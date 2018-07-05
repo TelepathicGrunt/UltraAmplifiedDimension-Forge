@@ -17,6 +17,7 @@ Just kidding! Mojang probably won't be happy so please don't profit off my mod o
 
     Major Change:
 •Made the .jar mod now a compatiable Forge mod! WOOOOOOOOOO!!!!!!!!!!!
+•Updated mod from 1.11.0 to 1.12.2
 
     Biomes:
 •Large Mushrooms now generate under floating islands and overhangs.
