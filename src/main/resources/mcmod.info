@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ultra_amplified_mod",
+  "name": "Ultra Amplified Mod",
+  "description": "A world beyond amplified world type!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://minecraft.curseforge.com/projects/ultra-amplified-mod",
+  "updateUrl": "",
+  "authorList": ["TelepathicGrunt"],
+  "credits": "Created by TelepathicGrunt",
+  "logoFile": "assets/ultra_amplified_mod/textures/ultra_amplified_logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
