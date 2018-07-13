@@ -13,6 +13,32 @@ Just kidding! Mojang probably won't be happy so please don't profit off my mod o
        | Ultra Amplified mod changelog |
 
 
+
+   (V.4.1 Changes)
+
+    Major Change:
+•Added config options to select biomes, biome size, ores spawnrates, structures spawnrates, and certain decorative generations!
+
+    Biomes:
+•Fixed Bug that prevented M variants of biomes from spawning naturally.
+•Increased spawnrate of natural M variant Biomes.
+•Attempting to optimize biome's ore generation to make creating a new world work faster.
+•Bamboo Forest generates less Sugar Cane and Vines to help reduce lag. 
+•Vines in Bamboo Forest do no generate underground anymore.
+•Smoothed out border of End Biome and Nether Biome against other biomes.
+•Slightly reduced End Island spawn rate in End Biome to make it a little less messy.
+•Made Birch Forest biomes have taller trees to match the crazy landscape.
+•Added massive 2 by 2 Birch Trees to Birch Forest M biomes.
+
+    Structures:
+•Attempting to optimize Cave Cavities and Ravines to reduce slowdown with world generation.
+•Ravines have more variety in their height size.
+•Cave Cavities spawn slightly less now.
+•Fixed bug where normal sized Dirt Room Mineshafts spawned underground instead of aboveground.
+•Added Nether style Mineshaft to spawn in Nether Biome.
+
+
+
     (V.4.0 Changes)
 
     Major Change:
