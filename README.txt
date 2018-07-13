@@ -2,7 +2,7 @@
     Created by TelepathicGrunt
 
 Highly recommend to also use the Optifine mod with my mod as well!
-You can choose between normal and large biomes by selecting the Ultra Amplfied or Ultra Amplfied LB world types.
+You can choose biome sizes, ore spawn rates, structure rarity, selection biomes, and much more with this mod's config options!
 
 Feel free to use this mod for whatever you want as long as you do not make money or profit off of it. 
 If you do, you better share some of that cash with me! LOL. 
