@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockEndPortalFrame;
@@ -314,7 +315,9 @@ public class StructureStrongholdPiecesUA
                 if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
                 {
                     this.hasMadeChest = true;
-                    this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 2, 3, LootTableList.CHESTS_STRONGHOLD_CORRIDOR);
+                    if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+                    	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 2, 3, LootTableList.CHESTS_STRONGHOLD_CORRIDOR);
+                    }
                 }
 
                 return true;
@@ -758,12 +761,17 @@ public class StructureStrongholdPiecesUA
                     this.setBlockState(worldIn, iblockstate, 7, 8, 8, structureBoundingBoxIn);
                 }
 
-                this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 3, 5, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
-
+                if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+                	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 3, 5, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
+                }
+                	
                 if (this.isLargeRoom)
                 {
                     this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 12, 9, 1, structureBoundingBoxIn);
-                    this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 12, 8, 1, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
+                    
+                    if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+                    	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 12, 8, 1, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
+                    }
                 }
 
                 return true;
@@ -1236,10 +1244,13 @@ public class StructureStrongholdPiecesUA
                         this.setBlockState(worldIn, iblockstate, 9, 1, 3, structureBoundingBoxIn);
                         this.setBlockState(worldIn, iblockstate, 9, 2, 3, structureBoundingBoxIn);
                         this.setBlockState(worldIn, iblockstate, 9, 3, 3, structureBoundingBoxIn);
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 4, 2, LootTableList.CHESTS_STRONGHOLD_CROSSING);
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 8, 4, 4, LootTableList.CHESTS_STRONGHOLD_CROSSING);
+                        
+                        if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 4, 2, LootTableList.CHESTS_STRONGHOLD_CROSSING);
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 8, 4, 4, LootTableList.CHESTS_STRONGHOLD_CROSSING);
+                        }
                 }
 
                 return true;
@@ -1428,18 +1439,18 @@ public class StructureStrongholdPiecesUA
             if (p_75062_5_)
             {
                 float f = rand.nextFloat();
-
-                if (f < 0.2F)
+                
+                if (f < (float)(Math.pow((UAConfig.oreAndFeatures.silverfishSpawnrate/500), 2)))
                 {
-                    this.blockstate = Blocks.STONEBRICK.getStateFromMeta(BlockStoneBrick.CRACKED_META);
+                    this.blockstate = Blocks.MONSTER_EGG.getDefaultState().withProperty(BlockSilverfish.VARIANT, BlockSilverfish.EnumType.STONEBRICK);
                 }
-                else if (f < 0.5F)
+                else if (f < 0.25F)
                 {
-                    this.blockstate = Blocks.STONEBRICK.getStateFromMeta(BlockStoneBrick.MOSSY_META);
+                    this.blockstate = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED);
                 }
                 else if (f < 0.55F)
                 {
-                    this.blockstate = Blocks.MONSTER_EGG.getStateFromMeta(BlockSilverfish.EnumType.STONEBRICK.getMetadata());
+                    this.blockstate = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY);
                 }
                 else
                 {

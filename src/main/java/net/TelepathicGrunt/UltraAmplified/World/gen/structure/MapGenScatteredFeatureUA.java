@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Map.Entry;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
@@ -29,28 +30,13 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
     /** the maximum distance between scattered features */
     private int maxDistanceBetweenScatteredFeatures;
 
-    /** the minimum distance between scattered features */
-    private final int minDistanceBetweenScatteredFeatures;
-
-    public MapGenScatteredFeatureUA()
+    private int separation = 8;
+    
+    public MapGenScatteredFeatureUA(ChunkGeneratorOverworldUA settings)
     {
         this.monsters = Lists.<Biome.SpawnListEntry>newArrayList();
-        this.maxDistanceBetweenScatteredFeatures = 13;
-        this.minDistanceBetweenScatteredFeatures = 13;
+        this.maxDistanceBetweenScatteredFeatures = settings.settings.templeRarity;
         this.monsters.add(new Biome.SpawnListEntry(EntityWitch.class, 1, 1, 1));
-    }
-
-    public MapGenScatteredFeatureUA(Map<String, String> p_i2061_1_)
-    {
-        this();
-
-        for (Entry<String, String> entry : p_i2061_1_.entrySet())
-        {
-            if ((entry.getKey()).equals("distance"))
-            {
-                this.maxDistanceBetweenScatteredFeatures = MathHelper.getInt(entry.getValue(), this.maxDistanceBetweenScatteredFeatures, 9);
-            }
-        }
     }
 
     public String getStructureName()
@@ -102,7 +88,7 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
     public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)
     {
         this.world = worldIn;
-        return findNearestStructurePosBySpacing(worldIn, this, pos, this.maxDistanceBetweenScatteredFeatures, 8, 14357617, false, 100, findUnexplored);
+        return findNearestStructurePosBySpacing(worldIn, this, pos, this.maxDistanceBetweenScatteredFeatures, this.separation, 14357617, false, 100, findUnexplored);
     }
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)

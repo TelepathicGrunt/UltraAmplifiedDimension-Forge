@@ -23,6 +23,9 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenNetherBridgeUA extends MapGenStructure
 {
+
+	//this class is not used at all. Nether Fortresses are generated in MapGenScatteredFeatureUA to reduce slowdown with world generation
+	
     private final List<Biome.SpawnListEntry> spawnList = Lists.<Biome.SpawnListEntry>newArrayList();
     
     public static final List<Biome> field_191072_a = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomeNether});

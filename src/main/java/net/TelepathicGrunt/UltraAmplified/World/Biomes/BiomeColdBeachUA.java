@@ -6,6 +6,7 @@ import java.util.Random;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenIcePathBeachUA;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -50,4 +51,9 @@ public class BiomeColdBeachUA extends BiomeExtendedUA
 
         super.decorate(worldIn, rand, pos);
 	}
+    
+    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    {
+        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+    }
 }

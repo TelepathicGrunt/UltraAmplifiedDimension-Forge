@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDungeonsUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSlimeLakeUA;
@@ -31,6 +32,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -57,19 +59,17 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     private final WorldType terrainType;
     private final double[] heightMap;
     private final float[] biomeWeights;
-    private ChunkGeneratorSettingsUA settings;
+    public ChunkGeneratorSettingsUA settings;
     private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
     private double[] depthBuffer = new double[256];
-    private final MapGenBase caveGenerator = new MapGenCaveCavity();
-    private final MapGenStrongholdUA strongholdGenerator = new MapGenStrongholdUA();
-    private final MapGenVillageUA villageGenerator = new MapGenVillageUA();
-    private final MapGenMineshaftUA mineshaftGenerator = new MapGenMineshaftUA();
-    private final MapGenScatteredFeatureUA scatteredFeatureGenerator = new MapGenScatteredFeatureUA();
-    private final MapGenBase ravineGenerator = new MapGenRavineUA();
-    private final StructureOceanMonumentUA oceanMonumentGenerator = new StructureOceanMonumentUA();
-    private final WoodlandMansionUA mansionGenerator = new WoodlandMansionUA(this);
-
-    private final MapGenNetherBridgeUA genNetherBridge = new MapGenNetherBridgeUA();
+    private MapGenBase caveGenerator;
+    private MapGenStrongholdUA strongholdGenerator;
+    private MapGenVillageUA villageGenerator;
+    private MapGenMineshaftUA mineshaftGenerator;
+    private MapGenScatteredFeatureUA scatteredFeatureGenerator;
+    private MapGenBase ravineGenerator;
+    private StructureOceanMonumentUA oceanMonumentGenerator;
+    private WoodlandMansionUA mansionGenerator;
     
     private Biome[] biomesForGeneration;
     double[] mainNoiseRegion;
@@ -77,7 +77,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     double[] maxLimitRegion;
     double[] depthRegion;
 
-    public ChunkGeneratorOverworldUA(World worldIn, long seed, boolean mapFeaturesEnabledIn, String p_i46668_5_)
+    public ChunkGeneratorOverworldUA(World worldIn, long seed, boolean mapFeaturesEnabledIn, String generatorOptions)
     {
         this.worldObj = worldIn;
         this.mapFeaturesEnabled = mapFeaturesEnabledIn;
@@ -102,12 +102,21 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
             }
         }
 
-        if (p_i46668_5_ != null)
-        {
-            this.settings = new ChunkGeneratorSettingsUA();
-            this.oceanBlock = this.settings.useLavaOceans ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
-            worldIn.setSeaLevel(this.settings.seaLevel);
-        }
+        
+        this.settings = new ChunkGeneratorSettingsUA();
+        
+        //these two are not actually used at the moment
+        this.oceanBlock = UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
+        worldIn.setSeaLevel(UAConfig.biomeOptions.seaLevel);
+    
+        caveGenerator = new MapGenCaveCavity(this);
+        strongholdGenerator = new MapGenStrongholdUA(this);
+        villageGenerator = new MapGenVillageUA(this);
+        mineshaftGenerator = new MapGenMineshaftUA(this);
+        scatteredFeatureGenerator = new MapGenScatteredFeatureUA(this);
+        ravineGenerator = new MapGenRavineUA(this);
+        oceanMonumentGenerator = new StructureOceanMonumentUA(this);
+        mansionGenerator = new WoodlandMansionUA(this);
     }
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -172,14 +181,14 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                                 		primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, STONE);
                                 	}
                                 }
-                            	else if (i2 * 8 + j2 < this.settings.seaLevel)
+                            	else if (i2 * 8 + j2 < UAConfig.biomeOptions.seaLevel)
                                 {
                             		if(loc == BiomeInit.BiomeIceMountain || loc == BiomeInit.BiomeIceSpike)
                                 	{
                                		   primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, SNOW);
                                 	}
                             		else {
-                            			primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);
+                            			primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState());
                             		}
                                 }
                             }
@@ -221,12 +230,12 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
-        if (this.settings.useCaves)
+        if (UAConfig.StructuresOptions.caveCavitySpawnrate != 0)
         {
             this.caveGenerator.generate(this.worldObj, x, z, chunkprimer);
         }
 
-        if (this.settings.useRavines)
+        if (UAConfig.StructuresOptions.ravineSpawnrate != 0)
         {
             this.ravineGenerator.generate(this.worldObj, x, z, chunkprimer);
         }
@@ -258,7 +267,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                 this.oceanMonumentGenerator.generate(this.worldObj, x, z, chunkprimer);
             }
 
-            if (this.settings.useMansion)
+            if (this.settings.useMansions)
             {
                 this.mansionGenerator.generate(this.worldObj, x, z, chunkprimer);
             } 
@@ -281,6 +290,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
         float f = this.settings.coordinateScale;
         float f1 = this.settings.heightScale;
+        
         //These controls the shape of the terrain. Change it juuuuust right and you can create floating layers of land! 
         this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)(f / this.settings.mainNoiseScaleX), (double)(50.1*(f1 / this.settings.mainNoiseScaleY)), (double)(f / this.settings.mainNoiseScaleZ));
         this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)f, (double)(f1*f1), (double)f);
@@ -450,13 +460,13 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                 this.oceanMonumentGenerator.generateStructure(this.worldObj, this.rand, chunkpos);
             }
 
-            if (this.settings.useMansion)
+            if (this.settings.useMansions)
             {
                 this.mansionGenerator.generateStructure(this.worldObj, this.rand, chunkpos);
             } 
         }
 
-        if (biome != BiomeInit.BiomeDesert && biome != BiomeInit.BiomeDesertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0)
+        if (biome != BiomeInit.BiomeDesert && biome != BiomeInit.BiomeDesertHills && !flag && this.settings.useWaterLakes &&this.rand.nextInt(this.settings.waterLakeChance) == 0)
         {
             int i1 = this.rand.nextInt(16) + 8;
             int j1 = this.rand.nextInt(256);
@@ -465,7 +475,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         }
 
         if(biome == BiomeInit.BiomeNether) {
-        	if (!flag && this.rand.nextInt(6) == 0 && this.settings.useLavaLakes)
+        	if (!flag && this.rand.nextInt(6) == 0)
             {
                 int i2 = this.rand.nextInt(16) + 8;
                 int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
@@ -483,13 +493,13 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
             }
         }
         else {
-        	if (!flag && this.rand.nextInt(8) == 0 && this.settings.useLavaLakes)
+        	if (!flag && this.settings.useLavaLakes && this.rand.nextInt(this.settings.lavaLakeChance) == 0)
             {
                 int i2 = this.rand.nextInt(16) + 8;
                 int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
                 int k3 = this.rand.nextInt(16) + 8;
 
-                if (l2 < this.worldObj.getSeaLevel() || this.rand.nextInt(8) == 0)
+                if (l2 < this.worldObj.getSeaLevel() || this.rand.nextInt(this.settings.lavaLakeChance) == 0)
                 {
                     (new WorldGenLakes(Blocks.LAVA)).generate(this.worldObj, this.rand, blockpos.add(i2, l2, k3));
                 }
@@ -497,7 +507,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         }
         
         
-        if (!flag && this.rand.nextInt(8) == 0 && this.settings.useLavaLakes)
+        if (!flag && this.settings.useSlimeLakes && this.rand.nextInt(8) == 0)
         {
         	
         	int l2 = worldObj.getTopSolidOrLiquidBlock(blockpos).getY();
@@ -512,7 +522,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
             }
         }
         
-        if (biome != BiomeInit.BiomeDesert && biome != BiomeInit.BiomeDesertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(2) == 0)
+        if (biome != BiomeInit.BiomeDesert && biome != BiomeInit.BiomeDesertHills && !flag && this.rand.nextInt(2) == 0)
         {
         	
         	int l2 = worldObj.getTopSolidOrLiquidBlock(blockpos).getY();
@@ -527,32 +537,30 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
             }
         }
 
-        if (this.settings.useDungeons)
+    	for (int j2 = 0; j2 < this.settings.dungeonChance; ++j2)
         {
-        	for (int j2 = 0; j2 < 625; ++j2)
-            {
-                int i3 = this.rand.nextInt(16) + 8;
-                int l1 = this.rand.nextInt(16) + 8;
-                
-                int l3 = 1;
-                
-                if(this.rand.nextInt(100) < 4) {
-                	l3 = this.rand.nextInt(10)+75;
-                }
-                else {
-                	if(this.rand.nextInt(75) == 0) 
-	                {
-	                	l3 = this.rand.nextInt(150);
-	            	}
-	                else 
-	            	{
-	            		l3 = this.rand.nextInt(90)+150;
-	            	}
-                }
-                
-                (new WorldGenDungeonsUA()).generate(this.worldObj, this.rand, blockpos.add(i3, l3, l1));
+            int i3 = this.rand.nextInt(16) + 8;
+            int l1 = this.rand.nextInt(16) + 8;
+            
+            int l3 = 1;
+            
+            if(this.rand.nextInt(100) < 4) {
+            	l3 = this.rand.nextInt(10)+75;
             }
+            else {
+            	if(this.rand.nextInt(75) == 0) 
+                {
+                	l3 = this.rand.nextInt(150);
+            	}
+                else 
+            	{
+            		l3 = this.rand.nextInt(90)+150;
+            	}
+            }
+            
+            (new WorldGenDungeonsUA()).generate(this.worldObj, this.rand, blockpos.add(i3, l3, l1));
         }
+        
 
         biome.decorate(this.worldObj, this.rand, new BlockPos(i, 0, j));
         WorldEntitySpawner.performWorldGenSpawning(this.worldObj, biome, i + 8, j + 8, 16, 16, this.rand);
@@ -705,7 +713,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                 this.oceanMonumentGenerator.generate(this.worldObj, x, z, (ChunkPrimer)null);
             }
 
-            if (this.settings.useMansion)
+            if (this.settings.useMansions)
             {
                 this.mansionGenerator.generate(this.worldObj, x, z, (ChunkPrimer)null);
             } 

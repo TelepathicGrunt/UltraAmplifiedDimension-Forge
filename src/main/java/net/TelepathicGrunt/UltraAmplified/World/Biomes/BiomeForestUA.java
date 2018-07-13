@@ -2,8 +2,11 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchTreeUA;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.passive.EntityRabbit;
@@ -12,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBirchTree;
@@ -21,9 +25,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeForestUA extends BiomeExtendedUA
 {
-    protected static final WorldGenBirchTree SUPER_BIRCH_TREE = new WorldGenBirchTree(false, true);
     protected static final WorldGenBirchTree BIRCH_TREE = new WorldGenBirchTree(false, false);
+    protected static final WorldGenBirchTreeUA TALL_BIRCH_TREE = new WorldGenBirchTreeUA(false, false);
     protected static final WorldGenCanopyTree ROOF_TREE = new WorldGenCanopyTree(false);
+    protected static final WorldGenBirchMTree BIRCH_M_TREE_GENERATOR = new WorldGenBirchMTree(false);
     private final BiomeForestUA.Type type;
 
     public BiomeForestUA(BiomeForestUA.Type typeIn, Biome.BiomeProperties properties)
@@ -65,13 +70,16 @@ public class BiomeForestUA extends BiomeExtendedUA
         }
     }
 
-    public WorldGenAbstractTree genBigTreeChance(Random rand)
+    public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
     	if (this.type == BiomeForestUA.Type.ROOFED && rand.nextInt(3) > 0)
         {
             return ROOF_TREE;
         }
-        else if (this.type != BiomeForestUA.Type.BIRCH && rand.nextInt(5) != 0)
+    	else if (this.type == BiomeForestUA.Type.BIRCH) {
+        	return TALL_BIRCH_TREE;
+        }
+        else if (rand.nextInt(5) != 0)
         {
             return (WorldGenAbstractTree)(rand.nextInt(10) == 0 ? BIG_TREE_FEATURE : TREE_FEATURE);
         }
@@ -95,6 +103,7 @@ public class BiomeForestUA extends BiomeExtendedUA
         }
     }
 
+    @Override
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
         if (this.type == BiomeForestUA.Type.ROOFED)
@@ -142,7 +151,7 @@ public class BiomeForestUA extends BiomeExtendedUA
 		                }
 		                else if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), blockpos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE))
 		                {
-		                    WorldGenAbstractTree worldgenabstracttree = this.genBigTreeChance(rand);
+		                    WorldGenAbstractTree worldgenabstracttree = this.getRandomTreeFeature(rand);
 		                    worldgenabstracttree.setDecorationDefaults();
 		
 		                    if (worldgenabstracttree.generate(worldIn, rand, blockpos))
@@ -189,6 +198,11 @@ public class BiomeForestUA extends BiomeExtendedUA
         }
     }
 
+    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    {
+        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+    }
+    
     public Class <? extends Biome > getBiomeClass()
     {
         return BiomeForestUA.class;

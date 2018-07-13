@@ -5,6 +5,8 @@ import java.util.Random;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,6 +30,13 @@ public class MapGenCaveCavity extends MapGenBase
     protected static final IBlockState BLK_SANDSTONE = Blocks.SANDSTONE.getDefaultState();
     protected static final IBlockState BLK_RED_SANDSTONE = Blocks.RED_SANDSTONE.getDefaultState();
 
+    private final ChunkGeneratorOverworldUA settings;
+    
+
+    public MapGenCaveCavity(ChunkGeneratorOverworldUA settingsIn) {
+    	settings = settingsIn;
+    }
+    
     protected void addRoom(long p_180703_1_, int p_180703_3_, int p_180703_4_, ChunkPrimer p_180703_5_, double p_180703_6_, double p_180703_8_, double p_180703_10_)
     {
         this.addTunnel(p_180703_1_, p_180703_3_, p_180703_4_, p_180703_5_, p_180703_6_, p_180703_8_, p_180703_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
@@ -59,6 +68,7 @@ public class MapGenCaveCavity extends MapGenBase
 
         for (boolean flag = random.nextInt(6) == 0; firstUnknownInt < secondUnknownInt; ++firstUnknownInt)
         {
+        	//the 18.0D controls size of each blob
             double d2 = 18.0D + (double)(MathHelper.sin((float)firstUnknownInt * (float)Math.PI / (float)secondUnknownInt) * firstUnknownFloat);
             double d3 = d2 * unknownDouble;
             float f2 = MathHelper.cos(thirdUnknownFloat);
@@ -83,6 +93,7 @@ public class MapGenCaveCavity extends MapGenBase
             f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
             f = f + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
+            
             if (!flag2 && firstUnknownInt == j && firstUnknownFloat > 1.0F && secondUnknownInt > 0)
             {
                 this.addTunnel(random.nextLong(), chunkX, chunkZ, chunkPrimer, x, y, z, random.nextFloat() * 0.5F + 0.5F, secondUnknownFloat - ((float)Math.PI / 2F), thirdUnknownFloat / 3.0F, firstUnknownInt, secondUnknownInt, 1.0D);
@@ -232,11 +243,14 @@ public class MapGenCaveCavity extends MapGenBase
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == Blocks.DIRT)
+        else if (p_175793_1_.getBlock() == Blocks.NETHERRACK)
         {
             return true;
         }
         else if (p_175793_1_.getBlock() == Blocks.END_STONE)
+        {
+            return true;
+        }else if (p_175793_1_.getBlock() == Blocks.ICE)
         {
             return true;
         }
@@ -244,15 +258,15 @@ public class MapGenCaveCavity extends MapGenBase
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == Blocks.NETHERRACK)
+        else if (p_175793_1_.getBlock() == Blocks.LAVA)
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == Blocks.ICE)
+        else if (p_175793_1_.getBlock() == Blocks.DIRT)
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == Blocks.GRASS)
+        else if (p_175793_1_.getBlock() == Blocks.SNOW)
         {
             return true;
         }
@@ -261,6 +275,10 @@ public class MapGenCaveCavity extends MapGenBase
             return true;
         }
         else if (p_175793_1_.getBlock() == Blocks.STAINED_HARDENED_CLAY)
+        {
+            return true;
+        }
+        else if (p_175793_1_.getBlock() == Blocks.GRASS)
         {
             return true;
         }
@@ -280,10 +298,6 @@ public class MapGenCaveCavity extends MapGenBase
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == Blocks.SNOW)
-        {
-            return true;
-        }
         else
         {
             return (p_175793_1_.getBlock() == Blocks.SAND || p_175793_1_.getBlock() == Blocks.GRAVEL);
@@ -295,24 +309,31 @@ public class MapGenCaveCavity extends MapGenBase
      */
     protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int p_180701_4_, int p_180701_5_, ChunkPrimer chunkPrimerIn)
     {
-        int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 5) + 5);
-
-        if (this.rand.nextInt(200) != 0)
+        //the nextInt controls how rare the cave cavities are
+        //Increase the number to increase rarity
+        //Remove this and all heck breaks loose!
+        if (this.rand.nextInt(700 - settings.settings.caveCavityCount) != 0)
         {
-            i = 0;
+            return;
         }
+        
+        //how many sphere cavity this will make
+        int i = this.rand.nextInt(5) + 5;
 
+        
         for (int j = 0; j < i; ++j)
         {
-            double d0 = (double)(chunkX * 16 + this.rand.nextInt(160));
-            double d1 = (double)this.rand.nextInt(40);
-            double d2 = (double)(chunkZ * 16 + this.rand.nextInt(160));
-            int k = 1;
+        	//randomly places sphere
+            double x = (double)(chunkX * 16 + this.rand.nextInt(120));
+            double y = (double)this.rand.nextInt(this.rand.nextInt(15)+5);
+            double z = (double)(chunkZ * 16 + this.rand.nextInt(120));
+           
+			int k = 1;
 
-
-             this.addRoom(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, d0, d1, d2);
-             k += this.rand.nextInt(4);
-
+            this.addRoom(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, x, y, z);
+             
+			k += this.rand.nextInt(4);
+			
             for (int l = 0; l < k; ++l)
             {
                 float f = this.rand.nextFloat() * ((float)Math.PI * 2F);
@@ -324,8 +345,8 @@ public class MapGenCaveCavity extends MapGenBase
                     f2 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
                 }
 
-                this.addTunnel(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, d0, d1, d2, f2, f, f1, 0, 0, 1.0D);
-            }
+                this.addTunnel(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, x, y, z, f2, f, f1, 0, 0, 1.0D);
+            } 
         }
     }
     

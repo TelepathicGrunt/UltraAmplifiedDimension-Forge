@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
@@ -495,7 +496,7 @@ public class WoodlandMansionPiecesUA
 
             protected void handleDataMarker(String function, BlockPos pos, World worldIn, Random rand, StructureBoundingBox sbb)
             {
-                if (function.startsWith("Chest"))
+                if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && function.startsWith("Chest"))
                 {
                     Rotation rotation = this.placeSettings.getRotation();
                     IBlockState iblockstate = Blocks.CHEST.getDefaultState();

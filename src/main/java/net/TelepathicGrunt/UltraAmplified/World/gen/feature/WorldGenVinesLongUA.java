@@ -14,7 +14,7 @@ public class WorldGenVinesLongUA extends WorldGenerator
 {
 	public boolean generate(World worldIn, Random rand, BlockPos position) 
 	{
-		for (; position.getY() > 40; position = position.down()) 
+		for (; position.getY() > 75; position = position.down()) 
 		{
 			if (worldIn.isAirBlock(position)) 
 			{

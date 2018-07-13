@@ -7,6 +7,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import jline.internal.Log;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.init.Blocks;
@@ -331,7 +332,7 @@ public class StructureEndCityPiecesUA
 
              protected void handleDataMarker(String function, BlockPos pos, World worldIn, Random rand, StructureBoundingBox sbb)
              {
-                 if (function.startsWith("Chest"))
+                 if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && function.startsWith("Chest"))
                  {
                      BlockPos blockpos = pos.down();
 

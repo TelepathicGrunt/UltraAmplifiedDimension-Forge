@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
@@ -161,7 +162,7 @@ public class StructureNetherBridgePiecesUA
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 4, 1, 4, 4, Blocks.NETHER_BRICK_FENCE.getDefaultState(), Blocks.NETHER_BRICK.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 3, 4, 3, 4, 4, Blocks.NETHER_BRICK_FENCE.getDefaultState(), Blocks.NETHER_BRICK.getDefaultState(), false);
 
-            if (randomIn.nextBoolean() && this.chest && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
+            if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && randomIn.nextBoolean() && this.chest && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
             {
                 this.chest = false;
                 this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 2, 3, LootTableList.CHESTS_NETHER_BRIDGE);
@@ -792,9 +793,11 @@ public class StructureNetherBridgePiecesUA
             IBlockState iblockstate = Blocks.FLOWING_LAVA.getDefaultState();
             this.setBlockState(worldIn, iblockstate, 6, 5, 6, structureBoundingBoxIn);
             BlockPos blockpos = new BlockPos(this.getXWithOffset(6, 6), this.getYWithOffset(5), this.getZWithOffset(6, 6));
-
-            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 5, 8, LootTableList.CHESTS_END_CITY_TREASURE);
             
+            if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+            	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 5, 8, LootTableList.CHESTS_END_CITY_TREASURE);
+            }
+            	
             if (structureBoundingBoxIn.isVecInside(blockpos))
             {
                 worldIn.immediateBlockTick(blockpos, iblockstate, randomIn);
@@ -1403,7 +1406,9 @@ public class StructureNetherBridgePiecesUA
                 }
             }
 
-            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 5, 7, LootTableList.CHESTS_NETHER_BRIDGE);
+            if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+            	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 5, 7, LootTableList.CHESTS_NETHER_BRIDGE);
+            }
             
             return true;
         }

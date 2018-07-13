@@ -11,6 +11,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 public class BiomeHellUA extends BiomeExtendedUA
@@ -35,8 +36,12 @@ public class BiomeHellUA extends BiomeExtendedUA
 
         this.topBlock = NETHERRACK;
         this.fillerBlock = NETHERRACK;
-        
-        this.decorator = new BiomeHellDecoratorUA();
+    }
+    
+    @Override
+    public BiomeDecorator createBiomeDecorator()
+    {
+        return getModdedBiomeDecorator(new BiomeHellDecoratorUA());
     }
     
     @Override

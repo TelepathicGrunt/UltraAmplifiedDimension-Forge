@@ -15,6 +15,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -25,8 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeMesaUA extends BiomeExtendedUA
 {
-	private final WorldGenerator goldGen = new WorldGenMinable(Blocks.GOLD_ORE.getDefaultState(), 9);
-    protected static final IBlockState COARSE_DIRT = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
+	protected static final IBlockState COARSE_DIRT = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
     protected static final IBlockState GRASS = Blocks.GRASS.getDefaultState();
     protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
     protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
@@ -43,7 +43,6 @@ public class BiomeMesaUA extends BiomeExtendedUA
     public BiomeMesaUA(boolean p_i46704_1_, boolean p_i46704_2_, Biome.BiomeProperties properties)
     {
         super(properties);
-        this.decorator = new BiomeDecoratorUA();
         
         this.brycePillars = p_i46704_1_;
         this.hasForest = p_i46704_2_;
@@ -61,6 +60,12 @@ public class BiomeMesaUA extends BiomeExtendedUA
         {
             this.decorator.treesPerChunk = 5;
         }
+    }
+
+    @Override
+    public BiomeDecorator createBiomeDecorator()
+    {
+        return getModdedBiomeDecorator(new BiomeMesaDecoratorUA());
     }
 
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
@@ -242,6 +247,8 @@ public class BiomeMesaUA extends BiomeExtendedUA
                 }
             }
         }
+        
+        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 
     public void generateBands(long p_150619_1_)
@@ -329,20 +336,5 @@ public class BiomeMesaUA extends BiomeExtendedUA
     {
         int i = (int)Math.round(this.clayBandsOffsetNoise.getValue((double)p_180629_1_ / 512.0D, (double)p_180629_1_ / 512.0D) * 2.0D);
         return this.clayBands[(p_180629_2_ + i + 64) % 64];
-    }
-
-    public void decorate(World worldIn, Random rand, BlockPos pos)
-    {
-    	 for (int numPerChunk = 0; numPerChunk < 70; ++numPerChunk)
-         {
-             int x = rand.nextInt(16);
-             int y = rand.nextInt(246)+5;
-             int z = rand.nextInt(16);
-             
-	         if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, rand, goldGen,  pos.add(x, y, z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD))
-	         this.goldGen.generate(worldIn, rand, pos.add(x,y,z));
-         }
-    	 
-        super.decorate(worldIn, rand, pos);
     }
 }

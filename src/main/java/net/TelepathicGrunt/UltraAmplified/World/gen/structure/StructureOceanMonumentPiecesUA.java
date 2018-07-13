@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
@@ -1796,9 +1797,11 @@ public class StructureOceanMonumentPiecesUA
 				this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, -1, 7, 7, -1, 8, DARK_PRISMARINE,
 						DARK_PRISMARINE, false);
 				this.spawnElder(worldIn, structureBoundingBoxIn, 6, 1, 6);
-				this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 0, 8, LootTableList.CHESTS_END_CITY_TREASURE);
-				this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 7, 0, 8, LootTableList.CHESTS_END_CITY_TREASURE);
-				return true;
+				if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 0, 8, LootTableList.CHESTS_END_CITY_TREASURE);
+					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 7, 0, 8, LootTableList.CHESTS_END_CITY_TREASURE);
+				}
+			    return true;
 			}
 		}
 	}
@@ -2574,8 +2577,10 @@ public class StructureOceanMonumentPiecesUA
 					this.fillWithBlocks(worldIn, structureBoundingBoxIn, 15, 0, 21, 16, 4, 21, BRICKS_PRISMARINE,
 							BRICKS_PRISMARINE, false);
 
-					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 11, 1, 17, LootTableList.CHESTS_END_CITY_TREASURE);
-					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 12, 1, 17, LootTableList.CHESTS_END_CITY_TREASURE);
+					if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+						this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 11, 1, 17, LootTableList.CHESTS_END_CITY_TREASURE);
+						this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 12, 1, 17, LootTableList.CHESTS_END_CITY_TREASURE);
+					}
 					this.spawnElder(worldIn, structureBoundingBoxIn, 11, 2, 16);
 					
 					
@@ -2627,8 +2632,12 @@ public class StructureOceanMonumentPiecesUA
 							DARK_PRISMARINE, false);
 					this.fillWithBlocks(worldIn, structureBoundingBoxIn, 14, 3, 8, 14, 3, 13, DARK_PRISMARINE,
 							DARK_PRISMARINE, false);
-					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 11, 4, 9, LootTableList.CHESTS_END_CITY_TREASURE);
-					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10, 4, 9, LootTableList.CHESTS_END_CITY_TREASURE);
+					
+					if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+						this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 11, 4, 9, LootTableList.CHESTS_END_CITY_TREASURE);
+						this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10, 4, 9, LootTableList.CHESTS_END_CITY_TREASURE);
+					}
+					
 					this.spawnElder(worldIn, structureBoundingBoxIn, 11, 5, 13);
 				}
 

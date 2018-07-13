@@ -8,6 +8,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -30,14 +31,14 @@ public class MapGenStrongholdUA extends MapGenStructure
      */
     private boolean ranBiomeCheck;
     private ChunkPos[] structureCoords;
-    private double distance;
+    private float distance;
     private int spread;
 
-    public MapGenStrongholdUA()
+    public MapGenStrongholdUA(ChunkGeneratorOverworldUA settings)
     {
-        this.structureCoords = new ChunkPos[128];
-        this.distance = 10.0D;
-        this.spread = 4;
+        this.structureCoords = new ChunkPos[settings.settings.strongholdCount];
+        this.distance = settings.settings.strongholdDistance;
+        this.spread = settings.settings.strongholdSpread;
         this.allowedBiomes = Lists.<Biome>newArrayList();
 
         for (Biome biome : Biome.REGISTRY)
@@ -53,27 +54,6 @@ public class MapGenStrongholdUA extends MapGenStructure
             if (!this.allowedBiomes.contains(biome))
             {
                 this.allowedBiomes.add(biome);
-            }
-        }
-    }
-
-    public MapGenStrongholdUA(Map<String, String> p_i2068_1_)
-    {
-        this();
-
-        for (Entry<String, String> entry : p_i2068_1_.entrySet())
-        {
-            if ((entry.getKey()).equals("distance"))
-            {
-                this.distance = MathHelper.getDouble(entry.getValue(), this.distance, 1.0D);
-            }
-            else if ((entry.getKey()).equals("count"))
-            {
-                this.structureCoords = new ChunkPos[MathHelper.getInt(entry.getValue(), this.structureCoords.length, 1)];
-            }
-            else if ((entry.getKey()).equals("spread"))
-            {
-                this.spread = MathHelper.getInt(entry.getValue(), this.spread, 1);
             }
         }
     }
@@ -161,9 +141,9 @@ public class MapGenStrongholdUA extends MapGenStructure
         {
             for (int i1 = 0; i1 < this.structureCoords.length; ++i1)
             {
-                double d0 = 4.0D * this.distance + this.distance * (double)j * 6.0D + (random.nextDouble() - 0.5D) * this.distance * 2.5D;
-                int j1 = (int)Math.round(Math.cos(d1) * d0);
-                int k1 = (int)Math.round(Math.sin(d1) * d0);
+                float f0 = 4.0F * this.distance + this.distance * (float)j * 6.0F + (random.nextFloat() - 0.5F) * this.distance * 2.5F;
+                int j1 = (int)Math.round(Math.cos(d1) * f0);
+                int k1 = (int)Math.round(Math.sin(d1) * f0);
                 BlockPos blockpos = this.world.getBiomeProvider().findBiomePosition((j1 << 4) + 8, (k1 << 4) + 8, 112, this.allowedBiomes, random);
 
                 if (blockpos != null)

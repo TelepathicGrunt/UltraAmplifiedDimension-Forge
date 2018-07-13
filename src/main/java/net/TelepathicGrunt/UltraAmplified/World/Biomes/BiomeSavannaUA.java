@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenFossils;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
@@ -64,6 +65,12 @@ public class BiomeSavannaUA extends BiomeExtendedUA
         super.decorate(worldIn, rand, pos);
     }
 
+    
+    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    {
+        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+    }
+    
     public Class <? extends Biome > getBiomeClass()
     {
         return BiomeSavannaUA.class;

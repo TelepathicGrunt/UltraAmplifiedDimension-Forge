@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Map.Entry;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -25,29 +26,16 @@ public class MapGenVillageUA extends MapGenStructure
     /** None */
     private int size;
     private int distance;
-    private final int minTownSeparation;
+    private int separation = 8;
 
     public MapGenVillageUA()
     {
         this.distance = 20;
-        this.minTownSeparation = 1;
     }
-
-    public MapGenVillageUA(Map<String, String> map)
+    
+    public MapGenVillageUA(ChunkGeneratorOverworldUA settings)
     {
-        this();
-
-        for (Entry<String, String> entry : map.entrySet())
-        {
-            if (((String)entry.getKey()).equals("size"))
-            {
-                this.size = MathHelper.getInt((String)entry.getValue(), this.size, 0);
-            }
-            else if (((String)entry.getKey()).equals("distance"))
-            {
-                this.distance = MathHelper.getInt((String)entry.getValue(), this.distance, 9);
-            }
-        }
+        this.distance = settings.settings.villageRarity;
     }
 
     public String getStructureName()
@@ -94,7 +82,7 @@ public class MapGenVillageUA extends MapGenStructure
     public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)
     {
         this.world = worldIn;
-        return findNearestStructurePosBySpacing(worldIn, this, pos, this.distance, 8, 10387312, false, 100, findUnexplored);
+        return findNearestStructurePosBySpacing(worldIn, this, pos, this.distance, this.separation, 10387312, false, 100, findUnexplored);
     }
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)

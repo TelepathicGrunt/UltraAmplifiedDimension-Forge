@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 public class BiomePlainsUA extends BiomeExtendedUA
@@ -73,7 +74,12 @@ public class BiomePlainsUA extends BiomeExtendedUA
             return BlockFlower.EnumFlowerType.DANDELION;
         }
     }
-
+    
+    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    {
+        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+    }
+    
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
         double d0 = GRASS_COLOR_NOISE.getValue((double)(pos.getX() + 8) / 200.0D, (double)(pos.getZ() + 8) / 200.0D);

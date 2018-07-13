@@ -16,6 +16,9 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenEndCityUA extends MapGenStructure
 {
+	
+	//this class is not used at all. End Cities are generated in MapGenScatteredFeatureUA to reduce slowdown with world generation 
+	
     private final int citySpacing = 25;
     private final int minCitySeparation = 5;
     private ChunkGeneratorOverworldUA overworldProvider;

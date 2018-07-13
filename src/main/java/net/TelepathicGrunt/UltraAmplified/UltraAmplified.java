@@ -1,8 +1,8 @@
 package net.TelepathicGrunt.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.Utils.LoadingScreenRenderProgress;
+import jline.internal.Log;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeLargeBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.ComponentScatteredFeaturePiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenEndCityUA;
@@ -20,10 +20,11 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureStronghol
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureVillagePiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionPiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -31,6 +32,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = UltraAmplified.MOD_ID, name = UltraAmplified.MOD_NAME, version = UltraAmplified.VERSION)
 public class UltraAmplified {
@@ -38,7 +40,7 @@ public class UltraAmplified {
 	//constants
 	public static final String MOD_ID = "ultra_amplified_mod";
 	public static final String MOD_NAME = "Ultra Amplified Mod";
-	public static final String VERSION = "0.4.0";
+	public static final String VERSION = "0.4.1";
 	public static WorldType UltraAmplified;
 	public static WorldType UltraAmplifiedLargeBiome;
 	
@@ -97,7 +99,7 @@ public class UltraAmplified {
     public void post(FMLPostInitializationEvent event)
     {
 		UltraAmplified = new WorldTypeUA();
-		UltraAmplifiedLargeBiome = new WorldTypeLargeBiomeUA();
     }
+	
 	
 }

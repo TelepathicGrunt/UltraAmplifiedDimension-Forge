@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeProviderUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;

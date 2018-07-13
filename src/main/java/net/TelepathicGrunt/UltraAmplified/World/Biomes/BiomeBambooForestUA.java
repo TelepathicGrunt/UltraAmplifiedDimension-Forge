@@ -49,14 +49,15 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
     	}
     	else 
     	{
-            if (Math.abs(noiseVal%3) > 2) 
-    		{
+    		
+    		if (noiseVal%2 < 0.7D)
+            {
     			this.topBlock = Blocks.GRASS.getDefaultState();
-    		}
-    		else
-    		{
-    			this.topBlock = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
-    		}
+            }
+            else
+            {
+            	this.topBlock = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
+            }
     	}
 
         this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
@@ -67,7 +68,7 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
     {
     	
     	if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.REED)) {
-			for (int x = 8; x < 24; x += (rand.nextInt(2)+1)) {
+			for (int x = 8; x < 24; x += (rand.nextInt(3)+1)) {
 				for (int z = 8; z < 24; z += (rand.nextInt(2)+1)) {
 					for (int y = 75; y < 255; ++y) {
 						
@@ -85,7 +86,7 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
 									|| worldIn.getBlockState(blockpos1.south()).getMaterial() == Material.WATER) {
 								
 								//controls height of reed
-								int j = 5 + rand.nextInt(rand.nextInt(20)+1);
+								int j = 5 + rand.nextInt(rand.nextInt(14)+1);
 	
 								for (int k = 0; k < j; ++k) {
 									
@@ -106,7 +107,7 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS)) {
 	       
         	//how many per chunk
-        	for (int j1 = 0; j1 < 25; ++j1)
+        	for (int j1 = 0; j1 < 18; ++j1)
 	        {
         		int x = rand.nextInt(16) + 8;
                 int z = rand.nextInt(16) + 8;

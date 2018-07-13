@@ -1,12 +1,19 @@
 package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeBambooForestUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeColdBeachUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeForestUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeForestMutatedUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeBirchForestMutatedUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHillsUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeJungleUA;
@@ -19,13 +26,19 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeStoneBeachUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
+import net.minecraft.util.ObjectIntIdentityMap;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class BiomeInit {
+	
+	//enums to hold all biomes and their properties
 	
 	public static final Biome BiomeBambooForest = new BiomeBambooForestUA();
 	public static final Biome BiomePlains = new BiomePlainsUA(false, new Biome.BiomeProperties("Plains").setBaseHeight(0.1F).setHeightVariation(0.2F).setTemperature(0.8F).setRainfall(0.4F));
@@ -69,8 +82,8 @@ public class BiomeInit {
 	public static final Biome BiomeIceSpike = new BiomeSnowUA(true, (new Biome.BiomeProperties("Ice Plains Spikes")).setBaseBiome("Ice Plains").setBaseHeight(0.425F).setHeightVariation(0.45000002F).setTemperature(0.0F).setRainfall(0.5F).setSnowEnabled());
 	public static final Biome BiomeJungleM = new BiomeJungleUA(false, (new Biome.BiomeProperties("Jungle M")).setBaseBiome("Jungle").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.95F).setRainfall(0.9F));
 	public static final Biome BiomeJungleEdgeM = new BiomeJungleUA(true, (new Biome.BiomeProperties("JungleEdge M")).setBaseBiome("Jungle Edge").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.95F).setRainfall(0.8F));
-	public static final Biome BiomeBirchForestM = new BiomeForestMutatedUA((new Biome.BiomeProperties("Birch Forest M")).setBaseBiome("Birch Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.6F).setRainfall(0.6F));
-	public static final Biome BiomeBirchForestHillsM = new BiomeForestMutatedUA((new Biome.BiomeProperties("Birch Forest Hills M")).setBaseBiome("Birch Forest Hills").setBaseHeight(0.55F).setHeightVariation(0.5F).setTemperature(0.6F).setRainfall(0.6F));
+	public static final Biome BiomeBirchForestM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest M")).setBaseBiome("Birch Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.6F).setRainfall(0.6F));
+	public static final Biome BiomeBirchForestHillsM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest Hills M")).setBaseBiome("Birch Forest Hills").setBaseHeight(0.55F).setHeightVariation(0.5F).setTemperature(0.6F).setRainfall(0.6F));
 	public static final Biome BiomeRoofedForestM = new BiomeForestUA(BiomeForestUA.Type.ROOFED, (new Biome.BiomeProperties("Roofed Forest M")).setBaseBiome("Roofed Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.7F).setRainfall(0.8F));
 	public static final Biome BiomeColdTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga M")).setBaseBiome("Taiga Cold").setBaseHeight(0.3F).setHeightVariation(0.4F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
 	public static final Biome BiomeRedwoodTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Mega Spruce Taiga")).setBaseBiome("Redwood Taiga").setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));
@@ -82,8 +95,9 @@ public class BiomeInit {
 	public static final Biome BiomeMesaRockM = new BiomeMesaUA(false, true, (new Biome.BiomeProperties("Mesa Plateau F M")).setBaseBiome("Mesa Rock").setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(2.0F).setRainfall(0.0F).setRainDisabled());
 	public static final Biome BiomeMesaClearRockM = new BiomeMesaUA(false, false, (new Biome.BiomeProperties("Mesa Plateau M")).setBaseBiome("Mesa Clear Rock").setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(2.0F).setRainfall(0.0F).setRainDisabled());
      
-	
+	//registers the biomes so they now exist in the registry along with their types
 	public static void registerBiomes() {
+		
 		initBiome(BiomeBambooForest, "Bamboo Forest", BiomeType.WARM, Type.DENSE, Type.WET, Type.FOREST);
 		initBiome(BiomePlains, "Plains", BiomeType.WARM, Type.PLAINS);
 		initBiome(BiomeDesert, "Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY);
@@ -138,13 +152,55 @@ public class BiomeInit {
 		initBiome(BiomeMesaBryce, "Mesa Bryce", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(BiomeMesaRockM, "Mesa Plateau F M", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
 		initBiome(BiomeMesaClearRockM, "Mesa Plateau M", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
+		
+		mapBiomes();
 	}
 	
+	//adds biome to registry with their type
 	private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types) {
 		biome.setRegistryName(name);
 		ForgeRegistries.BIOMES.register(biome);
 		ForgeRegistries.BIOMES.getKey(biome);
 		BiomeDictionary.addTypes(biome, types);
+		
 		return biome;
 	}
+	
+	
+//Handles conversion between M form and non-M form biomes
+	
+    public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<>();
+    
+    private static void mapBiomes() {
+    	
+    	BASE_TO_MUTATION_MAP.put(BiomePlains, BiomePlainsM);
+    	BASE_TO_MUTATION_MAP.put(BiomeDesert, BiomeDesertM);
+    	BASE_TO_MUTATION_MAP.put(BiomeBirchForest, BiomeBirchForestM);
+    	BASE_TO_MUTATION_MAP.put(BiomeBirchForestHills, BiomeBirchForestHillsM);
+    	BASE_TO_MUTATION_MAP.put(BiomeColdTaiga, BiomeColdTaigaM);
+    	BASE_TO_MUTATION_MAP.put(BiomeExtremeHills, BiomeExtremeHillsM);
+    	BASE_TO_MUTATION_MAP.put(BiomeExtremeHillsPlus, BiomeExtremeHillsPlusM);
+    	BASE_TO_MUTATION_MAP.put(BiomeForest, BiomeForestM);
+    	BASE_TO_MUTATION_MAP.put(BiomeIceFlats, BiomeIceSpike);
+    	BASE_TO_MUTATION_MAP.put(BiomeJungle, BiomeJungleM);
+    	BASE_TO_MUTATION_MAP.put(BiomeJungleEdge, BiomeJungleEdgeM);
+    	BASE_TO_MUTATION_MAP.put(BiomeMesa, BiomeMesaBryce);
+    	BASE_TO_MUTATION_MAP.put(BiomeMesaClearRock, BiomeMesaClearRockM);
+    	BASE_TO_MUTATION_MAP.put(BiomeMesaRock, BiomeMesaRockM);
+    	BASE_TO_MUTATION_MAP.put(BiomeRedwoodTaiga, BiomeRedwoodTaigaM);
+    	BASE_TO_MUTATION_MAP.put(BiomeRedwoodTaigaHills, BiomeRedwoodTaigaHillsM);
+    	BASE_TO_MUTATION_MAP.put(BiomeRoofedForest, BiomeRoofedForestM);
+    	BASE_TO_MUTATION_MAP.put(BiomeSavanna, BiomeSavannaM);
+    	BASE_TO_MUTATION_MAP.put(BiomeSavannaRock, BiomeSavannaRockM);
+    	BASE_TO_MUTATION_MAP.put(BiomeSwampland, BiomeSwamplandM);
+    	BASE_TO_MUTATION_MAP.put(BiomeTaiga, BiomeTaigaM);
+    }
+    
+	@Nullable
+    public static Biome getMutationForBiome(Biome biome)
+    {
+		return BASE_TO_MUTATION_MAP.get(biome);
+    }
+	
+	
 }

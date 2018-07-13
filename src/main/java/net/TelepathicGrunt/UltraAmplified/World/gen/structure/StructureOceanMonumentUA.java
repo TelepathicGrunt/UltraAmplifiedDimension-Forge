@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,27 +35,10 @@ public class StructureOceanMonumentUA extends MapGenStructure
     public static final List<Biome> SPAWN_BIOMES = Arrays.<Biome>asList(new Biome[] { BiomeInit.BiomeJungle, BiomeInit.BiomeJungleEdge, BiomeInit.BiomeJungleEdgeM, BiomeInit.BiomeJungleHills, BiomeInit.BiomeJungleM, Biomes.DEEP_OCEAN});
     private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.<Biome.SpawnListEntry>newArrayList();
 
-    public StructureOceanMonumentUA()
+    public StructureOceanMonumentUA(ChunkGeneratorOverworldUA settings)
     {
-        this.spacing = 18;
-        this.separation = 1;
-    }
-
-    public StructureOceanMonumentUA(Map<String, String> p_i45608_1_)
-    {
-        this();
-
-        for (Entry<String, String> entry : p_i45608_1_.entrySet())
-        {
-            if (((String)entry.getKey()).equals("spacing"))
-            {
-                this.spacing = MathHelper.getInt((String)entry.getValue(), this.spacing, 1);
-            }
-            else if (((String)entry.getKey()).equals("separation"))
-            {
-                this.separation = MathHelper.getInt((String)entry.getValue(), this.separation, 1);
-            }
-        }
+        this.spacing = settings.settings.monumentsRarity;
+        this.separation = 8;
     }
 
     public String getStructureName()

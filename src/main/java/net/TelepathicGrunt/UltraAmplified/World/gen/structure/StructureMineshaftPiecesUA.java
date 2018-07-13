@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockEndRod;
 import net.minecraft.block.BlockPlanks;
@@ -357,14 +358,16 @@ public class StructureMineshaftPiecesUA
                     this.placeCobWeb(worldIn, structureBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 + 2);
                     this.placeCobWeb(worldIn, structureBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 + 2);
 
-                    if (randomIn.nextInt(50) == 0)
-                    {
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 2, 0, k1 - 1, LootTableList.CHESTS_ABANDONED_MINESHAFT);
-                    }
-
-                    if (randomIn.nextInt(50) == 0)
-                    {
-                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 0, 0, k1 + 1, LootTableList.CHESTS_ABANDONED_MINESHAFT);
+                    if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+	                    if (randomIn.nextInt(50) == 0)
+	                    {
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 2, 0, k1 - 1, LootTableList.CHESTS_ABANDONED_MINESHAFT);
+	                    }
+	
+	                    if (randomIn.nextInt(50) == 0)
+	                    {
+	                        this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 0, 0, k1 + 1, LootTableList.CHESTS_ABANDONED_MINESHAFT);
+	                    }
                     }
 
                     if (this.hasSpiders && !this.spawnerPlaced)
@@ -412,7 +415,7 @@ public class StructureMineshaftPiecesUA
                     {
                         IBlockState iblockstate2 = this.getBlockStateFromPos(worldIn, 1, -1, j3, structureBoundingBoxIn);
 
-                        if (iblockstate2.isFullBlock())
+                        if (!worldIn.isAirBlock(new BlockPos(1, -1, j3)))
                         {
                             float f = this.getSkyBrightness(worldIn, 1, 0, j3, structureBoundingBoxIn) > 8 ? 0.9F : 0.7F;
                             this.randomlyPlaceBlock(worldIn, structureBoundingBoxIn, randomIn, f, 1, 0, j3, iblockstate1);
@@ -453,6 +456,10 @@ public class StructureMineshaftPiecesUA
 	                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z - 1, Blocks.END_ROD.getDefaultState().withProperty(BlockEndRod.FACING, EnumFacing.SOUTH));
 		                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().withProperty(BlockEndRod.FACING, EnumFacing.NORTH));
                     	}
+                    }
+                    else if(this.mineShaftType == mineShaftType.HELL) 
+                    {
+                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.15F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
                     }
                     else {
 	                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH));
@@ -698,6 +705,9 @@ public class StructureMineshaftPiecesUA
                 case END:
                     return Blocks.PURPUR_BLOCK.getDefaultState();
                     
+                case HELL:
+                    return Blocks.NETHER_BRICK.getDefaultState();
+                    
                 case STONE:
                     return Blocks.STONE.getDefaultState();
                     
@@ -737,6 +747,9 @@ public class StructureMineshaftPiecesUA
                     
                 case END:
                     return Blocks.PURPUR_BLOCK.getDefaultState();
+                    
+                case HELL:
+                    return Blocks.NETHER_BRICK.getDefaultState();
                     
                 case STONE:
                     return Blocks.STONE.getDefaultState();
@@ -781,14 +794,13 @@ public class StructureMineshaftPiecesUA
             this.mineShaftType = p_i47137_5_;
             
             if(p_i47137_2_.nextInt(5) < 3) {
+            	//normal dirt room mineshaft
             	this.boundingBox = new StructureBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 30, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
             }
             else {
+            	//giant pit-like dirt room mineshafts
             	int height = p_i47137_2_.nextInt(90);
             	this.boundingBox = new StructureBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 150 + height, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
-            	
-            	//Keep this here. It keeps mineshaft room from generating at Y = 2 somehow. I literally do not know how.
-            	this.boundingBox.offset(0, 0, 0);
             }
         }
 
@@ -879,10 +891,19 @@ public class StructureMineshaftPiecesUA
 
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
+        	IBlockState flooring;
+        	
+        	if(this.mineShaftType == mineShaftType.HELL) 
+            {
+        		flooring = Blocks.SOUL_SAND.getDefaultState();
+            }
+        	else {
+        		flooring = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
+        	}
         	
         	
         	if(this.boundingBox.getYSize() > 100) {
-                this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX-10, this.boundingBox.minY, this.boundingBox.minZ-10, this.boundingBox.maxX+10, this.boundingBox.minY, this.boundingBox.maxZ+10, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT), Blocks.AIR.getDefaultState(), false);
+                this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX-10, this.boundingBox.minY, this.boundingBox.minZ-10, this.boundingBox.maxX+10, this.boundingBox.minY, this.boundingBox.maxZ+10, flooring, Blocks.AIR.getDefaultState(), false);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX-10, this.boundingBox.minY + 1, this.boundingBox.minZ-10, this.boundingBox.maxX+10, Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ+10, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
                 for (StructureBoundingBox structureboundingbox : this.roomsLinkedToTheRoom)
@@ -894,7 +915,7 @@ public class StructureMineshaftPiecesUA
                 return true;
        		}
         	else {
-        		this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.minY, this.boundingBox.maxZ, Blocks.DIRT.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+        		this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.minY, this.boundingBox.maxZ, flooring, Blocks.AIR.getDefaultState(), false);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY + 1, this.boundingBox.minZ, this.boundingBox.maxX, Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ+10, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
                 for (StructureBoundingBox structureboundingbox : this.roomsLinkedToTheRoom)

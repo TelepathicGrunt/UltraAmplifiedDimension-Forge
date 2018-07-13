@@ -22,8 +22,15 @@ public class StructureMineshaftStartUA extends StructureStart
     	super(p_i47149_3_, p_i47149_4_);
         this.mineShaftType = p_i47149_5_;
         Room structuremineshaftpieces$room = new StructureMineshaftPiecesUA.Room(0, p_i47149_2_, (p_i47149_3_ << 4) + 2, (p_i47149_4_ << 4) + 2, this.mineShaftType);
+        
+        //makes the normal dirt room mineshafts spawn between 150 and 240
+        if(structuremineshaftpieces$room.getBoundingBox().maxY < 100) {
+        	structuremineshaftpieces$room.getBoundingBox().offset(0, 150 + p_i47149_2_.nextInt(70), 0);
+        }
+        
         this.components.add(structuremineshaftpieces$room);
         structuremineshaftpieces$room.buildComponent(structuremineshaftpieces$room, this.components, p_i47149_2_);
+       
         this.updateBoundingBox();
     }
 }

@@ -3,6 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.biome.Biome;
@@ -38,19 +39,15 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                 this.initChunkSeed((long)(j + areaX), (long)(i + areaY));
                 int k = aint[j + 1 + (i + 1) * (areaWidth + 2)];
                 int l = aint1[j + 1 + (i + 1) * (areaWidth + 2)];
-                boolean flag = (l - 2) % 29 == 0;
-
-                if (k > 255)
-                {
-                    LOGGER.debug("old! {}", (int)k);
-                }
+                int remander = (l - 2) % 29;
+                boolean flag = remander == 0;
 
                 Biome biome = Biome.getBiomeForId(k);
                 boolean flag1 = biome != null && biome.isMutation();
 
-                if (k != 0 && l >= 2 && (l - 2) % 29 == 1 && !flag1)
+                if (k != 0 && l >= 2 && remander >= 1 && remander <= 4 && !flag1)
                 {
-                    Biome biome3 = Biome.getMutationForBiome(biome);
+                    Biome biome3 = BiomeInit.getMutationForBiome(biome);
                     aint2[j + i * areaWidth] = biome3 == null ? k : Biome.getIdForBiome(biome3);
                 }
                 else if (this.nextInt(3) != 0 && !flag)

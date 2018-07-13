@@ -20,17 +20,19 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.WoodlandMansion;
+import scala.reflect.runtime.Settings;
 
 public class WoodlandMansionUA extends MapGenStructure
 {
-    private final int spacing = 24;
-    private final int field_191074_d = 1;
-    public static final List<Biome> field_191072_a = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeBirchForestHillsM, BiomeInit.BiomeBirchForestM, BiomeInit.BiomeRoofedForest, BiomeInit.BiomeRoofedForestM, BiomeInit.BiomeSwampland, BiomeInit.BiomeSwamplandM});
+    private final int spacing;
+    private int separation = 8;
+    public static final List<Biome> acceptedBiomes = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeBirchForestHillsM, BiomeInit.BiomeBirchForestM, BiomeInit.BiomeRoofedForest, BiomeInit.BiomeRoofedForestM, BiomeInit.BiomeSwampland, BiomeInit.BiomeSwamplandM});
     private final ChunkGeneratorOverworldUA provider;
 
     public WoodlandMansionUA(ChunkGeneratorOverworldUA provider)
     {
     	this.provider = provider;
+    	this.spacing = provider.settings.mansionRarity;
     }
 
     public String getStructureName()
@@ -63,8 +65,8 @@ public class WoodlandMansionUA extends MapGenStructure
         
         if (k == i && l == j)
         {
-            boolean flag = this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 5, field_191072_a);
-
+            boolean flag = this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 5, acceptedBiomes);
+            
             if (flag)
             {
                 return true;
@@ -79,7 +81,7 @@ public class WoodlandMansionUA extends MapGenStructure
     {
         this.world = worldIn;
         BiomeProvider biomeprovider = worldIn.getBiomeProvider();
-        return biomeprovider.isFixedBiome() && biomeprovider.getFixedBiome() != Biomes.ROOFED_FOREST ? null : findNearestStructurePosBySpacing(worldIn, this, pos, 80, 20, 10387319, true, 100, findUnexplored);
+        return biomeprovider.isFixedBiome() && acceptedBiomes.contains(biomeprovider.getFixedBiome()) ? null : findNearestStructurePosBySpacing(worldIn, this, pos, this.spacing, this.separation, 10387319, true, 100, findUnexplored);
     }
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)

@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellDecoratorUA;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,9 +20,7 @@ public class BiomeExtendedUA extends Biome{
 	public BiomeExtendedUA(BiomeProperties properties) {
 		super(properties);
 	}
-	
-	
-	
+	 
 	/**
      * Given x, z coordinates, we count down all the y positions starting at 255 and working our way down. When we hit a
      * non-air block, we replace it with this.topBlock (default grass, descendants may set otherwise), and then a
@@ -56,6 +56,10 @@ public class BiomeExtendedUA extends Biome{
                 {
                     j = -1;
                 }
+                
+                //checks all four blocks to see if it should replace the top block 
+                //This is needed because of End, Nether, and Ice Mountain does not use Stone when generating the terrain at all
+                //This might be one of the causes of the long loading times but not sure...
                 else if (iblockstate2.getBlock() == Blocks.STONE || iblockstate2.getBlock() == Blocks.NETHERRACK || iblockstate2.getBlock() == Blocks.END_STONE || iblockstate2.getBlock() == Blocks.ICE)
                 {
                     if (j == -1)
