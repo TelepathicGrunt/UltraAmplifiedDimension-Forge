@@ -64,7 +64,7 @@ Just kidding! Mojang probably won't be happy so please don't profit off my mod o
 •Nether biome's sky is now a reddish color to make it more spooky!
 
     Structures:
-•Mineshaft Torches now genegerate facing correct way.
+•Mineshaft Torches now generate facing correct way.
 •Made End Villages and End Mineshafts generate End Rods instead of Torches.
 •Village paths and pillars blocks now generate properly in Nether, Mesa, and End biomes.
 •Zombie Villages keep their Doors now so Zombie Villagers do not walk into sunlight and kill themselves.
