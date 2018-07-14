@@ -29,7 +29,7 @@ public class WorldGenBirchMTree extends WorldGenHugeTrees{
     {
         int i = this.getHeight(rand);
 
-        if (!this.ensureGrowable(worldIn, rand, position, i))
+        if (!this.ensureGrowable(worldIn, rand, position, i+9))
         {
             return false;
         }

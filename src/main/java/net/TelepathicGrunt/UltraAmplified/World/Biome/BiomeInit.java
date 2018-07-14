@@ -20,6 +20,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeJungleUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMushroomIslandUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomePlainsUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeRoofedForestMutatedUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaMutatedUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
@@ -84,7 +85,7 @@ public class BiomeInit {
 	public static final Biome BiomeJungleEdgeM = new BiomeJungleUA(true, (new Biome.BiomeProperties("JungleEdge M")).setBaseBiome("Jungle Edge").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.95F).setRainfall(0.8F));
 	public static final Biome BiomeBirchForestM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest M")).setBaseBiome("Birch Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.6F).setRainfall(0.6F));
 	public static final Biome BiomeBirchForestHillsM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest Hills M")).setBaseBiome("Birch Forest Hills").setBaseHeight(0.55F).setHeightVariation(0.5F).setTemperature(0.6F).setRainfall(0.6F));
-	public static final Biome BiomeRoofedForestM = new BiomeForestUA(BiomeForestUA.Type.ROOFED, (new Biome.BiomeProperties("Roofed Forest M")).setBaseBiome("Roofed Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.7F).setRainfall(0.8F));
+	public static final Biome BiomeRoofedForestM = new BiomeRoofedForestMutatedUA((new Biome.BiomeProperties("Roofed Forest M")).setBaseBiome("Roofed Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.7F).setRainfall(0.8F));
 	public static final Biome BiomeColdTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga M")).setBaseBiome("Taiga Cold").setBaseHeight(0.3F).setHeightVariation(0.4F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
 	public static final Biome BiomeRedwoodTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Mega Spruce Taiga")).setBaseBiome("Redwood Taiga").setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));
 	public static final Biome BiomeRedwoodTaigaHillsM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Redwood Taiga Hills M")).setBaseBiome("Redwood Taiga Hills").setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));

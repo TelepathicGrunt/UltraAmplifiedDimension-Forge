@@ -414,8 +414,8 @@ public class StructureMineshaftPiecesUA
                     for (int j3 = 0; j3 <= i1; ++j3)
                     {
                         IBlockState iblockstate2 = this.getBlockStateFromPos(worldIn, 1, -1, j3, structureBoundingBoxIn);
-
-                        if (!worldIn.isAirBlock(new BlockPos(1, -1, j3)))
+                        
+                        if (iblockstate2.getMaterial() != Material.AIR)
                         {
                             float f = this.getSkyBrightness(worldIn, 1, 0, j3, structureBoundingBoxIn) > 8 ? 0.9F : 0.7F;
                             this.randomlyPlaceBlock(worldIn, structureBoundingBoxIn, randomIn, f, 1, 0, j3, iblockstate1);

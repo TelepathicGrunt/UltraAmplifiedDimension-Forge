@@ -28,7 +28,6 @@ public class BiomeForestUA extends BiomeExtendedUA
     protected static final WorldGenBirchTree BIRCH_TREE = new WorldGenBirchTree(false, false);
     protected static final WorldGenBirchTreeUA TALL_BIRCH_TREE = new WorldGenBirchTreeUA(false, false);
     protected static final WorldGenCanopyTree ROOF_TREE = new WorldGenCanopyTree(false);
-    protected static final WorldGenBirchMTree BIRCH_M_TREE_GENERATOR = new WorldGenBirchMTree(false);
     private final BiomeForestUA.Type type;
 
     public BiomeForestUA(BiomeForestUA.Type typeIn, Biome.BiomeProperties properties)

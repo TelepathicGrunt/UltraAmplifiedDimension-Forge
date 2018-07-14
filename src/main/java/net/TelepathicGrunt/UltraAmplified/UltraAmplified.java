@@ -40,7 +40,7 @@ public class UltraAmplified {
 	//constants
 	public static final String MOD_ID = "ultra_amplified_mod";
 	public static final String MOD_NAME = "Ultra Amplified Mod";
-	public static final String VERSION = "0.4.1";
+	public static final String VERSION = "0.4.2";
 	public static WorldType UltraAmplified;
 	public static WorldType UltraAmplifiedLargeBiome;
 	

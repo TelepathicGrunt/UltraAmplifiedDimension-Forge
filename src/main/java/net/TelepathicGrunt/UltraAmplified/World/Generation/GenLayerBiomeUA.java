@@ -1,5 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
@@ -128,7 +129,7 @@ public class GenLayerBiomeUA extends GenLayer
 		    
         
         //a check here to make sure none of the biome lists are blank or we will crash HARD
-        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = null;
+        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = new java.util.ArrayList();
         
         	//set temp biome list to first biome list that isnt empty. Otherwise, set temp to null
         if(biomes[warmIdx].size() != 0) {
