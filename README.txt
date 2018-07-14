@@ -11,7 +11,20 @@ Just kidding! Mojang probably won't be happy so please don't profit off my mod o
 
 ------------------------------------------------
        | Ultra Amplified mod changelog |
-
+       
+       
+       
+   (V.4.2 Changes)
+   
+    Biomes:
+•Fixed major crash when selecting certain single biomes to spawn through config.    
+•Added massive Dark Oak trees to Roofed Forest M biomes.    
+•Adjusted world height that giant Birch Trees can generate to in Birch Forest M biome so the tree does not get cut off as often.
+    
+    Structures:
+•Fixed Mineshaft bug not spawning Rails in them.
+•Rails now will spawn in Icy Mineshafts (but will break off Ice Block when a block update occurs).
+    
 
 
    (V.4.1 Changes)
