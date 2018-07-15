@@ -4,8 +4,8 @@
 Highly recommend to also use the Optifine mod with my mod as well!
 You can choose biome sizes, ore spawn rates, structure rarity, selection biomes, and much more with this mod's config options!
 
-Feel free to use this mod and any part of it for whatever you want as long as you do not make money or profit off of it. 
-Just be sure to give me credit if you do. That's all. Enjoy! :) 
+Feel free to use this mod and any part of it for whatever you want as long as you do not profit off of my mod. 
+Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy! :) 
 
 
 ------------------------------------------------
