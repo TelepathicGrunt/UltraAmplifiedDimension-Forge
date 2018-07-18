@@ -1440,7 +1440,7 @@ public class StructureStrongholdPiecesUA
             {
                 float f = rand.nextFloat();
                 
-                if (f < (float)(Math.pow((UAConfig.oreAndFeatures.silverfishSpawnrate/500), 2)))
+                if (f < (float)(UAConfig.StructuresOptions.biomeBasedStructuresOptions.silverfishStrongholdSpawnrate/100))
                 {
                     this.blockstate = Blocks.MONSTER_EGG.getDefaultState().withProperty(BlockSilverfish.VARIANT, BlockSilverfish.EnumType.STONEBRICK);
                 }

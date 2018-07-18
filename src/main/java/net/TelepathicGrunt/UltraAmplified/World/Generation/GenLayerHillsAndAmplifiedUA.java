@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import jline.internal.Log;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.biome.Biome;
@@ -14,12 +15,14 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private final GenLayer riverLayer;
+    private ChunkGeneratorSettingsUA settings;
 
-    public GenLayerHillsAndAmplifiedUA(long p_i45479_1_, GenLayer p_i45479_3_, GenLayer p_i45479_4_)
+    public GenLayerHillsAndAmplifiedUA(long p_i45479_1_, GenLayer p_i45479_3_, GenLayer p_i45479_4_, ChunkGeneratorSettingsUA settings)
     {
         super(p_i45479_1_);
         this.parent = p_i45479_3_;
         this.riverLayer = p_i45479_4_;
+        this.settings = settings;
     }
 
     /**
@@ -45,7 +48,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                 Biome biome = Biome.getBiomeForId(k);
                 boolean flag1 = biome != null && biome.isMutation();
 
-                if (k != 0 && l >= 2 && remander >= 1 && remander <= 4 && !flag1)
+                if ((UAConfig.biomeOptions.mutatedBiomeSpawnrate == 29 || (k != 0 && l >= 2 && remander >= 1 && remander <= UAConfig.biomeOptions.mutatedBiomeSpawnrate - 1)) && !flag1)
                 {
                     Biome biome3 = BiomeInit.getMutationForBiome(biome);
                     aint2[j + i * areaWidth] = biome3 == null ? k : Biome.getIdForBiome(biome3);
@@ -70,7 +73,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                     {
                         biome1 = BiomeInit.BiomeBirchForestHills;
                     }
-                    else if (biome == BiomeInit.BiomeRoofedForest)
+                    else if (biome == BiomeInit.BiomeRoofedForest && settings.plains)
                     {
                         biome1 = BiomeInit.BiomePlains;
                     }
@@ -86,7 +89,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                     {
                         biome1 = BiomeInit.BiomeColdTaigaHills;
                     }
-                    else if (biome == BiomeInit.BiomePlains)
+                    else if (biome == BiomeInit.BiomePlains && settings.forest)
                     {
                         if (this.nextInt(3) == 0)
                         {
@@ -97,7 +100,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                             biome1 = BiomeInit.BiomeForest;
                         }
                     }
-                    else if (biome == BiomeInit.BiomeIceFlats)
+                    else if (biome == BiomeInit.BiomeIceFlats && settings.iceMountain)
                     {
                         biome1 = BiomeInit.BiomeIceMountain;
                     }

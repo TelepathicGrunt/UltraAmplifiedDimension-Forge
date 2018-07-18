@@ -793,11 +793,32 @@ public class StructureMineshaftPiecesUA
             super(p_i47137_1_, p_i47137_5_);
             this.mineShaftType = p_i47137_5_;
             
-            if(p_i47137_2_.nextInt(5) < 3) {
+            //if the pit rooms are not allowed, makes this boolean always true.
+            //if pits are allowed and normal rooms are not allowed, set to always false.
+            //else if both are allowed, runs RNG to determine which room to generate.
+            boolean normalRoom;
+            if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed) 
+            {
+            	if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed) 
+            	{
+            		normalRoom = p_i47137_2_.nextInt(5) < 3;
+            	}
+            	else 
+            	{
+            		normalRoom = false;
+            	}
+            }else 
+            {
+            	normalRoom = true;
+            }
+            
+            
+            
+            if(normalRoom) {
             	//normal dirt room mineshaft
             	this.boundingBox = new StructureBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 30, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
             }
-            else {
+            else{
             	//giant pit-like dirt room mineshafts
             	int height = p_i47137_2_.nextInt(90);
             	this.boundingBox = new StructureBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 150 + height, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));

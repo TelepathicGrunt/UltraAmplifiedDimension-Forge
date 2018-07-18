@@ -21,7 +21,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenVillageUA extends MapGenStructure
 {
-    public static final List<Biome> VILLAGE_SPAWN_BIOMES = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeDesert, BiomeInit.BiomeSavanna, BiomeInit.BiomeTaiga, BiomeInit.BiomeIceFlats, BiomeInit.BiomeColdTaiga, BiomeInit.BiomeColdTaigaHills, BiomeInit.BiomeIceMountain, BiomeInit.BiomeIceSpike, BiomeInit.BiomeJungle, BiomeInit.BiomeMesaBryce, BiomeInit.BiomeMesaClearRock, BiomeInit.BiomeEnd, BiomeInit.BiomeStoneBeach});
+    public static final List<Biome> VILLAGE_SPAWN_BIOMES = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeDesert, BiomeInit.BiomeSavanna, BiomeInit.BiomeTaiga, BiomeInit.BiomeIceFlats, BiomeInit.BiomeColdTaiga, BiomeInit.BiomeColdTaigaHills, BiomeInit.BiomeIceMountain, BiomeInit.BiomeIceSpike, BiomeInit.BiomeJungle, BiomeInit.BiomeMesaBryce, BiomeInit.BiomeMesaClearRock, BiomeInit.BiomeEnd, BiomeInit.BiomeStoneBeach, BiomeInit.BiomeRoofedForest, BiomeInit.BiomeRoofedForestM});
 
     /** None */
     private int size;

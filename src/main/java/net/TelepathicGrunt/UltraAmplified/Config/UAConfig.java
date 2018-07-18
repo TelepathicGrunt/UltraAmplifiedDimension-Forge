@@ -21,24 +21,25 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
 @Config.LangKey("ultra_amplified.config.title")
-@Config(modid = UltraAmplified.MOD_ID, type = Type.INSTANCE, name = UltraAmplified.MOD_ID + "_types")
+@Config(modid = UltraAmplified.MOD_ID, type = Type.INSTANCE, name = UltraAmplified.MOD_ID + "_0.4.3")
 public class UAConfig {
 
-	//TBH configs are black magic to me lol. I'm just following a tutorial.
-	
-	
+	//I use the following to organize configs. Putting this at start of option will put it at top of all options: '\0'+
 
 	@Name("Structure Options")
-	@Config.Comment("Control generation of structures (Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)")
+	@Config.Comment({
+		"Control generation of structures", 
+		'\u00a7'+"c(Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)"
+		})
 	public static StructureSubCategory StructuresOptions = new StructureSubCategory();
 	  public static class StructureSubCategory {
 		  
 		    @Name("Biome-Based Structure Options")
-			@Config.Comment("Control generation of biome-based structures")
+			@Config.Comment("Control generation of biome-based structures plus Strongholds")
 			public MainStructureSubCategory biomeBasedStructuresOptions = new MainStructureSubCategory();
 			public class MainStructureSubCategory {
 				
-				@Name("Loot Chests Allowed?")
+				@Name('\0'+"Loot Chests Allowed?")
 				@Config.Comment("Controls whether loot chests spawn or not in all structures.")
 				public boolean chestGeneration = true;
 				
@@ -46,7 +47,7 @@ public class UAConfig {
 				@Name("Village Rarity")
 				@Config.Comment({
 					"How rare are Villages.",
-					"9 for Village spawning in most chunk and 12 for default spawnrate."
+					'\u00a7'+"61 for Village spawning in most chunk and 100 for lowest spawnrate."
 					})
 				@Config.RangeInt(min = 1, max = 100)
 				public int villageSpawnrate = 12;
@@ -55,26 +56,38 @@ public class UAConfig {
 				@Config.Comment("Controls whether Villages spawn or not.")
 				public boolean villageGeneration = true;
 				
+				@Name("Village Zombified Chance")
+				@Config.Comment({
+					"What percentage of Villages are Zombie Villages.",
+					'\u00a7'+"60 for no Zombie Village spawning and 100 for all Villages being zombified."
+					})
+				@Config.RangeInt(min = 0, max = 100)
+				public int villageZombieSpawnrate = 10;
 				
 				
-				@Name("Mineshaft Spawnrate")
+				
+				@Name('\0'+"Mineshaft Spawnrate")
 				@Config.Comment({
 					"How often Mineshafts will spawn.",
-					"0 for no Mineshafts and 25 for default spawnrate."
+					'\u00a7'+"60 for no Mineshafts and 1000 for max spawnrate."
 					})
 				@Config.RangeDouble(min = 0, max = 1000)
 				public double mineshaftSpawnrate = 25;
 				
-				@Name("Mineshaft Allowed?")
-				@Config.Comment("Controls whether Mineshafts spawn or not.")
-				public boolean mineshaftGeneration = true;
+				@Name('\0'+"Mineshaft Can Spawn Underground?")
+				@Config.Comment("Can undergound giant pit Mineshafts spawn?")
+				public boolean mineshaftUndergroundAllowed = true;
+				
+				@Name('\0'+"Mineshaft Can Spawn Aboveground?")
+				@Config.Comment("Can aboveground floating Mineshafts spawn?")
+				public boolean mineshaftAbovegroundAllowed = true;
 				
 				
 				
 				@Name("Woodland Mansion Rarity")
 				@Config.Comment({
 					"How rare are Woodland Mansion.",
-					"9 for Woodland Mansion spawning in most chunk and 16 for default spawnrate."
+					'\u00a7'+"61 for Woodland Mansion spawning in most chunk and 100 for lowest spawnrate."
 					})
 				@Config.RangeInt(min = 1, max = 100)
 				public int mansionSpawnrate = 16;
@@ -85,85 +98,96 @@ public class UAConfig {
 				
 				
 				
-				@Name("Scattered Structure Rarity")
+				@Name('\0'+"Scattered Structure Rarity")
 				@Config.Comment({
 					"How rare are Temples, End Cities, Nether Fortresses, Igloos, and Witch Huts.",
-					"9 for a Scattered Structure spawning in most chunk and 16 for default spawnrate."
+					'\u00a7'+"61 for a Scattered Structure spawning in most chunk and 100 for lowest spawnrate."
 					})
 				@Config.RangeInt(min = 1, max = 100)
 				public int scatteredSpawnrate = 16;
 				
-				@Name("Scattered Structure Allowed?")
+				@Name('\0'+"Scattered Structure Allowed?")
 				@Config.Comment("Controls whether Temples, End Cities, Nether Fortresses, Igloos, and Witch Huts spawn or not.")
 				public boolean scatteredGeneration = true;
 				
 				
 				
-				@Name("Strongholds Distance")
+				@Name('\0'+"Stronghold Distance")
 				@Config.Comment({
 					"Minimum closest distance Strongholds can spawn to each other.",
-					"1 for clostest distance and 10 for default distance between Strongholds."
+					'\u00a7'+"61 for closest distance and 1000 for max distance between Strongholds."
 					})
 				@Config.RangeDouble(min = 1, max = 1000)
 				public float strongholdDistance = 10.0F;
 				
-				@Name("Strongholds Count")
+				@Name('\0'+"Stronghold Count")
 				@Config.Comment({
 					"How many Strongholds spawn in a world.",
-					"1 for 1 Strongholds to spawn and 128 for default number of Strongholds."
+					'\u00a7'+"61 for 1 Strongholds in an entire world and 5000 for maximum number of Strongholds."
 					})
-				@Config.RangeInt(min = 1, max = 10000)
+				@Config.RangeInt(min = 1, max = 5000)
 				public int strongholdNumberPerWorld = 128;
 				
-				@Name("Strongholds Spread")
+				@Name('\0'+"Stronghold Spread")
 				@Config.Comment({
 					"How clustered towards spawn the Strongholds will be.",
-					"1 for Strongholds to be farthest from spawn and 4 for default spawn distance."
+					'\u00a7'+"61 for Strongholds to be farthest from spawn and 100 for closest spawn distance."
 					})
 				@Config.RangeInt(min = 1, max = 100)
 				public int strongholdSpread = 4;
 				
-				@Name("Strongholds Allowed?")
+				@Name("Stronghold Silverfish Block Spawnrate")
+				@Config.Comment({ 
+					"How often Silverfish Blocks will generate in Strongholds.",
+					'\u00a7'+"60 for no Silverfish Blocks and 100 for max spawnrate." 
+					})
+				@Config.RangeDouble(min = 0, max = 100)
+				public double silverfishStrongholdSpawnrate = 4;
+				
+				@Name('\0'+"Stronghold Allowed?")
 				@Config.Comment("Controls whether Strongholds spawn or not.")
 				public boolean strongholdGeneration = true;
 				
 				
 				
-				@Name("Ocean Monument Rarity")
+				@Name('\0'+"Ocean Monument Rarity")
 				@Config.Comment({
 					"How rare are Ocean Monuments.",
-					"9 for a Ocean Monument spawning in most Jungle chunks and 18 for default spawnrate."
+					'\u00a7'+"61 for a Ocean Monument spawning in most Jungle chunks and 100 for lowest spawnrate."
 					})
 				@Config.RangeInt(min = 1, max = 100)
-				public int monumentRarity = 10;
+				public int monumentRarity = 12;
 				
-				@Name("Ocean Monuments Allowed?")
-				@Config.Comment("Controls whether Ocean Monuments spawn or not. (These spawn in Jungle biomes)")
+				@Name('\0'+"Ocean Monument Allowed?")
+				@Config.Comment({
+					"Controls whether Ocean Monuments spawn or not.",
+					'\u00a7'+"6(Ocean Monuments spawn in Jungle biomes)"
+					})
 				public boolean monumentGeneration = true;
 			}
 			
 		  
 			
-		    @Name("Dungeon Spawnrate")
+		    @Name('\0'+"Dungeon Spawnrate")
 		    @Config.Comment({
 				"How often Dungeons will spawn.",
-				"0 for no Dungeons and 650 for default spawnrate."
+				'\u00a7'+"60 for no Dungeons and 1200 for max spawnrate."
 				})
 			@Config.RangeInt(min = 0, max = 1200)
 			public int dungeonSpawnrate = 650;
 		  
-		    @Name("Ravine Spawnrate")
+		    @Name('\0'+""+'\0'+"Ravine Spawnrate")
 			@Config.Comment({
 				"How often Ravines will spawn.",
-				"0 for no Ravines and 5 for default spawnrate."
+				'\u00a7'+"60 for no Ravines and 8 for max spawnrate."
 				})
 			@Config.RangeInt(min = 0, max = 8)
 			public int ravineSpawnrate = 5;
 			
-			@Name("Cave Cavity Spawnrate")
+			@Name('\0'+""+'\0'+"Cave Cavity Spawnrate")
 			@Config.Comment({
 				"How often Cave Cavity will spawn.",
-				"0 for no Cave Cavity and 350 for default spawnrate."
+				'\u00a7'+"60 for no Cave Cavity and 700 for max spawnrate."
 				})
 			@Config.RangeInt(min = 0, max = 700)
 			public int caveCavitySpawnrate = 350;
@@ -174,61 +198,76 @@ public class UAConfig {
 			@Config.Comment("Controls whether Slime Lakes spawn or not.")
 			public boolean slimeLakeGen = true;
 			
-			@Name("Water Lakes Allowed?")
+			@Name('\0'+"Water Lakes Allowed?")
 			@Config.Comment("Controls whether Water Lakes spawn or not.")
 			public boolean waterLakeGen = true;
 			
-			@Name("Lava Lakes Allowed?")
-			@Config.Comment("Controls whether Lava Lakes spawn or not. (DOES NOT AFFECT NETHER BIOME)")
+			@Name('\0'+"Lava Lakes Allowed?")
+			@Config.Comment("Controls whether Lava Lakes spawn or not.")
 			public boolean lavaLakeGen = true;
 	  }
 	
 	
 	@Name("Biome and Terrain Options")
-	@Config.Comment("Control generation of biomes and terrain. (Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)")
+	@Config.Comment({
+		"Control generation of biomes and terrain.",
+		'\u00a7'+"c(Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)"
+		})
 	public static BiomeSubCategory biomeOptions = new BiomeSubCategory();
 	  public static class BiomeSubCategory {
-		  @Name("Biome Size")
+		  @Name('\0'+""+'\0'+""+'\0'+"Biome Size")
 		  @Config.Comment("How large the biomes are. Bigger number means bigger biomes.")
-		  @Config.RangeInt(min = 2, max = 8)
+		  @Config.RangeInt(min = 1, max = 8)
 		  public int biomeSize = 4;
 		  
-		  @Name("Sea Level")
+		  @Name('\0'+""+'\0'+""+'\0'+"Mutated Biome Spawnrate")
+		  @Config.Comment({
+			  "How often the mutated form of a biome will generate",
+			  '\u00a7'+"60 for no mutated biomes and 29 for all biomes to be mutated."
+			  })
+		  @Config.RangeInt(min = 0, max = 29)
+		  public int mutatedBiomeSpawnrate = 5;
+		  
+		  @Name('\0'+"Sea Level")
 		  @Config.Comment("Height at which air is replace with water aboveground.")
-		  @Config.RangeInt(min = 65, max = 250)
+		  @Config.RangeInt(min = 0, max = 250)
 		  public int seaLevel = 75;
 		  
 		  @Name("Replace Sea Level with Lava?")
-		  @Config.Comment("Replace the water at sea leve with lava instead.")
+		  @Config.Comment("Replace the water at sea level with lava instead.")
 		  public boolean lavaOcean = false;
 		  
-		  @Name("Replace Sea Level with Lava?")
+		  @Name('\0'+""+'\0'+"Waterfall Rarity")
 		  @Config.Comment({
 				"How often waterfalls will spawn.",
-				"0 for no waterfalls and 100 for default spawnrate."
+				'\u00a7'+"60 for no waterfalls and 1000 for max spawnrate."
 				})
-		  @Config.RangeDouble(min = 0, max = 500)
+		  @Config.RangeDouble(min = 0, max = 1000)
 		  public double waterfallSpawnrate = 100;
 		  
-		  @Name("Replace Sea Level with Lava?")
+		  @Name('\0'+"Lavafall Rarity")
 		  @Config.Comment({
-				"How often lavafalls will spawn. (Does not affect Nether Biome)",
-				"0 for no lavafalls and 100 for default spawnrate."
+				"How often lavafalls will spawn.",
+				'\u00a7'+"60 for no lavafalls and 1000 for max spawnrate."
 				})
-		  @Config.RangeDouble(min = 0, max = 500)
+		  @Config.RangeDouble(min = 0, max = 1000)
 		  public double lavafallSpawnrate = 100;
 		  
-		  @Name("End Islands")
+		  @Name('\0'+""+'\0'+"End Islands")
 		  @Config.Comment({
 				"How often End Islands will spawn in the End Biome.",
-				"0 for no End Islands and 100 for default spawnrate."
+				'\u00a7'+"60 for no End Islands and 500 for max spawnrate."
 				})
 	      @Config.RangeDouble(min = 0, max = 500)
 		  public double endIslandSpawnrate = 100;
 		  
 		  
 		  @Name("Biome Selection Options")
-			@Config.Comment("Control what biomes to generate. (Warning: Takes effect at start when entering any Ultra Amplified world for all unloaded chunks!)")
+			@Config.Comment({
+				"Control what biomes to generate.",
+				'\u00a7'+"c(Warning: Takes effect at start when entering any Ultra Amplified world for all unloaded chunks!)",
+				'\u00a7'+"6Turning off all biomes will set world gen to be Deep Ocean Biome only if no other mod is providing a biome."
+				})
 			public MainStructureSubCategory biomeSelectionOptions = new MainStructureSubCategory();
 			public class MainStructureSubCategory {
 				
@@ -329,32 +368,128 @@ public class UAConfig {
 	  
 	
 	@Name("Ores and Similar Generations")
-	@Config.Comment("Control spawnrate of ores and other similar generations.  (Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)")
+	@Config.Comment({
+		"Control spawnrate of ores and other similar generations.",
+		'\u00a7'+"c(Warning: Takes effect right away for all unloaded chunks in all Ultra Amplified worlds!)"
+		})
 	public static OreSubCategory oreAndFeatures = new OreSubCategory();
 	  public static class OreSubCategory {
+		
 		  
-		  @Config.Comment({
-				"How often ores will spawn.",
-				"0 for no ores and 100 for default spawnrate."
-				})
-			@Config.RangeDouble(min = 0, max = 500)
-			public double oreSpawnrate = 100;
+	    @Name("Main Ores")
+		@Config.Comment("Ores that spawn in the majority of biomes.")
+		public MainStructureSubCategory mainOresOptions = new MainStructureSubCategory();
+		public class MainStructureSubCategory {
 			
-			@Config.Comment({
+			@Name('\0'+""+'\0'+"Coal Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Coal Ores will spawn.", 
+				'\u00a7'+"60 for no Coal Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int coalOreSpawnrate = 35;
+			
+			@Name('\0'+""+'\0'+"Iron Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Iron Ores will spawn.", 
+				'\u00a7'+"60 for no Iron Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int ironOreSpawnrate = 50;
+			
+			@Name('\0'+""+'\0'+"Redstone Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Redstone Ores will spawn.", 
+				'\u00a7'+"60 for no Redstone Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int redstoneOreSpawnrate = 12;
+			
+			@Name('\0'+"Lapis Lazuli Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Lapis Lazuli Ores will spawn.", 
+				'\u00a7'+"60 for no Lapis Lazuli Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int lapisOreSpawnrate = 2;
+			
+			@Name("Diamond Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Diamond Ores will spawn.", 
+				'\u00a7'+"60 for no Diamond Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int diamondOreSpawnrate = 1;
+			
+			@Name('\0'+"Gold Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Gold Ores will spawn.", 
+				'\u00a7'+"60 for no Gold Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int goldOreSpawnrate = 2;
+		}
+		
+		@Name("Extreme Hills Ore and Feature")
+		@Config.Comment("Ores and features that spawns in Extreme Hills Biome.")
+		public MainStructureSubCategory2 extremeHillsOresOptions = new MainStructureSubCategory2();
+		public class MainStructureSubCategory2 {
+			
+			@Name('\0'+"Emerald Ore Spawnrate Percentage")
+			@Config.Comment({ 
+				"How often Emerald Ores will spawn in Extreme Hills Biome in the form of a percentage.", 
+				'\u00a7'+"60 for no Emerald Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeDouble(min = 0, max = 1000)
+			public float emeraldOreSpawnrate = 100;
+
+			@Name('\0'+"Silverfish Block Spawnrate")
+			@Config.Comment({ 
+				"How often Silverfish Blocks will spawn in Extreme Hills Biome.",
+				'\u00a7'+"60 for no Silverfish Blocks and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int silverfishSpawnrate = 30;
+		}
+		
+		@Name("Nether Ores and Features")
+		@Config.Comment("Ores and features that spawns in Nether Biome.")
+		public MainStructureSubCategory3 netherOresOptions = new MainStructureSubCategory3();
+		public class MainStructureSubCategory3 {
+				
+			@Name('\0'+"Quartz Ore Spawnrate")
+			@Config.Comment({ 
+				"How often Quartz Ores will spawn.", 
+				'\u00a7'+"60 for no Quartz Ores and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int quartzOreSpawnrate = 14;
+	
+			@Name('\0'+"Glowstone Spawnrate")
+			@Config.Comment({ 
 				"How often Glowstone will spawn in Nether biome.",
-				"0 for no Glowstone and 100 for default spawnrate."
+				'\u00a7'+"60 for no Glowstone and 1000 for max spawnrate." 
 				})
-			@Config.RangeDouble(min = 0, max = 500)
-			public double glowstoneSpawnrate = 100;
-			
-			@Config.Comment({
-				"How often Silverfish Blocks will spawn in Extreme Hills and Strongholds.",
-				"0 for no ores and 100 for default spawnrate."
+			@Config.RangeInt(min = 0, max = 1000)
+			public int glowstoneSpawnrate = 20;
+	
+			@Name("Magma Block Spawnrate")
+			@Config.Comment({ 
+				"How often Magma Blocks will spawn below Y = 100 in Nether biome.",
+				'\u00a7'+"60 for no Magma Blocks and 1000 for max spawnrate." 
 				})
-			@Config.RangeDouble(min = 0, max = 500)
-			public double silverfishSpawnrate = 100;
-			
-			
+			@Config.RangeInt(min = 0, max = 1000)
+			public int magmaSpawnrate = 5;
+	
+			@Name("Single Lava Block Spawnrate")
+			@Config.Comment({ 
+				"How often single Lava Blocks will spawn in Nether biome.",
+				'\u00a7'+"60 for no single Lava Blocks and 1000 for max spawnrate." 
+				})
+			@Config.RangeInt(min = 0, max = 1000)
+			public int lavaSpawnrate = 70;
+
+		}
 	  }
 	
 	
@@ -369,6 +504,7 @@ public class UAConfig {
 		@SubscribeEvent
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 			if (event.getModID().equals(UltraAmplified.MOD_ID)) {
+				
 				ConfigManager.sync(UltraAmplified.MOD_ID, Config.Type.INSTANCE);
 			}
 		}

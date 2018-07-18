@@ -55,26 +55,16 @@ public class BiomeEndDecoratorUA extends BiomeDecoratorUA
         {
             int l9 = random.nextInt(16) + 8;
             int k13 = random.nextInt(16) + 8;
-            int l16 = worldIn.getHeight(this.chunkPos.add(l9, 0, k13)).getY() * 2;
-
-            if (l16 > 7)
-            {
-                int j19 = random.nextInt(l16);
-                this.endIsland.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
+            int j19 = random.nextInt(255) + 7;
+            this.endIsland.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
         }
     	
     	for (int j5 = 0; j5 < this.chorusPerChunk; ++j5)
         {
-            int l9 = random.nextInt(16) + 8;
-            int k13 = random.nextInt(16) + 8;
-            int l16 = worldIn.getHeight(this.chunkPos.add(l9, 0, k13)).getY() * 2;
-
-            if (l16 > 0)
-            {
-                int j19 = random.nextInt(l16);
-                this.BlockChorusFlower.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
+            int l9 = random.nextInt(12)+10;
+            int k13 = random.nextInt(12)+10;
+            int j19 = random.nextInt(255)+8;
+            this.BlockChorusFlower.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
         }
     }
 }

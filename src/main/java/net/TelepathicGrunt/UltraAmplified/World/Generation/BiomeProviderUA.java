@@ -112,7 +112,7 @@ public class BiomeProviderUA extends BiomeProvider{
         GenLayer lvt_9_1_ = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
         
         //generates hills and M variants of biomes. Treat with special care as this is precious... 
-        GenLayer genlayerhills = new GenLayerHillsAndAmplifiedUA(1000L, genlayerbiomeedge, lvt_9_1_);
+        GenLayer genlayerhills = new GenLayerHillsAndAmplifiedUA(1000L, genlayerbiomeedge, lvt_9_1_, p_180781_3_);
         GenLayer genlayer5 = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
         genlayer5 = GenLayerZoom.magnify(1000L, genlayer5, j);
         

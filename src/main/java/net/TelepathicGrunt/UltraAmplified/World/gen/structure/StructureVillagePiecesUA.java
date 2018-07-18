@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Lists;
 
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellUA;
@@ -21,6 +22,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockEndRod;
 import net.minecraft.block.BlockLadder;
@@ -1586,8 +1588,16 @@ public class StructureVillagePiecesUA
             this.structureVillageWeightedPieceList = p_i2104_6_;
             this.terrainType = p_i2104_7_;
             
-
-            this.isZombieInfested = rand.nextInt(6) == 0;
+            
+           
+        
+        	//run RNG to see if it is zombified. 
+            //If config is 100, becomes 99 and will always return true. 
+            //If config is 0, becomes -1 and will always return false.
+            int zombieChance = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageZombieSpawnrate-1;
+        	this.isZombieInfested = rand.nextInt(100) <= zombieChance;
+            
+        	
         	
             Biome biome = chunkManagerIn.getBiome(new BlockPos(x, 0, z), Biomes.DEFAULT);
 
@@ -1641,6 +1651,11 @@ public class StructureVillagePiecesUA
             {
             	System.out.println("Village | Mesa | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 8;
+            }
+            else if (biome == BiomeInit.BiomeRoofedForest || biome == BiomeInit.BiomeRoofedForestM)
+            {
+            	System.out.println("Village | Dark Oak | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+                this.structureType = 10;
             }
             else {
             	System.out.println("Village | Normal | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
@@ -2238,8 +2253,40 @@ public class StructureVillagePiecesUA
                     return Blocks.ICE.getDefaultState();
                 }
             }
-            
-            
+            else if (this.structureType == 10)
+            {
+                if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2)
+                {
+                    return Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK).withProperty(BlockLog.LOG_AXIS, blockstateIn.getValue(BlockLog.LOG_AXIS));
+                }
+
+                
+                if (blockstateIn.getBlock() == Blocks.PLANKS)
+                {
+                	if(this.isZombieInfested) 
+                    {
+                    	return Blocks.MOSSY_COBBLESTONE.getDefaultState();
+                    }
+                    else {
+                    	return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK);
+                    }
+                }
+                
+                if (blockstateIn.getBlock() == Blocks.OAK_STAIRS)
+                {
+                    return Blocks.DARK_OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING));
+                }
+                
+                if (blockstateIn.getBlock() == Blocks.COBBLESTONE)
+                {
+                    return Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
+                }
+
+                if (blockstateIn.getBlock() == Blocks.OAK_FENCE)
+                {
+                    return Blocks.DARK_OAK_FENCE.getDefaultState();
+                }
+            }        
             return blockstateIn;
         }
 
@@ -2251,10 +2298,20 @@ public class StructureVillagePiecesUA
                     return Blocks.ACACIA_DOOR;
 
                 case 3:
+                case 8:
                     return Blocks.SPRUCE_DOOR;
                     
                 case 4:
                 	return Blocks.JUNGLE_DOOR;
+                	
+                case 1:
+                case 6:
+                case 9:
+                    return Blocks.BIRCH_DOOR;
+                	
+                case 7:
+                case 10:
+                	return Blocks.DARK_OAK_DOOR;
 
                 default:
                     return Blocks.OAK_DOOR;

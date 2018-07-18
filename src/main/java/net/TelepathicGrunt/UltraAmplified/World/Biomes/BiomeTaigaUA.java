@@ -6,6 +6,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBoulderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenMegaPineTreeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenTaigaMutatedUA;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
@@ -26,9 +27,12 @@ public class BiomeTaigaUA extends BiomeExtendedUA
 {
     private static final WorldGenTaiga1 PINE_GENERATOR = new WorldGenTaiga1();
     private static final WorldGenTaiga2 SPRUCE_GENERATOR = new WorldGenTaiga2(false);
+    private static final WorldGenTaigaMutatedUA SPRUCE_M_GENERATOR = new WorldGenTaigaMutatedUA(false);
     private static final WorldGenMegaPineTreeUA MEGA_PINE_GENERATOR = new WorldGenMegaPineTreeUA(false, false);
     private static final WorldGenMegaPineTreeUA MEGA_SPRUCE_GENERATOR = new WorldGenMegaPineTreeUA(false, true);
-    private static final WorldGenBoulderUA FOREST_ROCK_GENERATOR = new WorldGenBoulderUA(0);
+    private static final WorldGenBoulderUA MEGA_TAIGA_ROCK_GENERATOR = new WorldGenBoulderUA(3, false);
+    private static final WorldGenBoulderUA MEGA_TAIGA_M_ROCK_GENERATOR = new WorldGenBoulderUA(4, true);
+    private static final WorldGenBoulderUA TAIGA_M_ROCK_GENERATOR = new WorldGenBoulderUA(0, false);
     private final BiomeTaigaUA.Type type;
 
     public BiomeTaigaUA(BiomeTaigaUA.Type typeIn, Biome.BiomeProperties properties)
@@ -62,7 +66,13 @@ public class BiomeTaigaUA extends BiomeExtendedUA
         }
         else
         {
-            return (WorldGenAbstractTree)(rand.nextInt(3) == 0 ? PINE_GENERATOR : SPRUCE_GENERATOR);
+        	if(this.isMutation()) 
+        	{
+        		return SPRUCE_M_GENERATOR;
+        	}else 
+        	{
+        		 return (WorldGenAbstractTree)(rand.nextInt(3) == 0 ? PINE_GENERATOR : SPRUCE_GENERATOR);
+        	}
         }
     }
 
@@ -78,15 +88,48 @@ public class BiomeTaigaUA extends BiomeExtendedUA
     {
         if ((this.type == BiomeTaigaUA.Type.MEGA || this.type == BiomeTaigaUA.Type.MEGA_SPRUCE) && net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK))
         {
-            int i = rand.nextInt(3);
-
-            for (int j = 0; j < i; ++j)
-            {
-                int k = rand.nextInt(16) + 8;
-                int l = rand.nextInt(16) + 8;
-                BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
-                FOREST_ROCK_GENERATOR.generate(worldIn, rand, blockpos);
-            }
+        	if(this.isMutation()) 
+        	{
+	            if(rand.nextInt(10) == 0)
+	            {
+	            	for(int i = 0; i < 12; i++) {
+		                BlockPos blockpos = worldIn.getHeight(pos.add(16, 0, 16));
+		                MEGA_TAIGA_M_ROCK_GENERATOR.generate(worldIn, rand, blockpos);
+	            	}
+	            }
+	            else 
+	            {
+	            	if(rand.nextInt(5) == 0) 
+	            	{
+		            	int k = rand.nextInt(10) + 11;
+		                int l = rand.nextInt(10) + 11;
+		                BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+		                MEGA_TAIGA_ROCK_GENERATOR.generate(worldIn, rand, blockpos);
+	            	}
+	            }
+    		
+        	}
+        	else 
+        	{
+	            int i = rand.nextInt(4) == 0 ? rand.nextInt(3) : 0;
+	
+	            for (int j = 0; j < i; ++j)
+	            {
+	                int k = rand.nextInt(10) + 11;
+	                int l = rand.nextInt(10) + 11;
+	                BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+	                MEGA_TAIGA_ROCK_GENERATOR.generate(worldIn, rand, blockpos);
+	            }
+        	}
+        }
+        else if(this.isMutation() && net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK)){
+        	 if(rand.nextInt(3) < 2)
+             {
+                 int k = rand.nextInt(16) + 8;
+                 int l = rand.nextInt(16) + 8;
+                 BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+                 TAIGA_M_ROCK_GENERATOR.generate(worldIn, rand, blockpos);
+             }
         }
 
         DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.FERN);

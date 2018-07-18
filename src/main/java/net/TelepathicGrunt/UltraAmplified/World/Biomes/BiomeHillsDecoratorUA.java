@@ -20,22 +20,29 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class BiomeHillsDecoratorUA extends BiomeDecoratorUA{
 
 	private final WorldGenerator silverfishSpawner = new WorldGenMinable(Blocks.MONSTER_EGG.getDefaultState().withProperty(BlockSilverfish.VARIANT, BlockSilverfish.EnumType.STONE), 9);
-    private final EmeraldGenerator emeralds = new EmeraldGenerator();
+    private final WorldGenerator emeralds = new EmeraldGenerator();
 	
     
 	public void decorate(World worldIn, Random rand, Biome biome, BlockPos pos)
     {
     	super.decorate(worldIn, rand, biome, pos);
     	
-        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, rand, emeralds, pos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.EMERALD))
-        {
-        	emeralds.generate(worldIn, rand, pos, this.chunkProviderSettingsUA.emeraldCountPercentage);
-        }
+    	
+		int count = (int)((20 + rand.nextInt(35))*this.chunkProviderSettingsUA.emeraldCountPercentage);
+	    for (int i = 0; i < count; i++)
+	    {
+	    	int x = rand.nextInt(16) + 8;
+            int y = rand.nextInt(251) + 4;
+            int z = rand.nextInt(16) + 8;
+            if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, rand, emeralds, pos.add(x, y, z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.EMERALD))
+            emeralds.generate(worldIn, rand, pos.add(x, y, z));
+	    }
+    	
 
         for (int numPerChunk = 0; numPerChunk < this.chunkProviderSettingsUA.silverfishCount; ++numPerChunk)
         {
             int x = rand.nextInt(16);
-            int y = rand.nextInt(251)+4;
+            int y = rand.nextInt(251) + 4;
             int z = rand.nextInt(16);
             if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, rand, silverfishSpawner, pos.add(x, y, z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.SILVERFISH))
             this.silverfishSpawner.generate(worldIn, rand, pos.add(x, y, z));
@@ -50,28 +57,17 @@ public class BiomeHillsDecoratorUA extends BiomeDecoratorUA{
 	
 	 private static class EmeraldGenerator extends WorldGenerator
      {
-        public boolean generate(World worldIn, Random rand, BlockPos pos, float percentage)
+		@Override
+        public boolean generate(World worldIn, Random rand, BlockPos pos)
         {
-            int count = (int)((20 + rand.nextInt(35))*percentage);
-            for (int i = 0; i < count; i++)
+            net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
+            if (state.getBlock().isReplaceableOreGen(state, worldIn, pos, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.STONE)))
             {
-                BlockPos blockpos = pos.add(rand.nextInt(16) + 8, rand.nextInt(251) + 4, rand.nextInt(16) + 8);
-
-                net.minecraft.block.state.IBlockState state = worldIn.getBlockState(blockpos);
-                if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.STONE)))
-                {
-                    worldIn.setBlockState(blockpos, Blocks.EMERALD_ORE.getDefaultState(), 16 | 2);
-                }
+                worldIn.setBlockState(pos, Blocks.EMERALD_ORE.getDefaultState(), 16 | 2);
             }
+                
             return true;
         }
-		
-
-		@Override
-		public boolean generate(World worldIn, Random rand, BlockPos position) {
-			// nothing. Can't rid this without error
-			return false;
-		}
      }
 	
 }

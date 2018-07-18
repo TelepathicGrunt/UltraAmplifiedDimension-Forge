@@ -39,9 +39,7 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
     { 
         this.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
         
-    	int i = 3 + random.nextInt(6);
-    	
-        for (i = 0; i < 5; ++i)
+        for (int i = random.nextInt(3); i < this.chunkProviderSettingsUA.magmaCount; ++i)
         {
             int j1 = random.nextInt(16);
             int k1 = random.nextInt(101);
@@ -49,20 +47,25 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
             this.magma.generate(worldIn, random, pos.add(j1, k1, l1));
         }
 
-        
-    	i = 3 + random.nextInt(8);
     	
-    	for (i = 0; i < this.chunkProviderSettingsUA.quartzCount; ++i)
+    	for (int i = random.nextInt(3); i < this.chunkProviderSettingsUA.quartzCount; ++i)
         {
-            int j1 = random.nextInt(16);
-            int k1 = random.nextInt(240);
-            int l1 = random.nextInt(16);
-            this.quartz.generate(worldIn, random, pos.add(j1, k1, l1));
+            int x = random.nextInt(16);
+            int y = random.nextInt(240);
+            int z = random.nextInt(16);
+            if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, quartz, pos.add(x, y, z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ))
+            this.quartz.generate(worldIn, random, pos.add(x, y, z));
         }
         
     	
+        for (int i = random.nextInt(50); i < this.chunkProviderSettingsUA.lavaCount; i++)
+        {
+        	int x = random.nextInt(16) + 8;
+            int y = random.nextInt(236) + 4;
+            int z = random.nextInt(16) + 8;
+            lava.generate(worldIn, random, pos.add(x, y, z));
+        }
     	
-    	lava.generate(worldIn, random, pos);
 
         
         this.chunkPos = pos;
@@ -116,23 +119,17 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
     
     private static class lavaGenerator extends WorldGenerator
     {
-        @Override
-        public boolean generate(World worldIn, Random rand, BlockPos pos)
-        {
-        	 
-            int i = 10 + rand.nextInt(50);
-            for (; i < 100; i++)
-            {
-                BlockPos blockpos = pos.add(rand.nextInt(16) + 8, rand.nextInt(236) + 4, rand.nextInt(16) + 8);
-
-                net.minecraft.block.state.IBlockState state = worldIn.getBlockState(blockpos);
-                if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.NETHERRACK)))
+		@Override
+		public boolean generate(World worldIn, Random rand, BlockPos position) {
+			
+			    net.minecraft.block.state.IBlockState state = worldIn.getBlockState(position);
+                if (state.getBlock().isReplaceableOreGen(state, worldIn, position, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.NETHERRACK)))
                 {
-                    worldIn.setBlockState(blockpos, Blocks.FLOWING_LAVA.getDefaultState(), 16 | 2);
+                    worldIn.setBlockState(position, Blocks.FLOWING_LAVA.getDefaultState(), 16 | 2);
                 }
-            }
-            return true;
-        }
+                
+			return false;
+		}
     }
     
 }

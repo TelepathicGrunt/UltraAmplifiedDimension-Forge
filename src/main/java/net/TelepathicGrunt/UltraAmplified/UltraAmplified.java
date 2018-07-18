@@ -1,7 +1,9 @@
 package net.TelepathicGrunt.UltraAmplified;
 
+import java.lang.reflect.Method;
+
 import jline.internal.Log;
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.Utils.LoadingScreenProgressPercentage;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.ComponentScatteredFeaturePiecesUA;
@@ -20,11 +22,10 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureStronghol
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureVillagePiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionPiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.config.Config.Type;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -32,7 +33,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 @Mod(modid = UltraAmplified.MOD_ID, name = UltraAmplified.MOD_NAME, version = UltraAmplified.VERSION)
 public class UltraAmplified {
@@ -40,7 +41,7 @@ public class UltraAmplified {
 	//constants
 	public static final String MOD_ID = "ultra_amplified_mod";
 	public static final String MOD_NAME = "Ultra Amplified Mod";
-	public static final String VERSION = "0.4.2";
+	public static final String VERSION = "0.4.3";
 	public static WorldType UltraAmplified;
 	public static WorldType UltraAmplifiedLargeBiome;
 	
@@ -89,9 +90,6 @@ public class UltraAmplified {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		//Working on showing load progress on world loading screen
-		  //Minecraft instancemc = Minecraft.getMinecraft();
-		  //instancemc.loadingScreen = new LoadingScreenRenderProgress(instancemc);
 	}
 	
 	

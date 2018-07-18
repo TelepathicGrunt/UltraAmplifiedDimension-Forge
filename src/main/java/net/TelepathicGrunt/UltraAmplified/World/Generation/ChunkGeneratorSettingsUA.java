@@ -114,8 +114,10 @@ public class ChunkGeneratorSettingsUA {
     public final int lapisSpread;
     public final int quartzCount;
     public final int glowstoneCount;
+    public final int magmaCount;
     public final int silverfishCount;
     public final float emeraldCountPercentage;
+    public final int lavaCount;
     
     public final int waterfallCount;
     public final int undergroundWaterfallCount;
@@ -188,7 +190,7 @@ public class ChunkGeneratorSettingsUA {
         this.useVillages = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageGeneration;
         this.villageRarity = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageSpawnrate + 8;
         
-        this.useMineShafts = UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftGeneration;
+        this.useMineShafts = UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed || UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed;
         this.mineshaftSpawnrate = (float) UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftSpawnrate;
         
         this.useTemples =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.scatteredGeneration;
@@ -228,34 +230,36 @@ public class ChunkGeneratorSettingsUA {
         
         //Ores
         this.coalSize = 17;
-        this.coalCount = (int)(35*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.coalCount = UAConfig.oreAndFeatures.mainOresOptions.coalOreSpawnrate;
         this.coalMinHeight = 0;
         this.coalMaxHeight = 240;
         this.ironSize = 9;
-        this.ironCount = (int)(50*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.ironCount = UAConfig.oreAndFeatures.mainOresOptions.ironOreSpawnrate;
         this.ironMinHeight = 0;
         this.ironMaxHeight = 200;
         this.goldSize = 9;
-        this.goldCount = (int)(2*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.goldCount = UAConfig.oreAndFeatures.mainOresOptions.goldOreSpawnrate;
         this.goldMinHeight = 0;
         this.goldMaxHeight = 50;
-        this.mesaGoldCount = (int)(70*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.mesaGoldCount = (int)(70F*((float)UAConfig.oreAndFeatures.mainOresOptions.goldOreSpawnrate/2));
         this.redstoneSize = 8;
-        this.redstoneCount = (int)(12*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.redstoneCount = UAConfig.oreAndFeatures.mainOresOptions.redstoneOreSpawnrate;
         this.redstoneMinHeight = 0;
         this.redstoneMaxHeight = 25;
         this.diamondSize = 8;
-        this.diamondCount = (int)(1*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.diamondCount = UAConfig.oreAndFeatures.mainOresOptions.diamondOreSpawnrate;
         this.diamondMinHeight = 0;
         this.diamondMaxHeight = 25;
         this.lapisSize = 7;
-        this.lapisCount = (int)(2*(UAConfig.oreAndFeatures.oreSpawnrate/100));
+        this.lapisCount = UAConfig.oreAndFeatures.mainOresOptions.lapisOreSpawnrate;
         this.lapisCenterHeight = 20;
         this.lapisSpread = 20;
-        this.quartzCount = (int)(14*(UAConfig.oreAndFeatures.oreSpawnrate/100));
-		this.glowstoneCount = (int)(20*(UAConfig.oreAndFeatures.glowstoneSpawnrate/100));
-		this.silverfishCount = (int)(30*(UAConfig.oreAndFeatures.silverfishSpawnrate/100));
-		this.emeraldCountPercentage = (float)(UAConfig.oreAndFeatures.oreSpawnrate/100);
+        this.quartzCount = UAConfig.oreAndFeatures.netherOresOptions.quartzOreSpawnrate;
+		this.glowstoneCount = UAConfig.oreAndFeatures.netherOresOptions.glowstoneSpawnrate;
+		this.silverfishCount = UAConfig.oreAndFeatures.extremeHillsOresOptions.silverfishSpawnrate;
+		this.emeraldCountPercentage = (float)(UAConfig.oreAndFeatures.extremeHillsOresOptions.emeraldOreSpawnrate/100);
+		this.magmaCount = UAConfig.oreAndFeatures.netherOresOptions.magmaSpawnrate;
+		this.lavaCount = UAConfig.oreAndFeatures.netherOresOptions.lavaSpawnrate;
         
 		
 		//Decorations

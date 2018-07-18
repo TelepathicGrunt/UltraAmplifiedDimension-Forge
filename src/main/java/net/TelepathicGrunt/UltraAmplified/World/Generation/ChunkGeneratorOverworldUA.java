@@ -46,6 +46,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     protected static final IBlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
     protected static final IBlockState ICE = Blocks.ICE.getDefaultState();
     protected static final IBlockState SNOW = Blocks.SNOW.getDefaultState();
+    protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
     private final Random rand;
     private final NoiseGeneratorOctaves minLimitPerlinNoise;
     private final NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -185,10 +186,10 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                                 {
                             		if(loc == BiomeInit.BiomeIceMountain || loc == BiomeInit.BiomeIceSpike)
                                 	{
-                               		   primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, SNOW);
+                               		   primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW);
                                 	}
                             		else {
-                            			primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState());
+                            			primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : WATER);
                             		}
                                 }
                             }
@@ -242,7 +243,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
         if (this.mapFeaturesEnabled)
         {
-            if (this.settings.useMineShafts)
+            if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed || UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed)
             {
                 this.mineshaftGenerator.generate(this.worldObj, x, z, chunkprimer);
             }
@@ -435,7 +436,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
         if (this.mapFeaturesEnabled)
         {
-            if (this.settings.useMineShafts)
+            if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed || UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed)
             {
                 this.mineshaftGenerator.generateStructure(this.worldObj, this.rand, chunkpos);
             }
@@ -474,7 +475,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
             (new WorldGenLakes(Blocks.WATER)).generate(this.worldObj, this.rand, blockpos.add(i1, j1, k1));
         }
 
-        if(biome == BiomeInit.BiomeNether) {
+        if(this.settings.useLavaLakes && biome == BiomeInit.BiomeNether) {
         	if (!flag && this.rand.nextInt(6) == 0)
             {
                 int i2 = this.rand.nextInt(16) + 8;
@@ -688,7 +689,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     {
         if (this.mapFeaturesEnabled)
         {
-            if (this.settings.useMineShafts)
+            if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed || UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed)
             {
                 this.mineshaftGenerator.generate(this.worldObj, x, z, (ChunkPrimer)null);
             }
