@@ -13,6 +13,73 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        
        
        
+    (V.4.4 Changes)
+    
+     Config:
+·Added super secret setting that does something! (Can't say what lol. Try it!)
+·Fixed some config namings.
+·Added config option to turn on and off mini-structures such as Crosses, Hay Bale, Fossils, and Desert Wells.
+·Made lower config values now spawn more Villages, Temples, Nether Fortresses, End Cities, Ocean Monuemnts, and Woodland Mansions but raised default value to keep same default spawnrates.
+    
+     Biomes:
+·Biome distribution is now much better when fewer biomes are selected in the config settings.
+·Fixed bug where Desert M Biome spawned instead of Desert Hills Biome.
+·Bamboo Forest now spawns Llamas, Parrots, Pigs, Chickens, and Bats instead of default passive mobs.
+·Increased Pumpkin spawn rate due to difficulty in finding them with current terrain.
+·Fixed Chorus Plant's spawn placement so they are less clustered. (Probably not noticable)
+·Fixed bug where End Islands could spawn low enough to replace Bedrock at Y = 0 with End Stone.
+·Increased Slime spawnrate in Swampland M Biome.
+
+    Structures:
+·Added a very rare Sun Shrine to generate in any biome with "Hills" in its name. (Except for Extreme Hills Biomes)
+·Added a rare small Stonehedge to generate in any biome with "Hills" in its name (Except for Extreme Hills Biomes) and has a very small chance of generating an Enchanting Table.
+·Villages in Stone Beach Biome generates Stone instead of Dirt so the bottom of Farmlands blend better with the biome.
+·For Mesa and Desert biomes, replaced the 1% Dungeon chance of Giant Zombie Spawners with Illusioner Spawners as Giant Zombies cannot spawn through Mob Spawners.
+·The bug that caused Ocean Monument to not spawn at correct heights is squashed. Now they generate between the height Y = 97 and Y = 242 regardless of what the terrain height is.
+·Witch Huts' Brewing Stand now can have up three potions which can be Potion of Leaping, Potion of Poison, and Potion of Night Vision with the last potion being the rarest.
+
+     Misc:
+·Updated info that shows under this mod's World Type to be more accurate.
+  
+  
+
+    (V.4.3 Changes)
+    
+    Config:
+·Fixed several config descriptions, names, and order.
+·Added config option to choose whether Giant Pit Mineshafts or aboveground Floating Mineshafts spawn!
+·Increased max possible spawnrate for several options from 500 to 1000.
+·Decreased minimum possible spawn height for Sea Level option from 65 to 0.
+·Biome Size option can be set to 1 now. (Looks really ridiculous though lol)
+·Broken up the Ore Spawnrate option to being many options to control each ore's spawnrate individually.
+·Added option to control Magma spawnrate below Y = 100 in Nether Biome.
+·Added option to control single Lava Block spawnrate in Nether Biome.
+·Changed Silverfish Block Spawnrate option for Extreme Hills Biome and Stronghold into two seperate options.
+    
+    Biomes:
+·Made Plains, Forest, and Ice Mountain unable to spawn through the GenLayer for hills if those biomes are disabled.(example: Roofed Forests Biomes may generate Plains Biomes in them which is unwanted if player has the option for Plains disabled.)
+·Lava Ocean will spawn instead of Snow Blocks in Ice Mountain and Ice Spike Biome when the Lava Ocean config option is turned on.
+·Decreased Lava spawn rate in Nether to cut down a bit on the excessive amount of Lavafalls. 
+·Slightly adjusted Magma and Quartz spawnrates in Nether Biome.
+·Made Taiga M and Cold Taiga M Biomes look like a miniature Mega Taiga Biome.
+·Made Swampland M Biome now have wooden crosses with a chance of a hidden chest, thicker spooky trees, and swamp water can spawn at higher heights. 
+·Made Mega Spruce Taiga and Redwood Taiga Hills M Biomes (both looks almost exactly the same) have larger boulders that are stacked on top of each other to form massive pillars.
+·Made boulders have decreased chance of spawning ores.
+·Changed Cactus generation to be shorter and have arms to look much better instead of looking like a green stick lol.
+·Changed Desert M Biome to have Smooth Sandstone at top with patches of Sand along with increased Dead Bush spawnrate and taller Cactus than normal Desert Biomes.
+·Jungle M Biomes now generates large bodies of water (that aren't floating or at edge of cliffs) and will spawn huge amounts of flowers but with no red flowers. In addition, Hay Bale Piles will rarely spawn as well.
+·Jungle Biomes will very rarely spawn Green Concrete Powder Patches but Jungle M Biomes will spawn them more commonly.
+·Fixed cascading worldgen lag due to Chorus Plant.
+
+    Structures:
+·Added Dark Oak Village to spawn in Roofed Forest Biome.
+·Changed what Doors spawn for some Village types.
+  
+    Misc:
+·World generation progress is shown on loading screen when creating a new world!
+
+
+
    (V.4.2 Changes)
    
     Biomes:
