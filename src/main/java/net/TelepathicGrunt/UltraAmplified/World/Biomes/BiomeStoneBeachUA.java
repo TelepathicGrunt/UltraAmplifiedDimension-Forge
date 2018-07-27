@@ -19,20 +19,20 @@ public class BiomeStoneBeachUA extends BiomeExtendedUA
         
         this.topBlock = Blocks.STONE.getDefaultState();
         this.fillerBlock = Blocks.STONE.getDefaultState();
+        
         this.decorator.treesPerChunk = -999;
         this.decorator.deadBushPerChunk = 0;
         this.decorator.reedsPerChunk = 0;
         this.decorator.cactiPerChunk = 0;
     }
     
-    /**
-     * returns the chance a creature has to spawn.
-     */
+    //heavily increased the spawnrate of mobs in this biome because this biome is high in resources.
     public float getSpawningChance()
     {
         return 0.15F;
     }
     
+    //we use the decorator specifically for Stone Beach instead of BiomeDecoratorUA so we can generate additional ores and stone variants in this biome. 
     @Override
     public BiomeDecorator createBiomeDecorator()
     {
@@ -41,6 +41,6 @@ public class BiomeStoneBeachUA extends BiomeExtendedUA
     
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 }

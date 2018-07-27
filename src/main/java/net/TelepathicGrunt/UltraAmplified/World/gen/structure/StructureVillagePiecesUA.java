@@ -2074,7 +2074,7 @@ public class StructureVillagePiecesUA
                     return Blocks.STONE_SLAB.getDefaultState();
                 }
                 
-                if (blockstateIn.getBlock() == Blocks.COBBLESTONE)
+                if (blockstateIn.getBlock() == Blocks.COBBLESTONE || blockstateIn.getBlock() == Blocks.DIRT)
                 {
                     return Blocks.STONE.getDefaultState();
                 }

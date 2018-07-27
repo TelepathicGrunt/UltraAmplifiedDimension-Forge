@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorSettingsUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBetterCactusUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBushUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDeadBushUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenLiquidsUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenTallGrassUA;
@@ -25,14 +24,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BiomeDecoratorUA extends BiomeDecorator{
 	
 		//used to know how much to spawn stuff and where
+		//will be removed in 1.13 because configs will be able to be set per world 
 	    public static ChunkGeneratorSettingsUA chunkProviderSettingsUA;
 
-	    /** Field that is used to generate better cactus */
+	    /** Field that is used to generate better cactus because it's better!*/
 		public WorldGenerator shortCactus = new WorldGenBetterCactusUA(6);
-	    
-	    /** Fields that generates mushrooms better */
-	    public WorldGenerator mushroomBrownGenUA = new WorldGenBushUA(Blocks.BROWN_MUSHROOM);
-	    public WorldGenerator mushroomRedGenUA = new WorldGenBushUA(Blocks.RED_MUSHROOM);
 	    
 	    
 	    @Override
@@ -58,6 +54,8 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	            this.redstoneGen = new WorldGenMinable(Blocks.REDSTONE_ORE.getDefaultState(), this.chunkProviderSettingsUA.redstoneSize);
 	            this.diamondGen = new WorldGenMinable(Blocks.DIAMOND_ORE.getDefaultState(), this.chunkProviderSettingsUA.diamondSize);
 	            this.lapisGen = new WorldGenMinable(Blocks.LAPIS_ORE.getDefaultState(), this.chunkProviderSettingsUA.lapisSize);
+	            
+	            //actual decorating starts
 	            this.genDecorations(biome, worldIn, random);
 	            this.decorating = false;
 	        }
@@ -81,44 +79,44 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SAND))
 	        for (int i = 0; i < this.sandPatchesPerChunk; ++i)
 	        {
-	            int j = random.nextInt(16) + 8;
-	            int k = random.nextInt(16) + 8;
-	            this.sandGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(j, 0, k)));
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
+	            this.sandGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(x, 0, z)));
 	        }
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.CLAY))
 	        for (int i1 = 0; i1 < this.clayPerChunk; ++i1)
 	        {
-	            int l1 = random.nextInt(16) + 8;
-	            int i6 = random.nextInt(16) + 8;
-	            this.clayGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(l1, 0, i6)));
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
+	            this.clayGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(x, 0, z)));
 	        }
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SAND_PASS2))
 	        for (int j1 = 0; j1 < this.gravelPatchesPerChunk; ++j1)
 	        {
-	            int i2 = random.nextInt(16) + 8;
-	            int j6 = random.nextInt(16) + 8;
-	            this.gravelGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(i2, 0, j6)));
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
+	            this.gravelGen.generate(worldIn, random, worldIn.getTopSolidOrLiquidBlock(this.chunkPos.add(x, 0, z)));
 	        }
 
 	        
 	        //generate trees and large mushrooms
-	        int k1 = this.treesPerChunk;
+	        int treeCount = this.treesPerChunk;
 
 	        if (random.nextFloat() < this.extraTreeChance)
 	        {
-	            ++k1;
+	            ++treeCount;
 	        }
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE))
-	        for (int j2 = 0; j2 < k1; ++j2)
+	        for (int j2 = 0; j2 < treeCount; ++j2)
 	        {
-	            int k6 = random.nextInt(16) + 8;
-	            int l = random.nextInt(16) + 8;
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
 	            WorldGenAbstractTree worldgenabstracttree = biomeIn.getRandomTreeFeature(random);
 	            worldgenabstracttree.setDecorationDefaults();
-	            BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(k6, 0, l));
+	            BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(x, 0, z));
 
 	            if (worldgenabstracttree.generate(worldIn, random, blockpos))
 	            {
@@ -126,16 +124,17 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	            }
 	            
 	            
-	            for(int f = 75; f < worldIn.getHeight(this.chunkPos.add(k6, 0, l)).getY() - 10; f++) {
+	            for(int height = 75; height < worldIn.getHeight(this.chunkPos.add(x, 0, z)).getY() - 10; height++) {
 	            	
 	            	if(biomeIn == BiomeInit.BiomeSwampland || biomeIn == BiomeInit.BiomeSwamplandM) 
 	            	{
+	            		//increased spawnrate of trees under terrain in swamps (due to swamp's already low tree spawnrate. Other biomes are fine)
 	            		if(random.nextInt(4) == 0) 
 	            		{
-	    	            	k6 = random.nextInt(16) + 8;
-	    	                l = random.nextInt(16) + 8;
+	    	            	x = random.nextInt(16) + 8;
+	    	                z = random.nextInt(16) + 8;
 	    	            	
-	    	                blockpos = this.chunkPos.add(k6, f, l);
+	    	                blockpos = this.chunkPos.add(x, height, z);
 	    	                
 	    	                if (worldgenabstracttree.generate(worldIn, random, blockpos))
 	    	                {
@@ -148,10 +147,10 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	            	{
 	            		if(random.nextInt(10) == 0) 
 	            		{
-	    	            	k6 = random.nextInt(16) + 8;
-	    	                l = random.nextInt(16) + 8;
+	    	            	x = random.nextInt(16) + 8;
+	    	                z = random.nextInt(16) + 8;
 	    	            	
-	    	                blockpos = this.chunkPos.add(k6, f, l);
+	    	                blockpos = this.chunkPos.add(x, height, z);
 	    	                
 	    	                if (worldgenabstracttree.generate(worldIn, random, blockpos))
 	    	                {
@@ -165,23 +164,23 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        }
 	        
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM))
-	        for (int k2 = 0; k2 < this.bigMushroomsPerChunk; ++k2)
+	        for (int currentBigMushroomCount = 0; currentBigMushroomCount < this.bigMushroomsPerChunk; ++currentBigMushroomCount)
 	        {
-	            int l6 = random.nextInt(16) + 8;
-	            int k10 = random.nextInt(16) + 8;
-	            BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(l6, 0, k10));
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
+	            BlockPos blockpos = worldIn.getHeight(this.chunkPos.add(x, 0, z));
 	            
 	            this.bigMushroomGen.generate(worldIn, random, blockpos);
 	            
-	            for(int f = 75; f < worldIn.getHeight(this.chunkPos.add(l6, 0, k10)).getY() - 10; f++) {
+	            for(int height = 75; height < worldIn.getHeight(this.chunkPos.add(x, 0, z)).getY() - 10; height++) {
             	
             	
             		if(random.nextInt(3) == 0) 
             		{
-    	            	l6 = random.nextInt(16) + 8;
-    	                k10 = random.nextInt(16) + 8;
+    	            	x = random.nextInt(16) + 8;
+    	                z = random.nextInt(16) + 8;
     	            	
-    	                blockpos = this.chunkPos.add(l6, f, k10);
+    	                blockpos = this.chunkPos.add(x, height, z);
     	                
     	                this.bigMushroomGen.generate(worldIn, random, blockpos);
     	                
@@ -193,16 +192,16 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        
 	        //generates flowers, grass, deadbush, and waterlily
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
-	        for (int l2 = 0; l2 < this.flowersPerChunk; ++l2)
+	        for (int currentFlowerCount = 0; currentFlowerCount < this.flowersPerChunk; ++currentFlowerCount)
 	        {
-	            int i7 = random.nextInt(16) + 8;
-	            int l10 = random.nextInt(16) + 8;
-	            int j14 = worldIn.getHeight(this.chunkPos.add(i7, 0, l10)).getY() + 32;
+	            int x = random.nextInt(16) + 8;
+	            int z = random.nextInt(16) + 8;
+	            int maxHeight = worldIn.getHeight(this.chunkPos.add(x, 0, z)).getY() + 32;
 
-	            if (j14 > 0)
+	            if (maxHeight > 0)
 	            {
-	                int k17 = random.nextInt(j14);
-	                BlockPos blockpos1 = this.chunkPos.add(i7, k17, l10);
+	                int height = random.nextInt(maxHeight);
+	                BlockPos blockpos1 = this.chunkPos.add(x, height, z);
 	                BlockFlower.EnumFlowerType blockflower$enumflowertype = biomeIn.pickRandomFlower(random, blockpos1);
 	                BlockFlower blockflower = blockflower$enumflowertype.getBlockType().getBlock();
 
@@ -215,57 +214,49 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        }
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
-	        for (int i3 = 0; i3 < this.grassPerChunk; ++i3)
-          {
-            
-             int l6 = random.nextInt(16) + 8;
-             int k10 = random.nextInt(16) + 8;
-            BlockPos blockpos;
+	        for (int currentCount = 0; currentCount < this.grassPerChunk; ++currentCount)
+            {
+				BlockPos blockpos;
 
-             for(int f = 75; f < 260; f+=6) {
-            	
-	            	l6 = random.nextInt(16) + 8;
-	                k10 = random.nextInt(16) + 8;
-	            	
-	                blockpos = this.chunkPos.add(l6, f, k10);
-	                
-	                new WorldGenTallGrassUA(BlockTallGrass.EnumType.GRASS).generate(worldIn, random, blockpos);
-        		
+				for (int height = 75; height <= 255; height += 6) {
+
+					int x = random.nextInt(16) + 8;
+					int z = random.nextInt(16) + 8;
+
+					blockpos = this.chunkPos.add(x, height, z);
+
+					new WorldGenTallGrassUA(BlockTallGrass.EnumType.GRASS).generate(worldIn, random, blockpos);
+
             }
           }
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.DEAD_BUSH))
-	        for (int j3 = 0; j3 < this.deadBushPerChunk; ++j3)
-	        {
-	            int k7 = random.nextInt(16) + 8;
-            int j11 = random.nextInt(16) + 8;
-            BlockPos blockpos;
+				for (int currentCount = 0; currentCount < this.deadBushPerChunk; ++currentCount) {
 
-            for(int f = 75; f < 260; f+=6) {
-            	
-            	k7 = random.nextInt(16) + 8;
-            	j11 = random.nextInt(16) + 8;
-            	
-                blockpos = this.chunkPos.add(k7, f, j11);
-                
-                new WorldGenDeadBushUA().generate(worldIn, random, blockpos);
-            }
-	        }
+					BlockPos blockpos;
+	
+					for (int height = 75; height < 260; height += 6) {
+	
+						int x = random.nextInt(16) + 8;
+						int z = random.nextInt(16) + 8;
+	
+						blockpos = this.chunkPos.add(x, height, z);
+	
+						new WorldGenDeadBushUA().generate(worldIn, random, blockpos);
+					}
+				}
 
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.LILYPAD))
-	        for (int k3 = 0; k3 < this.waterlilyPerChunk; ++k3)
-	        {
-	            int l7 = random.nextInt(16) + 8;
-	            int k11 = random.nextInt(16) + 8;
-	            int i15 = worldIn.getHeight(this.chunkPos.add(l7, 0, k11)).getY() * 2;
-
-	            if (i15 > 0)
-	            {
-	                int j18 = random.nextInt(i15);
+		        for (int currentCount = 0; currentCount < this.waterlilyPerChunk; ++currentCount)
+		        {
+		            int x = random.nextInt(16) + 8;
+		            int z = random.nextInt(16) + 8;
+	                int y = random.nextInt(255);
+	                
 	                BlockPos blockpos4;
 	                BlockPos blockpos7;
 
-	                for (blockpos4 = this.chunkPos.add(l7, j18, k11); blockpos4.getY() > 0; blockpos4 = blockpos7)
+	                for (blockpos4 = this.chunkPos.add(x, y, z); blockpos4.getY() > 0; blockpos4 = blockpos7)
 	                {
 	                    blockpos7 = blockpos4.down();
 
@@ -277,113 +268,116 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 
 	                this.waterlilyGen.generate(worldIn, random, blockpos4);
 	            }
-	        }
+		        
 
 	        
 	        
 	        //generates mushrooms
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM))
 	        {
-	        	for (int l3 = 0; l3 < this.mushroomsPerChunk; ++l3)
+	        	for (int currentCount = 0; currentCount < this.mushroomsPerChunk; ++currentCount)
 	            {
+	        		//generates mushrooms at top of landscape
 	                if (random.nextInt(4) == 0)
 	                {
-	                    int i8 = random.nextInt(16) + 8;
-	                    int l11 = random.nextInt(16) + 8;
-	                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(i8, 0, l11));
+	                    int x = random.nextInt(16) + 8;
+	                    int z = random.nextInt(16) + 8;
+	                    BlockPos blockpos2 = worldIn.getHeight(this.chunkPos.add(x, 0, z));
 	                    this.mushroomBrownGen.generate(worldIn, random, blockpos2);
 	                }
 
 	                if (random.nextInt(8) == 0)
 	                {
-	                    int j8 = random.nextInt(16) + 8;
-	                    int i12 = random.nextInt(16) + 8;
-	                    BlockPos blockpos5 = worldIn.getHeight(this.chunkPos.add(j8, 0, i12));
+	                    int x = random.nextInt(16) + 8;
+	                    int z = random.nextInt(16) + 8;
+	                    BlockPos blockpos5 = worldIn.getHeight(this.chunkPos.add(x, 0, z));
 	                    this.mushroomRedGen.generate(worldIn, random, blockpos5);
 	                    
 	                }
 	                
-	                if (random.nextInt(3) == 0)
-	            {
-	                int i4 = random.nextInt(16) + 8;
-	                int k8 = random.nextInt(16) + 8;
-
-	            	int height = (worldIn.getHeight(this.chunkPos.add(i4, 0, k8))).getY();
-	            	if(height > 75) {
-	            		height -= 75;
-	            	}
-
-	                int k15 = random.nextInt(height)+75;
 	                
-	                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(i4, k15, k8));
-	                
+	                //generates mushroom under landscape based on biome's mushroomPerChunk
+					if (random.nextInt(3) == 0) {
+						int x = random.nextInt(16) + 8;
+						int z = random.nextInt(16) + 8;
+	
+						int height = (worldIn.getHeight(this.chunkPos.add(x, 0, z))).getY();
+						
+						if (height > 75) {
+							height -= 75;
+						}
+	
+		                int y = random.nextInt(height)+75;
+		                
+		                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
+		                
+		            }
+
+		            if (random.nextInt(6) == 0)
+		            {
+		                int x = random.nextInt(16) + 8;
+		                int z = random.nextInt(16) + 8;
+		                
+		                int height = (worldIn.getHeight(this.chunkPos.add(x, 0, z))).getY();
+		            	if(height > 75) {
+		            		height -= 75;
+		            	}
+	
+		                int y = random.nextInt(height)+75;
+		                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
+		                
+		            }
 	            }
 
-	            if (random.nextInt(6) == 0)
-	            {
-	                int j4 = random.nextInt(16) + 8;
-	                int l8 = random.nextInt(16) + 8;
-	                
-	                int height = (worldIn.getHeight(this.chunkPos.add(j4, 0, l8))).getY();
-	            	if(height > 75) {
-	            		height -= 75;
-	            	}
-
-	                int l15 = random.nextInt(height)+75;
-	                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(j4, l15, l8));
-	                
-	            }
-	            }
-
-	           
-	            
+	           //underground mushrooms that generate in all biomes but under terrain but not underground
 	            if (random.nextInt(3) == 0)
 	            {
-	                int i4 = random.nextInt(16) + 8;
-	                int k8 = random.nextInt(16) + 8;
+	                int x = random.nextInt(16) + 8;
+	                int z = random.nextInt(16) + 8;
 
-	            	int height = (worldIn.getHeight(this.chunkPos.add(i4, 0, k8))).getY();
+	            	int height = (worldIn.getHeight(this.chunkPos.add(x, 0, z))).getY();
 	            	if(height > 75) {
 	            		height -= 75;
 	            	}
 
-	                int k15 = random.nextInt(height)+75;
+	                int y = random.nextInt(height)+75;
 	                
-	                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(i4, k15, k8));
+	                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
 	                
 	            }
 
 	            if (random.nextInt(6) == 0)
 	            {
-	                int j4 = random.nextInt(16) + 8;
-	                int l8 = random.nextInt(16) + 8;
+	                int x = random.nextInt(16) + 8;
+	                int z = random.nextInt(16) + 8;
 	                
-	                int height = (worldIn.getHeight(this.chunkPos.add(j4, 0, l8))).getY();
+	                int height = (worldIn.getHeight(this.chunkPos.add(x, 0, z))).getY();
 	            	if(height > 75) {
 	            		height -= 75;
 	            	}
 
-	                int l15 = random.nextInt(height)+75;
-	                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(j4, l15, l8));
+	                int y = random.nextInt(height)+75;
+	                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
 	                
 	            }
 	            
 	            
+	            //generates mushrooms underground at a different rate than above
 	            if (random.nextInt(6) == 0)
 	            {
-	                int i4 = random.nextInt(16) + 8;
-	                int k8 = random.nextInt(16) + 8;
-	                int k15 = random.nextInt(75);
-	                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(i4, k15, k8));
+	                int x = random.nextInt(16) + 8;
+	                int z = random.nextInt(16) + 8;
+	                int y = random.nextInt(75);
+	                this.mushroomBrownGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
 	                
 	            }
 
 	            if (random.nextInt(12) == 0)
 	            {
-	                int j4 = random.nextInt(16) + 8;
-	                int l8 = random.nextInt(16) + 8;
-	                int l15 = random.nextInt(75);
-	                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(j4, l15, l8));
+	                int x = random.nextInt(16) + 8;
+	                int z = random.nextInt(16) + 8;
+	                int y = random.nextInt(75);
+	                this.mushroomRedGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
 	                
 	            }
 	        
@@ -394,98 +388,77 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        //generates reeds
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.REED))
 	        {
-	        for (int k4 = 0; k4 < this.reedsPerChunk; ++k4)
-	        {
-	            int i9 = random.nextInt(16) + 8;
-	            int l12 = random.nextInt(16) + 8;
-	            int i16 = worldIn.getHeight(this.chunkPos.add(i9, 0, l12)).getY() * 2;
-
-	            if (i16 > 0)
-	            {
-	                int l18 = random.nextInt(i16);
-	                this.reedGen.generate(worldIn, random, this.chunkPos.add(i9, l18, l12));
-	            }
-	        }
-
-	        for (int l4 = 0; l4 < 10; ++l4)
-	        {
-	            int j9 = random.nextInt(16) + 8;
-	            int i13 = random.nextInt(16) + 8;
-	            int j16 = worldIn.getHeight(this.chunkPos.add(j9, 0, i13)).getY() * 2;
-
-	            if (j16 > 0)
-	            {
-	                int i19 = random.nextInt(j16);
-	                this.reedGen.generate(worldIn, random, this.chunkPos.add(j9, i19, i13));
-	            }
-	        }
+		        for (int currentCount = 0; currentCount < this.reedsPerChunk; ++currentCount)
+		        {
+		            int x = random.nextInt(16) + 8;
+		            int z = random.nextInt(16) + 8;
+	                int y = random.nextInt(180)+75;
+	                
+	                this.reedGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
+		        }
 	        } // End of Reed generation
 	        
 	        
 	        
 	        //generates pumpkins
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
-	        if (random.nextInt(32) == 0)
-	        {
-	            int i5 = random.nextInt(16) + 8;
-	            int k9 = random.nextInt(16) + 8;
-	            int j13 = worldIn.getHeight(this.chunkPos.add(i5, 0, k9)).getY() * 2;
-
-	            if (j13 > 0)
-	            {
-	                int k16 = random.nextInt(j13);
-	                (new WorldGenPumpkin()).generate(worldIn, random, this.chunkPos.add(i5, k16, k9));
-	            }
-	        }
+		        if (random.nextInt(20) == 0)
+		        {
+		            int x = random.nextInt(16) + 8;
+		            int z = random.nextInt(16) + 8;
+	                int y = random.nextInt(245)+10;
+	                new WorldGenPumpkin().generate(worldIn, random, this.chunkPos.add(x, y, z));
+		        }
 
 	        
 	        
 	        //generates cactus
 	        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, forgeChunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.CACTUS))
-     	        for (int j5 = 0; j5 < this.cactiPerChunk; ++j5)
+     	        for (int currentCount = 0; currentCount < this.cactiPerChunk; ++currentCount)
      	        {
- 	                int j19 = random.nextInt(180) + 70;
- 	                shortCactus.generate(worldIn, random, this.chunkPos.add(16, j19, 16));
+ 	                int y = random.nextInt(180) + 70;
+ 	                shortCactus.generate(worldIn, random, this.chunkPos.add(16, y, 16));
      	        }
 
 	        
 	        
 	        //generates waterfalls and lavafalls
-            for (int k5 = 0; k5 < this.chunkProviderSettingsUA.waterfallCount; ++k5)
+            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.waterfallCount; ++currentCount)
             {
-                int i10 = random.nextInt(16) + 8;
-                int l13 = random.nextInt(16) + 8;
-                int i17 = random.nextInt(random.nextInt(175) + 8) + 75;
-                BlockPos blockpos6 = this.chunkPos.add(i10, i17, l13);
+                int x = random.nextInt(16) + 8;
+                int z = random.nextInt(16) + 8;
+                int y = random.nextInt(random.nextInt(175) + 8) + 75;
+                BlockPos blockpos6 = this.chunkPos.add(x, y, z);
                 new WorldGenLiquidsUA(Blocks.FLOWING_WATER).generate(worldIn, random, blockpos6);
                 
             }
 
-            for (int l5 = 0; l5 < this.chunkProviderSettingsUA.lavafallCount; ++l5)
+            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.lavafallCount; ++currentCount)
             {
-                int j10 = random.nextInt(16) + 8;
-                int i14 = random.nextInt(16) + 8;
-                int j17 = random.nextInt(random.nextInt(175) + 8) + 75;
-                BlockPos blockpos3 = this.chunkPos.add(j10, j17, i14);
+                int x = random.nextInt(16) + 8;
+                int z = random.nextInt(16) + 8;
+                int y = random.nextInt(random.nextInt(175) + 8) + 75;
+                BlockPos blockpos3 = this.chunkPos.add(x, y, z);
                 new WorldGenLiquidsUA(Blocks.FLOWING_LAVA).generate(worldIn, random, blockpos3);
             }
             
+            //if statement is like this to make underground waterfalls not attempt to spawn in every chunk to increase its rarity
             if (this.chunkProviderSettingsUA.undergroundWaterfallCount != 0 && random.nextInt(this.chunkProviderSettingsUA.undergroundWaterfallCount) == 0)
             {
-                int i10 = random.nextInt(16) + 8;
-                int l13 = random.nextInt(16) + 8;
-                int i17 = random.nextInt(random.nextInt(70) + 8) + 8;
+                int x = random.nextInt(16) + 8;
+                int z = random.nextInt(16) + 8;
+                int y = random.nextInt(random.nextInt(70) + 8) + 8;
 
-                BlockPos blockpos6 = this.chunkPos.add(i10, i17, l13);
+                BlockPos blockpos6 = this.chunkPos.add(x, y, z);
                 new WorldGenLiquidsUA(Blocks.FLOWING_WATER).generate(worldIn, random, blockpos6);
             }
 
-            for (int l5 = 0; l5 < this.chunkProviderSettingsUA.undergroundLavafallCount; ++l5)
+            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.undergroundLavafallCount; ++currentCount)
             {
-                int j10 = random.nextInt(16) + 8;
-                int i14 = random.nextInt(16) + 8;
-                int j17 = random.nextInt(random.nextInt(70) + 8) + 8;
-                BlockPos blockpos3 = this.chunkPos.add(j10, j17, i14);
+                int x = random.nextInt(16) + 8;
+                int z = random.nextInt(16) + 8;
+                int y = random.nextInt(random.nextInt(70) + 8) + 8;
+                BlockPos blockpos3 = this.chunkPos.add(x, y, z);
                 new WorldGenLiquidsUA(Blocks.FLOWING_LAVA).generate(worldIn, random, blockpos3);
             }
 	        
@@ -500,31 +473,69 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	    @Override
 	    protected void generateOres(World worldIn, Random random)
 	    {
-	        net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Pre(worldIn, random, chunkPos));
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dirtCount, this.dirtGen, this.chunkProviderSettingsUA.dirtMinHeight, this.chunkProviderSettingsUA.dirtMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, gravelOreGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.gravelCount, this.gravelOreGen, this.chunkProviderSettingsUA.gravelMinHeight, this.chunkProviderSettingsUA.gravelMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dioriteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIORITE))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dioriteCount, this.dioriteGen, this.chunkProviderSettingsUA.dioriteMinHeight, this.chunkProviderSettingsUA.dioriteMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, graniteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRANITE))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.graniteCount, this.graniteGen, this.chunkProviderSettingsUA.graniteMinHeight, this.chunkProviderSettingsUA.graniteMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, andesiteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.ANDESITE))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.andesiteCount, this.andesiteGen, this.chunkProviderSettingsUA.andesiteMinHeight, this.chunkProviderSettingsUA.andesiteMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, coalGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.coalCount, this.coalGen, this.chunkProviderSettingsUA.coalMinHeight, this.chunkProviderSettingsUA.coalMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, ironGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.ironCount, this.ironGen, this.chunkProviderSettingsUA.ironMinHeight, this.chunkProviderSettingsUA.ironMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, goldGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.goldCount, this.goldGen, this.chunkProviderSettingsUA.goldMinHeight, this.chunkProviderSettingsUA.goldMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, redstoneGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.redstoneCount, this.redstoneGen, this.chunkProviderSettingsUA.redstoneMinHeight, this.chunkProviderSettingsUA.redstoneMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, diamondGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND))
-	        this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.diamondCount, this.diamondGen, this.chunkProviderSettingsUA.diamondMinHeight, this.chunkProviderSettingsUA.diamondMaxHeight);
-	        if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, lapisGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.LAPIS))
-	        this.genStandardOre2(worldIn, random, this.chunkProviderSettingsUA.lapisCount, this.lapisGen, this.chunkProviderSettingsUA.lapisCenterHeight, this.chunkProviderSettingsUA.lapisSpread);
-	        net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Post(worldIn, random, chunkPos));
-	    }
+	    	//very messy. Even I go crossed-eye looking at this lol. This is Vanilla coding
+			
+	    	
+	    	net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Pre(worldIn, random, chunkPos));
+			
+			//dirt
+	    	if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dirtCount, this.dirtGen,
+						this.chunkProviderSettingsUA.dirtMinHeight, this.chunkProviderSettingsUA.dirtMaxHeight);
+			
+	    	//gravel
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, gravelOreGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.gravelCount, this.gravelOreGen,
+						this.chunkProviderSettingsUA.gravelMinHeight, this.chunkProviderSettingsUA.gravelMaxHeight);
+			
+			//diorite
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dioriteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIORITE))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dioriteCount, this.dioriteGen,
+						this.chunkProviderSettingsUA.dioriteMinHeight, this.chunkProviderSettingsUA.dioriteMaxHeight);
+			
+			//granite
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, graniteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRANITE))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.graniteCount, this.graniteGen,
+						this.chunkProviderSettingsUA.graniteMinHeight, this.chunkProviderSettingsUA.graniteMaxHeight);
+			
+			//andersite
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, andesiteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.ANDESITE))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.andesiteCount, this.andesiteGen,
+						this.chunkProviderSettingsUA.andesiteMinHeight, this.chunkProviderSettingsUA.andesiteMaxHeight);
+			
+			//coal
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, coalGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.coalCount, this.coalGen,
+						this.chunkProviderSettingsUA.coalMinHeight, this.chunkProviderSettingsUA.coalMaxHeight);
+			
+			//iron
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, ironGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.ironCount, this.ironGen,
+						this.chunkProviderSettingsUA.ironMinHeight, this.chunkProviderSettingsUA.ironMaxHeight);
+			
+			//gold
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, goldGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.goldCount, this.goldGen,
+						this.chunkProviderSettingsUA.goldMinHeight, this.chunkProviderSettingsUA.goldMaxHeight);
+			
+			//redstone
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, redstoneGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.redstoneCount, this.redstoneGen,
+						this.chunkProviderSettingsUA.redstoneMinHeight, this.chunkProviderSettingsUA.redstoneMaxHeight);
+			
+			//diamond
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, diamondGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND))
+				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.diamondCount, this.diamondGen,
+						this.chunkProviderSettingsUA.diamondMinHeight, this.chunkProviderSettingsUA.diamondMaxHeight);
+			
+			//lapis
+			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, lapisGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.LAPIS))
+				this.genStandardOre2(worldIn, random, this.chunkProviderSettingsUA.lapisCount, this.lapisGen,
+						this.chunkProviderSettingsUA.lapisCenterHeight, this.chunkProviderSettingsUA.lapisSpread);
+			
+			
+			net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Post(worldIn, random, chunkPos));
+		}
 
 	    /**
 	     * Standard ore generation helper. Vanilla uses this to generate most ores.
@@ -563,6 +574,8 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	     * Standard ore generation helper. Vanilla uses this to generate Lapis Lazuli.
 	     * The main difference between this and {@link #genStandardOre1} is that this takes takes center and spread, while
 	     * genStandardOre1 takes min and max heights.
+	     * 
+	     * used only for lapis ore
 	     */
 	    @Override
 	    protected void genStandardOre2(World worldIn, Random random, int blockCount, WorldGenerator generator, int centerHeight, int spread)

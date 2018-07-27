@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +28,6 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureOceanMonumentPiecesUA
 {
-	public static int height;
 	
     public static void registerOceanMonumentPieces()
     {
@@ -55,46 +55,10 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-							
-							if (height > 220) {
-								i += 220;
-							} else {
-								i += height;
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
+			
 
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
+			
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[EnumFacing.EAST
 						.getIndex()];
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
@@ -150,7 +114,7 @@ public class StructureOceanMonumentPiecesUA
 				this.spawnGuardian(worldIn, structureBoundingBoxIn, 6, 2, 5);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -165,48 +129,10 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-							
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
+			
 
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
-				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[EnumFacing.EAST
+			StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[EnumFacing.EAST
 						.getIndex()];
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition2 = structureoceanmonumentpieces$roomdefinition1.connections[EnumFacing.UP
@@ -289,7 +215,7 @@ public class StructureOceanMonumentPiecesUA
 				//this.setBlockState(worldIn, Blocks.REDSTONE_BLOCK.getDefaultState(), 7, 2, 3, structureBoundingBoxIn);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -304,48 +230,11 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-						
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
+		
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
+			
 
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
-				if (this.roomDefinition.index / 25 > 0) {
+			if (this.roomDefinition.index / 25 > 0) {
 					this.generateDefaultFloor(worldIn, structureBoundingBoxIn, 0, 0,
 							this.roomDefinition.hasOpening[EnumFacing.DOWN.getIndex()]);
 				}
@@ -456,7 +345,6 @@ public class StructureOceanMonumentPiecesUA
 				}
 
 				return true;
-			}
 		}
 	}
 
@@ -471,47 +359,9 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-							
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
+		
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
-
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
+			
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[EnumFacing.NORTH
 						.getIndex()];
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
@@ -604,7 +454,7 @@ public class StructureOceanMonumentPiecesUA
 				}
 
 				return true;
-			}
+			
 		}
 	}
 
@@ -619,47 +469,10 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-							
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
+			
 
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
+			
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[EnumFacing.NORTH
 						.getIndex()];
 				StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
@@ -748,7 +561,7 @@ public class StructureOceanMonumentPiecesUA
 				this.spawnGuardian(worldIn, structureBoundingBoxIn, 4, 2, 3);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -762,45 +575,8 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-						
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 0)) {
-				return false;
-			} else {
+			
 				this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 3, 0, 2, 3, 7, BRICKS_PRISMARINE,
 						BRICKS_PRISMARINE, false);
 				this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 3, 0, 7, 3, 7, BRICKS_PRISMARINE,
@@ -824,7 +600,7 @@ public class StructureOceanMonumentPiecesUA
 				this.spawnGuardian(worldIn, structureBoundingBoxIn, 4, 2, 3);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -870,24 +646,27 @@ public class StructureOceanMonumentPiecesUA
 		public MonumentBuilding() {
 		}
 
-		public MonumentBuilding(Random p_i45599_1_, int x, int y, EnumFacing p_i45599_4_) {
+		public MonumentBuilding(World worldIn, Random rand, int x, int z, EnumFacing direction) {
 			super(0);
-			this.setCoordBaseMode(p_i45599_4_);
+			this.setCoordBaseMode(direction);
 			EnumFacing enumfacing = this.getCoordBaseMode();
+            
+			int height = rand.nextInt(146)+75;
+			
+            if (enumfacing.getAxis() == EnumFacing.Axis.Z)
+            {
+                this.boundingBox = new StructureBoundingBox(x, height, z, x + 58 - 1, height+22, z + 58 - 1);
+            }
+            else
+            {
+                this.boundingBox = new StructureBoundingBox(x, height, z, x + 58 - 1, height+22, z + 58 - 1);
+            }
 
-			if (enumfacing.getAxis() == EnumFacing.Axis.Z) {
-				this.boundingBox = new StructureBoundingBox(x, 185, y, x + 58 - 1, 150,
-						y + 58 - 1);
-			} else {
-				this.boundingBox = new StructureBoundingBox(x, 185, y, x + 58 - 1, 150,
-						y + 58 - 1);
-			}
-
-			List<StructureOceanMonumentPiecesUA.RoomDefinition> list = this.generateRoomGraph(p_i45599_1_);
+			List<StructureOceanMonumentPiecesUA.RoomDefinition> list = this.generateRoomGraph(rand);
 			this.sourceRoom.claimed = true;
 			this.childPieces.add(new StructureOceanMonumentPiecesUA.EntryRoom(enumfacing, this.sourceRoom));
 			this.childPieces
-					.add(new StructureOceanMonumentPiecesUA.MonumentCoreRoom(enumfacing, this.coreRoom, p_i45599_1_));
+					.add(new StructureOceanMonumentPiecesUA.MonumentCoreRoom(enumfacing, this.coreRoom, rand));
 			List<StructureOceanMonumentPiecesUA.MonumentRoomFitHelper> list1 = Lists.<StructureOceanMonumentPiecesUA.MonumentRoomFitHelper>newArrayList();
 			list1.add(new StructureOceanMonumentPiecesUA.XYDoubleRoomFitHelper());
 			list1.add(new StructureOceanMonumentPiecesUA.YZDoubleRoomFitHelper());
@@ -919,7 +698,7 @@ public class StructureOceanMonumentPiecesUA
 					}
 
 					this.childPieces.add(structureoceanmonumentpieces$monumentroomfithelper.create(enumfacing,
-							structureoceanmonumentpieces$roomdefinition, p_i45599_1_));
+							structureoceanmonumentpieces$roomdefinition, rand));
 				}
 			}
 
@@ -940,11 +719,58 @@ public class StructureOceanMonumentPiecesUA
 			StructureBoundingBox structureboundingbox = StructureBoundingBox.createProper(this.getXWithOffset(22, 22),
 					this.getYWithOffset(13), this.getZWithOffset(22, 22), this.getXWithOffset(35, 35),
 					this.getYWithOffset(17), this.getZWithOffset(35, 35));
-			int i = p_i45599_1_.nextInt();
+			int i = rand.nextInt();
 			this.childPieces.add(new StructureOceanMonumentPiecesUA.WingRoom(enumfacing, structureboundingbox1, i++));
 			this.childPieces.add(new StructureOceanMonumentPiecesUA.WingRoom(enumfacing, structureboundingbox2, i++));
 			this.childPieces.add(new StructureOceanMonumentPiecesUA.Penthouse(enumfacing, structureboundingbox));
 		}
+	
+		 /**
+         * Calculates and offsets this structure boundingbox to average ground level
+         */	
+		/*
+        protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset)
+        {
+            if (this.horizontalPos >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                int i = 0;
+                int j = 0;
+                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+
+                for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k)
+                {
+                    for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l)
+                    {
+                        blockpos$mutableblockpos.setPos(l, 64, k);
+
+                        if (structurebb.isVecInside(blockpos$mutableblockpos))
+                        {
+                            i += Math.min(Math.max(worldIn.getTopSolidOrLiquidBlock(blockpos$mutableblockpos).getY(), 75), 220);
+                            ++j;
+                        }
+                    }
+                }
+                
+                Log.warn("x = "+this.boundingBox.minX+", " +this.boundingBox.maxX+" y = "+ this.boundingBox.minZ+", "+this.boundingBox.maxZ);
+				Log.warn("j = "+j+" Offset by "+ (this.horizontalPos - this.boundingBox.minY + yOffset));
+				
+                if (j == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.horizontalPos = i / j;
+                    this.boundingBox.offset(0, this.horizontalPos - this.boundingBox.minY + yOffset, 0);
+                    
+                    return true;
+                }
+            }
+        }*/
 
 		private List<StructureOceanMonumentPiecesUA.RoomDefinition> generateRoomGraph(Random p_175836_1_) {
 			StructureOceanMonumentPiecesUA.RoomDefinition[] astructureoceanmonumentpieces$roomdefinition = new StructureOceanMonumentPiecesUA.RoomDefinition[75];
@@ -985,9 +811,9 @@ public class StructureOceanMonumentPiecesUA
 
 						if (astructureoceanmonumentpieces$roomdefinition[l4] != null) {
 							for (EnumFacing enumfacing : EnumFacing.values()) {
-								int i1 = k2 + enumfacing.getFrontOffsetX();
-								int j1 = i4 + enumfacing.getFrontOffsetY();
-								int k1 = j3 + enumfacing.getFrontOffsetZ();
+								int i1 = k2 + enumfacing.getXOffset();
+								int j1 = i4 + enumfacing.getYOffset();
+								int k1 = j3 + enumfacing.getZOffset();
 
 								if (i1 >= 0 && i1 < 5 && k1 >= 0 && k1 < 5 && j1 >= 0 && j1 < 3) {
 									int l1 = getRoomIndex(i1, j1, k1);
@@ -1058,7 +884,7 @@ public class StructureOceanMonumentPiecesUA
 					int l5 = p_175836_1_.nextInt(6);
 
 					if (structureoceanmonumentpieces$roomdefinition3.hasOpening[l5]) {
-						int i6 = EnumFacing.getFront(l5).getOpposite().getIndex();
+						int i6 = EnumFacing.byIndex(l5).getOpposite().getIndex();
 						structureoceanmonumentpieces$roomdefinition3.hasOpening[l5] = false;
 						structureoceanmonumentpieces$roomdefinition3.connections[l5].hasOpening[i6] = false;
 
@@ -1081,37 +907,8 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-						blockpos$mutableblockpos.setPos((this.boundingBox.maxX+this.boundingBox.minX)/2, 64, (this.boundingBox.maxZ+this.boundingBox.minZ)/2);
-
-						height = worldIn.getTopSolidOrLiquidBlock(blockpos$mutableblockpos).getY();
-						
-
-						
-						if (height > 220) {
-							i = 220;
-						} else {
-							i = height;
-						}
-						
-
-				
-					this.horizontalPos = i;
-					
-					return true;
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 0)) {
-				return false;
-			} else {
+			
 				int i = Math.max(worldIn.getSeaLevel(), 64) - this.boundingBox.minY;
 				this.generateWaterBox(worldIn, structureBoundingBoxIn, 0, 0, 0, 58, i, 58, false);
 				this.generateWing(false, 0, worldIn, randomIn, structureBoundingBoxIn);
@@ -1158,7 +955,7 @@ public class StructureOceanMonumentPiecesUA
 				}
 
 				return true;
-			}
+			
 		}
 
 		private void generateWing(boolean p_175840_1_, int p_175840_2_, World worldIn, Random p_175840_4_,
@@ -1545,25 +1342,9 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			
-				int i = 0;
-				
-						if (height > 220) {
-								i = 220;
-							} else {
-								i = height;
-							}
-					
-					this.horizontalPos = i;
-					
-					return true;
-		}
 
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 0)) {
-				return false;
-			} else {
+			
 				this.generateBoxOnFillOnly(worldIn, structureBoundingBoxIn, 1, 8, 0, 14, 8, 14, ROUGH_PRISMARINE);
 				int i = 7;
 				IBlockState iblockstate = BRICKS_PRISMARINE;
@@ -1678,7 +1459,7 @@ public class StructureOceanMonumentPiecesUA
 				this.spawnGuardian(worldIn, structureBoundingBoxIn, 12, 3, 12);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -1699,45 +1480,9 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-						
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
 
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 13)) {
-				return false;
-			} else {
+			
 				this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, -1, 2, 11, -1, 11, BRICKS_PRISMARINE,
 						BRICKS_PRISMARINE, false);
 				this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, -1, 0, 1, -1, 11, ROUGH_PRISMARINE,
@@ -1802,7 +1547,7 @@ public class StructureOceanMonumentPiecesUA
 					this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 7, 0, 8, LootTableList.CHESTS_END_CITY_TREASURE);
 				}
 			    return true;
-			}
+			
 		}
 	}
 
@@ -2081,49 +1826,10 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset)
-
-		{
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-						
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
+			
 
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
+			
 				if (this.roomDefinition.index / 25 > 0) {
 					this.generateDefaultFloor(worldIn, structureBoundingBoxIn, 0, 0,
 							this.roomDefinition.hasOpening[EnumFacing.DOWN.getIndex()]);
@@ -2346,7 +2052,7 @@ public class StructureOceanMonumentPiecesUA
 				}
 
 				return true;
-			}
+			
 		}
 	}
 
@@ -2361,47 +2067,9 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-							
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
 
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			int offset = this.getYWithOffset(structureBoundingBoxIn.minY) - 186;
-
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, offset)) {
-				return false;
-			} else {
+			
 				if (this.roomDefinition.index / 25 > 0) {
 					this.generateDefaultFloor(worldIn, structureBoundingBoxIn, 0, 0,
 							this.roomDefinition.hasOpening[EnumFacing.DOWN.getIndex()]);
@@ -2458,7 +2126,7 @@ public class StructureOceanMonumentPiecesUA
 				this.spawnGuardian(worldIn, structureBoundingBoxIn, 3, 2, 5);
 				
 				return true;
-			}
+			
 		}
 	}
 
@@ -2475,45 +2143,8 @@ public class StructureOceanMonumentPiecesUA
 
 		protected int horizontalPos = -1;
 
-		protected boolean offsetToAverageGroundLevel(World worldIn, StructureBoundingBox structurebb, int yOffset) {
-			if (this.horizontalPos >= 0) {
-				return true;
-			} else {
-				int i = 0;
-				int j = 0;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-				for (int k = this.boundingBox.minZ; k <= this.boundingBox.maxZ; ++k) {
-					for (int l = this.boundingBox.minX; l <= this.boundingBox.maxX; ++l) {
-						blockpos$mutableblockpos.setPos(l, 64, k);
-
-						if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-						
-							if (height > 220) {
-								i += Math.max(220, worldIn.provider.getAverageGroundLevel());
-							} else {
-								i += Math.max(height,
-										worldIn.provider.getAverageGroundLevel());
-							}
-							++j;
-						}
-					}
-				}
-
-				if (j == 0) {
-					return false;
-				} else {
-					this.horizontalPos = i / j;
-					
-					return true;
-				}
-			}
-		}
-
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-			if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 1)) {
-				return false;
-			} else {
+			
 				if (this.mainDesign == 0) {
 					for (int i = 0; i < 4; ++i) {
 						this.fillWithBlocks(worldIn, structureBoundingBoxIn, 10 - i, 3 - i, 20 - i, 12 + i, 3 - i, 20,
@@ -2642,7 +2273,7 @@ public class StructureOceanMonumentPiecesUA
 				}
 
 				return true;
-			}
+			
 		}
 	}
 

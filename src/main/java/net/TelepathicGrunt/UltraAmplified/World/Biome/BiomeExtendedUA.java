@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
 import java.util.Random;
 
+import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellDecoratorUA;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -31,27 +32,30 @@ public class BiomeExtendedUA extends Biome{
      *  
      * If this.fillerBlock is red sand, we replace some of that with red sandstone.
      */
-    public void generateBiomeTerrain2(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
+    public void generateBiomeTerrainUA(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        int i = worldIn.getSeaLevel();
+    	//variables
+        int seaLevel = worldIn.getSeaLevel();
         IBlockState iblockstate = this.topBlock;
         IBlockState iblockstate1 = this.fillerBlock;
         int j = -1;
-        int k = (int)(noiseVal / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
-        int l = x & 15;
-        int i1 = z & 15;
+        int noise = (int)(noiseVal / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+        int chunkX = x & 15;
+        int chunkZ = z & 15;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for (int j1 = 255; j1 >= 0; --j1)
+        
+        for (int height = 255; height >= 0; --height)
         {
-            if (j1 <= rand.nextInt(5))
+            if (height <= rand.nextInt(5))
             {
-                chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
+                chunkPrimerIn.setBlockState(chunkZ, height, chunkX, BEDROCK);
             }
             else
             {
-                IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
+                IBlockState iblockstate2 = chunkPrimerIn.getBlockState(chunkZ, height, chunkX);
 
+                //reset when hitting air I believe
                 if (iblockstate2.getMaterial() == Material.AIR)
                 {
                     j = -1;
@@ -64,20 +68,11 @@ public class BiomeExtendedUA extends Biome{
                 {
                     if (j == -1)
                     {
-                        if (k <= 0)
+                        
+                        if (height < seaLevel && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
                         {
-                            iblockstate = AIR;
-                            iblockstate1 = STONE;
-                        }
-                        else if (j1 >= i - 4 && j1 <= i + 1)
-                        {
-                            iblockstate = this.topBlock;
-                            iblockstate1 = this.fillerBlock;
-                        }
-
-                        if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
-                        {
-                            if (this.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F)
+                        	//creates sea
+                            if (this.getTemperature(blockpos$mutableblockpos.setPos(x, height, z)) < 0.15F)
                             {
                                 iblockstate = ICE;
                             }
@@ -87,31 +82,35 @@ public class BiomeExtendedUA extends Biome{
                             }
                         }
 
-                        j = k;
+                        j = noise;
 
-                        if (j1 >= i - 1)
+                        if (height >= seaLevel - 1)
                         {
-                            chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
+                        	//above sea or normal dry terrain
+                            chunkPrimerIn.setBlockState(chunkZ, height, chunkX, iblockstate);
                         }
-                        else if (j1 < i - 7 - k)
+                        else if (height < seaLevel - 7 - noise)
                         {
+                        	//bottom of sea
                             iblockstate = AIR;
                             iblockstate1 = STONE;
-                            chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
+                            chunkPrimerIn.setBlockState(chunkZ, height, chunkX, GRAVEL);
                         }
                         else
                         {
-                            chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+                        	//may be place in shallow water in sea
+                            chunkPrimerIn.setBlockState(chunkZ, height, chunkX, iblockstate1);
                         }
                     }
                     else if (j > 0)
                     {
                         --j;
-                        chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+                        chunkPrimerIn.setBlockState(chunkZ, height, chunkX, iblockstate1);
 
-                        if (j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1)
+                        //turns sand into sandstone
+                        if (j == 0 && iblockstate1.getBlock() == Blocks.SAND && noise > 1)
                         {
-                            j = rand.nextInt(4) + Math.max(0, j1 - 63);
+                            j = rand.nextInt(4) + Math.max(0, height - 63);
                             iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? RED_SANDSTONE : SANDSTONE;
                         }
                     }
@@ -119,5 +118,4 @@ public class BiomeExtendedUA extends Biome{
             }
         }
     }
-
 }

@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.entity.monster.EntityHusk;
+import net.minecraft.entity.monster.EntityIllusionIllager;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -49,6 +50,8 @@ import org.apache.logging.log4j.Logger;
 public class WorldGenDungeonsUA extends WorldGenerator
 {
     private static final Logger LOGGER = LogManager.getLogger();
+    
+    //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
@@ -112,6 +115,8 @@ public class WorldGenDungeonsUA extends WorldGenerator
                         {
                             worldIn.setBlockToAir(blockpos1);
                         }
+                        
+                        //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
                         else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.MOB_SPAWNER)
                         {
                             if (i4 == -1 && rand.nextInt(4) != 0)
@@ -189,7 +194,7 @@ public class WorldGenDungeonsUA extends WorldGenerator
      */
     private ResourceLocation pickMobSpawner(World worldIn, Random rand, BlockPos position)
     {
-
+    	//this is so we can generate certain mob spawners in certain biomes while letting other mods have a chance to add spawner mobs.
     	Biome biome = worldIn.getBiome(position);
     	
     	if(biome != BiomeInit.BiomeMushroomIsland) {
@@ -292,7 +297,7 @@ public class WorldGenDungeonsUA extends WorldGenerator
 	       		}
 	    		else if(biome instanceof BiomeDesertUA || biome instanceof BiomeMesaUA) 
 	    		{
-	      			 return EntityList.getKey(EntityGiantZombie.class);
+	      			 return EntityList.getKey(EntityIllusionIllager.class);
 	       		}
 	    		else 
 	    		{
@@ -301,6 +306,7 @@ public class WorldGenDungeonsUA extends WorldGenerator
 	    	}
     	}
     	else {
+    		//mushroom biome always get mooshroom spawners
     		 return EntityList.getKey(EntityMooshroom.class);
     	}
     }

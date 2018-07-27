@@ -29,24 +29,29 @@ public class BiomeSnowUA extends BiomeExtendedUA
     public BiomeSnowUA(boolean superIcyIn, Biome.BiomeProperties properties)
     {
         super(properties);
+        
         this.decorator = new BiomeDecoratorUA();
         
+        //gives the default top block for Ice Spike and Ice Mountain biome.
         this.superIcy = superIcyIn;
-
         if (superIcyIn)
         {
+        	//ice spike biome
             this.topBlock = Blocks.SNOW.getDefaultState();
         }
-        else if(this.getBaseHeight() > 0.5F) {
+        else if(this.getBaseHeight() > 0.5F) 
+        {
+        	//ice mountain biome
         	this.topBlock = Blocks.SNOW.getDefaultState();
         	this.fillerBlock = Blocks.ICE.getDefaultState();
         }
 
+        //sets cold biome mobs to spawn and replaces skeletons entry with strays and reduced spawnrate skeleton entry
         this.spawnableCreatureList.clear();
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRabbit.class, 10, 2, 3));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityPolarBear.class, 1, 1, 2));
+        
         Iterator<Biome.SpawnListEntry> iterator = this.spawnableMonsterList.iterator();
-
         while (iterator.hasNext())
         {
             Biome.SpawnListEntry biome$spawnlistentry = (Biome.SpawnListEntry)iterator.next();
@@ -56,46 +61,50 @@ public class BiomeSnowUA extends BiomeExtendedUA
                 iterator.remove();
             }
         }
-
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkeleton.class, 20, 4, 4));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityStray.class, 80, 4, 4));
     }
 
-    /**
-     * returns the chance a creature has to spawn.
-     */
+    
+    //decreased the spawn rate of mobs for this biome
     public float getSpawningChance()
     {
         return 0.07F;
     }
 
+    
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
+    	//creates ice spike and ice patches only for Ice Spike Biome
         if (this.superIcy && net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ICE))
         {
-            for (int i = 0; i < 3; ++i)
+            for (int currentCount = 0; currentCount < 3; ++currentCount)
             {
-                int j = rand.nextInt(16) + 8;
-                int k = rand.nextInt(16) + 8;
-                this.iceSpike.generate(worldIn, rand, worldIn.getHeight(pos.add(j, 0, k)));
+                int x = rand.nextInt(16) + 8;
+                int z = rand.nextInt(16) + 8;
+                this.iceSpike.generate(worldIn, rand, worldIn.getHeight(pos.add(x, 0, z)));
             }
 
-            for (int l = 0; l < 2; ++l)
+            for (int currentCount = 0; currentCount < 2; ++currentCount)
             {
-                int i1 = rand.nextInt(16) + 8;
-                int j1 = rand.nextInt(16) + 8;
-                this.icePatch.generate(worldIn, rand, worldIn.getHeight(pos.add(i1, 0, j1)));
+                int x = rand.nextInt(16) + 8;
+                int z = rand.nextInt(16) + 8;
+                this.icePatch.generate(worldIn, rand, worldIn.getHeight(pos.add(x, 0, z)));
             }
         }
 
+        //runs default decorator to add other decorations
         super.decorate(worldIn, rand, pos);
     }
+    
 
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
     
+    
+    //make all trees that do generate in a snowy biome to be taiga trees 
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
         return new WorldGenTaiga2(false);

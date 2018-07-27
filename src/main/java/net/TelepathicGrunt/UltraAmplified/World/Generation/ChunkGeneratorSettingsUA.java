@@ -19,8 +19,11 @@ import net.minecraft.util.JsonUtils;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
 
+//holds values that is set in configs at start of world generation 
+//May be removed in 1.13 when configs work on a per world basis.
 public class ChunkGeneratorSettingsUA {
-	 public final float coordinateScale;
+	
+	public final float coordinateScale;
     public final float heightScale;
     public final float upperLimitScale;
     public final float lowerLimitScale;
@@ -36,12 +39,17 @@ public class ChunkGeneratorSettingsUA {
     public final float biomeDepthOffset;
     public final float biomeScaleWeight;
     public final float biomeScaleOffset;
+    
     public final int seaLevel;
     public final boolean useLavaOceans;
+    
     public final boolean useCaves;
     public final int caveCavityCount;
     public final boolean useRavines;
     public final int ravineCount;
+    
+    public final boolean lootChests;
+    
     public final boolean useDungeons;
     public final int dungeonChance;
     public final boolean useStrongholds;
@@ -58,15 +66,17 @@ public class ChunkGeneratorSettingsUA {
     public final int monumentsRarity;
     public final boolean useMansions;
     public final int mansionRarity;
-    public final boolean lootChests;
+    
     public final boolean useWaterLakes;
     public final int waterLakeChance;
     public final boolean useLavaLakes;
     public final int lavaLakeChance;
     public final boolean useSlimeLakes;
+    
     public final int fixedBiome;
     public final int biomeSize;
     public final int riverSize;
+    
     public final int dirtSize;
     public final int dirtCount;
     public final int dirtMinHeight;
@@ -87,6 +97,7 @@ public class ChunkGeneratorSettingsUA {
     public final int andesiteCount;
     public final int andesiteMinHeight;
     public final int andesiteMaxHeight;
+    
     public final int coalSize;
     public final int coalCount;
     public final int coalMinHeight;
@@ -112,11 +123,13 @@ public class ChunkGeneratorSettingsUA {
     public final int lapisCount;
     public final int lapisCenterHeight;
     public final int lapisSpread;
+    
+    public final float emeraldCountPercentage;
+    public final int silverfishCount;
+    
     public final int quartzCount;
     public final int glowstoneCount;
     public final int magmaCount;
-    public final int silverfishCount;
-    public final float emeraldCountPercentage;
     public final int lavaCount;
     
     public final int waterfallCount;
@@ -125,7 +138,6 @@ public class ChunkGeneratorSettingsUA {
     public final int undergroundLavafallCount;
     
     public final int endIslandCount;
-    
     
     public final boolean bambooForest;
     public final boolean plains;
@@ -188,19 +200,19 @@ public class ChunkGeneratorSettingsUA {
         this.strongholdSpread = UAConfig.StructuresOptions.biomeBasedStructuresOptions.strongholdSpread;
         
         this.useVillages = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageGeneration;
-        this.villageRarity = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageSpawnrate + 8;
+        this.villageRarity = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageSpawnrate + 2;
         
         this.useMineShafts = UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftAbovegroundAllowed || UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftUndergroundAllowed;
         this.mineshaftSpawnrate = (float) UAConfig.StructuresOptions.biomeBasedStructuresOptions.mineshaftSpawnrate;
         
         this.useTemples =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.scatteredGeneration;
-        this.templeRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.scatteredSpawnrate + 8;
+        this.templeRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.scatteredSpawnrate + 2;
         
         this.useMonuments =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.monumentGeneration;
-        this.monumentsRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.monumentRarity + 8;
+        this.monumentsRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.monumentRarity + 4;
         
         this.useMansions =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.mansionGeneration;
-        this.mansionRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.mansionSpawnrate + 8;
+        this.mansionRarity =  UAConfig.StructuresOptions.biomeBasedStructuresOptions.mansionSpawnrate + 6;
         
         this.lootChests = UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration;
         
@@ -256,8 +268,11 @@ public class ChunkGeneratorSettingsUA {
         this.lapisSpread = 20;
         this.quartzCount = UAConfig.oreAndFeatures.netherOresOptions.quartzOreSpawnrate;
 		this.glowstoneCount = UAConfig.oreAndFeatures.netherOresOptions.glowstoneSpawnrate;
-		this.silverfishCount = UAConfig.oreAndFeatures.extremeHillsOresOptions.silverfishSpawnrate;
 		this.emeraldCountPercentage = (float)(UAConfig.oreAndFeatures.extremeHillsOresOptions.emeraldOreSpawnrate/100);
+		
+		
+		//Sorta Ores
+		this.silverfishCount = UAConfig.oreAndFeatures.extremeHillsOresOptions.silverfishSpawnrate;
 		this.magmaCount = UAConfig.oreAndFeatures.netherOresOptions.magmaSpawnrate;
 		this.lavaCount = UAConfig.oreAndFeatures.netherOresOptions.lavaSpawnrate;
         

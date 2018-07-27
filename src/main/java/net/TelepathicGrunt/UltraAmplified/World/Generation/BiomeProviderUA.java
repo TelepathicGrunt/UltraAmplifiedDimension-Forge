@@ -41,13 +41,16 @@ public class BiomeProviderUA extends BiomeProvider{
             throw new RuntimeException("Error: WorldType is not UltraAmplified... How did you get this error?!");
         }    
        
+        
         this.settings = new ChunkGeneratorSettingsUA();
+        
         
         //generates the world and biome layouts
         GenLayer[] agenlayer = initializeAllBiomeGenerators(seed, worldType, this.settings);
         agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
         
-        //reflections to set two fields
+        
+        //reflections to set two fields because they are private and we need to pass in our version of agenlayer to generate properly.
         try {
 	        Field genBiomeField = ReflectionHelper.findField(BiomeProvider.class,"genBiomes", "field_76944_d");
 	        genBiomeField.set(this, agenlayer[0]);
@@ -72,8 +75,8 @@ public class BiomeProviderUA extends BiomeProvider{
     
 	
 	
-
-    public GenLayer[] initializeAllBiomeGenerators(long seed, WorldType worldType, ChunkGeneratorSettingsUA p_180781_3_)
+	//this is how minecraft generates all the biomes layout
+    public GenLayer[] initializeAllBiomeGenerators(long seed, WorldType worldType, ChunkGeneratorSettingsUA settings)
     {
     	//All this stuff below to genlayer4 seems like voodoo to me lol
         GenLayer genlayer = new GenLayerIsland(1L);
@@ -97,8 +100,8 @@ public class BiomeProviderUA extends BiomeProvider{
         GenLayer genlayer4 = GenLayerZoom.magnify(1000L, genlayerdeepocean, 0);
         //End of voodoo stuff!
         
-        int i = p_180781_3_.biomeSize;
-        int j = 4;
+        int biomeSize = settings.biomeSize;
+        int riverSize = 4;
 
         //Log.warn("Biome size set to: " + i);
 
@@ -106,38 +109,29 @@ public class BiomeProviderUA extends BiomeProvider{
         GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, lvt_7_1_);
         
         //generates the biome layout. EXTREMELY IMPORTANT
-        GenLayerBiomeUA lvt_8_1_ = new GenLayerBiomeUA(200L, genlayer4, worldType, p_180781_3_);
+        GenLayerBiomeUA lvt_8_1_ = new GenLayerBiomeUA(200L, genlayer4, worldType, settings);
         GenLayer genlayer6 = GenLayerZoom.magnify(1000L, lvt_8_1_, 2);
         GenLayerBiomeEdge genlayerbiomeedge = new GenLayerBiomeEdge(1000L, genlayer6);
         GenLayer lvt_9_1_ = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
         
         //generates hills and M variants of biomes. Treat with special care as this is precious... 
-        GenLayer genlayerhills = new GenLayerHillsAndAmplifiedUA(1000L, genlayerbiomeedge, lvt_9_1_, p_180781_3_);
+        GenLayer genlayerhills = new GenLayerHillsAndAmplifiedUA(1000L, genlayerbiomeedge, lvt_9_1_, settings);
         GenLayer genlayer5 = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
-        genlayer5 = GenLayerZoom.magnify(1000L, genlayer5, j);
-        
-        //RIVERS = BAD
-        //GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer5);
+        genlayer5 = GenLayerZoom.magnify(1000L, genlayer5, riverSize);
         GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayer5);
-        
-        //I think this just makes Sunflower Plains more common for vanilla's Plains Biome. 
-        //Since we are using my version of the Plains Biome, this thing does actually nothing! WASTE OF CPU TIME!!!
-        //genlayerhills = new GenLayerRareBiome(1001L, genlayerhills);
 
-        
-        //Expands the biome layout by what we set the variable 'i' as
+        //Expands the biome layout by what we set the variable 'biomeSize' as
         //4 is default biome size
-        //6 is large biome worldtype
-        for (int k = 0; k < i; ++k)
+        for (int currentIteration = 0; currentIteration < biomeSize; ++currentIteration)
         {
-            genlayerhills = new GenLayerZoom((long)(1000 + k), genlayerhills);
+            genlayerhills = new GenLayerZoom((long)(1000 + currentIteration), genlayerhills);
 
-            if (k == 0)
+            if (currentIteration == 0)
             {
                 genlayerhills = new GenLayerAddIsland(3L, genlayerhills);
             }
 
-            if (k == 1 || i == 1)
+            if (currentIteration == 1 || biomeSize == 1)
             {
                 genlayerhills = new GenLayerShore(1000L, genlayerhills);
             }
@@ -148,6 +142,7 @@ public class BiomeProviderUA extends BiomeProvider{
         GenLayer genlayer3 = new GenLayerVoronoiZoom(10L, genlayerrivermix);
         genlayerrivermix.initWorldGenSeed(seed);
         genlayer3.initWorldGenSeed(seed);
+        //finished making biome layout
         
         return new GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
     }

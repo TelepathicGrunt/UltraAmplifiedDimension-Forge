@@ -18,16 +18,18 @@ public class WorldGenMinableNetherUA extends WorldGenerator
     private final int numberOfBlocks;
     private final Predicate<IBlockState> predicate;
 
+    //modified WorldGenMinable to work with Netherrack instead of Stone so it can be used for quartz, magma, and single lava block generation in Nether Biome.
+    
     public WorldGenMinableNetherUA(IBlockState state, int blockCount)
     {
         this(state, blockCount, new WorldGenMinableNetherUA.NetherrackPredicate());
     }
 
-    public WorldGenMinableNetherUA(IBlockState state, int blockCount, Predicate<IBlockState> p_i45631_3_)
+    public WorldGenMinableNetherUA(IBlockState state, int blockCount, Predicate<IBlockState> netherrackPredicate)
     {
         this.oreBlock = state;
         this.numberOfBlocks = blockCount;
-        this.predicate = p_i45631_3_;
+        this.predicate = netherrackPredicate;
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
@@ -97,9 +99,9 @@ public class WorldGenMinableNetherUA extends WorldGenerator
         {
         }
 
-        public boolean apply(IBlockState p_apply_1_)
+        public boolean apply(IBlockState blockState)
         {
-            if (p_apply_1_ != null && p_apply_1_.getBlock() == Blocks.NETHERRACK)
+            if (blockState != null && blockState.getBlock() == Blocks.NETHERRACK)
             {
                 return true;
             }

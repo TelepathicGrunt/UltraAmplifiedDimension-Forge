@@ -15,6 +15,9 @@ public class BiomeMushroomIslandUA extends BiomeExtendedUA
     public BiomeMushroomIslandUA(Biome.BiomeProperties properties)
     {
         super(properties);
+        
+        this.topBlock = Blocks.MYCELIUM.getDefaultState();
+        
         this.decorator = new BiomeDecoratorUA();
         
         this.decorator.treesPerChunk = -100;
@@ -22,7 +25,7 @@ public class BiomeMushroomIslandUA extends BiomeExtendedUA
         this.decorator.grassPerChunk = -100;
         this.decorator.mushroomsPerChunk = 2;
         this.decorator.bigMushroomsPerChunk = 2;
-        this.topBlock = Blocks.MYCELIUM.getDefaultState();
+        
         this.spawnableMonsterList.clear();
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();
@@ -32,6 +35,6 @@ public class BiomeMushroomIslandUA extends BiomeExtendedUA
     
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 }

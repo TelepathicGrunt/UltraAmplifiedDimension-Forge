@@ -25,13 +25,12 @@ public class WorldGenTallGrassUA extends WorldGenerator
             position = position.down();
         }
 
-            BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+        BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos) && Blocks.TALLGRASS.canBlockStay(worldIn, blockpos, this.tallGrassState))
-            {
-                worldIn.setBlockState(blockpos, this.tallGrassState, 2);
-            }
-        
+        if (worldIn.isAirBlock(blockpos) && Blocks.TALLGRASS.canBlockStay(worldIn, blockpos, this.tallGrassState))
+        {
+            worldIn.setBlockState(blockpos, this.tallGrassState, 2);
+        }
 
         return true;
     }

@@ -27,6 +27,7 @@ public class MapGenVillageUA extends MapGenStructure
     private int size;
     private int distance;
     private int separation = 8;
+    private int subtraction = 8;
 
     public MapGenVillageUA()
     {
@@ -36,6 +37,9 @@ public class MapGenVillageUA extends MapGenStructure
     public MapGenVillageUA(ChunkGeneratorOverworldUA settings)
     {
         this.distance = settings.settings.villageRarity;
+        if(this.distance < 9) {
+        	this.subtraction = distance-1;
+        }
     }
 
     public String getStructureName()
@@ -63,8 +67,8 @@ public class MapGenVillageUA extends MapGenStructure
         Random random = this.world.setRandomSeed(k, l, 10387312);
         k = k * this.distance;
         l = l * this.distance;
-        k = k + random.nextInt(this.distance - 8);
-        l = l + random.nextInt(this.distance - 8);
+        k = k + random.nextInt(this.distance - this.subtraction);
+        l = l + random.nextInt(this.distance - this.subtraction);
 
         if (k == i && l == j)
         {

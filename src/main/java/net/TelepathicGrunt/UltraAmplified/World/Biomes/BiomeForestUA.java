@@ -3,10 +3,13 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 import java.util.Random;
 
 import jline.internal.Log;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchTreeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehedge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.passive.EntityRabbit;
@@ -20,22 +23,40 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBirchTree;
 import net.minecraft.world.gen.feature.WorldGenCanopyTree;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeForestUA extends BiomeExtendedUA
 {
     protected static final WorldGenBirchTree BIRCH_TREE = new WorldGenBirchTree(false, false);
-    protected static final WorldGenBirchTreeUA TALL_BIRCH_TREE = new WorldGenBirchTreeUA(false, false);
+    protected static final WorldGenBirchTreeUA TALL_BIRCH_TREE = new WorldGenBirchTreeUA(false);
     protected static final WorldGenCanopyTree ROOF_TREE = new WorldGenCanopyTree(false);
+    
+    private static final WorldGenerator shrine = new WorldGenSunShrine();
+    private static final WorldGenerator stonehedge = new WorldGenStonehedge();
+    
     private final BiomeForestUA.Type type;
 
+    
+    
+    
+	public static enum Type
+    {
+        NORMAL,
+        FLOWER,
+        BIRCH,
+        ROOFED;
+    }
+	
+	
     public BiomeForestUA(BiomeForestUA.Type typeIn, Biome.BiomeProperties properties)
     {
         super(properties);
-        this.decorator = new BiomeDecoratorUA();
         
+        this.decorator = new BiomeDecoratorUA();
         this.type = typeIn;
+        
         this.decorator.treesPerChunk = 10;
         this.decorator.grassPerChunk = 2;
 
@@ -54,10 +75,11 @@ public class BiomeForestUA extends BiomeExtendedUA
 
         if (this.type == BiomeForestUA.Type.ROOFED)
         {
+        	//this is because roofed forests use a different tree generator to spawn dark oak trees
             this.decorator.treesPerChunk = -999;
         }
         
-        if (this.type == BiomeForestUA.Type.FLOWER) //Needs to be done here so we have access to this.type
+        if (this.type == BiomeForestUA.Type.FLOWER) //replaces blue flowers in flower forests and adds other flowers in form of red flower? I think? So confusing
         {
             this.flowers.clear();
             for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values())
@@ -69,21 +91,30 @@ public class BiomeForestUA extends BiomeExtendedUA
         }
     }
 
+    //generates the trees specific for each forests. Some forests get a mix of trees
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
     	if (this.type == BiomeForestUA.Type.ROOFED && rand.nextInt(3) > 0)
         {
+    		//roofed forest
             return ROOF_TREE;
         }
     	else if (this.type == BiomeForestUA.Type.BIRCH) {
+    		//birch forest
         	return TALL_BIRCH_TREE;
         }
         else if (rand.nextInt(5) != 0)
         {
+        	//normal forest
+        	//flower forest
+        	//roofed forest
             return (WorldGenAbstractTree)(rand.nextInt(10) == 0 ? BIG_TREE_FEATURE : TREE_FEATURE);
         }
         else
         {
+        	//normal forest
+        	//flower forest
+        	//roofed forest
             return BIRCH_TREE;
         }
 	}
@@ -92,8 +123,12 @@ public class BiomeForestUA extends BiomeExtendedUA
     {
         if (this.type == BiomeForestUA.Type.FLOWER)
         {
+        	//grass color noise value is used to define patches of land and generate one kind of flower for those patches of land
             double d0 = MathHelper.clamp((1.0D + GRASS_COLOR_NOISE.getValue((double)pos.getX() / 48.0D, (double)pos.getZ() / 48.0D)) / 2.0D, 0.0D, 0.9999D);
+            
             BlockFlower.EnumFlowerType blockflower$enumflowertype = BlockFlower.EnumFlowerType.values()[(int)(d0 * (double)BlockFlower.EnumFlowerType.values().length)];
+            
+            //replaces blue orchid with poppy flowers instead
             return blockflower$enumflowertype == BlockFlower.EnumFlowerType.BLUE_ORCHID ? BlockFlower.EnumFlowerType.POPPY : blockflower$enumflowertype;
         }
         else
@@ -107,25 +142,51 @@ public class BiomeForestUA extends BiomeExtendedUA
     {
         if (this.type == BiomeForestUA.Type.ROOFED)
         {
-            this.roofedForestShitBecauseSomeoneNamedThisVariableInAShitWay(worldIn, rand, pos);
+        	//This was originally name this.addMushrooms. I want to strangle whoever named this method that incorrect name! lol
+            this.roofedForestTreesAndLargeMushrooms(worldIn, rand, pos);
         }
 
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
         {
-        int i = rand.nextInt(5) - 3;
-
-        if (this.type == BiomeForestUA.Type.FLOWER)
-        {
-            i += 2;
+	        int i = rand.nextInt(5) - 3;
+	
+	        if (this.type == BiomeForestUA.Type.FLOWER)
+	        {
+	            i += 2;
+	        }
+	        
+	
+	        this.addDoublePlants(worldIn, rand, pos, i);
         }
         
 
-        this.addDoublePlants(worldIn, rand, pos, i);
-        }
+        //needs to be before stonehedges so ores/dirt/etc does not replace stonehedge's blocks
         super.decorate(worldIn, rand, pos);
+        
+        
+        //if height is 0.6, this is a hills variant biome and thus, sun shrine and stonehedges can have a chance to generate
+        if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && this.getBaseHeight() == 0.6F) 
+	    {
+        	if(rand.nextInt(130) == 0) {
+		        int x = rand.nextInt(16) + 8;
+		        int z = rand.nextInt(16) + 8;
+		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+		        
+		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
+		        shrine.generate(worldIn, rand, position);
+        	}
+        	
+
+        	if(rand.nextInt(15) == 0) {
+		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(16, 0, 16));
+		        
+		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
+		        stonehedge.generate(worldIn, rand, position);
+        	}
+	    }
     }
 
-    protected void roofedForestShitBecauseSomeoneNamedThisVariableInAShitWay(World worldIn, Random rand, BlockPos pos)
+    protected void roofedForestTreesAndLargeMushrooms(World worldIn, Random rand, BlockPos pos)
     {
     	pos = pos.add(0, -pos.getY() + 75, 0);
     	
@@ -164,32 +225,32 @@ public class BiomeForestUA extends BiomeExtendedUA
     	}
     }
 
-    protected void addDoublePlants(World p_185378_1_, Random p_185378_2_, BlockPos p_185378_3_, int p_185378_4_)
+    protected void addDoublePlants(World worldIn, Random random, BlockPos blockPos, int numberOfPlants)
     {
-        for (int i = 0; i < p_185378_4_; ++i)
+        for (int currentCount = 0; currentCount < numberOfPlants; ++currentCount)
         {
-            int j = p_185378_2_.nextInt(3);
+            int randomFlowerType = random.nextInt(3);
 
-            if (j == 0)
+            if (randomFlowerType == 0)
             {
                 DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.SYRINGA);
             }
-            else if (j == 1)
+            else if (randomFlowerType == 1)
             {
                 DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.ROSE);
             }
-            else if (j == 2)
+            else if (randomFlowerType == 2)
             {
                 DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.PAEONIA);
             }
 
-            for (int k = 0; k < 5; ++k)
+            for (int i = 0; i < 5; ++i)
             {
-                int l = p_185378_2_.nextInt(16) + 8;
-                int i1 = p_185378_2_.nextInt(16) + 8;
-                int j1 = p_185378_2_.nextInt(p_185378_1_.getHeight(p_185378_3_.add(l, 0, i1)).getY() + 32);
+                int x = random.nextInt(16) + 8;
+                int z = random.nextInt(16) + 8;
+                int j1 = random.nextInt(worldIn.getHeight(blockPos.add(x, 0, z)).getY() + 32);
 
-                if (DOUBLE_PLANT_GENERATOR.generate(p_185378_1_, p_185378_2_, new BlockPos(p_185378_3_.getX() + l, j1, p_185378_3_.getZ() + i1)))
+                if (DOUBLE_PLANT_GENERATOR.generate(worldIn, random, new BlockPos(blockPos.getX() + x, j1, blockPos.getZ() + z)))
                 {
                     break;
                 }
@@ -199,26 +260,20 @@ public class BiomeForestUA extends BiomeExtendedUA
 
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
     
+    //is apparently important. Don't touch lol
     public Class <? extends Biome > getBiomeClass()
     {
         return BiomeForestUA.class;
     }
 
+    //sets the color of the grass based on what forest biome it is in
     @SideOnly(Side.CLIENT)
     public int getGrassColorAtPos(BlockPos pos)
     {
         int i = super.getGrassColorAtPos(pos);
         return this.type == BiomeForestUA.Type.ROOFED ? (i & 16711422) + 2634762 >> 1 : i;
-    }
-
-    public static enum Type
-    {
-        NORMAL,
-        FLOWER,
-        BIRCH,
-        ROOFED;
     }
 }

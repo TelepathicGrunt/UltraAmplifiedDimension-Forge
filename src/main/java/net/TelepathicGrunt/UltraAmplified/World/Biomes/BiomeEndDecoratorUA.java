@@ -34,11 +34,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BiomeEndDecoratorUA extends BiomeDecoratorUA
 {
-    protected int chorusPerChunk = 30;
-	
-    protected WorldGenerator BlockChorusFlower = new WorldGenChorusPlantUA();
     protected WorldGenerator endIsland = new WorldGenEndIsland();
+    protected WorldGenerator BlockChorusFlower = new WorldGenChorusPlantUA();
     
+    //fixed value. Maybe I should turn this into a config option... hmmm...
+    protected int chorusPerChunk = 30;
+    
+    //decorates what we need instead of all the other stuff in default decorate
     @Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     { 
@@ -51,20 +53,21 @@ public class BiomeEndDecoratorUA extends BiomeDecoratorUA
 	 
     protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
-    	for (int j5 = 0; j5 < this.chunkProviderSettingsUA.endIslandCount; ++j5)
+    	//generates end islands. These may be why end biome are slower to load
+    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.endIslandCount; ++currentCount)
         {
-            int l9 = random.nextInt(16) + 8;
-            int k13 = random.nextInt(16) + 8;
-            int j19 = random.nextInt(255) + 7;
-            this.endIsland.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
+            int x = random.nextInt(16) + 8;
+            int z = random.nextInt(16) + 8;
+            int y = random.nextInt(243) + 10;
+            this.endIsland.generate(worldIn, random, this.chunkPos.add(x, y, z));
         }
-    	
-    	for (int j5 = 0; j5 < this.chorusPerChunk; ++j5)
+
+    	//generates chorus plant. These may be why end biome are slower to load
+    	//we pass in 16 for x and z because the chorus class generates randomly around the passed in value. Not exactly on x and z.
+    	for (int currentCount = 0; currentCount < this.chorusPerChunk; ++currentCount)
         {
-            int l9 = random.nextInt(12)+10;
-            int k13 = random.nextInt(12)+10;
-            int j19 = random.nextInt(255)+8;
-            this.BlockChorusFlower.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
+            int y = random.nextInt(247)+8;
+            this.BlockChorusFlower.generate(worldIn, random, this.chunkPos.add(16, y, 16));
         }
     }
 }

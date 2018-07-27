@@ -12,14 +12,15 @@ public class WorldGenChorusPlantUA extends WorldGenerator
 {
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        for (int i = 0; i < 20; ++i)
+    	//attempts to spawn chorus plant 18 times near given position
+        for (int currentCount = 0; currentCount < 18; ++currentCount)
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
             if (worldIn.isAirBlock(blockpos))
             {
                 
-                if (worldIn.getBlockState(new BlockPos(blockpos.getX(), blockpos.getY()-1, blockpos.getZ())).getBlock().getDefaultState() == Blocks.END_STONE.getDefaultState())
+                if (worldIn.getBlockState(blockpos.down()).getBlock().getDefaultState() == Blocks.END_STONE.getDefaultState())
                 {
                 	BlockChorusFlower.generatePlant(worldIn, blockpos, rand, 8);
                 }

@@ -2,8 +2,10 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenCross;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSwampMutatedUA;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLog;
@@ -31,12 +33,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BiomeSwampUA extends BiomeExtendedUA
 {
     protected static final IBlockState WATER_LILY = Blocks.WATERLILY.getDefaultState();
-    private final WorldGenerator crossGenerator = new CrossGenerator();
-    protected static final WorldGenSwampMutatedUA SWAMP_MUTATED_FEATURE = new WorldGenSwampMutatedUA();
+    
+    private static final WorldGenSwampMutatedUA SWAMP_MUTATED_FEATURE = new WorldGenSwampMutatedUA();
+    private static final WorldGenerator CROSS_GENERATOR = new WorldGenCross();
+    private static final WorldGenerator fossil = new WorldGenFossils();
     
     public BiomeSwampUA(Biome.BiomeProperties properties)
     {
         super(properties);
+        
         this.decorator = new BiomeDecoratorUA();
         
         this.decorator.treesPerChunk = 2;
@@ -49,72 +54,91 @@ public class BiomeSwampUA extends BiomeExtendedUA
         this.decorator.sandPatchesPerChunk = 0;
         this.decorator.gravelPatchesPerChunk = 0;
         this.decorator.grassPerChunk = 6;
-        this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySlime.class, 1, 1, 1));
+        
+        //increased slime spawnrate and how many spawn in a group if in mutated swampland biome.
+        if(this.isMutation()) 
+        {
+        	this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySlime.class, 4, 1, 5));
+        }
+        else 
+        {
+        	this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySlime.class, 1, 1, 1));
+        }
+       
     }
 
+    //returns swamp tree or mutated swamp tree depending on if this biome is mutated or not
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
         return this.isMutation() ? SWAMP_MUTATED_FEATURE : SWAMP_FEATURE;
     }
     
+    //colors the grass in darker patches specified by Grass Color Noise 
     @SideOnly(Side.CLIENT)
     public int getGrassColorAtPos(BlockPos pos)
     {
-        double d0 = GRASS_COLOR_NOISE.getValue((double)pos.getX() * 0.0225D, (double)pos.getZ() * 0.0225D);
-        return d0 < -0.1D ? 5011004 : 6975545;
+        double noise = GRASS_COLOR_NOISE.getValue((double)pos.getX() * 0.0225D, (double)pos.getZ() * 0.0225D);
+        return noise < -0.1D ? 5011004 : 6975545;
     }
 
+    //all leaves are a darker green regardless where they are in biome unlike grass
     @SideOnly(Side.CLIENT)
     public int getFoliageColorAtPos(BlockPos pos)
     {
         return 6975545;
     }
 
+    //add blue orchids flower to this biome
     @Override
     public void addDefaultFlowers()
     {
         addFlower(Blocks.RED_FLOWER.getDefaultState().withProperty(Blocks.RED_FLOWER.getTypeProperty(), BlockFlower.EnumFlowerType.BLUE_ORCHID), 10);
     }
 
+    //all flowers in this biome are blue orchids and nothing else
     public BlockFlower.EnumFlowerType pickRandomFlower(Random rand, BlockPos pos)
     {
         return BlockFlower.EnumFlowerType.BLUE_ORCHID;
     }
 
+    
+    //generates water blocks and water lily randomly in even block height by using grass color noise in a specific way
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        double d0 = GRASS_COLOR_NOISE.getValue((double)x * 0.25D, (double)z * 0.25D);
+        double noise = GRASS_COLOR_NOISE.getValue((double)x * 0.25D, (double)z * 0.25D);
 
-        if (d0 > 0.0D)
+        if (noise > 0.0D)
         {
-            int i = x & 15;
-            int j = z & 15;
+            int chunkX = x & 15;
+            int chunkZ = z & 15;
 
             for (int k = 250; k >= 76; k = k - 2)
             {
-                if (chunkPrimerIn.getBlockState(j, k, i).getMaterial() != Material.AIR && chunkPrimerIn.getBlockState(j, k+1, i).getMaterial() == Material.AIR)
+                if (chunkPrimerIn.getBlockState(chunkZ, k, chunkX).getMaterial() != Material.AIR && chunkPrimerIn.getBlockState(chunkZ, k+1, chunkX).getMaterial() == Material.AIR)
                 {
                 	if(this.isMutation()) 
                 	{
-                		if (chunkPrimerIn.getBlockState(j, k, i).getBlock() != Blocks.WATER)
+                		if (chunkPrimerIn.getBlockState(chunkZ, k, chunkX).getBlock() != Blocks.WATER)
  	                    {
- 	                        chunkPrimerIn.setBlockState(j, k, i, WATER);
+ 	                        //adds water in every even height between Y = 76 and Y = 250 in Mutated Swamplands.
+ 	                        chunkPrimerIn.setBlockState(chunkZ, k, chunkX, WATER);
  	
- 	                        if (d0 < 0.12D)
+ 	                        if (noise < 0.12D)
  	                        {
- 	                            chunkPrimerIn.setBlockState(j, k + 1, i, WATER_LILY);
+ 	                            chunkPrimerIn.setBlockState(chunkZ, k + 1, chunkX, WATER_LILY);
  	                        }
  	                    }
                 	}
                 	else 
                 	{
-	                    if ((k >= 80 && k <= 200) && chunkPrimerIn.getBlockState(j, k, i).getBlock() != Blocks.WATER)
+	                    if ((k >= 80 && k <= 200) && chunkPrimerIn.getBlockState(chunkZ, k, chunkX).getBlock() != Blocks.WATER)
 	                    {
-	                        chunkPrimerIn.setBlockState(j, k, i, WATER);
+	                    	//adds water in every even height between Y = 80 and Y = 200 in non-mutated Swamplands.
+	                        chunkPrimerIn.setBlockState(chunkZ, k, chunkX, WATER);
 	
-	                        if (d0 < 0.12D)
+	                        if (noise < 0.12D)
 	                        {
-	                            chunkPrimerIn.setBlockState(j, k + 1, i, WATER_LILY);
+	                            chunkPrimerIn.setBlockState(chunkZ, k + 1, chunkX, WATER_LILY);
 	                        }
 	                    }
                 	}
@@ -124,62 +148,31 @@ public class BiomeSwampUA extends BiomeExtendedUA
             }
         }
 
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 
+    
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FOSSIL))
-            if (rand.nextInt(50) == 0)
+    	//generates fossils at a high spawnrate
+        if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FOSSIL))
+        {    
+        	if (rand.nextInt(50) == 0)
 	        {
-	            (new WorldGenFossils()).generate(worldIn, rand, pos);
+	            fossil.generate(worldIn, rand, pos);
 	        }
+        }
         
-	        if (this.isMutation() && rand.nextInt(50) == 0)
-	        {
-	            int i = rand.nextInt(16) + 8;
-	            int j = rand.nextInt(16) + 8;
-	            BlockPos blockpos = worldIn.getTopSolidOrLiquidBlock(pos.add(i, 0, j));
-	            crossGenerator.generate(worldIn, rand, blockpos);
-	        }
+        //adds crosses to mutated swamplands but only if mini structures are allowed
+        if (this.isMutation() && UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && rand.nextInt(50) == 0)
+        {
+            int x = rand.nextInt(16) + 8;
+            int z = rand.nextInt(16) + 8;
+            BlockPos blockpos = worldIn.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+            CROSS_GENERATOR.generate(worldIn, rand, blockpos);
+        }
         
+        //adds the default decorations needed
         super.decorate(worldIn, rand, pos);
-    }
-    
-    
-    private static class CrossGenerator extends WorldGenerator
-    {
-	@Override
-       public boolean generate(World worldIn, Random rand, BlockPos pos)
-       {
-           
-		  for(int i = -2; i < 6; i++) {
-			  worldIn.setBlockState(pos.up(i), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y), 16 | 2);
-		  }
-	
-		  for(int i = -2; i < 3; i++) {
-			  worldIn.setBlockState(pos.up(4).east(i), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.X), 16 | 2);
-		  }
-          
-		  BlockPos positionTemp = pos.down(2).north();
-		  if(!worldIn.isAirBlock(positionTemp) && worldIn.getBlockState(positionTemp) != Blocks.WATER.getDefaultState() && worldIn.getBlockState(positionTemp) != Blocks.LAVA.getDefaultState() ) {
-			  worldIn.setBlockState(positionTemp, Blocks.SKULL.getDefaultState(), 2);
-		  }
-		  
-		  
-		  positionTemp = pos.down(3);
-		  if(!worldIn.isAirBlock(positionTemp) && worldIn.getBlockState(positionTemp) != Blocks.WATER.getDefaultState() && worldIn.getBlockState(positionTemp) != Blocks.LAVA.getDefaultState() && rand.nextBoolean()) {
-			  worldIn.setBlockState(positionTemp, Blocks.CHEST.getDefaultState(), 2);
-			  
-			  TileEntity tileentity = worldIn.getTileEntity(positionTemp);
-
-	          if (tileentity instanceof TileEntityChest)
-	          {
-	              ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_JUNGLE_TEMPLE, rand.nextLong());
-	          }
-		  }
-			  
-          return true;
-       }
     }
 }

@@ -13,6 +13,11 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerHillsAndAmplifiedUA extends GenLayer
 {
+	/*
+	 * This class generates M variants and Hills variants of biomes if they exist for that biome
+	 */
+	
+	
     private static final Logger LOGGER = LogManager.getLogger();
     private final GenLayer riverLayer;
     private ChunkGeneratorSettingsUA settings;
@@ -42,28 +47,35 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                 this.initChunkSeed((long)(j + areaX), (long)(i + areaY));
                 int k = aint[j + 1 + (i + 1) * (areaWidth + 2)];
                 int l = aint1[j + 1 + (i + 1) * (areaWidth + 2)];
+                Biome biome = Biome.getBiomeForId(k);
+                boolean flag1 = biome != null && biome.isMutation();
+                
+                //This determines how common M variants and Hills are.
+                //M variant happens if remander is between 1 and whatever number user picks for mutatedBiomeSpawnrate config.
+                //Hills happen if remander is not 0 and the random number(0-2) equals 0.
                 int remander = (l - 2) % 29;
                 boolean flag = remander == 0;
 
-                Biome biome = Biome.getBiomeForId(k);
-                boolean flag1 = biome != null && biome.isMutation();
 
                 if ((UAConfig.biomeOptions.mutatedBiomeSpawnrate == 29 || (k != 0 && l >= 2 && remander >= 1 && remander <= UAConfig.biomeOptions.mutatedBiomeSpawnrate - 1)) && !flag1)
                 {
+                	//generates M variants
                     Biome biome3 = BiomeInit.getMutationForBiome(biome);
                     aint2[j + i * areaWidth] = biome3 == null ? k : Biome.getIdForBiome(biome3);
                 }
                 else if (this.nextInt(3) != 0 && !flag)
                 {
+                	//generates normal biome
                     aint2[j + i * areaWidth] = k;
                 }
                 else
                 {
+                	//generates hills
                     Biome biome1 = biome;
 
                     if (biome == BiomeInit.BiomeDesert)
                     {
-                        biome1 = BiomeInit.BiomeDesertM;
+                        biome1 = BiomeInit.BiomeDesertHills;
                     }
                     else if (biome == BiomeInit.BiomeForest)
                     {
@@ -75,6 +87,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                     }
                     else if (biome == BiomeInit.BiomeRoofedForest && settings.plains)
                     {
+                    	//makes sure plains is selected in the config setting before allowing it to spawn through here
                         biome1 = BiomeInit.BiomePlains;
                     }
                     else if (biome == BiomeInit.BiomeTaiga)
@@ -91,6 +104,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                     }
                     else if (biome == BiomeInit.BiomePlains && settings.forest)
                     {
+                    	//makes sure forest is selected in the config setting before allowing it to spawn through here
                         if (this.nextInt(3) == 0)
                         {
                             biome1 = BiomeInit.BiomeForestHills;
@@ -102,6 +116,7 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
                     }
                     else if (biome == BiomeInit.BiomeIceFlats && settings.iceMountain)
                     {
+                    	//makes sure ice mountain is selected in the config setting before allowing it to spawn through here
                         biome1 = BiomeInit.BiomeIceMountain;
                     }
                     else if (biome == BiomeInit.BiomeJungle)
@@ -177,6 +192,8 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
         return aint2;
     }
     
+    
+    //voodoo stuff. idk.
     protected static boolean biomesEqualOrMesaPlateau2(int biomeIDA, int biomeIDB)
     {
         if (biomeIDA == biomeIDB)

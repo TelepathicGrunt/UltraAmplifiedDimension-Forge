@@ -18,29 +18,36 @@ public class BiomePlainsUA extends BiomeExtendedUA
 {
     protected boolean sunflowers;
 
-    public BiomePlainsUA(boolean p_i46699_1_, Biome.BiomeProperties properties)
+    
+    public BiomePlainsUA(boolean hasSunflowers, Biome.BiomeProperties properties)
     {
         super(properties);
+        
+        this.sunflowers = hasSunflowers;
+        
         this.decorator = new BiomeDecoratorUA();
         
-        this.sunflowers = p_i46699_1_;
-        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityHorse.class, 5, 2, 6));
-        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDonkey.class, 1, 1, 3));
         this.decorator.treesPerChunk = 0;
         this.decorator.extraTreeChance = 0.05F;
         this.decorator.flowersPerChunk = 4;
         this.decorator.grassPerChunk = 10;
+        
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityHorse.class, 5, 2, 6));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityDonkey.class, 1, 1, 3));
     }
 
+    
+    //generates one type of flowers in patches specified by grass_color_noise
+    //this is how flower forests look somewhat organzied with their flowers
     public BlockFlower.EnumFlowerType pickRandomFlower(Random rand, BlockPos pos)
     {
-        double d0 = GRASS_COLOR_NOISE.getValue((double)pos.getX() / 200.0D, (double)pos.getZ() / 200.0D);
+        double noise = GRASS_COLOR_NOISE.getValue((double)pos.getX() / 200.0D, (double)pos.getZ() / 200.0D);
 
-        if (d0 < -0.8D)
+        if (noise < -0.8D)
         {
-            int j = rand.nextInt(4);
+            int flowerType = rand.nextInt(4);
 
-            switch (j)
+            switch (flowerType)
             {
                 case 0:
                     return BlockFlower.EnumFlowerType.ORANGE_TULIP;
@@ -58,15 +65,15 @@ public class BiomePlainsUA extends BiomeExtendedUA
         }
         else if (rand.nextInt(3) > 0)
         {
-            int i = rand.nextInt(3);
+            int flowerType2 = rand.nextInt(3);
 
-            if (i == 0)
+            if (flowerType2 == 0)
             {
                 return BlockFlower.EnumFlowerType.POPPY;
             }
             else
             {
-                return i == 1 ? BlockFlower.EnumFlowerType.HOUSTONIA : BlockFlower.EnumFlowerType.OXEYE_DAISY;
+                return flowerType2 == 1 ? BlockFlower.EnumFlowerType.HOUSTONIA : BlockFlower.EnumFlowerType.OXEYE_DAISY;
             }
         }
         else
@@ -75,16 +82,19 @@ public class BiomePlainsUA extends BiomeExtendedUA
         }
     }
     
+    
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
     
+   
     public void decorate(World worldIn, Random rand, BlockPos pos)
-    {
-        double d0 = GRASS_COLOR_NOISE.getValue((double)(pos.getX() + 8) / 200.0D, (double)(pos.getZ() + 8) / 200.0D);
+    { 
+    	//uses grass color noise to determine what patches should attempt to generate double tall grass or increased chance of flowers
+        double noise = GRASS_COLOR_NOISE.getValue((double)(pos.getX() + 8) / 200.0D, (double)(pos.getZ() + 8) / 200.0D);
 
-        if (d0 < -0.8D)
+        if (noise < -0.8D)
         {
             this.decorator.flowersPerChunk = 15;
             this.decorator.grassPerChunk = 5;
@@ -105,16 +115,17 @@ public class BiomePlainsUA extends BiomeExtendedUA
             }
         }
 
+        //generates sunflowers if this is a mutated Plains biome
         if (this.sunflowers && net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
         {
             DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.SUNFLOWER);
 
-            for (int i1 = 0; i1 < 25; ++i1)
+            for (int currentCount = 0; currentCount < 25; ++currentCount)
             {
-                int j1 = rand.nextInt(16) + 8;
-                int k1 = rand.nextInt(16) + 8;
-                int l1 = rand.nextInt(worldIn.getHeight(pos.add(j1, 0, k1)).getY() + 32);
-                DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(j1, l1, k1));
+                int x = rand.nextInt(16) + 8;
+                int z = rand.nextInt(16) + 8;
+                int y = rand.nextInt(worldIn.getHeight(pos.add(x, 0, z)).getY() + 32);
+                DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, pos.add(x, y, z));
             }
         }
 
@@ -136,6 +147,7 @@ public class BiomePlainsUA extends BiomeExtendedUA
         addFlower(yel.getDefaultState().withProperty(yel.getTypeProperty(), BlockFlower.EnumFlowerType.DANDELION), 30);
     }
 
+    //grabs oak tree or large oak tree to generate in this biome
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
         return (WorldGenAbstractTree)(rand.nextInt(3) == 0 ? BIG_TREE_FEATURE : TREE_FEATURE);

@@ -19,6 +19,7 @@ public class WorldGenLiquidsUA extends WorldGenerator
         this.block = blockIn;
     }
 
+    //replace stone or ice with the given liquid but only if one side of it has an air block
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
     	 if (worldIn.getBlockState(position.up()).getBlock() != Blocks.STONE && worldIn.getBlockState(position.up()).getBlock() != Blocks.ICE)

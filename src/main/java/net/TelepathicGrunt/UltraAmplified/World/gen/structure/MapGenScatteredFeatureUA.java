@@ -29,13 +29,19 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 
     /** the maximum distance between scattered features */
     private int maxDistanceBetweenScatteredFeatures;
-
     private int separation = 8;
+    private int subtraction = 8;
     
     public MapGenScatteredFeatureUA(ChunkGeneratorOverworldUA settings)
     {
         this.monsters = Lists.<Biome.SpawnListEntry>newArrayList();
+        
+        
         this.maxDistanceBetweenScatteredFeatures = settings.settings.templeRarity;
+        if(this.maxDistanceBetweenScatteredFeatures < 9) {
+        	this.subtraction = maxDistanceBetweenScatteredFeatures-1;
+        }
+        
         this.monsters.add(new Biome.SpawnListEntry(EntityWitch.class, 1, 1, 1));
     }
 
@@ -65,8 +71,8 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 	        Random random = this.world.setRandomSeed(k, l, 14357617);
 	        k = k * this.maxDistanceBetweenScatteredFeatures;
 	        l = l * this.maxDistanceBetweenScatteredFeatures;
-	        k = k + random.nextInt(this.maxDistanceBetweenScatteredFeatures - 8);
-	        l = l + random.nextInt(this.maxDistanceBetweenScatteredFeatures - 8);
+	        k = k + random.nextInt(this.maxDistanceBetweenScatteredFeatures - this.subtraction);
+	        l = l + random.nextInt(this.maxDistanceBetweenScatteredFeatures - this.subtraction);
 
 	        
 	        if (k == i && l == j)
@@ -222,7 +228,7 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
         {
             Random random = new Random((long)(chunkX + chunkZ * 10387313));
             Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
-             BlockPos blockpos = new BlockPos(chunkX * 16 + 8, 145, chunkZ * 16 + 8);
+            BlockPos blockpos = new BlockPos(chunkX * 16 + 8, 137, chunkZ * 16 + 8);
             
             
             StructureEndCityPiecesUA.startHouseTower(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, this.components, rnd);

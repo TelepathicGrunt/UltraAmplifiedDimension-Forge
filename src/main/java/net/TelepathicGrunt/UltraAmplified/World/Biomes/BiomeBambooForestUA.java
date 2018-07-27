@@ -7,40 +7,52 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenVinesLongUA;
 import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockVine;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntityParrot;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeBeach;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.feature.WorldGenVines;
 
 public class BiomeBambooForestUA extends BiomeExtendedUA
 {
+	private static final WorldGenVinesLongUA LONG_VINES = new WorldGenVinesLongUA();
+	protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
+	
     public BiomeBambooForestUA()
     {
+    	//set properties
         super(new BiomeProperties("Bamboo Forest").setBaseHeight(0.0F).setHeightVariation(0.025F).setTemperature(0.8F).setRainfall(0.4F).setWaterColor(10613441));
+       
         this.decorator = new BiomeDecoratorUA();
         
         this.topBlock = Blocks.GRASS.getDefaultState();
         this.fillerBlock = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT);
+        
         this.decorator.treesPerChunk = -999;
         this.decorator.deadBushPerChunk = 0;
         this.decorator.reedsPerChunk = 0;
         this.decorator.cactiPerChunk = 0;
         this.decorator.clayPerChunk = 0;
         this.decorator.waterlilyPerChunk = 3;
-        
-        //new
         this.decorator.sandPatchesPerChunk = 0;
         this.decorator.gravelPatchesPerChunk = 0;
         this.decorator.flowersPerChunk = 0;
+        
+        this.spawnableCreatureList.clear();
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityLlama.class, 2, 3, 5));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityParrot.class, 4, 1, 2));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityPig.class, 5, 2, 4));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityChicken.class, 4, 2, 3));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBat.class, 1, 5, 10));
     }
     
+    //generates terrain a specific way with 1/4 water and rest a mixture of grass and course dirt
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
     	if(rand.nextInt(4) == 0) 
@@ -60,39 +72,45 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
             }
     	}
 
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+    	//runs general terrain gen use for all biomes
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
     
     
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-    	
+    	//generates super tall reeds only when there is a water block next to it
     	if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.REED)) {
-			for (int x = 8; x < 24; x += (rand.nextInt(3)+1)) {
+    		
+    		BlockPos blockpos1;
+    		BlockPos blockpos2;
+    		
+    		//the rand.nextInt controls how dense the reeds will be. Height number foe less dense
+    		for (int x = 8; x < 24; x += (rand.nextInt(3)+1)) {
 				for (int z = 8; z < 24; z += (rand.nextInt(2)+1)) {
 					for (int y = 75; y < 255; ++y) {
 						
-						//set blockpos to a random spot in chunk (theoretically)
-						BlockPos blockpos = pos.add(x, y, z);
+						//set blockpos to a random spot in chunk
+						blockpos1 = pos.add(x, y, z);
 	
 						//if space is empty for reed
-						if (worldIn.isAirBlock(blockpos)) {
-							BlockPos blockpos1 = blockpos.down();
+						if (worldIn.isAirBlock(blockpos1)) {
+							blockpos2 = blockpos1.down();
 	
 							//checks to see if water is around to allow reed to be placed
-							if (worldIn.getBlockState(blockpos1.west()).getMaterial() == Material.WATER
-									|| worldIn.getBlockState(blockpos1.east()).getMaterial() == Material.WATER
-									|| worldIn.getBlockState(blockpos1.north()).getMaterial() == Material.WATER
-									|| worldIn.getBlockState(blockpos1.south()).getMaterial() == Material.WATER) {
+							if (worldIn.getBlockState(blockpos2.west()) == WATER
+									|| worldIn.getBlockState(blockpos2.east()) == WATER
+									|| worldIn.getBlockState(blockpos2.north()) == WATER
+									|| worldIn.getBlockState(blockpos2.south()) == WATER) {
 								
 								//controls height of reed
-								int j = 5 + rand.nextInt(rand.nextInt(14)+1);
+								int maxHeight = 5 + rand.nextInt(rand.nextInt(14)+1);
 	
-								for (int k = 0; k < j; ++k) {
+								for (int currentHeight = 0; currentHeight < maxHeight; ++currentHeight) {
 									
-									if (Blocks.REEDS.canBlockStay(worldIn, blockpos)) {
+									if (Blocks.REEDS.canBlockStay(worldIn, blockpos1)) {
 										//places the reed
-										worldIn.setBlockState(blockpos.up(k), Blocks.REEDS.getDefaultState(), 2);
+										worldIn.setBlockState(blockpos1.up(currentHeight), Blocks.REEDS.getDefaultState(), 2);
 									}
 								}
 							}
@@ -102,18 +120,18 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
 			}
     	}
 			
-		WorldGenVinesLongUA worldgenvines = new WorldGenVinesLongUA();
 
+		//generates LONG vines between y = 100 and y = 250
         if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS)) {
 	       
-        	//how many per chunk
-        	for (int j1 = 0; j1 < 18; ++j1)
+        	//how many vines to generate per chunk. set to 18 by default
+        	for (int currentCount = 0; currentCount < 18; ++currentCount)
 	        {
         		int x = rand.nextInt(16) + 8;
                 int z = rand.nextInt(16) + 8;
                 int y = rand.nextInt(150) + 100;
                 
-                worldgenvines.generate(worldIn, rand, pos.add(x, y, z));
+                LONG_VINES.generate(worldIn, rand, pos.add(x, y, z));
 	        }
         }
         

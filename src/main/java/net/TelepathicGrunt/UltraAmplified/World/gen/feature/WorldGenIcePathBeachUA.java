@@ -12,6 +12,7 @@ public class WorldGenIcePathBeachUA extends WorldGenerator
     private final Block block = Blocks.PACKED_ICE;
     private final int basePathWidth;
 
+    //creates a patch of packed ice for cold beach biome only
     public WorldGenIcePathBeachUA(int basePathWidthIn)
     {
         this.basePathWidth = basePathWidthIn;
@@ -30,21 +31,20 @@ public class WorldGenIcePathBeachUA extends WorldGenerator
         }
         else
         {
-            int i = rand.nextInt(this.basePathWidth - 2) + 2;
-            int j = 1;
+            int width = rand.nextInt(this.basePathWidth - 2) + 2;
 
-            for (int k = position.getX() - i; k <= position.getX() + i; ++k)
+            for (int x = position.getX() - width; x <= position.getX() + width; ++x)
             {
-                for (int l = position.getZ() - i; l <= position.getZ() + i; ++l)
+                for (int z = position.getZ() - width; z <= position.getZ() + width; ++z)
                 {
-                    int i1 = k - position.getX();
-                    int j1 = l - position.getZ();
+                    int xDiff = x - position.getX();
+                    int zDiff = z - position.getZ();
 
-                    if (i1 * i1 + j1 * j1 <= i * i)
+                    if (xDiff * xDiff + zDiff * zDiff <= width * width)
                     {
-                        for (int k1 = position.getY() - 1; k1 <= position.getY() + 1; ++k1)
+                        for (int y = position.getY() - 1; y <= position.getY() + 1; ++y)
                         {
-                            BlockPos blockpos = new BlockPos(k, k1, l);
+                            BlockPos blockpos = new BlockPos(x, y, z);
                             Block block = worldIn.getBlockState(blockpos).getBlock();
 
                             if (block == Blocks.SAND || block == Blocks.SANDSTONE)

@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
 
+	//unused but still kept just in case
+	
 	public void preInit(FMLPreInitializationEvent event) {
 		
 	}

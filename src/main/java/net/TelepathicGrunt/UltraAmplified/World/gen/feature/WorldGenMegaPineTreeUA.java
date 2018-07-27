@@ -23,54 +23,55 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
     private static final IBlockState PODZOL = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL);
     private final boolean useBaseHeight;
 
-    public WorldGenMegaPineTreeUA(boolean notify, boolean p_i45457_2_)
+    //only change is significant increase in possible height and thicker/bigger leaves so trees fit the terrain more.
+    public WorldGenMegaPineTreeUA(boolean notify, boolean useBaseHeight)
     {
         super(notify, 13, 50, TRUNK, LEAF);
-        this.useBaseHeight = p_i45457_2_;
+        this.useBaseHeight = useBaseHeight;
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = this.getHeight(rand);
+        int height = this.getHeight(rand);
 
-        if (!this.ensureGrowable(worldIn, rand, position, i))
+        if (!this.ensureGrowable(worldIn, rand, position, height))
         {
             return false;
         }
         else
         {
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + i, 0, rand);
+            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
 
-            for (int j = 0; j < i; ++j)
+            for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
-                IBlockState iblockstate = worldIn.getBlockState(position.up(j));
+                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(j), this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(worldIn, position.up(currentHeight), this.woodMetadata);
                 }
 
-                if (j < i - 1)
+                if (currentHeight < height - 1)
                 {
-                    iblockstate = worldIn.getBlockState(position.add(1, j, 0));
+                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 0));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 0), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(1, j, 1));
+                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(0, j, 1));
+                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
                     }
                 }
             }
@@ -79,17 +80,17 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         }
     }
 
-    private void createCrown(World worldIn, int x, int z, int y, int p_150541_5_, Random rand)
+    private void createCrown(World worldIn, int x, int z, int y, int extraRadius, Random rand)
     {
-        int i = rand.nextInt(5) + (this.useBaseHeight ? this.baseHeight : 3);
-        int j = 0;
+        int height = rand.nextInt(5) + (this.useBaseHeight ? this.baseHeight : 3);
+        int prevRadius = 0;
 
-        for (int k = y - i; k <= y+20; ++k)
+        for (int currentHeight = y - height; currentHeight <= y+20; ++currentHeight)
         {
-            int l = y - k;
-            int i1 = p_150541_5_ + MathHelper.floor((float)l / (float)i * 3.5F);
-            this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), i1 + (int)((l > 0 && i1 == j && (k & 1) == 0 ? 1 : 0)*2));
-            j = i1;
+            int heightDiff = y - currentHeight;
+            int radius = extraRadius + MathHelper.floor((float)heightDiff / (float)height * 3.5F);
+            this.growLeavesLayerStrict(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0)*2));
+            prevRadius = radius;
         }
     }
 
@@ -100,15 +101,15 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         this.placePodzolCircle(worldIn, pos.west().south(2));
         this.placePodzolCircle(worldIn, pos.east(2).south(2));
 
-        for (int i = 0; i < 5; ++i)
+        for (int currentCount = 0; currentCount < 5; ++currentCount)
         {
-            int j = random.nextInt(64);
-            int k = j % 8;
-            int l = j / 8;
+            int randNum = random.nextInt(64);
+            int x = randNum % 8;
+            int z = randNum / 8;
 
-            if (k == 0 || k == 7 || l == 0 || l == 7)
+            if (x == 0 || x == 7 || z == 0 || z == 7)
             {
-                this.placePodzolCircle(worldIn, pos.add(-3 + k, 0, -3 + l));
+                this.placePodzolCircle(worldIn, pos.add(-3 + x, 0, -3 + z));
             }
         }
     }

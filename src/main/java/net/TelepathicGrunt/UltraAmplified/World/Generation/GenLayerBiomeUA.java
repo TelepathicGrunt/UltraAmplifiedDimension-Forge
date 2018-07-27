@@ -7,6 +7,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
 
 public class GenLayerBiomeUA extends GenLayer
 {
@@ -54,7 +55,7 @@ public class GenLayerBiomeUA extends GenLayer
         }
         
         
-        //adds our ultra amplified version of the vanilla biomes
+        //adds our ultra amplified version of the vanilla biomes while checking to see if they are allowed by the user through the settings
         
         if(settings.desert)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BiomeDesert, 30));
@@ -127,44 +128,60 @@ public class GenLayerBiomeUA extends GenLayer
         if(settings.mushroom)
 		    mushroomReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BiomeMushroomIsland, 10));
 		    
-        
-        //a check here to make sure none of the biome lists are blank or we will crash HARD
+        //this is used to help fill any biome list that is empty due to player turning off all of its biome.
+        //otherwise, we will crash if a biome list is empty
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = new java.util.ArrayList();
         
-        	//set temp biome list to first biome list that isnt empty. Otherwise, set temp to null
+        //set temp biome list to biome list that isn't empty. Otherwise, set temp to null
+        //the biome list will store up to 5 biomes but could go over which means it will need to be trimmed afterwards
         if(biomes[warmIdx].size() != 0) {
-        	temporaryBiomeList = biomes[warmIdx];
+        	temporaryBiomeList.addAll(biomes[warmIdx]);
         }
-        if(biomes[desertIdx].size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = biomes[desertIdx];
+        if(biomes[desertIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(biomes[desertIdx]);
         }
-        if(biomes[coolIdx].size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = biomes[coolIdx];
+        if(biomes[coolIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(biomes[coolIdx]);
         }
-        if(biomes[icyIdx].size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = biomes[icyIdx];
+        if(biomes[icyIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(biomes[icyIdx]);
         }
-        if(jungleReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = jungleReplacedBiomes;
+        if(jungleReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(jungleReplacedBiomes);
         }
-        if(megaTaigaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = megaTaigaReplacedBiomes;
+        if(megaTaigaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(megaTaigaReplacedBiomes);
         }
-        if(mesaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = mesaReplacedBiomes;
+        if(mesaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(mesaReplacedBiomes);
         }
-        if(mushroomReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = mushroomReplacedBiomes;
+        if(mushroomReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(mushroomReplacedBiomes);
         }
-        if(deepOceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = deepOceanReplacedBiomes;
+        if(deepOceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(deepOceanReplacedBiomes);
         }
-        if(oceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 5) {
-        	temporaryBiomeList = oceanReplacedBiomes;
+        if(oceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        	temporaryBiomeList.addAll(oceanReplacedBiomes);
         }
         
-        	//if temp is null, set all biome list to have deep ocean so we do not crash due to no biome list having any biome
-        if(temporaryBiomeList == null) {
+        
+        //for debugging purposes
+        /*
+        for(BiomeEntry biome : temporaryBiomeList){
+        	Log.warn(biome.biome.getBiomeName());
+        }*/
+        
+        
+        //trims temporaryBiomeList if it exceeds 5 biomes
+        while(temporaryBiomeList.size() > 5) {
+        	temporaryBiomeList.remove(temporaryBiomeList.size()-1);
+        }
+        
+        
+        //if temp is empty (which means user made no biomes allowed), 
+        //set all biome list to have deep ocean so we do not crash due to all biome list not having any biome.
+        if(temporaryBiomeList.size() == 0) {
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
@@ -176,7 +193,7 @@ public class GenLayerBiomeUA extends GenLayer
         	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	mushroomReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         }
-        	//set any empty biome list to have temp's biome list so it is not empty 
+        //otherwise, set any empty biome list to have temp's biome list so it is not empty 
         else {
         	if(biomes[warmIdx].size() == 0) {
             	biomes[warmIdx] = temporaryBiomeList;
@@ -209,10 +226,6 @@ public class GenLayerBiomeUA extends GenLayer
             	mushroomReplacedBiomes = temporaryBiomeList;
             }
         }
-        
-        
-        
-        
     }
 
     /**
@@ -234,7 +247,7 @@ public class GenLayerBiomeUA extends GenLayer
                 k = k & -3841;
 
                 
-                //replaces biomes with our modded versions
+                //replaces biomes with our modded versions in specific biome lists.
                 if (k == Biome.getIdForBiome(Biomes.OCEAN))
                 {
                 	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedSpecialBiomeEntry(oceanReplacedBiomes).biome);                
@@ -290,6 +303,9 @@ public class GenLayerBiomeUA extends GenLayer
         return aint1;
     }
 
+    
+    //returns a biome with its weight impacting how often it appears
+    //This is a forge method
     protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType type)
     {
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = biomes[type.ordinal()];
@@ -297,7 +313,9 @@ public class GenLayerBiomeUA extends GenLayer
         int weight = net.minecraftforge.common.BiomeManager.isTypeListModded(type)?nextInt(totalWeight):nextInt(totalWeight / 10) * 10;
         return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
     }
-    
+
+    //returns a biome with its weight impacting how often it appears
+    //this is a modified forge method to work with my own biome lists that are passed in
     protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedSpecialBiomeEntry(java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> list)
     {
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = list;

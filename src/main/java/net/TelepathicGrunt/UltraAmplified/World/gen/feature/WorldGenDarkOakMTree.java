@@ -26,157 +26,167 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = this.getHeight(rand);
+        int height = this.getHeight(rand);
 
-        if (!this.ensureGrowable(worldIn, rand, position, i))
+        if (!this.ensureGrowable(worldIn, rand, position, height))
         {
             return false;
         }
         else
         {
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + i, 0, rand);
-            this.createWoodCrown(worldIn, position.getX(), position.getZ(), position.getY() + i, 1, rand);
+        	//creates the dome like crown of leaves first, 
+        	//then puts the ring of wood in the leaves that also makes a smooth transition between leaves and trunk,
+        	//then lastly, generates the trunk
+            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
+            this.createWoodCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, rand);
             
-            BlockPos temp = position;
+            BlockPos tempPos = position;
             int randomChance = 70;
             
-            for (int j = 0; j < i; ++j)
+            for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
-                IBlockState iblockstate = worldIn.getBlockState(position.up(j));
+                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
 
+                //lots of if statements as we want to generate the trunk as a thick plus sign like this:
+                //    [_][_]
+                // [_][_][_][_]
+                // [_][_][_][_]
+                //    [_][_]
+                
+                //In addition, every wood block placed has a tiny chance of spawning a tiny patch of leaves or "mini crown".
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(j), this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(worldIn, position.up(currentHeight), this.woodMetadata);
                 }
 
-                if (j < i - 1)
+                if (currentHeight < height - 1)
                 {
-                	temp = position.add(1, j, 0);
-                    iblockstate = worldIn.getBlockState(temp);
+                	tempPos = position.add(1, currentHeight, 0);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     }
 
-                    temp = position.add(1, j, 1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(1, currentHeight, 1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     }
                     
-                    temp = position.add(0, j, 1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(0, currentHeight, 1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     }
 
-                    temp = position.add(-1, j, 0);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(-1, currentHeight, 0);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		 this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		 this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                        
                     }
 
-                    temp = position.add(-1, j, 1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(-1, currentHeight, 1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(0, j, -1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(0, currentHeight, -1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                        	this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                        	this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(1, j, -1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(1, currentHeight, -1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(0, j, 2);
-                    iblockstate = worldIn.getBlockState(position.add(0, j, 2));
+                    tempPos = position.add(0, currentHeight, 2);
+                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 2));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(1, j, 2);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(1, currentHeight, 2);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(2, j, 0);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(2, currentHeight, 0);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
 
-                    temp = position.add(2, j, 1);
-                    iblockstate = worldIn.getBlockState(temp);
+                    tempPos = position.add(2, currentHeight, 1);
+                    iblockstate = worldIn.getBlockState(tempPos);
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
                     	if(rand.nextInt(randomChance) == 0) {
-                    		createMiniCrown(worldIn, temp.getX(), temp.getZ(), temp.getY(), 0, rand);
+                    		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
                     	}
                     	else {
-                    		this.setBlockAndNotifyAdequately(worldIn, temp, this.woodMetadata);
+                    		this.setBlockAndNotifyAdequately(worldIn, tempPos, this.woodMetadata);
                     	}
                     }
                 }
@@ -186,7 +196,7 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
         }
     }
 
-    private void createCrown(World worldIn, int x, int z, int y, int p_150541_5_, Random rand)
+    private void createCrown(World worldIn, int x, int z, int y, int extraRadius, Random rand)
     {
     	  int i = 4;
           int j = 0;
@@ -194,15 +204,17 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
           for (int k = y - i; k <= y+3; ++k)
           {
               int l = y - k;
-              int i1 = p_150541_5_ + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), i1 + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5));
-              j = i1;
+              int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
+              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5));
+              j = radius;
           }
           
           this.growLeavesLayerStrict(worldIn, new BlockPos(x, y+4, z), 1);
     }
     
-    private void createWoodCrown(World worldIn, int x, int z, int y, int p_150541_5_, Random rand)
+    
+    //generates the wood as an upside-down cone that curves out at end.
+    private void createWoodCrown(World worldIn, int x, int z, int y, Random rand)
     {
     	  int i = 2;
           int j = 0;
@@ -210,34 +222,35 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
           for (int k = y - (i + 4); k <= y-1; ++k)
           {
               int l = y - k;
-              int i1;
+              int radius;
               
               if(l < 3) {
-            	  i1 = 4; 
+            	  radius = 4; 
               }
               else if(l < 5) {
-            	  i1 = 3; 
+            	  radius = 3; 
               }
               else {
-            	  i1 = 2;
+            	  radius = 2;
               }
 
-              this.growWoodLayerStrict(worldIn, new BlockPos(x, k, z), i1);
-              j = i1;
+              this.growWoodLayerStrict(worldIn, new BlockPos(x, k, z), radius);
+              j = radius;
           }
     }
 
-    private void createMiniCrown(World worldIn, int x, int z, int y, int p_150541_5_, Random rand)
+    private void createMiniCrown(World worldIn, int x, int z, int y, int extraRadius, Random rand)
     {
+    	//generates a tiny patch of leaves
     	  int i = rand.nextInt(2) + 1;
           int j = 0;
 
           for (int k = y - i; k <= y+1; ++k)
           {
               int l = y - k;
-              int i1 = p_150541_5_ + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), i1 + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2));
-              j = i1;
+              int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
+              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2));
+              j = radius;
           }
     }
     

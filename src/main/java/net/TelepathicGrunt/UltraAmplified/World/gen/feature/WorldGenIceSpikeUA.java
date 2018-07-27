@@ -12,6 +12,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenIceSpikeUA extends WorldGenerator
 {
+	
+	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
         while (worldIn.isAirBlock(position) && position.getY() > 2)
@@ -31,6 +33,7 @@ public class WorldGenIceSpikeUA extends WorldGenerator
 
             if (j > 1 && rand.nextInt(40) == 0)
             {
+            	//if ice spike has the potential to generate over 245, then set the position to 245
             	if(position.getY()+130 > 245) {
             		position = position.up((245 - position.getY()));
             	}
@@ -40,37 +43,37 @@ public class WorldGenIceSpikeUA extends WorldGenerator
                 
             }
 
-            for (int k = 0; k < i; ++k)
+            for (int y = 0; y < i; ++y)
             {
-                float f = (1.0F - (float)k / (float)i) * (float)j;
+                float f = (1.0F - (float)y / (float)i) * (float)j;
                 int l = MathHelper.ceil(f);
 
-                for (int i1 = -l; i1 <= l; ++i1)
+                for (int x = -l; x <= l; ++x)
                 {
-                    float f1 = (float)MathHelper.abs(i1) - 0.25F;
+                    float f1 = (float)MathHelper.abs(x) - 0.25F;
 
-                    for (int j1 = -l; j1 <= l; ++j1)
+                    for (int z = -l; z <= l; ++z)
                     {
-                        float f2 = (float)MathHelper.abs(j1) - 0.25F;
+                        float f2 = (float)MathHelper.abs(z) - 0.25F;
 
-                        if ((i1 == 0 && j1 == 0 || f1 * f1 + f2 * f2 <= f * f) && (i1 != -l && i1 != l && j1 != -l && j1 != l || rand.nextFloat() <= 0.75F))
+                        if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
-                            IBlockState iblockstate = worldIn.getBlockState(position.add(i1, k, j1));
+                            IBlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
                             Block block = iblockstate.getBlock();
 
                             if (iblockstate.getMaterial() == Material.AIR || block == Blocks.DIRT || block == Blocks.SNOW || block == Blocks.ICE)
                             {
-                                this.setBlockAndNotifyAdequately(worldIn, position.add(i1, k, j1), Blocks.PACKED_ICE.getDefaultState());
+                                this.setBlockAndNotifyAdequately(worldIn, position.add(x, y, z), Blocks.PACKED_ICE.getDefaultState());
                             }
 
-                            if (k != 0 && l > 1)
+                            if (y != 0 && l > 1)
                             {
-                                iblockstate = worldIn.getBlockState(position.add(i1, -k, j1));
+                                iblockstate = worldIn.getBlockState(position.add(x, -y, z));
                                 block = iblockstate.getBlock();
 
                                 if (iblockstate.getMaterial() == Material.AIR || block == Blocks.DIRT || block == Blocks.SNOW || block == Blocks.ICE)
                                 {
-                                    this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), Blocks.PACKED_ICE.getDefaultState());
+                                    this.setBlockAndNotifyAdequately(worldIn, position.add(x, -y, z), Blocks.PACKED_ICE.getDefaultState());
                                 }
                             }
                         }
@@ -89,18 +92,19 @@ public class WorldGenIceSpikeUA extends WorldGenerator
                 k1 = 1;
             }
 
-            for (int l1 = -k1; l1 <= k1; ++l1)
+            for (int x = -k1; x <= k1; ++x)
             {
-                for (int i2 = -k1; i2 <= k1; ++i2)
+                for (int z = -k1; z <= k1; ++z)
                 {
-                    BlockPos blockpos = position.add(l1, -1, i2);
+                    BlockPos blockpos = position.add(x, -1, z);
                     int j2 = 50;
 
-                    if (Math.abs(l1) == 1 && Math.abs(i2) == 1)
+                    if (Math.abs(x) == 1 && Math.abs(z) == 1)
                     {
                         j2 = rand.nextInt(5);
                     }
 
+                    //how far down the ice spike can generate
                     while (blockpos.getY() > 5)
                     {
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);

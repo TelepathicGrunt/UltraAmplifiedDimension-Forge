@@ -26,6 +26,7 @@ public class WoodlandMansionUA extends MapGenStructure
 {
     private final int spacing;
     private int separation = 8;
+    private int subtraction = 8;
     public static final List<Biome> acceptedBiomes = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeBirchForestHillsM, BiomeInit.BiomeBirchForestM, BiomeInit.BiomeRoofedForest, BiomeInit.BiomeRoofedForestM, BiomeInit.BiomeSwampland, BiomeInit.BiomeSwamplandM});
     private final ChunkGeneratorOverworldUA provider;
 
@@ -33,6 +34,9 @@ public class WoodlandMansionUA extends MapGenStructure
     {
     	this.provider = provider;
     	this.spacing = provider.settings.mansionRarity;
+    	if(this.spacing < 9) {
+    		this.subtraction = this.spacing - 1;
+    	}
     }
 
     public String getStructureName()
@@ -47,12 +51,12 @@ public class WoodlandMansionUA extends MapGenStructure
 
         if (chunkX < 0)
         {
-        	chunkX = spacing - 1;
+        	chunkX -= spacing - 1;
         }
 
         if (chunkZ < 0)
         {
-        	chunkZ = spacing - 1;
+        	chunkZ -= spacing - 1;
         }
 
         int k = chunkX / spacing;
@@ -60,8 +64,8 @@ public class WoodlandMansionUA extends MapGenStructure
         Random random = this.world.setRandomSeed(k, l, 10387319);
         k = k * spacing;
         l = l * spacing;
-        k = k + random.nextInt(spacing - 8);
-        l = l + random.nextInt(spacing - 8);
+        k = k + random.nextInt(spacing - this.subtraction);
+        l = l + random.nextInt(spacing - this.subtraction);
         
         if (k == i && l == j)
         {

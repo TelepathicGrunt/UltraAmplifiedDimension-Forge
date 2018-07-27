@@ -27,46 +27,48 @@ public class WorldGenBirchMTree extends WorldGenHugeTrees{
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = this.getHeight(rand);
+        int height = this.getHeight(rand);
 
-        if (!this.ensureGrowable(worldIn, rand, position, i+9))
+        if (!this.ensureGrowable(worldIn, rand, position, height+9))
         {
             return false;
         }
         else
         {
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + i, 0, rand);
+        	//adds the leaves on crown
+            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
 
-            for (int j = 0; j < i; ++j)
+            //adds the 2 by 2 wood trunk
+            for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
-                IBlockState iblockstate = worldIn.getBlockState(position.up(j));
+                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(j), this.woodMetadata);
+                    this.setBlockAndNotifyAdequately(worldIn, position.up(currentHeight), this.woodMetadata);
                 }
 
-                if (j < i - 1)
+                if (currentHeight < height - 1)
                 {
-                    iblockstate = worldIn.getBlockState(position.add(1, j, 0));
+                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 0));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 0), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(1, j, 1));
+                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(0, j, 1));
+                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, j, 1), this.woodMetadata);
+                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
                     }
                 }
             }
@@ -75,17 +77,18 @@ public class WorldGenBirchMTree extends WorldGenHugeTrees{
         }
     }
 
-    private void createCrown(World worldIn, int x, int z, int y, int p_150541_5_, Random rand)
+    //this is set so that the crown is leaves in a cone shape 
+    private void createCrown(World worldIn, int x, int z, int y, int extraRadiusSize, Random rand)
     {
         int i = this.baseHeight - (rand.nextInt(5) + 6);
         int j = 0;
 
-        for (int k = y - i; k <= y+10; ++k)
+        for (int currentHeight = y - i; currentHeight <= y+10; ++currentHeight)
         {
-            int l = y - k;
-            int i1 = p_150541_5_ + MathHelper.floor((float)l / (float)i * 2F);
-            this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), i1 + (int)((l > 0 && i1 == j && (k & 1) == 0 ? 0.7 : 1)*4));
-            j = i1;
+            int l = y - currentHeight;
+            int radius = extraRadiusSize + MathHelper.floor((float)l / (float)i * 2F);
+            this.growLeavesLayerStrict(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((l > 0 && radius == j && (currentHeight & 1) == 0 ? 0.7 : 1)*4));
+            j = radius;
         }
     }
 

@@ -14,6 +14,7 @@ public class WorldGenVinesLongUA extends WorldGenerator
 {
 	public boolean generate(World worldIn, Random rand, BlockPos position) 
 	{
+		//generates vines from given position all the way down to Y = 75 if path is clear and the given position is valid
 		for (; position.getY() > 75; position = position.down()) 
 		{
 			if (worldIn.isAirBlock(position)) 

@@ -39,7 +39,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class BiomeInit {
 	
-	//enums to hold all biomes and their properties
+	//static variable to hold all biomes and their properties
 	
 	public static final Biome BiomeBambooForest = new BiomeBambooForestUA();
 	public static final Biome BiomePlains = new BiomePlainsUA(false, new Biome.BiomeProperties("Plains").setBaseHeight(0.1F).setHeightVariation(0.2F).setTemperature(0.8F).setRainfall(0.4F));
@@ -49,25 +49,25 @@ public class BiomeInit {
 	public static final Biome BiomeExtremeHills = new BiomeHillsUA(BiomeHillsUA.Type.NORMAL, (new Biome.BiomeProperties("Extreme Hills")).setBaseHeight(1.0F).setHeightVariation(0.5F).setTemperature(0.35F).setRainfall(0.3F));
 	public static final Biome BiomeSwampland = new BiomeSwampUA((new Biome.BiomeProperties("Swampland")).setBaseHeight(-0.4F).setHeightVariation(0.2F).setTemperature(0.8F).setRainfall(0.9F).setWaterColor(14745518));
 	public static final Biome BiomeNether =  new BiomeHellUA((new Biome.BiomeProperties("Nether")).setTemperature(2.0F).setRainfall(0.0F).setRainDisabled().setWaterColor(14090240));
-	public static final Biome BiomeEnd = new BiomeEndUA((new Biome.BiomeProperties("The End")).setRainDisabled().setWaterColor(16711870));
+	public static final Biome BiomeEnd = new BiomeEndUA((new Biome.BiomeProperties("The End")).setRainDisabled().setWaterColor(16711840));
 	public static final Biome BiomeIceFlats = new BiomeSnowUA(false, (new Biome.BiomeProperties("Ice Plains")).setBaseHeight(0.125F).setHeightVariation(0.2F).setTemperature(0.0F).setRainfall(0.5F).setSnowEnabled());
 	public static final Biome BiomeIceMountain = new BiomeSnowUA(false, (new Biome.BiomeProperties("Ice Mountains")).setBaseHeight(0.55F).setHeightVariation(0.3F).setTemperature(0.0F).setRainfall(0.5F).setSnowEnabled());
 	public static final Biome BiomeMushroomIsland= new BiomeMushroomIslandUA((new Biome.BiomeProperties("Mushroom")).setBaseHeight(0.2F).setHeightVariation(0.3F).setTemperature(0.9F).setRainfall(1.0F));
-	public static final Biome BiomeDesertHills = new BiomeDesertUA((new Biome.BiomeProperties("Desert Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(2.0F).setRainfall(0.0F).setRainDisabled());
-	public static final Biome BiomeForestHills = new BiomeForestUA(BiomeForestUA.Type.NORMAL, (new Biome.BiomeProperties("Forest Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(0.7F).setRainfall(0.8F));
-	public static final Biome BiomeTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Taiga Hills")).setTemperature(0.44F).setRainfall(0.8F).setBaseHeight(0.45F).setHeightVariation(0.3F));
+	public static final Biome BiomeDesertHills = new BiomeDesertUA((new Biome.BiomeProperties("Desert Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(2.0F).setRainfall(0.0F).setRainDisabled());
+	public static final Biome BiomeForestHills = new BiomeForestUA(BiomeForestUA.Type.NORMAL, (new Biome.BiomeProperties("Forest Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(0.7F).setRainfall(0.8F));
+	public static final Biome BiomeTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Taiga Hills")).setTemperature(0.44F).setRainfall(0.8F).setBaseHeight(0.6F).setHeightVariation(0.3F));
 	public static final Biome BiomeJungle = new BiomeJungleUA(false, (new Biome.BiomeProperties("Jungle")).setTemperature(0.95F).setRainfall(0.9F));
-	public static final Biome BiomeJungleHills = new BiomeJungleUA(false, (new Biome.BiomeProperties("Jungle Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(0.95F).setRainfall(0.9F));
+	public static final Biome BiomeJungleHills = new BiomeJungleUA(false, (new Biome.BiomeProperties("Jungle Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(0.95F).setRainfall(0.9F));
 	public static final Biome BiomeJungleEdge = new BiomeJungleUA(true, (new Biome.BiomeProperties("Jungle Edge")).setTemperature(0.95F).setRainfall(0.8F));
 	public static final Biome BiomeStoneBeach = new BiomeStoneBeachUA((new Biome.BiomeProperties("Stone Beach")).setBaseHeight(0.1F).setHeightVariation(0.8F).setTemperature(0.44F).setRainfall(0.3F));
 	public static final Biome BiomeColdBeach = new BiomeColdBeachUA(new Biome.BiomeProperties("Cold Beach").setBaseHeight(0.0F).setHeightVariation(0.025F).setTemperature(0.0F).setRainfall(0.3F).setSnowEnabled());
 	public static final Biome BiomeBirchForest = new BiomeForestUA(BiomeForestUA.Type.BIRCH, (new Biome.BiomeProperties("Birch Forest")).setTemperature(0.6F).setRainfall(0.6F));
-	public static final Biome BiomeBirchForestHills = new BiomeForestUA(BiomeForestUA.Type.BIRCH, (new Biome.BiomeProperties("Birch Forest Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(0.6F).setRainfall(0.6F));
+	public static final Biome BiomeBirchForestHills = new BiomeForestUA(BiomeForestUA.Type.BIRCH, (new Biome.BiomeProperties("Birch Forest Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(0.6F).setRainfall(0.6F));
 	public static final Biome BiomeRoofedForest = new BiomeForestUA(BiomeForestUA.Type.ROOFED, (new Biome.BiomeProperties("Roofed Forest")).setTemperature(0.7F).setRainfall(0.8F));
 	public static final Biome BiomeColdTaiga = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga")).setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
-	public static final Biome BiomeColdTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
+	public static final Biome BiomeColdTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
 	public static final Biome BiomeRedwoodTaiga = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA, (new Biome.BiomeProperties("Mega Taiga")).setTemperature(0.5F).setRainfall(0.8F).setBaseHeight(0.2F).setHeightVariation(0.2F));
-	public static final Biome BiomeRedwoodTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA, (new Biome.BiomeProperties("Mega Taiga Hills")).setBaseHeight(0.45F).setHeightVariation(0.3F).setTemperature(0.5F).setRainfall(0.8F));
+	public static final Biome BiomeRedwoodTaigaHills = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA, (new Biome.BiomeProperties("Mega Taiga Hills")).setBaseHeight(0.6F).setHeightVariation(0.3F).setTemperature(0.5F).setRainfall(0.8F));
 	public static final Biome BiomeExtremeHillsPlus = new BiomeHillsUA(BiomeHillsUA.Type.EXTRA_TREES, (new Biome.BiomeProperties("Extreme Hills+")).setBaseHeight(1.0F).setHeightVariation(0.5F).setTemperature(0.35F).setRainfall(0.3F));
 	public static final Biome BiomeSavanna = new BiomeSavannaUA((new Biome.BiomeProperties("Savanna")).setBaseHeight(0.125F).setHeightVariation(0.2F).setTemperature(1.2F).setRainfall(0.0F).setRainDisabled());
 	public static final Biome BiomeSavannaRock = new BiomeSavannaUA((new Biome.BiomeProperties("Savanna Plateau")).setBaseHeight(1.5F).setHeightVariation(0.2F).setTemperature(1.0F).setRainfall(0.0F).setRainDisabled());
@@ -84,11 +84,11 @@ public class BiomeInit {
 	public static final Biome BiomeJungleM = new BiomeJungleUA(false, (new Biome.BiomeProperties("Jungle M")).setBaseBiome("Jungle").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.95F).setRainfall(0.9F));
 	public static final Biome BiomeJungleEdgeM = new BiomeJungleUA(true, (new Biome.BiomeProperties("JungleEdge M")).setBaseBiome("Jungle Edge").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.95F).setRainfall(0.8F));
 	public static final Biome BiomeBirchForestM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest M")).setBaseBiome("Birch Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.6F).setRainfall(0.6F));
-	public static final Biome BiomeBirchForestHillsM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest Hills M")).setBaseBiome("Birch Forest Hills").setBaseHeight(0.55F).setHeightVariation(0.5F).setTemperature(0.6F).setRainfall(0.6F));
+	public static final Biome BiomeBirchForestHillsM = new BiomeBirchForestMutatedUA((new Biome.BiomeProperties("Birch Forest Hills M")).setBaseBiome("Birch Forest Hills").setBaseHeight(0.6F).setHeightVariation(0.5F).setTemperature(0.6F).setRainfall(0.6F));
 	public static final Biome BiomeRoofedForestM = new BiomeRoofedForestMutatedUA((new Biome.BiomeProperties("Roofed Forest M")).setBaseBiome("Roofed Forest").setBaseHeight(0.2F).setHeightVariation(0.4F).setTemperature(0.7F).setRainfall(0.8F));
 	public static final Biome BiomeColdTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.NORMAL, (new Biome.BiomeProperties("Cold Taiga M")).setBaseBiome("Taiga Cold").setBaseHeight(0.3F).setHeightVariation(0.4F).setTemperature(-0.5F).setRainfall(0.4F).setSnowEnabled());
 	public static final Biome BiomeRedwoodTaigaM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Mega Spruce Taiga")).setBaseBiome("Redwood Taiga").setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));
-	public static final Biome BiomeRedwoodTaigaHillsM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Redwood Taiga Hills M")).setBaseBiome("Redwood Taiga Hills").setBaseHeight(0.2F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));
+	public static final Biome BiomeRedwoodTaigaHillsM = new BiomeTaigaUA(BiomeTaigaUA.Type.MEGA_SPRUCE, (new Biome.BiomeProperties("Redwood Taiga Hills M")).setBaseBiome("Redwood Taiga Hills").setBaseHeight(0.6F).setHeightVariation(0.2F).setTemperature(0.5F).setRainfall(0.8F));
 	public static final Biome BiomeExtremeHillsPlusM = new BiomeHillsUA(BiomeHillsUA.Type.MUTATED, (new Biome.BiomeProperties("Extreme Hills+ M")).setBaseBiome("Extreme Hills+").setBaseHeight(1.0F).setHeightVariation(0.5F).setTemperature(0.5F).setRainfall(0.3F));
 	public static final Biome BiomeSavannaM = new BiomeSavannaMutatedUA((new Biome.BiomeProperties("Savanna M")).setBaseBiome("Savanna").setBaseHeight(0.3625F).setHeightVariation(1.225F).setTemperature(1.1F).setRainfall(0.0F).setRainDisabled());
 	public static final Biome BiomeSavannaRockM = new BiomeSavannaMutatedUA((new Biome.BiomeProperties("Savanna Plateau M")).setBaseBiome("Savanna Rock").setBaseHeight(1.05F).setHeightVariation(1.2125001F).setTemperature(1.0F).setRainfall(0.0F).setRainDisabled());
@@ -168,11 +168,13 @@ public class BiomeInit {
 	}
 	
 	
-//Handles conversion between M form and non-M form biomes
-	
+	//Handles conversion between M form and non-M form biomes. 
+	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods
+	//Also better as I can specify new M variant biomes or make any biome an M variant of another unrelated biome.
     public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<>();
     
     private static void mapBiomes() {
+    	//registers who is an M variant of another biome
     	
     	BASE_TO_MUTATION_MAP.put(BiomePlains, BiomePlainsM);
     	BASE_TO_MUTATION_MAP.put(BiomeDesert, BiomeDesertM);
@@ -200,6 +202,8 @@ public class BiomeInit {
 	@Nullable
     public static Biome getMutationForBiome(Biome biome)
     {
+		//returns the M variant of the given biome
+		
 		return BASE_TO_MUTATION_MAP.get(biome);
     }
 	

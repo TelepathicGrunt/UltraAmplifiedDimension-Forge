@@ -14,6 +14,8 @@ public class WorldGenVinesShortUA extends WorldGenerator
 {
 	public boolean generate(World worldIn, Random rand, BlockPos position) 
 	{
+		//generates vines from given position down 6 blocks if path is clear and the given position is valid
+		//Also won't generate vines below Y = 15.
 		int length = 0;
 		
 		for (; position.getY() > 15 && length < 6; position = position.down()) 

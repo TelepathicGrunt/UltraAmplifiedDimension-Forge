@@ -104,12 +104,14 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         }
 
         
+        //set the setting to use our version of chunkGeneratorSettings.
+        //Might be removed in 1.13 when configs can be per world
         this.settings = new ChunkGeneratorSettingsUA();
         
-        //these two are not actually used at the moment
+        //this is not actually used at the moment
         this.oceanBlock = UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
+        
         worldIn.setSeaLevel(UAConfig.biomeOptions.seaLevel);
-    
         caveGenerator = new MapGenCaveCavity(this);
         strongholdGenerator = new MapGenStrongholdUA(this);
         villageGenerator = new MapGenVillageUA(this);
@@ -169,6 +171,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                             	
                                 if ((lvt_45_1_ += d16) > 0.0D)
                                 {
+                                	//generate specific blocks instead of stone if a specific biome since these biomes should not have stone at all
                                 	if(loc == BiomeInit.BiomeEnd) {
                                 		primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, END_STONE);
                                 	}
@@ -184,6 +187,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                                 }
                             	else if (i2 * 8 + j2 < UAConfig.biomeOptions.seaLevel)
                                 {
+                            		//if we are in these two freezing biomes, generate snow blocks instead of water for sea level
                             		if(loc == BiomeInit.BiomeIceMountain || loc == BiomeInit.BiomeIceSpike)
                                 	{
                                		   primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW);
@@ -286,16 +290,16 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         return chunk;
     }
 
-    private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_)
+    private void generateHeightmap(int passedInOne, int passedInTwo, int passedInThree)
     {
-        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
+        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, passedInOne, passedInThree, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
         float f = this.settings.coordinateScale;
         float f1 = this.settings.heightScale;
         
-        //These controls the shape of the terrain. Change it juuuuust right and you can create floating layers of land! 
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)(f / this.settings.mainNoiseScaleX), (double)(50.1*(f1 / this.settings.mainNoiseScaleY)), (double)(f / this.settings.mainNoiseScaleZ));
-        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)f, (double)(f1*f1), (double)f);
-        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)f, (double)(f1*f1), (double)f);
+        //These three controls the shape of the terrain. Change it juuuuust right and you can create floating layers of land! 
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, passedInOne, passedInTwo, passedInThree, 5, 33, 5, (double)(f / this.settings.mainNoiseScaleX), UAConfig.biomeOptions.secretSettings ? (double)((f1 / this.settings.mainNoiseScaleY)*(f1 / this.settings.mainNoiseScaleY)) : (double)(50.1*(f1 / this.settings.mainNoiseScaleY)), (double)(f / this.settings.mainNoiseScaleZ));
+        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, passedInOne, passedInTwo, passedInThree, 5, 33, 5, UAConfig.biomeOptions.secretSettings ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), UAConfig.biomeOptions.secretSettings ? (double)(f*(f/4)) : (double)f);
+        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, passedInOne, passedInTwo, passedInThree, 5, 33, 5, UAConfig.biomeOptions.secretSettings ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), UAConfig.biomeOptions.secretSettings ? (double)(f*(f/4)) : (double)f);
         int i = 0;
         int j = 0;
 

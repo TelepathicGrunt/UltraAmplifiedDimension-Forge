@@ -25,12 +25,14 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
 	private final WorldGenerator ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), 8);
 	private final WorldGenerator coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), 15);
 	
-	
+	//adds additional ores and stone patches to make this a very high resource biome.
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     {
-		super.decorate(worldIn, random, biome, pos);
+		 //generates the default decorations with the stuff below it as additonal ore generations
+		 super.decorate(worldIn, random, biome, pos);
         
-		 for (int numPerChunk = 0; numPerChunk < 10; ++numPerChunk)
+		 //generates additional andersite at reduced spawnrate in a bigger range than default range
+		 for (int currentCount = 0; currentCount < 10; ++currentCount)
          {
              int x = random.nextInt(16);
              int y = random.nextInt(241)+10;
@@ -38,10 +40,10 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
              
              if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, andesiteGen, pos.add(x,y,z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.ANDESITE))
              	this.andesiteGen.generate(worldIn, random, pos.add(x,y,z));
-             
          }
     	 
-    	 for (int numPerChunk = 0; numPerChunk < 3; ++numPerChunk)
+		 //generates additional diorite at reduced spawnrate between Y = 150 and Y = 190.
+    	 for (int currentCount = 0; currentCount < 3; ++currentCount)
          {
              int x = random.nextInt(16);
              int y = random.nextInt(41)+150;
@@ -52,7 +54,8 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
                
          }
     	 
-    	 for (int numPerChunk = 0; numPerChunk < 3; ++numPerChunk)
+    	 //generates additional granite at reduced spawnrate between Y = 120 and Y = 170. 
+    	 for (int currentCount = 0; currentCount < 3; ++currentCount)
          {
              int x = random.nextInt(16);
              int y = random.nextInt(51)+120;
@@ -62,8 +65,9 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
             	 this.graniteGen.generate(worldIn, random, pos.add(x,y,z));
          }
     	 
+    	 //generates additional iron at reduced spawnrate in a bigger range than default range
     	 int ironCount = (this.chunkProviderSettingsUA.ironCount/5)*2;
-    	 for (int numPerChunk = 0; numPerChunk < ironCount; ++numPerChunk)
+    	 for (int currentCount = 0; currentCount < ironCount; ++currentCount)
          {
              int x = random.nextInt(16);
              int y = random.nextInt(246)+10;
@@ -73,8 +77,9 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
              	this.ironGen.generate(worldIn, random, pos.add(x,y,z));
          }
     	 
+    	 //generates additonal coal at reduced spawnrate in a bigger range than default range
     	 int coalCount = (this.chunkProviderSettingsUA.coalCount/3)*2;
-    	 for (int numPerChunk = 0; numPerChunk < coalCount; ++numPerChunk)
+    	 for (int currentCount = 0; currentCount < coalCount; ++currentCount)
          {
              int x = random.nextInt(16);
              int y = random.nextInt(246)+10;

@@ -36,7 +36,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-//Attempt at showing loading progress on world loading screen
+//shows loading progress on world loading screen
+//All that is need is just the existence of this class in any mod lol
 public class LoadingScreenProgressPercentage{
 
 	//Very similar to MinecraftServer's initialWorldChunkLoad() method but here we display the progress on screen.
@@ -63,6 +64,7 @@ public class LoadingScreenProgressPercentage{
 
                 if (j2 - k1 > 1000L)
                 {
+                	//this is what gets displayed to the user
                 	ms.setUserMessage("Preparing spawn area: " + Integer.valueOf(i1 * 100 / 625)+"%%");
                     k1 = j2;
                 	

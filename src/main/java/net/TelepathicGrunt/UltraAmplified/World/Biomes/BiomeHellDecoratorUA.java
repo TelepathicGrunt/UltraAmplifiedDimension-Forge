@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class BiomeHellDecoratorUA extends BiomeDecoratorUA
 {
 
+	//Fixed value. Could be too high...
     protected int netherWartPerChunk = 250;
 	
     protected WorldGenerator netherWartGen = new WorldGenNetherWartUA();
@@ -39,26 +40,30 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
     { 
         this.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
         
-        for (int i = random.nextInt(3); i < this.chunkProviderSettingsUA.magmaCount; ++i)
-        {
-            int j1 = random.nextInt(16);
-            int k1 = random.nextInt(101);
-            int l1 = random.nextInt(16);
-            this.magma.generate(worldIn, random, pos.add(j1, k1, l1));
-        }
-
-    	
-    	for (int i = random.nextInt(3); i < this.chunkProviderSettingsUA.quartzCount; ++i)
+        
+        //generates large blobs of magma blocks below Y = 100
+        for (int currentCount = random.nextInt(3); currentCount < this.chunkProviderSettingsUA.magmaCount; ++currentCount)
         {
             int x = random.nextInt(16);
-            int y = random.nextInt(240);
+            int y = random.nextInt(101);
+            int z = random.nextInt(16);
+            this.magma.generate(worldIn, random, pos.add(x, y, z));
+        }
+
+        
+    	//generates quartz below Y = 240
+    	for (int currentCount = random.nextInt(3); currentCount < this.chunkProviderSettingsUA.quartzCount; ++currentCount)
+        {
+            int x = random.nextInt(16);
+            int y = random.nextInt(241);
             int z = random.nextInt(16);
             if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, quartz, pos.add(x, y, z), net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ))
             this.quartz.generate(worldIn, random, pos.add(x, y, z));
         }
         
     	
-        for (int i = random.nextInt(50); i < this.chunkProviderSettingsUA.lavaCount; i++)
+    	//spawns a single block of lava and how many can spawn may vary greatly chunk by chunk.
+        for (int currentCount = random.nextInt(50); currentCount < this.chunkProviderSettingsUA.lavaCount; currentCount++)
         {
         	int x = random.nextInt(16) + 8;
             int y = random.nextInt(236) + 4;
@@ -67,7 +72,6 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
         }
     	
 
-        
         this.chunkPos = pos;
         this.genDecorations(biome, worldIn, random);
         this.decorating = false;
@@ -75,54 +79,43 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
     
     protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
-    	
-    	for (int j5 = 0; j5 < this.netherWartPerChunk; ++j5)
+    	//generates netherwart 
+    	for (int currentCount = 0; currentCount < this.netherWartPerChunk; ++currentCount)
         {
-            int l9 = random.nextInt(16) + 8;
-            int k13 = random.nextInt(16) + 8;
-            int l16 = worldIn.getHeight(this.chunkPos.add(l9, 0, k13)).getY() * 2;
-
-            if (l16 > 0)
-            {
-                int j19 = random.nextInt(l16);
-                this.netherWartGen.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
+            int x = random.nextInt(16) + 8;
+            int z = random.nextInt(16) + 8;
+            int y = random.nextInt(255);
+            this.netherWartGen.generate(worldIn, random, this.chunkPos.add(x, y, z));
         }
     	
-    	for (int j5 = 0; j5 < this.chunkProviderSettingsUA.glowstoneCount; ++j5)
+    	//generates glowstone in the first pattern
+    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
         {
-            int l9 = random.nextInt(16) + 8;
-            int k13 = random.nextInt(16) + 8;
-            int l16 = worldIn.getHeight(this.chunkPos.add(l9, 0, k13)).getY() + 20;
-
-            if (l16 > 60)
-            {
-                int j19 = random.nextInt(l16 - 60) + 60;
-                this.glowStone1.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
+            int x = random.nextInt(16) + 8;
+            int z = random.nextInt(16) + 8;
+            int y = random.nextInt(180) + 60;
+            this.glowStone1.generate(worldIn, random, this.chunkPos.add(x, y, z));
         }
-    	
-    	for (int j5 = 0; j5 < this.chunkProviderSettingsUA.glowstoneCount; ++j5)
-        {
-            int l9 = random.nextInt(16) + 8;
-            int k13 = random.nextInt(16) + 8;
-            int l16 = worldIn.getHeight(this.chunkPos.add(l9, 0, k13)).getY() + 20;
 
-            if (l16 > 60)
-            {
-                int j19 = random.nextInt(l16 - 60) + 60;
-                this.glowStone2.generate(worldIn, random, this.chunkPos.add(l9, j19, k13));
-            }
+    	//generates glowstone in the second pattern
+    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
+        {
+            int x = random.nextInt(16) + 8;
+            int z = random.nextInt(16) + 8;
+            int y = random.nextInt(180) + 60;
+            this.glowStone2.generate(worldIn, random, this.chunkPos.add(x, y, z));
         }
     }
     
     
     private static class lavaGenerator extends WorldGenerator
     {
+    	//will spawn one block of lava in given position but only if the block position is netherrack first
 		@Override
 		public boolean generate(World worldIn, Random rand, BlockPos position) {
 			
 			    net.minecraft.block.state.IBlockState state = worldIn.getBlockState(position);
+			    
                 if (state.getBlock().isReplaceableOreGen(state, worldIn, position, net.minecraft.block.state.pattern.BlockMatcher.forBlock(Blocks.NETHERRACK)))
                 {
                     worldIn.setBlockState(position, Blocks.FLOWING_LAVA.getDefaultState(), 16 | 2);

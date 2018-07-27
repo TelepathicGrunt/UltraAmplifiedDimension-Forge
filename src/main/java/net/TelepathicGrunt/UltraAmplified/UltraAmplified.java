@@ -41,7 +41,10 @@ public class UltraAmplified {
 	//constants
 	public static final String MOD_ID = "ultra_amplified_mod";
 	public static final String MOD_NAME = "Ultra Amplified Mod";
-	public static final String VERSION = "0.4.3";
+	
+	//Change mod version here, in mcmod.info, in UAConfig, and in build.gradlew. I probably should automate this lol.
+	public static final String VERSION = "0.4.4";
+	
 	public static WorldType UltraAmplified;
 	public static WorldType UltraAmplifiedLargeBiome;
 	
@@ -56,11 +59,14 @@ public class UltraAmplified {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		//registers all the biomes so forge knows about them
 		 BiomeInit.registerBiomes();
 	}
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
+		
+		//registers all the large structures that this mod will need
 		
 		MapGenStructureIO.registerStructure(MapGenVillageUA.Start.class, MOD_ID+":village");
 		StructureVillagePiecesUA.registerVillagePieces();
@@ -90,12 +96,14 @@ public class UltraAmplified {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		//nothing needed here
 	}
 	
 	
 	@EventHandler
     public void post(FMLPostInitializationEvent event)
     {
+		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
     }
 	

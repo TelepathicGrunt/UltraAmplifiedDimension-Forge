@@ -32,12 +32,17 @@ public class StructureOceanMonumentUA extends MapGenStructure
 {
     private int spacing;
     private int separation;
+    private int subtraction = 8;
     public static final List<Biome> SPAWN_BIOMES = Arrays.<Biome>asList(new Biome[] { BiomeInit.BiomeJungle, BiomeInit.BiomeJungleEdge, BiomeInit.BiomeJungleEdgeM, BiomeInit.BiomeJungleHills, BiomeInit.BiomeJungleM, Biomes.DEEP_OCEAN});
     private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.<Biome.SpawnListEntry>newArrayList();
 
     public StructureOceanMonumentUA(ChunkGeneratorOverworldUA settings)
     {
         this.spacing = settings.settings.monumentsRarity;
+        if(this.spacing < 9) {
+        	this.subtraction = spacing-1;
+        }
+        
         this.separation = 8;
     }
 
@@ -66,8 +71,8 @@ public class StructureOceanMonumentUA extends MapGenStructure
         Random random = this.world.setRandomSeed(k, l, 10387313);
         k = k * this.spacing;
         l = l * this.spacing;
-        k = k + random.nextInt(this.spacing - 8);
-        l = l + random.nextInt(this.spacing - 8);
+        k = k + random.nextInt(this.spacing - this.subtraction);
+        l = l + random.nextInt(this.spacing - this.subtraction);
 
         if (i == k && j == l)
         {
@@ -132,10 +137,10 @@ public class StructureOceanMonumentUA extends MapGenStructure
             long k = (long)chunkX * i;
             long l = (long)chunkZ * j;
             random.setSeed(k ^ l ^ worldIn.getSeed());
-            int i1 = chunkX * 16 + 8 - 29;
-            int j1 = chunkZ * 16 + 8 - 29;
+            int x = chunkX * 16 + 8 - 29;
+            int z = chunkZ * 16 + 8 - 29;
             EnumFacing enumfacing = EnumFacing.Plane.HORIZONTAL.random(random);
-            this.components.add(new StructureOceanMonumentPiecesUA.MonumentBuilding(random, i1, j1, enumfacing));
+            this.components.add(new StructureOceanMonumentPiecesUA.MonumentBuilding(worldIn, random, x, z, enumfacing));
             this.updateBoundingBox();
             this.wasCreated = true;
         }

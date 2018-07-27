@@ -10,12 +10,15 @@ public class BiomeRoofedForestMutatedUA extends BiomeForestUA
 {
     protected static final WorldGenDarkOakMTree ROOFED_M_TREE_GENERATOR = new WorldGenDarkOakMTree(false);
     
-    
+    //tells the base class that this is a roofed forest biome
 	public BiomeRoofedForestMutatedUA(Biome.BiomeProperties properties)
     {
         super(BiomeForestUA.Type.ROOFED, properties);
     }
 
+	//we override so we can generate our massive dark oak tree for this mutated roofed forest biome 
+	//while keeping similar spawn rate for the other trees as overridden method.
+	@Override
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
     	if (rand.nextInt(3) > 0)

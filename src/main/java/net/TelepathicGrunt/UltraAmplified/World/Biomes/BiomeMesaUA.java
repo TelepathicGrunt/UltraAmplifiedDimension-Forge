@@ -40,51 +40,61 @@ public class BiomeMesaUA extends BiomeExtendedUA
     private final boolean brycePillars;
     private final boolean hasForest;
 
-    public BiomeMesaUA(boolean p_i46704_1_, boolean p_i46704_2_, Biome.BiomeProperties properties)
+    public BiomeMesaUA(boolean hasBryceSpikes, boolean hasForest, Biome.BiomeProperties properties)
     {
         super(properties);
         
-        this.brycePillars = p_i46704_1_;
-        this.hasForest = p_i46704_2_;
-        this.spawnableCreatureList.clear();
         this.topBlock = RED_SAND;
         this.fillerBlock = STAINED_HARDENED_CLAY;
+        
+        this.brycePillars = hasBryceSpikes;
+        this.hasForest = hasForest;
+        
         this.decorator.treesPerChunk = -999;
         this.decorator.deadBushPerChunk = 10;
         this.decorator.reedsPerChunk = 3;
         this.decorator.cactiPerChunk = 10;
         this.decorator.flowersPerChunk = 0;
-        this.spawnableCreatureList.clear();
 
-        if (p_i46704_2_)
+        if (hasForest)
         {
             this.decorator.treesPerChunk = 5;
         }
+        
+        
+        this.spawnableCreatureList.clear();
     }
 
+    //we use the decorator specifically for Mesa instead of BiomeDecoratorUA so we can generate the additional gold ores. 
     @Override
     public BiomeDecorator createBiomeDecorator()
     {
         return getModdedBiomeDecorator(new BiomeMesaDecoratorUA());
     }
 
+    //grabs an oak tree to generate
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
         return TREE_FEATURE;
     }
 
+    //dried looking plants
     @SideOnly(Side.CLIENT)
     public int getFoliageColorAtPos(BlockPos pos)
     {
         return 10387789;
     }
 
+    //dried looking grass
     @SideOnly(Side.CLIENT)
     public int getGrassColorAtPos(BlockPos pos)
     {
         return 9470285;
     }
 
+    
+    //makes the colored bands for mesa biome so each level has a different colored block
+    //this also generates the bryce spikes
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
         if (this.clayBands == null || this.worldSeed != worldIn.getSeed())
@@ -248,9 +258,10 @@ public class BiomeMesaUA extends BiomeExtendedUA
             }
         }
         
-        this.generateBiomeTerrain2(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        this.generateBiomeTerrainUA(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 
+    //does the actual level coloring of blocks
     public void generateBands(long p_150619_1_)
     {
         this.clayBands = new IBlockState[64];
@@ -332,9 +343,10 @@ public class BiomeMesaUA extends BiomeExtendedUA
         }
     }
 
-    public IBlockState getBand(int p_180629_1_, int p_180629_2_, int p_180629_3_)
+    //???
+    public IBlockState getBand(int x, int y, int z)
     {
-        int i = (int)Math.round(this.clayBandsOffsetNoise.getValue((double)p_180629_1_ / 512.0D, (double)p_180629_1_ / 512.0D) * 2.0D);
-        return this.clayBands[(p_180629_2_ + i + 64) % 64];
+        int i = (int)Math.round(this.clayBandsOffsetNoise.getValue((double)x / 512.0D, (double)x / 512.0D) * 2.0D);
+        return this.clayBands[(y + i + 64) % 64];
     }
 }

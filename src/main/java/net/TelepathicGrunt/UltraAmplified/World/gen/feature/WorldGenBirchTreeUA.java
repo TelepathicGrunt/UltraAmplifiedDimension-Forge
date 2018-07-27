@@ -19,46 +19,45 @@ public class WorldGenBirchTreeUA extends WorldGenAbstractTree
 {
     private static final IBlockState LOG = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH);
     private static final IBlockState LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH).withProperty(BlockOldLeaf.CHECK_DECAY, Boolean.valueOf(false));
-    private final boolean useExtraRandomHeight;
 
-    public WorldGenBirchTreeUA(boolean notify, boolean useExtraRandomHeightIn)
+    //this class is just a slightly modified WorldGenBirchTree class so we could generate slightly taller birch tree than normal birch tree
+    public WorldGenBirchTreeUA(boolean notify)
     {
         super(notify);
-        this.useExtraRandomHeight = useExtraRandomHeightIn;
     }
 
     @Override
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = rand.nextInt(3) + 5 + rand.nextInt(15);
+        int height = rand.nextInt(3) + 6 + rand.nextInt(13);
         
         boolean flag = true;
 
-        if (position.getY() >= 1 && position.getY() + i + 1 <= 256)
+        if (position.getY() >= 1 && position.getY() + height + 1 <= 256)
         {
-            for (int j = position.getY(); j <= position.getY() + 1 + i; ++j)
+            for (int currentHeight = position.getY(); currentHeight <= position.getY() + 1 + height; ++currentHeight)
             {
                 int k = 1;
 
-                if (j == position.getY())
+                if (currentHeight == position.getY())
                 {
                     k = 0;
                 }
 
-                if (j >= position.getY() + 1 + i - 2)
+                if (currentHeight >= position.getY() + 1 + height - 2)
                 {
                     k = 2;
                 }
 
                 BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-                for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
+                for (int x = position.getX() - k; x <= position.getX() + k && flag; ++x)
                 {
-                    for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1)
+                    for (int z = position.getZ() - k; z <= position.getZ() + k && flag; ++z)
                     {
-                        if (j >= 0 && j < 256)
+                        if (currentHeight >= 0 && currentHeight < 256)
                         {
-                            if (!this.canGrowInto(worldIn.getBlockState(blockpos$mutableblockpos.setPos(l, j, i1)).getBlock()))
+                            if (!this.canGrowInto(worldIn.getBlockState(blockpos$mutableblockpos.setPos(x, currentHeight, z)).getBlock()))
                             {
                                 flag = false;
                             }
@@ -79,13 +78,13 @@ public class WorldGenBirchTreeUA extends WorldGenAbstractTree
             {
                 Block block = worldIn.getBlockState(position.down()).getBlock();
 
-                if ((block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.FARMLAND) && position.getY() < 256 - i - 1)
+                if ((block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.FARMLAND) && position.getY() < 256 - height - 1)
                 {
                     this.setDirtAt(worldIn, position.down());
 
-                    for (int i2 = position.getY() - 3 + i; i2 <= position.getY() + i; ++i2)
+                    for (int i2 = position.getY() - 3 + height; i2 <= position.getY() + height; ++i2)
                     {
-                        int k2 = i2 - (position.getY() + i);
+                        int k2 = i2 - (position.getY() + height);
                         int l2 = 1 - k2 / 2;
 
                         for (int i3 = position.getX() - l2; i3 <= position.getX() + l2; ++i3)
@@ -110,7 +109,7 @@ public class WorldGenBirchTreeUA extends WorldGenAbstractTree
                         }
                     }
 
-                    for (int j2 = 0; j2 < i; ++j2)
+                    for (int j2 = 0; j2 < height; ++j2)
                     {
                         Material material1 = worldIn.getBlockState(position.up(j2)).getMaterial();
 

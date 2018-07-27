@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockFlowerPot;
@@ -17,7 +16,6 @@ import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockRedstoneRepeater;
 import net.minecraft.block.BlockSandStone;
-import net.minecraft.block.BlockStainedHardenedClay;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.BlockStoneSlab;
@@ -28,10 +26,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -332,8 +335,8 @@ public class ComponentScatteredFeaturePiecesUA
 	            {
 	                if (!this.hasPlacedChest[enumfacing.getHorizontalIndex()])
 	                {
-	                    int k1 = enumfacing.getFrontOffsetX() * 2;
-	                    int l1 = enumfacing.getFrontOffsetZ() * 2;
+	                    int k1 = enumfacing.getXOffset() * 2;
+	                    int l1 = enumfacing.getZOffset() * 2;
 	                    this.hasPlacedChest[enumfacing.getHorizontalIndex()] = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10 + k1, -11, 10 + l1, LootTableList.CHESTS_DESERT_PYRAMID);
 	                }
 	            }
@@ -780,7 +783,7 @@ public class ComponentScatteredFeaturePiecesUA
             this.hasWitch = tagCompound.getBoolean("Witch");
         }
 
-        public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
+        public boolean addComponentParts(World worldIn, Random random, StructureBoundingBox structureBoundingBoxIn)
         {
             if (!this.offsetToAverageGroundLevel(worldIn, structureBoundingBoxIn, 0))
             {
@@ -807,6 +810,39 @@ public class ComponentScatteredFeaturePiecesUA
                 this.setBlockState(worldIn, Blocks.FLOWER_POT.getDefaultState().withProperty(BlockFlowerPot.CONTENTS, BlockFlowerPot.EnumFlowerType.MUSHROOM_RED), 1, 3, 5, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.CRAFTING_TABLE.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.BREWING_STAND.getDefaultState(), 2, 3, 6, structureBoundingBoxIn);
+                
+                //following code is a modified version from JavaMan7's youtube tutorial about making structures (But went into detail about how to put potions in brewing stands)
+                TileEntity tileentity = worldIn.getTileEntity(new BlockPos(this.getXWithOffset(2, 6), this.getYWithOffset(3), this.getZWithOffset(2, 6)));
+                
+                if (tileentity instanceof TileEntityBrewingStand)
+                {
+	               	 int potionSlot = 1 + random.nextInt(3);
+	               	 
+	               	 for (int j = 0; j < potionSlot; j++) {
+	               		 
+	               		 int potionType = random.nextInt(9);
+	               		
+	               		 ItemStack potion=null;
+			           	
+	               		 //5/9 chance
+	               		 if(potionType < 5) {
+	               			 potion = new ItemStack(Items.POTIONITEM);PotionUtils.addPotionToItemStack(potion, PotionTypes.STRONG_LEAPING);
+	               	 	 }
+	               		 //3/9 chance
+	               		 else if(potionType < 8) {
+	               			 potion = new ItemStack(Items.POTIONITEM);PotionUtils.addPotionToItemStack(potion, PotionTypes.STRONG_POISON); 
+	               		 }
+	               		 //1/9 chance
+	               		 else{
+	               			 potion = new ItemStack(Items.POTIONITEM);PotionUtils.addPotionToItemStack(potion, PotionTypes.LONG_NIGHT_VISION);
+			           	 }
+	               	 
+		               	 ((TileEntityBrewingStand)tileentity).setInventorySlotContents(j,potion);
+		             }
+                }
+               	 
+               	 
+                
                 this.setBlockState(worldIn, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 2), 4, 2, 6, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 1, 2, 1, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 5, 2, 1, structureBoundingBoxIn);
@@ -818,6 +854,8 @@ public class ComponentScatteredFeaturePiecesUA
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 2, 0, 4, 7, iblockstate1, iblockstate1, false);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 4, 2, 6, 4, 7, iblockstate2, iblockstate2, false);
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 8, 6, 4, 8, iblockstate3, iblockstate3, false);
+            	 
+
 
                 for (int i = 2; i <= 7; i += 5)
                 {
