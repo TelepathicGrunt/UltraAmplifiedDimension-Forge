@@ -18,7 +18,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
      Config:
 ·Added super secret setting that does something! (Can't say what lol. Try it!)
 ·Fixed some config namings.
-·Added config option to turn on and off mini-structures such as Crosses, Hay Bale, Fossils, Sun Shrine, Stonehedges, and Desert Wells.
+·Added config option to turn on and off mini-structures such as Crosses, Hay Bale, Fossils, Sun Shrine, Stonehenges, and Desert Wells.
 ·Made lower config values now spawn more Villages, Temples, Nether Fortresses, End Cities, Ocean Monuemnts, and Woodland Mansions but raised default value to keep same default spawnrates.
     
      Biomes:
@@ -32,7 +32,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
     Structures:
 ·Added a very rare Sun Shrine to generate in any biome with "Hills" in its name. (Except for Extreme Hills Biomes)
-·Added a rare small Stonehedge to generate in any biome with "Hills" in its name (Except for Extreme Hills Biomes) and has a very small chance of generating an Enchanting Table.
+·Added a rare small Stonehenge to generate in any biome with "Hills" in its name (Except for Extreme Hills Biomes) and has a very small chance of generating an Enchanting Table.
 ·Villages in Stone Beach Biome generates Stone instead of Dirt so the bottom of Farmlands blend better with the biome.
 ·For Mesa and Desert biomes, replaced the 1% Dungeon chance of Giant Zombie Spawners with Illusioner Spawners as Giant Zombies cannot spawn through Mob Spawners.
 ·The bug that caused Ocean Monument to not spawn at correct heights is squashed. Now they generate between the height Y = 97 and Y = 242 regardless of what the terrain height is.
