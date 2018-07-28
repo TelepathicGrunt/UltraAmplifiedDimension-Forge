@@ -97,7 +97,7 @@ public class UAConfig {
 				
 				
 				@Name('\0'+""+'\0'+"Mini-Structures Allowed?")
-				@Config.Comment("Controls whether Desert Wells, Hay Piles, and Crosses spawn or not.")
+				@Config.Comment("Controls whether Desert Wells, Hay Piles, Sun Shrines, Stonehenges, and Crosses spawn or not.")
 				public boolean miniStructureGeneration = true;
 				
 				

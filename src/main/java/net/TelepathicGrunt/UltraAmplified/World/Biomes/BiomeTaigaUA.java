@@ -7,7 +7,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBoulderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenMegaPineTreeUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehedge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenTaigaMutatedUA;
 import net.minecraft.block.BlockDirt;
@@ -40,7 +40,7 @@ public class BiomeTaigaUA extends BiomeExtendedUA
     private static final WorldGenBoulderUA MEGA_TAIGA_M_ROCK_GENERATOR = new WorldGenBoulderUA(4, true);
     
     private static final WorldGenerator shrine = new WorldGenSunShrine();
-    private static final WorldGenerator stonehedge = new WorldGenStonehedge();
+    private static final WorldGenerator stonehenge = new WorldGenStonehenge();
     
     private final BiomeTaigaUA.Type type;
 
@@ -107,10 +107,10 @@ public class BiomeTaigaUA extends BiomeExtendedUA
     
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        //needs to be before stonehedges and boulders so ores/dirt/etc does not replace stonehedge's or boulder's blocks
+        //needs to be before stones and boulders so ores/dirt/etc does not replace stone's or boulder's blocks
         super.decorate(worldIn, rand, pos);
         
-    	//if height is 0.6, this is a hills variant biome and thus, sun shrine and stonehedges can have a chance to generate
+    	//if height is 0.6, this is a hills variant biome and thus, sun shrine and stones can have a chance to generate
 	    if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && this.getBaseHeight() == 0.6F) 
 	    {
 	      	if(rand.nextInt(130) == 0) {
@@ -127,7 +127,7 @@ public class BiomeTaigaUA extends BiomeExtendedUA
 		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(16, 0, 16));
 		        
 		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
-		        stonehedge.generate(worldIn, rand, position);
+		        stonehenge.generate(worldIn, rand, position);
         	}
 	    }
 	    

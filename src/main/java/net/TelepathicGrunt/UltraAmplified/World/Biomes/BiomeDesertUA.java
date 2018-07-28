@@ -7,7 +7,7 @@ import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBetterCactusUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehedge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +32,7 @@ public class BiomeDesertUA extends BiomeExtendedUA
 	
 	private static final WorldGenerator tallCactus = new WorldGenBetterCactusUA(8);
     private static final WorldGenerator shrine = new WorldGenSunShrine();
-    private static final WorldGenerator stonehedge = new WorldGenStonehedge();
+    private static final WorldGenerator stonehenge = new WorldGenStonehenge();
     private static final WorldGenerator fossil = new WorldGenFossils();
     
     public BiomeDesertUA(Biome.BiomeProperties properties)
@@ -82,7 +82,7 @@ public class BiomeDesertUA extends BiomeExtendedUA
 
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        //needs to be before stonehedges so ores/dirt/etc does not replace stonehedge's blocks
+        //needs to be before stones so ores/dirt/etc does not replace stone's blocks
         super.decorate(worldIn, rand, pos);
 
         //generates fossils around every 60th chunk
@@ -142,7 +142,7 @@ public class BiomeDesertUA extends BiomeExtendedUA
 		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(16, 0, 16));
 		        
 		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
-		        stonehedge.generate(worldIn, rand, position);
+		        stonehenge.generate(worldIn, rand, position);
         	}
 	    }
     }

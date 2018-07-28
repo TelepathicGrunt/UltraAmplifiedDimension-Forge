@@ -8,7 +8,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchTreeUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehedge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -34,7 +34,7 @@ public class BiomeForestUA extends BiomeExtendedUA
     protected static final WorldGenCanopyTree ROOF_TREE = new WorldGenCanopyTree(false);
     
     private static final WorldGenerator shrine = new WorldGenSunShrine();
-    private static final WorldGenerator stonehedge = new WorldGenStonehedge();
+    private static final WorldGenerator stonehenge = new WorldGenStonehenge();
     
     private final BiomeForestUA.Type type;
 
@@ -160,11 +160,11 @@ public class BiomeForestUA extends BiomeExtendedUA
         }
         
 
-        //needs to be before stonehedges so ores/dirt/etc does not replace stonehedge's blocks
+        //needs to be before stones so ores/dirt/etc does not replace stone's blocks
         super.decorate(worldIn, rand, pos);
         
         
-        //if height is 0.6, this is a hills variant biome and thus, sun shrine and stonehedges can have a chance to generate
+        //if height is 0.6, this is a hills variant biome and thus, sun shrine and stones can have a chance to generate
         if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && this.getBaseHeight() == 0.6F) 
 	    {
         	if(rand.nextInt(130) == 0) {
@@ -181,7 +181,7 @@ public class BiomeForestUA extends BiomeExtendedUA
 		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(16, 0, 16));
 		        
 		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
-		        stonehedge.generate(worldIn, rand, position);
+		        stonehenge.generate(worldIn, rand, position);
         	}
 	    }
     }

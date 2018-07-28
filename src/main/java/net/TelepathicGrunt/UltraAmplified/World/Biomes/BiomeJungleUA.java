@@ -9,7 +9,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenGreenPowConcretePatchUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenHayBalePileUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehedge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenVinesShortUA;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class BiomeJungleUA extends BiomeExtendedUA
     private static final IBlockState WATER = Blocks.WATER.getDefaultState();
     
     private static final WorldGenerator shrine = new WorldGenSunShrine();
-    private static final WorldGenerator stonehedge = new WorldGenStonehedge();
+    private static final WorldGenerator stonehenge = new WorldGenStonehenge();
     protected WorldGenerator smallHayPile = new WorldGenHayBalePileUA(false);
     protected WorldGenerator largeHayPile = new WorldGenHayBalePileUA(true);
     
@@ -247,11 +247,11 @@ public class BiomeJungleUA extends BiomeExtendedUA
     	
 
     	//runs the normal decorations for biomes such as mushrooms and reeds and etc.
-    	//done after water gen code so less plants generate on water but before stonehedges so ores/dirt/etc does not replace stonehedge's blocks
+    	//done after water gen code so less plants generate on water but before stones so ores/dirt/etc does not replace stone's blocks
     	super.decorate(worldIn, rand, pos);
     	
     	
-    	//if height is 0.6, this is a hills variant biome and thus, sun shrine and Stonehedges can have a chance to generate
+    	//if height is 0.6, this is a hills variant biome and thus, sun shrine and Stones can have a chance to generate
 	    if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.miniStructureGeneration && this.getBaseHeight() == 0.6F) 
 	    {
 	      	if(rand.nextInt(130) == 0) {
@@ -267,7 +267,7 @@ public class BiomeJungleUA extends BiomeExtendedUA
 		        BlockPos position = worldIn.getTopSolidOrLiquidBlock(pos.add(16, 0, 16));
 		        
 		        //attempt to generate sun shrine but the shrine code will check to make sure the position is ok for it to spawn
-		        stonehedge.generate(worldIn, rand, position);
+		        stonehenge.generate(worldIn, rand, position);
         	}
 	    }
 	    
