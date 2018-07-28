@@ -18,7 +18,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
      Config:
 ·Added super secret setting that does something! (Can't say what lol. Try it!)
 ·Fixed some config namings.
-·Added config option to turn on and off mini-structures such as Crosses, Hay Bale, Fossils, and Desert Wells.
+·Added config option to turn on and off mini-structures such as Crosses, Hay Bale, Fossils, Sun Shrine, Stonehedges, and Desert Wells.
 ·Made lower config values now spawn more Villages, Temples, Nether Fortresses, End Cities, Ocean Monuemnts, and Woodland Mansions but raised default value to keep same default spawnrates.
     
      Biomes:
