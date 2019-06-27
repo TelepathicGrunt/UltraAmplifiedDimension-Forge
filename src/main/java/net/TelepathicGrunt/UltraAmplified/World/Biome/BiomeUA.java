@@ -118,7 +118,7 @@ public class BiomeUA extends Biome {
 	@Override
 	protected void addStructureFeatures() {
 
-	      UltraAmplified.Logger.log(Level.DEBUG, "Mineshaft registered");
+	      UltraAmplified.Logger.log(Level.DEBUG, "Mineshaft registered in biome");
       this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.NORMAL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       /*
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.OAK), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
