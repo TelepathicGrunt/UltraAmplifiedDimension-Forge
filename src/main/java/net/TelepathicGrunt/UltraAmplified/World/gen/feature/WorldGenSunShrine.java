@@ -1,87 +1,94 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import jline.internal.Log;
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockConcretePowder;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFlowerPot;
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockStainedGlass;
-import net.minecraft.block.BlockStainedHardenedClay;
-import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.Template;
-import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class WorldGenSunShrine extends WorldGenerator{
+public class WorldGenSunShrine extends Feature<NoFeatureConfig> {
 
-	private static final ArrayList<IBlockState> acceptableBlocks = new ArrayList<IBlockState>();
+	
+
+	protected static final Set<IBlockState> acceptableBlocks = 
+    		Stream.of(
+	    		Blocks.DIRT.getDefaultState(),
+	    		Blocks.GRASS_BLOCK.getDefaultState(),
+	    		Blocks.PODZOL.getDefaultState(),
+	    		Blocks.COARSE_DIRT.getDefaultState(),
+	    		Blocks.SAND.getDefaultState(),
+				Blocks.GRASS_PATH.getDefaultState()
+    		).collect(Collectors.toCollection(HashSet::new));
+	
 	
 	//first NTB structure I made to work by watching tutorials lol. 
 	//PRAISE THE SUN!!!
-	public WorldGenSunShrine()
-    {
-       super(false);
-       acceptableBlocks.add(Blocks.DIRT.getDefaultState());
-       acceptableBlocks.add(Blocks.GRASS.getDefaultState());
-       acceptableBlocks.add(Blocks.GRASS.getDefaultState().withProperty(BlockGrass.SNOWY, true));
-       acceptableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL));
-       acceptableBlocks.add(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT));
-       acceptableBlocks.add(Blocks.SAND.getDefaultState());
-    }
 	
-	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos position) {
-		
+	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    {	
 		//makes sure this shrine does not spawn too close to world height border or it will get cut off.
 		//Also makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
-		if(position.getY() < 248 && acceptableBlocks.contains(worldIn.getBlockState(position.down().west(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().north(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().east(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().south(4)))) 
+		
+		for(int x = -4; x <= 4; x = x + 8) 
 		{
-			System.out.println("Sun Shrine | " + position.getX() + " "+position.getZ());
-			
-			WorldServer worldserver = (WorldServer) worldIn;
-			MinecraftServer minecraftserver = worldIn.getMinecraftServer();
-			TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-			Template template = templatemanager.getTemplate(minecraftserver, new ResourceLocation(UltraAmplified.MOD_ID+":sunshrine"));
-			
-			if(template == null)
+			for(int z = -4; z <= 4; z = z + 8) 
 			{
-				Log.warn("sunshrine NTB does not exist!");
-				return false;
+				if( 	(x+z) % 8 != 0 &&
+						position.getY() < 248 && 
+						
+						worldIn.getBiome(position) == BiomeInit.BiomeDesertHills ?
+								(acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))) &&
+								worldIn.getBlockState(position.down(2).west((int)(x)).north((int)(z))) != Blocks.AIR &&
+								worldIn.getBlockState(position.down(3).west((int)(x)).north((int)(z))) != Blocks.AIR )	
+								:
+								acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))
+						)) 
+				{
+					//UltraAmplified.Logger.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
+		
+					TemplateManager templatemanager = worldIn.getSaveHandler().getStructureTemplateManager();
+					Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":sunshrine"));
+					
+					if(template == null)
+					{
+						UltraAmplified.Logger.warn("sunshrine NTB does not exist!");
+						return false;
+					}
+					
+					IBlockState iblockstate = worldIn.getBlockState(position);
+					worldIn.setBlockState(position, iblockstate, 3);
+					
+					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
+							.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
+							.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					
+					template.getDataBlocks(position, placementsettings);
+					template.addBlocksToWorld(worldIn, position.down().north(3).west(3), placementsettings);
+					
+					return true;
+				}
+				
 			}
-			
-			IBlockState iblockstate = worldIn.getBlockState(position);
-			worldIn.notifyBlockUpdate(position, iblockstate, iblockstate, 3);
-			
-			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
-			
-			template.getDataBlocks(position, placementsettings);
-			template.addBlocksToWorld(worldIn, position.down().north(3).west(3), placementsettings);
 		}
 		return false;
 	}

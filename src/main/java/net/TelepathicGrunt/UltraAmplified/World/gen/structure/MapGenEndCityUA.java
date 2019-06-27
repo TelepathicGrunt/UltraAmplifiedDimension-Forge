@@ -1,157 +1,132 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.chunk.UpgradeData;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.EndCityConfig;
+import net.minecraft.world.gen.feature.structure.EndCityPieces;
+import net.minecraft.world.gen.feature.structure.EndCityStructure;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructureStart;
 
-public class MapGenEndCityUA extends MapGenStructure
+public class MapGenEndCityUA extends Structure<EndCityConfig> 
 {
-	
-	//this class is used only to register end cities. End Cities are generated in MapGenScatteredFeatureUA to reduce slowdown with world generation 
-	
+
     private final int citySpacing = 25;
     private final int minCitySeparation = 5;
-    private ChunkGeneratorOverworldUA overworldProvider;
-
-    public static final List<Biome> field_191072_a = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomeEnd});
     
-    public MapGenEndCityUA(ChunkGeneratorOverworldUA chunky)
-    {
-    	this.overworldProvider = chunky;
-    }
-
-    public String getStructureName()
-    {
-        return "EndCity";
-    }
-
-    protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ)
-    {
-	    int i = chunkX;
-        int j = chunkZ;
-
-        if (chunkX < 0)
-        {
-            i = chunkX - 1;
-        }
-
-        if (chunkZ < 0)
-        {
-            j = chunkZ - 1;
-        }
-
-        int k = i / citySpacing;
-        int l = j / citySpacing;
-        Random random = this.world.setRandomSeed(k, l, 10387319);
-        k = k * citySpacing;
-        l = l * citySpacing;
-        k = k + random.nextInt(citySpacing - 8);
-        l = l + random.nextInt(citySpacing - 8);
-        
-        if (k == i && l == j)
-        {
-
-    		boolean flag = this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 0, field_191072_a);
-    		
-    		if (flag)
-    	    {
-    			return true;
-    	    }
-        }
-        
-        return false;
-    }
-
-    protected StructureStart getStructureStart(int chunkX, int chunkZ)
-    {
-        return new MapGenEndCityUA.Start(this.world, this.overworldProvider, this.rand, chunkX, chunkZ);
-    }
-
-    public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)
-    {
-        this.world = worldIn;
-        return findNearestStructurePosBySpacing(worldIn, this, pos, 20, 11, 10387313, true, 100, findUnexplored);
-    }
+    protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+        int i = citySpacing;
+        int j = minCitySeparation;
+        int k = x + i * spacingOffsetsX;
+        int l = z + i * spacingOffsetsZ;
+        int i1 = k < 0 ? k - i + 1 : k;
+        int j1 = l < 0 ? l - i + 1 : l;
+        int k1 = i1 / i;
+        int l1 = j1 / i;
+        ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, 10387313);
+        k1 = k1 * i;
+        l1 = l1 * i;
+        k1 = k1 + (random.nextInt(i - j) + random.nextInt(i - j)) / 2;
+        l1 = l1 + (random.nextInt(i - j) + random.nextInt(i - j)) / 2;
+        return new ChunkPos(k1, l1);
+     }
     
-    private static int getYPosForStructure(int p_191070_0_, int p_191070_1_, ChunkGeneratorOverworldUA p_191070_2_)
-    {
-        Random random = new Random((long)(p_191070_0_ + p_191070_1_ * 10387313));
+    protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+         ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+         if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+            Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
+            if (!chunkGen.hasStructure(biome, Feature.END_CITY)) {
+               return false;
+            } else {
+               int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
+               return i >= 60;
+            }
+         } else {
+            return false;
+         }
+      }
+
+    protected boolean isEnabledIn(IWorld worldIn) {
+        return worldIn.getWorldInfo().isMapFeaturesEnabled();
+     }
+
+     protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
+        Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.DEFAULT);
+        return new EndCityStructure.Start(worldIn, generator, random, x, z, biome);
+     }
+
+     protected String getStructureName() {
+        return "EndCityUA";
+     }
+
+     public int getSize() {
+        return 9;
+     }
+
+     private static int getYPosForStructure(int chunkX, int chunkY, IChunkGenerator<?> generatorIn) {
+        Random random = new Random((long)(chunkX + chunkY * 10387313));
         Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
-        ChunkPrimer chunkprimer = new ChunkPrimer();
-        p_191070_2_.setBlocksInChunk(p_191070_0_, p_191070_1_, chunkprimer);
+        ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(chunkX, chunkY), UpgradeData.EMPTY);
+        generatorIn.makeBase(chunkprimer);
         int i = 5;
         int j = 5;
-
-        if (rotation == Rotation.CLOCKWISE_90)
-        {
-            i = -5;
-        }
-        else if (rotation == Rotation.CLOCKWISE_180)
-        {
-            i = -5;
-            j = -5;
-        }
-        else if (rotation == Rotation.COUNTERCLOCKWISE_90)
-        {
-            j = -5;
+        if (rotation == Rotation.CLOCKWISE_90) {
+           i = -5;
+        } else if (rotation == Rotation.CLOCKWISE_180) {
+           i = -5;
+           j = -5;
+        } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+           j = -5;
         }
 
-        int k = chunkprimer.findGroundBlockIdx(7, 7);
-        int l = chunkprimer.findGroundBlockIdx(7, 7 + j);
-        int i1 = chunkprimer.findGroundBlockIdx(7 + i, 7);
-        int j1 = chunkprimer.findGroundBlockIdx(7 + i, 7 + j);
+        int k = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7);
+        int l = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7 + j);
+        int i1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7);
+        int j1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7 + j);
         
-        //the 120 is highest height that end city can spawn
-        int k1 = Math.min(Math.min(Math.min(k, l), Math.min(i1, j1)), 120);
-        return k1;
-    }
 
-    public static class Start extends StructureStart
-    {
+        //the 120 is highest height that end city can spawn
+        int height = Math.min(Math.min(Math.min(k, l), Math.min(i1, j1)), 120);
+        return height;
+     }
+
+     public static class Start extends StructureStart {
         private boolean isSizeable;
 
-        public Start()
-        {
-        }
-        
-        public Start(World worldIn, ChunkGeneratorOverworldUA chunkProvider, Random random, int chunkX, int chunkZ)
-        {
-            super(chunkX, chunkZ);
-            this.create(worldIn, chunkProvider, random, chunkX, chunkZ);
+        public Start() {
         }
 
-        private void create(World worldIn, ChunkGeneratorOverworldUA chunkProvider, Random rnd, int chunkX, int chunkZ)
-        {
-            Random random = new Random((long)(chunkX + chunkZ * 10387313));
-            Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
-            int i = MapGenEndCityUA.getYPosForStructure(chunkX, chunkZ, chunkProvider);
+        public Start(IWorld worldIn, IChunkGenerator<?> chunkGenerator, SharedSeedRandom sharedSeed, int chunkX, int chunkZ, Biome biomeIn) {
+           super(chunkX, chunkZ, biomeIn, sharedSeed, worldIn.getSeed());
+           Rotation rotation = Rotation.values()[sharedSeed.nextInt(Rotation.values().length)];
+           int i = MapGenEndCityUA.getYPosForStructure(chunkX, chunkZ, chunkGenerator);
+           if (i < 60) {
+              this.isSizeable = false;
+           } else {
+              BlockPos blockpos = new BlockPos(chunkX * 16 + 8, i, chunkZ * 16 + 8);
+              EndCityPieces.startHouseTower(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, this.components, sharedSeed);
+              this.recalculateStructureSize(worldIn);
+              this.isSizeable = true;
+           }
+        }
 
-            if (i < 60)
-            {
-                this.isSizeable = false;
-            }
-            else
-            {
-                BlockPos blockpos = new BlockPos(chunkX * 16 + 8, i, chunkZ * 16 + 8);
-                StructureEndCityPiecesUA.startHouseTower(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, this.components, rnd);
-                this.updateBoundingBox();
-                this.isSizeable = true;
-            }
+        /**
+         * currently only defined for Villages, returns true if Village has more than 2 non-road components
+         */
+        public boolean isSizeableStructure() {
+           return this.isSizeable;
         }
-        
-        public boolean isSizeableStructure()
-        {
-            return this.isSizeable;
-        }
-    }
+     }
 }

@@ -1,27 +1,50 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
+import java.util.HashSet;
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class WorldGenIceSpikeUA extends WorldGenerator
-{
+public class WorldGenIceSpikeUA extends Feature<NoFeatureConfig> {
+	
+	protected static final Set<IBlockState> ALLOWED_BLOCKS = 
+    		Stream.of(
+	    		Blocks.AIR.getDefaultState(),
+	    		Blocks.CAVE_AIR.getDefaultState(),
+	    		Blocks.ICE.getDefaultState(),
+	    		Blocks.PACKED_ICE.getDefaultState(),
+	    		Blocks.SNOW.getDefaultState(),
+	    		Blocks.SNOW_BLOCK.getDefaultState(),
+				Blocks.DIRT.getDefaultState(),
+				Blocks.COARSE_DIRT.getDefaultState(),
+				Blocks.WATER.getDefaultState()
+    		).collect(Collectors.toCollection(HashSet::new));
+    
+    private static final IBlockState WATER = Blocks.WATER.getDefaultState();
+    private static final IBlockState ICE = Blocks.ICE.getDefaultState();
+    private static final IBlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
 	
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
-    public boolean generate(World worldIn, Random rand, BlockPos position)
-    {
-        while (worldIn.isAirBlock(position) && position.getY() > 2)
+	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
+		//System.out.println(position.getX()+", "+position.getY()+", "+position.getZ());
+        while ((worldIn.isAirBlock(position) || worldIn.getBlockState(position) == Blocks.WATER.getDefaultState())&& position.getY() > 2)
         {
             position = position.down();
         }
 
-        if (worldIn.getBlockState(position).getBlock() != Blocks.SNOW)
+        if (worldIn.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
         {
             return false;
         }
@@ -59,21 +82,24 @@ public class WorldGenIceSpikeUA extends WorldGenerator
                         if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
                             IBlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
-                            Block block = iblockstate.getBlock();
-
-                            if (iblockstate.getMaterial() == Material.AIR || block == Blocks.DIRT || block == Blocks.SNOW || block == Blocks.ICE)
+                            if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > Config.seaLevel-2)
                             {
-                                this.setBlockAndNotifyAdequately(worldIn, position.add(x, y, z), Blocks.PACKED_ICE.getDefaultState());
+                                this.setBlockState(worldIn, position.add(x, y, z), PACKED_ICE);
+                            }
+                            else if(iblockstate == WATER) {
+                            	this.setBlockState(worldIn, position.add(x, y, z), ICE);
                             }
 
                             if (y != 0 && l > 1)
                             {
                                 iblockstate = worldIn.getBlockState(position.add(x, -y, z));
-                                block = iblockstate.getBlock();
 
-                                if (iblockstate.getMaterial() == Material.AIR || block == Blocks.DIRT || block == Blocks.SNOW || block == Blocks.ICE)
+                                if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, -y, z).getY() > Config.seaLevel-2)
                                 {
-                                    this.setBlockAndNotifyAdequately(worldIn, position.add(x, -y, z), Blocks.PACKED_ICE.getDefaultState());
+                                    this.setBlockState(worldIn, position.add(x, -y, z), PACKED_ICE);
+                                }
+                                else if(iblockstate == WATER) {
+                                	this.setBlockState(worldIn, position.add(x, -y, z), ICE);
                                 }
                             }
                         }
@@ -108,14 +134,17 @@ public class WorldGenIceSpikeUA extends WorldGenerator
                     while (blockpos.getY() > 5)
                     {
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
-                        Block block1 = iblockstate1.getBlock();
 
-                        if (iblockstate1.getMaterial() != Material.AIR && block1 != Blocks.DIRT && block1 != Blocks.SNOW && block1 != Blocks.ICE && block1 != Blocks.PACKED_ICE)
+                        if (!ALLOWED_BLOCKS.contains(iblockstate1))
                         {
                             break;
                         }
 
-                        this.setBlockAndNotifyAdequately(worldIn, blockpos, Blocks.PACKED_ICE.getDefaultState());
+                        if(iblockstate1 == WATER || iblockstate1 == ICE) {
+                        	this.setBlockState(worldIn, blockpos, Blocks.ICE.getDefaultState());
+                        }else {
+                            this.setBlockState(worldIn, blockpos, Blocks.PACKED_ICE.getDefaultState());
+                        }
                         blockpos = blockpos.down();
                         --j2;
 

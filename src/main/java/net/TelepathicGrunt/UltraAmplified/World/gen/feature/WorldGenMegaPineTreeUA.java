@@ -1,26 +1,23 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.feature.HugeTreesFeature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
-{
-    private static final IBlockState TRUNK = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE);
-    private static final IBlockState LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
-    private static final IBlockState PODZOL = Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL);
+public class WorldGenMegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
+	
+    private static final IBlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
+    private static final IBlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
+    private static final IBlockState PODZOL = Blocks.PODZOL.getDefaultState();
     private final boolean useBaseHeight;
 
     //only change is significant increase in possible height and thicker/bigger leaves so trees fit the terrain more.
@@ -30,11 +27,11 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         this.useBaseHeight = useBaseHeight;
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) 
     {
         int height = this.getHeight(rand);
 
-        if (!this.ensureGrowable(worldIn, rand, position, height))
+        if (!this.func_203427_a(worldIn, position, height))
         {
             return false;
         }
@@ -48,7 +45,7 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(currentHeight), this.woodMetadata);
+                	this.func_208520_a(changedBlocks, worldIn, position.up(currentHeight), this.woodMetadata);
                 }
 
                 if (currentHeight < height - 1)
@@ -57,21 +54,21 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
+                    	this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
                     }
 
                     iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
+                    	this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
                     }
 
                     iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
+                        this.func_208520_a(changedBlocks, worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
                     }
                 }
             }
@@ -80,7 +77,7 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         }
     }
 
-    private void createCrown(World worldIn, int x, int z, int y, int extraRadius, Random rand)
+    private void createCrown(IWorld worldIn, int x, int z, int y, int extraRadius, Random rand)
     {
         int height = rand.nextInt(5) + (this.useBaseHeight ? this.baseHeight : 3);
         int prevRadius = 0;
@@ -94,7 +91,7 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         }
     }
 
-    public void generateSaplings(World worldIn, Random random, BlockPos pos)
+    public void generateSaplings(IWorld worldIn, Random random, BlockPos pos)
     {
         this.placePodzolCircle(worldIn, pos.west().north());
         this.placePodzolCircle(worldIn, pos.east(2).north());
@@ -114,7 +111,7 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         }
     }
 
-    private void placePodzolCircle(World worldIn, BlockPos center)
+    private void placePodzolCircle(IWorld worldIn, BlockPos center)
     {
         for (int i = -2; i <= 2; ++i)
         {
@@ -128,7 +125,7 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
         }
     }
 
-    private void placePodzolAt(World worldIn, BlockPos pos)
+    private void placePodzolAt(IWorld worldIn, BlockPos pos)
     {
         for (int i = 2; i >= -3; --i)
         {
@@ -136,9 +133,9 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
             IBlockState iblockstate = worldIn.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
-            if (block == Blocks.GRASS || block == Blocks.DIRT)
+            if (block == Blocks.GRASS || Block.isDirt(block))
             {
-                this.setBlockAndNotifyAdequately(worldIn, blockpos, PODZOL);
+                this.setBlockState(worldIn, blockpos, PODZOL);
                 break;
             }
 
@@ -148,4 +145,5 @@ public class WorldGenMegaPineTreeUA extends WorldGenHugeTrees
             }
         }
     }
+    
 }

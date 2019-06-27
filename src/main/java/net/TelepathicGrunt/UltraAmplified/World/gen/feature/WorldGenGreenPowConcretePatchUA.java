@@ -3,27 +3,22 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockConcretePowder;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class WorldGenGreenPowConcretePatchUA extends WorldGenerator
-{
-    private final IBlockState concretePowder;
-    private final int maximumRadius;
+public class WorldGenGreenPowConcretePatchUA extends Feature<NoFeatureConfig> {
+	  
+    private final IBlockState greenConcretePowder = Blocks.GREEN_CONCRETE_POWDER.getDefaultState();
+    private final int maximumRadius = 6;
 
-    public WorldGenGreenPowConcretePatchUA()
-    {
-        this.concretePowder = Blocks.CONCRETE_POWDER.getDefaultState().withProperty(BlockConcretePowder.COLOR, EnumDyeColor.GREEN);
-        this.maximumRadius = 6;
-    }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
         
         int radius = rand.nextInt(this.maximumRadius - 2) + 2;
@@ -42,9 +37,9 @@ public class WorldGenGreenPowConcretePatchUA extends WorldGenerator
                         BlockPos blockpos = new BlockPos(x, y, z);
                         Block block = worldIn.getBlockState(blockpos).getBlock();
 
-                        if (block == Blocks.DIRT || block == Blocks.GRASS)
+                        if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK)
                         {
-                            worldIn.setBlockState(blockpos, this.concretePowder, 2);
+                            worldIn.setBlockState(blockpos, this.greenConcretePowder, 2);
                         }
                     }
                 }

@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
@@ -1015,7 +1015,7 @@ public class StructureVillagePiecesUA
             {
                 this.hasMadeChest = true;
                 
-                if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+                if(UAConfig.StructuresOptions.ConfigUA.chestGeneration) {
                 	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 1, 5, LootTableList.CHESTS_VILLAGE_BLACKSMITH);
                 }
             }
@@ -1594,7 +1594,7 @@ public class StructureVillagePiecesUA
         	//run RNG to see if it is zombified. 
             //If config is 100, becomes 99 and will always return true. 
             //If config is 0, becomes -1 and will always return false.
-            int zombieChance = UAConfig.StructuresOptions.biomeBasedStructuresOptions.villageZombieSpawnrate-1;
+            int zombieChance = UAConfig.StructuresOptions.ConfigUA.villageZombieSpawnrate-1;
         	this.isZombieInfested = rand.nextInt(100) <= zombieChance;
             
         	

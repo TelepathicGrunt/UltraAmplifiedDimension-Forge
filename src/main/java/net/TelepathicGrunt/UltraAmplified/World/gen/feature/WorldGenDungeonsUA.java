@@ -2,65 +2,38 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntityGiantZombie;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityIllusionIllager;
-import net.minecraft.entity.monster.EntityMagmaCube;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityStray;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityMooshroom;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeDesert;
-import net.minecraft.world.biome.BiomeMesa;
-import net.minecraft.world.biome.BiomeSnow;
-import net.minecraft.world.biome.BiomeSwamp;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.storage.loot.LootTableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class WorldGenDungeonsUA extends WorldGenerator
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructurePiece;
+import net.minecraft.world.storage.loot.LootTableList;
+
+public class WorldGenDungeonsUA extends Feature<NoFeatureConfig> 
 {
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final IBlockState CaveAir = Blocks.CAVE_AIR.getDefaultState();
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
-        int i = 3;
         int j = rand.nextInt(2) + 2;
         int k = -j - 1;
         int l = j + 1;
-        int i1 = -1;
-        int j1 = 4;
         int k1 = rand.nextInt(2) + 2;
         int l1 = -k1 - 1;
         int i2 = k1 + 1;
@@ -106,18 +79,18 @@ public class WorldGenDungeonsUA extends WorldGenerator
 
                         if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
                         {
-                            if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.MOB_SPAWNER)
+                            if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                worldIn.setBlockToAir(blockpos1);
+                                worldIn.setBlockState(blockpos1, CaveAir, 2);
                             }
                         }
                         else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            worldIn.setBlockToAir(blockpos1);
+                            worldIn.setBlockState(blockpos1, CaveAir, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
-                        else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.MOB_SPAWNER)
+                        else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                         {
                             if (i4 == -1 && rand.nextInt(4) != 0)
                             {
@@ -155,13 +128,8 @@ public class WorldGenDungeonsUA extends WorldGenerator
 
                         if (j3 == 1)
                         {
-                            worldIn.setBlockState(blockpos2, Blocks.CHEST.correctFacing(worldIn, blockpos2, Blocks.CHEST.getDefaultState()), 2);
-                            TileEntity tileentity1 = worldIn.getTileEntity(blockpos2);
-
-                            if (tileentity1 instanceof TileEntityChest)
-                            {
-                                ((TileEntityChest)tileentity1).setLootTable(LootTableList.CHESTS_SIMPLE_DUNGEON, rand.nextLong());
-                            }
+                        	worldIn.setBlockState(blockpos2, StructurePiece.func_197528_a(worldIn, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
+                        	TileEntityLockableLoot.setLootTable(worldIn, rand, blockpos2, LootTableList.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }
@@ -169,12 +137,12 @@ public class WorldGenDungeonsUA extends WorldGenerator
                 }
             }
 
-            worldIn.setBlockState(position, Blocks.MOB_SPAWNER.getDefaultState(), 2);
+            worldIn.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
             TileEntity tileentity = worldIn.getTileEntity(position);
 
             if (tileentity instanceof TileEntityMobSpawner)
             {
-                ((TileEntityMobSpawner)tileentity).getSpawnerBaseLogic().setEntityId(this.pickMobSpawner(worldIn, rand, position));
+             ((TileEntityMobSpawner)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(worldIn, rand, position));
             }
             else
             {
@@ -188,126 +156,38 @@ public class WorldGenDungeonsUA extends WorldGenerator
             return false;
         }
     }
+    
 
     /**
      * Randomly decides which spawner to use in a dungeon
      */
-    private ResourceLocation pickMobSpawner(World worldIn, Random rand, BlockPos position)
+    private EntityType<?> pickMobSpawner(IWorld worldIn, Random rand, BlockPos position)
     {
-    	//this is so we can generate certain mob spawners in certain biomes while letting other mods have a chance to add spawner mobs.
-    	Biome biome = worldIn.getBiome(position);
+    	int roll = rand.nextInt(100);
     	
-    	if(biome != BiomeInit.BiomeMushroomIsland) {
-	    	int roll = rand.nextInt(100);
-	    	
-	    	if(roll < 48) {
-	    		//48% chance
-	    		
-	    		if(biome == BiomeInit.BiomeNether) 
-	    		{
-	    			 return EntityList.getKey(EntityPigZombie.class);
-	        	}
-	    		else if(biome == BiomeInit.BiomeEnd) 
-	    		{
-	   			 return EntityList.getKey(EntityEndermite.class);
-	    		}
-	    		else if(biome instanceof BiomeDesertUA || biome instanceof BiomeMesaUA) 
-	    		{
-	      			 return EntityList.getKey(EntityHusk.class);
-	       		}
-	    		else 
-	    		{
-	        		 return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(rand);
-	        	}
-	    	}
-	    	else if(roll < 73) {
-	    		//25% chance
-	    		
-	    		if(biome == BiomeInit.BiomeNether) 
-	    		{
-	    			 return EntityList.getKey(EntityBlaze.class);
-	        	}
-	    		else if(biome == BiomeInit.BiomeEnd) 
-	    		{
-	   			 return EntityList.getKey(EntityEndermite.class);
-	    		}
-	    		else if(biome instanceof BiomeSnowUA) 
-	    		{
-	   			 return EntityList.getKey(EntityStray.class);
-	    		}
-	    		else if(biome instanceof BiomeSwampUA || biome == BiomeInit.BiomeRoofedForest || biome == BiomeInit.BiomeRoofedForestM) 
-	    		{
-	      			 return EntityList.getKey(EntityVex.class);
-	       		}
-	    		else 
-	    		{
-	        		 return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(rand);
-	        	}
-	    	}
-	    	else if(roll < 98) {
-	    		//25% chance
-	    		
-	    		if(biome == BiomeInit.BiomeNether) 
-	    		{
-	    			 return EntityList.getKey(EntityMagmaCube.class);
-	        	}
-	    		else if(biome == BiomeInit.BiomeEnd) 
-	    		{
-	   			 	 return EntityList.getKey(EntityEndermite.class);
-	    		}
-	    		else 
-	    		{
-	    			 return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(rand);
-	        	}
-	    	}
-	    	else if(roll == 98) {
-	    		//1% chance
-	    		
-	    		if(biome == BiomeInit.BiomeNether) 
-	    		{
-	    			 return EntityList.getKey(EntityWitherSkeleton.class);
-	        	}
-	    		else if(biome == BiomeInit.BiomeEnd) 
-	    		{
-	   			 	 return EntityList.getKey(EntityEnderman.class);
-	    		}
-	    		else if(biome instanceof BiomeSwampUA) 
-	    		{
-	      			 return EntityList.getKey(EntitySlime.class);
-	       		}
-	    		else 
-	    		{
-	        		 return EntityList.getKey(EntityCreeper.class);
-	        	}
-	        }
-	    	else {
-	    		//1% chance
-	    		
-	    		if(biome == BiomeInit.BiomeNether) 
-	    		{
-	    			 return EntityList.getKey(EntityWitherSkeleton.class);
-	        	}
-	    		else if(biome == BiomeInit.BiomeEnd) 
-	    		{
-	   			 	 return EntityList.getKey(EntityEnderman.class);
-	    		}
-	    		else if(biome instanceof BiomeSnowUA) 
-	    		{
-	      			 return EntityList.getKey(EntitySnowman.class);
-	       		}
-	    		else if(biome instanceof BiomeDesertUA || biome instanceof BiomeMesaUA) 
-	    		{
-	      			 return EntityList.getKey(EntityIllusionIllager.class);
-	       		}
-	    		else 
-	    		{
-	        		 return EntityList.getKey(EntityPig.class);
-	        	}
-	    	}
+    	if(roll < 48) {
+    		//48% chance
+    		return pickRandomDungeonMob(rand);
     	}
+    	else if(roll < 73) {
+    		//25% chance
+    		return pickRandomDungeonMob(rand);
+    	}
+    	else if(roll < 98) {
+    		//25% chance
+    		return pickRandomDungeonMob(rand);
+    	}
+    	else if(roll == 98) {
+    		//1% chance
+    		return EntityType.CREEPER;
+        }
     	else {
-    		//mushroom biome always get mooshroom spawners
-    		 return EntityList.getKey(EntityMooshroom.class);
+    		//1% chance
+    		return EntityType.PIG;
     	}
     }
+    
+    private EntityType<?> pickRandomDungeonMob(Random p_201043_1_) {
+        return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(p_201043_1_);
+     }
 }

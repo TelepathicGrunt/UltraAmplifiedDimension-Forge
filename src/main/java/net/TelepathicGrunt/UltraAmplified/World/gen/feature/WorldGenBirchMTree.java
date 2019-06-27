@@ -1,84 +1,84 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.Set;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.feature.HugeTreesFeature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class WorldGenBirchMTree extends WorldGenHugeTrees{
-	private static final IBlockState TRUNK = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH);
-    private static final IBlockState LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
-
+public class WorldGenBirchMTree extends HugeTreesFeature<NoFeatureConfig> {
+    private static final IBlockState TRUNK = Blocks.BIRCH_LOG.getDefaultState();
+    private static final IBlockState LEAF = Blocks.BIRCH_LEAVES.getDefaultState();
+    private static final int randExtraHeight = 50;
+    
     public WorldGenBirchMTree(boolean notify)
     {
-        super(notify, 13, 50, TRUNK, LEAF);
+        super(notify, 13, randExtraHeight, TRUNK, LEAF);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+
+    public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) 
     {
         int height = this.getHeight(rand);
-
-        if (!this.ensureGrowable(worldIn, rand, position, height+9))
-        {
+        
+        //checks to see if there is room to generate tree
+        if (!this.func_203427_a(worldIn, position, height+8)) {
             return false;
-        }
-        else
-        {
-        	//adds the leaves on crown
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
-
-            //adds the 2 by 2 wood trunk
-            for (int currentHeight = 0; currentHeight < height; ++currentHeight)
-            {
-                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
-
-                if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
-                {
-                    this.setBlockAndNotifyAdequately(worldIn, position.up(currentHeight), this.woodMetadata);
-                }
-
-                if (currentHeight < height - 1)
-                {
-                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 0));
-
-                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
-                    {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
-                    }
-
-                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
-
-                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
-                    {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
-                    }
-
-                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
-
-                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
-                    {
-                        this.setBlockAndNotifyAdequately(worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
-                    }
-                }
-            }
-
-            return true;
-        }
+         } 
+        else {
+        	if (worldIn.getBlockState(position.down()).canSustainPlant(worldIn, position.down(), net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling)Blocks.BIRCH_SAPLING) && position.getY() < worldIn.getWorld().getHeight() - height - 1) {
+	        	
+        		//adds the leaves on crown
+	            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
+	
+	            //adds the 2 by 2 wood trunk
+	            for (int currentHeight = 0; currentHeight < height; ++currentHeight)
+	            {
+	                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
+	
+	                if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
+	                {
+	                    this.func_208520_a(changedBlocks, worldIn, position.up(currentHeight), TRUNK);
+	                }
+	
+	                if (currentHeight < height - 1)
+	                {
+	                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 0));
+	
+	                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
+	                    {
+	                        this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
+	                    }
+	
+	                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
+	
+	                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
+	                    {
+	                        this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
+	                    }
+	
+	                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
+	
+	                    if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
+	                    {
+	                        this.func_208520_a(changedBlocks, worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
+	                    }
+	                }
+	            }
+        	}
+        	
+	        return true;
+	     }
     }
 
     //this is set so that the crown is leaves in a cone shape 
-    private void createCrown(World worldIn, int x, int z, int y, int extraRadiusSize, Random rand)
+    private void createCrown(IWorld worldIn, int x, int z, int y, int extraRadiusSize, Random rand)
     {
         int i = this.baseHeight - (rand.nextInt(5) + 6);
         int j = 0;
@@ -91,5 +91,4 @@ public class WorldGenBirchMTree extends WorldGenHugeTrees{
             j = radius;
         }
     }
-
 }

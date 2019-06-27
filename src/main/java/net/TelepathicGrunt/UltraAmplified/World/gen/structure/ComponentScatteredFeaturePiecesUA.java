@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockFlowerPot;
@@ -330,13 +330,13 @@ public class ComponentScatteredFeaturePiecesUA
             this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState().withProperty(BlockSandStone.TYPE, BlockSandStone.EnumType.CHISELED), 10, -10, 13, structureBoundingBoxIn);
             this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState().withProperty(BlockSandStone.TYPE, BlockSandStone.EnumType.SMOOTH), 10, -11, 13, structureBoundingBoxIn);
 
-            if(UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration) {
+            if(UAConfig.StructuresOptions.ConfigUA.chestGeneration) {
 	            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
 	            {
 	                if (!this.hasPlacedChest[enumfacing.getHorizontalIndex()])
 	                {
-	                    int k1 = enumfacing.getXOffset() * 2;
-	                    int l1 = enumfacing.getZOffset() * 2;
+	                    int k1 = enumfacing.getFrontOffsetX() * 2;
+	                    int l1 = enumfacing.getFrontOffsetZ() * 2;
 	                    this.hasPlacedChest[enumfacing.getHorizontalIndex()] = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10 + k1, -11, 10 + l1, LootTableList.CHESTS_DESERT_PYRAMID);
 	                }
 	            }
@@ -494,7 +494,7 @@ public class ComponentScatteredFeaturePiecesUA
 	                    worldIn.setBlockState(blockpos2, Blocks.AIR.getDefaultState(), 3);
 	                    TileEntity tileentity = worldIn.getTileEntity(blockpos2.down());
 	
-	                    if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && tileentity instanceof TileEntityChest)
+	                    if (UAConfig.StructuresOptions.ConfigUA.chestGeneration && tileentity instanceof TileEntityChest)
 	                    {
 	                        ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_IGLOO_CHEST, randomIn.nextLong());
 	                    }
@@ -695,7 +695,7 @@ public class ComponentScatteredFeaturePiecesUA
                 this.setBlockState(worldIn, Blocks.VINE.getDefaultState().withProperty(BlockVine.EAST, Boolean.valueOf(true)), 8, -1, 3, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.VINE.getDefaultState().withProperty(BlockVine.EAST, Boolean.valueOf(true)), 8, -2, 3, structureBoundingBoxIn);
 
-                if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && !this.placedMainChest)
+                if (UAConfig.StructuresOptions.ConfigUA.chestGeneration && !this.placedMainChest)
                 {
                     this.placedMainChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 8, -3, 3, LootTableList.CHESTS_JUNGLE_TEMPLE);
                 }
@@ -729,7 +729,7 @@ public class ComponentScatteredFeaturePiecesUA
                 this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().withProperty(BlockPistonBase.FACING, EnumFacing.WEST), 10, -1, 8, structureBoundingBoxIn);
                 this.setBlockState(worldIn, Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(BlockRedstoneRepeater.FACING, EnumFacing.NORTH), 10, -2, 10, structureBoundingBoxIn);
 
-                if (UAConfig.StructuresOptions.biomeBasedStructuresOptions.chestGeneration && !this.placedHiddenChest)
+                if (UAConfig.StructuresOptions.ConfigUA.chestGeneration && !this.placedHiddenChest)
                 {
                     this.placedHiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 10, LootTableList.CHESTS_JUNGLE_TEMPLE);
                 }

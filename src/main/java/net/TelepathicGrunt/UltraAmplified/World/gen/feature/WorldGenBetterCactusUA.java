@@ -3,20 +3,19 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class WorldGenBetterCactusUA extends WorldGenerator
-{
-	private final int height; 
+public class WorldGenBetterCactusUA extends Feature<NoFeatureConfig> {
+	   
+	private final int height = 8; 
 	
-	public WorldGenBetterCactusUA(int height) {
-		super();
-		this.height = height;
-	}
-	
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
     	//randomly set this cactus to a random spot. (thus passed in position must be the corner of the 4 loaded chunks)
         BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
@@ -28,86 +27,76 @@ public class WorldGenBetterCactusUA extends WorldGenerator
             //creates main body of cactus
             for (int currentHeight = 0; currentHeight < maxHeight; ++currentHeight)
             {
-               worldIn.setBlockState(blockpos.up(currentHeight), Blocks.CACTUS.getDefaultState(), 2);
+            	if(!worldIn.isAirBlock(blockpos.up(currentHeight))) {
+            		break;
+            	}
+                worldIn.setBlockState(blockpos.up(currentHeight), Blocks.CACTUS.getDefaultState(), 18);
             }
             
             
+            int facingOffset = rand.nextBoolean() ? 2 : 4;
+            
+            for(int i = 0; i < 2; i++) {
+            	//used to determine what arms will spawn for this cactus
+            	if(rand.nextInt(3) < 2) {
+	            int ArmHeight = rand.nextInt(maxHeight-5)+2;
+	            int ArmTallness = ArmHeight + rand.nextInt(maxHeight - ArmHeight - 2) + 2;
+	            
+	            if(worldIn.isAirBlock(blockpos.offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i))) && 
+	               worldIn.getBlockState(blockpos.down().offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i))) == Blocks.SAND.getDefaultState()) 
+	            {
+	            	for (int k = 0; k < ArmTallness; ++k)
+	            	{
+		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)))
+		                ){
+		            		break;
+		            	}
+		            	
+		                worldIn.setBlockState(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)), 
+		                					  Blocks.CACTUS.getDefaultState(), 
+	                					  18);
+	            	}
+	            }
+        		 
+         	}
+            
+            	
+            
+            /*
             //below code will generate cactus facing north/south 50% of the time and east/west the other times.
             //it will also generate just left arm 1/3rd of time, just right arm 1/3rd of time, and both arms the other 1/3rd of times.
             
-            //face east/west direction
-            if(rand.nextBoolean()) {
-            	 
+            int facingOffset = rand.nextBoolean() ? 2 : 4;
+            
+            for(int i = 0; i < 2; i++) {
             	//used to determine what arms will spawn for this cactus
-            	int arms = rand.nextInt(3);
-            	
-            	//left arm
-	            if(arms == 0 || arms == 2) 
-	            {
-	            	//trying to make sure arm does not equal or exceed main body height.
-	            	int leftArmHeight = rand.nextInt(maxHeight-5)+2;
-	            	int leftArmTallness = leftArmHeight + rand.nextInt(maxHeight - leftArmHeight - 2) + 2;
+            	if(rand.nextInt(3) < 2) {
+            		
+            		//trying to make sure arm does not equal or exceed main body height.
+	            	int ArmHeight = rand.nextInt(maxHeight-5)+2;
+	            	int ArmTallness = ArmHeight + rand.nextInt(maxHeight - ArmHeight - 2) + 2;
 	            	
-	            	worldIn.setBlockState(blockpos.up(leftArmHeight).west(), Blocks.CACTUS.getDefaultState(), 2);
-	            
-		            for (int k = leftArmHeight; k < leftArmTallness; ++k)
-		            {
-		                worldIn.setBlockState(blockpos.up(k).west(2), Blocks.CACTUS.getDefaultState(), 2);
-		            }
-	            }
-	            
-	            //right arm 
-	            if(arms == 1 || arms == 2) 
-	            {
-	            	//trying to make sure arm does not equal or exceed main body height.
-	            	int rightArmHeight = rand.nextInt(maxHeight-5)+2;
-	            	int rightArmTallness = rightArmHeight + rand.nextInt(maxHeight - rightArmHeight - 2) + 2;
+	            	if(worldIn.isAirBlock(blockpos.up(ArmHeight).offset(EnumFacing.byIndex(facingOffset+i)))) 
+	            	{
+	            		worldIn.setBlockState(blockpos.up(ArmHeight).offset(EnumFacing.byIndex(facingOffset+i)), 
+	            							Blocks.CACTUS.getDefaultState(), 
+	            							18);
+	            	}
 	            	
-	            	worldIn.setBlockState(blockpos.up(rightArmHeight).east(), Blocks.CACTUS.getDefaultState(), 2);
-	            
-		            for (int k = rightArmHeight; k < rightArmTallness ; ++k)
+		            for (int k = ArmHeight; k < ArmTallness; ++k)
 		            {
-		                worldIn.setBlockState(blockpos.up(k).east(2), Blocks.CACTUS.getDefaultState(), 2);
+		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)))
+		                ){
+		            		break;
+		            	}
+		            	
+		                worldIn.setBlockState(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)), 
+		                					  Blocks.CACTUS.getDefaultState(), 
+		                					  18);
 		            }
-	            }
+            	}*/
             }
             
-            //face North/South Direction
-            else {
-            	
-            	//used to determine what arms will spawn for this cactus
-            	int arms = rand.nextInt(3);
-            	
-            	//north arm 
-	            if(arms == 0 || arms == 2) 
-	            {
-	            	//trying to make sure arm does not equal or exceed main body height.
-	            	int northArmHeight = rand.nextInt(maxHeight-5)+2;
-	            	int northArmTallness = northArmHeight + rand.nextInt(maxHeight - northArmHeight - 2) + 2;
-	            	
-	            	worldIn.setBlockState(blockpos.up(northArmHeight).north(), Blocks.CACTUS.getDefaultState(), 2);
-	            
-		            for (int k = northArmHeight; k < northArmTallness ; ++k)
-		            {
-		                worldIn.setBlockState(blockpos.up(k).north(2), Blocks.CACTUS.getDefaultState(), 2);
-		            }
-	            }
-	            
-	            //south arm 
-	            if(arms == 1 || arms == 2) 
-	            {
-	            	//trying to make sure arm does not equal or exceed main body height.
-	            	int southArmHeight = rand.nextInt(maxHeight-5)+2;
-	            	int southArmTallness = southArmHeight + rand.nextInt(maxHeight - southArmHeight - 2) + 2;
-	            	
-	            	worldIn.setBlockState(blockpos.up(southArmHeight).south(), Blocks.CACTUS.getDefaultState(), 2);
-	            
-		            for (int k = southArmHeight; k < southArmTallness ; ++k)
-		            {
-		                worldIn.setBlockState(blockpos.up(k).south(2), Blocks.CACTUS.getDefaultState(), 2);
-		            }
-	            }
-            }
         }
         
         //cactus finished generating

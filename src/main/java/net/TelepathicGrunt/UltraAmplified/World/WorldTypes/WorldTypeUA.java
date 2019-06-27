@@ -1,17 +1,11 @@
 package net.TelepathicGrunt.UltraAmplified.World.WorldTypes;
 
-import java.lang.reflect.Method;
-
-import jline.internal.Log;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class WorldTypeUA extends WorldType {
 	//displays our mod as a world type
@@ -27,33 +21,29 @@ public class WorldTypeUA extends WorldType {
     	 */
         super("UltraAmplified");
 
+        /*
         //used reflection to get method that displays world type info and run that method.
         try {	
-        	Method enableInfoNoticeMethod = ReflectionHelper.findMethod(WorldType.class, "enableInfoNotice", "func_151358_j");
+        	Method enableInfoNoticeMethod = ObfuscationReflectionHelper.findMethod(WorldType.class, "func_151358_j"); // update the srg name
         	enableInfoNoticeMethod.setAccessible(true);
         	enableInfoNoticeMethod.invoke(this);
         }
         catch(Exception e){
-        	Log.warn("WorldTypeUA error with enableInfoNotice reflection: "+e.getMessage());
+        	UltraAmplified.logger.warn("WorldTypeUA error with enableInfoNotice reflection: "+e.getMessage());
         }
+        */
     }
     
     @Override
-    public BiomeProvider getBiomeProvider(World world)
-    {
-    	//tells Minecraft to use this mod's BiomeProvider when running this world type.
-        return new BiomeProviderUA(world);
-    } 
-    
-    @Override
-    public IChunkGenerator getChunkGenerator(World world, String generatorOptions)
+    public IChunkGenerator<?> createChunkGenerator(World world)
     {
     	//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
-        return new ChunkGeneratorOverworldUA(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled(), generatorOptions);
+        return new ChunkGeneratorOverworldUA(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
     }
     
+    
     @Override
-    public boolean isCustomizable()
+    public boolean hasCustomOptions()
     {
     	//Not customizable since we use a config file instead to customize.
         return false;
