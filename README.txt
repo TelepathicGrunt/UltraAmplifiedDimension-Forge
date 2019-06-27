@@ -1,4 +1,4 @@
-    Made for Minecraft v.1.12.2.
+    Made for Minecraft v.1.13.2.
     Created by TelepathicGrunt
 
 Highly recommend to also use the Optifine mod with my mod as well!
@@ -12,8 +12,36 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        | Ultra Amplified mod changelog |
        
        
+    (V.5.0 Changes) (1.13 Minecraft)
        
-    (V.4.4 Changes)
+     Major Changes:
+·Mod updated to work on 1.13 now!
+
+     Config:
+·No longer works as 1.13 Forge does not have a working config UI
+
+     Biomes:
+·Most biomes now generate extra Iron, Redstone, and Lapis in a small range between 5 and 15 blocks below sea level.
+·Many changes was made to how features (plants, snow, etc) so they spawn more efficiently and cleaner on all ledges.
+·Ice Mountain biome now has lakes made of Ice and Blue Ice.
+·Ice mountain biome now can generate waterfalls made of Blue Ice.
+·Ice Spike biome now has a layer of Ice with Water below it at sea level instead of Snow Blocks.
+·Nether biome now spawns regions of Gravel and Soul Sand that is different at each height (before it was based on x and z positions).
+·Nether biome now generates a layer of Magma Blocks several blocks below sea level Water and then generates Lava below the Magma Blocks.
+·Desert M biome now generates large areas of water to better fit its new 1.13 name which is Desert Lake biome.
+·M forms of Redwood Taiga biomes now generates tiny boulders and their pillars are now shorter but thicker.
+·Jungle Edge biomes now generates when a jungle touches the Badlands biome or Savanna biome in addition to the Swamp biome that it used to do.
+·Biomes that does not use Stone for their main block now generates their block true to their biome edge (before, if you were underground, you would see the Nether's Netherrack spawning by chunks instead of following the Nether's biome edge cleanly)
+       
+       Structures:
+·Hay Bales in M forms of Jungles are now more common.
+·Dungeons now have a new appearance for what biome they are in. (Forms include normal, mesa, desert, snow, nether, end, dark forest, mushroom, and swamp)
+·Mineshafts now takes on the Swamp variant when in Dark Forest biome.
+·Ravines are now slightly thinner and taller.
+·Fossils now generates on the surface of a ledge that does not have direct sunlight (before it could spawn floating in midair).
+       
+       
+    (V.4.4 Changes) (1.12 Minecraft)
     
      Config:
 ·Added super secret setting that does something! (Can't say what lol. Try it!)
@@ -43,7 +71,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
   
   
 
-    (V.4.3 Changes)
+    (V.4.3 Changes) (1.12 Minecraft)
     
     Config:
 ·Fixed several config descriptions, names, and order.
@@ -80,7 +108,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
 
 
-   (V.4.2 Changes)
+   (V.4.2 Changes) (1.12 Minecraft)
    
     Biomes:
 •Fixed major crash when selecting certain single biomes to spawn through config.    
@@ -93,7 +121,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
     
 
 
-   (V.4.1 Changes)
+   (V.4.1 Changes) (1.12 Minecraft)
 
     Major Change:
 •Added config options to select biomes, biome size, ores spawnrates, structures spawnrates, and certain decorative generations!
@@ -118,7 +146,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
 
 
-    (V.4.0 Changes)
+    (V.4.0 Changes) (1.12 Minecraft)
 
     Major Change:
 •Made the .jar mod now a compatiable Forge mod! WOOOOOOOOOO!!!!!!!!!!!
@@ -157,7 +185,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
 
 
-    (V.3.1 Changes)
+    (V.3.1 Changes) (1.12 Minecraft)
     
     Biomes:
 •Fixed bug that turned Cold Beach biome into a snowed-in Bamboo Forest.
@@ -183,7 +211,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
 
 
-    (V.3 Changes)
+    (V.3 Changes) (1.12 Minecraft)
 
     Biomes:
 •Flower Forest generate more flowers in greater density.
@@ -234,7 +262,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 
 
 
-    (V.1 Changes)
+    (V.1 Changes) (1.12 Minecraft)
 
     Terrain:
 •Made world terrain far more amplified than what amplified world type normally makes. The terrain is a mixture of being layered, full of overhangs, and having loads of floating islands.
