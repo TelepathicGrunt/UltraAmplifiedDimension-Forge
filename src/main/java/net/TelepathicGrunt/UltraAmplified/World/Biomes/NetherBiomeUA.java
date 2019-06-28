@@ -4,8 +4,9 @@ import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
@@ -21,7 +22,6 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.MinableConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraft.world.gen.feature.structure.FortressConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.ChanceRangeConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
@@ -35,9 +35,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class NetherBiomeUA extends BiomeUA {
    public NetherBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(NETHER_SURFACE_BUILDER_UA, NETHERRACK_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.NETHER).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(12411469).waterFogColor(12076846).parent((String)null));
-	      this.addStructure(Feature.FORTRESS, new FortressConfig());
+	      
 	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.END));
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.HELL));
+	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+
+	      this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(true));
+	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(true), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
 	      
 	      //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
@@ -47,7 +51,6 @@ public class NetherBiomeUA extends BiomeUA {
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.LIQUIDS, new LiquidsConfig(Fluids.LAVA), HEIGHT_VERY_BIASED_RANGE, new CountRangeConfig(40, 8, 16, 256)));
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(4)));
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(8)));
-	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.FORTRESS, new FortressConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.HELL_LAVA, new HellLavaConfig(false), COUNT_RANGE, new CountRangeConfig(23, 4, 8, 256)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.FIRE, IFeatureConfig.NO_FEATURE_CONFIG, CHANCE_ON_ALL_SURFACES_UA, new PercentageAndFrequencyConfig(0.18F, 1)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.GLOWSTONE, IFeatureConfig.NO_FEATURE_CONFIG, GLOWSTONE_PLACEMENT, new FrequencyConfig(Config.glowstoneSpawnrate)));
@@ -58,7 +61,8 @@ public class NetherBiomeUA extends BiomeUA {
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM), CHANCE_ON_ALL_SURFACES_UA, new PercentageAndFrequencyConfig(0.05F, 1)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM), CHANCE_ON_ALL_SURFACES_UA, new PercentageAndFrequencyConfig(0.05F, 1)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25), COUNT_RANGE, new CountRangeConfig(Config.quartzOreSpawnrate, Config.seaLevel-18, 0, 15))); 
-	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25), COUNT_RANGE, new CountRangeConfig(Config.quartzOreSpawnrate, 10, 20, 240)));
+	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25), COUNT_RANGE, new CountRangeConfig(Config.quartzOreSpawnrate/2, 10, 20, 120)));
+	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25), COUNT_RANGE, new CountRangeConfig(Config.quartzOreSpawnrate/10, 10, 120, 240)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.MAGMA_BLOCK.getDefaultState(), 55), COUNT_RANGE, new CountRangeConfig(Config.magmaSpawnrate, 10, 20, 100)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.HELL_LAVA, new HellLavaConfig(true), COUNT_RANGE, new CountRangeConfig(Config.lavaSpawnrate, 10, 20, 240)));
 	      this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.GHAST, 50, 4, 4));

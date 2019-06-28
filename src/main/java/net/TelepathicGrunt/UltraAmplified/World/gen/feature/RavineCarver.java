@@ -45,7 +45,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
     	 
     	int i = (this.func_202520_b() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
-        double height = region.getBiome(new BlockPos(originalX * 16, 100, originalZ * 16)) == BiomeInit.BiomeNether ? 25 : (double)(random.nextInt(random.nextInt(2) + 1) + 31);
+        double height = region.getBiome(new BlockPos(originalX * 16, 100, originalZ * 16)) == BiomeInit.NETHER ? 25 : (double)(random.nextInt(random.nextInt(2) + 1) + 31);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
         float f = random.nextFloat() * ((float)Math.PI * 2F);
         float f1 = (random.nextFloat() - 0.5F) / 8.0F;

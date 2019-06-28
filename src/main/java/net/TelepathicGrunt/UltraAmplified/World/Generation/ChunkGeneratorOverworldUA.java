@@ -54,9 +54,9 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
  	{
          Map<Biome, IBlockState> result = new HashMap<Biome, IBlockState>();
          
-         result.put(BiomeInit.BiomeNether, Blocks.NETHERRACK.getDefaultState()); 
-         result.put(BiomeInit.BiomeIceMountain, Blocks.ICE.getDefaultState()); 
-         result.put(BiomeInit.BiomeEnd, Blocks.END_STONE.getDefaultState()); 
+         result.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState()); 
+         result.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState()); 
+         result.put(BiomeInit.END, Blocks.END_STONE.getDefaultState()); 
          
          return Collections.unmodifiableMap(result);
      }
@@ -73,6 +73,7 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
          this.depthNoise = new NoiseGeneratorOctaves(sharedseedrandom, 16);
          this.biomeWeights = new float[25];
 
+         
          for(int i = -2; i <= 2; ++i) {
             for(int j = -2; j <= 2; ++j) {
                float f = 10.0F / MathHelper.sqrt((float)(i * i + j * j) + 0.2F);
@@ -194,12 +195,12 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
                             	else if (i2 * 8 + j2 < Config.seaLevel)
                                 {
                             		//if we are in this biome, generate snow blocks instead of water for sea level
-                            		if(biome == BiomeInit.BiomeIceMountain)
+                            		if(biome == BiomeInit.ICE_MOUNTAIN)
                                 	{
                             			 primer.setBlockState(blockpos$mutableblockpos, Config.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW, false);
                                 	}
                             		//if we are in nether, generate water, then a layer of magma blocks, and then lava the rest of the way
-                            		else if(biome == BiomeInit.BiomeNether)
+                            		else if(biome == BiomeInit.NETHER)
                                 	{
                             			if(i2 * 8 + j2 <= Config.seaLevel - 16 && i2 * 8 + j2 > 10) {
                             				 primer.setBlockState(blockpos$mutableblockpos, Blocks.LAVA.getDefaultState(), false);

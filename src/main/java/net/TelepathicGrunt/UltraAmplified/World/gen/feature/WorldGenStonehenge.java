@@ -67,7 +67,7 @@ public class WorldGenStonehenge extends Feature<NoFeatureConfig> {
 						 unAcceptableBlocks.contains(worldIn.getBlockState(position.west(x).north(z)))
 						) ||
 							
-						(	worldIn.getBiome(position) == BiomeInit.BiomeDesertHills &&
+						(	worldIn.getBiome(position) == BiomeInit.DESERT_HILLS &&
 							
 							(worldIn.getBlockState(position.west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR ||
 							 worldIn.getBlockState(position.down(1).west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR ||

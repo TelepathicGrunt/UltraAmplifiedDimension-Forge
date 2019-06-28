@@ -18,6 +18,8 @@ public class NetherSurfaceBuilderUA implements ISurfaceBuilder<SurfaceBuilderCon
    private static final IBlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
    private static final IBlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
    private static final IBlockState SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
+   private static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
+   private static final IBlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
    protected long field_205552_a;
    protected NoiseGeneratorOctaves field_205553_b;
 
@@ -37,9 +39,9 @@ public class NetherSurfaceBuilderUA implements ISurfaceBuilder<SurfaceBuilderCon
          if (iblockstate2.getBlock() != null && iblockstate2.getMaterial() != Material.AIR) {
         	 if (iblockstate2 == NETHERRACK) {
         		 
-    	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.03125D, (double)z * 0.03125D, j1/5) + random.nextDouble() * 0.2D > 5.0D;
-    	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.03125D, (j1/5)+109.0D, (double)z * 0.03125D) + random.nextDouble() * 0.2D > 5.8D;
-
+    	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.13125D, (double)z * 0.13125D, j1/5) + random.nextDouble() * 0.2D > 4.5D;
+    	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.13125D, (j1/5)+109.0D, (double)z * 0.13125D) + random.nextDouble() * 0.2D > 5.5D;
+    	     
     	       if (i1 == -1) {
                   if (l <= 0) {
                      iblockstate = CAVE_AIR;
@@ -47,15 +49,42 @@ public class NetherSurfaceBuilderUA implements ISurfaceBuilder<SurfaceBuilderCon
                   } else if (j1 >= i - 4) {
                      iblockstate = NETHERRACK;
                      iblockstate1 = NETHERRACK;
+
+                     
+                     if((noise > -3.85 && noise < -3.7) || (noise > -0.1 && noise < 0.05) || (noise > 3.7 && noise < 3.85)) {
+                    	 iblockstate = MAGMA;
+                     }
+                     
+                     
                      if (flag1) {
-                        iblockstate = GRAVEL;
-                        iblockstate1 = NETHERRACK;
+                    	 if(random.nextFloat() < 0.015F) {
+                             iblockstate = LAVA;
+                    	 }
+                    	 else {
+                         	iblockstate = GRAVEL;
+                    	 }
                      }
 
                      if (flag) {
-                        iblockstate = SOUL_SAND;
-                        iblockstate1 = SOUL_SAND;
+                    	 if(random.nextFloat() < 0.005F) {
+                             iblockstate = LAVA;
+                    	 }
+                    	 else {
+                    		 iblockstate = SOUL_SAND;
+                    	 }
+                    	 
+                         iblockstate1 = SOUL_SAND;
                      }
+                     
+                     
+                     
+                     
+                     
+                     //rare lava spot
+                	 if(random.nextFloat() < 0.0005F) {
+                         iblockstate = LAVA;
+                	 }
+                	 
                   }
                   
                   i1 = l;

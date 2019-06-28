@@ -1,8 +1,13 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.EndCityUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -11,9 +16,10 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.gen.feature.structure.EndCityConfig;
+import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.WoodlandMansionConfig;
 
 public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 
@@ -60,5 +66,9 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new WorldGenDarkOakMTree(false);
 	   public static final AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new WorldGenTaigaTreeMUA(false);
 	   
-	   public static final Structure<MineshaftConfigUA> MINESHAFT_UA = new MapGenMineshaftUA();
+	   public static final Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA();
+	   public static final Structure<EndCityConfig> END_CITY_UA = new EndCityUA();
+	   public static final Structure<NetherBridgeConfigUA> FORTRESS_UA = new NetherBridgeUA();
+	   public static final Structure<WoodlandMansionConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA();
+	   public static final Structure<StrongholdConfig> STRONGHOLD_UA = new StrongholdUA();
 }

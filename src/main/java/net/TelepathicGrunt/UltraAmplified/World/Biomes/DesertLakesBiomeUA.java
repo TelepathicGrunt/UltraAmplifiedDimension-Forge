@@ -4,7 +4,7 @@ import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
@@ -39,13 +39,15 @@ public final class DesertLakesBiomeUA extends BiomeUA {
       this.addStructure(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.SANDSTONE));
       this.addStructure(Feature.DESERT_PYRAMID, new DesertPyramidConfig());
       if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.DESERT));
-      this.addStructure(Feature.STRONGHOLD, new StrongholdConfig());
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.DESERT));
+      
+		      if(Config.strongholdGeneration)
+		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
       
 
       //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
       this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-      this.addStructureFeatures();
+      this.addStructureFeaturesUA();
       
       if(Config.waterLakeGen) {
     	  this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.WATER), LAKE_WATER, new LakeChanceConfig(7)));

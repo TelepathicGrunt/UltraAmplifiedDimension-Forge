@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
@@ -40,12 +40,14 @@ public class WoodedBadlandsPlateauBiomeUA extends BiomeUA {
 	   public WoodedBadlandsPlateauBiomeUA() {
 		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(MESA_FOREST_SURFACE_BUILDER, RED_SAND_WHITE_TERRACOTTA_GRAVEL_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.MESA).depth(1.5F).scale(0.025F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String)null));
 		      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.MESA));
-		      this.addStructure(Feature.STRONGHOLD, new StrongholdConfig());
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.MESA));
+		      
+		      if(Config.strongholdGeneration)
+		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 		      //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
 		      
-		      this.addStructureFeatures();
+		      this.addStructureFeaturesUA();
 		      
 		      if(Config.waterLakeGen)
 		    	  this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.LIQUIDS, new LiquidsConfig(Fluids.WATER), HEIGHT_BIASED_RANGE, new CountRangeConfig(50, 8, 8, 256)));

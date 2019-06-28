@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
@@ -39,12 +39,14 @@ public class DesertHillsBiomeUA extends BiomeUA {
 		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEFAULT_SURFACE_BUILDER, SAND_SAND_GRAVEL_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(0.45F).scale(0.3F).temperature(2.0F).downfall(0.0F).waterColor(11260362).waterFogColor(9812925).parent((String)null));
 		      this.addStructure(Feature.DESERT_PYRAMID, new DesertPyramidConfig());
 		      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.DESERT));
-		      this.addStructure(Feature.STRONGHOLD, new StrongholdConfig());
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.DESERT));
+		      
+		      if(Config.strongholdGeneration)
+		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
 		      //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-		      this.addStructureFeatures();
+		      this.addStructureFeaturesUA();
 		      
 		      if(Config.lavaLakeGen)
 		    	  this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.LAVA), LAVA_LAKE, new LakeChanceConfig(80)));

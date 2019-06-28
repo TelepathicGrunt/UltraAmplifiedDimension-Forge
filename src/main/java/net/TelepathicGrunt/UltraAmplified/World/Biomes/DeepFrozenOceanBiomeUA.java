@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
@@ -50,13 +50,13 @@ public class DeepFrozenOceanBiomeUA  extends BiomeUA {
 	      this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
 	      this.addStructure(Feature.OCEAN_MONUMENT, new OceanMonumentConfig());
 	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.NORMAL));
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL));
 	      this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_WORLD_CARVER, new ProbabilityConfig(0.06666667F)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CANYON_WORLD_CARVER, new ProbabilityConfig(0.02F)));
 	      this.addCarver(GenerationStage.Carving.LIQUID, createWorldCarverWrapper(UNDERWATER_CANYON_WORLD_CARVER, new ProbabilityConfig(0.02F)));
 	      this.addCarver(GenerationStage.Carving.LIQUID, createWorldCarverWrapper(UNDERWATER_CAVE_WORLD_CARVER, new ProbabilityConfig(0.06666667F)));
-	      this.addStructureFeatures();
+	      this.addStructureFeaturesUA();
 	      this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.WATER), LAKE_WATER, new LakeChanceConfig(4)));
 	      this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.LAVA), LAVA_LAKE, new LakeChanceConfig(80)));
 	      this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.ICEBERG, new IcebergConfig(Blocks.PACKED_ICE.getDefaultState()), ICEBERG_PLACEMENT, new ChanceConfig(16)));

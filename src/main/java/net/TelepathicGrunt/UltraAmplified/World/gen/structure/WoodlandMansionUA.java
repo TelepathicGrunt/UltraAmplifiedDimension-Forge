@@ -1,202 +1,188 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
+import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.chunk.UpgradeData;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructurePiece;
+import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.structure.WoodlandMansionConfig;
+import net.minecraft.world.gen.feature.structure.WoodlandMansionPieces;
 
-public class WoodlandMansionUA extends MapGenStructure
-{
-    private final int spacing;
-    private int separation = 8;
-    private int subtraction = 8;
-    public static final List<Biome> acceptedBiomes = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomePlains, BiomeInit.BiomeBirchForestHillsM, BiomeInit.BiomeBirchForestM, BiomeInit.BiomeRoofedForest, BiomeInit.BiomeRoofedForestM, BiomeInit.BiomeSwampland, BiomeInit.BiomeSwamplandM});
-    private final ChunkGeneratorOverworldUA provider;
+public class WoodlandMansionUA extends Structure<WoodlandMansionConfig> {
+	
+	
+	   protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+	      
+		   int maxSpacing = Config.mansionSpawnrate;
+		   int minSpacing = 8;
+		   
+		   if(Config.mansionSpawnrate < 9) {
+			      minSpacing = maxSpacing - 1;
+		   }
+	      
+	      
+	      int k = x + maxSpacing * spacingOffsetsX;
+	      int l = z + maxSpacing * spacingOffsetsZ;
+	      int i1 = k < 0 ? k - maxSpacing + 1 : k;
+	      int j1 = l < 0 ? l - maxSpacing + 1 : l;
+	      int k1 = i1 / maxSpacing;
+	      int l1 = j1 / maxSpacing;
+	      ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, 10387319);
+	      k1 = k1 * maxSpacing;
+	      l1 = l1 * maxSpacing;
+	      k1 = k1 + (random.nextInt(maxSpacing - minSpacing) + random.nextInt(maxSpacing - minSpacing)) / 2;
+	      l1 = l1 + (random.nextInt(maxSpacing - minSpacing) + random.nextInt(maxSpacing - minSpacing)) / 2;
+	      return new ChunkPos(k1, l1);
+	   }
 
-    public WoodlandMansionUA(ChunkGeneratorOverworldUA provider)
-    {
-    	this.provider = provider;
-    	this.spacing = provider.settings.mansionRarity;
-    	if(this.spacing < 9) {
-    		this.subtraction = this.spacing - 1;
-    	}
-    }
+	   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+	         for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 32)) {
+	            if (!chunkGen.hasStructure(biome, FeatureUA.WOODLAND_MANSION_UA)) {
+	               return false;
+	            }
+	         }
 
-    public String getStructureName()
-    {
-        return "Mansion";
-    }
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
 
-    protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ)
-    {
-        int i = chunkX;
-        int j = chunkZ;
+	   protected boolean isEnabledIn(IWorld worldIn) {
+	      return worldIn.getWorldInfo().isMapFeaturesEnabled();
+	   }
 
-        if (chunkX < 0)
-        {
-        	chunkX -= spacing - 1;
-        }
+	   protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
+	      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.DEFAULT);
+	      return new WoodlandMansionUA.Start(worldIn, generator, random, x, z, biome);
+	   }
 
-        if (chunkZ < 0)
-        {
-        	chunkZ -= spacing - 1;
-        }
+	   protected String getStructureName() {
+	      return "Woodland Mansion UA";
+	   }
 
-        int k = chunkX / spacing;
-        int l = chunkZ / spacing;
-        Random random = this.world.setRandomSeed(k, l, 10387319);
-        k = k * spacing;
-        l = l * spacing;
-        k = k + random.nextInt(spacing - this.subtraction);
-        l = l + random.nextInt(spacing - this.subtraction);
-        
-        if (k == i && l == j)
-        {
-            boolean flag = this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 5, acceptedBiomes);
-            
-            if (flag)
-            {
-                return true;
-            }
-        }
+	   public int getSize() {
+	      return 8;
+	   }
 
-        return false;
-    }
+	   public static class Start extends StructureStart {
+	      private boolean isValid;
 
+	      public Start() {
+	      }
 
-    public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)
-    {
-        this.world = worldIn;
-        BiomeProvider biomeprovider = worldIn.getBiomeProvider();
-        return biomeprovider.isFixedBiome() && acceptedBiomes.contains(biomeprovider.getFixedBiome()) ? null : findNearestStructurePosBySpacing(worldIn, this, pos, this.spacing, this.separation, 10387319, true, 100, findUnexplored);
-    }
+	      public Start(IWorld world, IChunkGenerator<?> generator, SharedSeedRandom seed, int x, int z, Biome biome) {
+	         super(x, z, biome, seed, world.getSeed());
+	         Rotation rotation = Rotation.values()[seed.nextInt(Rotation.values().length)];
+	         int i = 5;
+	         int j = 5;
+	         if (rotation == Rotation.CLOCKWISE_90) {
+	            i = -5;
+	         } else if (rotation == Rotation.CLOCKWISE_180) {
+	            i = -5;
+	            j = -5;
+	         } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+	            j = -5;
+	         }
 
-    protected StructureStart getStructureStart(int chunkX, int chunkZ)
-    {
-        return new WoodlandMansionUA.Start(this.world, this.provider, this.rand, chunkX, chunkZ);
-    }
+	         ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(x, z), UpgradeData.EMPTY);
+	         generator.makeBase(chunkprimer);
+	         int k = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7);
+	         int l = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7 + j);
+	         int i1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7);
+	         int j1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7 + j);
+	         int k1 = Math.min(Math.min(k, l), Math.min(i1, j1));
+	         k1 =  Math.min(k1, 220);
+	         
+	         if (k1 < 70) {
+	            this.isValid = false;
+	         } else {
+	            BlockPos blockpos = new BlockPos(x * 16 + 8, k1 + 1, z * 16 + 8);
+	            List<WoodlandMansionPieces.MansionTemplate> list = Lists.newLinkedList();
+	            WoodlandMansionPieces.generateMansion(world.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, list, seed);
+	            this.components.addAll(list);
+	            this.recalculateStructureSize(world);
+	            this.isValid = true;
+	         }
+	         
+	           UltraAmplified.Logger.log(Level.DEBUG, "Woodland Mansion | "+(x*16)+" "+(z*16));
+	      }
 
-    public static class Start extends StructureStart
-    {
-        private boolean field_191093_c;
+	      /**
+	       * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
+	       */
+	      public void generateStructure(IWorld worldIn, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
+	         super.generateStructure(worldIn, rand, structurebb, p_75068_4_);
+	         int i = this.boundingBox.minY;
 
-        public Start()
-        {
-        }
+	         for(int j = structurebb.minX; j <= structurebb.maxX; ++j) {
+	            for(int k = structurebb.minZ; k <= structurebb.maxZ; ++k) {
+	               BlockPos blockpos = new BlockPos(j, i, k);
+	               if (!worldIn.isAirBlock(blockpos) && this.boundingBox.isVecInside(blockpos)) {
+	                  boolean flag = false;
 
-        public Start(World p_i47235_1_, ChunkGeneratorOverworldUA provider, Random p_i47235_3_, int p_i47235_4_, int p_i47235_5_)
-        {
-            super(p_i47235_4_, p_i47235_5_);
-            this.create(p_i47235_1_, provider, p_i47235_3_, p_i47235_4_, p_i47235_5_);
-        }
+	                  for(StructurePiece structurepiece : this.components) {
+	                     if (structurepiece.getBoundingBox().isVecInside(blockpos)) {
+	                        flag = true;
+	                        break;
+	                     }
+	                  }
 
-        private void create(World p_191092_1_, ChunkGeneratorOverworldUA provider, Random p_191092_3_, int chunkX, int chunkZ)
-        {
-        	System.out.println("Woodland Mansion | "+chunkX*16+" "+chunkZ*16);
-        	
-            Rotation rotation = Rotation.values()[p_191092_3_.nextInt(Rotation.values().length)];
-            ChunkPrimer chunkprimer = new ChunkPrimer();
-            provider.setBlocksInChunk(chunkX, chunkZ, chunkprimer);
-            int i = 5;
-            int j = 5;
+	                  if (flag) {
+	                     for(int l = i - 1; l > 1; --l) {
+	                        BlockPos blockpos1 = new BlockPos(j, l, k);
+	                        if (!worldIn.isAirBlock(blockpos1) && !worldIn.getBlockState(blockpos1).getMaterial().isLiquid()) {
+	                           break;
+	                        }
 
-            if (rotation == Rotation.CLOCKWISE_90)
-            {
-                i = -5;
-            }
-            else if (rotation == Rotation.CLOCKWISE_180)
-            {
-                i = -5;
-                j = -5;
-            }
-            else if (rotation == Rotation.COUNTERCLOCKWISE_90)
-            {
-                j = -5;
-            }
+	                        worldIn.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState(), 2);
+	                     }
+	                  }
+	               }
+	            }
+	         }
 
-            int k = chunkprimer.findGroundBlockIdx(7, 7);
-            int l = chunkprimer.findGroundBlockIdx(7, 7 + j);
-            int i1 = chunkprimer.findGroundBlockIdx(7 + i, 7);
-            int j1 = chunkprimer.findGroundBlockIdx(7 + i, 7 + j);
-            int k1 = Math.min(Math.min(k, l), Math.min(i1, j1));
-            k1 =  Math.min(k1, 220);
-            
-            if (k1 < 60)
-            {
-                this.field_191093_c = false;
-            }
-            else
-            {
-                BlockPos blockpos = new BlockPos(chunkX * 16 + 8, k1 + 1, chunkZ * 16 + 8); 
-                List<WoodlandMansionPiecesUA.MansionTemplate> list = Lists.<WoodlandMansionPiecesUA.MansionTemplate>newLinkedList();
-                WoodlandMansionPiecesUA.generateMansion(p_191092_1_.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, list, p_191092_3_);
-                this.components.addAll(list);
-                this.updateBoundingBox();
-                this.field_191093_c = true;
-            }
-        }
+	      }
+	      
 
-        public void generateStructure(World worldIn, Random rand, StructureBoundingBox structurebb)
-        {
-            super.generateStructure(worldIn, rand, structurebb);
-            int i = this.boundingBox.minY;
+	      /**
+	       * currently only defined for Villages, returns true if Village has more than 2 non-road components
+	       */
+	      public boolean isSizeableStructure() {
+	         return this.isValid;
+	      }
 
-            for (int j = structurebb.minX; j <= structurebb.maxX; ++j)
-            {
-                for (int k = structurebb.minZ; k <= structurebb.maxZ; ++k)
-                {
-                    BlockPos blockpos = new BlockPos(j, i, k);
-
-                    if (!worldIn.isAirBlock(blockpos) && this.boundingBox.isVecInside(blockpos))
-                    {
-                        boolean flag = false;
-
-                        for (StructureComponent structurecomponent : this.components)
-                        {
-                            if (structurecomponent.getBoundingBox().isVecInside(blockpos))
-                            {
-                                flag = true;
-                                break;
-                            }
-                        }
-
-                        if (flag)
-                        {
-                            for (int l = i - 1; l > 1; --l)
-                            {
-                                BlockPos blockpos1 = new BlockPos(j, l, k);
-
-                                if (!worldIn.isAirBlock(blockpos1) && !worldIn.getBlockState(blockpos1).getMaterial().isLiquid())
-                                {
-                                    break;
-                                }
-
-                                worldIn.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState(), 2);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        public boolean isSizeableStructure()
-        {
-            return this.field_191093_c;
-        }
-    }
+	      //Forge: Fix losing of 'valid' flag on world reload. TODO: Remove in 1.14 as vanilla fixed.
+	      public void writeAdditional(net.minecraft.nbt.NBTTagCompound tag) {
+	         super.writeAdditional(tag);
+	         tag.setBoolean("Valid", this.isValid);
+	      }
+	      public void readAdditional(net.minecraft.nbt.NBTTagCompound tag) {
+	         super.readAdditional(tag);
+	         this.isValid = tag.hasKey("Valid") && tag.getBoolean("Valid");
+	      }
+	   }
 }

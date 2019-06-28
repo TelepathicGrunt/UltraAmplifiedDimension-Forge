@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -49,7 +50,62 @@ private final BiomeCache cache = new BiomeCache(this);
 private final GenLayer genBiomes;
 /** A GenLayer containing a factory to generate biome arrays for {@llink #getBiomes(int, int, int, int, boolean)} */
 private final GenLayer biomeFactoryLayer;
-private final Biome[] biomes = new Biome[]{Biomes.OCEAN, Biomes.PLAINS, Biomes.DESERT, Biomes.MOUNTAINS, Biomes.FOREST, Biomes.TAIGA, Biomes.SWAMP, Biomes.RIVER, Biomes.FROZEN_OCEAN, Biomes.FROZEN_RIVER, Biomes.SNOWY_TUNDRA, Biomes.SNOWY_MOUNTAINS, Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.BEACH, Biomes.DESERT_HILLS, Biomes.WOODED_HILLS, Biomes.TAIGA_HILLS, Biomes.MOUNTAIN_EDGE, Biomes.JUNGLE, Biomes.JUNGLE_HILLS, Biomes.JUNGLE_EDGE, Biomes.DEEP_OCEAN, Biomes.STONE_SHORE, Biomes.SNOWY_BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.DARK_FOREST, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.WOODED_MOUNTAINS, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.BADLANDS, Biomes.WOODED_BADLANDS_PLATEAU, Biomes.BADLANDS_PLATEAU, Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.SUNFLOWER_PLAINS, Biomes.DESERT_LAKES, Biomes.GRAVELLY_MOUNTAINS, Biomes.FLOWER_FOREST, Biomes.TAIGA_MOUNTAINS, Biomes.SWAMP_HILLS, Biomes.ICE_SPIKES, Biomes.MODIFIED_JUNGLE, Biomes.MODIFIED_JUNGLE_EDGE, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.DARK_FOREST_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.MODIFIED_GRAVELLY_MOUNTAINS, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU, Biomes.ERODED_BADLANDS, Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, Biomes.MODIFIED_BADLANDS_PLATEAU};
+private final Biome[] biomes = new Biome[]
+	{
+		BiomeInit.PLAINS, 
+		BiomeInit.DESERT, 
+		BiomeInit.MOUNTAINS, 
+		BiomeInit.FOREST, 
+		BiomeInit.TAIGA, 
+		BiomeInit.SWAMP, 
+		BiomeInit.NETHER, 
+		BiomeInit.END, 
+		BiomeInit.SNOWY_TUNDRA, 
+		BiomeInit.ICE_MOUNTAIN, 
+		BiomeInit.MUSHROOM_FIELDS, 
+		BiomeInit.DESERT_HILLS, 
+		BiomeInit.WOODED_HILLS, 
+		BiomeInit.TAIGA_HILLS, 
+		BiomeInit.JUNGLE, 
+		BiomeInit.JUNGLE_HILLS, 
+		BiomeInit.JUNGLE_EDGE, 
+		BiomeInit.STONE_SHORE, 
+		BiomeInit.SNOWY_BEACH, 
+		BiomeInit.BIRCH_FOREST, 
+		BiomeInit.BIRCH_FOREST_HILLS, 
+		BiomeInit.DARK_FOREST, 
+		BiomeInit.SNOWY_TAIGA, 
+		BiomeInit.SNOWY_TAIGA_HILLS, 
+		BiomeInit.GIANT_TREE_TAIGA, 
+		BiomeInit.GIANT_TREE_TAIGA_HILLS, 
+		BiomeInit.WOODED_MOUNTAINS, 
+		BiomeInit.SAVANNA, 
+		BiomeInit.SAVANNA_PLATEAU, 
+		BiomeInit.BADLANDS, 
+		BiomeInit.WOODED_BADLANDS_PLATEAU, 
+		BiomeInit.BADLANDS_PLATEAU, 
+		BiomeInit.SUNFLOWER_PLAINS, 
+		BiomeInit.DESERT_LAKES, 
+		BiomeInit.GRAVELLY_MOUNTAINS, 
+		BiomeInit.FLOWER_FOREST, 
+		BiomeInit.TAIGA_MOUNTAINS, 
+		BiomeInit.SWAMP_HILLS, 
+		BiomeInit.ICE_SPIKES, 
+		BiomeInit.MODIFIED_JUNGLE, 
+		BiomeInit.MODIFIED_JUNGLE_EDGE, 
+		BiomeInit.TALL_BIRCH_FOREST, 
+		BiomeInit.TALL_BIRCH_FOREST_HILLS, 
+		BiomeInit.DARK_FOREST_HILLS, 
+		BiomeInit.SNOWY_TAIGA_MOUNTAINS, 
+		BiomeInit.GIANT_SPRUCE_TAIGA, 
+		BiomeInit.GIANT_SPRUCE_TAIGA_HILLS,
+		BiomeInit.MODIFIED_GRAVELLY_MOUNTAINS,
+		BiomeInit.SHATTERED_SAVANNA, 
+		BiomeInit.SHATTERED_SAVANNA_PLATEAU, 
+		BiomeInit.ERODED_BADLANDS, 
+		BiomeInit.MODIFIED_WOODED_BADLANDS_PLATEAU,
+		BiomeInit.MODIFIED_BADLANDS_PLATEAU
+	};
 
 public BiomeProviderUA(long seed, WorldType worldType)
 {
@@ -68,33 +124,6 @@ public BiomeProviderUA(long seed, WorldType worldType)
     GenLayer[] agenlayer = buildOverworldProcedure(seed, worldType);
     this.genBiomes = agenlayer[0];
     this.biomeFactoryLayer = agenlayer[1];
-    
-    
-    			//not implemented yet
-    //agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
-    
-    
-    
-    //reflections to set two fields because they are private and we need to pass in our version of agenlayer to generate properly.
-    /*
-    try {
-    	//genBiomes
-        Field genBiomeField = ObfuscationReflectionHelper.getPrivateValue(BiomeProvider.class, this, "field_76944_d");
-        genBiomeField.set(this, agenlayer[0]);
-    }
-    catch(Exception e) {
-    	UltraAmplified.Logger.warn("BiomeProviderUA error with setting genBiome: "+e.getMessage());
-    }
-    
-    try {
-    	//biomeIndexLayer
-    	Field genBiomeField = ObfuscationReflectionHelper.getPrivateValue(BiomeProvider.class, this, "field_76945_e");
-        genBiomeField.set(this, agenlayer[1]);
-    }
-    catch(Exception e) {
-    	UltraAmplified.Logger.warn("BiomeProviderUA error with setting biomeIndexLayer: "+e.getMessage());
-    }
-    */
 }
 
 public BiomeProviderUA(World world)
@@ -145,8 +174,8 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
-      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
       //IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
+      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
       
       
       lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
@@ -164,6 +193,8 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       //lvt_7_1_ = GenLayerRiver.INSTANCE.apply(contextFactory.apply(1L), lvt_7_1_);
       lvt_7_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_7_1_);
       lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+	  
+
 
       for(int k = 0; k < i; ++k) {
          lvt_8_1_ = GenLayerZoom.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);

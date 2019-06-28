@@ -23,9 +23,10 @@ public class AtSurfaceRoofedForestUA extends BasePlacement<AtSurfaceWithExtraCon
 		   for (int i = 0; i < c; i++) {
 			   int height = 250;
 			   
+		        int x = random.nextInt(16);
+			    int z = random.nextInt(16);
+			    
 		         while(height > 74) {
-		        	 int x = random.nextInt(16);
-			         int z = random.nextInt(16);
 			         
 		        	 airBlock = worldIn.isAirBlock(pos.add(x, height, z));
 		        	 
@@ -37,9 +38,12 @@ public class AtSurfaceRoofedForestUA extends BasePlacement<AtSurfaceWithExtraCon
 		        	 
 		        	 //if height is an solid block and last block was air block, we are now on the surface of a piece of land. Generate feature now
 		        	 else if(airFlag && !airBlock) {
-		        		 featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height, z), featureConfig); 
-		  			     
 		        		 airFlag = false;
+		        		 featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height+1, z), featureConfig); 
+ 
+		        		 //pick new coordinates
+		 		         x = random.nextInt(16);
+		 			     z = random.nextInt(16);
 		        	 }
 		        	 
 		        	 //move down

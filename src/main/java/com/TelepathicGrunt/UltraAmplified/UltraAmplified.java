@@ -1,12 +1,14 @@
 package com.TelepathicGrunt.UltraAmplified;
 
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureInit;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
@@ -47,8 +49,10 @@ public class UltraAmplified {
 		public static void registerBiomes(RegistryEvent.Register<Biome> event){
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
+			Logger.log(Level.INFO, "Biomes registered.");
 			
-			Logger.info("Biomes registered.");
+			StructureInit.initializeStructures();
+			Logger.log(Level.INFO, "Structures registered.");
 		}
 	}
 	

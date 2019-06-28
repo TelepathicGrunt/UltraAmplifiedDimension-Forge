@@ -9,21 +9,21 @@ import net.minecraft.world.gen.layer.traits.ICastleTransformer;
 public enum GenLayerBiomeEdgeUA implements ICastleTransformer {
 	   INSTANCE;
 
-	   private static final int DESERT = IRegistry.field_212624_m.getId(BiomeInit.BiomeDesert);
-	   private static final int MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.BiomeExtremeHills);
-	   private static final int WOODED_MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.BiomeExtremeHillsPlus);
-	   private static final int SNOWY_TUNDRA = IRegistry.field_212624_m.getId(BiomeInit.BiomeIceFlats);
-	   private static final int JUNGLE = IRegistry.field_212624_m.getId(BiomeInit.BiomeJungle);
-	   private static final int JUNGLE_EDGE = IRegistry.field_212624_m.getId(BiomeInit.BiomeJungleEdge);
-	   private static final int BADLANDS = IRegistry.field_212624_m.getId(BiomeInit.BiomeMesa);
-	   private static final int BADLANDS_PLATEAU = IRegistry.field_212624_m.getId(BiomeInit.BiomeMesaClearRock);
-	   private static final int WOODED_BADLANDS_PLATEAU = IRegistry.field_212624_m.getId(BiomeInit.BiomeMesaRock);
-	   private static final int PLAINS = IRegistry.field_212624_m.getId(BiomeInit.BiomePlains);
-	   private static final int GIANT_TREE_TAIGA = IRegistry.field_212624_m.getId(BiomeInit.BiomeRedwoodTaiga);
-	   private static final int SWAMP = IRegistry.field_212624_m.getId(BiomeInit.BiomeSwampland);
-	   private static final int TAIGA = IRegistry.field_212624_m.getId(BiomeInit.BiomeTaiga);
-	   private static final int SNOWY_TAIGA = IRegistry.field_212624_m.getId(BiomeInit.BiomeColdTaiga);
-	   private static final int SAVANNA = IRegistry.field_212624_m.getId(BiomeInit.BiomeSavanna);
+	   private static final int DESERT = IRegistry.field_212624_m.getId(BiomeInit.DESERT);
+	   private static final int MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.MOUNTAINS);
+	   private static final int WOODED_MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.WOODED_MOUNTAINS);
+	   private static final int SNOWY_TUNDRA = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_TUNDRA);
+	   private static final int JUNGLE = IRegistry.field_212624_m.getId(BiomeInit.JUNGLE);
+	   private static final int JUNGLE_EDGE = IRegistry.field_212624_m.getId(BiomeInit.JUNGLE_EDGE);
+	   private static final int BADLANDS = IRegistry.field_212624_m.getId(BiomeInit.BADLANDS);
+	   private static final int BADLANDS_PLATEAU = IRegistry.field_212624_m.getId(BiomeInit.BADLANDS_PLATEAU);
+	   private static final int WOODED_BADLANDS_PLATEAU = IRegistry.field_212624_m.getId(BiomeInit.WOODED_BADLANDS_PLATEAU);
+	   private static final int PLAINS = IRegistry.field_212624_m.getId(BiomeInit.PLAINS);
+	   private static final int GIANT_TREE_TAIGA = IRegistry.field_212624_m.getId(BiomeInit.GIANT_TREE_TAIGA);
+	   private static final int SWAMP = IRegistry.field_212624_m.getId(BiomeInit.SWAMP);
+	   private static final int TAIGA = IRegistry.field_212624_m.getId(BiomeInit.TAIGA);
+	   private static final int SNOWY_TAIGA = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_TAIGA);
+	   private static final int SAVANNA = IRegistry.field_212624_m.getId(BiomeInit.SAVANNA);
 
 	   public int apply(IContext context, int pos1, int pos2, int pos3, int pos4, int currentPos) {
 	      int[] aint = new int[1];

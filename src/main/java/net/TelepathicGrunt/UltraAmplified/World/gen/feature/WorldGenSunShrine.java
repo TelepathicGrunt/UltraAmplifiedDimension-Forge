@@ -56,7 +56,7 @@ public class WorldGenSunShrine extends Feature<NoFeatureConfig> {
 				if( 	(x+z) % 8 != 0 &&
 						position.getY() < 248 && 
 						
-						worldIn.getBiome(position) == BiomeInit.BiomeDesertHills ?
+						worldIn.getBiome(position) == BiomeInit.DESERT_HILLS ?
 								(acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))) &&
 								worldIn.getBlockState(position.down(2).west((int)(x)).north((int)(z))) != Blocks.AIR &&
 								worldIn.getBlockState(position.down(3).west((int)(x)).north((int)(z))) != Blocks.AIR )	

@@ -35,7 +35,7 @@ public class Config {
     public static int villageSpawnrate = 18;
     public static boolean villageGeneration = true;
     public static int villageZombieSpawnrate = 10;
-    public static int mineshaftSpawnrate = 1000;
+    public static int mineshaftSpawnrate = 25;
     public static boolean mineshaftAbovegroundAllowed = true;
     public static boolean mineshaftUndergroundAllowed = true;
     public static int mansionSpawnrate = 18;
@@ -56,7 +56,7 @@ public class Config {
     public static boolean lavaOcean = false;
     public static int waterfallSpawnrate = 35;
     public static int lavafallSpawnrate = 14;
-    public static int endIslandSpawnrate = 25;
+    public static int endIslandSpawnrate = 6;
     public static boolean bambooForest = true;
     public static boolean plains = true;
     public static boolean desert = true;
@@ -362,7 +362,7 @@ public class Config {
             		endIslandSpawnrate = builder
             		.comment("How often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 500 for max spawnrate.")
             		.translation("ultraamplified.config.structure.endislandspawnrate")
-            		.defineInRange("endIslandSpawnrate", 25, 0, 500);
+            		.defineInRange("endIslandSpawnrate", 6, 0, 500);
             
             builder.push("Biome Selection Options");
             

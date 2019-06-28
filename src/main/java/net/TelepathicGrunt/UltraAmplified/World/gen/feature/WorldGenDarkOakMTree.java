@@ -34,10 +34,13 @@ public class WorldGenDarkOakMTree extends AbstractTreeFeature<NoFeatureConfig> {
         }
         else
         { 
-        	this.setDirtAt(worldIn, blockpos, blockpos.up());
-	        this.setDirtAt(worldIn, blockpos.east(), blockpos.up());
-	        this.setDirtAt(worldIn, blockpos.south(), blockpos.up());
-	        this.setDirtAt(worldIn, blockpos.south().east(), blockpos.up());
+	        for(int x = -1; x < 3; x++) {
+	        	for(int z = -1; z < 3; z++) {
+		        	if(x + z != -2 && x * z != -2 && x + z != 4) {
+		    	        this.setDirtAt(worldIn, blockpos.east(x).south(z), blockpos);
+		        	}
+		        }
+	        }
 	        
         	//creates the dome like crown of leaves first, 
         	//then puts the ring of wood in the leaves that also makes a smooth transition between leaves and trunk,
@@ -62,8 +65,8 @@ public class WorldGenDarkOakMTree extends AbstractTreeFeature<NoFeatureConfig> {
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, 1));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, 1));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(-1, 0, 0));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(-1, 0, -1));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, -1));
+                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(-1, 0, 1));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, -1));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, 2));
                 this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, 2));

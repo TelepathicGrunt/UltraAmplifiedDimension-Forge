@@ -29,7 +29,7 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPosi
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPositionEvery5Height;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.SlimeLakePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.TwiceSurfaceWithChanceUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.DesertLakesSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.EndSurfaceBuilderUA;
@@ -115,14 +115,13 @@ public class BiomeUA extends Biome {
 		super(biomeBuilder);
 	}
 	
-	@Override
-	protected void addStructureFeatures() {
-
-	      UltraAmplified.Logger.log(Level.DEBUG, "Mineshaft registered in biome");
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MapGenMineshaftUA.Type.NORMAL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+	
+	protected void addStructureFeaturesUA() {
+      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.STRONGHOLD_UA, new StrongholdConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+      
       /*
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.OAK), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(Feature.STRONGHOLD, new StrongholdConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.SWAMP_HUT, new SwampHutConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.DESERT_PYRAMID, new DesertPyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.JUNGLE_PYRAMID, new JunglePyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
