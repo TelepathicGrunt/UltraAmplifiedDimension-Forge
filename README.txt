@@ -18,16 +18,19 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Mod updated to work on 1.13 now!
 
      Config:
-·No longer works as 1.13 Forge does not have a working config UI
+·Config no longer works as 1.13 Forge does not have a working config UI
 
      Biomes:
-·Most biomes now generate extra Iron, Redstone, and Lapis in a small range between 5 and 15 blocks below sea level.
+·Most biomes now generate extra Gold, Redstone, and Lapis in a small range around 5 and 15 blocks below sea level to make underwater diving more rewarding.
 ·Many changes was made to how features (plants, snow, etc) so they spawn more efficiently and cleaner on all ledges.
 ·Ice Mountain biome now has lakes made of Ice and Blue Ice.
 ·Ice mountain biome now can generate waterfalls made of Blue Ice.
 ·Ice Spike biome now has a layer of Ice with Water below it at sea level instead of Snow Blocks.
 ·Nether biome now spawns regions of Gravel and Soul Sand that is different at each height (before it was based on x and z positions).
 ·Nether biome now generates a layer of Magma Blocks several blocks below sea level Water and then generates Lava below the Magma Blocks.
+·Nether biome now generates Quartz Ore less frequently above Y = 120.
+·End biome now generates End Islands less frequently at higher heights.
+·End biome now generates Shulker Boxes and Dragon Heads below sea level at a low chance and can spawn a Dragon Egg at any height but is extremely rare.
 ·Desert M biome now generates large areas of water to better fit its new 1.13 name which is Desert Lake biome.
 ·M forms of Redwood Taiga biomes now generates tiny boulders and their pillars are now shorter but thicker.
 ·Jungle Edge biomes now generates when a jungle touches the Badlands biome or Savanna biome in addition to the Swamp biome that it used to do.
@@ -39,7 +42,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Mineshafts now takes on the Swamp variant when in Dark Forest biome.
 ·Ravines are now slightly thinner and taller.
 ·Fossils now generates on the surface of a ledge that does not have direct sunlight (before it could spawn floating in midair).
-       
+·End Cities now generates much, much bigger (three full branches instead of one).
+ 
        
     (V.4.4 Changes) (1.12 Minecraft)
     
