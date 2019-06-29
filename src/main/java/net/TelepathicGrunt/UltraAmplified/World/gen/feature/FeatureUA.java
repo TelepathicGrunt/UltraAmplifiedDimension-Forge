@@ -2,11 +2,12 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.EndCityUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.IglooUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
@@ -17,6 +18,7 @@ import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.EndCityConfig;
+import net.minecraft.world.gen.feature.structure.IglooConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.WoodlandMansionConfig;
@@ -71,4 +73,5 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Structure<NetherBridgeConfigUA> FORTRESS_UA = new NetherBridgeUA();
 	   public static final Structure<WoodlandMansionConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA();
 	   public static final Structure<StrongholdConfig> STRONGHOLD_UA = new StrongholdUA();
+	   public static final Structure<IglooConfig> IGLOO_UA = new IglooUA();
 }

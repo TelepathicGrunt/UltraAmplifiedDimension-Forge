@@ -15,6 +15,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+import net.minecraft.world.gen.feature.structure.IglooConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
@@ -31,6 +32,10 @@ public class IceMountainsBiomeUA extends BiomeUA {
 		      if(Config.strongholdGeneration)
 		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 		      
+		      if(Config.scatteredGeneration) {
+		    	  this.addStructure(FeatureUA.IGLOO_UA, new IglooConfig());
+		    	  this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.IGLOO_UA, new IglooConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+		      }
 		      //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
 		      this.addStructureFeaturesUA();

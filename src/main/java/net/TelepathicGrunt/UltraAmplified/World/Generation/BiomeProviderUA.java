@@ -174,8 +174,8 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
+      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
+      /*IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
       
       
       lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
@@ -193,7 +193,7 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       //lvt_7_1_ = GenLayerRiver.INSTANCE.apply(contextFactory.apply(1L), lvt_7_1_);
       lvt_7_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_7_1_);
       lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-	  
+	  */
 
 
       for(int k = 0; k < i; ++k) {

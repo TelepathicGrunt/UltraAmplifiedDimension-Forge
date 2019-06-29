@@ -11,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.IChunkGenSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -26,17 +25,18 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 	         for(int zOffset = 0; zOffset < 16; ++zOffset) {
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
-		         for(int y = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, x, z); y > Config.seaLevel-1; --y) {
+		         for(int y = 256; y > Config.seaLevel-1; --y) {
 		        	 
 	        		blockpos$mutableblockpos.setPos(x, y, z);
 		            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);
 		            
-		        	if((worldIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR &&
-		        	    worldIn.getBlockState(blockpos$mutableblockpos1).isSolid()) ||
-		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.WATER) 
+		        	if(worldIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR &&
+		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() != Material.AIR) 
 		        	{
 			            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
-			            if (biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) {
+			            if (worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.WATER &&
+			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) 
+			            {
 			               worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
 			            }
 		
