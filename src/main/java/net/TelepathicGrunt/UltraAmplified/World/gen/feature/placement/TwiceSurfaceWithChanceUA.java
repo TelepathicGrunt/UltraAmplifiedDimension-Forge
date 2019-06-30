@@ -27,7 +27,7 @@ public class TwiceSurfaceWithChanceUA extends BasePlacement<ChanceConfig> {
 	        	 height--;
 	         }
 	         
-	         //if height is an air block, move down until we reached aa solid block. We are now on the surface of a piece of land
+	         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
 	         while(height > 74) {
 	        	 if(!worldIn.isAirBlock(pos.add(x, height, z))) {
 	        		 break;

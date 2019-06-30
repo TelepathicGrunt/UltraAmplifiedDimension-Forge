@@ -38,7 +38,7 @@ public class Config {
     public static int mineshaftSpawnrate = 25;
     public static boolean mineshaftAbovegroundAllowed = true;
     public static boolean mineshaftUndergroundAllowed = true;
-    public static int mansionSpawnrate = 18;
+    public static int mansionSpawnrate = 20;
     public static boolean mansionGeneration = true;
     public static int scatteredSpawnrate = 22;
     public static boolean scatteredGeneration = true;

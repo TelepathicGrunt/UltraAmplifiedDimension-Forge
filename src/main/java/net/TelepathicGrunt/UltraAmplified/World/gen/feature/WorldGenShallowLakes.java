@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.LakesConfig;
 public class WorldGenShallowLakes extends Feature<LakesConfig> {
 	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
 	     
-         pos = pos.down(2);
+		  pos = pos.down(2);
          boolean[] aboolean = new boolean[2048];
          int i = random.nextInt(4) + 4;
 

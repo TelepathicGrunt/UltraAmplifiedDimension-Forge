@@ -35,9 +35,9 @@ public class WoodlandMansionUA extends Structure<WoodlandMansionConfig> {
 	   protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
 	      
 		   int maxSpacing = Config.mansionSpawnrate;
-		   int minSpacing = 8;
+		   int minSpacing = (int)(maxSpacing*0.75);
 		   
-		   if(Config.mansionSpawnrate < 9) {
+		   if(Config.mansionSpawnrate < 10) {
 			      minSpacing = maxSpacing - 1;
 		   }
 	      

@@ -36,14 +36,19 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 public final class DesertLakesBiomeUA extends BiomeUA {
    public DesertLakesBiomeUA() {
       super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DESERT_LAKE_SURFACE_BUILDER, SANDSTONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(0.225F).scale(0.25F).temperature(2.0F).downfall(0.0F).waterColor(11260362).waterFogColor(9812925).parent((String)null));
+      
       this.addStructure(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.SANDSTONE));
-      this.addStructure(Feature.DESERT_PYRAMID, new DesertPyramidConfig());
+      
       if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
 		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.DESERT));
       
-		      if(Config.strongholdGeneration)
-		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
+      if(Config.strongholdGeneration)
+    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
       
+      if(Config.scatteredGeneration) {
+          this.addStructure(FeatureUA.DESERT_TEMPLE_UA, new DesertPyramidConfig());
+    	  this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.DESERT_TEMPLE_UA, new DesertPyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+      }
 
       //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
       this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));

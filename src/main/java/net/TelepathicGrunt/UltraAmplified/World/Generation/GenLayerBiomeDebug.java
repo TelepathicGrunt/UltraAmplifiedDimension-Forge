@@ -11,7 +11,7 @@ public class GenLayerBiomeDebug implements IC0Transformer
 {
 
 	   @SuppressWarnings("deprecation")
-	   private static final int TESTING_BIOME = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_TAIGA_MOUNTAINS);
+	   private static final int TESTING_BIOME = IRegistry.field_212624_m.getId(BiomeInit.SWAMP);
 	   
 	   public GenLayerBiomeDebug(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
 	   }

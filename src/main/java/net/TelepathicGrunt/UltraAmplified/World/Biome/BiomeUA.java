@@ -1,9 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
-import org.apache.logging.log4j.Level;
-
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
-
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.CaveCavityCarver;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
@@ -29,8 +25,8 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPosi
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPositionEvery5Height;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.SlimeLakePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.TwiceSurfaceWithChanceUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.DesertLakesSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.EndSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.IceMountainSurfaceBuilder;
@@ -41,21 +37,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.carver.WorldCarver;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
-import net.minecraft.world.gen.feature.structure.DesertPyramidConfig;
-import net.minecraft.world.gen.feature.structure.IglooConfig;
-import net.minecraft.world.gen.feature.structure.JunglePyramidConfig;
-import net.minecraft.world.gen.feature.structure.OceanMonumentConfig;
-import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
-import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
-import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
-import net.minecraft.world.gen.feature.structure.SwampHutConfig;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
-import net.minecraft.world.gen.feature.structure.VillagePieces;
-import net.minecraft.world.gen.feature.structure.WoodlandMansionConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.BasePlacement;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -122,10 +105,6 @@ public class BiomeUA extends Biome {
       
       /*
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.OAK), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.SWAMP_HUT, new SwampHutConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.DESERT_PYRAMID, new DesertPyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.JUNGLE_PYRAMID, new JunglePyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.IGLOO, new IglooConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.SHIPWRECK, new ShipwreckConfig(false), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.OCEAN_MONUMENT, new OceanMonumentConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.WOODLAND_MANSION, new WoodlandMansionConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));

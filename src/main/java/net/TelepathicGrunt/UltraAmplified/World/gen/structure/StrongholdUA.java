@@ -17,17 +17,16 @@ import net.minecraft.init.Biomes;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IChunkGenSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
-import net.minecraft.world.gen.feature.structure.StrongholdPieces;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class StrongholdUA extends Structure<StrongholdConfig> {
    /** is spawned false and set true once the defined BiomeGenBases were compared with the present ones */
@@ -130,7 +129,7 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
       this.seed = generator.getSeed();
       List<Biome> list = Lists.newArrayList();
 
-      for(Biome biome : IRegistry.field_212624_m) {
+      for(Biome biome : ForgeRegistries.BIOMES) {
          if (biome != null && generator.hasStructure(biome, FeatureUA.STRONGHOLD_UA)) {
             list.add(biome);
          }

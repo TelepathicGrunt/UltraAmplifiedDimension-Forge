@@ -43,6 +43,11 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Ravines are now slightly thinner and taller.
 ·Fossils now generates on the surface of a ledge that does not have direct sunlight (before it could spawn floating in midair).
 ·End Cities now generates much, much bigger (three full branches instead of one).
+·Desert Temples now have more TNT and is more dangerous to make safe. Be very careful!
+·Jungle Temples now have more hidden chests, more Dispensers that shoot arrows, and some Cobblestone is infested with Silverfish.
+·Witch Huts now generate 2 Witches at start instead of 1.
+·Woodland Mansions cannot spawn in Plains biome now.
+·Igloos can spawn in Ice Mountain biome and all Snowy Taiga biomes.
  
        
     (V.4.4 Changes) (1.12 Minecraft)
