@@ -84,7 +84,7 @@ public class DeepLukewarmOceanBiomeUA extends BiomeUA {
 		      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.SEA_GRASS, new SeaGrassConfig(80, 0.8D), TOP_SOLID_ONCE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 		      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BLOCK_WITH_CONTEXT, new BlockWithContextConfig(Blocks.SEAGRASS.getDefaultState(), new IBlockState[]{Blocks.STONE.getDefaultState()}, new IBlockState[]{Blocks.WATER.getDefaultState()}, new IBlockState[]{Blocks.WATER.getDefaultState()}), CAVE_EDGE, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.1F)));
 		      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.KELP, IFeatureConfig.NO_FEATURE_CONFIG, TOP_SOLID_WITH_NOISE, new TopSolidWithNoiseConfig(80, 80.0D)));
-		      this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, createCompositeFeature(Feature.ICE_AND_SNOW, IFeatureConfig.NO_FEATURE_CONFIG, PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+
 		      this.addSpawn(EnumCreatureType.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.SQUID, 8, 1, 4));
 		      this.addSpawn(EnumCreatureType.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.COD, 8, 3, 6));
 		      this.addSpawn(EnumCreatureType.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.PUFFERFISH, 5, 1, 3));

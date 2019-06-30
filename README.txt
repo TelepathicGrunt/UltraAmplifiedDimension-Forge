@@ -48,6 +48,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Witch Huts now generate 2 Witches at start instead of 1.
 ·Woodland Mansions cannot spawn in Plains biome now.
 ·Igloos can spawn in Ice Mountain biome and all Snowy Taiga biomes.
+·Adjusted what kind of blocks spawn in Villages.
  
        
     (V.4.4 Changes) (1.12 Minecraft)

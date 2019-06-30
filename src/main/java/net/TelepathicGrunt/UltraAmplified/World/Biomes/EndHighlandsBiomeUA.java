@@ -7,6 +7,8 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfi
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillagePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -28,10 +30,14 @@ public class EndHighlandsBiomeUA extends BiomeUA {
    public EndHighlandsBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(END_SURFACE_BUILDER_UA, END_STONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.THEEND).depth(0.1F).scale(0.2F).temperature(0.8F).downfall(0.5F).waterColor(16711840).waterFogColor(16711840).parent((String)null));
 	    
-	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
+	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed) {
 		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.END));
-	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-	      
+	      }
+
+    	  if(Config.villageGeneration) {
+    		  this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.END));
+    	  }
+    	  
 	      this.addStructure(FeatureUA.END_CITY_UA, new EndCityConfig()); 
 	      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.END_CITY_UA, new EndCityConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
 	      
@@ -39,6 +45,7 @@ public class EndHighlandsBiomeUA extends BiomeUA {
 	      //this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/100)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
 
+	      this.addStructureFeaturesUA();
 	      
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.END_DUNGEONS, IFeatureConfig.NO_FEATURE_CONFIG, DUNGEON_PLACEMENT, new DungeonRoomConfig(Config.dungeonSpawnrate)));
 

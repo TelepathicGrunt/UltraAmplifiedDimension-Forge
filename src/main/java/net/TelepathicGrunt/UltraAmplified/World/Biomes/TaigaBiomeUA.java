@@ -41,7 +41,10 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 public class TaigaBiomeUA extends BiomeUA {
 	   public TaigaBiomeUA() {
 		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEFAULT_SURFACE_BUILDER, GRASS_DIRT_GRAVEL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.TAIGA).depth(0.2F).scale(0.2F).temperature(0.44F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-		      this.addStructure(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.SPRUCE));
+		      
+		      if(Config.villageGeneration)
+		      	this.addStructure(Feature.VILLAGE, new VillageConfig(0, VillagePieces.Type.SPRUCE));
+		      
 		      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
 		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.TAIGA));
 		      

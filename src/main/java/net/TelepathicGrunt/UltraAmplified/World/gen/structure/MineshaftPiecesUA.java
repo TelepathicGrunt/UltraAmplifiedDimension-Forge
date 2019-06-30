@@ -704,7 +704,7 @@ public class MineshaftPiecesUA
                     return Blocks.NETHER_BRICKS.getDefaultState();
                     
                 case STONE:
-                    return Blocks.SMOOTH_STONE.getDefaultState();
+                    return Blocks.ANDESITE.getDefaultState();
                     
                 case SAVANNA:
                     return Blocks.ACACIA_PLANKS.getDefaultState();

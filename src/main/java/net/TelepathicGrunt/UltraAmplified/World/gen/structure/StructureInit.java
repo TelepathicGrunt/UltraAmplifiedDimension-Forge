@@ -18,6 +18,7 @@ public class StructureInit {
 			StructureIO.registerStructure(DesertTempleUA.Start.class, "Desert Temple UA");
 			StructureIO.registerStructure(JungleTempleUA.Start.class, "Jungle Temple UA");
 			StructureIO.registerStructure(WitchHutUA.Start.class, "Witch Hut UA");
+			StructureIO.registerStructure(VillageUA.Start.class, "Village UA");
 			MineshaftPiecesUA.registerStructurePieces();
 			EndCityPiecesUA.registerPieces();
 			NetherBridgePiecesUA.registerStructurePieces();
@@ -26,5 +27,6 @@ public class StructureInit {
 			DesertTemplePiecesUA.registerPieces();
 			JungleTemplePiecesUA.registerJunglePyramidPieces();
 			WitchHutPiecesUA.registerPieces();
+			VillagePiecesUA.registerVillagePieces();
 	}
 }

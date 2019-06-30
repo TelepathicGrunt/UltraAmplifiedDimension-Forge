@@ -5,11 +5,13 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.DesertTempleUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.EndCityUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.IglooUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.JungleTempleUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WitchHutUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -33,7 +35,7 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 
 	   public static final Feature<NoFeatureConfig> BETTER_CACTUS = new WorldGenBetterCactusUA();
 	   public static final Feature<NoFeatureConfig> GENERIC_DUNGEONS = new WorldGenDungeonsUA();
-	   public static final Feature<NoFeatureConfig> MESA_DUNGEONS = new WorldGenMesaDungeonsUA();
+	   public static final Feature<NoFeatureConfig> MESA_DUNGEONS = new WorldGenBadlandsDungeonsUA();
 	   public static final Feature<NoFeatureConfig> DARK_FOREST_DUNGEONS = new WorldGenDarkForestDungeonsUA();
 	   public static final Feature<NoFeatureConfig> DESERT_DUNGEONS = new WorldGenDesertDungeonsUA();
 	   public static final Feature<NoFeatureConfig> END_DUNGEONS = new WorldGenEndDungeonsUA();
@@ -83,4 +85,5 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Structure<DesertPyramidConfig> DESERT_TEMPLE_UA = new DesertTempleUA();
 	   public static final Structure<JunglePyramidConfig> JUNGLE_TEMPLE_UA = new JungleTempleUA();
 	   public static final Structure<SwampHutConfig> WITCH_HUT_UA = new WitchHutUA();
+	   public static final Structure<VillageUAConfig> VILLAGE_UA = new VillageUA();
 }

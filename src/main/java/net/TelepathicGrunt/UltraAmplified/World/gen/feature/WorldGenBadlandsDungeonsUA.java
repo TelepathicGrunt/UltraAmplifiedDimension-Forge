@@ -22,28 +22,31 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.storage.loot.LootTableList;
 
-public class WorldGenMesaDungeonsUA extends Feature<NoFeatureConfig> 
+public class WorldGenBadlandsDungeonsUA extends Feature<NoFeatureConfig> 
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final IBlockState CaveAir = Blocks.CAVE_AIR.getDefaultState();
+    private static final IBlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
+    private static final IBlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
+    private static final IBlockState ORANGE_TERRACOTTA = Blocks.ORANGE_TERRACOTTA.getDefaultState();
+    private static final IBlockState CUT_RED_SANDSTONE = Blocks.CUT_RED_SANDSTONE.getDefaultState();
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
     public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
         int j = rand.nextInt(2) + 2;
-        int k = -j - 1;
-        int l = j + 1;
+        int xMin = -j - 1;
+        int xMax = j + 1;
         int k1 = rand.nextInt(2) + 2;
-        int l1 = -k1 - 1;
-        int i2 = k1 + 1;
+        int zMin = -k1 - 1;
+        int zMax = k1 + 1;
         int j2 = 0;
 
-        for (int k2 = k; k2 <= l; ++k2)
+        for (int k2 = xMin; k2 <= xMax; ++k2)
         {
             for (int l2 = -1; l2 <= 4; ++l2)
             {
-                for (int i3 = l1; i3 <= i2; ++i3)
+                for (int i3 = zMin; i3 <= zMax; ++i3)
                 {
                     BlockPos blockpos = position.add(k2, l2, i3);
                     Material material = worldIn.getBlockState(blockpos).getMaterial();
@@ -59,7 +62,7 @@ public class WorldGenMesaDungeonsUA extends Feature<NoFeatureConfig>
                         return false;
                     }
 
-                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
+                    if ((k2 == xMin || k2 == xMax || i3 == zMin || i3 == zMax) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
                     {
                         ++j2;
                     }
@@ -69,40 +72,50 @@ public class WorldGenMesaDungeonsUA extends Feature<NoFeatureConfig>
 
         if (j2 >= 1 && j2 <= 5)
         {
-            for (int k3 = k; k3 <= l; ++k3)
+            for (int xOffset = xMin; xOffset <= xMax; ++xOffset)
             {
-                for (int i4 = 3; i4 >= -1; --i4)
+                for (int y = 4; y >= -1; --y)
                 {
-                    for (int k4 = l1; k4 <= i2; ++k4)
+                    for (int zOffset = zMin; zOffset <= zMax; ++zOffset)
                     {
-                        BlockPos blockpos1 = position.add(k3, i4, k4);
+                        BlockPos blockpos1 = position.add(xOffset, y, zOffset);
 
-                        if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
+                        if (xOffset != xMin && zOffset != zMin && xOffset != xMax&& zOffset != zMax && y != -1 && y != 5 )
                         {
-                            if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        	if(y == 4) {
+                        		//ceiling
+                            	if (rand.nextInt(4) == 0)
+                            	{
+                                	worldIn.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
+                            	}else 
+                            	{
+                                	worldIn.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
+                            	}
+                        	}
+                        	else if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                worldIn.setBlockState(blockpos1, CaveAir, 2);
+                                worldIn.setBlockState(blockpos1, CAVE_AIR, 2);
                             }
                         }
                         else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            worldIn.setBlockState(blockpos1, CaveAir, 2);
+                            worldIn.setBlockState(blockpos1, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
                         else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                         {
-                            if (i4 == -1 && rand.nextInt(4) != 0)
+                            if (y == -1 && rand.nextInt(4) != 0)
                             {
-                                worldIn.setBlockState(blockpos1, Blocks.RED_TERRACOTTA.getDefaultState(), 2);
+                                worldIn.setBlockState(blockpos1, RED_TERRACOTTA, 2);
                             }
-                            else if (rand.nextInt(3) != 0)
+                            else if (rand.nextInt(2) == 0)
                             {
-                                    worldIn.setBlockState(blockpos1, Blocks.ORANGE_TERRACOTTA.getDefaultState(), 2);
+                                worldIn.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
                             }
                             else
                             {
-                                worldIn.setBlockState(blockpos1, Blocks.SMOOTH_RED_SANDSTONE.getDefaultState(), 2);
+                                worldIn.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
                             }
                         }
                     }
