@@ -25,8 +25,8 @@ public class Config {
     }
     
     public static int dungeonSpawnrate = 650;
-    public static int ravineSpawnrate = 37;
-    public static int caveCavitySpawnrate = 1;
+    public static int ravineSpawnrate = 25;
+    public static int caveCavitySpawnrate = 5;
     public static boolean slimeLakeGen = true;
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
@@ -49,6 +49,8 @@ public class Config {
     public static boolean strongholdGeneration = true;
     public static int monumentRarity = 16;
     public static boolean monumentGeneration = true;
+    public static boolean netherFortressGeneration = true;
+    public static boolean endCityGeneration = true;
     public static boolean secretSetting = false;
     public static int biomeSize = 3;
     public static int mutatedBiomeSpawnrate = 3;
@@ -121,6 +123,8 @@ public class Config {
 		public final ForgeConfigSpec.BooleanValue strongholdGeneration;
 		public final ForgeConfigSpec.IntValue monumentRarity;
 		public final ForgeConfigSpec.BooleanValue monumentGeneration;
+		public final ForgeConfigSpec.BooleanValue netherFortressGeneration;
+		public final ForgeConfigSpec.BooleanValue endCityGeneration;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
 		public final ForgeConfigSpec.IntValue biomeSize;
 		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
@@ -179,13 +183,13 @@ public class Config {
 	                    .comment("How often Ravines will spawn.\r\n"
 	                    		+"0 for no Ravines and 100 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.ravinespawnrate")
-	                    .defineInRange("ravineSpawnrate", 37, 0, 100);
+	                    .defineInRange("ravineSpawnrate", 25, 0, 100);
 
 	            		caveCavitySpawnrate = builder
 	                    .comment("How often Cave Cavity will spawn.\r\n"
-	                    		+"0 for no Cave Cavity and 10 for max spawnrate.")
+	                    		+"0 for no Cave Cavity and 100 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.cavecavityspawnrate")
-	                    .defineInRange("caveCavitySpawnrate", 1, 0, 10);
+	                    .defineInRange("caveCavitySpawnrate", 5, 0, 100);
 	            
 	            		slimeLakeGen = builder
 	                    .comment("Controls whether Slime Lakes spawn or not.\r\n")
@@ -311,6 +315,18 @@ public class Config {
             		.comment("Controls whether Ocean Monuments spawn or not (Ocean Monuments spawn in Jungle biomes)")
             		.translation("ultraamplified.config.structure.monumentgeneration")
             		.define("monumentGeneration", true);
+            		
+
+            		netherFortressGeneration = builder
+            		.comment("Controls whether Nether Fortress spawn or not." + "\n" + "(Nether Fortress spawn underground in all biomes except End biome and can be aboveground in Nether biome)")
+            		.translation("ultraamplified.config.structure.netherfortressgeneration")
+            		.define("netherFortressGeneration", true);
+            		
+
+            		endCityGeneration = builder
+            		.comment("Controls whether End City spawn or not.")
+            		.translation("ultraamplified.config.structure.endcitygeneration")
+            		.define("endCityGeneration", true);
             
             builder.pop().pop();
 

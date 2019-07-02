@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -14,11 +13,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
-public class RavineCarver extends WorldCarver<ProbabilityConfig> {
+public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     private final float[] field_202536_i = new float[1024];
     protected static final IBlockState STONE = Blocks.STONE.getDefaultState();
     protected IBlockState fillerBlock = Blocks.STONE.getDefaultState();
@@ -43,16 +41,16 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 
      public boolean carve(IWorld region, Random random, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
        	 
-    	Biome biome = region.getBiome(new BlockPos(originalX * 16, 100, originalZ * 16));
+    	
     	int i = (this.func_202520_b() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
-        double height = biome == BiomeInit.NETHER ? 25 : (double)(random.nextInt(random.nextInt(2) + 1) + 42);
+        double height = (double)(random.nextInt(random.nextInt(4) + 3) + 17);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
         float f = random.nextFloat() * ((float)Math.PI * 2F);
         float f1 = (random.nextFloat() - 0.5F) / 8.0F;
-        float f2 = (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
-        int j = i - random.nextInt(i / 4);
-        this.func_202535_a(region, random.nextLong(), originalX, originalZ, xpos, height, zpos, f2, f, f1, 0, j, biome == BiomeInit.NETHER ? random.nextDouble()+2.5D : random.nextDouble()/3+1.9D, mask);
+        float f2 = (random.nextFloat() * 1.3F + random.nextFloat()) * 1.3F;
+        int j = i+12; //length of ravine. probably in chunks
+        this.func_202535_a(region, random.nextLong(), originalX, originalZ, xpos, height, zpos, f2, f, f1, 0, j, random.nextDouble()/2+0.9D, mask);
         return true;
      }
 
@@ -72,15 +70,15 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
         float f1 = 0.0F;
 
         for(int j = p_202535_15_; j < p_202535_16_; ++j) {
-           double placementXZBound = 2D + (double)(MathHelper.sin((float)j * (float)Math.PI / (float)p_202535_16_) * p_202535_12_);
+           double placementXZBound = 6D + (double)(MathHelper.sin((float)j * (float)Math.PI / (float)p_202535_16_) * p_202535_12_);
            double placementYBound = placementXZBound * heightMultiplier;
-           placementXZBound = placementXZBound * ((double)random.nextFloat() * 0.15D + 0.65D); //thickness
+           placementXZBound = placementXZBound * ((double)random.nextFloat() * 0.10D + 0.4D); //thickness
            placementYBound = placementYBound * 0.8D;
            float f2 = MathHelper.cos(p_202535_14_); //multiply by 0.1f to make cylinders
            randomBlockX += (double)(MathHelper.cos(p_202535_13_) * f2);
            randomBlockZ += (double)(MathHelper.sin(p_202535_13_) * f2);
-           p_202535_14_ = p_202535_14_ * 0.8F;
-           p_202535_14_ = p_202535_14_ + f1 * 0.08F;
+           p_202535_14_ = p_202535_14_ * 0.5F;
+           p_202535_14_ = p_202535_14_ + f1 * 0.03F;
            p_202535_13_ += f4 * 0.1F;
            f1 = f1 * 0.8F;
            f4 = f4 * 0.5F;
@@ -103,8 +101,8 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
         if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
            int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
            int j = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
-           int k = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 9);
-           int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, 70);
+           int k = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 6);
+           int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, 50);
            int i1 = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
            int j1 = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
            if (i <= j && k <= l && i1 <= j1) {

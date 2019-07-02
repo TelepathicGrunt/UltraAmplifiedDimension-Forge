@@ -4,6 +4,7 @@ import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.CaveCavityCarver;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.RavineCarver;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.SuperLongRavineCarver;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AllSoulSandSurfacesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtBottomOfRandomLayerUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtCenterSurfaceWithChanceUA;
@@ -73,8 +74,9 @@ public class BiomeUA extends Biome {
 	public static final BasePlacement<AtSurfaceWithExtraConfig> ROOFED_TREE_UA = new AtSurfaceRoofedForestUA();
 	public static final BasePlacement<ChanceConfig> AT_SURFACE_WITH_CHANCE_UA = new AtSurfaceWithChanceUA();
 	   public static final BasePlacement<ChanceConfig> AT_CENTER_SURFACE_WITH_CHANCE = new AtCenterSurfaceWithChanceUA();
-    public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver();
     public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver();
+    public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver();
+    public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver();
     public static final BasePlacement<DungeonRoomConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands();
     public static final BasePlacement<CountRangeConfig> EMERALD_PLACEMENT = new EmeraldPlacement();
     public static final BasePlacement<FrequencyConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacementUA();
