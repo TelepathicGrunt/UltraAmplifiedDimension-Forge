@@ -33,6 +33,7 @@ import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.SwampHutConfig;
 import net.minecraft.world.gen.feature.structure.WoodlandMansionConfig;
+import net.minecraft.world.gen.placement.CountConfig;
 
 public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 
@@ -76,6 +77,7 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Feature<NoFeatureConfig> SHORT_VINES = new WorldGenVinesShortUA();
 	   public static final Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrassUA();
 	   public static final Feature<NoFeatureConfig> KELP_UA = new KelpUA();
+	   public static final Feature<CountConfig> SEA_PICKLE_UA = new SeaPickleUA();
 	   
 	   public static final AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new WorldGenSwampTreeMutatedUA();
 	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new WorldGenBirchMTree(false);

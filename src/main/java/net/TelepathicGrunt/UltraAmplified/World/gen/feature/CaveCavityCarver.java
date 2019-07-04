@@ -181,7 +181,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                          //Then adds 400/y so that as the y value gets lower, the more area gets carved which sets the limit on how far down the stalagmites can go.
                          //add a random value to add some noise to the pillar.
                          //and set the greater than value to be high so more stalagmites can be made while the 400/y has already carved out the rest of the cave.
-                         boolean flagStalagmites = this.field_205553_b.func_205563_a((double)x * 0.63125D, (double)z * 0.63125D, y*0.04D) +(400/(y)) + random.nextDouble() * 0.1D > 2.3D;
+                         boolean flagStalagmites = this.field_205553_b.func_205563_a((double)x * 0.63125D, (double)z * 0.63125D, y*0.04D) +(360/(y)) + random.nextDouble() * 0.1D > 2.8D;
                          
                          //where the pillar flag and stalagmite flag both flagged this block to be carved, begin carving. 
                          //Thus the pillar and stalagmite is what is left after carving.

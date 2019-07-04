@@ -11,17 +11,16 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig> {
+public class DeepOceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig> {
    private static final IBlockState AIR = Blocks.AIR.getDefaultState();
    private static final IBlockState WATER = Blocks.WATER.getDefaultState();
    private final static IBlockState[] DEAD_CORAL_ARRAY = { 
-		  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
-		  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
-		  Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), 
-		  Blocks.DEAD_FIRE_CORAL_BLOCK.getDefaultState(),
-		  Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState()
-		};
-	
+			  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
+			  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
+			  Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), 
+			  Blocks.DEAD_FIRE_CORAL_BLOCK.getDefaultState(),
+			  Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState()
+			};
    
    public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
       this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getMiddle(), config.getBottom(), seaLevel);
@@ -37,9 +36,8 @@ public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig
       IBlockState aboveBlock = middleBlock;
       IBlockState above2Block = middleBlock;
       IBlockState above3Block = middleBlock;
-      IBlockState above4Block = middleBlock;
       IBlockState currentBlock;
-      boolean useCoral = bottomBlock == DEAD_CORAL_ARRAY[0];
+      boolean useCoral = bottomBlock.getBlockState() == DEAD_CORAL_ARRAY[0];
       
       for(int y = 255; y >= seaLevel-10; --y) {
          blockpos$mutableblockpos.setPos(x, y, z);
@@ -48,7 +46,7 @@ public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig
          
          if (currentBlock.getBlock() != null) {
         	 if(currentBlock == defaultBlock) {
-        		 	//turns terrain into water to manipulate later
+     		 		//turns terrain into water to manipulate later
                      bottom = WATER;
                 	 chunkIn.setBlockState(blockpos$mutableblockpos, bottom, false);
                      currentBlock = bottom;
@@ -56,11 +54,12 @@ public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig
         	 else if(aboveBlock.getMaterial() == Material.WATER && y < 256){
         		 
         		 if(above2Block.getMaterial() == Material.AIR) {
-        			//sets very bottom of terrain to bottom block
-                	 bottom = topBlock;
+         			//sets very bottom of terrain to bottom block
+                     bottom = topBlock;
                 	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);
-        		 }else {
-
+        		 }
+        		 else {
+        			 
         			 //removes two block high land
         			 if(above3Block.getMaterial() == Material.AIR) {
                          bottom = AIR;
@@ -77,26 +76,17 @@ public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig
         				 
                          middle = middleBlock;
         			 }
-
-        			 
-         			 //makes bottom of terrain now solid
-        			 //doesn't need to check if we are too high for other three checks since the aboveBlocks variables starts with a non-water block
-        			 
+                     
                 	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);
                      currentBlock = bottom;
-        			 
+                     
                      if(above2Block.getMaterial() == Material.WATER)
                     	 chunkIn.setBlockState(blockpos$mutableblockpos.up(2), middle, false);
-                     if(above3Block.getMaterial() == Material.WATER)
-                    	 chunkIn.setBlockState(blockpos$mutableblockpos.up(3), middle, false);
-                     if(above4Block.getMaterial() == Material.WATER)
-                    	 chunkIn.setBlockState(blockpos$mutableblockpos.up(4), middle, false);
         		 }
         		 
         	 }
 	      } 
 
-         above4Block = above3Block;
          above3Block = above2Block;
          above2Block = aboveBlock;
          aboveBlock = currentBlock;

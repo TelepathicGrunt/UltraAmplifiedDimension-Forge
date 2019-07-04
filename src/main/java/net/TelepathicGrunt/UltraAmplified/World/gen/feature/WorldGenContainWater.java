@@ -15,6 +15,13 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class WorldGenContainWater extends Feature<ContainWaterConfig> {
 	  private final static IBlockState ICE = Blocks.ICE.getDefaultState();
+	  private final static IBlockState[] DEAD_CORAL_ARRAY = { 
+			  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
+			  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
+			  Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), 
+			  Blocks.DEAD_FIRE_CORAL_BLOCK.getDefaultState(),
+			  Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState()
+			};
 	
 	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
 	     
@@ -22,23 +29,27 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
 		 pos.down(pos.getY());
 		 
   		 boolean notContainedFlag;
+       	 IBlockState currentblock;
+       	 IBlockState blockAbove;
+         boolean useCoral = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
 	     
     	 for(int x = 0; x < 16; ++x) {
              for(int z = 0; z < 16; ++z) {
+                 
             	 for(int y = 256; y > worldIn.getSeaLevel(); y--) {
 
-                  	IBlockState iblockstate = worldIn.getBlockState(pos.add(x, y, z));
+                  	currentblock = worldIn.getBlockState(pos.add(x, y, z));
                   	
                   	//move down until we hit a non-air block
-            		 while(iblockstate.getMaterial() == Material.AIR && y > 0) 
+            		 while(currentblock.getMaterial() == Material.AIR && y > 0) 
             		 {
                  		y--;
-                 		iblockstate = worldIn.getBlockState(pos.add(x, y, z));
+                 		currentblock = worldIn.getBlockState(pos.add(x, y, z));
                  	 }
             		 
                  	
             		 //checks to see if we are at a water block
-                 	if(!iblockstate.getFluidState().isEmpty()) {
+                 	if(!currentblock.getFluidState().isEmpty()) {
                  		notContainedFlag = false;
          	            
          	            /*
@@ -61,10 +72,10 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
     	     	        //Adjacent blocks must be solid    
     	                 for (EnumFacing face : EnumFacing.Plane.HORIZONTAL) {
     	
-    	                 	iblockstate = worldIn.getBlockState(pos.add(x, y, z).offset(face));
+    	                 	currentblock = worldIn.getBlockState(pos.add(x, y, z).offset(face));
     	                 	
     	                 	//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
-    	                 	if(iblockstate != ICE && !iblockstate.isSolid() && iblockstate.getFluidState().isEmpty()) 
+    	                 	if(currentblock != ICE && !currentblock.isSolid() && currentblock.getFluidState().isEmpty()) 
     	                 	{
     	                 		notContainedFlag = true;
     	                 	}
@@ -74,24 +85,45 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
      	               {
          	        	   if(y < 256) {
          	        		   
-         	        		   //if top is solid, place third config block
-            	        	   if(worldIn.getBlockState(pos.add(x, y+1, z)).isSolid()) {
-            	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.bottomBlock.getDefaultState(), 2);
+         	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
+         	        		   
+            	        	   
+            	        	   if(blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
+            	        		   
+            	        		   //if above is solid or water, place second config block
+                	        	   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock.getDefaultState(), 2);
             	        	   }
-            	        	   //if bottom is solid, place second config block
-            	        	   else if(worldIn.getBlockState(pos.add(x, y-1, z)).isSolid()) {
-            	        		   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock.getDefaultState(), 2);
-            	        	   }
+            	        	   
+            	        	   
             	        	   //place first config block if no solid block above and below
             	        	   else{
-            	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+            	        		   //if config top block is dead coral, randomly chooses any dead coral block to place
+            	        		   if(useCoral) {
+            	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+            	        		   }else {
+            	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+            	        		   }
             	        	   }
          	        	   }
+         	        	   
         	        	   //place first config block if too high
-         	        	   else {
-         	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
-         	        	   }
+         	        	   //if config top block is dead coral, randomly chooses any dead coral block to place
+         	        	   else if(useCoral) {
+    	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+    	        		   }else {
+    	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+    	        		   }
      	               }
+         	           else {
+         	        	   //water block is contained 
+         	        	   
+     	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
+      	        		   
+	      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
+	      	        	   if(blockAbove == configBlock.middleBlock.getDefaultState()) {
+	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock.getDefaultState(), 2);
+	      	        	   }
+         	           }
                  	}
                  }
               }

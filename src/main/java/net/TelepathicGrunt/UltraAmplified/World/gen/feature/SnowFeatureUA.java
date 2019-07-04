@@ -7,8 +7,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumLightType;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.IChunkGenSettings;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -27,15 +27,17 @@ public class SnowFeatureUA extends Feature<NoFeatureConfig> {
 	            int y = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, x, z);
 	            blockpos$mutableblockpos.setPos(x, y, z);
 	            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);
-	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
 	            
-	            if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
-	               worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-	               IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
-	               if (iblockstate.has(BlockDirtSnowy.SNOWY)) {
-	                  worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(BlockDirtSnowy.SNOWY, Boolean.valueOf(true)), 2);
-	               }
-	            }
+	            if (blockpos$mutableblockpos.getY() >= 0 && blockpos$mutableblockpos.getY() < 256 && worldIn.getLightFor(EnumLightType.BLOCK, blockpos$mutableblockpos) < 10) {
+	                IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+	                if (iblockstate.isAir(worldIn, blockpos$mutableblockpos) && Blocks.SNOW.getDefaultState().isValidPosition(worldIn, blockpos$mutableblockpos)) {
+	                   worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
+		               IBlockState iblockstate2 = worldIn.getBlockState(blockpos$mutableblockpos1);
+		               if (iblockstate2.has(BlockDirtSnowy.SNOWY)) {
+		                  worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate2.with(BlockDirtSnowy.SNOWY, Boolean.valueOf(true)), 2);
+		               }
+	                }
+	             }
 	         }
 	      }
 
