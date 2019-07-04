@@ -778,9 +778,11 @@ public class MineshaftPiecesUA
     public static class Room extends MineshaftPiecesUA.Peice
     {
         private final List<MutableBoundingBox> roomsLinkedToTheRoom = Lists.<MutableBoundingBox>newLinkedList();
+        private final boolean normalRoom;
 
         public Room()
         {
+        	normalRoom = false;
         }
 
         public Room(int p_i47137_1_, Random p_i47137_2_, int p_i47137_3_, int p_i47137_4_, MineshaftUA.Type p_i47137_5_)
@@ -791,7 +793,6 @@ public class MineshaftPiecesUA
             //if the pit rooms are not allowed, makes this boolean always true.
             //if pits are allowed and normal rooms are not allowed, set to always false.
             //else if both are allowed, runs RNG to determine which room to generate.
-            boolean normalRoom;
             if(Config.mineshaftUndergroundAllowed) 
             {
             	if(Config.mineshaftAbovegroundAllowed) 
@@ -823,7 +824,15 @@ public class MineshaftPiecesUA
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
         {
             int i = this.getComponentType();
+            
             int k = this.boundingBox.getYSize() - 3 - 1;
+            int y = k;
+            int groundTunnel = rand.nextInt(4)+1;
+            
+            //pit rooms have its tunnels much lower
+            if(!normalRoom) {
+            	k = k/2;
+            }
 
             if (k <= 0)
             {
@@ -840,8 +849,14 @@ public class MineshaftPiecesUA
                 {
                     break;
                 }
+                
+                if(groundTunnel == 1) {
+                	y=1;
+                }else {
+                	y= k;
+                }
 
-                MineshaftPiecesUA.Peice structuremineshaftpieces$peice = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX + l, this.boundingBox.minY + rand.nextInt(k) + 1, this.boundingBox.minZ - 1, EnumFacing.NORTH, i);
+                MineshaftPiecesUA.Peice structuremineshaftpieces$peice = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX + l, this.boundingBox.minY + rand.nextInt(y) + 1, this.boundingBox.minZ - 1, EnumFacing.NORTH, i);
 
                 if (structuremineshaftpieces$peice != null)
                 {
@@ -858,8 +873,14 @@ public class MineshaftPiecesUA
                 {
                     break;
                 }
-
-                MineshaftPiecesUA.Peice structuremineshaftpieces$peice1 = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX + l, this.boundingBox.minY + rand.nextInt(k) + 1, this.boundingBox.maxZ + 1, EnumFacing.SOUTH, i);
+                
+                if(groundTunnel == 2) {
+                	y=1;
+                }else {
+                	y= k;
+                }
+                
+                MineshaftPiecesUA.Peice structuremineshaftpieces$peice1 = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX + l, this.boundingBox.minY + rand.nextInt(y) + 1, this.boundingBox.maxZ + 1, EnumFacing.SOUTH, i);
 
                 if (structuremineshaftpieces$peice1 != null)
                 {
@@ -877,7 +898,13 @@ public class MineshaftPiecesUA
                     break;
                 }
 
-                MineshaftPiecesUA.Peice structuremineshaftpieces$peice2 = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX - 1, this.boundingBox.minY + rand.nextInt(k) + 1, this.boundingBox.minZ + l, EnumFacing.WEST, i);
+                if(groundTunnel == 3) {
+                	y=1;
+                }else {
+                	y= k;
+                }
+                
+                MineshaftPiecesUA.Peice structuremineshaftpieces$peice2 = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.minX - 1, this.boundingBox.minY + rand.nextInt(y) + 1, this.boundingBox.minZ + l, EnumFacing.WEST, i);
 
                 if (structuremineshaftpieces$peice2 != null)
                 {
@@ -894,8 +921,14 @@ public class MineshaftPiecesUA
                 {
                     break;
                 }
+                
+                if(groundTunnel == 4) {
+                	y=1;
+                }else {
+                	y= k;
+                }
 
-                StructurePiece StructurePiece = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.maxX + 1, this.boundingBox.minY + rand.nextInt(k) + 1, this.boundingBox.minZ + l, EnumFacing.EAST, i);
+                StructurePiece StructurePiece = MineshaftPiecesUA.generateAndAddPiece(componentIn, listIn, rand, this.boundingBox.maxX + 1, this.boundingBox.minY + rand.nextInt(y) + 1, this.boundingBox.minZ + l, EnumFacing.EAST, i);
 
                 if (StructurePiece != null)
                 {

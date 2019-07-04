@@ -67,10 +67,10 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
          //makes the normal sized dirt room mineshafts spawn between 150 and 240
          //otherwise they will spawn at bottom of world
          if(structuremineshaftpiecesua$room.getBoundingBox().maxY < 100) {
-             this.setRandomHeight(worldIn, sharedRandom, 150, 150 + sharedRandom.nextInt(70));
+             this.setRandomHeight(worldIn, sharedRandom, 150, 151 + sharedRandom.nextInt(70));
              UltraAmplified.Logger.log(Level.DEBUG, "Aboveground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
          }else {
-             this.setRandomHeight(worldIn, sharedRandom, 13, 16);
+             this.setRandomHeight(worldIn, sharedRandom, 10, 11);
              UltraAmplified.Logger.log(Level.DEBUG, "Underground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
          }
       }

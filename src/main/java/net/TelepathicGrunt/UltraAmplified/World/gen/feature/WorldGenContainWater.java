@@ -1,0 +1,102 @@
+package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
+
+import java.util.Random;
+
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+
+public class WorldGenContainWater extends Feature<ContainWaterConfig> {
+	  private final static IBlockState ICE = Blocks.ICE.getDefaultState();
+	
+	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
+	     
+		 //set y to 0
+		 pos.down(pos.getY());
+		 
+  		 boolean notContainedFlag;
+	     
+    	 for(int x = 0; x < 16; ++x) {
+             for(int z = 0; z < 16; ++z) {
+            	 for(int y = 256; y > worldIn.getSeaLevel(); y--) {
+
+                  	IBlockState iblockstate = worldIn.getBlockState(pos.add(x, y, z));
+                  	
+                  	//move down until we hit a non-air block
+            		 while(iblockstate.getMaterial() == Material.AIR && y > 0) 
+            		 {
+                 		y--;
+                 		iblockstate = worldIn.getBlockState(pos.add(x, y, z));
+                 	 }
+            		 
+                 	
+            		 //checks to see if we are at a water block
+                 	if(!iblockstate.getFluidState().isEmpty()) {
+                 		notContainedFlag = false;
+         	            
+         	            /*
+         	            //must be solid all around even diagonally
+         	            for(int x2 = -1; x2 < 2; x2++) {
+         	            	for(int z2 = -1; z2 < 2; z2++) {
+         	                	
+         	            		material = worldIn.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
+         	            		
+         	            		if(!material.isSolid() &&
+         	                        material != Material.WATER ) 
+         	                   	{
+         	                   		notContainedFlag = true;
+         	                   	}
+         	            	}
+         	            }
+         	            */
+         	            
+                     
+    	     	        //Adjacent blocks must be solid    
+    	                 for (EnumFacing face : EnumFacing.Plane.HORIZONTAL) {
+    	
+    	                 	iblockstate = worldIn.getBlockState(pos.add(x, y, z).offset(face));
+    	                 	
+    	                 	//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
+    	                 	if(iblockstate != ICE && !iblockstate.isSolid() && iblockstate.getFluidState().isEmpty()) 
+    	                 	{
+    	                 		notContainedFlag = true;
+    	                 	}
+    	                 }
+    	                 
+         	           if (notContainedFlag)
+     	               {
+         	        	   if(y < 256) {
+         	        		   
+         	        		   //if top is solid, place third config block
+            	        	   if(worldIn.getBlockState(pos.add(x, y+1, z)).isSolid()) {
+            	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.bottomBlock.getDefaultState(), 2);
+            	        	   }
+            	        	   //if bottom is solid, place second config block
+            	        	   else if(worldIn.getBlockState(pos.add(x, y-1, z)).isSolid()) {
+            	        		   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock.getDefaultState(), 2);
+            	        	   }
+            	        	   //place first config block if no solid block above and below
+            	        	   else{
+            	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+            	        	   }
+         	        	   }
+        	        	   //place first config block if too high
+         	        	   else {
+         	        		  worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+         	        	   }
+     	               }
+                 	}
+                 }
+              }
+         }
+         return true;
+	      
+	   }
+	}

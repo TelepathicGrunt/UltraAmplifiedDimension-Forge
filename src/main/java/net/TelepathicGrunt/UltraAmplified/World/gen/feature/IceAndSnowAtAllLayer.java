@@ -34,12 +34,12 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() != Material.AIR) 
 		        	{
 			            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
-			            if (worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.WATER &&
+			            if (!worldIn.getBlockState(blockpos$mutableblockpos1).getFluidState().isEmpty() &&
 			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) 
 			            {
 			               worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
 			            }
-		
+			            
 			            if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
 			               worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
 			               IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);

@@ -1,16 +1,17 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.DesertTempleUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.EndCityUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.IglooUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.JungleTempleUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WitchHutUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
@@ -19,9 +20,11 @@ import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.IcebergConfig;
 import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.SeaGrassConfig;
 import net.minecraft.world.gen.feature.structure.DesertPyramidConfig;
 import net.minecraft.world.gen.feature.structure.EndCityConfig;
 import net.minecraft.world.gen.feature.structure.IglooConfig;
@@ -51,6 +54,7 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Feature<NoFeatureConfig> SUN_SHRINE = new WorldGenSunShrine();
 	   public static final Feature<NoFeatureConfig> FOSSILS_UA = new WorldGenFossilUA();
 	   public static final Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock();
+	   public static final Feature<IcebergConfig> ICEBERG_UA = new IcebergUA();
 
 	   public static final Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new WorldGenGiantStackableBoulderUA();
 	   public static final Feature<BlockBlobConfig> LARGE_BOULDER = new WorldGenGiantBoulderUA();
@@ -59,15 +63,19 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 
 	   public static final Feature<LakesConfig> SLIME_LAKE = new WorldGenSlimeLakes();
 	   public static final Feature<LakesConfig> SHALLOW_LAKE = new WorldGenShallowLakes();
+	   public static final Feature<ContainWaterConfig> CONTAIN_WATER = new WorldGenContainWater();
 	   public static final Feature<NoFeatureConfig> ICE_PATCH_SANDY = new WorldGenIcePatchUA();
 	   public static final Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new WorldGenIceSpikeUA();
 	   public static final Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new WorldGenGreenPowConcretePatchUA();
 	   public static final Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new WorldGenBlueIceWaterfallUA();
 	   public static final Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid();
 	   public static final Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer();
+	   public static final Feature<NoFeatureConfig> SNOW_FIXED = new SnowFeatureUA();
 	   
 	   public static final Feature<NoFeatureConfig> LONG_VINES = new WorldGenVinesLongUA();
 	   public static final Feature<NoFeatureConfig> SHORT_VINES = new WorldGenVinesShortUA();
+	   public static final Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrassUA();
+	   public static final Feature<NoFeatureConfig> KELP_UA = new KelpUA();
 	   
 	   public static final AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new WorldGenSwampTreeMutatedUA();
 	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new WorldGenBirchMTree(false);

@@ -14,6 +14,8 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceU
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceWithChanceUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceWithExtraUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllSurfacesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllWaterBottomsUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllWaterSurfacesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.DungeonPlacementBands;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.EmeraldPlacement;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.GlowstonePlacementUA;
@@ -36,6 +38,7 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.EndSurfaceBui
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.IceMountainSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.MesaBryceSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.NetherSurfaceBuilderUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.OceanSurfaceBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -68,12 +71,14 @@ public class BiomeUA extends Biome {
 	public static final BasePlacement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfRandomLayerUA();
 	public static final BasePlacement<ChanceConfig> TWICE_SURFACE_WITH_CHANCE_UA = new TwiceSurfaceWithChanceUA();
 	public static final BasePlacement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_SURFACES_UA = new ChanceOnAllSurfacesUA();
+	public static final BasePlacement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_WATER_SURFACES_UA = new ChanceOnAllWaterSurfacesUA();
+	public static final BasePlacement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_WATER_BOTTOMS_UA = new ChanceOnAllWaterBottomsUA();
 	public static final BasePlacement<PercentageAndFrequencyConfig> NETHERWART_SOUL_SAND_SURFACES_UA = new AllSoulSandSurfacesUA();
 	public static final BasePlacement<AtSurfaceWithExtraConfig> AT_SURFACE_WITH_EXTRA_UA = new AtSurfaceWithExtraUA();
 	public static final BasePlacement<AtSurfaceWithExtraConfig> AT_SURFACE_THROUGH_WATER_WITH_EXTRA_UA = new AtSurfaceThroughWaterWithExtraUA();
 	public static final BasePlacement<AtSurfaceWithExtraConfig> ROOFED_TREE_UA = new AtSurfaceRoofedForestUA();
 	public static final BasePlacement<ChanceConfig> AT_SURFACE_WITH_CHANCE_UA = new AtSurfaceWithChanceUA();
-	   public static final BasePlacement<ChanceConfig> AT_CENTER_SURFACE_WITH_CHANCE = new AtCenterSurfaceWithChanceUA();
+	public static final BasePlacement<ChanceConfig> AT_CENTER_SURFACE_WITH_CHANCE = new AtCenterSurfaceWithChanceUA();
     public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver();
     public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver();
     public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver();
@@ -95,12 +100,15 @@ public class BiomeUA extends Biome {
     public static final SurfaceBuilderConfig SANDSTONE_SURFACE = new SurfaceBuilderConfig(SANDSTONE, SANDSTONE, SANDSTONE);
     public static final SurfaceBuilderConfig THIN_WATER_SURFACE = new SurfaceBuilderConfig(WATER, DIRT, GRAVEL);
     public static final SurfaceBuilderConfig SNOWBLOCK_ICE_ICE_SURFACE = new SurfaceBuilderConfig(SNOW_BLOCK, ICE, ICE);
+    public static final SurfaceBuilderConfig GRASS_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, STONE);
+    public static final SurfaceBuilderConfig ICE_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(ICE, GRAVEL, STONE);
 
     public static final ISurfaceBuilder<SurfaceBuilderConfig> DESERT_LAKE_SURFACE_BUILDER = new DesertLakesSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> UA_MESA_BRYCE_SURACE_BUILDER = new MesaBryceSurfaceBuilderUA();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> ICE_MOUNTAIN_SURFACE_BUILDER = new IceMountainSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> NETHER_SURFACE_BUILDER_UA = new NetherSurfaceBuilderUA();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> END_SURFACE_BUILDER_UA = new EndSurfaceBuilderUA();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> OCEAN_SURFACE_BUILDER_UA = new OceanSurfaceBuilder();
 	
 	protected BiomeUA(BiomeBuilder biomeBuilder) {
 		super(biomeBuilder);

@@ -9,8 +9,14 @@ import javax.annotation.Nullable;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsPlateauBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BirchForestBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.ColdOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DarkForestBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DarkForestHillsBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepColdOceanBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepFrozenOceanBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepLukewarmOceanBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepOceanBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepWarmOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertLakesBiomeUA;
@@ -18,6 +24,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.EndHighlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ErodedBadlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.FlowerForestBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ForestBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.FrozenOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.GiantSpruceTaigaBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.GiantSpruceTaigaHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.GiantTreeTaigaBiomeUA;
@@ -28,6 +35,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.IceSpikesBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.JungleBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.JungleEdgeBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.JungleHillsBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.LukewarmOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ModifiedBadlandsPlateauBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ModifiedGravellyMountainsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ModifiedJungleBiomeUA;
@@ -36,6 +44,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.ModifiedWoodedBadlandsPla
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.MountainsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.MushroomFieldsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.NetherBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.OceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.PlainsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.SavannaBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.SavannaPlateauBiomeUA;
@@ -55,6 +64,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.TaigaHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.TaigaMountainsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.TallBirchForestBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.TallBirchForestHillsBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.WarmOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedBadlandsPlateauBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedMountainsBiomeUA;
@@ -123,6 +133,16 @@ public class BiomeInit {
 	public static final Biome ERODED_BADLANDS = new ErodedBadlandsBiomeUA();
 	public static final Biome MODIFIED_WOODED_BADLANDS_PLATEAU = new ModifiedWoodedBadlandsPlateauBiomeUA();
 	public static final Biome MODIFIED_BADLANDS_PLATEAU = new ModifiedBadlandsPlateauBiomeUA();
+	public static final Biome COLD_OCEAN = new ColdOceanBiomeUA();
+	public static final Biome DEEP_COLD_OCEAN = new DeepColdOceanBiomeUA();
+	public static final Biome DEEP_FROZEN_OCEAN = new DeepFrozenOceanBiomeUA();
+	public static final Biome DEEP_LUKEWARM_OCEAN = new DeepLukewarmOceanBiomeUA();
+	public static final Biome DEEP_OCEAN = new DeepOceanBiomeUA();
+	public static final Biome DEEP_WARM_OCEAN = new DeepWarmOceanBiomeUA();
+	public static final Biome FROZEN_OCEAN = new FrozenOceanBiomeUA();
+	public static final Biome LUKEWARM_OCEAN = new LukewarmOceanBiomeUA();
+	public static final Biome OCEAN = new OceanBiomeUA();
+	public static final Biome WARM_OCEAN = new WarmOceanBiomeUA();
 	private static RegistryEvent.Register<Biome> eventIn = null;
      
 	//registers the biomes so they now exist in the registry along with their types
@@ -184,6 +204,16 @@ public class BiomeInit {
 		initBiome(ERODED_BADLANDS, "Eroded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(MODIFIED_WOODED_BADLANDS_PLATEAU, "Modified Wooden Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
 		initBiome(MODIFIED_BADLANDS_PLATEAU, "Modified Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
+		initBiome(COLD_OCEAN, "Cold Ocean", BiomeType.COOL, Type.OCEAN);
+		initBiome(DEEP_COLD_OCEAN, "Deep Cold Ocean", BiomeType.COOL, Type.OCEAN, Type.COLD);
+		initBiome(DEEP_FROZEN_OCEAN, "Deep Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
+		initBiome(DEEP_LUKEWARM_OCEAN, "Deep Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
+		initBiome(DEEP_OCEAN, "Deep Ocean", BiomeType.COOL, Type.OCEAN);
+		initBiome(DEEP_WARM_OCEAN, "Deep Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
+		initBiome(FROZEN_OCEAN, "Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
+		initBiome(LUKEWARM_OCEAN, "Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
+		initBiome(OCEAN, "Ocean", BiomeType.COOL, Type.OCEAN);
+		initBiome(WARM_OCEAN, "Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
 		
 		mapMBiomes();
 		mapHillsBiomes();
@@ -257,6 +287,11 @@ public class BiomeInit {
     	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(GIANT_TREE_TAIGA), IRegistry.field_212624_m.getId(GIANT_TREE_TAIGA_HILLS));
     	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(MOUNTAINS), IRegistry.field_212624_m.getId(WOODED_MOUNTAINS));
     	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(SAVANNA), IRegistry.field_212624_m.getId(SAVANNA_PLATEAU));
+    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(OCEAN), IRegistry.field_212624_m.getId(DEEP_OCEAN));
+    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(COLD_OCEAN), IRegistry.field_212624_m.getId(DEEP_COLD_OCEAN));
+    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(FROZEN_OCEAN), IRegistry.field_212624_m.getId(DEEP_FROZEN_OCEAN));
+    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(LUKEWARM_OCEAN), IRegistry.field_212624_m.getId(DEEP_LUKEWARM_OCEAN));
+    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(WARM_OCEAN), IRegistry.field_212624_m.getId(DEEP_WARM_OCEAN));
     }
     
 	

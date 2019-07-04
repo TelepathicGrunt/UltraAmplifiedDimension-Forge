@@ -68,8 +68,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
         float xzNoise2 = random.nextFloat() * ((float)Math.PI * 1F);
         float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
         float widthHeightBase = (random.nextFloat() + random.nextFloat())/16; //width And Height Modifier
-        int j = i - random.nextInt(i / 4);
-        this.beginCarvingRoom(region, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, j, random.nextDouble()+20D, mask);
+        this.beginCarvingRoom(region, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0,i, random.nextDouble()+20D, mask);
         return true;
      }
 
@@ -92,25 +91,24 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
         for(int currentRoom = startIteration; currentRoom < maxIteration; ++currentRoom) {
            double placementXZBound = 2D + (double)(MathHelper.sin((float)currentRoom * (float)Math.PI / (float)maxIteration) * widthHeightBase);
            double placementYBound = placementXZBound * heightMultiplier;
-           placementXZBound = placementXZBound * ((double)random.nextFloat() + 25D); //thickness
+           placementXZBound = placementXZBound * 23D; //thickness
            placementYBound = placementYBound * 2.2D;
            float f2 = MathHelper.cos(xzCosNoise);
            randomBlockX += (double)(MathHelper.cos(xzNoise2) * f2);
            randomBlockZ += (double)(MathHelper.sin(xzNoise2) * f2);
-           xzCosNoise = xzCosNoise * 0.7F;
-           xzCosNoise = xzCosNoise + f1 * 0.05F;
+           xzCosNoise = xzCosNoise * 0.5F;
+           xzCosNoise = xzCosNoise + f1 * 0.04F;
            xzNoise2 += f4 * 0.05F;
            f1 = f1 * 0.8F;
            f4 = f4 * 0.5F;
            f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 1.5F;
            f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 3.0F;
-           if (random.nextInt(4) != 0) {
-              if (!this.isWithinGenerationDepth(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration, widthHeightBase)) {
-                 return;
-              }
+          if (!this.isWithinGenerationDepth(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration, widthHeightBase)) {
+             return;
+          }
 
-              this.carveAtTarget(worldIn, random, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
-           }
+          this.carveAtTarget(worldIn, random, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
+       
         }
 
      }
@@ -160,14 +158,33 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                    	 for(int y = yMaxSum; y > yMin; --y) {
                          double d4 = ((double)(y - 1) + 0.5D - yRange) / placementYBound;
                          
-                         double yModified = y-6;
-                         if(yModified <= 0) {
-                        	 yModified = 0.000001D;
+                         //sets a trial and error value that widens base of pillar and makes paths through lava that look good
+                         double yModified = y-6.4;
+                         
+                         if(y < 10) {
+                        	 //creates a deep lava pool that starts 2 blocks deep automatically at edges.
+                        	 yModified++;
+                         }else if(yModified <= 0) {
+                        	 //prevents divide by 0 or by negative numbers (decreasing negative would make more terrain be carved instead of not carve)
+                        	 yModified = 0.00001D;
                          }
+                         
+                         //creates pillars that are widen at bottom. 
+                         //Perlin field creates the main body for pillar by stepping slowly through x and z and extremely slowly through y.
+                         //then subtracted out target height by yModified to flatten bottom of pillar to make a path through lava.
+                         //add a random value to add some noise to the pillar.
+                         //and set the greater than value to be very low so most of the cave gets carved out.
                          boolean flagPillars = this.field_205553_b.func_205563_a((double)x * 0.2D, (double)z * 0.2D, y*0.035D) - (targetedHeight/yModified) + random.nextDouble() * 0.1D > -3.5D;
+                         
+                         //creates large stalagmites that cannot reach floor of cavern
+                         //perlin field creates the main stalagmite shape and placement by stepping though x and z pretty fast and through y very slowly.
+                         //Then adds 400/y so that as the y value gets lower, the more area gets carved which sets the limit on how far down the stalagmites can go.
+                         //add a random value to add some noise to the pillar.
+                         //and set the greater than value to be high so more stalagmites can be made while the 400/y has already carved out the rest of the cave.
                          boolean flagStalagmites = this.field_205553_b.func_205563_a((double)x * 0.63125D, (double)z * 0.63125D, y*0.04D) +(400/(y)) + random.nextDouble() * 0.1D > 2.3D;
                          
-                         
+                         //where the pillar flag and stalagmite flag both flagged this block to be carved, begin carving. 
+                         //Thus the pillar and stalagmite is what is left after carving.
                          if ((flagPillars && flagStalagmites) && (d2 * d2 + d3 * d3) * (double)this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D) {
                             int l2 = smallX | smallZ << 4 | y << 8;
                             if (!mask.get(l2)) {
