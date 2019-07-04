@@ -59,8 +59,6 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
          MineshaftPiecesUA.Room structuremineshaftpiecesua$room = new MineshaftPiecesUA.Room(0, sharedRandom, (chunkX << 4) + 2, (chunkZ << 4) + 2, this.type);
          this.components.add(structuremineshaftpiecesua$room); 
          
-         
-         
          structuremineshaftpiecesua$room.buildComponent(structuremineshaftpiecesua$room, this.components, sharedRandom);
          this.recalculateStructureSize(worldIn);
          
@@ -73,6 +71,7 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
              this.setRandomHeight(worldIn, sharedRandom, 10, 11);
              UltraAmplified.Logger.log(Level.DEBUG, "Underground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
          }
+         
       }
    }
 

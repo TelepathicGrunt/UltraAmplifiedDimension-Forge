@@ -21,6 +21,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Config no longer works as 1.13 Forge does not have a working config UI
 
      Biomes:
+·Added Ultra Amplified versions of all Oceans! Deep Oceans has Shipwrecks and Ocean Monuments while shallow Oceans has Ruins and Treasure Chests!
 ·Most biomes now generate extra Gold, Redstone, and Lapis in a small range around 5 and 15 blocks below sea level to make underwater diving more rewarding.
 ·Many changes was made to how features (plants, snow, etc) so they spawn more efficiently and cleaner on all ledges.
 ·Ice Mountain biome now has lakes made of Ice and Blue Ice.

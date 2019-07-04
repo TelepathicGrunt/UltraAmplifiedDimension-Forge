@@ -10,6 +10,7 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.ShipwreckUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StrongholdUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
@@ -29,6 +30,11 @@ import net.minecraft.world.gen.feature.structure.DesertPyramidConfig;
 import net.minecraft.world.gen.feature.structure.EndCityConfig;
 import net.minecraft.world.gen.feature.structure.IglooConfig;
 import net.minecraft.world.gen.feature.structure.JunglePyramidConfig;
+import net.minecraft.world.gen.feature.structure.OceanMonumentConfig;
+import net.minecraft.world.gen.feature.structure.OceanMonumentStructure;
+import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
+import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
+import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.SwampHutConfig;
@@ -96,4 +102,7 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Structure<JunglePyramidConfig> JUNGLE_TEMPLE_UA = new JungleTempleUA();
 	   public static final Structure<SwampHutConfig> WITCH_HUT_UA = new WitchHutUA();
 	   public static final Structure<VillageUAConfig> VILLAGE_UA = new VillageUA();
+	   public static final Structure<ShipwreckConfig> SHIPWRECK_UA = new ShipwreckUA();
+	   public static final Structure<OceanMonumentConfig> OCEAN_MONUMENT_UA = new OceanMonumentStructure();
+	   public static final Structure<OceanRuinConfig> OCEAN_RUIN_UA = new OceanRuinStructure();
 }
