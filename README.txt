@@ -36,6 +36,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·M forms of Redwood Taiga biomes now generates tiny boulders and their pillars are now shorter but thicker.
 ·Jungle Edge biomes now generates when a jungle touches the Badlands biome or Savanna biome in addition to the Swamp biome that it used to do.
 ·Biomes that does not use Stone for their main block now generates their block true to their biome edge (before, if you were underground, you would see the Nether's Netherrack spawning by chunks instead of following the Nether's biome edge cleanly)
+·All Jungle biomes no longer spawn Ocean Monuments.
+
        
        Structures:
 ·Hay Bales in M forms of Jungles are now more common.
@@ -52,6 +54,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Ravines are now split between two levels. The first kind of Ravine spawn higher at a high rate to make a maze. The second kind of Ravine spawns around lava level and are extremely long. Both kinds of ravines are much shorter than the Ravines in 1.12 version of this mod.
 ·Cave Cavities have been redone. They now spawn giant areas with ledges along the edges with stalagmites in the ceiling. Giant pillars will also spawn that flattens out towards the bottom to provide a path for the player to walk across past the lava floor of the cave.
 
+       
        
     (V.4.4 Changes) (1.12 Minecraft)
     

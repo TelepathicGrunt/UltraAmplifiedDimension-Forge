@@ -19,7 +19,8 @@ public class StructureInit {
 			StructureIO.registerStructure(JungleTempleUA.Start.class, "Jungle Temple UA");
 			StructureIO.registerStructure(WitchHutUA.Start.class, "Witch Hut UA");
 			StructureIO.registerStructure(VillageUA.Start.class, "Village UA");
-			StructureIO.registerStructure(ShipwreckUA.Start.class, "Shipwreck UA"); // Calls vanilla pieces so we don't need to register pieces here
+			StructureIO.registerStructure(ShipwreckUA.Start.class, "Shipwreck UA");
+			StructureIO.registerStructure(StructureOceanMonumentUA.Start.class, "Ocean Monument UA");
 			MineshaftPiecesUA.registerStructurePieces();
 			EndCityPiecesUA.registerPieces();
 			NetherBridgePiecesUA.registerStructurePieces();
@@ -30,5 +31,6 @@ public class StructureInit {
 			WitchHutPiecesUA.registerPieces();
 			VillagePiecesUA.registerVillagePieces();
 			ShipwreckPiecesUA.registerShipwreckPieces();
+			OceanMonumentPiecesUA.registerOceanMonumentPieces();
 	}
 }
