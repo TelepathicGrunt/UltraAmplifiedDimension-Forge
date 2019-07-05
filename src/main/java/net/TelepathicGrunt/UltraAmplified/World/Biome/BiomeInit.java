@@ -80,6 +80,7 @@ public class BiomeInit {
 	//static variable to hold all biomes and their properties
 
 	//public static final Biome BiomeBambooForest = new BiomeBambooForestUA();
+	private static Biome[] biomes;
 	public static final Biome PLAINS = new PlainsBiomeUA();
 	public static final Biome DESERT = new DesertBiomeUA();
 	public static final Biome FOREST = new ForestBiomeUA();
@@ -143,6 +144,8 @@ public class BiomeInit {
 	public static final Biome LUKEWARM_OCEAN = new LukewarmOceanBiomeUA();
 	public static final Biome OCEAN = new OceanBiomeUA();
 	public static final Biome WARM_OCEAN = new WarmOceanBiomeUA();
+	
+	
 	private static RegistryEvent.Register<Biome> eventIn = null;
      
 	//registers the biomes so they now exist in the registry along with their types
@@ -215,10 +218,78 @@ public class BiomeInit {
 		initBiome(OCEAN, "Ocean", BiomeType.COOL, Type.OCEAN);
 		initBiome(WARM_OCEAN, "Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
 		
+		
 		mapMBiomes();
 		mapHillsBiomes();
 		
 		
+		//adds to a list which we then need in biomeProviderUA
+		biomes = new Biome[]
+				{
+						PLAINS, 
+						DESERT, 
+						MOUNTAINS, 
+						FOREST, 
+						TAIGA, 
+						SWAMP, 
+						NETHER, 
+						END, 
+						SNOWY_TUNDRA, 
+						ICE_MOUNTAIN, 
+						MUSHROOM_FIELDS, 
+						DESERT_HILLS, 
+						WOODED_HILLS, 
+						TAIGA_HILLS, 
+						JUNGLE, 
+						JUNGLE_HILLS, 
+						JUNGLE_EDGE, 
+						STONE_SHORE, 
+						SNOWY_BEACH, 
+						BIRCH_FOREST, 
+						BIRCH_FOREST_HILLS, 
+						DARK_FOREST, 
+						SNOWY_TAIGA, 
+						SNOWY_TAIGA_HILLS, 
+						GIANT_TREE_TAIGA, 
+						GIANT_TREE_TAIGA_HILLS, 
+						WOODED_MOUNTAINS, 
+						SAVANNA, 
+						SAVANNA_PLATEAU, 
+						BADLANDS, 
+						WOODED_BADLANDS_PLATEAU, 
+						BADLANDS_PLATEAU, 
+						SUNFLOWER_PLAINS, 
+						DESERT_LAKES, 
+						GRAVELLY_MOUNTAINS, 
+						FLOWER_FOREST, 
+						TAIGA_MOUNTAINS, 
+						SWAMP_HILLS, 
+						ICE_SPIKES, 
+						MODIFIED_JUNGLE, 
+						MODIFIED_JUNGLE_EDGE, 
+						TALL_BIRCH_FOREST, 
+						TALL_BIRCH_FOREST_HILLS, 
+						DARK_FOREST_HILLS, 
+						SNOWY_TAIGA_MOUNTAINS, 
+						GIANT_SPRUCE_TAIGA, 
+						GIANT_SPRUCE_TAIGA_HILLS,
+						MODIFIED_GRAVELLY_MOUNTAINS,
+						SHATTERED_SAVANNA, 
+						SHATTERED_SAVANNA_PLATEAU, 
+						ERODED_BADLANDS, 
+						MODIFIED_WOODED_BADLANDS_PLATEAU,
+						MODIFIED_BADLANDS_PLATEAU,
+						OCEAN,
+						COLD_OCEAN,
+						DEEP_COLD_OCEAN,
+						DEEP_FROZEN_OCEAN,
+						DEEP_LUKEWARM_OCEAN,
+						DEEP_OCEAN,
+						DEEP_WARM_OCEAN,
+						FROZEN_OCEAN,
+						LUKEWARM_OCEAN,
+						WARM_OCEAN
+					};
 	}
 	
 	//adds biome to registry with their type
@@ -228,6 +299,14 @@ public class BiomeInit {
 		BiomeDictionary.addTypes(biome, types);
 		return biome;
 	}
+	
+	
+	
+	//needed by BiomeProviderUA to check if a biome can generate a structure and grabs a biome's surface blocks
+	public static Biome[] getBiomeArray() {
+		return biomes;
+	}
+	
 	
 	
 	//Handles conversion between M form and non-M form biomes. 

@@ -50,68 +50,13 @@ private final BiomeCache cache = new BiomeCache(this);
 private final GenLayer genBiomes;
 /** A GenLayer containing a factory to generate biome arrays for {@llink #getBiomes(int, int, int, int, boolean)} */
 private final GenLayer biomeFactoryLayer;
-private final Biome[] biomes = new Biome[]
-	{
-		BiomeInit.PLAINS, 
-		BiomeInit.DESERT, 
-		BiomeInit.MOUNTAINS, 
-		BiomeInit.FOREST, 
-		BiomeInit.TAIGA, 
-		BiomeInit.SWAMP, 
-		BiomeInit.NETHER, 
-		BiomeInit.END, 
-		BiomeInit.SNOWY_TUNDRA, 
-		BiomeInit.ICE_MOUNTAIN, 
-		BiomeInit.MUSHROOM_FIELDS, 
-		BiomeInit.DESERT_HILLS, 
-		BiomeInit.WOODED_HILLS, 
-		BiomeInit.TAIGA_HILLS, 
-		BiomeInit.JUNGLE, 
-		BiomeInit.JUNGLE_HILLS, 
-		BiomeInit.JUNGLE_EDGE, 
-		BiomeInit.STONE_SHORE, 
-		BiomeInit.SNOWY_BEACH, 
-		BiomeInit.BIRCH_FOREST, 
-		BiomeInit.BIRCH_FOREST_HILLS, 
-		BiomeInit.DARK_FOREST, 
-		BiomeInit.SNOWY_TAIGA, 
-		BiomeInit.SNOWY_TAIGA_HILLS, 
-		BiomeInit.GIANT_TREE_TAIGA, 
-		BiomeInit.GIANT_TREE_TAIGA_HILLS, 
-		BiomeInit.WOODED_MOUNTAINS, 
-		BiomeInit.SAVANNA, 
-		BiomeInit.SAVANNA_PLATEAU, 
-		BiomeInit.BADLANDS, 
-		BiomeInit.WOODED_BADLANDS_PLATEAU, 
-		BiomeInit.BADLANDS_PLATEAU, 
-		BiomeInit.SUNFLOWER_PLAINS, 
-		BiomeInit.DESERT_LAKES, 
-		BiomeInit.GRAVELLY_MOUNTAINS, 
-		BiomeInit.FLOWER_FOREST, 
-		BiomeInit.TAIGA_MOUNTAINS, 
-		BiomeInit.SWAMP_HILLS, 
-		BiomeInit.ICE_SPIKES, 
-		BiomeInit.MODIFIED_JUNGLE, 
-		BiomeInit.MODIFIED_JUNGLE_EDGE, 
-		BiomeInit.TALL_BIRCH_FOREST, 
-		BiomeInit.TALL_BIRCH_FOREST_HILLS, 
-		BiomeInit.DARK_FOREST_HILLS, 
-		BiomeInit.SNOWY_TAIGA_MOUNTAINS, 
-		BiomeInit.GIANT_SPRUCE_TAIGA, 
-		BiomeInit.GIANT_SPRUCE_TAIGA_HILLS,
-		BiomeInit.MODIFIED_GRAVELLY_MOUNTAINS,
-		BiomeInit.SHATTERED_SAVANNA, 
-		BiomeInit.SHATTERED_SAVANNA_PLATEAU, 
-		BiomeInit.ERODED_BADLANDS, 
-		BiomeInit.MODIFIED_WOODED_BADLANDS_PLATEAU,
-		BiomeInit.MODIFIED_BADLANDS_PLATEAU
-	};
+private final Biome[] biomes;
 
 public BiomeProviderUA(long seed, WorldType worldType)
 {
 	super();
 	
-    
+    biomes = BiomeInit.getBiomeArray();
 	
 	//checks to make sure this biomeProvider is only running with the Ultra Amplified worldtypes
     if (!(worldType instanceof WorldTypeUA))

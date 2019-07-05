@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
@@ -19,29 +17,28 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.UpgradeData;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
-import net.minecraft.world.gen.feature.structure.ShipwreckPieces;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 
 public class ShipwreckUA extends Structure<ShipwreckConfig> {
 
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-      int i = Config.scatteredSpawnrate;
-      int j = 8;
-      if(Config.scatteredSpawnrate < 9 ) {
-    	  j = Config.scatteredSpawnrate - 1;
+      int maxDistance = 7;
+      int separation = 8;
+      if(maxDistance < 9 ) {
+    	  separation = maxDistance - 1;
       }
-      int k = x + i * spacingOffsetsX;
-      int l = z + i * spacingOffsetsZ;
-      int i1 = k < 0 ? k - i + 1 : k;
-      int j1 = l < 0 ? l - i + 1 : l;
-      int k1 = i1 / i;
-      int l1 = j1 / i;
+      int k = x + maxDistance * spacingOffsetsX;
+      int l = z + maxDistance * spacingOffsetsZ;
+      int i1 = k < 0 ? k - maxDistance + 1 : k;
+      int j1 = l < 0 ? l - maxDistance + 1 : l;
+      int k1 = i1 / maxDistance;
+      int l1 = j1 / maxDistance;
       ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
-      k1 = k1 * i;
-      l1 = l1 * i;
-      k1 = k1 + random.nextInt(i - j);
-      l1 = l1 + random.nextInt(i - j);
+      k1 = k1 * maxDistance;
+      l1 = l1 * maxDistance;
+      k1 = k1 + random.nextInt(maxDistance - separation);
+      l1 = l1 + random.nextInt(maxDistance - separation);
       return new ChunkPos(k1, l1);
    }
 
@@ -50,7 +47,7 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
 
    protected String getStructureName() {
-	      return "Shipwreck_UA";
+	      return "Shipwreck UA";
    }
 
    public int getSize() {
@@ -58,7 +55,7 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
 
    protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), (Biome)null);
+      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.PLAINS);
       return new ShipwreckUA.Start(worldIn, generator, random, x, z, biome);
    }
 
@@ -78,7 +75,6 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
    
    public static class Start extends StructureStart {
-	  private boolean isValid;
       public Start() {
       }
 
@@ -86,53 +82,49 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
          super(chunkX, chunkZ, biome, random, worldIn.getSeed());
          Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
          
-         int randHeight = random.nextInt(80)+150;
-    	 BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+         int xOffset = 8;
+         int zOffset = 8;
+         if (rotation == Rotation.CLOCKWISE_90) {
+            zOffset = 16;
+         } else if (rotation == Rotation.CLOCKWISE_180) {
+            xOffset = 0;
+            zOffset = 16;
+         } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+            xOffset = 0;
+            zOffset = 16;
+         }
          
-         ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(chunkX, chunkZ), UpgradeData.EMPTY);
+         
+         
+         int randHeight = random.nextInt(130)+90;
+    	 BlockPos blockpos = new BlockPos(chunkX * 16 + xOffset, 0, chunkZ * 16+zOffset);
+         
+         ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(blockpos.getX()/16, blockpos.getZ()/16), UpgradeData.EMPTY);
          chunkGenerator.makeBase(chunkprimer);
          
          //finds surface on water
-         while(randHeight > 50 && chunkprimer.getBlockState(blockpos.up(randHeight)).getMaterial() != Material.WATER) {
+         while(randHeight > 50 && chunkprimer.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
         	 randHeight--;
          }
          
          //finds bottom of water body
-         while(randHeight > 50 && chunkprimer.getBlockState(blockpos.up(randHeight)).getMaterial() == Material.WATER) {
+         while(randHeight > 50 && !chunkprimer.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
         	 randHeight--;
          }
+     
+    	 //without offset
+    	 BlockPos blockpos2 = new BlockPos(chunkX * 16, randHeight-2, chunkZ * 16);
+    	 
+    	 //Our shipwreck can generate all kinds of variants regardless of what biome it is in
+    	 ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(random.nextBoolean() ? true : false);
+    	 
+         ShipwreckPiecesUA.beginGeneration(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos2, rotation, this.components, random, newShipwreckConfig);
+         this.recalculateStructureSize(worldIn);
          
-         if (randHeight <= 50) {
-            this.isValid = false;
-         } else {
-        	 blockpos = blockpos.up(randHeight);
-        	 
-        	 //Our shipwreck can generate all kinds of variants regardless of what biome it is in
-        	 ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(random.nextBoolean() ? true : false);
-        	 
-             ShipwreckPieces.func_204760_a(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos, rotation, this.components, random, newShipwreckConfig);
-	         this.recalculateStructureSize(worldIn);
-             this.setRandomHeight(worldIn, random, randHeight, randHeight+1);
-	         
-	         UltraAmplified.Logger.log(Level.DEBUG, "Shipwreck | "+(chunkX*16)+" "+(chunkZ*16));
-	         this.isValid = true;
-         }
-         
+         UltraAmplified.Logger.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.boundingBox.minY+" "+blockpos.getZ());
+     
          this.recalculateStructureSize(worldIn);
       }
 
-      public boolean isSizeableStructure() {
-         return this.isValid;
-      }
-
-      //Forge: Fix losing of 'valid' flag on world reload. TODO: Remove in 1.14 as vanilla fixed.
-      public void writeAdditional(net.minecraft.nbt.NBTTagCompound tag) {
-         super.writeAdditional(tag);
-         tag.setBoolean("Valid", this.isValid);
-      }
-      public void readAdditional(net.minecraft.nbt.NBTTagCompound tag) {
-         super.readAdditional(tag);
-         this.isValid = tag.hasKey("Valid") && tag.getBoolean("Valid");
-      }
    }
 }

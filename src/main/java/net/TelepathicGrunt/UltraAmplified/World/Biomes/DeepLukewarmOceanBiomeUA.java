@@ -27,6 +27,7 @@ import net.minecraft.world.gen.feature.RandomDefaultFeatureListConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.TallGrassConfig;
+import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -52,8 +53,9 @@ public class DeepLukewarmOceanBiomeUA extends BiomeUA {
 		    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 
 		     // this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
-		     // this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));
-		      
+
+		      this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
+		      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
 		      
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));

@@ -59,11 +59,11 @@ public class DeepOceanBiomeUA extends BiomeUA {
 		      
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
 		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-			  this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
+		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
 		      
 		      this.addStructureFeaturesUA();
 		      
-		      this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(FeatureUA.CONTAIN_WATER, new ContainWaterConfig(Blocks.DEAD_HORN_CORAL_BLOCK, Blocks.GRAVEL, Blocks.GRAVEL), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+		      this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(FeatureUA.CONTAIN_WATER, new ContainWaterConfig(Blocks.DEAD_HORN_CORAL_BLOCK, Blocks.GRAVEL, Blocks.DEAD_HORN_CORAL_BLOCK), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
 		      
 		      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.GENERIC_DUNGEONS, IFeatureConfig.NO_FEATURE_CONFIG, DUNGEON_PLACEMENT, new DungeonRoomConfig(Config.dungeonSpawnrate)));
 		      this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, createCompositeFeature(Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, Blocks.DIRT.getDefaultState(), 33), COUNT_RANGE, new CountRangeConfig(6, 0, 0, 175)));

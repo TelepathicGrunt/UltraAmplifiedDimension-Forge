@@ -31,7 +31,8 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
   		 boolean notContainedFlag;
        	 IBlockState currentblock;
        	 IBlockState blockAbove;
-         boolean useCoral = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
+         boolean useCoralTop = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
+         boolean useCoralBottom = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
 	     
     	 for(int x = 0; x < 16; ++x) {
              for(int z = 0; z < 16; ++z) {
@@ -98,7 +99,7 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
             	        	   //place first config block if no solid block above and below
             	        	   else{
             	        		   //if config top block is dead coral, randomly chooses any dead coral block to place
-            	        		   if(useCoral) {
+            	        		   if(useCoralTop) {
             	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
             	        		   }else {
             	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
@@ -108,7 +109,7 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
          	        	   
         	        	   //place first config block if too high
          	        	   //if config top block is dead coral, randomly chooses any dead coral block to place
-         	        	   else if(useCoral) {
+         	        	   else if(useCoralTop) {
     	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
     	        		   }else {
     	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
@@ -120,8 +121,13 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
      	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
       	        		   
 	      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
-	      	        	   if(blockAbove == configBlock.middleBlock.getDefaultState()) {
-	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock.getDefaultState(), 2);
+     	        		   if(blockAbove == configBlock.middleBlock.getDefaultState()) {
+     	        			   if(useCoralBottom) {
+         	        			  worldIn.setBlockState(pos.add(x, y+1, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+         	        		   }
+         	        		   else{
+    	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock.getDefaultState(), 2);
+    	      	        	   }
 	      	        	   }
          	           }
                  	}
