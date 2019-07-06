@@ -68,11 +68,11 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
          else if (i == BiomeGenHelper.FROZEN_OCEAN) {
             l = BiomeGenHelper.DEEP_FROZEN_OCEAN;
          }
+         else if (i == BiomeGenHelper.WARM_OCEAN) {
+             l = BiomeGenHelper.DEEP_WARM_OCEAN;
+          }
          else if (LayerUtil.areBiomesSimilar(i, BiomeGenHelper.WOODED_BADLANDS_PLATEAU)) {
             l = BiomeGenHelper.BADLANDS;
-         } 
-         else if ((i == BiomeGenHelper.DEEP_OCEAN || i == BiomeGenHelper.DEEP_LUKEWARM_OCEAN || i == BiomeGenHelper.DEEP_COLD_OCEAN || i == BiomeGenHelper.DEEP_FROZEN_OCEAN) && context.random(3) == 0) {
-            l = context.random(2) == 0 ? BiomeGenHelper.PLAINS : BiomeGenHelper.FOREST;
          }
 
          if (remainder == 0 && l != i) {

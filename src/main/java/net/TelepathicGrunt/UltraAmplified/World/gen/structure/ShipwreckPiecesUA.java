@@ -3,6 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityLockableLoot;
@@ -81,13 +82,25 @@ public class ShipwreckPiecesUA{
 	      }
 
 	      protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb) {
-	         if ("map_chest".equals(function)) {
-	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_MAP);
-	         } else if ("treasure_chest".equals(function)) {
-	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_TREASURE);
-	         } else if ("supply_chest".equals(function)) {
-	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_SUPPLY);
+	         if(Config.chestGeneration) {
+	        	 if ("map_chest".equals(function)) {
+	 	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_MAP);
+	 	         } else if ("treasure_chest".equals(function)) {
+	 	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_TREASURE);
+	 	         } else if ("supply_chest".equals(function)) {
+	 	            TileEntityLockableLoot.setLootTable(worldIn, rand, pos.down(), LootTableList.CHESTS_SHIPWRECK_SUPPLY);
+	 	         }
 	         }
+	         else {
+	        	 
+	        	 //removes chest 
+	        	 if(worldIn.getBlockState(pos.down()).getFluidState().isEmpty()) {
+		        	 worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
+	        	 }else {
+	        		 worldIn.setBlockState(pos.down(), Blocks.WATER.getDefaultState(), 2);
+	        	 }
+	         }
+	    	  
 
 	      }
 

@@ -23,7 +23,6 @@ public class GenLayerBiomeUA implements IC0Transformer
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> jungleReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> megaTaigaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mushroomReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     
     
     public GenLayerBiomeUA()
@@ -82,6 +81,10 @@ public class GenLayerBiomeUA implements IC0Transformer
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 20));
         if(Config.plains)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 10));
+        if(Config.nether)
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 2));
+        if(Config.mushroom) 
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 1));
         //if(ConfigUA.SERVER.bambooForest)
         //	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BiomeBambooForest, 10));
         
@@ -97,6 +100,8 @@ public class GenLayerBiomeUA implements IC0Transformer
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BIRCH_FOREST, 10));
         if(Config.swamplands)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SWAMP, 10));
+        if(Config.mushroom) 
+        	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 1));
         
 
         if(Config.forest)
@@ -109,6 +114,10 @@ public class GenLayerBiomeUA implements IC0Transformer
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 10));
         if(Config.stoneBeach)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 4));
+        if(Config.end)
+        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 2));
+        if(Config.mushroom) 
+        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 1));
 
         if(Config.iceFlats)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 30));
@@ -118,21 +127,13 @@ public class GenLayerBiomeUA implements IC0Transformer
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 10));
         if(Config.coldBeach)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 10));
+        if(Config.mushroom) 
+        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 1));
         
+       
         
-        //special biomes lists used to replace vanilla ones such as oceans, jungles, etc
-        //if(ConfigUA.SERVER.bambooForest)
-        //	oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BiomeBambooForest, 10));
-        if(Config.iceSpike)
-		    oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_SPIKES, 10));
-        if(Config.end)
-		    oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 10));
-
-        if(Config.mesaBryce)
-		    deepOceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ERODED_BADLANDS, 20));
-        if(Config.nether)
-		    deepOceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 10));
-
+        //special biomes lists used to replace vanilla ones such as mesa, jungles, etc
+        
         if(Config.jungle)
 		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.JUNGLE, 10));
 
@@ -143,9 +144,6 @@ public class GenLayerBiomeUA implements IC0Transformer
 		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.WOODED_BADLANDS_PLATEAU, 20));
 		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS_PLATEAU, 10));
         }
-
-        if(Config.mushroom)
-		    mushroomReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 		    
         //this is used to help fill any biome list that is empty due to player turning off all of its biome.
         //otherwise, we will crash if a biome list is empty
@@ -174,9 +172,6 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(mesaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
         	temporaryBiomeList.addAll(mesaReplacedBiomes);
         }
-        if(mushroomReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
-        	temporaryBiomeList.addAll(mushroomReplacedBiomes);
-        }
         if(deepOceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
         	temporaryBiomeList.addAll(deepOceanReplacedBiomes);
         }
@@ -186,10 +181,10 @@ public class GenLayerBiomeUA implements IC0Transformer
         
         
         //for debugging purposes
-        /*
-        for(BiomeEntry biome : temporaryBiomeList){
-        	UltraAmplified.Logger.log(Level.DEBUG, biome.biome.getRegistryName());
-        }*/
+        
+//        for(BiomeEntry biome : temporaryBiomeList){
+//        	UltraAmplified.Logger.log(Level.DEBUG, biome.biome.getRegistryName());
+//        }
         
         
         //trims temporaryBiomeList if it exceeds 5 biomes
@@ -199,7 +194,7 @@ public class GenLayerBiomeUA implements IC0Transformer
         
         
         //if temp is empty (which means user made no biomes allowed), 
-        //set all biome list to have deep ocean so we do not crash due to all biome list not having any biome.
+        //set all biome list to have vanilla deep ocean so we do not crash due to all biome list not having any biome.
         if(temporaryBiomeList.size() == 0) {
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
@@ -210,15 +205,14 @@ public class GenLayerBiomeUA implements IC0Transformer
         	jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	mushroomReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
         }
         //otherwise, set any empty biome list to have temp's biome list so it is not empty 
         else {
-        	if(biomes[warmIdx].size() == 0) {
-            	biomes[warmIdx] = temporaryBiomeList;
-            }
             if(biomes[desertIdx].size() == 0) {
             	biomes[desertIdx] = temporaryBiomeList;
+            }
+        	if(biomes[warmIdx].size() == 0) {
+            	biomes[warmIdx] = temporaryBiomeList;
             }
             if(biomes[coolIdx].size() == 0) {
             	biomes[coolIdx] = temporaryBiomeList;
@@ -240,9 +234,6 @@ public class GenLayerBiomeUA implements IC0Transformer
             }
             if(mesaReplacedBiomes.size() == 0) {
             	mesaReplacedBiomes = temporaryBiomeList;
-            }
-            if(mushroomReplacedBiomes.size() == 0) {
-            	mushroomReplacedBiomes = temporaryBiomeList;
             }
         }
     }
@@ -275,18 +266,9 @@ public class GenLayerBiomeUA implements IC0Transformer
           case 4:
              return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
           default:
-             return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(mushroomReplacedBiomes, context).biome);
+             return value;
           }
        } else {
-    	   
-    	   if(value == BiomeGenHelper.OCEAN) 
-    	   {
-    		   return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome); 
-    	   }
-    	   else if (value == BiomeGenHelper.FROZEN_OCEAN || value == BiomeGenHelper.DEEP_OCEAN)
-           {
-    		   return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(deepOceanReplacedBiomes, context).biome); 
-           }
           return value;
        }
     

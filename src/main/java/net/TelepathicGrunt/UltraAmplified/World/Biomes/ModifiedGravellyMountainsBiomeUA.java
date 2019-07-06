@@ -39,7 +39,7 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 
 public class ModifiedGravellyMountainsBiomeUA extends BiomeUA {
 	   public ModifiedGravellyMountainsBiomeUA() {
-		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(EXTREME_HILLS_MUTATED_SURFACE_BUILDER, GRASS_DIRT_GRAVEL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.EXTREME_HILLS).depth(1.0F).scale(0.5F).temperature(0.5F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent("wooded_mountains"));
+		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA, GRASS_DIRT_GRAVEL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.EXTREME_HILLS).depth(1.0F).scale(0.5F).temperature(0.5F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent("wooded_mountains"));
 		      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
 		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.STONE));
 		      

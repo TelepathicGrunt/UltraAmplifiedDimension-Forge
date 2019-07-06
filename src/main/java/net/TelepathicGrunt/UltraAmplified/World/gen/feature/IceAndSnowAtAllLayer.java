@@ -30,6 +30,7 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 	        		blockpos$mutableblockpos.setPos(x, y, z);
 		            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);
 		            
+		            
 		        	if(worldIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR &&
 		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() != Material.AIR) 
 		        	{

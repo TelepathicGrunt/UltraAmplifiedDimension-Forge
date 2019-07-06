@@ -9,6 +9,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndHeightConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
@@ -29,6 +30,7 @@ import net.minecraft.world.gen.feature.MinableConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.TallGrassConfig;
+import net.minecraft.world.gen.feature.structure.OceanMonumentConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.StrongholdConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -55,10 +57,15 @@ public class DeepFrozenOceanBiomeUA  extends BiomeUA {
 	      if(Config.netherFortressGeneration)
 	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 
-	     // this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
-	      
 	      this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
 	      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+	      
+	      this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig());
+		  this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+
+		  if(Config.chestGeneration) {
+			  this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(FeatureUA.MARKED_TREASURE_CHEST_UA, IFeatureConfig.NO_FEATURE_CONFIG, FIXED_HEIGHT_WITH_CHANCE, new PercentageAndHeightConfig(0.015f, 52)));
+		  }
 	      
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));

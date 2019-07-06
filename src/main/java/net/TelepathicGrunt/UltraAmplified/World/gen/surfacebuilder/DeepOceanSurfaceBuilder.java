@@ -74,7 +74,12 @@ public class DeepOceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderCo
 	                         bottom = bottomBlock;
 	                     }
         				 
-                         middle = middleBlock;
+        				 //prevent ravines from making huge amounts of sand and gravel that can fall which causes an insane spike in lag 
+        				 if(y > 65) {
+                             middle = middleBlock;
+        				 }else {
+                             middle = bottomBlock;
+        				 }
         			 }
                      
                 	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);

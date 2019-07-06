@@ -20,7 +20,8 @@ public class StructureInit {
 			StructureIO.registerStructure(WitchHutUA.Start.class, "Witch Hut UA");
 			StructureIO.registerStructure(VillageUA.Start.class, "Village UA");
 			StructureIO.registerStructure(ShipwreckUA.Start.class, "Shipwreck UA");
-			StructureIO.registerStructure(StructureOceanMonumentUA.Start.class, "Ocean Monument UA");
+			StructureIO.registerStructure(OceanMonumentUA.Start.class, "Ocean Monument UA");
+			StructureIO.registerStructure(OceanRuinsUA.Start.class, "Ocean Ruins UA");
 			MineshaftPiecesUA.registerStructurePieces();
 			EndCityPiecesUA.registerPieces();
 			NetherBridgePiecesUA.registerStructurePieces();
@@ -32,5 +33,6 @@ public class StructureInit {
 			VillagePiecesUA.registerVillagePieces();
 			ShipwreckPiecesUA.registerShipwreckPieces();
 			OceanMonumentPiecesUA.registerOceanMonumentPieces();
+			OceanRuinsPiecesUA.registerPieces();
 	}
 }

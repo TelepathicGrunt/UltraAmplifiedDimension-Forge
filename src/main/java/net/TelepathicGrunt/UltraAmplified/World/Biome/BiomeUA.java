@@ -18,10 +18,12 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAl
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllWaterSurfacesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.DungeonPlacementBands;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.EmeraldPlacement;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.FixedHeightWithChance;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.GlowstonePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.HeightBiasedRangeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.NetherFirePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndHeightConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomChanceUnderSurface;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPlacementUnderSurface;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPositionEvery3Height;
@@ -36,10 +38,13 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.DeepOceanSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.DesertLakesSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.EndSurfaceBuilderUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.ExtremeHillsMutatedSurfaceBuilderUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.GravelSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.IceMountainSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.MesaBryceSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.NetherSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.OceanSurfaceBuilder;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.SandSurfaceBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -89,6 +94,7 @@ public class BiomeUA extends Biome {
     public static final BasePlacement<FrequencyConfig> FIRE_PLACEMENT = new NetherFirePlacementUA();
     public static final BasePlacement<LakeChanceConfig> SLIME_LAKE_PLACEMENT = new SlimeLakePlacementUA();
     public static final BasePlacement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRangeUA();
+    public static final BasePlacement<PercentageAndHeightConfig> FIXED_HEIGHT_WITH_CHANCE = new FixedHeightWithChance();
     
     
 
@@ -96,7 +102,8 @@ public class BiomeUA extends Biome {
     protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
     protected static final IBlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
     protected static final IBlockState ICE = Blocks.ICE.getDefaultState();
-    
+
+    public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SAND, SANDSTONE);
     public static final SurfaceBuilderConfig SAND_SANDSTONE_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SANDSTONE, SANDSTONE);
     public static final SurfaceBuilderConfig SANDSTONE_SURFACE = new SurfaceBuilderConfig(SANDSTONE, SANDSTONE, SANDSTONE);
     public static final SurfaceBuilderConfig THIN_WATER_SURFACE = new SurfaceBuilderConfig(WATER, DIRT, GRAVEL);
@@ -114,6 +121,9 @@ public class BiomeUA extends Biome {
     public static final ISurfaceBuilder<SurfaceBuilderConfig> END_SURFACE_BUILDER_UA = new EndSurfaceBuilderUA();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> OCEAN_SURFACE_BUILDER_UA = new OceanSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> DEEP_OCEAN_SURFACE_BUILDER_UA = new DeepOceanSurfaceBuilder();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> SAND_SURFACE_BUILDER = new SandSurfaceBuilder();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> GRAVEL_SURFACE_BUILDER = new GravelSurfaceBuilder();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA = new ExtremeHillsMutatedSurfaceBuilderUA();
 	
 	protected BiomeUA(BiomeBuilder biomeBuilder) {
 		super(biomeBuilder);
@@ -127,9 +137,6 @@ public class BiomeUA extends Biome {
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.DARK), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       
-      /*
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));*/
-   }
+    }
 
 }

@@ -32,7 +32,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
 import net.minecraft.world.gen.layer.GenLayerAddMushroomIsland;
 import net.minecraft.world.gen.layer.GenLayerAddSnow;
-import net.minecraft.world.gen.layer.GenLayerDeepOcean;
 import net.minecraft.world.gen.layer.GenLayerEdge;
 import net.minecraft.world.gen.layer.GenLayerIsland;
 import net.minecraft.world.gen.layer.GenLayerMixOceans;
@@ -42,7 +41,6 @@ import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraft.world.gen.layer.LayerUtil;
-import net.minecraft.world.gen.layer.OceanLayer;
 
 public class BiomeProviderUA extends BiomeProvider{
 
@@ -90,7 +88,10 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
    }
 
  public static <T extends IArea, C extends IContextExtended<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, LongFunction<C> contextFactory) {
-      IAreaFactory<T> iareafactory = GenLayerIsland.INSTANCE.apply(contextFactory.apply(1L));
+
+     int biomeSize = Config.biomeSize;
+	 
+	 IAreaFactory<T> iareafactory = GenLayerIsland.INSTANCE.apply(contextFactory.apply(1L));
       iareafactory = GenLayerZoom.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(1L), iareafactory);
       iareafactory = GenLayerZoom.NORMAL.apply(contextFactory.apply(2001L), iareafactory);
@@ -98,8 +99,8 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(50L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(70L), iareafactory);
       iareafactory = GenLayerRemoveTooMuchOcean.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      IAreaFactory<T> iareafactory1 = OceanLayer.INSTANCE.apply(contextFactory.apply(2L));
-      iareafactory1 = LayerUtil.repeat(2001L, GenLayerZoom.NORMAL, iareafactory1, 6, contextFactory);
+      IAreaFactory<T> iareafactory1 = GenLayerOceanUA.INSTANCE.apply(contextFactory.apply(2L));
+      iareafactory1 = LayerUtil.repeat(2001L, GenLayerZoom.NORMAL, iareafactory1, (int)(biomeSize*1.4), contextFactory);
       iareafactory = GenLayerAddSnow.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(3L), iareafactory);
       iareafactory = GenLayerEdge.CoolWarm.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
@@ -108,53 +109,38 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       iareafactory = GenLayerZoom.NORMAL.apply(contextFactory.apply(2002L), iareafactory);
       iareafactory = GenLayerZoom.NORMAL.apply(contextFactory.apply(2003L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
-      iareafactory = GenLayerAddMushroomIsland.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
-      iareafactory = GenLayerDeepOcean.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
+      iareafactory = GenLayerAddMushroomBiomeUA.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
+      iareafactory = GenLayerDeepOceansUA.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
       iareafactory = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
       
-      int i = Config.biomeSize;
-      int j = i;
 
       IAreaFactory<T> lvt_7_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
-      lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
+     // lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
       IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-      /*IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
+//      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
+//      
+//      
+//      lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
+//      
+//      //creates biomes that border incompatible biomes
+//      lvt_8_1_ = GenLayerBiomeEdgeUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      
+//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
+//      
+//      //generates the hills and Amplified variants/patches of biomes
+//      lvt_8_1_ = GenLayerHillsAndAmplifiedUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+//      lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+//	  
+//
+//      for(int k = 0; k < biomeSize; ++k) {
+//         lvt_8_1_ = GenLayerZoom.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+//      }
+//
+//      lvt_8_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      lvt_8_1_ = GenLayerMixOceanUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
       
-      
-      lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
-      
-      //creates biomes that border incompatible biomes
-      lvt_8_1_ = GenLayerBiomeEdgeUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      
-      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
-      
-      //generates the hills and Amplified variants/patches of biomes
-      lvt_8_1_ = GenLayerHillsAndAmplifiedUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-      
-      lvt_7_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
-      lvt_7_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, j, contextFactory);
-      //lvt_7_1_ = GenLayerRiver.INSTANCE.apply(contextFactory.apply(1L), lvt_7_1_);
-      lvt_7_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_7_1_);
-      lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-	  */
-
-
-      for(int k = 0; k < i; ++k) {
-         lvt_8_1_ = GenLayerZoom.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
-         if (k == 0) {
-            lvt_8_1_ = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(3L), lvt_8_1_);
-         }
-
-         if (k == 1 || i == 1) {
-            //lvt_8_1_ = GenLayerShore.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-         }
-      }
-
-      lvt_8_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      //lvt_8_1_ = GenLayerRiverMix.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), lvt_8_1_, lvt_7_1_);
-      lvt_8_1_ = GenLayerMixOceans.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
       IAreaFactory<T> iareafactory5 = GenLayerVoronoiZoom.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
       return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);
    }

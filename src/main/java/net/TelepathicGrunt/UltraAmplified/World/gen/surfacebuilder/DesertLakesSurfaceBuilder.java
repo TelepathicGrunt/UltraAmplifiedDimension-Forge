@@ -16,7 +16,7 @@ public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, in
 		IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
 
 		if (noise > 1.0D) {
-			Biome.DEFAULT_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock,
+			BiomeUA.SAND_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock,
 					defaultFluid, seaLevel, seed, BiomeUA.SAND_SANDSTONE_SANDSTONE_SURFACE);
 		} else {
 			Biome.DEFAULT_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock,
