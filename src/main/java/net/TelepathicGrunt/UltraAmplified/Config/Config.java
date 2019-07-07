@@ -24,7 +24,7 @@ public class Config {
         SERVER = specPair.getLeft();
     }
     
-    public static int dungeonSpawnrate = 650;
+    public static int dungeonSpawnrate = 40;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
     public static boolean slimeLakeGen = true;
@@ -53,7 +53,7 @@ public class Config {
     public static boolean endCityGeneration = true;
     public static boolean secretSetting = false;
     public static int biomeSize = 3;
-    public static int mutatedBiomeSpawnrate = 3;
+    public static int mutatedBiomeSpawnrate = 2;
     public static int seaLevel = 75;
     public static boolean lavaOcean = false;
     public static int waterfallSpawnrate = 35;
@@ -175,9 +175,9 @@ public class Config {
             
             			dungeonSpawnrate = builder
 	                    .comment("How often Dungeons will spawn.\r\n" 
-	                    		+"0 for no Dungeons and 1200 for max spawnrate.")
+	                    		+"0 for no Dungeons and 300 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.dungeonspawnrate")
-	                    .defineInRange("dungeonSpawnrate", 650, 0, 1200);
+	                    .defineInRange("dungeonSpawnrate", 40, 0, 300);
 	            
         	   			ravineSpawnrate = builder
 	                    .comment("How often Ravines will spawn.\r\n"
@@ -346,9 +346,9 @@ public class Config {
 
 
             		mutatedBiomeSpawnrate = builder
-            		.comment("How often the mutated form of a biome will generate" + "\n" + "0 for no mutated biomes and 29 for all biomes to be mutated.")
+            		.comment("How often the mutated form of a biome will generate" + "\n" + "0 for no mutated biomes and 28 for all biomes to be mutated.")
             		.translation("ultraamplified.config.structure.mutatedbiomespawnrate")
-            		.defineInRange("mutatedBiomeSpawnrate", 3, 0, 29);
+            		.defineInRange("mutatedBiomeSpawnrate", 2, 0, 28);
 
 
             		seaLevel = builder

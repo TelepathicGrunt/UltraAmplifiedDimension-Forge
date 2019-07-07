@@ -38,7 +38,8 @@ public class WorldGenMushroomDungeonsUA extends Feature<NoFeatureConfig>
         int l1 = -k1 - 1;
         int i2 = k1 + 1;
         int j2 = 0;
-
+        int ceilingOpenings = 0;
+        
         for (int k2 = k; k2 <= l; ++k2)
         {
             for (int l2 = -1; l2 <= 4; ++l2)
@@ -56,7 +57,7 @@ public class WorldGenMushroomDungeonsUA extends Feature<NoFeatureConfig>
 
                     if (l2 == 4 && !flag)
                     {
-                        return false;
+                    	ceilingOpenings++;
                     }
 
                     if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
@@ -67,7 +68,7 @@ public class WorldGenMushroomDungeonsUA extends Feature<NoFeatureConfig>
             }
         }
 
-        if (j2 >= 1 && j2 <= 5)
+        if (j2 >= 1 && j2 <= 14 && ceilingOpenings < 14)
         {
             for (int k3 = k; k3 <= l; ++k3)
             {

@@ -38,23 +38,28 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Jungle Edge biomes now generates when a jungle touches the Badlands biome or Savanna biome in addition to the Swamp biome that it used to do.
 ·Biomes that does not use Stone for their main block now generates their block true to their biome edge (before, if you were underground, you would see the Nether's Netherrack spawning by chunks instead of following the Nether's biome edge cleanly)
 ·All Jungle biomes no longer spawn Ocean Monuments.
+·Savanna Plateau and Shattered Savanna Plateau now generates giant pillars under its dirt terrain!
+·Tall Birch Forest Hills biome now generates more giant Birch Trees to make it more dense.
+·Desert Biomes and Gravely Mountain biomes now have blocks that cannot fall under their Sand/Gravel to help reduce the insane nearly-unplayable lag that occurs when ledges of Sand/Gravel begins falling.
+·Removed Bamboo Forest due to Bamboo Jungle being added in vanilla 1.14 and that this biome caused a great deal of lag from all the Sugar Cane.
 
        
        Structures:
 ·Hay Bales in M forms of Jungles are now more common.
 ·Dungeons now have a new appearance for what biome they are in. (Forms include normal, mesa, desert, snow, nether, end, dark forest, mushroom, and swamp)
-·Mineshafts now takes on the Swamp variant when in Dark Forest biome.
+·Dungeon now have less strict requirements on where they can generate and so spawnrates and density bands have been re-adjusted to account for more successful generations.
+·Mineshafts now takes on the Swamp variant when in Dark Forest biome and Ocean variant when in any Ocean biome.
 ·Fossils now generates on the surface of a ledge that does not have direct sunlight (before it could spawn floating in midair).
 ·End Cities now generates much, much bigger (three full branches instead of one).
 ·Desert Temples now have more TNT and is more dangerous to make safe. Be very careful!
 ·Jungle Temples now have more hidden chests, more Dispensers that shoot arrows, and some Cobblestone is infested with Silverfish.
 ·Witch Huts now generate 2 Witches at start instead of 1.
-·Woodland Mansions cannot spawn in Plains biome now.
-·Igloos can spawn in Ice Mountain biome and all Snowy Taiga biomes.
+·Woodland Mansions cannot spawn in Plains biome or mutated Birch Forest biomes now.
+·Igloos can now also spawn in Ice Mountain biome and all Snowy Taiga biomes.
+·Fixed Ocean Monuments so all rooms can be accessed now without resorting to TNT to break walls.
 ·Adjusted what kind of blocks spawn in Villages.
 ·Ravines are now split between two levels. The first kind of Ravine spawn higher at a high rate to make a maze. The second kind of Ravine spawns around lava level and are extremely long. Both kinds of ravines are much shorter than the Ravines in 1.12 version of this mod.
 ·Cave Cavities have been redone. They now spawn giant areas with ledges along the edges with stalagmites in the ceiling. Giant pillars will also spawn that flattens out towards the bottom to provide a path for the player to walk across past the lava floor of the cave.
-·Fixed Ocean Monuments so all rooms can be accessed now without resorting to TNT to break walls.
        
        
     (V.4.4 Changes) (1.12 Minecraft)

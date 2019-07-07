@@ -51,7 +51,7 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 	   public FrozenOceanBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(OCEAN_SURFACE_BUILDER_UA, ICE_GRAVEL_STONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-1.0F).scale(0.1F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String)null));
 	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-	    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL));
+	    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.OCEAN));
 	      
 	      if(Config.strongholdGeneration)
 	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());

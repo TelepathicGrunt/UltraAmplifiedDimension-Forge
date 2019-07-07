@@ -13,30 +13,30 @@ import net.minecraft.world.gen.placement.DungeonRoomConfig;
 
 public class DungeonPlacementBands extends BasePlacement<DungeonRoomConfig> {
    public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, DungeonRoomConfig placementConfig, Feature<C> featureIn, C featureConfig) {
-	      int i = placementConfig.count;
+	      int count = 40;
 
-	      for(int j = 0; j < i; ++j) {
+	      for(int currentCount = 0; currentCount < count; ++currentCount) {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
 	         int y;
-	         int rand = random.nextInt(1000);
+	         int rand = random.nextInt(100);
 	         
-	         //4% chance
-            if(rand < 40) {
-            	 y = random.nextInt(11)+75;
-            	 //range: 75 - 85
+	         //30% chance
+            if(rand < 30) {
+            	 y = random.nextInt(26)+75;
+            	 //range: 75 - 100
             }
-             //2% chance
-            else if(rand < 60) 
+             //35% chance
+            else if(rand < 65) 
             {
-        		 y = random.nextInt(180);
-        		 //range 0 - 179
+        		 y = random.nextInt(160)+1;
+        		 //range 1 - 160
         	}
-             //94%
+             //35%
             else 
         	{
-            	 y = random.nextInt(66)+180;
-            	 //range: 180 - 245
+            	 y = random.nextInt(86)+160;
+            	 //range: 160 - 245
         	}
 	         
 	         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, y, z), featureConfig);

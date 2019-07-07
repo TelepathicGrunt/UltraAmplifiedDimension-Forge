@@ -44,7 +44,9 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.IceMountainSu
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.MesaBryceSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.NetherSurfaceBuilderUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.OceanSurfaceBuilder;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.PlateauSurfaceBuilder;
 import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.SandSurfaceBuilder;
+import net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder.ShatteredSavannaSurfaceBuilderUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -113,6 +115,7 @@ public class BiomeUA extends Biome {
     public static final SurfaceBuilderConfig GRASS_GRAVEL_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
     public static final SurfaceBuilderConfig GRASS_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, SANDSTONE);
     public static final SurfaceBuilderConfig GRASS_SAND_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
+    public static final SurfaceBuilderConfig COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(COARSE_DIRT, COARSE_DIRT, GRAVEL);
 
     public static final ISurfaceBuilder<SurfaceBuilderConfig> DESERT_LAKE_SURFACE_BUILDER = new DesertLakesSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> UA_MESA_BRYCE_SURACE_BUILDER = new MesaBryceSurfaceBuilderUA();
@@ -124,6 +127,8 @@ public class BiomeUA extends Biome {
     public static final ISurfaceBuilder<SurfaceBuilderConfig> SAND_SURFACE_BUILDER = new SandSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> GRAVEL_SURFACE_BUILDER = new GravelSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA = new ExtremeHillsMutatedSurfaceBuilderUA();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> PLATEAU_SURFACE_BUILDER = new PlateauSurfaceBuilder();
+    public static final ISurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA_SURFACE_BUILDER_UA = new ShatteredSavannaSurfaceBuilderUA();
 	
 	protected BiomeUA(BiomeBuilder biomeBuilder) {
 		super(biomeBuilder);

@@ -41,6 +41,7 @@ public class WorldGenBadlandsDungeonsUA extends Feature<NoFeatureConfig>
         int zMin = -k1 - 1;
         int zMax = k1 + 1;
         int j2 = 0;
+        int ceilingOpenings = 0;
 
         for (int k2 = xMin; k2 <= xMax; ++k2)
         {
@@ -59,7 +60,7 @@ public class WorldGenBadlandsDungeonsUA extends Feature<NoFeatureConfig>
 
                     if (l2 == 4 && !flag)
                     {
-                        return false;
+                    	ceilingOpenings++;
                     }
 
                     if ((k2 == xMin || k2 == xMax || i3 == zMin || i3 == zMax) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
@@ -70,7 +71,7 @@ public class WorldGenBadlandsDungeonsUA extends Feature<NoFeatureConfig>
             }
         }
 
-        if (j2 >= 1 && j2 <= 5)
+        if (j2 >= 1 && j2 <= 14 && ceilingOpenings < 14)
         {
             for (int xOffset = xMin; xOffset <= xMax; ++xOffset)
             {

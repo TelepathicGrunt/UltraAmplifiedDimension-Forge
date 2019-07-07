@@ -79,7 +79,6 @@ public class BiomeInit {
 	
 	//static variable to hold all biomes and their properties
 
-	//public static final Biome BiomeBambooForest = new BiomeBambooForestUA();
 	private static Biome[] biomes;
 	public static final Biome PLAINS = new PlainsBiomeUA();
 	public static final Biome DESERT = new DesertBiomeUA();
@@ -153,7 +152,6 @@ public class BiomeInit {
 		
 		eventIn = event;
 		
-		//initBiome(BiomeBambooForest, "Bamboo Forest", BiomeType.WARM, Type.DENSE, Type.WET, Type.FOREST);
 		initBiome(PLAINS, "Plains", BiomeType.WARM, Type.PLAINS);
 		initBiome(DESERT, "Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY);
 		initBiome(FOREST, "Forest", BiomeType.WARM, Type.FOREST);

@@ -31,53 +31,54 @@ public class WorldGenDungeonsUA extends Feature<NoFeatureConfig>
     
     public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
-        int j = rand.nextInt(2) + 2;
-        int k = -j - 1;
-        int l = j + 1;
-        int k1 = rand.nextInt(2) + 2;
-        int l1 = -k1 - 1;
-        int i2 = k1 + 1;
-        int j2 = 0;
+        int randXRange = rand.nextInt(2) + 2;
+        int minX = -randXRange - 1;
+        int maxX = randXRange + 1;
+        int randZRange = rand.nextInt(2) + 2;
+        int minZ = -randZRange - 1;
+        int maxZ = randZRange + 1;
+        int validOpenings = 0;
+        int ceilingOpenings = 0;
 
-        for (int k2 = k; k2 <= l; ++k2)
+        for (int x = minX; x <= maxX; ++x)
         {
-            for (int l2 = -1; l2 <= 4; ++l2)
+            for (int y = -1; y <= 4; ++y)
             {
-                for (int i3 = l1; i3 <= i2; ++i3)
+                for (int z = minZ; z <= maxZ; ++z)
                 {
-                    BlockPos blockpos = position.add(k2, l2, i3);
+                    BlockPos blockpos = position.add(x, y, z);
                     Material material = worldIn.getBlockState(blockpos).getMaterial();
                     boolean flag = material.isSolid();
 
-                    if (l2 == -1 && !flag)
+                    if (y == -1 && !flag)
                     {
-                        return false;
+                    	return false;
                     }
 
-                    if (l2 == 4 && !flag)
+                    if (y == 4 && !flag)
                     {
-                        return false;
+                    	ceilingOpenings++;
                     }
 
-                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
+                    if ((x == minX || x == maxX || z == minZ || z == maxZ) && y == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
                     {
-                        ++j2;
+                        validOpenings++;
                     }
                 }
             }
         }
 
-        if (j2 >= 1 && j2 <= 5)
+        if (validOpenings >= 1 && validOpenings <= 14 && ceilingOpenings < 14)
         {
-            for (int k3 = k; k3 <= l; ++k3)
+            for (int x = minX; x <= maxX; ++x)
             {
-                for (int i4 = 3; i4 >= -1; --i4)
+                for (int y = 3; y >= -1; --y)
                 {
-                    for (int k4 = l1; k4 <= i2; ++k4)
+                    for (int z = minZ; z <= maxZ; ++z)
                     {
-                        BlockPos blockpos1 = position.add(k3, i4, k4);
+                        BlockPos blockpos1 = position.add(x, y, z);
 
-                        if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
+                        if (x != minX && y != -1 && z != minZ && x != maxX && y != 4 && z != maxZ)
                         {
                             if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
@@ -92,7 +93,7 @@ public class WorldGenDungeonsUA extends Feature<NoFeatureConfig>
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
                         else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                         {
-                            if (i4 == -1 && rand.nextInt(4) != 0)
+                            if (y == -1 && rand.nextInt(4) != 0)
                             {
                                 worldIn.setBlockState(blockpos1, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2);
                             }
@@ -109,9 +110,9 @@ public class WorldGenDungeonsUA extends Feature<NoFeatureConfig>
             {
                 for (int j4 = 0; j4 < 3; ++j4)
                 {
-                    int l4 = position.getX() + rand.nextInt(j * 2 + 1) - j;
+                    int l4 = position.getX() + rand.nextInt(randXRange * 2 + 1) - randXRange;
                     int i5 = position.getY();
-                    int j5 = position.getZ() + rand.nextInt(k1 * 2 + 1) - k1;
+                    int j5 = position.getZ() + rand.nextInt(randZRange * 2 + 1) - randZRange;
                     BlockPos blockpos2 = new BlockPos(l4, i5, j5);
 
                     if (worldIn.isAirBlock(blockpos2))

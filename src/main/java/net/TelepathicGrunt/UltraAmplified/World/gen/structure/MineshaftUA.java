@@ -87,7 +87,8 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
        SAVANNA,
        SWAMPORDARKFOREST,
        END,
-       HELL;
+       HELL,
+       OCEAN;
 
       public static MineshaftUA.Type byId(int id) {
          return id >= 0 && id < values().length ? values()[id] : NORMAL;

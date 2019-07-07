@@ -19,82 +19,79 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
 /*
  * This class generates M variants and Hills variants of biomes if they exist for that biome
  */
-   private static final Logger LOGGER = LogManager.getLogger();
    
 
 
    public int apply(IContext context, AreaDimension dimensionIn, IArea area1, IArea area2, int x, int z) {
-      int i = area1.getValue(x + 1, z + 1);
-      int j = area2.getValue(x + 1, z + 1);
-      if (i > 255) {
-         LOGGER.debug("old! {}", (int)i);
-      }
+      int biomeId1 = area1.getValue(x + 1, z + 1);
+      int biomeId2 = area2.getValue(x + 1, z + 1);
 
-      int remainder = (j - 2) % 29;
       
-      if ((!BiomeGenHelper.isShallowOcean(i) && i != 0 && j >= 2 && remainder != 0 && remainder <= Config.mutatedBiomeSpawnrate - 1) || Config.mutatedBiomeSpawnrate == 29) {
-         Biome biome = IRegistry.field_212624_m.get(i);
+      int remainder = (biomeId2 - 2) % 29;
+      if (!BiomeGenHelper.isShallowOcean(biomeId1) && biomeId2 >= 2 && remainder != 0 && remainder <= Config.mutatedBiomeSpawnrate) {
+         Biome biome = IRegistry.field_212624_m.get(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
-            return biome2 == null ? i : IRegistry.field_212624_m.getId(biome2);
+            return biome2 == null ? biomeId1 : IRegistry.field_212624_m.getId(biome2);
          }
       }
+      
 
       if (context.random(3) == 0 || remainder == 0) {
-         int l = i;
+         int l = biomeId1;
          
-         if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(i)) {
-        	 l = BiomeInit.BASE_TO_HILLS_MAP.get(i);
+         if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(biomeId1)) {
+        	 l = BiomeInit.BASE_TO_HILLS_MAP.get(biomeId1);
          }
-         else if (i == BiomeGenHelper.DARK_FOREST && Config.plains) {
+         else if (biomeId1 == BiomeGenHelper.DARK_FOREST && Config.plains) {
          	//makes sure plains is selected in the config setting before allowing it to spawn through here
             l = BiomeGenHelper.PLAINS;
-         }else if (i == BiomeGenHelper.PLAINS && Config.forest) {
+         }else if (biomeId1 == BiomeGenHelper.PLAINS && Config.forest) {
         	//makes sure forest is selected in the config setting before allowing it to spawn through here
             l = context.random(3) == 0 ? BiomeGenHelper.WOODED_HILLS : BiomeGenHelper.FOREST;
          } 
-         else if (i == BiomeGenHelper.SNOWY_TUNDRA && Config.iceMountain) {
+         else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && Config.iceMountain) {
             l = BiomeGenHelper.SNOWY_MOUNTAINS;
          } 
-         else if (i == BiomeGenHelper.OCEAN) {
+         else if (biomeId1 == BiomeGenHelper.OCEAN) {
             l = BiomeGenHelper.DEEP_OCEAN;
          } 
-         else if (i == BiomeGenHelper.LUKEWARM_OCEAN) {
+         else if (biomeId1 == BiomeGenHelper.LUKEWARM_OCEAN) {
             l = BiomeGenHelper.DEEP_LUKEWARM_OCEAN;
          } 
-         else if (i == BiomeGenHelper.COLD_OCEAN) {
+         else if (biomeId1 == BiomeGenHelper.COLD_OCEAN) {
             l = BiomeGenHelper.DEEP_COLD_OCEAN;
          } 
-         else if (i == BiomeGenHelper.FROZEN_OCEAN) {
+         else if (biomeId1 == BiomeGenHelper.FROZEN_OCEAN) {
             l = BiomeGenHelper.DEEP_FROZEN_OCEAN;
          }
-         else if (i == BiomeGenHelper.WARM_OCEAN) {
+         else if (biomeId1 == BiomeGenHelper.WARM_OCEAN) {
              l = BiomeGenHelper.DEEP_WARM_OCEAN;
           }
-         else if (LayerUtil.areBiomesSimilar(i, BiomeGenHelper.WOODED_BADLANDS_PLATEAU)) {
+         else if (LayerUtil.areBiomesSimilar(biomeId1, BiomeGenHelper.WOODED_BADLANDS_PLATEAU)) {
             l = BiomeGenHelper.BADLANDS;
          }
 
-         if (remainder == 0 && l != i) {
-            Biome biome1 = BiomeInit.BASE_TO_MUTATION_MAP.get(IRegistry.field_212624_m.get(l));
-            l = biome1 == null ? i : IRegistry.field_212624_m.getId(biome1);
-         }
+//         if (remainder == 0 && l != biomeId1) {
+//            Biome biome1 = BiomeInit.BASE_TO_MUTATION_MAP.get(IRegistry.field_212624_m.get(l));
+//            l = biome1 == null ? biomeId1 : IRegistry.field_212624_m.getId(biome1);
+//         }
 
-         if (l != i) {
+         if (l != biomeId1) {
             int i1 = 0;
-            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 1, z + 0), i)) {
+            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 1, z + 0), biomeId1)) {
                ++i1;
             }
 
-            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 2, z + 1), i)) {
+            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 2, z + 1), biomeId1)) {
                ++i1;
             }
 
-            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 0, z + 1), i)) {
+            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 0, z + 1), biomeId1)) {
                ++i1;
             }
 
-            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 1, z + 2), i)) {
+            if (LayerUtil.areBiomesSimilar(area1.getValue(x + 1, z + 2), biomeId1)) {
                ++i1;
             }
 
@@ -104,6 +101,6 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
          }
       }
 
-      return i;
+      return biomeId1;
    }
 }

@@ -34,8 +34,9 @@ public class WorldGenContainWater extends Feature<ContainWaterConfig> {
          boolean useCoralTop = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
          boolean useCoralBottom = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
 	     
-    	 for(int x = 0; x < 16; ++x) {
-             for(int z = 0; z < 16; ++z) {
+         //needs to take up all 4 chunks so biome borders betwen ocean and non-oceans are cleaner
+    	 for(int x = -8; x < 24; ++x) {
+             for(int z = -8; z < 24; ++z) {
                  
             	 for(int y = 256; y > worldIn.getSeaLevel(); y--) {
 

@@ -46,7 +46,7 @@ public class DeepOceanBiomeUA extends BiomeUA {
 	   public DeepOceanBiomeUA() {
 		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEEP_OCEAN_SURFACE_BUILDER_UA, GRASS_GRAVEL_DEAD_CORAL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.OCEAN).depth(-1.8F).scale(0.1F).temperature(0.6F).downfall(0.5F).waterColor(4159204).waterFogColor(329011).parent((String)null));
 		      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed)
-		    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.NORMAL));
+		    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.OCEAN));
 		      
 		      if(Config.strongholdGeneration)
 		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
@@ -121,11 +121,11 @@ public class DeepOceanBiomeUA extends BiomeUA {
 
 	   @OnlyIn(Dist.CLIENT)
 	   public int getGrassColor(BlockPos pos) {
-	      return 37451;
+	      return 4624715;
 	   }
 
 	   @OnlyIn(Dist.CLIENT)
 	   public int getFoliageColor(BlockPos pos) {
-	      return 37723;
+	      return 4295760;
 	   }
 }

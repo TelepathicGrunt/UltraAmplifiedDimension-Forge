@@ -50,6 +50,7 @@ public enum BiomeGenHelper {
    public static final int DEEP_FROZEN_OCEAN = IRegistry.field_212624_m.getId(BiomeInit.DEEP_FROZEN_OCEAN);
    public static final int SNOWY_BEACH = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_BEACH);
    public static final int STONE_SHORE = IRegistry.field_212624_m.getId(BiomeInit.STONE_SHORE);
+   public static final int SUNFLOWER_PLAINS = IRegistry.field_212624_m.getId(BiomeInit.SUNFLOWER_PLAINS);
 
    public static final int VANILLA_OCEAN = IRegistry.field_212624_m.getId(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = IRegistry.field_212624_m.getId(Biomes.DEEP_OCEAN);

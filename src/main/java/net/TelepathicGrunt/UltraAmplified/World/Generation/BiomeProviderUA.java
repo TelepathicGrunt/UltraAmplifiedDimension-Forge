@@ -30,13 +30,10 @@ import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
-import net.minecraft.world.gen.layer.GenLayerAddMushroomIsland;
 import net.minecraft.world.gen.layer.GenLayerAddSnow;
 import net.minecraft.world.gen.layer.GenLayerEdge;
 import net.minecraft.world.gen.layer.GenLayerIsland;
-import net.minecraft.world.gen.layer.GenLayerMixOceans;
 import net.minecraft.world.gen.layer.GenLayerRemoveTooMuchOcean;
-import net.minecraft.world.gen.layer.GenLayerRiverInit;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
@@ -118,28 +115,28 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
      // lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
-      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-//      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
-//      
-//      
-//      lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
-//      
-//      //creates biomes that border incompatible biomes
-//      lvt_8_1_ = GenLayerBiomeEdgeUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-//      
-//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
-//      
-//      //generates the hills and Amplified variants/patches of biomes
-//      lvt_8_1_ = GenLayerHillsAndAmplifiedUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-//      lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-//	  
-//
-//      for(int k = 0; k < biomeSize; ++k) {
-//         lvt_8_1_ = GenLayerZoom.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
-//      }
-//
-//      lvt_8_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-//      lvt_8_1_ = GenLayerMixOceanUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
+      //IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
+      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
+      
+      
+      lvt_8_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_8_1_, 2, contextFactory);
+      
+      //creates biomes that border incompatible biomes
+      lvt_8_1_ = GenLayerBiomeEdgeUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+      
+      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
+      
+      //generates the hills and Amplified variants/patches of biomes
+      lvt_8_1_ = GenLayerHillsAndAmplifiedUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+      lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+	  
+
+      for(int k = 0; k < biomeSize; ++k) {
+         lvt_8_1_ = GenLayerZoom.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+      }
+
+      lvt_8_1_ = GenLayerSmooth.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+      lvt_8_1_ = GenLayerMixOceanUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
       
       IAreaFactory<T> iareafactory5 = GenLayerVoronoiZoom.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
       return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);

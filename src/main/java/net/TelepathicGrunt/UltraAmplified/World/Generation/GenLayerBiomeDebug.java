@@ -10,14 +10,14 @@ import net.minecraft.world.gen.layer.traits.IC0Transformer;
 public class GenLayerBiomeDebug implements IC0Transformer 
 {
 
-	   @SuppressWarnings("deprecation")
-	   private static final int TESTING_BIOME = IRegistry.field_212624_m.getId(BiomeInit.DESERT);
-	   
-	   public GenLayerBiomeDebug(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
-	   }
+   @SuppressWarnings("deprecation")
+   private static final int TESTING_BIOME = IRegistry.field_212624_m.getId(BiomeInit.TALL_BIRCH_FOREST_HILLS);
+   
+   public GenLayerBiomeDebug(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
+   }
 
-	   public int apply(IContext context, int value) {
-	       return TESTING_BIOME;
-	   }
+   public int apply(IContext context, int value) {
+       return TESTING_BIOME;
+   }
 
-	}
+}

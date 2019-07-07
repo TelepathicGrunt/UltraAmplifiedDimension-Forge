@@ -453,7 +453,11 @@ public class MineshaftPiecesUA
                     }
                     else if(this.mineShaftType == Type.HELL) 
                     {
-                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.15F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
+                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
+                    }
+                    else if(this.mineShaftType == Type.OCEAN) 
+                    {
+                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.SEA_LANTERN.getDefaultState());
                     }
                     else {
 	                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.WALL_TORCH.getDefaultState().with(BlockTorchWall.HORIZONTAL_FACING, EnumFacing.SOUTH));
@@ -702,6 +706,9 @@ public class MineshaftPiecesUA
                     
                 case HELL:
                     return Blocks.NETHER_BRICKS.getDefaultState();
+
+                case OCEAN:
+                    return Blocks.DARK_PRISMARINE.getDefaultState();
                     
                 case STONE:
                     return Blocks.ANDESITE.getDefaultState();
@@ -745,6 +752,9 @@ public class MineshaftPiecesUA
                     
                 case HELL:
                     return Blocks.NETHER_BRICKS.getDefaultState();
+
+                case OCEAN:
+                    return Blocks.PRISMARINE_BRICKS.getDefaultState();
                     
                 case STONE:
                     return Blocks.COBBLESTONE_WALL.getDefaultState();
