@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.state.IBlockState;
@@ -86,7 +86,7 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
 
  public static <T extends IArea, C extends IContextExtended<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, LongFunction<C> contextFactory) {
 
-     int biomeSize = Config.biomeSize;
+     int biomeSize = ConfigUA.biomeSize;
 	 
 	 IAreaFactory<T> iareafactory = GenLayerIsland.INSTANCE.apply(contextFactory.apply(1L));
       iareafactory = GenLayerZoom.FUZZY.apply(contextFactory.apply(2000L), iareafactory);

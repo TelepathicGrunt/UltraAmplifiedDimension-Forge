@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -93,17 +93,17 @@ public class WorldGenGiantStackableBoulderUA extends Feature<BlockBlobConfig>
                     	int randomChance = rand.nextInt(1400);
                     	
                     	// 2/1400th chance for diamond ore
-                    	if(Config.diamondOreSpawnrate != 0 && randomChance <= 1) {
+                    	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance <= 1) {
                     		worldIn.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
                     	}
                     	
                     	// 48/1400th chance for iron ore
-                    	else if(Config.ironOreSpawnrate != 0 && randomChance <= 50){
+                    	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 50){
                     		worldIn.setBlockState(blockpos, ironOre.getDefaultState(), 4);
                     	}
                     	
                     	// 82/1400th chance for coal ore
-                    	else if(Config.coalOreSpawnrate != 0 && randomChance <= 130){
+                    	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 130){
                     		worldIn.setBlockState(blockpos, coalOre.getDefaultState(), 4);
                     	}
                     	

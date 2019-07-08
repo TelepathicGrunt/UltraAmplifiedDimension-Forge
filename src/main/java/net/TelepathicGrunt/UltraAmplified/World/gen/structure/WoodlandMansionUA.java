@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Level;
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -34,7 +34,7 @@ public class WoodlandMansionUA extends Structure<WoodlandMansionConfig> {
 	
 	   protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
 	      
-		   int maxSpacing = Config.mansionSpawnrate;
+		   int maxSpacing = ConfigUA.mansionSpawnrate;
 		   int minSpacing = (int)(maxSpacing*0.75);
 		   
 		   if(maxSpacing < 10) {

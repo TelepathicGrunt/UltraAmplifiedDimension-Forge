@@ -2,7 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
 import java.util.Collection;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.registry.IRegistry;
@@ -75,72 +75,72 @@ public class GenLayerBiomeUA implements IC0Transformer
         //adds our ultra amplified version of the vanilla biomes while checking to see if they are allowed by the user through the config
         
         //deserts
-        if(Config.desert)
+        if(ConfigUA.desert)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 20));
-        if(Config.savanna)
+        if(ConfigUA.savanna)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 20));
-        if(Config.plains)
+        if(ConfigUA.plains)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 8));
-        if(Config.nether)
+        if(ConfigUA.nether)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 10));
-        if(Config.mushroom) 
+        if(ConfigUA.mushroom) 
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
 
         //warm
-        if(Config.forest)
+        if(ConfigUA.forest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
-        if(Config.roofedForest)
+        if(ConfigUA.roofedForest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DARK_FOREST, 10));
-        if(Config.extremeHills)
+        if(ConfigUA.extremeHills)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
-        if(Config.plains)
+        if(ConfigUA.plains)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 10));
-        if(Config.birchForest)
+        if(ConfigUA.birchForest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BIRCH_FOREST, 10));
-        if(Config.swamplands)
+        if(ConfigUA.swamplands)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SWAMP, 10));
-        if(Config.mushroom) 
+        if(ConfigUA.mushroom) 
         	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
         
         //cool
-        if(Config.forest)
+        if(ConfigUA.forest)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
-        if(Config.extremeHills)
+        if(ConfigUA.extremeHills)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
-        if(Config.taiga)
+        if(ConfigUA.taiga)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.TAIGA, 10));
-        if(Config.plains)
+        if(ConfigUA.plains)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 6));
-        if(Config.stoneBeach)
+        if(ConfigUA.stoneBeach)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 8));
-        if(Config.end)
+        if(ConfigUA.end)
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 8));
-        if(Config.mushroom) 
+        if(ConfigUA.mushroom) 
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
 
         //icy
-        if(Config.iceFlats)
+        if(ConfigUA.iceFlats)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 24));
-        if(Config.iceMountain)
+        if(ConfigUA.iceMountain)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 10));
-        if(Config.coldTaiga)
+        if(ConfigUA.coldTaiga)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 10));
-        if(Config.coldBeach)
+        if(ConfigUA.coldBeach)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 8));
-        if(Config.mushroom) 
+        if(ConfigUA.mushroom) 
         	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
         
        
         
         //special biomes lists used to replace vanilla ones such as mesa, jungles, etc
         
-        if(Config.jungle)
+        if(ConfigUA.jungle)
 		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.JUNGLE, 10));
 
-        if(Config.megaTaiga)
+        if(ConfigUA.megaTaiga)
 		    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
 
-        if(Config.mesa) 
+        if(ConfigUA.mesa) 
 		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS, 10));
 
         
@@ -229,7 +229,7 @@ public class GenLayerBiomeUA implements IC0Transformer
             }
         }
 
-		if (!Config.ocean && !Config.coldOcean && !Config.frozenOcean && !Config.lukewarmOcean && !Config.warmOcean) {
+		if (!ConfigUA.ocean && !ConfigUA.coldOcean && !ConfigUA.frozenOcean && !ConfigUA.lukewarmOcean && !ConfigUA.warmOcean) {
 			noOcean = true;
 		}
     }

@@ -11,7 +11,7 @@ import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.SharedSeedRandom;
@@ -135,9 +135,9 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
          }
       }
 
-      int distance = (int)Config.strongholdDistance;
-      int numberOfStrongholds = Config.strongholdNumberPerWorld;
-      int spread = Config.strongholdSpread;
+      int distance = (int)ConfigUA.strongholdDistance;
+      int numberOfStrongholds = ConfigUA.strongholdNumberPerWorld;
+      int spread = ConfigUA.strongholdSpread;
       this.structureCoords = new ChunkPos[numberOfStrongholds];
       int j = 0;
       Long2ObjectMap<StructureStart> long2objectmap = generator.getStructureReferenceToStartMap(this);

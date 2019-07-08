@@ -1,6 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
@@ -30,30 +30,30 @@ public class EndHighlandsBiomeUA extends BiomeUA {
    public EndHighlandsBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(END_SURFACE_BUILDER_UA, END_STONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.THEEND).depth(0.1F).scale(0.2F).temperature(0.7F).downfall(0.5F).waterColor(16711840).waterFogColor(16711840).parent((String)null));
 	    
-	      if(Config.mineshaftAbovegroundAllowed || Config.mineshaftUndergroundAllowed) {
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)Config.mineshaftSpawnrate, MineshaftUA.Type.END));
+	      if(ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) {
+		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.END));
 	      }
 
-    	  if(Config.villageGeneration) {
+    	  if(ConfigUA.villageGeneration) {
     		  this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.END));
     	  }
     	  
-    	  if(Config.endCityGeneration)
+    	  if(ConfigUA.endCityGeneration)
     		  this.addStructure(FeatureUA.END_CITY_UA, new EndCityConfig()); 
 	      
 	      
-	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
-	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
+	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(ConfigUA.caveCavitySpawnrate)/1000)));
+	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(ConfigUA.ravineSpawnrate)/100)));
+		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(ConfigUA.ravineSpawnrate)/850)));
 
 	      this.addStructureFeaturesUA();
 	      
-	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.END_DUNGEONS, IFeatureConfig.NO_FEATURE_CONFIG, DUNGEON_PLACEMENT, new DungeonRoomConfig(Config.dungeonSpawnrate)));
+	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(FeatureUA.END_DUNGEONS, IFeatureConfig.NO_FEATURE_CONFIG, DUNGEON_PLACEMENT, new DungeonRoomConfig(ConfigUA.dungeonSpawnrate)));
 
-	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(Config.endIslandSpawnrate/6, 200, 0, 254)));//low density
-	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(Config.endIslandSpawnrate/3, 140, 0, 199)));//low-medium density
-	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(Config.endIslandSpawnrate, 75, 0, 139)));//high density
-	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(Config.endIslandSpawnrate/2, 10, 0, 50)));//medium density
+	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(ConfigUA.endIslandSpawnrate/6, 200, 0, 254)));//low density
+	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(ConfigUA.endIslandSpawnrate/3, 140, 0, 199)));//low-medium density
+	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(ConfigUA.endIslandSpawnrate, 75, 0, 139)));//high density
+	      this.addFeature(GenerationStage.Decoration.RAW_GENERATION, createCompositeFeature(Feature.END_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(ConfigUA.endIslandSpawnrate/2, 10, 0, 50)));//medium density
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.CHORUS_PLANT, IFeatureConfig.NO_FEATURE_CONFIG, CHANCE_ON_ALL_SURFACES_UA, new PercentageAndFrequencyConfig(0.7f, 2)));
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.CHORUS_PLANT, IFeatureConfig.NO_FEATURE_CONFIG, HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(50, 10, 10, 75)));
 	      this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(FeatureUA.SINGLE_BLOCK, new BlockConfig(Blocks.DRAGON_HEAD), HEIGHT_BIASED_RANGE_UA, new CountRangeConfig(2, 4, 1, 50)));

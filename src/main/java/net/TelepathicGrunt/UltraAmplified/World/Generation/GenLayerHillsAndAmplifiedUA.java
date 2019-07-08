@@ -3,7 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.biome.Biome;
@@ -28,7 +28,7 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
 
       
       int remainder = (biomeId2 - 2) % 29;
-      if (!BiomeGenHelper.isShallowOcean(biomeId1) && biomeId2 >= 2 && remainder != 0 && remainder <= Config.mutatedBiomeSpawnrate) {
+      if (!BiomeGenHelper.isShallowOcean(biomeId1) && biomeId2 >= 2 && remainder != 0 && remainder <= ConfigUA.mutatedBiomeSpawnrate) {
          Biome biome = IRegistry.field_212624_m.get(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
@@ -43,14 +43,14 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
          if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(biomeId1)) {
         	 l = BiomeInit.BASE_TO_HILLS_MAP.get(biomeId1);
          }
-         else if (biomeId1 == BiomeGenHelper.DARK_FOREST && Config.plains) {
+         else if (biomeId1 == BiomeGenHelper.DARK_FOREST && ConfigUA.plains) {
          	//makes sure plains is selected in the config setting before allowing it to spawn through here
             l = BiomeGenHelper.PLAINS;
-         }else if (biomeId1 == BiomeGenHelper.PLAINS && Config.forest) {
+         }else if (biomeId1 == BiomeGenHelper.PLAINS && ConfigUA.forest) {
         	//makes sure forest is selected in the config setting before allowing it to spawn through here
             l = context.random(3) == 0 ? BiomeGenHelper.WOODED_HILLS : BiomeGenHelper.FOREST;
          } 
-         else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && Config.iceMountain) {
+         else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && ConfigUA.iceMountain) {
             l = BiomeGenHelper.SNOWY_MOUNTAINS;
          } 
          else if (biomeId1 == BiomeGenHelper.OCEAN) {

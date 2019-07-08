@@ -3,7 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.world.gen.IContext;
 import net.minecraft.world.gen.NoiseGeneratorImproved;
 import net.minecraft.world.gen.area.AreaDimension;
@@ -16,15 +16,15 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 		public GenLayerOceanUA(){
 			oceanList = new ArrayList<Integer>();
 			
-			if(Config.warmOcean) 
+			if(ConfigUA.warmOcean) 
 				oceanList.add(BiomeGenHelper.WARM_OCEAN);
-			if(Config.lukewarmOcean) 
+			if(ConfigUA.lukewarmOcean) 
 				oceanList.add(BiomeGenHelper.LUKEWARM_OCEAN);
-			if(Config.ocean) 
+			if(ConfigUA.ocean) 
 				oceanList.add(BiomeGenHelper.OCEAN);
-			if(Config.coldOcean) 
+			if(ConfigUA.coldOcean) 
 				oceanList.add(BiomeGenHelper.COLD_OCEAN);
-			if(Config.frozenOcean) 
+			if(ConfigUA.frozenOcean) 
 				oceanList.add(BiomeGenHelper.FROZEN_OCEAN);
 			
 			listSize = oceanList.size();

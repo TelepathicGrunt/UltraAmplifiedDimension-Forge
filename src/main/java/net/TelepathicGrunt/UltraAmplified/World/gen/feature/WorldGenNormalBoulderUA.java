@@ -2,7 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -66,17 +66,17 @@ public class WorldGenNormalBoulderUA extends Feature<BlockBlobConfig>
                         	int randomChance = rand.nextInt(1400);
                         	
                         	// 1/1400th chance for diamond ore
-                        	if(Config.diamondOreSpawnrate != 0 && randomChance == 0) {
+                        	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance == 0) {
                         		worldIn.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
                         	}
                         	
                         	// 39/1400th chance for iron ore
-                        	else if(Config.ironOreSpawnrate != 0 && randomChance <= 40){
+                        	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 40){
                         		worldIn.setBlockState(blockpos, ironOre.getDefaultState(), 4);
                         	}
                         	
                         	// 60/1400th chance for coal ore
-                        	else if(Config.coalOreSpawnrate != 0 && randomChance <= 100){
+                        	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 100){
                         		worldIn.setBlockState(blockpos, coalOre.getDefaultState(), 4);
                         	}
                         	

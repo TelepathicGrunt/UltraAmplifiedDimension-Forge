@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockEndPortalFrame;
@@ -308,7 +308,7 @@ public class StrongholdPiecesUA
             if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
             {
                 this.hasMadeChest = true;
-                if(Config.chestGeneration) {
+                if(ConfigUA.chestGeneration) {
                 	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 2, 3, LootTableList.CHESTS_STRONGHOLD_CORRIDOR);
                 }
             }
@@ -726,7 +726,7 @@ public class StrongholdPiecesUA
                 this.setBlockState(worldIn, iblockstate4, 7, 8, 8, structureBoundingBoxIn);
              }
              
-            if(Config.chestGeneration) {
+            if(ConfigUA.chestGeneration) {
             	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 3, 5, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
             }
             	
@@ -734,7 +734,7 @@ public class StrongholdPiecesUA
             {
                 this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 12, 9, 1, structureBoundingBoxIn);
                 
-                if(Config.chestGeneration) {
+                if(ConfigUA.chestGeneration) {
                 	this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 12, 8, 1, LootTableList.CHESTS_STRONGHOLD_LIBRARY);
                 }
             }
@@ -1186,7 +1186,7 @@ public class StrongholdPiecesUA
                     this.setBlockState(worldIn, iblockstate, 9, 2, 3, structureBoundingBoxIn);
                     this.setBlockState(worldIn, iblockstate, 9, 3, 3, structureBoundingBoxIn);
                     
-                    if(Config.chestGeneration) {
+                    if(ConfigUA.chestGeneration) {
                         this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 3, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
                         this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 5, 4, 2, LootTableList.CHESTS_STRONGHOLD_CROSSING);
                         this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 4, 8, LootTableList.CHESTS_STRONGHOLD_CROSSING);
@@ -1366,7 +1366,7 @@ public class StrongholdPiecesUA
             {
                 float f = rand.nextFloat();
                 
-                if (f < (float)(Config.silverfishStrongholdSpawnrate/100))
+                if (f < (float)(ConfigUA.silverfishStrongholdSpawnrate/100))
                 {
                     this.blockstate = Blocks.CRACKED_STONE_BRICKS.getDefaultState();
                 }

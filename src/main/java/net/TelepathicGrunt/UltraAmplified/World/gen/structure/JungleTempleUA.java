@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
@@ -25,7 +25,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 public class JungleTempleUA extends Structure<JunglePyramidConfig> {
   
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-	      int maxDistance = Config.jungleTempleSpawnrate;
+	      int maxDistance = ConfigUA.jungleTempleSpawnrate;
 	      int minDistance = 8;
 	      if(maxDistance < 9 ) {
 	    	  minDistance = maxDistance - 1;

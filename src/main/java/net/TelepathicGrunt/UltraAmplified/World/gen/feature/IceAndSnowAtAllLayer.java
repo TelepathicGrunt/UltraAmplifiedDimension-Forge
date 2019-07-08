@@ -2,7 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockDirtSnowy;
 import net.minecraft.block.material.Material;
@@ -26,7 +26,7 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 	         for(int zOffset = 0; zOffset < 16; ++zOffset) {
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
-		         for(int y = 256; y > Config.seaLevel-1; --y) {
+		         for(int y = 256; y > ConfigUA.seaLevel-1; --y) {
 		        	 
 	        		blockpos$mutableblockpos.setPos(x, y, z);
 		            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);

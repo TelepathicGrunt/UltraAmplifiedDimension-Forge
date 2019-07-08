@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Level;
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
@@ -30,7 +30,7 @@ public class WitchHutUA extends Structure<SwampHutConfig> {
    private static final List<Biome.SpawnListEntry> field_202384_d = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
 
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-      int maxDistance = Config.witchHutSpawnrate;
+      int maxDistance = ConfigUA.witchHutSpawnrate;
       int minDistance = 8;
       if(maxDistance < 9 ) {
     	  minDistance = maxDistance - 1;

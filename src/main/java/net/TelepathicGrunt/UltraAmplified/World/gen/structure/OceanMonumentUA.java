@@ -10,7 +10,7 @@ import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Biomes;
@@ -36,7 +36,7 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
     private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
     protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-       int maxDistance = Config.monumentRarity;
+       int maxDistance = ConfigUA.monumentRarity;
        int minDistance = 8;
        if(maxDistance < 9 ) {
     	  minDistance = maxDistance - 1;

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -97,7 +97,7 @@ public class IglooPiecesUA {
 	            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 	            TileEntity tileentity = worldIn.getTileEntity(pos.down());
 	            if (tileentity instanceof TileEntityChest) {
-	            	if(Config.chestGeneration) {
+	            	if(ConfigUA.chestGeneration) {
 	 	               ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_IGLOO_CHEST, rand.nextLong());
 	            	}else {
 	            		worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);

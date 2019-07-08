@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureInit;
@@ -39,7 +39,7 @@ public class UltraAmplified {
         modEventBus.addListener(this::setup);
 
 		//generates config
-        modLoadingContext.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
+        modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
 	}
 	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

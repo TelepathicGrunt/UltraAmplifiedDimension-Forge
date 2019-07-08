@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -183,7 +183,7 @@ public class OceanRuinsPiecesUA {
 
       protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb) {
          if ("chest".equals(function)) {
-        	 if(Config.chestGeneration) {
+        	 if(ConfigUA.chestGeneration) {
         		worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState().with(BlockChest.WATERLOGGED, Boolean.valueOf(worldIn.getFluidState(pos).isTagged(FluidTags.WATER))), 2);
 	            TileEntity tileentity = worldIn.getTileEntity(pos);
 	            if (tileentity instanceof TileEntityChest) {

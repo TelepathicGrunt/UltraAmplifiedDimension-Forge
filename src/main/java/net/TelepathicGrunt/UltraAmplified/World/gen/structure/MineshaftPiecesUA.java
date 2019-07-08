@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA.Type;
 import net.minecraft.block.BlockEndRod;
 import net.minecraft.block.BlockRail;
@@ -354,7 +354,7 @@ public class MineshaftPiecesUA
                     this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 + 2);
                     this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 + 2);
 
-                    if(Config.chestGeneration) {
+                    if(ConfigUA.chestGeneration) {
 	                    if (randomIn.nextInt(50) == 0)
 	                    {
 	                        this.generateChest(worldIn, MutableBoundingBoxIn, randomIn, 2, 0, k1 - 1, LootTableList.CHESTS_ABANDONED_MINESHAFT);
@@ -782,9 +782,9 @@ public class MineshaftPiecesUA
             //if the pit rooms are not allowed, makes this boolean always true.
             //if pits are allowed and normal rooms are not allowed, set to always false.
             //else if both are allowed, runs RNG to determine which room to generate.
-            if(Config.mineshaftUndergroundAllowed) 
+            if(ConfigUA.mineshaftUndergroundAllowed) 
             {
-            	if(Config.mineshaftAbovegroundAllowed) 
+            	if(ConfigUA.mineshaftAbovegroundAllowed) 
             	{
             		normalRoom = p_i47137_2_.nextInt(5) < 3;
             	}

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -192,29 +192,29 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
                                 	//place the biome's solid block
                                 	primer.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
                                 }
-                            	else if (i2 * 8 + j2 < Config.seaLevel)
+                            	else if (i2 * 8 + j2 < ConfigUA.seaLevel)
                                 {
                             		//if we are in this biome, generate snow blocks instead of water for sea level
                             		if(biome == BiomeInit.ICE_MOUNTAIN)
                                 	{
-                            			 primer.setBlockState(blockpos$mutableblockpos, Config.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW, false);
+                            			 primer.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW, false);
                                 	}
                             		//if we are in nether, generate water, then a layer of magma blocks, and then lava the rest of the way
                             		else if(biome == BiomeInit.NETHER)
                                 	{
-                            			if(i2 * 8 + j2 <= Config.seaLevel - 16 && i2 * 8 + j2 > 10) {
+                            			if(i2 * 8 + j2 <= ConfigUA.seaLevel - 16 && i2 * 8 + j2 > 10) {
                             				 primer.setBlockState(blockpos$mutableblockpos, Blocks.LAVA.getDefaultState(), false);
                             			}
-                            			else if(i2 * 8 + j2 == Config.seaLevel - 15 && i2 * 8 + j2 > 10) {
+                            			else if(i2 * 8 + j2 == ConfigUA.seaLevel - 15 && i2 * 8 + j2 > 10) {
                             				primer.setBlockState(blockpos$mutableblockpos, Blocks.MAGMA_BLOCK.getDefaultState(), false);
                             			}
                             			else {
-                            				primer.setBlockState(blockpos$mutableblockpos, Config.lavaOcean  ? Blocks.LAVA.getDefaultState() : WATER, false);
+                            				primer.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean  ? Blocks.LAVA.getDefaultState() : WATER, false);
                             			}
                                 	}
                             		//normal water generation
                             		else {
-                            			 primer.setBlockState(blockpos$mutableblockpos, Config.lavaOcean  ? Blocks.LAVA.getDefaultState() : WATER, false);
+                            			 primer.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean  ? Blocks.LAVA.getDefaultState() : WATER, false);
                             		}
                                 }
                             }
@@ -240,9 +240,9 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
         float f1 = this.settings.getHeightScale();
         
         //These three controls the shape of the terrain. Change it juuuuust right and you can create floating layers of land! 
-        double[] adouble1 = this.mainPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double)(f / this.settings.getMainNoiseScaleX()), Config.secretSetting ? (double)(f1 / this.settings.getMainNoiseScaleY()*(f1 / this.settings.getMainNoiseScaleY())) : (double)(50.1*(f1 / this.settings.getMainNoiseScaleY())), (double)(f / this.settings.getMainNoiseScaleZ()));
-        double[] adouble2 = this.minLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, Config.secretSetting ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), Config.secretSetting ? (double)(f*(f/4)) : (double)f);
-        double[] adouble3 = this.maxLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, Config.secretSetting ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), Config.secretSetting ? (double)(f*(f/4)) : (double)f);
+        double[] adouble1 = this.mainPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double)(f / this.settings.getMainNoiseScaleX()), ConfigUA.secretSetting ? (double)(f1 / this.settings.getMainNoiseScaleY()*(f1 / this.settings.getMainNoiseScaleY())) : (double)(50.1*(f1 / this.settings.getMainNoiseScaleY())), (double)(f / this.settings.getMainNoiseScaleZ()));
+        double[] adouble2 = this.minLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, ConfigUA.secretSetting ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), ConfigUA.secretSetting ? (double)(f*(f/4)) : (double)f);
+        double[] adouble3 = this.maxLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, ConfigUA.secretSetting ? (double)(f*(f/4)) : (double)f, (double)(f1*f1), ConfigUA.secretSetting ? (double)(f*(f/4)) : (double)f);
         int i = 0;
         int j = 0;
 

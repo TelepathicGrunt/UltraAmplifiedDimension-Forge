@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -82,7 +82,7 @@ public class WorldGenIceSpikeUA extends Feature<NoFeatureConfig> {
                         if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
                             IBlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
-                            if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > Config.seaLevel-2)
+                            if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > ConfigUA.seaLevel-2)
                             {
                                 this.setBlockState(worldIn, position.add(x, y, z), PACKED_ICE);
                             }
@@ -94,7 +94,7 @@ public class WorldGenIceSpikeUA extends Feature<NoFeatureConfig> {
                             {
                                 iblockstate = worldIn.getBlockState(position.add(x, -y, z));
 
-                                if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, -y, z).getY() > Config.seaLevel-2)
+                                if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, -y, z).getY() > ConfigUA.seaLevel-2)
                                 {
                                     this.setBlockState(worldIn, position.add(x, -y, z), PACKED_ICE);
                                 }

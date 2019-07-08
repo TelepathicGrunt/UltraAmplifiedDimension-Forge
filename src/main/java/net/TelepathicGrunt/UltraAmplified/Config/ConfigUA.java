@@ -7,7 +7,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class Config {
+public class ConfigUA {
   /*
    * Config to control all sorts of settings used for world generation with this mod.
    * This ranges from ore rarity, what biomes spawn, structure spawning, and more.
@@ -207,7 +207,8 @@ public class Config {
 		public final ForgeConfigSpec.IntValue magmaSpawnrate;
 		public final ForgeConfigSpec.IntValue lavaSpawnrate;
 
-        ServerConfig(ForgeConfigSpec.Builder builder) {
+        ServerConfig(ForgeConfigSpec.Builder builder) 
+        {
         	
             builder.push("General Structure Options");
             
@@ -743,4 +744,97 @@ public class Config {
             builder.pop().pop().pop();
         }
     } 
+    
+    public static void refreshServer()
+    {
+    	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
+    	ravineSpawnrate = SERVER.ravineSpawnrate.get();
+    	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
+    	slimeLakeGen = SERVER.slimeLakeGen.get();
+    	waterLakeGen = SERVER.waterLakeGen.get();
+    	lavaLakeGen = SERVER.lavaLakeGen.get();
+    	chestGeneration = SERVER.chestGeneration.get();
+    	miniStructureGeneration = SERVER.miniStructureGeneration.get();
+    	villageSpawnrate = SERVER.villageSpawnrate.get();
+    	villageGeneration = SERVER.villageGeneration.get();
+    	villageZombieSpawnrate = SERVER.villageZombieSpawnrate.get();
+    	mineshaftSpawnrate = SERVER.mineshaftSpawnrate.get();
+    	mineshaftAbovegroundAllowed = SERVER.mineshaftAbovegroundAllowed.get();
+    	mineshaftUndergroundAllowed = SERVER.mineshaftUndergroundAllowed.get();
+    	mansionSpawnrate = SERVER.mansionSpawnrate.get();
+    	mansionGeneration = SERVER.mansionGeneration.get();
+    	desertTempleSpawnrate = SERVER.desertTempleSpawnrate.get();
+    	desertTempleGeneration = SERVER.desertTempleGeneration.get();
+    	jungleTempleSpawnrate = SERVER.jungleTempleSpawnrate.get();
+    	jungleTempleGeneration = SERVER.jungleTempleGeneration.get();
+    	iglooSpawnrate = SERVER.iglooSpawnrate.get();
+    	iglooGeneration = SERVER.iglooGeneration.get();
+    	witchHutSpawnrate = SERVER.witchHutSpawnrate.get();
+    	witchHutGeneration = SERVER.witchHutGeneration.get();
+    	oceanMonumentSpawnrate = SERVER.oceanMonumentSpawnrate.get();
+    	oceanMonumentGeneration = SERVER.oceanMonumentGeneration.get();
+    	oceanRuinsSpawnrate = SERVER.oceanRuinsSpawnrate.get();
+    	oceanRuinsGeneration = SERVER.oceanRuinsGeneration.get();
+    	shipwreckSpawnrate = SERVER.shipwreckSpawnrate.get();
+    	shipwreckGeneration = SERVER.shipwreckGeneration.get();
+    	strongholdDistance = SERVER.strongholdDistance.get();
+    	strongholdNumberPerWorld = SERVER.strongholdNumberPerWorld.get();
+    	strongholdSpread = SERVER.strongholdSpread.get();
+    	silverfishStrongholdSpawnrate = SERVER.silverfishStrongholdSpawnrate.get();
+    	strongholdGeneration = SERVER.strongholdGeneration.get();
+    	monumentRarity = SERVER.monumentRarity.get();
+    	monumentGeneration = SERVER.monumentGeneration.get();
+    	netherFortressSpawnrate = SERVER.netherFortressSpawnrate.get();
+    	netherFortressAboveground = SERVER.netherFortressAboveground.get();
+    	netherFortressUnderground = SERVER.netherFortressUnderground.get();
+    	endCitySpawnrate = SERVER.endCitySpawnrate.get();
+    	endCityGeneration = SERVER.endCityGeneration.get();
+    	secretSetting = SERVER.secretSetting.get();
+    	biomeSize = SERVER.biomeSize.get();
+    	mutatedBiomeSpawnrate = SERVER.mutatedBiomeSpawnrate.get();
+    	seaLevel = SERVER.seaLevel.get();
+    	lavaOcean = SERVER.lavaOcean.get();
+    	waterfallSpawnrate = SERVER.waterfallSpawnrate.get();
+    	lavafallSpawnrate = SERVER.lavafallSpawnrate.get();
+    	endIslandSpawnrate = SERVER.endIslandSpawnrate.get();
+    	plains = SERVER.plains.get();
+    	desert = SERVER.desert.get();
+    	forest = SERVER.forest.get();
+    	taiga = SERVER.taiga.get();
+    	extremeHills = SERVER.extremeHills.get();
+    	swamplands = SERVER.swamplands.get();
+    	nether = SERVER.nether.get();
+    	end = SERVER.end.get();
+    	iceFlats = SERVER.iceFlats.get();
+    	iceMountain = SERVER.iceMountain.get();
+    	mushroom = SERVER.mushroom.get();
+    	stoneBeach = SERVER.stoneBeach.get();
+    	jungle = SERVER.jungle.get();
+    	coldBeach = SERVER.coldBeach.get();
+    	birchForest = SERVER.birchForest.get();
+    	roofedForest = SERVER.roofedForest.get();
+    	coldTaiga = SERVER.coldTaiga.get();
+    	megaTaiga = SERVER.megaTaiga.get();
+    	savanna = SERVER.savanna.get();
+    	mesa = SERVER.mesa.get();
+    	mesaBryce = SERVER.mesaBryce.get();
+    	iceSpike = SERVER.iceSpike.get();
+    	frozenOcean = SERVER.frozenOcean.get();
+    	coldOcean = SERVER.coldOcean.get();
+    	ocean = SERVER.ocean.get();
+    	lukewarmOcean = SERVER.lukewarmOcean.get();
+    	warmOcean = SERVER.warmOcean.get();
+    	coalOreSpawnrate = SERVER.coalOreSpawnrate.get();
+    	ironOreSpawnrate = SERVER.ironOreSpawnrate.get();
+    	redstoneOreSpawnrate = SERVER.redstoneOreSpawnrate.get();
+    	lapisOreSpawnrate = SERVER.lapisOreSpawnrate.get();
+    	diamondOreSpawnrate = SERVER.diamondOreSpawnrate.get();
+    	goldOreSpawnrate = SERVER.goldOreSpawnrate.get();
+    	emeraldOreSpawnrate = SERVER.emeraldOreSpawnrate.get();
+    	silverfishSpawnrate = SERVER.silverfishSpawnrate.get();
+    	quartzOreSpawnrate = SERVER.quartzOreSpawnrate.get();
+    	glowstoneSpawnrate = SERVER.glowstoneSpawnrate.get();
+    	magmaSpawnrate = SERVER.magmaSpawnrate.get();
+    	lavaSpawnrate = SERVER.lavaSpawnrate.get();
+    }
 }
