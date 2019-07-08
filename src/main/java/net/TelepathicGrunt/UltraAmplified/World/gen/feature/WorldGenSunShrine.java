@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -46,6 +47,10 @@ public class WorldGenSunShrine extends Feature<NoFeatureConfig> {
 	
 	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
+		if(!ConfigUA.miniStructureGeneration) {
+			return false;
+		}
+	
 		//makes sure this shrine does not spawn too close to world height border or it will get cut off.
 		//Also makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
 		

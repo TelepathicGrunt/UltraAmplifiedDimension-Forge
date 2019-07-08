@@ -67,12 +67,12 @@ public class DesertTempleUA extends Structure<DesertPyramidConfig> {
 	   }
 
 	   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
-		      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-		         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9),  Biomes.PLAINS);
-		         if (chunkGen.hasStructure(biome, this)) {
-		            return true;
-		         }
+	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9),  Biomes.PLAINS);
+	         if ((ConfigUA.desertTempleGeneration) && chunkGen.hasStructure(biome, this)) {
+	            return true;
+	         }
 	      }
 	      return false;
 	   }

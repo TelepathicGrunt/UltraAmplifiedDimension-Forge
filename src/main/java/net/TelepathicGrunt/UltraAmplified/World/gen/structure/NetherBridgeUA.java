@@ -26,20 +26,24 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
   private static final List<Biome.SpawnListEntry> field_202381_d = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3), new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5), new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
 
    protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
-      int i = chunkPosX >> 4;
-      int j = chunkPosZ >> 4;
-      rand.setSeed((long)(i ^ j << 4) ^ chunkGen.getSeed());
-      rand.nextInt();
-      if (rand.nextInt(3) != 0) {
-         return false;
-      } else if (chunkPosX != (i << 4) + 4 + rand.nextInt(8)) {
-         return false;
-      } else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(8)) {
-         return false;
-      } else {
-         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
-         return chunkGen.hasStructure(biome, FeatureUA.FORTRESS_UA);
-      }
+	   if(ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground) {
+		  int i = chunkPosX >> 4;
+	      int j = chunkPosZ >> 4;
+	      rand.setSeed((long)(i ^ j << 4) ^ chunkGen.getSeed());
+	      rand.nextInt();
+	      if (rand.nextInt(3) != 0) {
+	         return false;
+	      } else if (chunkPosX != (i << 4) + 4 + rand.nextInt(8)) {
+	         return false;
+	      } else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(8)) {
+	         return false;
+	      } else {
+	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
+	         return chunkGen.hasStructure(biome, FeatureUA.FORTRESS_UA);
+	      }
+	   }
+	   
+      return false;
    }
 
    protected boolean isEnabledIn(IWorld worldIn) {

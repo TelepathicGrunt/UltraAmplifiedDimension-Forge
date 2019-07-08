@@ -20,6 +20,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.structure.VillagePieces;
 
 public class VillageUA  extends Structure<VillageUAConfig> {
@@ -57,7 +58,7 @@ public class VillageUA  extends Structure<VillageUAConfig> {
 
    protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
       ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+      if ((ConfigUA.villageGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
          Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
          return chunkGen.hasStructure(biome, FeatureUA.VILLAGE_UA); 
       } else {
@@ -80,25 +81,71 @@ public class VillageUA  extends Structure<VillageUAConfig> {
       public Start(IWorld p_i48753_1_, IChunkGenerator<?> generator, SharedSeedRandom random, int chunkX, int chunkZ, Biome biome) {
          super(chunkX, chunkZ, biome, random, p_i48753_1_.getSeed());
          VillageUAConfig villageconfig = (VillageUAConfig)generator.getStructureConfig(biome, FeatureUA.VILLAGE_UA); 
-         List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(random, villageconfig.field_202461_a);
-         VillagePiecesUA.Start villagepieces$start = new VillagePiecesUA.Start(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageconfig, biome);
-         this.components.add(villagepieces$start);
-         villagepieces$start.buildComponent(villagepieces$start, this.components, random);
-         List<StructurePiece> list1 = villagepieces$start.pendingRoads;
-         List<StructurePiece> list2 = villagepieces$start.pendingHouses;
-
-         while(!list1.isEmpty() || !list2.isEmpty()) {
-            if (list1.isEmpty()) {
-               int i = random.nextInt(list2.size());
-               StructurePiece structurepiece = list2.remove(i);
-               structurepiece.buildComponent(villagepieces$start, this.components, random);
-            } else {
-               int j = random.nextInt(list1.size());
-               StructurePiece structurepiece2 = list1.remove(j);
-               structurepiece2.buildComponent(villagepieces$start, this.components, random);
-            }
+         
+         //if we are requesting a village type that vanilla already can make,
+         //we then generate a vanilla village. 
+         //This sets up the config that vanilla needs
+         VillageConfig vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.OAK);
+         boolean genVanillaVillage = false;
+         if(villageconfig.type == VillagePiecesUA.Type.OAK) {
+        	 genVanillaVillage = true;
          }
+         else if(villageconfig.type == VillagePiecesUA.Type.SANDSTONE) {
+        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.SANDSTONE);
+        	 genVanillaVillage = true;
+         }
+         else if(villageconfig.type == VillagePiecesUA.Type.ACACIA) {
+        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.ACACIA);
+        	 genVanillaVillage = true;
+         }
+         else if(villageconfig.type == VillagePiecesUA.Type.SPRUCE) {
+        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.SPRUCE);
+        	 genVanillaVillage = true;
+         }
+         
+         if(genVanillaVillage) {
+        	 //generates a vanilla village so if villages change in future updates, we pull the new villages automatically
+        	 List<VillagePieces.PieceWeight> list = VillagePieces.getStructureVillageWeightedPieceList(random, vanillaVillageConfig.field_202461_a);
+             VillagePieces.Start villagepieces$start = new VillagePieces.Start(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, vanillaVillageConfig, biome);
+             this.components.add(villagepieces$start);
+             villagepieces$start.buildComponent(villagepieces$start, this.components, random);
+             List<StructurePiece> list1 = villagepieces$start.pendingRoads;
+             List<StructurePiece> list2 = villagepieces$start.pendingHouses;
 
+             while(!list1.isEmpty() || !list2.isEmpty()) {
+                if (list1.isEmpty()) {
+                   int i = random.nextInt(list2.size());
+                   StructurePiece structurepiece = list2.remove(i);
+                   structurepiece.buildComponent(villagepieces$start, this.components, random);
+                } else {
+                   int j = random.nextInt(list1.size());
+                   StructurePiece structurepiece2 = list1.remove(j);
+                   structurepiece2.buildComponent(villagepieces$start, this.components, random);
+                }
+             }
+         }else {
+        	 //generates our own kind of village
+        	 List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(random, villageconfig.terrainType);
+             VillagePiecesUA.Start villagepiecesua$start = new VillagePiecesUA.Start(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageconfig, biome);
+             this.components.add(villagepiecesua$start);
+             villagepiecesua$start.buildComponent(villagepiecesua$start, this.components, random);
+             List<StructurePiece> list1 = villagepiecesua$start.pendingRoads;
+             List<StructurePiece> list2 = villagepiecesua$start.pendingHouses;
+
+             while(!list1.isEmpty() || !list2.isEmpty()) {
+                if (list1.isEmpty()) {
+                   int i = random.nextInt(list2.size());
+                   StructurePiece structurepiece = list2.remove(i);
+                   structurepiece.buildComponent(villagepiecesua$start, this.components, random);
+                } else {
+                   int j = random.nextInt(list1.size());
+                   StructurePiece structurepiece2 = list1.remove(j);
+                   structurepiece2.buildComponent(villagepiecesua$start, this.components, random);
+                }
+             }
+         }
+        
+         
          this.recalculateStructureSize(p_i48753_1_);
          int k = 0;
 

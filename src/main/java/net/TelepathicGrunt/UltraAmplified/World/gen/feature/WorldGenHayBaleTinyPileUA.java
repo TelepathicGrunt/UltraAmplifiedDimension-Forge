@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockHay;
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,11 @@ public class WorldGenHayBaleTinyPileUA extends Feature<NoFeatureConfig> {
 
     public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
-			
+        
+  		if(!ConfigUA.miniStructureGeneration) {
+  			return false;
+  		}
+  		
 		//makes sure it is generating completely on land and not over water or air
 		if( this.isBlockNormalCube(worldIn, position.down().north(), false) && 
 			this.isBlockNormalCube(worldIn, position.down().south(), false) && 

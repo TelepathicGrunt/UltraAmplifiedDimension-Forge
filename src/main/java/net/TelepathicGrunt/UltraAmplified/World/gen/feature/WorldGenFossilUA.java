@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -38,7 +39,12 @@ public class WorldGenFossilUA extends Feature<NoFeatureConfig> {
    private static final ResourceLocation[] FOSSILS_COAL = new ResourceLocation[]{STRUCTURE_SPINE_01_COAL, STRUCTURE_SPINE_02_COAL, STRUCTURE_SPINE_03_COAL, STRUCTURE_SPINE_04_COAL, STRUCTURE_SKULL_01_COAL, STRUCTURE_SKULL_02_COAL, STRUCTURE_SKULL_03_COAL, STRUCTURE_SKULL_04_COAL};
 
    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config) {
-      Random random = worldIn.getRandom();
+	      
+	  if(!ConfigUA.miniStructureGeneration) {
+		return false;
+	  }
+	   
+	  Random random = worldIn.getRandom();
       Rotation[] arotation = Rotation.values();
       Rotation rotation = arotation[random.nextInt(arotation.length)];
       int i = random.nextInt(FOSSILS.length);

@@ -30,16 +30,9 @@ public class EndHighlandsBiomeUA extends BiomeUA {
    public EndHighlandsBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(END_SURFACE_BUILDER_UA, END_STONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.THEEND).depth(0.1F).scale(0.2F).temperature(0.7F).downfall(0.5F).waterColor(16711840).waterFogColor(16711840).parent((String)null));
 	    
-	      if(ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) {
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.END));
-	      }
-
-    	  if(ConfigUA.villageGeneration) {
-    		  this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.END));
-    	  }
-    	  
-    	  if(ConfigUA.endCityGeneration)
-    		  this.addStructure(FeatureUA.END_CITY_UA, new EndCityConfig()); 
+	      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.END));
+          this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.END));
+    	  this.addStructure(FeatureUA.END_CITY_UA, new EndCityConfig()); 
 	      
 	      
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(ConfigUA.caveCavitySpawnrate)/1000)));

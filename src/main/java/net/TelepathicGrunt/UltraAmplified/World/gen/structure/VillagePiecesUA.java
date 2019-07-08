@@ -1400,7 +1400,7 @@ public class VillagePiecesUA
 	      public Start(int p_i48769_1_, Random p_i48769_2_, int p_i48769_3_, int p_i48769_4_, List<VillagePiecesUA.PieceWeightUA> p_i48769_5_, VillageUAConfig p_i48769_6_, net.minecraft.world.biome.Biome biome) {
 	         super((VillagePiecesUA.Start)null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
 	         this.structureVillageWeightedPieceList = p_i48769_5_;
-	         this.terrainType = p_i48769_6_.field_202461_a;
+	         this.terrainType = p_i48769_6_.terrainType;
 	         this.structureType = p_i48769_6_.type;
 	         this.func_202579_a(this.structureType);
 	         this.isZombieInfested = p_i48769_2_.nextInt(50) == 0;
@@ -1453,14 +1453,21 @@ public class VillagePiecesUA
 	   }
 
 	   public static enum Type {
+		  //UA types
 	      DARK(0),
 	      JUNGLE(1),
 	      STONE(2),
 	      END(3),
 	      HELL(4),
 	      BADLANDS(5),
-		  ICY(6);
-
+		  ICY(6),
+		  
+		  //vanilla types
+		  OAK(7),
+		  SANDSTONE(8),
+		  ACACIA(9),
+		  SPRUCE(10);
+		   
 	      private final int field_202605_e;
 
 	      private Type(int p_i48768_3_) {

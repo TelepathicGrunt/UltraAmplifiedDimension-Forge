@@ -48,22 +48,22 @@ public class DeepFrozenOceanBiomeUA  extends BiomeUA {
 
 	   public DeepFrozenOceanBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEEP_OCEAN_SURFACE_BUILDER_UA, ICE_GRAVEL_STONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-1.8F).scale(0.1F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String)null));
-	      if(ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed)
+	      
 	    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.OCEAN));
 	      
-	      if(ConfigUA.strongholdGeneration)
+	      
 	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
-	      if(ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground)
+	      
 	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 
-	      if(ConfigUA.shipwreckGeneration)
+	      
 	    	  this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
 	      
-	      if(ConfigUA.oceanMonumentGeneration)
+	      
 	    	  this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig());
 
-		  if(ConfigUA.chestGeneration) {
+		   {
 			  this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(FeatureUA.MARKED_TREASURE_CHEST_UA, IFeatureConfig.NO_FEATURE_CONFIG, FIXED_HEIGHT_WITH_CHANCE, new PercentageAndHeightConfig(0.015f, 52)));
 		  }
 	      

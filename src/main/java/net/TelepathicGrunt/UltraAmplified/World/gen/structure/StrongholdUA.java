@@ -45,7 +45,7 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
       }
 
       for(ChunkPos chunkpos : this.structureCoords) {
-         if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+         if ((ConfigUA.strongholdGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
             return true;
          }
       }

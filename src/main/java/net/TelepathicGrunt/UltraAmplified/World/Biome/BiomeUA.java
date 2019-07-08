@@ -11,24 +11,27 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtCenterSu
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceRoofedForestUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceThroughWaterWithExtraUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceUnderTopLayerWithChanceUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceWithChanceDesertWell;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceWithChanceUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.AtSurfaceWithExtraUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllSurfacesUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllWaterBottomsUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ChanceOnAllWaterSurfacesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.CountRangeAndTypeConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.DungeonPlacementBands;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.EmeraldPlacement;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.FixedHeightWithChance;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.GlowstonePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.HeightBiasedRangeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.LakePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.NetherFirePlacementUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PassthroughChest;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndHeightConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomChanceUnderSurface;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPlacementUnderSurface;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPositionEvery3Height;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.RandomPositionEvery5Height;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.SlimeLakePlacementUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.TwiceSurfaceWithChanceUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
@@ -74,7 +77,7 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.LakeChanceConfig;
+import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
@@ -104,9 +107,14 @@ public class BiomeUA extends Biome {
     public static final BasePlacement<CountRangeConfig> EMERALD_PLACEMENT = new EmeraldPlacement();
     public static final BasePlacement<FrequencyConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacementUA();
     public static final BasePlacement<FrequencyConfig> FIRE_PLACEMENT = new NetherFirePlacementUA();
-    public static final BasePlacement<LakeChanceConfig> SLIME_LAKE_PLACEMENT = new SlimeLakePlacementUA();
     public static final BasePlacement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRangeUA();
     public static final BasePlacement<PercentageAndHeightConfig> FIXED_HEIGHT_WITH_CHANCE = new FixedHeightWithChance();
+    //needed so we can prevent vanilla Treasure Chest from spawning if config is off
+    public static final BasePlacement<NoPlacementConfig> PASSTHROUGH_CHEST = new PassthroughChest();
+    //needed so we can prevent vanilla Desert Well from spawning if config is off
+    public static final BasePlacement<ChanceConfig> AT_SURFACE_WITH_CHANCE_DESERT_WELL = new AtSurfaceWithChanceDesertWell();
+    //needed so we can prevent lava lakes and water lakes from spawning if config is off
+    public static final BasePlacement<CountRangeAndTypeConfig> LAKE_PLACEMENT = new LakePlacementUA();
     
     
 

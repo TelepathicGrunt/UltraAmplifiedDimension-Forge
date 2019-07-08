@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.SharedSeedRandom;
@@ -20,7 +21,7 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
    protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
 	      ((SharedSeedRandom)rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 	      Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
-	      if (chunkGen.hasStructure(biome, FeatureUA.MINESHAFT_UA)) {
+	      if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, FeatureUA.MINESHAFT_UA)) {
 	    	  MineshaftConfigUA mineshaftconfig = (MineshaftConfigUA)chunkGen.getStructureConfig(biome, FeatureUA.MINESHAFT_UA);
 	         double d0 = mineshaftconfig.field_202439_a;
 	         return rand.nextDouble() < d0;

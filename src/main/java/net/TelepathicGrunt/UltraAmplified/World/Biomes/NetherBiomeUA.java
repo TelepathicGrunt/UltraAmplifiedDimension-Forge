@@ -39,20 +39,11 @@ public class NetherBiomeUA extends BiomeUA {
    public NetherBiomeUA() {
 	      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(NETHER_SURFACE_BUILDER_UA, NETHERRACK_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.NETHER).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(12411469).waterFogColor(12076846).parent((String)null));
 	      
-	      if(ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed)
-		      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.HELL));
-
-    	  if(ConfigUA.villageGeneration) {
-    		  this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.HELL));
-    	  }
-
-	      if(ConfigUA.strongholdGeneration)
-	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
-
-	      if(ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground) {
-	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(true));
-	      }
-	      
+	      this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.HELL));
+		  this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.HELL));
+    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
+    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(true));
+	    
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(ConfigUA.caveCavitySpawnrate)/1000)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(ConfigUA.ravineSpawnrate)/100)));
 		  this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(ConfigUA.ravineSpawnrate)/850)));

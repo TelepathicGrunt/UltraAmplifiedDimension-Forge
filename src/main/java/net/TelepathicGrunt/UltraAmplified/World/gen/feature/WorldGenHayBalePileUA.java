@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockHay;
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,10 @@ public class WorldGenHayBalePileUA extends Feature<NoFeatureConfig> {
 
     public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
-		
+        
+  		if(!ConfigUA.miniStructureGeneration) {
+  			return false;
+  		}
 		
 		//north/south
 		if(rand.nextBoolean()) {

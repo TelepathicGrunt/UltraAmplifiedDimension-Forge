@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -18,6 +19,10 @@ import net.minecraft.world.storage.loot.LootTableList;
 public class WorldGenCross extends Feature<NoFeatureConfig> {
 	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
 		      
+		if(!ConfigUA.miniStructureGeneration) {
+			return false;
+		}
+		   
 		//creates vertical log blocks
 		for (int i = -2; i < 6; i++) 
 		{

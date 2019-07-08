@@ -69,7 +69,7 @@ public class OceanRuinsUA extends Structure<OceanRuinConfig> {
 		      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
 		         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9),  Biomes.PLAINS);
-		         if (chunkGen.hasStructure(biome, this)) {
+		         if ((ConfigUA.oceanRuinsGeneration) && chunkGen.hasStructure(biome, this)) {
 		            return true;
 		         }
 	      }

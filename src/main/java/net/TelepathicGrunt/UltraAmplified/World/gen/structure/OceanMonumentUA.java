@@ -60,7 +60,7 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
        ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
        if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
           for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 16)) {
-             if (!chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
+             if (ConfigUA.oceanMonumentGeneration || !chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
                 return false;
              }
           }

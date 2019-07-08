@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityLockableLoot;
@@ -21,6 +22,11 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 
 	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
 
+		if(!ConfigUA.chestGeneration) {
+			return false;
+		}
+		
+		
 		//surface block must be solid with water above
 		if(!worldIn.getBlockState(blockpos).isSolid() || 
 			worldIn.getBlockState(blockpos.up()).getFluidState().isEmpty()) 

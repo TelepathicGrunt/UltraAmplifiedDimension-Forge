@@ -37,6 +37,7 @@ public class UltraAmplified {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
         modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::modConfig);
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
@@ -56,11 +57,19 @@ public class UltraAmplified {
 		}
 	}
 	
-	private void setup(final FMLCommonSetupEvent event) {
-		
+	private void setup(final FMLCommonSetupEvent event) 
+	{
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
 		
 	}
+	
+	
+	public void modConfig(ModConfig.ModConfigEvent event)
+    {
+        ModConfig config = event.getConfig();
+        if (config.getSpec() == ConfigUA.SERVER_SPEC)
+            ConfigUA.refreshServer();
+    }
 	
 }

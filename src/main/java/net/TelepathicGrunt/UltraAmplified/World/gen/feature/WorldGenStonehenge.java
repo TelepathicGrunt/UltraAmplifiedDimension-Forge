@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -55,6 +56,12 @@ public class WorldGenStonehenge extends Feature<NoFeatureConfig> {
 
     public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
+        
+  		if(!ConfigUA.miniStructureGeneration) {
+  			return false;
+  		}
+    	
+    	
 		//makes sure this stonehenge does not spawn too close to world height border or it will get cut off.
 		if(position.getY() < 248) 
 		{

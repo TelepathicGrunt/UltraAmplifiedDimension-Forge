@@ -78,23 +78,23 @@ public class ConfigUA {
     public static boolean desert = true;
     public static boolean forest = true;
     public static boolean taiga = true;
-    public static boolean extremeHills = true;
+    public static boolean mountains = true;
     public static boolean swamplands = true;
     public static boolean nether = true;
     public static boolean end = true;
-    public static boolean iceFlats = true;
+    public static boolean snowyTundra = true;
     public static boolean iceMountain = true;
     public static boolean mushroom = true;
     public static boolean stoneBeach = true;
     public static boolean jungle = true;
     public static boolean coldBeach = true;
     public static boolean birchForest = true;
-    public static boolean roofedForest = true;
-    public static boolean coldTaiga = true;
-    public static boolean megaTaiga = true;
+    public static boolean darkForest = true;
+    public static boolean snowyTaiga = true;
+    public static boolean giantSpruceTaiga = true;
     public static boolean savanna = true;
-    public static boolean mesa = true;
-    public static boolean mesaBryce = true;
+    public static boolean badlands = true;
+    public static boolean erodedBadlands = true;
     public static boolean iceSpike = true;
     public static boolean frozenOcean = true;
     public static boolean coldOcean = true;
@@ -171,23 +171,23 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue desert;
 		public final ForgeConfigSpec.BooleanValue forest;
 		public final ForgeConfigSpec.BooleanValue taiga;
-		public final ForgeConfigSpec.BooleanValue extremeHills;
+		public final ForgeConfigSpec.BooleanValue mountains;
 		public final ForgeConfigSpec.BooleanValue swamplands;
 		public final ForgeConfigSpec.BooleanValue nether;
 		public final ForgeConfigSpec.BooleanValue end;
-		public final ForgeConfigSpec.BooleanValue iceFlats;
+		public final ForgeConfigSpec.BooleanValue snowyTundra;
 		public final ForgeConfigSpec.BooleanValue iceMountain;
 		public final ForgeConfigSpec.BooleanValue mushroom;
 		public final ForgeConfigSpec.BooleanValue stoneBeach;
 		public final ForgeConfigSpec.BooleanValue jungle;
 		public final ForgeConfigSpec.BooleanValue coldBeach;
 		public final ForgeConfigSpec.BooleanValue birchForest;
-		public final ForgeConfigSpec.BooleanValue roofedForest;
-		public final ForgeConfigSpec.BooleanValue coldTaiga;
-		public final ForgeConfigSpec.BooleanValue megaTaiga;
+		public final ForgeConfigSpec.BooleanValue darkForest;
+		public final ForgeConfigSpec.BooleanValue snowyTaiga;
+		public final ForgeConfigSpec.BooleanValue giantSpruceTaiga;
 		public final ForgeConfigSpec.BooleanValue savanna;
-		public final ForgeConfigSpec.BooleanValue mesa;
-		public final ForgeConfigSpec.BooleanValue mesaBryce;
+		public final ForgeConfigSpec.BooleanValue badlands;
+		public final ForgeConfigSpec.BooleanValue erodedBadlands;
 		public final ForgeConfigSpec.BooleanValue iceSpike;
 		public final ForgeConfigSpec.BooleanValue frozenOcean;
 		public final ForgeConfigSpec.BooleanValue coldOcean;
@@ -527,10 +527,10 @@ public class ConfigUA {
             		.define("taiga", true);
 
 
-            		extremeHills = builder
+            		mountains = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.extremehills")
-            		.define("extremeHills", true);
+            		.translation("ultraamplified.config.structure.mountains")
+            		.define("mountains", true);
 
 
             		swamplands = builder
@@ -551,10 +551,10 @@ public class ConfigUA {
             		.define("end", true);
 
 
-            		iceFlats = builder
+            		snowyTundra = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.iceflats")
-            		.define("iceFlats", true);
+            		.translation("ultraamplified.config.structure.snowytundra")
+            		.define("snowyTundra", true);
 
 
             		iceMountain = builder
@@ -593,22 +593,22 @@ public class ConfigUA {
             		.define("birchForest", true);
 
 
-            		roofedForest = builder
+            		darkForest = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.roofedforest")
-            		.define("roofedForest", true);
+            		.translation("ultraamplified.config.structure.darkforest")
+            		.define("darkForest", true);
 
 
-            		coldTaiga = builder
+            		snowyTaiga = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.coldtaiga")
-            		.define("coldTaiga", true);
+            		.translation("ultraamplified.config.structure.snowytaiga")
+            		.define("snowyTaiga", true);
 
 
-            		megaTaiga = builder
+            		giantSpruceTaiga = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.megataiga")
-            		.define("megaTaiga", true);
+            		.translation("ultraamplified.config.structure.giantsprucetaiga")
+            		.define("giantSpruceTaiga", true);
 
 
             		savanna = builder
@@ -617,16 +617,16 @@ public class ConfigUA {
             		.define("savanna", true);
 
 
-            		mesa = builder
+            		badlands = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.mesa")
-            		.define("mesa", true);
+            		.translation("ultraamplified.config.structure.badlands")
+            		.define("badlands", true);
 
 
-            		mesaBryce = builder
+            		erodedBadlands = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.mesabryce")
-            		.define("mesaBryce", true);
+            		.translation("ultraamplified.config.structure.erodedbadlands")
+            		.define("erodedBadlands", true);
 
             		
             		iceSpike = builder
@@ -801,23 +801,23 @@ public class ConfigUA {
     	desert = SERVER.desert.get();
     	forest = SERVER.forest.get();
     	taiga = SERVER.taiga.get();
-    	extremeHills = SERVER.extremeHills.get();
+    	mountains = SERVER.mountains.get();
     	swamplands = SERVER.swamplands.get();
     	nether = SERVER.nether.get();
     	end = SERVER.end.get();
-    	iceFlats = SERVER.iceFlats.get();
+    	snowyTundra = SERVER.snowyTundra.get();
     	iceMountain = SERVER.iceMountain.get();
     	mushroom = SERVER.mushroom.get();
     	stoneBeach = SERVER.stoneBeach.get();
     	jungle = SERVER.jungle.get();
     	coldBeach = SERVER.coldBeach.get();
     	birchForest = SERVER.birchForest.get();
-    	roofedForest = SERVER.roofedForest.get();
-    	coldTaiga = SERVER.coldTaiga.get();
-    	megaTaiga = SERVER.megaTaiga.get();
+    	darkForest = SERVER.darkForest.get();
+    	snowyTaiga = SERVER.snowyTaiga.get();
+    	giantSpruceTaiga = SERVER.giantSpruceTaiga.get();
     	savanna = SERVER.savanna.get();
-    	mesa = SERVER.mesa.get();
-    	mesaBryce = SERVER.mesaBryce.get();
+    	badlands = SERVER.badlands.get();
+    	erodedBadlands = SERVER.erodedBadlands.get();
     	iceSpike = SERVER.iceSpike.get();
     	frozenOcean = SERVER.frozenOcean.get();
     	coldOcean = SERVER.coldOcean.get();

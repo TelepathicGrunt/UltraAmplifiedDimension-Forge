@@ -89,9 +89,9 @@ public class GenLayerBiomeUA implements IC0Transformer
         //warm
         if(ConfigUA.forest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
-        if(ConfigUA.roofedForest)
+        if(ConfigUA.darkForest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DARK_FOREST, 10));
-        if(ConfigUA.extremeHills)
+        if(ConfigUA.mountains)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
         if(ConfigUA.plains)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 10));
@@ -105,7 +105,7 @@ public class GenLayerBiomeUA implements IC0Transformer
         //cool
         if(ConfigUA.forest)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
-        if(ConfigUA.extremeHills)
+        if(ConfigUA.mountains)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
         if(ConfigUA.taiga)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.TAIGA, 10));
@@ -119,11 +119,16 @@ public class GenLayerBiomeUA implements IC0Transformer
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
 
         //icy
-        if(ConfigUA.iceFlats)
+        if(ConfigUA.snowyTundra) {
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 24));
+        }else if(ConfigUA.iceSpike) {
+        	//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
+        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 10));
+        }
+        
         if(ConfigUA.iceMountain)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 10));
-        if(ConfigUA.coldTaiga)
+        if(ConfigUA.snowyTaiga)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 10));
         if(ConfigUA.coldBeach)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 8));
@@ -137,12 +142,18 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(ConfigUA.jungle)
 		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.JUNGLE, 10));
 
-        if(ConfigUA.megaTaiga)
+        if(ConfigUA.giantSpruceTaiga)
 		    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
 
-        if(ConfigUA.mesa) 
+        if(ConfigUA.badlands) {
 		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS, 10));
+        }
+        else if(ConfigUA.erodedBadlands) {
+        	//turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
+        	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ERODED_BADLANDS, 10));
+        }
 
+        
         
 		    
         //this is used to help fill any biome list that is empty due to player turning off all of its biome.

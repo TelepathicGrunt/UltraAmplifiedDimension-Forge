@@ -18,10 +18,11 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Mod updated from 1.12.2 to work on 1.13.2 now!
 
      Config:
-·The Config GUI no longer works as 1.13 Forge does not have a working config UI. Instead, look for the serverconfig folder and edit the ultra_amplified_mod-server.toml file to change the config. Then launch Minecraft.
+·The Config GUI no longer works as 1.13 Forge does not have a working config UI. Instead, exit the Minecraft world you are in, look for the serverconfig folder in the save folder for that specific world, and edit the ultra_amplified_mod-server.toml file to change the config. Then enter the Minecraft world or restart server for the changes to take place. To make a fresh new world with a different config, create a new world and force close Minecraft before it starts showing the generation percentage. Then change the config and re-enter the world.
 ·Added config options for the new ocean biomes and ocean structures.
 ·Seperated scattered structures config to now let players control generation of every kind of scattered structure separately.
 ·Now can control whether Nether Fortresses can generate aboveground or underground or both.
+·Renamed biome config names to match the new biome names in 1.13.
 
      Biomes:
 ·Added Ultra Amplified versions of all Oceans! Deep Oceans has Shipwrecks and Ocean Monuments while shallow Oceans has Ruins, Treasure Chests, and Ocean Monuments!

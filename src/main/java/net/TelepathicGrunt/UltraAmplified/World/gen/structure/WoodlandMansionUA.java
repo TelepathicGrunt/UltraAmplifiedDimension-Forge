@@ -60,7 +60,7 @@ public class WoodlandMansionUA extends Structure<WoodlandMansionConfig> {
 	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
 	         for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 32)) {
-	            if (!chunkGen.hasStructure(biome, FeatureUA.WOODLAND_MANSION_UA)) {
+	            if ((ConfigUA.mansionGeneration) || !chunkGen.hasStructure(biome, FeatureUA.WOODLAND_MANSION_UA)) {
 	               return false;
 	            }
 	         }
