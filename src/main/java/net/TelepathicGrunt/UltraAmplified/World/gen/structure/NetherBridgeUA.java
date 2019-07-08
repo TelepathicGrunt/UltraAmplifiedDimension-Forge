@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Level;
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Biomes;
@@ -89,13 +90,12 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
          
          this.recalculateStructureSize(worldIn);
          
-         
-         if(genAboveSeaLevel && sharedRandom.nextBoolean()) {
-
+         //gens aboveground 50% of time if underground is allowed and 100% of time when underground is not allowed
+         if(genAboveSeaLevel && (sharedRandom.nextBoolean() || !Config.netherFortressUnderground) && Config.netherFortressAboveground) {
              this.setRandomHeight(worldIn, sharedRandom, 85, 130);
              UltraAmplified.Logger.log(Level.DEBUG, "Aboveground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
-         else {
+         else if(Config.netherFortressUnderground) {
              this.setRandomHeight(worldIn, sharedRandom, 15, 30);
              UltraAmplified.Logger.log(Level.DEBUG, "Underground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }

@@ -1326,7 +1326,7 @@ public class VillagePiecesUA
 	                        break;
 	                     }
 
-	                     if (block == Blocks.STONE || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.RED_SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.END_STONE || block == Blocks.NETHER_BRICKS || block == Blocks.SNOW_BLOCK || block == Blocks.ORANGE_TERRACOTTA) {
+	                     if (block == Blocks.STONE || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.RED_SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.END_STONE || block == Blocks.NETHERRACK || block == Blocks.SNOW_BLOCK || block == Blocks.ORANGE_TERRACOTTA) {
 	                        worldIn.setBlockState(blockpos$mutableblockpos, iblockstate2, 2);
 	                        worldIn.setBlockState(blockpos$mutableblockpos.down(), iblockstate3, 2);
 	                        break;
@@ -1459,7 +1459,7 @@ public class VillagePiecesUA
 	      END(3),
 	      HELL(4),
 	      BADLANDS(5),
-		  SNOW(6);
+		  ICY(6);
 
 	      private final int field_202605_e;
 
@@ -1910,7 +1910,7 @@ public class VillagePiecesUA
 		               return Blocks.CHISELED_RED_SANDSTONE.getDefaultState();
 		            }
 		         }
-	         else if (this.structureType == VillagePiecesUA.Type.SNOW) {
+	         else if (this.structureType == VillagePiecesUA.Type.ICY) {
 		            if (block.isIn(BlockTags.LOGS)) {
 		               return Blocks.SNOW_BLOCK.getDefaultState();
 		            }
@@ -1979,7 +1979,7 @@ public class VillagePiecesUA
 	         else if(this.structureType == VillagePiecesUA.Type.BADLANDS){
 	        	 return (BlockDoor)Blocks.ACACIA_DOOR;
 	         } 
-	         else if(this.structureType == VillagePiecesUA.Type.SNOW){
+	         else if(this.structureType == VillagePiecesUA.Type.ICY){
 	        	 return (BlockDoor)Blocks.BIRCH_DOOR;
 	         } 
 	         else if(this.structureType == VillagePiecesUA.Type.STONE){

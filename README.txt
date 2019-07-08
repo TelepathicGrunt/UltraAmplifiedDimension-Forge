@@ -15,10 +15,13 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
     (V.5.0 Changes) (1.13 Minecraft)
        
      Major Changes:
-·Mod updated to work on 1.13 now!
+·Mod updated from 1.12.2 to work on 1.13.2 now!
 
      Config:
-·Config no longer works as 1.13 Forge does not have a working config UI
+·The Config GUI no longer works as 1.13 Forge does not have a working config UI. Instead, look for the serverconfig folder and edit the ultra_amplified_mod-server.toml file to change the config. Then launch Minecraft.
+·Added config options for the new ocean biomes and ocean structures.
+·Seperated scattered structures config to now let players control generation of every kind of scattered structure separately.
+·Now can control whether Nether Fortresses can generate aboveground or underground or both.
 
      Biomes:
 ·Added Ultra Amplified versions of all Oceans! Deep Oceans has Shipwrecks and Ocean Monuments while shallow Oceans has Ruins, Treasure Chests, and Ocean Monuments!
@@ -42,13 +45,13 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Tall Birch Forest Hills biome now generates more giant Birch Trees to make it more dense.
 ·Desert Biomes and Gravely Mountain biomes now have blocks that cannot fall under their Sand/Gravel to help reduce the insane nearly-unplayable lag that occurs when ledges of Sand/Gravel begins falling.
 ·Removed Bamboo Forest due to Bamboo Jungle being added in vanilla 1.14 and that this biome caused a great deal of lag from all the Sugar Cane.
-
        
        Structures:
 ·Hay Bales in M forms of Jungles are now more common.
 ·Dungeons now have a new appearance for what biome they are in. (Forms include normal, mesa, desert, snow, nether, end, dark forest, mushroom, and swamp)
 ·Dungeon now have less strict requirements on where they can generate and so spawnrates and density bands have been re-adjusted to account for more successful generations.
 ·Mineshafts now takes on the Swamp variant when in Dark Forest biome and Ocean variant when in any Ocean biome.
+·Mineshafts now place their supports/archs even when the hallway is not in the ground.
 ·Fossils now generates on the surface of a ledge that does not have direct sunlight (before it could spawn floating in midair).
 ·End Cities now generates much, much bigger (three full branches instead of one).
 ·Desert Temples now have more TNT and is more dangerous to make safe. Be very careful!
@@ -60,7 +63,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Adjusted what kind of blocks spawn in Villages.
 ·Ravines are now split between two levels. The first kind of Ravine spawn higher at a high rate to make a maze. The second kind of Ravine spawns around lava level and are extremely long. Both kinds of ravines are much shorter than the Ravines in 1.12 version of this mod.
 ·Cave Cavities have been redone. They now spawn giant areas with ledges along the edges with stalagmites in the ceiling. Giant pillars will also spawn that flattens out towards the bottom to provide a path for the player to walk across past the lava floor of the cave.
-       
+·Icy Village now generates in Snowy Beach and Snowy Tundra biomes as well.
+
        
     (V.4.4 Changes) (1.12 Minecraft)
     

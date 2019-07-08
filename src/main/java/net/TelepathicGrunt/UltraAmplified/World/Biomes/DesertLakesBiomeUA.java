@@ -30,7 +30,6 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.LakeChanceConfig;
 import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 
@@ -46,12 +45,12 @@ public final class DesertLakesBiomeUA extends BiomeUA {
       if(Config.strongholdGeneration)
     	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
-      if(Config.netherFortressGeneration)
+      if(Config.netherFortressAboveground || Config.netherFortressUnderground)
     	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 
-      if(Config.scatteredGeneration) {
+      if(Config.desertTempleGeneration) {
           this.addStructure(FeatureUA.DESERT_TEMPLE_UA, new DesertPyramidConfig());
-    	  this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.DESERT_TEMPLE_UA, new DesertPyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+    	  
       }
 
       this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));

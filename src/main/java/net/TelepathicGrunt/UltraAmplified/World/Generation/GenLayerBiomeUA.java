@@ -1,14 +1,13 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import org.apache.logging.log4j.Level;
-
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import java.util.Collection;
 
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.gen.IContext;
+import net.minecraft.world.gen.NoiseGeneratorImproved;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 
@@ -18,11 +17,11 @@ public class GenLayerBiomeUA implements IC0Transformer
     @SuppressWarnings("unchecked")
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry>[] biomes = new java.util.ArrayList[net.minecraftforge.common.BiomeManager.BiomeType.values().length];
 
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> deepOceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> jungleReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> megaTaigaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private boolean noOcean = false;
     
     
     public GenLayerBiomeUA()
@@ -75,18 +74,19 @@ public class GenLayerBiomeUA implements IC0Transformer
         
         //adds our ultra amplified version of the vanilla biomes while checking to see if they are allowed by the user through the config
         
+        //deserts
         if(Config.desert)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 30));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 20));
         if(Config.savanna)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 20));
         if(Config.plains)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 6));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 8));
         if(Config.nether)
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 10));
         if(Config.mushroom) 
         	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
 
-        
+        //warm
         if(Config.forest)
 	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
         if(Config.roofedForest)
@@ -102,7 +102,7 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(Config.mushroom) 
         	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
         
-
+        //cool
         if(Config.forest)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
         if(Config.extremeHills)
@@ -112,20 +112,21 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(Config.plains)
 	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 6));
         if(Config.stoneBeach)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 6));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 8));
         if(Config.end)
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 8));
         if(Config.mushroom) 
         	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
 
+        //icy
         if(Config.iceFlats)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 30));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 24));
         if(Config.iceMountain)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 20));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 10));
         if(Config.coldTaiga)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 10));
         if(Config.coldBeach)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 10));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 8));
         if(Config.mushroom) 
         	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
         
@@ -139,12 +140,9 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(Config.megaTaiga)
 		    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
 
-        if(Config.mesa) {
-		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS, 1));
-        }
-        
-        
-        
+        if(Config.mesa) 
+		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS, 10));
+
         
 		    
         //this is used to help fill any biome list that is empty due to player turning off all of its biome.
@@ -156,29 +154,23 @@ public class GenLayerBiomeUA implements IC0Transformer
         if(biomes[warmIdx].size() != 0) {
         	temporaryBiomeList.addAll(biomes[warmIdx]);
         }
-        if(biomes[desertIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        if(biomes[desertIdx].size() != 0) {
         	temporaryBiomeList.addAll(biomes[desertIdx]);
         }
-        if(biomes[coolIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        if(biomes[coolIdx].size() != 0) {
         	temporaryBiomeList.addAll(biomes[coolIdx]);
         }
-        if(biomes[icyIdx].size() != 0 && temporaryBiomeList.size() < 6) {
+        if(biomes[icyIdx].size() != 0) {
         	temporaryBiomeList.addAll(biomes[icyIdx]);
         }
-        if(jungleReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        if(jungleReplacedBiomes.size() != 0) {
         	temporaryBiomeList.addAll(jungleReplacedBiomes);
         }
-        if(megaTaigaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        if(megaTaigaReplacedBiomes.size() != 0) {
         	temporaryBiomeList.addAll(megaTaigaReplacedBiomes);
         }
-        if(mesaReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
+        if(mesaReplacedBiomes.size() != 0) {
         	temporaryBiomeList.addAll(mesaReplacedBiomes);
-        }
-        if(deepOceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
-        	temporaryBiomeList.addAll(deepOceanReplacedBiomes);
-        }
-        if(oceanReplacedBiomes.size() != 0 && temporaryBiomeList.size() < 6) {
-        	temporaryBiomeList.addAll(oceanReplacedBiomes);
         }
         
         
@@ -189,6 +181,9 @@ public class GenLayerBiomeUA implements IC0Transformer
 //        }
         
         
+        //grabs all allowed biomes into ocean replaced list in case we disallow oceans later 
+        oceanReplacedBiomes.addAll(temporaryBiomeList);
+        
         //trims temporaryBiomeList if it exceeds 5 biomes
         while(temporaryBiomeList.size() > 5) {
         	temporaryBiomeList.remove(temporaryBiomeList.size()-1);
@@ -196,18 +191,19 @@ public class GenLayerBiomeUA implements IC0Transformer
         
         
         //if temp is empty (which means user made no biomes allowed), 
-        //set all biome list to have vanilla deep ocean so we do not crash due to all biome list not having any biome.
+        //set all biome list to have vanilla ocean so we do not crash due to all biome list not having any biome.
+        //This will also make it so that our ocean can replace the entire world too of they are enabled
         if(temporaryBiomeList.size() == 0) {
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	deepOceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
-        	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.DEEP_OCEAN, 10));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+        	oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
         }
+        
         //otherwise, set any empty biome list to have temp's biome list so it is not empty 
         else {
             if(biomes[desertIdx].size() == 0) {
@@ -222,12 +218,6 @@ public class GenLayerBiomeUA implements IC0Transformer
             if(biomes[icyIdx].size() == 0) {
             	biomes[icyIdx] = temporaryBiomeList;
             }
-            if(oceanReplacedBiomes.size() == 0) {
-            	oceanReplacedBiomes = temporaryBiomeList;
-            }
-            if(deepOceanReplacedBiomes.size() == 0) {
-            	deepOceanReplacedBiomes = temporaryBiomeList;
-            }
             if(jungleReplacedBiomes.size() == 0) {
             	jungleReplacedBiomes = temporaryBiomeList;
             }
@@ -238,6 +228,10 @@ public class GenLayerBiomeUA implements IC0Transformer
             	mesaReplacedBiomes = temporaryBiomeList;
             }
         }
+
+		if (!Config.ocean && !Config.coldOcean && !Config.frozenOcean && !Config.lukewarmOcean && !Config.warmOcean) {
+			noOcean = true;
+		}
     }
 
     
@@ -268,9 +262,23 @@ public class GenLayerBiomeUA implements IC0Transformer
           case 4:
              return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
           default:
+        	  
+        	  if(noOcean) {
+          		return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+          	  }
+        	  
+        	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean
              return value;
           }
        } else {
+    	   
+    	  if(noOcean) {
+
+    		   
+       		return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+       	  }
+    	   
+    	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean
           return value;
        }
     

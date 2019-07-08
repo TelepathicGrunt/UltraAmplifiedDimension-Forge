@@ -78,7 +78,7 @@ public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 	   public static final Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new WorldGenBlueIceWaterfallUA();
 	   public static final Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid();
 	   public static final Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer();
-	   public static final Feature<NoFeatureConfig> SNOW_FIXED = new SnowFeatureUA();
+	   public static final Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeatureUA();
 	   
 	   public static final Feature<NoFeatureConfig> LONG_VINES = new WorldGenVinesLongUA();
 	   public static final Feature<NoFeatureConfig> SHORT_VINES = new WorldGenVinesShortUA();

@@ -96,7 +96,7 @@ public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn) {
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(50L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(70L), iareafactory);
       iareafactory = GenLayerRemoveTooMuchOcean.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      IAreaFactory<T> iareafactory1 = GenLayerOceanUA.INSTANCE.apply(contextFactory.apply(2L));
+      IAreaFactory<T> iareafactory1 = new GenLayerOceanUA().apply(contextFactory.apply(2L));
       iareafactory1 = LayerUtil.repeat(2001L, GenLayerZoom.NORMAL, iareafactory1, (int)(biomeSize*1.4), contextFactory);
       iareafactory = GenLayerAddSnow.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
       iareafactory = GenLayerAddIsland.INSTANCE.apply(contextFactory.apply(3L), iareafactory);

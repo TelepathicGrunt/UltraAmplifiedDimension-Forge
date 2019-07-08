@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
@@ -23,22 +24,22 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 public class OceanRuinsUA extends Structure<OceanRuinConfig> {
    
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-	      int i = 5;
-	      int j = 8;
-	      if(i < 9 ) {
-	    	  j = i - 1;
+	      int maxDistance = Config.oceanRuinsSpawnrate;
+	      int minDistance = 8;
+	      if(maxDistance < 9) {
+	    	  minDistance = maxDistance - 1;
 	      }
-	      int k = x + i * spacingOffsetsX;
-	      int l = z + i * spacingOffsetsZ;
-	      int i1 = k < 0 ? k - i + 1 : k;
-	      int j1 = l < 0 ? l - i + 1 : l;
-	      int k1 = i1 / i;
-	      int l1 = j1 / i;
+	      int k = x + maxDistance * spacingOffsetsX;
+	      int l = z + maxDistance * spacingOffsetsZ;
+	      int i1 = k < 0 ? k - maxDistance + 1 : k;
+	      int j1 = l < 0 ? l - maxDistance + 1 : l;
+	      int k1 = i1 / maxDistance;
+	      int l1 = j1 / maxDistance;
 	      ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
-	      k1 = k1 * i;
-	      l1 = l1 * i;
-	      k1 = k1 + random.nextInt(i - j);
-	      l1 = l1 + random.nextInt(i - j);
+	      k1 = k1 * maxDistance;
+	      l1 = l1 * maxDistance;
+	      k1 = k1 + random.nextInt(maxDistance - minDistance);
+	      l1 = l1 + random.nextInt(maxDistance - minDistance);
 	      return new ChunkPos(k1, l1);
 	   }
 

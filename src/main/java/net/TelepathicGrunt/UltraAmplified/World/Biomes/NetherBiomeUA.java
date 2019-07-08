@@ -30,6 +30,7 @@ import net.minecraft.world.gen.placement.ChanceRangeConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -48,13 +49,13 @@ public class NetherBiomeUA extends BiomeUA {
 	      if(Config.strongholdGeneration)
 	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
-	      if(Config.netherFortressGeneration) {
+	      if(Config.netherFortressAboveground || Config.netherFortressUnderground) {
 	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(true));
 	      }
 	      
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
+		  this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
 
 	      this.addStructureFeaturesUA();
 	      
@@ -77,6 +78,8 @@ public class NetherBiomeUA extends BiomeUA {
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25), COUNT_RANGE, new CountRangeConfig(Config.quartzOreSpawnrate/10, 10, 120, 240)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(Blocks.NETHERRACK), Blocks.MAGMA_BLOCK.getDefaultState(), 55), COUNT_RANGE, new CountRangeConfig(Config.magmaSpawnrate, 10, 20, 100)));
 	      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.HELL_LAVA, new HellLavaConfig(true), COUNT_RANGE, new CountRangeConfig(Config.lavaSpawnrate, 10, 20, 240)));
+	      this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, createCompositeFeature(Feature.ICE_AND_SNOW, IFeatureConfig.NO_FEATURE_CONFIG, PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+
 	      this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.GHAST, 50, 4, 4));
 	      this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 100, 4, 4));
 	      this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 2, 4, 4));

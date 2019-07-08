@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
+import net.TelepathicGrunt.UltraAmplified.Config.Config;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
@@ -23,10 +24,10 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 public class ShipwreckUA extends Structure<ShipwreckConfig> {
 
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-      int maxDistance = 7;
-      int separation = 8;
+      int maxDistance = Config.shipwreckSpawnrate;
+      int minDistance = 8;
       if(maxDistance < 9 ) {
-    	  separation = maxDistance - 1;
+    	  minDistance = maxDistance - 1;
       }
       int k = x + maxDistance * spacingOffsetsX;
       int l = z + maxDistance * spacingOffsetsZ;
@@ -37,8 +38,8 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
       ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
       k1 = k1 * maxDistance;
       l1 = l1 * maxDistance;
-      k1 = k1 + random.nextInt(maxDistance - separation);
-      l1 = l1 + random.nextInt(maxDistance - separation);
+      k1 = k1 + random.nextInt(maxDistance - minDistance);
+      l1 = l1 + random.nextInt(maxDistance - minDistance);
       return new ChunkPos(k1, l1);
    }
 

@@ -51,14 +51,14 @@ public class DeepColdOceanBiomeUA extends BiomeUA {
 		      if(Config.strongholdGeneration)
 		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
-		      if(Config.netherFortressGeneration)
+		      if(Config.netherFortressAboveground || Config.netherFortressUnderground)
 		    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 
-		      this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
-		      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+		      if(Config.shipwreckGeneration)
+		    	  this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
 		      
-		      this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig());
-			  this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+		      if(Config.oceanMonumentGeneration)
+		    	  this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, new OceanMonumentConfig());
 		      
 
 			  if(Config.chestGeneration) {

@@ -37,7 +37,7 @@ public class WoodlandMansionUA extends Structure<WoodlandMansionConfig> {
 		   int maxSpacing = Config.mansionSpawnrate;
 		   int minSpacing = (int)(maxSpacing*0.75);
 		   
-		   if(Config.mansionSpawnrate < 10) {
+		   if(maxSpacing < 10) {
 			      minSpacing = maxSpacing - 1;
 		   }
 	      

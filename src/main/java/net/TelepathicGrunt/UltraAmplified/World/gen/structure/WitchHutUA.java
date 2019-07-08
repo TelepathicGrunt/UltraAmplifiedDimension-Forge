@@ -30,22 +30,22 @@ public class WitchHutUA extends Structure<SwampHutConfig> {
    private static final List<Biome.SpawnListEntry> field_202384_d = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
 
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-      int i = Config.scatteredSpawnrate;
-      int j = 8;
-      if(Config.scatteredSpawnrate < 9 ) {
-    	  j = Config.scatteredSpawnrate - 1;
+      int maxDistance = Config.witchHutSpawnrate;
+      int minDistance = 8;
+      if(maxDistance < 9 ) {
+    	  minDistance = maxDistance - 1;
       }
-      int k = x + i * spacingOffsetsX;
-      int l = z + i * spacingOffsetsZ;
-      int i1 = k < 0 ? k - i + 1 : k;
-      int j1 = l < 0 ? l - i + 1 : l;
-      int k1 = i1 / i;
-      int l1 = j1 / i;
+      int k = x + maxDistance * spacingOffsetsX;
+      int l = z + maxDistance * spacingOffsetsZ;
+      int i1 = k < 0 ? k - maxDistance + 1 : k;
+      int j1 = l < 0 ? l - maxDistance + 1 : l;
+      int k1 = i1 / maxDistance;
+      int l1 = j1 / maxDistance;
       ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
-      k1 = k1 * i;
-      l1 = l1 * i;
-      k1 = k1 + random.nextInt(i - j);
-      l1 = l1 + random.nextInt(i - j);
+      k1 = k1 * maxDistance;
+      l1 = l1 * maxDistance;
+      k1 = k1 + random.nextInt(maxDistance - minDistance);
+      l1 = l1 + random.nextInt(maxDistance - minDistance);
       return new ChunkPos(k1, l1);
    }
 

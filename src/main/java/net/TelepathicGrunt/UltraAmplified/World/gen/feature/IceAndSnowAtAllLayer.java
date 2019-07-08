@@ -3,6 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.Random;
 
 import net.TelepathicGrunt.UltraAmplified.Config.Config;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockDirtSnowy;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -36,7 +37,9 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 		        	{
 			            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
 			            if (!worldIn.getBlockState(blockpos$mutableblockpos1).getFluidState().isEmpty() &&
-			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) 
+			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false) &&
+			            	biome != BiomeInit.COLD_OCEAN &&
+			            	biome != BiomeInit.DEEP_COLD_OCEAN) 
 			            {
 			               worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
 			            }

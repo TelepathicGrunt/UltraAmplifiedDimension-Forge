@@ -45,7 +45,7 @@ public final class StoneShoreBiomeUA extends BiomeUA {
 	      if(Config.strongholdGeneration)
 	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());
 
-	      if(Config.netherFortressGeneration)
+	      if(Config.netherFortressAboveground || Config.netherFortressUnderground)
 	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 	      
     	  if(Config.villageGeneration)
@@ -53,8 +53,9 @@ public final class StoneShoreBiomeUA extends BiomeUA {
 	    	  
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_CAVITY_CARVER, new ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
 	      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/100)));
-		      this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
-	      this.addStructureFeaturesUA();
+		  this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(LONG_RAVINE_CARVER, new ProbabilityConfig((float)(Config.ravineSpawnrate)/850)));
+	      
+		  this.addStructureFeaturesUA();
 	      
 	      if(Config.waterLakeGen)
 	    	  this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.WATER), LAKE_WATER, new LakeChanceConfig(4)));

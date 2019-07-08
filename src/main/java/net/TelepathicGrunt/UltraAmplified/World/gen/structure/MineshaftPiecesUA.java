@@ -421,50 +421,41 @@ public class MineshaftPiecesUA
             }
         }
 
-        private void placeSupport(IWorld worldIn, MutableBoundingBox boundingBox, int x, int p_189921_4_, int z, int y, int p_189921_7_, Random random)
+        private void placeSupport(IWorld worldIn, MutableBoundingBox boundingBox, int x, int y2, int z, int y, int x2, Random random)
         {
-            if (this.isSupportingBox(worldIn, boundingBox, x, p_189921_7_, y, z))
-            {
-                IBlockState iblockstate = this.getPlanksBlock();
-                IBlockState iblockstate1 = this.getFenceBlock();
-                IBlockState iblockstate2 = CAVE_AIR;
-                this.fillWithBlocks(worldIn, boundingBox, x, p_189921_4_, z, x, y - 1, z, iblockstate1, iblockstate2, false);
-                this.fillWithBlocks(worldIn, boundingBox, p_189921_7_, p_189921_4_, z, p_189921_7_, y - 1, z, iblockstate1, iblockstate2, false);
-
-                if (random.nextInt(4) == 0)
-                {
-                    this.fillWithBlocks(worldIn, boundingBox, x, y, z, x, y, z, iblockstate, iblockstate2, false);
-                    this.fillWithBlocks(worldIn, boundingBox, p_189921_7_, y, z, p_189921_7_, y, z, iblockstate, iblockstate2, false);
-                }
-                else
-                {
-                    this.fillWithBlocks(worldIn, boundingBox, x, y, z, p_189921_7_, y, z, iblockstate, iblockstate2, false);
-                    
-                    if(this.mineShaftType == Type.END) {
-                    		if(random.nextFloat() < 0.08F) {
-                    		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z - 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.SOUTH));
-                    		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z + 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.NORTH));
-                    	}
-                    	
-                    	if(random.nextFloat() < 0.08F) {
-	                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z - 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.SOUTH));
-		                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.NORTH));
-                    	}
-                    }
-                    else if(this.mineShaftType == Type.HELL) 
-                    {
-                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
-                    }
-                    else if(this.mineShaftType == Type.OCEAN) 
-                    {
-                    	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.SEA_LANTERN.getDefaultState());
-                    }
-                    else {
-	                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.WALL_TORCH.getDefaultState().with(BlockTorchWall.HORIZONTAL_FACING, EnumFacing.SOUTH));
-	                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z + 1, Blocks.WALL_TORCH.getDefaultState().with(BlockTorchWall.HORIZONTAL_FACING, EnumFacing.NORTH));
-                    }
-                }
+           
+            IBlockState iblockstate = this.getPlanksBlock();
+            IBlockState iblockstate1 = this.getFenceBlock();
+            IBlockState iblockstate2 = CAVE_AIR;
+            this.fillWithBlocks(worldIn, boundingBox, x, y2, z, x, y - 1, z, iblockstate1, iblockstate2, false);
+            this.fillWithBlocks(worldIn, boundingBox, x2, y2, z, x2, y - 1, z, iblockstate1, iblockstate2, false);
+            this.fillWithBlocks(worldIn, boundingBox, x, y, z, x2, y, z, iblockstate, iblockstate2, false);
+            
+            if(this.mineShaftType == Type.END) {
+            		if(random.nextFloat() < 0.08F) {
+            		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z - 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.SOUTH));
+            		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z + 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.NORTH));
+            	}
+            	
+            	if(random.nextFloat() < 0.08F) {
+                	this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z - 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.SOUTH));
+                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().with(BlockEndRod.FACING, EnumFacing.NORTH));
+            	}
             }
+            else if(this.mineShaftType == Type.HELL) 
+            {
+            	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
+            }
+            else if(this.mineShaftType == Type.OCEAN) 
+            {
+            	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.SEA_LANTERN.getDefaultState());
+            }
+            else {
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.WALL_TORCH.getDefaultState().with(BlockTorchWall.HORIZONTAL_FACING, EnumFacing.SOUTH));
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z + 1, Blocks.WALL_TORCH.getDefaultState().with(BlockTorchWall.HORIZONTAL_FACING, EnumFacing.NORTH));
+            }
+        
+            
         }
 
         private void placeCobWeb(IWorld p_189922_1_, MutableBoundingBox p_189922_2_, Random p_189922_3_, float p_189922_4_, int p_189922_5_, int p_189922_6_, int p_189922_7_)
@@ -771,18 +762,6 @@ public class MineshaftPiecesUA
             }
         }
 
-        protected boolean isSupportingBox(IWorld p_189918_1_, MutableBoundingBox p_189918_2_, int p_189918_3_, int p_189918_4_, int p_189918_5_, int p_189918_6_)
-        {
-            for (int i = p_189918_3_; i <= p_189918_4_; ++i)
-            {
-                if (this.getBlockStateFromPos(p_189918_1_, i, p_189918_5_ + 1, p_189918_6_, p_189918_2_).getMaterial() == Material.AIR)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 
     public static class Room extends MineshaftPiecesUA.Peice

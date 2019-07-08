@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockDirtSnowy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -16,7 +17,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class SnowFeatureUA extends Feature<NoFeatureConfig> {
+public class ColdOceanSnowFeatureUA extends Feature<NoFeatureConfig> {
    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random p_212245_3_, BlockPos blockPos, NoFeatureConfig p_212245_5_) {
 	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 	      BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
@@ -30,7 +31,8 @@ public class SnowFeatureUA extends Feature<NoFeatureConfig> {
 	            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);
 	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
 	            
-	            if(biome.getTemperature(blockpos$mutableblockpos) <= 0.15f) {
+	            //decorates only cold ocean with just snow
+	            if(biome == BiomeInit.COLD_OCEAN || biome == BiomeInit.DEEP_COLD_OCEAN) {
 	            	if (blockpos$mutableblockpos.getY() >= 0 && blockpos$mutableblockpos.getY() < 256 && worldIn.getLightFor(EnumLightType.BLOCK, blockpos$mutableblockpos) < 10) {
 		                
 	            		IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
@@ -44,6 +46,20 @@ public class SnowFeatureUA extends Feature<NoFeatureConfig> {
 			                }
 		                }
 	            	}
+	            }
+	            //does normal default snow/ice for non-cold ocean bordering this biome
+	            else {
+	            	 if (biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) {
+	            		 worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
+	                  }
+
+	                  if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
+	                	  worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
+	                     IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
+	                     if (iblockstate.has(BlockDirtSnowy.SNOWY)) {
+	                    	 worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(BlockDirtSnowy.SNOWY, Boolean.valueOf(true)), 2);
+	                     }
+	                  }
 	            }
 	         }
 	      }
