@@ -58,9 +58,11 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Desert Temples now have more TNT and is more dangerous to make safe. Be very careful!
 ·Jungle Temples now have more hidden chests, more Dispensers that shoot arrows, and some Cobblestone is infested with Silverfish.
 ·Witch Huts now generate 2 Witches at start instead of 1.
+·Witch Huts now continually spawn Witches over time which makes a Witch farm now possible.
 ·Woodland Mansions cannot spawn in Plains biome or mutated Birch Forest biomes now.
 ·Igloos can now also spawn in Ice Mountain biome and all Snowy Taiga biomes.
-·Fixed Ocean Monuments so all rooms can be accessed now without resorting to TNT to break walls.
+·Fixed Ocean Monuments so most rooms can be accessed now without resorting to TNT to break walls. Though there is a glitch that lets terrain blocks generate inside the monument at the moment.
+·Ocean Monuments now continually spawn Guardians over time which makes a Guardian farm now possible.
 ·Adjusted what kind of blocks spawn in Villages.
 ·Ravines are now split between two levels. The first kind of Ravine spawn higher at a high rate to make a maze. The second kind of Ravine spawns around lava level and are extremely long. Both kinds of ravines are much shorter than the Ravines in 1.12 version of this mod.
 ·Cave Cavities have been redone. They now spawn giant areas with ledges along the edges with stalagmites in the ceiling. Giant pillars will also spawn that flattens out towards the bottom to provide a path for the player to walk across past the lava floor of the cave.

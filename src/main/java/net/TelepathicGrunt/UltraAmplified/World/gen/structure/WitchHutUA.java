@@ -27,7 +27,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.SwampHutConfig;
 
 public class WitchHutUA extends Structure<SwampHutConfig> {
-   private static final List<Biome.SpawnListEntry> field_202384_d = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
+   private static final List<Biome.SpawnListEntry> WITCH_HUT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
 
 	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
       int maxDistance = ConfigUA.witchHutSpawnrate;
@@ -71,7 +71,7 @@ public class WitchHutUA extends Structure<SwampHutConfig> {
    }
 
    public List<Biome.SpawnListEntry> getSpawnList() {
-      return field_202384_d;
+      return WITCH_HUT_ENEMIES;
    }
 
    public boolean func_202383_b(IWorld p_202383_1_, BlockPos p_202383_2_) {

@@ -32,7 +32,6 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 
 public class OceanMonumentUA extends Structure<OceanMonumentConfig> 
 {
-    //public static final List<Biome> SPAWN_BIOMES = Arrays.<Biome>asList(new Biome[] { BiomeInit.BiomeJungle, BiomeInit.BiomeJungleEdge, BiomeInit.BiomeJungleEdgeM, BiomeInit.BiomeJungleHills, BiomeInit.BiomeJungleM, Biomes.DEEP_OCEAN});
     private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
     protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
@@ -60,7 +59,7 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
        ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
        if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
           for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 16)) {
-             if (ConfigUA.oceanMonumentGeneration || !chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
+             if (!ConfigUA.oceanMonumentGeneration || !chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
                 return false;
              }
           }

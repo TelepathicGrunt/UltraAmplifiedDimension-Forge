@@ -7,6 +7,8 @@ import java.util.Map;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WitchHutUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -27,8 +29,6 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.SwampHutStructure;
 
 public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldGenSettings>{
 	protected static final IBlockState STONE = Blocks.STONE.getDefaultState();
@@ -369,10 +369,10 @@ public class ChunkGeneratorOverworldUA extends AbstractChunkGenerator<OverworldG
 
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
        Biome biome = this.world.getBiome(pos);
-       if (creatureType == EnumCreatureType.MONSTER && ((SwampHutStructure)Feature.SWAMP_HUT).func_202383_b(this.world, pos)) {
-          return Feature.SWAMP_HUT.getSpawnList();
+       if (creatureType == EnumCreatureType.MONSTER && ((WitchHutUA)FeatureUA.WITCH_HUT_UA).func_202383_b(this.world, pos)) {
+          return FeatureUA.WITCH_HUT_UA.getSpawnList();
        } else {
-          return creatureType == EnumCreatureType.MONSTER && Feature.OCEAN_MONUMENT.isPositionInStructure(this.world, pos) ? Feature.OCEAN_MONUMENT.getSpawnList() : biome.getSpawns(creatureType);
+          return creatureType == EnumCreatureType.MONSTER && FeatureUA.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos) ? FeatureUA.OCEAN_MONUMENT_UA.getSpawnList() : biome.getSpawns(creatureType);
        }
     }
 
