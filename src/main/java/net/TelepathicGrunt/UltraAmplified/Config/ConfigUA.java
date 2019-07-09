@@ -24,7 +24,7 @@ public class ConfigUA {
         SERVER = specPair.getLeft();
     }
     
-    public static int dungeonSpawnrate = 40;
+    public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
     public static boolean slimeLakeGen = true;
@@ -216,7 +216,7 @@ public class ConfigUA {
 	                    .comment("How often Dungeons will spawn.\r\n" 
 	                    		+"0 for no Dungeons and 300 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.dungeonspawnrate")
-	                    .defineInRange("dungeonSpawnrate", 40, 0, 300);
+	                    .defineInRange("dungeonSpawnrate", 30, 0, 300);
 	            
         	   			ravineSpawnrate = builder
 	                    .comment("How often Ravines will spawn.\r\n"

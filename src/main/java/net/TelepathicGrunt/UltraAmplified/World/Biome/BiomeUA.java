@@ -57,6 +57,7 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
 import net.minecraft.world.gen.feature.structure.DesertPyramidConfig;
 import net.minecraft.world.gen.feature.structure.EndCityConfig;
 import net.minecraft.world.gen.feature.structure.IglooConfig;
@@ -168,6 +169,7 @@ public class BiomeUA extends Biome {
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.JUNGLE_TEMPLE_UA, new JunglePyramidConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.WITCH_HUT_UA, new SwampHutConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(FeatureUA.WOODLAND_MANSION_UA, new WoodlandMansionConfig(), PASSTHROUGH, IPlacementConfig.NO_PLACEMENT_CONFIG));
+      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createCompositeFeature(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F), PASSTHROUGH_CHEST, IPlacementConfig.NO_PLACEMENT_CONFIG));
     }
 
 }

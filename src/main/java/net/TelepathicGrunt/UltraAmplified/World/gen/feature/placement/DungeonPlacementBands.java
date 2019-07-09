@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IChunkGenSettings;
@@ -13,7 +14,7 @@ import net.minecraft.world.gen.placement.DungeonRoomConfig;
 
 public class DungeonPlacementBands extends BasePlacement<DungeonRoomConfig> {
    public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, DungeonRoomConfig placementConfig, Feature<C> featureIn, C featureConfig) {
-	      int count = 40;
+	      int count = ConfigUA.dungeonSpawnrate;
 
 	      for(int currentCount = 0; currentCount < count; ++currentCount) {
 	         int x = random.nextInt(16);

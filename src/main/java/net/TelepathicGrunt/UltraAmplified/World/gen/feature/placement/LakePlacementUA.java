@@ -15,9 +15,8 @@ import net.minecraft.world.gen.placement.BasePlacement;
 public class LakePlacementUA extends BasePlacement<CountRangeAndTypeConfig> {
 	public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, CountRangeAndTypeConfig lakeConfig, Feature<C> featureIn, C featureConfig) {
 
-		int x = random.nextInt(16) + 8; // counteract the -8 i do in the actual generation of lakes so lakes generate
-										// around chosen position instead of in corner
-		int z = random.nextInt(16) + 8;
+		int x = random.nextInt(16);
+		int z = random.nextInt(16);
 		
 		
 		switch (lakeConfig.type) {
@@ -56,6 +55,11 @@ public class LakePlacementUA extends BasePlacement<CountRangeAndTypeConfig> {
 				}
 	
 				if (random.nextInt(lakeConfig.chance) == 0) {
+					
+					// counteract the -8 I do in the actual generation of Slime Lakes so Slime Lakes generate
+					// around chosen position instead of in corner like the water and lava lakes do
+					x += 8;
+					z += 8;  
 					
 					int y = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
 					if (y > worldIn.getSeaLevel() && y <= 170) {

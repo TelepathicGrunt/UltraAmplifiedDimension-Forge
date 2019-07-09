@@ -76,64 +76,63 @@ public class GenLayerBiomeUA implements IC0Transformer
         
         //deserts
         if(ConfigUA.desert)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 20));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 50));
         if(ConfigUA.savanna)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 20));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 50));
         if(ConfigUA.plains)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 8));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 20));
         if(ConfigUA.nether)
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 10));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 26));
         if(ConfigUA.mushroom) 
-        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
+        	biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
         //warm
         if(ConfigUA.forest)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 26));
         if(ConfigUA.darkForest)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DARK_FOREST, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DARK_FOREST, 26));
         if(ConfigUA.mountains)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 26));
         if(ConfigUA.plains)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 26));
         if(ConfigUA.birchForest)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BIRCH_FOREST, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BIRCH_FOREST, 26));
         if(ConfigUA.swamplands)
-	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SWAMP, 10));
+	        biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SWAMP, 26));
         if(ConfigUA.mushroom) 
-        	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
+        	biomes[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
         
         //cool
         if(ConfigUA.forest)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 10));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 26));
         if(ConfigUA.mountains)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 10));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 26));
         if(ConfigUA.taiga)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.TAIGA, 10));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.TAIGA, 26));
         if(ConfigUA.plains)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 6));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 15));
         if(ConfigUA.stoneBeach)
-	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 8));
+	        biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 20));
         if(ConfigUA.end)
-        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 8));
+        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 20));
         if(ConfigUA.mushroom) 
-        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
+        	biomes[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
         //icy
         if(ConfigUA.snowyTundra) {
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 24));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 50));
         }else if(ConfigUA.iceSpike) {
         	//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
-        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 10));
+        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_SPIKES, 26));
         }
-        
         if(ConfigUA.iceMountain)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 10));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 26));
         if(ConfigUA.snowyTaiga)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 10));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
         if(ConfigUA.coldBeach)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 8));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 20));
         if(ConfigUA.mushroom) 
-        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 4));
+        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
         
        
         
