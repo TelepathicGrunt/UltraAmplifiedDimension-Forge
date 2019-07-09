@@ -1585,7 +1585,7 @@ public class VillagePiecesUA
 	         
 	         for(int j = 0; j < this.boundingBox.getXSize(); j++) {
 	        	 for(int k = 0; k < this.boundingBox.getZSize(); k++) {
-	        		 blockpos$mutableblockpos.setPos(x+j, 64, z+k);
+	        		 blockpos$mutableblockpos.setPos(x+j, this.boundingBox.minY, z+k);
 		  	         if (structurebb.isVecInside(blockpos$mutableblockpos)) {
 		  	        	heightArray[k + j*this.boundingBox.getZSize()] = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos$mutableblockpos).getY();
 		  	         }
@@ -1610,7 +1610,10 @@ public class VillagePiecesUA
 	    	    int maxCount = 1;
 
 	    	    for (int i = 1; i < heightArray.length; i++) {
-	    	        if (heightArray[i] == previous)
+	    	    	if(heightArray[i] == 0) {
+	    	    		continue;
+	    	    	}
+	    	    	else if (heightArray[i] == previous)
 	    	            count++;
 	    	        else {
 	    	            if (count > maxCount) {

@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +39,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
     	 for(int x = -8; x < 24; ++x) {
              for(int z = -8; z < 24; ++z) {
                  
-            	 for(int y = 256; y > worldIn.getSeaLevel(); y--) {
+            	 for(int y = 256; y > ConfigUA.seaLevel-10; y--) {
 
                   	currentblock = worldIn.getBlockState(pos.add(x, y, z));
                   	

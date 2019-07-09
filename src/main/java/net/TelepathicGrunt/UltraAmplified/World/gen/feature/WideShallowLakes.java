@@ -11,6 +11,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.LakesConfig;
 
 public class WideShallowLakes extends Feature<LakesConfig> {
+	
+	
+	
 	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
 	     
 		  pos = pos.down(2);

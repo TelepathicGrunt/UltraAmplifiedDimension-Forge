@@ -480,7 +480,7 @@ public class OceanMonumentPiecesUA {
 			this.setCoordBaseMode(direction);
 			EnumFacing enumfacing = this.getCoordBaseMode();
 
-			int height = rand.nextInt(40)+55;
+			int height = 66;
 			
 			if (enumfacing.getAxis() == EnumFacing.Axis.Z) {
 				this.boundingBox = new MutableBoundingBox(x, height, z, x + 58 - 1, height+22, z + 58 - 1);
