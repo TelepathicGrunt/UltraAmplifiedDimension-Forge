@@ -13,7 +13,6 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 	
 		private static List<Integer> oceanList;
 		private static float listSize; 
-    	private static boolean OceansOnly;
 	
 		public GenLayerOceanUA(){
 			oceanList = new ArrayList<Integer>();
@@ -31,17 +30,6 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 			
 			listSize = oceanList.size();
 			
-			
-			//all land biomes disabled
-			 if(!ConfigUA.desert && !ConfigUA.savanna && !ConfigUA.plains && !ConfigUA.nether && !ConfigUA.mushroom && !ConfigUA.forest && !ConfigUA.darkForest && 
-					 !ConfigUA.mountains && !ConfigUA.birchForest && !ConfigUA.swamplands && !ConfigUA.taiga && !ConfigUA.stoneBeach && !ConfigUA.end && 
-					 !ConfigUA.snowyTundra && !ConfigUA.iceSpike && !ConfigUA.iceMountain && !ConfigUA.snowyTaiga && !ConfigUA.coldBeach && !ConfigUA.jungle && 
-					 !ConfigUA.giantSpruceTaiga && !ConfigUA.badlands && !ConfigUA.erodedBadlands) {
-				 
-				 OceansOnly = true;
-			 }else{
-				 OceansOnly = false;
-			 }
 		}
 
 	   public int apply(IContext context, AreaDimension areaDimensionIn, int x, int z) {
@@ -76,34 +64,31 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 	    	  int biomeID = oceanList.get(index);
 	    	  
 	    	  
-	    	  //makes deep oceans here if only ocean biomes are allowed because GenLayerDeepOcean only makes deep oceans just offland where there would've been land
-	    	  if(OceansOnly) {
-	    		  double d1 = noisegeneratorimproved.func_205562_a((double)(x + areaDimensionIn.getStartX() + 54443) / 5.0D, (double)(z + areaDimensionIn.getStartZ() + 34445) / 5.0D);
-	    		     
-	    		  if(Math.abs(d1%0.1D) < 0.03D) {
-	    			  if (biomeID == BiomeGenHelper.WARM_OCEAN) {
-	    				  biomeID = BiomeGenHelper.DEEP_WARM_OCEAN;
-	   	            }
+	    	  //makes deep oceans
+    	  	  double d1 = noisegeneratorimproved.func_205562_a((double)(x + areaDimensionIn.getStartX() + 54443) / 5.0D, (double)(z + areaDimensionIn.getStartZ() + 34445) / 5.0D);
+    		     
+    		  if(Math.abs(d1%0.1D) < 0.03D) {
+    			  if (biomeID == BiomeGenHelper.WARM_OCEAN) {
+    				  biomeID = BiomeGenHelper.DEEP_WARM_OCEAN;
+   	            }
 
-	   	            if (biomeID == BiomeGenHelper.LUKEWARM_OCEAN) {
-	   	            	biomeID = BiomeGenHelper.DEEP_LUKEWARM_OCEAN;
-	   	            }
+   	            if (biomeID == BiomeGenHelper.LUKEWARM_OCEAN) {
+   	            	biomeID = BiomeGenHelper.DEEP_LUKEWARM_OCEAN;
+   	            }
 
-	   	            if (biomeID == BiomeGenHelper.OCEAN) {
-	   	            	biomeID = BiomeGenHelper.DEEP_OCEAN;
-	   	            }
+   	            if (biomeID == BiomeGenHelper.OCEAN) {
+   	            	biomeID = BiomeGenHelper.DEEP_OCEAN;
+   	            }
 
-	   	            if (biomeID == BiomeGenHelper.COLD_OCEAN) {
-	   	            	biomeID = BiomeGenHelper.DEEP_COLD_OCEAN;
-	   	            }
+   	            if (biomeID == BiomeGenHelper.COLD_OCEAN) {
+   	            	biomeID = BiomeGenHelper.DEEP_COLD_OCEAN;
+   	            }
 
-	   	            if (biomeID == BiomeGenHelper.FROZEN_OCEAN) {
-	   	            	biomeID = BiomeGenHelper.DEEP_FROZEN_OCEAN;
-	   	            }
-	    		  }
+   	            if (biomeID == BiomeGenHelper.FROZEN_OCEAN) {
+   	            	biomeID = BiomeGenHelper.DEEP_FROZEN_OCEAN;
+   	            }
+    		  }
 	    		  
-	    	  }
-	    	  
 	    	  return biomeID;
 	      }
 	      

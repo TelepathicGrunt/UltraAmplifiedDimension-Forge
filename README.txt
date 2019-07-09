@@ -30,7 +30,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Most biomes now generate extra Gold, Redstone, and Lapis in a small range around 5 and 15 blocks below sea level to make underwater diving more rewarding.
 ·Many changes was made to how features (plants, snow, etc) so they spawn more efficiently and cleaner on all ledges.
 ·Ice Mountain biome now has lakes made of Ice and Blue Ice.
-·Ice mountain biome now can generate waterfalls made of Blue Ice.
+·Ice Mountain biome now can generate waterfalls made of Blue Ice.
 ·Ice Spike biome now has a layer of Ice with Water below it at sea level instead of Snow Blocks.
 ·Nether biome now spawns regions of Gravel and Soul Sand that is different at each height (before it was based on x and z positions).
 ·Nether biome now generates a layer of Magma Blocks several blocks below sea level Water and then generates Lava below the Magma Blocks.
@@ -39,12 +39,13 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·End biome now generates Shulker Boxes and Dragon Heads below sea level at a low chance and can spawn a Dragon Egg at any height but is extremely rare.
 ·Desert M biome now generates large areas of water to better fit its new 1.13 name which is Desert Lake biome.
 ·M forms of Redwood Taiga biomes now generates tiny boulders and their pillars are now shorter but thicker.
-·Jungle Edge biomes now generates when a jungle touches the Badlands biome or Savanna biome in addition to the Swamp biome that it used to do.
-·Biomes that does not use Stone for their main block now generates their block true to their biome edge (before, if you were underground, you would see the Nether's Netherrack spawning by chunks instead of following the Nether's biome edge cleanly)
+·Jungle Edge biomes now generates always at Jungle borders.
 ·All Jungle biomes no longer spawn Ocean Monuments.
+·Nether biome will generate a border of Savanna biome if it touches a Snowy Tundra or Snowy Taiga biome.
+·Biomes that does not use Stone for their main block now generates their block true to their biome edge (before, if you were underground, you would see the Nether's Netherrack spawning by chunks instead of following the Nether's biome edge cleanly)
 ·Savanna Plateau and Shattered Savanna Plateau now generates giant pillars under its dirt terrain!
 ·Tall Birch Forest Hills biome now generates more giant Birch Trees to make it more dense.
-·Desert Biomes and Gravely Mountain biomes now have blocks that cannot fall under their Sand/Gravel to help reduce the insane nearly-unplayable lag that occurs when ledges of Sand/Gravel begins falling.
+·Desert Biomes, Snowy Beach biome, and Gravely Mountain biomes now have blocks that cannot fall under their Sand/Gravel to help reduce the insane nearly-unplayable lag that occurs when ledges of Sand/Gravel begins falling.
 ·Removed Bamboo Forest due to Bamboo Jungle being added in vanilla 1.14 and that this biome caused a great deal of lag from all the Sugar Cane.
        
        Structures:
@@ -67,6 +68,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Ravines are now split between two levels. The first kind of Ravine spawn higher at a high rate to make a maze. The second kind of Ravine spawns around lava level and are extremely long. Both kinds of ravines are much shorter than the Ravines in 1.12 version of this mod.
 ·Cave Cavities have been redone. They now spawn giant areas with ledges along the edges with stalagmites in the ceiling. Giant pillars will also spawn that flattens out towards the bottom to provide a path for the player to walk across past the lava floor of the cave.
 ·Icy Village now generates in Snowy Beach and Snowy Tundra biomes as well.
+·Crosses in Swampland Hills biome will now have a 10% chance of generating a Wither Skeleton Skull instead of a normal Skeleton Skull if it has room for the skull.
 
        
     (V.4.4 Changes) (1.12 Minecraft)

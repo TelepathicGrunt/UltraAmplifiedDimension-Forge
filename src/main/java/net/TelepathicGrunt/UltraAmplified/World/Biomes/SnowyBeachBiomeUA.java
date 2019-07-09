@@ -39,7 +39,7 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 
 public class SnowyBeachBiomeUA extends BiomeUA {
 	   public SnowyBeachBiomeUA() {
-		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEFAULT_SURFACE_BUILDER, SAND_SAND_GRAVEL_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.BEACH).depth(0.0F).scale(0.025F).temperature(0.05F).downfall(0.3F).waterColor(11854335).waterFogColor(11847915).parent((String)null));
+		      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(SAND_SURFACE_BUILDER, SAND_SAND_SANDSTONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.BEACH).depth(0.0F).scale(0.025F).temperature(0.05F).downfall(0.3F).waterColor(11854335).waterFogColor(11847915).parent((String)null));
 		      
 		    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.COLDORBIRCH));
 		    	  this.addStructure(FeatureUA.STRONGHOLD_UA, new StrongholdConfig());

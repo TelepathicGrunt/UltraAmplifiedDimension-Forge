@@ -9,6 +9,7 @@ public enum BiomeGenHelper {
    instance;
 	
    public static final int PLAINS = IRegistry.field_212624_m.getId(BiomeInit.PLAINS);
+   public static final int SWAMP = IRegistry.field_212624_m.getId(BiomeInit.SWAMP);
    public static final int FOREST = IRegistry.field_212624_m.getId(BiomeInit.FOREST);
    public static final int WOODED_HILLS = IRegistry.field_212624_m.getId(BiomeInit.WOODED_HILLS);
    public static final int BIRCH_FOREST = IRegistry.field_212624_m.getId(BiomeInit.BIRCH_FOREST);
@@ -18,7 +19,7 @@ public enum BiomeGenHelper {
    public static final int MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.MOUNTAINS);
    public static final int WOODED_MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.WOODED_MOUNTAINS);
    public static final int SNOWY_TUNDRA = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_TUNDRA);
-   public static final int SNOWY_MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.ICE_MOUNTAIN);
+   public static final int ICE_MOUNTAINS = IRegistry.field_212624_m.getId(BiomeInit.ICE_MOUNTAIN);
    public static final int JUNGLE = IRegistry.field_212624_m.getId(BiomeInit.JUNGLE);
    public static final int JUNGLE_HILLS = IRegistry.field_212624_m.getId(BiomeInit.JUNGLE_HILLS);
    public static final int JUNGLE_EDGE = IRegistry.field_212624_m.getId(BiomeInit.JUNGLE_EDGE);
@@ -51,6 +52,7 @@ public enum BiomeGenHelper {
    public static final int SNOWY_BEACH = IRegistry.field_212624_m.getId(BiomeInit.SNOWY_BEACH);
    public static final int STONE_SHORE = IRegistry.field_212624_m.getId(BiomeInit.STONE_SHORE);
    public static final int SUNFLOWER_PLAINS = IRegistry.field_212624_m.getId(BiomeInit.SUNFLOWER_PLAINS);
+   public static final int NETHER = IRegistry.field_212624_m.getId(BiomeInit.NETHER);
 
    public static final int VANILLA_OCEAN = IRegistry.field_212624_m.getId(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = IRegistry.field_212624_m.getId(Biomes.DEEP_OCEAN);

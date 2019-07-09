@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[25,)" #mandatory (24 is current forge version)
+loaderVersion="[25,)" #mandatory
 
 [[mods]] #mandatory
 modId="ultra_amplified_mod" #mandatory
@@ -12,17 +12,3 @@ credits="Thanks to all the Forge tutorials and debugging help from other modders
 description='''
 A world beyond amplified world type! Discover incredible landscape! Loot filled structures! And many boosted Biomes along with the End and Nether in the Overworld!
 '''
-
-[[dependencies.testmod]] #optional
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[25,)" #mandatory
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.examplemod]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.13.2]"
-    ordering="NONE"
-    side="BOTH"

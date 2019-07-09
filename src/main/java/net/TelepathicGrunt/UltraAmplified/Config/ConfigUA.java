@@ -32,25 +32,25 @@ public class ConfigUA {
     public static boolean lavaLakeGen = true;
     public static boolean chestGeneration = true;
     public static boolean miniStructureGeneration = true;
-    public static int villageSpawnrate = 18;
+    public static int villageSpawnrate = 16;
     public static boolean villageGeneration = true;
     public static int villageZombieSpawnrate = 10;
     public static int mineshaftSpawnrate = 22;
     public static boolean mineshaftAbovegroundAllowed = true;
     public static boolean mineshaftUndergroundAllowed = true;
-    public static int mansionSpawnrate = 20;
+    public static int mansionSpawnrate = 18;
     public static boolean mansionGeneration = true;
-    public static int desertTempleSpawnrate = 22;
+    public static int desertTempleSpawnrate = 20;
     public static boolean desertTempleGeneration = true;
-    public static int jungleTempleSpawnrate = 22;
+    public static int jungleTempleSpawnrate = 20;
     public static boolean jungleTempleGeneration = true;
-    public static int iglooSpawnrate = 18;
+    public static int iglooSpawnrate = 14;
     public static boolean iglooGeneration = true;
-    public static int witchHutSpawnrate = 18;
+    public static int witchHutSpawnrate = 14;
     public static boolean witchHutGeneration = true;
     public static int oceanMonumentSpawnrate = 22;
     public static boolean oceanMonumentGeneration = true;
-    public static int oceanRuinsSpawnrate = 6;
+    public static int oceanRuinsSpawnrate = 7;
     public static boolean oceanRuinsGeneration = true;
     public static int shipwreckSpawnrate = 7;
     public static boolean shipwreckGeneration = true;
@@ -64,7 +64,7 @@ public class ConfigUA {
     public static int netherFortressSpawnrate = 22;
     public static boolean netherFortressAboveground = true;
     public static boolean netherFortressUnderground = true;
-    public static int endCitySpawnrate = 22;
+    public static int endCitySpawnrate = 18;
     public static boolean endCityGeneration = true;
     public static boolean secretSetting = false;
     public static int biomeSize = 3;
@@ -261,7 +261,7 @@ public class ConfigUA {
                     .comment("How rare are Villages.\r\n"
                     		 +"1 for Village spawning in most chunk and 100 for lowest spawnrate.")
                     .translation("ultraamplified.config.structure.villagespawnrate")
-                    .defineInRange("villageSpawnrate", 18, 1, 100);
+                    .defineInRange("villageSpawnrate", 16, 1, 100);
 
             		villageGeneration = builder
                     .comment("Controls whether Villages spawn or not.\r\n")
@@ -306,7 +306,7 @@ public class ConfigUA {
             		desertTempleSpawnrate = builder
             		.comment("How rare are Desert Temples." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.deserttemplespawnrate")
-            		.defineInRange("desertTempleSpawnrate", 22, 1, 100);
+            		.defineInRange("desertTempleSpawnrate", 20, 1, 100);
 
 
             		desertTempleGeneration = builder
@@ -318,7 +318,7 @@ public class ConfigUA {
             		jungleTempleSpawnrate = builder
             		.comment("How rare are Jungle Temples." + "\n" + "1 for a spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.jungletemplespawnrate")
-            		.defineInRange("jungleTempleSpawnrate", 22, 1, 100);
+            		.defineInRange("jungleTempleSpawnrate", 20, 1, 100);
 
             		jungleTempleGeneration = builder
             		.comment("Controls whether Jungle Temples spawn or not.")
@@ -329,7 +329,7 @@ public class ConfigUA {
             		iglooSpawnrate = builder
             		.comment("How rare are igloos." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.igloospawnrate")
-            		.defineInRange("iglooSpawnrate", 18, 1, 100);
+            		.defineInRange("iglooSpawnrate", 14, 1, 100);
 
             		iglooGeneration = builder
             		.comment("Controls whether Igloos spawn or not.")
@@ -340,7 +340,7 @@ public class ConfigUA {
             		witchHutSpawnrate = builder
             		.comment("How rare are Witch Huts." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.witchhutspawnrate")
-            		.defineInRange("witchHutSpawnrate", 18, 1, 100);
+            		.defineInRange("witchHutSpawnrate", 14, 1, 100);
 
             		witchHutGeneration = builder
             		.comment("Controls whether Witch Huts spawn or not.")
@@ -362,7 +362,7 @@ public class ConfigUA {
             		oceanRuinsSpawnrate = builder
             		.comment("How rare are Ocean Ruins." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.oceanruinsspawnrate")
-            		.defineInRange("oceanRuinsSpawnrate", 6, 1, 100);
+            		.defineInRange("oceanRuinsSpawnrate", 7, 1, 100);
 
             		oceanRuinsGeneration = builder
             		.comment("Controls whether Ocean Ruins spawn or not.")

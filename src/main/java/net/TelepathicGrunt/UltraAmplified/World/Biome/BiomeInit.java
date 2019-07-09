@@ -161,7 +161,7 @@ public class BiomeInit {
 		initBiome(NETHER, "Nether", BiomeType.DESERT, Type.NETHER, Type.HOT, Type.DRY);
 		initBiome(END, "The End", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
 		initBiome(SNOWY_TUNDRA, "Snowy Tundra", BiomeType.ICY, Type.COLD, Type.WASTELAND, Type.SNOWY);
-		initBiome(ICE_MOUNTAIN, "Snowy Mountain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
+		initBiome(ICE_MOUNTAIN, "Ice Mountain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
 		initBiome(MUSHROOM_FIELDS, "Mushroom Field", BiomeType.WARM, Type.MAGICAL, Type.MUSHROOM, Type.RARE);
 		initBiome(DESERT_HILLS, "Desert Hills", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS);
 		initBiome(WOODED_HILLS, "Wooden Hills", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS);

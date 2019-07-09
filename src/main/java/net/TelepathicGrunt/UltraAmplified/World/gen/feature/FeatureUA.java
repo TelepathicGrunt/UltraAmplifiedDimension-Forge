@@ -43,55 +43,55 @@ import net.minecraft.world.gen.placement.CountConfig;
 
 public abstract class FeatureUA<C extends IFeatureConfig> extends Feature<C>{
 
-	   public static final Feature<NoFeatureConfig> BETTER_CACTUS = new WorldGenBetterCactusUA();
-	   public static final Feature<NoFeatureConfig> GENERIC_DUNGEONS = new WorldGenDungeonsUA();
-	   public static final Feature<NoFeatureConfig> MESA_DUNGEONS = new WorldGenBadlandsDungeonsUA();
-	   public static final Feature<NoFeatureConfig> DARK_FOREST_DUNGEONS = new WorldGenDarkForestDungeonsUA();
-	   public static final Feature<NoFeatureConfig> DESERT_DUNGEONS = new WorldGenDesertDungeonsUA();
-	   public static final Feature<NoFeatureConfig> END_DUNGEONS = new WorldGenEndDungeonsUA();
-	   public static final Feature<NoFeatureConfig> NETHER_DUNGEONS = new WorldGenNetherDungeonsUA();
-	   public static final Feature<NoFeatureConfig> SNOW_DUNGEONS = new WorldGenSnowDungeonsUA();
-	   public static final Feature<NoFeatureConfig> SWAMP_DUNGEONS = new WorldGenSwampDungeonsUA();
-	   public static final Feature<NoFeatureConfig> MUSHROOM_DUNGEONS = new WorldGenMushroomDungeonsUA();
+	   public static final Feature<NoFeatureConfig> BETTER_CACTUS = new BetterCactus();
+	   public static final Feature<NoFeatureConfig> GENERIC_DUNGEONS = new DungeonDefault();
+	   public static final Feature<NoFeatureConfig> MESA_DUNGEONS = new DungeonsBadlands();
+	   public static final Feature<NoFeatureConfig> DARK_FOREST_DUNGEONS = new DungeonsDarkForest();
+	   public static final Feature<NoFeatureConfig> DESERT_DUNGEONS = new DungeonsDesert();
+	   public static final Feature<NoFeatureConfig> END_DUNGEONS = new DungeonsEnd();
+	   public static final Feature<NoFeatureConfig> NETHER_DUNGEONS = new DungeonsNether();
+	   public static final Feature<NoFeatureConfig> SNOW_DUNGEONS = new DungeonsSnow();
+	   public static final Feature<NoFeatureConfig> SWAMP_DUNGEONS = new DungeonsSwamp();
+	   public static final Feature<NoFeatureConfig> MUSHROOM_DUNGEONS = new DungeonsMushroom();
 	   
-	   public static final Feature<NoFeatureConfig> CROSS = new WorldGenCross();
-	   public static final Feature<NoFeatureConfig> HAY_BALE = new WorldGenHayBalePileUA();
-	   public static final Feature<NoFeatureConfig> TINY_HAY_BALE = new WorldGenHayBaleTinyPileUA();
-	   public static final Feature<NoFeatureConfig> STONEHENGE = new WorldGenStonehenge();
-	   public static final Feature<NoFeatureConfig> SUN_SHRINE = new WorldGenSunShrine();
-	   public static final Feature<NoFeatureConfig> FOSSILS_UA = new WorldGenFossilUA();
+	   public static final Feature<NoFeatureConfig> CROSS = new SwampCross();
+	   public static final Feature<NoFeatureConfig> HAY_BALE = new HayBalePile();
+	   public static final Feature<NoFeatureConfig> TINY_HAY_BALE = new HayBaleTinyPile();
+	   public static final Feature<NoFeatureConfig> STONEHENGE = new Stonehenge();
+	   public static final Feature<NoFeatureConfig> SUN_SHRINE = new SunShrine();
+	   public static final Feature<NoFeatureConfig> FOSSILS_UA = new FossilUA();
 	   public static final Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock();
 	   public static final Feature<IcebergConfig> ICEBERG_UA = new IcebergUA();
 	   public static final Feature<NoFeatureConfig> MARKED_TREASURE_CHEST_UA = new MarkedTreasureChest();
 
-	   public static final Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new WorldGenGiantStackableBoulderUA();
-	   public static final Feature<BlockBlobConfig> LARGE_BOULDER = new WorldGenGiantBoulderUA();
-	   public static final Feature<BlockBlobConfig> MEDIUM_BOULDER = new WorldGenNormalBoulderUA();
-	   public static final Feature<BlockBlobConfig> SMALL_BOULDER = new WorldGenTinyBoulderUA();
+	   public static final Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new GiantStackableBoulder();
+	   public static final Feature<BlockBlobConfig> LARGE_BOULDER = new BoulderGiant();
+	   public static final Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal();
+	   public static final Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny();
 
-	   public static final Feature<LakesConfig> SLIME_LAKE = new WorldGenSlimeLakes();
-	   public static final Feature<LakesConfig> SHALLOW_LAKE = new WorldGenShallowLakes();
-	   public static final Feature<ContainWaterConfig> CONTAIN_WATER = new WorldGenContainWater();
-	   public static final Feature<NoFeatureConfig> ICE_PATCH_SANDY = new WorldGenIcePatchUA();
-	   public static final Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new WorldGenIceSpikeUA();
-	   public static final Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new WorldGenGreenPowConcretePatchUA();
-	   public static final Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new WorldGenBlueIceWaterfallUA();
+	   public static final Feature<LakesConfig> SLIME_LAKE = new SlimeLakes();
+	   public static final Feature<LakesConfig> SHALLOW_LAKE = new WideShallowLakes();
+	   public static final Feature<ContainWaterConfig> CONTAIN_WATER = new ContainWaterForOceans();
+	   public static final Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA();
+	   public static final Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA();
+	   public static final Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new GreenPowConcretePatch();
+	   public static final Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall();
 	   public static final Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid();
 	   public static final Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer();
 	   public static final Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeatureUA();
 	   
-	   public static final Feature<NoFeatureConfig> LONG_VINES = new WorldGenVinesLongUA();
-	   public static final Feature<NoFeatureConfig> SHORT_VINES = new WorldGenVinesShortUA();
+	   public static final Feature<NoFeatureConfig> LONG_VINES = new VinesLongUA();
+	   public static final Feature<NoFeatureConfig> SHORT_VINES = new VinesShortUA();
 	   public static final Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrassUA();
 	   public static final Feature<NoFeatureConfig> KELP_UA = new KelpUA();
 	   public static final Feature<CountConfig> SEA_PICKLE_UA = new SeaPickleUA();
 	   
-	   public static final AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new WorldGenSwampTreeMutatedUA();
-	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new WorldGenBirchMTree(false);
-	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new WorldGenMegaPineTreeUA(false, false);
-	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new WorldGenMegaPineTreeUA(false, true);
-	   public static final AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new WorldGenDarkOakMTree(false);
-	   public static final AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new WorldGenTaigaTreeMUA(false);
+	   public static final AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated();
+	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTreeUA(false);
+	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTreeUA(false, false);
+	   public static final HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTreeUA(false, true);
+	   public static final AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTreeUA(false);
+	   public static final AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutatedUA(false);
 	   
 	   public static final Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA();
 	   public static final Structure<EndCityConfig> END_CITY_UA = new EndCityUA();

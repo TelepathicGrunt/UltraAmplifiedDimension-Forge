@@ -1453,21 +1453,23 @@ public class VillagePiecesUA
 	   }
 
 	   public static enum Type {
-		  //UA types
-	      DARK(0),
-	      JUNGLE(1),
-	      STONE(2),
-	      END(3),
-	      HELL(4),
-	      BADLANDS(5),
-		  ICY(6),
+		 
 		  
 		  //vanilla types
-		  OAK(7),
-		  SANDSTONE(8),
-		  ACACIA(9),
-		  SPRUCE(10);
+		  OAK(1),
+		  SANDSTONE(2),
+		  ACACIA(3),
+		  SPRUCE(4),
 		   
+		  //UA types
+	      DARK(5),
+	      JUNGLE(6),
+	      STONE(7),
+	      END(8),
+	      HELL(9),
+	      BADLANDS(10),
+		  ICY(11);
+		  
 	      private final int field_202605_e;
 
 	      private Type(int p_i48768_3_) {
@@ -1672,6 +1674,76 @@ public class VillagePiecesUA
 	         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
 	         if (event.getResult() == net.minecraftforge.eventbus.api.Event.Result.DENY) return event.getReplacement();
 	         Block block = blockstateIn.getBlock();
+	         
+	         if (this.structureType == VillagePiecesUA.Type.SANDSTONE) {
+	             if (block.isIn(BlockTags.LOGS) || block == Blocks.COBBLESTONE) {
+	                return Blocks.SANDSTONE.getDefaultState();
+	             }
+
+	             if (block.isIn(BlockTags.PLANKS)) {
+	                return Blocks.CUT_SANDSTONE.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_STAIRS) {
+	                return Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, blockstateIn.get(BlockStairs.FACING));
+	             }
+
+	             if (block == Blocks.COBBLESTONE_STAIRS) {
+	                return Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, blockstateIn.get(BlockStairs.FACING));
+	             }
+
+	             if (block == Blocks.GRAVEL) {
+	                return Blocks.SANDSTONE.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_PRESSURE_PLATE) {
+	                return Blocks.BIRCH_PRESSURE_PLATE.getDefaultState();
+	             }
+	          } else if (this.structureType == VillagePiecesUA.Type.SPRUCE) {
+	             if (block.isIn(BlockTags.LOGS)) {
+	                return Blocks.SPRUCE_LOG.getDefaultState().with(BlockLog.AXIS, blockstateIn.get(BlockLog.AXIS));
+	             }
+
+	             if (block.isIn(BlockTags.PLANKS)) {
+	                return Blocks.SPRUCE_PLANKS.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_STAIRS) {
+	                return Blocks.SPRUCE_STAIRS.getDefaultState().with(BlockStairs.FACING, blockstateIn.get(BlockStairs.FACING));
+	             }
+
+	             if (block == Blocks.OAK_FENCE) {
+	                return Blocks.SPRUCE_FENCE.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_PRESSURE_PLATE) {
+	                return Blocks.SPRUCE_PRESSURE_PLATE.getDefaultState();
+	             }
+	          } else if (this.structureType == VillagePiecesUA.Type.ACACIA) {
+	             if (block.isIn(BlockTags.LOGS)) {
+	                return Blocks.ACACIA_LOG.getDefaultState().with(BlockLog.AXIS, blockstateIn.get(BlockLog.AXIS));
+	             }
+
+	             if (block.isIn(BlockTags.PLANKS)) {
+	                return Blocks.ACACIA_PLANKS.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_STAIRS) {
+	                return Blocks.ACACIA_STAIRS.getDefaultState().with(BlockStairs.FACING, blockstateIn.get(BlockStairs.FACING));
+	             }
+
+	             if (block == Blocks.COBBLESTONE) {
+	                return Blocks.ACACIA_LOG.getDefaultState().with(BlockLog.AXIS, EnumFacing.Axis.Y);
+	             }
+
+	             if (block == Blocks.OAK_FENCE) {
+	                return Blocks.ACACIA_FENCE.getDefaultState();
+	             }
+
+	             if (block == Blocks.OAK_PRESSURE_PLATE) {
+	                return Blocks.ACACIA_PRESSURE_PLATE.getDefaultState();
+	             }
+	          }
 	         if (this.structureType == VillagePiecesUA.Type.DARK) {
 	            if (block.isIn(BlockTags.LOGS)) {
 	               return Blocks.DARK_OAK_LOG.getDefaultState();

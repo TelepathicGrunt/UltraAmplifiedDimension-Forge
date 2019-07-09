@@ -51,7 +51,7 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
             l = context.random(3) == 0 ? BiomeGenHelper.WOODED_HILLS : BiomeGenHelper.FOREST;
          } 
          else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && ConfigUA.iceMountain) {
-            l = BiomeGenHelper.SNOWY_MOUNTAINS;
+            l = BiomeGenHelper.ICE_MOUNTAINS;
          } 
          else if (biomeId1 == BiomeGenHelper.OCEAN) {
             l = BiomeGenHelper.DEEP_OCEAN;

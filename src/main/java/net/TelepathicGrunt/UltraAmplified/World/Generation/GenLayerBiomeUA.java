@@ -120,17 +120,23 @@ public class GenLayerBiomeUA implements IC0Transformer
 
         //icy
         if(ConfigUA.snowyTundra) {
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 50));
-        }else if(ConfigUA.iceSpike) {
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 60));
+        }else {
         	//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
-        	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_SPIKES, 26));
+        	if(ConfigUA.iceSpike) 
+        		biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_SPIKES, 26));
+        	
+        	//turns snowy tundra into ice mountain only if config has snowy tundra off and ice mountain on
+            if(ConfigUA.iceMountain)
+    	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 26));
         }
+
         if(ConfigUA.iceMountain)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 26));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 17));
         if(ConfigUA.snowyTaiga)
 	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
         if(ConfigUA.coldBeach)
-	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 20));
+	        biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 17));
         if(ConfigUA.mushroom) 
         	biomes[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
         
