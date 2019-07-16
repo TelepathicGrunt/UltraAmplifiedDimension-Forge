@@ -1,4 +1,4 @@
-    Made for Minecraft v.1.13.2.
+    Made for Minecraft v.1.14.3
     Created by TelepathicGrunt
 
 Highly recommend to also use the Optifine mod with my mod as well!
@@ -11,8 +11,21 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ------------------------------------------------
        | Ultra Amplified mod changelog |
        
+             
+    (V.6.0 Changes) (1.14.3 Minecraft)
+    
+     Major Changes:
+·Mod updated from 1.13.2 to work on 1.14.3 now!
+
+     Config:
+
+     Biomes:
+
+     Structures:
+·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
+  
        
-    (V.5.0 Changes) (1.13 Minecraft)
+    (V.5.0 Changes) (1.13.2 Minecraft)
        
      Major Changes:
 ·Mod updated from 1.12.2 to work on 1.13.2 now!
