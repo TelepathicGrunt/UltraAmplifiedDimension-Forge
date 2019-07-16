@@ -3,27 +3,34 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.mojang.datafixers.Dynamic;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
 
-private static final IBlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
-private static final IBlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
-private static final IBlockState SNOW = Blocks.SNOW.getDefaultState();
-private static final IBlockState AIR = Blocks.AIR.getDefaultState();
+public BlueIceWaterfall(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+private static final BlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
+private static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
+private static final BlockState SNOW = Blocks.SNOW.getDefaultState();
+private static final BlockState AIR = Blocks.AIR.getDefaultState();
 
 	protected static final Set<Block> acceptableBlocks = 
     		Stream.of(
@@ -32,7 +39,7 @@ private static final IBlockState AIR = Blocks.AIR.getDefaultState();
 	    		Blocks.PACKED_ICE
     		).collect(Collectors.toCollection(HashSet::new));
 	
-public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
+public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
 	
 		//creates a waterfall of blue ice that has a puddle at bottom
 	
@@ -49,9 +56,9 @@ public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGen
         	 //checks if we are in the side of a wall with air exposed on one side
         	 
              int numberOfSolidSides = 0;
-             EnumFacing emptySpot = EnumFacing.NORTH;
+             Direction emptySpot = Direction.NORTH;
 
-             for (EnumFacing face : EnumFacing.Plane.HORIZONTAL) {
+             for (Direction face : Direction.Plane.HORIZONTAL) {
    
              	if(acceptableBlocks.contains(worldIn.getBlockState(position.offset(face)).getBlock())) 
              	{
@@ -101,7 +108,7 @@ public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGen
             		 boolean spotFound = false;
                      
             		 //goes around ledge
-                     for (EnumFacing face : EnumFacing.Plane.HORIZONTAL) 
+                     for (Direction face : Direction.Plane.HORIZONTAL) 
                      {
                     	 
                 		 if((worldIn.getBlockState(curPos.offset(face)).getMaterial() == Material.AIR ||
@@ -147,7 +154,7 @@ public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGen
                             	 if(y > 1 && y < 255) {
                             		 
                             		 BlockPos blockpos = new BlockPos(x + curPos.getX(), y, z + curPos.getZ());
-	                                 IBlockState block = worldIn.getBlockState(blockpos);
+	                                 BlockState block = worldIn.getBlockState(blockpos);
 	
 	                                 if (block == Blocks.ICE.getDefaultState() || block == SNOW_BLOCK)
 	                                 {
@@ -174,7 +181,7 @@ public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGen
                     	 if (x * x + z * z <= width * width)
 	                     {
                     		 BlockPos blockpos = new BlockPos(x + curPos.getX(), curPos.getY() + 1, z + curPos.getZ());
-                             IBlockState block = worldIn.getBlockState(blockpos);
+                             BlockState block = worldIn.getBlockState(blockpos);
                              
 	                    	 if(block == SNOW) 
 	                         {
@@ -188,4 +195,5 @@ public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGen
              return true;
          }
      }
+
  }

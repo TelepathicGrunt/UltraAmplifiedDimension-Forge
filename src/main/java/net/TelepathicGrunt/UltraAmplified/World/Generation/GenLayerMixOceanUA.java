@@ -1,7 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import net.minecraft.world.gen.IContext;
-import net.minecraft.world.gen.area.AreaDimension;
+import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
@@ -9,7 +8,7 @@ import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
 public enum GenLayerMixOceanUA implements IAreaTransformer2, IDimOffset0Transformer {
    INSTANCE;
 
-   public int apply(IContext context, AreaDimension dimensionIn, IArea area1, IArea area2, int x, int z) {
+   public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z) {
       int i = area1.getValue(x, z);
       int j = area2.getValue(x, z);
       if (!BiomeGenHelper.isOcean(i)) {

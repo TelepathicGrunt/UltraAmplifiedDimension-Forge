@@ -7,10 +7,10 @@ import java.util.Random;
 import com.google.common.collect.ImmutableMap;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.Blocks;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -19,14 +19,12 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.structure.IglooConfig;
-import net.minecraft.world.gen.feature.structure.StructureIO;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class IglooPiecesUA {
 	   private static final ResourceLocation IGLOO_TOP = new ResourceLocation("igloo/top");
@@ -35,11 +33,8 @@ public class IglooPiecesUA {
 	   private static final Map<ResourceLocation, BlockPos> OFFSET1 = ImmutableMap.of(IGLOO_TOP, new BlockPos(3, 5, 5), IGLOO_MIDDLE, new BlockPos(1, 3, 1), IGLOO_BOTTOM, new BlockPos(3, 6, 7));
 	   private static final Map<ResourceLocation, BlockPos> OFFSET2 = ImmutableMap.of(IGLOO_TOP, new BlockPos(0, 0, 0), IGLOO_MIDDLE, new BlockPos(2, -3, 4), IGLOO_BOTTOM, new BlockPos(0, -3, -2));
 
-	   public static void registerPieces() {
-	      StructureIO.registerStructureComponent(IglooPiecesUA.Piece.class, "Iglu");
-	   }
 
-	   public static void start(TemplateManager p_207617_0_, BlockPos p_207617_1_, Rotation p_207617_2_, List<StructurePiece> p_207617_3_, Random p_207617_4_, IglooConfig p_207617_5_) {
+	   public static void start(TemplateManager p_207617_0_, BlockPos p_207617_1_, Rotation p_207617_2_, List<StructurePiece> p_207617_3_, Random p_207617_4_) {
 	    
          int i = p_207617_4_.nextInt(8) + 4;
          p_207617_3_.add(new IglooPiecesUA.Piece(p_207617_0_, IGLOO_BOTTOM, p_207617_1_, p_207617_2_, i * 3));
@@ -55,11 +50,8 @@ public class IglooPiecesUA {
 	      private ResourceLocation resourceLocation;
 	      private Rotation rotation;
 
-	      public Piece() {
-	      }
-
 	      public Piece(TemplateManager templateManager, ResourceLocation resourceLocation, BlockPos pos, Rotation rotation, int downDepth) {
-	         super(0);
+	    	 super(StructureInit.IGLUUA, 0);
 	         this.resourceLocation = resourceLocation;
 	         BlockPos blockpos = IglooPiecesUA.OFFSET2.get(resourceLocation);
 	         this.templatePosition = pos.add(blockpos.getX(), blockpos.getY() - downDepth, blockpos.getZ());
@@ -67,6 +59,14 @@ public class IglooPiecesUA {
 	         this.setupPiece(templateManager);
 	      }
 
+
+	      public Piece(TemplateManager p_i50566_1_, CompoundNBT p_i50566_2_) {
+	         super(StructureInit.IGLUUA, p_i50566_2_);
+	         this.resourceLocation = new ResourceLocation(p_i50566_2_.getString("Template"));
+	         this.rotation = Rotation.valueOf(p_i50566_2_.getString("Rot"));
+	         this.setupPiece(p_i50566_1_);
+	      }
+	      
 	      private void setupPiece(TemplateManager templateManager) {
 	         Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
 	         PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(IglooPiecesUA.OFFSET1.get(this.resourceLocation));
@@ -76,29 +76,19 @@ public class IglooPiecesUA {
 	      /**
 	       * (abstract) Helper method to write subclass data to NBT
 	       */
-	      protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-	         super.writeStructureToNBT(tagCompound);
-	         tagCompound.setString("Template", this.resourceLocation.toString());
-	         tagCompound.setString("Rot", this.rotation.name());
-	      }
-
-	      /**
-	       * (abstract) Helper method to read subclass data from NBT
-	       */
-	      protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager templateManager) {
-	         super.readStructureFromNBT(tagCompound, templateManager);
-	         this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
-	         this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
-	         this.setupPiece(templateManager);
-	      }
+	      protected void readAdditional(CompoundNBT tagCompound) {
+	          super.readAdditional(tagCompound);
+	          tagCompound.putString("Template", this.resourceLocation.toString());
+	          tagCompound.putString("Rot", this.rotation.name());
+	       }
 
 	      protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb) {
 	         if ("chest".equals(function)) {
 	            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 	            TileEntity tileentity = worldIn.getTileEntity(pos.down());
-	            if (tileentity instanceof TileEntityChest) {
+	            if (tileentity instanceof ChestTileEntity) {
 	            	if(ConfigUA.chestGeneration) {
-	 	               ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_IGLOO_CHEST, rand.nextLong());
+	 	               ((ChestTileEntity)tileentity).setLootTable(LootTables.CHESTS_IGLOO_CHEST, rand.nextLong());
 	            	}else {
 	            		worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 	            	}

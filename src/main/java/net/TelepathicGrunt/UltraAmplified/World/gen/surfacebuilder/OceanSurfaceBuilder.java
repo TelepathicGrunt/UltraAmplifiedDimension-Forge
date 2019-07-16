@@ -1,20 +1,28 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder;
 
 import java.util.Random;
+import java.util.function.Function;
 
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig> {
-   private static final IBlockState AIR = Blocks.AIR.getDefaultState();
-   private static final IBlockState WATER = Blocks.WATER.getDefaultState();
-   private final static IBlockState[] DEAD_CORAL_ARRAY = { 
+public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> 
+{
+	public OceanSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_) {
+	      super(p_i51310_1_);
+	}
+	
+   private static final BlockState AIR = Blocks.AIR.getDefaultState();
+   private static final BlockState WATER = Blocks.WATER.getDefaultState();
+   private final static BlockState[] DEAD_CORAL_ARRAY = { 
 		  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
 		  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
 		  Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), 
@@ -23,22 +31,22 @@ public class OceanSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig
 		};
 	
    
-   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-      this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getMiddle(), config.getBottom(), seaLevel);
+   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+      this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getUnder(), config.getUnderWaterMaterial(), seaLevel);
    }
 
-   protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, IBlockState topBlock, IBlockState middleBlock, IBlockState bottomBlock, int seaLevel) {
+   protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel) {
 	  
       int x = xStart & 15;
       int z = zStart & 15;
       BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-      IBlockState bottom = topBlock;
-      IBlockState middle = middleBlock;
-      IBlockState aboveBlock = middleBlock;
-      IBlockState above2Block = middleBlock;
-      IBlockState above3Block = middleBlock;
-      IBlockState above4Block = middleBlock;
-      IBlockState currentBlock;
+      BlockState bottom = topBlock;
+      BlockState middle = middleBlock;
+      BlockState aboveBlock = middleBlock;
+      BlockState above2Block = middleBlock;
+      BlockState above3Block = middleBlock;
+      BlockState above4Block = middleBlock;
+      BlockState currentBlock;
       boolean useCoral = bottomBlock == DEAD_CORAL_ARRAY[0];
       
       for(int y = 255; y >= seaLevel-10; --y) {

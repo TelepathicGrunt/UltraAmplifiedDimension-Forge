@@ -68,7 +68,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.WarmOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedBadlandsPlateauBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedMountainsBiomeUA;
-import net.minecraft.util.registry.IRegistry;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -355,20 +355,20 @@ public class BiomeInit {
     private static void mapHillsBiomes() {
     	//registers who is an Hills variant of another biome
     	
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(DESERT), IRegistry.field_212624_m.getId(DESERT_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(FOREST), IRegistry.field_212624_m.getId(WOODED_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(TAIGA), IRegistry.field_212624_m.getId(TAIGA_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(JUNGLE), IRegistry.field_212624_m.getId(JUNGLE_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(BIRCH_FOREST), IRegistry.field_212624_m.getId(BIRCH_FOREST_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(SNOWY_TAIGA), IRegistry.field_212624_m.getId(SNOWY_TAIGA_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(GIANT_TREE_TAIGA), IRegistry.field_212624_m.getId(GIANT_TREE_TAIGA_HILLS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(MOUNTAINS), IRegistry.field_212624_m.getId(WOODED_MOUNTAINS));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(SAVANNA), IRegistry.field_212624_m.getId(SAVANNA_PLATEAU));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(OCEAN), IRegistry.field_212624_m.getId(DEEP_OCEAN));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(COLD_OCEAN), IRegistry.field_212624_m.getId(DEEP_COLD_OCEAN));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(FROZEN_OCEAN), IRegistry.field_212624_m.getId(DEEP_FROZEN_OCEAN));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(LUKEWARM_OCEAN), IRegistry.field_212624_m.getId(DEEP_LUKEWARM_OCEAN));
-    	BASE_TO_HILLS_MAP.put(IRegistry.field_212624_m.getId(WARM_OCEAN), IRegistry.field_212624_m.getId(DEEP_WARM_OCEAN));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(DESERT), Registry.BIOME.getId(DESERT_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(FOREST), Registry.BIOME.getId(WOODED_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(TAIGA), Registry.BIOME.getId(TAIGA_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(JUNGLE), Registry.BIOME.getId(JUNGLE_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(BIRCH_FOREST), Registry.BIOME.getId(BIRCH_FOREST_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(SNOWY_TAIGA), Registry.BIOME.getId(SNOWY_TAIGA_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(GIANT_TREE_TAIGA), Registry.BIOME.getId(GIANT_TREE_TAIGA_HILLS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(MOUNTAINS), Registry.BIOME.getId(WOODED_MOUNTAINS));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(SAVANNA), Registry.BIOME.getId(SAVANNA_PLATEAU));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(OCEAN), Registry.BIOME.getId(DEEP_OCEAN));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(COLD_OCEAN), Registry.BIOME.getId(DEEP_COLD_OCEAN));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(FROZEN_OCEAN), Registry.BIOME.getId(DEEP_FROZEN_OCEAN));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(LUKEWARM_OCEAN), Registry.BIOME.getId(DEEP_LUKEWARM_OCEAN));
+    	BASE_TO_HILLS_MAP.put(Registry.BIOME.getId(WARM_OCEAN), Registry.BIOME.getId(DEEP_WARM_OCEAN));
     }
     
 	

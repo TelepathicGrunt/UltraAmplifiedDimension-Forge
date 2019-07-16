@@ -2,34 +2,43 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IWorldGenerationBaseReader;
+import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraftforge.common.IPlantable;
 
 public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
-   private static final IBlockState DARK_OAK_LOG = Blocks.DARK_OAK_LOG.getDefaultState();
-   private static final IBlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState();
+   private static final BlockState DARK_OAK_LOG = Blocks.DARK_OAK_LOG.getDefaultState();
+   private static final BlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState();
 
-   public DarkOakMTreeUA(boolean notify) {
-      super(notify);
+   public DarkOakMTreeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> config, boolean notify) {
+      super(config, notify);
+      setSapling((net.minecraftforge.common.IPlantable)Blocks.DARK_OAK_SAPLING);
    }
 
-   public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) {
+   public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
     {
         int height = 11 + rand.nextInt(3);
-
+        IWorld world = (IWorld) worldIn;
+        
+        
         BlockPos blockpos = position.down();
-        boolean isSoil = worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling)Blocks.DARK_OAK_SAPLING);
+        boolean isSoil = world.getBlockState(blockpos).canSustainPlant(world, blockpos, net.minecraft.util.Direction.UP, (IPlantable)Blocks.DARK_OAK_SAPLING);
         if (!isSoil) {
            return false;
-        } else if (!this.placeTreeOfHeight(worldIn, position, height)) {
+        } else if (!this.placeTreeOfHeight(world, position, height)) {
            return false;
         }
         else
@@ -45,8 +54,8 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
         	//creates the dome like crown of leaves first, 
         	//then puts the ring of wood in the leaves that also makes a smooth transition between leaves and trunk,
         	//then lastly, generates the trunk
-            this.createCrown(changedBlocks, worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
-            this.createWoodCrown(changedBlocks, worldIn, position.getX(), position.getZ(), position.getY() + height, rand);
+            this.createCrown(changedBlocks, world, position.getX(), position.getZ(), position.getY() + height, 0, rand, p_208519_5_);
+            this.createWoodCrown(changedBlocks, world, position.getX(), position.getZ(), position.getY() + height, rand, p_208519_5_);
             
                 // we want to generate the trunk as a thick plus sign like this:
                 //    [_][_]
@@ -60,18 +69,18 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
                 	position = position.down(2);
                 }
                 
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position);
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, 0));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, 1));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, 1));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(-1, 0, 0));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, -1));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(-1, 0, 1));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, -1));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(0, 0, 2));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(1, 0, 2));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(2, 0, 0));
-                this.placeColumnOfWood(changedBlocks, worldIn, ymax, rand, position.add(2, 0, 1));
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position, p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(1, 0, 0), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(1, 0, 1), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(0, 0, 1), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(-1, 0, 0), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(0, 0, -1), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(-1, 0, 1), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(1, 0, -1), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(0, 0, 2), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(1, 0, 2), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(2, 0, 0), p_208519_5_);
+                this.placeColumnOfWood(changedBlocks, world, ymax, rand, position.add(2, 0, 1), p_208519_5_);
 
             }
 
@@ -79,7 +88,7 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
         }
     }
 
-    private void createCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, int extraRadius, Random rand)
+    private void createCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, int extraRadius, Random rand, MutableBoundingBox p_208519_5_)
     {
     	  int i = 4;
 
@@ -87,15 +96,15 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5));
+              this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5), p_208519_5_);
           }
           
-          this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, y+4, z), 1);
+          this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, y+4, z), 1, p_208519_5_);
     }
     
     
     //generates the wood as an upside-down cone that curves out at end.
-    private void createWoodCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, Random rand)
+    private void createWoodCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, Random rand, MutableBoundingBox p_208519_5_)
     {
     	  int i = 2;
 
@@ -114,11 +123,11 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
             	  radius = 2;
               }
 
-              this.growWoodLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius);
+              this.growWoodLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius, p_208519_5_);
           }
     }
 
-    private void createMiniCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, int extraRadius, Random rand)
+    private void createMiniCrown(Set<BlockPos> changedBlocks, IWorld worldIn, int x, int z, int y, int extraRadius, Random rand, MutableBoundingBox p_208519_5_)
     {
     	//generates a tiny patch of leaves
     	  int i = rand.nextInt(2) + 1;
@@ -127,7 +136,7 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2));
+              this.growLeavesLayerStrict(changedBlocks, worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2), p_208519_5_);
           }
     }
     
@@ -135,7 +144,7 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
     /**
      * grow leaves in a circle with the outsides being within the circle
      */
-    protected void growLeavesLayerStrict(Set<BlockPos> changedBlocks, IWorld worldIn, BlockPos layerCenter, int width)
+    protected void growLeavesLayerStrict(Set<BlockPos> changedBlocks, IWorld worldIn, BlockPos layerCenter, int width, MutableBoundingBox p_208519_5_)
     {
         int i = width * width;
 
@@ -149,11 +158,11 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
                 if (j * j + k * k <= i || l * l + i1 * i1 <= i || j * j + i1 * i1 <= i || l * l + k * k <= i)
                 {
                     BlockPos blockpos = layerCenter.add(j, 0, k);
-                    IBlockState state = worldIn.getBlockState(blockpos);
+                    BlockState state = worldIn.getBlockState(blockpos);
 
                     if (state.getBlock().isAir(state, worldIn, blockpos) || state.getMaterial() == Material.LEAVES)
                     {
-                    	this.func_208520_a(changedBlocks, worldIn, blockpos, DARK_OAK_LEAVES);
+                    	this.setLogState(changedBlocks, worldIn, blockpos, DARK_OAK_LEAVES, p_208519_5_);
                     }
                 }
             }
@@ -164,7 +173,7 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
     /**
      * grow wood in a circle with the outsides being within the circle
      */
-    protected void growWoodLayerStrict(Set<BlockPos> changedBlocks, IWorld worldIn, BlockPos layerCenter, int width)
+    protected void growWoodLayerStrict(Set<BlockPos> changedBlocks, IWorld worldIn, BlockPos layerCenter, int width, MutableBoundingBox p_208519_5_)
     {
         int i = width * width;
 
@@ -178,37 +187,37 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
                 if (j * j + k * k <= i || l * l + i1 * i1 <= i || j * j + i1 * i1 <= i || l * l + k * k <= i)
                 {
                     BlockPos blockpos = layerCenter.add(j, 0, k);
-                    IBlockState state = worldIn.getBlockState(blockpos);
+                    BlockState state = worldIn.getBlockState(blockpos);
 
                     if (state.getBlock().isAir(state, worldIn, blockpos) || state.getMaterial() == Material.LEAVES)
                     {
-                        this.func_208520_a(changedBlocks, worldIn, blockpos, DARK_OAK_LOG);
+                        this.setLogState(changedBlocks, worldIn, blockpos, DARK_OAK_LOG, p_208519_5_);
                     }
                 }
             }
         }
     }
     
-    private void placeColumnOfWood(Set<BlockPos> changedBlocks, IWorld worldIn, int yMax, Random rand, BlockPos tempPos) {
+    private void placeColumnOfWood(Set<BlockPos> changedBlocks, IWorld worldIn, int yMax, Random rand, BlockPos tempPos, MutableBoundingBox p_208519_5_) {
     	while(tempPos.getY() < yMax)
         {
     		tempPos = tempPos.up();
-            IBlockState iblockstate = worldIn.getBlockState(tempPos);
+            BlockState iblockstate = worldIn.getBlockState(tempPos);
 	
 	        if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 	        {
 	        	if(rand.nextInt(70) == 0) {
-	        		createMiniCrown(changedBlocks, worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand);
+	        		createMiniCrown(changedBlocks, worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand, p_208519_5_);
 	        	}
 	        	else {
-	        		this.func_208520_a(changedBlocks, worldIn, tempPos, DARK_OAK_LOG);
+	        		this.setLogState(changedBlocks, worldIn, tempPos, DARK_OAK_LOG, p_208519_5_);
 	        	}
 	        }
         }
     }
 
 
-    private boolean placeTreeOfHeight(IBlockReader worldIn, BlockPos pos, int height) {
+    private boolean placeTreeOfHeight(IWorldGenerationBaseReader worldIn, BlockPos pos, int height) {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
@@ -226,7 +235,7 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
 
            for(int j1 = -i1; j1 <= i1; ++j1) {
               for(int k1 = -i1; k1 <= i1; ++k1) {
-                 if (!this.canGrowInto(worldIn, blockpos$mutableblockpos.setPos(i + j1, j + l, k + k1))) {
+                 if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(i + j1, j + l, k + k1))) {
                     return false;
                  }
               }

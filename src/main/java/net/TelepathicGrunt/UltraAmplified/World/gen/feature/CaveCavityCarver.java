@@ -5,33 +5,39 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Function;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SharedSeedRandom;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
-    private final float[] field_202536_i = new float[1024];
-    protected IBlockState fillerBlock = Blocks.STONE.getDefaultState();
-    protected static final IBlockState STONE = Blocks.STONE.getDefaultState();
-    protected static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
-    protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
-    protected static final IBlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
-    protected static final IBlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
+    public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49921_1_, int p_i49921_2_) {
+		super(p_i49921_1_, p_i49921_2_);
+	}
+
+
+	private final float[] field_202536_i = new float[1024];
+    protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
+    protected static final BlockState STONE = Blocks.STONE.getDefaultState();
+    protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
+    protected static final BlockState WATER = Blocks.WATER.getDefaultState();
+    protected static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
+    protected static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
     
-    private static final Map<IBlockState, IBlockState> fillerMap = createMap();
+    private static final Map<BlockState, BlockState> fillerMap = createMap();
 	
-	private static Map<IBlockState, IBlockState> createMap() 
+	private static Map<BlockState, BlockState> createMap() 
 	{
-        Map<IBlockState, IBlockState> result = new HashMap<IBlockState, IBlockState>();
+        Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
         
         result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState()); 
         result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState()); 
@@ -44,36 +50,28 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	
 
    protected long field_205552_a;
-   protected NoiseGeneratorOctaves field_205553_b;
+   protected OctavesNoiseGenerator field_205553_b;
 
-   public void setSeed(long seed) {
-      if (this.field_205553_b == null) {
-         this.field_205553_b = new NoiseGeneratorOctaves(new SharedSeedRandom(seed), 4);
-      }
-
-      this.field_205552_a = seed;
-   }
-
-    public boolean func_212246_a(IBlockReader p_212246_1_, Random p_212246_2_, int p_212246_3_, int p_212246_4_, ProbabilityConfig p_212246_5_) {
-        return p_212246_2_.nextFloat() <= p_212246_5_.probability;
+    public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
+        return p_212246_2_.nextFloat() <= config.probability;
      }
 
-     public boolean carve(IWorld region, Random random, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
+     public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
        	 
     	 
-    	int i = (this.func_202520_b() * 2 - 1) * 16;
+    	int i = (this.func_222704_c() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
         double height = (double)(random.nextInt(random.nextInt(2) + 1) + 34);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
         float xzNoise2 = random.nextFloat() * ((float)Math.PI * 1F);
         float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
         float widthHeightBase = (random.nextFloat() + random.nextFloat())/16; //width And Height Modifier
-        this.beginCarvingRoom(region, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0,i, random.nextDouble()+20D, mask);
+        this.func_222729_a(region, random.nextLong(), seaLevel, originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0,i, random.nextDouble()+20D, mask);
         return true;
      }
 
-     private void beginCarvingRoom(IWorld worldIn, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
-    	 setSeed(randomSeed);
+     private void func_222729_a(IChunk worldIn, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
+    	 
     	 Random random = new Random(randomSeed);
         float f = 1.0F;
 
@@ -103,7 +101,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
            f4 = f4 * 0.5F;
            f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 1.5F;
            f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 3.0F;
-          if (!this.isWithinGenerationDepth(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration, widthHeightBase)) {
+          if (!this.func_222702_a(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration, widthHeightBase)) {
              return;
           }
 
@@ -113,11 +111,11 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
      }
 
-     protected boolean carveAtTarget(IWorld worldIn, Random random, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+     protected boolean carveAtTarget(IChunk worldIn, Random random, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
         double xPos = (double)(mainChunkX * 16 + 8);
         double zPos = (double)(mainChunkZ * 16 + 8);
-        IBlockState iblockstate;
-        IBlockState iblockstate1;
+        BlockState iblockstate;
+        BlockState iblockstate1;
         double targetedHeight = 14;
         
         if (!(xRange < xPos - 16.0D - placementXZBound * 2.0D) && !(zRange < zPos - 16.0D - placementXZBound * 2.0D) && !(xRange > xPos + 16.0D + placementXZBound * 2.0D) && !(zRange > zPos + 16.0D + placementXZBound * 2.0D)) {
@@ -193,26 +191,26 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
                                
                                iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.UP);
-                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN);
+                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
+                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
                                iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
                                if (iblockstate.getBlock() == Blocks.GRASS_BLOCK || iblockstate.getBlock() == Blocks.MYCELIUM) {
                                   flag1 = true;
                                }
                                
                                if(iblockstate1.getBlock() == Blocks.WATER) {
-                        		   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, 2);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, 2);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, 2);
+                        		   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
+                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
                                    flag = true;
                                }
-                               else if (this.isTargetSafeFromFalling(iblockstate, iblockstate1) || fillerMap.containsKey(iblockstate)) {
+                               else if (this.canCarveBlock(iblockstate, iblockstate1) || fillerMap.containsKey(iblockstate)) {
                                   if (y < 11) {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, LAVA, 2);
+                                     worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
                                   } else {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, DEFAULT_CAVE_AIR, 2);
+                                     worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR, false);
                                      if (flag1 && worldIn.getBlockState(blockpos$mutableblockpos2).getBlock() == Blocks.DIRT) {
-                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), 2);
+                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), false);
                                      }
                                   }
 
@@ -234,10 +232,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
        }
     }
 
-	@Override
-	protected boolean carveAtTarget(IWorld worldIn, long seed, int mainChunkX, int mainChunkZ, double xRange,
-			double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
-		// TODO Auto-generated method stub
-		return false;
+     //not used i believe for our class
+	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_) {
+	    return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double)this.field_202536_i[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
 	}
 }

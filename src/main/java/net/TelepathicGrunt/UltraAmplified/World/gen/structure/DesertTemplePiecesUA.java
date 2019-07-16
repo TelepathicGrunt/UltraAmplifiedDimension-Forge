@@ -2,56 +2,42 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DirectionalBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.structure.ScatteredStructurePiece;
-import net.minecraft.world.gen.feature.structure.StructureIO;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class DesertTemplePiecesUA extends ScatteredStructurePiece {
-	   private final boolean[] chestsPlaced = new boolean[4];
-
-	   public static void registerPieces() {
-	      StructureIO.registerStructureComponent(DesertTemplePiecesUA.class, "TeDP");
-	   }
-
-	   public DesertTemplePiecesUA() {
-	   }
+	   private final boolean[] hasPlacedChest = new boolean[4];
 
 	   public DesertTemplePiecesUA(Random random, int x, int y, int z) {
-	      super(random, x, y, z, 21, 15, 21);
+		      super(StructureInit.TEDPUA, random, x, y, z, 21, 15, 21);
 	   }
 
-	   /**
-	    * (abstract) Helper method to write subclass data to NBT
-	    */
-	   protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-	      super.writeStructureToNBT(tagCompound);
-	      tagCompound.setBoolean("hasPlacedChest0", this.chestsPlaced[0]);
-	      tagCompound.setBoolean("hasPlacedChest1", this.chestsPlaced[1]);
-	      tagCompound.setBoolean("hasPlacedChest2", this.chestsPlaced[2]);
-	      tagCompound.setBoolean("hasPlacedChest3", this.chestsPlaced[3]);
+	   public DesertTemplePiecesUA(TemplateManager p_i51351_1_, CompoundNBT p_i51351_2_) {
+	      super(StructureInit.TEDPUA, p_i51351_2_);
+	      this.hasPlacedChest[0] = p_i51351_2_.getBoolean("hasPlacedChest0");
+	      this.hasPlacedChest[1] = p_i51351_2_.getBoolean("hasPlacedChest1");
+	      this.hasPlacedChest[2] = p_i51351_2_.getBoolean("hasPlacedChest2");
+	      this.hasPlacedChest[3] = p_i51351_2_.getBoolean("hasPlacedChest3");
 	   }
 
-	   /**
-	    * (abstract) Helper method to read subclass data from NBT
-	    */
-	   protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_) {
-	      super.readStructureFromNBT(tagCompound, p_143011_2_);
-	      this.chestsPlaced[0] = tagCompound.getBoolean("hasPlacedChest0");
-	      this.chestsPlaced[1] = tagCompound.getBoolean("hasPlacedChest1");
-	      this.chestsPlaced[2] = tagCompound.getBoolean("hasPlacedChest2");
-	      this.chestsPlaced[3] = tagCompound.getBoolean("hasPlacedChest3");
+	   protected void readAdditional(CompoundNBT tagCompound) {
+	      super.readAdditional(tagCompound);
+	      tagCompound.putBoolean("hasPlacedChest0", this.hasPlacedChest[0]);
+	      tagCompound.putBoolean("hasPlacedChest1", this.hasPlacedChest[1]);
+	      tagCompound.putBoolean("hasPlacedChest2", this.hasPlacedChest[2]);
+	      tagCompound.putBoolean("hasPlacedChest3", this.hasPlacedChest[3]);
 	   }
-
+	   
 	   /**
 	    * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 	    * end, it adds Fences...
@@ -71,10 +57,10 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 	         }
 	      }
 
-	      IBlockState iblockstate1 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.NORTH);
-	      IBlockState iblockstate2 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.SOUTH);
-	      IBlockState iblockstate3 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.EAST);
-	      IBlockState iblockstate = Blocks.SANDSTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.WEST);
+	      BlockState iblockstate1 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.NORTH);
+	      BlockState iblockstate2 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH);
+	      BlockState iblockstate3 = Blocks.SANDSTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.EAST);
+	      BlockState iblockstate = Blocks.SANDSTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.WEST);
 	      this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 9, 4, Blocks.SANDSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 	      this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 10, 1, 3, 10, 3, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
 	      this.setBlockState(worldIn, iblockstate1, 2, 10, 0, structureBoundingBoxIn);
@@ -224,7 +210,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 	      this.fillWithBlocks(worldIn, structureBoundingBoxIn, 9, -11, 9, 11, -1, 11, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 	      this.setBlockState(worldIn, Blocks.STONE_PRESSURE_PLATE.getDefaultState(), 10, -11, 10, structureBoundingBoxIn);
 	      this.fillWithBlocks(worldIn, structureBoundingBoxIn, 9, -14, 9, 11, -13, 11, Blocks.TNT.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-	      this.setBlockState(worldIn, Blocks.OBSERVER.getDefaultState().with(BlockDirectional.FACING, EnumFacing.UP), 10, -12, 10, structureBoundingBoxIn);
+	      this.setBlockState(worldIn, Blocks.OBSERVER.getDefaultState().with(DirectionalBlock.FACING, Direction.UP), 10, -12, 10, structureBoundingBoxIn);
 	      
 	      this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 8, -11, 10, structureBoundingBoxIn);
 	      this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 8, -10, 10, structureBoundingBoxIn);
@@ -244,11 +230,11 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 	      this.setBlockState(worldIn, Blocks.CUT_SANDSTONE.getDefaultState(), 10, -11, 13, structureBoundingBoxIn);
 
 	      //chests
-	      for(EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-	         if (!this.chestsPlaced[enumfacing.getHorizontalIndex()]) {
+	      for(Direction enumfacing : Direction.Plane.HORIZONTAL) {
+	         if (!this.hasPlacedChest[enumfacing.getHorizontalIndex()]) {
 	            int i1 = enumfacing.getXOffset() * 2;
 	            int j1 = enumfacing.getZOffset() * 2;
-	            this.chestsPlaced[enumfacing.getHorizontalIndex()] = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10 + i1, -11, 10 + j1, LootTableList.CHESTS_DESERT_PYRAMID);
+	            this.hasPlacedChest[enumfacing.getHorizontalIndex()] = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10 + i1, -11, 10 + j1, LootTables.CHESTS_DESERT_PYRAMID);
 	         }
 	      }
 	      

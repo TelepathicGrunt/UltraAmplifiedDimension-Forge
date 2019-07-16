@@ -1,28 +1,36 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.surfacebuilder;
 
 import java.util.Random;
+import java.util.function.Function;
 
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class GravelSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig> {
-   private static final IBlockState AIR = Blocks.AIR.getDefaultState();
-   private static final IBlockState STONE = Blocks.STONE.getDefaultState();
+public class GravelSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> 
+{
+	public GravelSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_) {
+	      super(p_i51310_1_);
+	}
+	
+   private static final BlockState AIR = Blocks.AIR.getDefaultState();
+   private static final BlockState STONE = Blocks.STONE.getDefaultState();
    
-   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-      this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getMiddle(), config.getBottom(), seaLevel);
+   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+      this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getUnder(), config.getUnderWaterMaterial(), seaLevel);
    }
 
-   protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, IBlockState topBlock, IBlockState middleBlock, IBlockState bottomBlock, int seaLevel) {
+   protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel) {
 
-		IBlockState iblockstate = topBlock;
-		IBlockState iblockstate1 = middleBlock;
+		BlockState iblockstate = topBlock;
+		BlockState iblockstate1 = middleBlock;
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		int bottomLayerNoise = -1;
 		int noiseThing = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
@@ -31,7 +39,7 @@ public class GravelSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfi
 
 		for (int y = startHeight; y >= 0; --y) {
 			blockpos$mutableblockpos.setPos(x, y, z);
-			IBlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
 			if (iblockstate2.getMaterial() == Material.AIR) {
 				bottomLayerNoise = -1;
 			} else if (iblockstate2.getBlock() == defaultBlock.getBlock()) {

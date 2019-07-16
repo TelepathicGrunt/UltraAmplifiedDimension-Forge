@@ -1,34 +1,41 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IcebergConfig;
 
 public class IcebergUA extends Feature<IcebergConfig> {
 	
 
-	  private final static IBlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
-	  private final static IBlockState AIR = Blocks.AIR.getDefaultState();
-	  private final static IBlockState WATER = Blocks.WATER.getDefaultState();
-	  private final static IBlockState STONE = Blocks.STONE.getDefaultState();
-	  private final static IBlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
+	  public IcebergUA(Function<Dynamic<?>, ? extends IcebergConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	private final static BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
+	  private final static BlockState AIR = Blocks.AIR.getDefaultState();
+	  private final static BlockState WATER = Blocks.WATER.getDefaultState();
+	  private final static BlockState STONE = Blocks.STONE.getDefaultState();
+	  private final static BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 	
-	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, IcebergConfig icebergConfig) {
+	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, IcebergConfig icebergConfig) {
 		      
 		      boolean flag = random.nextDouble() > 0.7D;
-		      IBlockState iblockstate = icebergConfig.state;
+		      BlockState iblockstate = icebergConfig.state;
 		      double d0 = random.nextDouble() * 2.0D * Math.PI;
 		      int i = 11 - random.nextInt(5);
 		      int j = 3 + random.nextInt(3);
@@ -138,7 +145,7 @@ public class IcebergUA extends Feature<IcebergConfig> {
 
 		   }
 
-		   private void func_205181_a(IWorld p_205181_1_, Random p_205181_2_, BlockPos p_205181_3_, int p_205181_4_, int xPos, int yPos, int zPos, int p_205181_8_, int p_205181_9_, boolean p_205181_10_, int p_205181_11_, double p_205181_12_, boolean p_205181_14_, IBlockState p_205181_15_) {
+		   private void func_205181_a(IWorld p_205181_1_, Random p_205181_2_, BlockPos p_205181_3_, int p_205181_4_, int xPos, int yPos, int zPos, int p_205181_8_, int p_205181_9_, boolean p_205181_10_, int p_205181_11_, double p_205181_12_, boolean p_205181_14_, BlockState p_205181_15_) {
 		      BlockPos blockpos = new BlockPos(0, 0, 0);
 		      double d0 = p_205181_10_ ? this.func_205180_a(xPos, zPos, blockpos, p_205181_9_, this.func_205176_a(yPos, p_205181_4_, p_205181_11_), p_205181_12_) : this.func_205177_a(xPos, zPos, blockpos, p_205181_8_, p_205181_2_);
 		      if (d0 < 0.0D) {
@@ -153,8 +160,8 @@ public class IcebergUA extends Feature<IcebergConfig> {
 
 		   }
 
-		   private void func_205175_a(BlockPos p_205175_1_, IWorld p_205175_2_, Random p_205175_3_, int p_205175_4_, int p_205175_5_, boolean p_205175_6_, boolean p_205175_7_, IBlockState p_205175_8_) {
-		      IBlockState iblockstate = p_205175_2_.getBlockState(p_205175_1_);
+		   private void func_205175_a(BlockPos p_205175_1_, IWorld p_205175_2_, Random p_205175_3_, int p_205175_4_, int p_205175_5_, boolean p_205175_6_, boolean p_205175_7_, BlockState p_205175_8_) {
+		      BlockState iblockstate = p_205175_2_.getBlockState(p_205175_1_);
 		      Block block = iblockstate.getBlock();
 		      if (iblockstate.getMaterial() == Material.AIR || block == Blocks.SNOW_BLOCK || block == Blocks.ICE || block == Blocks.WATER) {
 		         boolean flag = !p_205175_6_ || p_205175_3_.nextDouble() > 0.05D;
@@ -216,17 +223,17 @@ public class IcebergUA extends Feature<IcebergConfig> {
 		      return reader.getBlockState(pos.down()).getMaterial() == Material.AIR;
 		   }
 
-		   private IBlockState appropriateBlockForNeighbors(IWorld worldIn, BlockPos pos) {
+		   private BlockState appropriateBlockForNeighbors(IWorld worldIn, BlockPos pos) {
 			   
 			   boolean bordersWater = false;
 			   boolean bordersAir = false;
-			   IBlockState iblockstate;
-			   IBlockState[] blockArray = new IBlockState[5];
+			   BlockState iblockstate;
+			   BlockState[] blockArray = new BlockState[5];
 			   int i = 0;
 			   //detects what blocks are adjacent
-               for (EnumFacing face : EnumFacing.values()) {
+               for (Direction face : Direction.values()) {
 
-            	   if(face == EnumFacing.UP) {
+            	   if(face == Direction.UP) {
             		   continue;
             	   }
             	   

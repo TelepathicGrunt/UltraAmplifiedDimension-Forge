@@ -1,30 +1,32 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.placement.Placement;
 
-public class FixedHeightWithChance extends BasePlacement<PercentageAndHeightConfig> {
+public class FixedHeightWithChance extends Placement<PercentageAndHeightConfig> {
 	
-	public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, PercentageAndHeightConfig percentageAndHeightConfig, Feature<C> featureIn, C featureConfig) {
+	public FixedHeightWithChance(Function<Dynamic<?>, ? extends PercentageAndHeightConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndHeightConfig percentageAndHeightConfig, BlockPos pos) {
 	   
    	   if(random.nextFloat() < percentageAndHeightConfig.percentage) {
 	   			
    		    pos = pos.up(percentageAndHeightConfig.height);
    		   
-		    featureIn.func_212245_a(worldIn, chunkGenerator, random, pos, featureConfig);
+   		 return Stream.of(pos);
    	   }
-   	   else {
-   		   return false;
-	   
-       }
 
-       return true;
+       return Stream.empty();
    }
 }

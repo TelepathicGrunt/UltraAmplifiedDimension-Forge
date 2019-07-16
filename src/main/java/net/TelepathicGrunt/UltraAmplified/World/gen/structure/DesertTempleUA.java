@@ -1,30 +1,34 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.UpgradeData;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.structure.DesertPyramidConfig;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class DesertTempleUA extends Structure<DesertPyramidConfig> {
+public class DesertTempleUA extends Structure<NoFeatureConfig> {
    
-	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+	public DesertTempleUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+		super(p_i51427_1_);
+	}
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
 	      int maxDistance = ConfigUA.desertTempleSpawnrate;
 	      int minDistance = 8;
 	      if(maxDistance < 9 ) {
@@ -36,7 +40,7 @@ public class DesertTempleUA extends Structure<DesertPyramidConfig> {
 	      int j1 = l < 0 ? l - maxDistance + 1 : l;
 	      int k1 = i1 / maxDistance;
 	      int l1 = j1 / maxDistance;
-	      ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
+	      ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, 14357617);
 	      k1 = k1 * maxDistance;
 	      l1 = l1 * maxDistance;
 	      k1 = k1 + random.nextInt(maxDistance - minDistance);
@@ -44,32 +48,23 @@ public class DesertTempleUA extends Structure<DesertPyramidConfig> {
 	      return new ChunkPos(k1, l1);
 	   }
 
-	   protected boolean isEnabledIn(IWorld worldIn) {
-	      return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	   }
-	
-	   
-	   protected String getStructureName() {
+	   public String getStructureName() {
 	      return "Desert Temple UA";
 	   }
+
 
 	   public int getSize() {
 	      return 3;
 	   }
 
-	   protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-	      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.PLAINS);
-	      return new DesertTempleUA.Start(worldIn, generator, random, x, z, biome);
+	   public Structure.IStartFactory getStartFactory() {
+	      return DesertTempleUA.Start::new;
 	   }
 
-	   protected int getSeedModifier() {
-	      return 14357617;
-	   }
-
-	   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+	   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
 	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9),  Biomes.PLAINS);
+	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
 	         if ((ConfigUA.desertTempleGeneration) && chunkGen.hasStructure(biome, this)) {
 	            return true;
 	         }
@@ -79,13 +74,12 @@ public class DesertTempleUA extends Structure<DesertPyramidConfig> {
 
 	   
 	   public static class Start extends StructureStart {
-		  private boolean isValid;
-	      public Start() {
+		  public Start(Structure<?> p_i50437_1_, int p_i50437_2_, int p_i50437_3_, Biome p_i50437_4_, MutableBoundingBox p_i50437_5_, int p_i50437_6_, long p_i50437_7_) {
+	         super(p_i50437_1_, p_i50437_2_, p_i50437_3_, p_i50437_4_, p_i50437_5_, p_i50437_6_, p_i50437_7_);
 	      }
 
-	      public Start(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom sharedSeed, int chunkX, int chunkZ, Biome biome) {
-	         super(chunkX, chunkZ, biome, sharedSeed, worldIn.getSeed());
-	         Rotation rotation = Rotation.values()[sharedSeed.nextInt(Rotation.values().length)];
+	      public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+	         Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 	         int i = 5;
 	         int j = 5;
 	         if (rotation == Rotation.CLOCKWISE_90) {
@@ -96,41 +90,22 @@ public class DesertTempleUA extends Structure<DesertPyramidConfig> {
 	         } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
 	            j = -5;
 	         }
-	         
-	         ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(chunkX, chunkZ), UpgradeData.EMPTY);
-	         generator.makeBase(chunkprimer);
-	         int k = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7);
-	         int l = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7, 7 + j);
-	         int i1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7);
-	         int j1 = chunkprimer.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, 7 + i, 7 + j);
-	         int y = Math.min(Math.min(k, l), Math.min(i1, j1));
+
+	         int k = (chunkX << 4) + 7;
+	         int l = (chunkZ << 4) + 7;
+	         int i1 = generator.func_222531_c(k, l, Heightmap.Type.WORLD_SURFACE_WG);
+	         int j1 = generator.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
+	         int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
+	         int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
+	         int y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 	         y =  Math.min(y, 244);
 	         
-	         if (y < 70) {
-	            this.isValid = false;
-	         } else {
-		         DesertTemplePiecesUA desertpyramidpiece = new DesertTemplePiecesUA(sharedSeed, chunkX * 16, y, chunkZ * 16);
+	         if (y >= 70) {
+		         DesertTemplePiecesUA desertpyramidpiece = new DesertTemplePiecesUA(this.rand, chunkX * 16, y, chunkZ * 16);
 		         this.components.add(desertpyramidpiece);
-		         this.recalculateStructureSize(worldIn);
-
-		          UltraAmplified.Logger.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+" "+(chunkZ*16));
-		         this.isValid = true;
-	         }
-	      }
-
-
-	      public boolean isSizeableStructure() {
-	         return this.isValid;
-	      }
-
-	      //Forge: Fix losing of 'valid' flag on world reload. TODO: Remove in 1.14 as vanilla fixed.
-	      public void writeAdditional(net.minecraft.nbt.NBTTagCompound tag) {
-	         super.writeAdditional(tag);
-	         tag.setBoolean("Valid", this.isValid);
-	      }
-	      public void readAdditional(net.minecraft.nbt.NBTTagCompound tag) {
-	         super.readAdditional(tag);
-	         this.isValid = tag.hasKey("Valid") && tag.getBoolean("Valid");
+		         this.recalculateStructureSize();
+		         UltraAmplified.Logger.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+" "+(chunkZ*16));
+		     }
 	      }
 	   }
 	}

@@ -1,24 +1,34 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.placement.Placement;
 
-public class ChanceOnAllWaterSurfacesUA extends BasePlacement<PercentageAndFrequencyConfig> {
+public class ChanceOnAllWaterSurfacesUA extends Placement<PercentageAndFrequencyConfig> {
 	
-	private static final IBlockState WATER = Blocks.WATER.getDefaultState();
+	public ChanceOnAllWaterSurfacesUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	private static final BlockState WATER = Blocks.WATER.getDefaultState();
 	
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, PercentageAndFrequencyConfig pfConfig, Feature<C> featureIn, C featureConfig) {
+   public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 	   int lowestHeight = 40;
-	   
+
+       ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 	   for(int i = 0; i < pfConfig.frequency; i++) {
 		   
 	       int height = 255;
@@ -42,7 +52,7 @@ public class ChanceOnAllWaterSurfacesUA extends BasePlacement<PercentageAndFrequ
 		            break;
 		         }
 		         else if(random.nextFloat() < pfConfig.percentage) {
-			         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height+1, z), featureConfig);
+		        	 blockPosList.add(pos.add(x, height+1, z));
 		         }
 		         
 		         //height is a water block, move down until we reached an air block. We are now on the top surface of a body of water
@@ -58,6 +68,9 @@ public class ChanceOnAllWaterSurfacesUA extends BasePlacement<PercentageAndFrequ
 		     }
 	       
 		  }
-	      return true;
+	   
+	    return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) -> {
+	    	return blockPosList.remove(0);
+	    }).filter(Objects::nonNull);
 	   }
 	}

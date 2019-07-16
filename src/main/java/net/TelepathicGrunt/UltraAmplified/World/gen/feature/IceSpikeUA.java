@@ -3,23 +3,30 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.mojang.datafixers.Dynamic;
+
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class IceSpikeUA extends Feature<NoFeatureConfig> {
 	
-	protected static final Set<IBlockState> ALLOWED_BLOCKS = 
+	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	protected static final Set<BlockState> ALLOWED_BLOCKS = 
     		Stream.of(
 	    		Blocks.AIR.getDefaultState(),
 	    		Blocks.CAVE_AIR.getDefaultState(),
@@ -32,12 +39,12 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 				Blocks.WATER.getDefaultState()
     		).collect(Collectors.toCollection(HashSet::new));
     
-    private static final IBlockState WATER = Blocks.WATER.getDefaultState();
-    private static final IBlockState ICE = Blocks.ICE.getDefaultState();
-    private static final IBlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
+    private static final BlockState WATER = Blocks.WATER.getDefaultState();
+    private static final BlockState ICE = Blocks.ICE.getDefaultState();
+    private static final BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
 	
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
-	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
 		//System.out.println(position.getX()+", "+position.getY()+", "+position.getZ());
         while ((worldIn.isAirBlock(position) || worldIn.getBlockState(position) == Blocks.WATER.getDefaultState())&& position.getY() > 2)
         {
@@ -81,7 +88,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 
                         if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
-                            IBlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
+                            BlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
                             if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > ConfigUA.seaLevel-2)
                             {
                                 this.setBlockState(worldIn, position.add(x, y, z), PACKED_ICE);
@@ -133,7 +140,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                     //how far down the ice spike can generate
                     while (blockpos.getY() > 5)
                     {
-                        IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
+                        BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
                         if (!ALLOWED_BLOCKS.contains(iblockstate1))
                         {

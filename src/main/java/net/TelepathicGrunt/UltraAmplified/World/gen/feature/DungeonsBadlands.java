@@ -1,38 +1,45 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityLockableLoot;
-import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.tileentity.MobSpawnerTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonsBadlands extends Feature<NoFeatureConfig> 
 {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final IBlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
-    private static final IBlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
-    private static final IBlockState ORANGE_TERRACOTTA = Blocks.ORANGE_TERRACOTTA.getDefaultState();
-    private static final IBlockState CUT_RED_SANDSTONE = Blocks.CUT_RED_SANDSTONE.getDefaultState();
+    public DungeonsBadlands(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	private static final Logger LOGGER = LogManager.getLogger();
+    private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
+    private static final BlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
+    private static final BlockState ORANGE_TERRACOTTA = Blocks.ORANGE_TERRACOTTA.getDefaultState();
+    private static final BlockState CUT_RED_SANDSTONE = Blocks.CUT_RED_SANDSTONE.getDefaultState();
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
-    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
         int j = rand.nextInt(2) + 2;
         int xMin = -j - 1;
@@ -136,9 +143,9 @@ public class DungeonsBadlands extends Feature<NoFeatureConfig>
                     {
                         int j3 = 0;
 
-                        for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
+                        for (Direction Direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (worldIn.getBlockState(blockpos2.offset(enumfacing)).getMaterial().isSolid())
+                            if (worldIn.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -147,7 +154,7 @@ public class DungeonsBadlands extends Feature<NoFeatureConfig>
                         if (j3 == 1)
                         {
                         	worldIn.setBlockState(blockpos2, StructurePiece.func_197528_a(worldIn, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
-                        	TileEntityLockableLoot.setLootTable(worldIn, rand, blockpos2, LootTableList.CHESTS_SIMPLE_DUNGEON);
+                        	LockableLootTileEntity.setLootTable(worldIn, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }
@@ -158,9 +165,9 @@ public class DungeonsBadlands extends Feature<NoFeatureConfig>
             worldIn.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
             TileEntity tileentity = worldIn.getTileEntity(position);
 
-            if (tileentity instanceof TileEntityMobSpawner)
+            if (tileentity instanceof MobSpawnerTileEntity)
             {
-             ((TileEntityMobSpawner)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(worldIn, rand, position));
+             ((MobSpawnerTileEntity)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(worldIn, rand, position));
             }
             else
             {

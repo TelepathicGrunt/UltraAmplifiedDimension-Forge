@@ -1,26 +1,37 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import net.minecraft.init.Blocks;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.placement.Placement;
 
-public class AtSurfaceThroughWaterWithExtraUA extends BasePlacement<AtSurfaceWithExtraConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, AtSurfaceWithExtraConfig chancesConfig, Feature<C> featureIn, C featureConfig) {
-	   int c = chancesConfig.baseCount;
+public class AtSurfaceThroughWaterWithExtraUA extends Placement<AtSurfaceWithExtraConfig> {
+   public AtSurfaceThroughWaterWithExtraUA(Function<Dynamic<?>, ? extends AtSurfaceWithExtraConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos) {
+	   int c = chancesConfig.count;
        if (random.nextFloat() < chancesConfig.extraChance) {
           c += chancesConfig.extraCount;
        }
       
 	   boolean airWaterFlag = false;
 	   boolean airWaterBlock = true;
+       ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
+       
 	   for (int i = 0; i < c; i++) {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
@@ -40,7 +51,7 @@ public class AtSurfaceThroughWaterWithExtraUA extends BasePlacement<AtSurfaceWit
 	        	 //if height is an solid block and last block was air/water block, we are now on the surface of a piece of land. Generate feature now
 	        	 else if(airWaterFlag && !airWaterBlock) {
 	        		 
-	        		 featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height+1, z), featureConfig);
+	        		 blockPosList.add(pos.add(x, height+1, z));
 	        		 airWaterFlag = false;
 	        	 }
 	        	 
@@ -50,6 +61,10 @@ public class AtSurfaceThroughWaterWithExtraUA extends BasePlacement<AtSurfaceWit
 
 	      }
 
-	      return true;
+
+	    return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) -> {
+	    	return blockPosList.remove(0);
+	    }).filter(Objects::nonNull);
+	    
 	   }
 	}

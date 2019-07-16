@@ -1,23 +1,30 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
 
-import net.minecraft.block.BlockSeaGrassTall;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.TallSeaGrassBlock;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 
 public class SeaGrassUA extends Feature<SeaGrassConfig> {
-	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, SeaGrassConfig config) {
+	   public SeaGrassUA(Function<Dynamic<?>, ? extends SeaGrassConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, SeaGrassConfig config) {
 		      int i = 0;
 
-		      for(int j = 0; j < config.field_203237_a; ++j) {
+		      for(int j = 0; j < config.count; ++j) {
 		         int k = random.nextInt(8) - random.nextInt(8);
 		         int l = random.nextInt(8) - random.nextInt(8);
 
@@ -28,11 +35,11 @@ public class SeaGrassUA extends Feature<SeaGrassConfig> {
 		         
 		         
 		         if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER) {
-		            boolean flag = random.nextDouble() < config.field_203238_b;
-		            IBlockState iblockstate = flag ? Blocks.TALL_SEAGRASS.getDefaultState() : Blocks.SEAGRASS.getDefaultState();
+		            boolean flag = random.nextDouble() < config.tallProbability;
+		            BlockState iblockstate = flag ? Blocks.TALL_SEAGRASS.getDefaultState() : Blocks.SEAGRASS.getDefaultState();
 		            if (iblockstate.isValidPosition(worldIn, blockpos)) {
 		               if (flag) {
-		                  IBlockState iblockstate1 = iblockstate.with(BlockSeaGrassTall.field_208065_c, DoubleBlockHalf.UPPER);
+		                  BlockState iblockstate1 = iblockstate.with(TallSeaGrassBlock.field_208065_c, DoubleBlockHalf.UPPER);
 		                  BlockPos blockpos1 = blockpos.up();
 		                  if (worldIn.getBlockState(blockpos1).getBlock() == Blocks.WATER) {
 		                     worldIn.setBlockState(blockpos, iblockstate, 2);

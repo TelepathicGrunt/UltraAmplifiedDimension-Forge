@@ -1,19 +1,25 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.placement.Placement;
 
-public class LakePlacementUA extends BasePlacement<CountRangeAndTypeConfig> {
-	public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, CountRangeAndTypeConfig lakeConfig, Feature<C> featureIn, C featureConfig) {
+public class LakePlacementUA extends Placement<CountRangeAndTypeConfig> {
+	public LakePlacementUA(Function<Dynamic<?>, ? extends CountRangeAndTypeConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeAndTypeConfig lakeConfig, BlockPos pos) {
 
 		int x = random.nextInt(16);
 		int z = random.nextInt(16);
@@ -23,35 +29,32 @@ public class LakePlacementUA extends BasePlacement<CountRangeAndTypeConfig> {
 			case LAVA: {
 	
 				if (!ConfigUA.lavaLakeGen) {
-					return false;
+					return Stream.empty();
 				}
 	
 				if (random.nextInt(lakeConfig.chance / 10) == 0) {
 					int y = random.nextInt(random.nextInt(chunkGenerator.getMaxHeight() - 8) + 8);
 					if (y < worldIn.getSeaLevel() || random.nextInt(lakeConfig.chance / 8) == 0) {
-						featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, y, z), featureConfig);
+						return Stream.of(pos.add(x, y, z));
 					}
 				}
-	
-				return true;
 	
 			}
 			case WATER: {
 	
 				if (!ConfigUA.waterLakeGen) {
-					return false;
+					return Stream.empty();
 				}
 	
 				if (random.nextInt(lakeConfig.chance) == 0) {
 					int y = random.nextInt(chunkGenerator.getMaxHeight());
-					featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, y, z), featureConfig);
+					return Stream.of(pos.add(x, y, z));
 				}
 	
-				return true;
 			}
 			case SLIME: {
 				if (!ConfigUA.slimeLakeGen) {
-					return false;
+					return Stream.empty();
 				}
 	
 				if (random.nextInt(lakeConfig.chance) == 0) {
@@ -63,14 +66,12 @@ public class LakePlacementUA extends BasePlacement<CountRangeAndTypeConfig> {
 					
 					int y = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
 					if (y > worldIn.getSeaLevel() && y <= 170) {
-						featureIn.func_212245_a(worldIn, chunkGenerator, random, new BlockPos(pos.getX() + x, y - 2, pos.getZ() + z), featureConfig);
+						return Stream.of(new BlockPos(pos.getX() + x, y - 2, pos.getZ() + z));
 					}
 				}
-	
-				return true;
 			}
 		}
 
-		return false;
+		return Stream.empty();
 	}
 }

@@ -2,39 +2,38 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.function.Function;
 
 import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityType;
-import net.minecraft.init.Biomes;
-import net.minecraft.nbt.INBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.structure.OceanMonumentConfig;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class OceanMonumentUA extends Structure<OceanMonumentConfig> 
+public class OceanMonumentUA extends Structure<NoFeatureConfig> 
 {
-    private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
+    public OceanMonumentUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+		super(p_i51427_1_);
+	}
 
-    protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
+
+    protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
        int maxDistance = ConfigUA.monumentRarity;
        int minDistance = 8;
        if(maxDistance < 9 ) {
@@ -55,7 +54,7 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
     }
     
 
-    protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
        ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
        if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
           for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 16)) {
@@ -74,9 +73,8 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
        return worldIn.getWorldInfo().isMapFeaturesEnabled();
     }
 
-    protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-       Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.DEFAULT);
-       return new OceanMonumentUA.Start(worldIn, generator, random, x, z, biome);
+    public Structure.IStartFactory getStartFactory() {
+       return OceanMonumentUA.Start::new;
     }
     
     public String getStructureName()
@@ -94,71 +92,36 @@ public class OceanMonumentUA extends Structure<OceanMonumentConfig>
 
     public static class Start extends StructureStart
     {
-        private final Set<ChunkPos> processed = Sets.<ChunkPos>newHashSet();
         private boolean wasCreated;
-
-        public Start()
-        {
+        public Start(Structure<?> p_i50437_1_, int p_i50437_2_, int p_i50437_3_, Biome p_i50437_4_, MutableBoundingBox p_i50437_5_, int p_i50437_6_, long p_i50437_7_) {
+           super(p_i50437_1_, p_i50437_2_, p_i50437_3_, p_i50437_4_, p_i50437_5_, p_i50437_6_, p_i50437_7_);
         }
 
-        public Start(IWorld worldIn, IChunkGenerator<?> chunkGenerator, SharedSeedRandom random, int chunkX, int chunkZ, Biome biome) {
-            super(chunkX, chunkZ, biome, random, worldIn.getSeed());
-            this.create(worldIn, random, chunkX, chunkZ);
-         }
+        public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+        	this.generate(chunkX, chunkZ);
+        }
 
-        private void create(IBlockReader worldIn, Random random, int chunkX, int chunkZ) 
-        {
+        private void generate(int chunkX, int chunkZ) {
         	  int i = chunkX * 16 - 29;
               int j = chunkZ * 16 - 29;
-              EnumFacing enumfacing = EnumFacing.Plane.HORIZONTAL.random(random);
-              this.components.add(new OceanMonumentPiecesUA.MonumentBuilding(random, i, j, enumfacing));
-              this.recalculateStructureSize(worldIn);
+              Direction enumfacing = Direction.Plane.HORIZONTAL.random(this.rand);
+              this.components.add(new OceanMonumentPiecesUA.MonumentBuilding(this.rand, i, j, enumfacing));
+              this.recalculateStructureSize();
               
               UltraAmplified.Logger.log(Level.DEBUG, "Ocean Monument | "+(chunkX*16)+" "+(chunkZ*16));
-              
-            
+
               this.wasCreated = true;
         }
+        /**
+         * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
+         */
+        public void generateStructure(IWorld worldIn, Random rand, MutableBoundingBox structurebb, ChunkPos pos) {
+           if (!this.wasCreated) {
+              this.components.clear();
+              this.generate(this.getChunkPosX(), this.getChunkPosZ());
+           }
 
-        public void generateStructure(IWorld worldIn, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
-            if (!this.wasCreated) {
-               this.components.clear();
-               this.create(worldIn, rand, this.getChunkPosX(), this.getChunkPosZ());
-            }
-
-            super.generateStructure(worldIn, rand, structurebb, p_75068_4_);
-         }
-
-         public void notifyPostProcessAt(ChunkPos pair) {
-            super.notifyPostProcessAt(pair);
-            this.processed.add(pair);
-         }
-
-         public void writeAdditional(NBTTagCompound tagCompound) {
-            super.writeAdditional(tagCompound);
-            NBTTagList nbttaglist = new NBTTagList();
-
-            for(ChunkPos chunkpos : this.processed) {
-               NBTTagCompound nbttagcompound = new NBTTagCompound();
-               nbttagcompound.setInt("X", chunkpos.x);
-               nbttagcompound.setInt("Z", chunkpos.z);
-               nbttaglist.add((INBTBase)nbttagcompound);
-            }
-
-            tagCompound.setTag("Processed", nbttaglist);
-         }
-
-         public void readAdditional(NBTTagCompound tagCompound) {
-            super.readAdditional(tagCompound);
-            if (tagCompound.contains("Processed", 9)) {
-               NBTTagList nbttaglist = tagCompound.getList("Processed", 10);
-
-               for(int i = 0; i < nbttaglist.size(); ++i) {
-                  NBTTagCompound nbttagcompound = nbttaglist.getCompound(i);
-                  this.processed.add(new ChunkPos(nbttagcompound.getInt("X"), nbttagcompound.getInt("Z")));
-               }
-            }
-
-         }
+           super.generateStructure(worldIn, rand, structurebb, pos);
+        }
     }
 }

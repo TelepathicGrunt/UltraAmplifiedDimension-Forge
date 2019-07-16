@@ -1,24 +1,31 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.block.BlockDirtSnowy;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowyDirtBlock;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumLightType;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class ColdOceanSnowFeatureUA extends Feature<NoFeatureConfig> {
-   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random p_212245_3_, BlockPos blockPos, NoFeatureConfig p_212245_5_) {
+   public ColdOceanSnowFeatureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random p_212245_3_, BlockPos blockPos, NoFeatureConfig p_212245_5_) {
 	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 	      BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
 
@@ -28,21 +35,21 @@ public class ColdOceanSnowFeatureUA extends Feature<NoFeatureConfig> {
 	            int z = blockPos.getZ() + zOffset;
 	            int y = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, x, z);
 	            blockpos$mutableblockpos.setPos(x, y, z);
-	            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN, 1);
+	            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.DOWN, 1);
 	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
 	            
 	            //decorates only cold ocean with just snow
 	            if(biome == BiomeInit.COLD_OCEAN || biome == BiomeInit.DEEP_COLD_OCEAN) {
-	            	if (blockpos$mutableblockpos.getY() >= 0 && blockpos$mutableblockpos.getY() < 256 && worldIn.getLightFor(EnumLightType.BLOCK, blockpos$mutableblockpos) < 10) {
+	            	if (blockpos$mutableblockpos.getY() >= 0 && blockpos$mutableblockpos.getY() < 256 && worldIn.getLightFor(LightType.BLOCK, blockpos$mutableblockpos) < 10) {
 		                
-	            		IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+	            		BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
 		                if (iblockstate.isAir(worldIn, blockpos$mutableblockpos) && Blocks.SNOW.getDefaultState().isValidPosition(worldIn, blockpos$mutableblockpos)) {
 		                   
 		                	worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-			                IBlockState iblockstate2 = worldIn.getBlockState(blockpos$mutableblockpos1);
+			                BlockState iblockstate2 = worldIn.getBlockState(blockpos$mutableblockpos1);
 			                
-			                if (iblockstate2.has(BlockDirtSnowy.SNOWY)) {
-			                   worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate2.with(BlockDirtSnowy.SNOWY, Boolean.valueOf(true)), 2);
+			                if (iblockstate2.has(SnowyDirtBlock.SNOWY)) {
+			                   worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate2.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 			                }
 		                }
 	            	}
@@ -55,9 +62,9 @@ public class ColdOceanSnowFeatureUA extends Feature<NoFeatureConfig> {
 
 	                  if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
 	                	  worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-	                     IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
-	                     if (iblockstate.has(BlockDirtSnowy.SNOWY)) {
-	                    	 worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(BlockDirtSnowy.SNOWY, Boolean.valueOf(true)), 2);
+	                     BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
+	                     if (iblockstate.has(SnowyDirtBlock.SNOWY)) {
+	                    	 worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 	                     }
 	                  }
 	            }

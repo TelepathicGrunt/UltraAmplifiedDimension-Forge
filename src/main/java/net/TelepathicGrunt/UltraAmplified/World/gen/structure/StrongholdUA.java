@@ -2,6 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
@@ -9,32 +10,37 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
+import com.mojang.datafixers.Dynamic;
 
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.structure.StrongholdConfig;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class StrongholdUA extends Structure<StrongholdConfig> {
-   /** is spawned false and set true once the defined BiomeGenBases were compared with the present ones */
+public class StrongholdUA extends Structure<NoFeatureConfig> {
+   public StrongholdUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+		super(p_i51427_1_);
+	}
+
+/** is spawned false and set true once the defined BiomeGenBases were compared with the present ones */
    private boolean ranBiomeCheck;
    private ChunkPos[] structureCoords;
+   private final List<StructureStart> structureList = Lists.newArrayList();
    private long seed;
 
-   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
       if (this.seed != chunkGen.getSeed()) {
          this.resetData();
       }
@@ -60,25 +66,18 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
    private void resetData() {
       this.ranBiomeCheck = false;
       this.structureCoords = null;
+      this.structureList.clear();
    }
 
    protected boolean isEnabledIn(IWorld worldIn) {
       return worldIn.getWorldInfo().isMapFeaturesEnabled();
    }
 
-   protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.DEFAULT);
-      int i = 0;
-
-      StrongholdUA.Start strongholdstructure$start;
-      for(strongholdstructure$start = new StrongholdUA.Start(worldIn, random, x, z, biome, i++); strongholdstructure$start.getComponents().isEmpty() || ((StrongholdPiecesUA.Stairs2)strongholdstructure$start.getComponents().get(0)).strongholdPortalRoom == null; strongholdstructure$start = new StrongholdUA.Start(worldIn, random, x, z, biome, i++)) {
-         ;
-      }
-
-      return strongholdstructure$start;
+   public Structure.IStartFactory getStartFactory() {
+      return StrongholdUA.Start::new;
    }
 
-   protected String getStructureName() {
+   public String getStructureName() {
       return "Stronghold UA";
    }
 
@@ -86,8 +85,9 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
       return 8;
    }
 
+
    @Nullable
-   public BlockPos findNearest(World worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, BlockPos pos, int radius, boolean p_211405_5_) {
+   public BlockPos findNearest(World worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, BlockPos pos, int radius, boolean p_211405_5_) {
       if (!chunkGenerator.getBiomeProvider().hasStructure(this)) {
          return null;
       } else {
@@ -101,11 +101,11 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
          }
 
          BlockPos blockpos = null;
-         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(0, 0, 0);
+         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
          double d0 = Double.MAX_VALUE;
 
          for(ChunkPos chunkpos : this.structureCoords) {
-            blockpos$mutableblockpos.setPos((chunkpos.x << 4) + 8, 112, (chunkpos.z << 4) + 8);
+            blockpos$mutableblockpos.setPos((chunkpos.x << 4) + 8, 32, (chunkpos.z << 4) + 8);
             double d1 = blockpos$mutableblockpos.distanceSq(pos);
             if (blockpos == null) {
                blockpos = new BlockPos(blockpos$mutableblockpos);
@@ -125,7 +125,7 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
     * and other settings provided by the chunk generator, each time the structure is used on a different seed, this can
     * be called multiple times during the game lifecycle.
     */
-   private void reinitializeData(IChunkGenerator<?> generator) {
+   private void reinitializeData(ChunkGenerator<?> generator) {
       this.seed = generator.getSeed();
       List<Biome> list = Lists.newArrayList();
 
@@ -140,19 +140,16 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
       int spread = ConfigUA.strongholdSpread;
       this.structureCoords = new ChunkPos[numberOfStrongholds];
       int j = 0;
-      Long2ObjectMap<StructureStart> long2objectmap = generator.getStructureReferenceToStartMap(this);
-      synchronized(long2objectmap) {
-         for(StructureStart structurestart : long2objectmap.values()) {
-            if (j < this.structureCoords.length) {
-               this.structureCoords[j++] = new ChunkPos(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
-            }
+      for(StructureStart structurestart : this.structureList) {
+         if (j < this.structureCoords.length) {
+            this.structureCoords[j++] = new ChunkPos(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
          }
       }
 
       Random random = new Random();
       random.setSeed(generator.getSeed());
       double d1 = random.nextDouble() * Math.PI * 2.0D;
-      int k = long2objectmap.size();
+      int k = j;
       if (k < this.structureCoords.length) {
          int l = 0;
          int i1 = 0;
@@ -186,26 +183,26 @@ public class StrongholdUA extends Structure<StrongholdConfig> {
    }
 
    public static class Start extends StructureStart {
-      public Start() {
+	  public Start(Structure<?> p_i50780_1_, int p_i50780_2_, int p_i50780_3_, Biome p_i50780_4_, MutableBoundingBox p_i50780_5_, int p_i50780_6_, long p_i50780_7_) {
+         super(p_i50780_1_, p_i50780_2_, p_i50780_3_, p_i50780_4_, p_i50780_5_, p_i50780_6_, p_i50780_7_);
       }
 
-      public Start(IWorld worldIn, SharedSeedRandom random, int chunkX, int chunkZ, Biome p_i48716_5_, int seed) {
-         super(chunkX, chunkZ, p_i48716_5_, random, worldIn.getSeed() + (long)seed);
+      public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
          StrongholdPiecesUA.prepareStructurePieces();
-         StrongholdPiecesUA.Stairs2 strongholdpieces$stairs2 = new StrongholdPiecesUA.Stairs2(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+         StrongholdPiecesUA.Stairs2 strongholdpieces$stairs2 = new StrongholdPiecesUA.Stairs2(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2);
          this.components.add(strongholdpieces$stairs2);
-         strongholdpieces$stairs2.buildComponent(strongholdpieces$stairs2, this.components, random);
+         strongholdpieces$stairs2.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
          List<StructurePiece> list = strongholdpieces$stairs2.pendingChildren;
 
          while(!list.isEmpty()) {
-            int i = random.nextInt(list.size());
+            int i = this.rand.nextInt(list.size());
             StructurePiece structurepiece = list.remove(i);
-            structurepiece.buildComponent(strongholdpieces$stairs2, this.components, random);
+            structurepiece.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
          }
 
-         this.recalculateStructureSize(worldIn);
+         this.recalculateStructureSize();
          
-         this.setRandomHeight(worldIn, random, 100, 120);
+         this.func_214626_a(this.rand, 100, 120);
          UltraAmplified.Logger.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
       }
    }

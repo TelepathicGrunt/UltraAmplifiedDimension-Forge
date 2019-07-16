@@ -1,20 +1,28 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 public class BoulderGiant extends Feature<BlockBlobConfig> 
 {
-    private final static Block mossyCobblestone = Blocks.MOSSY_COBBLESTONE;
+    public BoulderGiant(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+
+	private final static Block mossyCobblestone = Blocks.MOSSY_COBBLESTONE;
     private final static Block cobblestone = Blocks.COBBLESTONE;
     private final static Block andesite = Blocks.ANDESITE;
     private final static Block coalOre = Blocks.COAL_ORE;
@@ -23,7 +31,7 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
     private final static int startRadius = 4;
 
     
-    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
         while (true)
         {
@@ -43,7 +51,7 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
 
 
             	//boulder will ignore other boulders and will generate only on ground
-            	if (block != Blocks.GRASS_BLOCK && block != Blocks.DIRT && block != Blocks.PODZOL)
+            	if (block != Blocks.GRASS_BLOCK && !Block.isDirt(block))
                 {
                     break label0;
                 }

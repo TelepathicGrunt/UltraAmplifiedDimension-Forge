@@ -1,19 +1,28 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.Placement;
 
-public class RandomPositionEvery5Height extends BasePlacement<FrequencyConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, FrequencyConfig countConfig, Feature<C> featureIn, C featureConfig) {
-		   int numberOfChunkAttempts = random.nextInt(Math.max(countConfig.frequency, 1)+1);
+public class RandomPositionEvery5Height extends Placement<FrequencyConfig> {
+   public RandomPositionEvery5Height(Function<Dynamic<?>, ? extends FrequencyConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, FrequencyConfig countConfig, BlockPos pos) {
+		   int numberOfChunkAttempts = random.nextInt(Math.max(countConfig.count, 1)+1);
+	       ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 		   
 		   for(int count = 0; count < numberOfChunkAttempts; ++count) {
 			   
@@ -26,11 +35,13 @@ public class RandomPositionEvery5Height extends BasePlacement<FrequencyConfig> {
 		      for(int height = startHeight; height <= 255; height += 5) {
 		         int x = random.nextInt(16);
 		         int z = random.nextInt(16);
-		         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height, z), featureConfig);
+		         blockPosList.add(pos.add(x, height, z));
 		      }
 		   }
-
-	      return true;
+		   
+		   return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) -> {
+		    	return blockPosList.remove(0);
+		    });
 	   }
 
 }

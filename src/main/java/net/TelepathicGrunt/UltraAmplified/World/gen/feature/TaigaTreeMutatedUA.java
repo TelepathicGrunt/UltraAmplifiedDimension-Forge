@@ -2,32 +2,37 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockVine;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class TaigaTreeMutatedUA extends AbstractTreeFeature<NoFeatureConfig> 
 {
-    private static final IBlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
-    private static final IBlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
-    private static final IBlockState PODZOL = Blocks.PODZOL.getDefaultState();
+    private static final BlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
+    private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
+    private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
     
-    public TaigaTreeMutatedUA(boolean notify)
-    {
-        super(notify);
-    }
+    public TaigaTreeMutatedUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51429_1_, boolean p_i51429_2_) {
+        super(p_i51429_1_, p_i51429_2_);
+        setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING);
+     }
 
     //taller taiga trees with slightly thicker leaves and podzol soil below it.
-    public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) 
+    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) 
     {
+        IWorld world = (IWorld) worldIn;
         int height = rand.nextInt(6) + 8;
         int bottomOfLeaves = (2 + rand.nextInt(3));
         int leavesRange = height - bottomOfLeaves;
@@ -57,8 +62,7 @@ public class TaigaTreeMutatedUA extends AbstractTreeFeature<NoFeatureConfig>
                     {
                         if (y >= 0 && y < 256)
                         {
-                        	IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos.setPos(x, y, z));
-                            if (!iblockstate.isAir(worldIn, blockpos$mutableblockpos) && !iblockstate.isIn(BlockTags.LEAVES))
+                            if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos))
                             {
                                 flag = false;
                             }
@@ -75,96 +79,91 @@ public class TaigaTreeMutatedUA extends AbstractTreeFeature<NoFeatureConfig>
             {
                 return false;
             }
-            else
+            else if (isSoil(worldIn, position.down(), getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
             {
-            	BlockPos down = position.down();
-                IBlockState state = worldIn.getBlockState(down);
+            	//places podzol +'s. Can generate up to 5.
+            	if(rand.nextBoolean())
+            		 this.placePodzolCircle(world, position.west().north());
+            	if(rand.nextBoolean())
+            		this.placePodzolCircle(world, position.east().north());
+            	if(rand.nextBoolean())
+            		this.placePodzolCircle(world, position.west().south());
+            	if(rand.nextBoolean())
+            		this.placePodzolCircle(world, position.east().south());
+            	
+        		this.placePodzolCircle(world, position);
+        		
+        		
+        		this.setDirtAt(worldIn, position.down(), position);
+                
+        		
+                int bounds = rand.nextInt(2);
+                int j3 = 1;
+                int k3 = 0;
 
-                if (state.getBlock().canSustainPlant(state, worldIn, down, net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling)Blocks.SPRUCE_SAPLING) && position.getY() < worldIn.getWorld().getHeight() - height - 1)
+                for (int currentHeight = 0; currentHeight <= leavesRange; ++currentHeight)
                 {
-                	
-                	//places podzol +'s. Can generate up to 5.
-	            	if(rand.nextBoolean())
-	            		 this.placePodzolCircle(worldIn, position.west().north());
-	            	if(rand.nextBoolean())
-	            		this.placePodzolCircle(worldIn, position.east().north());
-	            	if(rand.nextBoolean())
-	            		this.placePodzolCircle(worldIn, position.west().south());
-	            	if(rand.nextBoolean())
-	            		this.placePodzolCircle(worldIn, position.east().south());
-	
-	        		this.placePodzolCircle(worldIn, position);
-	        		
-                	
-                    state.getBlock().onPlantGrow(state, worldIn, down, position);
-                    int bounds = rand.nextInt(2);
-                    int j3 = 1;
-                    int k3 = 0;
+                    int y = position.getY() + height - currentHeight;
 
-                    for (int currentHeight = 0; currentHeight <= leavesRange; ++currentHeight)
+                    for (int x = position.getX() - bounds; x <= position.getX() + bounds; ++x)
                     {
-                        int y = position.getY() + height - currentHeight;
+                        int j2 = x - position.getX();
 
-                        for (int x = position.getX() - bounds; x <= position.getX() + bounds; ++x)
+                        for (int z = position.getZ() - bounds; z <= position.getZ() + bounds; ++z)
                         {
-                            int j2 = x - position.getX();
+                            int l2 = z - position.getZ();
 
-                            for (int z = position.getZ() - bounds; z <= position.getZ() + bounds; ++z)
+                            if (Math.abs(j2) != bounds || Math.abs(l2) != bounds || bounds <= 0)
                             {
-                                int l2 = z - position.getZ();
+                                BlockPos blockpos = new BlockPos(x, y, z);
 
-                                if (Math.abs(j2) != bounds || Math.abs(l2) != bounds || bounds <= 0)
+                                if (isAirOrLeaves(worldIn, blockpos))
                                 {
-                                    BlockPos blockpos = new BlockPos(x, y, z);
-
-                                    if (worldIn.getBlockState(blockpos).canBeReplacedByLeaves(worldIn, blockpos))
-                                    {
-                                        this.setBlockState(worldIn, blockpos, LEAF);
-                                    }
+                                    this.setBlockState(worldIn, blockpos, LEAF);
                                 }
                             }
                         }
-
-                        if (bounds >= j3)
-                        {
-                            bounds = k3;
-                            k3 = 1;
-                            ++j3;
-
-                            if (j3 > l)
-                            {
-                                j3 = l;
-                            }
-                        }
-                        else
-                        {
-                            ++bounds;
-                        }
                     }
 
-                    placeTrunkVines(worldIn, changedBlocks, rand, position, bottomOfLeaves);
-                    
-                    int randomNum = rand.nextInt(3);
-
-                    for (int currentHeight = bottomOfLeaves; currentHeight < height - randomNum; ++currentHeight)
+                    if (bounds >= j3)
                     {
-                        BlockPos upN = position.up(currentHeight);
-                        state = worldIn.getBlockState(upN);
+                        bounds = k3;
+                        k3 = 1;
+                        ++j3;
 
-                        if (state.getBlock().isAir(state, worldIn, upN) || state.isIn(BlockTags.LEAVES))
+                        if (j3 > l)
                         {
-                        	this.func_208520_a(changedBlocks, worldIn, upN, TRUNK);
+                            j3 = l;
                         }
                     }
-                    
+                    else
+                    {
+                        ++bounds;
+                    }
+                }
 
-                    return true;
-                }
-                else
+                placeTrunkVines(world, changedBlocks, rand, position, bottomOfLeaves, p_208519_5_);
+                
+                int randomNum = rand.nextInt(3);
+
+                for (int currentHeight = bottomOfLeaves; currentHeight < height - randomNum; ++currentHeight)
                 {
-                    return false;
+                    BlockPos upN = position.up(currentHeight);
+
+                    if (isAirOrLeaves(worldIn, upN))
+                    {
+                    	this.setLogState(changedBlocks, worldIn, upN, TRUNK, p_208519_5_);
+                    }
                 }
+                
+
+                return true;
             }
+            else
+            {
+                return false;
+            }
+            
         }
         else
         {
@@ -191,7 +190,7 @@ public class TaigaTreeMutatedUA extends AbstractTreeFeature<NoFeatureConfig>
         for (int level = 2; level >= -3; --level)
         {
             BlockPos blockpos = pos.up(level);
-            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+            BlockState iblockstate = worldIn.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
             if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT)
@@ -207,30 +206,30 @@ public class TaigaTreeMutatedUA extends AbstractTreeFeature<NoFeatureConfig>
         }
     }
     
-    private void placeTrunkVines(IWorld worldIn, Set<BlockPos> changedBlocks, Random rand, BlockPos position, int bottomLeavesHeight) {
+    private void placeTrunkVines(IWorld worldIn, Set<BlockPos> changedBlocks, Random rand, BlockPos position, int bottomLeavesHeight, MutableBoundingBox p_208519_5_) {
     	 
     	for(int height = 0; height < bottomLeavesHeight; height++) {
-            IBlockState iblockstate1 = worldIn.getBlockState(position.up(height));
-            Material material1 = iblockstate1.getMaterial();
-            if (iblockstate1.canBeReplacedByLeaves(worldIn, position.up(height)) || material1 == Material.VINE) {
-               this.func_208520_a(changedBlocks, worldIn, position.up(height), TRUNK);
+            BlockState iblockstate1 = worldIn.getBlockState(position.up(height));
+            
+            if (iblockstate1.canBeReplacedByLeaves(worldIn, position.up(height))) {
+               this.setLogState(changedBlocks, worldIn, position.up(height), TRUNK, p_208519_5_);
               
               int chance = 1 + height;
                
               if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(-1, height, 0))) {
-            	  this.setBlockState(worldIn, position.add(-1, height, 0), Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)));
+            	  this.setBlockState(worldIn, position.add(-1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)));
               }
 
               if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(1, height, 0))) {
-            	  this.setBlockState(worldIn, position.add(1, height, 0), Blocks.VINE.getDefaultState().with(BlockVine.WEST, Boolean.valueOf(true)));
+            	  this.setBlockState(worldIn, position.add(1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.WEST, Boolean.valueOf(true)));
               }
 
               if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(0, height, -1))) {
-            	  this.setBlockState(worldIn, position.add(0, height, -1), Blocks.VINE.getDefaultState().with(BlockVine.SOUTH, Boolean.valueOf(true)));
+            	  this.setBlockState(worldIn, position.add(0, height, -1), Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)));
               }
 
               if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(0, height, 1))) {
-            	  this.setBlockState(worldIn, position.add(0, height, 1), Blocks.VINE.getDefaultState().with(BlockVine.NORTH, Boolean.valueOf(true)));
+            	  this.setBlockState(worldIn, position.add(0, height, 1), Blocks.VINE.getDefaultState().with(VineBlock.NORTH, Boolean.valueOf(true)));
               }
             }
          }

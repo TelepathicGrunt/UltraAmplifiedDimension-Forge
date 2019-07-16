@@ -1,22 +1,29 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 
 public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
-	  private final static IBlockState ICE = Blocks.ICE.getDefaultState();
-	  private final static IBlockState[] DEAD_CORAL_ARRAY = { 
+	  public ContainWaterForOceans(Function<Dynamic<?>, ? extends ContainWaterConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	private final static BlockState ICE = Blocks.ICE.getDefaultState();
+	  private final static BlockState[] DEAD_CORAL_ARRAY = { 
 			  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
 			  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
 			  Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), 
@@ -24,16 +31,16 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
 			  Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState()
 			};
 	
-	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
+	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
 	     
 		 //set y to 0
 		 pos.down(pos.getY());
 		 
   		 boolean notContainedFlag;
-       	 IBlockState currentblock;
-       	 IBlockState blockAbove;
-         boolean useCoralTop = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
-         boolean useCoralBottom = configBlock.topBlock.getDefaultState() == DEAD_CORAL_ARRAY[0];
+       	 BlockState currentblock;
+       	 BlockState blockAbove;
+         boolean useCoralTop = configBlock.topBlock == DEAD_CORAL_ARRAY[0];
+         boolean useCoralBottom = configBlock.topBlock == DEAD_CORAL_ARRAY[0];
 	     
          //needs to take up all 4 chunks so biome borders betwen ocean and non-oceans are cleaner
     	 for(int x = -8; x < 24; ++x) {
@@ -73,7 +80,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
          	            
                      
     	     	        //Adjacent blocks must be solid    
-    	                 for (EnumFacing face : EnumFacing.Plane.HORIZONTAL) {
+    	                 for (Direction face : Direction.Plane.HORIZONTAL) {
     	
     	                 	currentblock = worldIn.getBlockState(pos.add(x, y, z).offset(face));
     	                 	
@@ -94,7 +101,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
             	        	   if(blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
             	        		   
             	        		   //if above is solid or water, place second config block
-                	        	   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock.getDefaultState(), 2);
+                	        	   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock, 2);
             	        	   }
             	        	   
             	        	   
@@ -104,7 +111,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
             	        		   if(useCoralTop) {
             	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
             	        		   }else {
-            	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+            	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock, 2);
             	        		   }
             	        	   }
          	        	   }
@@ -114,7 +121,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
          	        	   else if(useCoralTop) {
     	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
     	        		   }else {
-    	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock.getDefaultState(), 2);
+    	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock, 2);
     	        		   }
      	               }
          	           else {
@@ -123,12 +130,12 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
      	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
       	        		   
 	      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
-     	        		   if(blockAbove == configBlock.middleBlock.getDefaultState()) {
+     	        		   if(blockAbove == configBlock.middleBlock) {
      	        			   if(useCoralBottom) {
          	        			  worldIn.setBlockState(pos.add(x, y+1, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
          	        		   }
          	        		   else{
-    	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock.getDefaultState(), 2);
+    	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock, 2);
     	      	        	   }
 	      	        	   }
          	           }

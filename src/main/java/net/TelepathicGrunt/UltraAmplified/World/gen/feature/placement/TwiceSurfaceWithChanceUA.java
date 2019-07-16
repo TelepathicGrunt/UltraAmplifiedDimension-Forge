@@ -1,18 +1,24 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.Placement;
 
-public class TwiceSurfaceWithChanceUA extends BasePlacement<ChanceConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, ChanceConfig placementConfig, Feature<C> featureIn, C featureConfig) {
+public class TwiceSurfaceWithChanceUA extends Placement<ChanceConfig> {
+   public TwiceSurfaceWithChanceUA(Function<Dynamic<?>, ? extends ChanceConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
 	      if (random.nextFloat() < 1.0F / (float)placementConfig.chance) {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
@@ -37,12 +43,12 @@ public class TwiceSurfaceWithChanceUA extends BasePlacement<ChanceConfig> {
 	         }
 	         
 	         if (height <= 74) {
-	            return false;
+	            return Stream.empty();
 	         }
 
-	         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height, z), featureConfig);
+	         Stream.of(pos.add(x, height, z));
 	      }
 
-	      return true;
+	      return Stream.empty();
 	   }
 	}

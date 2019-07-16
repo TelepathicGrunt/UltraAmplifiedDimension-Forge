@@ -5,32 +5,32 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.ItemFrameEntity;
+import net.minecraft.entity.monster.ShulkerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityLockableLoot;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.structure.StructureIO;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
+import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class EndCityPiecesUA
 {
-	  private static final PlacementSettings OVERWRITE = (new PlacementSettings()).setIgnoreEntities(true);
-	   private static final PlacementSettings INSERT = (new PlacementSettings()).setIgnoreEntities(true).setReplacedBlock(Blocks.AIR);
+	  private static final PlacementSettings OVERWRITE = (new PlacementSettings()).setIgnoreEntities(true).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
+	   private static final PlacementSettings INSERT = (new PlacementSettings()).setIgnoreEntities(true).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 	   private static final EndCityPiecesUA.IGenerator HOUSE_TOWER_GENERATOR = new EndCityPiecesUA.IGenerator() {
 		   
 	      public void init() {
@@ -157,14 +157,10 @@ public class EndCityPiecesUA
 	         return true;
 	      }
 	   };
-
-	   public static void registerPieces() {
-	      StructureIO.registerStructureComponent(EndCityPiecesUA.CityTemplate.class, "ECP");
-	   }
-
+	   
 	   private static EndCityPiecesUA.CityTemplate addPiece(TemplateManager p_191090_0_, EndCityPiecesUA.CityTemplate p_191090_1_, BlockPos p_191090_2_, String p_191090_3_, Rotation p_191090_4_, boolean owerwrite) {
 	      EndCityPiecesUA.CityTemplate StructureEndCityPiecesUA$citytemplate = new EndCityPiecesUA.CityTemplate(p_191090_0_, p_191090_3_, p_191090_1_.templatePosition, p_191090_4_, owerwrite);
-	      BlockPos blockpos = p_191090_1_.template.calculateConnectedPos(p_191090_1_.placeSettings, p_191090_2_, StructureEndCityPiecesUA$citytemplate.placeSettings, BlockPos.ORIGIN);
+	      BlockPos blockpos = p_191090_1_.template.calculateConnectedPos(p_191090_1_.placeSettings, p_191090_2_, StructureEndCityPiecesUA$citytemplate.placeSettings, BlockPos.ZERO);
 	      StructureEndCityPiecesUA$citytemplate.offset(blockpos.getX(), blockpos.getY(), blockpos.getZ());
 	      return StructureEndCityPiecesUA$citytemplate;
 	   }
@@ -220,11 +216,8 @@ public class EndCityPiecesUA
 	      /** Whether this template should overwrite existing blocks. Replaces only air if false. */
 	      private boolean overwrite;
 
-	      public CityTemplate() {
-	      }
-
 	      public CityTemplate(TemplateManager p_i47214_1_, String p_i47214_2_, BlockPos p_i47214_3_, Rotation p_i47214_4_, boolean overwriteIn) {
-	         super(0);
+	         super(StructureInit.ECPUA, 0);
 	         this.pieceName = p_i47214_2_;
 	         this.templatePosition = p_i47214_3_;
 	         this.rotation = p_i47214_4_;
@@ -232,6 +225,14 @@ public class EndCityPiecesUA
 	         this.loadTemplate(p_i47214_1_);
 	      }
 
+	      public CityTemplate(TemplateManager p_i50598_1_, CompoundNBT p_i50598_2_) {
+	         super(StructureInit.ECPUA, p_i50598_2_);
+	         this.pieceName = p_i50598_2_.getString("Template");
+	         this.rotation = Rotation.valueOf(p_i50598_2_.getString("Rot"));
+	         this.overwrite = p_i50598_2_.getBoolean("OW");
+	         this.loadTemplate(p_i50598_1_);
+	      }
+	      
 	      private void loadTemplate(TemplateManager p_191085_1_) {
 	         Template template = p_191085_1_.getTemplateDefaulted(new ResourceLocation("end_city/" + this.pieceName));
 	         PlacementSettings placementsettings = (this.overwrite ? EndCityPiecesUA.OVERWRITE : EndCityPiecesUA.INSERT).copy().setRotation(this.rotation);
@@ -241,39 +242,28 @@ public class EndCityPiecesUA
 	      /**
 	       * (abstract) Helper method to write subclass data to NBT
 	       */
-	      protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-	         super.writeStructureToNBT(tagCompound);
-	         tagCompound.setString("Template", this.pieceName);
-	         tagCompound.setString("Rot", this.rotation.name());
-	         tagCompound.setBoolean("OW", this.overwrite);
-	      }
-
-	      /**
-	       * (abstract) Helper method to read subclass data from NBT
-	       */
-	      protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_) {
-	         super.readStructureFromNBT(tagCompound, p_143011_2_);
-	         this.pieceName = tagCompound.getString("Template");
-	         this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
-	         this.overwrite = tagCompound.getBoolean("OW");
-	         this.loadTemplate(p_143011_2_);
-	      }
+	      protected void readAdditional(CompoundNBT tagCompound) {
+	          super.readAdditional(tagCompound);
+	          tagCompound.putString("Template", this.pieceName);
+	          tagCompound.putString("Rot", this.rotation.name());
+	          tagCompound.putBoolean("OW", this.overwrite);
+	       }
 
 	      protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb) {
 	         if (function.startsWith("Chest")) {
 	            BlockPos blockpos = pos.down();
 	            if (sbb.isVecInside(blockpos)) {
-	               TileEntityLockableLoot.setLootTable(worldIn, rand, blockpos, LootTableList.CHESTS_END_CITY_TREASURE);
+	            	LockableLootTileEntity.setLootTable(worldIn, rand, blockpos, LootTables.CHESTS_END_CITY_TREASURE);
 	            }
 	         } else if (function.startsWith("Sentry")) {
-	            EntityShulker entityshulker = new EntityShulker(worldIn.getWorld());
+	        	 ShulkerEntity entityshulker = EntityType.SHULKER.create(worldIn.getWorld());
 	            entityshulker.setPosition((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D);
 	            entityshulker.setAttachmentPos(pos);
-	            worldIn.spawnEntity(entityshulker);
+	            worldIn.addEntity(entityshulker);
 	         } else if (function.startsWith("Elytra")) {
-	            EntityItemFrame entityitemframe = new EntityItemFrame(worldIn.getWorld(), pos, this.rotation.rotate(EnumFacing.SOUTH));
+	        	 ItemFrameEntity entityitemframe = new ItemFrameEntity(worldIn.getWorld(), pos, this.rotation.rotate(Direction.SOUTH));
 	            entityitemframe.setDisplayedItem(new ItemStack(Items.ELYTRA));
-	            worldIn.spawnEntity(entityitemframe);
+	            worldIn.addEntity(entityitemframe);
 	         }
 
 	      }

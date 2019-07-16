@@ -2,28 +2,27 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockLever;
-import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockRedstoneRepeater;
-import net.minecraft.block.BlockRedstoneWire;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockTripWire;
-import net.minecraft.block.BlockTripWireHook;
-import net.minecraft.block.BlockVine;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeverBlock;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.block.RedstoneWireBlock;
+import net.minecraft.block.RepeaterBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.TripWireBlock;
+import net.minecraft.block.TripWireHookBlock;
+import net.minecraft.block.VineBlock;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.RedstoneSide;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.structure.ScatteredStructurePiece;
-import net.minecraft.world.gen.feature.structure.StructureIO;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	   private boolean mainChest;
@@ -32,37 +31,24 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	   private boolean trap2;
 	   private static final JungleTemplePiecesUA.MossStoneSelector MOSS_STONE_SELECTOR = new JungleTemplePiecesUA.MossStoneSelector();
 
-	   public static void registerJunglePyramidPieces() {
-	      StructureIO.registerStructureComponent(JungleTemplePiecesUA.class, "TeJP");
-	   }
-
-	   public JungleTemplePiecesUA() {
-	   }
-
 	   public JungleTemplePiecesUA(Random random, int x, int y, int z) {
-	      super(random, x, y, z, 12, 10, 15);
+	      super(StructureInit.TEJPUA, random, x, y, z, 12, 10, 15);
 	   }
 
-	   /**
-	    * (abstract) Helper method to write subclass data to NBT
-	    */
-	   protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-	      super.writeStructureToNBT(tagCompound);
-	      tagCompound.setBoolean("placedMainChest", this.mainChest);
-	      tagCompound.setBoolean("placedHiddenChest", this.hiddenChest);
-	      tagCompound.setBoolean("placedTrap1", this.trap1);
-	      tagCompound.setBoolean("placedTrap2", this.trap2);
+	   public JungleTemplePiecesUA(TemplateManager p_i51351_1_, CompoundNBT p_i51351_2_) {
+	      super(StructureInit.TEJPUA, p_i51351_2_);
+	      this.mainChest = p_i51351_2_.getBoolean("placedMainChest");
+	      this.hiddenChest = p_i51351_2_.getBoolean("placedHiddenChest");
+	      this.trap1 = p_i51351_2_.getBoolean("placedTrap1");
+	      this.trap2 = p_i51351_2_.getBoolean("placedTrap2");
 	   }
 
-	   /**
-	    * (abstract) Helper method to read subclass data from NBT
-	    */
-	   protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_) {
-	      super.readStructureFromNBT(tagCompound, p_143011_2_);
-	      this.mainChest = tagCompound.getBoolean("placedMainChest");
-	      this.hiddenChest = tagCompound.getBoolean("placedHiddenChest");
-	      this.trap1 = tagCompound.getBoolean("placedTrap1");
-	      this.trap2 = tagCompound.getBoolean("placedTrap2");
+	   protected void readAdditional(CompoundNBT tagCompound) {
+	      super.readAdditional(tagCompound);
+	      tagCompound.putBoolean("placedMainChest", this.mainChest);
+	      tagCompound.putBoolean("placedHiddenChest", this.hiddenChest);
+	      tagCompound.putBoolean("placedTrap1", this.trap1);
+	      tagCompound.putBoolean("placedTrap2", this.trap2);
 	   }
 
 
@@ -122,10 +108,10 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 4, 9, 10, 4, 9, 10, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 7, 9, 10, 7, 9, 10, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 5, 9, 7, 6, 9, 7, false, randomIn, MOSS_STONE_SELECTOR);
-	         IBlockState iblockstate3 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.EAST);
-	         IBlockState iblockstate4 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.WEST);
-	         IBlockState iblockstate = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.SOUTH);
-	         IBlockState iblockstate1 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(BlockStairs.FACING, EnumFacing.NORTH);
+	         BlockState iblockstate3 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.EAST);
+	         BlockState iblockstate4 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.WEST);
+	         BlockState iblockstate = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH);
+	         BlockState iblockstate1 = Blocks.COBBLESTONE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.NORTH);
 	         this.setBlockState(worldIn, iblockstate1, 5, 9, 6, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate1, 6, 9, 6, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate, 5, 9, 8, structureBoundingBoxIn);
@@ -169,61 +155,61 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 7, -2, 1, 9, -2, 1, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 6, -3, 1, 6, -3, 1, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 6, -1, 1, 6, -1, 1, false, randomIn, MOSS_STONE_SELECTOR);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(BlockTripWireHook.FACING, EnumFacing.EAST).with(BlockTripWireHook.ATTACHED, Boolean.valueOf(true)), 1, -3, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(BlockTripWireHook.FACING, EnumFacing.WEST).with(BlockTripWireHook.ATTACHED, Boolean.valueOf(true)), 4, -3, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(BlockTripWire.EAST, Boolean.valueOf(true)).with(BlockTripWire.WEST, Boolean.valueOf(true)).with(BlockTripWire.ATTACHED, Boolean.valueOf(true)), 2, -3, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(BlockTripWire.EAST, Boolean.valueOf(true)).with(BlockTripWire.WEST, Boolean.valueOf(true)).with(BlockTripWire.ATTACHED, Boolean.valueOf(true)), 3, -3, 8, structureBoundingBoxIn);
-	         IBlockState iblockstate5 = Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE).with(BlockRedstoneWire.SOUTH, RedstoneSide.SIDE);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.SOUTH, RedstoneSide.SIDE), 5, -3, 7, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(TripWireHookBlock.FACING, Direction.EAST).with(TripWireHookBlock.ATTACHED, Boolean.valueOf(true)), 1, -3, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(TripWireHookBlock.FACING, Direction.WEST).with(TripWireHookBlock.ATTACHED, Boolean.valueOf(true)), 4, -3, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(TripWireBlock.EAST, Boolean.valueOf(true)).with(TripWireBlock.WEST, Boolean.valueOf(true)).with(TripWireBlock.ATTACHED, Boolean.valueOf(true)), 2, -3, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(TripWireBlock.EAST, Boolean.valueOf(true)).with(TripWireBlock.WEST, Boolean.valueOf(true)).with(TripWireBlock.ATTACHED, Boolean.valueOf(true)), 3, -3, 8, structureBoundingBoxIn);
+	         BlockState iblockstate5 = Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE).with(RedstoneWireBlock.SOUTH, RedstoneSide.SIDE);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.SOUTH, RedstoneSide.SIDE), 5, -3, 7, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate5, 5, -3, 6, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate5, 5, -3, 5, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate5, 5, -3, 4, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate5, 5, -3, 3, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate5, 5, -3, 2, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 4, -3, 1, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE).with(BlockRedstoneWire.WEST, RedstoneSide.UP), 5, -3, 1, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.EAST, RedstoneSide.SIDE).with(BlockRedstoneWire.WEST, RedstoneSide.UP), 4, -2, 1, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE).with(RedstoneWireBlock.WEST, RedstoneSide.UP), 5, -3, 1, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE).with(RedstoneWireBlock.WEST, RedstoneSide.UP), 4, -2, 1, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 3, -3, 1, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.EAST, RedstoneSide.SIDE), 3, -1, 1, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.EAST, RedstoneSide.SIDE), 2, -1, 1, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE), 3, -1, 1, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE), 2, -1, 1, structureBoundingBoxIn);
 	         if (!this.trap1) {
-	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 3, -2, 1, EnumFacing.NORTH, LootTableList.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 2, -2, 1, EnumFacing.NORTH, LootTableList.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 3, -2, 1, Direction.NORTH, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 2, -2, 1, Direction.NORTH, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
 	         }
 
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.SOUTH, Boolean.valueOf(true)), 3, -2, 2, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.SOUTH, Boolean.valueOf(true)), 2, -2, 2, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(BlockTripWireHook.FACING, EnumFacing.NORTH).with(BlockTripWireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 1, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(BlockTripWireHook.FACING, EnumFacing.SOUTH).with(BlockTripWireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 5, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(BlockTripWire.NORTH, Boolean.valueOf(true)).with(BlockTripWire.SOUTH, Boolean.valueOf(true)).with(BlockTripWire.ATTACHED, Boolean.valueOf(true)), 7, -3, 2, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(BlockTripWire.NORTH, Boolean.valueOf(true)).with(BlockTripWire.SOUTH, Boolean.valueOf(true)).with(BlockTripWire.ATTACHED, Boolean.valueOf(true)), 7, -3, 3, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(BlockTripWire.NORTH, Boolean.valueOf(true)).with(BlockTripWire.SOUTH, Boolean.valueOf(true)).with(BlockTripWire.ATTACHED, Boolean.valueOf(true)), 7, -3, 4, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.EAST, RedstoneSide.SIDE), 8, -3, 6, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.WEST, RedstoneSide.SIDE).with(BlockRedstoneWire.SOUTH, RedstoneSide.UP), 9, -3, 6, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE).with(BlockRedstoneWire.SOUTH, RedstoneSide.UP), 9, -2, 5, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)), 3, -2, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)), 2, -2, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(TripWireHookBlock.FACING, Direction.NORTH).with(TripWireHookBlock.ATTACHED, Boolean.valueOf(true)), 7, -3, 1, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE_HOOK.getDefaultState().with(TripWireHookBlock.FACING, Direction.SOUTH).with(TripWireHookBlock.ATTACHED, Boolean.valueOf(true)), 7, -3, 5, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(TripWireBlock.NORTH, Boolean.valueOf(true)).with(TripWireBlock.SOUTH, Boolean.valueOf(true)).with(TripWireBlock.ATTACHED, Boolean.valueOf(true)), 7, -3, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(TripWireBlock.NORTH, Boolean.valueOf(true)).with(TripWireBlock.SOUTH, Boolean.valueOf(true)).with(TripWireBlock.ATTACHED, Boolean.valueOf(true)), 7, -3, 3, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.TRIPWIRE.getDefaultState().with(TripWireBlock.NORTH, Boolean.valueOf(true)).with(TripWireBlock.SOUTH, Boolean.valueOf(true)).with(TripWireBlock.ATTACHED, Boolean.valueOf(true)), 7, -3, 4, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE), 8, -3, 6, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.WEST, RedstoneSide.SIDE).with(RedstoneWireBlock.SOUTH, RedstoneSide.UP), 9, -3, 6, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE).with(RedstoneWireBlock.SOUTH, RedstoneSide.UP), 9, -2, 5, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, -1, 5, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 9, -2, 6, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 9, -3, 5, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 9, -3, 4, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 9, -2, 4, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 8, -2, 5, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE), 9, -1, 4, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE), 9, -1, 3, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE), 9, -1, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 9, -1, 4, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 9, -1, 3, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 9, -1, 2, structureBoundingBoxIn);
 	         if (!this.trap2) {
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 3, EnumFacing.WEST, LootTableList.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 4, EnumFacing.WEST, LootTableList.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 2, EnumFacing.WEST, LootTableList.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 3, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 4, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 2, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
 	         }
 
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -1, 3, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -2, 3, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -1, 2, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -2, 2, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -1, 4, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(BlockVine.EAST, Boolean.valueOf(true)), 8, -2, 4, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -1, 3, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -2, 3, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -1, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -2, 2, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -1, 4, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -2, 4, structureBoundingBoxIn);
 	         if (!this.mainChest) {
-	            this.mainChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 3, LootTableList.CHESTS_JUNGLE_TEMPLE);
+	            this.mainChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 3, LootTables.CHESTS_JUNGLE_TEMPLE);
 	         }
 
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 9, -3, 2, structureBoundingBoxIn);
@@ -241,24 +227,24 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.setBlockState(worldIn, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 8, -2, 11, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 9, -2, 11, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 10, -2, 11, structureBoundingBoxIn);
-	         IBlockState iblockstate2 = Blocks.LEVER.getDefaultState().with(BlockLever.HORIZONTAL_FACING, EnumFacing.NORTH).with(BlockLever.FACE, AttachFace.WALL);
+	         BlockState iblockstate2 = Blocks.LEVER.getDefaultState().with(LeverBlock.HORIZONTAL_FACING, Direction.NORTH).with(LeverBlock.FACE, AttachFace.WALL);
 	         this.setBlockState(worldIn, iblockstate2, 8, -2, 12, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate2, 9, -2, 12, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, iblockstate2, 10, -2, 12, structureBoundingBoxIn);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 8, -3, 8, 8, -3, 10, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 10, -3, 8, 10, -3, 10, false, randomIn, MOSS_STONE_SELECTOR);
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 10, -2, 9, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.NORTH, RedstoneSide.SIDE), 8, -2, 9, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(BlockRedstoneWire.SOUTH, RedstoneSide.SIDE), 8, -2, 10, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 8, -2, 9, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.SOUTH, RedstoneSide.SIDE), 8, -2, 10, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState(), 10, -1, 9, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(BlockPistonBase.FACING, EnumFacing.UP), 9, -2, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(BlockPistonBase.FACING, EnumFacing.WEST), 10, -2, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(BlockPistonBase.FACING, EnumFacing.WEST), 10, -1, 8, structureBoundingBoxIn);
-	         this.setBlockState(worldIn, Blocks.REPEATER.getDefaultState().with(BlockRedstoneRepeater.HORIZONTAL_FACING, EnumFacing.NORTH), 10, -2, 10, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.UP), 9, -2, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.WEST), 10, -2, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.WEST), 10, -1, 8, structureBoundingBoxIn);
+	         this.setBlockState(worldIn, Blocks.REPEATER.getDefaultState().with(RepeaterBlock.HORIZONTAL_FACING, Direction.NORTH), 10, -2, 10, structureBoundingBoxIn);
 	         if (!this.hiddenChest) {
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 10, LootTableList.CHESTS_JUNGLE_TEMPLE);
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 9, LootTableList.CHESTS_JUNGLE_TEMPLE);
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 8, LootTableList.CHESTS_JUNGLE_TEMPLE);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 10, LootTables.CHESTS_JUNGLE_TEMPLE);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 9, LootTables.CHESTS_JUNGLE_TEMPLE);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 8, LootTables.CHESTS_JUNGLE_TEMPLE);
 	         }
 
 	         return true;

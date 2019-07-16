@@ -3,24 +3,26 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.ServerWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
@@ -29,11 +31,17 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class Stonehenge extends Feature<NoFeatureConfig> {
 	
+	public Stonehenge(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+
+
 	private static int perfectStoneCount = 0;
 	private static boolean markedForPerfection = false;
+	private static BlockState AIR = Blocks.AIR.getDefaultState();
 	
-	
-	protected static final Set<IBlockState> unAcceptableBlocks = 
+	protected static final Set<BlockState> unAcceptableBlocks = 
     		Stream.of(
 	    		Blocks.AIR.getDefaultState(),
 	    		Blocks.STONE.getDefaultState(),
@@ -54,7 +62,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 	
 	
 
-    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
         
   		if(!ConfigUA.miniStructureGeneration) {
@@ -76,10 +84,10 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 							
 						(	worldIn.getBiome(position) == BiomeInit.DESERT_HILLS &&
 							
-							(worldIn.getBlockState(position.west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR ||
-							 worldIn.getBlockState(position.down(1).west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR ||
-						     worldIn.getBlockState(position.down(2).west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR ||
-						     worldIn.getBlockState(position.down(3).west((int)(x*1.2)).north((int)(z*1.2))) == Blocks.AIR )
+							(worldIn.getBlockState(position.west((int)(x*1.2)).north((int)(z*1.2))) == AIR ||
+							 worldIn.getBlockState(position.down(1).west((int)(x*1.2)).north((int)(z*1.2))) == AIR ||
+						     worldIn.getBlockState(position.down(2).west((int)(x*1.2)).north((int)(z*1.2))) == AIR ||
+						     worldIn.getBlockState(position.down(3).west((int)(x*1.2)).north((int)(z*1.2))) == AIR )
 					    ) 
 					   ) {
 						return false;
@@ -95,9 +103,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			//6.7% of being a perfect stonehenge right off the bat
 			markedForPerfection = rand.nextInt(15) == 0;
 			perfectStoneCount = 0;
-			TemplateManager templatemanager = worldIn.getSaveHandler().getStructureTemplateManager();
+			TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 			Template template;
-			IBlockState iblockstate = worldIn.getBlockState(position);
+			BlockState iblockstate = worldIn.getBlockState(position);
 			
 			worldIn.setBlockState(position, iblockstate, 3);
 			
@@ -114,10 +122,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 			
 			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).north(11).west(2), placementsettings);
 
 
@@ -130,10 +137,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).north(2).east(11), placementsettings);
 			
 			
@@ -146,10 +152,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).south(11).east(2), placementsettings);
 			
 			
@@ -163,10 +168,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).south(2).west(11), placementsettings);
 			
 			
@@ -183,10 +187,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).north(9).west(9), placementsettings);
 
 
@@ -199,10 +202,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).north(9).east(9), placementsettings);
 
 			
@@ -215,10 +217,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).south(9).east(9), placementsettings);
 			
 			
@@ -231,10 +232,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 
 			placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down(2).south(9).west(9), placementsettings);
 			
 			
@@ -259,10 +259,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			}
 			
 		    placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
-					.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+					.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 			
-			template.getDataBlocks(position, placementsettings);
+			
 			template.addBlocksToWorld(worldIn, position.down().north(2).west(2), placementsettings);
 			
 			return true;

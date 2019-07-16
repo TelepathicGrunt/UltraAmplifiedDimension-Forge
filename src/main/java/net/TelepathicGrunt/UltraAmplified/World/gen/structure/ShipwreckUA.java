@@ -1,29 +1,36 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.UpgradeData;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class ShipwreckUA extends Structure<ShipwreckConfig> {
 
-	protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+	public ShipwreckUA(Function<Dynamic<?>, ? extends ShipwreckConfig> p_i51427_1_) {
+		super(p_i51427_1_);
+	}
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
       int maxDistance = ConfigUA.shipwreckSpawnrate;
       int minDistance = 8;
       if(maxDistance < 9 ) {
@@ -47,7 +54,7 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
       return worldIn.getWorldInfo().isMapFeaturesEnabled();
    }
 
-   protected String getStructureName() {
+   public String getStructureName() {
 	      return "Shipwreck UA";
    }
 
@@ -55,19 +62,18 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
       return 3;
    }
 
-   protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.PLAINS);
-      return new ShipwreckUA.Start(worldIn, generator, random, x, z, biome);
+   public Structure.IStartFactory getStartFactory() {
+      return ShipwreckUA.Start::new;
    }
 
    protected int getSeedModifier() {
       return 165745295;
    }
 
-   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
 	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9),  Biomes.PLAINS);
+	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
 	         if ((ConfigUA.shipwreckGeneration) && chunkGen.hasStructure(biome, this)) {
 	            return true;
 	         }
@@ -76,12 +82,12 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
    
    public static class Start extends StructureStart {
-      public Start() {
-      }
+	   public Start(Structure<?> p_i50460_1_, int p_i50460_2_, int p_i50460_3_, Biome p_i50460_4_, MutableBoundingBox p_i50460_5_, int p_i50460_6_, long p_i50460_7_) {
+	         super(p_i50460_1_, p_i50460_2_, p_i50460_3_, p_i50460_4_, p_i50460_5_, p_i50460_6_, p_i50460_7_);
+	      }
 
-      public Start(IWorld worldIn, IChunkGenerator<?> chunkGenerator, SharedSeedRandom random, int chunkX, int chunkZ, Biome biome) {
-         super(chunkX, chunkZ, biome, random, worldIn.getSeed());
-         Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
+      public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+         Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
          
          int xOffset = 8;
          int zOffset = 8;
@@ -97,11 +103,10 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
          
          
          
-         int randHeight = random.nextInt(130)+90;
+         int randHeight = this.rand.nextInt(130)+90;
     	 BlockPos blockpos = new BlockPos(chunkX * 16 + xOffset, 0, chunkZ * 16+zOffset);
          
          ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(blockpos.getX()/16, blockpos.getZ()/16), UpgradeData.EMPTY);
-         chunkGenerator.makeBase(chunkprimer);
          
          //finds surface on water
          while(randHeight > 50 && chunkprimer.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
@@ -117,14 +122,13 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
     	 BlockPos blockpos2 = new BlockPos(chunkX * 16, randHeight-2, chunkZ * 16);
     	 
     	 //Our shipwreck can generate all kinds of variants regardless of what biome it is in
-    	 ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(random.nextBoolean() ? true : false);
+    	 ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(this.rand.nextBoolean() ? true : false);
     	 
-         ShipwreckPiecesUA.beginGeneration(worldIn.getSaveHandler().getStructureTemplateManager(), blockpos2, rotation, this.components, random, newShipwreckConfig);
-         this.recalculateStructureSize(worldIn);
+         ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos2, rotation, this.components, this.rand, newShipwreckConfig);
+         this.recalculateStructureSize();
          
-         UltraAmplified.Logger.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.boundingBox.minY+" "+blockpos.getZ());
-     
-         this.recalculateStructureSize(worldIn);
+         UltraAmplified.Logger.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.bounds.minY+" "+blockpos.getZ());
+    
       }
 
    }

@@ -1,21 +1,29 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class BetterCactus extends Feature<NoFeatureConfig> {
 	   
+	public BetterCactus(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+		// TODO Auto-generated constructor stub
+	}
+
 	private final int height = 8; 
 	
-	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
     	//randomly set this cactus to a random spot. (thus passed in position must be the corner of the 4 loaded chunks)
         BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
@@ -42,17 +50,17 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
 	            int ArmHeight = rand.nextInt(maxHeight-5)+2;
 	            int ArmTallness = ArmHeight + rand.nextInt(maxHeight - ArmHeight - 2) + 2;
 	            
-	            if(worldIn.isAirBlock(blockpos.offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i))) && 
-	               worldIn.getBlockState(blockpos.down().offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i))) == Blocks.SAND.getDefaultState()) 
+	            if(worldIn.isAirBlock(blockpos.offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i))) && 
+	               worldIn.getBlockState(blockpos.down().offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i))) == Blocks.SAND.getDefaultState()) 
 	            {
 	            	for (int k = 0; k < ArmTallness; ++k)
 	            	{
-		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)))
+		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i)))
 		                ){
 		            		break;
 		            	}
 		            	
-		                worldIn.setBlockState(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)), 
+		                worldIn.setBlockState(blockpos.up(k).offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i)), 
 		                					  Blocks.CACTUS.getDefaultState(), 
 	                					  18);
 	            	}
@@ -76,21 +84,21 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
 	            	int ArmHeight = rand.nextInt(maxHeight-5)+2;
 	            	int ArmTallness = ArmHeight + rand.nextInt(maxHeight - ArmHeight - 2) + 2;
 	            	
-	            	if(worldIn.isAirBlock(blockpos.up(ArmHeight).offset(EnumFacing.byIndex(facingOffset+i)))) 
+	            	if(worldIn.isAirBlock(blockpos.up(ArmHeight).offset(Direction.byIndex(facingOffset+i)))) 
 	            	{
-	            		worldIn.setBlockState(blockpos.up(ArmHeight).offset(EnumFacing.byIndex(facingOffset+i)), 
+	            		worldIn.setBlockState(blockpos.up(ArmHeight).offset(Direction.byIndex(facingOffset+i)), 
 	            							Blocks.CACTUS.getDefaultState(), 
 	            							18);
 	            	}
 	            	
 		            for (int k = ArmHeight; k < ArmTallness; ++k)
 		            {
-		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)))
+		            	if(!worldIn.isAirBlock(blockpos.up(k).offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i)))
 		                ){
 		            		break;
 		            	}
 		            	
-		                worldIn.setBlockState(blockpos.up(k).offset(EnumFacing.byIndex(facingOffset+i)).offset(EnumFacing.byIndex(facingOffset+i)), 
+		                worldIn.setBlockState(blockpos.up(k).offset(Direction.byIndex(facingOffset+i)).offset(Direction.byIndex(facingOffset+i)), 
 		                					  Blocks.CACTUS.getDefaultState(), 
 		                					  18);
 		            }

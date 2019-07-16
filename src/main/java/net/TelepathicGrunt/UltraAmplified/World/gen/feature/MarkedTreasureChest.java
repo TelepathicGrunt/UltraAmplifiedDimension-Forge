@@ -1,26 +1,33 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntityLockableLoot;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 
-	private static final IBlockState RED_SAND = Blocks.RED_SAND.getDefaultState();
+	public MarkedTreasureChest(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
 
-	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
+	private static final BlockState RED_SAND = Blocks.RED_SAND.getDefaultState();
+
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
 
 		if(!ConfigUA.chestGeneration) {
 			return false;
@@ -35,9 +42,9 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 		}
 		
 		//chest position must be surrounded by solid blocks
-		for (EnumFacing face : EnumFacing.values()){
+		for (Direction face : Direction.values()){
 			//skip above block as we already checked it
-			if(face == EnumFacing.UP) {
+			if(face == Direction.UP) {
 				continue;
 			}
 			
@@ -71,10 +78,10 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 		//places chest with a 50/50 split between treasure chest and end city loot
 		worldIn.setBlockState(blockpos.down(), StructurePiece.func_197528_a(worldIn, blockpos.down(), Blocks.CHEST.getDefaultState()), 2);
 		if(random.nextFloat() < 0.5f) {
-			TileEntityLockableLoot.setLootTable(worldIn, random, blockpos.down(), LootTableList.CHESTS_BURIED_TREASURE);
+			LockableLootTileEntity.setLootTable(worldIn, random, blockpos.down(), LootTables.CHESTS_BURIED_TREASURE);
 		}
 		else {
-			TileEntityLockableLoot.setLootTable(worldIn, random, blockpos.down(), LootTableList.CHESTS_END_CITY_TREASURE);
+			LockableLootTileEntity.setLootTable(worldIn, random, blockpos.down(), LootTables.CHESTS_END_CITY_TREASURE);
 		}
 
 		return true;

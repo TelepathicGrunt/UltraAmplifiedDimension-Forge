@@ -1,25 +1,30 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.Placement;
 
-public class GlowstonePlacementUA extends BasePlacement<FrequencyConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, FrequencyConfig placementConfig, Feature<C> featureIn, C featureConfig) {
-	      for(int i = 0; i < random.nextInt(random.nextInt(placementConfig.frequency) + 1); ++i) {
-	         int j = random.nextInt(16);
-	         int k = random.nextInt(250) + 4;
-	         int l = random.nextInt(16);
-	         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(j, k, l), featureConfig);
-	      }
+public class GlowstonePlacementUA extends Placement<FrequencyConfig> {
+   public GlowstonePlacementUA(Function<Dynamic<?>, ? extends FrequencyConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
 
-	      return true;
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, FrequencyConfig placementConfig, BlockPos pos) {
+	   return IntStream.range(0, random.nextInt(random.nextInt(placementConfig.count) + 1)).mapToObj((p_215051_3_) -> {
+	         int x = random.nextInt(16);
+	         int y = random.nextInt(250) + 4;
+	         int z = random.nextInt(16);
+	         return pos.add(x, y, z);
+	      });
 	   }
 	}

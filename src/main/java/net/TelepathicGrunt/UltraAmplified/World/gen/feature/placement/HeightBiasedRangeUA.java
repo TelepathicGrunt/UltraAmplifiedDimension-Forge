@@ -1,25 +1,30 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.Placement;
 
-public class HeightBiasedRangeUA extends BasePlacement<CountRangeConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, CountRangeConfig placementConfig, Feature<C> featureIn, C featureConfig) {
-	      for(int i = 0; i < placementConfig.count; ++i) {
+public class HeightBiasedRangeUA extends Placement<CountRangeConfig> {
+   public HeightBiasedRangeUA(Function<Dynamic<?>, ? extends CountRangeConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
+	   return IntStream.range(0, placementConfig.count).mapToObj((p_215051_3_) -> {
 	         int j = random.nextInt(16);
-	         int k = random.nextInt(placementConfig.maxHeight - placementConfig.maxHeightBase - placementConfig.minHeight) + placementConfig.minHeight;
+	         int k = random.nextInt(placementConfig.topOffset - placementConfig.maximum - placementConfig.bottomOffset) + placementConfig.bottomOffset;
 	         int l = random.nextInt(16);
-	         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(j, k, l), featureConfig);
-	      }
-
-	      return true;
+	         return pos.add(j, k, l);
+	      });
 	   }
 	}

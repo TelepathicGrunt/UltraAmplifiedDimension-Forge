@@ -1,23 +1,30 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.block.BlockLog;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LogBlock;
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class SwampCross extends Feature<NoFeatureConfig> {
-	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
+	   public SwampCross(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
 		      
 		if(!ConfigUA.miniStructureGeneration) {
 			return false;
@@ -32,7 +39,7 @@ public class SwampCross extends Feature<NoFeatureConfig> {
 		//adds horizontal log blocks towards top
 		for (int i = -2; i < 3; i++) 
 		{
-			worldIn.setBlockState(pos.up(4).east(i), Blocks.SPRUCE_LOG.getDefaultState().with(BlockLog.AXIS, EnumFacing.Axis.X), 16 | 2);
+			worldIn.setBlockState(pos.up(4).east(i), Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X), 16 | 2);
 		}
 
 		//adds skull underground if block is not water, lava, or air
@@ -46,7 +53,7 @@ public class SwampCross extends Feature<NoFeatureConfig> {
 			}
 		}
 
-		//adds skull underground if block is not water, lava, air, and if next boolean is true
+		//adds hidden chest underground if block is not water, lava, air, and if next boolean is true
 		positionTemp = pos.down(3);
 		if (!worldIn.isAirBlock(positionTemp) && worldIn.getBlockState(positionTemp) != Blocks.WATER.getDefaultState() && worldIn.getBlockState(positionTemp) != Blocks.LAVA.getDefaultState() && rand.nextBoolean()) 
 		{
@@ -54,9 +61,9 @@ public class SwampCross extends Feature<NoFeatureConfig> {
 
 			TileEntity tileentity = worldIn.getTileEntity(positionTemp);
 
-			if (tileentity instanceof TileEntityChest) 
+			if (tileentity instanceof ChestTileEntity) 
 			{
-				((TileEntityChest) tileentity).setLootTable(LootTableList.CHESTS_JUNGLE_TEMPLE, rand.nextLong());
+				((ChestTileEntity)tileentity).setLootTable(LootTables.CHESTS_SPAWN_BONUS_CHEST, rand.nextLong());
 			}
 		}
 

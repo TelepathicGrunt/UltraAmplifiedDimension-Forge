@@ -5,27 +5,33 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Function;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
-    private final float[] field_202536_i = new float[1024];
-    protected static final IBlockState STONE = Blocks.STONE.getDefaultState();
-    protected IBlockState fillerBlock = Blocks.STONE.getDefaultState();
+    public SuperLongRavineCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49921_1_, int p_i49921_2_) {
+		super(p_i49921_1_, p_i49921_2_);
+	}
+
+	private final float[] field_202536_i = new float[1024];
+    protected static final BlockState STONE = Blocks.STONE.getDefaultState();
+    protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
     
-    private static final Map<IBlockState, IBlockState> fillerMap = createMap();
+    private static final Map<BlockState, BlockState> fillerMap = createMap();
 	
-	private static Map<IBlockState, IBlockState> createMap() 
+	private static Map<BlockState, BlockState> createMap() 
 	{
-        Map<IBlockState, IBlockState> result = new HashMap<IBlockState, IBlockState>();
+        Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
         
         result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState()); 
         result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState()); 
@@ -35,14 +41,15 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
         return Collections.unmodifiableMap(result);
     }
 
-    public boolean func_212246_a(IBlockReader p_212246_1_, Random p_212246_2_, int p_212246_3_, int p_212246_4_, ProbabilityConfig p_212246_5_) {
-        return p_212246_2_.nextFloat() <= p_212246_5_.probability;
+
+    public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
+        return p_212246_2_.nextFloat() <= config.probability;
      }
 
-     public boolean carve(IWorld region, Random random, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
+     public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
        	 
     	
-    	int i = (this.func_202520_b() * 2 - 1) * 16;
+    	int i = (this.func_222704_c() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
         double height = (double)(random.nextInt(random.nextInt(4) + 3) + 17);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
@@ -54,7 +61,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
         return true;
      }
 
-     private void func_202535_a(IWorld worldIn, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
+     private void func_202535_a(IChunk worldIn, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
         Random random = new Random(randomSeed);
         float f = 1.0F;
 
@@ -85,7 +92,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
            f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 1.5F;
            f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 3.0F;
            if (random.nextInt(4) != 0) {
-              if (!this.isWithinGenerationDepth(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, j, p_202535_16_, p_202535_12_)) {
+              if (!this.func_222702_a(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, j, p_202535_16_, p_202535_12_)) {
                  return;
               }
 
@@ -95,7 +102,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
 
      }
 
-     protected boolean carveAtTarget(IWorld worldIn, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+     protected boolean carveAtTarget(IChunk worldIn, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
         double d0 = (double)(mainChunkX * 16 + 8);
         double d1 = (double)(mainChunkZ * 16 + 8);
         if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
@@ -136,27 +143,27 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                                mask.set(l2);
                                blockpos$mutableblockpos.setPos(l1, k2, j2);
 
-                               IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(EnumFacing.UP);
-                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(EnumFacing.DOWN);
-                               IBlockState iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
+                               BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
+                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
+                               BlockState iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
                                if (iblockstate.getBlock() == Blocks.GRASS_BLOCK || iblockstate.getBlock() == Blocks.MYCELIUM) {
                                   flag1 = true;
                                }
                                
                                if(iblockstate1.getBlock() == Blocks.WATER ||iblockstate1.getBlock() == Blocks.LAVA) {
-                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, 2);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, 2);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, 2);
+                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
+                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
                                    flag = true;
                                }
-                               else if (this.isTargetSafeFromFalling(iblockstate, iblockstate1) || fillerMap.containsKey(iblockstate)) {
+                               else if (this.canCarveBlock(iblockstate, iblockstate1) || fillerMap.containsKey(iblockstate)) {
                                   if (k2 - 1 < 10) {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, LAVA_FLUID.getBlockState(), 2);
+                                     worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, DEFAULT_CAVE_AIR, 2);
+                                     worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR, false);
                                      if (flag1 && worldIn.getBlockState(blockpos$mutableblockpos2).getBlock() == Blocks.DIRT) {
-                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), 2);
+                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), false);
                                      }
                                   }
 
@@ -179,4 +186,10 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
           return false;
        }
     }
+
+
+     //not used i believe for our class
+	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_) {
+	    return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double)this.field_202536_i[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
+	}
 }

@@ -1,12 +1,15 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.LakesConfig;
 
@@ -14,7 +17,11 @@ public class WideShallowLakes extends Feature<LakesConfig> {
 	
 	
 	
-	   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
+	public WideShallowLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
 	     
 		  pos = pos.down(2);
          boolean[] aboolean = new boolean[2048];
@@ -62,7 +69,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
             	  
                  if (!material.isSolid() && 
                 	  material != Material.WATER && 
-                	  worldIn.getBlockState(pos.add(x-8, y, z-8)).getBlock() != configBlock.field_202438_a) {
+                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
                     return false;
                  }
               }
@@ -118,11 +125,11 @@ public class WideShallowLakes extends Feature<LakesConfig> {
             
 	        //Adjacent blocks must be solid    
 	        /*
-            for (EnumFacing face : EnumFacing.values()) {
+            for (Direction face : Direction.values()) {
 
             	material = worldIn.getBlockState(pos.add(x, y, z).offset(face)).getMaterial();
             	
-            	if(face == EnumFacing.UP)
+            	if(face == Direction.UP)
             	{
 	            	if(material.isSolid() ||
 	                   material == Material.WATER) 
@@ -140,7 +147,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
               if (aboolean[(x * 16 + z) * 8 + y] &&
             	 !notContainedFlag )
               {
-                 worldIn.setBlockState(pos.add(x, y, z), configBlock.field_202438_a.getDefaultState(), 2);
+                 worldIn.setBlockState(pos.add(x, y, z), configBlock.state, 2);
               }
             }
          }

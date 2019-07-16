@@ -3,24 +3,26 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.ServerWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
@@ -31,7 +33,13 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 
 	
 
-	protected static final Set<IBlockState> acceptableBlocks = 
+	public SunShrine(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+
+	private static BlockState AIR = Blocks.AIR.getDefaultState();
+	protected static final Set<BlockState> acceptableBlocks = 
     		Stream.of(
 	    		Blocks.DIRT.getDefaultState(),
 	    		Blocks.GRASS_BLOCK.getDefaultState(),
@@ -45,7 +53,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 	//first NTB structure I made to work by watching tutorials lol. 
 	//PRAISE THE SUN!!!
 	
-	public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
 		if(!ConfigUA.miniStructureGeneration) {
 			return false;
@@ -63,15 +71,15 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 						
 						worldIn.getBiome(position) == BiomeInit.DESERT_HILLS ?
 								(acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))) &&
-								worldIn.getBlockState(position.down(2).west((int)(x)).north((int)(z))) != Blocks.AIR &&
-								worldIn.getBlockState(position.down(3).west((int)(x)).north((int)(z))) != Blocks.AIR )	
+								worldIn.getBlockState(position.down(2).west((int)(x)).north((int)(z))) != AIR &&
+								worldIn.getBlockState(position.down(3).west((int)(x)).north((int)(z))) != AIR )	
 								:
 								acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))
 						)) 
 				{
 					//UltraAmplified.Logger.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
 		
-					TemplateManager templatemanager = worldIn.getSaveHandler().getStructureTemplateManager();
+					TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 					Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":sunshrine"));
 					
 					if(template == null)
@@ -80,14 +88,12 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 						return false;
 					}
 					
-					IBlockState iblockstate = worldIn.getBlockState(position);
+					BlockState iblockstate = worldIn.getBlockState(position);
 					worldIn.setBlockState(position, iblockstate, 3);
 					
 					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-							.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
-							.setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+							.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 					
-					template.getDataBlocks(position, placementsettings);
 					template.addBlocksToWorld(worldIn, position.down().north(3).west(3), placementsettings);
 					
 					return true;

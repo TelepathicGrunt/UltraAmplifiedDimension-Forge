@@ -2,35 +2,40 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockVine;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig> 
 {
-	 	private static final IBlockState TRUNK = Blocks.OAK_LOG.getDefaultState();
-	   private static final IBlockState LEAF = Blocks.OAK_LEAVES.getDefaultState();
+	 	private static final BlockState TRUNK = Blocks.OAK_LOG.getDefaultState();
+	   private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState();
 
-	    public SwampTreeMutated()
-	    {
-	        super(false);
+	    public SwampTreeMutated(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51425_1_) {
+	        super(p_i51425_1_, false);
 	    }
 
 	    //generate the spooky horned swamp m trees
-	    public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) 
+	    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_)
 	    {
 	        int height;
-
-	        for (height = rand.nextInt(4) + 6; worldIn.getBlockState(position.down()).getMaterial() == Material.WATER; position = position.down())
+	        IWorld world = (IWorld) worldIn;
+	        
+	        for (height = rand.nextInt(4) + 6; world.getBlockState(position.down()).getMaterial() == Material.WATER; position = position.down())
 	        {
 	            ;
 	        }
@@ -61,13 +66,9 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	                    {
 	                        if (y >= 0 && y < 256)
 	                        {
-	                            IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos.setPos(x, y, z));
-	                            Block block = iblockstate.getBlock();
-
-	                            if (!iblockstate.isAir(worldIn, blockpos$mutableblockpos.setPos(x, y, z)) && 
-	                            	!iblockstate.isIn(BlockTags.LEAVES))
+	                            if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos))
 	                            {
-	                                if (block != Blocks.WATER)
+	                                if (isWater(worldIn, blockpos$mutableblockpos))
 	                                {
 	                                    flag = false;
 	                                }
@@ -89,116 +90,109 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	            {
 	                return false;
 	            }
-	            else
+	            else if (isSoil(worldIn, position.down(), getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
 	            {
-	                BlockPos down = position.down();
-	                IBlockState state = worldIn.getBlockState(down);
-	                boolean isSoil = state.getBlock().canSustainPlant(state, worldIn, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling)Blocks.OAK_SAPLING));
+	                this.setDirtAt(worldIn, position.down(), position);
+	                
+                    for (int currentHeight = position.getY() - 4 + height; currentHeight <= position.getY() + height; ++currentHeight)
+                    {
+                        int heightDiff = currentHeight - (position.getY() + height);
+                        int l2 = 2 - heightDiff / 2;
 
-	                if (isSoil && position.getY() < worldIn.getWorld().getHeight() - height - 1)
-	                {
-	                    state.getBlock().onPlantGrow(state, worldIn, position.down(),position);
+                        for (int x = position.getX() - l2 - 1; x <= position.getX() + l2; ++x)
+                        {
+                            int xPos = x - position.getX();
 
-	                    for (int currentHeight = position.getY() - 4 + height; currentHeight <= position.getY() + height; ++currentHeight)
-	                    {
-	                        int heightDiff = currentHeight - (position.getY() + height);
-	                        int l2 = 2 - heightDiff / 2;
+                            for (int z = position.getZ() - l2 - 1; z <= position.getZ() + l2; ++z)
+                            {
+                                int zPos = z - position.getZ();
+                                int isCornerIfThisIsTwo = 0;
+                                
+                                if(xPos == l2) {
+                                	isCornerIfThisIsTwo++;
+                                }
+                                if(zPos == l2) {
+                                	isCornerIfThisIsTwo++;
+                                }	                                
+                                if(xPos == -l2 - 1) {
+                                	isCornerIfThisIsTwo++;
+                                }
+                                if(zPos == -l2 - 1) {
+                                	isCornerIfThisIsTwo++;
+                                }
+                                
+                                //generate leaves if is in corners or if 2/3rd rng is true
+                                if (isCornerIfThisIsTwo == 2 || rand.nextInt(3) < 2 && heightDiff != 0)
+                                {
+                                    BlockPos blockpos = new BlockPos(x, currentHeight, z);
 
-	                        for (int x = position.getX() - l2 - 1; x <= position.getX() + l2; ++x)
-	                        {
-	                            int xPos = x - position.getX();
+                                    if (isAirOrLeaves(worldIn, blockpos) || func_214576_j(worldIn, blockpos))
+                                    {
+                                        this.setBlockState(worldIn, blockpos, LEAF);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-	                            for (int z = position.getZ() - l2 - 1; z <= position.getZ() + l2; ++z)
-	                            {
-	                                int zPos = z - position.getZ();
-	                                int isCornerIfThisIsTwo = 0;
-	                                
-	                                if(xPos == l2) {
-	                                	isCornerIfThisIsTwo++;
-	                                }
-	                                if(zPos == l2) {
-	                                	isCornerIfThisIsTwo++;
-	                                }	                                
-	                                if(xPos == -l2 - 1) {
-	                                	isCornerIfThisIsTwo++;
-	                                }
-	                                if(zPos == -l2 - 1) {
-	                                	isCornerIfThisIsTwo++;
-	                                }
-	                                
-	                                //generate leaves if is in corners or if 2/3rd rng is true
-	                                if (isCornerIfThisIsTwo == 2 || rand.nextInt(3) < 2 && heightDiff != 0)
-	                                {
-	                                    BlockPos blockpos = new BlockPos(x, currentHeight, z);
-	                                    state = worldIn.getBlockState(blockpos);
+                    //the following four for statements generates the trunk of the tree
+                    genTrunk(world, position, height);
+                    genTrunk(world, position.west(), height);
+                    genTrunk(world, position.north(), height);
+                    genTrunk(world, position.west().north(), height);
+                    
+                    
+                    //vine generation
+                    for (int currentHeight = position.getY() - 3 + height; currentHeight <= position.getY() + height; ++currentHeight)
+                    {
+                        int heightDiff = currentHeight - (position.getY() + height);
+                        int i3 = 2 - heightDiff / 2;
+                        BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
 
-	                                    if (state.getBlock().canBeReplacedByLeaves(state, worldIn, blockpos))
-	                                    {
-	                                        this.setBlockState(worldIn, blockpos, LEAF);
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
+                        for (int x = position.getX() - i3 - 1; x <= position.getX() + i3; ++x)
+                        {
+                            for (int z = position.getZ() - i3 - 1; z <= position.getZ() + i3; ++z)
+                            {
+                                blockpos$mutableblockpos1.setPos(x, currentHeight, z);
 
-	                    //the following four for statements generates the trunk of the tree
-	                    genTrunk(worldIn, position, height);
-	                    genTrunk(worldIn, position.west(), height);
-	                    genTrunk(worldIn, position.north(), height);
-	                    genTrunk(worldIn, position.west().north(), height);
-	                    
-	                    
-	                    //vine generation
-	                    for (int currentHeight = position.getY() - 3 + height; currentHeight <= position.getY() + height; ++currentHeight)
-	                    {
-	                        int heightDiff = currentHeight - (position.getY() + height);
-	                        int i3 = 2 - heightDiff / 2;
-	                        BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+                                if (world.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.LEAVES)
+                                {
+                                    BlockPos blockpos3 = blockpos$mutableblockpos1.west();
+                                    BlockPos blockpos4 = blockpos$mutableblockpos1.east();
+                                    BlockPos blockpos1 = blockpos$mutableblockpos1.north();
+                                    BlockPos blockpos2 = blockpos$mutableblockpos1.south();
 
-	                        for (int x = position.getX() - i3 - 1; x <= position.getX() + i3; ++x)
-	                        {
-	                            for (int z = position.getZ() - i3 - 1; z <= position.getZ() + i3; ++z)
-	                            {
-	                                blockpos$mutableblockpos1.setPos(x, currentHeight, z);
+                                    if (rand.nextInt(4) == 0 && world.isAirBlock(blockpos3))
+                                    {
+                                        this.addVine(world, blockpos3, VineBlock.EAST);
+                                    }
 
-	                                if (worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.LEAVES)
-	                                {
-	                                    BlockPos blockpos3 = blockpos$mutableblockpos1.west();
-	                                    BlockPos blockpos4 = blockpos$mutableblockpos1.east();
-	                                    BlockPos blockpos1 = blockpos$mutableblockpos1.north();
-	                                    BlockPos blockpos2 = blockpos$mutableblockpos1.south();
+                                    if (rand.nextInt(4) == 0 && world.isAirBlock(blockpos4))
+                                    {
+                                        this.addVine(world, blockpos4, VineBlock.WEST);
+                                    }
 
-	                                    if (rand.nextInt(4) == 0 && worldIn.isAirBlock(blockpos3))
-	                                    {
-	                                        this.addVine(worldIn, blockpos3, BlockVine.EAST);
-	                                    }
+                                    if (rand.nextInt(4) == 0 && world.isAirBlock(blockpos1))
+                                    {
+                                        this.addVine(world, blockpos1, VineBlock.SOUTH);
+                                    }
 
-	                                    if (rand.nextInt(4) == 0 && worldIn.isAirBlock(blockpos4))
-	                                    {
-	                                        this.addVine(worldIn, blockpos4, BlockVine.WEST);
-	                                    }
+                                    if (rand.nextInt(4) == 0 && world.isAirBlock(blockpos2))
+                                    {
+                                        this.addVine(world, blockpos2, VineBlock.NORTH);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-	                                    if (rand.nextInt(4) == 0 && worldIn.isAirBlock(blockpos1))
-	                                    {
-	                                        this.addVine(worldIn, blockpos1, BlockVine.SOUTH);
-	                                    }
-
-	                                    if (rand.nextInt(4) == 0 && worldIn.isAirBlock(blockpos2))
-	                                    {
-	                                        this.addVine(worldIn, blockpos2, BlockVine.NORTH);
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
-
-	                    return true;
-	                }
-	                else
-	                {
-	                    return false;
-	                }
-	            }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+	            
 	        }
 	        else
 	        {
@@ -208,7 +202,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 
 	    private void addVine(IWorld worldIn, BlockPos pos, BooleanProperty prop)
 	    {
-	        IBlockState iblockstate = Blocks.VINE.getDefaultState().with(prop, Boolean.valueOf(true));
+	        BlockState iblockstate = Blocks.VINE.getDefaultState().with(prop, Boolean.valueOf(true));
 	        this.setBlockState(worldIn, pos, iblockstate);
 	        int i = 4;
 
@@ -223,7 +217,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	    	for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
                 BlockPos upN = position.up(currentHeight);
-                IBlockState iblockstate1 = worldIn.getBlockState(upN);
+                BlockState iblockstate1 = worldIn.getBlockState(upN);
                 Block block2 = iblockstate1.getBlock();
 
                 if (currentHeight != height-1 && 

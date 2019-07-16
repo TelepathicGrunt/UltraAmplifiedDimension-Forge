@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.world.gen.IContext;
-import net.minecraft.world.gen.NoiseGeneratorImproved;
-import net.minecraft.world.gen.area.AreaDimension;
+import net.minecraft.world.gen.INoiseRandom;
+import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 
 public class GenLayerOceanUA implements IAreaTransformer0 {
@@ -32,9 +31,9 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 			
 		}
 
-	   public int apply(IContext context, AreaDimension areaDimensionIn, int x, int z) {
-	      NoiseGeneratorImproved noisegeneratorimproved = context.getNoiseGenerator();
-	      double d0 = noisegeneratorimproved.func_205562_a((double)(x + areaDimensionIn.getStartX()) / 8.0D, (double)(z + areaDimensionIn.getStartZ()) / 8.0D);
+	   public int apply(INoiseRandom context, int x, int z) {
+	      ImprovedNoiseGenerator noisegeneratorimproved = context.getNoiseGenerator();
+	      double d0 = noisegeneratorimproved.func_215456_a((double)(x) / 8.0D, (double)(z) / 8.0D, 0.0D, 0.0D, 0.0D);
 	      
 	      
 	      //dynamic code that will try to equally space oceans depending on how many is allowed
@@ -65,7 +64,7 @@ public class GenLayerOceanUA implements IAreaTransformer0 {
 	    	  
 	    	  
 	    	  //makes deep oceans
-    	  	  double d1 = noisegeneratorimproved.func_205562_a((double)(x + areaDimensionIn.getStartX() + 54443) / 5.0D, (double)(z + areaDimensionIn.getStartZ() + 34445) / 5.0D);
+    	  	  double d1 = noisegeneratorimproved.func_215456_a((double)(x + 54443) / 5.0D, (double)(z + 34445) / 5.0D, 0.0D, 0.0D, 0.0D);
     		     
     		  if(Math.abs(d1%0.1D) < 0.03D) {
     			  if (biomeID == BiomeGenHelper.WARM_OCEAN) {

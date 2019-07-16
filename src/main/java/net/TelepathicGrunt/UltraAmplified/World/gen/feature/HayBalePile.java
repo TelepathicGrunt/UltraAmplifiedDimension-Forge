@@ -1,34 +1,41 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.minecraft.block.BlockHay;
-import net.minecraft.block.BlockRail;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HayBlock;
+import net.minecraft.block.RailBlock;
 import net.minecraft.state.properties.RailShape;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class HayBalePile extends Feature<NoFeatureConfig> {
 	
 
-    private final IBlockState hayBaleNS = Blocks.HAY_BLOCK.getDefaultState().with(BlockHay.AXIS, EnumFacing.Axis.Z);
-    private final IBlockState hayBaleEW = Blocks.HAY_BLOCK.getDefaultState().with(BlockHay.AXIS, EnumFacing.Axis.X);
-    private final IBlockState railNSFlat = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.NORTH_SOUTH);
-    private final IBlockState railNSAscending = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.ASCENDING_NORTH);
-    private final IBlockState railNSDecending = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.ASCENDING_SOUTH);
-    private final IBlockState railEWFlat = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.EAST_WEST);
-    private final IBlockState railEWAscending = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.ASCENDING_EAST);
-    private final IBlockState railEWDecending = Blocks.RAIL.getDefaultState().with(BlockRail.SHAPE, RailShape.ASCENDING_WEST);
+    public HayBalePile(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
 
-    public boolean func_212245_a(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+	private final BlockState hayBaleNS = Blocks.HAY_BLOCK.getDefaultState().with(HayBlock.AXIS, Direction.Axis.Z);
+    private final BlockState hayBaleEW = Blocks.HAY_BLOCK.getDefaultState().with(HayBlock.AXIS, Direction.Axis.X);
+    private final BlockState railNSFlat = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.NORTH_SOUTH);
+    private final BlockState railNSAscending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_NORTH);
+    private final BlockState railNSDecending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_SOUTH);
+    private final BlockState railEWFlat = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.EAST_WEST);
+    private final BlockState railEWAscending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_EAST);
+    private final BlockState railEWDecending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_WEST);
+
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
         
   		if(!ConfigUA.miniStructureGeneration) {
@@ -115,8 +122,7 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
         }
         else
         {
-            IBlockState iblockstate1 = worldIn.getBlockState(pos);
-            return iblockstate1.getBlock().isNormalCube(iblockstate1, worldIn, pos);
+            return worldIn.getBlockState(pos).isNormalCube(worldIn, pos);
         }
     }
 }

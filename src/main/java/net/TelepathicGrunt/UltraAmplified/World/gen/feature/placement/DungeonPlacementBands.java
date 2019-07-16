@@ -1,22 +1,29 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
+import net.minecraft.world.gen.placement.Placement;
 
-public class DungeonPlacementBands extends BasePlacement<DungeonRoomConfig> {
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, DungeonRoomConfig placementConfig, Feature<C> featureIn, C featureConfig) {
+public class DungeonPlacementBands extends Placement<DungeonRoomConfig> {
+   public DungeonPlacementBands(Function<Dynamic<?>, ? extends DungeonRoomConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, DungeonRoomConfig placementConfig, BlockPos pos) {
 	      int count = ConfigUA.dungeonSpawnrate;
 
-	      for(int currentCount = 0; currentCount < count; ++currentCount) {
+	      return IntStream.range(0, count).mapToObj((p_215051_3_) -> {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
 	         int y;
@@ -40,9 +47,7 @@ public class DungeonPlacementBands extends BasePlacement<DungeonRoomConfig> {
             	 //range: 160 - 245
         	}
 	         
-	         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, y, z), featureConfig);
-	      }
-
-	      return true;
+	         return pos.add(x, y, z);
+	      });
 	   }
 	}

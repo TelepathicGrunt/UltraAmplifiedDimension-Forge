@@ -1,5 +1,9 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
+import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.Dynamic;
+import com.mojang.datafixers.types.DynamicOps;
+
 import net.minecraft.world.gen.placement.IPlacementConfig;
 
 public class CountRangeAndTypeConfig implements IPlacementConfig {
@@ -15,5 +19,16 @@ public class CountRangeAndTypeConfig implements IPlacementConfig {
 	   LAVA,
 	   WATER,
 	   SLIME;
+   }
+
+	@Override
+	public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
+		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("chance"), ops.createInt(this.chance), ops.createString("type"), ops.createString(this.type.name()))));
+	}
+	
+   public static CountRangeAndTypeConfig deserialize(Dynamic<?> p_214723_0_) {
+      int chance = p_214723_0_.get("chance").asInt(0);
+      Type type = Type.valueOf(p_214723_0_.get("type").asString("WATER"));
+      return new CountRangeAndTypeConfig(chance, type);
    }
 }

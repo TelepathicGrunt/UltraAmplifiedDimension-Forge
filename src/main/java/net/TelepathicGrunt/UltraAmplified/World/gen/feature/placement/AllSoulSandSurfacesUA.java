@@ -1,25 +1,35 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.BasePlacement;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.placement.Placement;
 
-public class AllSoulSandSurfacesUA extends BasePlacement<PercentageAndFrequencyConfig> {
-	private final IBlockState SOULSAND =  Blocks.SOUL_SAND.getDefaultState();
-	
-   public <C extends IFeatureConfig> boolean generate(IWorld worldIn, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random random, BlockPos pos, PercentageAndFrequencyConfig pfConfig, Feature<C> featureIn, C featureConfig) {
-	   
-	   for(int i = 0; i < pfConfig.frequency; i++) {
-		   
-	       int height = 255;
+public class AllSoulSandSurfacesUA extends Placement<PercentageAndFrequencyConfig> {
+	public AllSoulSandSurfacesUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+	private final BlockState SOULSAND = Blocks.SOUL_SAND.getDefaultState();
+
+	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
+
+       ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
+       
+	   for(int i = 0; i < pfConfig.frequency; i++){
+		   int height = 255;
 		   
 	       while(height > 74) {
 		         int x = random.nextInt(16);
@@ -49,12 +59,14 @@ public class AllSoulSandSurfacesUA extends BasePlacement<PercentageAndFrequencyC
 		            break;
 		         }
 		         else if(random.nextFloat() < pfConfig.percentage) {
-			         featureIn.func_212245_a(worldIn, chunkGenerator, random, pos.add(x, height, z), featureConfig);
+			         blockPosList.add(pos.add(x, height, z));
 		         }
-		         
 		     }
-	       
 		  }
-	      return true;
+	   
+
+	    return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) -> {
+	    	return blockPosList.remove(0);
+	    }).filter(Objects::nonNull);
 	   }
-	}
+}

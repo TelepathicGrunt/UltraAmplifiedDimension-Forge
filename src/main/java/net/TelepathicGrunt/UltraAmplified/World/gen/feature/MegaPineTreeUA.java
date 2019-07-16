@@ -2,34 +2,40 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class MegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
 	
-    private static final IBlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
-    private static final IBlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
-    private static final IBlockState PODZOL = Blocks.PODZOL.getDefaultState();
+    private static final BlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
+    private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
+    private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
     private final boolean useBaseHeight;
 
     //only change is significant increase in possible height and thicker/bigger leaves so trees fit the terrain more.
-    public MegaPineTreeUA(boolean notify, boolean useBaseHeight)
-    {
-        super(notify, 13, 50, TRUNK, LEAF);
-        this.useBaseHeight = useBaseHeight;
-    }
+    public MegaPineTreeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, boolean useBaseHeightIn) {
+        super(configFactoryIn, doBlockNotifyOnPlace, 13, 50, TRUNK, LEAF);
+        useBaseHeight = useBaseHeightIn;
+        setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING);
+     }
 
-    public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) 
+    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_)  
     {
         int height = this.getHeight(rand);
+        IWorld world = (IWorld) worldIn;
 
         if (!this.func_203427_a(worldIn, position, height))
         {
@@ -37,38 +43,38 @@ public class MegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
         }
         else
         {
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand);
+            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand, p_208519_5_, changedBlocks);
 
             for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
-                IBlockState iblockstate = worldIn.getBlockState(position.up(currentHeight));
+                BlockState iblockstate = world.getBlockState(position.up(currentHeight));
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                	this.func_208520_a(changedBlocks, worldIn, position.up(currentHeight), this.woodMetadata);
+                	this.setLogState(changedBlocks, worldIn, position.up(currentHeight), TRUNK, p_208519_5_);
                 }
 
                 if (currentHeight < height - 1)
                 {
-                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 0));
+                    iblockstate = world.getBlockState(position.add(1, currentHeight, 0));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                    	this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 0), this.woodMetadata);
+                    	this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 0), TRUNK, p_208519_5_);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(1, currentHeight, 1));
+                    iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                    	this.func_208520_a(changedBlocks, worldIn, position.add(1, currentHeight, 1), this.woodMetadata);
+                    	this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 1), TRUNK, p_208519_5_);
                     }
 
-                    iblockstate = worldIn.getBlockState(position.add(0, currentHeight, 1));
+                    iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.func_208520_a(changedBlocks, worldIn, position.add(0, currentHeight, 1), this.woodMetadata);
+                        this.setLogState(changedBlocks, worldIn, position.add(0, currentHeight, 1), TRUNK, p_208519_5_);
                     }
                 }
             }
@@ -77,7 +83,7 @@ public class MegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
         }
     }
 
-    private void createCrown(IWorld worldIn, int x, int z, int y, int extraRadius, Random rand)
+    private void createCrown(IWorldGenerationReader worldIn, int x, int z, int y, int extraRadiusSize, Random rand, MutableBoundingBox p_214596_7_, Set<BlockPos> p_214596_8_)
     {
         int height = rand.nextInt(5) + (this.useBaseHeight ? this.baseHeight : 3);
         int prevRadius = 0;
@@ -85,8 +91,8 @@ public class MegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
         for (int currentHeight = y - height; currentHeight <= y+20; ++currentHeight)
         {
             int heightDiff = y - currentHeight;
-            int radius = extraRadius + MathHelper.floor((float)heightDiff / (float)height * 3.5F);
-            this.growLeavesLayerStrict(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0)*2));
+            int radius = extraRadiusSize + MathHelper.floor((float)heightDiff / (float)height * 3.5F);
+            this.func_222839_a(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0)*2), p_214596_7_, p_214596_8_);
             prevRadius = radius;
         }
     }
@@ -130,7 +136,7 @@ public class MegaPineTreeUA extends HugeTreesFeature<NoFeatureConfig> {
         for (int i = 2; i >= -3; --i)
         {
             BlockPos blockpos = pos.up(i);
-            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+            BlockState iblockstate = worldIn.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
             if (block == Blocks.GRASS || Block.isDirt(block))

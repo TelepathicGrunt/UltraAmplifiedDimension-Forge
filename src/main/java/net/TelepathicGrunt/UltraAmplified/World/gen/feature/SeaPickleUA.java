@@ -1,18 +1,25 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+import java.util.function.Function;
 
-import net.minecraft.block.BlockSeaPickle;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
 
 public class SeaPickleUA extends Feature<CountConfig> {
-   public boolean func_212245_a(IWorld worldIn, IChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {
+   public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactoryIn) {
+		super(configFactoryIn);
+	}
+
+public boolean place(IWorld worldIn, ChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {
 	      int howManyPickleGenerated = 0;
 
 	      for(int count = 0; count < configCount.count; ++count) {
@@ -23,7 +30,7 @@ public class SeaPickleUA extends Feature<CountConfig> {
 		      //We have placement classes for a reason. Features should not be finding their own positions.
 		      
 	         BlockPos blockpos = new BlockPos(pos.getX() + xOffset, pos.getY(), pos.getZ() + zOffset);
-	         IBlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(BlockSeaPickle.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
+	         BlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
 	         
 	         if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && pickle.isValidPosition(worldIn, blockpos)) {
 	            worldIn.setBlockState(blockpos, pickle, 2);

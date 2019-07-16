@@ -2,28 +2,34 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.minecraft.init.Biomes;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.structure.VillagePieces;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class VillageUA  extends Structure<VillageUAConfig> {
+   public VillageUA(Function<Dynamic<?>, ? extends VillageUAConfig> p_i51427_1_) {
+		super(p_i51427_1_);
+	}
+
    public String getStructureName() {
 	      return "Village UA";
    }
@@ -36,7 +42,7 @@ public class VillageUA  extends Structure<VillageUAConfig> {
       return worldIn.getWorldInfo().isMapFeaturesEnabled();
    }
 
-   protected ChunkPos getStartPositionForPosition(IChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+   protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
       int maxDistance = ConfigUA.villageSpawnrate;
       int minDistance = 8;
       if(maxDistance < 9 ) {
@@ -56,122 +62,84 @@ public class VillageUA  extends Structure<VillageUAConfig> {
       return new ChunkPos(k1, l1);
    }
 
-   protected boolean hasStartAt(IChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
       ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
       if ((ConfigUA.villageGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9), Biomes.DEFAULT);
+         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
          return chunkGen.hasStructure(biome, FeatureUA.VILLAGE_UA); 
       } else {
          return false;
       }
    }
 
-   protected StructureStart makeStart(IWorld worldIn, IChunkGenerator<?> generator, SharedSeedRandom random, int x, int z) {
-      Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9), Biomes.DEFAULT);
-      return new VillageUA.Start(worldIn, generator, random, x, z, biome); 
+   public Structure.IStartFactory getStartFactory() {
+      return VillageUA.Start::new;
    }
 
    
    public static class Start extends StructureStart {
-      private boolean hasMoreThanTwoComponents;
-
-      public Start() {
+	   public Start(Structure<?> p_i51110_1_, int p_i51110_2_, int p_i51110_3_, Biome p_i51110_4_, MutableBoundingBox p_i51110_5_, int p_i51110_6_, long p_i51110_7_) {
+         super(p_i51110_1_, p_i51110_2_, p_i51110_3_, p_i51110_4_, p_i51110_5_, p_i51110_6_, p_i51110_7_);
       }
 
-      public Start(IWorld p_i48753_1_, IChunkGenerator<?> generator, SharedSeedRandom random, int chunkX, int chunkZ, Biome biome) {
-         super(chunkX, chunkZ, biome, random, p_i48753_1_.getSeed());
-         VillageUAConfig villageconfig = (VillageUAConfig)generator.getStructureConfig(biome, FeatureUA.VILLAGE_UA); 
+      public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+         VillageUAConfig villageconfig = (VillageUAConfig)generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA); 
          
          //if we are requesting a village type that vanilla already can make,
          //we then generate a vanilla village. 
          //This sets up the config that vanilla needs
-         VillageConfig vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.OAK);
+         VillageConfig vanillaVillageConfig = new VillageConfig("village/plains/town_centers", 6);
          boolean genVanillaVillage = false;
          if(villageconfig.type == VillagePiecesUA.Type.OAK) {
         	 genVanillaVillage = true;
          }
          else if(villageconfig.type == VillagePiecesUA.Type.SANDSTONE) {
-        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.SANDSTONE);
+        	 vanillaVillageConfig = new VillageConfig("village/desert/town_centers", 6);
         	 genVanillaVillage = true;
          }
          else if(villageconfig.type == VillagePiecesUA.Type.ACACIA) {
-        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.ACACIA);
+        	 vanillaVillageConfig = new VillageConfig("village/savanna/town_centers", 6);
+        	 genVanillaVillage = true;
+         }
+         else if(villageconfig.type == VillagePiecesUA.Type.SNOWYSPRUCE) {
+        	 vanillaVillageConfig = new VillageConfig("village/snowy/town_centers", 6);
         	 genVanillaVillage = true;
          }
          else if(villageconfig.type == VillagePiecesUA.Type.SPRUCE) {
-        	 vanillaVillageConfig = new VillageConfig(0, VillagePieces.Type.SPRUCE);
+        	 vanillaVillageConfig = new VillageConfig("village/taiga/town_centers", 6);
         	 genVanillaVillage = true;
          }
          
          if(genVanillaVillage) {
         	 //generates a vanilla village so if villages change in future updates, we pull the new villages automatically
-        	 List<VillagePieces.PieceWeight> list = VillagePieces.getStructureVillageWeightedPieceList(random, vanillaVillageConfig.field_202461_a);
-             VillagePieces.Start villagepieces$start = new VillagePieces.Start(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, vanillaVillageConfig, biome);
-             this.components.add(villagepieces$start);
-             villagepieces$start.buildComponent(villagepieces$start, this.components, random);
-             List<StructurePiece> list1 = villagepieces$start.pendingRoads;
-             List<StructurePiece> list2 = villagepieces$start.pendingHouses;
-
-             while(!list1.isEmpty() || !list2.isEmpty()) {
-                if (list1.isEmpty()) {
-                   int i = random.nextInt(list2.size());
-                   StructurePiece structurepiece = list2.remove(i);
-                   structurepiece.buildComponent(villagepieces$start, this.components, random);
-                } else {
-                   int j = random.nextInt(list1.size());
-                   StructurePiece structurepiece2 = list1.remove(j);
-                   structurepiece2.buildComponent(villagepieces$start, this.components, random);
-                }
-             }
+        	 BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+             VillagePieces.func_214838_a(generator, templateManagerIn, blockpos, this.components, this.rand, vanillaVillageConfig);
+             this.recalculateStructureSize();
          }else {
         	 //generates our own kind of village
-        	 List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(random, villageconfig.terrainType);
-             VillagePiecesUA.Start villagepiecesua$start = new VillagePiecesUA.Start(0, random, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageconfig, biome);
+        	 List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(this.rand, villageconfig.terrainType);
+             VillagePiecesUA.Start villagepiecesua$start = new VillagePiecesUA.Start(0, this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageconfig, biomeIn);
              this.components.add(villagepiecesua$start);
-             villagepiecesua$start.buildComponent(villagepiecesua$start, this.components, random);
+             villagepiecesua$start.buildComponent(villagepiecesua$start, this.components, this.rand);
              List<StructurePiece> list1 = villagepiecesua$start.pendingRoads;
              List<StructurePiece> list2 = villagepiecesua$start.pendingHouses;
 
              while(!list1.isEmpty() || !list2.isEmpty()) {
                 if (list1.isEmpty()) {
-                   int i = random.nextInt(list2.size());
+                   int i = this.rand.nextInt(list2.size());
                    StructurePiece structurepiece = list2.remove(i);
-                   structurepiece.buildComponent(villagepiecesua$start, this.components, random);
+                   structurepiece.buildComponent(villagepiecesua$start, this.components, this.rand);
                 } else {
-                   int j = random.nextInt(list1.size());
+                   int j = this.rand.nextInt(list1.size());
                    StructurePiece structurepiece2 = list1.remove(j);
-                   structurepiece2.buildComponent(villagepiecesua$start, this.components, random);
+                   structurepiece2.buildComponent(villagepiecesua$start, this.components, this.rand);
                 }
              }
          }
         
          
-         this.recalculateStructureSize(p_i48753_1_);
-         int k = 0;
-
-         for(StructurePiece structurepiece1 : this.components) {
-            if (!(structurepiece1 instanceof VillagePieces.Road)) {
-               ++k;
-            }
-         }
-
-         this.hasMoreThanTwoComponents = k > 2;
+         this.recalculateStructureSize();
          UltraAmplified.Logger.log(Level.DEBUG,villageconfig.type+" Village | "+chunkX*16+", "+chunkZ*16);
-      }
-
-
-      public boolean isSizeableStructure() {
-         return this.hasMoreThanTwoComponents;
-      }
-
-      public void writeAdditional(NBTTagCompound tagCompound) {
-         super.writeAdditional(tagCompound);
-         tagCompound.setBoolean("Valid", this.hasMoreThanTwoComponents);
-      }
-
-      public void readAdditional(NBTTagCompound tagCompound) {
-         super.readAdditional(tagCompound);
-         this.hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
       }
    }
 }

@@ -4,10 +4,9 @@ import java.util.Collection;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.registry.IRegistry;
-import net.minecraft.world.gen.IContext;
-import net.minecraft.world.gen.NoiseGeneratorImproved;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 
@@ -251,7 +250,7 @@ public class GenLayerBiomeUA implements IC0Transformer
     }
 
     
-    public int apply(IContext context, int value) {
+    public int apply(INoiseRandom context, int value) {
    
        int i = (value & 3840) >> 8;
        value = value & -3841;
@@ -259,28 +258,28 @@ public class GenLayerBiomeUA implements IC0Transformer
           switch(value) {
           case 1:
              if (i > 0) {
-                return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
+                return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
              }
 
-             return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);
+             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);
           case 2:
              if (i > 0) {
-                return  IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(jungleReplacedBiomes, context).biome);
+                return  Registry.BIOME.getId(getWeightedSpecialBiomeEntry(jungleReplacedBiomes, context).biome);
              }
 
-             return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM, context).biome);
+             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM, context).biome);
           case 3:
              if (i > 0) {
-                return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(megaTaigaReplacedBiomes, context).biome);
+                return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(megaTaigaReplacedBiomes, context).biome);
              }
 
-             return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
+             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
           case 4:
-             return IRegistry.field_212624_m.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
+             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
           default:
         	  
         	  if(noOcean) {
-          		return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+          		return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
           	  }
         	  
         	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean
@@ -291,7 +290,7 @@ public class GenLayerBiomeUA implements IC0Transformer
     	  if(noOcean) {
 
     		   
-       		return IRegistry.field_212624_m.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+       		return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
        	  }
     	   
     	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean
@@ -302,7 +301,7 @@ public class GenLayerBiomeUA implements IC0Transformer
     
     //returns a biome with its weight impacting how often it appears
     //This is a forge method
-    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType type, IContext context) {
+    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType type, INoiseRandom context) {
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = biomes[type.ordinal()];
         int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
         int weight = net.minecraftforge.common.BiomeManager.isTypeListModded(type)?context.random(totalWeight):context.random(totalWeight / 10) * 10;
@@ -311,7 +310,7 @@ public class GenLayerBiomeUA implements IC0Transformer
 
     //returns a biome with its weight impacting how often it appears
     //this is a modified forge method to work with my own biome lists that are passed in
-    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedSpecialBiomeEntry(java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> list, IContext context)
+    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedSpecialBiomeEntry(java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> list, INoiseRandom context)
     {
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = list;
         int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);

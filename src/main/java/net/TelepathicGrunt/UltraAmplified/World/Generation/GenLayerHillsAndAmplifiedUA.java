@@ -1,14 +1,10 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.util.registry.IRegistry;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IContext;
-import net.minecraft.world.gen.area.AreaDimension;
+import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
@@ -22,17 +18,17 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
    
 
 
-   public int apply(IContext context, AreaDimension dimensionIn, IArea area1, IArea area2, int x, int z) {
+   public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z) {
       int biomeId1 = area1.getValue(x + 1, z + 1);
       int biomeId2 = area2.getValue(x + 1, z + 1);
 
       
       int remainder = (biomeId2 - 2) % 29;
       if (!BiomeGenHelper.isShallowOcean(biomeId1) && biomeId2 >= 2 && remainder != 0 && remainder <= ConfigUA.mutatedBiomeSpawnrate) {
-         Biome biome = IRegistry.field_212624_m.get(biomeId1);
+         Biome biome = Registry.BIOME.getByValue(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
-            return biome2 == null ? biomeId1 : IRegistry.field_212624_m.getId(biome2);
+            return biome2 == null ? biomeId1 : Registry.BIOME.getId(biome2);
          }
       }
       
@@ -73,8 +69,8 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
          }
 
 //         if (remainder == 0 && l != biomeId1) {
-//            Biome biome1 = BiomeInit.BASE_TO_MUTATION_MAP.get(IRegistry.field_212624_m.get(l));
-//            l = biome1 == null ? biomeId1 : IRegistry.field_212624_m.getId(biome1);
+//            Biome biome1 = BiomeInit.BASE_TO_MUTATION_MAP.get(Registry.BIOME.get(l));
+//            l = biome1 == null ? biomeId1 : Registry.BIOME.getId(biome1);
 //         }
 
          if (l != biomeId1) {

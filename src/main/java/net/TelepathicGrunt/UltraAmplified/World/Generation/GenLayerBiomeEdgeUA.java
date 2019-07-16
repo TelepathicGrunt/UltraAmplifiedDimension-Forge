@@ -1,6 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import net.minecraft.world.gen.IContext;
+import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;
 
@@ -8,7 +8,7 @@ public enum GenLayerBiomeEdgeUA implements ICastleTransformer {
 	   INSTANCE;
 	
 	
-	   public int apply(IContext context, int pos1, int pos2, int pos3, int pos4, int currentPos) {
+	   public int apply(INoiseRandom context, int pos1, int pos2, int pos3, int pos4, int currentPos) {
 	      int[] aint = new int[1];
 	      if (!this.replaceBiomeEdge(aint, pos1, pos2, pos3, pos4, currentPos, BiomeGenHelper.WOODED_BADLANDS_PLATEAU, BiomeGenHelper.BADLANDS) 
 	    	  && !this.replaceBiomeEdge(aint, pos1, pos2, pos3, pos4, currentPos, BiomeGenHelper.BADLANDS_PLATEAU, BiomeGenHelper.BADLANDS) 
