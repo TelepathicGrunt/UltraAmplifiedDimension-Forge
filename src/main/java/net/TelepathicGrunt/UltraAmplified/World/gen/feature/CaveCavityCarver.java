@@ -12,6 +12,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.IChunk;
@@ -49,8 +50,17 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
     }
 	
 
-   protected long field_205552_a;
-   protected OctavesNoiseGenerator field_205553_b;
+   protected long seed;
+   protected OctavesNoiseGenerator noiseGen;
+   
+
+   public void setSeed(long seed) {
+      if (this.noiseGen == null) {
+         this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+      }
+
+      this.seed = seed;
+   }
 
     public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
         return p_212246_2_.nextFloat() <= config.probability;
@@ -71,7 +81,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
      }
 
      private void func_222729_a(IChunk worldIn, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
-    	 
+    	 setSeed(randomSeed);
     	 Random random = new Random(randomSeed);
         float f = 1.0F;
 
@@ -172,14 +182,14 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                          //then subtracted out target height by yModified to flatten bottom of pillar to make a path through lava.
                          //add a random value to add some noise to the pillar.
                          //and set the greater than value to be very low so most of the cave gets carved out.
-                         boolean flagPillars = this.field_205553_b.func_205563_a((double)x * 0.2D, (double)z * 0.2D, y*0.035D) - (targetedHeight/yModified) + random.nextDouble() * 0.1D > -3.5D;
+                         boolean flagPillars = this.noiseGen.func_205563_a((double)x * 0.2D, (double)z * 0.2D, y*0.035D) - (targetedHeight/yModified) + random.nextDouble() * 0.1D > -3.5D;
                          
                          //creates large stalagmites that cannot reach floor of cavern
                          //perlin field creates the main stalagmite shape and placement by stepping though x and z pretty fast and through y very slowly.
                          //Then adds 400/y so that as the y value gets lower, the more area gets carved which sets the limit on how far down the stalagmites can go.
                          //add a random value to add some noise to the pillar.
                          //and set the greater than value to be high so more stalagmites can be made while the 400/y has already carved out the rest of the cave.
-                         boolean flagStalagmites = this.field_205553_b.func_205563_a((double)x * 0.63125D, (double)z * 0.63125D, y*0.04D) +(360/(y)) + random.nextDouble() * 0.1D > 2.8D;
+                         boolean flagStalagmites = this.noiseGen.func_205563_a((double)x * 0.63125D, (double)z * 0.63125D, y*0.04D) +(360/(y)) + random.nextDouble() * 0.1D > 2.8D;
                          
                          //where the pillar flag and stalagmite flag both flagged this block to be carved, begin carving. 
                          //Thus the pillar and stalagmite is what is left after carving.

@@ -48,12 +48,9 @@ public class UltraAmplified {
 	{
 		@SubscribeEvent
 		public static void registerBiomes(RegistryEvent.Register<Biome> event){
-			
-			
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
 			Logger.log(Level.INFO, "Biomes registered.");
-			//Logger.log(Level.INFO, "Structures registered.");
 		}
 	}
 	

@@ -119,7 +119,6 @@ public class FeatureUA
 
 		UltraAmplified.Logger.debug("FEATURE REGISTER");
 
-
 		   BETTER_CACTUS = registerFeature(BETTER_CACTUS, "better_cactus");
 		   GENERIC_DUNGEONS = registerFeature(GENERIC_DUNGEONS, "dungeon_default");
 		   MESA_DUNGEONS = registerFeature(MESA_DUNGEONS, "dungeons_badlands");
