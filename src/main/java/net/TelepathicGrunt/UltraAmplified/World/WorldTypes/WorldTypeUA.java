@@ -6,12 +6,14 @@ import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.OverworldBiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class WorldTypeUA extends WorldType {
@@ -44,7 +46,13 @@ public class WorldTypeUA extends WorldType {
     public ChunkGenerator<?> createChunkGenerator(World world)
     {
     	//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
-        return new ChunkGeneratorOverworldUA(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
+        return new ChunkGeneratorOverworldUA(
+        		world, 
+        		new OverworldBiomeProvider(
+        				BiomeProviderType.VANILLA_LAYERED.createSettings()
+        					.setGeneratorSettings(new OverworldGenSettings())
+        					.setWorldInfo(world.getWorldInfo())), 
+        		ChunkGeneratorType.SURFACE.createSettings());
     }
     
     

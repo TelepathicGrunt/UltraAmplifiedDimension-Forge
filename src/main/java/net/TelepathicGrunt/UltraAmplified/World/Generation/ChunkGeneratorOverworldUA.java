@@ -3,6 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import java.util.List;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
@@ -38,7 +39,7 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	   private final CatSpawner catSpawner = new CatSpawner();
 
 	   public ChunkGeneratorOverworldUA(IWorld worldIn, BiomeProvider provider, OverworldGenSettings settingsIn) {
-	      super(worldIn, provider, 4, 8, 256, settingsIn, true);
+	      super(worldIn, provider, 4, 8, 256, settingsIn);
 	      this.randomSeed.skip(2620);
 	      this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
 	   }
@@ -53,7 +54,7 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	   }
 
 	   protected void func_222548_a(double[] p_222548_1_, int p_222548_2_, int p_222548_3_) {
-	      this.func_222546_a(p_222548_1_, p_222548_2_, p_222548_3_, (double)684.412F, (double)684.412F, 8.555149841308594D, 4.277574920654297D, 3, -10);
+	      this.func_222546_a(p_222548_1_, p_222548_2_, p_222548_3_, (double)(ConfigUA.secretSetting ? 117104.946F : 684.412F), (double)468419.786F, 8.55515F, (ConfigUA.secretSetting ? 73.1905915F : 428.613F), 8.555149841308594D, 4.277574920654297D, 3, -10);
 	   }
 
 	   protected double func_222545_a(double p_222545_1_, double p_222545_3_, int p_222545_5_) {
@@ -128,21 +129,21 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	   
 	   //fix
 	   public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos) {
-	      if (Feature.SWAMP_HUT.func_202383_b(this.world, pos)) {
+	      if (FeatureUA.WITCH_HUT_UA.func_202383_b(this.world, pos)) {
 	         if (creatureType == EntityClassification.MONSTER) {
-	            return Feature.SWAMP_HUT.getSpawnList();
+	            return FeatureUA.WITCH_HUT_UA.getSpawnList();
 	         }
 
 	         if (creatureType == EntityClassification.CREATURE) {
-	            return Feature.SWAMP_HUT.getCreatureSpawnList();
+	            return FeatureUA.WITCH_HUT_UA.getCreatureSpawnList();
 	         }
 	      } else if (creatureType == EntityClassification.MONSTER) {
 	         if (Feature.PILLAGER_OUTPOST.isPositionInStructure(this.world, pos)) {
 	            return Feature.PILLAGER_OUTPOST.getSpawnList();
 	         }
 
-	         if (Feature.OCEAN_MONUMENT.isPositionInStructure(this.world, pos)) {
-	            return Feature.OCEAN_MONUMENT.getSpawnList();
+	         if (FeatureUA.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos)) {
+	            return FeatureUA.OCEAN_MONUMENT_UA.getSpawnList();
 	         }
 	      }
 

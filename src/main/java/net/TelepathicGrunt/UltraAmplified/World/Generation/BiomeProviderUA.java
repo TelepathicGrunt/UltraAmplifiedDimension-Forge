@@ -13,6 +13,13 @@ import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerAddMushroomBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerBiomeEdgeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerHillsAndAmplifiedUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerMixOceanUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerOceanUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerSunflowerPlains;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

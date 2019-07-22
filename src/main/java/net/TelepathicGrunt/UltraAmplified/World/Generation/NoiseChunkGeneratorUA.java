@@ -29,7 +29,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.INoiseGenerator;
-import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -45,6 +44,8 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
     private static final BlockState SNOW = Blocks.SNOW_BLOCK.getDefaultState();
     private static final BlockState WATER = Blocks.WATER.getDefaultState();
+    private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
+    private static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
     private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
 	private static final Map<Biome, BlockState> fillerMap = createMap();
@@ -78,45 +79,49 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	private final int noiseSizeY;
 	private final int noiseSizeZ;
 	protected final SharedSeedRandom randomSeed;
-	private final OctavesNoiseGenerator field_222568_o;
-	private final OctavesNoiseGenerator field_222569_p;
-	private final OctavesNoiseGenerator field_222570_q;
+	private final OctavesNoiseGenerator minNoise;
+	private final OctavesNoiseGenerator maxNoise;
+	private final OctavesNoiseGenerator mainNoise;
 	private final INoiseGenerator surfaceDepthNoise;
 	protected final BlockState defaultBlock;
 	protected final BlockState defaultFluid;
 
-	public NoiseChunkGeneratorUA(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int p_i49931_3_, int p_i49931_4_, int p_i49931_5_, T p_i49931_6_, boolean p_i49931_7_) {
+	public NoiseChunkGeneratorUA(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_) {
 		super(p_i49931_1_, p_i49931_2_, p_i49931_6_);
-		this.verticalNoiseGranularity = p_i49931_4_;
-		this.horizontalNoiseGranularity = p_i49931_3_;
+		this.verticalNoiseGranularity = verticalNoiseGranularityIn;
+		this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;
 		this.defaultBlock = p_i49931_6_.getDefaultBlock();
 		this.defaultFluid = p_i49931_6_.getDefaultFluid();
 		this.noiseSizeX = 16 / this.horizontalNoiseGranularity;
 		this.noiseSizeY = p_i49931_5_ / this.verticalNoiseGranularity;
 		this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
 		this.randomSeed = new SharedSeedRandom(this.seed);
-		this.field_222568_o = new OctavesNoiseGenerator(this.randomSeed, 16);
-		this.field_222569_p = new OctavesNoiseGenerator(this.randomSeed, 16);
-		this.field_222570_q = new OctavesNoiseGenerator(this.randomSeed, 8);
-		this.surfaceDepthNoise = (INoiseGenerator) (p_i49931_7_ ? new PerlinNoiseGenerator(this.randomSeed, 4) : new OctavesNoiseGenerator(this.randomSeed, 4));
+		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
+		this.maxNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
+		this.mainNoise = new OctavesNoiseGenerator(this.randomSeed, 8);
+		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 4));
 	}
 
-	private double func_222552_a(int p_222552_1_, int p_222552_2_, int p_222552_3_, double p_222552_4_, double p_222552_6_, double p_222552_8_, double p_222552_10_) {
+	private double func_222552_a(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_8_, double p_222552_10_) {
 		double d0 = 0.0D;
 		double d1 = 0.0D;
 		double d2 = 0.0D;
 		double d3 = 1.0D;
 
 		for (int i = 0; i < 16; ++i) {
-			double d4 = OctavesNoiseGenerator.maintainPrecision((double) p_222552_1_ * p_222552_4_ * d3);
-			double d5 = OctavesNoiseGenerator.maintainPrecision((double) p_222552_2_ * p_222552_6_ * d3);
-			double d6 = OctavesNoiseGenerator.maintainPrecision((double) p_222552_3_ * p_222552_4_ * d3);
-			double d7 = p_222552_6_ * d3;
-			d0 += this.field_222568_o.getOctave(i).func_215456_a(d4, d5, d6, d7, (double) p_222552_2_ * d7) / d3;
-			d1 += this.field_222569_p.getOctave(i).func_215456_a(d4, d5, d6, d7, (double) p_222552_2_ * d7) / d3;
+			double limitX = OctavesNoiseGenerator.maintainPrecision((double) x * getCoordinateScale * d3);
+			double limitY = OctavesNoiseGenerator.maintainPrecision((double) y * getHeightScale * d3);
+			double limitZ = OctavesNoiseGenerator.maintainPrecision((double) z * getCoordinateScale * d3);
+
+			double mainX = OctavesNoiseGenerator.maintainPrecision((double) x * getMainCoordinateScale * d3);
+			double mainY = OctavesNoiseGenerator.maintainPrecision((double) y * getMainHeightScale * d3);
+			double mainZ = OctavesNoiseGenerator.maintainPrecision((double) z * getMainCoordinateScale * d3);
+			
+			double d7 = 684.412F * d3;
+			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
+			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
 			if (i < 8) {
-				d2 += this.field_222570_q.getOctave(i).func_215456_a(OctavesNoiseGenerator.maintainPrecision((double) p_222552_1_ * p_222552_8_ * d3), OctavesNoiseGenerator.maintainPrecision((double) p_222552_2_ * p_222552_10_ * d3),
-						OctavesNoiseGenerator.maintainPrecision((double) p_222552_3_ * p_222552_8_ * d3), p_222552_10_ * d3, (double) p_222552_2_ * p_222552_10_ * d3) / d3;
+				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, p_222552_10_ * d3, (double) y * p_222552_10_ * d3) / d3;
 			}
 
 			d3 /= 2.0D;
@@ -131,23 +136,23 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		return adouble;
 	}
 
-	protected void func_222546_a(double[] p_222546_1_, int p_222546_2_, int p_222546_3_, double p_222546_4_, double p_222546_6_, double p_222546_8_, double p_222546_10_, int p_222546_12_, int p_222546_13_) {
-		double[] adouble = this.func_222549_a(p_222546_2_, p_222546_3_);
+	protected void func_222546_a(double[] p_222546_1_, int x, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222546_8_, double p_222546_10_, int p_222546_12_, int p_222546_13_) {
+		double[] adouble = this.func_222549_a(x, z);
 		double d0 = adouble[0];
 		double d1 = adouble[1];
 		double d2 = this.func_222551_g();
 		double d3 = this.func_222553_h();
 
-		for (int i = 0; i < this.func_222550_i(); ++i) {
-			double d4 = this.func_222552_a(p_222546_2_, i, p_222546_3_, p_222546_4_, p_222546_6_, p_222546_8_, p_222546_10_);
-			d4 = d4 - this.func_222545_a(d0, d1, i);
-			if ((double) i > d2) {
-				d4 = MathHelper.clampedLerp(d4, (double) p_222546_13_, ((double) i - d2) / (double) p_222546_12_);
-			} else if ((double) i < d3) {
-				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - (double) i) / (d3 - 1.0D));
+		for (int y = 0; y < this.func_222550_i(); ++y) {
+			double d4 = this.func_222552_a(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_8_, p_222546_10_);
+			d4 = d4 - this.func_222545_a(d0, d1, y);
+			if ((double) y > d2) {
+				d4 = MathHelper.clampedLerp(d4, (double) p_222546_13_, ((double) y - d2) / (double) p_222546_12_);
+			} else if ((double) y < d3) {
+				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - (double) y) / (d3 - 1.0D));
 			}
 
-			p_222546_1_[i] = d4;
+			p_222546_1_[y] = d4;
 		}
 
 	}
@@ -268,10 +273,10 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		ObjectList<AbstractVillagePiece> objectlist = new ObjectArrayList<>(10);
 		ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
 		ChunkPos chunkpos = p_222537_2_.getPos();
-		int j = chunkpos.x;
-		int k = chunkpos.z;
-		int l = j << 4;
-		int i1 = k << 4;
+		int chunkX = chunkpos.x;
+		int chunkZ = chunkpos.z;
+		int coordinateX = chunkX << 4;
+		int coordinateZ = chunkZ << 4;
 		BlockState fillerBlock;
     	Biome biome;
 		
@@ -297,7 +302,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 							for (JigsawJunction jigsawjunction : abstractvillagepiece.getJunctions()) {
 								int k1 = jigsawjunction.getSourceX();
 								int l1 = jigsawjunction.getSourceZ();
-								if (k1 > l - 12 && l1 > i1 - 12 && k1 < l + 15 + 12 && l1 < i1 + 15 + 12) {
+								if (k1 > coordinateX - 12 && l1 > coordinateZ - 12 && k1 < coordinateX + 15 + 12 && l1 < coordinateZ + 15 + 12) {
 									objectlist1.add(jigsawjunction);
 								}
 							}
@@ -311,24 +316,38 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 		for (int j5 = 0; j5 < this.noiseSizeZ + 1; ++j5) {
 			adouble[0][j5] = new double[this.noiseSizeY + 1];
-			this.func_222548_a(adouble[0][j5], j * this.noiseSizeX, k * this.noiseSizeZ + j5);
+			this.func_222548_a(adouble[0][j5], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + j5);
 			adouble[1][j5] = new double[this.noiseSizeY + 1];
 		}
 
 		ChunkPrimer chunkprimer = (ChunkPrimer) p_222537_2_;
 		Heightmap heightmap = chunkprimer.func_217303_b(Heightmap.Type.OCEAN_FLOOR_WG);
 		Heightmap heightmap1 = chunkprimer.func_217303_b(Heightmap.Type.WORLD_SURFACE_WG);
+		BlockPos.MutableBlockPos biomeblockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		ObjectListIterator<AbstractVillagePiece> objectlistiterator = objectlist.iterator();
 		ObjectListIterator<JigsawJunction> objectlistiterator1 = objectlist1.iterator();
+		
+		Biome[] biomeArrayForChunk = new Biome[256];
+		
+
+		ChunkSection chunksection = chunkprimer.func_217332_a(15);
+		chunksection.lock();
+		for(int x = 0; x < 16; x++) {
+			for(int z = 0; z < 16; z++) {
+				biomeArrayForChunk[x+(z*16)] = world.getBiome(biomeblockpos$mutableblockpos.setPos(coordinateX, 256, coordinateZ));
+			}
+		}
+		chunksection.unlock();
+		
 
 		for (int k5 = 0; k5 < this.noiseSizeX; ++k5) {
 			for (int l5 = 0; l5 < this.noiseSizeZ + 1; ++l5) {
-				this.func_222548_a(adouble[1][l5], j * this.noiseSizeX + k5 + 1, k * this.noiseSizeZ + l5);
+				this.func_222548_a(adouble[1][l5], chunkX * this.noiseSizeX + k5 + 1, chunkZ * this.noiseSizeZ + l5);
 			}
 
 			for (int i6 = 0; i6 < this.noiseSizeZ; ++i6) {
-				ChunkSection chunksection = chunkprimer.func_217332_a(15);
+				chunksection = chunkprimer.func_217332_a(15);
 				chunksection.lock();
 
 				for (int j6 = this.noiseSizeY - 1; j6 >= 0; --j6) {
@@ -358,14 +377,14 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 						double d9 = MathHelper.lerp(d5, d0, d4);
 
 						for (int i3 = 0; i3 < this.horizontalNoiseGranularity; ++i3) {
-							int j3 = l + k5 * this.horizontalNoiseGranularity + i3;
+							int j3 = coordinateX + k5 * this.horizontalNoiseGranularity + i3;
 							int x = j3 & 15;
 							double d10 = (double) i3 / (double) this.horizontalNoiseGranularity;
 							double d11 = MathHelper.lerp(d10, d6, d7);
 							double d12 = MathHelper.lerp(d10, d8, d9);
 
 							for (int l3 = 0; l3 < this.horizontalNoiseGranularity; ++l3) {
-								int i4 = i1 + i6 * this.horizontalNoiseGranularity + l3;
+								int i4 = coordinateZ + i6 * this.horizontalNoiseGranularity + l3;
 								int z = i4 & 15;
 								double d13 = (double) l3 / (double) this.horizontalNoiseGranularity;
 								double d14 = MathHelper.lerp(d13, d11, d12);
@@ -394,16 +413,17 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 								objectlistiterator1.back(objectlist1.size());
 								BlockState blockstate;
+								biomeblockpos$mutableblockpos.setPos(x, 90, z);
+								
 								
 								//generate specific blocks instead of stone if a specific biome since these biomes should not have stone at all
-                            	biome = world.getBiome(new BlockPos(x, 90, z));
-                            	if(fillerMap.containsKey(biome)) {
-                                	fillerBlock = fillerMap.get(biome);
-                            	}
-                            	else {
+                            	biome = biomeArrayForChunk[x+(z*16)];
+                            	
+                            	fillerBlock = fillerMap.get(biome);
+                            	if(fillerBlock == null) {
                             		fillerBlock = STONE;
                             	}
-                            	
+
                             	
                                 if (d15 > 0.0D)
                                 {
@@ -415,24 +435,24 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
                             		//if we are in this biome, generate snow blocks instead of water for sea level
                             		if(biome == BiomeInit.ICE_MOUNTAIN)
                                 	{
-                            			blockstate = ConfigUA.lavaOcean ? Blocks.LAVA.getDefaultState() : SNOW;
+                            			blockstate = ConfigUA.lavaOcean ? LAVA : SNOW;
                                 	}
                             		//if we are in nether, generate water, then a layer of magma blocks, and then lava the rest of the way
                             		else if(biome == BiomeInit.NETHER)
                                 	{
                             			if(currentY <= ConfigUA.seaLevel - 16 && currentY > 10) {
-                            				blockstate = Blocks.LAVA.getDefaultState();
+                            				blockstate = LAVA;
                             			}
                             			else if(currentY == ConfigUA.seaLevel - 15 && currentY > 10) {
-                            				blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
+                            				blockstate = MAGMA;
                             			}
                             			else {
-                            				blockstate = ConfigUA.lavaOcean ? Blocks.LAVA.getDefaultState() : WATER;
+                            				blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
                             			}
                                 	}
                             		//normal water generation
                             		else {
-                            			blockstate = ConfigUA.lavaOcean ? Blocks.LAVA.getDefaultState() : WATER;
+                            			blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
                             		}
                                 } else {
 									blockstate = AIR;

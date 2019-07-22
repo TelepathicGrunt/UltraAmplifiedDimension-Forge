@@ -1,14 +1,15 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
-
-import java.util.Collection;
+package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.util.registry.Registry;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public class GenLayerBiomeUA implements IC0Transformer 
 {
@@ -21,6 +22,8 @@ public class GenLayerBiomeUA implements IC0Transformer
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     private boolean noOcean = false;
+    
+    private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
     
     
     public GenLayerBiomeUA()
@@ -258,28 +261,28 @@ public class GenLayerBiomeUA implements IC0Transformer
           switch(value) {
           case 1:
              if (i > 0) {
-                return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
+                return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
              }
 
-             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);
           case 2:
              if (i > 0) {
-                return  Registry.BIOME.getId(getWeightedSpecialBiomeEntry(jungleReplacedBiomes, context).biome);
+                return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(jungleReplacedBiomes, context).biome);
              }
 
-             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM, context).biome);
           case 3:
              if (i > 0) {
-                return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(megaTaigaReplacedBiomes, context).biome);
+                return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(megaTaigaReplacedBiomes, context).biome);
              }
 
-             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
           case 4:
-             return Registry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
           default:
         	  
         	  if(noOcean) {
-          		return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+          		return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
           	  }
         	  
         	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean
@@ -290,7 +293,7 @@ public class GenLayerBiomeUA implements IC0Transformer
     	  if(noOcean) {
 
     		   
-       		return Registry.BIOME.getId(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
+       		return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(oceanReplacedBiomes, context).biome);
        	  }
     	   
     	 //return 0 which will later be replaced by our oceans in GenLayerMixedOcean

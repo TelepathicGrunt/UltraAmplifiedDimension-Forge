@@ -1,21 +1,24 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.minecraft.util.registry.Registry;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset1Transformer;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset1Transformer {
    INSTANCE;
 /*
  * This class generates M variants and Hills variants of biomes if they exist for that biome
  */
-   
+
+    private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
 
 
    public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z) {
@@ -25,10 +28,10 @@ public enum GenLayerHillsAndAmplifiedUA implements IAreaTransformer2, IDimOffset
       
       int remainder = (biomeId2 - 2) % 29;
       if (!BiomeGenHelper.isShallowOcean(biomeId1) && biomeId2 >= 2 && remainder != 0 && remainder <= ConfigUA.mutatedBiomeSpawnrate) {
-         Biome biome = Registry.BIOME.getByValue(biomeId1);
+         Biome biome = BiomeRegistry.getValue(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
-            return biome2 == null ? biomeId1 : Registry.BIOME.getId(biome2);
+            return biome2 == null ? biomeId1 : BiomeRegistry.getID(biome2);
          }
       }
       

@@ -5,11 +5,13 @@ import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.DynamicOps;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public class BlockConfig implements IFeatureConfig {
    public final Block block;
+   private static ForgeRegistry<Block> BlockRegistry = ((ForgeRegistry<Block>)ForgeRegistries.BLOCKS);
 
    public BlockConfig(Block blockIn) {
       this.block = blockIn;
@@ -17,12 +19,12 @@ public class BlockConfig implements IFeatureConfig {
 
 	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
-		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("block"), ops.createInt(Registry.BLOCK.getId(block)))));
+		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("block"), ops.createInt(BlockRegistry.getID(block)))));
 	}
 	
 
    public static <T> BlockConfig deserialize(Dynamic<T> p_222853_0_) {
-      Block block = Registry.BLOCK.getByValue(p_222853_0_.get("block").asInt(0));
+      Block block = BlockRegistry.getValue(p_222853_0_.get("block").asInt(0));
       return new BlockConfig(block);
    }
 }

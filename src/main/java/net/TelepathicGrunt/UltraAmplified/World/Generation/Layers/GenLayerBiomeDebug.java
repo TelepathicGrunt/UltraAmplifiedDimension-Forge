@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.util.registry.Registry;
