@@ -28,6 +28,8 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 	private final float[] field_202536_i = new float[1024];
     protected static final BlockState STONE = Blocks.STONE.getDefaultState();
     protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
+    protected static final BlockState WATER = Blocks.WATER.getDefaultState();
+    protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
     
     private static final Map<BlockState, BlockState> fillerMap = createMap();
 	
@@ -152,7 +154,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                                   flag1 = true;
                                }
                                
-                               if(iblockstate1.getBlock() == Blocks.WATER ||iblockstate1.getBlock() == Blocks.LAVA) {
+                               if(iblockstate1 == WATER ||iblockstate1 == LAVA) {
                             	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);

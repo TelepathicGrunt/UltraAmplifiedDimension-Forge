@@ -20,6 +20,7 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WitchHutUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -69,7 +70,7 @@ public class FeatureUA
 	   public static Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal(BlockBlobConfig::deserialize);
 	   public static Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny(BlockBlobConfig::deserialize);
 
-	   public static Feature<LakesConfig> SLIME_LAKE = new SlimeLakes(LakesConfig::deserialize);
+	   public static Feature<LakesConfig> SLIME_AND_ICE_LAKE = new SlimeAndIceLakes(LakesConfig::deserialize);
 	   public static Feature<LakesConfig> SHALLOW_LAKE = new WideShallowLakes(LakesConfig::deserialize);
 	   public static Feature<ContainWaterConfig> CONTAIN_WATER = new ContainWaterForOceans(ContainWaterConfig::deserialize);
 	   public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
@@ -85,6 +86,7 @@ public class FeatureUA
 	   public static Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrassUA(SeaGrassConfig::deserialize);
 	   public static Feature<NoFeatureConfig> KELP_UA = new KelpUA(NoFeatureConfig::deserialize);
 	   public static Feature<CountConfig> SEA_PICKLE_UA = new SeaPickleUA(CountConfig::deserialize);
+	   public static Feature<NoFeatureConfig> JUNGLE_BUSH_UA = new JungleShrubUA(NoFeatureConfig::deserialize, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
 
 	   public static AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(NoFeatureConfig::deserialize);
 	   public static HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTreeUA(NoFeatureConfig::deserialize, false, false);
@@ -140,7 +142,7 @@ public class FeatureUA
 		   LARGE_BOULDER = registerFeature(LARGE_BOULDER, "boulder_giant");
 		   MEDIUM_BOULDER = registerFeature(MEDIUM_BOULDER, "boulder_normal");
 		   SMALL_BOULDER = registerFeature(SMALL_BOULDER, "boulder_tiny");
-		   SLIME_LAKE = registerFeature(SLIME_LAKE, "slime_lakes");
+		   SLIME_AND_ICE_LAKE = registerFeature(SLIME_AND_ICE_LAKE, "slime_lakes");
 		   SHALLOW_LAKE = registerFeature(SHALLOW_LAKE, "wide_shallow_lakes");
 		   CONTAIN_WATER = registerFeature(CONTAIN_WATER, "contain_water_for_oceans");
 		   ICE_PATCH_SANDY = registerFeature(ICE_PATCH_SANDY, "ice_patch");

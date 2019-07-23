@@ -38,9 +38,9 @@ public class IceMountainsBiomeUA extends BiomeUA {
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 100)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 850)));
 		this.addStructureFeaturesUA();
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_LAKE, new LakesConfig(Blocks.PACKED_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(10, 30, 0, 250)));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_LAKE, new LakesConfig(Blocks.PACKED_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(8, 17, 0, 100)));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_LAKE, new LakesConfig(Blocks.BLUE_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(1, 10, 0, 40)));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_AND_ICE_LAKE, new LakesConfig(Blocks.PACKED_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(10, 30, 0, 250)));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_AND_ICE_LAKE, new LakesConfig(Blocks.PACKED_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(8, 17, 0, 100)));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_AND_ICE_LAKE, new LakesConfig(Blocks.BLUE_ICE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(1, 10, 0, 40)));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(FeatureUA.SNOW_DUNGEONS, IFeatureConfig.NO_FEATURE_CONFIG, DUNGEON_PLACEMENT, new DungeonRoomConfig(ConfigUA.dungeonSpawnrate)));
 		DefaultBiomeFeatures.addMushrooms(this);

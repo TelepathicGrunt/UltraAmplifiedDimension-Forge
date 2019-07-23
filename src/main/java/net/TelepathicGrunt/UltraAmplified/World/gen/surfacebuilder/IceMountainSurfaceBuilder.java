@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -19,7 +20,9 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 	public IceMountainSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_) {
 	      super(p_i51310_1_);
 	}
-	
+
+	   private static final BlockState STONE = Blocks.STONE.getDefaultState();
+	   private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	   private static final BlockState ICE = Blocks.ICE.getDefaultState();
 	   private static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 	
@@ -30,39 +33,49 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 	      int i = -1;
 	      int j = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
-	      int k = x & 15;
-	      int l = z & 15;
+	      int xpos = x & 15;
+	      int zpos = z & 15;
 	
-	      for(int i1 = startHeight; i1 >= 0; --i1) {
-	         blockpos$mutableblockpos.setPos(k, i1, l);
+	      for(int ypos = 255; ypos >= 0; --ypos) {
+	         blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
 	         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
-	         if (iblockstate2.getMaterial() == Material.AIR) {
-	            i = -1;
-	         } else if (iblockstate2.getBlock() == ICE.getBlock()) {
-	            if (i == -1) {
-	               if (j <= 0) {
-	                  iblockstate = Blocks.AIR.getDefaultState();
-	                  iblockstate1 = defaultBlock;
-	               } else if (i1 >= seaLevel - 4 && i1 <= seaLevel + 1) {
-	                  iblockstate = SNOW_BLOCK;
-	                  iblockstate1 = ICE;
-	               }
-	
-	               
-	               i = j;
-	               if (i1 >= seaLevel - 1) {
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
-	               } else if (i1 < seaLevel - 7 - j) {
-	                  iblockstate = Blocks.AIR.getDefaultState();
-	                  iblockstate1 = defaultBlock;
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, ICE, false);
-	               } else {
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
-	               }
-	            } else if (i > 0) {
-	               --i;
-	               chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
-	            }
+
+	         if (iblockstate2.getBlock() == null || iblockstate2.getMaterial() == Material.AIR) {
+	        	 i = -1;
+	         }
+	         else if(iblockstate2.getMaterial() == Material.WATER) {
+
+	        	 if(ypos < ConfigUA.seaLevel) {
+	        		 chunkIn.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean ? LAVA : SNOW_BLOCK, false);
+	        	 }
+	        	 
+	        	 i = -1;
+	    	 }else {
+		    	if(iblockstate2 == STONE) {
+		            if (i == -1) {
+		               if (j <= 0) {
+		                  iblockstate = Blocks.AIR.getDefaultState();
+		                  iblockstate1 = ICE;
+		               } else if (ypos >= seaLevel - 4 && ypos <= seaLevel + 1) {
+		                  iblockstate = SNOW_BLOCK;
+		                  iblockstate1 = ICE;
+		               }
+		
+		               
+		               i = j;
+		               if (ypos >= seaLevel - 1) {
+		                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+		               } else {
+		                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+		               }
+		            } else if (i > 0) {
+		               --i;
+		               chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+		            }
+	                else {
+	              	  chunkIn.setBlockState(blockpos$mutableblockpos, ICE, false);
+	                }
+		    	}
 	         }
 	      }
 

@@ -1,8 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import it.unimi.dsi.fastutil.longs.LongIterator;
@@ -10,7 +7,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
@@ -42,25 +38,11 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extends ChunkGenerator<T> {
 
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
-    private static final BlockState SNOW = Blocks.SNOW_BLOCK.getDefaultState();
     private static final BlockState WATER = Blocks.WATER.getDefaultState();
     private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
-    private static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
     private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
-	private static final Map<Biome, BlockState> fillerMap = createMap();
  	
- 	private static Map<Biome, BlockState> createMap() 
- 	{
-         Map<Biome, BlockState> result = new HashMap<Biome, BlockState>();
-         
-         result.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState()); 
-         result.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState()); 
-         result.put(BiomeInit.END, Blocks.END_STONE.getDefaultState()); 
-         
-         return Collections.unmodifiableMap(result);
-     }
-
 	
 	
 	private static final float[] field_222561_h = Util.make(new float[13824], (p_222557_0_) -> {
@@ -278,7 +260,6 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		int coordinateX = chunkX << 4;
 		int coordinateZ = chunkZ << 4;
 		BlockState fillerBlock;
-    	Biome biome;
 		
 		
 		for (Structure<?> structure : Feature.field_214488_aQ) {
@@ -328,18 +309,6 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		ObjectListIterator<AbstractVillagePiece> objectlistiterator = objectlist.iterator();
 		ObjectListIterator<JigsawJunction> objectlistiterator1 = objectlist1.iterator();
 		
-		Biome[] biomeArrayForChunk = new Biome[256];
-		
-
-		ChunkSection chunksection = chunkprimer.func_217332_a(15);
-		chunksection.lock();
-		for(int x = 0; x < 16; x++) {
-			for(int z = 0; z < 16; z++) {
-				biomeArrayForChunk[x+(z*16)] = world.getBiome(biomeblockpos$mutableblockpos.setPos(coordinateX, 256, coordinateZ));
-			}
-		}
-		chunksection.unlock();
-		
 
 		for (int k5 = 0; k5 < this.noiseSizeX; ++k5) {
 			for (int l5 = 0; l5 < this.noiseSizeZ + 1; ++l5) {
@@ -347,7 +316,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 			}
 
 			for (int i6 = 0; i6 < this.noiseSizeZ; ++i6) {
-				chunksection = chunkprimer.func_217332_a(15);
+				ChunkSection chunksection = chunkprimer.func_217332_a(15);
 				chunksection.lock();
 
 				for (int j6 = this.noiseSizeY - 1; j6 >= 0; --j6) {
@@ -416,14 +385,8 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 								biomeblockpos$mutableblockpos.setPos(x, 90, z);
 								
 								
-								//generate specific blocks instead of stone if a specific biome since these biomes should not have stone at all
-                            	biome = biomeArrayForChunk[x+(z*16)];
                             	
-                            	fillerBlock = fillerMap.get(biome);
-                            	if(fillerBlock == null) {
-                            		fillerBlock = STONE;
-                            	}
-
+                            	fillerBlock = STONE;
                             	
                                 if (d15 > 0.0D)
                                 {
@@ -432,28 +395,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
                                 }
                             	else if (currentY < ConfigUA.seaLevel)
                                 {
-                            		//if we are in this biome, generate snow blocks instead of water for sea level
-                            		if(biome == BiomeInit.ICE_MOUNTAIN)
-                                	{
-                            			blockstate = ConfigUA.lavaOcean ? LAVA : SNOW;
-                                	}
-                            		//if we are in nether, generate water, then a layer of magma blocks, and then lava the rest of the way
-                            		else if(biome == BiomeInit.NETHER)
-                                	{
-                            			if(currentY <= ConfigUA.seaLevel - 16 && currentY > 10) {
-                            				blockstate = LAVA;
-                            			}
-                            			else if(currentY == ConfigUA.seaLevel - 15 && currentY > 10) {
-                            				blockstate = MAGMA;
-                            			}
-                            			else {
-                            				blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
-                            			}
-                                	}
-                            		//normal water generation
-                            		else {
-                            			blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
-                            		}
+                            		blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
                                 } else {
 									blockstate = AIR;
 								}

@@ -15,12 +15,12 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.LakesConfig;
 
-public class SlimeLakes extends Feature<LakesConfig> {
-	   public SlimeLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
+public class SlimeAndIceLakes extends Feature<LakesConfig> {
+	   public SlimeAndIceLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
-	private static final BlockState field_205188_a = Blocks.CAVE_AIR.getDefaultState();
+	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState(); 
 
 	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
 	     
@@ -73,7 +73,7 @@ public class SlimeLakes extends Feature<LakesConfig> {
             for(int z = 0; z < 16; ++z) {
                for(int y = 0; y < 8; ++y) {
                   if (aboolean[(x * 16 + z) * 8 + y]) {
-                     worldIn.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? field_205188_a : configBlock.state, 2);
+                     worldIn.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.state, 2);
                   }
                }
             }
@@ -86,7 +86,7 @@ public class SlimeLakes extends Feature<LakesConfig> {
                  
                  Material blockMaterial = worldIn.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
                  if (flag1 && (y < 4 || random.nextInt(2) != 0) && blockMaterial.isSolid() && blockMaterial != Material.LEAVES) {
-                    worldIn.setBlockState(pos.add(x-8, y, z-8), Blocks.SLIME_BLOCK.getDefaultState(), 2);
+                    worldIn.setBlockState(pos.add(x-8, y, z-8), configBlock.state, 2);
                  }
               }
            }

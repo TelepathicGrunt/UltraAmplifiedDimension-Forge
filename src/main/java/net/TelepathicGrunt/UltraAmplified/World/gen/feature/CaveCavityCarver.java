@@ -208,7 +208,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                                   flag1 = true;
                                }
                                
-                               if(iblockstate1.getBlock() == Blocks.WATER) {
+                               if(iblockstate1 == WATER || (y >= 11 && iblockstate1 == LAVA)) {
                         		   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);

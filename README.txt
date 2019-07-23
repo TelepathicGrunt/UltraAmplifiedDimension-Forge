@@ -16,10 +16,13 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
     
      Major Changes:
 ·Mod updated from 1.13.2 to work on 1.14.3 now!
+·Generating chunk is now much faster due to some optimization done behind the scenes with this mod.
 
      Config:
 
      Biomes:
+·Adjusted grass density in Jungle biomes so the grond isn't 100% covered in grass.
+·Fixed Jungle Bushes in Jungle biome to generate under ledges now.
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.

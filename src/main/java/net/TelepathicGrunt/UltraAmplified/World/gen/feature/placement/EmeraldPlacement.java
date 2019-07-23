@@ -22,7 +22,7 @@ public class EmeraldPlacement extends Placement<CountRangeConfig> {
 public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
 	     return IntStream.range(0, (int) ((20 + random.nextInt(35))*((double)(placementConfig.count)/100))).mapToObj((p_215051_3_) -> {
 	         int x = random.nextInt(16);
-	         int y = random.nextInt(placementConfig.topOffset - placementConfig.maximum) + placementConfig.bottomOffset;
+	         int y = random.nextInt(placementConfig.maximum - placementConfig.topOffset) + placementConfig.bottomOffset;
 	         int z = random.nextInt(16);
 	         return pos.add(x, y, z);
 	      });
