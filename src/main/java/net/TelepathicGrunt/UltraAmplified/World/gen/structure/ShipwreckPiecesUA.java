@@ -27,7 +27,8 @@ public class ShipwreckPiecesUA{
 	   private static final BlockPos STRUCTURE_OFFSET = new BlockPos(4, 0, 15);
 	   private static final ResourceLocation[] BEACHED_SHIPS = new ResourceLocation[]{new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"), new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"), new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded")};
 	   private static final ResourceLocation[] NOT_BEACHED_SHIPS = new ResourceLocation[]{new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/upsidedown_full"), new ResourceLocation("shipwreck/upsidedown_fronthalf"), new ResourceLocation("shipwreck/upsidedown_backhalf"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"), new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"), new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/upsidedown_full_degraded"), new ResourceLocation("shipwreck/upsidedown_fronthalf_degraded"), new ResourceLocation("shipwreck/upsidedown_backhalf_degraded"), new ResourceLocation("shipwreck/sideways_full_degraded"), new ResourceLocation("shipwreck/sideways_fronthalf_degraded"), new ResourceLocation("shipwreck/sideways_backhalf_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded")};
-
+	   private static int heightOffset = 0;
+	   
 	   public static void beginGeneration(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> piecesList, Random random, ShipwreckConfig config) {
 	      ResourceLocation resourcelocation = config.isBeached ? BEACHED_SHIPS[random.nextInt(BEACHED_SHIPS.length)] : NOT_BEACHED_SHIPS[random.nextInt(NOT_BEACHED_SHIPS.length)];
 	      piecesList.add(new ShipwreckPiecesUA.Piece(templateManager, resourcelocation, pos, rotation, config.isBeached));
@@ -99,6 +100,41 @@ public class ShipwreckPiecesUA{
 	       * the end, it adds Fences...
 	       */
 	      public boolean addComponentParts(IWorld worldIn, Random randomIn, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
+	    	  
+	    	  //applies a height offset that the rest of the shipwreck will use
+	    	  if(heightOffset == 0) {
+	    		 int xOffset = 8;
+    	         int zOffset = 8;
+    	         if (rotation == Rotation.CLOCKWISE_90) {
+    	            zOffset = 16;
+    	         } else if (rotation == Rotation.CLOCKWISE_180) {
+    	            xOffset = 0;
+    	            zOffset = 16;
+    	         } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+    	            xOffset = 0;
+    	            zOffset = 16;
+    	         }
+    	         
+    	         
+    	         int randHeight = randomIn.nextInt(130)+90;
+    	    	 BlockPos blockpos = new BlockPos(templatePosition.getX() + xOffset, 0, templatePosition.getZ() + zOffset);
+    	         
+
+    	         //finds surface on water
+    	         while(randHeight > 65 && worldIn.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
+    	        	 randHeight--;
+    	         }
+    	         
+    	         //finds bottom of water body
+    	         while(randHeight > 65 && !worldIn.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
+    	        	 randHeight--;
+    	         }
+    	     
+    	         
+    	         heightOffset = randHeight-2;
+	    	  }
+     	      templatePosition = new BlockPos(templatePosition.getX(), heightOffset, templatePosition.getZ());
+
 	         return super.addComponentParts(worldIn, randomIn, structureBoundingBoxIn, p_74875_4_);
 	      }
 	   }

@@ -21,8 +21,8 @@ public class LakePlacementUA extends Placement<CountRangeAndTypeConfig> {
 
 	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeAndTypeConfig lakeConfig, BlockPos pos) {
 
-		int x = random.nextInt(16);
-		int z = random.nextInt(16);
+		int x = random.nextInt(16)-8;
+		int z = random.nextInt(16)-8;
 		
 		
 		switch (lakeConfig.type) {

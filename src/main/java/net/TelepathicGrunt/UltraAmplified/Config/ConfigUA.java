@@ -61,7 +61,7 @@ public class ConfigUA {
     public static boolean strongholdGeneration = true;
     public static int monumentRarity = 16;
     public static boolean monumentGeneration = true;
-    public static int netherFortressSpawnrate = 22;
+    public static int netherFortressSpawnrate = 14;
     public static boolean netherFortressAboveground = true;
     public static boolean netherFortressUnderground = true;
     public static int endCitySpawnrate = 18;
@@ -426,7 +426,7 @@ public class ConfigUA {
             		netherFortressSpawnrate = builder
             		.comment("How rare are Nether Fortresses." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
             		.translation("ultraamplified.config.structure.netherfortressspawnrate")
-            		.defineInRange("netherFortressSpawnrate", 22, 1, 100);
+            		.defineInRange("netherFortressSpawnrate", 14, 1, 100);
 
             		netherFortressAboveground = builder
             		.comment("Can Nether Fortresses spawn aboveground in the Nether biome (between y = 85 and 130).")

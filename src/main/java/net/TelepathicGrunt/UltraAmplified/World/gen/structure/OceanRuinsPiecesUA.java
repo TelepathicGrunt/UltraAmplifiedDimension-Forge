@@ -206,7 +206,7 @@ public class OceanRuinsPiecesUA {
          
          if(randomIn.nextInt(3)==0) {
         	 //a third of the ruins will generate at the bottom of the world (y = 53)
-        	 finalHeight = 52;
+        	 finalHeight = 64;
          }else {
         	 
              //The following code will check a chunk for the height that has the most land surface exposed to the sky and generate the ruins at that height
@@ -238,7 +238,7 @@ public class OceanRuinsPiecesUA {
              
              //finds the height that has the most land surface
              int count = 0;
-             for(int index = 255; index > 50; index--) {
+             for(int index = 255; index > 64; index--) {
             	 if(heightRanges[index] > count) {
             		 count = heightRanges[index];
             		 finalHeight = index;

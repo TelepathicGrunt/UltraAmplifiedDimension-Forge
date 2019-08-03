@@ -66,6 +66,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	                    {
 	                        if (y >= 0 && y < 256)
 	                        {
+	                            blockpos$mutableblockpos.setPos(x, y, z);
 	                            if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos))
 	                            {
 	                                if (isWater(worldIn, blockpos$mutableblockpos))

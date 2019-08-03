@@ -153,7 +153,7 @@ public class GenLayerBiomeUA implements IC0Transformer
 		    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
 
         if(ConfigUA.badlands) {
-		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS, 10));
+		    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS_PLATEAU, 10));
         }
         else if(ConfigUA.erodedBadlands) {
         	//turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
@@ -261,7 +261,11 @@ public class GenLayerBiomeUA implements IC0Transformer
           switch(value) {
           case 1:
              if (i > 0) {
-                return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
+            	Biome mesaReplacementBiome = getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome;
+            	if(mesaReplacementBiome == BiomeInit.BADLANDS_PLATEAU && context.random(3) == 0) {
+            		mesaReplacementBiome = BiomeInit.WOODED_BADLANDS_PLATEAU;
+            	}
+                return BiomeRegistry.getID(mesaReplacementBiome);
              }
 
              return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);

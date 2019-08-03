@@ -1,7 +1,12 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
 @SuppressWarnings("deprecation")
@@ -57,6 +62,24 @@ public enum BiomeGenHelper {
    public static final int VANILLA_OCEAN = Registry.BIOME.getId(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = Registry.BIOME.getId(Biomes.DEEP_OCEAN);
 	
+   private static final Biome[] OCEAN_VALUES = new Biome[] { 
+		   BiomeInit.WARM_OCEAN,
+		   BiomeInit.LUKEWARM_OCEAN,
+		   BiomeInit.OCEAN,
+		   BiomeInit.COLD_OCEAN,
+		   BiomeInit.FROZEN_OCEAN,
+		   BiomeInit.DEEP_WARM_OCEAN,
+		   BiomeInit.DEEP_LUKEWARM_OCEAN,
+		   BiomeInit.DEEP_OCEAN,
+		   BiomeInit.DEEP_COLD_OCEAN,
+		   BiomeInit.DEEP_FROZEN_OCEAN
+		   };
+   private static final Set<Biome> OCEAN_LIST = new HashSet<Biome>(Arrays.asList(OCEAN_VALUES)); 
+   
+   public static boolean isOcean(Biome biomeIn) {
+	   return OCEAN_LIST.contains(biomeIn);
+   }
+   
    public static boolean isOcean(int biomeIn) {
       return biomeIn == VANILLA_OCEAN || biomeIn == VANILLA_DEEP_OCEAN || biomeIn == WARM_OCEAN || biomeIn == LUKEWARM_OCEAN || biomeIn == OCEAN || biomeIn == COLD_OCEAN || biomeIn == FROZEN_OCEAN || biomeIn == DEEP_WARM_OCEAN || biomeIn == DEEP_LUKEWARM_OCEAN || biomeIn == DEEP_OCEAN || biomeIn == DEEP_COLD_OCEAN || biomeIn == DEEP_FROZEN_OCEAN;
    }

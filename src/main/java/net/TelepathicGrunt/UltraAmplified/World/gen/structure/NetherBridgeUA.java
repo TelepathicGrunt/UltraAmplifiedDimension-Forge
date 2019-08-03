@@ -25,23 +25,20 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class NetherBridgeUA extends Structure<NetherBridgeConfigUA> 
 {
-  public NetherBridgeUA(Function<Dynamic<?>, ? extends NetherBridgeConfigUA> p_i51427_1_) {
+	private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3), new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5), new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
+
+	public NetherBridgeUA(Function<Dynamic<?>, ? extends NetherBridgeConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
-
-private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3), new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5), new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
 
    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
 	   if(ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground) {
 		  int i = chunkPosX >> 4;
 	      int j = chunkPosZ >> 4;
 	      rand.setSeed((long)(i ^ j << 4) ^ chunkGen.getSeed());
-	      rand.nextInt();
-	      if (rand.nextInt(3) != 0) {
+	      if (chunkPosX != (i << 4) + 4 + rand.nextInt(ConfigUA.netherFortressSpawnrate)) {
 	         return false;
-	      } else if (chunkPosX != (i << 4) + 4 + rand.nextInt(8)) {
-	         return false;
-	      } else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(8)) {
+	      } else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(ConfigUA.netherFortressSpawnrate)) {
 	         return false;
 	      } else {
 	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
@@ -83,7 +80,20 @@ private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.
       public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
          NetherBridgeConfigUA fortressconfig = (NetherBridgeConfigUA)generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
          this.genAboveSeaLevel = fortressconfig.surfaceAllow;
-         NetherBridgePiecesUA.Start fortresspieces$start = new NetherBridgePiecesUA.Start(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+         boolean stoneVariant = false;
+         
+         //gens aboveground 50% of time if underground is allowed and 100% of time when underground is not allowed
+         //Otherwise, it'll always generate underground. 
+         //This will always be allowed aboveground or underground when reaching here as we already checked if
+         //this structure was disabled in hasStartAt
+         if(genAboveSeaLevel && (this.rand.nextBoolean() || !ConfigUA.netherFortressUnderground) && ConfigUA.netherFortressAboveground) {
+        	 stoneVariant = false;
+         }
+         else if(ConfigUA.netherFortressUnderground) {
+        	 stoneVariant = true;
+         }
+         
+         NetherBridgePiecesUA.Start fortresspieces$start = new NetherBridgePiecesUA.Start(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, stoneVariant);
          this.components.add(fortresspieces$start);
          
          
@@ -100,12 +110,12 @@ private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.
          
          this.recalculateStructureSize();
          
-         //gens aboveground 50% of time if underground is allowed and 100% of time when underground is not allowed
-         if(genAboveSeaLevel && (this.rand.nextBoolean() || !ConfigUA.netherFortressUnderground) && ConfigUA.netherFortressAboveground) {
+         
+         if(!stoneVariant) {
              this.func_214626_a(this.rand, 85, 130);
              UltraAmplified.Logger.log(Level.DEBUG, "Aboveground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
-         else if(ConfigUA.netherFortressUnderground) {
+         else{
              this.func_214626_a(this.rand, 15, 30);
              UltraAmplified.Logger.log(Level.DEBUG, "Underground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }

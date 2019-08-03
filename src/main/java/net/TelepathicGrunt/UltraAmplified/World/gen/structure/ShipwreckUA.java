@@ -16,8 +16,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.UpgradeData;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -82,49 +80,19 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
    
    public static class Start extends StructureStart {
-	   public Start(Structure<?> p_i50460_1_, int p_i50460_2_, int p_i50460_3_, Biome p_i50460_4_, MutableBoundingBox p_i50460_5_, int p_i50460_6_, long p_i50460_7_) {
-	         super(p_i50460_1_, p_i50460_2_, p_i50460_3_, p_i50460_4_, p_i50460_5_, p_i50460_6_, p_i50460_7_);
-	      }
+	  public Start(Structure<?> p_i50460_1_, int p_i50460_2_, int p_i50460_3_, Biome p_i50460_4_, MutableBoundingBox p_i50460_5_, int p_i50460_6_, long p_i50460_7_) {
+         super(p_i50460_1_, p_i50460_2_, p_i50460_3_, p_i50460_4_, p_i50460_5_, p_i50460_6_, p_i50460_7_);
+      }
 
       public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
          Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
          
-         int xOffset = 8;
-         int zOffset = 8;
-         if (rotation == Rotation.CLOCKWISE_90) {
-            zOffset = 16;
-         } else if (rotation == Rotation.CLOCKWISE_180) {
-            xOffset = 0;
-            zOffset = 16;
-         } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
-            xOffset = 0;
-            zOffset = 16;
-         }
-         
-         
-         
-         int randHeight = this.rand.nextInt(130)+90;
-    	 BlockPos blockpos = new BlockPos(chunkX * 16 + xOffset, 0, chunkZ * 16+zOffset);
-         
-         ChunkPrimer chunkprimer = new ChunkPrimer(new ChunkPos(blockpos.getX()/16, blockpos.getZ()/16), UpgradeData.EMPTY);
-         
-         //finds surface on water
-         while(randHeight > 50 && chunkprimer.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
-        	 randHeight--;
-         }
-         
-         //finds bottom of water body
-         while(randHeight > 50 && !chunkprimer.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
-        	 randHeight--;
-         }
-     
-    	 //without offset
-    	 BlockPos blockpos2 = new BlockPos(chunkX * 16, randHeight-2, chunkZ * 16);
+    	 BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
     	 
     	 //Our shipwreck can generate all kinds of variants regardless of what biome it is in
     	 ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(this.rand.nextBoolean() ? true : false);
     	 
-         ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos2, rotation, this.components, this.rand, newShipwreckConfig);
+         ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos, rotation, this.components, this.rand, newShipwreckConfig);
          this.recalculateStructureSize();
          
          UltraAmplified.Logger.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.bounds.minY+" "+blockpos.getZ());

@@ -100,7 +100,7 @@ public class EndCityUA extends Structure<NoFeatureConfig>
          int j1 = generatorIn.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
          int k1 = generatorIn.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
          int l1 = generatorIn.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-         return Math.min(Math.min(Math.min(i1, j1), Math.min(k1, l1)), 114);
+         return Math.min(Math.min(Math.min(i1, j1), Math.min(k1, l1)), 106);
       }
      
      public static class Start extends StructureStart {

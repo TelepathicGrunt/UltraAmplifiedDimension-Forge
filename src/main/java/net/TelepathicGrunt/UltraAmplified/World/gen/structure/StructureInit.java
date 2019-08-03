@@ -18,7 +18,7 @@ public class StructureInit {
 	public static final IStructurePieceType MSSTAIRSUA = register(MineshaftPiecesUA.Stairs::new, "MSStairsUA");
 	public static final IStructurePieceType ORPUA = register(OceanRuinsPiecesUA.Piece::new, "ORPUA");
 	public static final IStructurePieceType SHIPWRECKUA = register(ShipwreckPiecesUA.Piece::new, "ShipwreckUA");
-	public static final IStructurePieceType TESHUA = register(SwampHutPiece::new, "TeSHUA");
+	public static final IStructurePieceType TESHUA = register(WitchHutPiecesUA::new, "TeSHUA");
 	public static final IStructurePieceType NEBCRUA = register(NetherBridgePiecesUA.Crossing3::new, "NeBCrUA");
 	public static final IStructurePieceType NEBEFUA = register(NetherBridgePiecesUA.End::new, "NeBEFUA");
 	public static final IStructurePieceType NEBSUA = register(NetherBridgePiecesUA.Straight::new, "NeBSUA");

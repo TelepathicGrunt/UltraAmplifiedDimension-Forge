@@ -1,5 +1,7 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
+import java.util.Locale;
+
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
@@ -21,6 +23,7 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WitchHutUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -163,22 +166,36 @@ public class FeatureUA
 		   MEGA_PINE_TREE_2_UA = (HugeTreesFeature<NoFeatureConfig>) registerFeature(MEGA_PINE_TREE_2_UA, "mega_pine_2_tree");
 		   DARK_FOREST_M_TREE = (AbstractTreeFeature<NoFeatureConfig>) registerFeature(DARK_FOREST_M_TREE, "dark_oak_m_tree");
 		   TAIGA_M_TREE = (AbstractTreeFeature<NoFeatureConfig>) registerFeature(TAIGA_M_TREE, "taiga_tree_mutated");
-		   MINESHAFT_UA = (Structure<MineshaftConfigUA>) registerFeature(MINESHAFT_UA, "mineshaft_ua");
-		   WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) registerFeature(WOODLAND_MANSION_UA, "woodland_mansion_ua");
-		   JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerFeature(JUNGLE_TEMPLE_UA, "jungle_temple_ua");
-		   DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) registerFeature(DESERT_TEMPLE_UA, "desert_pyramid_ua");
-		   IGLOO_UA = (Structure<NoFeatureConfig>) registerFeature(IGLOO_UA, "igloo_ua");
-		   SHIPWRECK_UA = (Structure<ShipwreckConfig>) registerFeature(SHIPWRECK_UA, "shipwreck_ua");
-		   WITCH_HUT_UA = (WitchHutUA) registerFeature(WITCH_HUT_UA, "swamp_hut_ua");
-		   STRONGHOLD_UA = (Structure<NoFeatureConfig>) registerFeature(STRONGHOLD_UA, "stronghold_ua");
-		   OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) registerFeature(OCEAN_MONUMENT_UA, "ocean_monument_ua");
-		   OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) registerFeature(OCEAN_RUIN_UA, "ocean_ruin_ua");
-		   FORTRESS_UA = (Structure<NetherBridgeConfigUA>) registerFeature(FORTRESS_UA, "nether_bridge_ua");
-		   END_CITY_UA = (Structure<NoFeatureConfig>) registerFeature(END_CITY_UA, "end_city_ua");
-		   VILLAGE_UA = (Structure<VillageUAConfig>) registerFeature(VILLAGE_UA, "village_ua");
+		   MINESHAFT_UA = (Structure<MineshaftConfigUA>) registerStructure(MINESHAFT_UA, "mineshaft_ua");
+		   WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) registerStructure(WOODLAND_MANSION_UA, "woodland_mansion_ua");
+		   JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(JUNGLE_TEMPLE_UA, "jungle_temple_ua");
+		   DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(DESERT_TEMPLE_UA, "desert_pyramid_ua");
+		   IGLOO_UA = (Structure<NoFeatureConfig>) registerStructure(IGLOO_UA, "igloo_ua");
+		   SHIPWRECK_UA = (Structure<ShipwreckConfig>) registerStructure(SHIPWRECK_UA, "shipwreck_ua");
+		   WITCH_HUT_UA = (WitchHutUA) registerStructure(WITCH_HUT_UA, "swamp_hut_ua");
+		   STRONGHOLD_UA = (Structure<NoFeatureConfig>) registerStructure(STRONGHOLD_UA, "stronghold_ua");
+		   OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) registerStructure(OCEAN_MONUMENT_UA, "ocean_monument_ua");
+		   OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) registerStructure(OCEAN_RUIN_UA, "ocean_ruin_ua");
+		   FORTRESS_UA = (Structure<NetherBridgeConfigUA>) registerStructure(FORTRESS_UA, "nether_bridge_ua");
+		   END_CITY_UA = (Structure<NoFeatureConfig>) registerStructure(END_CITY_UA, "end_city_ua");
+		   VILLAGE_UA = (Structure<VillageUAConfig>) registerStructure(VILLAGE_UA, "village_ua");
 		
-		
-		
+		   
+		   //add structures to the BiMap in Feature so Minecraft can generate our structures
+		   Feature.STRUCTURES.put("Mineshaft_UA".toLowerCase(Locale.ROOT), MINESHAFT_UA);
+		   Feature.STRUCTURES.put("Woodland_Mansion_UA".toLowerCase(Locale.ROOT), WOODLAND_MANSION_UA);
+		   Feature.STRUCTURES.put("Jungle_Temple_UA".toLowerCase(Locale.ROOT), JUNGLE_TEMPLE_UA);
+		   Feature.STRUCTURES.put("Desert_Temple_UA".toLowerCase(Locale.ROOT), DESERT_TEMPLE_UA);
+		   Feature.STRUCTURES.put("Igloo_UA".toLowerCase(Locale.ROOT), IGLOO_UA);
+		   Feature.STRUCTURES.put("Shipwreck_UA".toLowerCase(Locale.ROOT), SHIPWRECK_UA);
+		   Feature.STRUCTURES.put("Witch_Hut_UA".toLowerCase(Locale.ROOT), WITCH_HUT_UA);
+		   Feature.STRUCTURES.put("Stronghold_UA".toLowerCase(Locale.ROOT), STRONGHOLD_UA);
+		   Feature.STRUCTURES.put("Ocean_Monument_UA".toLowerCase(Locale.ROOT), OCEAN_MONUMENT_UA);
+		   Feature.STRUCTURES.put("Ocean_Ruin_UA".toLowerCase(Locale.ROOT), OCEAN_RUIN_UA);
+		   Feature.STRUCTURES.put("Fortress_UA".toLowerCase(Locale.ROOT), FORTRESS_UA);
+		   Feature.STRUCTURES.put("End_City_UA".toLowerCase(Locale.ROOT), END_CITY_UA);
+		   //Feature.STRUCTURES.put("Village_UA".toLowerCase(Locale.ROOT), VILLAGE_UA);
+		   
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -193,6 +210,11 @@ public class FeatureUA
 
 		return feature;
 	}
+	
+
+   private static Structure<?> registerStructure(Structure<?> p_215141_1_, String key) {
+      return Registry.register(Registry.STRUCTURE_FEATURE, key.toLowerCase(Locale.ROOT), p_215141_1_);
+   }
 
 	private static IForgeRegistry<Feature<?>> registry;
 }

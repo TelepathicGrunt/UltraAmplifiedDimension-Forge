@@ -45,9 +45,9 @@ public class ForestBiomeUA extends BiomeUA {
 
 		this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double) ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.NORMAL));
 		this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));// this.addCarver(GenerationStage.Carving.AIR,
-																					// Biome.createCarver(CAVE_CAVITY_CARVER, new
-																					// ProbabilityConfig((float)(Config.caveCavitySpawnrate)/1000)));
+		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
+
+		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig((float) (ConfigUA.caveCavitySpawnrate) / 1000)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 100)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 850)));
 		this.addStructureFeaturesUA();

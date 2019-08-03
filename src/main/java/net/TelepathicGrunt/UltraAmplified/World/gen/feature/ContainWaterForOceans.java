@@ -6,6 +6,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,7 +23,8 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
 		super(configFactoryIn);
 	}
 
-	private final static BlockState ICE = Blocks.ICE.getDefaultState();
+	  private final static BlockState ICE = Blocks.ICE.getDefaultState();
+	  
 	  private final static BlockState[] DEAD_CORAL_ARRAY = { 
 			  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
 			  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
@@ -30,7 +32,8 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
 			  Blocks.DEAD_FIRE_CORAL_BLOCK.getDefaultState(),
 			  Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState()
 			};
-	
+	  
+
 	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
 	     
 		 //set y to 0
@@ -41,21 +44,36 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
        	 BlockState blockAbove;
          boolean useCoralTop = configBlock.topBlock == DEAD_CORAL_ARRAY[0];
          boolean useCoralBottom = configBlock.topBlock == DEAD_CORAL_ARRAY[0];
-	     
-         //needs to take up all 4 chunks so biome borders betwen ocean and non-oceans are cleaner
-    	 for(int x = -8; x < 24; ++x) {
-             for(int z = -8; z < 24; ++z) {
-                 
+         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	     int extraRange = 0;
+         
+         //needs to take up all 4 chunks when non-ocean is present so biome borders between ocean and non-oceans are cleaner
+         for(int xx = 0; xx < 16; xx+=15) {
+        	 for(int zz = 0; zz < 16; zz+=15) {
+        		 blockpos$mutableblockpos.setPos(pos.getX() + xx, 0, pos.getZ()+zz);
+                 if(!BiomeGenHelper.isOcean(worldIn.getBiome(blockpos$mutableblockpos))) {
+                	 extraRange = 6;
+                	 xx = 17;
+                	 zz = 17;
+                 }
+             }
+         }
+    	 for(int x = 0-extraRange; x < 16+extraRange; ++x) {
+             for(int z = 0-extraRange; z < 16+extraRange; ++z) {
             	 for(int y = 256; y > ConfigUA.seaLevel-10; y--) {
-
-                  	currentblock = worldIn.getBlockState(pos.add(x, y, z));
+            		 
+            		blockpos$mutableblockpos.setPos(pos.getX() + x, 0, pos.getZ() + z);
+                  	currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
                   	
                   	//move down until we hit a non-air block
             		 while(currentblock.getMaterial() == Material.AIR && y > 0) 
             		 {
                  		y--;
-                 		currentblock = worldIn.getBlockState(pos.add(x, y, z));
+                 		currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
                  	 }
+            		 
+            		 //y value is now fully set for rest of code
+             		 blockpos$mutableblockpos.setPos(pos.getX() + x, y, pos.getZ() + z);
             		 
                  	
             		 //checks to see if we are at a water block
@@ -67,7 +85,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
          	            for(int x2 = -1; x2 < 2; x2++) {
          	            	for(int z2 = -1; z2 < 2; z2++) {
          	                	
-         	            		material = worldIn.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
+         	            		material = worldIn.getBlockState(blockpos$mutableblockpos.west(x2).north(z2)).getMaterial();
          	            		
          	            		if(!material.isSolid() &&
          	                        material != Material.WATER ) 
@@ -82,7 +100,7 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
     	     	        //Adjacent blocks must be solid    
     	                 for (Direction face : Direction.Plane.HORIZONTAL) {
     	
-    	                 	currentblock = worldIn.getBlockState(pos.add(x, y, z).offset(face));
+    	                 	currentblock = worldIn.getBlockState(blockpos$mutableblockpos.offset(face));
     	                 	
     	                 	//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
     	                 	if(currentblock != ICE && !currentblock.isSolid() && currentblock.getFluidState().isEmpty()) 
@@ -95,13 +113,13 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
      	               {
          	        	   if(y < 256) {
          	        		   
-         	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
+         	        		   blockAbove = worldIn.getBlockState(blockpos$mutableblockpos.up());
          	        		   
             	        	   
             	        	   if(blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
             	        		   
             	        		   //if above is solid or water, place second config block
-                	        	   worldIn.setBlockState(pos.add(x, y, z), configBlock.middleBlock, 2);
+                	        	   worldIn.setBlockState(blockpos$mutableblockpos, configBlock.middleBlock, 2);
             	        	   }
             	        	   
             	        	   
@@ -109,9 +127,9 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
             	        	   else{
             	        		   //if config top block is dead coral, randomly chooses any dead coral block to place
             	        		   if(useCoralTop) {
-            	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+            	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
             	        		   }else {
-            	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock, 2);
+            	        			   worldIn.setBlockState(blockpos$mutableblockpos, configBlock.topBlock, 2);
             	        		   }
             	        	   }
          	        	   }
@@ -119,23 +137,23 @@ public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
         	        	   //place first config block if too high
          	        	   //if config top block is dead coral, randomly chooses any dead coral block to place
          	        	   else if(useCoralTop) {
-    	        			   worldIn.setBlockState(pos.add(x, y, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+    	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
     	        		   }else {
-    	        			   worldIn.setBlockState(pos.add(x, y, z), configBlock.topBlock, 2);
+    	        			   worldIn.setBlockState(blockpos$mutableblockpos, configBlock.topBlock, 2);
     	        		   }
      	               }
          	           else {
          	        	   //water block is contained 
          	        	   
-     	        		   blockAbove = worldIn.getBlockState(pos.add(x, y+1, z));
+     	        		   blockAbove = worldIn.getBlockState(blockpos$mutableblockpos.up());
       	        		   
 	      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
      	        		   if(blockAbove == configBlock.middleBlock) {
      	        			   if(useCoralBottom) {
-         	        			  worldIn.setBlockState(pos.add(x, y+1, z), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+         	        			  worldIn.setBlockState(blockpos$mutableblockpos.up(), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
          	        		   }
          	        		   else{
-    	      	        		   worldIn.setBlockState(pos.add(x, y+1, z), configBlock.bottomBlock, 2);
+    	      	        		   worldIn.setBlockState(blockpos$mutableblockpos.up(), configBlock.bottomBlock, 2);
     	      	        	   }
 	      	        	   }
          	           }
