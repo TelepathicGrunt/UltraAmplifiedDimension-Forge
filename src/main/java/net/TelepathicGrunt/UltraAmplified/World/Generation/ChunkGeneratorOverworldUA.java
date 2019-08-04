@@ -3,6 +3,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import java.util.List;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Spawner.CatSpawnerUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
@@ -17,7 +18,6 @@ import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.spawner.CatSpawner;
 import net.minecraft.world.spawner.PatrolSpawner;
 import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
@@ -35,8 +35,7 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	   private final OctavesNoiseGenerator depthNoise;
 	   private final PhantomSpawner phantomSpawner = new PhantomSpawner();
 	   private final PatrolSpawner patrolSpawner = new PatrolSpawner();
-	   //make our own cat spawner
-	   private final CatSpawner catSpawner = new CatSpawner();
+	   private final CatSpawnerUA catSpawner = new CatSpawnerUA();
 
 	   public ChunkGeneratorOverworldUA(IWorld worldIn, BiomeProvider provider, OverworldGenSettings settingsIn) {
 	      super(worldIn, provider, 4, 8, 256, settingsIn);

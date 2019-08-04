@@ -194,7 +194,7 @@ public class FeatureUA
 		   Feature.STRUCTURES.put("Ocean_Ruin_UA".toLowerCase(Locale.ROOT), OCEAN_RUIN_UA);
 		   Feature.STRUCTURES.put("Fortress_UA".toLowerCase(Locale.ROOT), FORTRESS_UA);
 		   Feature.STRUCTURES.put("End_City_UA".toLowerCase(Locale.ROOT), END_CITY_UA);
-		   //Feature.STRUCTURES.put("Village_UA".toLowerCase(Locale.ROOT), VILLAGE_UA);
+		   Feature.STRUCTURES.put("Village_UA".toLowerCase(Locale.ROOT), VILLAGE_UA);
 		   
 	}
 

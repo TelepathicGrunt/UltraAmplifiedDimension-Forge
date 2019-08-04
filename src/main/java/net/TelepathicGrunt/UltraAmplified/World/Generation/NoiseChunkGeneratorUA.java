@@ -72,8 +72,8 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		super(p_i49931_1_, p_i49931_2_, p_i49931_6_);
 		this.verticalNoiseGranularity = verticalNoiseGranularityIn;
 		this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;
-		this.defaultBlock = p_i49931_6_.getDefaultBlock();
-		this.defaultFluid = p_i49931_6_.getDefaultFluid();
+		this.defaultBlock = STONE;
+		this.defaultFluid = ConfigUA.lavaOcean ? LAVA : WATER;
 		this.noiseSizeX = 16 / this.horizontalNoiseGranularity;
 		this.noiseSizeY = p_i49931_5_ / this.verticalNoiseGranularity;
 		this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
@@ -84,7 +84,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 4));
 	}
 
-	private double func_222552_a(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_8_, double p_222552_10_) {
+	private double setupPerlinNoiseGenerators(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_8_, double p_222552_10_) {
 		double d0 = 0.0D;
 		double d1 = 0.0D;
 		double d2 = 0.0D;
@@ -126,7 +126,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		double d3 = this.func_222553_h();
 
 		for (int y = 0; y < this.func_222550_i(); ++y) {
-			double d4 = this.func_222552_a(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_8_, p_222546_10_);
+			double d4 = this.setupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_8_, p_222546_10_);
 			d4 = d4 - this.func_222545_a(d0, d1, y);
 			if ((double) y > d2) {
 				d4 = MathHelper.clampedLerp(d4, (double) p_222546_13_, ((double) y - d2) / (double) p_222546_12_);
@@ -159,7 +159,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		double d0 = (double) k / (double) this.horizontalNoiseGranularity;
 		double d1 = (double) l / (double) this.horizontalNoiseGranularity;
 		double[][] adouble = new double[][] { this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1) };
-		int seaLevel = this.getSeaLevel();
+		int seaLevel = ConfigUA.seaLevel;
 
 		for (int j1 = this.noiseSizeY - 1; j1 >= 0; --j1) {
 			double d2 = adouble[0][j1];
@@ -216,7 +216,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 				int l1 = l + j1;
 				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
 				double d1 = this.surfaceDepthNoise.func_215460_a((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D, (double) i1 * 0.0625D);
-				abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.getSettings().getDefaultBlock(), this.getSettings().getDefaultFluid(), this.getSeaLevel(), this.world.getSeed());
+				abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, ConfigUA.seaLevel, this.world.getSeed());
 			}
 		}
 
@@ -259,8 +259,6 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		int chunkZ = chunkpos.z;
 		int coordinateX = chunkX << 4;
 		int coordinateZ = chunkZ << 4;
-		BlockState fillerBlock;
-		
 		
 		for (Structure<?> structure : Feature.field_214488_aQ) {
 			String s = structure.getStructureName();
@@ -304,7 +302,6 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		ChunkPrimer chunkprimer = (ChunkPrimer) p_222537_2_;
 		Heightmap heightmap = chunkprimer.func_217303_b(Heightmap.Type.OCEAN_FLOOR_WG);
 		Heightmap heightmap1 = chunkprimer.func_217303_b(Heightmap.Type.WORLD_SURFACE_WG);
-		BlockPos.MutableBlockPos biomeblockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		ObjectListIterator<AbstractVillagePiece> objectlistiterator = objectlist.iterator();
 		ObjectListIterator<JigsawJunction> objectlistiterator1 = objectlist1.iterator();
@@ -382,20 +379,16 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 								objectlistiterator1.back(objectlist1.size());
 								BlockState blockstate;
-								biomeblockpos$mutableblockpos.setPos(x, 90, z);
 								
 								
-                            	
-                            	fillerBlock = STONE;
-                            	
                                 if (d15 > 0.0D)
                                 {
                                 	//place the biome's solid block
-                                	blockstate = fillerBlock;
+                                	blockstate = this.defaultBlock;
                                 }
                             	else if (currentY < ConfigUA.seaLevel)
                                 {
-                            		blockstate = ConfigUA.lavaOcean ? LAVA : WATER;
+                            		blockstate = this.defaultFluid;
                                 } else {
 									blockstate = AIR;
 								}

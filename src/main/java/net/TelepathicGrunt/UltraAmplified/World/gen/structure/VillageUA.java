@@ -139,6 +139,7 @@ public class VillageUA  extends Structure<VillageUAConfig> {
         
          
 
+         this.recalculateStructureSize();
          UltraAmplified.Logger.log(Level.DEBUG,villageconfig.type+" Village | "+chunkX*16+", "+chunkZ*16);
       }
    }

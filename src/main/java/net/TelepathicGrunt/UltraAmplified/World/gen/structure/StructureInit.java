@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.SwampHutPiece;
 
 public class StructureInit {
 
@@ -62,14 +61,14 @@ public class StructureInit {
 	public static final IStructurePieceType VISTUA = register(VillagePiecesUA.Church::new, "ViSTUA");
 	public static final IStructurePieceType VIDFUA = register(VillagePiecesUA.Field1::new, "ViDFUA");
 	public static final IStructurePieceType VIFUA = register(VillagePiecesUA.Field2::new, "ViFUA");
-	public static final IStructurePieceType VIPHUA = register(VillagePiecesUA.Hall::new, "ViPHUA");
-	public static final IStructurePieceType VIBHUA = register(VillagePiecesUA.House1::new, "ViBHUA");
-	public static final IStructurePieceType VISUA = register(VillagePiecesUA.House2::new, "ViSUA");
-	public static final IStructurePieceType VITRHUA = register(VillagePiecesUA.House3::new, "ViTRHUA");
-	public static final IStructurePieceType VISHUA = register(VillagePiecesUA.House4Garden::new, "ViSHUA");
+	public static final IStructurePieceType VIPHUA = register(VillagePiecesUA.WorkHouse::new, "ViPHUA");
+	public static final IStructurePieceType VIBHUA = register(VillagePiecesUA.LibraryHouse::new, "ViBHUA");
+	public static final IStructurePieceType VISUA = register(VillagePiecesUA.Blacksmith::new, "ViSUA");
+	public static final IStructurePieceType VITRHUA = register(VillagePiecesUA.LargeHouse::new, "ViTRHUA");
+	public static final IStructurePieceType VISHUA = register(VillagePiecesUA.FlatTopTinyHouse::new, "ViSHUA");
 	public static final IStructurePieceType VISRUA = register(VillagePiecesUA.Path::new, "ViSRUA");
 	public static final IStructurePieceType VIWUA = register(VillagePiecesUA.Well::new, "ViWUA");
-	public static final IStructurePieceType VISMHUA = register(VillagePiecesUA.WoodHut::new, "ViSmHUA");
+	public static final IStructurePieceType VISMHUA = register(VillagePiecesUA.TinyHouse::new, "ViSmHUA");
 	public static final IStructurePieceType VILUA = register(VillagePiecesUA.Torch::new, "ViLUA");
 	public static final IStructurePieceType VISTARTUA = register(VillagePiecesUA.Start::new, "ViStartUA");
 	

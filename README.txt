@@ -23,6 +23,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Adjusted grass density in Jungle biomes so the grond isn't 100% covered in grass.
 ·Fixed Jungle Bushes in Jungle biome to generate under ledges now.
 ·M forms of Redwood Taiga biomes now generates slightly less trees to be less dense.
+·Fixed bug preventing Mesa Plateau variant biomes from spawning.
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
