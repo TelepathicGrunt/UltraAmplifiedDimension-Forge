@@ -9,12 +9,12 @@ import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 
-public class GenLayerOceanUA implements IAreaTransformer0 {
+public class AddOceansLayerUA implements IAreaTransformer0 {
 	
 		private static List<Integer> oceanList;
 		private static float listSize; 
 	
-		public GenLayerOceanUA(){
+		public AddOceansLayerUA(){
 			oceanList = new ArrayList<Integer>();
 			
 			if(ConfigUA.warmOcean) 

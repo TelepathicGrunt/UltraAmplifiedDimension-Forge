@@ -18,18 +18,32 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Mod updated from 1.13.2 to work on 1.14.3 now!
 
      Config:
+·Added config option for Pillager Outposts.
+·Lava ocean config option now applies to Ocean biomes.
+·Fixed bug that prevented M variant biomes from spawning when setting config value to max m variant spawnrate.
+·Added config option for Bamboo Jungle generation.
+·Patched bug that prevented most Wooded Badlands Plateau biome from spawning when config is set to only Badlands biomes for generation.
 
      Biomes:
+·Added Bamboo Jungle biome to generate in this mod along with some modification. Uses real Bamboo unlike the Sugar Cane that the 1.12 version of this mod used!
 ·Adjusted grass density in Jungle biomes so the grond isn't 100% covered in grass.
 ·Fixed Jungle Bushes in Jungle biome to generate under ledges now.
 ·M forms of Redwood Taiga biomes now generates slightly less trees to be less dense.
 ·Fixed bug preventing Mesa Plateau variant biomes from spawning.
+·Patched bug that made Deep variants of oceans super rare when config biome options is set to oceans only. 
+·Added Coarse Dirt, Clay, and Gravel patches to spawn at bottom of water in all biomes (except oceans, Nether, and End biomes. Desert biomes gets Sandstone, Sand, and Clay patches). These patches can be easily found between sea level and Y = 40 in all biomes or in the shallow lakes in Swamp, Desert lakes, Modified Jungle, Modified Jungle Hills, and Bamboo Jungle Hills biomes.
+·Warm and Lukewarm Ocean biomes now has a sandy bottom below sea level and neutral Ocean biomes has Gravel bottom below sea level. 
+·Badlands biome now generates Red Sand at all heights above sea level to better distinguish it from Badlands Plateau biome.
+·Modified Badlands Plateau biome and Modified Wooded Badlands Plateau biome generates Deadbush, lavafalls, and Gold Ore more often with the wooden biome generating more trees as well.
+·Nether biome now has a thin Savanna border and the End biome has a thin Plains biome for better biome transition.
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
 ·End Cities lowered by 8 blocks so they do not get cut off by height limit.
 ·Nether Fortresses that spawns underground in all biomes now generates as a stone variant. Aboveground Nether Fortresses in the Nether remains the same.
-  
+·Added Pillager Outposts to Plains, Snowy Taiga, Taiga, Dark Forest, Tundra, Savanna, Shattered Savanna, and Desert biomes.
+·Made Marked Treasure Chests five times more common due to difficulty finding the Red Sand 'X' below sea level.
+
        
     (V.5.0 Changes) (1.13.2 Minecraft)
        

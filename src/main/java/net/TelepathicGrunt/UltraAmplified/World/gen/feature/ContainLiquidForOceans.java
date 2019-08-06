@@ -18,8 +18,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 
-public class ContainWaterForOceans extends Feature<ContainWaterConfig> {
-	  public ContainWaterForOceans(Function<Dynamic<?>, ? extends ContainWaterConfig> configFactoryIn) {
+public class ContainLiquidForOceans extends Feature<ContainWaterConfig> {
+	  public ContainLiquidForOceans(Function<Dynamic<?>, ? extends ContainWaterConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 

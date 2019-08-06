@@ -83,6 +83,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 		else {
 			LockableLootTileEntity.setLootTable(worldIn, random, blockpos.down(), LootTables.CHESTS_END_CITY_TREASURE);
 		}
+        //UltraAmplified.Logger.log(Level.DEBUG, "Marked Treasure Chest "+" | "+blockpos.getX()+" "+blockpos.getZ());
 
 		return true;
 	}

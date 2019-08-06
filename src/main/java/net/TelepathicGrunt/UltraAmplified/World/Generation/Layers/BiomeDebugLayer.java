@@ -7,13 +7,13 @@ import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
 
-public class GenLayerBiomeDebug implements IC0Transformer 
+public class BiomeDebugLayer implements IC0Transformer 
 {
 
    @SuppressWarnings("deprecation")
-   private static final int TESTING_BIOME = Registry.BIOME.getId(BiomeInit.TALL_BIRCH_FOREST_HILLS);
+   private static final int TESTING_BIOME = Registry.BIOME.getId(BiomeInit.DESERT_LAKES);
    
-   public GenLayerBiomeDebug(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
+   public BiomeDebugLayer(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
    }
 
    public int apply(INoiseRandom context, int value) {

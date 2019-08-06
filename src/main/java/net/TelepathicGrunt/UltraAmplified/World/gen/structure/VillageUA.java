@@ -117,7 +117,7 @@ public class VillageUA  extends Structure<VillageUAConfig> {
              this.recalculateStructureSize();
          }else {
         	 //generates our own kind of village
-        	 List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(this.rand, villageconfig.terrainType);
+        	 List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA.getStructureVillageWeightedPieceList(this.rand, this.rand.nextInt(3));
              VillagePiecesUA.Start villagepiecesua$start = new VillagePiecesUA.Start(0, this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, list, villageconfig, biomeIn);
              this.components.add(villagepiecesua$start);
              villagepiecesua$start.buildComponent(villagepiecesua$start, this.components, this.rand);

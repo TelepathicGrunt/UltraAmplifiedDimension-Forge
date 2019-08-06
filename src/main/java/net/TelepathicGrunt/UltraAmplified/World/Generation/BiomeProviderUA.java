@@ -13,13 +13,14 @@ import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerAddMushroomBiomeUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerBiomeEdgeUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerBiomeUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerHillsAndAmplifiedUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerMixOceanUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerOceanUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.GenLayerSunflowerPlains;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddMushroomBiomeLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddOceansLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddSunflowerPlainsLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeDebugLayer;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeEdgeLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.HillsAndAmplifiedLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.MixOceanLayerUA;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -108,7 +109,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
       iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(50L), iareafactory);
       iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(70L), iareafactory);
       iareafactory = RemoveTooMuchOceanLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      IAreaFactory<T> iareafactory1 = new GenLayerOceanUA().apply(contextFactory.apply(2L));
+      IAreaFactory<T> iareafactory1 = new AddOceansLayerUA().apply(contextFactory.apply(2L));
       iareafactory1 = LayerUtil.repeat(2001L, ZoomLayer.NORMAL, iareafactory1, (int)(biomeSize*1.4), contextFactory);
       iareafactory = AddSnowLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
       iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(3L), iareafactory);
@@ -118,7 +119,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
       iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2002L), iareafactory);
       iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2003L), iareafactory);
       iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
-      iareafactory = GenLayerAddMushroomBiomeUA.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
+      iareafactory = AddMushroomBiomeLayerUA.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
       iareafactory = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
       
 
@@ -126,20 +127,20 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
      // lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeDebug(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-      IAreaFactory<T>lvt_8_1_ = (new GenLayerBiomeUA().apply(contextFactory.apply(200L), iareafactory));
+      //IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
+      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), iareafactory));
       
       
       lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
       
       //creates biomes that border incompatible biomes
-      lvt_8_1_ = GenLayerBiomeEdgeUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
       
       IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
       
       //generates the hills and Amplified variants/patches of biomes
-      lvt_8_1_ = GenLayerHillsAndAmplifiedUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-      lvt_8_1_ = GenLayerSunflowerPlains.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
 	  
 
       for(int k = 0; k < biomeSize; ++k) {
@@ -147,7 +148,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
       }
 
       lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      lvt_8_1_ = GenLayerMixOceanUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
+      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
       
       IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
       return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);

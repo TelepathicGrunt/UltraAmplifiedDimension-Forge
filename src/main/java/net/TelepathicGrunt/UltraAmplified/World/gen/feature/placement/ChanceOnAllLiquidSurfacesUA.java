@@ -9,22 +9,18 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
 
-public class ChanceOnAllWaterSurfacesUA extends Placement<PercentageAndFrequencyConfig> {
+public class ChanceOnAllLiquidSurfacesUA extends Placement<PercentageAndFrequencyConfig> {
 	
-	public ChanceOnAllWaterSurfacesUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
+	public ChanceOnAllLiquidSurfacesUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
-	private static final BlockState WATER = Blocks.WATER.getDefaultState();
-	
    public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 	   int lowestHeight = 40;
 
@@ -38,9 +34,9 @@ public class ChanceOnAllWaterSurfacesUA extends Placement<PercentageAndFrequency
 		         int z = random.nextInt(16);
 		         
 
-		         //if height is inside am air block, move down until we reached a water block
+		         //if height is inside am air block, move down until we reached a liquid block
 		         while(height > lowestHeight) {
-		        	 if(worldIn.getBlockState(pos.add(x, height, z)) == WATER) {
+		        	 if(!worldIn.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty()) {
 		        		 break;
 		        	 }
 		        	 

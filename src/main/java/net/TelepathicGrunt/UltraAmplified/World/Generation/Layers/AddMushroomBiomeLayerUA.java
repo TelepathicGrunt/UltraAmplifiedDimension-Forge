@@ -4,7 +4,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IBishopTransformer;
 
-public enum GenLayerAddMushroomBiomeUA implements IBishopTransformer {
+public enum AddMushroomBiomeLayerUA implements IBishopTransformer {
 	   INSTANCE;
 
 	   private static final int MUSHROOM_FIELDS = BiomeGenHelper.MUSHROOM_FIELDS;

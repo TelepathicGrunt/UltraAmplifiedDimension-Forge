@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -22,6 +23,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
 	
    private static final BlockState AIR = Blocks.AIR.getDefaultState();
    private static final BlockState WATER = Blocks.WATER.getDefaultState();
+   private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
    private final static BlockState[] DEAD_CORAL_ARRAY = { 
 			  Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(),
 			  Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), 
@@ -35,7 +37,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
    }
 
    protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel) {
-	  
+	  BlockState liquid = ConfigUA.lavaOcean ? LAVA : WATER;
       int x = xStart & 15;
       int z = zStart & 15;
       BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
@@ -55,11 +57,11 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
          if (currentBlock.getBlock() != null) {
         	 if(currentBlock == defaultBlock) {
      		 		//turns terrain into water to manipulate later
-                     bottom = WATER;
+                     bottom = liquid;
                 	 chunkIn.setBlockState(blockpos$mutableblockpos, bottom, false);
                      currentBlock = bottom;
 	         }
-        	 else if(aboveBlock.getMaterial() == Material.WATER && y < 256){
+        	 else if(!aboveBlock.getFluidState().isEmpty() && y < 256){
         		 
         		 if(above2Block.getMaterial() == Material.AIR) {
          			//sets very bottom of terrain to bottom block
@@ -93,7 +95,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
                 	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);
                      currentBlock = bottom;
                      
-                     if(above2Block.getMaterial() == Material.WATER)
+                     if(!above2Block.getFluidState().isEmpty())
                     	 chunkIn.setBlockState(blockpos$mutableblockpos.up(2), middle, false);
         		 }
         		 
@@ -103,6 +105,33 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
          above3Block = above2Block;
          above2Block = aboveBlock;
          aboveBlock = currentBlock;
+      }
+      
+      //detects if we are a Lukewarm Ocean, Warm Ocean, or ocean plus their deep variants.
+      //Adds sand/gravel bottom towards bottom of terrain gen between 40 - 70
+      if(middleBlock == Blocks.SAND.getDefaultState() || bottomBlock == Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState()) {
+	      blockpos$mutableblockpos.setPos(x, 70, z);
+    	  aboveBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
+    	  above2Block = chunkIn.getBlockState(blockpos$mutableblockpos.up());
+    	  
+    	  for(int y = 69; y >= 40; --y) {
+    	         blockpos$mutableblockpos.setPos(x, y, z);
+    	         currentBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
+    	         
+    	         //detects if above block is solid and has solid block below and liquid block above.
+    	         //if true, set above block to either sand or gravel
+    	         if (currentBlock.getBlock() != null && currentBlock.isSolid()) {
+    	        	 if(!above2Block.getFluidState().isEmpty() && aboveBlock.isSolid()) {
+    	        		 if(middleBlock == Blocks.SAND.getDefaultState() || random.nextFloat() < 0.8F) {
+		        			 chunkIn.setBlockState(blockpos$mutableblockpos.up(), middleBlock, false);
+		        			 aboveBlock = middleBlock;
+    	        		 }
+    	        	 }
+    	         }
+
+    	         above2Block = aboveBlock;
+    	         aboveBlock = currentBlock;
+    	  }
       }
    }
 }

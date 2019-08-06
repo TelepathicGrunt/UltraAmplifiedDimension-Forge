@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsPlateauBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BambooJungleBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BambooJungleHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BirchForestBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ColdOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DarkForestBiomeUA;
@@ -20,6 +22,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.DeepWarmOceanBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.DesertLakesBiomeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.EndBarrenFieldBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.EndHighlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.ErodedBadlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.FlowerForestBiomeUA;
@@ -97,6 +100,8 @@ public class BiomeInit {
 	public static final Biome DESERT_HILLS = new DesertHillsBiomeUA();
 	public static final Biome WOODED_HILLS = new WoodedHillsBiomeUA();
 	public static final Biome TAIGA_HILLS = new TaigaHillsBiomeUA();
+	public static final Biome BAMBOO_JUNGLE = new BambooJungleBiomeUA();
+	public static final Biome BAMBOO_JUNGLE_HILLS = new BambooJungleHillsBiomeUA();
 	public static final Biome JUNGLE = new JungleBiomeUA();
 	public static final Biome JUNGLE_HILLS = new JungleHillsBiomeUA();
 	public static final Biome JUNGLE_EDGE = new JungleEdgeBiomeUA();
@@ -146,6 +151,7 @@ public class BiomeInit {
 	public static final Biome LUKEWARM_OCEAN = new LukewarmOceanBiomeUA();
 	public static final Biome OCEAN = new OceanBiomeUA();
 	public static final Biome WARM_OCEAN = new WarmOceanBiomeUA();
+	public static final Biome BARREN_END_FIELD = new EndBarrenFieldBiomeUA();
 	
 	
 	private static RegistryEvent.Register<Biome> eventIn = null;
@@ -169,6 +175,8 @@ public class BiomeInit {
 		initBiome(DESERT_HILLS, "Desert Hills", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS);
 		initBiome(WOODED_HILLS, "Wooden Hills", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS);
 		initBiome(TAIGA_HILLS, "Taiga Hills", BiomeType.COOL, Type.CONIFEROUS);
+		initBiome(BAMBOO_JUNGLE, "Bamboo Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
+		initBiome(BAMBOO_JUNGLE_HILLS, "Bamboo Jungle Hills", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
 		initBiome(JUNGLE, "Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
 		initBiome(JUNGLE_HILLS, "Jungle Hills", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.HILLS);
 		initBiome(JUNGLE_EDGE, "Jungle Edge", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.RARE);
@@ -185,7 +193,7 @@ public class BiomeInit {
 		initBiome(SAVANNA, "Savanna", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE);
 		initBiome(SAVANNA_PLATEAU, "Savanna Plateau", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
 		initBiome(BADLANDS, "Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
-		initBiome(WOODED_BADLANDS_PLATEAU, "Wooden Badlands Plateau", BiomeType.DESERT, Type.MESA, Type.SANDY, Type.SPARSE);
+		initBiome(WOODED_BADLANDS_PLATEAU, "Wooded Badlands Plateau", BiomeType.DESERT, Type.MESA, Type.SANDY, Type.SPARSE);
 		initBiome(BADLANDS_PLATEAU, "Badlands Plateau", BiomeType.DESERT, Type.MESA, Type.SANDY);
 		initBiome(SUNFLOWER_PLAINS, "Sunflower Plains", BiomeType.WARM, Type.PLAINS, Type.RARE);
 		initBiome(DESERT_LAKES, "Desert Lakes", BiomeType.DESERT, Type.HOT, Type.SANDY, Type.RARE);
@@ -206,7 +214,7 @@ public class BiomeInit {
 		initBiome(SHATTERED_SAVANNA, "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
 		initBiome(SHATTERED_SAVANNA_PLATEAU, "Shattered Savanna Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
 		initBiome(ERODED_BADLANDS, "Eroded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
-		initBiome(MODIFIED_WOODED_BADLANDS_PLATEAU, "Modified Wooden Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
+		initBiome(MODIFIED_WOODED_BADLANDS_PLATEAU, "Modified Wooded Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
 		initBiome(MODIFIED_BADLANDS_PLATEAU, "Modified Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(COLD_OCEAN, "Cold Ocean", BiomeType.COOL, Type.OCEAN);
 		initBiome(DEEP_COLD_OCEAN, "Deep Cold Ocean", BiomeType.COOL, Type.OCEAN, Type.COLD);
@@ -218,6 +226,7 @@ public class BiomeInit {
 		initBiome(LUKEWARM_OCEAN, "Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
 		initBiome(OCEAN, "Ocean", BiomeType.COOL, Type.OCEAN);
 		initBiome(WARM_OCEAN, "Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
+		initBiome(BARREN_END_FIELD, "Barren End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
 		
 		
 		mapMBiomes();
@@ -241,6 +250,8 @@ public class BiomeInit {
 						DESERT_HILLS, 
 						WOODED_HILLS, 
 						TAIGA_HILLS, 
+						BAMBOO_JUNGLE,
+						BAMBOO_JUNGLE_HILLS,
 						JUNGLE, 
 						JUNGLE_HILLS, 
 						JUNGLE_EDGE, 
@@ -289,7 +300,8 @@ public class BiomeInit {
 						DEEP_WARM_OCEAN,
 						FROZEN_OCEAN,
 						LUKEWARM_OCEAN,
-						WARM_OCEAN
+						WARM_OCEAN,
+						BARREN_END_FIELD
 					};
 	}
 	
@@ -345,7 +357,6 @@ public class BiomeInit {
     public static Biome getMutationForBiome(Biome biome)
     {
 		//returns the M variant of the given biome
-		
 		return BASE_TO_MUTATION_MAP.get(biome);
     }
     
@@ -361,6 +372,7 @@ public class BiomeInit {
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(DESERT), BiomeRegistry.getID(DESERT_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(FOREST), BiomeRegistry.getID(WOODED_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(TAIGA), BiomeRegistry.getID(TAIGA_HILLS));
+    	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(BAMBOO_JUNGLE), BiomeRegistry.getID(BAMBOO_JUNGLE_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(JUNGLE), BiomeRegistry.getID(JUNGLE_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(BIRCH_FOREST), BiomeRegistry.getID(BIRCH_FOREST_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SNOWY_TAIGA), BiomeRegistry.getID(SNOWY_TAIGA_HILLS));

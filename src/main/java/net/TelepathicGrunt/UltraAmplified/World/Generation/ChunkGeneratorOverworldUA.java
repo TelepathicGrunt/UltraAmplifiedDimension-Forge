@@ -17,7 +17,6 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.spawner.PatrolSpawner;
 import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
@@ -137,8 +136,8 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	            return FeatureUA.WITCH_HUT_UA.getCreatureSpawnList();
 	         }
 	      } else if (creatureType == EntityClassification.MONSTER) {
-	         if (Feature.PILLAGER_OUTPOST.isPositionInStructure(this.world, pos)) {
-	            return Feature.PILLAGER_OUTPOST.getSpawnList();
+	         if (FeatureUA.PILLAGER_OUTPOST_UA.isPositionInStructure(this.world, pos)) {
+	            return FeatureUA.PILLAGER_OUTPOST_UA.getSpawnList();
 	         }
 
 	         if (FeatureUA.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos)) {

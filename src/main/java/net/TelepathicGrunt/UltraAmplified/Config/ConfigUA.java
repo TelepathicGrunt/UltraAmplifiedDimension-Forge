@@ -66,6 +66,8 @@ public class ConfigUA {
     public static boolean netherFortressUnderground = true;
     public static int endCitySpawnrate = 18;
     public static boolean endCityGeneration = true;
+    public static int pillageOutpostRarity = 20;
+    public static boolean pillageOutpostGeneration = true;
     public static boolean secretSetting = false;
     public static int biomeSize = 3;
     public static int mutatedBiomeSpawnrate = 2;
@@ -86,12 +88,13 @@ public class ConfigUA {
     public static boolean iceMountain = true;
     public static boolean mushroom = true;
     public static boolean stoneBeach = true;
+    public static boolean bambooJungle = true;
     public static boolean jungle = true;
     public static boolean coldBeach = true;
     public static boolean birchForest = true;
     public static boolean darkForest = true;
     public static boolean snowyTaiga = true;
-    public static boolean giantSpruceTaiga = true;
+    public static boolean giantTreeTaiga = true;
     public static boolean savanna = true;
     public static boolean badlands = true;
     public static boolean erodedBadlands = true;
@@ -159,6 +162,8 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue netherFortressUnderground;
 		public final ForgeConfigSpec.IntValue endCitySpawnrate;
 		public final ForgeConfigSpec.BooleanValue endCityGeneration;
+		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
+		public final ForgeConfigSpec.BooleanValue pillageOutpostGeneration;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
 		public final ForgeConfigSpec.IntValue biomeSize;
 		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
@@ -179,12 +184,13 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue iceMountain;
 		public final ForgeConfigSpec.BooleanValue mushroom;
 		public final ForgeConfigSpec.BooleanValue stoneBeach;
+		public final ForgeConfigSpec.BooleanValue bambooJungle;
 		public final ForgeConfigSpec.BooleanValue jungle;
 		public final ForgeConfigSpec.BooleanValue coldBeach;
 		public final ForgeConfigSpec.BooleanValue birchForest;
 		public final ForgeConfigSpec.BooleanValue darkForest;
 		public final ForgeConfigSpec.BooleanValue snowyTaiga;
-		public final ForgeConfigSpec.BooleanValue giantSpruceTaiga;
+		public final ForgeConfigSpec.BooleanValue giantTreeTaiga;
 		public final ForgeConfigSpec.BooleanValue savanna;
 		public final ForgeConfigSpec.BooleanValue badlands;
 		public final ForgeConfigSpec.BooleanValue erodedBadlands;
@@ -448,6 +454,16 @@ public class ConfigUA {
             		.comment("Controls whether End City spawn or not.")
             		.translation("ultraamplified.config.structure.endcitygeneration")
             		.define("endCityGeneration", true);
+            	    
+            	    pillageOutpostRarity = builder
+            		.comment("How rare are Pillager Outposts." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.translation("ultraamplified.config.structure.pillageoutpostrarity")
+            		.defineInRange("pillageOutpostRarity", 20, 1, 100);
+            		
+            	    pillageOutpostGeneration = builder
+            		.comment("Controls whether Pillager Outposts spawn or not.")
+            		.translation("ultraamplified.config.structure.pillageoutpostgeneration")
+            		.define("pillageOutpostGeneration", true);
             
             builder.pop().pop();
 
@@ -479,7 +495,7 @@ public class ConfigUA {
 
 
             		lavaOcean = builder
-            		.comment("Replace the water at sea level with lava instead.")
+            		.comment("Replace the water at sea level with lava instead. DO NOT CHANGE THIS OPTION IN AN ALREADY GENERATED WORLD. IT WILL CRASH DUE TO LAVA OCEAN UPDATING NEXT TO OCEAN WATER!!")
             		.translation("ultraamplified.config.structure.lavaocean")
             		.define("lavaOcean", false);
 
@@ -575,6 +591,12 @@ public class ConfigUA {
             		.define("stoneBeach", true);
 
 
+            		bambooJungle = builder
+            		.comment("Should this biome be allowed to spawn?")
+            		.translation("ultraamplified.config.structure.bamboojungle")
+            		.define("bambooJungle", true);
+
+
             		jungle = builder
             		.comment("Should this biome be allowed to spawn?")
             		.translation("ultraamplified.config.structure.jungle")
@@ -605,10 +627,10 @@ public class ConfigUA {
             		.define("snowyTaiga", true);
 
 
-            		giantSpruceTaiga = builder
+            		giantTreeTaiga = builder
             		.comment("Should this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.giantsprucetaiga")
-            		.define("giantSpruceTaiga", true);
+            		.translation("ultraamplified.config.structure.gianttreetaiga")
+            		.define("giantTreeTaiga", true);
 
 
             		savanna = builder
@@ -789,6 +811,8 @@ public class ConfigUA {
     	netherFortressUnderground = SERVER.netherFortressUnderground.get();
     	endCitySpawnrate = SERVER.endCitySpawnrate.get();
     	endCityGeneration = SERVER.endCityGeneration.get();
+    	pillageOutpostRarity = SERVER.pillageOutpostRarity.get();
+    	pillageOutpostGeneration = SERVER.pillageOutpostGeneration.get();
     	secretSetting = SERVER.secretSetting.get();
     	biomeSize = SERVER.biomeSize.get();
     	mutatedBiomeSpawnrate = SERVER.mutatedBiomeSpawnrate.get();
@@ -809,12 +833,13 @@ public class ConfigUA {
     	iceMountain = SERVER.iceMountain.get();
     	mushroom = SERVER.mushroom.get();
     	stoneBeach = SERVER.stoneBeach.get();
+    	bambooJungle = SERVER.bambooJungle.get();
     	jungle = SERVER.jungle.get();
     	coldBeach = SERVER.coldBeach.get();
     	birchForest = SERVER.birchForest.get();
     	darkForest = SERVER.darkForest.get();
     	snowyTaiga = SERVER.snowyTaiga.get();
-    	giantSpruceTaiga = SERVER.giantSpruceTaiga.get();
+    	giantTreeTaiga = SERVER.giantTreeTaiga.get();
     	savanna = SERVER.savanna.get();
     	badlands = SERVER.badlands.get();
     	erodedBadlands = SERVER.erodedBadlands.get();

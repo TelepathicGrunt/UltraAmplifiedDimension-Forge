@@ -53,10 +53,10 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
          }
          else if(iblockstate2.getMaterial() == Material.WATER) {
 
-        	 if(ypos < ConfigUA.seaLevel && ypos > 10) {
+        	 if(ypos < ConfigUA.seaLevel - 7) {
         		 chunkIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
         	 }
-        	 else if(ypos < ConfigUA.seaLevel - 12 && ypos > 10) {
+        	 else if(ypos == ConfigUA.seaLevel - 7) {
         		 chunkIn.setBlockState(blockpos$mutableblockpos, MAGMA, false);
         	 }
         	 else{

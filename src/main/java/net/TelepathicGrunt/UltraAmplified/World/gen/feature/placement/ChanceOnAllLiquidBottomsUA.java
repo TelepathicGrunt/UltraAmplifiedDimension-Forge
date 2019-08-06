@@ -20,10 +20,10 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
 
-public class ChanceOnAllWaterBottomsUA extends Placement<PercentageAndFrequencyConfig> {
+public class ChanceOnAllLiquidBottomsUA extends Placement<PercentageAndFrequencyConfig> {
 	
 
-	public ChanceOnAllWaterBottomsUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
+	public ChanceOnAllLiquidBottomsUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 

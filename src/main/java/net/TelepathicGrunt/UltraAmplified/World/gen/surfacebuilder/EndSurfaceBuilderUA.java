@@ -25,7 +25,9 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
    private static final BlockState ENDSTONE = Blocks.END_STONE.getDefaultState();
 
    public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-	  int i = seaLevel + 1;
+	  //creates grass surface normally
+	  SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+	  
       int xpos = x & 15;
       int zpos = z & 15;
       int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
@@ -34,7 +36,8 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
       BlockState iblockstate = ENDSTONE;
       BlockState iblockstate1 = ENDSTONE;
 
-      for(int ypos = 255; ypos >= 0; --ypos) {
+      //makes stone below sea level into end stone
+      for(int ypos = seaLevel; ypos >= 0; --ypos) {
          blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
          BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
          
@@ -45,14 +48,14 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
                   if (l <= 0) {
                      iblockstate = CAVE_AIR;
                      iblockstate1 = ENDSTONE;
-                  } else if (ypos >= i - 4) {
+                  } else if (ypos >= seaLevel - 3) {
                      iblockstate = ENDSTONE;
                      iblockstate1 = ENDSTONE;
                      
                   }
                   
                   i1 = l;
-                  if (ypos >= i - 1) {
+                  if (ypos >= seaLevel) {
                      chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
                   } else {
                      chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);

@@ -77,7 +77,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 								acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))
 						)) 
 				{
-					//UltraAmplified.Logger.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
+					UltraAmplified.Logger.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
 		
 					TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 					Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":sunshrine"));

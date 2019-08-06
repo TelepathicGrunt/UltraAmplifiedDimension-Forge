@@ -86,10 +86,10 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
          //Otherwise, it'll always generate underground. 
          //This will always be allowed aboveground or underground when reaching here as we already checked if
          //this structure was disabled in hasStartAt
-         if(genAboveSeaLevel && (this.rand.nextBoolean() || !ConfigUA.netherFortressUnderground) && ConfigUA.netherFortressAboveground) {
+         if(genAboveSeaLevel) {
         	 stoneVariant = false;
          }
-         else if(ConfigUA.netherFortressUnderground) {
+         else{
         	 stoneVariant = true;
          }
          
@@ -111,13 +111,17 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
          this.recalculateStructureSize();
          
          
-         if(!stoneVariant) {
-             this.func_214626_a(this.rand, 85, 130);
-             UltraAmplified.Logger.log(Level.DEBUG, "Aboveground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
+         if(fortressconfig.surfaceAllow) {
+        	 if(rand.nextBoolean()) {
+                 this.func_214626_a(this.rand, 85, 130);
+        	 }else {
+                 this.func_214626_a(this.rand, 15, 30);
+        	 }
+             UltraAmplified.Logger.log(Level.DEBUG, "Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
          else{
              this.func_214626_a(this.rand, 15, 30);
-             UltraAmplified.Logger.log(Level.DEBUG, "Underground Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
+             UltraAmplified.Logger.log(Level.DEBUG, "Stone Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
       }
    }

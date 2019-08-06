@@ -6,7 +6,7 @@ import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
 
-public enum GenLayerMixOceanUA implements IAreaTransformer2, IDimOffset0Transformer {
+public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer {
    INSTANCE;
 
    public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z) {

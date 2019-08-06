@@ -14,7 +14,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CauldronBlock;
-import net.minecraft.block.ChestBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.EndRodBlock;
@@ -402,6 +401,7 @@ public class VillagePiecesUA
 	       * (abstract) Helper method to read subclass data from NBT
 	       */
 	      protected void readAdditional(CompoundNBT tagCompound) {
+		      super.readAdditional(tagCompound);
 	    	  tagCompound.put("cropTypeA", NBTUtil.writeBlockState(cropTypeA));
 	    	  tagCompound.put("cropTypeB", NBTUtil.writeBlockState(cropTypeB));
 	    	  tagCompound.put("cropTypeC", NBTUtil.writeBlockState(cropTypeC));
@@ -515,6 +515,7 @@ public class VillagePiecesUA
 	       * (abstract) Helper method to read subclass data from NBT
 	       */
 	      protected void readAdditional(CompoundNBT tagCompound) {
+			  super.readAdditional(tagCompound);
 	    	  tagCompound.put("cropTypeA", NBTUtil.writeBlockState(cropTypeA));
 	    	  tagCompound.put("cropTypeB", NBTUtil.writeBlockState(cropTypeB));
 	      }
@@ -1438,10 +1439,10 @@ public class VillagePiecesUA
 	      public int villagePiecesSpawned;
 	      public int villagePiecesLimit;
 
-	      public PieceWeightUA(Class<? extends VillagePiecesUA.Village> p_i2098_1_, int p_i2098_2_, int p_i2098_3_) {
-	         this.villagePieceClass = p_i2098_1_;
-	         this.villagePieceWeight = p_i2098_2_;
-	         this.villagePiecesLimit = p_i2098_3_;
+	      public PieceWeightUA(Class<? extends VillagePiecesUA.Village> classIn, int weightIn, int limitIn) {
+	         this.villagePieceClass = classIn;
+	         this.villagePieceWeight = weightIn;
+	         this.villagePiecesLimit = limitIn;
 	      }
 
 	      public boolean canSpawnMoreVillagePiecesOfType(int componentType) {
