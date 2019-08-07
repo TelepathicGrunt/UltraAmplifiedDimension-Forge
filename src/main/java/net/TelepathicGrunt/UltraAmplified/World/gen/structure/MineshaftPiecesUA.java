@@ -12,7 +12,9 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA.Type;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.EndRodBlock;
+import net.minecraft.block.LogBlock;
 import net.minecraft.block.RailBlock;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
@@ -409,7 +411,7 @@ public class MineshaftPiecesUA
         private void placeSupport(IWorld worldIn, MutableBoundingBox boundingBox, int x, int y2, int z, int y, int x2, Random random)
         {
            
-            BlockState iblockstate = this.getPlanksBlock();
+            BlockState iblockstate = this.getArchBlock();
             BlockState iblockstate1 = this.getFenceBlock();
             BlockState iblockstate2 = CAVE_AIR;
             this.fillWithBlocks(worldIn, boundingBox, x, y2, z, x, y - 1, z, iblockstate1, iblockstate2, false);
@@ -429,11 +431,17 @@ public class MineshaftPiecesUA
             }
             else if(this.mineShaftType == Type.HELL) 
             {
-            	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
+            	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z, Blocks.REDSTONE_LAMP.getDefaultState());
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
             }
             else if(this.mineShaftType == Type.OCEAN) 
             {
             	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z, Blocks.SEA_LANTERN.getDefaultState());
+            }
+            else if(this.mineShaftType == Type.ICEY) {
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
+                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
             }
             else {
                 this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
@@ -648,8 +656,55 @@ public class MineshaftPiecesUA
          protected void readAdditional(CompoundNBT tagCompound) {
             tagCompound.putInt("MST", this.mineShaftType.ordinal());
          }
-         
 
+         protected BlockState getArchBlock()
+         {
+             switch (this.mineShaftType)
+             {
+                 case MESA:
+                     return Blocks.DARK_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+                     
+                 case ICEY:
+                     return Blocks.PACKED_ICE.getDefaultState();
+                     
+                 case COLDORBIRCH:
+                     return Blocks.STRIPPED_BIRCH_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+                     
+                 case JUNGLE:
+                     return Blocks.JUNGLE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+                     
+                 case TAIGA:
+                     return Blocks.STRIPPED_SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+                     
+                 case DESERT:
+                     return Blocks.CHISELED_SANDSTONE.getDefaultState();
+                     
+                 case END:
+                     return Blocks.PURPUR_PILLAR.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z);
+                     
+                 case HELL:
+                     return Blocks.NETHER_BRICKS.getDefaultState();
+
+                 case OCEAN:
+                     return Blocks.DARK_PRISMARINE.getDefaultState();
+                     
+                 case STONE:
+                     return Blocks.STONE.getDefaultState();
+                     
+                 case SAVANNA:
+                     return Blocks.ACACIA_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+                     
+                 case SWAMPORDARKFOREST:
+                     return Blocks.DARK_OAK_PLANKS.getDefaultState();
+                     
+                 case NORMAL:
+                 default:
+                     return Blocks.STRIPPED_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+             }
+         }
+
+         //cannot be a rotatable block
+         //The crossing part has a null rotation and will try to force it on the rotatable block which will cause a crash
         protected BlockState getPlanksBlock()
         {
             switch (this.mineShaftType)
@@ -679,7 +734,7 @@ public class MineshaftPiecesUA
                     return Blocks.NETHER_BRICKS.getDefaultState();
 
                 case OCEAN:
-                    return Blocks.DARK_PRISMARINE.getDefaultState();
+                    return Blocks.PRISMARINE_BRICKS.getDefaultState();
                     
                 case STONE:
                     return Blocks.ANDESITE.getDefaultState();
@@ -716,16 +771,16 @@ public class MineshaftPiecesUA
                     return Blocks.SPRUCE_FENCE.getDefaultState();
                     
                 case DESERT:
-                    return Blocks.CHISELED_SANDSTONE.getDefaultState();
+                    return Blocks.SANDSTONE_WALL.getDefaultState();
                     
                 case END:
-                    return Blocks.PURPUR_BLOCK.getDefaultState();
+                    return Blocks.PURPUR_PILLAR.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y);
                     
                 case HELL:
-                    return Blocks.NETHER_BRICKS.getDefaultState();
+                    return Blocks.NETHER_BRICK_WALL.getDefaultState();
 
                 case OCEAN:
-                    return Blocks.PRISMARINE_BRICKS.getDefaultState();
+                    return Blocks.PRISMARINE.getDefaultState();
                     
                 case STONE:
                     return Blocks.COBBLESTONE_WALL.getDefaultState();
@@ -734,7 +789,7 @@ public class MineshaftPiecesUA
                     return Blocks.ACACIA_FENCE.getDefaultState();
                     
                 case SWAMPORDARKFOREST:
-                    return Blocks.DARK_OAK_LOG.getDefaultState();
+                    return Blocks.DARK_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.Y);
                     
                 case NORMAL:
                 default:
@@ -1070,4 +1125,6 @@ public class MineshaftPiecesUA
             }
         }
     }
+    
+    
 }

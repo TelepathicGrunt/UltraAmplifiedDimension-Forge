@@ -7,6 +7,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -30,22 +31,13 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 	            return false;
 	         } else {
 	            int j = 0;
-	            
-	            if (Block.isRock(worldIn.getBlockState(position.west()).getBlock())) {
-	               ++j;
-	            }
 
-	            if (Block.isRock(worldIn.getBlockState(position.east()).getBlock())) {
-	               ++j;
-	            }
-
-	            if (Block.isRock(worldIn.getBlockState(position.north()).getBlock())) {
-	               ++j;
-	            }
-
-	            if (Block.isRock(worldIn.getBlockState(position.south()).getBlock())) {
-	               ++j;
-	            }
+                for (Direction face : Direction.Plane.HORIZONTAL) 
+                {
+    	            if (Block.isRock(worldIn.getBlockState(position.offset(face)).getBlock())) {
+    	               ++j;
+    	            }
+                }
 
 	            if (j == 4) {
 	               worldIn.setBlockState(position, liquid.state.getBlockState(), 2);

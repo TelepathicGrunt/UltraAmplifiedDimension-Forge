@@ -1663,7 +1663,12 @@ public class VillagePiecesUA
 		         }
 	         }
 
-	         return findPopular(heightArray);
+	         int bestHeight = findPopular(heightArray);
+	         
+	         if(bestHeight > 243) {
+	        	 bestHeight = 243;
+	         }
+	         return bestHeight;
 	      }
 	      
 
@@ -1952,7 +1957,7 @@ public class VillagePiecesUA
 		               return Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.UP);
 		            }
 		            
-		            if (block == Blocks.COBBLESTONE) {
+		            if (block == Blocks.COBBLESTONE || block == Blocks.GRASS_PATH) {
 		               return Blocks.PURPUR_BLOCK.getDefaultState();
 		            }
 		            

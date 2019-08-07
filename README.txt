@@ -35,7 +35,9 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Warm and Lukewarm Ocean biomes now has a sandy bottom below sea level and neutral Ocean biomes has Gravel bottom below sea level. 
 ·Badlands biome now generates Red Sand at all heights above sea level to better distinguish it from Badlands Plateau biome.
 ·Modified Badlands Plateau biome and Modified Wooded Badlands Plateau biome generates Deadbush, lavafalls, and Gold Ore more often with the wooden biome generating more trees as well.
-·Nether biome now has a thin Savanna border and the End biome has a thin Plains biome for better biome transition.
+·The End biome has been changed so that terrain above Y = 70 generates Grass Blocks, Dirt, and Stone like most other biomes. Reduced spawnrate of Chorus Plant. Generates patches of Endstone, Endstone Bricks, and Obsidian. Spawns Berry Bushes, small amount of Tallgrass/Ferns, and a hybrid tree with Birch Trunk, Dark Oak Leaves, and a patch of Blue Terracotta at base of trunk.
+·Added Barren End Field biome to make a thin border around the End biome for better biome transition. This biome is slightly less purple than the End biome, has a small amount of patches of Obsidian and Endstone, no trees, and can spawn Berry Bushes.
+·Nether biome now has a thin Savanna border for better biome transition.
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
@@ -43,6 +45,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Nether Fortresses that spawns underground in all biomes now generates as a stone variant. Aboveground Nether Fortresses in the Nether remains the same.
 ·Added Pillager Outposts to Plains, Snowy Taiga, Taiga, Dark Forest, Tundra, Savanna, Shattered Savanna, and Desert biomes.
 ·Made Marked Treasure Chests five times more common due to difficulty finding the Red Sand 'X' below sea level.
+·Mineshaft blocks has been changed for most Mineshaft types to add variety and look better.
+·Water filled caves has been added to all ocean biomes. You may find entrances to these new caves in Ravines, Cave Cavities, or on the ocean floor!
 
        
     (V.5.0 Changes) (1.13.2 Minecraft)

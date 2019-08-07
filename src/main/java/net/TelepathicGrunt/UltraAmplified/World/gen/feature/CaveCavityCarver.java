@@ -21,12 +21,10 @@ import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
-    public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49921_1_, int p_i49921_2_) {
-		super(p_i49921_1_, p_i49921_2_);
-	}
-
-
+	
 	private final float[] field_202536_i = new float[1024];
+    protected long seed;
+    protected OctavesNoiseGenerator noiseGen;
     protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
     protected static final BlockState STONE = Blocks.STONE.getDefaultState();
     protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
@@ -35,35 +33,33 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
     protected static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
     
     private static final Map<BlockState, BlockState> fillerMap = createMap();
-	
 	private static Map<BlockState, BlockState> createMap() 
 	{
         Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
-        
         result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState()); 
         result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState()); 
         result.put(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState()); 
         result.put(Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()); 
         result.put(Blocks.LAVA.getDefaultState(), Blocks.LAVA.getDefaultState()); 
-        
         return Collections.unmodifiableMap(result);
     }
 	
-
-   protected long seed;
-   protected OctavesNoiseGenerator noiseGen;
    
 
-   public void setSeed(long seed) {
-      if (this.noiseGen == null) {
-         this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
-      }
+    public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight) {
+		super(probabilityConfig, maximumHeight);
+	}
+   
+    public void setSeed(long seed) {
+       if (this.noiseGen == null) {
+          this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+       }
 
-      this.seed = seed;
-   }
+       this.seed = seed;
+    }
 
-    public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
-        return p_212246_2_.nextFloat() <= config.probability;
+    public boolean shouldCarve(Random randomIn, int chunkX, int chunkZ, ProbabilityConfig config) {
+        return randomIn.nextFloat() <= config.probability;
      }
 
      public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
@@ -132,7 +128,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
            int xMin = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
            int xMax = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
            int yMin = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 5);
-           int yMax = Math.min(MathHelper.floor(yRange + placementYBound) + 1, 70);
+           int yMax = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
            int zMin = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
            int zMax = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
            if (xMin <= xMax && yMin <= yMax && zMin <= zMax) {
@@ -150,7 +146,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                    int z = smallZ + mainChunkZ * 16;
                    double d3 = ((double)z + 0.5D - zRange) / placementXZBound;
                    if (d2 * d2 + d3 * d3 < 1.0D) {
-                      boolean flag1 = false;
                       int yMaxSum = (int) (yMax - ((1+random.nextFloat())*random.nextFloat()*20));
 
                       if(yMaxSum<yMin) {
@@ -163,7 +158,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                    		fillerBlock = STONE; 
                    	 }
                       
-                   	 for(int y = yMaxSum; y > yMin; --y) {
+                   	 for(int y = yMaxSum; y > yMin; y--) {
                          double d4 = ((double)(y - 1) + 0.5D - yRange) / placementYBound;
                          
                          //sets a trial and error value that widens base of pillar and makes paths through lava that look good
@@ -204,11 +199,11 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                                blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
                                blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
                                iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
-                               if (iblockstate.getBlock() == Blocks.GRASS_BLOCK || iblockstate.getBlock() == Blocks.MYCELIUM) {
-                                  flag1 = true;
-                               }
                                
-                               if(iblockstate1 == WATER || (y >= 11 && iblockstate1 == LAVA)) {
+                               if(!iblockstate.getFluidState().isEmpty()) {
+                        		   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+                               }
+                               else if(y >= 11 && !iblockstate1.getFluidState().isEmpty()) {
                         		   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
@@ -218,10 +213,28 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
                                   if (y < 11) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
                                   } else {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR, false);
-                                     if (flag1 && worldIn.getBlockState(blockpos$mutableblockpos2).getBlock() == Blocks.DIRT) {
-                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), false);
-                                     }
+                                	  
+	                                   boolean bordersFluid = false;
+	               	            	   
+	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
+	               	                	    if(!worldIn.getBlockState(blockpos$mutableblockpos.offset(direction)).getFluidState().isEmpty()) {
+	               	                	    	bordersFluid = true;
+	               	                	    }
+	               	                   }
+	               	                   
+	               	                   if(y != 11 && !worldIn.getBlockState(blockpos$mutableblockpos.down()).getFluidState().isEmpty()) {
+	               	                	   bordersFluid = true;
+	               	                   }
+	               	                   
+	               	                   if(!worldIn.getBlockState(blockpos$mutableblockpos.up()).getFluidState().isEmpty()) {
+	               	                	   bordersFluid = true;
+	               	                   }
+	               	            	   
+	               	                   if(bordersFluid) {
+	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+	               	                   }else {
+	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
+	               	                   }
                                   }
 
                                   flag = true;

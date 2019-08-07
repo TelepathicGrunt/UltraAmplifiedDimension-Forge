@@ -27,6 +27,7 @@ public class ConfigUA {
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
+    public static int oceanCaveSpawnrate = 20;
     public static boolean slimeLakeGen = true;
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
@@ -123,6 +124,7 @@ public class ConfigUA {
         public final ForgeConfigSpec.IntValue dungeonSpawnrate;
         public final ForgeConfigSpec.IntValue ravineSpawnrate;
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
+        public final ForgeConfigSpec.IntValue oceanCaveSpawnrate;
         public final ForgeConfigSpec.BooleanValue slimeLakeGen;
         public final ForgeConfigSpec.BooleanValue waterLakeGen;
         public final ForgeConfigSpec.BooleanValue lavaLakeGen;
@@ -235,7 +237,13 @@ public class ConfigUA {
 	                    		+"0 for no Cave Cavity and 100 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.cavecavityspawnrate")
 	                    .defineInRange("caveCavitySpawnrate", 5, 0, 100);
-	            
+
+	            		oceanCaveSpawnrate = builder
+	                    .comment("How often Underwater Caves will spawn in ocean biomes.\r\n"
+	                    		+"0 for no Underwater Caves and 100 for max spawnrate.")
+	                    .translation("ultraamplified.config.structure.oceancavespawnrate")
+	                    .defineInRange("oceanCaveSpawnrate", 20, 0, 100);
+	            		
 	            		slimeLakeGen = builder
 	                    .comment("Controls whether Slime Lakes spawn or not.\r\n")
 	                    .translation("ultraamplified.config.structure.slimelakegen")
@@ -772,6 +780,7 @@ public class ConfigUA {
     	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
+    	oceanCaveSpawnrate = SERVER.oceanCaveSpawnrate.get();
     	slimeLakeGen = SERVER.slimeLakeGen.get();
     	waterLakeGen = SERVER.waterLakeGen.get();
     	lavaLakeGen = SERVER.lavaLakeGen.get();

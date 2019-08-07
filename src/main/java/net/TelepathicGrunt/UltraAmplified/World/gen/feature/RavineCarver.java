@@ -112,7 +112,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
            int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
            int j = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
            int k = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 9);
-           int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, 70);
+           int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
            int i1 = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
            int j1 = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
            if (i <= j && k <= l && i1 <= j1) {
@@ -130,7 +130,6 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                    int j2 = i2 + mainChunkZ * 16;
                    double d3 = ((double)j2 + 0.5D - zRange) / placementXZBound;
                    if (d2 * d2 + d3 * d3 < 1.0D) {
-                      boolean flag1 = false;
 
                       blockpos$mutableblockpos.setPos(l1, 60, j2);
                       fillerBlock = fillerMap.get(worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop());
@@ -150,11 +149,8 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                                blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
                                blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
                                BlockState iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
-                               if (iblockstate.getBlock() == Blocks.GRASS_BLOCK || iblockstate.getBlock() == Blocks.MYCELIUM) {
-                                  flag1 = true;
-                               }
                                
-                               if(iblockstate1 == WATER ||iblockstate1 == LAVA) {
+                               if(!iblockstate1.getFluidState().isEmpty()) {
                             	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
                             	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
@@ -164,10 +160,23 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                                   if (k2 - 1 < 10) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR, false);
-                                     if (flag1 && worldIn.getBlockState(blockpos$mutableblockpos2).getBlock() == Blocks.DIRT) {
-                                        worldIn.setBlockState(blockpos$mutableblockpos2, worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop(), false);
-                                     }
+	                                   boolean bordersFluid = false;
+	               	            	   
+	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
+	               	                	    if(!worldIn.getBlockState(blockpos$mutableblockpos.offset(direction)).getFluidState().isEmpty()) {
+	               	                	    	bordersFluid = true;
+	               	                	    }
+	               	                   }
+	               	                   
+	               	                   if(!worldIn.getBlockState(blockpos$mutableblockpos.up()).getFluidState().isEmpty()) {
+	               	                	   bordersFluid = true;
+	               	                   }
+	               	            	   
+	               	                   if(bordersFluid) {
+	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+	               	                   }else {
+	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
+	               	                   }
                                   }
 
                                   flag = true;

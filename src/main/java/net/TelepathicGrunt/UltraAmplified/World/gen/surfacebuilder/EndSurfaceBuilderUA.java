@@ -37,7 +37,7 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
       BlockState iblockstate1 = ENDSTONE;
 
       //makes stone below sea level into end stone
-      for(int ypos = seaLevel; ypos >= 0; --ypos) {
+      for(int ypos = seaLevel-2; ypos >= 0; --ypos) {
          blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
          BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
          

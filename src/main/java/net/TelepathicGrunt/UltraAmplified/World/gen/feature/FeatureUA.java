@@ -34,6 +34,7 @@ import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
+import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.PillagerOutpostConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
@@ -81,6 +82,7 @@ public class FeatureUA
 	   public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new GreenPowConcretePatch(NoFeatureConfig::deserialize);
+	   public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDryUA(SphereReplaceConfig::deserialize);
 	   public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
 	   public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
 	   public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
@@ -104,6 +106,7 @@ public class FeatureUA
 	   public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTreeUA(NoFeatureConfig::deserialize, false, true);
 	   public static AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTreeUA(NoFeatureConfig::deserialize, false);
 	   public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutatedUA(NoFeatureConfig::deserialize, false);
+	   public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTreeUA(NoFeatureConfig::deserialize, false);
 
 	   public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
 	   public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
@@ -159,6 +162,7 @@ public class FeatureUA
 		   ICE_PATCH_SANDY = registerFeature(ICE_PATCH_SANDY, "ice_patch_ua");
 		   GIANT_ICE_SPIKE = registerFeature(GIANT_ICE_SPIKE, "ice_spike_ua");
 		   GREEN_CONCRETE_POWDER_PATCH = registerFeature(GREEN_CONCRETE_POWDER_PATCH, "green_pow_concrete_patch_ua");
+		   DISK_DRY = registerFeature(DISK_DRY, "disk_dry_ua");
 		   BLUE_ICE_WATERFALL = registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
 		   CEILING_FLUID = registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
 		   ICE_AND_SNOW_UNDER_LEDGES = registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");
@@ -178,6 +182,7 @@ public class FeatureUA
 		   MEGA_PINE_TREE_2_UA = (HugeTreesFeature<NoFeatureConfig>) registerFeature(MEGA_PINE_TREE_2_UA, "mega_pine_2_tree_ua");
 		   DARK_FOREST_M_TREE = (AbstractTreeFeature<NoFeatureConfig>) registerFeature(DARK_FOREST_M_TREE, "dark_oak_m_tree_ua");
 		   TAIGA_M_TREE = (AbstractTreeFeature<NoFeatureConfig>) registerFeature(TAIGA_M_TREE, "taiga_tree_mutated_ua");
+		   END_TREE = (AbstractTreeFeature<NoFeatureConfig>) registerFeature(END_TREE, "end_tree_ua");
 		   MINESHAFT_UA = (Structure<MineshaftConfigUA>) registerStructure(MINESHAFT_UA, "mineshaft_ua");
 		   WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) registerStructure(WOODLAND_MANSION_UA, "woodland_mansion_ua");
 		   JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(JUNGLE_TEMPLE_UA, "jungle_temple_ua");
