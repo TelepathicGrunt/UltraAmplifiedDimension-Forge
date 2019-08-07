@@ -60,8 +60,7 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 850)));
 
 		this.addStructureFeaturesUA();
-
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.CONTAIN_LIQUID, new ContainWaterConfig(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.ANDESITE.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.CONTAIN_LIQUID, new ContainWaterConfig(Blocks.STONE.getDefaultState(), Blocks.GRAVEL.getDefaultState(), Blocks.ANDESITE.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.ICEBERG_UA, new IcebergConfig(Blocks.PACKED_ICE.getDefaultState()), CHANCE_ON_ALL_WATER_SURFACES_UA, new PercentageAndFrequencyConfig(0.35F, 3)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.ICEBERG_UA, new IcebergConfig(Blocks.BLUE_ICE.getDefaultState()), CHANCE_ON_ALL_WATER_SURFACES_UA, new PercentageAndFrequencyConfig(0.07F, 1)));

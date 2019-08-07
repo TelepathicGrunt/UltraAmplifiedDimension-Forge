@@ -143,8 +143,6 @@ public class OceanMonumentPiecesUA {
 			this.setBlockState(worldIn, SEA_LANTERN, 10, 4, 5, mutableBoundingBoxIn);
 			this.spawnGuardian(worldIn, mutableBoundingBoxIn, 7, 2, 3);
 			this.spawnGuardian(worldIn, mutableBoundingBoxIn, 7, 2, 3);
-			// this.setBlockState(worldIn, Blocks.REDSTONE_BLOCK.getDefaultState(), 7, 2, 3,
-			// mutableBoundingBoxIn);
 
 			return true;
 
@@ -267,13 +265,13 @@ public class OceanMonumentPiecesUA {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
 
-//			if (structureoceanmonumentpieces$roomdefinition3.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 1, 6, 8, 7, ROUGH_PRISMARINE);
-//			}
-//
-//			if (structureoceanmonumentpieces$roomdefinition2.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 8, 6, 8, 14, ROUGH_PRISMARINE);
-//			}
+			if (structureoceanmonumentpieces$roomdefinition3.connections[Direction.UP.getIndex()] == null) {
+				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 1, 6, 8, 7, ROUGH_PRISMARINE);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition2.connections[Direction.UP.getIndex()] == null) {
+				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 8, 6, 8, 14, ROUGH_PRISMARINE);
+			}
 
 			for (int i = 1; i <= 7; ++i) {
 				BlockState iblockstate = BRICKS_PRISMARINE;
@@ -347,14 +345,6 @@ public class OceanMonumentPiecesUA {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 8, true);
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
-
-//			if (structureoceanmonumentpieces$roomdefinition1.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 4, 1, 6, 4, 7, ROUGH_PRISMARINE);
-//			}
-//
-//			if (structureoceanmonumentpieces$roomdefinition.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 4, 8, 6, 4, 14, ROUGH_PRISMARINE);
-//			}
 
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 7, 3, 0, 7, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -475,7 +465,7 @@ public class OceanMonumentPiecesUA {
 			this.setCoordBaseMode(direction);
 			Direction enumfacing = this.getCoordBaseMode();
 
-			int height = 66;
+			int height = rand.nextInt(28)+68;
 			
 			if (enumfacing.getAxis() == Direction.Axis.Z) {
 				this.boundingBox = new MutableBoundingBox(x, height, z, x + 58 - 1, height+22, z + 58 - 1);
@@ -1111,7 +1101,7 @@ public class OceanMonumentPiecesUA {
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 0, -1, 0, 1, -1, 11, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 12, -1, 0, 13, -1, 11, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 2, -1, 0, 11, -1, 1, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 2, -1, 12, 11, -1, 13, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 1, -1, 12, 12, -1, 13, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 0, 0, 0, 0, 0, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 13, 0, 0, 13, 0, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 1, 0, 0, 12, 0, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -1146,6 +1136,7 @@ public class OceanMonumentPiecesUA {
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 5, 0, 10, 5, 2, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 8, 0, 10, 8, 2, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 6, -1, 7, 7, -1, 8, DARK_PRISMARINE, DARK_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 6, -1, 3, 7, -1, 4, WATER, WATER, false);
 			this.spawnElder(worldIn, mutableBoundingBoxIn, 6, 1, 6);
 			if (ConfigUA.chestGeneration) {
 				this.generateChest(worldIn, mutableBoundingBoxIn, randomIn, 6, 0, 8, LootTables.CHESTS_END_CITY_TREASURE);
@@ -1263,6 +1254,32 @@ public class OceanMonumentPiecesUA {
 			this.fillWithBlocks(p_181655_1_, p_181655_2_, 22, 13, 22, 35, 13, 35, WATER, WATER, false);
 			this.fillWithBlocks(p_181655_1_, p_181655_2_, 23, 14, 23, 34, 14, 34, WATER, WATER, false);
 			this.fillWithBlocks(p_181655_1_, p_181655_2_, 24, 15, 24, 33, 15, 33, WATER, WATER, false);
+			
+			//creates opening in front of entrance
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 32, 3, 20, DARK_PRISMARINE, WATER, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 32, 0, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 0, 10, 32, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 25, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 3, 10, 32, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 3, 10, 32, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 3, 10, 25, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 1, 10, 25, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 1, 10, 32, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 12, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 12, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 14, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 14, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 16, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 16, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 18, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 18, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 20, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 20, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 27, 1, 10, p_181655_2_);
+			this.setBlockState(p_181655_1_, SEA_LANTERN, 30, 1, 10, p_181655_2_);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 26, 3, 11, 31, 3, 20, WATER, WATER, false);
+			this.fillWithBlocks(p_181655_1_, p_181655_2_, 26, 1, 20, 31, 3, 20, WATER, WATER, false);
+			
 		}
 
 		protected void generateDefaultFloor(IWorld worldIn, MutableBoundingBox p_175821_2_, int x, int z, boolean hasOpeningDownwards) {
@@ -1628,6 +1645,7 @@ public class OceanMonumentPiecesUA {
 
 		public boolean addComponentParts(IWorld worldIn, Random randomIn, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
+			
 			if (this.mainDesign == 0) {
 				for (int i = 0; i < 4; ++i) {
 					this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 10 - i, 3 - i, 20 - i, 12 + i, 3 - i, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -1679,6 +1697,9 @@ public class OceanMonumentPiecesUA {
 					this.generateChest(worldIn, mutableBoundingBoxIn, randomIn, 11, 1, 17, LootTables.CHESTS_END_CITY_TREASURE);
 					this.generateChest(worldIn, mutableBoundingBoxIn, randomIn, 12, 1, 17, LootTables.CHESTS_END_CITY_TREASURE);
 				}
+				
+				this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 10, 4, 21, 12, 6, 21, WATER, WATER, false);
+				
 				this.spawnElder(worldIn, mutableBoundingBoxIn, 11, 2, 16);
 
 			} else if (this.mainDesign == 1) {
@@ -1723,6 +1744,8 @@ public class OceanMonumentPiecesUA {
 					this.generateChest(worldIn, mutableBoundingBoxIn, randomIn, 10, 4, 9, LootTables.CHESTS_END_CITY_TREASURE);
 				}
 
+				this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 10, 4, 21, 12, 6, 21, WATER, WATER, false);
+				
 				this.spawnElder(worldIn, mutableBoundingBoxIn, 11, 5, 13);
 			}
 

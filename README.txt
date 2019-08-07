@@ -47,6 +47,10 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Made Marked Treasure Chests five times more common due to difficulty finding the Red Sand 'X' below sea level.
 ·Mineshaft blocks has been changed for most Mineshaft types to add variety and look better.
 ·Water filled caves has been added to all ocean biomes. You may find entrances to these new caves in Ravines, Cave Cavities, or on the ocean floor!
+·Added pool in front of Ocean Monument entrance so it is easier to get inside as before, the small entrance could be easily blocked by terrain.
+·Fixed Ocean Monument bug preventing entrances to the Elder Guardian rooms from being made.
+·Fixed Ocean Monument bug that let terrain blocks be generated in the Monument. Coral and Icebergs can rarely still be generated inside.
+·Ocean Monument can be at a random height between Y = 67 and Y = 92 
 
        
     (V.5.0 Changes) (1.13.2 Minecraft)
