@@ -47,7 +47,8 @@ public class PillagerOutpostUA extends Structure<PillagerOutpostConfig> {
    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
       ((SharedSeedRandom)rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
       Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-      if (ConfigUA.pillageOutpostGeneration && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
+      
+      if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
     	  PillagerOutpostConfig pillagerconfig = (PillagerOutpostConfig)chunkGen.getStructureConfig(biome, FeatureUA.PILLAGER_OUTPOST_UA);
     	  
     	  if(rand.nextFloat() < pillagerconfig.probability) {

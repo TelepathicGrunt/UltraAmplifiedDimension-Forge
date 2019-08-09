@@ -73,9 +73,9 @@ public class JungleTempleUA extends Structure<NoFeatureConfig> {
 	   
 	   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
 	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-	      if ((ConfigUA.jungleTempleGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
 	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
-	         if (chunkGen.hasStructure(biome, this)) {
+	         if (ConfigUA.jungleTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
 	            return true;
 	         }
 	      }

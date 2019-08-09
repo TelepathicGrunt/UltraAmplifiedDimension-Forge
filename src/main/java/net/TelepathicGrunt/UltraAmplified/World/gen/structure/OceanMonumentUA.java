@@ -34,7 +34,7 @@ public class OceanMonumentUA extends Structure<NoFeatureConfig>
 	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
     protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-       int maxDistance = ConfigUA.monumentRarity;
+       int maxDistance = ConfigUA.oceanMonumentSpawnrate;
        int minDistance = 8;
        if(maxDistance < 9 ) {
     	  minDistance = maxDistance - 1;
@@ -58,15 +58,13 @@ public class OceanMonumentUA extends Structure<NoFeatureConfig>
        ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
        if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
           for(Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 16)) {
-             if (!ConfigUA.oceanMonumentGeneration || !chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
-                return false;
+             if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome, FeatureUA.OCEAN_MONUMENT_UA)) {
+                return true;
              }
           }
-
-          return true;
-       } else {
-          return false;
        }
+       
+       return false;
     }
 
     protected boolean isEnabledIn(IWorld worldIn) {

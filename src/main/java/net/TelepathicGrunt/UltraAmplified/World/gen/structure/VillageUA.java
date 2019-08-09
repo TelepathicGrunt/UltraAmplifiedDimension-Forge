@@ -64,12 +64,13 @@ public class VillageUA  extends Structure<VillageUAConfig> {
 
    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
       ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-      if ((ConfigUA.villageGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
          Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-         return chunkGen.hasStructure(biome, FeatureUA.VILLAGE_UA); 
-      } else {
-         return false;
-      }
+         if(ConfigUA.villageSpawnrate != 101 && chunkGen.hasStructure(biome, FeatureUA.VILLAGE_UA)) {
+        	return true;  
+         }
+      } 
+     return false;
    }
 
    public Structure.IStartFactory getStartFactory() {

@@ -7,7 +7,6 @@ import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -18,10 +17,11 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class ContainLiquidForOceans extends Feature<ContainWaterConfig> {
-	  public ContainLiquidForOceans(Function<Dynamic<?>, ? extends ContainWaterConfig> configFactoryIn) {
+public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
+	  public ContainLiquidForOceans(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
@@ -36,7 +36,7 @@ public class ContainLiquidForOceans extends Feature<ContainWaterConfig> {
 			};
 	  
 
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, ContainWaterConfig configBlock) {
+	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock) {
 	     
 		 //set y to 0
 		 pos.down(pos.getY());

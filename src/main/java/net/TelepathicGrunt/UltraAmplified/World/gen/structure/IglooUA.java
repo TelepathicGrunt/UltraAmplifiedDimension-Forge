@@ -72,7 +72,7 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
 	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
-	         if ((ConfigUA.iglooGeneration) && chunkGen.hasStructure(biome, this)) {
+	         if (ConfigUA.iglooSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
 	            return true;
 	         }
 	      }

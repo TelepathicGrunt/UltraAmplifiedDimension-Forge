@@ -23,6 +23,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Fixed bug that prevented M variant biomes from spawning when setting config value to max m variant spawnrate.
 ·Added config option for Bamboo Jungle generation.
 ·Patched bug that prevented most Wooded Badlands Plateau biome from spawning when config is set to only Badlands biomes for generation.
+·Added config option to turn on and off column/ramp generation.
+·Combined the structure generation and spawnrate config options into one to reduce number of configs. Set the structure spawnrate to 101 to turn off generation for that structure.
 
      Biomes:
 ·Added Bamboo Jungle biome to generate in this mod along with some modification. Uses real Bamboo unlike the Sugar Cane that the 1.12 version of this mod used!
@@ -50,7 +52,8 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Added pool in front of Ocean Monument entrance so it is easier to get inside as before, the small entrance could be easily blocked by terrain.
 ·Fixed Ocean Monument bug preventing entrances to the Elder Guardian rooms from being made.
 ·Fixed Ocean Monument bug that let terrain blocks be generated in the Monument. Coral and Icebergs can rarely still be generated inside.
-·Ocean Monument can be at a random height between Y = 67 and Y = 92 
+·Ocean Monument can be at a random height between Y = 67 and Y = 92 as they were at a fixed height at Y = 67 before to minimize the occurrence of the terrain block bug.
+·Added columns and ramps to most biomes to give a more cave-like appearance as well as make travel between layers of land easier.
 
        
     (V.5.0 Changes) (1.13.2 Minecraft)

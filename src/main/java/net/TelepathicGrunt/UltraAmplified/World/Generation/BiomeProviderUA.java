@@ -127,28 +127,28 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
      // lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
       
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), iareafactory));
-      
-      
-      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
-      
-      //creates biomes that border incompatible biomes
-      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      
-      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
-      
-      //generates the hills and Amplified variants/patches of biomes
-      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-	  
-
-      for(int k = 0; k < biomeSize; ++k) {
-         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
-      }
-
-      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
+      IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
+//      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), iareafactory));
+//      
+//      
+//      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
+//      
+//      //creates biomes that border incompatible biomes
+//      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      
+//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
+//      
+//      //generates the hills and Amplified variants/patches of biomes
+//      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+//      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+//	  
+//
+//      for(int k = 0; k < biomeSize; ++k) {
+//         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+//      }
+//
+//      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
       
       IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
       return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);

@@ -28,47 +28,35 @@ public class ConfigUA {
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
     public static int oceanCaveSpawnrate = 20;
+    public static boolean pillarGen = true;
     public static boolean slimeLakeGen = true;
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
     public static boolean chestGeneration = true;
     public static boolean miniStructureGeneration = true;
     public static int villageSpawnrate = 16;
-    public static boolean villageGeneration = true;
     public static int villageZombieSpawnrate = 10;
     public static int mineshaftSpawnrate = 22;
     public static boolean mineshaftAbovegroundAllowed = true;
     public static boolean mineshaftUndergroundAllowed = true;
     public static int mansionSpawnrate = 18;
-    public static boolean mansionGeneration = true;
     public static int desertTempleSpawnrate = 20;
-    public static boolean desertTempleGeneration = true;
     public static int jungleTempleSpawnrate = 20;
-    public static boolean jungleTempleGeneration = true;
     public static int iglooSpawnrate = 14;
-    public static boolean iglooGeneration = true;
     public static int witchHutSpawnrate = 14;
-    public static boolean witchHutGeneration = true;
     public static int oceanMonumentSpawnrate = 22;
-    public static boolean oceanMonumentGeneration = true;
     public static int oceanRuinsSpawnrate = 7;
-    public static boolean oceanRuinsGeneration = true;
     public static int shipwreckSpawnrate = 7;
-    public static boolean shipwreckGeneration = true;
     public static double strongholdDistance = 10.0;
     public static int strongholdNumberPerWorld = 128;
     public static int strongholdSpread = 4;
     public static double silverfishStrongholdSpawnrate = 4D;
     public static boolean strongholdGeneration = true;
-    public static int monumentRarity = 16;
-    public static boolean monumentGeneration = true;
     public static int netherFortressSpawnrate = 14;
     public static boolean netherFortressAboveground = true;
     public static boolean netherFortressUnderground = true;
     public static int endCitySpawnrate = 18;
-    public static boolean endCityGeneration = true;
     public static int pillageOutpostRarity = 20;
-    public static boolean pillageOutpostGeneration = true;
     public static boolean secretSetting = false;
     public static int biomeSize = 3;
     public static int mutatedBiomeSpawnrate = 2;
@@ -125,47 +113,35 @@ public class ConfigUA {
         public final ForgeConfigSpec.IntValue ravineSpawnrate;
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
         public final ForgeConfigSpec.IntValue oceanCaveSpawnrate;
+        public final ForgeConfigSpec.BooleanValue pillarGen;
         public final ForgeConfigSpec.BooleanValue slimeLakeGen;
         public final ForgeConfigSpec.BooleanValue waterLakeGen;
         public final ForgeConfigSpec.BooleanValue lavaLakeGen;
 		public final ForgeConfigSpec.BooleanValue chestGeneration;
 		public final ForgeConfigSpec.BooleanValue miniStructureGeneration;
 		public final ForgeConfigSpec.IntValue villageSpawnrate;
-		public final ForgeConfigSpec.BooleanValue villageGeneration;
 		public final ForgeConfigSpec.IntValue villageZombieSpawnrate;
 		public final ForgeConfigSpec.IntValue mineshaftSpawnrate;
 		public final ForgeConfigSpec.BooleanValue mineshaftAbovegroundAllowed;
 		public final ForgeConfigSpec.BooleanValue mineshaftUndergroundAllowed;
 		public final ForgeConfigSpec.IntValue mansionSpawnrate;
-		public final ForgeConfigSpec.BooleanValue mansionGeneration;
 		public final ForgeConfigSpec.IntValue desertTempleSpawnrate;
-		public final ForgeConfigSpec.BooleanValue desertTempleGeneration;
 		public final ForgeConfigSpec.IntValue jungleTempleSpawnrate;
-		public final ForgeConfigSpec.BooleanValue jungleTempleGeneration;
 		public final ForgeConfigSpec.IntValue iglooSpawnrate;
-		public final ForgeConfigSpec.BooleanValue iglooGeneration;
 		public final ForgeConfigSpec.IntValue witchHutSpawnrate;
-		public final ForgeConfigSpec.BooleanValue witchHutGeneration;
 		public final ForgeConfigSpec.IntValue oceanMonumentSpawnrate;
-		public final ForgeConfigSpec.BooleanValue oceanMonumentGeneration;
 		public final ForgeConfigSpec.IntValue oceanRuinsSpawnrate;
-		public final ForgeConfigSpec.BooleanValue oceanRuinsGeneration;
 		public final ForgeConfigSpec.IntValue shipwreckSpawnrate;
-		public final ForgeConfigSpec.BooleanValue shipwreckGeneration;
 		public final ForgeConfigSpec.DoubleValue strongholdDistance;
 		public final ForgeConfigSpec.IntValue strongholdNumberPerWorld;
 		public final ForgeConfigSpec.IntValue strongholdSpread;
 		public final ForgeConfigSpec.DoubleValue silverfishStrongholdSpawnrate;
 		public final ForgeConfigSpec.BooleanValue strongholdGeneration;
-		public final ForgeConfigSpec.IntValue monumentRarity;
-		public final ForgeConfigSpec.BooleanValue monumentGeneration;
 		public final ForgeConfigSpec.IntValue netherFortressSpawnrate;
 		public final ForgeConfigSpec.BooleanValue netherFortressAboveground;
 		public final ForgeConfigSpec.BooleanValue netherFortressUnderground;
 		public final ForgeConfigSpec.IntValue endCitySpawnrate;
-		public final ForgeConfigSpec.BooleanValue endCityGeneration;
 		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
-		public final ForgeConfigSpec.BooleanValue pillageOutpostGeneration;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
 		public final ForgeConfigSpec.IntValue biomeSize;
 		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
@@ -243,7 +219,12 @@ public class ConfigUA {
 	                    		+"0 for no Underwater Caves and 100 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.oceancavespawnrate")
 	                    .defineInRange("oceanCaveSpawnrate", 20, 0, 100);
-	            		
+
+	            		pillarGen = builder
+	                    .comment("Controls whether pillars features (both ramp and straight kind) spawn or not.\r\n")
+	                    .translation("ultraamplified.config.structure.pillargen")
+	                    .define("pillarGen", true);
+
 	            		slimeLakeGen = builder
 	                    .comment("Controls whether Slime Lakes spawn or not.\r\n")
 	                    .translation("ultraamplified.config.structure.slimelakegen")
@@ -273,17 +254,12 @@ public class ConfigUA {
             
             		villageSpawnrate = builder
                     .comment("How rare are Villages.\r\n"
-                    		 +"1 for Village spawning in most chunk and 100 for lowest spawnrate.")
+                    		 +"1 for Village spawning in most chunk and 101 for no spawn.")
                     .translation("ultraamplified.config.structure.villagespawnrate")
-                    .defineInRange("villageSpawnrate", 16, 1, 100);
+                    .defineInRange("villageSpawnrate", 16, 1, 101);
 
-            		villageGeneration = builder
-                    .comment("Controls whether Villages spawn or not.\r\n")
-                    .translation("ultraamplified.config.structure.villagegeneration")
-                    .define("villageGeneration", true);
-            
             		villageZombieSpawnrate = builder
-                    .comment("What percentage of Villages are Zombie Villages.\r\n"
+                    .comment("What percentage of Classic Styled Villages are Zombie Villages.\r\n"
                     		 +"0 for no Zombie Village spawning and 100 for all Villages being zombified.")
                     .translation("ultraamplified.config.structure.villagezombiespawnrate")
                     .defineInRange("villageZombieSpawnrate", 10, 0, 100);
@@ -307,92 +283,51 @@ public class ConfigUA {
             
             		
             		mansionSpawnrate = builder
-            		.comment("How rare are Woodland Mansion." + "\n" + "1 for Woodland Mansion spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Woodland Mansion." + "\n" + "1 for Woodland Mansion spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.mansionspawnrate")
-            		.defineInRange("mansionSpawnrate", 18, 1, 100);
-
-            		mansionGeneration = builder
-            		.comment("Controls whether Woodland Mansion spawn or not.")
-            		.translation("ultraamplified.config.structure.mansiongeneration")
-            		.define("mansionGeneration", true);
+            		.defineInRange("mansionSpawnrate", 18, 1, 101);
 
 
             		desertTempleSpawnrate = builder
-            		.comment("How rare are Desert Temples." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Desert Temples." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.deserttemplespawnrate")
-            		.defineInRange("desertTempleSpawnrate", 20, 1, 100);
-
-
-            		desertTempleGeneration = builder
-            		.comment("Controls whether Desert Temples spawn or not.")
-            		.translation("ultraamplified.config.structure.deserttemplegeneration")
-            		.define("desertTempleGeneration", true);
+            		.defineInRange("desertTempleSpawnrate", 20, 1, 101);
 
             		
             		jungleTempleSpawnrate = builder
-            		.comment("How rare are Jungle Temples." + "\n" + "1 for a spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Jungle Temples." + "\n" + "1 for a spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.jungletemplespawnrate")
-            		.defineInRange("jungleTempleSpawnrate", 20, 1, 100);
-
-            		jungleTempleGeneration = builder
-            		.comment("Controls whether Jungle Temples spawn or not.")
-            		.translation("ultraamplified.config.structure.jungletemplegeneration")
-            		.define("jungleTempleGeneration", true);
+            		.defineInRange("jungleTempleSpawnrate", 20, 1, 101);
 
             		
             		iglooSpawnrate = builder
-            		.comment("How rare are igloos." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are igloos." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.igloospawnrate")
-            		.defineInRange("iglooSpawnrate", 14, 1, 100);
-
-            		iglooGeneration = builder
-            		.comment("Controls whether Igloos spawn or not.")
-            		.translation("ultraamplified.config.structure.igloogeneration")
-            		.define("iglooGeneration", true);
+            		.defineInRange("iglooSpawnrate", 14, 1, 101);
 
             		
             		witchHutSpawnrate = builder
-            		.comment("How rare are Witch Huts." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Witch Huts." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.witchhutspawnrate")
-            		.defineInRange("witchHutSpawnrate", 14, 1, 100);
-
-            		witchHutGeneration = builder
-            		.comment("Controls whether Witch Huts spawn or not.")
-            		.translation("ultraamplified.config.structure.witchhutgeneration")
-            		.define("witchHutGeneration", true);
+            		.defineInRange("witchHutSpawnrate", 14, 1, 101);
 
             		
             		oceanMonumentSpawnrate = builder
-            		.comment("How rare are Ocean Monuments." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Ocean Monuments." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.oceanmonumentspawnrate")
-            		.defineInRange("oceanMonumentSpawnrate", 22, 1, 100);
-
-            		oceanMonumentGeneration = builder
-            		.comment("Controls whether Ocean Monuments spawn or not.")
-            		.translation("ultraamplified.config.structure.oceanmonumentgeneration")
-            		.define("oceanMonumentGeneration", true);
+            		.defineInRange("oceanMonumentSpawnrate", 22, 1, 101);
 
             		
             		oceanRuinsSpawnrate = builder
-            		.comment("How rare are Ocean Ruins." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Ocean Ruins." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.oceanruinsspawnrate")
-            		.defineInRange("oceanRuinsSpawnrate", 7, 1, 100);
-
-            		oceanRuinsGeneration = builder
-            		.comment("Controls whether Ocean Ruins spawn or not.")
-            		.translation("ultraamplified.config.structure.oceanruinsgeneration")
-            		.define("oceanRuinsGeneration", true);
+            		.defineInRange("oceanRuinsSpawnrate", 7, 1, 101);
 
             		
             		shipwreckSpawnrate = builder
-            		.comment("How rare are Shipwrecks." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Shipwrecks." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.shipwreckspawnrate")
-            		.defineInRange("shipwreckSpawnrate", 7, 1, 100);
-
-            		shipwreckGeneration = builder
-            		.comment("Controls whether Shipwrecks spawn or not.")
-            		.translation("ultraamplified.config.structure.shipwreckgeneration")
-            		.define("shipwreckGeneration", true);
+            		.defineInRange("shipwreckSpawnrate", 7, 1, 101);
 
 
             		strongholdDistance = builder
@@ -425,22 +360,10 @@ public class ConfigUA {
             		.define("strongholdGeneration", true);
 
 
-            		monumentRarity = builder
-            		.comment("How rare are Ocean Monuments." + "\n" + "1 for a Ocean Monument spawning in most Jungle chunks and 100 for lowest spawnrate.")
-            		.translation("ultraamplified.config.structure.monumentrarity")
-            		.defineInRange("monumentRarity", 16, 1, 100);
-
-
-            		monumentGeneration = builder
-            		.comment("Controls whether Ocean Monuments spawn or not (Ocean Monuments spawn in Jungle biomes)")
-            		.translation("ultraamplified.config.structure.monumentgeneration")
-            		.define("monumentGeneration", true);
-            		
-
             		netherFortressSpawnrate = builder
-            		.comment("How rare are Nether Fortresses." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Nether Fortresses." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.netherfortressspawnrate")
-            		.defineInRange("netherFortressSpawnrate", 14, 1, 100);
+            		.defineInRange("netherFortressSpawnrate", 14, 1, 101);
 
             		netherFortressAboveground = builder
             		.comment("Can Nether Fortresses spawn aboveground in the Nether biome (between y = 85 and 130).")
@@ -448,30 +371,22 @@ public class ConfigUA {
             		.define("netherFortressAboveground", true);
             		
             		netherFortressUnderground = builder
-            		.comment("Can Nether Fortress spawn underground or not (below y = 60)." + "\n" + "(Nether Fortress spawn underground in all biomes except End biome)")
+            		.comment("Can stone variant Nether Fortresses spawn underground or not (below y = 60)." + "\n" + "(Stone variant Nether Fortress spawn underground in all biomes except End biome)")
             		.translation("ultraamplified.config.structure.netherfortressunderground")
             		.define("netherFortressUnderground", true);
             		
 
             		endCitySpawnrate = builder
-            		.comment("How rare are End Cities." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are End Cities." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.endcityspawnrate")
-            		.defineInRange("endCitySpawnrate", 22, 1, 100);
+            		.defineInRange("endCitySpawnrate", 22, 1, 101);
             		
-            		endCityGeneration = builder
-            		.comment("Controls whether End City spawn or not.")
-            		.translation("ultraamplified.config.structure.endcitygeneration")
-            		.define("endCityGeneration", true);
             	    
             	    pillageOutpostRarity = builder
-            		.comment("How rare are Pillager Outposts." + "\n" + "1 for spawning in most chunk and 100 for lowest spawnrate.")
+            		.comment("How rare are Pillager Outposts." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.pillageoutpostrarity")
-            		.defineInRange("pillageOutpostRarity", 20, 1, 100);
+            		.defineInRange("pillageOutpostRarity", 20, 1, 101);
             		
-            	    pillageOutpostGeneration = builder
-            		.comment("Controls whether Pillager Outposts spawn or not.")
-            		.translation("ultraamplified.config.structure.pillageoutpostgeneration")
-            		.define("pillageOutpostGeneration", true);
             
             builder.pop().pop();
 
@@ -781,47 +696,35 @@ public class ConfigUA {
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
     	oceanCaveSpawnrate = SERVER.oceanCaveSpawnrate.get();
+    	pillarGen = SERVER.pillarGen.get();
     	slimeLakeGen = SERVER.slimeLakeGen.get();
     	waterLakeGen = SERVER.waterLakeGen.get();
     	lavaLakeGen = SERVER.lavaLakeGen.get();
     	chestGeneration = SERVER.chestGeneration.get();
     	miniStructureGeneration = SERVER.miniStructureGeneration.get();
     	villageSpawnrate = SERVER.villageSpawnrate.get();
-    	villageGeneration = SERVER.villageGeneration.get();
     	villageZombieSpawnrate = SERVER.villageZombieSpawnrate.get();
     	mineshaftSpawnrate = SERVER.mineshaftSpawnrate.get();
     	mineshaftAbovegroundAllowed = SERVER.mineshaftAbovegroundAllowed.get();
     	mineshaftUndergroundAllowed = SERVER.mineshaftUndergroundAllowed.get();
     	mansionSpawnrate = SERVER.mansionSpawnrate.get();
-    	mansionGeneration = SERVER.mansionGeneration.get();
     	desertTempleSpawnrate = SERVER.desertTempleSpawnrate.get();
-    	desertTempleGeneration = SERVER.desertTempleGeneration.get();
     	jungleTempleSpawnrate = SERVER.jungleTempleSpawnrate.get();
-    	jungleTempleGeneration = SERVER.jungleTempleGeneration.get();
     	iglooSpawnrate = SERVER.iglooSpawnrate.get();
-    	iglooGeneration = SERVER.iglooGeneration.get();
     	witchHutSpawnrate = SERVER.witchHutSpawnrate.get();
-    	witchHutGeneration = SERVER.witchHutGeneration.get();
     	oceanMonumentSpawnrate = SERVER.oceanMonumentSpawnrate.get();
-    	oceanMonumentGeneration = SERVER.oceanMonumentGeneration.get();
     	oceanRuinsSpawnrate = SERVER.oceanRuinsSpawnrate.get();
-    	oceanRuinsGeneration = SERVER.oceanRuinsGeneration.get();
     	shipwreckSpawnrate = SERVER.shipwreckSpawnrate.get();
-    	shipwreckGeneration = SERVER.shipwreckGeneration.get();
     	strongholdDistance = SERVER.strongholdDistance.get();
     	strongholdNumberPerWorld = SERVER.strongholdNumberPerWorld.get();
     	strongholdSpread = SERVER.strongholdSpread.get();
     	silverfishStrongholdSpawnrate = SERVER.silverfishStrongholdSpawnrate.get();
     	strongholdGeneration = SERVER.strongholdGeneration.get();
-    	monumentRarity = SERVER.monumentRarity.get();
-    	monumentGeneration = SERVER.monumentGeneration.get();
     	netherFortressSpawnrate = SERVER.netherFortressSpawnrate.get();
     	netherFortressAboveground = SERVER.netherFortressAboveground.get();
     	netherFortressUnderground = SERVER.netherFortressUnderground.get();
     	endCitySpawnrate = SERVER.endCitySpawnrate.get();
-    	endCityGeneration = SERVER.endCityGeneration.get();
     	pillageOutpostRarity = SERVER.pillageOutpostRarity.get();
-    	pillageOutpostGeneration = SERVER.pillageOutpostGeneration.get();
     	secretSetting = SERVER.secretSetting.get();
     	biomeSize = SERVER.biomeSize.get();
     	mutatedBiomeSpawnrate = SERVER.mutatedBiomeSpawnrate.get();

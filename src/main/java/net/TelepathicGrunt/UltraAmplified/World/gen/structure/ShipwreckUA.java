@@ -69,12 +69,12 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
 
    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
-	      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-	      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-	         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
-	         if ((ConfigUA.shipwreckGeneration) && chunkGen.hasStructure(biome, this)) {
-	            return true;
-	         }
+      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
+         if (ConfigUA.shipwreckSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+            return true;
+         }
       }
       return false;
    }

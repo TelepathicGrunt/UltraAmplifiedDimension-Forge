@@ -5,7 +5,7 @@ import java.util.Locale;
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.BlockConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ContainWaterConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.ColumnBlocksConfig;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.DesertTempleUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.EndCityUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.IglooUA;
@@ -78,7 +78,7 @@ public class FeatureUA
 
 	   public static Feature<LakesConfig> SLIME_AND_ICE_LAKE = new SlimeAndIceLakes(LakesConfig::deserialize);
 	   public static Feature<LakesConfig> SHALLOW_LAKE = new WideShallowLakes(LakesConfig::deserialize);
-	   public static Feature<ContainWaterConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(ContainWaterConfig::deserialize);
+	   public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new GreenPowConcretePatch(NoFeatureConfig::deserialize);
@@ -87,6 +87,8 @@ public class FeatureUA
 	   public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
 	   public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeatureUA(NoFeatureConfig::deserialize);
+	   public static Feature<ColumnBlocksConfig> COLUMN = new ColumnUA(ColumnBlocksConfig::deserialize);
+	   public static Feature<ColumnBlocksConfig> RAMP = new RampColumnUA(ColumnBlocksConfig::deserialize);
 
 	   public static Feature<NoFeatureConfig> LONG_VINES = new VinesLongUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> SHORT_VINES = new VinesShortUA(NoFeatureConfig::deserialize);
@@ -163,6 +165,8 @@ public class FeatureUA
 		   GIANT_ICE_SPIKE = registerFeature(GIANT_ICE_SPIKE, "ice_spike_ua");
 		   GREEN_CONCRETE_POWDER_PATCH = registerFeature(GREEN_CONCRETE_POWDER_PATCH, "green_pow_concrete_patch_ua");
 		   DISK_DRY = registerFeature(DISK_DRY, "disk_dry_ua");
+		   COLUMN = registerFeature(COLUMN, "column_ua");
+		   RAMP = registerFeature(RAMP, "ramp_column_ua");
 		   BLUE_ICE_WATERFALL = registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
 		   CEILING_FLUID = registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
 		   ICE_AND_SNOW_UNDER_LEDGES = registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");

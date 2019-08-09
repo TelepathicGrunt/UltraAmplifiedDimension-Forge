@@ -53,15 +53,13 @@ public class EndCityUA extends Structure<NoFeatureConfig>
          ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
          if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
             Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-            if (!ConfigUA.endCityGeneration || !chunkGen.hasStructure(biome, this)) {
-               return false;
-            } else {
-               int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
-               return i >= 60;
+            if (ConfigUA.endCitySpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+	           int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
+	           return i >= 60;
             }
-         } else {
-            return false;
-         }
+         } 
+         
+        return false;
       }
 
     protected boolean isEnabledIn(IWorld worldIn) {
