@@ -3,8 +3,8 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 import java.util.List;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.Spawner.CatSpawnerUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;

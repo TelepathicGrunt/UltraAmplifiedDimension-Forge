@@ -4,12 +4,12 @@ import java.util.Random;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndFrequencyConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.placement.PercentageAndHeightConfig;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFrequencyConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndHeightConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -48,7 +48,7 @@ public class DeepFrozenOceanBiomeUA extends BiomeUA {
 		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
 		this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
 		this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(FeatureUA.MARKED_TREASURE_CHEST_UA, IFeatureConfig.NO_FEATURE_CONFIG, FIXED_HEIGHT_WITH_CHANCE, new PercentageAndHeightConfig(0.050f, 64)));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(FeatureUA.MARKED_TREASURE_CHEST_UA, IFeatureConfig.NO_FEATURE_CONFIG, FIXED_HEIGHT_WITH_CHANCE, new PercentageAndHeightConfig(0.025f, 64)));
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UNDERWATER_CAVE_CARVER, new ProbabilityConfig((float) (ConfigUA.oceanCaveSpawnrate) / 100)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig((float) (ConfigUA.caveCavitySpawnrate) / 1000)));

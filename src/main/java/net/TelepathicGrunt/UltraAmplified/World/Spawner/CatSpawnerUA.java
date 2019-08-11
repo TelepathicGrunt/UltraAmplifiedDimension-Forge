@@ -2,7 +2,7 @@ package net.TelepathicGrunt.UltraAmplified.World.Spawner;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;

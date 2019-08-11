@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "ultra_amplified_mod:block/glowdirt",
+        "top": "ultra_amplified_mod:block/glowpodzol_top2",
+        "side": "ultra_amplified_mod:block/glowpodzol_side"
+    }
+}

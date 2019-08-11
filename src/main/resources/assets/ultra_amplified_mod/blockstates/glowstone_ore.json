@@ -1,0 +1,14 @@
+{
+    "variants": {
+        "": [
+            { "model": "ultra_amplified_mod:block/glowstone_ore" },
+            { "model": "ultra_amplified_mod:block/glowstone_ore_mirrored" },
+            { "model": "ultra_amplified_mod:block/glowstone_ore", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowstone_ore_mirrored", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowstone_ore", "x": 180 },
+            { "model": "ultra_amplified_mod:block/glowstone_ore_mirrored", "x": 180 },
+            { "model": "ultra_amplified_mod:block/glowstone_ore", "z": 180 },
+            { "model": "ultra_amplified_mod:block/glowstone_ore_mirrored", "z": 180 }
+        ]
+    }
+}

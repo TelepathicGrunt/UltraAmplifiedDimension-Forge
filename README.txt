@@ -1,11 +1,11 @@
     Made for Minecraft v.1.14.3
     Created by TelepathicGrunt
 
-Highly recommend to also use the Optifine mod with my mod as well!
-You can choose biome sizes, ore spawn rates, structure rarity, selection biomes, and much more with this mod's config options!
+Highly recommend using a strong computer with this mod! (May not be compatible with other mods that affects terrain shape gen or modifies vanilla biomes) 
+You can choose biome sizes, ore spawn rates, structure rarity, toggle biomes, and much more with this mod's config options!
 
 Feel free to use this mod and any part of it for whatever you want as long as you do not profit off of my mod. 
-Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy! :) 
+Just be sure to have fun and make awesome mods! That's all. Enjoy! :) 
 
 
 ------------------------------------------------
@@ -46,15 +46,17 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·End Cities lowered by 8 blocks so they do not get cut off by height limit.
 ·Nether Fortresses that spawns underground in all biomes now generates as a stone variant. Aboveground Nether Fortresses in the Nether remains the same.
 ·Added Pillager Outposts to Plains, Snowy Taiga, Taiga, Dark Forest, Tundra, Savanna, Shattered Savanna, and Desert biomes.
-·Made Marked Treasure Chests five times more common due to difficulty finding the Red Sand 'X' below sea level.
+·Made Marked Treasure Chests 2.5 times more common due to difficulty finding the Red Sand 'X' below sea level.
 ·Mineshaft blocks has been changed for most Mineshaft types to add variety and look better.
 ·Water filled caves has been added to all ocean biomes. You may find entrances to these new caves in Ravines, Cave Cavities, or on the ocean floor!
 ·Added pool in front of Ocean Monument entrance so it is easier to get inside as before, the small entrance could be easily blocked by terrain.
 ·Fixed Ocean Monument bug preventing entrances to the Elder Guardian rooms from being made.
 ·Fixed Ocean Monument bug that let terrain blocks be generated in the Monument. Coral and Icebergs can rarely still be generated inside.
-·Ocean Monument can be at a random height between Y = 67 and Y = 92 as they were at a fixed height at Y = 67 before to minimize the occurrence of the terrain block bug.
+·Ocean Monument can be at a random height between Y = 67 and Y = 85 as they were at a fixed height at Y = 67 before to minimize the occurrence of the terrain block bug.
 ·Added columns and ramps to most biomes to give a more cave-like appearance as well as make travel between layers of land easier.
 
+     Blocks:
+     
        
     (V.5.0 Changes) (1.13.2 Minecraft)
        

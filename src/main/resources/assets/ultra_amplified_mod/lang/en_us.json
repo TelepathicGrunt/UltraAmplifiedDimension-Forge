@@ -1,4 +1,12 @@
 {
   "generator.UltraAmplified": "Ultra Amplified",
-  "generator.UltraAmplified.info": "May take a few minutes to create a fresh world."
+  "generator.UltraAmplified.info": "May take a few minutes to create a fresh world.",
+  "block.ultra_amplified_mod.glowmycelium": "Glowmycelium",
+  "block.ultra_amplified_mod.glowpodzol": "Glowpodzol",
+  "block.ultra_amplified_mod.glowgrass_block": "Glowgrass Block",
+  "block.ultra_amplified_mod.glowsand": "Glowsand",
+  "block.ultra_amplified_mod.red_glowsand": "Red Glowsand",
+  "block.ultra_amplified_mod.glowstone_ore": "Glowstone Ore",
+  "block.ultra_amplified_mod.glowdirt": "Glowdirt",
+  "block.ultra_amplified_mod.coarse_glowdirt": "Coarse Glowdirt"
 }

@@ -1,0 +1,15 @@
+{
+    "variants": {
+        "snowy=false": [
+            { "model": "ultra_amplified_mod:block/glowpodzol" },
+            { "model": "ultra_amplified_mod:block/glowpodzol", "y": 90 },
+            { "model": "ultra_amplified_mod:block/glowpodzol", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowpodzol", "y": 270 },
+            { "model": "ultra_amplified_mod:block/glowpodzol2" },
+            { "model": "ultra_amplified_mod:block/glowpodzol2", "y": 90 },
+            { "model": "ultra_amplified_mod:block/glowpodzol2", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowpodzol2", "y": 270 }
+        ],
+        "snowy=true":  { "model": "ultra_amplified_mod:block/glowgrass_block_snow" }
+    }
+}

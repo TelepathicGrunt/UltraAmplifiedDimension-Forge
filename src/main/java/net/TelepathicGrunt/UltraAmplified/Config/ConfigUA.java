@@ -105,6 +105,7 @@ public class ConfigUA {
     public static int glowstoneSpawnrate = 20;
     public static int magmaSpawnrate = 5;
     public static int lavaSpawnrate = 70;
+    public static boolean generateGlowstoneVariants = true;
 
     
     public static class ServerConfig
@@ -190,6 +191,7 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue glowstoneSpawnrate;
 		public final ForgeConfigSpec.IntValue magmaSpawnrate;
 		public final ForgeConfigSpec.IntValue lavaSpawnrate;
+		public final ForgeConfigSpec.BooleanValue generateGlowstoneVariants;
 
         ServerConfig(ForgeConfigSpec.Builder builder) 
         {
@@ -239,7 +241,12 @@ public class ConfigUA {
 	                    .comment("Controls whether Lava Lakes spawn or not.\r\n")
 	                    .translation("ultraamplified.config.structure.lavalakegen")
 	                    .define("lavaLakeGen", true);
-	            
+
+	            		generateGlowstoneVariants = builder
+	                    .comment("Controls whether patches of Glowdirt and other modded Glowstone variants spawn or not.\r\n")
+	                    .translation("ultraamplified.config.structure.generateglowstonevariants")
+	                    .define("generateGlowstoneVariants", true);
+	                    
             builder.push("Biome-Based Structure Options");
             
             		chestGeneration = builder
@@ -773,5 +780,6 @@ public class ConfigUA {
     	glowstoneSpawnrate = SERVER.glowstoneSpawnrate.get();
     	magmaSpawnrate = SERVER.magmaSpawnrate.get();
     	lavaSpawnrate = SERVER.lavaSpawnrate.get();
+    	generateGlowstoneVariants = SERVER.generateGlowstoneVariants.get();
     }
 }

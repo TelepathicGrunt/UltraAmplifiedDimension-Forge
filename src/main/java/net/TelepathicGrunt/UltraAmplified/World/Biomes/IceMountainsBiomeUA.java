@@ -2,12 +2,12 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.NetherBridgeConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillagePiecesUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.VillageUAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillagePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;

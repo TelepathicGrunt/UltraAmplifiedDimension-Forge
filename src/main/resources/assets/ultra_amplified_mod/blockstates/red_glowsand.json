@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [                                     
+            { "model": "ultra_amplified_mod:block/red_glowsand" },
+            { "model": "ultra_amplified_mod:block/red_glowsand", "y": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand", "x": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand", "z": 180 }
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "snowy=false": [
+            { "model": "ultra_amplified_mod:block/glowmycelium" },
+            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 90 },
+            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 270 }
+        ],
+        "snowy=true":  { "model": "ultra_amplified_mod:block/glowgrass_block_snow" }
+    }
+}

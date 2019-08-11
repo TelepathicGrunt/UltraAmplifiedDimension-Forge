@@ -1,0 +1,14 @@
+{
+    "variants": {
+        "": [
+            { "model": "ultra_amplified_mod:block/glowdirt" },
+            { "model": "ultra_amplified_mod:block/glowdirt_mirrored" },
+            { "model": "ultra_amplified_mod:block/glowdirt", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowdirt_mirrored", "y": 180 },
+            { "model": "ultra_amplified_mod:block/glowdirt", "x": 180 },
+            { "model": "ultra_amplified_mod:block/glowdirt_mirrored", "x": 180 },
+            { "model": "ultra_amplified_mod:block/glowdirt", "z": 180 },
+            { "model": "ultra_amplified_mod:block/glowdirt_mirrored", "z": 180 }
+        ]
+    }
+}
