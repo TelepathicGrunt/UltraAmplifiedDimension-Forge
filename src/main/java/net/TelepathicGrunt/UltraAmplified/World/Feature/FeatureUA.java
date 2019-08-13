@@ -89,6 +89,7 @@ public class FeatureUA
 	   public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeatureUA(NoFeatureConfig::deserialize);
 	   public static Feature<ColumnBlocksConfig> COLUMN = new ColumnUA(ColumnBlocksConfig::deserialize);
 	   public static Feature<ColumnBlocksConfig> RAMP = new RampColumnUA(ColumnBlocksConfig::deserialize);
+	   public static Feature<CountConfig> GLOWPATCH = new GlowPatch(CountConfig::deserialize);
 
 	   public static Feature<NoFeatureConfig> LONG_VINES = new VinesLongUA(NoFeatureConfig::deserialize);
 	   public static Feature<NoFeatureConfig> SHORT_VINES = new VinesShortUA(NoFeatureConfig::deserialize);
@@ -167,6 +168,7 @@ public class FeatureUA
 		   DISK_DRY = registerFeature(DISK_DRY, "disk_dry_ua");
 		   COLUMN = registerFeature(COLUMN, "column_ua");
 		   RAMP = registerFeature(RAMP, "ramp_column_ua");
+		   GLOWPATCH = registerFeature(GLOWPATCH, "glowpatch_ua");
 		   BLUE_ICE_WATERFALL = registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
 		   CEILING_FLUID = registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
 		   ICE_AND_SNOW_UNDER_LEDGES = registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");

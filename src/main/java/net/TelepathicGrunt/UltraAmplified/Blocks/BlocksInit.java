@@ -26,7 +26,7 @@ public class BlocksInit {
 	public static GlowdirtBlock GLOWDIRT;
 
 	@ObjectHolder("ultra_amplified_mod:glowgrass_block")
-	public static GlowgrassBlock GLOWGRASS;
+	public static GlowgrassBlock GLOWGRASS_BLOCK;
 
 	@ObjectHolder("ultra_amplified_mod:glowmycelium")
 	public static GlowmyceliumBlock GLOWMYCELIUM;
@@ -61,7 +61,7 @@ public class BlocksInit {
 				new BlockItem(BlocksInit.GLOWSTONE_ORE, new Item.Properties()).setRegistryName("glowstone_ore"),
 				new BlockItem(BlocksInit.COARSE_GLOWDIRT, new Item.Properties()).setRegistryName("coarse_glowdirt"),
 				new BlockItem(BlocksInit.GLOWDIRT, new Item.Properties()).setRegistryName("glowdirt"),
-				new BlockItem(BlocksInit.GLOWGRASS, new Item.Properties()).setRegistryName("glowgrass_block"),
+				new BlockItem(BlocksInit.GLOWGRASS_BLOCK, new Item.Properties()).setRegistryName("glowgrass_block"),
 				new BlockItem(BlocksInit.GLOWMYCELIUM, new Item.Properties()).setRegistryName("glowmycelium"),
 				new BlockItem(BlocksInit.GLOWPODZOL, new Item.Properties()).setRegistryName("glowpodzol"),
 				new BlockItem(BlocksInit.GLOWSAND, new Item.Properties()).setRegistryName("glowsand"),

@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "ultra_amplified_mod:block/coarse_glowdirt3"
+    }
+}

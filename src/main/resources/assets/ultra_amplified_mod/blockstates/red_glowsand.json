@@ -4,7 +4,19 @@
             { "model": "ultra_amplified_mod:block/red_glowsand" },
             { "model": "ultra_amplified_mod:block/red_glowsand", "y": 180 },
             { "model": "ultra_amplified_mod:block/red_glowsand", "x": 180 },
-            { "model": "ultra_amplified_mod:block/red_glowsand", "z": 180 }
+            { "model": "ultra_amplified_mod:block/red_glowsand", "z": 180 },                                     
+            { "model": "ultra_amplified_mod:block/red_glowsand2" },
+            { "model": "ultra_amplified_mod:block/red_glowsand2", "y": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand2", "x": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand2", "z": 180 },                                     
+            { "model": "ultra_amplified_mod:block/red_glowsand3" },
+            { "model": "ultra_amplified_mod:block/red_glowsand3", "y": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand3", "x": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand3", "z": 180 },                                     
+            { "model": "ultra_amplified_mod:block/red_glowsand4" },
+            { "model": "ultra_amplified_mod:block/red_glowsand4", "y": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand4", "x": 180 },
+            { "model": "ultra_amplified_mod:block/red_glowsand4", "z": 180 }
         ]
     }
 }

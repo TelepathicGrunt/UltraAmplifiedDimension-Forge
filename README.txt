@@ -25,6 +25,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Patched bug that prevented most Wooded Badlands Plateau biome from spawning when config is set to only Badlands biomes for generation.
 ·Added config option to turn on and off column/ramp generation.
 ·Combined the structure generation and spawnrate config options into one to reduce number of configs. Set the structure spawnrate to 101 to turn off generation for that structure.
+·Added config option to affect the spawnrates of glowstone variant patches
 
      Biomes:
 ·Added Bamboo Jungle biome to generate in this mod along with some modification. Uses real Bamboo unlike the Sugar Cane that the 1.12 version of this mod used!
@@ -40,6 +41,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·The End biome has been changed so that terrain above Y = 70 generates Grass Blocks, Dirt, and Stone like most other biomes. Reduced spawnrate of Chorus Plant. Generates patches of Endstone, Endstone Bricks, and Obsidian. Spawns Berry Bushes, small amount of Tallgrass/Ferns, and a hybrid tree with Birch Trunk, Dark Oak Leaves, and a patch of Blue Terracotta at base of trunk.
 ·Added Barren End Field biome to make a thin border around the End biome for better biome transition. This biome is slightly less purple than the End biome, has a small amount of patches of Obsidian and Endstone, no trees, and can spawn Berry Bushes.
 ·Nether biome now has a thin Savanna border for better biome transition.
+·All biomes has patches of mainly Glowstone Ore blocks (and sometimes other Glowstone variants) between Y = 45 to 70 (some has Y = 60 as max) to provide light at top of the topmost Ravine maze and at top of Cave Caverns. They drop Glowstone dust and the base block when broken. Fortune and Silk Touch works on these blocks.
+·Most biomes now has patches of modded blocks that are variations of Glowstone infused terrain blocks to provide light under ledges. The variants are the following: Coarse Glowdirt, Glowdirt, Glowgrass Block, Glowmycelium, Glowpodzol, Glowsand, Glowstone Ore, and Red Glowsand. The biomes that does not have these patches above Y = 70 includes all snowy biomes, all ocean biomes, and most Badlands biomes.
+
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
@@ -53,7 +57,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed Ocean Monument bug preventing entrances to the Elder Guardian rooms from being made.
 ·Fixed Ocean Monument bug that let terrain blocks be generated in the Monument. Coral and Icebergs can rarely still be generated inside.
 ·Ocean Monument can be at a random height between Y = 67 and Y = 85 as they were at a fixed height at Y = 67 before to minimize the occurrence of the terrain block bug.
-·Added columns and ramps to most biomes to give a more cave-like appearance as well as make travel between layers of land easier.
+·Added columns and ramps to most biomes to give a more cave-like appearance as well as make travel between layers of land easier. All ocean biomes does not have columns/ramps. 
 
      Blocks:
      

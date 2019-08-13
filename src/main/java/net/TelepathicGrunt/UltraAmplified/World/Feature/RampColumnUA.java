@@ -3,9 +3,6 @@ package net.TelepathicGrunt.UltraAmplified.World.Feature;
 import java.util.Random;
 import java.util.function.Function;
 
-import org.apache.logging.log4j.Level;
-
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
@@ -140,7 +137,7 @@ public class RampColumnUA extends Feature<ColumnBlocksConfig>
         
         
         //position is valid for pillar gen.
-        UltraAmplified.Logger.log(Level.DEBUG, "Ramp at "+position.getX() +", "+position.getY()+", "+position.getZ() +"  | "+xTurningValue +", "+zTurningValue);
+        //UltraAmplified.Logger.log(Level.DEBUG, "Ramp at "+position.getX() +", "+position.getY()+", "+position.getZ() +"  | "+xTurningValue +", "+zTurningValue);
         
         
         //makes ramp

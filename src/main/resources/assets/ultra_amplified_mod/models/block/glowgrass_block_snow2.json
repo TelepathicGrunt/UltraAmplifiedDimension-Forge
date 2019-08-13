@@ -1,0 +1,9 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "particle": "ultra_amplified_mod:block/glowdirt2",
+        "bottom": "ultra_amplified_mod:block/glowdirt2",
+        "top": "ultra_amplified_mod:block/grass_block_top2",
+        "side": "ultra_amplified_mod:block/glowgrass_block_snow2"
+    }
+}

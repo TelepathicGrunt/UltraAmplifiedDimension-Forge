@@ -37,7 +37,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	    	 return Stream.empty();
 	     }
 	
-		 if (random.nextFloat() < 1.0F / chancesConfig.chance) {
+		 if (chancesConfig.chance != 0 && random.nextFloat() < 1.0F / chancesConfig.chance) {
 			 return Stream.of(pos.add(x-4, topYLayer-1, z-4));
 		 }
 

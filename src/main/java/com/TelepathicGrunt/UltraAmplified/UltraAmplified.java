@@ -11,12 +11,9 @@ import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraft.world.GrassColors;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,6 +29,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
  * 
  * @author TelepathicGrunt
  */
+		//workaround because the events for colors is firing before the blocks are registered which is causing a crash
+		//BlockColorManager.onBlockColorsInit(Minecraft.getInstance().getBlockColors());
+		//BlockColorManager.onItemColorsInit(Minecraft.getInstance().getItemColors(), Minecraft.getInstance().getBlockColors());
 @Mod(UltraAmplified.modid)
 public class UltraAmplified {
 	
@@ -50,8 +50,7 @@ public class UltraAmplified {
         
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::modConfig);
-        modEventBus.addListener(BlockColorManager::onBlockColorsInit);
-        modEventBus.addListener(BlockColorManager::onItemColorsInit);
+        modEventBus.register(new BlockColorManager());
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);

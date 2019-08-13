@@ -30,6 +30,8 @@ import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
 import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.ChanceRangeConfig;
+import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
@@ -59,6 +61,7 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 850)));
 
 		this.addStructureFeaturesUA();
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.GLOWPATCH, new CountConfig(100), Placement.CHANCE_RANGE, new ChanceRangeConfig((ConfigUA.glowstoneVariantsSpawnrate / 100f) * 0.4f, 45, 45, 60)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.CONTAIN_LIQUID, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.ICEBERG_UA, new IcebergConfig(Blocks.PACKED_ICE.getDefaultState()), CHANCE_ON_ALL_WATER_SURFACES_UA, new PercentageAndFrequencyConfig(0.35F, 3)));

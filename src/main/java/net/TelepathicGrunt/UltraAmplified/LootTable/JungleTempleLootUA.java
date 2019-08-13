@@ -1,11 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.LootTable;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
-
-import net.minecraftforge.fml.common.Mod;
-
-@Mod.EventBusSubscriber(modid = UltraAmplified.modid)
-public class JungleTempleLootInjection {
+public class JungleTempleLootUA {
 	
 	/**broke in 1.14 due to vanilla changing how loot tables internals work. Need to wait until forge implements a patch or workaround**/
 //	@SubscribeEvent
