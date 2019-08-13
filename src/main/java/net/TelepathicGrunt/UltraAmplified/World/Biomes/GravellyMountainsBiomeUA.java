@@ -10,7 +10,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.CountRangeAndType
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFrequencyConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -45,7 +45,7 @@ public class GravellyMountainsBiomeUA extends BiomeUA {
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.EXTREME_HILLS).depth(1.0F).scale(0.5F).temperature(0.5F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent("mountains"));
 		this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double) ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.STONE));
 		this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
+		this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig((float) (ConfigUA.caveCavitySpawnrate) / 1000)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 100)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig((float) (ConfigUA.ravineSpawnrate) / 850)));

@@ -7,7 +7,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFreq
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndHeightConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -46,7 +46,7 @@ public class LukewarmOceanBiomeUA extends BiomeUA {
 		      
 	    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double)ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.OCEAN));
 	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-	    	  this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
+	    	  this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));
 	    	  this.addStructure(FeatureUA.OCEAN_RUIN_UA, new OceanRuinConfig(OceanRuinStructure.Type.WARM, 0.3F, 0.9F));
 			  this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, IFeatureConfig.NO_FEATURE_CONFIG);
 			  this.addStructure(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.05F));

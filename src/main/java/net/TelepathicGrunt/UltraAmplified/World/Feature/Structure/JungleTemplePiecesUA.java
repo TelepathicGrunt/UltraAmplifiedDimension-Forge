@@ -16,13 +16,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.RedstoneSide;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.structure.ScatteredStructurePiece;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTables;
 
 public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	   private boolean mainChest;
@@ -30,6 +30,8 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	   private boolean trap1;
 	   private boolean trap2;
 	   private static final JungleTemplePiecesUA.MossStoneSelector MOSS_STONE_SELECTOR = new JungleTemplePiecesUA.MossStoneSelector();
+	   public static final ResourceLocation CHESTS_JUNGLE_TEMPLE_UA = new ResourceLocation("ultra_amplified_mod:chests/jungle_temple_ua");
+	   public static final ResourceLocation CHESTS_JUNGLE_TEMPLE_DISPENSER_UA = new ResourceLocation("ultra_amplified_mod:chests/jungle_temple_dispenser_ua");
 
 	   public JungleTemplePiecesUA(Random random, int x, int y, int z) {
 	      super(StructureInit.TEJPUA, random, x, y, z, 12, 10, 15);
@@ -173,8 +175,8 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE), 3, -1, 1, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.EAST, RedstoneSide.SIDE), 2, -1, 1, structureBoundingBoxIn);
 	         if (!this.trap1) {
-	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 3, -2, 1, Direction.NORTH, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 2, -2, 1, Direction.NORTH, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 3, -2, 1, Direction.NORTH, CHESTS_JUNGLE_TEMPLE_DISPENSER_UA);
+	            this.trap1 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 2, -2, 1, Direction.NORTH, CHESTS_JUNGLE_TEMPLE_DISPENSER_UA);
 	         }
 
 	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)), 3, -2, 2, structureBoundingBoxIn);
@@ -197,9 +199,9 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 9, -1, 3, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 9, -1, 2, structureBoundingBoxIn);
 	         if (!this.trap2) {
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 3, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 4, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
-	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 2, Direction.WEST, LootTables.CHESTS_JUNGLE_TEMPLE_DISPENSER);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 3, Direction.WEST, CHESTS_JUNGLE_TEMPLE_DISPENSER_UA);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 4, Direction.WEST, CHESTS_JUNGLE_TEMPLE_DISPENSER_UA);
+	            this.trap2 = this.createDispenser(worldIn, structureBoundingBoxIn, randomIn, 9, -2, 2, Direction.WEST, CHESTS_JUNGLE_TEMPLE_DISPENSER_UA);
 	         }
 
 	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -1, 3, structureBoundingBoxIn);
@@ -209,7 +211,7 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -1, 4, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)), 8, -2, 4, structureBoundingBoxIn);
 	         if (!this.mainChest) {
-	            this.mainChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 3, LootTables.CHESTS_JUNGLE_TEMPLE);
+	            this.mainChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 3, CHESTS_JUNGLE_TEMPLE_UA);
 	         }
 
 	         this.setBlockState(worldIn, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 9, -3, 2, structureBoundingBoxIn);
@@ -242,9 +244,9 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	         this.setBlockState(worldIn, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.WEST), 10, -1, 8, structureBoundingBoxIn);
 	         this.setBlockState(worldIn, Blocks.REPEATER.getDefaultState().with(RepeaterBlock.HORIZONTAL_FACING, Direction.NORTH), 10, -2, 10, structureBoundingBoxIn);
 	         if (!this.hiddenChest) {
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 10, LootTables.CHESTS_JUNGLE_TEMPLE);
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 9, LootTables.CHESTS_JUNGLE_TEMPLE);
-	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 8, LootTables.CHESTS_JUNGLE_TEMPLE);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 10, CHESTS_JUNGLE_TEMPLE_UA);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 9, CHESTS_JUNGLE_TEMPLE_UA);
+	            this.hiddenChest = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 9, -3, 8, CHESTS_JUNGLE_TEMPLE_UA);
 	         }
 
 	         return true;

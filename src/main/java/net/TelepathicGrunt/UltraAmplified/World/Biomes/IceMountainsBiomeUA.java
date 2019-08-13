@@ -6,7 +6,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.ColumnBlocksConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillagePiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
 import net.minecraft.block.Blocks;
@@ -30,7 +30,7 @@ public class IceMountainsBiomeUA extends BiomeUA {
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(ICE_MOUNTAIN_SURFACE_BUILDER, SNOWBLOCK_ICE_ICE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.45F).scale(0.3F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent((String) null));
 		this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double) ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.ICEY));
 		this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
+		this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));
 		this.addStructure(FeatureUA.IGLOO_UA, IFeatureConfig.NO_FEATURE_CONFIG);
 
 		this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.ICY));

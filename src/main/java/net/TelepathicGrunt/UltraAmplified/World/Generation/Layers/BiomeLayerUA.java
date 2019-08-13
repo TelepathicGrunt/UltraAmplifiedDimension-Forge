@@ -148,8 +148,11 @@ public class BiomeLayerUA implements IC0Transformer
         
         if(ConfigUA.jungle) {
 		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.JUNGLE, 70));
-		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BAMBOO_JUNGLE, 30));
         }
+        
+		if(ConfigUA.bambooJungle) {
+		    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BAMBOO_JUNGLE, 30));
+		}
 
         if(ConfigUA.giantTreeTaiga)
 		    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));

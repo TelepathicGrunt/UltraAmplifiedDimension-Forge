@@ -23,11 +23,11 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class NetherBridgeUA extends Structure<NetherBridgeConfigUA> 
+public class FortressUA extends Structure<FortressConfigUA> 
 {
 	private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3), new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5), new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
 
-	public NetherBridgeUA(Function<Dynamic<?>, ? extends NetherBridgeConfigUA> p_i51427_1_) {
+	public FortressUA(Function<Dynamic<?>, ? extends FortressConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -54,12 +54,12 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
    }
 
    public Structure.IStartFactory getStartFactory() {
-      return NetherBridgeUA.Start::new;
+      return FortressUA.Start::new;
    }
 
 
    public String getStructureName() {
-      return "Nether Fortress UA";
+      return "Fortress UA";
    }
 
    public int getSize() {
@@ -78,7 +78,7 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
       }
 
       public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
-         NetherBridgeConfigUA fortressconfig = (NetherBridgeConfigUA)generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
+         FortressConfigUA fortressconfig = (FortressConfigUA)generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
          this.genAboveSeaLevel = fortressconfig.surfaceAllow;
          boolean stoneVariant = false;
          
@@ -93,7 +93,7 @@ public class NetherBridgeUA extends Structure<NetherBridgeConfigUA>
         	 stoneVariant = true;
          }
          
-         NetherBridgePiecesUA.Start fortresspieces$start = new NetherBridgePiecesUA.Start(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, stoneVariant);
+         FortressPiecesUA.Start fortresspieces$start = new FortressPiecesUA.Start(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, stoneVariant);
          this.components.add(fortresspieces$start);
          
          

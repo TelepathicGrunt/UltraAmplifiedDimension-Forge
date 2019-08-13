@@ -66,7 +66,7 @@ public class WitchHutUA extends Structure<NoFeatureConfig> {
    }
    
    public String getStructureName() {
-      return "Swamp Hut UA";
+      return "Witch Hut UA";
    }
 
    public int getSize() {

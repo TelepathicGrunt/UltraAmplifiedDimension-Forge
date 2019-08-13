@@ -10,7 +10,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.CountRangeAndType
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFrequencyConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.NetherBridgeConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillagePiecesUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
 import net.minecraft.block.Blocks;
@@ -44,7 +44,7 @@ public class SnowyBeachBiomeUA extends BiomeUA {
 
 		this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double) ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.COLDORBIRCH));
 		this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-		this.addStructure(FeatureUA.FORTRESS_UA, new NetherBridgeConfigUA(false));
+		this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));
 		this.addStructure(FeatureUA.IGLOO_UA, IFeatureConfig.NO_FEATURE_CONFIG);
 
 		this.addStructure(FeatureUA.VILLAGE_UA, new VillageUAConfig(0, VillagePiecesUA.Type.ICY));
