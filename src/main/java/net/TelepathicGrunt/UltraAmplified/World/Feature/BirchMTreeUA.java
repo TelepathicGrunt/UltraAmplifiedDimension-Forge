@@ -23,11 +23,11 @@ public class BirchMTreeUA extends HugeTreesFeature<NoFeatureConfig> {
     private static final int randExtraHeight = 50;
     
     public BirchMTreeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, boolean useBaseHeightIn) {
-        super(configFactoryIn, doBlockNotifyOnPlace, 13, randExtraHeight, TRUNK, LEAF);
+        super(configFactoryIn, doBlockNotifyOnPlace, 18, randExtraHeight, TRUNK, LEAF);
         setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING);
      }
 
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) 
+    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundingBox) 
     {
         int height = this.getHeight(rand);
         IWorld world = (IWorld) worldIn;
@@ -38,7 +38,7 @@ public class BirchMTreeUA extends HugeTreesFeature<NoFeatureConfig> {
          } 
         else {
     		//adds the leaves on crown
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand, p_208519_5_, changedBlocks);
+            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height - 4, rand, boundingBox, changedBlocks);
 
             //adds the 2 by 2 wood trunk
             for (int currentHeight = 0; currentHeight < height; ++currentHeight)
@@ -47,7 +47,7 @@ public class BirchMTreeUA extends HugeTreesFeature<NoFeatureConfig> {
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.setLogState(changedBlocks, worldIn, position.up(currentHeight), TRUNK, p_208519_5_);
+                    this.setLogState(changedBlocks, worldIn, position.up(currentHeight), TRUNK, boundingBox);
                 }
 
                 if (currentHeight < height - 1)
@@ -56,21 +56,21 @@ public class BirchMTreeUA extends HugeTreesFeature<NoFeatureConfig> {
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 0), TRUNK, p_208519_5_);
+                        this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 0), TRUNK, boundingBox);
                     }
 
                     iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 1), TRUNK, p_208519_5_);
+                        this.setLogState(changedBlocks, worldIn, position.add(1, currentHeight, 1), TRUNK, boundingBox);
                     }
 
                     iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.setLogState(changedBlocks, worldIn, position.add(0, currentHeight, 1), TRUNK, p_208519_5_);
+                        this.setLogState(changedBlocks, worldIn, position.add(0, currentHeight, 1), TRUNK, boundingBox);
                     }
                 }
             }
@@ -81,17 +81,17 @@ public class BirchMTreeUA extends HugeTreesFeature<NoFeatureConfig> {
     }
 
     //this is set so that the crown is leaves in a cone shape 
-    private void createCrown(IWorldGenerationReader worldIn, int x, int z, int y, int extraRadiusSize, Random rand, MutableBoundingBox p_214596_7_, Set<BlockPos> p_214596_8_)
+    private void createCrown(IWorldGenerationReader worldIn, int x, int z, int y, Random rand, MutableBoundingBox p_214596_7_, Set<BlockPos> p_214596_8_)
     {
-        int i = this.baseHeight - (rand.nextInt(5) + 6);
-        int j = 0;
+        int depthOfLeaves = this.baseHeight - (rand.nextInt(5) + 10);
+        int currentRadius = 0;
 
-        for (int currentHeight = y - i; currentHeight <= y+10; ++currentHeight)
+        for (int currentHeight = y - depthOfLeaves; currentHeight <= y+5; ++currentHeight)
         {
-            int l = y - currentHeight;
-            int radius = extraRadiusSize + MathHelper.floor((float)l / (float)i * 2F);
-            this.func_222839_a(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((l > 0 && radius == j && (currentHeight & 1) == 0 ? 0.7 : 1)*4), p_214596_7_, p_214596_8_);
-            j = radius;
+            int heightDiff = y - currentHeight;
+            int radius = MathHelper.floor((float)heightDiff / (float)depthOfLeaves * 2F);
+            this.func_222839_a(worldIn, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == currentRadius && (currentHeight & 1) == 0 ? 0.5 : 1)*3.7), p_214596_7_, p_214596_8_);
+            currentRadius = radius;
         }
     }
 }

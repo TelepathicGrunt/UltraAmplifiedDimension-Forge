@@ -24,7 +24,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   int z = random.nextInt(16);
 	   int topYLayer = YPositionOfBelowLayer(worldIn, 255, random, pos.add(x, 0 ,z));
 	   
-	   if(topYLayer < 75) {
+	   if(topYLayer < 75 || chancesConfig.chance == 0) {
 		   return Stream.empty();
 	   }
 	   
@@ -37,7 +37,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	    	 return Stream.empty();
 	     }
 	
-		 if (chancesConfig.chance != 0 && random.nextFloat() < 1.0F / chancesConfig.chance) {
+		 if (random.nextFloat() < 1.0F / chancesConfig.chance) {
 			 return Stream.of(pos.add(x-4, topYLayer-1, z-4));
 		 }
 

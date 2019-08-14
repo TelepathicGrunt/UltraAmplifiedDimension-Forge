@@ -20,7 +20,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
      Config:
 ·Added config option for Pillager Outposts.
 ·Lava ocean config option now applies to Ocean biomes.
-·Fixed bug that prevented M variant biomes from spawning when setting config value to max m variant spawnrate.
+·Changed how M biome config option now affects the spawnrate of M variant biomes. It should be more uniform and consistent now and should work better
 ·Added config option for Bamboo Jungle generation.
 ·Patched bug that prevented most Wooded Badlands Plateau biome from spawning when config is set to only Badlands biomes for generation.
 ·Added config option to turn on and off column/ramp generation.
@@ -43,6 +43,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Nether biome now has a thin Savanna border for better biome transition.
 ·All biomes has patches of mainly Glowstone Ore blocks (and sometimes other Glowstone variants) between Y = 45 to 70 (some has Y = 60 as max) to provide light at top of the topmost Ravine maze and at top of Cave Caverns. 
 ·Most biomes now has patches of Glowstone variant blocks under their ledges to provide light (spawns at Y = 70 and higher). The biomes that does not have these patches includes all snowy biomes, all ocean biomes, and most Badlands biomes.
+·Patched bug that made Tall Birch Forest trees leaves break because the leaves were too far from the trunk. 
+·Patched bug that generated giant trees too close to build height limit and got them cut off in Dark Forest Hills biome.
 
      Structures:
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.

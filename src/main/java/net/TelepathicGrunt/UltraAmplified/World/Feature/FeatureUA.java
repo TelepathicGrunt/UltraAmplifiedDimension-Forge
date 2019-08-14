@@ -19,6 +19,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.OceanRuinsUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.PillagerOutpostUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.ShipwreckUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.WitchHutUA;
@@ -221,6 +222,7 @@ public class FeatureUA
 		   Feature.STRUCTURES.put("Village_UA".toLowerCase(Locale.ROOT), VILLAGE_UA);
 		   Feature.STRUCTURES.put("Pillager_Outpost_UA".toLowerCase(Locale.ROOT), PILLAGER_OUTPOST_UA);
 		   
+		   StructureInit.registerStructurePieces();
 	}
 
 	@SuppressWarnings("rawtypes")

@@ -9,6 +9,7 @@ import net.TelepathicGrunt.UltraAmplified.Blocks.BlockColorManager;
 import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksInit;
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -95,6 +96,7 @@ public class UltraAmplified {
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
+		StructureInit.registerStructurePieces();
 	}
 	
 	public void modConfig(ModConfig.ModConfigEvent event)

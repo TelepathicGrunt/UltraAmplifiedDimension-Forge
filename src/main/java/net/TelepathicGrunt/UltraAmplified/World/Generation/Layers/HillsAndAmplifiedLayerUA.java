@@ -22,11 +22,10 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 
    public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z) {
       int biomeId1 = area1.getValue(x + 1, z + 1);
-      int biomeId2 = area2.getValue(x + 1, z + 1);
 
       //first way to create m variant biomes of base biomes
-      int remainder = (biomeId2 - 2) % 29;
-      if (!BiomeGenHelper.isShallowOcean(biomeId1) && remainder != 0 && biomeId2 >= 2 && remainder <= ConfigUA.mutatedBiomeSpawnrate) {
+      int mFormValue = context.random(30 - ConfigUA.mutatedBiomeSpawnrate);
+      if (!BiomeGenHelper.isShallowOcean(biomeId1) && (mFormValue == 1 || ConfigUA.mutatedBiomeSpawnrate == 28)) {
          Biome biome = BiomeRegistry.getValue(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
@@ -36,7 +35,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
       
 
       //creates hills variants of biomes
-      if (context.random(3) == 0 || remainder == 0) {
+      if (context.random(3) == 0 || mFormValue == 0) {
          int biomeIdToReturn = biomeId1;
          
          if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(biomeId1)) {
@@ -58,7 +57,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 
          
          //second way to create m variant biomes of both base and hills biomes
-         if (ConfigUA.mutatedBiomeSpawnrate != 0 && remainder == 0 && biomeIdToReturn != biomeId1) {
+         if (ConfigUA.mutatedBiomeSpawnrate != 0 && mFormValue == 0 && biomeIdToReturn != biomeId1) {
             Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
             biomeIdToReturn = biomeTemp == null ? biomeId1 : BiomeRegistry.getID(biomeTemp);
          }

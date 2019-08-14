@@ -8,7 +8,6 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksInit;
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -28,11 +27,6 @@ public class GlowPatch extends Feature<CountConfig> {
 	}
 
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig) {
-		
-		//checks to see if user wants the patchs of glow stone variants
-		if(ConfigUA.glowstoneVariantsSpawnrate != 0) {
-			return false;
-		}
 		
 		//create the map here because it contains our modded blocks.
 		//If we make the map in the constructor or as a class field, it'll cause

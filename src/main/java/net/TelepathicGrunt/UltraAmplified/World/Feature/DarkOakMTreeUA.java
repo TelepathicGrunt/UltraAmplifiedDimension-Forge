@@ -32,7 +32,11 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
     {
         int height = 11 + rand.nextInt(3);
         IWorld world = (IWorld) worldIn;
-        
+
+        //checks to see if there is room to generate tree
+        if (!this.isSpaceAt(worldIn, position, height + 4)) {
+            return false;
+        } 
         
         BlockPos blockpos = position.down();
         boolean isSoil = world.getBlockState(blockpos).canSustainPlant(world, blockpos, net.minecraft.util.Direction.UP, (IPlantable)Blocks.DARK_OAK_SAPLING);
@@ -243,5 +247,32 @@ public class DarkOakMTreeUA extends AbstractTreeFeature<NoFeatureConfig> {
         }
 
         return true;
+     }
+    
+    
+    private boolean isSpaceAt(IWorldGenerationBaseReader worldIn, BlockPos leavesPos, int height) {
+        boolean flag = true;
+        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= worldIn.getMaxHeight()) {
+           for(int i = 0; i <= 1 + height; ++i) {
+              int j = 2;
+              if (i == 0) {
+                 j = 1;
+              } else if (i >= 1 + height - 2) {
+                 j = 2;
+              }
+
+              for(int k = -j; k <= j && flag; ++k) {
+                 for(int l = -j; l <= j && flag; ++l) {
+                    if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= worldIn.getMaxHeight() || !func_214587_a(worldIn, leavesPos.add(k, i, l))) {
+                       flag = false;
+                    }
+                 }
+              }
+           }
+
+           return flag;
+        } else {
+           return false;
+        }
      }
 }
