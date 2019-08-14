@@ -1,4 +1,4 @@
-    Made for Minecraft v.1.14.3
+    Made for Minecraft v.1.14.4
     Created by TelepathicGrunt
 
 Highly recommend using a strong computer with this mod! (May not be compatible with other mods that affects terrain shape gen or modifies vanilla biomes) 
@@ -10,6 +10,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ------------------------------------------------
        | Ultra Amplified mod changelog |
+       
+       
+             
+    (V.6.1 Changes) (1.14.4 Minecraft)
+    
+    Major Changes:
+·Now compatible with 1.14.4 as 1.14.3 wouldn't work in 1.14 due to some import changes and an accesstransformer issue.
        
              
     (V.6.0 Changes) (1.14.3 Minecraft)
