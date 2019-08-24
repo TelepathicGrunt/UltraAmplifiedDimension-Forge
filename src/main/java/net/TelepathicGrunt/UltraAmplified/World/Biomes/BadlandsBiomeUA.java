@@ -45,8 +45,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BadlandsBiomeUA extends BiomeUA {
+
+
 	public BadlandsBiomeUA() {
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(BADLANDS_SURFACE_BUILDER_UA, SurfaceBuilder.RED_SAND_WHITE_TERRACOTTA_GRAVEL_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.MESA).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String) null));
+
 		this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA((double) ConfigUA.mineshaftSpawnrate, MineshaftUA.Type.MESA));
 		this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
 		this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));

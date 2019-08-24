@@ -72,6 +72,9 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedBadlandsPlateauBiom
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedMountainsBiomeUA;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeType;
@@ -303,8 +306,14 @@ public class BiomeInit {
 						WARM_OCEAN,
 						BARREN_END_FIELD
 					};
+
 	}
-	
+
+
+
+
+
+
 	//adds biome to registry with their type
 	private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types) {
 		biome.setRegistryName(name.toLowerCase().replace(' ', '_'));
@@ -352,14 +361,7 @@ public class BiomeInit {
     	BASE_TO_MUTATION_MAP.put(SWAMP, SWAMP_HILLS);
     	BASE_TO_MUTATION_MAP.put(TAIGA, TAIGA_MOUNTAINS);
     }
-    
-	@Nullable
-    public static Biome getMutationForBiome(Biome biome)
-    {
-		//returns the M variant of the given biome
-		return BASE_TO_MUTATION_MAP.get(biome);
-    }
-    
+
     
 	//Handles conversion between Hills form and non-M form biomes in GenLayerHillsUA. 
 	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods

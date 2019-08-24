@@ -1,6 +1,8 @@
 package com.TelepathicGrunt.UltraAmplified;
 
 
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
+import net.minecraft.world.gen.feature.Feature;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -86,6 +88,15 @@ public class UltraAmplified {
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
 			BlocksInit.registerItems(event);
 			Logger.log(Level.INFO, "Items registered.");
+		}
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register features.
+		 */
+		@SubscribeEvent
+		public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
+			FeatureUA.registerFeatures(event);
+			Logger.log(Level.INFO, "features registered.");
 		}
 	}
 	

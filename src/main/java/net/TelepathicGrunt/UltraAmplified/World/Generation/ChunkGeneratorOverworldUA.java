@@ -51,8 +51,8 @@ public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGe
 	      WorldEntitySpawner.performWorldGenSpawning(region, biome, i, j, sharedseedrandom);
 	   }
 
-	   protected void func_222548_a(double[] p_222548_1_, int p_222548_2_, int p_222548_3_) {
-	      this.func_222546_a(p_222548_1_, p_222548_2_, p_222548_3_, (double)(ConfigUA.secretSetting ? 117104.946F : 684.412F), (double)468419.786F, 8.55515F, (ConfigUA.secretSetting ? 73.1905915F : 428.613F), 8.555149841308594D, 4.277574920654297D, 3, -10);
+	   protected void func_222548_a(double[] areaArrayIn, int x, int z) {
+	      this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : 684.412D, ConfigUA.secretSetting ? 468419.786D : 68419.786D, 8.55515F, ConfigUA.secretSetting ? 73.1905915D : 428.613D, 8.555149841308594D, 4.277574920654297D, 3, -10);
 	   }
 
 	   protected double func_222545_a(double p_222545_1_, double p_222545_3_, int p_222545_5_) {

@@ -4,11 +4,9 @@ gradle/
 .settings/
 run/
 build/
+out/
 .classpath
 .project
-forge-1.14.4-UA_Client.launch
-forge-1.14.4-UA_Server.launch
-forge-1.14.4-UA_Data.launch
 runServer.launch
 runClient.launch
 runData.launch

@@ -42,7 +42,7 @@ public class AtBottomOfRandomLayerUA extends Placement<CountRangeConfig> {
 	private int YPositionOfBottomOfLayer(IWorld worldIn, int height, Random random, BlockPos pos, CountRangeConfig placementConfig) {
 
 		// if height is inside a non-air block, move up until we reached an air block
-		while (height < placementConfig.maximum) {
+		while (height < 255) {
 			if (worldIn.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}
@@ -52,7 +52,7 @@ public class AtBottomOfRandomLayerUA extends Placement<CountRangeConfig> {
 
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
-		while (height < placementConfig.maximum) {
+		while (height < 255) {
 			if (!worldIn.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}

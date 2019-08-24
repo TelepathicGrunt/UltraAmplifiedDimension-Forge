@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.util.SharedSeedRandom;
 import org.apache.logging.log4j.Level;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
@@ -34,24 +35,33 @@ public class StrongholdUA extends Structure<NoFeatureConfig> {
 		super(p_i51427_1_);
 	}
 
-/** is spawned false and set true once the defined BiomeGenBases were compared with the present ones */
-   private boolean ranBiomeCheck;
-   private ChunkPos[] structureCoords;
-   private final List<StructureStart> structureList = Lists.newArrayList();
-   private long seed;
+   protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+      int maxDistance = ConfigUA.strongholdSpawnrate;
+      int minDistance = maxDistance - 10;
+      if(maxDistance < 12 ) {
+         minDistance = maxDistance - 1;
+      }
+      int k = x + maxDistance * spacingOffsetsX;
+      int l = z + maxDistance * spacingOffsetsZ;
+      int i1 = k < 0 ? k - maxDistance + 1 : k;
+      int j1 = l < 0 ? l - maxDistance + 1 : l;
+      int k1 = i1 / maxDistance;
+      int l1 = j1 / maxDistance;
+      ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, 143523564);
+      k1 = k1 * maxDistance;
+      l1 = l1 * maxDistance;
+      k1 = k1 + random.nextInt(maxDistance - minDistance);
+      l1 = l1 + random.nextInt(maxDistance - minDistance);
+      return new ChunkPos(k1, l1);
+   }
+
 
    public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
-      if (this.seed != chunkGen.getSeed()) {
-         this.resetData();
-      }
 
-      if (!this.ranBiomeCheck) {
-         this.reinitializeData(chunkGen);
-         this.ranBiomeCheck = true;
-      }
-
-      for(ChunkPos chunkpos : this.structureCoords) {
-         if ((ConfigUA.strongholdGeneration) && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+      ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+      if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
+         Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos(chunkPosX * 16 + 9, 0, chunkPosZ * 16 + 9));
+         if ((ConfigUA.strongholdSpawnrate != 501) && chunkGen.hasStructure(biome, this)) {
             return true;
          }
       }
@@ -59,128 +69,18 @@ public class StrongholdUA extends Structure<NoFeatureConfig> {
       return false;
    }
 
-   /**
-    * Resets the current available data on the stronghold structure, since biome checks and existing structure
-    * coordinates are needed to properly generate strongholds.
-    */
-   private void resetData() {
-      this.ranBiomeCheck = false;
-      this.structureCoords = null;
-      this.structureList.clear();
-   }
-
-   protected boolean isEnabledIn(IWorld worldIn) {
-      return worldIn.getWorldInfo().isMapFeaturesEnabled();
-   }
-
    public Structure.IStartFactory getStartFactory() {
       return StrongholdUA.Start::new;
    }
 
    public String getStructureName() {
-      return "Stronghold UA";
+      return "Stronghold";
    }
 
    public int getSize() {
       return 8;
    }
 
-
-   @Nullable
-   public BlockPos findNearest(World worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, BlockPos pos, int radius, boolean p_211405_5_) {
-      if (!chunkGenerator.getBiomeProvider().hasStructure(this)) {
-         return null;
-      } else {
-         if (this.seed != worldIn.getSeed()) {
-            this.resetData();
-         }
-
-         if (!this.ranBiomeCheck) {
-            this.reinitializeData(chunkGenerator);
-            this.ranBiomeCheck = true;
-         }
-
-         BlockPos blockpos = null;
-         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-         double d0 = Double.MAX_VALUE;
-
-         for(ChunkPos chunkpos : this.structureCoords) {
-            blockpos$mutableblockpos.setPos((chunkpos.x << 4) + 8, 32, (chunkpos.z << 4) + 8);
-            double d1 = blockpos$mutableblockpos.distanceSq(pos);
-            if (blockpos == null) {
-               blockpos = new BlockPos(blockpos$mutableblockpos);
-               d0 = d1;
-            } else if (d1 < d0) {
-               blockpos = new BlockPos(blockpos$mutableblockpos);
-               d0 = d1;
-            }
-         }
-
-         return blockpos;
-      }
-   }
-
-   /**
-    * Re-initializes the stronghold information needed to generate strongholds. Due to the requirement to rely on seeds
-    * and other settings provided by the chunk generator, each time the structure is used on a different seed, this can
-    * be called multiple times during the game lifecycle.
-    */
-   private void reinitializeData(ChunkGenerator<?> generator) {
-      this.seed = generator.getSeed();
-      List<Biome> list = Lists.newArrayList();
-
-      for(Biome biome : ForgeRegistries.BIOMES) {
-         if (biome != null && generator.hasStructure(biome, FeatureUA.STRONGHOLD_UA)) {
-            list.add(biome);
-         }
-      }
-
-      int distance = (int)ConfigUA.strongholdDistance;
-      int numberOfStrongholds = ConfigUA.strongholdNumberPerWorld;
-      int spread = ConfigUA.strongholdSpread;
-      this.structureCoords = new ChunkPos[numberOfStrongholds];
-      int j = 0;
-      for(StructureStart structurestart : this.structureList) {
-         if (j < this.structureCoords.length) {
-            this.structureCoords[j++] = new ChunkPos(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
-         }
-      }
-
-      Random random = new Random();
-      random.setSeed(generator.getSeed());
-      double d1 = random.nextDouble() * Math.PI * 2.0D;
-      int k = j;
-      if (k < this.structureCoords.length) {
-         int l = 0;
-         int i1 = 0;
-
-         for(int j1 = 0; j1 < this.structureCoords.length; ++j1) {
-            double d0 = (double)(4 * distance + distance * i1 * 6) + (random.nextDouble() - 0.5D) * (double)distance * 2.5D;
-            int k1 = (int)Math.round(Math.cos(d1) * d0);
-            int l1 = (int)Math.round(Math.sin(d1) * d0);
-            BlockPos blockpos = generator.getBiomeProvider().findBiomePosition((k1 << 4) + 8, (l1 << 4) + 8, 112, list, random);
-            if (blockpos != null) {
-               k1 = blockpos.getX() >> 4;
-               l1 = blockpos.getZ() >> 4;
-            }
-
-            if (j1 >= k) {
-               this.structureCoords[j1] = new ChunkPos(k1, l1);
-            }
-
-            d1 += (Math.PI * 2D) / (double)spread;
-            ++l;
-            if (l == spread) {
-               ++i1;
-               l = 0;
-               spread = spread + 2 * spread / (i1 + 1);
-               spread = Math.min(spread, this.structureCoords.length - j1);
-               d1 += random.nextDouble() * Math.PI * 2.0D;
-            }
-         }
-      }
-
-   }
 
    public static class Start extends StructureStart {
 	  public Start(Structure<?> p_i50780_1_, int p_i50780_2_, int p_i50780_3_, Biome p_i50780_4_, MutableBoundingBox p_i50780_5_, int p_i50780_6_, long p_i50780_7_) {

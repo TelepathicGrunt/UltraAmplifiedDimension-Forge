@@ -47,11 +47,8 @@ public class ConfigUA {
     public static int oceanMonumentSpawnrate = 22;
     public static int oceanRuinsSpawnrate = 7;
     public static int shipwreckSpawnrate = 7;
-    public static double strongholdDistance = 10.0;
-    public static int strongholdNumberPerWorld = 128;
-    public static int strongholdSpread = 4;
+    public static int strongholdSpawnrate = 62;
     public static double silverfishStrongholdSpawnrate = 4D;
-    public static boolean strongholdGeneration = true;
     public static int netherFortressSpawnrate = 14;
     public static boolean netherFortressAboveground = true;
     public static boolean netherFortressUnderground = true;
@@ -106,6 +103,7 @@ public class ConfigUA {
     public static int magmaSpawnrate = 5;
     public static int lavaSpawnrate = 70;
     public static int glowstoneVariantsSpawnrate = 50;
+    public static boolean rootGen = true;
 
     
     public static class ServerConfig
@@ -133,11 +131,8 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue oceanMonumentSpawnrate;
 		public final ForgeConfigSpec.IntValue oceanRuinsSpawnrate;
 		public final ForgeConfigSpec.IntValue shipwreckSpawnrate;
-		public final ForgeConfigSpec.DoubleValue strongholdDistance;
-		public final ForgeConfigSpec.IntValue strongholdNumberPerWorld;
-		public final ForgeConfigSpec.IntValue strongholdSpread;
+		public final ForgeConfigSpec.IntValue strongholdSpawnrate;
 		public final ForgeConfigSpec.DoubleValue silverfishStrongholdSpawnrate;
-		public final ForgeConfigSpec.BooleanValue strongholdGeneration;
 		public final ForgeConfigSpec.IntValue netherFortressSpawnrate;
 		public final ForgeConfigSpec.BooleanValue netherFortressAboveground;
 		public final ForgeConfigSpec.BooleanValue netherFortressUnderground;
@@ -192,6 +187,7 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue magmaSpawnrate;
 		public final ForgeConfigSpec.IntValue lavaSpawnrate;
 		public final ForgeConfigSpec.IntValue glowstoneVariantsSpawnrate;
+		public final ForgeConfigSpec.BooleanValue rootGen;
 
         ServerConfig(ForgeConfigSpec.Builder builder) 
         {
@@ -247,6 +243,13 @@ public class ConfigUA {
 	                    		+"0 for no patches and 100 for max amount of patches.")
 	                    .translation("ultraamplified.config.structure.glowstonevariantsspawnrate")
 	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 100);
+	            		
+
+	            		rootGen = builder
+	                    .comment("\r\nControls whether roots spawn or not on the underside of the floating land.")
+	                    .translation("ultraamplified.config.structure.rootgen")
+	                    .define("rootGen", true);
+
 	                    
             builder.push("Biome-Based Structure Options");
             
@@ -262,7 +265,7 @@ public class ConfigUA {
             
             		villageSpawnrate = builder
                     .comment("\r\nHow rare are Villages.\r\n"
-                    		 +"1 for Village spawning in most chunk and 101 for no spawn.")
+                    		 +"1 for Village spawning in most chunks and 101 for no spawn.")
                     .translation("ultraamplified.config.structure.villagespawnrate")
                     .defineInRange("villageSpawnrate", 16, 1, 101);
 
@@ -291,69 +294,57 @@ public class ConfigUA {
             
             		
             		mansionSpawnrate = builder
-            		.comment("\r\nHow rare are Woodland Mansion." + "\n" + "1 for Woodland Mansion spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Woodland Mansion." + "\n" + "1 for Woodland Mansion spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.mansionspawnrate")
             		.defineInRange("mansionSpawnrate", 18, 1, 101);
 
 
             		desertTempleSpawnrate = builder
-            		.comment("\r\nHow rare are Desert Temples." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Desert Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.deserttemplespawnrate")
             		.defineInRange("desertTempleSpawnrate", 20, 1, 101);
 
             		
             		jungleTempleSpawnrate = builder
-            		.comment("\r\nHow rare are Jungle Temples." + "\n" + "1 for a spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Jungle Temples." + "\n" + "1 for a spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.jungletemplespawnrate")
             		.defineInRange("jungleTempleSpawnrate", 20, 1, 101);
 
             		
             		iglooSpawnrate = builder
-            		.comment("\r\nHow rare are igloos." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are igloos." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.igloospawnrate")
             		.defineInRange("iglooSpawnrate", 14, 1, 101);
 
             		
             		witchHutSpawnrate = builder
-            		.comment("\r\nHow rare are Witch Huts." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Witch Huts." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.witchhutspawnrate")
             		.defineInRange("witchHutSpawnrate", 14, 1, 101);
 
             		
             		oceanMonumentSpawnrate = builder
-            		.comment("\r\nHow rare are Ocean Monuments." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Ocean Monuments." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.oceanmonumentspawnrate")
             		.defineInRange("oceanMonumentSpawnrate", 22, 1, 101);
 
             		
             		oceanRuinsSpawnrate = builder
-            		.comment("\r\nHow rare are Ocean Ruins." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Ocean Ruins." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.oceanruinsspawnrate")
             		.defineInRange("oceanRuinsSpawnrate", 7, 1, 101);
 
             		
             		shipwreckSpawnrate = builder
-            		.comment("\r\nHow rare are Shipwrecks." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Shipwrecks." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.shipwreckspawnrate")
             		.defineInRange("shipwreckSpawnrate", 7, 1, 101);
 
 
-            		strongholdDistance = builder
-            		.comment("\r\nMinimum closest distance Strongholds can spawn to each other." + "\n" + "1 for closest distance and 1000 for max distance between Strongholds.")
-            		.translation("ultraamplified.config.structure.strongholddistance")
-            		.defineInRange("strongholdDistance", 10.0, 1, 1000);
-
-
-            		strongholdNumberPerWorld = builder
-            		.comment("\r\nHow many Strongholds spawn in a world." + "\n" + "1 for 1 Strongholds in an entire world and 5000 for maximum number of Strongholds.")
-            		.translation("ultraamplified.config.structure.strongholdnumberperworld")
-            		.defineInRange("strongholdNumberPerWorld", 128, 1, 5000);
-
-
-            		strongholdSpread = builder
-            		.comment("\r\nHow clustered towards spawn the Strongholds will be." + "\n" + "1 for Strongholds to be farthest from spawn and 100 for closest spawn distance.")
-            		.translation("ultraamplified.config.structure.strongholdspread")
-            		.defineInRange("strongholdSpread", 4, 1, 100);
+            		strongholdSpawnrate = builder
+            		.comment("\r\nHow rare are Strongholds." + "\n" + "1 for spawning in most chunks and 501 for no spawn.")
+            		.translation("ultraamplified.config.structure.strongholdspawnrate")
+            		.defineInRange("strongholdSpawnrate", 62, 1, 501);
 
 
             		silverfishStrongholdSpawnrate = builder
@@ -362,14 +353,8 @@ public class ConfigUA {
             		.defineInRange("silverfishStrongholdSpawnrate", 4D, 0, 100);
 
 
-            		strongholdGeneration = builder
-            		.comment("\r\nControls whether Strongholds spawn or not.")
-            		.translation("ultraamplified.config.structure.strongholdgeneration")
-            		.define("strongholdGeneration", true);
-
-
             		netherFortressSpawnrate = builder
-            		.comment("\r\nHow rare are Nether Fortresses." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Nether Fortresses." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.netherfortressspawnrate")
             		.defineInRange("netherFortressSpawnrate", 14, 1, 101);
 
@@ -385,13 +370,13 @@ public class ConfigUA {
             		
 
             		endCitySpawnrate = builder
-            		.comment("\r\nHow rare are End Cities." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are End Cities." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.endcityspawnrate")
             		.defineInRange("endCitySpawnrate", 22, 1, 101);
             		
             	    
             	    pillageOutpostRarity = builder
-            		.comment("\r\nHow rare are Pillager Outposts." + "\n" + "1 for spawning in most chunk and 101 for no spawn.")
+            		.comment("\r\nHow rare are Pillager Outposts." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.pillageoutpostrarity")
             		.defineInRange("pillageOutpostRarity", 20, 1, 101);
             		
@@ -414,9 +399,9 @@ public class ConfigUA {
 
 
             		mutatedBiomeSpawnrate = builder
-            		.comment("\r\nHow often the mutated form of a biome will generate" + "\n" + "0 for no mutated biomes and 28 for all biomes to be mutated.")
+            		.comment("\r\nHow often the mutated form of a biome will generate" + "\n" + "0 for no mutated biomes and 10 for all biomes to be mutated.")
             		.translation("ultraamplified.config.structure.mutatedbiomespawnrate")
-            		.defineInRange("mutatedBiomeSpawnrate", 2, 0, 28);
+            		.defineInRange("mutatedBiomeSpawnrate", 2, 0, 10);
 
 
             		seaLevel = builder
@@ -723,11 +708,8 @@ public class ConfigUA {
     	oceanMonumentSpawnrate = SERVER.oceanMonumentSpawnrate.get();
     	oceanRuinsSpawnrate = SERVER.oceanRuinsSpawnrate.get();
     	shipwreckSpawnrate = SERVER.shipwreckSpawnrate.get();
-    	strongholdDistance = SERVER.strongholdDistance.get();
-    	strongholdNumberPerWorld = SERVER.strongholdNumberPerWorld.get();
-    	strongholdSpread = SERVER.strongholdSpread.get();
+		strongholdSpawnrate = SERVER.strongholdSpawnrate.get();
     	silverfishStrongholdSpawnrate = SERVER.silverfishStrongholdSpawnrate.get();
-    	strongholdGeneration = SERVER.strongholdGeneration.get();
     	netherFortressSpawnrate = SERVER.netherFortressSpawnrate.get();
     	netherFortressAboveground = SERVER.netherFortressAboveground.get();
     	netherFortressUnderground = SERVER.netherFortressUnderground.get();
@@ -782,5 +764,6 @@ public class ConfigUA {
     	magmaSpawnrate = SERVER.magmaSpawnrate.get();
     	lavaSpawnrate = SERVER.lavaSpawnrate.get();
     	glowstoneVariantsSpawnrate = SERVER.glowstoneVariantsSpawnrate.get();
+    	rootGen = SERVER.rootGen.get();
     }
 }

@@ -13,14 +13,7 @@ import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddMushroomBiomeLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddOceansLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddSunflowerPlainsLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeDebugLayer;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeEdgeLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.HillsAndAmplifiedLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.MixOceanLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.*;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -101,54 +94,51 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	   
      int biomeSize = ConfigUA.biomeSize;
 	 
-	 IAreaFactory<T> iareafactory = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
-      iareafactory = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(1L), iareafactory);
-      iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2001L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(50L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(70L), iareafactory);
-      iareafactory = RemoveTooMuchOceanLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      IAreaFactory<T> iareafactory1 = new AddOceansLayerUA().apply(contextFactory.apply(2L));
-      iareafactory1 = LayerUtil.repeat(2001L, ZoomLayer.NORMAL, iareafactory1, (int)(biomeSize*1.4), contextFactory);
-      iareafactory = AddSnowLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(3L), iareafactory);
-      iareafactory = EdgeLayer.CoolWarm.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      iareafactory = EdgeLayer.HeatIce.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-      iareafactory = EdgeLayer.Special.INSTANCE.apply(contextFactory.apply(3L), iareafactory);
-      iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2002L), iareafactory);
-      iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2003L), iareafactory);
-      iareafactory = AddIslandLayer.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
-      iareafactory = AddMushroomBiomeLayerUA.INSTANCE.apply(contextFactory.apply(5L), iareafactory);
-      iareafactory = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
-      
+	 IAreaFactory<T> areaFactory1 = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
+      areaFactory1 = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(1L), areaFactory1);
+      areaFactory1 = ZoomLayer.NORMAL.apply(contextFactory.apply(2001L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(50L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(70L), areaFactory1);
+      areaFactory1 = RemoveTooMuchOceanLayer.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+      IAreaFactory<T> areaFactory2 = new AddOceansLayerUA().apply(contextFactory.apply(2L));
+      areaFactory2 = LayerUtil.repeat(2001L, ZoomLayer.NORMAL, areaFactory2, (int)(biomeSize*1.4), contextFactory);
+      areaFactory1 = AddSnowLayer.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(3L), areaFactory1);
+      areaFactory1 = EdgeLayer.CoolWarm.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+      areaFactory1 = EdgeLayer.HeatIce.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+      areaFactory1 = EdgeLayer.Special.INSTANCE.apply(contextFactory.apply(3L), areaFactory1);
+      areaFactory1 = ZoomLayer.NORMAL.apply(contextFactory.apply(2002L), areaFactory1);
+      areaFactory1 = ZoomLayer.NORMAL.apply(contextFactory.apply(2003L), areaFactory1);
+      areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(4L), areaFactory1);
+      areaFactory1 = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, areaFactory1, 0, contextFactory);
+      IAreaFactory<T> lvt_7_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, areaFactory1, 0, contextFactory);
 
-      IAreaFactory<T> lvt_7_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
-     // lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply(contextFactory.apply(100L), lvt_7_1_);
-      
+
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), iareafactory));
-      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), iareafactory));
-      
-      
-      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
-      
-      //creates biomes that border incompatible biomes
-      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      
-      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
-      
-      //generates the hills and Amplified variants/patches of biomes
-      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-	  
-
-      for(int k = 0; k < biomeSize; ++k) {
-         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
-      }
-
-      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, iareafactory1);
+      IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1));
+//      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), areaFactory1));
+//
+//
+//      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
+//
+//      //creates biomes that border incompatible biomes
+//      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//
+//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
+//
+//      //generates the hills and M variants/patches of biomes
+//      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+//      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+//
+//
+//      for(int k = 0; k < biomeSize; ++k) {
+//         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+//      }
+//
+//      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, areaFactory2);
       
       IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
       return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);

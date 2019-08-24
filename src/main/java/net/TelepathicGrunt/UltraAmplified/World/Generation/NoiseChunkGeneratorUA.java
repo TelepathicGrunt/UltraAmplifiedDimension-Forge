@@ -84,7 +84,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 4));
 	}
 
-	private double setupPerlinNoiseGenerators(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_8_, double p_222552_10_) {
+	private double internalSetupPerlinNoiseGenerators(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_10_) {
 		double d0 = 0.0D;
 		double d1 = 0.0D;
 		double d2 = 0.0D;
@@ -118,15 +118,15 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		return adouble;
 	}
 
-	protected void func_222546_a(double[] p_222546_1_, int x, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222546_8_, double p_222546_10_, int p_222546_12_, int p_222546_13_) {
-		double[] adouble = this.func_222549_a(x, z);
-		double d0 = adouble[0];
-		double d1 = adouble[1];
+	protected void setupPerlinNoiseGenerators(double[] areaArrayIn, int x, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222546_8_, double p_222546_10_, int p_222546_12_, int p_222546_13_) {
+		double[] localAreaArray = this.func_222549_a(x, z);
+		double d0 = localAreaArray[0];
+		double d1 = localAreaArray[1];
 		double d2 = this.func_222551_g();
 		double d3 = this.func_222553_h();
 
 		for (int y = 0; y < this.func_222550_i(); ++y) {
-			double d4 = this.setupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_8_, p_222546_10_);
+			double d4 = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_10_);
 			d4 = d4 - this.func_222545_a(d0, d1, y);
 			if ((double) y > d2) {
 				d4 = MathHelper.clampedLerp(d4, (double) p_222546_13_, ((double) y - d2) / (double) p_222546_12_);
@@ -134,7 +134,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - (double) y) / (d3 - 1.0D));
 			}
 
-			p_222546_1_[y] = d4;
+			areaArrayIn[y] = d4;
 		}
 
 	}

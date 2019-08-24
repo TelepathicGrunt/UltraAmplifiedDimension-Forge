@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public enum BiomeGenHelper {
    instance;
-   private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
+   public static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
 	
    public static final int PLAINS = BiomeRegistry.getID(BiomeInit.PLAINS);
    public static final int SWAMP = BiomeRegistry.getID(BiomeInit.SWAMP);
@@ -48,6 +48,8 @@ public enum BiomeGenHelper {
    public static final int NETHER = BiomeRegistry.getID(BiomeInit.NETHER);
    public static final int END = BiomeRegistry.getID(BiomeInit.END);
    public static final int BARREN_END_FIELD = BiomeRegistry.getID(BiomeInit.BARREN_END_FIELD);
+   public static final int SNOWY_BEACH = BiomeRegistry.getID(BiomeInit.SNOWY_BEACH);
+   public static final int STONE_BEACH = BiomeRegistry.getID(BiomeInit.STONE_SHORE);
 
    public static final int VANILLA_OCEAN = BiomeRegistry.getID(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = BiomeRegistry.getID(Biomes.DEEP_OCEAN);

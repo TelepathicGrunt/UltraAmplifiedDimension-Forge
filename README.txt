@@ -11,8 +11,29 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ------------------------------------------------
        | Ultra Amplified mod changelog |
        
-       
-             
+
+    (V.6.2 Changes) (1.14.4 Minecraft)
+
+     Terrain:
+·Adjusted terrain so top layers islands are less frequent. Feedback on this change would be appreciated.
+
+     Config:
+·Made the M form config now correctly make an actual area M form instead of tiny chunk size patches of the M biomes.
+·Config values for Plains, Savanna, and Wooded Mountains biome now correctly applies when these biomes tries to generate as a border separation between certain biomes.
+·Stronghold config values changed to reflect the new way Strongholds generate and the config values now applies correctly.
+
+     Biomes:
+·Snowy Beach biome now spawns less often on land and will now also spawn along edges of where snowy biomes meets oceans.
+·Stone Beach biome now spawns less often on land and will now also spawn along edges of where Extreme Hills biomes meets oceans.
+·Mushroom Biomes will no longer spawn in ocean biomes but will continue to generate on land like it has before. This is because the ocean biomes looks better when it is mainly ocean and not interrupted by the Mushroom biome.
+·Glowstone variant patches are more tighter and will now not be placed where light from the sky is too bright. This will keep the patches of glowstone blocks more under ledges in the dark
+
+     Structures:
+·Strongholds now generate like other structures instead of being limited to a certain number per world so it is easier to find Strongholds.
+·Fixed bug that prevented Ender Eyes from pointing to closest Stronghold.
+·Locate command now works and will find all main structures. (Cannot find Stonehenge or Sun Shrine)
+
+
     (V.6.1 Changes) (1.14.4 Minecraft)
     
     Major Changes:
