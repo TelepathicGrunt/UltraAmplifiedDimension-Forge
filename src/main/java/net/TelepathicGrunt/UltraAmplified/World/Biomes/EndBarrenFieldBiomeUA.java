@@ -72,7 +72,7 @@ public class EndBarrenFieldBiomeUA extends BiomeUA {
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public int getSkyColorByTemp(float currentTemperature) {
-		return 5555;
+		return 2369577;
 	}
 
 	@OnlyIn(Dist.CLIENT)

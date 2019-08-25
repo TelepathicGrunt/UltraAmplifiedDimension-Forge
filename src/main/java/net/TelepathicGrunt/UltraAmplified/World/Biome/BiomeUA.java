@@ -50,6 +50,8 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillagePiecesU
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.carver.WorldCarver;
@@ -72,6 +74,8 @@ import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BiomeUA extends Biome {
 
@@ -168,4 +172,46 @@ public class BiomeUA extends Biome {
       this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(FeatureUA.PILLAGER_OUTPOST_UA, new PillagerOutpostConfig(0.05D), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
     }
 
+
+	
+	//Currently does not work well. only changes sky color when X/Z coordinates changes
+	//requires a javascript coremod to get working
+//	//We cannot change the getSkyBlendColour method in ForgeHooksClient class so we have to do this ugly workaround
+//	//This will be where y coordinate is stored from getTemperature and is used by getSkyColorByTemp
+//	@OnlyIn(Dist.CLIENT)
+//	protected static int yPos = 0;
+//	
+//	/**
+//	 * takes temperature, returns color
+//	 */
+//	//Darken the sky the lower the player is
+//	@OnlyIn(Dist.CLIENT)
+//    public int getSkyColorByTemp(float currentTemperature) {
+//       currentTemperature = currentTemperature / 3.0F;
+//       currentTemperature = MathHelper.clamp(currentTemperature, -1.0F, 1.0F);
+//       
+//       //starts making sky darker below y = 230 and reaches maximum darkness at y = 175 by the last argument
+//       return MathHelper.hsvToRGB(
+//    		   0.62222224F - currentTemperature * 0.05F,  //hue
+//    		   0.5F + currentTemperature * 0.1F,   //saturation
+//    		   Math.max(Math.min((yPos-175F)/55, 1.0F), 0)  //value
+//    		  );
+//    }
+//
+//    /**
+//     * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
+//     * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
+//     */
+//    //Grabs the y coordinate to store for getSkyColorByTemp method later. 
+//     @OnlyIn(Dist.CLIENT)
+//     public float getTemperature(BlockPos pos) {
+//    	 yPos = pos.getY();
+//    	 
+//        if (pos.getY() > 64) {
+//           float f = (float)(TEMPERATURE_NOISE.getValue((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F)) * 4.0D);
+//           return this.getDefaultTemperature() - (f + (float)yPos - 64.0F) * 0.05F / 30.0F;
+//        } else {
+//           return this.getDefaultTemperature();
+//        }
+//    }
 }

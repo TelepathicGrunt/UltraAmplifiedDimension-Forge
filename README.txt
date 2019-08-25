@@ -19,7 +19,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
      Config:
 ·Made the M form config now correctly make an actual area M form instead of tiny chunk size patches of the M biomes.
-·Config values for Plains, Savanna, and Wooded Mountains biome now correctly applies when these biomes tries to generate as a border separation between certain biomes.
+·Config values for if Plains, Savanna, and Wooded Mountains biomes should generate now correctly applies when these biomes tries to generate as a border separation between certain biomes.
 ·Stronghold config values changed to reflect the new way Strongholds generate and the config values now applies correctly.
 
      Biomes:

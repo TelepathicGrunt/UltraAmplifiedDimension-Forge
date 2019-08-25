@@ -117,6 +117,7 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 	 * {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
 	 */
 	public float getTemperature(BlockPos pos) {
+   	 
 		float f = this.getDefaultTemperature();
 		double d0 = field_205163_aV.getValue((double) pos.getX() * 0.05D, (double) pos.getZ() * 0.05D);
 		double d1 = INFO_NOISE.getValue((double) pos.getX() * 0.2D, (double) pos.getZ() * 0.2D);

@@ -122,8 +122,8 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 
 
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = (new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1));
-      IAreaFactory<T>lvt_8_1_ = (new BiomeLayerUA().apply(contextFactory.apply(200L), areaFactory1));
+      //IAreaFactory<T>lvt_8_1_ = new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1);
+      IAreaFactory<T>lvt_8_1_ = new BiomeLayerUA().apply(contextFactory.apply(200L), areaFactory1);
 
 
       lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
