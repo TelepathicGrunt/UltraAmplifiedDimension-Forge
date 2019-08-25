@@ -4,8 +4,6 @@ package net.TelepathicGrunt.UltraAmplified.World.Biome;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BadlandsPlateauBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BambooJungleBiomeUA;
@@ -72,9 +70,6 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedBadlandsPlateauBiom
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedHillsBiomeUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.WoodedMountainsBiomeUA;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeType;

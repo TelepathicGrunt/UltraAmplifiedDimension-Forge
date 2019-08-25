@@ -43,11 +43,11 @@ import net.TelepathicGrunt.UltraAmplified.World.Feature.Placement.PassthroughChe
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Placement.RandomChanceUnderSurface;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Placement.RandomPositionEvery5Height;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Placement.TwiceSurfaceWithChanceUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillagePiecesUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.FortressConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.MineshaftConfigUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.MineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.VillagePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.VillageUAConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
