@@ -13,7 +13,8 @@ import com.google.common.collect.Sets;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.*;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddOceansLayerUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeDebugLayer;
 import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +35,6 @@ import net.minecraft.world.gen.layer.IslandLayer;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.RemoveTooMuchOceanLayer;
-import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;

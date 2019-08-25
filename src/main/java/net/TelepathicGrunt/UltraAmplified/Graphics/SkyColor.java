@@ -1,7 +1,7 @@
 package net.TelepathicGrunt.UltraAmplified.Graphics;
 
 import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
-import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;

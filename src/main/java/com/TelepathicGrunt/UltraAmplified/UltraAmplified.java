@@ -2,7 +2,7 @@ package com.TelepathicGrunt.UltraAmplified;
 
 
 import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.StructureUA.StructureInit;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
 import net.minecraft.world.gen.feature.Feature;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
