@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Placement;
+package net.telepathicgrunt.ultraamplified.world.feature.placement;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -6,14 +6,14 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.CountRangeAndTypeConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 
 public class LakePlacementUA extends Placement<CountRangeAndTypeConfig> {
 	public LakePlacementUA(Function<Dynamic<?>, ? extends CountRangeAndTypeConfig> configFactoryIn) {

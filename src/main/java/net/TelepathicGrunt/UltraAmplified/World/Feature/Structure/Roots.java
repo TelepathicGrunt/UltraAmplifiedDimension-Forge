@@ -1,12 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.BlockConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.VineBlock;
@@ -20,6 +18,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
 public class Roots extends Feature<BlockConfig> {
     public Roots(Function<Dynamic<?>, ? extends BlockConfig> configFactoryIn) {

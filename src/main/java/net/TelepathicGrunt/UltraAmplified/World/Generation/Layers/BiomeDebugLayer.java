@@ -1,11 +1,11 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
+package net.telepathicgrunt.ultraamplified.world.generation.layers;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class BiomeDebugLayer implements IC0Transformer 
 {

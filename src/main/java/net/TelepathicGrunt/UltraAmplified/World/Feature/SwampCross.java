@@ -1,11 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.tileentity.ChestTileEntity;
@@ -18,6 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.storage.loot.LootTables;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class SwampCross extends Feature<NoFeatureConfig> {
 	   public SwampCross(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {

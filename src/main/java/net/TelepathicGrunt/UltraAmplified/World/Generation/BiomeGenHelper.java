@@ -1,14 +1,14 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.world.generation;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public enum BiomeGenHelper {
    instance;

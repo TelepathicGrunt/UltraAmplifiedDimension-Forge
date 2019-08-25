@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.world.generation;
 
 import java.util.Random;
 
@@ -6,7 +6,6 @@ import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
@@ -34,6 +33,7 @@ import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extends ChunkGenerator<T> {
 

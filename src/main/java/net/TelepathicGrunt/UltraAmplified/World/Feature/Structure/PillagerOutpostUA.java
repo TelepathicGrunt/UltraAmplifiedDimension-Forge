@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;
@@ -6,12 +6,10 @@ import java.util.function.Function;
 
 import org.apache.logging.log4j.Level;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +22,8 @@ import net.minecraft.world.gen.feature.structure.PillagerOutpostConfig;
 import net.minecraft.world.gen.feature.structure.PillagerOutpostPieces;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
 public class PillagerOutpostUA extends Structure<PillagerOutpostConfig> {
    private static final List<Biome.SpawnListEntry> field_214558_a = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));

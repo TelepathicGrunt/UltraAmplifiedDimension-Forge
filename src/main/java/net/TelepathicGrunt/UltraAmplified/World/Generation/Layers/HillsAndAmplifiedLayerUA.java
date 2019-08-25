@@ -1,8 +1,5 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
+package net.telepathicgrunt.ultraamplified.world.generation.layers;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.area.IArea;
@@ -10,6 +7,9 @@ import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset1Transformer;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Transformer {
    INSTANCE;

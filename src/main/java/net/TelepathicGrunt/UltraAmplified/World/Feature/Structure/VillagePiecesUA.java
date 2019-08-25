@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.Arrays;
 import java.util.Iterator;

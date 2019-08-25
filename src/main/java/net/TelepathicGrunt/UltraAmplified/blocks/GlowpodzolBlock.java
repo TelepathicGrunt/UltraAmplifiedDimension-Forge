@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.blocks;
 
 import net.minecraft.block.SnowyDirtBlock;
 import net.minecraft.block.SoundType;

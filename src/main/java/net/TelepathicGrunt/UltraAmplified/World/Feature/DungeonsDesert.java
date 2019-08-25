@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -8,15 +8,15 @@ import org.apache.logging.log4j.Logger;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.SlabBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.state.properties.SlabType;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;

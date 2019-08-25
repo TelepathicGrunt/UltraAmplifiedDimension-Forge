@@ -1,10 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.blocks;
 
 
 import javax.annotation.Nonnull;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.google.common.base.Preconditions;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;

@@ -1,17 +1,10 @@
-package com.TelepathicGrunt.UltraAmplified;
+package com.telepathicgrunt.ultraamplified;
 
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.TelepathicGrunt.UltraAmplified.Blocks.BlockColorManager;
-import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksInit;
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
-import net.TelepathicGrunt.UltraAmplified.World.Worldtypes.WorldTypeUA;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
@@ -25,6 +18,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
+import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInit;
+import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 /*
  * Mod for making insane landscape and a more challenging world to survive on!

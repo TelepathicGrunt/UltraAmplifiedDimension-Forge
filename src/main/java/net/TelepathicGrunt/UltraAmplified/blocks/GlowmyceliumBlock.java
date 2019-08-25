@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.blocks;
 
 import java.util.Random;
 

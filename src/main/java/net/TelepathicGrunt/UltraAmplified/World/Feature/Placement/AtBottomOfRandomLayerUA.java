@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Placement;
+package net.telepathicgrunt.ultraamplified.world.feature.placement;
 
 import java.util.Objects;
 import java.util.Random;

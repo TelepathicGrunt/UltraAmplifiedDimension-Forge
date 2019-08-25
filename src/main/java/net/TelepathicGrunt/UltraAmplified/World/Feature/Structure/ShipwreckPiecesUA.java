@@ -1,9 +1,8 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.LockableLootTileEntity;
@@ -22,6 +21,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class ShipwreckPiecesUA{
 	   private static final BlockPos STRUCTURE_OFFSET = new BlockPos(4, 0, 15);

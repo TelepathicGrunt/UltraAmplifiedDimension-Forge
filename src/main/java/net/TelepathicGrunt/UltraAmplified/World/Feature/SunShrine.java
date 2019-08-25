@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -7,11 +7,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import com.mojang.datafixers.Dynamic;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
@@ -28,6 +26,8 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class SunShrine extends Feature<NoFeatureConfig> {
 

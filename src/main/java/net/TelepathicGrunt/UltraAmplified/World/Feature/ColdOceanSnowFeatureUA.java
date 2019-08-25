@@ -1,11 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowyDirtBlock;
@@ -19,6 +18,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class ColdOceanSnowFeatureUA extends Feature<NoFeatureConfig> {
    public ColdOceanSnowFeatureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {

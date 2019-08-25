@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;
@@ -7,8 +7,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA.Type;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.EndRodBlock;
@@ -34,6 +32,8 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA.Type;
 
 public class MineshaftPiecesUA
 {

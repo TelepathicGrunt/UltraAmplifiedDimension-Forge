@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Placement;
+package net.telepathicgrunt.ultraamplified.world.feature.placement;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFrequencyConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +16,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 
 public class AllSoulSandSurfacesUA extends Placement<PercentageAndFrequencyConfig> {
 	public AllSoulSandSurfacesUA(Function<Dynamic<?>, ? extends PercentageAndFrequencyConfig> configFactoryIn) {

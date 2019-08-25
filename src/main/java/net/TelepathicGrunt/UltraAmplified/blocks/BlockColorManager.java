@@ -1,6 +1,6 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.blocks;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.BlockColors;

@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Placement;
+package net.telepathicgrunt.ultraamplified.world.feature.placement;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -7,13 +7,13 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.DungeonRoomConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class DungeonPlacementBands extends Placement<DungeonRoomConfig> {
    public DungeonPlacementBands(Function<Dynamic<?>, ? extends DungeonRoomConfig> configFactoryIn) {

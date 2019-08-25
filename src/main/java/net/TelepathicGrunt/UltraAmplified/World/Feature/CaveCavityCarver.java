@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.BitSet;
 import java.util.Collections;

@@ -1,29 +1,9 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Locale;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.BlockConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.ColumnBlocksConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.DesertTempleUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.EndCityUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.IglooUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.JungleTempleUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.OceanMonumentUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.OceanRuinsUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.PillagerOutpostUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.ShipwreckUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StrongholdUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.VillageUAConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.WitchHutUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.WoodlandMansionUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -43,6 +23,26 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.EndCityUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.IglooUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.JungleTempleUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanMonumentUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanRuinsUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.PillagerOutpostUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.ShipwreckUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StrongholdUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInit;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageUAConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.WitchHutUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansionUA;
 
 public class FeatureUA
 {

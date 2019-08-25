@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.world.generation;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,15 +11,6 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddOceansLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.AddSunflowerPlainsLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeEdgeLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.HillsAndAmplifiedLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.MixOceanLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.Worldtypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,6 +34,15 @@ import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.AddOceansLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.AddSunflowerPlainsLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
+import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 public class BiomeProviderUA extends BiomeProvider{
 

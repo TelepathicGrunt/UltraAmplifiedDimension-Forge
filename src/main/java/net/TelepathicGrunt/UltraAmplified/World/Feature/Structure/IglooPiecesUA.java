@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Structure;
+package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
@@ -25,6 +24,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class IglooPiecesUA {
 	   private static final ResourceLocation IGLOO_TOP = new ResourceLocation("igloo/top");

@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class GiantStackableBoulder extends Feature<BlockBlobConfig> 
 {

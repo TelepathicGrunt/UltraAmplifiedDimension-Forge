@@ -1,8 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.World.Spawner;
+package net.telepathicgrunt.ultraamplified.world.spawner;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +10,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.CatSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
 public class CatSpawnerUA extends CatSpawner{
    private int field_221125_a;

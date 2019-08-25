@@ -1,9 +1,9 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation.Layers;
+package net.telepathicgrunt.ultraamplified.world.generation.layers;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeGenHelper;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC1Transformer;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 public enum AddBambooJungleLayerUA implements IC1Transformer {
    INSTANCE;

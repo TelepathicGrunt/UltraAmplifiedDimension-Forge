@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,6 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -18,6 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
+import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 
 public class GlowPatch extends Feature<CountConfig> {
 

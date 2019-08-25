@@ -1,17 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.world.biomes;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.BlockConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.ColumnBlocksConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.CountRangeAndTypeConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.PercentageAndFrequencyConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.FortressConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.MineshaftUA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -40,6 +30,16 @@ import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 
 public class SnowyTaigaMountainsBiomeUA extends BiomeUA {
 	public SnowyTaigaMountainsBiomeUA() {

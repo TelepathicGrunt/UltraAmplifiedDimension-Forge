@@ -1,18 +1,18 @@
-package net.TelepathicGrunt.UltraAmplified.World.Worldtypes;
+package net.telepathicgrunt.ultraamplified.world.worldtypes;
 
 import java.lang.reflect.Method;
 
 import org.apache.logging.log4j.Level;
 
-import com.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
+import net.telepathicgrunt.ultraamplified.world.generation.ChunkGeneratorOverworldUA;
 
 public class WorldTypeUA extends WorldType {
 	//displays our mod as a world type

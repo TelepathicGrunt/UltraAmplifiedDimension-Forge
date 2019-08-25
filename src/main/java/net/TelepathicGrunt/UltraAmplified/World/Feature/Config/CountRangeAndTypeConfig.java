@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Feature.Config;
+package net.telepathicgrunt.ultraamplified.world.feature.config;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.Dynamic;

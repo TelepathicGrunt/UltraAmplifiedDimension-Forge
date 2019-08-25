@@ -1,10 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.world.generation;
 
 import java.util.List;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.Spawner.CatSpawnerUA;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
@@ -20,6 +17,9 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.PatrolSpawner;
 import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.spawner.CatSpawnerUA;
 
 public class ChunkGeneratorOverworldUA extends NoiseChunkGeneratorUA<OverworldGenSettings> {
    private static final float[] field_222576_h = Util.make(new float[25], (p_222575_0_) -> {

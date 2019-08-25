@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biome.Surfacebuilder;
+package net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder;
 
 import java.util.Random;
 import java.util.function.Function;

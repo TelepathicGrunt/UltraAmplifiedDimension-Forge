@@ -1,11 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biome.Surfacebuilder;
+package net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder;
 
 import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -14,6 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> 
 {
