@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.WorldTypes;
+package net.TelepathicGrunt.UltraAmplified.World.Worldtypes;
 
 import java.lang.reflect.Method;
 

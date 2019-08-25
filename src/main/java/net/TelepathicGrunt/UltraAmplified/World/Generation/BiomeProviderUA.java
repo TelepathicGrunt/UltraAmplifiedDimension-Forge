@@ -19,7 +19,7 @@ import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeEdgeLayer
 import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.BiomeLayerUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.HillsAndAmplifiedLayerUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.Layers.MixOceanLayerUA;
-import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Worldtypes.WorldTypeUA;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

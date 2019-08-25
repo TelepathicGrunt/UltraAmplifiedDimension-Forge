@@ -1,9 +1,6 @@
 package com.TelepathicGrunt.UltraAmplified;
 
 
-import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
-import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
-import net.minecraft.world.gen.feature.Feature;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,11 +9,14 @@ import net.TelepathicGrunt.UltraAmplified.Blocks.BlockColorManager;
 import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksInit;
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.FeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.Feature.Structure.StructureInit;
+import net.TelepathicGrunt.UltraAmplified.World.Worldtypes.WorldTypeUA;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
