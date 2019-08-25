@@ -7,7 +7,11 @@ import com.mojang.datafixers.Dynamic;
 
 import net.TelepathicGrunt.UltraAmplified.Config.ConfigUA;
 import net.TelepathicGrunt.UltraAmplified.World.Feature.Config.BlockConfig;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -48,7 +52,7 @@ public class Roots extends Feature<BlockConfig> {
 		
 		position = position.down();
 		BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-
+		BlockState currentBlockState;
 		int xOffset;
 		int zOffset;
 		int yOffset;
@@ -68,19 +72,28 @@ public class Roots extends Feature<BlockConfig> {
 			for(int length = 0; length < rootLength; length++){
 
 				//checks to see if air block is not higher than starting place
+				currentBlockState = worldIn.getBlockState(mutableBlockPos);
 				if(mutableBlockPos.getY() <= position.getY() && 
-				    (worldIn.getBlockState(mutableBlockPos).getMaterial() == Material.AIR ||
-					 worldIn.getBlockState(mutableBlockPos) == blockConfig.block.getDefaultState())
+				    (currentBlockState.getMaterial() == Material.AIR ||
+				     currentBlockState == blockConfig.block.getDefaultState() || 
+				     currentBlockState == Blocks.VINE.getDefaultState())
 				){
 
 					
 					//checks to see if there is solid land still above (1 blocks higher than position height)
-					if(worldIn.getBlockState(
-							new BlockPos(mutableBlockPos.getX(), position.getY()+1, mutableBlockPos.getZ())
-							).isSolid()) {
+					if(worldIn.getBlockState( new BlockPos(mutableBlockPos.getX(), 
+															position.getY()+1, 
+															mutableBlockPos.getZ()
+														   )).isSolid()) {
 
 						//set root block
 						worldIn.setBlockState(mutableBlockPos, blockConfig.block.getDefaultState(), 2);
+						
+						//rare chance to also generate a vine
+						if(rand.nextFloat() < 0.13F) {
+							generateTinyVine(worldIn, rand, mutableBlockPos);
+						}
+						
 
 					}else {
 						break;
@@ -110,4 +123,41 @@ public class Roots extends Feature<BlockConfig> {
 
 		return true;
 	}
+    
+    
+    private void generateTinyVine(IWorld worldIn, Random rand, BlockPos position) {
+    	//generates vines from given position down 5 blocks if path is clear and the given position is valid
+		//Also won't generate vines below Y = 1.
+		int length = 0;
+		
+		Direction face = Direction.Plane.HORIZONTAL.random(rand);
+		position.offset(face);
+		
+		//begin vine generation
+		for (; position.getY() > 1 && length < 5; position = position.down()) 
+		{
+			if (worldIn.isAirBlock(position)) 
+			{
+				for (Direction Direction : Direction.Plane.HORIZONTAL) 
+				{
+					BlockState iblockstate = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(Direction), Boolean.valueOf(true));
+					if (iblockstate.isValidPosition(worldIn, position)) 
+					{
+						worldIn.setBlockState(position, iblockstate, 2);
+						length++;
+						break;
+					} 
+					else if (worldIn.getBlockState(position.up()).getBlock() == Blocks.VINE) 
+					{
+						worldIn.setBlockState(position, worldIn.getBlockState(position.up()), 2);
+						length++;
+						break;
+					}
+				}
+			}
+			else {
+				break;
+			}
+		}
+    }
 }

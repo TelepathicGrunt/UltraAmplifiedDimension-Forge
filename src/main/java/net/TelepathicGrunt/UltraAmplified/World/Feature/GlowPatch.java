@@ -72,13 +72,6 @@ public class GlowPatch extends Feature<CountConfig> {
 				// turns stone into glowstone ore even if no air above
 				if (chosenBlock == Blocks.STONE.getDefaultState()) {
 
-					//if block above is air and is receiving too much light from the sky, does not generate glowstone ore here
-					if(chosenAboveBlock.getMaterial() == Material.AIR){
-						if(worldIn.getLightFor(LightType.SKY, blockpos) > 7){
-							continue;
-						}
-					}
-
 					worldIn.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
 					generatedSuccessfully = true;
 				}

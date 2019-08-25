@@ -246,7 +246,7 @@ public class ConfigUA {
 	            		
 
 	            		rootGen = builder
-	                    .comment("\r\nControls whether roots spawn or not on the underside of the floating land.")
+	                    .comment("\r\nControls whether roots and short vines spawn or not on the underside of the floating land.")
 	                    .translation("ultraamplified.config.structure.rootgen")
 	                    .define("rootGen", true);
 

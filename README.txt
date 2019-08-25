@@ -26,7 +26,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Snowy Beach biome now spawns less often on land and will now also spawn along edges of where snowy biomes meets oceans.
 ·Stone Beach biome now spawns less often on land and will now also spawn along edges of where Extreme Hills biomes meets oceans.
 ·Mushroom Biomes will no longer spawn in ocean biomes but will continue to generate on land like it has before. This is because the ocean biomes looks better when it is mainly ocean and not interrupted by the Mushroom biome.
-·Glowstone variant patches are more tighter and will now not be placed where light from the sky is too bright. This will keep the patches of glowstone blocks more under ledges in the dark
+·Glowstone variant patches are more tighter.
+·Added roots and short vines that spawn on the under-side of floating land in Forest, Birch Forest, Dark Forest, Giant Tree Taiga, Wooded Badlands Plateau, Savanna, Shattered Savanna, Snowy Taiga, Swamp, Taiga and all their hills and M variants biomes. The hills variants has denser roots.
 
      Structures:
 ·Strongholds now generate like other structures instead of being limited to a certain number per world so it is easier to find Strongholds.
