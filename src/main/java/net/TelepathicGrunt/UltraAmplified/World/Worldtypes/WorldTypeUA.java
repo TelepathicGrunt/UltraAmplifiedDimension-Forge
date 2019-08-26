@@ -1,16 +1,9 @@
 package net.telepathicgrunt.ultraamplified.world.worldtypes;
 
-import java.lang.reflect.Method;
-
-import org.apache.logging.log4j.Level;
-
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
-
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
 import net.telepathicgrunt.ultraamplified.world.generation.ChunkGeneratorOverworldUA;
 
@@ -27,17 +20,7 @@ public class WorldTypeUA extends WorldType {
 		 * "generator.UltraAmplified.info":"May take a minute or two to create a fresh world."
     	 */
         super("UltraAmplified");
-
-        
-        //used reflection to get method that displays world type info and run that method.
-        try {	
-        	Method enableInfoNoticeMethod = ObfuscationReflectionHelper.findMethod(WorldType.class, "func_151358_j"); // update the srg name
-        	enableInfoNoticeMethod.setAccessible(true);
-        	enableInfoNoticeMethod.invoke(this);
-        }
-        catch(Exception e){
-        	UltraAmplified.Logger.log(Level.ERROR ,"WorldTypeUA error with enableInfoNotice reflection: "+e.getMessage());
-        }
+        this.enableInfoNotice();
     }
     
     @Override
