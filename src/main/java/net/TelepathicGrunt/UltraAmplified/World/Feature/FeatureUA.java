@@ -121,7 +121,7 @@ public class FeatureUA
     public static Structure<NoFeatureConfig> END_CITY_UA = new EndCityUA(NoFeatureConfig::deserialize);
     public static Structure<VillageUAConfig> VILLAGE_UA = new VillageUA(VillageUAConfig::deserialize);
     public static Structure<PillagerOutpostConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostUA(PillagerOutpostConfig::deserialize);
-
+    
 
     @SuppressWarnings("unchecked")
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
@@ -129,7 +129,7 @@ public class FeatureUA
         if(registry == null)
             registry = event.getRegistry();
 
-        UltraAmplified.Logger.debug("FEATURE REGISTER");
+        UltraAmplified.LOGGER.debug("FEATURE REGISTER");
 
         registerFeature(BETTER_CACTUS, "better_cactus_ua");
         registerFeature(GENERIC_DUNGEONS, "dungeon_default_ua");
@@ -230,7 +230,7 @@ public class FeatureUA
             throw new NullPointerException("Feature Registry not set");
 
 
-        feature.setRegistryName(UltraAmplified.modid, name);
+        feature.setRegistryName(UltraAmplified.MODID, name);
         registry.register(feature);
 
         return feature;

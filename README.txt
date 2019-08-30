@@ -1,7 +1,7 @@
     Made for Minecraft v.1.14.4
     Created by TelepathicGrunt
 
-Highly recommend using a strong computer with this mod! (May not be compatible with other mods that affects terrain shape gen or modifies vanilla biomes) 
+Highly recommend using a strong computer with this mod!
 You can choose biome sizes, ore spawn rates, structure rarity, toggle biomes, and much more with this mod's config options!
 
 Feel free to use this mod and any part of it for whatever you want as long as you do not profit off of my mod. 
@@ -11,6 +11,43 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ------------------------------------------------
        | Ultra Amplified mod changelog |
        
+       
+    (V.6.3 Changes) (1.14.4 Minecraft)
+       
+    Major Changes:
+·This mod is now its own dimension in any worldtype that isn't Ultra Amplified. To enter this dimension, make a portal with these blocks and then use Flint and Steel on Polished Diorite in center. Then right click on portal to enter.
+
+PG = Polished Granite
+BPAS = Bottom Polished Andesite Slab
+TPAS = Top Polished Andesite Slab
+PD =  Polished Diorite
+
+    Bottom Layer:
+PG   |  BPAS  |  PG
+BPAS |  BPAS  |  BPAS
+PG   |  BPAS  |  PG
+
+    Middle Layer:
+     |        |  
+     |   PD   |  
+     |        | 
+  
+     Top Layer:
+PG   |  TPAS  |  PG
+TPAS |  TPAS  |  TPAS
+PG   |  TPAS  |  PG
+
+
+Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is unabled to be removed in Survival. Any other portal can be removed by left clicking on it to turn it back into Polished Diorite.
+
+     Config:
+·Added option to modify the values used for the terrain perlin noise generator. Gives people the ability to make it more or less crazy.
+    
+     Biomes:
+·Columns in Wooded Hills biomes now generates Dirt under its Grass Blocks correctly on the bottom half of the column.
+·Fixed bug that prevent glowstone patches from fully generating.
+·Greatly increased spawnrate of crosses in Swamp Hills biome.
+     
 
     (V.6.2 Changes) (1.14.4 Minecraft)
 

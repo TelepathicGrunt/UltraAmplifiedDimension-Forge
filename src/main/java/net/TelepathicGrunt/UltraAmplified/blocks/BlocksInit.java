@@ -40,6 +40,9 @@ public class BlocksInit {
 	@ObjectHolder("ultra_amplified_mod:red_glowsand")
 	public static RedGlowsandBlock REDGLOWSAND;
 
+	@ObjectHolder("ultra_amplified_mod:amplified_portal")
+	public static AmplifiedPortalBlock AMPLIFIEDPORTAL;
+	
 	//registers the Blocks so they now exist in the registry
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(
@@ -50,7 +53,8 @@ public class BlocksInit {
 				new GlowmyceliumBlock(),
 				new GlowpodzolBlock(),
 				new GlowsandBlock(),
-				new RedGlowsandBlock()
+				new RedGlowsandBlock(),
+				new AmplifiedPortalBlock()
 				);
 		
 	}
@@ -65,7 +69,8 @@ public class BlocksInit {
 				new BlockItem(BlocksInit.GLOWMYCELIUM, new Item.Properties()).setRegistryName("glowmycelium"),
 				new BlockItem(BlocksInit.GLOWPODZOL, new Item.Properties()).setRegistryName("glowpodzol"),
 				new BlockItem(BlocksInit.GLOWSAND, new Item.Properties()).setRegistryName("glowsand"),
-				new BlockItem(BlocksInit.REDGLOWSAND, new Item.Properties()).setRegistryName("red_glowsand")
+				new BlockItem(BlocksInit.REDGLOWSAND, new Item.Properties()).setRegistryName("red_glowsand"),
+				new BlockItem(BlocksInit.AMPLIFIEDPORTAL, new Item.Properties()).setRegistryName("amplified_portal")
 				);
 	}
 
@@ -74,7 +79,7 @@ public class BlocksInit {
 	@Nonnull
 	private static <T extends IForgeRegistryEntry<T>> T setup(@Nonnull final T entry, @Nonnull final String name) {
 		Preconditions.checkNotNull(name, "Name to assign to entry cannot be null!");
-		return setup(entry, new ResourceLocation(UltraAmplified.modid, name));
+		return setup(entry, new ResourceLocation(UltraAmplified.MODID, name));
 	}
 
 	@Nonnull

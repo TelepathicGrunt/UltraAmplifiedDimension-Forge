@@ -24,6 +24,7 @@ runServer.launch
 runClient.launch
 runData.launch
 changelog.txt
+UltraAmplified_Changelog.txt
 
 # Files from Forge MDK
 forge*changelog.txt

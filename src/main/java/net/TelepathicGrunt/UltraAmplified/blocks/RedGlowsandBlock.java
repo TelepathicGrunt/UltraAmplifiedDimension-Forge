@@ -13,6 +13,4 @@ public class RedGlowsandBlock extends SandBlock {
 			setRegistryName("red_glowsand");
 		}
 
-	
-
 }

@@ -117,7 +117,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, templatemanager);
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 			
@@ -132,7 +132,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -147,7 +147,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -163,7 +163,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -182,7 +182,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -197,7 +197,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -212,7 +212,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -227,7 +227,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, templatemanager);;
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -245,16 +245,16 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			//If all stones are perfect, generates crafting table, otherwise, place a small patch of stones
 			if(perfectStoneCount == 8) 
 			{
-				template =  templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehengeperfectcenter"));
+				template =  templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehengeperfectcenter"));
 			}
 			else 
 			{
-				template =  templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehengecenter"));
+				template =  templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehengecenter"));
 			}
 			
 			if(template == null)
 			{
-				UltraAmplified.Logger.warn("a center stonehenge NTB does not exist!");
+				UltraAmplified.LOGGER.warn("a center stonehenge NTB does not exist!");
 				return false;
 			}
 			
@@ -295,38 +295,38 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 		{
 			if(hengeType == 0) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge1"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge1"));
 			}
 			else if(hengeType == 1) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge2"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge2"));
 			}
 			else if(hengeType == 2) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge3"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge3"));
 			}
 			else
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge4"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge4"));
 			}
 		}
 		else 
 		{
 			if(hengeType == 0) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge5"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge5"));
 			}
 			else if(hengeType == 1) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge6"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge6"));
 			}
 			else if(hengeType == 2) 
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge7"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge7"));
 			}
 			else
 			{
-				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":stonehenge8"));
+				return templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":stonehenge8"));
 			}
 		}
 	}

@@ -56,13 +56,6 @@ public BiomeProviderUA(long seed, WorldType worldType)
 	super();
 	
     biomes = BiomeInit.getBiomeArray();
-	
-	//checks to make sure this biomeProvider is only running with the Ultra Amplified worldtypes
-    if (!(worldType instanceof WorldTypeUA))
-    {
-        throw new RuntimeException("Error: WorldType is not UltraAmplified... How did you get this error?!");
-    }    
-   
     
     //generates the world and biome layouts
     Layer[] agenlayer = buildOverworldProcedure(seed, worldType);

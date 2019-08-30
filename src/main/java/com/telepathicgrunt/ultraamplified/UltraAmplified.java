@@ -35,12 +35,12 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 		//workaround because the events for colors is firing before the blocks are registered which is causing a crash
 		//BlockColorManager.onBlockColorsInit(Minecraft.getInstance().getBlockColors());
 		//BlockColorManager.onItemColorsInit(Minecraft.getInstance().getItemColors(), Minecraft.getInstance().getBlockColors());
-@Mod(UltraAmplified.modid)
+@Mod(UltraAmplified.MODID)
 public class UltraAmplified {
 	
 	public static UltraAmplified instance;
-	public static final String modid = "ultra_amplified_mod";
-	public static final Logger Logger = LogManager.getLogger(modid);
+	public static final String MODID = "ultra_amplified_mod";
+	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	//worldTypes
 	public static WorldType UltraAmplified;
@@ -67,7 +67,7 @@ public class UltraAmplified {
 		public static void registerBiomes(RegistryEvent.Register<Biome> event){
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
-			Logger.log(Level.INFO, "Biomes registered.");
+			LOGGER.log(Level.INFO, "Biomes registered.");
 		}
 		
 		/**
@@ -77,7 +77,7 @@ public class UltraAmplified {
 		@SubscribeEvent
 		public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
 			BlocksInit.registerBlocks(event);
-			Logger.log(Level.INFO, "Blocks registered.");
+			LOGGER.log(Level.INFO, "Blocks registered.");
 		}
 		
 		/**
@@ -87,7 +87,7 @@ public class UltraAmplified {
 		@SubscribeEvent
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
 			BlocksInit.registerItems(event);
-			Logger.log(Level.INFO, "Items registered.");
+			LOGGER.log(Level.INFO, "Items registered.");
 		}
 
 		/**
@@ -96,7 +96,7 @@ public class UltraAmplified {
 		@SubscribeEvent
 		public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
 			FeatureUA.registerFeatures(event);
-			Logger.log(Level.INFO, "features registered.");
+			LOGGER.log(Level.INFO, "features registered.");
 		}
 	}
 	

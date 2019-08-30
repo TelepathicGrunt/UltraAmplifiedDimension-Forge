@@ -122,7 +122,7 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 				this.recalculateStructureSize();
 			}
 
-			UltraAmplified.Logger.log(Level.DEBUG, "Woodland Mansion | " + (chunkX * 16) + " " + (chunkZ * 16));
+			UltraAmplified.LOGGER.log(Level.DEBUG, "Woodland Mansion | " + (chunkX * 16) + " " + (chunkZ * 16));
 		}
 
 		/**

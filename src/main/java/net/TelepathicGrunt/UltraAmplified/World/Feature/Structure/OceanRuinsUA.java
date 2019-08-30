@@ -95,7 +95,7 @@ public class OceanRuinsUA extends Structure<OceanRuinConfig> {
 	         Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 	         OceanRuinsPiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand, oceanruinconfig);
 	         this.recalculateStructureSize();
-		     UltraAmplified.Logger.log(Level.DEBUG, "Ocean Ruins | "+(chunkX*16)+" "+(chunkZ*16));
+		     UltraAmplified.LOGGER.log(Level.DEBUG, "Ocean Ruins | "+(chunkX*16)+" "+(chunkZ*16));
 	      }
 
 	   }

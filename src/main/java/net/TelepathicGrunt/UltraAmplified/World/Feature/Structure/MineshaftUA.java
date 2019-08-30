@@ -74,10 +74,10 @@ public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX
          //otherwise they will spawn at bottom of world
          if(structuremineshaftpiecesua$room.getBoundingBox().maxY < 100) {
              this.func_214626_a(this.rand, 150, 151 + this.rand.nextInt(70));
-             UltraAmplified.Logger.log(Level.DEBUG, "Aboveground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
+             UltraAmplified.LOGGER.log(Level.DEBUG, "Aboveground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
          }else {
              this.func_214626_a(this.rand, 10, 11);
-             UltraAmplified.Logger.log(Level.DEBUG, "Underground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
+             UltraAmplified.LOGGER.log(Level.DEBUG, "Underground Mineshaft | "+this.type.toString()+" | "+(chunkX*16)+" "+(chunkZ*16));
          }
          
       }

@@ -117,11 +117,11 @@ public class FortressUA extends Structure<FortressConfigUA>
         	 }else {
                  this.func_214626_a(this.rand, 15, 30);
         	 }
-             UltraAmplified.Logger.log(Level.DEBUG, "Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
+             UltraAmplified.LOGGER.log(Level.DEBUG, "Nether Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
          else{
              this.func_214626_a(this.rand, 15, 30);
-             UltraAmplified.Logger.log(Level.DEBUG, "Stone Fortress | "+(chunkX*16)+" "+(chunkZ*16));
+             UltraAmplified.LOGGER.log(Level.DEBUG, "Stone Fortress | "+(chunkX*16)+" "+(chunkZ*16));
          }
       }
    }

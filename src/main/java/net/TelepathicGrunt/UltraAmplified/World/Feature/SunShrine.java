@@ -77,14 +77,14 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 								acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))
 						)) 
 				{
-					UltraAmplified.Logger.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
+					UltraAmplified.LOGGER.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
 		
 					TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
-					Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.modid+":sunshrine"));
+					Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":sunshrine"));
 					
 					if(template == null)
 					{
-						UltraAmplified.Logger.warn("sunshrine NTB does not exist!");
+						UltraAmplified.LOGGER.warn("sunshrine NTB does not exist!");
 						return false;
 					}
 					

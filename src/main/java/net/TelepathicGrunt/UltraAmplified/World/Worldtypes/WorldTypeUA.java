@@ -5,7 +5,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
-import net.telepathicgrunt.ultraamplified.world.generation.ChunkGeneratorOverworldUA;
+import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 public class WorldTypeUA extends WorldType {
 	//displays our mod as a world type
@@ -27,7 +27,7 @@ public class WorldTypeUA extends WorldType {
     public ChunkGenerator<?> createChunkGenerator(World world)
     {
     	//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
-        return new ChunkGeneratorOverworldUA(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
+        return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
     }
     
     

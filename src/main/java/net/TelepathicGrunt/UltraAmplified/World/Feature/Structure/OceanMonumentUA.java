@@ -106,7 +106,7 @@ public class OceanMonumentUA extends Structure<NoFeatureConfig>
               this.components.add(new OceanMonumentPiecesUA.MonumentBuilding(this.rand, i, j, enumfacing));
               this.recalculateStructureSize();
               
-              UltraAmplified.Logger.log(Level.DEBUG, "Ocean Monument | "+(chunkX*16)+" "+(chunkZ*16));
+              UltraAmplified.LOGGER.log(Level.DEBUG, "Ocean Monument | "+(chunkX*16)+" "+(chunkZ*16));
 
               this.wasCreated = true;
         }

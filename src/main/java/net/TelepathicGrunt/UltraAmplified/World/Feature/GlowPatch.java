@@ -12,7 +12,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.LightType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
@@ -77,11 +76,6 @@ public class GlowPatch extends Feature<CountConfig> {
 				}
 				// turns valid surface blocks with air above into glowstone variants
 				else if (GLOWBLOCKMAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR) {
-
-					//if block is receiving too much light from the sky, does not generate glowstone variants here
-					if(worldIn.getLightFor(LightType.SKY, blockpos) > 7){
-						continue;
-					}
 
 					worldIn.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
 					generatedSuccessfully = true;

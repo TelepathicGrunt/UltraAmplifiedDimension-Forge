@@ -15,7 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@Mod.EventBusSubscriber(modid = UltraAmplified.modid, bus = Bus.MOD)
+@Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Bus.MOD)
 public class BlockColorManager {
 
 	/**

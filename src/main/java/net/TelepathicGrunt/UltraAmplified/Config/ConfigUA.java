@@ -23,7 +23,11 @@ public class ConfigUA {
         SERVER_SPEC = specPair.getRight();
         SERVER = specPair.getLeft();
     }
-    
+
+    public static double xzTerrainModifier = 684.412D;
+    public static double xzScaleModifier = 8.55515F;
+    public static double yTerrainModifier = 68419.786D;
+    public static double yScaleModifier = 428.613D;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
@@ -108,6 +112,10 @@ public class ConfigUA {
     
     public static class ServerConfig
     {
+        public final ForgeConfigSpec.DoubleValue xzTerrainModifier;
+        public final ForgeConfigSpec.DoubleValue xzScaleModifier;
+        public final ForgeConfigSpec.DoubleValue yTerrainModifier;
+        public final ForgeConfigSpec.DoubleValue yScaleModifier;
         public final ForgeConfigSpec.IntValue dungeonSpawnrate;
         public final ForgeConfigSpec.IntValue ravineSpawnrate;
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
@@ -391,6 +399,39 @@ public class ConfigUA {
             		  		  "Changes the terrain's look!")
             		.translation("ultraamplified.config.structure.secretsettings")
             		.define("secretSettings", false);
+
+	  				
+	  		        xzTerrainModifier = builder
+            		.comment("\r\nChanges the xz terrain modifier.\n" +
+            		  		  "I believe lower numbers will make the layers longer in the xz plane.\n"+
+            		  		  "Default value is 684.412D")
+            		.translation("ultraamplified.config.structure.xzterrainmodifier")
+            		.defineInRange("xzTerrainModifier", 684.412D, 1D, 10000000D);
+
+	  		        
+	  		        xzScaleModifier = builder
+            		.comment("\r\nChanges the xz terrain scale.\n" +
+            		  		  "Not exactly sure what this does.\n"+
+            		  		  "Default value is 8.55515F")
+            		.translation("ultraamplified.config.structure.xzscalemodifier")
+            		.defineInRange("xzScaleModifier", 8.55515F, 1D, 10000000D);
+
+	  		        
+	  		      	yTerrainModifier = builder
+            		.comment("\r\nChanges the y terrain modifier.\n" +
+            		  		  "I believe lower numbers will make less layers and thicken layers that do spawn.\n"+
+            		  		  "Default value is 68419.786D")
+            		.translation("ultraamplified.config.structure.yterrainmodifier")
+            		.defineInRange("yTerrainModifier", 68419.786D, 1D, 10000000D);
+	  		        
+	  		        
+	  		        yScaleModifier = builder
+            		.comment("\r\nChanges the y terrain scale.\n" +
+            		  		  "Not exactly sure what this does.\n"+
+            		  		  "Default value is 428.613D")
+            		.translation("ultraamplified.config.structure.yscalemodifier")
+            		.defineInRange("yScaleModifier", 428.613D, 1D, 10000000D);
+	  		        
   		
             		biomeSize = builder
             		.comment("\r\nHow large the biomes are." + "\n" + "Bigger number means bigger biomes.")
@@ -685,6 +726,11 @@ public class ConfigUA {
     
     public static void refreshServer()
     {
+    	
+	    xzTerrainModifier = SERVER.xzTerrainModifier.get();
+	    xzScaleModifier = SERVER.xzScaleModifier.get();
+	    yScaleModifier = SERVER.yScaleModifier.get();
+	    yScaleModifier = SERVER.yScaleModifier.get();
     	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
