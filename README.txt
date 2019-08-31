@@ -12,6 +12,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.4 Changes) (1.14.4 Minecraft)
+·Quick fix to patch bug that caused putting this mod into a server would make the server to crash.
+
+       
     (V.6.3 Changes) (1.14.4 Minecraft)
        
     Major Changes:

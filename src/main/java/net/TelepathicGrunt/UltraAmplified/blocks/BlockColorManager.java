@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.BlockItem;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +24,7 @@ public class BlockColorManager {
 	 * Register the {@link IBlockColor} handlers.
 	 */
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onBlockColorsInit(ColorHandlerEvent.Block event) {
 		final BlockColors blockColors = event.getBlockColors();
 		
@@ -36,6 +39,7 @@ public class BlockColorManager {
 	 * Register the {@link IItemColor} handlers
 	 */
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onItemColorsInit(ColorHandlerEvent.Item event) {
 		final BlockColors blockColors = event.getBlockColors();
 		final ItemColors itemColors = event.getItemColors();
