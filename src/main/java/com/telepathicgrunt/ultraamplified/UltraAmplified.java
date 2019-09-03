@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.capabilities.PastPosAndDimProvider;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
@@ -57,6 +58,7 @@ public class UltraAmplified {
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
+        
 
 	}
 	
@@ -64,7 +66,7 @@ public class UltraAmplified {
 	public static class RegistryEvents
 	{
 		@SubscribeEvent
-		public static void registerBiomes(RegistryEvent.Register<Biome> event){
+		public static void registerBiomes(final RegistryEvent.Register<Biome> event){
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
 			LOGGER.log(Level.INFO, "Biomes registered.");
@@ -103,14 +105,15 @@ public class UltraAmplified {
 
 	
 	
-	private void setup(final FMLCommonSetupEvent event) 
+	public void setup(final FMLCommonSetupEvent event) 
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
 		StructureInit.registerStructurePieces();
+		PastPosAndDimProvider.register();
 	}
 	
-	public void modConfig(ModConfig.ModConfigEvent event)
+	public void modConfig(final ModConfig.ModConfigEvent event)
     {
         ModConfig config = event.getConfig();
         if (config.getSpec() == ConfigUA.SERVER_SPEC)
