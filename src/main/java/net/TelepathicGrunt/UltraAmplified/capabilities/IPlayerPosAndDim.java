@@ -1,5 +1,6 @@
 package net.telepathicgrunt.ultraamplified.capabilities;
 
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.dimension.DimensionType;
 
@@ -12,5 +13,7 @@ public interface IPlayerPosAndDim {
 
 	DimensionType getDim();
 	BlockPos getPos();
-	
+
+	CompoundNBT saveNBTData();
+	void loadNBTData(CompoundNBT nbtTag);
 }

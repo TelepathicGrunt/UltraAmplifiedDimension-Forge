@@ -16,7 +16,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     
     Dimension: 
 ·Patched bug that prevented the dimension from being registered and working on the latest forge build.
-·
+·Added floor around base of portal in the Ultra Amplified dimension.
+·Improved portal mechanics so now the portal will teleport players to last dimension and position the player was at instead of always to the Overworld at world origin.
 
 	Config:
 ·Added config option to let users select maximum height of terrain.

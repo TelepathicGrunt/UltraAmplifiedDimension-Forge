@@ -3,7 +3,6 @@ package net.telepathicgrunt.ultraamplified.handclickevents;
 
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -52,7 +51,8 @@ public class LeftAndRightClickEvents {
 					//gets previous dimension
 					DimensionType destination;
 					if(cap.getDim() == null) {
-						//first trip will always take player to ultra amplifed dimension
+						//first trip will always take player to ultra amplified dimension
+						//as default dim for cap is always overworld and overworld always goes to ultra amplified dimension
 						destination = UltraAmplifiedDimension.ultraamplified();
 					}
 					else if(cap.getDim() == entityIn.dimension){
@@ -68,7 +68,6 @@ public class LeftAndRightClickEvents {
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 					
 					//gets top block in other world or original location
-					Block block;
 					BlockPos blockpos;
 					ChunkPos chunkpos;
 					if(destination == UltraAmplifiedDimension.ultraamplified() ||
@@ -91,19 +90,6 @@ public class LeftAndRightClickEvents {
 			            ((ServerPlayerEntity)entityIn).wakeUpPlayer(true, true, false);
 			         }
 			         
-					//checks a 2 by 2 by 5 area to replace any portal with air to prevent infinite loops or being stuck by badly place portals
-					for(int x = -1; x < 1; x++) {
-						for(int z = -1; z < 1; z++) {
-							for(int y = -2; y < 3; y++) {
-								block = serverworld.getBlockState(blockpos.add(x, y, z)).getBlock();
-								
-								if(block == BlocksInit.AMPLIFIEDPORTAL) {
-									serverworld.setBlockState(blockpos.add(x, y, z), Blocks.AIR.getDefaultState());
-								}
-							}
-						}	
-					}
-					
 	
 					//store current blockpos and dim before teleporting
 					cap.setDim(entityIn.dimension);

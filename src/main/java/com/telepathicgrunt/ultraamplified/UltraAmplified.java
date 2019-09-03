@@ -20,7 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
-import net.telepathicgrunt.ultraamplified.capabilities.PastPosAndDimProvider;
+import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
@@ -110,7 +110,7 @@ public class UltraAmplified {
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
 		StructureInit.registerStructurePieces();
-		PastPosAndDimProvider.register();
+		CapabilityPlayerPosAndDim.register();
 	}
 	
 	public void modConfig(final ModConfig.ModConfigEvent event)

@@ -4,18 +4,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.registries.ClearableRegistry;
 
 public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 
-	//handles the actual data that this capability will have and use
-	private static final ClearableRegistry<DimensionType> REGISTRY = new ClearableRegistry<>(new ResourceLocation("dimension_type"), DimensionType.class);
 
 	public DimensionType prevDimension = null;
-	public BlockPos prevBlockPos = null;
+	public BlockPos prevBlockPos = new BlockPos(0,0,0);
 	
 	@Override
 	public void setDim(DimensionType incomingDim) {
@@ -35,6 +29,35 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 	@Override
 	public BlockPos getPos() {
 		return prevBlockPos;
+	}
+
+	@Override
+	public CompoundNBT saveNBTData() {
+		CompoundNBT nbt = new CompoundNBT();
+
+		nbt.putInt("PrevX", this.getPos().getX());
+		nbt.putInt("PrevY", this.getPos().getY());
+		nbt.putInt("PrevZ", this.getPos().getZ());
+		
+		if(this.getDim() != null) {
+			nbt.putString("PreviousDimensionNamespace", this.getDim().getRegistryName().getNamespace());
+			nbt.putString("PreviousDimensionPath", this.getDim().getRegistryName().getPath());
+		}
+
+		return nbt;
+	}
+
+	@Override
+	public void loadNBTData(CompoundNBT nbtTag) {
+		CompoundNBT cnbt = (CompoundNBT) nbtTag;
+		BlockPos storedBlockPos = new BlockPos(cnbt.getInt("PrevX"), cnbt.getInt("PrevY"), cnbt.getInt("PrevZ"));
+		
+		//grabs past dimension resource location and tries to get that dimension from the registry
+		DimensionType storedDimension = DimensionType.byName(new ResourceLocation(cnbt.getString("PreviousDimensionNamespace"), 
+																			      cnbt.getString("PreviousDimensionPath")));
+		
+		this.setDim(storedDimension);
+		this.setPos(storedBlockPos);
 	}
 		
 }
