@@ -52,7 +52,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece {
    }
 
    public boolean addComponentParts(IWorld worldIn, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
-      if (!this.func_202580_a(worldIn, structureBoundingBoxIn, 0)) {
+      if (!this.isInsideBounds(worldIn, structureBoundingBoxIn, 0)) {
          return false;
       } else {
          this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 5, 1, 7, Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);

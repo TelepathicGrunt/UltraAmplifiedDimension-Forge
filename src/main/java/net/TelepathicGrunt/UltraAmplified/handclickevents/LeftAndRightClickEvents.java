@@ -16,16 +16,22 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
+import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LeftAndRightClickEvents {
 	
-
+	@CapabilityInject(IPlayerPosAndDim.class)
+    public static Capability<IPlayerPosAndDim> PAST_POS_AND_DIM = null;
+	
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents {
 
@@ -40,27 +46,52 @@ public class LeftAndRightClickEvents {
 			{
 				if(!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
 				{
-					DimensionType destination = worldIn.dimension.getType() != UltraAmplifiedDimension.ultraamplified()
-							? UltraAmplifiedDimension.ultraamplified()
-							: DimensionType.OVERWORLD;
+					//grabs the capability attached to player for dimension hopping
+					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entityIn.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
+					
+					//gets previous dimension
+					DimensionType destination;
+					if(cap.getDim() == null) {
+						//first trip will always take player to ultra amplifed dimension
+						destination = UltraAmplifiedDimension.ultraamplified();
+					}
+					else if(cap.getDim() == entityIn.dimension){
+						//if our stored dimension somehow ends up being out current dimension, just take us to overworld instead
+						destination = DimensionType.OVERWORLD;
+					}
+					else {
+						//gets stored dimension
+						destination = cap.getDim();
+					}
 							
 					MinecraftServer minecraftserver = entityIn.getServer();
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 					
-					//gets top block in other world
-					BlockPos blockpos = new BlockPos(10, 60, 8);
+					//gets top block in other world or original location
 					Block block;
-					
-					//load chunk beforehand
-					ChunkPos chunkpos = new ChunkPos(blockpos);
-					minecraftserver.getWorld(destination).getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entityIn.getEntityId());
+					BlockPos blockpos;
+					ChunkPos chunkpos;
+					if(destination == UltraAmplifiedDimension.ultraamplified() ||
+						cap.getDim() == entityIn.dimension) {
+						//if we are going into ultra amplified dimension or our stored dimension was our current dimension, get topmost block
+						
+						//load chunk beforehand for grabbing topmost block and before teleporting
+						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
+						serverworld.getChunkProvider().getChunk(chunkpos.x, chunkpos.z, true);
+						blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+					}else {
+						
+						blockpos = cap.getPos();
+						chunkpos = new ChunkPos(blockpos);
+					}
+
+					serverworld.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entityIn.getEntityId());
 					
 			         if (((ServerPlayerEntity)entityIn).isSleeping()) {
 			            ((ServerPlayerEntity)entityIn).wakeUpPlayer(true, true, false);
 			         }
 			         
 					//checks a 2 by 2 by 5 area to replace any portal with air to prevent infinite loops or being stuck by badly place portals
-					blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 					for(int x = -1; x < 1; x++) {
 						for(int z = -1; z < 1; z++) {
 							for(int y = -2; y < 3; y++) {
@@ -73,9 +104,11 @@ public class LeftAndRightClickEvents {
 						}	
 					}
 					
-					
-					blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 	
+					//store current blockpos and dim before teleporting
+					cap.setDim(entityIn.dimension);
+					cap.setPos(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ));
+					
 					
 					((ServerPlayerEntity)entityIn).teleport(
 							minecraftserver.getWorld(destination), 

@@ -134,7 +134,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
                                 {
                                     BlockPos blockpos = new BlockPos(x, currentHeight, z);
 
-                                    if (isAirOrLeaves(worldIn, blockpos) || func_214576_j(worldIn, blockpos))
+                                    if (isAirOrLeaves(worldIn, blockpos) || isTallPlants(worldIn, blockpos))
                                     {
                                         this.setBlockState(worldIn, blockpos, LEAF);
                                     }

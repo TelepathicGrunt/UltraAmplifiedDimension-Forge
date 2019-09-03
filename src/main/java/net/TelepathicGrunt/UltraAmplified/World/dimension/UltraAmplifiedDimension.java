@@ -2,6 +2,7 @@ package net.telepathicgrunt.ultraamplified.world.dimension;
 
 import java.lang.reflect.Field;
 import java.util.function.BiFunction;
+import java.util.function.IntSupplier;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -93,7 +94,7 @@ public class UltraAmplifiedDimension {
     
     //This forge fix is from this open source code: https://github.com/Cryptic-Mushroom/The-Midnight/blob/1.14.4-dev/src/main/java/com/mushroom/midnight/common/registry/MidnightDimensions.java
     //Credit to Corail31 and Gegy
-    public static class S2CDimensionSync {
+    public static class S2CDimensionSync implements IntSupplier{
         final int id;
         final ResourceLocation name;
         final ModDimension dimension;
@@ -138,5 +139,10 @@ public class UltraAmplifiedDimension {
 
             return new S2CDimensionSync(id, name, dimension, skyLight);
         }
+
+		@Override
+		public int getAsInt() {
+	         return this.getLoginIndex();
+		}
     }
 }

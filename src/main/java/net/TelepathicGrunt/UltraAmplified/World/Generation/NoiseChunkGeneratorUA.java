@@ -260,7 +260,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		int coordinateX = chunkX << 4;
 		int coordinateZ = chunkZ << 4;
 		
-		for (Structure<?> structure : Feature.field_214488_aQ) {
+		for (Structure<?> structure : Feature.ILLAGER_STRUCTURES) {
 			String s = structure.getStructureName();
 			LongIterator longiterator = p_222537_2_.getStructureReferences(s).iterator();
 
@@ -273,7 +273,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 					for (StructurePiece structurepiece : structurestart.getComponents()) {
 						if (structurepiece.func_214810_a(chunkpos, 12) && structurepiece instanceof AbstractVillagePiece) {
 							AbstractVillagePiece abstractvillagepiece = (AbstractVillagePiece) structurepiece;
-							JigsawPattern.PlacementBehaviour jigsawpattern$placementbehaviour = abstractvillagepiece.func_214826_b().getPlacementBehaviour();
+							JigsawPattern.PlacementBehaviour jigsawpattern$placementbehaviour = abstractvillagepiece.getJigsawPiece().getPlacementBehaviour();
 							if (jigsawpattern$placementbehaviour == JigsawPattern.PlacementBehaviour.RIGID) {
 								objectlist.add(abstractvillagepiece);
 							}
@@ -381,7 +381,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 								BlockState blockstate;
 								
 								
-                                if (d15 > 0.0D)
+                                if (d15 > 0.0D && currentY <= ConfigUA.yMaximum)
                                 {
                                 	//place the biome's solid block
                                 	blockstate = this.defaultBlock;

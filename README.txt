@@ -12,6 +12,16 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.5 Changes) (1.14.4 Minecraft)
+    
+    Dimension: 
+·Patched bug that prevented the dimension from being registered and working on the latest forge build.
+·
+
+	Config:
+·Added config option to let users select maximum height of terrain.
+    
+       
     (V.6.4 Changes) (1.14.4 Minecraft)
 ·Quick fix to patch bug that caused putting this mod into a server would make the server to crash.
 

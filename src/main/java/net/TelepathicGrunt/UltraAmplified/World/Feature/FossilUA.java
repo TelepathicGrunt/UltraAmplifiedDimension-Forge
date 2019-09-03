@@ -66,11 +66,11 @@ private static final ResourceLocation STRUCTURE_SPINE_01 = new ResourceLocation(
      
       BlockPos blockpos1 = template.getZeroPositionWithTransform(position, Mirror.NONE, rotation);
       IntegrityProcessor integrityprocessor = new IntegrityProcessor(0.9F);
-      placementsettings.func_215219_b().addProcessor(integrityprocessor);
+      placementsettings.clearProcessors().addProcessor(integrityprocessor);
       template.addBlocksToWorld(worldIn, blockpos1, placementsettings, 4);
       placementsettings.func_215220_b(integrityprocessor);
       IntegrityProcessor integrityprocessor1 = new IntegrityProcessor(0.1F);
-      placementsettings.func_215219_b().addProcessor(integrityprocessor1);
+      placementsettings.clearProcessors().addProcessor(integrityprocessor1);
       template1.addBlocksToWorld(worldIn, blockpos1, placementsettings, 4);
       return true;
    }

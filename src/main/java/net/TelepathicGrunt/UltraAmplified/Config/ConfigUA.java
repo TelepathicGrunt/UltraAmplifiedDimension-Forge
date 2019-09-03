@@ -28,6 +28,7 @@ public class ConfigUA {
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
     public static double yScaleModifier = 428.613D;
+    public static int yMaximum = 256;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
@@ -116,6 +117,7 @@ public class ConfigUA {
         public final ForgeConfigSpec.DoubleValue xzScaleModifier;
         public final ForgeConfigSpec.DoubleValue yTerrainModifier;
         public final ForgeConfigSpec.DoubleValue yScaleModifier;
+        public final ForgeConfigSpec.IntValue yMaximum;
         public final ForgeConfigSpec.IntValue dungeonSpawnrate;
         public final ForgeConfigSpec.IntValue ravineSpawnrate;
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
@@ -400,7 +402,13 @@ public class ConfigUA {
             		.translation("ultraamplified.config.structure.secretsettings")
             		.define("secretSettings", false);
 
-	  				
+
+	  				yMaximum = builder
+            		.comment("\r\nMaxium height the terrain can generate up to.")
+            		.translation("ultraamplified.config.structure.ymaximum")
+            		.defineInRange("yMaximum", 256, 100, 256);
+	  		        
+	  		        
 	  		        xzTerrainModifier = builder
             		.comment("\r\nChanges the xz terrain modifier.\n" +
             		  		  "I believe lower numbers will make the layers longer in the xz plane.\n"+
@@ -731,6 +739,7 @@ public class ConfigUA {
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
+	    yMaximum = SERVER.yMaximum.get();
     	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
