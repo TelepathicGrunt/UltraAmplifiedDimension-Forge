@@ -5,7 +5,7 @@ loaderVersion="[28,)" #mandatory
 [[mods]] #mandatory
 modId="ultra_amplified_mod" #mandatory
 logoFile="ultraamplifiedlogo.png"
-version="0.6.5" #mandatory
+version="0.6.6" #mandatory
 displayName="Ultra Amplified Mod" #mandatory
 displayURL="https://minecraft.curseforge.com/projects/ultra-amplified-mod"
 authors="TelepathicGrunt"

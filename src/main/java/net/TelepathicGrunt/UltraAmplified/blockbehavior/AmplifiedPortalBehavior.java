@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.handclickevents;
+package net.telepathicgrunt.ultraamplified.blockbehavior;
 
 
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
@@ -26,7 +26,7 @@ import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimensio
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class LeftAndRightClickEvents {
+public class AmplifiedPortalBehavior {
 	
 	@CapabilityInject(IPlayerPosAndDim.class)
     public static Capability<IPlayerPosAndDim> PAST_POS_AND_DIM = null;
@@ -43,20 +43,23 @@ public class LeftAndRightClickEvents {
 			// teleports player to other dimension
 			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState())
 			{
+				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				if(!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
 				{
 					//grabs the capability attached to player for dimension hopping
 					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entityIn.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
+					boolean firstTime = false;
 					
 					//gets previous dimension
 					DimensionType destination;
 					if(cap.getDim() == null) {
 						//first trip will always take player to ultra amplified dimension
-						//as default dim for cap is always overworld and overworld always goes to ultra amplified dimension
+						//as default dim for cap is always null when player hasn't teleported yet
 						destination = UltraAmplifiedDimension.ultraamplified();
+						firstTime = true;
 					}
 					else if(cap.getDim() == entityIn.dimension){
-						//if our stored dimension somehow ends up being out current dimension, just take us to overworld instead
+						//if our stored dimension somehow ends up being our current dimension, just take us to overworld instead
 						destination = DimensionType.OVERWORLD;
 					}
 					else {
@@ -70,22 +73,20 @@ public class LeftAndRightClickEvents {
 					//gets top block in other world or original location
 					BlockPos blockpos;
 					ChunkPos chunkpos;
-					if(destination == UltraAmplifiedDimension.ultraamplified() ||
-						cap.getDim() == entityIn.dimension) {
-						//if we are going into ultra amplified dimension or our stored dimension was our current dimension, get topmost block
-						
-						//load chunk beforehand for grabbing topmost block and before teleporting
+					if(firstTime || cap.getDim() == entityIn.dimension) {
+						//if it is player's first time teleporting or our stored dimension was our current dimension, find top block at world origin
 						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
 						serverworld.getChunkProvider().getChunk(chunkpos.x, chunkpos.z, true);
 						blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 					}else {
-						
+						//otherwise, just go to where our stored location is
 						blockpos = cap.getPos();
 						chunkpos = new ChunkPos(blockpos);
 					}
 
 					serverworld.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entityIn.getEntityId());
 					
+					 //dunno how a sleeping player clicked on the portal but if they do, they wake up
 			         if (((ServerPlayerEntity)entityIn).isSleeping()) {
 			            ((ServerPlayerEntity)entityIn).wakeUpPlayer(true, true, false);
 			         }

@@ -12,6 +12,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.6 Changes) (1.14.4 Minecraft)
+    
+    Dimension: 
+·Futher improved portal mechanics so portal now remembers last position you were in Ultra Amplified Dimension when you last teleport out of it.
+·The distance fog in the Ultra Amplified Dimension now becomes more dark the lower down in the world you go to help with immersion. Nothing breaks immersion like seeing a bright blue sky through an unloaded chunk when underground. Now it'll be dark blue!
+
+       
     (V.6.5 Changes) (1.14.4 Minecraft)
     
     Dimension: 
