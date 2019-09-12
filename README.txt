@@ -12,11 +12,29 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.7 Changes) (1.14.4 Minecraft)
+    
+    Config: 
+·Added config option to trigger heavy fog in the Ultra Amplified Dimension for spooky effect. Set to false by default.
+·Added config options to control spawnrate of Sun Shrine and Stonehenge ministructures.
+
+	Dimension:
+·All light sources now look brighter and their light visually reaches further to make glow-variant patches look nicer. The actual light levels itself has not change.
+
+    Biomes:
+·Added new cactus blocks to create better cactuses to spawn in desert biomes.
+·Desert Hills biome has less Sand under its surface which makes Stone appear more often on the bottom of ledges to make this biome slightly more distinct from regular Desert biome.
+     
+    Blocks:
+·All blocks that this mod added is now available in the creative inventory.
+
+       
     (V.6.6 Changes) (1.14.4 Minecraft)
     
     Dimension: 
 ·Futher improved portal mechanics so portal now remembers last position you were in Ultra Amplified Dimension when you last teleport out of it.
 ·The distance fog in the Ultra Amplified Dimension now becomes more dark the lower down in the world you go to help with immersion. Nothing breaks immersion like seeing a bright blue sky through an unloaded chunk when underground. Now it'll be dark blue!
+·Clouds now generate higher (2 higher than what the yMaximum value is set for the terrain in the config option)
 
        
     (V.6.5 Changes) (1.14.4 Minecraft)

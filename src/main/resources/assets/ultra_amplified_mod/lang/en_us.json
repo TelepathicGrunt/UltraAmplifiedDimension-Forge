@@ -9,5 +9,9 @@
   "block.ultra_amplified_mod.glowstone_ore": "Glowstone Ore",
   "block.ultra_amplified_mod.glowdirt": "Glowdirt",
   "block.ultra_amplified_mod.coarse_glowdirt": "Coarse Glowdirt",
-  "block.ultra_amplified_mod.amplified_portal": "Amplified Portal"
+  "block.ultra_amplified_mod.amplified_portal": "Amplified Portal",
+  "itemGroup.ultra_amplified_mod": "Ultra Amplified Mod",
+  "block.ultra_amplified_mod.cactus_body_block_ua": "Thick Cactus Body",
+  "block.ultra_amplified_mod.cactus_corner_block_ua": "Thick Cactus Corner",
+  "block.ultra_amplified_mod.cactus_main_block_ua": "Thick Cactus Main"
 }

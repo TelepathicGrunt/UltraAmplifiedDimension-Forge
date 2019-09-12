@@ -42,7 +42,6 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayer
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
-import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 public class BiomeProviderUA extends BiomeProvider{
 
