@@ -75,12 +75,12 @@ public class EndBarrenFieldBiomeUA extends BiomeUA {
 
 	@OnlyIn(Dist.CLIENT)
 	public int getGrassColor(BlockPos pos) {
-		return 7047283;
+		return 7045758;
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public int getFoliageColor(BlockPos pos) {
-		return 6062186;
+		return 6060912;
 	}
 
 }

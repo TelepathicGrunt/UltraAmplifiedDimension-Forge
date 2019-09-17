@@ -20,6 +20,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed bug so that spawnrates config options now correctly apply for: Mineshafts, Caves, Ravines, Waterfalls, Lavafalls, Glowstone patches, Pillager Outposts, Ores, Sunshrines, Stonehenge, and End Islands.
 ·Lowered maximum spawnrate option from 100 to 22 for Cave Caverns because anything 30 or above causes Minecraft to stop loading chunks due to how massive caverns are.
 ·Lowered maximum spawnrate of End Islands from 500 to 100 because 500 is ridiculous lol. The entire land was pretty much all Endstone at that point with no opening or ledges.
+·Increased maximum range for glowstone variant patches.
 
 	Dimension:
 ·All light sources now look brighter and their light visually reaches further to make glow-variant patches look nicer. The actual light levels itself has not change.

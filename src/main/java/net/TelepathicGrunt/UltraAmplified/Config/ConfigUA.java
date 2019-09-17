@@ -256,9 +256,9 @@ public class ConfigUA {
 
 	            		glowstoneVariantsSpawnrate = builder
 	                    .comment("\r\nControls how often patches of Glowdirt and other modded Glowstone variants spawn.\r\n"
-	                    		+"0 for no patches and 100 for max amount of patches.")
+	                    		+"0 for no patches and 1000 for max amount of patches.")
 	                    .translation("ultraamplified.config.structure.glowstonevariantsspawnrate")
-	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 100);
+	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 1000);
 	            		
 
 	            		rootGen = builder
