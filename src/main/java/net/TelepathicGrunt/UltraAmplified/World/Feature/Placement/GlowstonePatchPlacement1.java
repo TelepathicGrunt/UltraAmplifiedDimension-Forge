@@ -24,7 +24,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   int x = random.nextInt(16);
 	   int z = random.nextInt(16);
 	   int topYLayer = YPositionOfBelowLayer(worldIn, 255, random, pos.add(x, 0 ,z));
-	   float chance = (ConfigUA.glowstoneVariantsSpawnrate/100f) * chancesConfig.chance;
+	   float chance = (ConfigUA.glowstoneVariantsSpawnrate/909f) * chancesConfig.chance;
 	   
 	   if(topYLayer < 75 || chance == 0) {
 		   return Stream.empty();
@@ -39,7 +39,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	    	 return Stream.empty();
 	     }
 	
-		 if (random.nextFloat() < 1.0F / chance) {
+		 if (random.nextFloat() < chance) {
 			 return Stream.of(pos.add(x-4, topYLayer-1, z-4));
 		 }
 

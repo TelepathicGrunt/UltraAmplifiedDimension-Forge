@@ -15,6 +15,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.8 Changes) (1.14.4 Minecraft)
+    
+    Config: 
+·Fixed crash when Glowstone variant config is set to 0 and patches frequency being inverted
+    
+    Dimension
+·The portal frame made in Ultra Amplified Dimension will have waterlogged Andesite Slabs if the slabs replaces water.
+·Entering the Ultra Amplified Dimension will attempt to player you next to the portal if there is open space to do so. This should reduce the chances of spawning on a ledge way above the portal when entering the dimension for the first time.
+·Fixed bug where the dimension generates chunk at world origin when no players has entered the dimension. Now after you create the world, modify the config, restart the world, and enter the dimension for the first time, now the spawn chunk will match the config settings and match the surrounding terrain instead of being the default generation.
+       
+       
     (V.6.7 Changes) (1.14.4 Minecraft)
     
     Config: 

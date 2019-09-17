@@ -1,9 +1,12 @@
 package net.telepathicgrunt.ultraamplified.blockbehavior;
 
 
+import java.util.Random;
+
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
@@ -13,6 +16,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,9 +28,11 @@ import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
+import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AmplifiedPortalBehavior {
+	
 	
 	@CapabilityInject(IPlayerPosAndDim.class)
     public static Capability<IPlayerPosAndDim> PAST_POS_AND_DIM = null;
@@ -38,6 +44,7 @@ public class AmplifiedPortalBehavior {
 		public static void BlockRightClickEvent(PlayerInteractEvent.RightClickBlock event) {
 			World worldIn = event.getWorld();
 			Entity entityIn = event.getEntity();
+			MinecraftServer minecraftserver = entityIn.getServer();
 
 			// checks to see if player uses right click on amplified portal and if so
 			// teleports player to other dimension
@@ -57,6 +64,13 @@ public class AmplifiedPortalBehavior {
 						//as default dim for cap is always null when player hasn't teleported yet
 						destination = UltraAmplifiedDimension.ultraamplified();
 						firstTime = true;
+						
+			    	   //double check for portal as this class gets made multiple times
+			    	   //before one can save the fact that the portal was made.
+			    	   //So a manual check is made for the portal as a double check.
+			    	   if(!checkForGeneratedPortal(minecraftserver.getWorld(destination))) {
+			        	   generatePortal(minecraftserver.getWorld(destination));
+			    	   }
 					}
 					else if(cap.getDim() == entityIn.dimension){
 						//if our stored dimension somehow ends up being our current dimension, just take us to overworld instead
@@ -67,17 +81,61 @@ public class AmplifiedPortalBehavior {
 						destination = cap.getDim();
 					}
 							
-					MinecraftServer minecraftserver = entityIn.getServer();
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 					
 					//gets top block in other world or original location
-					BlockPos blockpos;
+					BlockPos blockpos = new BlockPos(8, 0, 8);
 					ChunkPos chunkpos;
 					if(firstTime || cap.getDim() == entityIn.dimension) {
-						//if it is player's first time teleporting or our stored dimension was our current dimension, find top block at world origin
+						//if it is player's first time teleporting or our stored dimension was our current dimension, find top block at world origin closest to portal
 						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
 						serverworld.getChunkProvider().getChunk(chunkpos.x, chunkpos.z, true);
-						blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+						
+						int portalY = 255;
+						BlockPos pos = new BlockPos(8, 0, 8);
+						
+						//finds where portal block is
+						while(portalY > 0) {
+							if(serverworld.getBlockState(pos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
+								break;
+							}
+							portalY--;
+						}
+						
+						//not sure how the portal block was not found but if so, spawn player at highest piece of land
+						if(portalY == 0) {
+							blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+						}else {
+							//portal was found so try to find 2 air spaces around it that the player can spawn at
+							pos = pos.up(portalY-1);
+							boolean validSpaceFound = false;
+							
+							for(int x = -2; x < 3; x++) 
+							{
+								for(int z = -2; z < 3; z++) 
+								{
+									if(x == -2 || x == 2 || z == -2 || z == 2) 
+									{
+										if(serverworld.getBlockState(pos.add(x, 0, z)).getMaterial() == Material.AIR &&
+											serverworld.getBlockState(pos.add(x, 1, z)).getMaterial() == Material.AIR) 
+										{
+											//valid space for player is found
+											blockpos = pos.add(x, 0, z);
+											validSpaceFound = true;
+											z=3;
+											x=3;
+										}
+									}
+								}
+							}
+							
+							if(!validSpaceFound) {
+								//no valid space found around portal. get top solid block instead
+								blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+							}
+						}
+						
+						
 					}else {
 						//otherwise, just go to where our stored location is
 						blockpos = cap.getPos();
@@ -133,6 +191,37 @@ public class AmplifiedPortalBehavior {
 				}
 			}
 		}
+		
+
+	    private static boolean checkForGeneratedPortal(World worldIn) {
+	    	BlockPos pos = new BlockPos(8, 255, 8);
+	    	worldIn.getChunkAt(pos);
+	    	
+	    	while(pos.getY() >= 0) {
+	    		if(worldIn.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
+	    			return true;
+	    		}
+	    		pos = pos.down();
+	    	}
+	    	
+	    	return false;
+	    }
+	    
+	    private static void generatePortal(World worldIn) {
+	    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
+	    	BlockPos pos = new BlockPos(8, 255, 8);
+	    	worldIn.getChunkAt(pos);
+	    	
+	    	pos = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
+	    	if(pos.getY() > 252) {
+	    		pos = pos.down(3);
+	    	}
+	    	else if(pos.getY() < 6) {
+	    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
+	    	}
+
+	    	amplifiedportalfeature.place(worldIn, worldIn.getChunkProvider().getChunkGenerator(), new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
+	 	}
 	}
 
 }
