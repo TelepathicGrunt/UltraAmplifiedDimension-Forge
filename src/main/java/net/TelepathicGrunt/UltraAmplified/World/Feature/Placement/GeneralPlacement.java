@@ -23,8 +23,15 @@ public class GeneralPlacement extends SimplePlacement<CountRangeAndTypeConfig> {
 		   //hacky workaround as biome/feature registration happens at MC startup before the config file is loaded in a world. 
 		   //We have to read the config file here as placement is being found to have the config file be read in real time.
 		   switch(config.type) {
-			   case GLOWSTONE_PATCH:
-				   count = (int) (ConfigUA.glowstoneVariantsSpawnrate * config.countModifier);
+			   case GLOWSTONE_VARIANT_PATCH:
+				   float result = ConfigUA.glowstoneVariantsSpawnrate * config.countModifier;
+				   //if the resulting count is less than one, then we switch to probability
+				   if(result < 1 && rand.nextFloat() < ConfigUA.glowstoneVariantsSpawnrate * config.countModifier) {
+					   count = 1;
+				   }else {
+					   count = (int)result;
+				   }
+				   
 				   break;
 
 			   case GLOWSTONE:

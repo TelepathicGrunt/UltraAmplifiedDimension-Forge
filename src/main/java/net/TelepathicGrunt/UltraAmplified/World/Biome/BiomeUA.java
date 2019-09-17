@@ -102,7 +102,7 @@ public class BiomeUA extends Biome {
     public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
     public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
     public static final WorldCarver<ProbabilityConfig> UNDERWATER_CAVE_CARVER = new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
-	public static final Placement<ChanceConfig> GLOWSTONE_PATCH_1 = new GlowstonePatchPlacement1(ChanceConfig::deserialize);
+	public static final Placement<ChanceConfig> GLOWSTONE_VARIANT_PATCH = new GlowstonePatchPlacement1(ChanceConfig::deserialize);
     public static final Placement<NoPlacementConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands(NoPlacementConfig::deserialize);
     public static final Placement<NoPlacementConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacement(NoPlacementConfig::deserialize);
     public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralPlacement(CountRangeAndTypeConfig::deserialize);

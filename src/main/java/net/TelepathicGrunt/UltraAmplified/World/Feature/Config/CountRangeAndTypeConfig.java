@@ -24,7 +24,7 @@ public class CountRangeAndTypeConfig implements IPlacementConfig {
    }
 
    public static enum Type {
-	   GLOWSTONE_PATCH,
+	   GLOWSTONE_VARIANT_PATCH,
 	   GLOWSTONE,
 	   MAGMA,
 	   QUARTZ,
