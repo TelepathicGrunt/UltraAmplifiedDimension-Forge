@@ -1,6 +1,9 @@
     Made for Minecraft v.1.14.4
     Created by TelepathicGrunt
 
+Hello! If you are reading this, you must be on Github then! I strongly encourage you to only download and run the master branch as that should be the most stable version of my mod. 
+If you try to use the latest Minecraft version branch, you may run into bugs and issues as I am experimenting and working on that latest version. Older version branches should be alright.
+
 Highly recommend using a strong computer with this mod!
 You can choose biome sizes, ore spawn rates, structure rarity, toggle biomes, and much more with this mod's config options!
 
