@@ -1,7 +1,5 @@
 package net.telepathicgrunt.ultraamplified.world.dimension;
 
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -13,17 +11,13 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 public class UltraAmplifiedWorldProvider extends Dimension{
-	private boolean generatedPortal = false;
 
     public UltraAmplifiedWorldProvider(World worldIn, DimensionType typeIn) {
 		super(worldIn, typeIn);
@@ -118,51 +112,4 @@ public class UltraAmplifiedWorldProvider extends Dimension{
 		return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
 	}
 	
-    /**
-     * Attempts to generate portal out of ultra amplified if no portal exists
-     */
-    public void tick() {
-       if (generatedPortal == false) {
-    	   //double check for portal as this class gets made multiple times
-    	   //before one can save the fact that the portal was made.
-    	   //So a manual check is made for the portal as a double check.
-    	   if(!checkForGeneratedPortal()) {
-        	   generatePortal();
-    	   }
-    	   
-    	   generatedPortal = true;
-       }
-    }
-    
-    private boolean checkForGeneratedPortal() {
-    	BlockPos pos = new BlockPos(8, 255, 8);
-    	this.world.getChunkAt(pos);
-    	
-    	while(pos.getY() >= 0) {
-    		if(world.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
-    			return true;
-    		}
-    		pos = pos.down();
-    	}
-    	
-    	return false;
-    }
-    
-    private void generatePortal() {
-    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
-    	BlockPos pos = new BlockPos(8, 255, 8);
-    	this.world.getChunkAt(pos);
-    	
-    	pos = this.world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
-    	if(pos.getY() > 252) {
-    		pos = pos.down(3);
-    	}
-    	else if(pos.getY() < 6) {
-    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
-    	}
-
-    	amplifiedportalfeature.place(this.world, this.world.getChunkProvider().getChunkGenerator(), new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
- 	}
-    
-    
  }
