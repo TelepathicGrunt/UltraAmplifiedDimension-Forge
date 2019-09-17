@@ -40,7 +40,7 @@ public class ShipwreckPiecesUA{
 	      private boolean isBeached;
 
 	      public Piece(TemplateManager p_i48904_1_, ResourceLocation p_i48904_2_, BlockPos p_i48904_3_, Rotation p_i48904_4_, boolean p_i48904_5_) {
-	          super(StructureInit.SHIPWRECKUA, 0);
+	          super(StructureInitUA.SHIPWRECKUA, 0);
 	          this.templatePosition = p_i48904_3_;
 	          this.rotation = p_i48904_4_;
 	          this.resourceLocation = p_i48904_2_;
@@ -49,7 +49,7 @@ public class ShipwreckPiecesUA{
 	       }
 
 	       public Piece(TemplateManager p_i50445_1_, CompoundNBT p_i50445_2_) {
-	          super(StructureInit.SHIPWRECKUA, p_i50445_2_);
+	          super(StructureInitUA.SHIPWRECKUA, p_i50445_2_);
 	          this.resourceLocation = new ResourceLocation(p_i50445_2_.getString("Template"));
 	          this.isBeached = p_i50445_2_.getBoolean("isBeached");
 	          this.rotation = Rotation.valueOf(p_i50445_2_.getString("Rot"));

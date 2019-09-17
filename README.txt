@@ -18,31 +18,32 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.6.7 Changes) (1.14.4 Minecraft)
     
     Config: 
-稟dded config option to trigger heavy fog in the Ultra Amplified Dimension for spooky effect. Set to false by default.
-稟dded config options to control spawnrate of Sun Shrine and Stonehenge ministructures.
-稦ixed bug so that spawnrates config options now correctly apply for: Mineshafts, Caves, Ravines, Waterfalls, Lavafalls, Glowstone patches, Pillager Outposts, Ores, Sunshrines, Stonehenge, and End Islands.
-稬owered maximum spawnrate option from 100 to 22 for Cave Caverns because anything 30 or above causes Minecraft to stop loading chunks due to how massive caverns are.
-稬owered maximum spawnrate of End Islands from 500 to 100 because 500 is ridiculous lol. The entire land was pretty much all Endstone at that point with no opening or ledges.
-稩ncreased maximum range for glowstone variant patches.
+路Added config option to trigger heavy fog in the Ultra Amplified Dimension for spooky effect. Set to false by default.
+路Added config options to control spawnrate of Sun Shrine and Stonehenge ministructures.
+路Fixed bug so that spawnrates config options now correctly apply for: Mineshafts, Caves, Ravines, Waterfalls, Lavafalls, Glowstone patches, Pillager Outposts, Ores, Sunshrines, Stonehenge, and End Islands.
+路Lowered maximum spawnrate option from 100 to 22 for Cave Caverns because anything 30 or above causes Minecraft to stop loading chunks due to how massive caverns are.
+路Lowered maximum spawnrate of End Islands from 500 to 100 because 500 is ridiculous lol. The entire land was pretty much all Endstone at that point with no opening or ledges.
+路Increased maximum range for glowstone variant patches.
 
 	Dimension:
-稟ll light sources now look brighter and their light visually reaches further to make glow-variant patches look nicer. The actual light levels itself has not change.
+路All light sources now look brighter and their light visually reaches further to make glow-variant patches look nicer. The actual light levels itself has not change.
 
     Biomes:
-稟dded new cactus blocks to create better cactuses to spawn in desert biomes.
-稤esert Hills biome has less Sand under its surface which makes Stone appear more often on the bottom of ledges to make this biome slightly more distinct from regular Desert biome.
-稦oliage in End Barren Fields biome are now slightly more green. 
-稟dded extra Iron Ores that spawn around sealevel for all biomes with "Mountain" in its name except for Ice Mountain biome.
+路Added new cactus blocks to create better cactuses to spawn in desert biomes.
+路Desert Hills biome has less Sand under its surface which makes Stone appear more often on the bottom of ledges to make this biome slightly more distinct from regular Desert biome.
+路Foliage in End Barren Fields biome are now slightly more green. 
+路Added extra Iron Ores that spawn around sealevel for all biomes with "Mountain" in its name except for Ice Mountain biome.
 
     Blocks:
-稟ll blocks that this mod added is now available in the creative inventory.
+路All blocks that this mod added is now available in the creative inventory.
 
-            
+       
     (V.6.6 Changes) (1.14.4 Minecraft)
     
     Dimension: 
 路Futher improved portal mechanics so portal now remembers last position you were in Ultra Amplified Dimension when you last teleport out of it.
 路The distance fog in the Ultra Amplified Dimension now becomes more dark the lower down in the world you go to help with immersion. Nothing breaks immersion like seeing a bright blue sky through an unloaded chunk when underground. Now it'll be dark blue!
+路Clouds now generate higher (2 higher than what the yMaximum value is set for the terrain in the config option)
 
        
     (V.6.5 Changes) (1.14.4 Minecraft)

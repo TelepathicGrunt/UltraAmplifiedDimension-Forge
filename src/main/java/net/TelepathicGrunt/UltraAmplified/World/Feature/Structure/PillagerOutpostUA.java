@@ -17,18 +17,18 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
-import net.minecraft.world.gen.feature.structure.PillagerOutpostConfig;
 import net.minecraft.world.gen.feature.structure.PillagerOutpostPieces;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class PillagerOutpostUA extends Structure<PillagerOutpostConfig> {
+public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
    private static final List<Biome.SpawnListEntry> field_214558_a = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
 
-   public PillagerOutpostUA(Function<Dynamic<?>, ? extends PillagerOutpostConfig> p_i51470_1_) {
+   public PillagerOutpostUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
       super(p_i51470_1_);
    }
 
@@ -49,9 +49,8 @@ public class PillagerOutpostUA extends Structure<PillagerOutpostConfig> {
       Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
       
       if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
-    	  PillagerOutpostConfig pillagerconfig = (PillagerOutpostConfig)chunkGen.getStructureConfig(biome, FeatureUA.PILLAGER_OUTPOST_UA);
     	  
-    	  if(rand.nextFloat() < pillagerconfig.probability) {
+    	  if(rand.nextFloat() < 1/((double)(ConfigUA.pillageOutpostRarity-1)*4.5D+1)) {
 	         for(int k = chunkPosX - 3; k <= chunkPosX + 3; ++k) {
 	            for(int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l) {
 	               if (FeatureUA.VILLAGE_UA.hasStartAt(chunkGen, rand, k, l)) {

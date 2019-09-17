@@ -17,6 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     public SuperLongRavineCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49921_1_, int p_i49921_2_) {
@@ -45,7 +46,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
 
 
     public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
-        return p_212246_2_.nextFloat() <= config.probability;
+        return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 850f;
      }
 
      public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {

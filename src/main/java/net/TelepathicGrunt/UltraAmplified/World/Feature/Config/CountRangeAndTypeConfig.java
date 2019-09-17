@@ -7,28 +7,54 @@ import com.mojang.datafixers.types.DynamicOps;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 
 public class CountRangeAndTypeConfig implements IPlacementConfig {
-   public final int chance;
+   public final float countModifier;
+   public final int bottomOffset;
+   public final int topOffset;
+   public final int maximum;
+   public final boolean sealevelBased;
    public final Type type;
 
-   public CountRangeAndTypeConfig(int chanceIn, Type typeIn) {
-      this.chance = chanceIn;
+   public CountRangeAndTypeConfig(float countModifier, int bottomOffset, int topOffset, int maximum, boolean sealevelBasedIn, Type typeIn) {
+      this.countModifier = countModifier;
+      this.bottomOffset = bottomOffset;
+      this.topOffset = topOffset;
+      this.maximum = maximum;
+      this.sealevelBased = sealevelBasedIn;
       this.type = typeIn;
    }
-   
+
    public static enum Type {
-	   LAVA,
-	   WATER,
-	   SLIME;
+	   GLOWSTONE_VARIANT_PATCH,
+	   GLOWSTONE,
+	   MAGMA,
+	   QUARTZ,
+	   EMERALD,
+	   SILVERFISH,
+	   COAL,
+	   IRON,
+	   GOLD,
+	   REDSTONE,
+	   DIAMOND,
+	   NOCONFIG;
+   }
+   
+   //cannot fit boolean in
+   public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
+      return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(
+    		  ops.createString("count"), ops.createFloat(this.countModifier), 
+    		  ops.createString("bottom_offset"), ops.createInt(this.bottomOffset), 
+    		  ops.createString("top_offset"), ops.createInt(this.topOffset), 
+    		  ops.createString("maximum"), ops.createInt(this.maximum),
+    		  ops.createString("type"), ops.createString(this.type.name())
+    		  )));
    }
 
-	@Override
-	public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
-		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("chance"), ops.createInt(this.chance), ops.createString("type"), ops.createString(this.type.name()))));
-	}
-	
-   public static CountRangeAndTypeConfig deserialize(Dynamic<?> p_214723_0_) {
-      int chance = p_214723_0_.get("chance").asInt(0);
-      Type type = Type.valueOf(p_214723_0_.get("type").asString("WATER"));
-      return new CountRangeAndTypeConfig(chance, type);
+   public static CountRangeAndTypeConfig deserialize(Dynamic<?> p_214733_0_) {
+      float count = p_214733_0_.get("count").asFloat(0);
+      int bottom_offset = p_214733_0_.get("bottom_offset").asInt(0);
+      int top_offset = p_214733_0_.get("top_offset").asInt(0);
+      int maximum = p_214733_0_.get("maximum").asInt(0);
+      Type type = Type.valueOf(p_214733_0_.get("type").asString("COAL"));
+      return new CountRangeAndTypeConfig(count, bottom_offset, top_offset, maximum, false, type);
    }
 }

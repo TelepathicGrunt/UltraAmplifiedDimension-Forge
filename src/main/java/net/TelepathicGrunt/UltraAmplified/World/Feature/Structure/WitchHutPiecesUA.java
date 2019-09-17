@@ -32,11 +32,11 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece {
    private boolean cat;
 
    public WitchHutPiecesUA(Random random, int x, int y, int z) {
-      super(StructureInit.TESHUA, random, x, y, z, 7, 7, 9);
+      super(StructureInitUA.TESHUA, random, x, y, z, 7, 7, 9);
    }
 
    public WitchHutPiecesUA(TemplateManager p_i51340_1_, CompoundNBT p_i51340_2_) {
-      super(StructureInit.TESHUA, p_i51340_2_);
+      super(StructureInitUA.TESHUA, p_i51340_2_);
       this.witch = p_i51340_2_.getBoolean("Witch");
       this.cat = p_i51340_2_.getBoolean("Cat");
    }

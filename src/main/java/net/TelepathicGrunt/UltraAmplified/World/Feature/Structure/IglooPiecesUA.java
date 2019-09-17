@@ -51,7 +51,7 @@ public class IglooPiecesUA {
 	      private Rotation rotation;
 
 	      public Piece(TemplateManager templateManager, ResourceLocation resourceLocation, BlockPos pos, Rotation rotation, int downDepth) {
-	    	 super(StructureInit.IGLUUA, 0);
+	    	 super(StructureInitUA.IGLUUA, 0);
 	         this.resourceLocation = resourceLocation;
 	         BlockPos blockpos = IglooPiecesUA.OFFSET2.get(resourceLocation);
 	         this.templatePosition = pos.add(blockpos.getX(), blockpos.getY() - downDepth, blockpos.getZ());
@@ -61,7 +61,7 @@ public class IglooPiecesUA {
 
 
 	      public Piece(TemplateManager p_i50566_1_, CompoundNBT p_i50566_2_) {
-	         super(StructureInit.IGLUUA, p_i50566_2_);
+	         super(StructureInitUA.IGLUUA, p_i50566_2_);
 	         this.resourceLocation = new ResourceLocation(p_i50566_2_.getString("Template"));
 	         this.rotation = Rotation.valueOf(p_i50566_2_.getString("Rot"));
 	         this.setupPiece(p_i50566_1_);

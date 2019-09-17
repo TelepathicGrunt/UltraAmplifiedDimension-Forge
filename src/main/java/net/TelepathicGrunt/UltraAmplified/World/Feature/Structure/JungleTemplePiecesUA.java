@@ -34,11 +34,11 @@ public class JungleTemplePiecesUA  extends ScatteredStructurePiece {
 	   public static final ResourceLocation CHESTS_JUNGLE_TEMPLE_DISPENSER_UA = new ResourceLocation("ultra_amplified_mod:chests/jungle_temple_dispenser_ua");
 
 	   public JungleTemplePiecesUA(Random random, int x, int y, int z) {
-	      super(StructureInit.TEJPUA, random, x, y, z, 12, 10, 15);
+	      super(StructureInitUA.TEJPUA, random, x, y, z, 12, 10, 15);
 	   }
 
 	   public JungleTemplePiecesUA(TemplateManager p_i51351_1_, CompoundNBT p_i51351_2_) {
-	      super(StructureInit.TEJPUA, p_i51351_2_);
+	      super(StructureInitUA.TEJPUA, p_i51351_2_);
 	      this.mainChest = p_i51351_2_.getBoolean("placedMainChest");
 	      this.hiddenChest = p_i51351_2_.getBoolean("placedHiddenChest");
 	      this.trap1 = p_i51351_2_.getBoolean("placedTrap1");

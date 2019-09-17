@@ -24,7 +24,7 @@ import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInit;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInitUA;
 import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 /*
@@ -109,7 +109,7 @@ public class UltraAmplified {
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplified = new WorldTypeUA();
-		StructureInit.registerStructurePieces();
+		StructureInitUA.registerStructurePieces();
 		CapabilityPlayerPosAndDim.register();
 	}
 	

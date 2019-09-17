@@ -48,6 +48,17 @@ public class UltraAmplifiedWorldProvider extends Dimension{
 	      return (float)(d0 * 2.0D + d1) / 3.0F;
 	}
 
+
+	   /**
+	    * Creates the light to brightness table. It changes how light levels looks to the players but does not change the actual values of the light levels.
+	    */
+	   protected void generateLightBrightnessTable() {
+	      for(int i = 0; i <= 15; ++i) {
+	         this.lightBrightnessTable[i] = (float)i / 20.0F;
+	      }
+
+	   }
+	
    /**
     * the y level at which clouds are rendered.
     */
@@ -99,7 +110,7 @@ public class UltraAmplifiedWorldProvider extends Dimension{
 
 	@Override
 	public boolean doesXZShowFog(int x, int z) {
-		return false;
+		return ConfigUA.heavyFog;
 	}
 
 	@Override

@@ -38,6 +38,8 @@ public class ConfigUA {
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
     public static boolean chestGeneration = true;
+    public static int sunShrineSpawnrate = 130;
+    public static int stonehengeSpawnrate = 15;
     public static boolean miniStructureGeneration = true;
     public static int villageSpawnrate = 16;
     public static int villageZombieSpawnrate = 10;
@@ -60,6 +62,7 @@ public class ConfigUA {
     public static int endCitySpawnrate = 18;
     public static int pillageOutpostRarity = 20;
     public static boolean secretSetting = false;
+    public static boolean heavyFog = false;
     public static int biomeSize = 3;
     public static int mutatedBiomeSpawnrate = 2;
     public static int seaLevel = 75;
@@ -127,6 +130,8 @@ public class ConfigUA {
         public final ForgeConfigSpec.BooleanValue waterLakeGen;
         public final ForgeConfigSpec.BooleanValue lavaLakeGen;
 		public final ForgeConfigSpec.BooleanValue chestGeneration;
+		public final ForgeConfigSpec.IntValue sunShrineSpawnrate;
+		public final ForgeConfigSpec.IntValue stonehengeSpawnrate;
 		public final ForgeConfigSpec.BooleanValue miniStructureGeneration;
 		public final ForgeConfigSpec.IntValue villageSpawnrate;
 		public final ForgeConfigSpec.IntValue villageZombieSpawnrate;
@@ -149,6 +154,7 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue endCitySpawnrate;
 		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
+		public final ForgeConfigSpec.BooleanValue heavyFog;
 		public final ForgeConfigSpec.IntValue biomeSize;
 		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
 		public final ForgeConfigSpec.IntValue seaLevel;
@@ -218,9 +224,9 @@ public class ConfigUA {
 
 	            		caveCavitySpawnrate = builder
 	                    .comment("\r\nHow often Cave Cavity will spawn.\r\n"
-	                    		+"0 for no Cave Cavity and 100 for max spawnrate.")
+	                    		+"0 for no Cave Cavity and 22 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.cavecavityspawnrate")
-	                    .defineInRange("caveCavitySpawnrate", 5, 0, 100);
+	                    .defineInRange("caveCavitySpawnrate", 5, 0, 22);
 
 	            		oceanCaveSpawnrate = builder
 	                    .comment("\r\nHow often Underwater Caves will spawn in ocean biomes.\r\n"
@@ -250,9 +256,9 @@ public class ConfigUA {
 
 	            		glowstoneVariantsSpawnrate = builder
 	                    .comment("\r\nControls how often patches of Glowdirt and other modded Glowstone variants spawn.\r\n"
-	                    		+"0 for no patches and 100 for max amount of patches.")
+	                    		+"0 for no patches and 1000 for max amount of patches.")
 	                    .translation("ultraamplified.config.structure.glowstonevariantsspawnrate")
-	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 100);
+	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 1000);
 	            		
 
 	            		rootGen = builder
@@ -267,12 +273,29 @@ public class ConfigUA {
                     .comment("\r\nControls whether loot chests spawn or not in all structures.")
                     .translation("ultraamplified.config.structure.chestgeneration")
                     .define("chestGeneration", true);
-            
+
+
+            		sunShrineSpawnrate = builder
+                    .comment("\r\nHow rare are Sun Shrines.\r\n"
+                    		 +"1 for Sun Shrines spawning in most chunks and 1000 for very rare spawn.\r\n"
+                    		 +"Spawns mainly in hills variant of biomes.")
+                    .translation("ultraamplified.config.structure.sunshrinespawnrate")
+                    .defineInRange("sunShrineSpawnrate", 130, 1, 100);
+
+            		stonehengeSpawnrate = builder
+                    .comment("\r\nHow rare are Stonehenges.\r\n"
+                    		 +"1 for Stonehenges spawning in most chunks and 1000 for very rare spawn.\r\n"
+                    		 +"Spawns mainly in hills variant of biomes.")
+                    .translation("ultraamplified.config.structure.stonehengespawnrate")
+                    .defineInRange("stonehengeSpawnrate", 15, 1, 1000);
+            		
+            		
             		miniStructureGeneration = builder
                     .comment("\r\nControls whether Desert Wells, Hay Piles, Sun Shrines, Stonehenges, and Crosses spawn or not.")
                     .translation("ultraamplified.config.structure.ministructuregeneration")
                     .define("miniStructureGeneration", true);
             
+            		
             		villageSpawnrate = builder
                     .comment("\r\nHow rare are Villages.\r\n"
                     		 +"1 for Village spawning in most chunks and 101 for no spawn.")
@@ -402,6 +425,12 @@ public class ConfigUA {
             		.translation("ultraamplified.config.structure.secretsettings")
             		.define("secretSettings", false);
 
+	  				heavyFog = builder
+            		.comment("\r\nAdds very heavy fog to make the world look more spoky and limit visibility.\n"+
+            				"This is not the same as distance fog which does not make chunks near you foggy.")
+            		.translation("ultraamplified.config.structure.heavyfog")
+            		.define("heavyFog", false);
+
 
 	  				yMaximum = builder
             		.comment("\r\nMaxium height the terrain can generate up to.")
@@ -478,9 +507,9 @@ public class ConfigUA {
 
 
             		endIslandSpawnrate = builder
-            		.comment("\r\nHow often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 500 for max spawnrate.")
+            		.comment("\r\nHow often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 100 for max spawnrate.")
             		.translation("ultraamplified.config.structure.endislandspawnrate")
-            		.defineInRange("endIslandSpawnrate", 6, 0, 500);
+            		.defineInRange("endIslandSpawnrate", 6, 0, 100);
             
             builder.push("Biome Selection Options");
             
@@ -749,6 +778,8 @@ public class ConfigUA {
     	waterLakeGen = SERVER.waterLakeGen.get();
     	lavaLakeGen = SERVER.lavaLakeGen.get();
     	chestGeneration = SERVER.chestGeneration.get();
+    	sunShrineSpawnrate = SERVER.sunShrineSpawnrate.get();
+    	stonehengeSpawnrate = SERVER.stonehengeSpawnrate.get();
     	miniStructureGeneration = SERVER.miniStructureGeneration.get();
     	villageSpawnrate = SERVER.villageSpawnrate.get();
     	villageZombieSpawnrate = SERVER.villageZombieSpawnrate.get();
@@ -771,6 +802,7 @@ public class ConfigUA {
     	endCitySpawnrate = SERVER.endCitySpawnrate.get();
     	pillageOutpostRarity = SERVER.pillageOutpostRarity.get();
     	secretSetting = SERVER.secretSetting.get();
+    	heavyFog = SERVER.heavyFog.get();
     	biomeSize = SERVER.biomeSize.get();
     	mutatedBiomeSpawnrate = SERVER.mutatedBiomeSpawnrate.get();
     	seaLevel = SERVER.seaLevel.get();
