@@ -25,8 +25,8 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class VillageUA  extends Structure<VillageUAConfig> {
-   public VillageUA(Function<Dynamic<?>, ? extends VillageUAConfig> p_i51427_1_) {
+public class VillageUA  extends Structure<VillageConfigUA> {
+   public VillageUA(Function<Dynamic<?>, ? extends VillageConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -84,7 +84,7 @@ public class VillageUA  extends Structure<VillageUAConfig> {
       }
 
       public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
-         VillageUAConfig villageconfig = (VillageUAConfig)generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA); 
+         VillageConfigUA villageconfig = (VillageConfigUA)generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA); 
          
          //if we are requesting a village type that vanilla already can make,
          //we then generate a vanilla village. 

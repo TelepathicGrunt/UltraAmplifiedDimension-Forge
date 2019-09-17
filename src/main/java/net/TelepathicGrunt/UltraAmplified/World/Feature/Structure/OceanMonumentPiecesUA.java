@@ -30,11 +30,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class DoubleXRoom extends OceanMonumentPiecesUA.Piece {
 		 public DoubleXRoom(Direction p_i50661_1_, OceanMonumentPiecesUA.RoomDefinition p_i50661_2_) {
-	         super(StructureInit.OMDXRUA, 1, p_i50661_1_, p_i50661_2_, 2, 1, 1);
+	         super(StructureInitUA.OMDXRUA, 1, p_i50661_1_, p_i50661_2_, 2, 1, 1);
 	      }
 
 	      public DoubleXRoom(TemplateManager p_i50662_1_, CompoundNBT p_i50662_2_) {
-	         super(StructureInit.OMDXRUA, p_i50662_2_);
+	         super(StructureInitUA.OMDXRUA, p_i50662_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -81,11 +81,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class DoubleXYRoom extends OceanMonumentPiecesUA.Piece {
 		  public DoubleXYRoom(Direction p_i50659_1_, OceanMonumentPiecesUA.RoomDefinition p_i50659_2_) {
-	         super(StructureInit.OMDXYRUA, 1, p_i50659_1_, p_i50659_2_, 2, 2, 1);
+	         super(StructureInitUA.OMDXYRUA, 1, p_i50659_1_, p_i50659_2_, 2, 2, 1);
 	      }
 
 	      public DoubleXYRoom(TemplateManager p_i50660_1_, CompoundNBT p_i50660_2_) {
-	         super(StructureInit.OMDXYRUA, p_i50660_2_);
+	         super(StructureInitUA.OMDXYRUA, p_i50660_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -152,11 +152,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class DoubleYRoom extends OceanMonumentPiecesUA.Piece {
 		public DoubleYRoom(Direction p_i50657_1_, OceanMonumentPiecesUA.RoomDefinition p_i50657_2_) {
-	         super(StructureInit.OMDYRUA, 1, p_i50657_1_, p_i50657_2_, 1, 2, 1);
+	         super(StructureInitUA.OMDYRUA, 1, p_i50657_1_, p_i50657_2_, 1, 2, 1);
 	      }
 
 	      public DoubleYRoom(TemplateManager p_i50658_1_, CompoundNBT p_i50658_2_) {
-	         super(StructureInit.OMDYRUA, p_i50658_2_);
+	         super(StructureInitUA.OMDYRUA, p_i50658_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -244,11 +244,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class DoubleYZRoom extends OceanMonumentPiecesUA.Piece {
 	    public DoubleYZRoom(Direction p_i50655_1_, OceanMonumentPiecesUA.RoomDefinition p_i50655_2_) {
-           super(StructureInit.OMDYZRUA, 1, p_i50655_1_, p_i50655_2_, 1, 2, 2);
+           super(StructureInitUA.OMDYZRUA, 1, p_i50655_1_, p_i50655_2_, 1, 2, 2);
         }
   
         public DoubleYZRoom(TemplateManager p_i50656_1_, CompoundNBT p_i50656_2_) {
-           super(StructureInit.OMDYZRUA, p_i50656_2_);
+           super(StructureInitUA.OMDYZRUA, p_i50656_2_);
         }
 
 		protected int horizontalPos = -1;
@@ -330,11 +330,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class DoubleZRoom extends OceanMonumentPiecesUA.Piece {
 		public DoubleZRoom(Direction p_i50653_1_, OceanMonumentPiecesUA.RoomDefinition p_i50653_2_) {
-          super(StructureInit.OMDZRUA, 1, p_i50653_1_, p_i50653_2_, 1, 1, 2);
+          super(StructureInitUA.OMDZRUA, 1, p_i50653_1_, p_i50653_2_, 1, 1, 2);
         }
 
         public DoubleZRoom(TemplateManager p_i50654_1_, CompoundNBT p_i50654_2_) {
-          super(StructureInit.OMDZRUA, p_i50654_2_);
+          super(StructureInitUA.OMDZRUA, p_i50654_2_);
         }
 
 		protected int horizontalPos = -1;
@@ -393,11 +393,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class EntryRoom extends OceanMonumentPiecesUA.Piece {
 		  public EntryRoom(Direction p_i45592_1_, OceanMonumentPiecesUA.RoomDefinition p_i45592_2_) {
-	         super(StructureInit.OMENTRYUA, 1, p_i45592_1_, p_i45592_2_, 1, 1, 1);
+	         super(StructureInitUA.OMENTRYUA, 1, p_i45592_1_, p_i45592_2_, 1, 1, 1);
 	      }
 
 	      public EntryRoom(TemplateManager p_i50652_1_, CompoundNBT p_i50652_2_) {
-	         super(StructureInit.OMENTRYUA, p_i50652_2_);
+	         super(StructureInitUA.OMENTRYUA, p_i50652_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -457,11 +457,11 @@ public class OceanMonumentPiecesUA {
 		private final List<OceanMonumentPiecesUA.Piece> childPieces = Lists.<OceanMonumentPiecesUA.Piece>newArrayList();
 
 	      public MonumentBuilding(TemplateManager p_i50665_1_, CompoundNBT p_i50665_2_) {
-	         super(StructureInit.OMBUA, p_i50665_2_);
+	         super(StructureInitUA.OMBUA, p_i50665_2_);
 	      }
 	      
 		public MonumentBuilding(Random rand, int x, int z, Direction direction) {
-			super(StructureInit.OMBUA, 0);
+			super(StructureInitUA.OMBUA, 0);
 			this.setCoordBaseMode(direction);
 			Direction enumfacing = this.getCoordBaseMode();
 
@@ -991,11 +991,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class MonumentCoreRoom extends OceanMonumentPiecesUA.Piece {
 		 public MonumentCoreRoom(Direction p_i50663_1_, OceanMonumentPiecesUA.RoomDefinition p_i50663_2_) {
-	         super(StructureInit.OMCRUA, 1, p_i50663_1_, p_i50663_2_, 2, 2, 2);
+	         super(StructureInitUA.OMCRUA, 1, p_i50663_1_, p_i50663_2_, 2, 2, 2);
 	      }
 
 	      public MonumentCoreRoom(TemplateManager p_i50664_1_, CompoundNBT p_i50664_2_) {
-	         super(StructureInit.OMCRUA, p_i50664_2_);
+	         super(StructureInitUA.OMCRUA, p_i50664_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -1086,11 +1086,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class Penthouse extends OceanMonumentPiecesUA.Piece {
 		public Penthouse(Direction p_i45591_1_, MutableBoundingBox p_i45591_2_) {
-	         super(StructureInit.OMPENTHOUSEUA, p_i45591_1_, p_i45591_2_);
+	         super(StructureInitUA.OMPENTHOUSEUA, p_i45591_1_, p_i45591_2_);
 	      }
 	
 	      public Penthouse(TemplateManager p_i50651_1_, CompoundNBT p_i50651_2_) {
-	         super(StructureInit.OMPENTHOUSEUA, p_i50651_2_);
+	         super(StructureInitUA.OMPENTHOUSEUA, p_i50651_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -1414,12 +1414,12 @@ public class OceanMonumentPiecesUA {
 		private int mainDesign;
 
 		  public SimpleRoom(Direction p_i45587_1_, OceanMonumentPiecesUA.RoomDefinition p_i45587_2_, Random p_i45587_3_) {
-	         super(StructureInit.OMSIMPLEUA, 1, p_i45587_1_, p_i45587_2_, 1, 1, 1);
+	         super(StructureInitUA.OMSIMPLEUA, 1, p_i45587_1_, p_i45587_2_, 1, 1, 1);
 	         this.mainDesign = p_i45587_3_.nextInt(3);
 	      }
 
 	      public SimpleRoom(TemplateManager p_i50646_1_, CompoundNBT p_i50646_2_) {
-	         super(StructureInit.OMSIMPLEUA, p_i50646_2_);
+	         super(StructureInitUA.OMSIMPLEUA, p_i50646_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -1576,11 +1576,11 @@ public class OceanMonumentPiecesUA {
 
 	public static class SimpleTopRoom extends OceanMonumentPiecesUA.Piece {
 		  public SimpleTopRoom(Direction p_i50644_1_, OceanMonumentPiecesUA.RoomDefinition p_i50644_2_) {
-	         super(StructureInit.OMSIMPLETUA, 1, p_i50644_1_, p_i50644_2_, 1, 1, 1);
+	         super(StructureInitUA.OMSIMPLETUA, 1, p_i50644_1_, p_i50644_2_, 1, 1, 1);
 	      }
 
 	      public SimpleTopRoom(TemplateManager p_i50645_1_, CompoundNBT p_i50645_2_) {
-	         super(StructureInit.OMSIMPLETUA, p_i50645_2_);
+	         super(StructureInitUA.OMSIMPLETUA, p_i50645_2_);
 	      }
 
 		protected int horizontalPos = -1;
@@ -1633,12 +1633,12 @@ public class OceanMonumentPiecesUA {
 		private int mainDesign;
 
 	      public WingRoom(Direction p_i45585_1_, MutableBoundingBox p_i45585_2_, int p_i45585_3_) {
-	         super(StructureInit.OMWRUA, p_i45585_1_, p_i45585_2_);
+	         super(StructureInitUA.OMWRUA, p_i45585_1_, p_i45585_2_);
 	         this.mainDesign = p_i45585_3_ & 1;
 	      }
 
 	      public WingRoom(TemplateManager p_i50643_1_, CompoundNBT p_i50643_2_) {
-	         super(StructureInit.OMWRUA, p_i50643_2_);
+	         super(StructureInitUA.OMWRUA, p_i50643_2_);
 	      }
 
 		protected int horizontalPos = -1;

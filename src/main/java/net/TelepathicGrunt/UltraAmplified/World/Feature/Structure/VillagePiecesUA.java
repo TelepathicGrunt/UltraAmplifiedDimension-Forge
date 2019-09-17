@@ -222,13 +222,13 @@ public class VillagePiecesUA
 	   public static class Church extends VillagePiecesUA.Village {
 		   
 	      protected Church(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VISTUA, type);
+	         super(start, StructureInitUA.VISTUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public Church(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VISTUA, p_i50111_2_);
+	         super(StructureInitUA.VISTUA, p_i50111_2_);
 	      }
 
 
@@ -380,7 +380,7 @@ public class VillagePiecesUA
 
 	      
 	      protected Field1(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VIDFUA, type);
+	         super(start, StructureInitUA.VIDFUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	         cropTypeA = randomCrop(rand);
@@ -390,7 +390,7 @@ public class VillagePiecesUA
 	      }
 
 	      public Field1(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VIDFUA, p_i50111_2_);
+	         super(StructureInitUA.VIDFUA, p_i50111_2_);
 	         this.cropTypeA = NBTUtil.readBlockState(p_i50111_2_.getCompound("cropTypeA"));
 	         this.cropTypeB = NBTUtil.readBlockState(p_i50111_2_.getCompound("cropTypeB"));
 	         this.cropTypeC = NBTUtil.readBlockState(p_i50111_2_.getCompound("cropTypeC"));
@@ -498,7 +498,7 @@ public class VillagePiecesUA
 	      private BlockState cropTypeB;
 
 	      protected Field2(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VIFUA, type);
+	         super(start, StructureInitUA.VIFUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	         cropTypeA = randomCrop(rand);
@@ -506,7 +506,7 @@ public class VillagePiecesUA
 	      }
 
 	      public Field2(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VIFUA, p_i50111_2_);
+	         super(StructureInitUA.VIFUA, p_i50111_2_);
 	         this.cropTypeA = NBTUtil.readBlockState(p_i50111_2_.getCompound("cropTypeA"));
 	         this.cropTypeB = NBTUtil.readBlockState(p_i50111_2_.getCompound("cropTypeB"));
 	      }
@@ -591,13 +591,13 @@ public class VillagePiecesUA
 
 	   public static class WorkHouse extends VillagePiecesUA.Village {
 		   protected WorkHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VIPHUA, type);
+	         super(start, StructureInitUA.VIPHUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public WorkHouse(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VIPHUA, p_i50111_2_);
+	         super(StructureInitUA.VIPHUA, p_i50111_2_);
 	      }
 
 		      
@@ -723,13 +723,13 @@ public class VillagePiecesUA
 
 	   public static class LibraryHouse extends VillagePiecesUA.Village {
 		   protected LibraryHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VIBHUA, type);
+	         super(start, StructureInitUA.VIBHUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public LibraryHouse(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VIBHUA, p_i50111_2_);
+	         super(StructureInitUA.VIBHUA, p_i50111_2_);
 	      }
 
 	      public static VillagePiecesUA.LibraryHouse createPiece(VillagePiecesUA.Start start, List<StructurePiece> p_175850_1_, Random rand, int p_175850_3_, int p_175850_4_, int p_175850_5_, Direction facing, int p_175850_7_) {
@@ -847,13 +847,13 @@ public class VillagePiecesUA
 	      private boolean hasMadeChest;
 
 	      protected Blacksmith(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VISUA, type);
+	         super(start, StructureInitUA.VISUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public Blacksmith(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VISUA, p_i50111_2_);
+	         super(StructureInitUA.VISUA, p_i50111_2_);
 	         this.hasMadeChest = p_i50111_2_.getBoolean("hasMadeChest");
 	      }
 
@@ -965,13 +965,13 @@ public class VillagePiecesUA
 	      private boolean hasMadeChest;
 
 	      protected LargeHouse(VillagePiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VITRHUA, p_i45573_1_);;
+	         super(start, StructureInitUA.VITRHUA, p_i45573_1_);;
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public LargeHouse(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VITRHUA, p_i50111_2_);
+	         super(StructureInitUA.VITRHUA, p_i50111_2_);
 	         this.hasMadeChest = p_i50111_2_.getBoolean("hasMadeChest");
 	      }
 
@@ -1161,13 +1161,13 @@ public class VillagePiecesUA
 
 
 	      protected FlatTopTinyHouse(VillagePiecesUA.Start start, int p_i45573_1_, Random rand, MutableBoundingBox boundingBoxIn, Direction p_i45573_4_) {
-	         super(start, StructureInit.VISHUA, p_i45573_1_);
+	         super(start, StructureInitUA.VISHUA, p_i45573_1_);
 	         this.boundingBox = boundingBoxIn;
 	         this.isRoofAccessible = rand.nextBoolean();
 	      }
 
 	      public FlatTopTinyHouse(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VISHUA, p_i50111_2_);
+	         super(StructureInitUA.VISHUA, p_i50111_2_);
 	         this.isRoofAccessible = p_i50111_2_.getBoolean("isRoofAccessible");
 	      }
 
@@ -1288,14 +1288,14 @@ public class VillagePiecesUA
 	      private int length;
 
 	      protected Path(VillagePiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VISRUA, p_i45573_1_);
+	         super(start, StructureInitUA.VISRUA, p_i45573_1_);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	         this.length = Math.max(boundingBoxIn.getXSize(), boundingBoxIn.getZSize());
 	      }
 
 	      public Path(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VISRUA, p_i50111_2_);
+	         super(StructureInitUA.VISRUA, p_i50111_2_);
 	         this.length = p_i50111_2_.getInt("length");
 	      }
 
@@ -1469,10 +1469,10 @@ public class VillagePiecesUA
 
 
          public Start(TemplateManager p_i50253_1_, CompoundNBT p_i50253_2_) {
-            super(StructureInit.VISTARTUA, p_i50253_2_);
+            super(StructureInitUA.VISTARTUA, p_i50253_2_);
          }
 	      
-	      public Start(int p_i48769_1_, Random p_i48769_2_, int p_i48769_3_, int p_i48769_4_, List<VillagePiecesUA.PieceWeightUA> p_i48769_5_, VillageUAConfig p_i48769_6_, net.minecraft.world.biome.Biome biome) {
+	      public Start(int p_i48769_1_, Random p_i48769_2_, int p_i48769_3_, int p_i48769_4_, List<VillagePiecesUA.PieceWeightUA> p_i48769_5_, VillageConfigUA p_i48769_6_, net.minecraft.world.biome.Biome biome) {
 	         super((VillagePiecesUA.Start)null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
 	         this.structureVillageWeightedPieceList = p_i48769_5_;
 	         this.terrainType = p_i48769_6_.terrainType;
@@ -1485,13 +1485,13 @@ public class VillagePiecesUA
 
 	   public static class Torch extends VillagePiecesUA.Village {
 		   protected Torch(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VILUA, type);
+	         super(start, StructureInitUA.VILUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public Torch(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VILUA, p_i50111_2_);
+	         super(StructureInitUA.VILUA, p_i50111_2_);
 	      }
 
 
@@ -2211,7 +2211,7 @@ public class VillagePiecesUA
           }
           
 	      public Well(VillagePiecesUA.Start start, int type, Random rand, int x, int z) {
-			super(start, StructureInit.VIWUA, 0);
+			super(start, StructureInitUA.VIWUA, 0);
 	         this.setCoordBaseMode(Direction.Plane.HORIZONTAL.random(rand));
 	         if (this.getCoordBaseMode().getAxis() == Direction.Axis.Z) {
 	            this.boundingBox = new MutableBoundingBox(x, 64, z, x + 6 - 1, 78, z + 6 - 1);
@@ -2221,7 +2221,7 @@ public class VillagePiecesUA
 	      }
 
 	      public Well(TemplateManager p_i50665_1_, CompoundNBT p_i50665_2_) {
-		         super(StructureInit.VIWUA, p_i50665_2_);
+		         super(StructureInitUA.VIWUA, p_i50665_2_);
 	      }
 
 	      /**
@@ -2285,13 +2285,13 @@ public class VillagePiecesUA
 	      private int tablePosition;
 
 	      protected TinyHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn, Direction facing) {
-	         super(start, StructureInit.VISMHUA, type);
+	         super(start, StructureInitUA.VISMHUA, type);
 	         this.setCoordBaseMode(facing);
 	         this.boundingBox = boundingBoxIn;
 	      }
 
 	      public TinyHouse(TemplateManager p_i50111_1_, CompoundNBT p_i50111_2_) {
-	         super(StructureInit.VISMHUA, p_i50111_2_);
+	         super(StructureInitUA.VISMHUA, p_i50111_2_);
 	         this.isTallHouse = p_i50111_2_.getBoolean("isTallHouse");
 	         this.tablePosition = p_i50111_2_.getInt("tablePosition");
 	      }

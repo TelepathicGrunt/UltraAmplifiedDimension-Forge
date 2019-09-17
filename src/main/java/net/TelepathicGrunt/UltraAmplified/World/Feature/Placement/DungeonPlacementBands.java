@@ -11,16 +11,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.placement.DungeonRoomConfig;
+import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class DungeonPlacementBands extends Placement<DungeonRoomConfig> {
-   public DungeonPlacementBands(Function<Dynamic<?>, ? extends DungeonRoomConfig> configFactoryIn) {
+public class DungeonPlacementBands extends Placement<NoPlacementConfig> {
+   public DungeonPlacementBands(Function<Dynamic<?>, ? extends NoPlacementConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, DungeonRoomConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
 	      int count = ConfigUA.dungeonSpawnrate;
 
 	      return IntStream.range(0, count).mapToObj((p_215051_3_) -> {

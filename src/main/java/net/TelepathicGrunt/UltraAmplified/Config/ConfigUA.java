@@ -224,9 +224,9 @@ public class ConfigUA {
 
 	            		caveCavitySpawnrate = builder
 	                    .comment("\r\nHow often Cave Cavity will spawn.\r\n"
-	                    		+"0 for no Cave Cavity and 100 for max spawnrate.")
+	                    		+"0 for no Cave Cavity and 22 for max spawnrate.")
 	                    .translation("ultraamplified.config.structure.cavecavityspawnrate")
-	                    .defineInRange("caveCavitySpawnrate", 5, 0, 100);
+	                    .defineInRange("caveCavitySpawnrate", 5, 0, 22);
 
 	            		oceanCaveSpawnrate = builder
 	                    .comment("\r\nHow often Underwater Caves will spawn in ocean biomes.\r\n"
@@ -507,9 +507,9 @@ public class ConfigUA {
 
 
             		endIslandSpawnrate = builder
-            		.comment("\r\nHow often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 500 for max spawnrate.")
+            		.comment("\r\nHow often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 100 for max spawnrate.")
             		.translation("ultraamplified.config.structure.endislandspawnrate")
-            		.defineInRange("endIslandSpawnrate", 6, 0, 500);
+            		.defineInRange("endIslandSpawnrate", 6, 0, 100);
             
             builder.push("Biome Selection Options");
             

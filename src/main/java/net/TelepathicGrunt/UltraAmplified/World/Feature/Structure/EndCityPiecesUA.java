@@ -217,7 +217,7 @@ public class EndCityPiecesUA
 	      private boolean overwrite;
 
 	      public CityTemplate(TemplateManager p_i47214_1_, String p_i47214_2_, BlockPos p_i47214_3_, Rotation p_i47214_4_, boolean overwriteIn) {
-	         super(StructureInit.ECPUA, 0);
+	         super(StructureInitUA.ECPUA, 0);
 	         this.pieceName = p_i47214_2_;
 	         this.templatePosition = p_i47214_3_;
 	         this.rotation = p_i47214_4_;
@@ -226,7 +226,7 @@ public class EndCityPiecesUA
 	      }
 
 	      public CityTemplate(TemplateManager p_i50598_1_, CompoundNBT p_i50598_2_) {
-	         super(StructureInit.ECPUA, p_i50598_2_);
+	         super(StructureInitUA.ECPUA, p_i50598_2_);
 	         this.pieceName = p_i50598_2_.getString("Template");
 	         this.rotation = Rotation.valueOf(p_i50598_2_.getString("Rot"));
 	         this.overwrite = p_i50598_2_.getBoolean("OW");

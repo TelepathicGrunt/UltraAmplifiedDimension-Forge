@@ -17,6 +17,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Config: 
 ·Added config option to trigger heavy fog in the Ultra Amplified Dimension for spooky effect. Set to false by default.
 ·Added config options to control spawnrate of Sun Shrine and Stonehenge ministructures.
+·Fixed bug so that spawnrates config options now correctly apply for: Mineshafts, Caves, Ravines, Waterfalls, Lavafalls, Glowstone patches, Pillager Outposts, Ores, Sunshrines, Stonehenge, and End Islands.
+·Lowered maximum spawnrate option from 100 to 22 for Cave Caverns because anything 30 or above causes Minecraft to stop loading chunks due to how massive caverns are.
+·Lowered maximum spawnrate of End Islands from 500 to 100 because 500 is ridiculous lol. The entire land was pretty much all Endstone at that point with no opening or ledges.
 
 	Dimension:
 ·All light sources now look brighter and their light visually reaches further to make glow-variant patches look nicer. The actual light levels itself has not change.
@@ -24,7 +27,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Biomes:
 ·Added new cactus blocks to create better cactuses to spawn in desert biomes.
 ·Desert Hills biome has less Sand under its surface which makes Stone appear more often on the bottom of ledges to make this biome slightly more distinct from regular Desert biome.
-     
+·Foliage in End Barren Fields biome are now slightly more green. 
+·Added extra Iron Ores that spawn around sealevel for all biomes with "Mountain" in its name except for Ice Mountain biome.
+
     Blocks:
 ·All blocks that this mod added is now available in the creative inventory.
 

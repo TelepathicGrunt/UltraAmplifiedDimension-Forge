@@ -239,14 +239,14 @@ public class StrongholdPiecesUA
         private boolean hasMadeChest;
 
         public ChestCorridor(int p_i45582_1_, Random p_i45582_2_, MutableBoundingBox p_i45582_3_, Direction p_i45582_4_) {
-            super(StructureInit.SHCCUA, p_i45582_1_);
+            super(StructureInitUA.SHCCUA, p_i45582_1_);
             this.setCoordBaseMode(p_i45582_4_);
             this.entryDoor = this.getRandomDoor(p_i45582_2_);
             this.boundingBox = p_i45582_3_;
          }
 
          public ChestCorridor(TemplateManager p_i50140_1_, CompoundNBT p_i50140_2_) {
-            super(StructureInit.SHCCUA, p_i50140_2_);
+            super(StructureInitUA.SHCCUA, p_i50140_2_);
             this.hasMadeChest = p_i50140_2_.getBoolean("Chest");
          }
 
@@ -302,14 +302,14 @@ public class StrongholdPiecesUA
         private int steps;
 
         public Corridor(int p_i50137_1_, MutableBoundingBox p_i50137_2_, Direction p_i50137_3_) {
-            super(StructureInit.SHFCUA, p_i50137_1_);
+            super(StructureInitUA.SHFCUA, p_i50137_1_);
             this.setCoordBaseMode(p_i50137_3_);
             this.boundingBox = p_i50137_2_;
             this.steps = p_i50137_3_ != Direction.NORTH && p_i50137_3_ != Direction.SOUTH ? p_i50137_2_.getXSize() : p_i50137_2_.getZSize();
          }
 
          public Corridor(TemplateManager p_i50138_1_, CompoundNBT p_i50138_2_) {
-            super(StructureInit.SHFCUA, p_i50138_2_);
+            super(StructureInitUA.SHFCUA, p_i50138_2_);
             this.steps = p_i50138_2_.getInt("Steps");
          }
 
@@ -388,7 +388,7 @@ public class StrongholdPiecesUA
         private boolean rightHigh;
 
         public Crossing(int p_i45580_1_, Random p_i45580_2_, MutableBoundingBox p_i45580_3_, Direction p_i45580_4_) {
-            super(StructureInit.SH5CUA, p_i45580_1_);
+            super(StructureInitUA.SH5CUA, p_i45580_1_);
             this.setCoordBaseMode(p_i45580_4_);
             this.entryDoor = this.getRandomDoor(p_i45580_2_);
             this.boundingBox = p_i45580_3_;
@@ -399,7 +399,7 @@ public class StrongholdPiecesUA
          }
 
          public Crossing(TemplateManager p_i50136_1_, CompoundNBT p_i50136_2_) {
-            super(StructureInit.SH5CUA, p_i50136_2_);
+            super(StructureInitUA.SH5CUA, p_i50136_2_);
             this.leftLow = p_i50136_2_.getBoolean("leftLow");
             this.leftHigh = p_i50136_2_.getBoolean("leftHigh");
             this.rightLow = p_i50136_2_.getBoolean("rightLow");
@@ -505,14 +505,14 @@ public class StrongholdPiecesUA
     public static class LeftTurn extends StrongholdPiecesUA.Turn
     {
     	 public LeftTurn(int p_i45579_1_, Random p_i45579_2_, MutableBoundingBox p_i45579_3_, Direction p_i45579_4_) {
-             super(StructureInit.SHLTUA, p_i45579_1_);
+             super(StructureInitUA.SHLTUA, p_i45579_1_);
              this.setCoordBaseMode(p_i45579_4_);
              this.entryDoor = this.getRandomDoor(p_i45579_2_);
              this.boundingBox = p_i45579_3_;
           }
 
           public LeftTurn(TemplateManager p_i50134_1_, CompoundNBT p_i50134_2_) {
-             super(StructureInit.SHLTUA, p_i50134_2_);
+             super(StructureInitUA.SHLTUA, p_i50134_2_);
           }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -559,7 +559,7 @@ public class StrongholdPiecesUA
         private boolean isLargeRoom;
 
         public Library(int p_i45578_1_, Random p_i45578_2_, MutableBoundingBox p_i45578_3_, Direction p_i45578_4_) {
-            super(StructureInit.SHLIUA, p_i45578_1_);
+            super(StructureInitUA.SHLIUA, p_i45578_1_);
             this.setCoordBaseMode(p_i45578_4_);
             this.entryDoor = this.getRandomDoor(p_i45578_2_);
             this.boundingBox = p_i45578_3_;
@@ -567,7 +567,7 @@ public class StrongholdPiecesUA
          }
 
          public Library(TemplateManager p_i50133_1_, CompoundNBT p_i50133_2_) {
-            super(StructureInit.SHLIUA, p_i50133_2_);
+            super(StructureInitUA.SHLIUA, p_i50133_2_);
             this.isLargeRoom = p_i50133_2_.getBoolean("Tall");
          }
 
@@ -741,13 +741,13 @@ public class StrongholdPiecesUA
         private boolean hasSpawner;
 
         public PortalRoom(int p_i50131_1_, MutableBoundingBox p_i50131_2_, Direction p_i50131_3_) {
-            super(StructureInit.SHPRUA, p_i50131_1_);
+            super(StructureInitUA.SHPRUA, p_i50131_1_);
             this.setCoordBaseMode(p_i50131_3_);
             this.boundingBox = p_i50131_2_;
          }
 
          public PortalRoom(TemplateManager p_i50132_1_, CompoundNBT p_i50132_2_) {
-            super(StructureInit.SHPRUA, p_i50132_2_);
+            super(StructureInitUA.SHPRUA, p_i50132_2_);
             this.hasSpawner = p_i50132_2_.getBoolean("Mob");
          }
 
@@ -878,14 +878,14 @@ public class StrongholdPiecesUA
     public static class Prison extends StrongholdPiecesUA.Stronghold
     { 
     	public Prison(int p_i45576_1_, Random p_i45576_2_, MutableBoundingBox p_i45576_3_, Direction p_i45576_4_) {
-	        super(StructureInit.SHPHUA, p_i45576_1_);
+	        super(StructureInitUA.SHPHUA, p_i45576_1_);
 	        this.setCoordBaseMode(p_i45576_4_);
 	        this.entryDoor = this.getRandomDoor(p_i45576_2_);
 	        this.boundingBox = p_i45576_3_;
 	     }
 	
 	     public Prison(TemplateManager p_i50130_1_, CompoundNBT p_i50130_2_) {
-	        super(StructureInit.SHPHUA, p_i50130_2_);
+	        super(StructureInitUA.SHPHUA, p_i50130_2_);
 	     }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -925,14 +925,14 @@ public class StrongholdPiecesUA
     public static class RightTurn extends StrongholdPiecesUA.Turn
     {
     	public RightTurn(int p_i50127_1_, Random p_i50127_2_, MutableBoundingBox p_i50127_3_, Direction p_i50127_4_) {
-            super(StructureInit.SHRTUA, p_i50127_1_);
+            super(StructureInitUA.SHRTUA, p_i50127_1_);
             this.setCoordBaseMode(p_i50127_4_);
             this.entryDoor = this.getRandomDoor(p_i50127_2_);
             this.boundingBox = p_i50127_3_;
          }
 
          public RightTurn(TemplateManager p_i50128_1_, CompoundNBT p_i50128_2_) {
-            super(StructureInit.SHRTUA, p_i50128_2_);
+            super(StructureInitUA.SHRTUA, p_i50128_2_);
          }
     	
     	
@@ -982,7 +982,7 @@ public class StrongholdPiecesUA
         private boolean hasSpawner = false;
         
         public RoomCrossing(int p_i45575_1_, Random p_i45575_2_, MutableBoundingBox p_i45575_3_, Direction p_i45575_4_) {
-            super(StructureInit.SHRCUA, p_i45575_1_);
+            super(StructureInitUA.SHRCUA, p_i45575_1_);
             this.setCoordBaseMode(p_i45575_4_);
             this.entryDoor = this.getRandomDoor(p_i45575_2_);
             this.boundingBox = p_i45575_3_;
@@ -990,7 +990,7 @@ public class StrongholdPiecesUA
          }
 
          public RoomCrossing(TemplateManager p_i50125_1_, CompoundNBT p_i50125_2_) {
-            super(StructureInit.SHRCUA, p_i50125_2_);
+            super(StructureInitUA.SHRCUA, p_i50125_2_);
             this.roomType = p_i50125_2_.getInt("Type");
          }
 
@@ -1196,7 +1196,7 @@ public class StrongholdPiecesUA
         }
 
         public Stairs(int p_i45574_1_, Random p_i45574_2_, MutableBoundingBox p_i45574_3_, Direction p_i45574_4_) {
-           super(StructureInit.SHSDUA, p_i45574_1_);
+           super(StructureInitUA.SHSDUA, p_i45574_1_);
            this.source = false;
            this.setCoordBaseMode(p_i45574_4_);
            this.entryDoor = this.getRandomDoor(p_i45574_2_);
@@ -1209,7 +1209,7 @@ public class StrongholdPiecesUA
         }
 
         public Stairs(TemplateManager p_i50122_1_, CompoundNBT p_i50122_2_) {
-           this(StructureInit.SHSDUA, p_i50122_2_);
+           this(StructureInitUA.SHSDUA, p_i50122_2_);
         }
 
         /**
@@ -1271,25 +1271,25 @@ public class StrongholdPiecesUA
 
 
         public Stairs2(Random p_i50117_1_, int p_i50117_2_, int p_i50117_3_) {
-           super(StructureInit.SHSTARTUA, 0, p_i50117_1_, p_i50117_2_, p_i50117_3_);
+           super(StructureInitUA.SHSTARTUA, 0, p_i50117_1_, p_i50117_2_, p_i50117_3_);
         }
 
         public Stairs2(TemplateManager p_i50118_1_, CompoundNBT p_i50118_2_) {
-           super(StructureInit.SHSTARTUA, p_i50118_2_);
+           super(StructureInitUA.SHSTARTUA, p_i50118_2_);
         }
     }
 
     public static class StairsStraight extends StrongholdPiecesUA.Stronghold
     {
     	public StairsStraight(int p_i45572_1_, Random p_i45572_2_, MutableBoundingBox p_i45572_3_, Direction p_i45572_4_) {
-            super(StructureInit.SHSSDUA, p_i45572_1_);
+            super(StructureInitUA.SHSSDUA, p_i45572_1_);
             this.setCoordBaseMode(p_i45572_4_);
             this.entryDoor = this.getRandomDoor(p_i45572_2_);
             this.boundingBox = p_i45572_3_;
          }
 
          public StairsStraight(TemplateManager p_i50113_1_, CompoundNBT p_i50113_2_) {
-            super(StructureInit.SHSSDUA, p_i50113_2_);
+            super(StructureInitUA.SHSSDUA, p_i50113_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -1370,7 +1370,7 @@ public class StrongholdPiecesUA
         private boolean expandsZ;
         
         public Straight(int p_i45573_1_, Random p_i45573_2_, MutableBoundingBox p_i45573_3_, Direction p_i45573_4_) {
-            super(StructureInit.SHSUA, p_i45573_1_);
+            super(StructureInitUA.SHSUA, p_i45573_1_);
             this.setCoordBaseMode(p_i45573_4_);
             this.entryDoor = this.getRandomDoor(p_i45573_2_);
             this.boundingBox = p_i45573_3_;
@@ -1379,7 +1379,7 @@ public class StrongholdPiecesUA
          }
 
          public Straight(TemplateManager p_i50115_1_, CompoundNBT p_i50115_2_) {
-            super(StructureInit.SHSUA, p_i50115_2_);
+            super(StructureInitUA.SHSUA, p_i50115_2_);
             this.expandsX = p_i50115_2_.getBoolean("Left");
             this.expandsZ = p_i50115_2_.getBoolean("Right");
          }

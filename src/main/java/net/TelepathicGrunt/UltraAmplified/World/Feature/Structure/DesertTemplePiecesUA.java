@@ -19,11 +19,11 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 	   private final boolean[] hasPlacedChest = new boolean[4];
 
 	   public DesertTemplePiecesUA(Random random, int x, int y, int z) {
-		      super(StructureInit.TEDPUA, random, x, y, z, 21, 15, 21);
+		      super(StructureInitUA.TEDPUA, random, x, y, z, 21, 15, 21);
 	   }
 
 	   public DesertTemplePiecesUA(TemplateManager p_i51351_1_, CompoundNBT p_i51351_2_) {
-	      super(StructureInit.TEDPUA, p_i51351_2_);
+	      super(StructureInitUA.TEDPUA, p_i51351_2_);
 	      this.hasPlacedChest[0] = p_i51351_2_.getBoolean("hasPlacedChest0");
 	      this.hasPlacedChest[1] = p_i51351_2_.getBoolean("hasPlacedChest1");
 	      this.hasPlacedChest[2] = p_i51351_2_.getBoolean("hasPlacedChest2");

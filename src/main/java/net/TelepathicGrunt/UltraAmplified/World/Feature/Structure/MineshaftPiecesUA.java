@@ -106,7 +106,7 @@ public class MineshaftPiecesUA
         private int sectionCount;
 
         public Corridor(TemplateManager p_i50456_1_, CompoundNBT p_i50456_2_) {
-            super(StructureInit.MSCORRIDORUA, p_i50456_2_);
+            super(StructureInitUA.MSCORRIDORUA, p_i50456_2_);
             this.hasRails = p_i50456_2_.getBoolean("hr");
             this.hasSpiders = p_i50456_2_.getBoolean("sc");
             this.spawnerPlaced = p_i50456_2_.getBoolean("hps");
@@ -125,7 +125,7 @@ public class MineshaftPiecesUA
          }
 
          public Corridor(int p_i47140_1_, Random p_i47140_2_, MutableBoundingBox p_i47140_3_, Direction p_i47140_4_, MineshaftUA.Type p_i47140_5_) {
-            super(StructureInit.MSCORRIDORUA, p_i47140_1_, p_i47140_5_);
+            super(StructureInitUA.MSCORRIDORUA, p_i47140_1_, p_i47140_5_);
             this.setCoordBaseMode(p_i47140_4_);
             this.boundingBox = p_i47140_3_;
             this.hasRails = p_i47140_2_.nextInt(3) == 0;
@@ -468,7 +468,7 @@ public class MineshaftPiecesUA
 
 
         public Cross(TemplateManager p_i50454_1_, CompoundNBT p_i50454_2_) {
-           super(StructureInit.MSCROSSINGUA, p_i50454_2_);
+           super(StructureInitUA.MSCROSSINGUA, p_i50454_2_);
            this.isMultipleFloors = p_i50454_2_.getBoolean("tf");
            this.corridorDirection = Direction.byHorizontalIndex(p_i50454_2_.getInt("D"));
         }
@@ -483,7 +483,7 @@ public class MineshaftPiecesUA
         }
 
         public Cross(int p_i50455_1_, MutableBoundingBox p_i50455_2_, @Nullable Direction p_i50455_3_, MineshaftUA.Type p_i50455_4_) {
-           super(StructureInit.MSCROSSINGUA, p_i50455_1_, p_i50455_4_);
+           super(StructureInitUA.MSCROSSINGUA, p_i50455_1_, p_i50455_4_);
            this.corridorDirection = p_i50455_3_;
            this.boundingBox = p_i50455_2_;
            this.isMultipleFloors = p_i50455_2_.getYSize() > 3;
@@ -805,7 +805,7 @@ public class MineshaftPiecesUA
         private final boolean normalRoom;
 
         public Room(int p_i47137_1_, Random p_i47137_2_, int p_i47137_3_, int p_i47137_4_, MineshaftUA.Type p_i47137_5_) {
-            super(StructureInit.MSROOMUA, p_i47137_1_, p_i47137_5_);
+            super(StructureInitUA.MSROOMUA, p_i47137_1_, p_i47137_5_);
             this.mineShaftType = p_i47137_5_;
           //if the pit rooms are not allowed, makes this boolean always true.
             //if pits are allowed and normal rooms are not allowed, set to always false.
@@ -840,7 +840,7 @@ public class MineshaftPiecesUA
         }
 
          public Room(TemplateManager p_i50451_1_, CompoundNBT p_i50451_2_) {
-            super(StructureInit.MSROOMUA, p_i50451_2_);
+            super(StructureInitUA.MSROOMUA, p_i50451_2_);
             ListNBT listnbt = p_i50451_2_.getList("Entrances", 11);
             
 
@@ -1038,13 +1038,13 @@ public class MineshaftPiecesUA
     public static class Stairs extends MineshaftPiecesUA.Piece
     {
     	 public Stairs(int p_i50449_1_, MutableBoundingBox p_i50449_2_, Direction p_i50449_3_, MineshaftUA.Type p_i50449_4_) {
-             super(StructureInit.MSSTAIRSUA, p_i50449_1_, p_i50449_4_);
+             super(StructureInitUA.MSSTAIRSUA, p_i50449_1_, p_i50449_4_);
              this.setCoordBaseMode(p_i50449_3_);
              this.boundingBox = p_i50449_2_;
           }
 
           public Stairs(TemplateManager p_i50450_1_, CompoundNBT p_i50450_2_) {
-             super(StructureInit.MSSTAIRSUA, p_i50450_2_);
+             super(StructureInitUA.MSSTAIRSUA, p_i50450_2_);
           }
 
         public static MutableBoundingBox findStairs(List<StructurePiece> listIn, Random rand, int x, int y, int z, Direction facing)

@@ -136,7 +136,7 @@ public class OceanRuinsPiecesUA {
       private boolean isLarge;
 
       public Piece(TemplateManager p_i48868_1_, ResourceLocation p_i48868_2_, BlockPos p_i48868_3_, Rotation p_i48868_4_, float p_i48868_5_, OceanRuinStructure.Type p_i48868_6_, boolean p_i48868_7_) {
-         super(StructureInit.ORPUA, 0);
+         super(StructureInitUA.ORPUA, 0);
          this.ruinsTemplate = p_i48868_2_;
          this.templatePosition = p_i48868_3_;
          this.rotation = p_i48868_4_;
@@ -147,7 +147,7 @@ public class OceanRuinsPiecesUA {
       }
 
       public Piece(TemplateManager p_i50592_1_, CompoundNBT p_i50592_2_) {
-         super(StructureInit.ORPUA, p_i50592_2_);
+         super(StructureInitUA.ORPUA, p_i50592_2_);
          this.ruinsTemplate = new ResourceLocation(p_i50592_2_.getString("Template"));
          this.rotation = Rotation.valueOf(p_i50592_2_.getString("Rot"));
          this.integrity = p_i50592_2_.getFloat("Integrity");

@@ -102,13 +102,13 @@ public class FortressPiecesUA
 
 
         public Corridor(int p_i45615_1_, Random rand, MutableBoundingBox p_i45615_3_, Direction p_i45615_4_, boolean isStone) {
-           super(StructureInit.NESCLTUA, p_i45615_1_, isStone);
+           super(StructureInitUA.NESCLTUA, p_i45615_1_, isStone);
            this.setCoordBaseMode(p_i45615_4_);
            this.boundingBox = p_i45615_3_;
         }
 
         public Corridor(TemplateManager p_i50272_1_, CompoundNBT p_i50272_2_) {
-           super(StructureInit.NESCLTUA, p_i50272_2_);
+           super(StructureInitUA.NESCLTUA, p_i50272_2_);
         }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -159,13 +159,13 @@ public class FortressPiecesUA
     {
 
         public Corridor2(int p_i45613_1_, Random rand, MutableBoundingBox p_i45613_3_, Direction p_i45613_4_, boolean isStone) {
-            super(StructureInit.NESCRTUA, p_i45613_1_, isStone);
+            super(StructureInitUA.NESCRTUA, p_i45613_1_, isStone);
             this.setCoordBaseMode(p_i45613_4_);
             this.boundingBox = p_i45613_3_;
          }
 
          public Corridor2(TemplateManager p_i50266_1_, CompoundNBT p_i50266_2_) {
-            super(StructureInit.NESCRTUA, p_i50266_2_);
+            super(StructureInitUA.NESCRTUA, p_i50266_2_);
          }
 
          /**
@@ -223,13 +223,13 @@ public class FortressPiecesUA
     public static class Corridor3 extends FortressPiecesUA.Piece
     {
     	 public Corridor3(int p_i50280_1_, MutableBoundingBox p_i50280_2_, Direction p_i50280_3_, boolean isStone) {
-             super(StructureInit.NECCSUA, p_i50280_1_, isStone);
+             super(StructureInitUA.NECCSUA, p_i50280_1_, isStone);
              this.setCoordBaseMode(p_i50280_3_);
              this.boundingBox = p_i50280_2_;
           }
 
           public Corridor3(TemplateManager p_i50281_1_, CompoundNBT p_i50281_2_) {
-             super(StructureInit.NECCSUA, p_i50281_2_);
+             super(StructureInitUA.NECCSUA, p_i50281_2_);
           }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -286,13 +286,13 @@ public class FortressPiecesUA
     public static class Corridor4 extends FortressPiecesUA.Piece
     {
     	public Corridor4(int p_i50277_1_, MutableBoundingBox p_i50277_2_, Direction p_i50277_3_, boolean isStone) {
-            super(StructureInit.NECTBUA, p_i50277_1_, isStone);
+            super(StructureInitUA.NECTBUA, p_i50277_1_, isStone);
             this.setCoordBaseMode(p_i50277_3_);
             this.boundingBox = p_i50277_2_;
          }
 
          public Corridor4(TemplateManager p_i50278_1_, CompoundNBT p_i50278_2_) {
-            super(StructureInit.NECTBUA, p_i50278_2_);
+            super(StructureInitUA.NECTBUA, p_i50278_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -357,13 +357,13 @@ public class FortressPiecesUA
     public static class Corridor5 extends FortressPiecesUA.Piece
     {
     	public Corridor5(int p_i50268_1_, MutableBoundingBox p_i50268_2_, Direction p_i50268_3_, boolean isStone) {
-            super(StructureInit.NESCUA, p_i50268_1_, isStone);
+            super(StructureInitUA.NESCUA, p_i50268_1_, isStone);
             this.setCoordBaseMode(p_i50268_3_);
             this.boundingBox = p_i50268_2_;
          }
 
          public Corridor5(TemplateManager p_i50269_1_, CompoundNBT p_i50269_2_) {
-            super(StructureInit.NESCUA, p_i50269_2_);
+            super(StructureInitUA.NESCUA, p_i50269_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -405,13 +405,13 @@ public class FortressPiecesUA
     public static class Crossing extends FortressPiecesUA.Piece
     {
     	 public Crossing(int p_i50258_1_, MutableBoundingBox p_i50258_2_, Direction p_i50258_3_, boolean isStone) {
-             super(StructureInit.NERCUA, p_i50258_1_, isStone);
+             super(StructureInitUA.NERCUA, p_i50258_1_, isStone);
              this.setCoordBaseMode(p_i50258_3_);
              this.boundingBox = p_i50258_2_;
           }
 
           public Crossing(TemplateManager p_i50259_1_, CompoundNBT p_i50259_2_) {
-             super(StructureInit.NERCUA, p_i50259_2_);
+             super(StructureInitUA.NERCUA, p_i50259_2_);
           }
 
 
@@ -466,13 +466,13 @@ public class FortressPiecesUA
     public static class Crossing2 extends FortressPiecesUA.Piece
     {
     	public Crossing2(int p_i50273_1_, MutableBoundingBox p_i50273_2_, Direction p_i50273_3_, boolean isStone) {
-            super(StructureInit.NESCSCUA, p_i50273_1_, isStone);
+            super(StructureInitUA.NESCSCUA, p_i50273_1_, isStone);
             this.setCoordBaseMode(p_i50273_3_);
             this.boundingBox = p_i50273_2_;
          }
 
          public Crossing2(TemplateManager p_i50274_1_, CompoundNBT p_i50274_2_) {
-            super(StructureInit.NESCSCUA, p_i50274_2_);
+            super(StructureInitUA.NESCSCUA, p_i50274_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -518,17 +518,17 @@ public class FortressPiecesUA
         }
 
         public Crossing3(TemplateManager p_i50288_1_, CompoundNBT p_i50288_2_) {
-           this(StructureInit.NEBCRUA, p_i50288_2_);
+           this(StructureInitUA.NEBCRUA, p_i50288_2_);
         }
         
     	 public Crossing3(int p_i50286_1_, MutableBoundingBox p_i50286_2_, Direction p_i50286_3_, boolean isStone) {
-             super(StructureInit.NEBCRUA, p_i50286_1_, isStone);
+             super(StructureInitUA.NEBCRUA, p_i50286_1_, isStone);
              this.setCoordBaseMode(p_i50286_3_);
              this.boundingBox = p_i50286_2_;
           }
 
 	      protected Crossing3(Random p_i2042_1_, int p_i2042_2_, int p_i2042_3_, boolean isStone) {
-	         super(StructureInit.NEBCRUA, 0, isStone);
+	         super(StructureInitUA.NEBCRUA, 0, isStone);
 	         this.setCoordBaseMode(Direction.Plane.HORIZONTAL.random(p_i2042_1_));
 	         if (this.getCoordBaseMode().getAxis() == Direction.Axis.Z) {
 	            this.boundingBox = new MutableBoundingBox(p_i2042_2_, 64, p_i2042_3_, p_i2042_2_ + 19 - 1, 73, p_i2042_3_ + 19 - 1);
@@ -603,14 +603,14 @@ public class FortressPiecesUA
         private int fillSeed;
 
         public End(int p_i45621_1_, Random p_i45621_2_, MutableBoundingBox p_i45621_3_, Direction p_i45621_4_, boolean isStone) {
-           super(StructureInit.NEBEFUA, p_i45621_1_, isStone);
+           super(StructureInitUA.NEBEFUA, p_i45621_1_, isStone);
            this.setCoordBaseMode(p_i45621_4_);
            this.boundingBox = p_i45621_3_;
            this.fillSeed = p_i45621_2_.nextInt();
         }
 
         public End(TemplateManager p_i50285_1_, CompoundNBT p_i50285_2_) {
-           super(StructureInit.NEBEFUA, p_i50285_2_);
+           super(StructureInitUA.NEBEFUA, p_i50285_2_);
            this.fillSeed = p_i50285_2_.getInt("Seed");
         }
 
@@ -668,13 +668,13 @@ public class FortressPiecesUA
     public static class Entrance extends FortressPiecesUA.Piece
     {
     	public Entrance(int p_i45617_1_, Random rand, MutableBoundingBox p_i45617_3_, Direction p_i45617_4_, boolean isStone) {
-            super(StructureInit.NECEUA, p_i45617_1_, isStone);
+            super(StructureInitUA.NECEUA, p_i45617_1_, isStone);
             this.setCoordBaseMode(p_i45617_4_);
             this.boundingBox = p_i45617_3_;
          }
 
          public Entrance(TemplateManager p_i50276_1_, CompoundNBT p_i50276_2_) {
-            super(StructureInit.NECEUA, p_i50276_2_);
+            super(StructureInitUA.NECEUA, p_i50276_2_);
          }
 
          
@@ -780,13 +780,13 @@ public class FortressPiecesUA
     public static class NetherStalkRoom extends FortressPiecesUA.Piece
     {
     	 public NetherStalkRoom(int p_i50264_1_, MutableBoundingBox p_i50264_2_, Direction p_i50264_3_, boolean isStone) {
-             super(StructureInit.NECSRUA, p_i50264_1_, isStone);
+             super(StructureInitUA.NECSRUA, p_i50264_1_, isStone);
              this.setCoordBaseMode(p_i50264_3_);
              this.boundingBox = p_i50264_2_;
           }
 
           public NetherStalkRoom(TemplateManager p_i50265_1_, CompoundNBT p_i50265_2_) {
-             super(StructureInit.NECSRUA, p_i50265_2_);
+             super(StructureInitUA.NECSRUA, p_i50265_2_);
           }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -1302,13 +1302,13 @@ public class FortressPiecesUA
     public static class Stairs extends FortressPiecesUA.Piece
     {
     	public Stairs(int p_i50255_1_, MutableBoundingBox p_i50255_2_, Direction p_i50255_3_, boolean isStone) {
-            super(StructureInit.NESRUA, p_i50255_1_, isStone);
+            super(StructureInitUA.NESRUA, p_i50255_1_, isStone);
             this.setCoordBaseMode(p_i50255_3_);
             this.boundingBox = p_i50255_2_;
          }
 
          public Stairs(TemplateManager p_i50256_1_, CompoundNBT p_i50256_2_) {
-            super(StructureInit.NESRUA, p_i50256_2_);
+            super(StructureInitUA.NESRUA, p_i50256_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -1389,20 +1389,20 @@ public class FortressPiecesUA
         }
         
         public Start(TemplateManager p_i50253_1_, CompoundNBT p_i50253_2_) {
-           super(StructureInit.NESTARTUA, p_i50253_2_);
+           super(StructureInitUA.NESTARTUA, p_i50253_2_);
         }
     }
 
     public static class Straight extends FortressPiecesUA.Piece
     {
     	public Straight(int p_i45620_1_, Random p_i45620_2_, MutableBoundingBox p_i45620_3_, Direction p_i45620_4_, boolean isStone) {
-            super(StructureInit.NEBSUA, p_i45620_1_, isStone);
+            super(StructureInitUA.NEBSUA, p_i45620_1_, isStone);
             this.setCoordBaseMode(p_i45620_4_);
             this.boundingBox = p_i45620_3_;
          }
 
          public Straight(TemplateManager p_i50283_1_, CompoundNBT p_i50283_2_) {
-            super(StructureInit.NEBSUA, p_i50283_2_);
+            super(StructureInitUA.NEBSUA, p_i50283_2_);
          }
 
         public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
@@ -1456,13 +1456,13 @@ public class FortressPiecesUA
         private boolean hasSpawner;
        
         public Throne(int p_i50262_1_, Random rand, MutableBoundingBox p_i50262_2_, Direction p_i50262_3_, boolean isStone) {
-            super(StructureInit.NEMTUA, p_i50262_1_, isStone);
+            super(StructureInitUA.NEMTUA, p_i50262_1_, isStone);
             this.setCoordBaseMode(p_i50262_3_);
             this.boundingBox = p_i50262_2_;
          }
 
          public Throne(TemplateManager p_i50263_1_, CompoundNBT p_i50263_2_) {
-            super(StructureInit.NEMTUA, p_i50263_2_);
+            super(StructureInitUA.NEMTUA, p_i50263_2_);
             this.hasSpawner = p_i50263_2_.getBoolean("Mob");
          }
 

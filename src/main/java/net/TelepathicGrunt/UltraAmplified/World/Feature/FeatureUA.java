@@ -17,7 +17,6 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
-import net.minecraft.world.gen.feature.structure.PillagerOutpostConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.CountConfig;
@@ -38,9 +37,9 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanRuinsUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.PillagerOutpostUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.ShipwreckUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.StrongholdUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInit;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInitUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageUAConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.WitchHutUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansionUA;
 
@@ -62,9 +61,9 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> TINY_HAY_BALE = new HayBaleTinyPile(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> STONEHENGE = new Stonehenge(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SUN_SHRINE = new SunShrine(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> FOSSILS_UA = new FossilUA(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> FOSSILS_UA = new Fossil(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
-    public static Feature<IcebergConfig> ICEBERG_UA = new IcebergUA(IcebergConfig::deserialize);
+    public static Feature<IcebergConfig> ICEBERG_UA = new Iceberg(IcebergConfig::deserialize);
     public static Feature<NoFeatureConfig> MARKED_TREASURE_CHEST_UA = new MarkedTreasureChest(NoFeatureConfig::deserialize);
 
     public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new GiantStackableBoulder(BlockBlobConfig::deserialize);
@@ -75,37 +74,37 @@ public class FeatureUA
     public static Feature<LakesConfig> SLIME_AND_ICE_LAKE = new SlimeAndIceLakes(LakesConfig::deserialize);
     public static Feature<LakesConfig> SHALLOW_LAKE = new WideShallowLakes(LakesConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatch(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpike(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new GreenPowConcretePatch(NoFeatureConfig::deserialize);
-    public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDryUA(SphereReplaceConfig::deserialize);
+    public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDry(SphereReplaceConfig::deserialize);
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeatureUA(NoFeatureConfig::deserialize);
-    public static Feature<ColumnBlocksConfig> COLUMN = new ColumnUA(ColumnBlocksConfig::deserialize);
-    public static Feature<ColumnBlocksConfig> RAMP = new RampColumnUA(ColumnBlocksConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
+    public static Feature<ColumnBlocksConfig> COLUMN = new Column(ColumnBlocksConfig::deserialize);
+    public static Feature<ColumnBlocksConfig> RAMP = new RampColumn(ColumnBlocksConfig::deserialize);
     public static Feature<CountConfig> GLOWPATCH = new GlowPatch(CountConfig::deserialize);
 
-    public static Feature<NoFeatureConfig> LONG_VINES = new VinesLongUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SHORT_VINES = new VinesShortUA(NoFeatureConfig::deserialize);
-    public static Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrassUA(SeaGrassConfig::deserialize);
-    public static Feature<NoFeatureConfig> KELP_UA = new KelpUA(NoFeatureConfig::deserialize);
-    public static Feature<CountConfig> SEA_PICKLE_UA = new SeaPickleUA(CountConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_CLAW_UA = new CoralClawUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_TREE_UA = new CoralMushroomUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_MUSHROOM_UA = new CoralTreeUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> JUNGLE_BUSH_UA = new JungleShrubUA(NoFeatureConfig::deserialize, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
-    public static Feature<NoFeatureConfig> BAMBOO_UA = new BambooUA(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> LONG_VINES = new VinesLong(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SHORT_VINES = new VinesShort(NoFeatureConfig::deserialize);
+    public static Feature<SeaGrassConfig> SEA_GRASS_UA = new SeaGrass(SeaGrassConfig::deserialize);
+    public static Feature<NoFeatureConfig> KELP_UA = new Kelp(NoFeatureConfig::deserialize);
+    public static Feature<CountConfig> SEA_PICKLE_UA = new SeaPickle(CountConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_CLAW_UA = new CoralClaw(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_TREE_UA = new CoralMushroom(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_MUSHROOM_UA = new CoralTree(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> JUNGLE_BUSH_UA = new JungleShrub(NoFeatureConfig::deserialize, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
+    public static Feature<NoFeatureConfig> BAMBOO_UA = new Bamboo(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
     public static AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(NoFeatureConfig::deserialize);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTreeUA(NoFeatureConfig::deserialize, false, false);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTreeUA(NoFeatureConfig::deserialize, false, false);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTreeUA(NoFeatureConfig::deserialize, false, true);
-    public static AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTreeUA(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutatedUA(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTreeUA(NoFeatureConfig::deserialize, false);
+    public static HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(NoFeatureConfig::deserialize, false, false);
+    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, false);
+    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, true);
+    public static AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(NoFeatureConfig::deserialize, false);
+    public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(NoFeatureConfig::deserialize, false);
+    public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTree(NoFeatureConfig::deserialize, false);
 
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
     public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
@@ -119,8 +118,8 @@ public class FeatureUA
     public static Structure<OceanRuinConfig> OCEAN_RUIN_UA = new OceanRuinsUA(OceanRuinConfig::deserialize);
     public static Structure<FortressConfigUA> FORTRESS_UA = new FortressUA(FortressConfigUA::deserialize);
     public static Structure<NoFeatureConfig> END_CITY_UA = new EndCityUA(NoFeatureConfig::deserialize);
-    public static Structure<VillageUAConfig> VILLAGE_UA = new VillageUA(VillageUAConfig::deserialize);
-    public static Structure<PillagerOutpostConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostUA(PillagerOutpostConfig::deserialize);
+    public static Structure<VillageConfigUA> VILLAGE_UA = new VillageUA(VillageConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostUA(NoFeatureConfig::deserialize);
     
 
     @SuppressWarnings("unchecked")
@@ -197,8 +196,8 @@ public class FeatureUA
         OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) registerStructure(OCEAN_RUIN_UA, "ocean_ruin_ua");
         FORTRESS_UA = (Structure<FortressConfigUA>) registerStructure(FORTRESS_UA, "fortress_ua");
         END_CITY_UA = (Structure<NoFeatureConfig>) registerStructure(END_CITY_UA, "endcity_ua");
-        VILLAGE_UA = (Structure<VillageUAConfig>) registerStructure(VILLAGE_UA, "village_ua");
-        PILLAGER_OUTPOST_UA = (Structure<PillagerOutpostConfig>) registerStructure(PILLAGER_OUTPOST_UA, "pillager_outpost_ua");
+        VILLAGE_UA = (Structure<VillageConfigUA>) registerStructure(VILLAGE_UA, "village_ua");
+        PILLAGER_OUTPOST_UA = (Structure<NoFeatureConfig>) registerStructure(PILLAGER_OUTPOST_UA, "pillager_outpost_ua");
 
 
 
@@ -220,7 +219,7 @@ public class FeatureUA
         Feature.STRUCTURES.replace("Pillager_Outpost".toLowerCase(Locale.ROOT), PILLAGER_OUTPOST_UA);
 
 
-        StructureInit.registerStructurePieces();
+        StructureInitUA.registerStructurePieces();
     }
 
     @SuppressWarnings("rawtypes")
@@ -237,7 +236,8 @@ public class FeatureUA
     }
 
 
-    private static Structure<?> registerStructure(Structure<?> p_215141_1_, String key) {
+    @SuppressWarnings("deprecation")
+	private static Structure<?> registerStructure(Structure<?> p_215141_1_, String key) {
         return Registry.register(Registry.STRUCTURE_FEATURE, key.toLowerCase(Locale.ROOT), p_215141_1_);
     }
 
