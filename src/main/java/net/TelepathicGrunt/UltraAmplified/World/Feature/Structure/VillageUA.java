@@ -31,7 +31,7 @@ public class VillageUA  extends Structure<VillageConfigUA> {
 	}
 
    public String getStructureName() {
-	      return "Village UA";
+	      return UltraAmplified.MODID+":village";
    }
 
    public int getSize() {

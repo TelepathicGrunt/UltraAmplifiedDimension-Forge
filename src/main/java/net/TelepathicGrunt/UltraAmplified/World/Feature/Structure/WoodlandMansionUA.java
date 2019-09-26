@@ -80,7 +80,7 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 	}
 
 	public String getStructureName() {
-		return "Woodland Mansion UA";
+		return UltraAmplified.MODID+":woodland_mansion";
 	}
 
 	public int getSize() {

@@ -29,11 +29,14 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
       boolean allowMForm = ConfigUA.mutatedBiomeSpawnrate != 0 &&
                            ( noise < (ConfigUA.mutatedBiomeSpawnrate / 10D) - 0.5D ||
                              ConfigUA.mutatedBiomeSpawnrate == 10 );
+      boolean allowHills = (biomeId2 - 2) % 29 == 0 || context.random(3) == 0;
+      
+      //debugging
       //System.out.println("Noise: "+noise+"  |  M form? " + allowMForm);
 
 
       //first way to create m variant biomes of base biomes
-      if (!BiomeGenHelper.isShallowOcean(biomeId1) && allowMForm) {
+      if (!BiomeGenHelper.isShallowOcean(biomeId1) && allowMForm && !allowHills) {
          Biome biome = BiomeRegistry.getValue(biomeId1);
          if (biome == null || !biome.isMutation()) {
             Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
@@ -41,12 +44,11 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
          }
       }
 
-
+      
       //first way of making m biomes failed. Now we try to make hills/hills m biomes
-      boolean allowHills = (biomeId2 - 2) % 29 == 0;
 
       //creates hills variants of biomes
-      if (context.random(3) == 0 || allowHills) {
+      if (allowHills) {
          int biomeIdToReturn = biomeId1;
 
          if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(biomeId1)) {

@@ -66,7 +66,7 @@ public class WitchHutUA extends Structure<NoFeatureConfig> {
    }
    
    public String getStructureName() {
-      return "Witch Hut UA";
+      return UltraAmplified.MODID+":witch_hut";
    }
 
    public int getSize() {

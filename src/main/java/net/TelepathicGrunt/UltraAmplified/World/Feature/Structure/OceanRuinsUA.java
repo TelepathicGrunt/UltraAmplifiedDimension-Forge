@@ -55,7 +55,7 @@ public class OceanRuinsUA extends Structure<OceanRuinConfig> {
 	
 	   
 	   public String getStructureName() {
-	      return "Ocean Ruins UA";
+	      return UltraAmplified.MODID+":ocean_ruins";
 	   }
 
 	   public int getSize() {

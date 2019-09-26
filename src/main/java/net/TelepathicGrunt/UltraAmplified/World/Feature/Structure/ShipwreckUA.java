@@ -53,7 +53,7 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
    }
 
    public String getStructureName() {
-	      return "Shipwreck UA";
+	      return UltraAmplified.MODID+":shipwreck";
    }
 
    public int getSize() {

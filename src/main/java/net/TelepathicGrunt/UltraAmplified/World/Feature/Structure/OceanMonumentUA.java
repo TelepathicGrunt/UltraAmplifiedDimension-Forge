@@ -77,7 +77,7 @@ public class OceanMonumentUA extends Structure<NoFeatureConfig>
     
     public String getStructureName()
     {
-        return "Ocean Monument UA";
+        return UltraAmplified.MODID+":ocean_monument";
     }
 
     public int getSize() {

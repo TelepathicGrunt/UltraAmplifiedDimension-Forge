@@ -71,7 +71,7 @@ public class EndCityUA extends Structure<NoFeatureConfig>
      }
 
      public String getStructureName() {
-        return "EndCity UA";
+        return UltraAmplified.MODID+":endcity";
      }
 
      public int getSize() {
