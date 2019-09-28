@@ -265,12 +265,12 @@ public class BiomeAddModdedFeatures {
 		for (EntityClassification entityType : EntityClassification.values()) { 
 			for (SpawnListEntry spawnEntry : vanillaBiome.getSpawns(entityType)){
 				
-				ResourceLocation rl = EntityRegistry.getKey(spawnEntry.entityType);
-				if(rl == null) {
-					continue;
-				}
-				
-				//String namespace = rl.getNamespace();
+//				ResourceLocation rl = EntityRegistry.getKey(spawnEntry.entityType);
+//				if(rl == null) {
+//					continue;
+//				}
+//				
+//				String namespace = rl.getNamespace();
 				
 				if(!listOfVanillaMobs.contains(spawnEntry.entityType)) {
 					uaBiome.addSpawn(entityType, spawnEntry);

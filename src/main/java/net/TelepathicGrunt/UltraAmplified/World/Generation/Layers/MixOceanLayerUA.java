@@ -4,6 +4,7 @@ import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer {
@@ -20,10 +21,12 @@ public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer
                int k1 = area1.getValue(x + i1, z + j1);
                if (!BiomeGenHelper.isOcean(k1)) {
                   if (j == BiomeGenHelper.WARM_OCEAN) {
+          			if(ConfigUA.lukewarmOcean) 
                      return BiomeGenHelper.LUKEWARM_OCEAN;
                   }
 
                   if (j == BiomeGenHelper.FROZEN_OCEAN) {
+          			if(ConfigUA.coldOcean) 
                      return BiomeGenHelper.COLD_OCEAN;
                   }
                }

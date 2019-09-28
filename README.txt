@@ -18,10 +18,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.6.9 Changes) (1.14.4 Minecraft)
        
     Biomes: 
+·Adjusted some biome's spawnrates and improved filling temperature regions that all biomes were disallowed by config with allowed biomes.
 ·Fixed bug that prevent trees from spawning below ledges.
 ·Fixed bug that prevented the M forms of hill variant biomes from spawning. (Example: Shattered Savanna Plateau and Tall Birch Forest Hills)
 ·Added Fox to spawn in all Taiga Biomes.
 ·Added Turtle to all ocean biomes, into Desert Lakes biome, and into Modified Jungle biome. However, breeding Turtles may not work. Let me know if this is the case.
+·Patched bug where Lukewarm Ocean would sometimes spawn bordering Warm Ocean even when Lukewarm Ocean option is turned off.
+·Patched bug where Cold Ocean would sometimes spawn bordering Frozen Ocean even when Cold Ocean option is turned off.
        
     Structures: 
 ·Locate command fixed again so it now can find structures again in the Ultra Amplified Dimension. Begin typing "/locate ultra" and all Ultra Amplified structures should show up in the chat that you can search for.
