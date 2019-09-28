@@ -1,5 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.biome;
 
+import java.util.Map.Entry;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -12,6 +14,7 @@ import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtra;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
@@ -52,6 +55,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeig
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AllSoulSandSurfaces;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtBottomOfRandomLayer;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtCenterSurfaceWithChance;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceBelowTopLayerWithExtra;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceRoofedForest;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceThroughWaterWithExtra;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceUnderTopLayerWithChance;
@@ -95,6 +99,7 @@ public class BiomeUA extends Biome {
 	public static final Placement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_WATER_BOTTOMS_UA = new ChanceOnAllLiquidBottoms(PercentageAndFrequencyConfig::deserialize);
 	public static final Placement<PercentageAndFrequencyConfig> NETHERWART_SOUL_SAND_SURFACES_UA = new AllSoulSandSurfaces(PercentageAndFrequencyConfig::deserialize);
 	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_WITH_EXTRA_UA = new AtSurfaceWithExtra(AtSurfaceWithExtraConfig::deserialize);
+	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA = new AtSurfaceBelowTopLayerWithExtra(AtSurfaceWithExtraConfig::deserialize);
 	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_THROUGH_WATER_WITH_EXTRA_UA = new AtSurfaceThroughWaterWithExtra(AtSurfaceWithExtraConfig::deserialize);
 	public static final Placement<AtSurfaceWithExtraConfig> ROOFED_TREE_UA = new AtSurfaceRoofedForest(AtSurfaceWithExtraConfig::deserialize);
 	public static final Placement<ChanceAndTypeConfig> AT_CENTER_SURFACE_WITH_CHANCE = new AtCenterSurfaceWithChance(ChanceAndTypeConfig::deserialize);
@@ -181,45 +186,7 @@ public class BiomeUA extends Biome {
     }
 
 
-	
-	//Currently does not work well. only changes sky color when X/Z coordinates changes
-	//requires a javascript coremod to get working
-//	//We cannot change the getSkyBlendColour method in ForgeHooksClient class so we have to do this ugly workaround
-//	//This will be where y coordinate is stored from getTemperature and is used by getSkyColorByTemp
-//	@OnlyIn(Dist.CLIENT)
-//	protected static int yPos = 0;
-//	
-//	/**
-//	 * takes temperature, returns color
-//	 */
-//	//Darken the sky the lower the player is
-//	@OnlyIn(Dist.CLIENT)
-//    public int getSkyColorByTemp(float currentTemperature) {
-//       currentTemperature = currentTemperature / 3.0F;
-//       currentTemperature = MathHelper.clamp(currentTemperature, -1.0F, 1.0F);
-//       
-//       //starts making sky darker below y = 230 and reaches maximum darkness at y = 175 by the last argument
-//       return MathHelper.hsvToRGB(
-//    		   0.62222224F - currentTemperature * 0.05F,  //hue
-//    		   0.5F + currentTemperature * 0.1F,   //saturation
-//    		   Math.max(Math.min((yPos-175F)/55, 1.0F), 0)  //value
-//    		  );
-//    }
-//
-//    /**
-//     * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
-//     * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
-//     */
-//    //Grabs the y coordinate to store for getSkyColorByTemp method later. 
-//     @OnlyIn(Dist.CLIENT)
-//     public float getTemperature(BlockPos pos) {
-//    	 yPos = pos.getY();
-//    	 
-//        if (pos.getY() > 64) {
-//           float f = (float)(TEMPERATURE_NOISE.getValue((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F)) * 4.0D);
-//           return this.getDefaultTemperature() - (f + (float)yPos - 64.0F) * 0.05F / 30.0F;
-//        } else {
-//           return this.getDefaultTemperature();
-//        }
-//    }
+   public <C extends IFeatureConfig> void addStructure(Entry<Structure<?>, IFeatureConfig> structureEntry) {
+      this.structures.put(structureEntry.getKey(), structureEntry.getValue());
+   }
 }
