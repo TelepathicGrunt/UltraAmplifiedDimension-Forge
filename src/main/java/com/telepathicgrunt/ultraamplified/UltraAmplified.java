@@ -100,6 +100,7 @@ public class UltraAmplified {
 			FeatureUA.registerFeatures(event);
 			LOGGER.log(Level.INFO, "features registered.");
 		}
+
 	}
 	
 

@@ -15,6 +15,25 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.9 Changes) (1.14.4 Minecraft)
+       
+    Config: 
+·Added config options to allow importing of modded features, structures, and mobs from vanilla biomes to the corresponding Ultra Amplified biome.
+·Added config options to allow importing of modded biomes into Ultra Amplified dimension/WorldType.
+
+    Biomes: 
+·Adjusted some biome's spawnrates and improved filling temperature regions that all biomes were disallowed by config with allowed biomes.
+·Fixed bug that prevent trees from spawning below ledges.
+·Fixed bug that prevented the M forms of hill variant biomes from spawning. (Example: Shattered Savanna Plateau and Tall Birch Forest Hills)
+·Added Fox to spawn in all Taiga Biomes.
+·Added Turtle to all ocean biomes, into Desert Lakes biome, and into Modified Jungle biome. However, breeding Turtles may not work. Let me know if this is the case.
+·Patched bug where Lukewarm Ocean would sometimes spawn bordering Warm Ocean even when Lukewarm Ocean option is turned off.
+·Patched bug where Cold Ocean would sometimes spawn bordering Frozen Ocean even when Cold Ocean option is turned off.
+       
+    Structures: 
+·Locate command fixed again so it now can find structures again in the Ultra Amplified Dimension. Begin typing "/locate ultra" and all Ultra Amplified structures should show up in the chat that you can search for.
+       
+       
     (V.6.8 Changes) (1.14.4 Minecraft)
     
     Config: 
@@ -24,8 +43,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·The portal frame made in Ultra Amplified Dimension will have waterlogged Andesite Slabs if the slabs replaces water.
 ·Entering the Ultra Amplified Dimension will attempt to player you next to the portal if there is open space to do so. This should reduce the chances of spawning on a ledge way above the portal when entering the dimension for the first time.
 ·Fixed bug where the dimension generates chunk at world origin when no players has entered the dimension. Now after you create the world, modify the config, restart the world, and enter the dimension for the first time, now the spawn chunk will match the config settings and match the surrounding terrain instead of being the default generation.
-       
-       
+ 
+   
+   
     (V.6.7 Changes) (1.14.4 Minecraft)
     
     Config: 

@@ -53,7 +53,7 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 	   }
 	
 	   public String getStructureName() {
-	      return "Igloo UA";
+	      return UltraAmplified.MODID+":igloo";
 	   }
 
 	   public int getSize() {

@@ -59,7 +59,7 @@ public class FortressUA extends Structure<FortressConfigUA>
 
 
    public String getStructureName() {
-      return "Fortress UA";
+      return UltraAmplified.MODID+":fortress";
    }
 
    public int getSize() {

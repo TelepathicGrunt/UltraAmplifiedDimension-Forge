@@ -87,9 +87,10 @@ public class AmplifiedPortalBehavior {
 					BlockPos blockpos = new BlockPos(8, 0, 8);
 					ChunkPos chunkpos;
 					if(firstTime || cap.getDim() == entityIn.dimension) {
-						//if it is player's first time teleporting or our stored dimension was our current dimension, find top block at world origin closest to portal
+						//if it is player's first time teleporting or our stored dimension was our current dimension, 
+						//find top block at world origin closest to portal
+						
 						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
-						serverworld.getChunkProvider().getChunk(chunkpos.x, chunkpos.z, true);
 						
 						int portalY = 255;
 						BlockPos pos = new BlockPos(8, 0, 8);

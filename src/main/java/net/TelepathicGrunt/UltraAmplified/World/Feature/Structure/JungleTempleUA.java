@@ -54,7 +54,7 @@ public class JungleTempleUA extends Structure<NoFeatureConfig> {
 	   }
 	
 	   public String getStructureName() {
-	      return "Jungle Pyramid UA";
+	      return UltraAmplified.MODID+":jungle_temple";
 	   }
 
 	   public int getSize() {

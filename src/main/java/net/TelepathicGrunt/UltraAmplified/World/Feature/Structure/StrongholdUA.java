@@ -67,7 +67,7 @@ public class StrongholdUA extends Structure<NoFeatureConfig> {
    }
 
    public String getStructureName() {
-      return "Stronghold";
+      return UltraAmplified.MODID+":stronghold";
    }
 
    public int getSize() {

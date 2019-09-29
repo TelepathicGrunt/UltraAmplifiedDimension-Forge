@@ -29,7 +29,7 @@ public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX
 	      ((SharedSeedRandom)rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 	      Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
 	      if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, FeatureUA.MINESHAFT_UA)) {
-	    	 return rand.nextDouble() < ConfigUA.mineshaftSpawnrate;
+	    	 return rand.nextDouble() < (double)(ConfigUA.mineshaftSpawnrate)/10000D;
 	      } else {
 	         return false;
 	      }
@@ -45,7 +45,7 @@ public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX
 	   }
 
 	   public String getStructureName() {
-	      return "Mineshaft UA";
+	      return UltraAmplified.MODID+":mineshaft";
    }
 
    public int getSize() {

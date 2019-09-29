@@ -33,7 +33,7 @@ public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
    }
 
    public String getStructureName() {
-      return "Pillager_Outpost_UA";
+      return UltraAmplified.MODID+":pillager_outpost";
    }
 
    public int getSize() {

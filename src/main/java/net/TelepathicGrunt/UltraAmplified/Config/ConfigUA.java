@@ -24,6 +24,10 @@ public class ConfigUA {
         SERVER = specPair.getLeft();
     }
 
+    public static boolean importModdedFeatures = false;
+    public static boolean importModdedStructure = false;
+    public static boolean importModdedMobs = false;
+    public static boolean importModdedBiomes = false;
     public static double xzTerrainModifier = 684.412D;
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
@@ -116,6 +120,11 @@ public class ConfigUA {
     
     public static class ServerConfig
     {
+    					
+	    public final ForgeConfigSpec.BooleanValue importModdedFeatures;
+	    public final ForgeConfigSpec.BooleanValue importModdedStructure;
+	    public final ForgeConfigSpec.BooleanValue importModdedMobs;
+	    public final ForgeConfigSpec.BooleanValue importModdedBiomes;
         public final ForgeConfigSpec.DoubleValue xzTerrainModifier;
         public final ForgeConfigSpec.DoubleValue xzScaleModifier;
         public final ForgeConfigSpec.DoubleValue yTerrainModifier;
@@ -207,7 +216,35 @@ public class ConfigUA {
 
         ServerConfig(ForgeConfigSpec.Builder builder) 
         {
-        	
+
+            builder.push("Mod Compatibility Options");
+            
+            		importModdedFeatures = builder
+                    .comment("\r\nAttempt to add modded features from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    		+"Only works if other mod added the feature by addFeature(...) to vanilla biome and registered the feature correctly without the 'minecraft' namespace.")
+                    .translation("ultraamplified.config.structure.importmoddedfeatures")
+                    .define("importModdedFeatures", false);
+            		
+            		importModdedStructure = builder
+                    .comment("\r\nAttempt to add modded structures from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    		+"Only works if other mod added the structure by addFeature(...) to vanilla biome and registered the structure correctly without the 'minecraft' namespace.")
+                    .translation("ultraamplified.config.structure.importmoddedstructure")
+                    .define("importModdedStructure", false);
+            		
+            		importModdedMobs = builder
+                    .comment("\r\nAttempt to add modded mobs from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    		+"Only works if other mod added the mob by addSpawn(...) to vanilla biome and registered the mob correctly without the 'minecraft' namespace.")
+                    .translation("ultraamplified.config.structure.importmoddedmobs")
+                    .define("importModdedMobs", false);
+            		
+            		importModdedBiomes = builder
+                    .comment("\r\nAttempt to add modded biomes from Overworld into Ultra Amplified dimension. (or into Overworld in Ultra Amplified worldtype)\r\n"
+                    		+"Only works if other mod added the biome to the BiomeDictionary with the BiomeType of DESERT, WARM, COOL, or ICY type.")
+                    .translation("ultraamplified.config.structure.importmoddedbiomes")
+                    .define("importModdedBiomes", false);
+            		
+            builder.pop();
+            
             builder.push("General Structure Options");
             
             			dungeonSpawnrate = builder
@@ -763,7 +800,10 @@ public class ConfigUA {
     
     public static void refreshServer()
     {
-    	
+    	importModdedFeatures = SERVER.importModdedFeatures.get();
+    	importModdedStructure = SERVER.importModdedStructure.get();
+    	importModdedMobs = SERVER.importModdedMobs.get();
+    	importModdedBiomes = SERVER.importModdedBiomes.get();
 	    xzTerrainModifier = SERVER.xzTerrainModifier.get();
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();

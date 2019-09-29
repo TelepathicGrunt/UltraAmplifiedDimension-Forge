@@ -49,7 +49,7 @@ public class DesertTempleUA extends Structure<NoFeatureConfig> {
 	   }
 
 	   public String getStructureName() {
-	      return "Desert Temple UA";
+	      return UltraAmplified.MODID+":desert_temple";
 	   }
 
 
