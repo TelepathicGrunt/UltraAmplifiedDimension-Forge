@@ -54,16 +54,16 @@ public class BiomeLayerUA implements IC0Transformer
 		    noOcean = false;
 		    
 			
-			//Came with forge for the normal GenLayer class. Adds all biomes to list by temperature 
+	    	//Came with forge for the normal GenLayer class. Adds all biomes to list by temperature 
 	        for (net.minecraftforge.common.BiomeManager.BiomeType type : net.minecraftforge.common.BiomeManager.BiomeType.values())
 	        {
 	            com.google.common.collect.ImmutableList<net.minecraftforge.common.BiomeManager.BiomeEntry> biomesToAdd = net.minecraftforge.common.BiomeManager.getBiomes(type);
 	            int idx = type.ordinal();
 
 	            if (biomeListsByTemperature[idx] == null) biomeListsByTemperature[idx] = new java.util.ArrayList<net.minecraftforge.common.BiomeManager.BiomeEntry>();
-	            if (biomesToAdd != null) biomeListsByTemperature[idx].addAll(biomesToAdd);
+	            if (ConfigUA.importModdedBiomes && biomesToAdd != null) biomeListsByTemperature[idx].addAll(biomesToAdd);
 	        }
-	      
+		    
 	        //used to manually add biomes to a certain temperature list
 	        int desertIdx = net.minecraftforge.common.BiomeManager.BiomeType.DESERT.ordinal();
 	        int warmIdx = net.minecraftforge.common.BiomeManager.BiomeType.WARM.ordinal();
@@ -89,7 +89,7 @@ public class BiomeLayerUA implements IC0Transformer
 //	            UltraAmplified.LOGGER.log(Level.DEBUG, biomeListsByTemperature[desertIdx].get(i).biome.getDisplayName());
 //	        }
 	        
-	        //removes vanilla biomes from biome list but should leave other mod's biome just fine. "theoretically"
+	        //removes vanilla and UA biomes from biome list but should leave other mod's biome just fine. "theoretically"
 	        for(int tempIndex = 0; tempIndex < biomeListsByTemperature.length; tempIndex++) {
 		        for(int biomeIndex = biomeListsByTemperature[tempIndex].size()-1; biomeIndex >= 0; biomeIndex--) {
 		        	ResourceLocation rl = BiomeRegistry.getKey(biomeListsByTemperature[tempIndex].get(biomeIndex).biome);
@@ -99,10 +99,28 @@ public class BiomeLayerUA implements IC0Transformer
 					
 					String namespace = rl.getNamespace();
 					
-					//workaround due to some people registering structures under minecraft namespace
+					//scrape out vanilla and UA biome by namespace
 					if(namespace.equals("minecraft") || namespace.equals(UltraAmplified.MODID)) {
 						biomeListsByTemperature[tempIndex].remove(biomeListsByTemperature[tempIndex].get(biomeIndex));
 					}
+		        }
+	        }
+	        
+	        
+	        //makes biome weight not less than 10 so my biomes don't overshadow it
+	        for(int indexOfList = 0; indexOfList < biomeListsByTemperature.length; indexOfList++) {
+		        for(int indexOfEntry = 0; indexOfEntry < biomeListsByTemperature[indexOfList].size(); indexOfEntry++) {
+		        	if(biomeListsByTemperature[indexOfList].get(indexOfEntry).itemWeight < 10) {
+		        		BiomeEntry biomeEntry = biomeListsByTemperature[indexOfList].get(indexOfEntry);
+		        		biomeListsByTemperature[indexOfList].remove(indexOfEntry);
+		        		
+		        		//I'll be amazed if someone set their biome weight to 0 or less but I'm sure someone had done so...
+		        		if(biomeEntry.itemWeight <= 0) {
+		        			biomeListsByTemperature[indexOfList].add(indexOfEntry, new BiomeEntry(biomeEntry.biome, 10));
+		        		}else {
+		        			biomeListsByTemperature[indexOfList].add(indexOfEntry, new BiomeEntry(biomeEntry.biome, biomeEntry.itemWeight*10));
+		        		}
+		        	}
 		        }
 	        }
 	        
@@ -241,7 +259,8 @@ public class BiomeLayerUA implements IC0Transformer
 	        }
 	        
 	        
-	        //grabs all allowed biomes into ocean replaced list in case we disallow oceans later 
+	        //grabs all allowed biomes into ocean replaced list in case we disallow oceans later. 
+	        //Oceans take up a large area so they can have more than 6 biomes replacing them.
 	        oceanReplacedBiomes.addAll(temporaryBiomeList);
 	        
 	        //trims temporaryBiomeList if it exceeds 6 biomes
