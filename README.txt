@@ -15,8 +15,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
-    (V.7.0 Changes) (1.14.4 Minecraft)
+    (V.6.9.1 Changes) (1.14.4 Minecraft)
     
+    Versioning:
+·Changed versioning of this mod to match the accepted standard versioning practice.
+    
+    Dimension
+·Fixed bug when player tries teleporting to UA dimension from Overworld but the store world on the player is also the Overworld, the player gets stuck and cannot enter UA dimension.    
+       
        
     (V.6.9 Changes) (1.14.4 Minecraft)
        
