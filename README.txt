@@ -15,6 +15,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.7.0 Changes) (1.14.4 Minecraft)
+    
+       
     (V.6.9 Changes) (1.14.4 Minecraft)
        
     Config: 
