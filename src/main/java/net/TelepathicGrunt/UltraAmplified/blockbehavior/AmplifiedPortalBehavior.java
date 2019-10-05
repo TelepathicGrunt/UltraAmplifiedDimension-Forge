@@ -78,7 +78,7 @@ public class AmplifiedPortalBehavior {
 						if(cap.getDim() != UltraAmplifiedDimension.ultraamplified()) {
 							destination = UltraAmplifiedDimension.ultraamplified();
 						}
-						//if the store dimension and player dimension is ultra amplified world, take up to overworld
+						//if the store dimension and player dimension is ultra amplified world, take us to overworld
 						else {
 							destination = DimensionType.OVERWORLD;
 						}

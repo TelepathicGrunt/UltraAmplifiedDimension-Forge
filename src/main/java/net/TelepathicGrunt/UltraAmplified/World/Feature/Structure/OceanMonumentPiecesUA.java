@@ -46,14 +46,6 @@ public class OceanMonumentPiecesUA {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
 
-//			if (structureoceanmonumentpieces$roomdefinition1.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 4, 1, 7, 4, 6, ROUGH_PRISMARINE);
-//			}
-//
-//			if (structureoceanmonumentpieces$roomdefinition.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 8, 4, 1, 14, 4, 6, ROUGH_PRISMARINE);
-//			}
-
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 15, 3, 0, 15, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 1, 3, 0, 15, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -97,13 +89,6 @@ public class OceanMonumentPiecesUA {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
 
-//			if (structureoceanmonumentpieces$roomdefinition2.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 1, 7, 8, 6, ROUGH_PRISMARINE);
-//			}
-//
-//			if (structureoceanmonumentpieces$roomdefinition3.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 8, 8, 1, 14, 8, 6, ROUGH_PRISMARINE);
-//			}
 
 			for (int i = 1; i <= 7; ++i) {
 				BlockState iblockstate = BRICKS_PRISMARINE;
@@ -168,10 +153,6 @@ public class OceanMonumentPiecesUA {
 			}
 
 			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.UP.getIndex()];
-
-//			if (structureoceanmonumentpieces$roomdefinition.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 8, 1, 6, 8, 6, ROUGH_PRISMARINE);
-//			}
 
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 0, 4, 0, 0, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 			this.fillWithBlocks(worldIn, mutableBoundingBoxIn, 7, 4, 0, 7, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -613,34 +594,6 @@ public class OceanMonumentPiecesUA {
 
 			structureoceanmonumentpieces$roomdefinition.updateOpenings();
 			Collections.shuffle(list, p_175836_1_);
-			
-			//removes some connections
-			/*
-			int i5 = 1;
-			
-			for (OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition3 : list) {
-				int j5 = 0;
-				int k5 = 0;
-
-				while (j5 < 2 && k5 < 5) {
-					++k5;
-					int l5 = p_175836_1_.nextInt(6);
-
-					if (structureoceanmonumentpieces$roomdefinition3.hasOpening[l5]) {
-						int i6 = Direction.byIndex(l5).getOpposite().getIndex();
-						structureoceanmonumentpieces$roomdefinition3.hasOpening[l5] = false;
-						structureoceanmonumentpieces$roomdefinition3.connections[l5].hasOpening[i6] = false;
-
-						if (structureoceanmonumentpieces$roomdefinition3.findSource(i5++) && structureoceanmonumentpieces$roomdefinition3.connections[l5].findSource(i5++)) {
-							++j5;
-						} else {
-							structureoceanmonumentpieces$roomdefinition3.hasOpening[l5] = true;
-							structureoceanmonumentpieces$roomdefinition3.connections[l5].hasOpening[i6] = true;
-						}
-					}
-				}
-			}*/
-
 			list.add(structureoceanmonumentpieces$roomdefinition);
 			list.add(structureoceanmonumentpieces$roomdefinition1);
 			list.add(structureoceanmonumentpieces$roomdefinition2);
@@ -1218,68 +1171,83 @@ public class OceanMonumentPiecesUA {
       protected void readAdditional(CompoundNBT tagCompound) {
       }
       
-		protected void generateWaterBox(IWorld p_181655_1_, MutableBoundingBox p_181655_2_) {
+		protected void generateWaterBox(IWorld worldIn, MutableBoundingBox mutableBoundingBox) {
 
 			// right leg
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 0, 1, 0, 24, 1, 57, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 1, 2, 1, 23, 2, 56, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 2, 3, 2, 22, 3, 55, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 3, 4, 3, 21, 4, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 7, 5, 7, 17, 5, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 8, 6, 8, 16, 6, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 9, 7, 9, 15, 7, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 10, 8, 10, 14, 8, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 0, 1, 0, 24, 1, 57, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 1, 2, 1, 23, 2, 56, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 2, 3, 2, 22, 3, 55, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 3, 4, 3, 21, 4, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 7, 5, 7, 17, 5, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 8, 6, 8, 16, 6, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 9, 7, 9, 15, 7, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 10, 8, 10, 14, 8, 54, WATER, WATER, false);
 
 			// left leg
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 33, 1, 0, 57, 1, 57, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 34, 2, 1, 56, 2, 56, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 35, 3, 2, 55, 3, 55, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 36, 4, 3, 54, 4, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 40, 5, 7, 50, 5, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 41, 6, 8, 49, 6, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 42, 7, 9, 48, 7, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 43, 8, 10, 47, 8, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 33, 1, 0, 57, 1, 57, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 34, 2, 1, 56, 2, 56, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 35, 3, 2, 55, 3, 55, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 36, 4, 3, 54, 4, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 40, 5, 7, 50, 5, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 41, 6, 8, 49, 6, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 42, 7, 9, 48, 7, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 43, 8, 10, 47, 8, 54, WATER, WATER, false);
 
 			// main body
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 14, 1, 22, 44, 1, 57, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 14, 2, 22, 44, 2, 56, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 14, 1, 22, 44, 8, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 14, 1, 22, 44, 8, 54, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 15, 8, 21, 43, 9, 42, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 16, 10, 21, 42, 10, 41, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 17, 11, 21, 41, 11, 40, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 14, 1, 22, 44, 1, 57, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 14, 2, 22, 44, 2, 56, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 14, 1, 22, 44, 8, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 14, 1, 22, 44, 8, 54, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 15, 8, 21, 43, 9, 42, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 16, 10, 21, 42, 10, 41, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 17, 11, 21, 41, 11, 40, WATER, WATER, false);
 
 			// top
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 21, 12, 21, 36, 12, 36, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 22, 13, 22, 35, 13, 35, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 23, 14, 23, 34, 14, 34, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 24, 15, 24, 33, 15, 33, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 21, 12, 21, 36, 12, 36, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 22, 13, 22, 35, 13, 35, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 23, 14, 23, 34, 14, 34, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 24, 15, 24, 33, 15, 33, WATER, WATER, false);
 			
 			//creates opening in front of entrance
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 32, 3, 20, DARK_PRISMARINE, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 32, 0, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 0, 10, 32, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 0, 10, 25, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 3, 10, 32, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 3, 10, 32, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 3, 10, 25, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 25, 1, 10, 25, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 32, 1, 10, 32, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 12, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 12, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 14, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 14, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 16, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 16, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 18, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 18, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 25, 1, 20, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 32, 1, 20, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 27, 1, 10, p_181655_2_);
-			this.setBlockState(p_181655_1_, SEA_LANTERN, 30, 1, 10, p_181655_2_);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 26, 3, 11, 31, 3, 20, WATER, WATER, false);
-			this.fillWithBlocks(p_181655_1_, p_181655_2_, 26, 1, 20, 31, 3, 20, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 0, 10, 32, 3, 20, DARK_PRISMARINE, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 0, 10, 32, 0, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 32, 0, 10, 32, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 0, 10, 25, 0, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 3, 10, 32, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 32, 3, 10, 32, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 3, 10, 25, 3, 20, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 25, 1, 10, 25, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 32, 1, 10, 32, 2, 10, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.setBlockState(worldIn, SEA_LANTERN, 25, 1, 12, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 32, 1, 12, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 25, 1, 14, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 32, 1, 14, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 25, 1, 16, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 32, 1, 16, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 25, 1, 18, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 32, 1, 18, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 25, 1, 20, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 32, 1, 20, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 27, 1, 10, mutableBoundingBox);
+			this.setBlockState(worldIn, SEA_LANTERN, 30, 1, 10, mutableBoundingBox);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 26, 3, 11, 31, 3, 20, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 26, 1, 20, 31, 3, 20, WATER, WATER, false);
+			this.fillWithBlocks(worldIn, mutableBoundingBox, 26, 1, 21, 31, 3, 21, WATER, WATER, false);
 			
+			//clears out all solid blocks in a column until it hits non-solid blocks to create an opening to entrance
+			for(int y = 4; y < 16; y++) {
+				for(int x = 26; x < 32; x++) {
+					for(int z = 11; z < 21; z++) {
+						 if(this.getBlockStateFromPos(worldIn, x, y, z, mutableBoundingBox).isSolid()) {
+							 this.setBlockState(worldIn, WATER, x, y, z, mutableBoundingBox);
+						 }else {
+							 x = 32;
+							 y = 16;
+							 break;
+						 }
+					}
+				}
+			}
 		}
 
 		protected void generateDefaultFloor(IWorld worldIn, MutableBoundingBox p_175821_2_, int x, int z, boolean hasOpeningDownwards) {
@@ -1429,11 +1397,6 @@ public class OceanMonumentPiecesUA {
 			if (this.roomDefinition.index / 25 > 0) {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
-
-			/*
-			if (this.roomDefinition.connections[Direction.UP.getIndex()] == null) {
-				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 4, 1, 6, 4, 6, ROUGH_PRISMARINE);
-			}*/
 
 			boolean flag = this.mainDesign != 0 && randomIn.nextBoolean() && !this.roomDefinition.hasOpening[Direction.DOWN.getIndex()] && !this.roomDefinition.hasOpening[Direction.UP.getIndex()]
 					&& this.roomDefinition.countOpenings() > 1;
@@ -1590,10 +1553,6 @@ public class OceanMonumentPiecesUA {
 			if (this.roomDefinition.index / 25 > 0) {
 				this.generateDefaultFloor(worldIn, mutableBoundingBoxIn, 0, 0, true);
 			}
-
-//			if (this.roomDefinition.connections[Direction.UP.getIndex()] == null) {
-//				this.generateBoxOnFillOnly(worldIn, mutableBoundingBoxIn, 1, 4, 1, 6, 4, 6, ROUGH_PRISMARINE);
-//			}
 
 			for (int i = 1; i <= 6; ++i) {
 				for (int j = 1; j <= 6; ++j) {

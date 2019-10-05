@@ -116,7 +116,7 @@ public class EndCityUA extends Structure<NoFeatureConfig>
               this.recalculateStructureSize();
            }
            
-           UltraAmplified.LOGGER.log(Level.DEBUG, "End City | "+(chunkX*16)+" "+(chunkZ*16));
+          // UltraAmplified.LOGGER.log(Level.DEBUG, "End City | "+(chunkX*16)+" "+(chunkZ*16));
         }
 
      }

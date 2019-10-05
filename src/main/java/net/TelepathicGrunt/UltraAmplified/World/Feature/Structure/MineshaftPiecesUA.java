@@ -12,6 +12,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.EndRodBlock;
 import net.minecraft.block.LogBlock;
 import net.minecraft.block.RailBlock;
+import net.minecraft.block.RedstoneLampBlock;
+import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
@@ -20,6 +22,7 @@ import net.minecraft.entity.item.minecart.ChestMinecartEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.state.properties.RailShape;
+import net.minecraft.state.properties.RedstoneSide;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -431,9 +434,15 @@ public class MineshaftPiecesUA
             }
             else if(this.mineShaftType == Type.HELL) 
             {
-            	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z, Blocks.REDSTONE_LAMP.getDefaultState());
-                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
-                this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
+            	if(random.nextFloat() < 0.1f) {
+                	this.setBlockState(worldIn, Blocks.REDSTONE_LAMP.getDefaultState().with(RedstoneLampBlock.LIT, Boolean.valueOf(true)), x + 1, y, z, boundingBox);
+                    this.setBlockState(worldIn, Blocks.REDSTONE_TORCH.getDefaultState(), x, y + 1, z, boundingBox);
+                    this.setBlockState(worldIn, Blocks.REDSTONE_TORCH.getDefaultState(), x + 2, y + 1, z, boundingBox);
+                    this.setBlockState(worldIn, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.POWER, Integer.valueOf(14)).with(RedstoneWireBlock.EAST, RedstoneSide.SIDE).with(RedstoneWireBlock.WEST, RedstoneSide.SIDE), x + 1, y + 1, z, boundingBox);
+            	}else {
+                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
+                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
+            	}
             }
             else if(this.mineShaftType == Type.OCEAN) 
             {

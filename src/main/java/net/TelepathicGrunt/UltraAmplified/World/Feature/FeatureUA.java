@@ -78,6 +78,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> ICE_AND_SNOW_ICE_MOUNTAIN = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
     public static Feature<ColumnBlocksConfig> COLUMN = new Column(ColumnBlocksConfig::deserialize);
     public static Feature<ColumnBlocksConfig> RAMP = new RampColumn(ColumnBlocksConfig::deserialize);

@@ -116,7 +116,7 @@ public class JungleTempleUA extends Structure<NoFeatureConfig> {
 	        	 JungleTemplePiecesUA junglepyramidpiece = new JungleTemplePiecesUA(this.rand, chunkX * 16, y, chunkZ * 16);
 		         this.components.add(junglepyramidpiece);
 		         this.recalculateStructureSize();
-		         UltraAmplified.LOGGER.log(Level.DEBUG, "Jungle Temple | "+(chunkX*16)+" "+(chunkZ*16));
+		         // UltraAmplified.LOGGER.log(Level.DEBUG, "Jungle Temple | "+(chunkX*16)+" "+(chunkZ*16));
 	         }
 	         
 	      }

@@ -1,17 +1,22 @@
 package net.telepathicgrunt.ultraamplified.world.generation.layers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.logging.log4j.Level;
-
+import com.google.common.collect.ImmutableList;
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,11 +30,11 @@ import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 public class BiomeLayerUA implements IC0Transformer 
 {
 	
-    private static java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry>[] biomeListsByTemperature;
-    private static java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> jungleReplacedBiomes;
-    private static java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> megaTaigaReplacedBiomes;
-    private static java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes;
-    private static java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes;
+    private static List<BiomeEntry>[] biomeListsByTemperature;
+    private static List<BiomeEntry> jungleReplacedBiomes;
+    private static List<BiomeEntry> megaTaigaReplacedBiomes;
+    private static List<BiomeEntry> mesaReplacedBiomes;
+    private static List<BiomeEntry> oceanReplacedBiomes;
     private static boolean noOcean = false;
     private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
     
@@ -45,30 +50,91 @@ public class BiomeLayerUA implements IC0Transformer
 		@SubscribeEvent
 		public static void Load(WorldEvent.Load event) {
 			
-			
-			biomeListsByTemperature = new java.util.ArrayList[net.minecraftforge.common.BiomeManager.BiomeType.values().length];
-		    jungleReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
-		    megaTaigaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
-		    mesaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
-		    oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+			//reset lists and variables on world load 
+			biomeListsByTemperature = new ArrayList[BiomeType.values().length];
+		    jungleReplacedBiomes = new ArrayList<BiomeEntry>();
+		    megaTaigaReplacedBiomes = new ArrayList<BiomeEntry>();
+		    mesaReplacedBiomes = new ArrayList<BiomeEntry>();
+		    oceanReplacedBiomes = new ArrayList<BiomeEntry>();
 		    noOcean = false;
 		    
-			
-	    	//Came with forge for the normal GenLayer class. Adds all biomes to list by temperature 
-	        for (net.minecraftforge.common.BiomeManager.BiomeType type : net.minecraftforge.common.BiomeManager.BiomeType.values())
-	        {
-	            com.google.common.collect.ImmutableList<net.minecraftforge.common.BiomeManager.BiomeEntry> biomesToAdd = net.minecraftforge.common.BiomeManager.getBiomes(type);
-	            int idx = type.ordinal();
-
-	            if (biomeListsByTemperature[idx] == null) biomeListsByTemperature[idx] = new java.util.ArrayList<net.minecraftforge.common.BiomeManager.BiomeEntry>();
-	            if (ConfigUA.importModdedBiomes && biomesToAdd != null) biomeListsByTemperature[idx].addAll(biomesToAdd);
-	        }
+		    //grabs what the user entered.
+		    //is done as linked list so we can remove entries later on since Arrays.asList creates a fixed size list.
+		    List<String> blacklistedMods = new ArrayList<String>();
+		    List<String> blacklistedResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedBiomeList.split(",")));
+		    for(int i = 0; i < blacklistedResourceLocations.size(); i++) {
+		    	blacklistedResourceLocations.set(i, blacklistedResourceLocations.get(i).trim());
+		    }
 		    
+		    
+		    //finds all strings that doesn't have a path and adds it to blacklistedMods as it's a mod's namespace
+		    for(String entry : blacklistedResourceLocations) {
+		    	if(entry.contains(":*")) {
+		    		blacklistedMods.add(entry.split(":")[0]);
+		    	}
+		    }
+
 	        //used to manually add biomes to a certain temperature list
-	        int desertIdx = net.minecraftforge.common.BiomeManager.BiomeType.DESERT.ordinal();
-	        int warmIdx = net.minecraftforge.common.BiomeManager.BiomeType.WARM.ordinal();
-	        int coolIdx = net.minecraftforge.common.BiomeManager.BiomeType.COOL.ordinal();
-	        int icyIdx = net.minecraftforge.common.BiomeManager.BiomeType.ICY.ordinal();
+	        int desertIdx = BiomeType.DESERT.ordinal();
+	        int warmIdx = BiomeType.WARM.ordinal();
+	        int coolIdx = BiomeType.COOL.ordinal();
+	        int icyIdx = BiomeType.ICY.ordinal();
+	        
+			
+	    	//Came with forge for the normal GenLayer class. 
+	        //sets up the inner list to hold all biome entries 
+	        for (BiomeType type : BiomeType.values())
+	        {
+	            int idx = type.ordinal();
+	            if (biomeListsByTemperature[idx] == null) biomeListsByTemperature[idx] = new ArrayList<BiomeEntry>();
+	        }
+	        
+
+	        //will go through all biomes and add modded biomes that arent UA biomes to biome list
+	        //will attempt to place the in right spot based on temperature
+	        int index = 0;
+	        if(ConfigUA.importAllModdedBiomes) {
+	        	for(Biome biome : ForgeRegistries.BIOMES.getValues()) {
+					
+					ResourceLocation rl = BiomeRegistry.getKey(biome);
+					if(rl == null) {
+						continue;
+					}
+					String namespace = rl.getNamespace();
+					if(blacklistedMods.contains(namespace) || ConfigUA.blacklistedBiomeList.contains(rl.toString())) {
+						continue;
+					}
+					
+					
+					if(!namespace.equals("minecraft") && !namespace.equals(UltraAmplified.MODID)) {
+
+						//default weight of 20 which seems good enough 
+						BiomeEntry addedBiome = new BiomeEntry(biome, 20);
+						float biomeTemperature = biome.getDefaultTemperature();
+						 
+						//finds what area the biome should go based on temperature
+						if(biomeTemperature < 0.1f) index = icyIdx;
+						else if(biomeTemperature >= 0.1f && biomeTemperature< 0.5f) index = coolIdx;
+						else if(biomeTemperature >= 0.5f && biomeTemperature< 1.0f) index = warmIdx;
+						else index = desertIdx; //greater than 1.0f 
+						
+						
+						
+						biomeListsByTemperature[index].add(addedBiome);
+					}
+				}
+	        }
+	        //only imports the modded biomes already registered in the biome dictionary (Other mods wanted biome to generate in Overworld)
+	        else if(ConfigUA.importModdedBiomes) {
+		        for (BiomeType type : BiomeType.values())
+		        {
+		            ImmutableList<BiomeEntry> biomesToAdd = BiomeManager.getBiomes(type);
+		            int idx = type.ordinal();
+		            if (ConfigUA.importModdedBiomes && biomesToAdd != null) biomeListsByTemperature[idx].addAll(biomesToAdd);
+		        }
+	        }
+			
+		    
 	        
 
 	        //debugging
@@ -88,6 +154,7 @@ public class BiomeLayerUA implements IC0Transformer
 //	        for(int i = 0; i < biomeListsByTemperature[desertIdx].size(); i++) {
 //	            UltraAmplified.LOGGER.log(Level.DEBUG, biomeListsByTemperature[desertIdx].get(i).biome.getDisplayName());
 //	        }
+	        
 	        
 	        //removes vanilla and UA biomes from biome list but should leave other mod's biome just fine. "theoretically"
 	        for(int tempIndex = 0; tempIndex < biomeListsByTemperature.length; tempIndex++) {
@@ -128,101 +195,66 @@ public class BiomeLayerUA implements IC0Transformer
 	        //adds our ultra amplified version of the vanilla biomes while checking to see if they are allowed by the user through the config
 	       
 	        //deserts
-	        if(ConfigUA.desert)
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DESERT, 40));
-	        if(ConfigUA.savanna)
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SAVANNA, 40));
-	        if(ConfigUA.plains)
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 20));
-	        if(ConfigUA.nether)
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.NETHER, 26));
-	        if(ConfigUA.mushroom) 
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+	        if(ConfigUA.desert) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.DESERT, 40));
+	        if(ConfigUA.savanna) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.SAVANNA, 40));
+	        if(ConfigUA.plains) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.PLAINS, 20));
+	        if(ConfigUA.nether) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.NETHER, 26));
+	        if(ConfigUA.mushroom) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
 	        //warm
-	        if(ConfigUA.forest)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 26));
-	        if(ConfigUA.darkForest)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.DARK_FOREST, 26));
-	        if(ConfigUA.mountains)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 26));
-	        if(ConfigUA.plains)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 26));
-	        if(ConfigUA.birchForest)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BIRCH_FOREST, 26));
-	        if(ConfigUA.swamplands)
-		        biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SWAMP, 26));
-	        if(ConfigUA.mushroom) 
-	        	biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+	        if(ConfigUA.forest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.FOREST, 26));
+	        if(ConfigUA.darkForest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.DARK_FOREST, 26));
+	        if(ConfigUA.mountains) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MOUNTAINS, 26));
+	        if(ConfigUA.plains) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.PLAINS, 26));
+	        if(ConfigUA.birchForest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.BIRCH_FOREST, 26));
+	        if(ConfigUA.swamplands) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.SWAMP, 26));
+	        if(ConfigUA.mushroom) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 	        
 	        //cool
-	        if(ConfigUA.forest)
-		        biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.FOREST, 30));
-	        if(ConfigUA.mountains)
-		        biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MOUNTAINS, 30));
-	        if(ConfigUA.taiga)
-		        biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.TAIGA, 30));
-	        if(ConfigUA.plains)
-		        biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.PLAINS, 13));
-	        if(ConfigUA.stoneBeach)
-		        biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.STONE_SHORE, 10));
-	        if(ConfigUA.end)
-	        	biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.END, 20));
-	        if(ConfigUA.mushroom) 
-	        	biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+	        if(ConfigUA.forest) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.FOREST, 30));
+	        if(ConfigUA.mountains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MOUNTAINS, 30));
+	        if(ConfigUA.taiga) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.TAIGA, 30));
+	        if(ConfigUA.plains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 13));
+	        if(ConfigUA.stoneBeach) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_SHORE, 10));
+	        if(ConfigUA.end) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END, 20));
+	        if(ConfigUA.mushroom) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
 	        //icy
-	        if(ConfigUA.snowyTundra) {
-		        biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TUNDRA, 45));
-	        }else {
+	        if(ConfigUA.snowyTundra) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TUNDRA, 45));
+		    else {
 	        	//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
-	        	if(ConfigUA.iceSpike) 
-	        		biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_SPIKES, 26));
+	        	if(ConfigUA.iceSpike) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_SPIKES, 26));
 	        	
 	        	//turns snowy tundra into ice mountain only if config has snowy tundra off and ice mountain on
-	            if(ConfigUA.iceMountain)
-	    	        biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 26));
+	            if(ConfigUA.iceMountain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_MOUNTAIN, 26));
 	        }
 
-	        if(ConfigUA.iceMountain)
-		        biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ICE_MOUNTAIN, 17));
-	        if(ConfigUA.snowyTaiga)
-		        biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
-	        if(ConfigUA.coldBeach)
-		        biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.SNOWY_BEACH, 10));
-	        if(ConfigUA.mushroom) 
-	        	biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+	        if(ConfigUA.iceMountain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_MOUNTAIN, 17));
+	        if(ConfigUA.snowyTaiga) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
+	        if(ConfigUA.coldBeach) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_BEACH, 10));
+	        if(ConfigUA.mushroom) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 	        
 	       
 	        
 	        //special biomes lists used to replace vanilla ones such as mesa, jungles, etc
 	        
-	        if(ConfigUA.jungle) {
-			    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.JUNGLE, 70));
-	        }
-	        
-			if(ConfigUA.bambooJungle) {
-			    jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BAMBOO_JUNGLE, 30));
-			}
-
-	        if(ConfigUA.giantTreeTaiga)
-			    megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
-
+	        if(ConfigUA.jungle) jungleReplacedBiomes.add(new BiomeEntry(BiomeInit.JUNGLE, 70));
+			if(ConfigUA.bambooJungle) jungleReplacedBiomes.add(new BiomeEntry(BiomeInit.BAMBOO_JUNGLE, 30));
+	        if(ConfigUA.giantTreeTaiga) megaTaigaReplacedBiomes.add(new BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
 	        if(ConfigUA.badlands) {
-			    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.BADLANDS_PLATEAU, 20));
-			    mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.WOODED_BADLANDS_PLATEAU, 10));
-	        }
-	        else if(ConfigUA.erodedBadlands) {
-	        	//turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
-	        	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeInit.ERODED_BADLANDS, 10));
-	        }
+			    mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.BADLANDS_PLATEAU, 20));
+			    mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.WOODED_BADLANDS_PLATEAU, 10));
+	        } 
+	        //turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
+	        else if(ConfigUA.erodedBadlands) mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.ERODED_BADLANDS, 10));
+	        
 
 	        
 	        
 			    
 	        //this is used to help fill any biome list that is empty due to player turning off all of its biome.
 	        //otherwise, we will crash if a biome list is empty
-	        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = new java.util.ArrayList<BiomeEntry>();
+	        List<BiomeEntry> temporaryBiomeList = new ArrayList<BiomeEntry>();
 	        
 	        //set temp biome list to biome list that isn't empty. Otherwise, set temp to null
 	        //the biome list will store up to 5 different biomes but could go over which means it will need to be trimmed afterwards
@@ -241,22 +273,16 @@ public class BiomeLayerUA implements IC0Transformer
 	        		}
 	        	}
 	        }
-	        if(jungleReplacedBiomes.size() != 0) {
-	        	temporaryBiomeList.addAll(jungleReplacedBiomes);
-	        }
-	        if(megaTaigaReplacedBiomes.size() != 0) {
-	        	temporaryBiomeList.addAll(megaTaigaReplacedBiomes);
-	        }
-	        if(mesaReplacedBiomes.size() != 0) {
-	        	temporaryBiomeList.addAll(mesaReplacedBiomes);
-	        }
+	        if(jungleReplacedBiomes.size() != 0) temporaryBiomeList.addAll(jungleReplacedBiomes);
+	        if(megaTaigaReplacedBiomes.size() != 0) temporaryBiomeList.addAll(megaTaigaReplacedBiomes);
+	        if(mesaReplacedBiomes.size() != 0) temporaryBiomeList.addAll(mesaReplacedBiomes);
+	        
 	        
 	        
 	        //for debugging purposes
-	        
-	        for(BiomeEntry biome : temporaryBiomeList){
-	        	UltraAmplified.LOGGER.log(Level.WARN, biome.biome.getRegistryName());
-	        }
+//	        for(BiomeEntry biome : temporaryBiomeList){
+//	        	UltraAmplified.LOGGER.log(Level.WARN, biome.biome.getRegistryName());
+//	        }
 	        
 	        
 	        //grabs all allowed biomes into ocean replaced list in case we disallow oceans later. 
@@ -273,14 +299,14 @@ public class BiomeLayerUA implements IC0Transformer
 	        //set all biome list to have vanilla ocean so we do not crash due to all biome list not having any biome.
 	        //This will also make it so that our ocean can replace the entire world too of they are enabled
 	        if(temporaryBiomeList.size() == 0) {
-	        	biomeListsByTemperature[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	biomeListsByTemperature[warmIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	biomeListsByTemperature[coolIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	biomeListsByTemperature[icyIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	jungleReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	megaTaigaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	mesaReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
-	        	oceanReplacedBiomes.add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.OCEAN, 10));
+	        	biomeListsByTemperature[desertIdx].add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	biomeListsByTemperature[warmIdx].add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	biomeListsByTemperature[coolIdx].add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	biomeListsByTemperature[icyIdx].add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	jungleReplacedBiomes.add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	megaTaigaReplacedBiomes.add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	mesaReplacedBiomes.add(new BiomeEntry(Biomes.OCEAN, 10));
+	        	oceanReplacedBiomes.add(new BiomeEntry(Biomes.OCEAN, 10));
 	        }
 	        
 	        //otherwise, set any empty biome list to have temp's biome list so it is not empty 
@@ -327,21 +353,21 @@ public class BiomeLayerUA implements IC0Transformer
                 return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(mesaReplacedBiomes, context).biome);
              }
 
-             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(BiomeType.DESERT, context).biome);
           case 2:
              if (i > 0) {
                 return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(jungleReplacedBiomes, context).biome);
              }
 
-             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(BiomeType.WARM, context).biome);
           case 3:
              if (i > 0) {
                 return BiomeRegistry.getID(getWeightedSpecialBiomeEntry(megaTaigaReplacedBiomes, context).biome);
              }
 
-             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(BiomeType.COOL, context).biome);
           case 4:
-             return BiomeRegistry.getID(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY, context).biome);
+             return BiomeRegistry.getID(getWeightedBiomeEntry(BiomeType.ICY, context).biome);
           default:
         	  
         	  if(noOcean) {
@@ -365,20 +391,20 @@ public class BiomeLayerUA implements IC0Transformer
     
     //returns a biome with its weight impacting how often it appears
     //This is a forge method
-    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType type, INoiseRandom context) {
-        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = biomeListsByTemperature[type.ordinal()];
-        int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
-        int weight = net.minecraftforge.common.BiomeManager.isTypeListModded(type)?context.random(totalWeight):context.random(totalWeight / 10) * 10;
-        return net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+    protected BiomeEntry getWeightedBiomeEntry(BiomeType type, INoiseRandom context) {
+        List<BiomeEntry> biomeList = biomeListsByTemperature[type.ordinal()];
+        int totalWeight = WeightedRandom.getTotalWeight(biomeList);
+        int weight = BiomeManager.isTypeListModded(type)?context.random(totalWeight):context.random(totalWeight / 10) * 10;
+        return WeightedRandom.getRandomItem(biomeList, weight);
     }
 
     //returns a biome with its weight impacting how often it appears
     //this is a modified forge method to work with my own biome lists that are passed in
-    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedSpecialBiomeEntry(java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> list, INoiseRandom context)
+    protected BiomeEntry getWeightedSpecialBiomeEntry(List<BiomeEntry> list, INoiseRandom context)
     {
-        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = list;
-        int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
+        List<BiomeEntry> biomeList = list;
+        int totalWeight = WeightedRandom.getTotalWeight(biomeList);
         int weight = list.size()!=0?context.random(totalWeight):context.random(totalWeight / 10) * 10;
-        return net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+        return WeightedRandom.getRandomItem(biomeList, weight);
     }
 }

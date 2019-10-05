@@ -15,13 +15,40 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.10.0 Changes) (1.14.4 Minecraft)
+          
+    Config: 
+·Lowered default maximum height for terrain from 256 to 248 so trees has less of a chance of being cut off. Can still be changed to 256 in config file.
+·Added config option called importAllModdedBiomes to allow importing all modded biomes registered in the forge registry. This overrides the importModdedBiomes config option when it is set to true.
+·Added blacklistedBiomeList config option that lets players blacklist certain mods or individual biomes from being imported. Please let me know if an issue occurs with this.
+    
+    Dimension
+·Other mod's ScatteredPlantFeature feature now gets imported correctly.
+·Fixed a theoretical bug where a modded feature, structure, or mob could be added multiple time to a biome. (Added once by the mod itself and then added again when my mod imports it from a vanilla biome)
+·End biome now grabs modded features, mobs, and structures from all vanilla End biomes instead of just "The End" biome.
+·Barren End Field biome now grabs modded features, mobs, and structures from the vanilla "End Barrens" biome.
+     
+    Biomes: 
+·Fixed bug where Cave Cavities and Ravines would spawn Stone instead of Endstone, Ice, and Netherrack in End, Ice Mountain, and Nether biome.
+·Underwater Caves will be covered in Ice when exposed to air in Frozen Ocean and Deep Frozen Ocean biome.
+·Cave Cavities and Ravines will replace underground water reservoirs with Ice instead of Stone in Deep Frozen Ocean and Frozen ocean biome.
+·Fixed bug where snow would not generate under ledges in icey biomes bordering an Ice Mountain biome.
+·Fixed bug where ocean biomes may generate weird glitchy looking terrain that alternates between air and water each block height below sealevel. It's hard to explain but if you haven't noticed it before, well, you certainly won't see this bug in the future!
+
+    Structures: 
+·Mineshafts in Nether biome will now place 2 Redstone Torches with Redstone wire in between at the top of arches that has a Redstone Lamp.
+·Ocean Monuments will now remove solid blocks if it blocks off the entrance to make it much more unlikely that the entrance is completely sealed off by terrain.
+·Fixed bug that let Sun Shrine generate with most of the shrine hanging off ledge in midair. Now shrine will only generate on flat solid land. Also increased default spawnrate in config to compensate for more restricted spawn condition.
+·Improved Stonehenge spawn condition so it hand less chance of hanging over ledges Also increased default spawnrate in config to compensate for slightly more restricted spawn condition.
+     
+     
     (V.6.9.1 Changes) (1.14.4 Minecraft)
     
     Versioning:
 ·Changed versioning of this mod to match the accepted standard versioning practice.
     
     Dimension
-·Fixed bug when player tries teleporting to UA dimension from Overworld but the store world on the player is also the Overworld, the player gets stuck and cannot enter UA dimension.    
+·Fixed bug when player tries teleporting to UA dimension from Overworld but the stored world on the player is also the Overworld, the player gets stuck and cannot enter UA dimension.    
        
        
     (V.6.9 Changes) (1.14.4 Minecraft)

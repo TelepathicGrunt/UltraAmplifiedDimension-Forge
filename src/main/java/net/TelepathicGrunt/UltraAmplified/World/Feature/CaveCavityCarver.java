@@ -15,11 +15,13 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
@@ -33,7 +35,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	protected static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
 	protected static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
-	private static final Map<BlockState, BlockState> fillerMap = createMap();
+	private static final Map<BlockState, BlockState> canReplaceMap = createMap();
 
 	private static Map<BlockState, BlockState> createMap() {
 		Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
@@ -45,8 +47,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		return Collections.unmodifiableMap(result);
 	}
 
+
+    private static Map<Biome, BlockState> fillerBiomeMap;
+	
 	public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight) {
 		super(probabilityConfig, maximumHeight);
+		
 	}
 
 	public void setSeed(long seed) {
@@ -56,6 +62,24 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
 		this.seed = seed;
 	}
+	
+	/**
+	 * Have to make this map much later since the biomes needs to be initialized first and that's delayed a bit
+	 */
+	public void setFillerMap() {
+		if (fillerBiomeMap == null) {
+			fillerBiomeMap = new HashMap<Biome, BlockState>();
+
+			fillerBiomeMap.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
+	        fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState()); 
+	        fillerBiomeMap.put(BiomeInit.END, Blocks.END_STONE.getDefaultState()); 
+		}
+	}
+
 
 	public boolean shouldCarve(Random randomIn, int chunkX, int chunkZ, ProbabilityConfig config) {
 		return randomIn.nextFloat() <= (float) (ConfigUA.caveCavitySpawnrate) / 1000f;
@@ -82,6 +106,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		
 		
 		setSeed(randomSeed);
+		setFillerMap();
 		Random random = new Random(randomSeed);
 		float f = 1.0F;
 
@@ -165,8 +190,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 							}
 
 							blockpos$mutableblockpos.setPos(x, 60, z);
-							fillerBlock = fillerMap
-									.get(worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop());
+							fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
 							if (fillerBlock == null) {
 								fillerBlock = STONE;
 							}
@@ -234,7 +258,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 											worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
 											flag = true;
 										} else if (this.canCarveBlock(iblockstate, iblockstate1)
-												|| fillerMap.containsKey(iblockstate)) {
+												|| canReplaceMap.containsKey(iblockstate)) {
 											if (y < 11) {
 												worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
 											} else {
@@ -262,8 +286,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 												if (bordersFluid) {
 													worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
 												} else {
-													worldIn.setBlockState(blockpos$mutableblockpos,
-															CAVE_AIR.getBlockState(), false);
+													worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
 												}
 											}
 

@@ -93,7 +93,7 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 	         IglooPiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
 	         this.recalculateStructureSize();
 	         
-	           UltraAmplified.LOGGER.log(Level.DEBUG, "Igloo | "+(chunkX*16)+" "+(chunkZ*16));
+	          // UltraAmplified.LOGGER.log(Level.DEBUG, "Igloo | "+(chunkX*16)+" "+(chunkZ*16));
 	      }
 	   }
 

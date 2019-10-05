@@ -63,7 +63,7 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
                 	 chunkIn.setBlockState(blockpos$mutableblockpos, bottom, false);
                      currentBlock = bottom;
 	         }
-        	 else if(!aboveBlock.getFluidState().isEmpty() && y < 256){
+        	 else if(!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR && y < 256){
         		 
         		 if(above2Block.getMaterial() == Material.AIR) {
         			//sets very bottom of terrain to bottom block

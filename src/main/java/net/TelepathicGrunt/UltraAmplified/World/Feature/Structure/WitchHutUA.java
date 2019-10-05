@@ -139,7 +139,7 @@ public class WitchHutUA extends Structure<NoFeatureConfig> {
         	 WitchHutPiecesUA swamphutpiece = new WitchHutPiecesUA(this.rand, x * 16, y, z * 16);
 	         this.components.add(swamphutpiece);
 	         this.recalculateStructureSize();
-	         UltraAmplified.LOGGER.log(Level.DEBUG, "Witch Hut | "+(x*16)+" "+(z*16));
+	       //  UltraAmplified.LOGGER.log(Level.DEBUG, "Witch Hut | "+(x*16)+" "+(z*16));
          }
       }
    }

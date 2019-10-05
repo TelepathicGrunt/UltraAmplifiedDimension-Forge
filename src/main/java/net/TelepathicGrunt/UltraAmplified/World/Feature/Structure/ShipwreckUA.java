@@ -95,7 +95,7 @@ public class ShipwreckUA extends Structure<ShipwreckConfig> {
          ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos, rotation, this.components, this.rand, newShipwreckConfig);
          this.recalculateStructureSize();
          
-         UltraAmplified.LOGGER.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.bounds.minY+" "+blockpos.getZ());
+        // UltraAmplified.LOGGER.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+" "+this.bounds.minY+" "+blockpos.getZ());
     
       }
 

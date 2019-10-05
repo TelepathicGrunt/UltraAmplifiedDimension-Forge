@@ -33,6 +33,8 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 	         for(int zOffset = 0; zOffset < 16; ++zOffset) {
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
+	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos.setPos(x, 60, z));
+	            
 		         for(int y = 256; y > ConfigUA.seaLevel-1; --y) {
 		        	 
 	        		blockpos$mutableblockpos.setPos(x, y, z);
@@ -42,7 +44,7 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 		        	if(worldIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR &&
 		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() != Material.AIR) 
 		        	{
-			            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
+		        		//does not freeze top of Cold Ocean and Deep Cold Ocean biomes
 			            if (!worldIn.getBlockState(blockpos$mutableblockpos1).getFluidState().isEmpty() &&
 			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false) &&
 			            	biome != BiomeInit.COLD_OCEAN &&
@@ -58,6 +60,11 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 			                  worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 			               }
 			            }
+
+		               //does not check rest of height if it is in Ice Mountain biome
+		               if(biome == BiomeInit.ICE_MOUNTAIN) {
+		            	   break;
+		               }
 		        	}
 		         }
 	         }

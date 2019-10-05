@@ -32,6 +32,7 @@ import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
 import net.minecraft.world.gen.feature.MultipleWithChanceRandomFeature;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.ScatteredPlantFeature;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.SphereReplaceFeature;
 import net.minecraft.world.gen.feature.SpringFeature;
@@ -189,6 +190,13 @@ public class BiomeAddModdedFeatures {
 			for (int biomeIndex = 0; biomeIndex < vanillaBiomesToCheck.length; biomeIndex++) {
 				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (BiomeUA) BiomeInit.getBiomeArray()[biomeIndex]);
 			}
+			
+			//edge case as UA End biome will grab features from multiple end biomes
+			addModdedFeatureAndSpawns(Biomes.SMALL_END_ISLANDS, (BiomeUA) BiomeInit.END);
+			addModdedFeatureAndSpawns(Biomes.END_MIDLANDS, (BiomeUA) BiomeInit.END);
+			addModdedFeatureAndSpawns(Biomes.END_HIGHLANDS, (BiomeUA) BiomeInit.END);
+			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.END);
+			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.BARREN_END_FIELD);
 		}
 	}
 
@@ -199,6 +207,7 @@ public class BiomeAddModdedFeatures {
 	 * @param vanillaBiome - Vanilla biome to check for modded features/mobs
 	 * @param uaBiome      - UA biome to get modded features/mobs
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	private static void addModdedFeatureAndSpawns(Biome vanillaBiome, BiomeUA uaBiome) {
 
 		// FEATURES
@@ -206,6 +215,12 @@ public class BiomeAddModdedFeatures {
 		// If not, it is a modded feature and we should add it to the UA biome
 		for (Decoration decorationType : Decoration.values()) {
 			for (ConfiguredFeature<?> feature : vanillaBiome.getFeatures(decorationType)) {
+				//if feature is already registered (Same feature, placement, config, etc),
+				//then skip this feature and move on to next one
+				if(uaBiome.getFeatures(decorationType).contains(feature)) {
+					break;
+				}
+				
 				DecoratedFeatureConfig insideConfig = (DecoratedFeatureConfig) feature.config;
 
 				Feature<?> insideFeature = insideConfig.feature.feature;
@@ -223,90 +238,98 @@ public class BiomeAddModdedFeatures {
 						uaBiome.addFeature(decorationType, feature);
 					}
 				}
-				// modded ores are buried in the state variable within the 
-				// OreFeature so we have to dig for it
-				else if (insideFeature instanceof OreFeature) {
-					OreFeatureConfig oreConfig = (OreFeatureConfig) insideConfig.feature.config;
-					if (ConfigUA.importModdedFeatures && checkIfBlockIsAllowed(oreConfig.state.getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
+				else if(ConfigUA.importModdedFeatures) {
+					
+					// modded ores are buried in the state variable within the 
+					// OreFeature so we have to dig for it
+					if (insideFeature instanceof OreFeature) {
+						OreFeatureConfig oreConfig = (OreFeatureConfig) insideConfig.feature.config;
+						if (checkIfBlockIsAllowed(oreConfig.state.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
 					}
-				}
-				// modded bushes are buried in the state variable within the 
-				// BushFeature so we have to dig for it
-				else if (insideFeature instanceof BushFeature) {
-					BushConfig bushConfig = (BushConfig) insideConfig.feature.config;
-					if (ConfigUA.importModdedFeatures && checkIfBlockIsAllowed(bushConfig.state.getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
+					// modded bushes are buried in the state variable within the 
+					// BushFeature so we have to dig for it
+					else if (insideFeature instanceof BushFeature) {
+						BushConfig bushConfig = (BushConfig) insideConfig.feature.config;
+						if (checkIfBlockIsAllowed(bushConfig.state.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
 					}
-				}
-				// modded double plants are buried in the state variable within the
-				// DoublePlantFeature so we have to dig for it
-				else if (insideFeature instanceof DoublePlantFeature) {
-					DoublePlantConfig doublePlantConfig = (DoublePlantConfig) insideConfig.feature.config;
-					if (ConfigUA.importModdedFeatures && checkIfBlockIsAllowed(doublePlantConfig.state.getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
+					// modded double plants are buried in the state variable within the
+					// DoublePlantFeature so we have to dig for it
+					else if (insideFeature instanceof DoublePlantFeature) {
+						DoublePlantConfig doublePlantConfig = (DoublePlantConfig) insideConfig.feature.config;
+						if (checkIfBlockIsAllowed(doublePlantConfig.state.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
 					}
-				}
-				// modded grass are buried in the state variable within the
-				// GrassFeature so we have to dig for it
-				else if (insideFeature instanceof GrassFeature) {
-					GrassFeatureConfig bushConfig = (GrassFeatureConfig) insideConfig.feature.config;
-					if (ConfigUA.importModdedFeatures && checkIfBlockIsAllowed(bushConfig.state.getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
+					// modded scattered plants are buried in the state variable within the
+					// ScatteredPlantFeature so we have to dig for it
+					else if (insideFeature instanceof ScatteredPlantFeature) {
+						if (checkIfBlockIsAllowed(((ScatteredPlantFeature)insideFeature).plant.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
 					}
-				}
-				// modded lakes are buried in the state variable within the
-				// LakeFeature so we have to dig for it
-				else if (insideFeature instanceof LakesFeature) {
-					LakesConfig lakeConfig = (LakesConfig) insideConfig.feature.config;
+					// modded grass are buried in the state variable within the
+					// GrassFeature so we have to dig for it
+					else if (insideFeature instanceof GrassFeature) {
+						GrassFeatureConfig bushConfig = (GrassFeatureConfig) insideConfig.feature.config;
+						if (checkIfBlockIsAllowed(bushConfig.state.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
+					}
+					// modded lakes are buried in the state variable within the
+					// LakeFeature so we have to dig for it
+					else if (insideFeature instanceof LakesFeature) {
+						LakesConfig lakeConfig = (LakesConfig) insideConfig.feature.config;
 
-					if (ConfigUA.importModdedFeatures && checkIfBlockIsAllowed(lakeConfig.state.getBlock())) {
+						if (checkIfBlockIsAllowed(lakeConfig.state.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
+					}
+					// modded springs are buried in the state variable within the 
+					// SpringFeature so we have to dig for it
+					else if (insideFeature instanceof SpringFeature) {
+						LiquidsConfig springConfig = (LiquidsConfig) insideConfig.feature.config;
+
+						if (checkIfBlockIsAllowed(springConfig.state.getBlockState().getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
+					}
+					// modded single block are buried in the state variable within the
+					// BlockWithContextFeature so we have to dig for it
+					else if (insideFeature instanceof BlockWithContextFeature) {
+						BlockWithContextConfig sphereReplaceConfig = (BlockWithContextConfig) insideConfig.feature.config;
+
+						if (checkIfBlockIsAllowed(sphereReplaceConfig.toPlace.getBlock())) {
+							uaBiome.addFeature(decorationType, feature);
+						}
+					}
+					// modded trees are typically buried in the state variable within the
+					// MultipleWithChanceRandomFeature so we have to dig for it
+					else if (insideFeature instanceof MultipleWithChanceRandomFeature) {
+						MultipleRandomFeatureConfig randConfig = (MultipleRandomFeatureConfig) insideConfig.feature.config;
+
+						// check first feature in random feature as I assume people will always have
+						// entire feature list be full of modded trees/features
+						insideFeature = randConfig.features.get(0).feature;
+						rl = FeatureRegistry.getKey(insideFeature);
+						if (rl == null) {
+							continue;
+						}
+
+						namespace = rl.getNamespace();
+						if (!namespace.equals("minecraft")) {
+							uaBiome.addFeature(decorationType, feature);
+						}
+					}
+					
+					// add all regular features but only if it doesn't have minecraft namespace
+					// Everything above was edge cases.
+					else if (!namespace.equals("minecraft")) {
 						uaBiome.addFeature(decorationType, feature);
 					}
-				}
-				// modded springs are buried in the state variable within the 
-				// SpringFeature so we have to dig for it
-				else if (insideFeature instanceof SpringFeature) {
-					LiquidsConfig springConfig = (LiquidsConfig) insideConfig.feature.config;
-
-					if (ConfigUA.importModdedFeatures
-							&& checkIfBlockIsAllowed(springConfig.state.getBlockState().getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
-					}
-				}
-				// modded single block are buried in the state variable within the
-				// BlockWithContextFeature so we have to dig for it
-				else if (insideFeature instanceof BlockWithContextFeature) {
-					BlockWithContextConfig sphereReplaceConfig = (BlockWithContextConfig) insideConfig.feature.config;
-
-					if (ConfigUA.importModdedFeatures
-							&& checkIfBlockIsAllowed(sphereReplaceConfig.toPlace.getBlock())) {
-						uaBiome.addFeature(decorationType, feature);
-					}
-				}
-				// modded trees are typically buried in the state variable within the
-				// MultipleWithChanceRandomFeature so we have to dig for it
-				else if (insideFeature instanceof MultipleWithChanceRandomFeature) {
-					MultipleRandomFeatureConfig randConfig = (MultipleRandomFeatureConfig) insideConfig.feature.config;
-
-					// check first feature in random feature as I assume people will always have
-					// entire feature list be full of modded trees/features
-					insideFeature = randConfig.features.get(0).feature;
-					rl = FeatureRegistry.getKey(insideFeature);
-					if (rl == null) {
-						continue;
-					}
-
-					namespace = rl.getNamespace();
-					if (ConfigUA.importModdedFeatures && !namespace.equals("minecraft")) {
-						uaBiome.addFeature(decorationType, feature);
-					}
-				}
-				
-				// add all regular features but only if it doesn't have minecraft namespace
-				// Everything above was edge cases.
-				else if (ConfigUA.importModdedFeatures && !namespace.equals("minecraft")) {
-					uaBiome.addFeature(decorationType, feature);
 				}
 			}
 		}
@@ -314,8 +337,14 @@ public class BiomeAddModdedFeatures {
 		// STRUCTURES
 		// add structure to biome's structure list to allow generation and locate command to work
 		for (Entry<Structure<?>, IFeatureConfig> structureEntry : vanillaBiome.structures.entrySet()) {
+			//if structure is already registered,
+			//then skip this structure and move on to next one
+			if(uaBiome.structures.containsKey(structureEntry)) {
+				break;
+			}
+			
 //			String namespace = structureEntry.getKey().getRegistryName().getNamespace();
-
+			
 			// workaround due to some people registering structures under minecraft namespace
 			if (ConfigUA.importModdedStructure && !listOfVanillaStructures.contains(structureEntry.getKey())) {
 				uaBiome.addStructure(structureEntry);
@@ -327,6 +356,11 @@ public class BiomeAddModdedFeatures {
 		// If not, it is a modded mob and we should add it to the UA biome
 		for (EntityClassification entityType : EntityClassification.values()) {
 			for (SpawnListEntry spawnEntry : vanillaBiome.getSpawns(entityType)) {
+				//if mob is already registered,
+				//then skip this mob and move on to next one
+				if(uaBiome.getSpawns(entityType).contains(spawnEntry)) {
+					break;
+				}
 
 //				ResourceLocation rl = EntityRegistry.getKey(spawnEntry.entityType);
 //				if(rl == null) {
@@ -397,6 +431,13 @@ public class BiomeAddModdedFeatures {
 					else if (insideFeature instanceof DoublePlantFeature) {
 						DoublePlantConfig doublePlantConfig = (DoublePlantConfig) insideConfig.feature.config;
 						if (checkIfBlockIsAllowed(doublePlantConfig.state.getBlock())) {
+							uaBiome.getFeatures(decorationType).remove(featureIndex);
+						}
+					}
+					// modded scattered plants are buried in the state variable within the
+					// ScatteredPlantFeature so we have to dig for it
+					else if (insideFeature instanceof ScatteredPlantFeature) {
+						if (checkIfBlockIsAllowed(((ScatteredPlantFeature)insideFeature).plant.getBlock())) {
 							uaBiome.getFeatures(decorationType).remove(featureIndex);
 						}
 					}

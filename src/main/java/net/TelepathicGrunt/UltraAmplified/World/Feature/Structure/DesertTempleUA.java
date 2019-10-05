@@ -104,7 +104,7 @@ public class DesertTempleUA extends Structure<NoFeatureConfig> {
 		         DesertTemplePiecesUA desertpyramidpiece = new DesertTemplePiecesUA(this.rand, chunkX * 16, y, chunkZ * 16);
 		         this.components.add(desertpyramidpiece);
 		         this.recalculateStructureSize();
-		         UltraAmplified.LOGGER.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+" "+(chunkZ*16));
+		        // UltraAmplified.LOGGER.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+" "+(chunkZ*16));
 		     }
 	      }
 	   }

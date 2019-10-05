@@ -95,7 +95,7 @@ public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
         	 BlockPos blockpos = new BlockPos(chunkX * 16, y, chunkZ * 16);
         	 PillagerOutpostPieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
              this.recalculateStructureSize();
-             UltraAmplified.LOGGER.log(Level.DEBUG, "Pillager Outpost | "+(x)+" "+(y+1)+" "+(z));
+            // UltraAmplified.LOGGER.log(Level.DEBUG, "Pillager Outpost | "+(x)+" "+(y+1)+" "+(z));
          }
       }
    }

@@ -28,6 +28,8 @@ public class ConfigUA {
     public static boolean importModdedStructure = false;
     public static boolean importModdedMobs = false;
     public static boolean importModdedBiomes = false;
+    public static boolean importAllModdedBiomes = false;
+    public static String blacklistedBiomeList = "";
     public static double xzTerrainModifier = 684.412D;
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
@@ -42,8 +44,8 @@ public class ConfigUA {
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
     public static boolean chestGeneration = true;
-    public static int sunShrineSpawnrate = 130;
-    public static int stonehengeSpawnrate = 15;
+    public static int sunShrineSpawnrate = 50;
+    public static int stonehengeSpawnrate = 10;
     public static boolean miniStructureGeneration = true;
     public static int villageSpawnrate = 16;
     public static int villageZombieSpawnrate = 10;
@@ -125,6 +127,8 @@ public class ConfigUA {
 	    public final ForgeConfigSpec.BooleanValue importModdedStructure;
 	    public final ForgeConfigSpec.BooleanValue importModdedMobs;
 	    public final ForgeConfigSpec.BooleanValue importModdedBiomes;
+	    public final ForgeConfigSpec.BooleanValue importAllModdedBiomes;
+	    public final ForgeConfigSpec.ConfigValue<String> blacklistedBiomeList;
         public final ForgeConfigSpec.DoubleValue xzTerrainModifier;
         public final ForgeConfigSpec.DoubleValue xzScaleModifier;
         public final ForgeConfigSpec.DoubleValue yTerrainModifier;
@@ -242,6 +246,21 @@ public class ConfigUA {
                     		+"Only works if other mod added the biome to the BiomeDictionary with the BiomeType of DESERT, WARM, COOL, or ICY type.")
                     .translation("ultraamplified.config.structure.importmoddedbiomes")
                     .define("importModdedBiomes", false);
+
+            		importAllModdedBiomes = builder
+                    .comment("\r\nAttempt to add all registered modded biomes into Ultra Amplified dimension or worldtype.\r\n"
+                    		+"You may want to turn up biome size to 4 or 5 as this may make biomes very crowded. Also overrides importModdedBiomes setting.")
+                    .translation("ultraamplified.config.structure.importmoddedbiomes")
+                    .define("importAllModdedBiomes", false);
+            		
+            		blacklistedBiomeList = builder
+                    .comment("\r\nBlacklist either modded mods or its specific biomes from being imported into Ultra Amplified dimension/worldtype.\r\n"
+                    		+"To blacklist a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
+                    		+"To blacklist a mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
+                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n"
+                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    .translation("ultraamplified.config.structure.blacklistedbiomelist")
+                    .define("blacklistedBiomeList", "");
             		
             builder.pop();
             
@@ -472,7 +491,7 @@ public class ConfigUA {
 	  				yMaximum = builder
             		.comment("\r\nMaxium height the terrain can generate up to.")
             		.translation("ultraamplified.config.structure.ymaximum")
-            		.defineInRange("yMaximum", 256, 100, 256);
+            		.defineInRange("yMaximum", 248, 100, 256);
 	  		        
 	  		        
 	  		        xzTerrainModifier = builder
@@ -804,6 +823,8 @@ public class ConfigUA {
     	importModdedStructure = SERVER.importModdedStructure.get();
     	importModdedMobs = SERVER.importModdedMobs.get();
     	importModdedBiomes = SERVER.importModdedBiomes.get();
+    	importAllModdedBiomes = SERVER.importAllModdedBiomes.get();
+    	blacklistedBiomeList = SERVER.blacklistedBiomeList.get();
 	    xzTerrainModifier = SERVER.xzTerrainModifier.get();
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();

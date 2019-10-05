@@ -14,10 +14,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     public SuperLongRavineCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49921_1_, int p_i49921_2_) {
@@ -30,9 +32,9 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
     protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
     
-    private static final Map<BlockState, BlockState> fillerMap = createMap();
+    private static Map<BlockState, BlockState> canReplaceMap = createMap();
 	
-	private static Map<BlockState, BlockState> createMap() 
+	private static final Map<BlockState, BlockState> createMap() 
 	{
         Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
         
@@ -43,7 +45,25 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
         
         return Collections.unmodifiableMap(result);
     }
+	
+    private static Map<Biome, BlockState> fillerBiomeMap;
 
+	/**
+	 * Have to make this map much later since the biomes needs to be initialized first and that's delayed a bit
+	 */
+	public void setFillerMap() {
+		if (fillerBiomeMap == null) {
+			fillerBiomeMap = new HashMap<Biome, BlockState>();
+
+			fillerBiomeMap.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
+	        fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState()); 
+	        fillerBiomeMap.put(BiomeInit.END, Blocks.END_STONE.getDefaultState()); 
+		}
+	}
 
     public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
         return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 850f;
@@ -66,6 +86,8 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
 
      private void func_202535_a(IChunk worldIn, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
         Random random = new Random(randomSeed);
+        setFillerMap();
+        
         float f = 1.0F;
 
         for(int i = 0; i < 256; ++i) {
@@ -132,7 +154,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                    if (d2 * d2 + d3 * d3 < 1.0D) {
 
                       blockpos$mutableblockpos.setPos(l1, 60, j2);
-                      fillerBlock = fillerMap.get(worldIn.getBiome(blockpos$mutableblockpos).getSurfaceBuilderConfig().getTop());
+                      fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
                    	  if (fillerBlock == null){
                    	 	fillerBlock = STONE; 
                    	  }
@@ -156,7 +178,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                             	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
                                    flag = true;
                                }
-                               else if (this.canCarveBlock(iblockstate, iblockstate1) || fillerMap.containsKey(iblockstate)) {
+                               else if (this.canCarveBlock(iblockstate, iblockstate1) || canReplaceMap.containsKey(iblockstate)) {
                                   if (k2 - 1 < 10) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
