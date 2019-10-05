@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-import org.apache.logging.log4j.Level;
-
 import com.mojang.datafixers.Dynamic;
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
