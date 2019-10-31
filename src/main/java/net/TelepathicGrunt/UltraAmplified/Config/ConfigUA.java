@@ -30,6 +30,7 @@ public class ConfigUA {
     public static boolean importModdedBiomes = false;
     public static boolean importAllModdedBiomes = false;
     public static String blacklistedBiomeList = "";
+    public static String blacklistedFeatureList = "";
     public static double xzTerrainModifier = 684.412D;
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
@@ -130,6 +131,7 @@ public class ConfigUA {
 	    public final ForgeConfigSpec.BooleanValue importModdedBiomes;
 	    public final ForgeConfigSpec.BooleanValue importAllModdedBiomes;
 	    public final ForgeConfigSpec.ConfigValue<String> blacklistedBiomeList;
+	    public final ForgeConfigSpec.ConfigValue<String> blacklistedFeatureList;
         public final ForgeConfigSpec.DoubleValue xzTerrainModifier;
         public final ForgeConfigSpec.DoubleValue xzScaleModifier;
         public final ForgeConfigSpec.DoubleValue yTerrainModifier;
@@ -256,14 +258,24 @@ public class ConfigUA {
                     .define("importAllModdedBiomes", false);
             		
             		blacklistedBiomeList = builder
-                    .comment("\r\nBlacklist either modded mods or its specific biomes from being imported into Ultra Amplified dimension/worldtype.\r\n"
-                    		+"To blacklist a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
-                    		+"To blacklist a mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
+                    .comment("\r\nBlacklist either all of a mod's biomes or its specific biomes from being imported into Ultra Amplified dimension/worldtype.\r\n"
+                    		+"To blacklist all of a mod's biomes, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
+                    		+"To blacklist a specific mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
                     		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n"
                     		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
                     .translation("ultraamplified.config.structure.blacklistedbiomelist")
                     .define("blacklistedBiomeList", "");
+
             		
+            		blacklistedFeatureList = builder
+                    .comment("\r\nBlacklist either all of a mod's features/structures or specific features/structures from being imported into Ultra Amplified dimension/worldtype.\r\n"
+                    		+"To blacklist all features/structures in a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
+                    		+"To blacklist a specific mod's feature/structure, type out the resourcelocation. Example: \"example_mod_id:wizard_tower\"\r\n"
+                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:wizard_tower, example_mod_id_2:*, example_mod_id_1:donut_tree\"\r\n"
+                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    .translation("ultraamplified.config.structure.blacklistedfeaturelist")
+                    .define("blacklistedFeatureList", "");
+
             builder.pop();
             
             builder.push("General Structure Options");
@@ -836,6 +848,7 @@ public class ConfigUA {
     	importModdedBiomes = SERVER.importModdedBiomes.get();
     	importAllModdedBiomes = SERVER.importAllModdedBiomes.get();
     	blacklistedBiomeList = SERVER.blacklistedBiomeList.get();
+    	blacklistedFeatureList = SERVER.blacklistedFeatureList.get();
 	    xzTerrainModifier = SERVER.xzTerrainModifier.get();
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();

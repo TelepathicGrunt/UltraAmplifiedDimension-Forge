@@ -59,7 +59,7 @@ public class BiomeLayerUA implements IC0Transformer
 		    noOcean = false;
 		    
 		    //grabs what the user entered.
-		    //is done as linked list so we can remove entries later on since Arrays.asList creates a fixed size list.
+		    //is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
 		    List<String> blacklistedMods = new ArrayList<String>();
 		    List<String> blacklistedResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedBiomeList.split(",")));
 		    for(int i = 0; i < blacklistedResourceLocations.size(); i++) {

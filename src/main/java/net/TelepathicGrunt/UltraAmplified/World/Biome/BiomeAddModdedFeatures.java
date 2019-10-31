@@ -1,6 +1,9 @@
 package net.telepathicgrunt.ultraamplified.world.biome;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
@@ -167,7 +170,9 @@ public class BiomeAddModdedFeatures {
 			Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN 
 	};
 
-	
+	private static List<String> blacklistedFeatureMods;
+    private static List<String> blacklistedFeatureResourceLocations;
+    
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents {
 
@@ -185,6 +190,23 @@ public class BiomeAddModdedFeatures {
 			// helps keep what gets imported into the UA biomes on a per world basis.
 			resetBiomesBackToDefault();
 
+			//SET UP FEATURE/STRUCTURE BLACKLIST
+			    //grabs what the user entered.
+			    //is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
+			    blacklistedFeatureMods = new ArrayList<String>();
+			    blacklistedFeatureResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedFeatureList.split(",")));
+			    for(int i = 0; i < blacklistedFeatureResourceLocations.size(); i++) {
+			    	blacklistedFeatureResourceLocations.set(i, blacklistedFeatureResourceLocations.get(i).trim());
+			    }
+			    
+			    
+			    //finds all strings that doesn't have a path and adds it to blacklistedFeatureMods as it's a mod's namespace
+			    for(String entry : blacklistedFeatureResourceLocations) {
+			    	if(entry.contains(":*")) {
+			    		blacklistedFeatureMods.add(entry.split(":")[0]);
+			    	}
+			    }
+			
 			// we have a list of vanilla biomes in the order to match the UA biome list in BiomeInit.
 			// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
 			for (int biomeIndex = 0; biomeIndex < vanillaBiomesToCheck.length; biomeIndex++) {
@@ -230,11 +252,16 @@ public class BiomeAddModdedFeatures {
 
 				Feature<?> insideFeature = insideConfig.feature.feature;
 				ResourceLocation rl = FeatureRegistry.getKey(insideFeature);
-				if (rl == null) {
+				if(rl == null) {
 					continue;
 				}
-
+				
+				//check blacklist
 				String namespace = rl.getNamespace();
+				if (rl == null || blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedFeatureList.contains(rl.toString())) {
+					continue;
+				}
+				
 
 				// add feature form of structures
 				// workaround due to some people registering structures under minecraft namespace
