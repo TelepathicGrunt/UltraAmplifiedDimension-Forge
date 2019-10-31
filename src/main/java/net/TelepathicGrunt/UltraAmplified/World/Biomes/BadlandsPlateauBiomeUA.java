@@ -31,6 +31,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
@@ -54,6 +55,7 @@ public class BadlandsPlateauBiomeUA extends BiomeUA {
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(FeatureUA.HANGING_RUINS, IFeatureConfig.NO_FEATURE_CONFIG, LEDGE_UNDERSIDE_MINI_FEATURE, new ChanceAndTypeConfig(1f, ChanceAndTypeConfig.Type.HANGING_RUINS)));
 		this.addStructureFeaturesUA();
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.COLUMN, new ColumnBlocksConfig(Blocks.TERRACOTTA.getDefaultState(), Blocks.TERRACOTTA.getDefaultState(), Blocks.STONE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(2, 70, 0, 220)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.RAMP, new ColumnBlocksConfig(Blocks.TERRACOTTA.getDefaultState(), Blocks.TERRACOTTA.getDefaultState(), Blocks.STONE.getDefaultState()), Placement.COUNT_RANGE, new CountRangeConfig(2, 70, 0, 220)));

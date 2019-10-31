@@ -72,6 +72,7 @@ public class DarkForestHillsBiomeUA extends BiomeUA {
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(FeatureUA.HANGING_RUINS, IFeatureConfig.NO_FEATURE_CONFIG, LEDGE_UNDERSIDE_MINI_FEATURE, new ChanceAndTypeConfig(1f, ChanceAndTypeConfig.Type.HANGING_RUINS)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(Feature.LAKE, new LakesConfig(Blocks.WATER.getDefaultState()), LAKE_PLACEMENT, new LakeCountRangeAndTypeConfig(4, LakeCountRangeAndTypeConfig.Type.WATER)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(Feature.LAKE, new LakesConfig(Blocks.LAVA.getDefaultState()), LAKE_PLACEMENT, new LakeCountRangeAndTypeConfig(80, LakeCountRangeAndTypeConfig.Type.LAVA)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(FeatureUA.SLIME_AND_ICE_LAKE, new LakesConfig(Blocks.SLIME_BLOCK.getDefaultState()), LAKE_PLACEMENT, new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME)));

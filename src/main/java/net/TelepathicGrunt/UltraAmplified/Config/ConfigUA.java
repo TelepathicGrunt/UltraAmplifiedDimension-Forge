@@ -46,6 +46,7 @@ public class ConfigUA {
     public static boolean chestGeneration = true;
     public static int sunShrineSpawnrate = 50;
     public static int stonehengeSpawnrate = 10;
+    public static int hangingRuinsSpawnrate = 10;
     public static boolean miniStructureGeneration = true;
     public static int villageSpawnrate = 16;
     public static int villageZombieSpawnrate = 10;
@@ -145,6 +146,7 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue chestGeneration;
 		public final ForgeConfigSpec.IntValue sunShrineSpawnrate;
 		public final ForgeConfigSpec.IntValue stonehengeSpawnrate;
+		public final ForgeConfigSpec.IntValue hangingRuinsSpawnrate;
 		public final ForgeConfigSpec.BooleanValue miniStructureGeneration;
 		public final ForgeConfigSpec.IntValue villageSpawnrate;
 		public final ForgeConfigSpec.IntValue villageZombieSpawnrate;
@@ -343,7 +345,16 @@ public class ConfigUA {
                     		 +"1 for Stonehenges spawning in most chunks and 1000 for very rare spawn.\r\n"
                     		 +"Spawns mainly in hills variant of biomes.")
                     .translation("ultraamplified.config.structure.stonehengespawnrate")
-                    .defineInRange("stonehengeSpawnrate", 15, 1, 1000);
+                    .defineInRange("stonehengeSpawnrate", 15, 1, 100);
+                    
+            		hangingRuinsSpawnrate = builder
+                            .comment("\r\nHow rare are Hanging Ruins.\r\n"
+                            		 +"100 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n"
+                            		 +"NOTE: this is backwards than other spawnrates.\r\n"
+                            		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n"
+                            		 +"Spawns in most biomes except for oceans and Ice Mountain Biomes.")
+                            .translation("ultraamplified.config.structure.hangingruinsspawnrate")
+                            .defineInRange("hangingRuinsSpawnrate", 45, 0, 100);
             		
             		
             		miniStructureGeneration = builder
@@ -841,6 +852,7 @@ public class ConfigUA {
     	chestGeneration = SERVER.chestGeneration.get();
     	sunShrineSpawnrate = SERVER.sunShrineSpawnrate.get();
     	stonehengeSpawnrate = SERVER.stonehengeSpawnrate.get();
+        hangingRuinsSpawnrate = SERVER.hangingRuinsSpawnrate.get();
     	miniStructureGeneration = SERVER.miniStructureGeneration.get();
     	villageSpawnrate = SERVER.villageSpawnrate.get();
     	villageZombieSpawnrate = SERVER.villageZombieSpawnrate.get();

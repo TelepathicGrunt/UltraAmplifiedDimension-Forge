@@ -11,6 +11,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 
 public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig> {
@@ -26,7 +27,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   //We have to read the config file here as placement is being found to have the config file be read in real time.
 	   switch(placementConfig.type) {
 		   case HANGING_RUINS:
-			   chance = 2f;
+			   chance = (int) (ConfigUA.hangingRuinsSpawnrate * placementConfig.chanceModifier);
 			   break;
 			   
 		   default:
@@ -34,7 +35,8 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 			   break;
 	   }
 	   
-	   if(random.nextFloat() <= 1.0F / chance) {
+	   //more logical to do chance like this as this feature does not need to have chances less than 1% while other features/structures do
+	   if(random.nextFloat() * 100 >= chance) {
 		   return Stream.empty();
 	   }
 	   

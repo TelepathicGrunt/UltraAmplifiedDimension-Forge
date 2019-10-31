@@ -29,7 +29,6 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 	}
 
 	
-	
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
 		//makes sure this ruins does not spawn too close to world height border.
@@ -49,7 +48,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 			}
 		}
 		
-		UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " "+position.getZ());
+		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " "+position.getZ());
 		
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
