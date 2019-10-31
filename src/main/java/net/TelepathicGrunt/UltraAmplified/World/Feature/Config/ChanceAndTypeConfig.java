@@ -17,7 +17,8 @@ public class ChanceAndTypeConfig implements IPlacementConfig {
 
 	public static enum Type {
 		SUNSHRINE, 
-		STONEHENGE;
+		STONEHENGE,
+		HANGING_RUINS;
 	}
 
 	// cannot fit boolean in

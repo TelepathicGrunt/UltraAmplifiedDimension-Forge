@@ -53,12 +53,12 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeCo
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AllSoulSandSurfaces;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtBottomOfRandomLayer;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtCenterSurfaceWithChance;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.AtBottomOfLedge;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.AtCenterSurfaceMiniFeature;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceBelowTopLayerWithExtra;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceRoofedForest;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceThroughWaterWithExtra;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceUnderTopLayerWithChance;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceUnderTopLedgeWithChance;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceWithChanceDesertWell;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllLiquidBottoms;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllLiquidSurfaces;
@@ -74,6 +74,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBasedWat
 import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBiasedEndIslandRange;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.LakePlacement;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.LapisPlacement;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.LedgeUndersideMiniFeature;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.PassthroughChest;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.RandomChanceUnderSurface;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.RandomPositionEvery5Height;
@@ -87,9 +88,9 @@ public class BiomeUA extends Biome {
 
     //set up custom position placements
 	public static final Placement<FrequencyConfig> RANDOM_POSITION_EVERY_5_HEIGHT = new RandomPositionEvery5Height(FrequencyConfig::deserialize);
-	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLayerWithChance(ChanceConfig::deserialize);
+	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLedgeWithChance(ChanceConfig::deserialize);
 	public static final Placement<ChanceConfig> RANDOM_CHANCE_UNDER_SURFACE = new RandomChanceUnderSurface(ChanceConfig::deserialize);
-	public static final Placement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfRandomLayer(CountRangeConfig::deserialize);
+	public static final Placement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfLedge(CountRangeConfig::deserialize);
 	public static final Placement<ChanceConfig> TWICE_SURFACE_WITH_CHANCE_UA = new TwiceSurfaceWithChance(ChanceConfig::deserialize);
 	public static final Placement<CountRangeConfig> LAVAFALL_RANGE = new HeightBasedLavafallsRange(CountRangeConfig::deserialize);
 	public static final Placement<CountRangeConfig> LAVAFALL_RANGE_2 = new HeightBasedLavafallsRange2(CountRangeConfig::deserialize);
@@ -102,7 +103,8 @@ public class BiomeUA extends Biome {
 	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA = new AtSurfaceBelowTopLayerWithExtra(AtSurfaceWithExtraConfig::deserialize);
 	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_THROUGH_WATER_WITH_EXTRA_UA = new AtSurfaceThroughWaterWithExtra(AtSurfaceWithExtraConfig::deserialize);
 	public static final Placement<AtSurfaceWithExtraConfig> ROOFED_TREE_UA = new AtSurfaceRoofedForest(AtSurfaceWithExtraConfig::deserialize);
-	public static final Placement<ChanceAndTypeConfig> AT_CENTER_SURFACE_WITH_CHANCE = new AtCenterSurfaceWithChance(ChanceAndTypeConfig::deserialize);
+	public static final Placement<ChanceAndTypeConfig> AT_CENTER_SURFACE_MINI_FEATURE = new AtCenterSurfaceMiniFeature(ChanceAndTypeConfig::deserialize);
+	public static final Placement<ChanceAndTypeConfig> LEDGE_UNDERSIDE_MINI_FEATURE = new LedgeUndersideMiniFeature(ChanceAndTypeConfig::deserialize);
     public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver(ProbabilityConfig::deserialize, 70);
     public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
     public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);

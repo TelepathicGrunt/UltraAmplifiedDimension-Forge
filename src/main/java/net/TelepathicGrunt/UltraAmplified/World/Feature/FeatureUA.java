@@ -58,6 +58,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> TINY_HAY_BALE = new HayBaleTinyPile(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> STONEHENGE = new Stonehenge(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SUN_SHRINE = new SunShrine(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> HANGING_RUINS = new HangingRuins(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> FOSSILS_UA = new Fossil(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
     public static Feature<IcebergConfig> ICEBERG_UA = new Iceberg(IcebergConfig::deserialize);
@@ -143,6 +144,7 @@ public class FeatureUA
         registerFeature(TINY_HAY_BALE, "hay_bale_tiny_pile_ua");
         registerFeature(STONEHENGE, "stonehenge_ua");
         registerFeature(SUN_SHRINE, "sun_shrine_ua");
+        registerFeature(HANGING_RUINS, "hanging_ruins_ua");
         registerFeature(FOSSILS_UA, "fossil_ua");
         registerFeature(SINGLE_BLOCK, "single_block_ua");
         registerFeature(ICEBERG_UA, "iceberg_ua");
