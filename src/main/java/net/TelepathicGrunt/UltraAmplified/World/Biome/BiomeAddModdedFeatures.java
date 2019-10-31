@@ -221,6 +221,11 @@ public class BiomeAddModdedFeatures {
 					break;
 				}
 				
+				//bug fix. If config is not decorated feature config somehow, ignore the feature.
+				if(!(feature.config instanceof DecoratedFeatureConfig)) {
+					break;
+				}
+				
 				DecoratedFeatureConfig insideConfig = (DecoratedFeatureConfig) feature.config;
 
 				Feature<?> insideFeature = insideConfig.feature.feature;
@@ -392,8 +397,13 @@ public class BiomeAddModdedFeatures {
 			for (Decoration decorationType : Decoration.values()) {
 				for (int featureIndex = uaBiome.getFeatures(decorationType).size() - 1; featureIndex >= 0; featureIndex--) {
 					
+					//bug fix. If config is not decorated feature config somehow, ignore the feature.
+					if(!(uaBiome.getFeatures(decorationType).get(featureIndex).config instanceof DecoratedFeatureConfig)) {
+						break;
+					}
+					
 					DecoratedFeatureConfig insideConfig = 
-							(DecoratedFeatureConfig) uaBiome.getFeatures(decorationType) .get(featureIndex).config;
+							(DecoratedFeatureConfig) uaBiome.getFeatures(decorationType).get(featureIndex).config;
 
 					Feature<?> insideFeature = insideConfig.feature.feature;
 					ResourceLocation rl = FeatureRegistry.getKey(insideFeature);
