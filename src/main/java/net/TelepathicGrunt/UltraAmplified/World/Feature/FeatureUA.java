@@ -219,7 +219,7 @@ public class FeatureUA
 
 	private static Structure<?> registerStructure(Structure<?> structure, String name) {
     	if(registry == null)
-            throw new NullPointerException("Feature Registry not set");
+            throw new NullPointerException("Feature Registry not set (Structure)");
 
 
     	structure.setRegistryName(UltraAmplified.MODID, name);

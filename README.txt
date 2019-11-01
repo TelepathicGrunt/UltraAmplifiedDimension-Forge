@@ -21,6 +21,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed a rare bug where importing features from other mods could cause a crash. Instead, problematic features will be ignored when importing.
 ·Added spawnrate config option for Hanging Ruins.
 ·Fixed maximum value for spawnrate option for Sun Shrines. It was stuck at 100 instead of 1000 due to a typo.  
+·Added option to blacklist certain mods' structures when importing structures. 
   
     Structures: 
 ·Added Hanging Ruins to all biomes except oceans and Ice Mountains biome. They spawn more often in Mountains biome and its variants. These features (not technically a structure) will spawn on the underside of floating ledges and can be seen by the faint light of Redstone Torches in them. Check them out!

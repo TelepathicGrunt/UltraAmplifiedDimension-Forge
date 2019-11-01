@@ -194,7 +194,7 @@ public class BiomeAddModdedFeatures {
 			    //grabs what the user entered.
 			    //is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
 			    blacklistedFeatureMods = new ArrayList<String>();
-			    blacklistedFeatureResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedFeatureList.split(",")));
+			    blacklistedFeatureResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedStructureList.split(",")));
 			    for(int i = 0; i < blacklistedFeatureResourceLocations.size(); i++) {
 			    	blacklistedFeatureResourceLocations.set(i, blacklistedFeatureResourceLocations.get(i).trim());
 			    }
@@ -255,17 +255,18 @@ public class BiomeAddModdedFeatures {
 				if(rl == null) {
 					continue;
 				}
-				
-				//check blacklist
 				String namespace = rl.getNamespace();
-				if (rl == null || blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedFeatureList.contains(rl.toString())) {
-					continue;
-				}
 				
-
+				
 				// add feature form of structures
 				// workaround due to some people registering structures under minecraft namespace
 				if (ConfigUA.importModdedStructure && insideFeature instanceof Structure) {
+
+					//check blacklist
+					if (blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedStructureList.contains(rl.toString())) {
+						continue;
+					}
+					
 					if (!listOfVanillaStructureFeatures.contains(insideFeature)) {
 						uaBiome.addFeature(decorationType, feature);
 					}
@@ -374,8 +375,12 @@ public class BiomeAddModdedFeatures {
 			if(uaBiome.structures.containsKey(structureEntry)) {
 				break;
 			}
-			
-//			String namespace = structureEntry.getKey().getRegistryName().getNamespace();
+
+			ResourceLocation rl = structureEntry.getKey().getRegistryName();
+			String namespace = rl.getNamespace();
+			if (blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedStructureList.contains(rl.toString())) {
+				continue;
+			}
 			
 			// workaround due to some people registering structures under minecraft namespace
 			if (ConfigUA.importModdedStructure && !listOfVanillaStructures.contains(structureEntry.getKey())) {
