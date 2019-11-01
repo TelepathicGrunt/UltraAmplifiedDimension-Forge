@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.Level;
+
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Block;
@@ -431,6 +433,9 @@ public class BiomeAddModdedFeatures {
 					
 					//bug fix. If config is not decorated feature config somehow, ignore the feature.
 					if(!(uaBiome.getFeatures(decorationType).get(featureIndex).config instanceof DecoratedFeatureConfig)) {
+						UltraAmplified.LOGGER.log(Level.INFO, uaBiome.getFeatures(decorationType).get(featureIndex).config.toString());
+						UltraAmplified.LOGGER.log(Level.INFO, uaBiome.getFeatures(decorationType).get(featureIndex).feature.toString());
+						UltraAmplified.LOGGER.log(Level.INFO, uaBiome.getFeatures(decorationType).get(featureIndex).toString());
 						break;
 					}
 					
