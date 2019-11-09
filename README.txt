@@ -17,6 +17,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
     (V.6.11.1 Changes) (1.14.4 Minecraft)
     
+    
+    Structures: 
+·Made Ravines and Cave Cavities more optimized so it should reduce generation time by a bit.
+
     Internal: 
 ·Changed this mod's version info displayed when in the mod tab in Forge to show the MC version as well. (1.14.4-6.11.1 instead of just 6.11.1)
   

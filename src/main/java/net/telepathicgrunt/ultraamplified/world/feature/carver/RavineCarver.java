@@ -133,54 +133,61 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
         double d1 = (double)(mainChunkZ * 16 + 8);
         if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
            int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
-           int j = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
+           int z = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
            int k = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 9);
            int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
            int i1 = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
            int j1 = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
-           if (i <= j && k <= l && i1 <= j1) {
+           if (i <= z && k <= l && i1 <= j1) {
               boolean flag = false;
               BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-              BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
-              BlockPos.MutableBlockPos blockpos$mutableblockpos2 = new BlockPos.MutableBlockPos();
+              BlockPos.MutableBlockPos blockpos$mutableblockposup = new BlockPos.MutableBlockPos();
+              BlockPos.MutableBlockPos blockpos$mutableblockposdown = new BlockPos.MutableBlockPos();
               
 
-             for(int k1 = i; k1 < j; ++k1) {
-                int l1 = k1 + mainChunkX * 16;
-                double d2 = ((double)l1 + 0.5D - xRange) / placementXZBound;
+             for(int k1 = i; k1 < z; ++k1) {
+                int x = k1 + mainChunkX * 16;
+                double d2 = ((double)x + 0.5D - xRange) / placementXZBound;
 
                 for(int i2 = i1; i2 < j1; ++i2) {
                    int j2 = i2 + mainChunkZ * 16;
                    double d3 = ((double)j2 + 0.5D - zRange) / placementXZBound;
                    if (d2 * d2 + d3 * d3 < 1.0D) {
 
-                      blockpos$mutableblockpos.setPos(l1, 60, j2);
+                      blockpos$mutableblockpos.setPos(x, 60, j2);
                       fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
                    	  if (fillerBlock == null){
                    	 	fillerBlock = STONE; 
                    	  }
                       
-                      for(int k2 = l; k2 > k; --k2) {
-                         double d4 = ((double)(k2 - 1) + 0.5D - yRange) / placementYBound;
-                         if ((d2 * d2 + d3 * d3) * (double)this.field_202536_i[k2 - 1] + d4 * d4 / 6.0D < 1.0D) {
-                            int l2 = k1 | i2 << 4 | k2 << 8;
+                      for(int y = l; y > k; --y) {
+                         double d4 = ((double)(y - 1) + 0.5D - yRange) / placementYBound;
+                         if ((d2 * d2 + d3 * d3) * (double)this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D) {
+                            int l2 = k1 | i2 << 4 | y << 8;
                             if (!mask.get(l2)) {
                                mask.set(l2);
-                               blockpos$mutableblockpos.setPos(l1, k2, j2);
+                               blockpos$mutableblockpos.setPos(x, y, z);
 
-                               BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
-                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
-                               BlockState iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
-                               
-                               if(!iblockstate1.getFluidState().isEmpty()) {
-                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
-                                   flag = true;
+                               BlockState currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+                               blockpos$mutableblockposup.setPos(blockpos$mutableblockpos).move(Direction.UP);
+                               blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
+                               BlockState aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
+
+							   if(y > 61) {
+								   //Creates the messy but cool plateau of stone on the ocean floor 
+								   //above this ravine to help players locate ravines when exploring
+								   //ocean biomes. Also helps to break up the blandness of ocean
+								   //floors.
+									
+	                               if(!aboveBlockstate.getFluidState().isEmpty()) {
+	                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+	                            	   worldIn.setBlockState(blockpos$mutableblockposup, fillerBlock, false);
+	                            	   worldIn.setBlockState(blockpos$mutableblockposdown, fillerBlock, false);
+	                                   flag = true;
+	                               }
                                }
-                               else if (this.canCarveBlock(iblockstate, iblockstate1) || canReplaceMap.containsKey(iblockstate)) {
-                                  if (k2 - 1 < 10) {
+                               else if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || canReplaceMap.containsKey(currentBlockstate)) {
+                                  if (y - 1 < 10) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
 	                                   boolean bordersFluid = false;

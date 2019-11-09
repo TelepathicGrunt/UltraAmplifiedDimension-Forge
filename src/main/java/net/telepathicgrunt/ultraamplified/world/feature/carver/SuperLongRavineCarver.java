@@ -140,46 +140,42 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
            if (i <= j && k <= l && i1 <= j1) {
               boolean flag = false;
               BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-              BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
-              BlockPos.MutableBlockPos blockpos$mutableblockpos2 = new BlockPos.MutableBlockPos();
+              BlockPos.MutableBlockPos blockpos$mutableblockposup = new BlockPos.MutableBlockPos();
+              BlockPos.MutableBlockPos blockpos$mutableblockposdown = new BlockPos.MutableBlockPos();
               
 
              for(int k1 = i; k1 < j; ++k1) {
-                int l1 = k1 + mainChunkX * 16;
-                double d2 = ((double)l1 + 0.5D - xRange) / placementXZBound;
+                int x = k1 + mainChunkX * 16;
+                double d2 = ((double)x + 0.5D - xRange) / placementXZBound;
 
                 for(int i2 = i1; i2 < j1; ++i2) {
-                   int j2 = i2 + mainChunkZ * 16;
-                   double d3 = ((double)j2 + 0.5D - zRange) / placementXZBound;
+                   int z = i2 + mainChunkZ * 16;
+                   double d3 = ((double)z + 0.5D - zRange) / placementXZBound;
                    if (d2 * d2 + d3 * d3 < 1.0D) {
 
-                      blockpos$mutableblockpos.setPos(l1, 60, j2);
+                      blockpos$mutableblockpos.setPos(x, 60, z);
                       fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
                    	  if (fillerBlock == null){
                    	 	fillerBlock = STONE; 
                    	  }
                       
-                      for(int k2 = l; k2 > k; --k2) {
-                         double d4 = ((double)(k2 - 1) + 0.5D - yRange) / placementYBound;
-                         if ((d2 * d2 + d3 * d3) * (double)this.field_202536_i[k2 - 1] + d4 * d4 / 6.0D < 1.0D) {
-                            int l2 = k1 | i2 << 4 | k2 << 8;
+                      for(int y = l; y > k; --y) {
+                         double d4 = ((double)(y - 1) + 0.5D - yRange) / placementYBound;
+                         if ((d2 * d2 + d3 * d3) * (double)this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D) {
+                            int l2 = k1 | i2 << 4 | y << 8;
                             if (!mask.get(l2)) {
                                mask.set(l2);
-                               blockpos$mutableblockpos.setPos(l1, k2, j2);
+                               blockpos$mutableblockpos.setPos(x, y, z);
 
-                               BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-                               blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
-                               blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
-                               BlockState iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
-                               
-                               if(!iblockstate1.getFluidState().isEmpty()) {
-                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
-                                   flag = true;
-                               }
-                               else if (this.canCarveBlock(iblockstate, iblockstate1) || canReplaceMap.containsKey(iblockstate)) {
-                                  if (k2 - 1 < 10) {
+                               BlockState currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+                               blockpos$mutableblockposup.setPos(blockpos$mutableblockpos).move(Direction.UP);
+                               blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
+                               BlockState aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
+
+                               if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || 
+                            		   canReplaceMap.containsKey(currentBlockstate)) {
+                            	   
+                                  if (y - 1 < 10) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
 
