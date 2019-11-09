@@ -272,16 +272,21 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
 										aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
 
-										if (!currentBlockstate.getFluidState().isEmpty()) {
-											//replaces underground lakes
-											worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
-										} else if (y >= 11 && !aboveBlockstate.getFluidState().isEmpty()) {
-											//if above block is liquid, make above, center, and below solid
-											//to replace the water ceiling of the cave.
-											worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
-											worldIn.setBlockState(blockpos$mutableblockposup, replacementBlock, false);
-											worldIn.setBlockState(blockpos$mutableblockposdown, replacementBlock, false);
-											flag = true;
+										
+										if(y > 61) {
+											//Creates the messy but cool plateau of stone on the ocean floor 
+											//above this cave to help players locate caves when exploring
+											//ocean biomes. Also helps to break up the blandness of ocean
+											//floors.
+											
+											if (!currentBlockstate.getFluidState().isEmpty()) {
+												worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
+											} else if (!aboveBlockstate.getFluidState().isEmpty()) {
+												worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
+												worldIn.setBlockState(blockpos$mutableblockposup, replacementBlock, false);
+												worldIn.setBlockState(blockpos$mutableblockposdown, replacementBlock, false);
+												flag = true;
+											}
 										} else if (this.canCarveBlock(currentBlockstate, aboveBlockstate)
 												|| canReplaceMap.containsKey(currentBlockstate)) {
 											
@@ -316,7 +321,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
 												
 												if (bordersFluid) {
-													//adds solid block to contain the water
+													//Adds solid block to contain the water from underwaterCaveCarver
+													//Otherwise, it becomes a mess.
 													worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
 												} else {
 													//carves the cave
