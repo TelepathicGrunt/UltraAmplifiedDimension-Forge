@@ -21,6 +21,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Structures: 
 ·Made Ravines and Cave Cavities more optimized so it should reduce generation time by a bit.
 ·Changed how fluids are contained in Ravines and Cave Cavities to fix several generation bugs with exposed walls of water and messy straight lines of floating blocks. However, might cause issues with structures/features that create water underground. Please let me know if this is the case. 
+·Underwater Caves exposed in Ravines and Cave Cavities no longer has any water exposed and may have patches of Grass Blocks. (They are still hollowed out tubes with water inside)
 
     Internal: 
 ·Changed this mod's version info displayed when in the mod tab in Forge to show the MC version as well. (1.14.4-6.11.1 instead of just 6.11.1)
