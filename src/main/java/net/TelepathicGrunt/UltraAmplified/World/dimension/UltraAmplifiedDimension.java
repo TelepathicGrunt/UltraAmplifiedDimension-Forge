@@ -107,7 +107,7 @@ public class UltraAmplifiedDimension {
             this.id = dimensionType.getId() + 1;
             this.name = DimensionType.getKey(dimensionType);
             this.dimension = dimensionType.getModType();
-            this.skyLight = dimensionType.func_218272_d();
+            this.skyLight = dimensionType.hasSkyLight();
         }
 
         S2CDimensionSync(int id, ResourceLocation name, ModDimension dimension, boolean skyLight) {

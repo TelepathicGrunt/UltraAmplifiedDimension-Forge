@@ -25,18 +25,17 @@ import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
-	private final float[] field_202536_i = new float[1024];
+	private final float[] ledgeWidthArrayYIndex = new float[1024];
 	protected long seed;
 	protected OctavesNoiseGenerator noiseGen;
-	protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
 	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
 	protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	protected static final BlockState WATER = Blocks.WATER.getDefaultState();
 	protected static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
 	protected static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
+	// Blocks that we can carve out.
 	private static final Map<BlockState, BlockState> canReplaceMap = createMap();
-
 	private static Map<BlockState, BlockState> createMap() {
 		Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
 		result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState());
@@ -46,15 +45,24 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		result.put(Blocks.LAVA.getDefaultState(), Blocks.LAVA.getDefaultState());
 		return Collections.unmodifiableMap(result);
 	}
-
-
+	
+	// Used to keep track of what block to use to fill in certain air/liquids
+	protected BlockState replacementBlock = Blocks.STONE.getDefaultState();
+	
+	// Associates what block to use when in which biome when setting the replacementBlock.
     private static Map<Biome, BlockState> fillerBiomeMap;
 	
+    
 	public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight) {
 		super(probabilityConfig, maximumHeight);
 		
 	}
 
+	
+	/**
+	 * Sets the internal seed for this carver after we get the world seed. 
+	 * (Based on Nether's surface builder code)
+	 */
 	public void setSeed(long seed) {
 		if (this.noiseGen == null) {
 			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
@@ -64,7 +72,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	}
 	
 	/**
-	 * Have to make this map much later since the biomes needs to be initialized first and that's delayed a bit
+	 * Have to make this map much later instead of in constructor since 
+	 * the biomes needs to be initialized first and that's delayed a bit
 	 */
 	public void setFillerMap() {
 		if (fillerBiomeMap == null) {
@@ -80,11 +89,14 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		}
 	}
 
-
+	/**
+	 * Checks whether the entire cave can spawn or not. (Not the individual parts)
+	 */
 	public boolean shouldCarve(Random randomIn, int chunkX, int chunkZ, ProbabilityConfig config) {
 		return randomIn.nextFloat() <= (float) (ConfigUA.caveCavitySpawnrate) / 1000f;
 	}
 
+	
 	public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX,
 			int originalZ, BitSet mask, ProbabilityConfig config) {
 
@@ -108,25 +120,29 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		setSeed(randomSeed);
 		setFillerMap();
 		Random random = new Random(randomSeed);
-		float f = 1.0F;
+		float ledgeWidth = 1.0F;
 
-		for (int i = 0; i < 256; ++i) {
-			if (i == 0 || random.nextInt(3) == 0) {
-				f = 1.0F + random.nextFloat() * 0.5F; // CONTROLS THE LEDGES' WIDTH! FINALLY FOUND WHAT THIS JUNK DOES
+		// CONTROLS THE LEDGES' WIDTH! FINALLY FOUND WHAT THIS JUNK DOES
+		for (int currentHeight = 0; currentHeight < 256; ++currentHeight) {
+			if (currentHeight == 0 || random.nextInt(3) == 0) {
+				ledgeWidth = 1.0F + random.nextFloat() * 0.5F; 
 			}
 
-			this.field_202536_i[i] = f;
+			this.ledgeWidthArrayYIndex[currentHeight] = ledgeWidth;
 		}
 
+		
 		float f4 = 0.0F;
 		float f1 = 0.0F;
 
-		for (int currentRoom = startIteration; currentRoom < maxIteration; ++currentRoom) {
+		//creates "rooms" which are giant sections of the cave. (cave is made up of many rooms)
+		for (int currentRoom = startIteration; currentRoom < maxIteration; ++currentRoom) 
+		{
 			double placementXZBound = 2D
 					+ (double) (MathHelper.sin((float) currentRoom * (float) Math.PI / (float) maxIteration)
 							* widthHeightBase);
 			double placementYBound = placementXZBound * heightMultiplier;
-			placementXZBound = placementXZBound * 23D; // thickness
+			placementXZBound = placementXZBound * 23D; // thickness of the "room" itself
 			placementYBound = placementYBound * 2.2D;
 			float f2 = MathHelper.cos(xzCosNoise);
 			randomBlockX += (double) (MathHelper.cos(xzNoise2) * f2);
@@ -138,6 +154,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 			f4 = f4 * 0.5F;
 			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 1.5F;
 			f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 3.0F;
+			
+			//No idea what this is for yet
 			if (!this.func_222702_a(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration,
 					widthHeightBase)) {
 				return;
@@ -156,8 +174,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		
 		double xPos = (double) (mainChunkX * 16 + 8);
 		double zPos = (double) (mainChunkZ * 16 + 8);
-		BlockState iblockstate;
-		BlockState iblockstate1;
+		BlockState currentBlockstate;
+		BlockState aboveBlockstate;
 		double targetedHeight = 14;
 
 		if (!(xRange < xPos - 16.0D - placementXZBound * 2.0D) && !(zRange < zPos - 16.0D - placementXZBound * 2.0D)
@@ -172,8 +190,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 			if (xMin <= xMax && yMin <= yMax && zMin <= zMax) {
 				boolean flag = false;
 				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-				BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
-				BlockPos.MutableBlockPos blockpos$mutableblockpos2 = new BlockPos.MutableBlockPos();
+				BlockPos.MutableBlockPos blockpos$mutableblockposup = new BlockPos.MutableBlockPos();
+				BlockPos.MutableBlockPos blockpos$mutableblockposdown = new BlockPos.MutableBlockPos();
 
 				for (int smallX = xMin; smallX < xMax; ++smallX) {
 					int x = smallX + mainChunkX * 16;
@@ -190,9 +208,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 							}
 
 							blockpos$mutableblockpos.setPos(x, 60, z);
-							fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
-							if (fillerBlock == null) {
-								fillerBlock = STONE;
+							replacementBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
+							if (replacementBlock == null) {
+								replacementBlock = STONE;
 							}
 
 							for (int y = yMaxSum; y > yMin; y--) {
@@ -211,60 +229,70 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									yModified = 0.00001D;
 								}
 
-								// creates pillars that are widen at bottom.
+								// Creates pillars that are widen at bottom.
+								//
 								// Perlin field creates the main body for pillar by stepping slowly through x
 								// and z and extremely slowly through y.
-								// then subtracted out target height by yModified to flatten bottom of pillar to
+								// Then subtracted modified target height to flatten bottom of pillar to
 								// make a path through lava.
-								// add a random value to add some noise to the pillar.
-								// and set the greater than value to be very low so most of the cave gets carved
+								// Next, adds a random value to add some noise to the pillar.
+								// And lastly, sets the greater than value to be very low so most of the cave gets carved
 								// out.
 								boolean flagPillars = this.noiseGen.func_205563_a((double) x * 0.2D, (double) z * 0.2D,
 										y * 0.035D) - (targetedHeight / yModified) + random.nextDouble() * 0.1D > -3.5D;
 
-								// creates large stalagmites that cannot reach floor of cavern
-								// perlin field creates the main stalagmite shape and placement by stepping
+								// Creates large stalagmites that cannot reach floor of cavern.
+								//
+								// Perlin field creates the main stalagmite shape and placement by stepping
 								// though x and z pretty fast and through y very slowly.
 								// Then adds 400/y so that as the y value gets lower, the more area gets carved
 								// which sets the limit on how far down the stalagmites can go.
-								// add a random value to add some noise to the pillar.
-								// and set the greater than value to be high so more stalagmites can be made
+								// Next, add a random value to add some noise to the pillar.
+								// And lastly, sets the greater than value to be high so more stalagmites can be made
 								// while the 400/y has already carved out the rest of the cave.
 								boolean flagStalagmites = this.noiseGen.func_205563_a((double) x * 0.63125D,
 										(double) z * 0.63125D, y * 0.04D) + (360 / (y))
 										+ random.nextDouble() * 0.1D > 2.8D;
 
-								// where the pillar flag and stalagmite flag both flagged this block to be
+								// Where the pillar flag and stalagmite flag both flagged this block to be
 								// carved, begin carving.
 								// Thus the pillar and stalagmite is what is left after carving.
 								if ((flagPillars && flagStalagmites)
-										&& (d2 * d2 + d3 * d3) * (double) this.field_202536_i[y - 1]
+										&& (d2 * d2 + d3 * d3) * (double) this.ledgeWidthArrayYIndex[y - 1]
 												+ d4 * d4 / 6.0D < 1.0D) {
+									
+									// Initiate confused me here. 
 									int l2 = smallX | smallZ << 4 | y << 8;
 									if (!mask.get(l2)) {
 										mask.set(l2);
 										blockpos$mutableblockpos.setPos(x, y, z);
 
-										iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-										blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.UP);
-										blockpos$mutableblockpos2.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
-										iblockstate1 = worldIn.getBlockState(blockpos$mutableblockpos1);
+										currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+										blockpos$mutableblockposup.setPos(blockpos$mutableblockpos).move(Direction.UP);
+										blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
+										aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
 
-										if (!iblockstate.getFluidState().isEmpty()) {
-											worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-										} else if (y >= 11 && !iblockstate1.getFluidState().isEmpty()) {
-											worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-											worldIn.setBlockState(blockpos$mutableblockpos1, fillerBlock, false);
-											worldIn.setBlockState(blockpos$mutableblockpos2, fillerBlock, false);
+										if (!currentBlockstate.getFluidState().isEmpty()) {
+											//replaces underground lakes
+											worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
+										} else if (y >= 11 && !aboveBlockstate.getFluidState().isEmpty()) {
+											//if above block is liquid, make above, center, and below solid
+											//to replace the water ceiling of the cave.
+											worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
+											worldIn.setBlockState(blockpos$mutableblockposup, replacementBlock, false);
+											worldIn.setBlockState(blockpos$mutableblockposdown, replacementBlock, false);
 											flag = true;
-										} else if (this.canCarveBlock(iblockstate, iblockstate1)
-												|| canReplaceMap.containsKey(iblockstate)) {
+										} else if (this.canCarveBlock(currentBlockstate, aboveBlockstate)
+												|| canReplaceMap.containsKey(currentBlockstate)) {
+											
 											if (y < 11) {
 												worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
 											} else {
 
 												boolean bordersFluid = false;
 
+												//cannot iterate through all values here
+												//because of special behavior for down
 												for (Direction direction : Direction.Plane.HORIZONTAL) {
 													if (!worldIn
 															.getBlockState(blockpos$mutableblockpos.offset(direction))
@@ -273,19 +301,25 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 													}
 												}
 
+												//have to do this one separately so the lava floor does not
+												//trigger the bordersFluid
 												if (y != 11 && !worldIn.getBlockState(blockpos$mutableblockpos.down())
 														.getFluidState().isEmpty()) {
 													bordersFluid = true;
 												}
 
+												//checks above afterwards
 												if (!worldIn.getBlockState(blockpos$mutableblockpos.up())
 														.getFluidState().isEmpty()) {
 													bordersFluid = true;
 												}
 
+												
 												if (bordersFluid) {
-													worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+													//adds solid block to contain the water
+													worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
 												} else {
+													//carves the cave
 													worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
 												}
 											}
@@ -308,8 +342,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		}
 	}
 
-	// not used i believe for our class
+	// 
 	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_) {
-		return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double) this.field_202536_i[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
+		return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double) this.ledgeWidthArrayYIndex[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
 	}
 }
