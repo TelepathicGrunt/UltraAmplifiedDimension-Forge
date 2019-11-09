@@ -78,99 +78,100 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
             		blockpos$mutableblockpos.setPos(pos.getX() + x, 0, pos.getZ() + z);
                   	currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
                   	
-                  	//move down until we hit a non-air block
-            		 while(currentblock.getMaterial() == Material.AIR && y > 0) 
+                  	//move down until we hit a liquid block
+            		 while(currentblock.getFluidState().isEmpty() && y > 10) 
             		 {
                  		y--;
                  		currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
                  	 }
+            		 if(y == 10) {
+            			 continue;
+            		 }
             		 
             		 //y value is now fully set for rest of code
              		 blockpos$mutableblockpos.setPos(pos.getX() + x, y, pos.getZ() + z);
             		 
                  	
-            		 //checks to see if we are at a water block
-                 	if(!currentblock.getFluidState().isEmpty()) {
-                 		notContainedFlag = false;
-         	            
-         	            /*
-         	            //must be solid all around even diagonally
-         	            for(int x2 = -1; x2 < 2; x2++) {
-         	            	for(int z2 = -1; z2 < 2; z2++) {
-         	                	
-         	            		material = worldIn.getBlockState(blockpos$mutableblockpos.west(x2).north(z2)).getMaterial();
-         	            		
-         	            		if(!material.isSolid() &&
-         	                        material != Material.WATER ) 
-         	                   	{
-         	                   		notContainedFlag = true;
-         	                   	}
-         	            	}
-         	            }
-         	            */
-         	            
-                     
-    	     	        //Adjacent blocks must be solid    
-    	                 for (Direction face : Direction.Plane.HORIZONTAL) {
-    	
-    	                 	currentblock = worldIn.getBlockState(blockpos$mutableblockpos.offset(face));
-    	                 	
-    	                 	//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
-    	                 	if(currentblock != ICE && !currentblock.isSolid() && currentblock.getFluidState().isEmpty()) 
-    	                 	{
-    	                 		notContainedFlag = true;
-    	                 	}
-    	                 }
-    	                 
-         	           if (notContainedFlag)
-     	               {
-         	        	   if(y < 256) {
-         	        		   
-         	        		   blockAbove = worldIn.getBlockState(blockpos$mutableblockpos.up());
-         	        		   
-            	        	   
-            	        	   if(blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
-            	        		   
-            	        		   //if above is solid or water, place second config block
-                	        	   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getUnder(), 2);
-            	        	   }
-            	        	   
-            	        	   
-            	        	   //place first config block if no solid block above and below
-            	        	   else{
-            	        		   //if config top block is dead coral, randomly chooses any dead coral block to place
-            	        		   if(useCoralTop) {
-            	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
-            	        		   }else {
-            	        			   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getTop(), 2);
-            	        		   }
-            	        	   }
-         	        	   }
-         	        	   
-        	        	   //place first config block if too high
-         	        	   //if config top block is dead coral, randomly chooses any dead coral block to place
-         	        	   else if(useCoralTop) {
-    	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
-    	        		   }else {
-    	        			   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getTop(), 2);
-    	        		   }
-     	               }
-         	           else {
-         	        	   //water block is contained 
-         	        	   
+             		notContainedFlag = false;
+     	            
+     	            /*
+     	            //must be solid all around even diagonally
+     	            for(int x2 = -1; x2 < 2; x2++) {
+     	            	for(int z2 = -1; z2 < 2; z2++) {
+     	                	
+     	            		material = worldIn.getBlockState(blockpos$mutableblockpos.west(x2).north(z2)).getMaterial();
+     	            		
+     	            		if(!material.isSolid() &&
+     	                        material != Material.WATER ) 
+     	                   	{
+     	                   		notContainedFlag = true;
+     	                   	}
+     	            	}
+     	            }
+     	            */
+     	            
+                 
+	     	        //Adjacent blocks must be solid    
+	                 for (Direction face : Direction.Plane.HORIZONTAL) {
+	
+	                 	currentblock = worldIn.getBlockState(blockpos$mutableblockpos.offset(face));
+	                 	
+	                 	//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
+	                 	if(currentblock != ICE && !currentblock.isSolid() && currentblock.getFluidState().isEmpty()) 
+	                 	{
+	                 		notContainedFlag = true;
+	                 	}
+	                 }
+	                 
+     	           if (notContainedFlag)
+ 	               {
+     	        	   if(y < 256) {
+     	        		   
      	        		   blockAbove = worldIn.getBlockState(blockpos$mutableblockpos.up());
-      	        		   
-	      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
-     	        		   if(blockAbove == oceanBiome.getSurfaceBuilderConfig().getUnder()) {
-     	        			   if(useCoralBottom) {
-         	        			  worldIn.setBlockState(blockpos$mutableblockpos.up(), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
-         	        		   }
-         	        		   else{
-    	      	        		   worldIn.setBlockState(blockpos$mutableblockpos.up(), ((SurfaceBuilderConfig) oceanBiome.getSurfaceBuilderConfig()).getUnderWaterMaterial(), 2);
-    	      	        	   }
+     	        		   
+        	        	   
+        	        	   if(blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
+        	        		   
+        	        		   //if above is solid or water, place second config block
+            	        	   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getUnder(), 2);
+        	        	   }
+        	        	   
+        	        	   
+        	        	   //place first config block if no solid block above and below
+        	        	   else{
+        	        		   //if config top block is dead coral, randomly chooses any dead coral block to place
+        	        		   if(useCoralTop) {
+        	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+        	        		   }else {
+        	        			   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getTop(), 2);
+        	        		   }
+        	        	   }
+     	        	   }
+     	        	   
+    	        	   //place first config block if too high
+     	        	   //if config top block is dead coral, randomly chooses any dead coral block to place
+     	        	   else if(useCoralTop) {
+	        			   worldIn.setBlockState(blockpos$mutableblockpos, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+	        		   }else {
+	        			   worldIn.setBlockState(blockpos$mutableblockpos, oceanBiome.getSurfaceBuilderConfig().getTop(), 2);
+	        		   }
+ 	               }
+     	           else {
+     	        	   //water block is contained 
+     	        	   
+ 	        		   blockAbove = worldIn.getBlockState(blockpos$mutableblockpos.up());
+  	        		   
+      	        	   //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
+ 	        		   if(blockAbove == oceanBiome.getSurfaceBuilderConfig().getUnder()) {
+ 	        			   if(useCoralBottom) {
+     	        			  worldIn.setBlockState(blockpos$mutableblockpos.up(), DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+     	        		   }
+     	        		   else{
+	      	        		   worldIn.setBlockState(blockpos$mutableblockpos.up(), ((SurfaceBuilderConfig) oceanBiome.getSurfaceBuilderConfig()).getUnderWaterMaterial(), 2);
 	      	        	   }
-         	           }
-                 	}
+      	        	   }
+     	           }
+                 	
                  }
               }
          }

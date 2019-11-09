@@ -64,7 +64,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 		for (int x = -7; x < 9; ++x) {
 			for (int z = -7; z < 9; ++z) {
 
-				for (int y = 61; y > 11; y--) {
+				for (int y = 61; y >= 10; y--) {
 
 					blockpos$mutableblockpos.setPos(pos.getX() + x, 0, pos.getZ() + z);
 					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
@@ -73,6 +73,11 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					while (currentblock != Blocks.CAVE_AIR.getDefaultState() && y > 11) {
 						y--;
 						currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
+					}
+					
+					//checks one last time at y = 11 to see if we should quit now
+					if(y <= 11 && currentblock != Blocks.CAVE_AIR.getDefaultState()) {
+						continue;
 					}
 
 					// y value is now fully set for rest of code
@@ -95,7 +100,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					}
 
 					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.down());
-					if (blockpos$mutableblockpos.down().getY() != 11 && !currentblock.getFluidState().isEmpty()) {
+					if (blockpos$mutableblockpos.down().getY() > 10 && !currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 

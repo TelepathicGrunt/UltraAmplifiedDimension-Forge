@@ -38,7 +38,6 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddOceansLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddSunflowerPlainsLayerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeDebugLayer;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
@@ -115,20 +114,20 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 
 
       //generates the main biome layout
-      IAreaFactory<T>lvt_8_1_ = new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1);
-      //IAreaFactory<T>lvt_8_1_ = new BiomeLayerUA().apply(contextFactory.apply(200L), areaFactory1);
+      //IAreaFactory<T>lvt_8_1_ = new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1);
+      IAreaFactory<T>lvt_8_1_ = new BiomeLayerUA().apply(contextFactory.apply(200L), areaFactory1);
 
 
-//      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
-//
-//      //creates biomes that border incompatible biomes
-//      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-//
-//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
-//
-//      //generates the hills and M variants/patches of biomes
-//      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-//      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
+
+      //creates biomes that border incompatible biomes
+      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+
+      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
+
+      //generates the hills and M variants/patches of biomes
+      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
 
 
       for(int k = 0; k < biomeSize; ++k) {
