@@ -288,52 +288,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										if (y < 11) {
 											worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
 										} else {
-
-											boolean bordersFluid = false;
 											
-											//cannot iterate through all values here
-											//because of special behavior for down
-											for (Direction direction : Direction.Plane.HORIZONTAL) {
-												
-												//Need to skip checking outside the chunk border due to
-												//getFluidState wrapping around from -1 to 15 and 16 to 0
-												//which means it would be checking fluidstate on other side
-												//of the chunk.
-												int xInChunk = (blockpos$mutableblockpos.getX() & 15) + direction.getXOffset();
-												int zInChunk = (blockpos$mutableblockpos.getZ() & 15) + direction.getZOffset();
-												if(xInChunk > 15 || xInChunk < 0 || zInChunk > 15 || zInChunk < 0) {
-													continue;
-												}
-												
-												if (!worldIn
-														.getFluidState(blockpos$mutableblockpos.offset(direction))
-														.isEmpty()) {
-													bordersFluid = true;
-												}
-											}
-
-											//have to do this one separately so the lava floor does not
-											//trigger the bordersFluid
-											if (y != 11 && !worldIn.getBlockState(blockpos$mutableblockpos.down())
-													.getFluidState().isEmpty()) {
-												bordersFluid = true;
-											}
-
-											//checks above afterwards
-											if (!worldIn.getBlockState(blockpos$mutableblockpos.up())
-													.getFluidState().isEmpty()) {
-												bordersFluid = true;
-											}
-
-											
-											if (bordersFluid) {
-												//Adds solid block to contain the water from underwaterCaveCarver
-												//Otherwise, it becomes a mess.
-												worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, false);
-											} else {
-												//carves the cave
-												worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
-											}
+											//carves the cave
+											worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
 										}
 
 										flag = true;

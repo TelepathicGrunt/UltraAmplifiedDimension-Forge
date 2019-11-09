@@ -178,32 +178,8 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                                   if (y - 1 < 10) {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
-
-	                                   boolean bordersFluid = false;
-	               	            	   
-	               	                   //Does not check down so that it can expose the Underwater Cave's water 
-	               	                   //to provide an entrance to enter it
-	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
-	               	                	    if(!worldIn.getFluidState(blockpos$mutableblockpos.offset(direction)).isEmpty()) {
-	               	                	    	bordersFluid = true;
-	               	                	    }
-	               	                   }
-	               	                   
-	               	                   if(!worldIn.getBlockState(blockpos$mutableblockpos.up()).getFluidState().isEmpty()) {
-	               	                	   bordersFluid = true;
-	               	                   }
-	               	                   
-	               	                   
-	               	            	   
-	               	                   if(bordersFluid) {
-										   //Adds solid block to contain the water from underwaterCaveCarver
-										   //Otherwise, it becomes a mess.
-	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-	               	                   }else {
-	               	                	   //carves the ravine
-	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
-	               	                   }
-                                	  
+               	                	   //carves the ravine
+               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
                                   }
 
                                   flag = true;

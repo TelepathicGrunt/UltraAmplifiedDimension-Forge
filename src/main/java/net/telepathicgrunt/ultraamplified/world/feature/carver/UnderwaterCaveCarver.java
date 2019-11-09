@@ -100,25 +100,9 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 	               return false;
 	            } else {
 
-	               mutableBlockPosIn.setPos(xStart, y, zStart);
-            	   boolean bordersAir = false;
-            	   
-                   for(Direction direction : Direction.Plane.HORIZONTAL) {
-                	    if(chunkIn.getBlockState(mutableBlockPosIn.offset(direction)).getMaterial() == Material.AIR) {
-                	    	bordersAir = true;
-                	    }
-                   }
+	              mutableBlockPosIn.setPos(xStart, y, zStart);
+                  chunkIn.setBlockState(mutableBlockPosIn, WATER.getBlockState(), false);
                    
-                   if(chunkIn.getBlockState(mutableBlockPosIn.down()).getMaterial() == Material.AIR) {
-           	    		bordersAir = true;
-                   }
-            	   
-                   if(bordersAir) {
-	                   chunkIn.setBlockState(mutableBlockPosIn, fillerBlock, false);
-                   }else {
- 	                  chunkIn.setBlockState(mutableBlockPosIn, WATER.getBlockState(), false);
-                   }
-            	   
                   return true;
 	            }
 	         }
