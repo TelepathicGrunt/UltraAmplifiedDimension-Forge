@@ -15,6 +15,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.11.1 Changes) (1.14.4 Minecraft)
+    
+    Internal: 
+·Changed the version info displayed when in the mod tab in Forge to show the MC version as well. (1.14.4-6.11.1 instead of just 6.11.1)
+  
+       
     (V.6.11.0 Changes) (1.14.4 Minecraft)
              
     Config: 
