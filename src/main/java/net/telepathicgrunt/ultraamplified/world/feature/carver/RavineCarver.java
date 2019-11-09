@@ -173,7 +173,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                                blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
                                BlockState aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
 
-							   if(y > 61) {
+							  if(y > 61) {
 								   //Creates the messy but cool plateau of stone on the ocean floor 
 								   //above this ravine to help players locate ravines when exploring
 								   //ocean biomes. Also helps to break up the blandness of ocean
@@ -191,7 +191,10 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                                      worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
                                   } else {
 	                                   boolean bordersFluid = false;
-	               	            	   
+
+	               	                   
+	               	                   //Does not check down so that it can expose the Underwater Cave's water 
+	               	                   //to provide an entrance to enter it
 	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
 	               	                	    if(!worldIn.getBlockState(blockpos$mutableblockpos.offset(direction)).getFluidState().isEmpty()) {
 	               	                	    	bordersFluid = true;
@@ -201,10 +204,14 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 	               	                   if(!worldIn.getBlockState(blockpos$mutableblockpos.up()).getFluidState().isEmpty()) {
 	               	                	   bordersFluid = true;
 	               	                   }
+	               	                   
 	               	            	   
 	               	                   if(bordersFluid) {
+										   //Adds solid block to contain the water from underwaterCaveCarver
+										   //Otherwise, it becomes a mess.
 	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
 	               	                   }else {
+	               	                	   //carves the ravine
 	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
 	               	                   }
                                   }

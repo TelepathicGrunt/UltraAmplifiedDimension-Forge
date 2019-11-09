@@ -181,6 +181,8 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
 
 	                                   boolean bordersFluid = false;
 	               	            	   
+	               	                   //Does not check down so that it can expose the Underwater Cave's water 
+	               	                   //to provide an entrance to enter it
 	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
 	               	                	    if(!worldIn.getBlockState(blockpos$mutableblockpos.offset(direction)).getFluidState().isEmpty()) {
 	               	                	    	bordersFluid = true;
@@ -190,10 +192,15 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
 	               	                   if(!worldIn.getBlockState(blockpos$mutableblockpos.up()).getFluidState().isEmpty()) {
 	               	                	   bordersFluid = true;
 	               	                   }
+	               	                   
+	               	                   
 	               	            	   
 	               	                   if(bordersFluid) {
+										   //Adds solid block to contain the water from underwaterCaveCarver
+										   //Otherwise, it becomes a mess.
 	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
 	               	                   }else {
+	               	                	   //carves the ravine
 	               	                	   worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
 	               	                   }
                                 	  
