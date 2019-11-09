@@ -194,7 +194,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 	               	                   //Does not check down so that it can expose the Underwater Cave's water 
 	               	                   //to provide an entrance to enter it
 	               	                   for(Direction direction : Direction.Plane.HORIZONTAL) {
-	               	                	    if(!worldIn.getBlockState(blockpos$mutableblockpos.offset(direction)).getFluidState().isEmpty()) {
+	               	                	    if(!worldIn.getFluidState(blockpos$mutableblockpos.offset(direction)).isEmpty()) {
 	               	                	    	bordersFluid = true;
 	               	                	    }
 	               	                   }
