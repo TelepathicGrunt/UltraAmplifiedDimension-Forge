@@ -41,11 +41,11 @@ import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.OceanSurfac
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.PlateauSurfaceBuilder;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.SandSurfaceBuilder;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.ShatteredSavannaSurfaceBuilderUA;
-import net.telepathicgrunt.ultraamplified.world.feature.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
-import net.telepathicgrunt.ultraamplified.world.feature.RavineCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.SuperLongRavineCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.UnderwaterCaveCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
