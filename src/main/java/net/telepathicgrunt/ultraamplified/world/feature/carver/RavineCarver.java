@@ -235,8 +235,12 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
     }
      
 
-     //not used i believe for our class
+ 	/**
+ 	 * MC doesn't seem to do anything with the returned value in the end. Strange.
+ 	 * I wonder why.
+ 	 */
 	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_) {
-	    return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double)this.field_202536_i[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
+	    return true;
+		//return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double)this.field_202536_i[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
 	}
 }
