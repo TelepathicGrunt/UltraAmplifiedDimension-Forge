@@ -177,10 +177,13 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		BlockState currentBlockstate;
 		BlockState aboveBlockstate;
 		double targetedHeight = 14;
+		double multiplier = 2.0D;
 
-		if (!(xRange < xPos - 16.0D - placementXZBound * 2.0D) && !(zRange < zPos - 16.0D - placementXZBound * 2.0D)
-				&& !(xRange > xPos + 16.0D + placementXZBound * 2.0D)
-				&& !(zRange > zPos + 16.0D + placementXZBound * 2.0D)) {
+		if (!(xRange < xPos - 16.0D - placementXZBound * multiplier) 
+			&& !(zRange < zPos - 16.0D - placementXZBound * multiplier)
+			&& !(xRange > xPos + 16.0D + placementXZBound * multiplier)
+			&& !(zRange > zPos + 16.0D + placementXZBound * multiplier)) {
+			
 			int xMin = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
 			int xMax = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
 			int yMin = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 5);
@@ -195,12 +198,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
 				for (int smallX = xMin; smallX < xMax; ++smallX) {
 					int x = smallX + mainChunkX * 16;
-					double d2 = ((double) x + 0.5D - xRange) / placementXZBound;
+					double xModified = ((double) x + 0.5D - xRange) / placementXZBound;
 
 					for (int smallZ = zMin; smallZ < zMax; ++smallZ) {
 						int z = smallZ + mainChunkZ * 16;
-						double d3 = ((double) z + 0.5D - zRange) / placementXZBound;
-						if (d2 * d2 + d3 * d3 < 1.0D) {
+						double zModified = ((double) z + 0.5D - zRange) / placementXZBound;
+						if (xModified * xModified + zModified * zModified < 1.0D) {
 							int yMaxSum = (int) (yMax - ((1 + random.nextFloat()) * random.nextFloat() * 20));
 
 							if (yMaxSum < yMin) {
@@ -258,7 +261,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								// carved, begin carving.
 								// Thus the pillar and stalagmite is what is left after carving.
 								if ((flagPillars && flagStalagmites)
-										&& (d2 * d2 + d3 * d3) * (double) this.ledgeWidthArrayYIndex[y - 1]
+										&& (xModified * xModified + zModified * zModified) * (double) this.ledgeWidthArrayYIndex[y - 1]
 												+ d4 * d4 / 6.0D < 1.0D) {
 									
 									blockpos$mutableblockpos.setPos(x, y, z);
