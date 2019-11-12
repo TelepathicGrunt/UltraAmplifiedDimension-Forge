@@ -69,13 +69,13 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
 
 					// move down until we hit an air block
-					while (currentblock != Blocks.CAVE_AIR.getDefaultState() && y > 11) {
+					while (currentblock != Blocks.AIR.getDefaultState() && y > 11) {
 						y--;
 						currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
 					}
 					
 					//checks one last time at y = 11 to see if we should quit now
-					if(y <= 11 && currentblock != Blocks.CAVE_AIR.getDefaultState()) {
+					if(y <= 11 && currentblock != Blocks.AIR.getDefaultState()) {
 						continue;
 					}
 

@@ -293,7 +293,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										} else {
 											
 											//carves the cave
-											worldIn.setBlockState(blockpos$mutableblockpos, CAVE_AIR.getBlockState(), false);
+											worldIn.setBlockState(blockpos$mutableblockpos, AIR.getBlockState(), false);
 										}
 
 										flag = true;
