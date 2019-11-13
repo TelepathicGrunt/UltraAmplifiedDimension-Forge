@@ -142,9 +142,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 					+ (double) (MathHelper.sin((float) currentRoom * (float) Math.PI / (float) maxIteration)
 							* widthHeightBase);
 			double placementYBound = placementXZBound * heightMultiplier;
-			placementXZBound = placementXZBound * 23D; // thickness of the "room" itself
+			placementXZBound = placementXZBound * 33D; // thickness of the "room" itself
 			placementYBound = placementYBound * 2.2D;
-			float f2 = MathHelper.cos(xzCosNoise);
+			float f2 = MathHelper.cos(xzCosNoise)*0.05f;
 			randomBlockX += (double) (MathHelper.cos(xzNoise2) * f2);
 			randomBlockZ += (double) (MathHelper.sin(xzNoise2) * f2);
 			xzCosNoise = xzCosNoise * 0.5F;
@@ -152,8 +152,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 			xzNoise2 += f4 * 0.05F;
 			f1 = f1 * 0.8F;
 			f4 = f4 * 0.5F;
-			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 1.5F;
-			f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 3.0F;
+			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.5F;
+			f4 = f4 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 			
 			//No idea what this is for yet
 			if (!this.func_222702_a(mainChunkX, mainChunkZ, randomBlockX, randomBlockZ, currentRoom, maxIteration,
@@ -198,12 +198,13 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 
 				for (int smallX = xMin; smallX < xMax; ++smallX) {
 					int x = smallX + mainChunkX * 16;
-					double xModified = ((double) x + 0.5D - xRange) / placementXZBound;
+					double xSquaringModified = ((double) x + 0.5D - xRange) / placementXZBound;
 
 					for (int smallZ = zMin; smallZ < zMax; ++smallZ) {
 						int z = smallZ + mainChunkZ * 16;
-						double zModified = ((double) z + 0.5D - zRange) / placementXZBound;
-						if (xModified * xModified + zModified * zModified < 1.0D) {
+						double zSquaringModified = ((double) z + 0.5D - zRange) / placementXZBound;
+						double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
+						if (xzSquaredModified < 1.0D) {
 							int yMaxSum = (int) (yMax - ((1 + random.nextFloat()) * random.nextFloat() * 20));
 
 							if (yMaxSum < yMin) {
@@ -217,19 +218,18 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 							}
 
 							for (int y = yMaxSum; y > yMin; y--) {
-								double d4 = ((double) (y - 1) + 0.5D - yRange) / placementYBound;
-
+								
 								// sets a trial and error value that widens base of pillar and makes paths
 								// through lava that look good
-								double yModified = y - 6.4;
+								double yPillarModifier = y - 6.4;
 
 								if (y < 10) {
 									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
-									yModified++;
-								} else if (yModified <= 0) {
+									yPillarModifier++;
+								} else if (yPillarModifier <= 0) {
 									// prevents divide by 0 or by negative numbers (decreasing negative would make
 									// more terrain be carved instead of not carve)
-									yModified = 0.00001D;
+									yPillarModifier = 0.00001D;
 								}
 
 								// Creates pillars that are widen at bottom.
@@ -242,8 +242,13 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								// And lastly, sets the greater than value to be very low so most of the cave gets carved
 								// out.
 								boolean flagPillars = this.noiseGen.func_205563_a((double) x * 0.2D, (double) z * 0.2D,
-										y * 0.035D) - (targetedHeight / yModified) + random.nextDouble() * 0.1D > -3.5D;
+										y * 0.035D) - (targetedHeight / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
 
+								if(!flagPillars) {
+									//skip position if we are in pillar space
+									continue;
+								}
+										
 								// Creates large stalagmites that cannot reach floor of cavern.
 								//
 								// Perlin field creates the main stalagmite shape and placement by stepping
@@ -255,14 +260,21 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								// while the 400/y has already carved out the rest of the cave.
 								boolean flagStalagmites = this.noiseGen.func_205563_a((double) x * 0.63125D,
 										(double) z * 0.63125D, y * 0.04D) + (360 / (y))
-										+ random.nextDouble() * 0.1D > 2.8D;
+										+ random.nextDouble() * 0.06D > 2.8D;
 
+								if(!flagStalagmites) {
+									//skip position if we are in stalagmite space
+									continue;
+								}
+								
+								
+								double ySquaringModified = ((double) (y - 1) + 0.5D - yRange) / placementYBound;
+								
 								// Where the pillar flag and stalagmite flag both flagged this block to be
 								// carved, begin carving.
 								// Thus the pillar and stalagmite is what is left after carving.
-								if ((flagPillars && flagStalagmites)
-										&& (xModified * xModified + zModified * zModified) * (double) this.ledgeWidthArrayYIndex[y - 1]
-												+ d4 * d4 / 6.0D < 1.0D) {
+								if (xzSquaredModified * this.ledgeWidthArrayYIndex[y - 1] 
+										+ ySquaringModified * ySquaringModified / 6.0D + random.nextFloat() * 0.1f < 1.0D) {
 									
 									blockpos$mutableblockpos.setPos(x, y, z);
 									currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
@@ -291,7 +303,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										if (y < 11) {
 											worldIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
 										} else {
-											
 											//carves the cave
 											worldIn.setBlockState(blockpos$mutableblockpos, AIR.getBlockState(), false);
 										}
