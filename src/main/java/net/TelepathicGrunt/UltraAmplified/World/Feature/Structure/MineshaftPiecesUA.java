@@ -19,6 +19,7 @@ import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.minecart.ChestMinecartEntity;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.state.properties.RailShape;
@@ -1008,7 +1009,8 @@ public class MineshaftPiecesUA
         	
         	
         	if(this.boundingBox.getYSize() > 100) {
-                this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-10, this.boundingBox.minY, this.boundingBox.minZ-10, this.boundingBox.maxX+7, this.boundingBox.minY, this.boundingBox.maxZ+10, flooring, CAVE_AIR, false);
+        		//floor
+                this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-10, this.boundingBox.minY, this.boundingBox.minZ-10, this.boundingBox.maxX+8, this.boundingBox.minY, this.boundingBox.maxZ+10, flooring, CAVE_AIR, false);
                 this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-3, this.boundingBox.minY + 1, this.boundingBox.minZ-3, this.boundingBox.maxX+1, Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ+3, CAVE_AIR, CAVE_AIR, false);
 
                 for (MutableBoundingBox MutableBoundingBox : this.roomsLinkedToTheRoom)
@@ -1016,7 +1018,9 @@ public class MineshaftPiecesUA
                     this.fillWithBlocks(worldIn, MutableBoundingBoxIn, MutableBoundingBox.minX, MutableBoundingBox.maxY - 2, MutableBoundingBox.minZ, MutableBoundingBox.maxX, MutableBoundingBox.maxY, MutableBoundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
                 }
 
-                this.randomlyRareFillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-3, this.boundingBox.minY + 4, this.boundingBox.minZ-3, this.boundingBox.maxX+1, this.boundingBox.maxY, this.boundingBox.maxZ+3, CAVE_AIR, false);
+                //wall
+                this.randomlyRareFillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-1, this.boundingBox.minY + 4, this.boundingBox.minZ-1, this.boundingBox.maxX, this.boundingBox.maxY, this.boundingBox.maxZ+1, CAVE_AIR, false);
+                this.updateLiquidBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX-5, this.boundingBox.minY + 4, this.boundingBox.minZ-5, this.boundingBox.maxX+5, this.boundingBox.maxY+4, this.boundingBox.maxZ+7);
                 return true;
        		}
         	else {
@@ -1041,6 +1045,39 @@ public class MineshaftPiecesUA
             {
                 MutableBoundingBox.offset(x, y, z);
             }
+        }
+
+        protected void updateLiquidBlocks(IWorld worldIn, MutableBoundingBox boundingboxIn, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
+           float f = (float)(maxX - minX + 1);
+           float f1 = (float)(maxY - minY + 1);
+           float f2 = (float)(maxZ - minZ + 1);
+           float f3 = (float)minX + f / 2.0F;
+           float f4 = (float)minZ + f2 / 2.0F;
+
+           for(int y = minY; y <= maxY; ++y) {
+              float f5 = (float)(y - minY) / f1;
+
+              for(int x = minX; x <= maxX; ++x) {
+                 float f6 = ((float)x - f3) / (f * 0.5F);
+
+                 for(int z = minZ; z <= maxZ; ++z) {
+                    float f7 = ((float)z - f4) / (f2 * 0.5F);
+                    if (!this.getBlockStateFromPos(worldIn, x, y, z, boundingboxIn).getFluidState().isEmpty()) {
+                       float f8 = f6 * f6 + f5 * f5 + f7 * f7;
+    				   if (f8 <= 1.05F) {
+    					    BlockPos blockpos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+
+    						IFluidState ifluidstate = worldIn.getFluidState(blockpos);
+    						if (!ifluidstate.isEmpty()) {
+    							worldIn.getPendingFluidTicks().scheduleTick(blockpos, ifluidstate.getFluid(), 0);
+
+    						}
+                       }
+                    }
+                 }
+              }
+           }
+
         }
     }
 
@@ -1134,6 +1171,4 @@ public class MineshaftPiecesUA
             }
         }
     }
-    
-    
 }
