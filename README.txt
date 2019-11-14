@@ -17,10 +17,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
     (V.6.11.1 Changes) (1.14.4 Minecraft)
     
+    WorldType:
+·Patched a bug that crashes the game when trying to use the Ultra Amplified WorldType. Sorry about that. 
     
     Structures: 
 ·Cave Cavity walls are no longer cut off or broken but I had to change the overall shape of Cave Cavities to fix that bug. (Walls are also slightly messier to make it look more natural)
-·Made Ravines and Cave Cavities more optimized so it should reduce generation time by a bit.
 ·Changed how fluids are contained in Ravines and Cave Cavities to fix several generation bugs with exposed walls of water and messy straight lines of floating blocks. However, might cause issues with structures/features that create water underground. Please let me know if this is the case. 
 ·Underwater Caves exposed in Ravines and Cave Cavities no longer has any water exposed and may have patches of Grass Blocks. (They are still hollowed out tubes with water inside)
 

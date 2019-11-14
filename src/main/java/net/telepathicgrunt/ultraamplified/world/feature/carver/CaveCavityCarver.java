@@ -142,7 +142,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 					+ (double) (MathHelper.sin((float) currentRoom * (float) Math.PI / (float) maxIteration)
 							* widthHeightBase);
 			double placementYBound = placementXZBound * heightMultiplier;
-			placementXZBound = placementXZBound * 33D; // thickness of the "room" itself
+			placementXZBound = placementXZBound * 32D; // thickness of the "room" itself
 			placementYBound = placementYBound * 2.2D;
 			float f2 = MathHelper.cos(xzCosNoise)*0.05f;
 			randomBlockX += (double) (MathHelper.cos(xzNoise2) * f2);
