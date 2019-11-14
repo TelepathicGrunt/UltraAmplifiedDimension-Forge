@@ -20,6 +20,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     WorldType:
 ·Patched a bug that crashes the game when trying to use the Ultra Amplified WorldType. Sorry about that. 
     
+    Biomes:
+·Removed Hanging Ruins from Nether biome as it doesn't mesh well with Netherrack.
+
     Structures: 
 ·Cave Cavity walls are no longer cut off or broken but I had to change the overall shape of Cave Cavities to fix that bug. (Walls are also slightly messier to make it look more natural)
 ·Changed how fluids are contained in Ravines and Cave Cavities to fix several generation bugs with exposed walls of water and messy straight lines of floating blocks. However, might cause issues with structures/features that create water underground. Please let me know if this is the case. 

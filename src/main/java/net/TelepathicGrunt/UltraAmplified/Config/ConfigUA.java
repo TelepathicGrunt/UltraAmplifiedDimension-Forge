@@ -364,7 +364,7 @@ public class ConfigUA {
                             		 +"100 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n"
                             		 +"NOTE: this is backwards than other spawnrates.\r\n"
                             		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n"
-                            		 +"Spawns in most biomes except for oceans and Ice Mountain Biomes.")
+                            		 +"Spawns in most biomes except for oceans, Nether, and Ice Mountain Biomes.")
                             .translation("ultraamplified.config.structure.hangingruinsspawnrate")
                             .defineInRange("hangingRuinsSpawnrate", 45, 0, 100);
             		
