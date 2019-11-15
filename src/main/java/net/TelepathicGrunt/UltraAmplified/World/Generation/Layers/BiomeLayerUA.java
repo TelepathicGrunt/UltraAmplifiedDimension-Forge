@@ -288,7 +288,7 @@ public class BiomeLayerUA implements IC0Transformer
         
         //for debugging purposes
 //        for(BiomeEntry biome : temporaryBiomeList){
-//        	UltraAmplified.LOGGER.log(Level.WARN, biome.biome.getRegistryName());
+//        	UltraAmplified.LOGGER.log(Level.WARN, I18n.format("biome." + biome.biome.getRegistryName().getNamespace() +"." + biome.biome.getRegistryName().getPath()));
 //        }
         
         

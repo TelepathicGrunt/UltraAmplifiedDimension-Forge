@@ -15,6 +15,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.11.2 Changes) (1.14.4 Minecraft)
+    
+    Internal: 
+·Localized English version of biome, features, and structure names is added to this mod's en_us.json file. Will help with compatibility with other mods that needs to show the localized name of these stuff.
+       
+       
     (V.6.11.1 Changes) (1.14.4 Minecraft)
     
     WorldType:

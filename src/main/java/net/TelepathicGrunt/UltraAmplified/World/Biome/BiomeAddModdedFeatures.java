@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.Level;
-
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Block;
