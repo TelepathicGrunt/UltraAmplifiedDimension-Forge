@@ -19,6 +19,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     
     Internal: 
 ·Localized English version of biome, features, and structure names is added to this mod's en_us.json file. Will help with compatibility with other mods that needs to show the localized name of these stuff.
+·Removed underscores from UltraAmplified WorldType's descriptive text.
+       
+    Structures: 
+·Optimized Cave Cavities to speed up world generation slightly
+·Fixed bug where setting the Elytra in ships in End Cities would cause Minecraft to become unresponsive and hang forever.
        
        
     (V.6.11.1 Changes) (1.14.4 Minecraft)
