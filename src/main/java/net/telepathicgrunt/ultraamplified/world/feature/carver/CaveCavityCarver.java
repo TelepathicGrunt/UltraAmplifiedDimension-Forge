@@ -209,6 +209,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 							}
 
 							for (int y = yMaxSum; y > yMin; y--) {
+
 								
 								// sets a trial and error value that widens base of pillar and makes paths
 								// through lava that look good
@@ -257,9 +258,16 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										// Next, add a random value to add some noise to the pillar.
 										// And lastly, sets the greater than value to be high so more stalagmites can be made
 										// while the 400/y has already carved out the rest of the cave.
-										boolean flagStalagmites = noiseGen.func_205563_a((double) x * 0.63125D,
+										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.63125D,
 												(double) z * 0.63125D, y * 0.04D) + (360 / (y))
-												+ random.nextDouble() * 0.06D > 2.8D;
+												+ random.nextDouble() * 0.06D;
+										
+										//adds more tiny stalagmites to ceiling
+										if(y>54) {
+											stalagmiteDouble *= 1D/((y-53D)/1.5D);
+										}
+										
+										boolean flagStalagmites = stalagmiteDouble > 2.8D;
 
 										if(!flagStalagmites) {
 											//skip position if we are in stalagmite space

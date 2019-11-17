@@ -22,7 +22,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Removed underscores from UltraAmplified WorldType's descriptive text.
        
     Structures: 
-·Optimized Cave Cavities to speed up world generation slightly
+·Optimized Cave Cavities to speed up world generation slightly.
+·Roughed up Cave Cavity ceiling to make it look more natural.
 ·Fixed bug where setting the Elytra in ships in End Cities would cause Minecraft to become unresponsive and hang forever.
        
        
