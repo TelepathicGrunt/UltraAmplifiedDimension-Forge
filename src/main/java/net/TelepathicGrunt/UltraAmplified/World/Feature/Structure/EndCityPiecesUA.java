@@ -261,9 +261,9 @@ public class EndCityPiecesUA
 	            entityshulker.setAttachmentPos(pos);
 	            worldIn.addEntity(entityshulker);
 	         } else if (function.startsWith("Elytra")) {
-	        	 ItemFrameEntity entityitemframe = new ItemFrameEntity(worldIn.getWorld(), pos, this.rotation.rotate(Direction.SOUTH));
-	            entityitemframe.setDisplayedItem(new ItemStack(Items.ELYTRA));
-	            worldIn.addEntity(entityitemframe);
+	             ItemFrameEntity itemframeentity = new ItemFrameEntity(worldIn.getWorld(), pos, this.rotation.rotate(Direction.SOUTH));
+	             itemframeentity.setDisplayedItemWithUpdate(new ItemStack(Items.ELYTRA), false);
+	             worldIn.addEntity(itemframeentity);
 	         }
 
 	      }
