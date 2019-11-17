@@ -24,6 +24,10 @@ import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInitUA;
 import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
@@ -112,6 +116,10 @@ public class UltraAmplified {
 		UltraAmplified = new WorldTypeUA();
 		StructureInitUA.registerStructurePieces();
 		CapabilityPlayerPosAndDim.register();
+		RavineCarver.setFillerMap();
+		SuperLongRavineCarver.setFillerMap();
+		UnderwaterCaveCarver.setFillerMap();
+		CaveCavityCarver.setFillerMap();
 	}
 	
 	public void modConfig(final ModConfig.ModConfigEvent event)

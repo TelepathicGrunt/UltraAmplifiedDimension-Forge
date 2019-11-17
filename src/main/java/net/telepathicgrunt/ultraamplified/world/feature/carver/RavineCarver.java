@@ -51,7 +51,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 	/**
 	 * Have to make this map much later since the biomes needs to be initialized first and that's delayed a bit
 	 */
-	public void setFillerMap() {
+	public static void setFillerMap() {
 		if (fillerBiomeMap == null) {
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
@@ -67,7 +67,8 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 
 
     public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
-        return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 100f;
+    	
+    	return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 100f;
      }
 
      public boolean carve(IChunk region, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
@@ -87,7 +88,6 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 
      private void func_202535_a(IChunk worldIn, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
         Random random = new Random(randomSeed);
-        setFillerMap();
         
         float f = 1.0F;
 
@@ -147,12 +147,14 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 
              for(int k1 = i; k1 < j; ++k1) {
                 int x = k1 + mainChunkX * 16;
-                double d2 = ((double)x + 0.5D - xRange) / placementXZBound;
+                double xSquaringModified = ((double)x + 0.5D - xRange) / placementXZBound;
 
                 for(int i2 = i1; i2 < j1; ++i2) {
                    int z = i2 + mainChunkZ * 16;
-                   double d3 = ((double)z + 0.5D - zRange) / placementXZBound;
-                   if (d2 * d2 + d3 * d3 < 1.0D) {
+                   double zSquaringModified = ((double)z + 0.5D - zRange) / placementXZBound;
+				   double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
+				   
+                   if (xzSquaredModified < 1.0D) {
 
                       blockpos$mutableblockpos.setPos(x, 60, z);
                       fillerBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
@@ -162,41 +164,35 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
                       
                       for(int y = l; y > k; --y) {
                          double d4 = ((double)(y - 1) + 0.5D - yRange) / placementYBound;
-                         if ((d2 * d2 + d3 * d3) * (double)this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D) {
-                            int l2 = k1 | i2 << 4 | y << 8;
-                            if (!mask.get(l2)) {
-                               mask.set(l2);
-                               blockpos$mutableblockpos.setPos(x, y, z);
+                         if (xzSquaredModified * (double)this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D) {
+                           blockpos$mutableblockpos.setPos(x, y, z);
 
-                               BlockState currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-                               blockpos$mutableblockposup.setPos(blockpos$mutableblockpos).move(Direction.UP);
-                               blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
-                               BlockState aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
+                           BlockState currentBlockstate = worldIn.getBlockState(blockpos$mutableblockpos);
+                           blockpos$mutableblockposup.setPos(blockpos$mutableblockpos).move(Direction.UP);
+                           blockpos$mutableblockposdown.setPos(blockpos$mutableblockpos).move(Direction.DOWN);
+                           BlockState aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
 
-							  if(y > 61 && !aboveBlockstate.getFluidState().isEmpty()) {
-								   //Creates the messy but cool plateau of stone on the ocean floor 
-								   //above this ravine to help players locate ravines when exploring
-								   //ocean biomes. Also helps to break up the blandness of ocean
-								   //floors.
-									
-                            	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockposup, fillerBlock, false);
-                            	   worldIn.setBlockState(blockpos$mutableblockposdown, fillerBlock, false);
-                                   flag = true;
-                               }
-                               else if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || canReplaceMap.containsKey(currentBlockstate)) {
-                                  if (y - 1 < 10) {
-                                     worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
-                                  } else {
-               	                	   //carves the ravine
-               	                	   worldIn.setBlockState(blockpos$mutableblockpos, AIR.getBlockState(), false);
-                                  }
+						  if(y > 61 && !aboveBlockstate.getFluidState().isEmpty()) {
+							   //Creates the messy but cool plateau of stone on the ocean floor 
+							   //above this ravine to help players locate ravines when exploring
+							   //ocean biomes. Also helps to break up the blandness of ocean
+							   //floors.
+								
+                        	   worldIn.setBlockState(blockpos$mutableblockpos, fillerBlock, false);
+                        	   worldIn.setBlockState(blockpos$mutableblockposup, fillerBlock, false);
+                        	   worldIn.setBlockState(blockpos$mutableblockposdown, fillerBlock, false);
+                               flag = true;
+                           }
+                           else if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || canReplaceMap.containsKey(currentBlockstate)) {
+                              if (y - 1 < 10) {
+                                 worldIn.setBlockState(blockpos$mutableblockpos, LAVA.getBlockState(), false);
+                              } else {
+           	                	   //carves the ravine
+           	                	   worldIn.setBlockState(blockpos$mutableblockpos, AIR.getBlockState(), false);
+                              }
 
-                                  flag = true;
-                               }
-
-                               
-                            }
+                              flag = true;
+                           }
                          }
                       }
                    }
