@@ -64,7 +64,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	 */
 	public static void setSeed(long seed) {
 		if (noiseGen == null) {
-			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3);
 		}
 	}
 	
@@ -213,7 +213,21 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								
 								// sets a trial and error value that widens base of pillar and makes paths
 								// through lava that look good
-								double yPillarModifier = y - 6.4;
+								double yPillarModifier = y;
+								
+								//makes pillar widen at top
+								if(y >= 40) {
+									yPillarModifier = 40 - (yPillarModifier-40)*2D;
+									
+									//prevents it from widening too fast and end up lowering the ceiling
+									if(yPillarModifier < 10) {
+										yPillarModifier += (10-yPillarModifier)*0.75D;
+									}
+								}
+								
+								//Use this value to control how much lava is shown at bottom
+								//Increase constant for less lava
+								yPillarModifier -= 4.0D;
 
 								if (y < 10) {
 									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
@@ -237,8 +251,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									// Next, adds a random value to add some noise to the pillar.
 									// And lastly, sets the greater than value to be very low so most of the cave gets carved
 									// out.
-									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.2D, (double) z * 0.2D,
-											y * 0.035D) - (14 / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
+									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.12D, (double) z * 0.12D,
+											y * 0.035D) - (15 / yPillarModifier) + random.nextDouble() * 0.1D > -2.0D;
 	
 									if(!flagPillars) {
 										//skip position if we are in pillar space
@@ -258,16 +272,15 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										// Next, add a random value to add some noise to the pillar.
 										// And lastly, sets the greater than value to be high so more stalagmites can be made
 										// while the 400/y has already carved out the rest of the cave.
-										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.63125D,
-												(double) z * 0.63125D, y * 0.04D) + (360 / (y))
-												+ random.nextDouble() * 0.06D;
+										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.43125D,
+												(double) z * 0.43125D, y * 0.06D) + (360D / (y));
 										
 										//adds more tiny stalagmites to ceiling
 										if(y>54) {
-											stalagmiteDouble *= 1D/((y-53D)/1.5D);
+											stalagmiteDouble -= (y-53D)/3D;
 										}
 										
-										boolean flagStalagmites = stalagmiteDouble > 2.8D;
+										boolean flagStalagmites = stalagmiteDouble > 6.0D;
 
 										if(!flagStalagmites) {
 											//skip position if we are in stalagmite space
