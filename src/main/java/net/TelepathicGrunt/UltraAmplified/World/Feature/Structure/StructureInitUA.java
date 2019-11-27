@@ -15,6 +15,7 @@ public class StructureInitUA {
 	public static IStructurePieceType MSCROSSINGUA;
 	public static IStructurePieceType MSROOMUA;
 	public static IStructurePieceType MSSTAIRSUA;
+	public static IStructurePieceType MTUA;
 	public static IStructurePieceType ORPUA;
 	public static IStructurePieceType SHIPWRECKUA;
 	public static IStructurePieceType TESHUA;
@@ -80,7 +81,8 @@ public class StructureInitUA {
 		MSCORRIDORUA = register(MineshaftPiecesUA.Corridor::new, "MSCorridorUA");               
 		MSCROSSINGUA = register(MineshaftPiecesUA.Cross::new, "MSCrossingUA");                  
 		MSROOMUA = register(MineshaftPiecesUA.Room::new, "MSRoomUA");                           
-		MSSTAIRSUA = register(MineshaftPiecesUA.Stairs::new, "MSStairsUA");                     
+		MSSTAIRSUA = register(MineshaftPiecesUA.Stairs::new, "MSStairsUA");   
+		MTUA = register(MushroomTemplePiecesUA.Piece::new, "MTUA");   
 		ORPUA = register(OceanRuinsPiecesUA.Piece::new, "ORPUA");                               
 		SHIPWRECKUA = register(ShipwreckPiecesUA.Piece::new, "ShipwreckUA");                    
 		TESHUA = register(WitchHutPiecesUA::new, "TeSHUA");                                     

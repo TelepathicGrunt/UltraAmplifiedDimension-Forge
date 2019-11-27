@@ -118,9 +118,19 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		float ledgeWidth = 1.0F;
 
 		// CONTROLS THE LEDGES' WIDTH! FINALLY FOUND WHAT THIS JUNK DOES
-		for (int currentHeight = 0; currentHeight < 256; ++currentHeight) {
-			if (currentHeight == 0 || random.nextInt(3) == 0) {
-				ledgeWidth = 1.0F + random.nextFloat() * 0.5F; 
+		for (int currentHeight = 0; currentHeight <= 70; ++currentHeight) {
+			
+			//attempt at creating dome ceilings
+			if(currentHeight > 44 && currentHeight < 60) {
+				ledgeWidth = 1.0F + random.nextFloat()*0.3f; 
+				ledgeWidth = (float) (ledgeWidth + Math.max(0, Math.pow((currentHeight-44) * 0.15F, 2)));
+			}
+			
+			//normal ledges on walls
+			else {
+				if (currentHeight == 0 || random.nextInt(3) == 0) {
+					ledgeWidth = 1.0F + random.nextFloat() * 0.5F; 
+				}
 			}
 
 			this.ledgeWidthArrayYIndex[currentHeight] = ledgeWidth;
@@ -240,7 +250,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								
 								
 								//limits calling pillar and stalagmite perlin generators to reduce gen time
-								if(y < 62) 
+								if(y < 60) 
 								{
 									// Creates pillars that are widen at bottom.
 									//
@@ -251,6 +261,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									// Next, adds a random value to add some noise to the pillar.
 									// And lastly, sets the greater than value to be very low so most of the cave gets carved
 									// out.
+									//
+									//Increase step in X and Z to make pillars less frequent but thicker
 									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.12D, (double) z * 0.12D,
 											y * 0.035D) - (15 / yPillarModifier) + random.nextDouble() * 0.1D > -2.0D;
 	
@@ -272,14 +284,17 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										// Next, add a random value to add some noise to the pillar.
 										// And lastly, sets the greater than value to be high so more stalagmites can be made
 										// while the 400/y has already carved out the rest of the cave.
-										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.43125D,
-												(double) z * 0.43125D, y * 0.06D) + (360D / (y));
+										//
+										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
+										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.33125D,
+												(double) z * 0.33125D, y * 0.06D) + (360D / (y));
 										
 										//adds more tiny stalagmites to ceiling
 										if(y>54) {
 											stalagmiteDouble -= (y-53D)/3D;
 										}
 										
+										//increase constant to make stalagmites smaller and thinner
 										boolean flagStalagmites = stalagmiteDouble > 6.0D;
 
 										if(!flagStalagmites) {
@@ -305,7 +320,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									aboveBlockstate = worldIn.getBlockState(blockpos$mutableblockposup);
 
 									
-									if(y > 61) {
+									if(y >= 60) {
 										//Creates the messy but cool plateau of stone on the ocean floor 
 										//above this cave to help players locate caves when exploring
 										//ocean biomes. Also helps to break up the blandness of ocean

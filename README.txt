@@ -18,7 +18,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.6.11.3 Changes) (1.14.4 Minecraft)
     
     Structures: 
-·Cave Cavities are now optimized even more and looks a bit better too! 
+·Cave Cavities are now optimized even more and looks better too! 
+·Added Mushroom temples to spawn in Mushroom biome! They have a secret hidden in them... 
+
+    Biomes:
+·Mushroom Biomes now generates more mushrooms underground.
+
        
     (V.6.11.2 Changes) (1.14.4 Minecraft)
     
