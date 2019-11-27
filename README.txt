@@ -15,7 +15,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
-    (V.6.11.3 Changes) (1.14.4 Minecraft)
+    (V.6.12.0 Changes) (1.14.4 Minecraft)
     
     Structures: 
 ·Cave Cavities are now optimized even more and looks better too! 
