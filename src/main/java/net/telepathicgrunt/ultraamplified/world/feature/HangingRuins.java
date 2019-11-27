@@ -48,6 +48,21 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 			}
 		}
 		
+		//if we are on a 1 block thick ledge at any point, move down one so ruins ceiling isn't exposed 
+		for(int x = -5; x <= 5; x++) 
+		{
+			for(int z = -5; z <= 5; z++)  
+			{
+				if(!worldIn.getBlockState(position.up(2)).isSolid()) {
+					position = position.down();
+					z = 6;
+					x = 6;
+					break;
+				}
+			}
+		}
+		
+		
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " "+position.getZ());
 		
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();

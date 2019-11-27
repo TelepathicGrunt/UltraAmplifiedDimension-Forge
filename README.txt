@@ -20,6 +20,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Structures: 
 ·Cave Cavities are now optimized even more and looks better too! 
 ·Added Mushroom temples to spawn in Mushroom biome! They have a secret hidden in them... 
+·Fixed bug where Hanging Ruins ceiling can be exposed on 1 block thick floating ledges.
 
     Biomes:
 ·Mushroom Biomes now generates more mushrooms underground.
