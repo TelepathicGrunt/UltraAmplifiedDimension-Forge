@@ -47,7 +47,7 @@ public class ConfigUA {
     public static boolean chestGeneration = true;
     public static int sunShrineSpawnrate = 50;
     public static int stonehengeSpawnrate = 10;
-    public static int hangingRuinsSpawnrate = 10;
+    public static int hangingRuinsSpawnrate = 40;
     public static boolean miniStructureGeneration = true;
     public static int villageSpawnrate = 16;
     public static int villageZombieSpawnrate = 10;
@@ -370,7 +370,7 @@ public class ConfigUA {
                             		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n"
                             		 +"Spawns in most biomes except for oceans, Nether, and Ice Mountain Biomes.")
                             .translation("ultraamplified.config.structure.hangingruinsspawnrate")
-                            .defineInRange("hangingRuinsSpawnrate", 45, 0, 100);
+                            .defineInRange("hangingRuinsSpawnrate", 40, 0, 100);
             		
             		
             		miniStructureGeneration = builder

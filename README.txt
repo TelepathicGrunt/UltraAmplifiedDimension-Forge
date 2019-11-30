@@ -23,6 +23,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Added Ice Spike temples to spawn in Ice Spike biomes! Check them out for good loot and some hidden stuff! 
 ·Fixed bug where Hanging Ruins ceiling can be exposed on 1 block thick floating ledges.
 ·Hanging Ruins can now face any direction instead of just north (not really noticeable).
+·Slightly decreased default spawnrate for Hanging Ruins.
 
     Biomes:
 ·Mushroom Biomes now generates more mushrooms underground.
