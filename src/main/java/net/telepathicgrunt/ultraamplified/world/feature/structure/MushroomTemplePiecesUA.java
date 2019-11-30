@@ -30,12 +30,12 @@ public class MushroomTemplePiecesUA {
 	   private static final ResourceLocation MUSHROOM_TEMPLE = new ResourceLocation(UltraAmplified.MODID+":mushroom_temple");
 	   private static final Map<ResourceLocation, BlockPos> OFFSET1 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(0, 4, 0));
 	   private static final Map<ResourceLocation, BlockPos> OFFSET2 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(-8, -1, -8));
-	   public static final ResourceLocation CHESTS_MUSHROOM_TEMPLE_UA = new ResourceLocation("ultra_amplified_mod:chests/mushroom_temple_ua");
+	   private static final ResourceLocation CHESTS_MUSHROOM_TEMPLE_UA = new ResourceLocation(UltraAmplified.MODID+":chests/mushroom_temple_ua");
 
 	  
-	   public static void start(TemplateManager p_207617_0_, BlockPos p_207617_1_, Rotation p_207617_2_, List<StructurePiece> p_207617_3_, Random p_207617_4_) {
+	   public static void start(TemplateManager templateManagerIn, BlockPos pos, Rotation rotationIn, List<StructurePiece> structurePieceList, Random randomIn) {
 	    
-	      p_207617_3_.add(new MushroomTemplePiecesUA.Piece(p_207617_0_, MUSHROOM_TEMPLE, p_207617_1_, p_207617_2_, 0));
+	      structurePieceList.add(new MushroomTemplePiecesUA.Piece(templateManagerIn, MUSHROOM_TEMPLE, pos, rotationIn, 0));
 	   }
 
 	   public static class Piece extends TemplateStructurePiece {
@@ -52,11 +52,11 @@ public class MushroomTemplePiecesUA {
 	      }
 
 
-	      public Piece(TemplateManager p_i50566_1_, CompoundNBT p_i50566_2_) {
-	         super(StructureInitUA.MTUA, p_i50566_2_);
-	         this.resourceLocation = new ResourceLocation(p_i50566_2_.getString("Template"));
-	         this.rotation = Rotation.valueOf(p_i50566_2_.getString("Rot"));
-	         this.setupPiece(p_i50566_1_);
+	      public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound) {
+	         super(StructureInitUA.MTUA, tagCompound);
+	         this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
+	         this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
+	         this.setupPiece(templateManagerIn);
 	      }
 	      
 	      private void setupPiece(TemplateManager templateManager) {

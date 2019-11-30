@@ -9,6 +9,7 @@ public class StructureInitUA {
 
 	public static IStructurePieceType TEDPUA;
 	public static IStructurePieceType ECPUA;
+	public static IStructurePieceType ISTUA;
 	public static IStructurePieceType IGLUUA;
 	public static IStructurePieceType TEJPUA;
 	public static IStructurePieceType MSCORRIDORUA;
@@ -76,6 +77,7 @@ public class StructureInitUA {
 	public static void registerStructurePieces() {
 		TEDPUA = register(DesertTemplePiecesUA::new, "TeDPUA");                                 
 		ECPUA = register(EndCityPiecesUA.CityTemplate::new, "ECPUA");                           
+		ISTUA = register(IceSpikeTemplePiecesUA.Piece::new, "ISTUA");                             
 		IGLUUA = register(IglooPiecesUA.Piece::new, "IgluUA");                                  
 		TEJPUA = register(JungleTemplePiecesUA::new, "TeJPUA");                                 
 		MSCORRIDORUA = register(MineshaftPiecesUA.Corridor::new, "MSCorridorUA");               

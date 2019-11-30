@@ -3,6 +3,8 @@ package net.telepathicgrunt.ultraamplified.world.feature;
 import java.util.Random;
 import java.util.function.Function;
 
+import org.apache.logging.log4j.Level;
+
 import com.mojang.datafixers.Dynamic;
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
@@ -35,7 +37,8 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		if(!ConfigUA.miniStructureGeneration) {
 			return false;
 		}
-	
+
+	     
 		//makes sure there is enough solid blocks on ledge to hold this feature.
 		for(int x = -5; x <= 5; x++) 
 		{
@@ -63,7 +66,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		}
 		
 		
-		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " "+position.getZ());
+		UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
 		
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
@@ -74,8 +77,12 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 			return false;
 		}
 		
-		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
+		PlacementSettings placementsettings = (
+				new PlacementSettings())
+				.setMirror(Mirror.NONE)
+				.setRotation(Rotation.values()[rand.nextInt(Rotation.values().length)])
+				.setIgnoreEntities(false)
+				.setChunk(new ChunkPos(position));
 		
 		template.addBlocksToWorld(worldIn, position.down(8).north(4).west(4), placementsettings);
 		

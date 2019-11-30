@@ -59,7 +59,8 @@ public class ConfigUA {
     public static int jungleTempleSpawnrate = 20;
     public static int iglooSpawnrate = 14;
     public static int witchHutSpawnrate = 14;
-    public static int mushroomTempleSpawnrate = 14;
+    public static int mushroomTempleSpawnrate = 12;
+    public static int iceSpikeTempleSpawnrate = 20;
     public static int oceanMonumentSpawnrate = 22;
     public static int oceanRuinsSpawnrate = 7;
     public static int shipwreckSpawnrate = 7;
@@ -161,6 +162,7 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue jungleTempleSpawnrate;
 		public final ForgeConfigSpec.IntValue iglooSpawnrate;
 		public final ForgeConfigSpec.IntValue mushroomTempleSpawnrate;
+		public final ForgeConfigSpec.IntValue iceSpikeTempleSpawnrate;
 		public final ForgeConfigSpec.IntValue witchHutSpawnrate;
 		public final ForgeConfigSpec.IntValue oceanMonumentSpawnrate;
 		public final ForgeConfigSpec.IntValue oceanRuinsSpawnrate;
@@ -432,7 +434,12 @@ public class ConfigUA {
             		mushroomTempleSpawnrate = builder
             		.comment("\r\nHow rare are Mushroom Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.mushroomtemplespawnrate")
-            		.defineInRange("mushroomTempleSpawnrate", 14, 1, 101);
+            		.defineInRange("mushroomTempleSpawnrate", 12, 1, 101);
+
+            		iceSpikeTempleSpawnrate = builder
+            		.comment("\r\nHow rare are Ice Spike Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+            		.translation("ultraamplified.config.structure.icespiketemplespawnrate")
+            		.defineInRange("iceSpikeTempleSpawnrate", 20, 1, 101);
             		
             		witchHutSpawnrate = builder
             		.comment("\r\nHow rare are Witch Huts." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
@@ -882,6 +889,7 @@ public class ConfigUA {
     	jungleTempleSpawnrate = SERVER.jungleTempleSpawnrate.get();
     	iglooSpawnrate = SERVER.iglooSpawnrate.get();
     	mushroomTempleSpawnrate = SERVER.mushroomTempleSpawnrate.get();
+    	iceSpikeTempleSpawnrate = SERVER.iceSpikeTempleSpawnrate.get();
     	witchHutSpawnrate = SERVER.witchHutSpawnrate.get();
     	oceanMonumentSpawnrate = SERVER.oceanMonumentSpawnrate.get();
     	oceanRuinsSpawnrate = SERVER.oceanRuinsSpawnrate.get();

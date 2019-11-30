@@ -26,6 +26,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleUA
 import net.telepathicgrunt.ultraamplified.world.feature.structure.EndCityUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.IceSpikeTempleUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.IglooUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.JungleTempleUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
@@ -123,6 +124,7 @@ public class FeatureUA
     public static Structure<VillageConfigUA> VILLAGE_UA = new VillageUA(VillageConfigUA::deserialize);
     public static Structure<NoFeatureConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleUA(NoFeatureConfig::deserialize);
     
 
     @SuppressWarnings("unchecked")
@@ -203,6 +205,7 @@ public class FeatureUA
         VILLAGE_UA = (Structure<VillageConfigUA>) registerStructure(VILLAGE_UA, "village");
         PILLAGER_OUTPOST_UA = (Structure<NoFeatureConfig>) registerStructure(PILLAGER_OUTPOST_UA, "pillager_outpost");
         MUSHROOM_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(MUSHROOM_TEMPLE_UA, "mushroom_temple");
+        ICE_SPIKE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
 
 
       

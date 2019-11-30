@@ -146,6 +146,8 @@
   "feature.ultra_amplified_mod.endcity": "Endcity UA",
   "feature.ultra_amplified_mod.village": "Village UA",
   "feature.ultra_amplified_mod.pillager_outpost": "Pillager Outpost UA",
+  "feature.ultra_amplified_mod.mushroom_temple": "Mushroom Temple UA",
+  "feature.ultra_amplified_mod.ice_spike_temple": "Ice Spike Temple UA",
   "structure.ultra_amplified_mod.mineshaft": "Mineshaft UA",
   "structure.ultra_amplified_mod.woodland_mansion": "Woodland Mansion UA",
   "structure.ultra_amplified_mod.jungle_temple": "Jungle Temple UA",
@@ -159,5 +161,7 @@
   "structure.ultra_amplified_mod.fortress": "Fortress UA",
   "structure.ultra_amplified_mod.endcity": "Endcity UA",
   "structure.ultra_amplified_mod.village": "Village UA",
-  "structure.ultra_amplified_mod.pillager_outpost": "Pillager Outpost UA"
+  "structure.ultra_amplified_mod.pillager_outpost": "Pillager Outpost UA",
+  "structure.ultra_amplified_mod.mushroom_temple": "Mushroom Temple UA",
+  "structure.ultra_amplified_mod.ice_spike_temple": "Ice Spike Temple UA"
 }
