@@ -27,6 +27,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
     Biomes:
 ·Mushroom Biomes now generates more mushrooms underground.
+·Fixed bug where biomes were not weighted correctly when determining what biomes spawned (caused some biomes to not spawn).
 
        
     (V.6.11.2 Changes) (1.14.4 Minecraft)

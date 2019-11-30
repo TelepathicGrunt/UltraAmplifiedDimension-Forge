@@ -400,7 +400,7 @@ public class BiomeLayerUA implements IC0Transformer
     protected BiomeEntry getWeightedBiomeEntry(BiomeType type, INoiseRandom context) {
         List<BiomeEntry> biomeList = biomeListsByTemperature[type.ordinal()];
         int totalWeight = WeightedRandom.getTotalWeight(biomeList);
-        int weight = BiomeManager.isTypeListModded(type)?context.random(totalWeight):context.random(totalWeight / 10) * 10;
+        int weight = context.random(totalWeight);
         return WeightedRandom.getRandomItem(biomeList, weight);
     }
 
@@ -410,7 +410,7 @@ public class BiomeLayerUA implements IC0Transformer
     {
         List<BiomeEntry> biomeList = list;
         int totalWeight = WeightedRandom.getTotalWeight(biomeList);
-        int weight = list.size()!=0?context.random(totalWeight):context.random(totalWeight / 10) * 10;
+        int weight = context.random(totalWeight);
         return WeightedRandom.getRandomItem(biomeList, weight);
     }
 }
