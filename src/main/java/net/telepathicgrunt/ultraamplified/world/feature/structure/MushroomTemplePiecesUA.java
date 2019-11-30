@@ -120,12 +120,6 @@ public class MushroomTemplePiecesUA {
 	        		worldIn.setBlockState(pos, Blocks.POTTED_BROWN_MUSHROOM.getDefaultState(), 2);
 	        	 }
 	        	 
-	        	//should've put this in the structure nbt but too late now lol
-	        		worldIn.setBlockState(pos.down(3), Blocks.DIRT.getDefaultState(), 2);
-        		worldIn.setBlockState(pos.down(3).north(), Blocks.DIRT.getDefaultState(), 2);
-        		worldIn.setBlockState(pos.down(3).south(), Blocks.DIRT.getDefaultState(), 2);
-        		worldIn.setBlockState(pos.down(3).west(), Blocks.DIRT.getDefaultState(), 2);
-        		worldIn.setBlockState(pos.down(3).east(), Blocks.DIRT.getDefaultState(), 2);
 	         }
 	      }
 
