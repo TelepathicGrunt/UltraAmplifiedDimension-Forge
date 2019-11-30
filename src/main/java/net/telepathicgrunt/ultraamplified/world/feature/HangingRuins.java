@@ -3,8 +3,6 @@ package net.telepathicgrunt.ultraamplified.world.feature;
 import java.util.Random;
 import java.util.function.Function;
 
-import org.apache.logging.log4j.Level;
-
 import com.mojang.datafixers.Dynamic;
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
@@ -66,7 +64,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		}
 		
 		
-		UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
+		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
 		
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
@@ -82,7 +80,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 				.setMirror(Mirror.NONE)
 				.setRotation(Rotation.values()[rand.nextInt(Rotation.values().length)])
 				.setIgnoreEntities(false)
-				.setChunk(new ChunkPos(position));
+				.setChunk((ChunkPos)null);
 		
 		template.addBlocksToWorld(worldIn, position.down(8).north(4).west(4), placementsettings);
 		

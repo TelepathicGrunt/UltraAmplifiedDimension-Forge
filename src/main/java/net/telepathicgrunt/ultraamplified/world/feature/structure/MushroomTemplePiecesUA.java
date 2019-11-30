@@ -31,7 +31,7 @@ public class MushroomTemplePiecesUA {
 	   private static final Map<ResourceLocation, BlockPos> OFFSET1 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(0, 4, 0));
 	   private static final Map<ResourceLocation, BlockPos> OFFSET2 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(-8, -1, -8));
 	   private static final ResourceLocation CHESTS_MUSHROOM_TEMPLE_UA = new ResourceLocation(UltraAmplified.MODID+":chests/mushroom_temple_ua");
-
+	   
 	  
 	   public static void start(TemplateManager templateManagerIn, BlockPos pos, Rotation rotationIn, List<StructurePiece> structurePieceList, Random randomIn) {
 	    
@@ -85,7 +85,47 @@ public class MushroomTemplePiecesUA {
 	            		worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 	            	}
 	            }
-
+	         }
+	         else if ("lottery".equals(function)) {
+	        	 
+	        	 int lotteryNum = rand.nextInt(100);
+	        	 
+	        	 //1/100th chance of wither rose and Dried Kelp Block being place
+	        	 if(lotteryNum == 0) {
+	        		worldIn.setBlockState(pos, Blocks.POTTED_WITHER_ROSE.getDefaultState(), 2);
+	        		worldIn.setBlockState(pos.down(2), Blocks.DRIED_KELP_BLOCK.getDefaultState(), 2);
+	        	 }
+	        	 //14/100th chance of Redstone Block being place
+	        	 else if(lotteryNum < 14) {
+	        		worldIn.setBlockState(pos, Blocks.POTTED_RED_MUSHROOM.getDefaultState(), 2);
+	        		worldIn.setBlockState(pos.down(2), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
+	        	 }
+	        	 //12/100th chance of Lapis Block being place
+	        	 else if(lotteryNum < 26) {
+	        		worldIn.setBlockState(pos, Blocks.POTTED_BLUE_ORCHID.getDefaultState(), 2);
+	        		worldIn.setBlockState(pos.down(2), Blocks.LAPIS_BLOCK.getDefaultState(), 2);
+	        	 }
+	        	 //12/100th chance of Bone Block being place
+	        	 else if(lotteryNum < 38) {
+	        		worldIn.setBlockState(pos, Blocks.POTTED_LILY_OF_THE_VALLEY.getDefaultState(), 2);
+	        		worldIn.setBlockState(pos.down(2), Blocks.BONE_BLOCK.getDefaultState(), 2);
+	        	 }
+	        	 //12/100th chance of Hay Bale Block being place
+	        	 else if(lotteryNum < 50) {
+	        		worldIn.setBlockState(pos, Blocks.POTTED_DANDELION.getDefaultState(), 2);
+	        		worldIn.setBlockState(pos.down(2), Blocks.HAY_BLOCK.getDefaultState(), 2);
+	        	 }
+	        	 //1/2th chance of nothing being place
+	        	 else{
+	        		worldIn.setBlockState(pos, Blocks.POTTED_BROWN_MUSHROOM.getDefaultState(), 2);
+	        	 }
+	        	 
+	        	//should've put this in the structure nbt but too late now lol
+	        		worldIn.setBlockState(pos.down(3), Blocks.DIRT.getDefaultState(), 2);
+        		worldIn.setBlockState(pos.down(3).north(), Blocks.DIRT.getDefaultState(), 2);
+        		worldIn.setBlockState(pos.down(3).south(), Blocks.DIRT.getDefaultState(), 2);
+        		worldIn.setBlockState(pos.down(3).west(), Blocks.DIRT.getDefaultState(), 2);
+        		worldIn.setBlockState(pos.down(3).east(), Blocks.DIRT.getDefaultState(), 2);
 	         }
 	      }
 
@@ -102,12 +142,12 @@ public class MushroomTemplePiecesUA {
 	         
 	          int i = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX(), blockpos1.getZ());
 	          
-	          if(i > 244) {
-	        	  i = 244;
+	          if(i > 246) {
+	        	  i = 246;
 	          }
 
 	         BlockPos blockpos2 = this.templatePosition;
-	         this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
+	         this.templatePosition = this.templatePosition.add(0, i - 90 - 2, 0);
 	         boolean flag = super.addComponentParts(worldIn, randomIn, structureBoundingBoxIn, chunkPos);
 	         
 	         this.templatePosition = blockpos2;
