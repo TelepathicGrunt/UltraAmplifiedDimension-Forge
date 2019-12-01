@@ -15,6 +15,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
+    (V.6.12.1 Changes) (1.14.4 Minecraft)
+    
+    Internal: 
+·Fixed typo in localization of Sunflower Plains. "UASunflower Plains" -> "Sunflower Plains UA"
+    
+       
     (V.6.12.0 Changes) (1.14.4 Minecraft)
     
     Structures: 
