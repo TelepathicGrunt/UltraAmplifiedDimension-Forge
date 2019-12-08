@@ -23,6 +23,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Blocks: 
 ·Amplified Portal Blocks no longer turn to Polished Diorite when left clicked. Instead, you can now mine it and it'll drop Polished Diorite. The highest Amplified Portal block at x = 8, z = 8 in the Ultra Amplified Dimension still cannot be mined to allow escape from the dimension.
 ·If players now right click the Amplified Portal Block while crouching, they can place blocks on the portal instead of teleporting.
+·Change texture of Amplified Portal Block to be opaque and adjusted the texture itself to fit being opaque. This is to stop the bug of clouds appearing through the block when it was translucent.
     
        
     (V.6.12.0 Changes) (1.14.4 Minecraft)

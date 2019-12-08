@@ -58,7 +58,7 @@ public class AmplifiedPortalBlock extends Block
 
 	public BlockRenderLayer getRenderLayer()
 	{
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockRenderLayer.SOLID;
 	}
 
 
