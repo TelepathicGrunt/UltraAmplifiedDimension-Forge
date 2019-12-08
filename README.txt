@@ -18,7 +18,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.6.12.1 Changes) (1.14.4 Minecraft)
     
     Internal: 
-·Fixed typo in localization of Sunflower Plains. "UASunflower Plains" -> "Sunflower Plains UA"
+·Fixed typo in localization of Sunflower Plains. "UASunflower Plains" -> "Sunflower Plains UA" 
+ 
+    Blocks: 
+·Amplified Portal Blocks no longer turn to Polished Diorite when left clicked. Instead, you can now mine it and it'll drop Polished Diorite. The highest Amplified Portal block at x = 8, z = 8 in the Ultra Amplified Dimension still cannot be mined to allow escape from the dimension.
+·If players now right click the Amplified Portal Block while crouching, they can place blocks on the portal instead of teleporting.
     
        
     (V.6.12.0 Changes) (1.14.4 Minecraft)
