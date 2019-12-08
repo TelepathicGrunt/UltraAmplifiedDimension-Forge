@@ -38,7 +38,7 @@ public class AmplifiedPortalBlock extends Block
 
 	public AmplifiedPortalBlock()
 	{
-		super(Block.Properties.create(Material.ROCK, MaterialColor.BLACK).lightValue(15).hardnessAndResistance(20.0F, 3600000.0F));
+		super(Block.Properties.create(Material.ROCK, MaterialColor.BLACK).lightValue(15).hardnessAndResistance(30.0F, 3600000.0F));
 
 		setRegistryName("amplified_portal");
 	}
