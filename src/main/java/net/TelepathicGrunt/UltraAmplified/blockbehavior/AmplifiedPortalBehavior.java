@@ -5,7 +5,6 @@ import java.util.Random;
 
 import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -184,22 +183,6 @@ public class AmplifiedPortalBehavior {
 		}
 		
 
-		//clicking on portal block in any dimension other than ultra amplified will turn the portal to polished diorite
-		//In ultra amplified dimension, turns any diorite not at x=8, z=8 into diorite
-		@SubscribeEvent
-		public static void BlockLeftClickEvent(PlayerInteractEvent.LeftClickBlock event) {
-			if(event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
-				
-				if (event.getWorld().getDimension().getType() == UltraAmplifiedDimension.ultraamplified()) {
-						if(event.getPos().getX() != 8 || event.getPos().getZ() != 8) {
-							event.getWorld().setBlockState(event.getPos(), Blocks.POLISHED_DIORITE.getDefaultState());
-						}
-				}else {
-					event.getWorld().setBlockState(event.getPos(), Blocks.POLISHED_DIORITE.getDefaultState());
-				}
-			}
-		}
-		
 
 	    private static boolean checkForGeneratedPortal(World worldIn) {
 	    	BlockPos pos = new BlockPos(8, 255, 8);
