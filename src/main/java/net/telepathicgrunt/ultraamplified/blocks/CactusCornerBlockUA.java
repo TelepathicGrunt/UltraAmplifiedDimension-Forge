@@ -16,7 +16,6 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -104,11 +103,11 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 		return OUTLINE_DIMENSION;
 	}
 
-
-	public boolean isSolid(BlockState state)
-	{
-		return true;
-	}
+//
+//	public boolean isSolid(BlockState state)
+//	{
+//		return true;
+//	}
 
 
 	/**
@@ -197,16 +196,16 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
-
-
-	/**
-	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
-	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
-	 */
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+//
+//
+//	/**
+//	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
+//	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
+//	 */
+//	public BlockRenderLayer getRenderLayer()
+//	{
+//		return BlockRenderLayer.CUTOUT;
+//	}
 
 
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)

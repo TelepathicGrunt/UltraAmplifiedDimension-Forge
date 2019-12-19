@@ -1,4 +1,4 @@
-package com.telepathicgrunt.ultraamplified;
+package net.telepathicgrunt.ultraamplified;
 
 
 import org.apache.logging.log4j.Level;

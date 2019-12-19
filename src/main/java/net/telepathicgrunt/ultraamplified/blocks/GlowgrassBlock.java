@@ -8,7 +8,7 @@ import net.minecraft.block.GrassBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 
 public class GlowgrassBlock extends GrassBlock
@@ -22,10 +22,10 @@ public class GlowgrassBlock extends GrassBlock
 
 
 	/*
-	 * every tick, it'll attempt to spread normal grass instead of itself. If covered, will turn into glowdirt.
+	 * every tick, it'll attempt to spread normal mycelium instead of itself. If covered, will turn into glowdirt.
 	 */
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
 		if (!worldIn.isRemote)
 		{

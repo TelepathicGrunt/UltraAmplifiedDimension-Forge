@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +19,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class HangingRuins extends Feature<NoFeatureConfig> {

@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,7 +17,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.tileentity.EndPortalTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -28,6 +25,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 
 
@@ -55,12 +53,12 @@ public class AmplifiedPortalBlock extends Block
 		return SHAPE;
 	}
 
-
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.SOLID;
-	}
-
+//
+//	public BlockRenderLayer getRenderLayer()
+//	{
+//		return BlockRenderLayer.SOLID;
+//	}
+//
 
 	/**
 	 * mining portal block in ultra amplified dimension will be denied if it is the highest Amplified Portal Block at x=8,

@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -19,6 +18,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class RegUtil {
     @Nonnull

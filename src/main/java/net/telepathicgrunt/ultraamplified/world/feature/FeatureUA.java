@@ -1,7 +1,5 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
@@ -19,6 +17,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;

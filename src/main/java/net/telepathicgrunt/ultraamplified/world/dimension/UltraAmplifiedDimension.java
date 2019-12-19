@@ -7,7 +7,6 @@ import java.util.function.IntSupplier;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +23,7 @@ import net.minecraftforge.fml.network.FMLHandshakeMessages;
 import net.minecraftforge.fml.network.FMLNetworkConstants;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 @SuppressWarnings("deprecation")

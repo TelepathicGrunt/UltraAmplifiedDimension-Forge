@@ -3,8 +3,6 @@ package net.telepathicgrunt.ultraamplified.blockbehavior;
 
 import java.util.Random;
 
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +22,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
@@ -52,7 +51,7 @@ public class AmplifiedPortalBehavior {
 			{
 				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
-				if(!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && !((PlayerEntity)entityIn).isSneaking())
+				if(!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && !((PlayerEntity)entityIn).isCrouching())
 				{
 					//grabs the capability attached to player for dimension hopping
 					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entityIn.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
@@ -155,13 +154,13 @@ public class AmplifiedPortalBehavior {
 					
 					 //dunno how a sleeping player clicked on the portal but if they do, they wake up
 			         if (((ServerPlayerEntity)entityIn).isSleeping()) {
-			            ((ServerPlayerEntity)entityIn).wakeUpPlayer(true, true, false);
+			            ((ServerPlayerEntity)entityIn).wakeUp();
 			         }
 			         
 	
 					//store current blockpos and dim before teleporting
 					cap.setDim(entityIn.dimension);
-					cap.setPos(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ));
+					cap.setPos(entityIn.getPosition());
 					
 					
 					((ServerPlayerEntity)entityIn).teleport(
@@ -213,7 +212,7 @@ public class AmplifiedPortalBehavior {
 	    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
 	    	}
 
-	    	amplifiedportalfeature.place(worldIn, worldIn.getChunkProvider().getChunkGenerator(), new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
+	    	amplifiedportalfeature.place(worldIn, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
 	 	}
 	}
 
