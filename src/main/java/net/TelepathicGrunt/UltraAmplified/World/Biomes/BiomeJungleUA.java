@@ -3,7 +3,6 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 import java.util.ArrayList;
 import java.util.Random;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
@@ -13,7 +12,6 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenVinesShortUA;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockConcretePowder;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeaves;
@@ -21,12 +19,10 @@ import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -165,7 +161,7 @@ public class BiomeJungleUA extends BiomeExtendedUA
 	    			double noise = MathHelper.clamp((1.0D + GRASS_COLOR_NOISE.getValue((double)pos.east(x).getX() / 60.0D, (double)pos.south(z).getZ() / 60.0D)) / 3.0D, 0.0D, 0.9999D);
 			        
 	    			//used for debugging
-			    	//Log.warn(" d0: "+d0 + " remainder: "+d0%1.5+" result: " + (d0%1.5 < 0.3));
+			    	//UltraAmplified.logger.warn(" d0: "+d0 + " remainder: "+d0%1.5+" result: " + (d0%1.5 < 0.3));
 			    	
 	    			//determines if we should attempt to generate water at this coordinate
 		    		if (noise%1.5 < 0.20)

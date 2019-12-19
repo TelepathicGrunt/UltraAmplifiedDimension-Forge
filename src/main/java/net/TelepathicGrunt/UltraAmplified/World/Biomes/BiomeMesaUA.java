@@ -3,7 +3,6 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockDirt;
@@ -19,8 +18,6 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

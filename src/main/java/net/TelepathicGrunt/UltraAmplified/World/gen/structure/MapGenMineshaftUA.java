@@ -1,8 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeColdBeachUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
@@ -17,7 +14,6 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;

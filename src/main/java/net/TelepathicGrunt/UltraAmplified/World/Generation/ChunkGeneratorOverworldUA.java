@@ -11,7 +11,6 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDungeonsUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSlimeLakeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenCaveCavity;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenNetherBridgeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenRavineUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenScatteredFeatureUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenStrongholdUA;
@@ -21,7 +20,6 @@ import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -32,7 +30,6 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -78,7 +75,7 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     double[] maxLimitRegion;
     double[] depthRegion;
 
-    public ChunkGeneratorOverworldUA(World worldIn, long seed, boolean mapFeaturesEnabledIn, String generatorOptions)
+    public ChunkGeneratorOverworldUA(World worldIn, long seed, boolean mapFeaturesEnabledIn)
     {
         this.worldObj = worldIn;
         this.mapFeaturesEnabled = mapFeaturesEnabledIn;
@@ -141,7 +138,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
                 for (int i2 = 0; i2 < 32; ++i2)
                 {
-                    double d0 = 0.125D;
                     double d1 = this.heightMap[i1 + i2];
                     double d2 = this.heightMap[j1 + i2];
                     double d3 = this.heightMap[k1 + i2];
@@ -153,7 +149,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
                     for (int j2 = 0; j2 < 8; ++j2)
                     {
-                        double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
@@ -161,7 +156,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
                         for (int k2 = 0; k2 < 4; ++k2)
                         {
-                            double d14 = 0.25D;
                             double d16 = (d11 - d10) * 0.25D;
                             double lvt_45_1_ = d10 - d16;
 
@@ -214,7 +208,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 
     public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
     {
-        double d0 = 0.03125D;
         this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(x * 16), (double)(z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
         for (int i = 0; i < 16; ++i)
@@ -310,7 +303,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
                 float f2 = 0.0F;
                 float f3 = 0.0F;
                 float f4 = 0.0F;
-                int i1 = 2;
                 Biome biome = this.biomesForGeneration[k + 2 + (l + 2) * 10];
 
                 for (int j1 = -2; j1 <= 2; ++j1)

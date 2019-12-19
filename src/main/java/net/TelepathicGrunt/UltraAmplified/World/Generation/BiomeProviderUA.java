@@ -2,13 +2,10 @@ package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
 import java.lang.reflect.Field;
 
-import jline.internal.Log;
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
 import net.minecraft.world.gen.layer.GenLayerAddMushroomIsland;
@@ -35,12 +32,6 @@ public class BiomeProviderUA extends BiomeProvider{
     {
 		super();
 		
-		//checks to make sure this biomeProvider is only running with the Ultra Amplified worldtypes
-        if (!(worldType instanceof WorldTypeUA))
-        {
-            throw new RuntimeException("Error: WorldType is not UltraAmplified... How did you get this error?!");
-        }    
-       
         
         this.settings = new ChunkGeneratorSettingsUA();
         
@@ -56,7 +47,7 @@ public class BiomeProviderUA extends BiomeProvider{
 	        genBiomeField.set(this, agenlayer[0]);
         }
         catch(Exception e) {
-        	Log.warn("BiomeProviderUA error with setting genBiome: "+e.getMessage());
+        	UltraAmplified.logger.warn("BiomeProviderUA error with setting genBiome: "+e.getMessage());
         }
         
         try {
@@ -64,7 +55,7 @@ public class BiomeProviderUA extends BiomeProvider{
 	        genBiomeField.set(this, agenlayer[1]);
         }
         catch(Exception e) {
-        	Log.warn("BiomeProviderUA error with setting biomeIndexLayer: "+e.getMessage());
+        	UltraAmplified.logger.warn("BiomeProviderUA error with setting biomeIndexLayer: "+e.getMessage());
         }
     }
 	
@@ -103,7 +94,7 @@ public class BiomeProviderUA extends BiomeProvider{
         int biomeSize = settings.biomeSize;
         int riverSize = 4;
 
-        //Log.warn("Biome size set to: " + i);
+        //UltraAmplified.logger.warn("Biome size set to: " + i);
 
         GenLayer lvt_7_1_ = GenLayerZoom.magnify(1000L, genlayer4, 0);
         GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, lvt_7_1_);

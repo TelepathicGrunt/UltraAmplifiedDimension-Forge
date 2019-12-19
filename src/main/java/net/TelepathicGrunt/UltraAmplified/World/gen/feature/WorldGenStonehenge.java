@@ -3,11 +3,8 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 import java.util.ArrayList;
 import java.util.Random;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -85,7 +82,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, minecraftserver, templatemanager);
 			if(template == null)
 			{
-				Log.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 			
@@ -101,7 +98,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -117,7 +114,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -134,7 +131,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.SIDE, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a side stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a side stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -154,7 +151,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -170,7 +167,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -186,7 +183,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -202,7 +199,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			template = pickStonehengeStyle(StoneHengeType.CORNER, rand, minecraftserver, templatemanager);;
 			if(template == null)
 			{
-				Log.warn("a corner stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a corner stonehenge NTB does not exist!");
 				return false;
 			}
 
@@ -230,7 +227,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			
 			if(template == null)
 			{
-				Log.warn("a center stonehenge NTB does not exist!");
+				UltraAmplified.logger.warn("a center stonehenge NTB does not exist!");
 				return false;
 			}
 			

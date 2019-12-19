@@ -1,6 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
@@ -14,12 +13,12 @@ public class GenLayerBiomeUA extends GenLayer
     //@SuppressWarnings("unchecked")
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry>[] biomes = new java.util.ArrayList[net.minecraftforge.common.BiomeManager.BiomeType.values().length];
 
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> deepOceanReplacedBiomes = new java.util.ArrayList();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> jungleReplacedBiomes = new java.util.ArrayList();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> megaTaigaReplacedBiomes = new java.util.ArrayList();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes = new java.util.ArrayList();
-    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mushroomReplacedBiomes = new java.util.ArrayList();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> deepOceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> jungleReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> megaTaigaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mesaReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
+    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> mushroomReplacedBiomes = new java.util.ArrayList<BiomeEntry>();
     
     
     public GenLayerBiomeUA(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkGeneratorSettingsUA settings)
@@ -130,7 +129,7 @@ public class GenLayerBiomeUA extends GenLayer
 		    
         //this is used to help fill any biome list that is empty due to player turning off all of its biome.
         //otherwise, we will crash if a biome list is empty
-        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = new java.util.ArrayList();
+        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> temporaryBiomeList = new java.util.ArrayList<BiomeEntry>();
         
         //set temp biome list to biome list that isn't empty. Otherwise, set temp to null
         //the biome list will store up to 5 biomes but could go over which means it will need to be trimmed afterwards
@@ -169,7 +168,7 @@ public class GenLayerBiomeUA extends GenLayer
         //for debugging purposes
         /*
         for(BiomeEntry biome : temporaryBiomeList){
-        	Log.warn(biome.biome.getBiomeName());
+        	UltraAmplified.logger.warn(biome.biome.getBiomeName());
         }*/
         
         
@@ -311,7 +310,7 @@ public class GenLayerBiomeUA extends GenLayer
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = biomes[type.ordinal()];
         int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
         int weight = net.minecraftforge.common.BiomeManager.isTypeListModded(type)?nextInt(totalWeight):nextInt(totalWeight / 10) * 10;
-        return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+        return net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
     }
 
     //returns a biome with its weight impacting how often it appears
@@ -321,6 +320,6 @@ public class GenLayerBiomeUA extends GenLayer
         java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = list;
         int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
         int weight = list.size()!=0?nextInt(totalWeight):nextInt(totalWeight / 10) * 10;
-        return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+        return net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
     }
 }

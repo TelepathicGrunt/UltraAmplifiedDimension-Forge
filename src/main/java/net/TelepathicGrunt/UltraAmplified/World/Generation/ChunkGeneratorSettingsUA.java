@@ -1,23 +1,6 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import java.lang.reflect.Type;
-
-import com.google.common.annotations.VisibleForTesting;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.JsonUtils;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
 
 //holds values that is set in configs at start of world generation 
 //May be removed in 1.13 when configs work on a per world basis.

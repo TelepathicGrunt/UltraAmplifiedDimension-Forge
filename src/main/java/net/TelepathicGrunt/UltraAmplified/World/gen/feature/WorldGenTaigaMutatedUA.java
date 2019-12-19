@@ -1,6 +1,7 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockLeaves;

@@ -1,27 +1,17 @@
 package net.TelepathicGrunt.UltraAmplified.Config;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
 @Config.LangKey("ultra_amplified.config.title")
-@Config(modid = UltraAmplified.MOD_ID, type = Type.INSTANCE, name = UltraAmplified.MOD_ID + "_0.4.4")
+@Config(modid = UltraAmplified.MOD_ID, type = Type.INSTANCE, name = UltraAmplified.MOD_ID + "_4.6.0")
 public class UAConfig {
 
 	/*
@@ -32,7 +22,23 @@ public class UAConfig {
 	//Putting this at start of option will put it at top of all options: '\0'+
 	// '\u00a7'+ is used to replace § since § will be turned to gibberish when this mod is ran on Minecraft outside a development environment.
 
+
+
+	@Name("Dimension Options")
+	@Config.Comment({
+		"Special technical controls for the dimension."
+		})
+	public static DimensionSubCategory dimensionOptions = new DimensionSubCategory();
+	public static class DimensionSubCategory {
+		@Name("Dimension ID")
+		@Config.Comment({ 
+			"Change this only if the default ID conflicts with another mod's dimension ID."
+			})
+		@Config.RangeInt(min = -2147483646, max = 2147483647)
+		public int dimensionID = 37047734;
 	
+		//end of dimension subsection
+	}
 	
 	@Name("Structure Options")
 	@Config.Comment({

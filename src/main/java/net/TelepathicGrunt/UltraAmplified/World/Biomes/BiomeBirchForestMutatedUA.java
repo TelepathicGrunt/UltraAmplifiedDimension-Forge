@@ -2,7 +2,6 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;

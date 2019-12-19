@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "ultra_amplified_mod:amplified_portal" }
+        ],
+        "inventory": [
+            { "model": "ultra_amplified_mod:amplified_portal" }
+        ]
+    }
+}

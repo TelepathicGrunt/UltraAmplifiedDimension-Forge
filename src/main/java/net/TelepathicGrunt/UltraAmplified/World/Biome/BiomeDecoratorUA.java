@@ -41,19 +41,19 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        else
 	        {
 	        	//sets the settings for ores and stones
-	            this.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
+	            BiomeDecoratorUA.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
 	            this.chunkPos = pos;
-	            this.dirtGen = new WorldGenMinable(Blocks.DIRT.getDefaultState(), this.chunkProviderSettingsUA.dirtSize);
-	            this.gravelOreGen = new WorldGenMinable(Blocks.GRAVEL.getDefaultState(), this.chunkProviderSettingsUA.gravelSize);
-	            this.graniteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE), this.chunkProviderSettingsUA.graniteSize);
-	            this.dioriteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), this.chunkProviderSettingsUA.dioriteSize);
-	            this.andesiteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE), this.chunkProviderSettingsUA.andesiteSize);
-	            this.coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), this.chunkProviderSettingsUA.coalSize);
-	            this.ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), this.chunkProviderSettingsUA.ironSize);
-	            this.goldGen = new WorldGenMinable(Blocks.GOLD_ORE.getDefaultState(), this.chunkProviderSettingsUA.goldSize);
-	            this.redstoneGen = new WorldGenMinable(Blocks.REDSTONE_ORE.getDefaultState(), this.chunkProviderSettingsUA.redstoneSize);
-	            this.diamondGen = new WorldGenMinable(Blocks.DIAMOND_ORE.getDefaultState(), this.chunkProviderSettingsUA.diamondSize);
-	            this.lapisGen = new WorldGenMinable(Blocks.LAPIS_ORE.getDefaultState(), this.chunkProviderSettingsUA.lapisSize);
+	            this.dirtGen = new WorldGenMinable(Blocks.DIRT.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.dirtSize);
+	            this.gravelOreGen = new WorldGenMinable(Blocks.GRAVEL.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.gravelSize);
+	            this.graniteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE), BiomeDecoratorUA.chunkProviderSettingsUA.graniteSize);
+	            this.dioriteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), BiomeDecoratorUA.chunkProviderSettingsUA.dioriteSize);
+	            this.andesiteGen = new WorldGenMinable(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE), BiomeDecoratorUA.chunkProviderSettingsUA.andesiteSize);
+	            this.coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.coalSize);
+	            this.ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.ironSize);
+	            this.goldGen = new WorldGenMinable(Blocks.GOLD_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.goldSize);
+	            this.redstoneGen = new WorldGenMinable(Blocks.REDSTONE_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.redstoneSize);
+	            this.diamondGen = new WorldGenMinable(Blocks.DIAMOND_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.diamondSize);
+	            this.lapisGen = new WorldGenMinable(Blocks.LAPIS_ORE.getDefaultState(), BiomeDecoratorUA.chunkProviderSettingsUA.lapisSize);
 	            
 	            //actual decorating starts
 	            this.genDecorations(biome, worldIn, random);
@@ -423,7 +423,7 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 	        
 	        
 	        //generates waterfalls and lavafalls
-            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.waterfallCount; ++currentCount)
+            for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.waterfallCount; ++currentCount)
             {
                 int x = random.nextInt(16) + 8;
                 int z = random.nextInt(16) + 8;
@@ -433,7 +433,7 @@ public class BiomeDecoratorUA extends BiomeDecorator{
                 
             }
 
-            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.lavafallCount; ++currentCount)
+            for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.lavafallCount; ++currentCount)
             {
                 int x = random.nextInt(16) + 8;
                 int z = random.nextInt(16) + 8;
@@ -443,7 +443,7 @@ public class BiomeDecoratorUA extends BiomeDecorator{
             }
             
             //if statement is like this to make underground waterfalls not attempt to spawn in every chunk to increase its rarity
-            if (this.chunkProviderSettingsUA.undergroundWaterfallCount != 0 && random.nextInt(this.chunkProviderSettingsUA.undergroundWaterfallCount) == 0)
+            if (BiomeDecoratorUA.chunkProviderSettingsUA.undergroundWaterfallCount != 0 && random.nextInt(BiomeDecoratorUA.chunkProviderSettingsUA.undergroundWaterfallCount) == 0)
             {
                 int x = random.nextInt(16) + 8;
                 int z = random.nextInt(16) + 8;
@@ -453,7 +453,7 @@ public class BiomeDecoratorUA extends BiomeDecorator{
                 new WorldGenLiquidsUA(Blocks.FLOWING_WATER).generate(worldIn, random, blockpos6);
             }
 
-            for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.undergroundLavafallCount; ++currentCount)
+            for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.undergroundLavafallCount; ++currentCount)
             {
                 int x = random.nextInt(16) + 8;
                 int z = random.nextInt(16) + 8;
@@ -480,58 +480,58 @@ public class BiomeDecoratorUA extends BiomeDecorator{
 			
 			//dirt
 	    	if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dirtGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dirtCount, this.dirtGen,
-						this.chunkProviderSettingsUA.dirtMinHeight, this.chunkProviderSettingsUA.dirtMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.dirtCount, this.dirtGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.dirtMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.dirtMaxHeight);
 			
 	    	//gravel
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, gravelOreGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.gravelCount, this.gravelOreGen,
-						this.chunkProviderSettingsUA.gravelMinHeight, this.chunkProviderSettingsUA.gravelMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.gravelCount, this.gravelOreGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.gravelMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.gravelMaxHeight);
 			
 			//diorite
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, dioriteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIORITE))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.dioriteCount, this.dioriteGen,
-						this.chunkProviderSettingsUA.dioriteMinHeight, this.chunkProviderSettingsUA.dioriteMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.dioriteCount, this.dioriteGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.dioriteMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.dioriteMaxHeight);
 			
 			//granite
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, graniteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRANITE))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.graniteCount, this.graniteGen,
-						this.chunkProviderSettingsUA.graniteMinHeight, this.chunkProviderSettingsUA.graniteMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.graniteCount, this.graniteGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.graniteMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.graniteMaxHeight);
 			
 			//andersite
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, andesiteGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.ANDESITE))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.andesiteCount, this.andesiteGen,
-						this.chunkProviderSettingsUA.andesiteMinHeight, this.chunkProviderSettingsUA.andesiteMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.andesiteCount, this.andesiteGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.andesiteMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.andesiteMaxHeight);
 			
 			//coal
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, coalGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.coalCount, this.coalGen,
-						this.chunkProviderSettingsUA.coalMinHeight, this.chunkProviderSettingsUA.coalMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.coalCount, this.coalGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.coalMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.coalMaxHeight);
 			
 			//iron
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, ironGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.ironCount, this.ironGen,
-						this.chunkProviderSettingsUA.ironMinHeight, this.chunkProviderSettingsUA.ironMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.ironCount, this.ironGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.ironMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.ironMaxHeight);
 			
 			//gold
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, goldGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.goldCount, this.goldGen,
-						this.chunkProviderSettingsUA.goldMinHeight, this.chunkProviderSettingsUA.goldMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.goldCount, this.goldGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.goldMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.goldMaxHeight);
 			
 			//redstone
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, redstoneGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.redstoneCount, this.redstoneGen,
-						this.chunkProviderSettingsUA.redstoneMinHeight, this.chunkProviderSettingsUA.redstoneMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.redstoneCount, this.redstoneGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.redstoneMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.redstoneMaxHeight);
 			
 			//diamond
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, diamondGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND))
-				this.genStandardOre1(worldIn, random, this.chunkProviderSettingsUA.diamondCount, this.diamondGen,
-						this.chunkProviderSettingsUA.diamondMinHeight, this.chunkProviderSettingsUA.diamondMaxHeight);
+				this.genStandardOre1(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.diamondCount, this.diamondGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.diamondMinHeight, BiomeDecoratorUA.chunkProviderSettingsUA.diamondMaxHeight);
 			
 			//lapis
 			if (net.minecraftforge.event.terraingen.TerrainGen.generateOre(worldIn, random, lapisGen, chunkPos, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.LAPIS))
-				this.genStandardOre2(worldIn, random, this.chunkProviderSettingsUA.lapisCount, this.lapisGen,
-						this.chunkProviderSettingsUA.lapisCenterHeight, this.chunkProviderSettingsUA.lapisSpread);
+				this.genStandardOre2(worldIn, random, BiomeDecoratorUA.chunkProviderSettingsUA.lapisCount, this.lapisGen,
+						BiomeDecoratorUA.chunkProviderSettingsUA.lapisCenterHeight, BiomeDecoratorUA.chunkProviderSettingsUA.lapisSpread);
 			
 			
 			net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Post(worldIn, random, chunkPos));
