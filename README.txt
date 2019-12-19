@@ -13,6 +13,12 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        
        
        
+    (V.4.6.0 Changes)
+    
+    Major changes:
+·Backported Ultra Amplified dimension from 1.14. This includes the portal block and frame. To create the portal, use Smooth Stone Slab in place of the Polished Andersite Slab since 1.12 does not have Polished Andersite Slabs. Have fun! 
+       
+       
     (V.4.4 Changes)
     
      Config:

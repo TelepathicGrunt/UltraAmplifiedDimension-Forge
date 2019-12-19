@@ -4,9 +4,6 @@ import java.util.Random;
 
 import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureMineshaftPiecesUA.Room;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureMineshaftPieces;
 import net.minecraft.world.gen.structure.StructureStart;
 
 public class StructureMineshaftStartUA extends StructureStart

@@ -1,29 +1,15 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockConcretePowder;
 import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockStainedGlass;
-import net.minecraft.block.BlockStainedHardenedClay;
-import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -69,7 +55,7 @@ public class WorldGenSunShrine extends WorldGenerator{
 			
 			if(template == null)
 			{
-				Log.warn("sunshrine NTB does not exist!");
+				UltraAmplified.logger.warn("sunshrine NTB does not exist!");
 				return false;
 			}
 			

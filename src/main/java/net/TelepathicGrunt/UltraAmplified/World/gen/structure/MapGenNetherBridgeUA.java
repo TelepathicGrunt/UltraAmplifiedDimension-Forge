@@ -1,10 +1,10 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
-import com.google.common.collect.Lists;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -12,7 +12,6 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;

@@ -1,6 +1,7 @@
 package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
+
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

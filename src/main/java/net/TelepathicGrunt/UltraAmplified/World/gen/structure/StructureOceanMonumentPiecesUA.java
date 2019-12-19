@@ -7,14 +7,12 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityGuardian;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -755,8 +753,8 @@ public class StructureOceanMonumentPiecesUA
                     }
                 }
                 
-                Log.warn("x = "+this.boundingBox.minX+", " +this.boundingBox.maxX+" y = "+ this.boundingBox.minZ+", "+this.boundingBox.maxZ);
-				Log.warn("j = "+j+" Offset by "+ (this.horizontalPos - this.boundingBox.minY + yOffset));
+                UltraAmplified.logger.warn("x = "+this.boundingBox.minX+", " +this.boundingBox.maxX+" y = "+ this.boundingBox.minZ+", "+this.boundingBox.maxZ);
+				UltraAmplified.logger.warn("j = "+j+" Offset by "+ (this.horizontalPos - this.boundingBox.minY + yOffset));
 				
                 if (j == 0)
                 {
@@ -811,9 +809,9 @@ public class StructureOceanMonumentPiecesUA
 
 						if (astructureoceanmonumentpieces$roomdefinition[l4] != null) {
 							for (EnumFacing enumfacing : EnumFacing.values()) {
-								int i1 = k2 + enumfacing.getXOffset();
-								int j1 = i4 + enumfacing.getYOffset();
-								int k1 = j3 + enumfacing.getZOffset();
+								int i1 = k2 + enumfacing.getFrontOffsetX();
+								int j1 = i4 + enumfacing.getFrontOffsetY();
+								int k1 = j3 + enumfacing.getFrontOffsetZ();
 
 								if (i1 >= 0 && i1 < 5 && k1 >= 0 && k1 < 5 && j1 >= 0 && j1 < 3) {
 									int l1 = getRoomIndex(i1, j1, k1);
@@ -884,7 +882,7 @@ public class StructureOceanMonumentPiecesUA
 					int l5 = p_175836_1_.nextInt(6);
 
 					if (structureoceanmonumentpieces$roomdefinition3.hasOpening[l5]) {
-						int i6 = EnumFacing.byIndex(l5).getOpposite().getIndex();
+						int i6 = EnumFacing.getFront(l5).getOpposite().getIndex();
 						structureoceanmonumentpieces$roomdefinition3.hasOpening[l5] = false;
 						structureoceanmonumentpieces$roomdefinition3.connections[l5].hasOpening[i6] = false;
 

@@ -1,19 +1,17 @@
 package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeBambooForestUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeBirchForestMutatedUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeColdBeachUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeForestUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeBirchForestMutatedUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHillsUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeJungleUA;
@@ -21,21 +19,17 @@ import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMushroomIslandUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomePlainsUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeRoofedForestMutatedUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaMutatedUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeStoneBeachUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
-import net.minecraft.util.ObjectIntIdentityMap;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeProvider;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class BiomeInit {
 	

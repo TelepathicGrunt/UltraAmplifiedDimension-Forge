@@ -335,8 +335,8 @@ public class ComponentScatteredFeaturePiecesUA
 	            {
 	                if (!this.hasPlacedChest[enumfacing.getHorizontalIndex()])
 	                {
-	                    int k1 = enumfacing.getXOffset() * 2;
-	                    int l1 = enumfacing.getZOffset() * 2;
+	                    int k1 = enumfacing.getFrontOffsetX() * 2;
+	                    int l1 = enumfacing.getFrontOffsetZ() * 2;
 	                    this.hasPlacedChest[enumfacing.getHorizontalIndex()] = this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 10 + k1, -11, 10 + l1, LootTableList.CHESTS_DESERT_PYRAMID);
 	                }
 	            }

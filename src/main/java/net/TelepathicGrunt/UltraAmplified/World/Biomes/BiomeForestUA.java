@@ -2,11 +2,9 @@ package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import jline.internal.Log;
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchTreeUA;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
 import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;

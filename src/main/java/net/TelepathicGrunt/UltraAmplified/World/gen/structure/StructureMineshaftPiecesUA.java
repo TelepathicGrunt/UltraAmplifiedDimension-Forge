@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Lists;
 
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA.Type;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockEndRod;
 import net.minecraft.block.BlockPlanks;
@@ -446,7 +447,7 @@ public class StructureMineshaftPiecesUA
                 {
                     this.fillWithBlocks(worldIn, boundingBox, x, y, z, p_189921_7_, y, z, iblockstate, iblockstate2, false);
                     
-                    if(this.mineShaftType == mineShaftType.END) {
+                    if(this.mineShaftType == Type.END) {
                     		if(random.nextFloat() < 0.08F) {
                     		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z - 1, Blocks.END_ROD.getDefaultState().withProperty(BlockEndRod.FACING, EnumFacing.SOUTH));
                     		this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z + 1, Blocks.END_ROD.getDefaultState().withProperty(BlockEndRod.FACING, EnumFacing.NORTH));
@@ -457,7 +458,7 @@ public class StructureMineshaftPiecesUA
 		                    this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().withProperty(BlockEndRod.FACING, EnumFacing.NORTH));
                     	}
                     }
-                    else if(this.mineShaftType == mineShaftType.HELL) 
+                    else if(this.mineShaftType == Type.HELL) 
                     {
                     	this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.15F, x + 1, y, z, Blocks.GLOWSTONE.getDefaultState());
                     }
@@ -498,7 +499,7 @@ public class StructureMineshaftPiecesUA
         {
             super.readStructureFromNBT(tagCompound, p_143011_2_);
             this.isMultipleFloors = tagCompound.getBoolean("tf");
-            this.corridorDirection = EnumFacing.byHorizontalIndex(tagCompound.getInteger("D"));
+            this.corridorDirection = EnumFacing.getHorizontal(tagCompound.getInteger("D"));
         }
 
         public Cross(int p_i47139_1_, Random p_i47139_2_, StructureBoundingBox p_i47139_3_, @Nullable EnumFacing p_i47139_4_, MapGenMineshaftUA.Type p_i47139_5_)
