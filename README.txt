@@ -15,7 +15,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified mod changelog |
        
        
-    (V.6.12.1 Changes) (1.14.4 Minecraft)
+    (V.6.12.2 Changes) (1.14.4 Minecraft)
     
     Blocks: 
 ·Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if their coordinate is 8 in x OR z instead of x AND z. Now only highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
