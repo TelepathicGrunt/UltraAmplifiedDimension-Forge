@@ -1,7 +1,5 @@
 package net.telepathicgrunt.ultraamplified.blocks;
 
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -16,6 +14,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Bus.MOD)

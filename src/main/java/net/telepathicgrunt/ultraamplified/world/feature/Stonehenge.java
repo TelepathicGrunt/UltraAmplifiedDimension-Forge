@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,6 +25,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class Stonehenge extends Feature<NoFeatureConfig> {

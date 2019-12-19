@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Rotation;
@@ -23,6 +22,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class WitchHutUA extends Structure<NoFeatureConfig> {

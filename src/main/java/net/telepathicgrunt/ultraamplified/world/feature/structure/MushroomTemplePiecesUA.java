@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
-import com.telepathicgrunt.ultraamplified.UltraAmplified;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,6 +23,7 @@ import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class MushroomTemplePiecesUA {
