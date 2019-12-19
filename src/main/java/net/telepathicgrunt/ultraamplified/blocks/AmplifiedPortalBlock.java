@@ -101,7 +101,7 @@ public class AmplifiedPortalBlock extends Block
 			{
 
 				// if we are at default portal coordinate
-				if (pos.getX() == 8 || pos.getZ() == 8)
+				if (pos.getX() == 8 && pos.getZ() == 8)
 				{
 
 					// finds the highest portal at world origin
