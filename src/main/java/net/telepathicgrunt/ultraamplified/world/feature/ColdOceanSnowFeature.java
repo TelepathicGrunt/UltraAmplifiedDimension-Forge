@@ -26,45 +26,45 @@ public class ColdOceanSnowFeature extends Feature<NoFeatureConfig> {
 	}
 
 public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random p_212245_3_, BlockPos blockPos, NoFeatureConfig p_212245_5_) {
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+	      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
+	      BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
 	      for(int xOffset = 0; xOffset < 16; xOffset++) {
 	         for(int zOffset = 0; zOffset < 16; zOffset++) {
 	            int x = blockPos.getX() + xOffset;
 	            int z = blockPos.getZ() + zOffset;
 	            int y = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, x, z);
-	            blockpos$mutableblockpos.setPos(x, y, z);
-	            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.DOWN, 1);
-	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos);
+	            blockpos$Mutable.setPos(x, y, z);
+	            blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN, 1);
+	            Biome biome = worldIn.getBiome(blockpos$Mutable);
 	            
 	            //decorates only cold ocean with just snow
 	            if(biome == BiomeInit.COLD_OCEAN || biome == BiomeInit.DEEP_COLD_OCEAN) {
-	            	if (blockpos$mutableblockpos.getY() >= 0 && blockpos$mutableblockpos.getY() < 256 && worldIn.getLightFor(LightType.BLOCK, blockpos$mutableblockpos) < 10) {
+	            	if (blockpos$Mutable.getY() >= 0 && blockpos$Mutable.getY() < 256 && worldIn.getLightFor(LightType.BLOCK, blockpos$Mutable) < 10) {
 		                
-	            		BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos);
-		                if (iblockstate.isAir(worldIn, blockpos$mutableblockpos) && Blocks.SNOW.getDefaultState().isValidPosition(worldIn, blockpos$mutableblockpos)) {
+	            		BlockState iblockstate = worldIn.getBlockState(blockpos$Mutable);
+		                if (iblockstate.isAir(worldIn, blockpos$Mutable) && Blocks.SNOW.getDefaultState().isValidPosition(worldIn, blockpos$Mutable)) {
 		                   
-		                	worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-			                BlockState iblockstate2 = worldIn.getBlockState(blockpos$mutableblockpos1);
+		                	worldIn.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
+			                BlockState iblockstate2 = worldIn.getBlockState(blockpos$Mutable1);
 			                
 			                if (iblockstate2.has(SnowyDirtBlock.SNOWY)) {
-			                   worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate2.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
+			                   worldIn.setBlockState(blockpos$Mutable1, iblockstate2.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 			                }
 		                }
 	            	}
 	            }
 	            //does normal default snow/ice for non-cold ocean bordering this biome
 	            else {
-	            	 if (biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false)) {
-	            		 worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
+	            	 if (biome.doesWaterFreeze(worldIn, blockpos$Mutable1, false)) {
+	            		 worldIn.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
 	                  }
 
-	                  if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
-	                	  worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-	                     BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
+	                  if (biome.doesSnowGenerate(worldIn, blockpos$Mutable)) {
+	                	  worldIn.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
+	                     BlockState iblockstate = worldIn.getBlockState(blockpos$Mutable1);
 	                     if (iblockstate.has(SnowyDirtBlock.SNOWY)) {
-	                    	 worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
+	                    	 worldIn.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 	                     }
 	                  }
 	            }

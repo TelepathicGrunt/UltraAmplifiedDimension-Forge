@@ -26,38 +26,38 @@ public class IceAndSnowAtAllLayer extends Feature<NoFeatureConfig> {
 	}
 
 public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig config) {
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+	      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
+	      BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
 	      for(int xOffset = 0; xOffset < 16; ++xOffset) {
 	         for(int zOffset = 0; zOffset < 16; ++zOffset) {
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
-	            Biome biome = worldIn.getBiome(blockpos$mutableblockpos.setPos(x, 60, z));
+	            Biome biome = worldIn.getBiome(blockpos$Mutable.setPos(x, 60, z));
 	            
 		         for(int y = 256; y > ConfigUA.seaLevel-1; --y) {
 		        	 
-	        		blockpos$mutableblockpos.setPos(x, y, z);
-		            blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.DOWN, 1);
+	        		blockpos$Mutable.setPos(x, y, z);
+		            blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN, 1);
 		            
 		            
-		        	if(worldIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR &&
-		        	    worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() != Material.AIR) 
+		        	if(worldIn.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR &&
+		        	    worldIn.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) 
 		        	{
 		        		//does not freeze top of Cold Ocean and Deep Cold Ocean biomes
-			            if (!worldIn.getBlockState(blockpos$mutableblockpos1).getFluidState().isEmpty() &&
-			            	biome.doesWaterFreeze(worldIn, blockpos$mutableblockpos1, false) &&
+			            if (!worldIn.getBlockState(blockpos$Mutable1).getFluidState().isEmpty() &&
+			            	biome.doesWaterFreeze(worldIn, blockpos$Mutable1, false) &&
 			            	biome != BiomeInit.COLD_OCEAN &&
 			            	biome != BiomeInit.DEEP_COLD_OCEAN) 
 			            {
-			               worldIn.setBlockState(blockpos$mutableblockpos1, Blocks.ICE.getDefaultState(), 2);
+			               worldIn.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
 			            }
 			            
-			            if (biome.doesSnowGenerate(worldIn, blockpos$mutableblockpos)) {
-			               worldIn.setBlockState(blockpos$mutableblockpos, Blocks.SNOW.getDefaultState(), 2);
-			               BlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos1);
+			            if (biome.doesSnowGenerate(worldIn, blockpos$Mutable)) {
+			               worldIn.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
+			               BlockState iblockstate = worldIn.getBlockState(blockpos$Mutable1);
 			               if (iblockstate.has(SnowyDirtBlock.SNOWY)) {
-			                  worldIn.setBlockState(blockpos$mutableblockpos1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
+			                  worldIn.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 			               }
 			            }
 

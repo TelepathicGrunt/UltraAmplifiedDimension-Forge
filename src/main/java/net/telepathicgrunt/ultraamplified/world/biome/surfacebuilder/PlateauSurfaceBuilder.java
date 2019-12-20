@@ -29,15 +29,15 @@ public class PlateauSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 
 		BlockState iblockstate = topBlock;
 		BlockState iblockstate1 = middleBlock;
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		int bottomLayerNoise = -1;
 		int noiseThing = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		int x = xStart & 15;
 		int z = zStart & 15;
 
 		for (int y = startHeight; y >= 0; --y) {
-			blockpos$mutableblockpos.setPos(x, y, z);
-			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+			blockpos$Mutable.setPos(x, y, z);
+			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
 			if (iblockstate2.getMaterial() == Material.AIR) {
 				bottomLayerNoise = -1;
 			} else if (iblockstate2.getBlock() == defaultBlock.getBlock()) {
@@ -51,41 +51,41 @@ public class PlateauSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 					}
 
 					if (y < seaLevel && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
-						if (biomeIn.getTemperature(blockpos$mutableblockpos.setPos(xStart, y, zStart)) < 0.15F) {
+						if (biomeIn.getTemperature(blockpos$Mutable.setPos(xStart, y, zStart)) < 0.15F) {
 							iblockstate = Blocks.ICE.getDefaultState();
 						} else {
 							iblockstate = defaultFluid;
 						}
 
-						blockpos$mutableblockpos.setPos(x, y, z);
+						blockpos$Mutable.setPos(x, y, z);
 					}
 
 					bottomLayerNoise = noiseThing;
 					if (y >= seaLevel - 1) {
-						chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+						chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
 					} else if (y < seaLevel - 7 - noiseThing) {
 						iblockstate = Blocks.AIR.getDefaultState();
 						iblockstate1 = defaultBlock;
-						chunkIn.setBlockState(blockpos$mutableblockpos, bottomBlock, false);
+						chunkIn.setBlockState(blockpos$Mutable, bottomBlock, false);
 					} else {
-						chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+						chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
 					}
 				} else if (bottomLayerNoise > 0) {
 					--bottomLayerNoise;
-					chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+					chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
 				}
 			}
 			
 			//creates pillars under ledges
 			if(y < 255 && y > 0) {
-				Material materialAbove2 = chunkIn.getBlockState(blockpos$mutableblockpos.up(2)).getMaterial();
-				Material materialAbove = chunkIn.getBlockState(blockpos$mutableblockpos.up()).getMaterial();
-				BlockState currentBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
+				Material materialAbove2 = chunkIn.getBlockState(blockpos$Mutable.up(2)).getMaterial();
+				Material materialAbove = chunkIn.getBlockState(blockpos$Mutable.up()).getMaterial();
+				BlockState currentBlock = chunkIn.getBlockState(blockpos$Mutable);
 				
 				//at bottom of ledge
 				if(!currentBlock.isSolid() && materialAbove != Material.AIR && materialAbove2 != Material.AIR) {
 						// sets middle block to start making pillar
-						chunkIn.setBlockState(blockpos$mutableblockpos, middleBlock, false);
+						chunkIn.setBlockState(blockpos$Mutable, middleBlock, false);
 				}
 				
 			}

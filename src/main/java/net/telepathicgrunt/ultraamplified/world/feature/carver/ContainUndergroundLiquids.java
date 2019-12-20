@@ -58,20 +58,20 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 
 		boolean notContainedFlag;
 		BlockState currentblock;
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(pos);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		for (int x = -7; x < 9; ++x) {
 			for (int z = -7; z < 9; ++z) {
 
 				for (int y = 61; y >= 10; y--) {
 
-					blockpos$mutableblockpos.setPos(pos.getX() + x, 0, pos.getZ() + z);
-					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
+					blockpos$Mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
+					currentblock = worldIn.getBlockState(blockpos$Mutable.up(y));
 
 					// move down until we hit an air block
 					while (currentblock != Blocks.AIR.getDefaultState() && y > 11) {
 						y--;
-						currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up(y));
+						currentblock = worldIn.getBlockState(blockpos$Mutable.up(y));
 					}
 					
 					//checks one last time at y = 11 to see if we should quit now
@@ -80,26 +80,26 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					}
 
 					// y value is now fully set for rest of code
-					blockpos$mutableblockpos.setPos(pos.getX() + x, y, pos.getZ() + z);
+					blockpos$Mutable.setPos(pos.getX() + x, y, pos.getZ() + z);
 
 					// checks to see if we are touching a liquid block
 					notContainedFlag = false;
 
 					for (Direction face : Direction.Plane.HORIZONTAL) {
 
-						currentblock = worldIn.getBlockState(blockpos$mutableblockpos.offset(face));
+						currentblock = worldIn.getBlockState(blockpos$Mutable.offset(face));
 						if (!currentblock.getFluidState().isEmpty()) {
 							notContainedFlag = true;
 						}
 					}
 
-					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.up());
+					currentblock = worldIn.getBlockState(blockpos$Mutable.up());
 					if (!currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 
-					currentblock = worldIn.getBlockState(blockpos$mutableblockpos.down());
-					if (blockpos$mutableblockpos.down().getY() > 10 && !currentblock.getFluidState().isEmpty()) {
+					currentblock = worldIn.getBlockState(blockpos$Mutable.down());
+					if (blockpos$Mutable.down().getY() > 10 && !currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 
@@ -107,12 +107,12 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					if (notContainedFlag) {
 						
 						//grabs what block to use based on what biome we are in
-						replacementBlock = fillerBiomeMap.get(worldIn.getBiome(blockpos$mutableblockpos));
+						replacementBlock = fillerBiomeMap.get(worldIn.func_226691_t_(blockpos$Mutable));
 						if (replacementBlock == null) {
 							replacementBlock = STONE;
 						}
 
-						worldIn.setBlockState(blockpos$mutableblockpos, replacementBlock, 2);
+						worldIn.setBlockState(blockpos$Mutable, replacementBlock, 2);
 					}
 				}
 			}

@@ -42,7 +42,7 @@ public class Column extends Feature<ColumnBlocksConfig>
      	}
     	
     	setSeed(rand.nextLong());
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(position);
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
     	int minWidth = 3;
     	int maxWidth = 10;
     	int currentHeight = 0;
@@ -52,28 +52,28 @@ public class Column extends Feature<ColumnBlocksConfig>
     	
     	//checks to see if position is acceptable for pillar gen
         //finds ceiling
-        while (!worldIn.getBlockState(blockpos$mutableblockpos.up(currentHeight)).isSolid())
+        while (!worldIn.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too high for column to generate
-        	if(blockpos$mutableblockpos.up(currentHeight).getY() > 254) {
+        	if(blockpos$Mutable.up(currentHeight).getY() > 254) {
         		return false;
         	}
         	currentHeight+=2;
         }
-        ceilingHeight = blockpos$mutableblockpos.up(currentHeight).getY();
+        ceilingHeight = blockpos$Mutable.up(currentHeight).getY();
         
         
         //find floor
         currentHeight = 0;
-        while (!worldIn.getBlockState(blockpos$mutableblockpos.up(currentHeight)).isSolid())
+        while (!worldIn.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too low for column to generate
-        	if(blockpos$mutableblockpos.up(currentHeight).getY() < 50) {
+        	if(blockpos$Mutable.up(currentHeight).getY() < 50) {
         		return false;
         	}
         	currentHeight-=2;
         }
-        floorHeight = blockpos$mutableblockpos.up(currentHeight).getY();
+        floorHeight = blockpos$Mutable.up(currentHeight).getY();
         
         
         heightDiff = ceilingHeight - floorHeight;
@@ -101,8 +101,8 @@ public class Column extends Feature<ColumnBlocksConfig>
                 int xDiff = x - position.getX();
                 int zDiff = z - position.getZ();
             	if(xDiff * xDiff + zDiff * zDiff <= (widthAtHeight) * (widthAtHeight)) {
-                    BlockState block1 = worldIn.getBlockState(blockpos$mutableblockpos.setPos(x, ceilingHeight + 3, z));
-                    BlockState block2 = worldIn.getBlockState(blockpos$mutableblockpos.setPos(x, floorHeight - 2, z));
+                    BlockState block1 = worldIn.getBlockState(blockpos$Mutable.setPos(x, ceilingHeight + 3, z));
+                    BlockState block2 = worldIn.getBlockState(blockpos$Mutable.setPos(x, floorHeight - 2, z));
                     
                     //there is not enough land to contain bases of pillar
                     if(!block1.isSolid() || !block2.isSolid()) {
@@ -153,7 +153,7 @@ public class Column extends Feature<ColumnBlocksConfig>
 	            {
 	                int xDiff = x - position.getX();
 	                int zDiff = z - position.getZ();
-                    blockpos$mutableblockpos.setPos(x, y + floorHeight, z);
+                    blockpos$Mutable.setPos(x, y + floorHeight, z);
                     
                 
                 	//scratches the surface for more imperfection
@@ -173,11 +173,11 @@ public class Column extends Feature<ColumnBlocksConfig>
                     int xzDiffSquared = (xDiff * xDiff) + (zDiff * zDiff);
                     if (xzDiffSquaredStretched <= (currentWidth-1) * (currentWidth-1))
 	                {
-                        BlockState block = worldIn.getBlockState(blockpos$mutableblockpos);
+                        BlockState block = worldIn.getBlockState(blockpos$Mutable);
 
                         if (!block.isSolid())
                         {
-                            worldIn.setBlockState(blockpos$mutableblockpos, blocksConfig.insideBlock, 2);
+                            worldIn.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
                         }
                     }
 	                //We are at non-pillar space 
@@ -186,11 +186,11 @@ public class Column extends Feature<ColumnBlocksConfig>
 	                	//top block followed by 4 middle blocks below that
 	                	for(int downward = 0; downward < 6 && y - downward >= -3; downward++) 
 	                	{
-	                        BlockState block = worldIn.getBlockState(blockpos$mutableblockpos.down(downward));
-	                       // BlockState blockBelow = worldIn.getBlockState(blockpos$mutableblockpos.down(downward+1));
+	                        BlockState block = worldIn.getBlockState(blockpos$Mutable.down(downward));
+	                       // BlockState blockBelow = worldIn.getBlockState(blockpos$Mutable.down(downward+1));
 	                        if (block == blocksConfig.insideBlock)
 	                        {
-	                            worldIn.setBlockState(blockpos$mutableblockpos.down(downward), downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
+	                            worldIn.setBlockState(blockpos$Mutable.down(downward), downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
 	                        }
 	                	}
                     }

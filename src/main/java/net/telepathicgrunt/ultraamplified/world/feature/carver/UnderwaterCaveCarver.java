@@ -77,49 +77,49 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 	}
 
 	protected boolean carveBlock(IChunk chunkIn, BitSet carvingMask, Random randomIn,
-			BlockPos.MutableBlockPos mutableBlockPosIn, 
-			BlockPos.MutableBlockPos p_222703_5_,
-			BlockPos.MutableBlockPos p_222703_6_, 
+			BlockPos.Mutable MutableIn, 
+			BlockPos.Mutable p_222703_5_,
+			BlockPos.Mutable p_222703_6_, 
 			int minHeight, int chunkX, int chunkZ, int x, int z, int maskY, int y,
 			int atomicBoolean, AtomicBoolean p_222703_15_) 
 	{
-		return carvingBlock(this, chunkIn, carvingMask, randomIn, mutableBlockPosIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
+		return carvingBlock(this, chunkIn, carvingMask, randomIn, MutableIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
 	}
 
 	protected static boolean carvingBlock(WorldCarver<?> worldCarver, IChunk chunkIn, BitSet carvingMask,
-			Random randomIn, BlockPos.MutableBlockPos mutableBlockPosIn, 
+			Random randomIn, BlockPos.Mutable MutableIn, 
 			int minHeight, int chunkX, int chunkZ, int xStart, int zStart, int maskY, int y, int atomicBoolean) 
 	{
 		if (y >= minHeight) {
 			return false;
 		} else {
-			mutableBlockPosIn.setPos(xStart, y, zStart);
+			MutableIn.setPos(xStart, y, zStart);
 
-			BlockState fillerBlock = fillerBiomeMap.get(chunkIn.getBiome(mutableBlockPosIn));
+			BlockState fillerBlock = fillerBiomeMap.get(chunkIn.getWorldForge().func_226691_t_(MutableIn));
 			if (fillerBlock == null) {
 				fillerBlock = STONE;
 			}
 
-			BlockState blockstate = chunkIn.getBlockState(mutableBlockPosIn);
+			BlockState blockstate = chunkIn.getBlockState(MutableIn);
 			if (!CARVABLE_BLOCKS.contains(blockstate)) {
 				return false;
 			} else if (y == 10) {
 				float f = randomIn.nextFloat();
 				if ((double) f < 0.25D) {
-					chunkIn.setBlockState(mutableBlockPosIn, Blocks.MAGMA_BLOCK.getDefaultState(), false);
-					chunkIn.getBlocksToBeTicked().scheduleTick(mutableBlockPosIn, Blocks.MAGMA_BLOCK, 0);
+					chunkIn.setBlockState(MutableIn, Blocks.MAGMA_BLOCK.getDefaultState(), false);
+					chunkIn.getBlocksToBeTicked().scheduleTick(MutableIn, Blocks.MAGMA_BLOCK, 0);
 				} else {
-					chunkIn.setBlockState(mutableBlockPosIn, Blocks.OBSIDIAN.getDefaultState(), false);
+					chunkIn.setBlockState(MutableIn, Blocks.OBSIDIAN.getDefaultState(), false);
 				}
 
 				return true;
 			} else if (y < 10) {
-				chunkIn.setBlockState(mutableBlockPosIn, Blocks.LAVA.getDefaultState(), false);
+				chunkIn.setBlockState(MutableIn, Blocks.LAVA.getDefaultState(), false);
 				return false;
 			} else {
 
-				mutableBlockPosIn.setPos(xStart, y, zStart);
-				chunkIn.setBlockState(mutableBlockPosIn, WATER.getBlockState(), false);
+				MutableIn.setPos(xStart, y, zStart);
+				chunkIn.setBlockState(MutableIn, WATER.getBlockState(), false);
 
 				return true;
 			}

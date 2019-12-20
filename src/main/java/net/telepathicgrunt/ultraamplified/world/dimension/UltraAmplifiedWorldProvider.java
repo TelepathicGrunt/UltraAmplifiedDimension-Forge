@@ -20,7 +20,7 @@ import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 public class UltraAmplifiedWorldProvider extends Dimension{
 
     public UltraAmplifiedWorldProvider(World worldIn, DimensionType typeIn) {
-		super(worldIn, typeIn);
+		super(worldIn, typeIn, 1.0f); //set 1.0f. I think it has to do with maximum brightness?
     }
 
 	@Override

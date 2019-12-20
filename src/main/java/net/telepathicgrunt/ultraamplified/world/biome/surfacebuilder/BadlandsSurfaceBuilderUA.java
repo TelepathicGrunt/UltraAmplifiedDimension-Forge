@@ -46,12 +46,12 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
       int l = -1;
       boolean flag1 = false;
       int i1 = 0;
-      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
       for(int j1 = startHeight; j1 >= 0; --j1) {
          if (i1 < 15) {
-            blockpos$mutableblockpos.setPos(i, j1, j);
-            BlockState blockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+            blockpos$Mutable.setPos(i, j1, j);
+            BlockState blockstate2 = chunkIn.getBlockState(blockpos$Mutable);
             if (blockstate2.getMaterial() == Material.AIR) {
                l = -1;
             } else if (blockstate2.getBlock() == defaultBlock.getBlock()) {
@@ -71,8 +71,8 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
 
                   l = k + Math.max(0, j1 - seaLevel);
                   if (j1 >= seaLevel - 1) {
-                     if (j1 > seaLevel + 3 + k && chunkIn.getBlockState(blockpos$mutableblockpos.down()).getMaterial() != Material.AIR) {
-                         chunkIn.setBlockState(blockpos$mutableblockpos, biomeIn.getSurfaceBuilderConfig().getTop(), false);
+                     if (j1 > seaLevel + 3 + k && chunkIn.getBlockState(blockpos$Mutable.down()).getMaterial() != Material.AIR) {
+                         chunkIn.setBlockState(blockpos$Mutable, biomeIn.getSurfaceBuilderConfig().getTop(), false);
                          flag1 = true;
                      } else {
                     	 BlockState blockstate3;
@@ -86,21 +86,21 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
                             blockstate3 = ORANGE_TERRACOTTA;
                          }
 
-                         chunkIn.setBlockState(blockpos$mutableblockpos, blockstate3, false);
+                         chunkIn.setBlockState(blockpos$Mutable, blockstate3, false);
                      }
                   } else {
-                     chunkIn.setBlockState(blockpos$mutableblockpos, blockstate1, false);
+                     chunkIn.setBlockState(blockpos$Mutable, blockstate1, false);
                      Block block = blockstate1.getBlock();
                      if (block == Blocks.WHITE_TERRACOTTA || block == Blocks.ORANGE_TERRACOTTA || block == Blocks.MAGENTA_TERRACOTTA || block == Blocks.LIGHT_BLUE_TERRACOTTA || block == Blocks.YELLOW_TERRACOTTA || block == Blocks.LIME_TERRACOTTA || block == Blocks.PINK_TERRACOTTA || block == Blocks.GRAY_TERRACOTTA || block == Blocks.LIGHT_GRAY_TERRACOTTA || block == Blocks.CYAN_TERRACOTTA || block == Blocks.PURPLE_TERRACOTTA || block == Blocks.BLUE_TERRACOTTA || block == Blocks.BROWN_TERRACOTTA || block == Blocks.GREEN_TERRACOTTA || block == Blocks.RED_TERRACOTTA || block == Blocks.BLACK_TERRACOTTA) {
-                        chunkIn.setBlockState(blockpos$mutableblockpos, ORANGE_TERRACOTTA, false);
+                        chunkIn.setBlockState(blockpos$Mutable, ORANGE_TERRACOTTA, false);
                      }
                   }
                } else if (l > 0) {
                   --l;
                   if (flag1) {
-                     chunkIn.setBlockState(blockpos$mutableblockpos, ORANGE_TERRACOTTA, false);
+                     chunkIn.setBlockState(blockpos$Mutable, ORANGE_TERRACOTTA, false);
                   } else {
-                     chunkIn.setBlockState(blockpos$mutableblockpos, this.func_215431_a(x, j1, z), false);
+                     chunkIn.setBlockState(blockpos$Mutable, this.func_215431_a(x, j1, z), false);
                   }
                }
 
@@ -117,9 +117,9 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
       }
 
       if (this.field_215433_b != seed || this.field_215435_c == null || this.field_215437_d == null) {
-         Random random = new SharedSeedRandom(seed);
-         this.field_215435_c = new PerlinNoiseGenerator(random, 4);
-         this.field_215437_d = new PerlinNoiseGenerator(random, 1);
+    	 SharedSeedRandom random = new SharedSeedRandom(seed);
+         this.field_215435_c = new PerlinNoiseGenerator(random, 3, 0); 
+         this.field_215437_d = new PerlinNoiseGenerator(random, 0, 0); 
       }
 
       this.field_215433_b = seed;
@@ -128,8 +128,8 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
    protected void func_215430_b(long p_215430_1_) {
       this.field_215432_a = new BlockState[64];
       Arrays.fill(this.field_215432_a, TERRACOTTA);
-      Random random = new SharedSeedRandom(p_215430_1_);
-      this.field_215439_e = new PerlinNoiseGenerator(random, 1);
+      SharedSeedRandom random = new SharedSeedRandom(p_215430_1_);
+      this.field_215439_e = new PerlinNoiseGenerator(random, 0, 0);
 
       for(int l1 = 0; l1 < 64; ++l1) {
          l1 += random.nextInt(5) + 1;
@@ -192,7 +192,7 @@ public class BadlandsSurfaceBuilderUA  extends SurfaceBuilder<SurfaceBuilderConf
    }
 
    protected BlockState func_215431_a(int p_215431_1_, int p_215431_2_, int p_215431_3_) {
-      int i = (int)Math.round(this.field_215439_e.getValue((double)p_215431_1_ / 512.0D, (double)p_215431_3_ / 512.0D) * 2.0D);
+      int i = (int)Math.round(this.field_215439_e.noiseAt((double)p_215431_1_ / 512.0D, (double)p_215431_3_ / 512.0D, false) * 2.0D);
       return this.field_215432_a[(p_215431_2_ + i + 64) % 64];
    }
 }

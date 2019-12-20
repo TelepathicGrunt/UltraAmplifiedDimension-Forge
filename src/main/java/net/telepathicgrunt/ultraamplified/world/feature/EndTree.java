@@ -43,12 +43,12 @@ public class EndTree extends AbstractTreeFeature<NoFeatureConfig>
                k = 2;
             }
 
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+            BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
             for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
                for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
                   if (j >= 0 && j < worldIn.getMaxHeight()) {
-                     if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) {
+                     if (!func_214587_a(worldIn, blockpos$Mutable.setPos(l, j, i1))) {
                         flag = false;
                      }
                   } else {

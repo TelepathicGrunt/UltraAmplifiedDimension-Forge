@@ -40,7 +40,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
 	  BlockState liquid = ConfigUA.lavaOcean ? LAVA : WATER;
       int x = xStart & 15;
       int z = zStart & 15;
-      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
       BlockState bottom = topBlock;
       BlockState middle = middleBlock;
       BlockState aboveBlock = middleBlock;
@@ -50,15 +50,15 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
       boolean useCoral = bottomBlock.getBlockState() == DEAD_CORAL_ARRAY[0];
       
       for(int y = 255; y >= seaLevel-10; --y) {
-         blockpos$mutableblockpos.setPos(x, y, z);
-         currentBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
+         blockpos$Mutable.setPos(x, y, z);
+         currentBlock = chunkIn.getBlockState(blockpos$Mutable);
          
          
          if (currentBlock.getBlock() != null) {
         	 if(currentBlock == defaultBlock) {
      		 		//turns terrain into water to manipulate later
                      bottom = liquid;
-                	 chunkIn.setBlockState(blockpos$mutableblockpos, bottom, false);
+                	 chunkIn.setBlockState(blockpos$Mutable, bottom, false);
                      currentBlock = bottom;
 	         }
         	 else if(!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR && y < 256){
@@ -66,7 +66,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
         		 if(above2Block.getMaterial() == Material.AIR) {
          			//sets very bottom of terrain to bottom block
                      bottom = topBlock;
-                	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);
+                	 chunkIn.setBlockState(blockpos$Mutable.up(), bottom, false);
         		 }
         		 else {
         			 
@@ -92,11 +92,11 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
         				 }
         			 }
                      
-                	 chunkIn.setBlockState(blockpos$mutableblockpos.up(), bottom, false);
+                	 chunkIn.setBlockState(blockpos$Mutable.up(), bottom, false);
                      currentBlock = bottom;
                      
                      if(!above2Block.getFluidState().isEmpty())
-                    	 chunkIn.setBlockState(blockpos$mutableblockpos.up(2), middle, false);
+                    	 chunkIn.setBlockState(blockpos$Mutable.up(2), middle, false);
         		 }
         		 
         	 }
@@ -110,20 +110,20 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
       //detects if we are a Lukewarm Ocean, Warm Ocean, or ocean plus their deep variants.
       //Adds sand/gravel bottom towards bottom of terrain gen between 40 - 70
       if(middleBlock == Blocks.SAND.getDefaultState() || bottomBlock == Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState()) {
-	      blockpos$mutableblockpos.setPos(x, 70, z);
-    	  aboveBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
-    	  above2Block = chunkIn.getBlockState(blockpos$mutableblockpos.up());
+	      blockpos$Mutable.setPos(x, 70, z);
+    	  aboveBlock = chunkIn.getBlockState(blockpos$Mutable);
+    	  above2Block = chunkIn.getBlockState(blockpos$Mutable.up());
     	  
     	  for(int y = 69; y >= 40; --y) {
-    	         blockpos$mutableblockpos.setPos(x, y, z);
-    	         currentBlock = chunkIn.getBlockState(blockpos$mutableblockpos);
+    	         blockpos$Mutable.setPos(x, y, z);
+    	         currentBlock = chunkIn.getBlockState(blockpos$Mutable);
     	         
     	         //detects if above block is solid and has solid block below and liquid block above.
     	         //if true, set above block to either sand or gravel
     	         if (currentBlock.getBlock() != null && currentBlock.isSolid()) {
     	        	 if(!above2Block.getFluidState().isEmpty() && aboveBlock.isSolid()) {
     	        		 if(middleBlock == Blocks.SAND.getDefaultState() || random.nextFloat() < 0.8F) {
-		        			 chunkIn.setBlockState(blockpos$mutableblockpos.up(), middleBlock, false);
+		        			 chunkIn.setBlockState(blockpos$Mutable.up(), middleBlock, false);
 		        			 aboveBlock = middleBlock;
     	        		 }
     	        	 }

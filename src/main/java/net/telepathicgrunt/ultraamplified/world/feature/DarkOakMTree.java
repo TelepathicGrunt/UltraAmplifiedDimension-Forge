@@ -225,7 +225,7 @@ public class DarkOakMTree extends AbstractTreeFeature<NoFeatureConfig> {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
         for(int l = 0; l <= height + 1; ++l) {
            int i1 = 1;
@@ -239,7 +239,7 @@ public class DarkOakMTree extends AbstractTreeFeature<NoFeatureConfig> {
 
            for(int j1 = -i1; j1 <= i1; ++j1) {
               for(int k1 = -i1; k1 <= i1; ++k1) {
-                 if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(i + j1, j + l, k + k1))) {
+                 if (!func_214587_a(worldIn, blockpos$Mutable.setPos(i + j1, j + l, k + k1))) {
                     return false;
                  }
               }

@@ -3,6 +3,9 @@ package net.telepathicgrunt.ultraamplified.world.biome;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -83,7 +86,7 @@ public class BiomeInit {
     private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
 	//static variable to hold all biomes and their properties
 
-	private static Biome[] biomes;
+	private static Set<Biome> biomes;
 	public static Biome PLAINS = new PlainsBiomeUA();
 	public static Biome DESERT = new DesertBiomeUA();
 	public static Biome FOREST = new ForestBiomeUA();
@@ -233,8 +236,7 @@ public class BiomeInit {
 		
 		
 		//adds to a list which we then need in biomeProviderUA
-		biomes = new Biome[]
-		{
+		biomes = ImmutableSet.of(
 				PLAINS, 
 				DESERT, 
 				MOUNTAINS, 
@@ -301,7 +303,7 @@ public class BiomeInit {
 				DEEP_LUKEWARM_OCEAN,
 				DEEP_WARM_OCEAN,
 				BARREN_END_FIELD
-			};
+			);
 	}
 
 
@@ -317,7 +319,7 @@ public class BiomeInit {
 	
 	
 	//needed by BiomeProviderUA to check if a biome can generate a structure and grabs a biome's surface blocks
-	public static Biome[] getBiomeArray() {
+	public static Set<Biome> getBiomeArray() {
 		return biomes;
 	}
 	

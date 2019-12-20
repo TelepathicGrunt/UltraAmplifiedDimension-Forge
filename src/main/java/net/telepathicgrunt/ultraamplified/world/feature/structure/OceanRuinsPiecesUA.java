@@ -260,15 +260,15 @@ public class OceanRuinsPiecesUA {
              int x = blockpos.getX();
              int z = blockpos.getZ();
              int y = pos1.getY() - 1;
-             BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(x, y, z);
-             BlockState iblockstate = blockReader.getBlockState(blockpos$mutableblockpos);
+             BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(x, y, z);
+             BlockState iblockstate = blockReader.getBlockState(blockpos$Mutable);
 
              
              //sets waterlogged blocks in ruins when ruins block replaced water or another waterlogged block
-             for(IFluidState ifluidstate = blockReader.getFluidState(blockpos$mutableblockpos); (iblockstate.getMaterial() == Material.AIR || ifluidstate.isTagged(FluidTags.WATER) || iblockstate.getBlock().isIn(BlockTags.ICE)) && y > 1; ifluidstate = blockReader.getFluidState(blockpos$mutableblockpos)) {
+             for(IFluidState ifluidstate = blockReader.getFluidState(blockpos$Mutable); (iblockstate.getMaterial() == Material.AIR || ifluidstate.isTagged(FluidTags.WATER) || iblockstate.getBlock().isIn(BlockTags.ICE)) && y > 1; ifluidstate = blockReader.getFluidState(blockpos$Mutable)) {
                 --y;
-                blockpos$mutableblockpos.setPos(x, y, z);
-                iblockstate = blockReader.getBlockState(blockpos$mutableblockpos);
+                blockpos$Mutable.setPos(x, y, z);
+                iblockstate = blockReader.getBlockState(blockpos$Mutable);
              }
           }
 

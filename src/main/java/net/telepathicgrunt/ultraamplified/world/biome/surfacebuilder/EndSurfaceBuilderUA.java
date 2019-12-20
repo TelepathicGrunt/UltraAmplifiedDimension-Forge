@@ -31,15 +31,15 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
       int xpos = x & 15;
       int zpos = z & 15;
       int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
-      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
       int i1 = -1;
       BlockState iblockstate = ENDSTONE;
       BlockState iblockstate1 = ENDSTONE;
 
       //makes stone below sea level into end stone
       for(int ypos = seaLevel-2; ypos >= 0; --ypos) {
-         blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
-         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+         blockpos$Mutable.setPos(xpos, ypos, zpos);
+         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
          
          if (iblockstate2.getBlock() != null && iblockstate2.getMaterial() != Material.AIR) {
         	 if (iblockstate2 == STONE) {
@@ -56,16 +56,16 @@ public class EndSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
                   
                   i1 = l;
                   if (ypos >= seaLevel) {
-                     chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+                     chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
                   } else {
-                     chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+                     chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
                   }
                } else if (i1 > 0) {
                   --i1;
-                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+                  chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
                }
                else {
-             	  chunkIn.setBlockState(blockpos$mutableblockpos, ENDSTONE, false);
+             	  chunkIn.setBlockState(blockpos$Mutable, ENDSTONE, false);
                }
         	 }
             

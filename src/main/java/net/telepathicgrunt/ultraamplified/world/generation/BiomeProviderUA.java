@@ -1,6 +1,5 @@
 package net.telepathicgrunt.ultraamplified.world.generation;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -31,7 +30,6 @@ import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.RemoveTooMuchOceanLayer;
 import net.minecraft.world.gen.layer.SmoothLayer;
-import net.minecraft.world.gen.layer.VoroniZoomLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
@@ -46,20 +44,17 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerU
 public class BiomeProviderUA extends BiomeProvider{
 
 private final Layer genBiomes;
-/** A GenLayer containing a factory to generate biome arrays for {@llink #getBiomes(int, int, int, int, boolean)} */
-private final Layer biomeFactoryLayer;
-private final Biome[] biomes;
+private final Set<Biome> biomes;
 
 public BiomeProviderUA(long seed, WorldType worldType)
 {
-	super();
-	
+	super(BiomeInit.getBiomeArray());
     biomes = BiomeInit.getBiomeArray();
+	
     
     //generates the world and biome layouts
     Layer[] agenlayer = buildOverworldProcedure(seed, worldType);
     this.genBiomes = agenlayer[0];
-    this.biomeFactoryLayer = agenlayer[1];
 }
 
 public BiomeProviderUA(World world)
@@ -136,54 +131,49 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 
       lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
       lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, areaFactory2);
-      
-      IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
-      return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);
+      return ImmutableList.of(lvt_8_1_, lvt_8_1_, lvt_8_1_);
    }
+	
+	public Set<Biome> func_225530_a_(int centerX, int centerY, int centerZ, int sideLength) {
+	      int i = centerX - sideLength >> 2;
+	      int j = centerY - sideLength >> 2;
+	      int k = centerZ - sideLength >> 2;
+	      int l = centerX + sideLength >> 2;
+	      int i1 = centerY + sideLength >> 2;
+	      int j1 = centerZ + sideLength >> 2;
+	      int k1 = l - i + 1;
+	      int l1 = i1 - j + 1;
+	      int i2 = j1 - k + 1;
+	      Set<Biome> set = Sets.newHashSet();
 
-	/**
-	 * Gets the biome from the provided coordinates
-	 */
-	public Biome getBiome(int x, int y) {
-	   return this.biomeFactoryLayer.func_215738_a(x, y);
-	}
-	
-	public Biome func_222366_b(int p_222366_1_, int p_222366_2_) {
-	   return this.genBiomes.func_215738_a(p_222366_1_, p_222366_2_);
-	}
-	
-	public Biome[] getBiomes(int x, int z, int width, int length, boolean cacheFlag) {
-	   return this.biomeFactoryLayer.generateBiomes(x, z, width, length);
-	}
-	
-	public Set<Biome> getBiomesInSquare(int centerX, int centerZ, int sideLength) {
-	   int i = centerX - sideLength >> 2;
-	   int j = centerZ - sideLength >> 2;
-	   int k = centerX + sideLength >> 2;
-	   int l = centerZ + sideLength >> 2;
-	   int i1 = k - i + 1;
-	   int j1 = l - j + 1;
-	   Set<Biome> set = Sets.newHashSet();
-	   Collections.addAll(set, this.genBiomes.generateBiomes(i, j, i1, j1));
+	      for(int j2 = 0; j2 < i2; ++j2) {
+	         for(int k2 = 0; k2 < k1; ++k2) {
+	            for(int l2 = 0; l2 < l1; ++l2) {
+	               int i3 = i + k2;
+	               int j3 = j + l2;
+	               int k3 = k + j2;
+	               set.add(this.func_225526_b_(i3, j3, k3));
+	            }
+	         }
+	      }
 	   return set;
 	}
 	
 	@Nullable
-	public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random) {
+	public BlockPos func_225531_a_(int x, int z, int range, List<Biome> biomes, Random random) {
 	   int i = x - range >> 2;
 	   int j = z - range >> 2;
 	   int k = x + range >> 2;
 	   int l = z + range >> 2;
 	   int i1 = k - i + 1;
 	   int j1 = l - j + 1;
-	   Biome[] abiome = this.genBiomes.generateBiomes(i, j, i1, j1);
 	   BlockPos blockpos = null;
 	   int k1 = 0;
 	
 	   for(int l1 = 0; l1 < i1 * j1; ++l1) {
 	      int i2 = i + l1 % i1 << 2;
 	      int j2 = j + l1 / i1 << 2;
-	      if (biomes.contains(abiome[l1])) {
+	      if (biomes.contains(this.func_225526_b_(i2, k1, j2))) {
 	         if (blockpos == null || random.nextInt(k1 + 1) == 0) {
 	            blockpos = new BlockPos(i2, 0, j2);
 	         }
@@ -216,4 +206,8 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	
 	   return this.topBlocksCache;
 	}
+
+   public Biome func_225526_b_(int p_225526_1_, int p_225526_2_, int p_225526_3_) {
+      return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);
+   }
 }

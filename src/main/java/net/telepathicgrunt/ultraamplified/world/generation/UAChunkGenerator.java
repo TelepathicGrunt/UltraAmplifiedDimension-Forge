@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
@@ -39,19 +40,19 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	   public UAChunkGenerator(IWorld worldIn, BiomeProvider provider, OverworldGenSettings settingsIn) {
 	      super(worldIn, provider, 4, 8, 256, settingsIn);
 	      this.randomSeed.skip(2620);
-	      this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
+	      this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 	   }
 
 	   public void spawnMobs(WorldGenRegion region) {
 	      int i = region.getMainChunkX();
 	      int j = region.getMainChunkZ();
-	      Biome biome = region.getChunk(i, j).getBiomes()[0];
+	      Biome biome = region.func_226691_t_((new ChunkPos(i, j)).asBlockPos());
 	      SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
 	      sharedseedrandom.setDecorationSeed(region.getSeed(), i << 4, j << 4);
 	      WorldEntitySpawner.performWorldGenSpawning(region, biome, i, j, sharedseedrandom);
 	   }
 
-	   protected void func_222548_a(double[] areaArrayIn, int x, int z) {
+	   protected void fillNoiseColumn(double[] areaArrayIn, int x, int z) {
 	      this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : ConfigUA.xzTerrainModifier, ConfigUA.secretSetting ? 468419.786D : ConfigUA.yTerrainModifier, ConfigUA.xzScaleModifier, ConfigUA.secretSetting ? 73.1905915D : ConfigUA.yScaleModifier, 8.555149841308594D, 4.277574920654297D, 3, -10);
 	   }
 
@@ -64,16 +65,17 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	      return d1;
 	   }
 
-	   protected double[] func_222549_a(int p_222549_1_, int p_222549_2_) {
+	   protected double[] getBiomeNoiseColumn(int noiseX, int noiseZ) {
 	      double[] adouble = new double[2];
 	      float f = 0.0F;
 	      float f1 = 0.0F;
 	      float f2 = 0.0F;
-	      float f3 = this.biomeProvider.func_222366_b(p_222549_1_, p_222549_2_).getDepth();
+	      int y = this.getSeaLevel();
+	      float f3 = this.biomeProvider.func_225526_b_(noiseX, y, noiseZ).getDepth();
 
 	      for(int j = -2; j <= 2; ++j) {
 	         for(int k = -2; k <= 2; ++k) {
-	            Biome biome = this.biomeProvider.func_222366_b(p_222549_1_ + j, p_222549_2_ + k);
+	            Biome biome = this.biomeProvider.func_225526_b_(noiseX + j, y, noiseZ + k);
 	            float depthWeight = 0; //biome.getDepth();
 	            float scaleWeight = 0; //biome.getScale();
 	            
@@ -99,13 +101,13 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	      f1 = f1 / f2;
 	      f = f * 0.9F + 0.1F;
 	      f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-	      adouble[0] = (double)f1 + this.func_222574_c(p_222549_1_, p_222549_2_);
+	      adouble[0] = (double)f1 + this.func_222574_c(noiseX, noiseZ);
 	      adouble[1] = (double)f;
 	      return adouble;
 	   }
 
 	   private double func_222574_c(int p_222574_1_, int p_222574_2_) {
-	      double d0 = this.depthNoise.func_215462_a((double)(p_222574_1_ * 200), 10.0D, (double)(p_222574_2_ * 200), 1.0D, 0.0D, true) / 8000.0D;
+	      double d0 = this.depthNoise.getValue((double)(p_222574_1_ * 200), 10.0D, (double)(p_222574_2_ * 200), 1.0D, 0.0D, true) / 8000.0D;
 	      if (d0 < 0.0D) {
 	         d0 = -d0 * 0.3D;
 	      }
@@ -161,4 +163,5 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	   public int getSeaLevel() {
 	      return ConfigUA.seaLevel;
 	   }
+
 	}

@@ -1,9 +1,14 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
+import com.google.common.collect.ImmutableList;
+
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
 import net.minecraft.world.gen.feature.IcebergConfig;
 import net.minecraft.world.gen.feature.LakesConfig;
@@ -15,6 +20,9 @@ import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.CountConfig;
+import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
+import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
+import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
@@ -44,6 +52,23 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansio
 
 public class FeatureUA
 {
+	   private static final BlockState GRASS = Blocks.GRASS.getDefaultState();
+	   private static final BlockState FERN = Blocks.FERN.getDefaultState();
+	   private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
+	   private static final BlockState OAK_LOG = Blocks.OAK_LOG.getDefaultState();
+	   private static final BlockState OAK_LEAVES = Blocks.OAK_LEAVES.getDefaultState();
+	   private static final BlockState JUNGLE_LOG = Blocks.JUNGLE_LOG.getDefaultState();
+	   private static final BlockState JUNGLE_LEAVES = Blocks.JUNGLE_LEAVES.getDefaultState();
+	   private static final BlockState SPRUCE_LOG = Blocks.SPRUCE_LOG.getDefaultState();
+	   private static final BlockState SPRUCE_LEAVES = Blocks.SPRUCE_LEAVES.getDefaultState();
+	   private static final BlockState ACACIA_LOG = Blocks.ACACIA_LOG.getDefaultState();
+	   private static final BlockState ACACIA_LEAVES = Blocks.ACACIA_LEAVES.getDefaultState();
+	   private static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
+	   private static final BlockState BIRCH_LEAVES = Blocks.BIRCH_LEAVES.getDefaultState();
+	   private static final BlockState DARK_OAK_LOG = Blocks.DARK_OAK_LOG.getDefaultState();
+	   private static final BlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState();
+	   
+	   
     public static Feature<NoFeatureConfig> BETTER_CACTUS = new BetterCactus(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> GENERIC_DUNGEONS = new DungeonDefault(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MESA_DUNGEONS = new DungeonsBadlands(NoFeatureConfig::deserialize);
@@ -101,13 +126,18 @@ public class FeatureUA
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
     public static AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(NoFeatureConfig::deserialize);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(NoFeatureConfig::deserialize, false, false);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(HugeTreeFeatureConfig::deserializeDarkOak); //may need to fix deserialize
     public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, false);
     public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, true);
     public static AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(NoFeatureConfig::deserialize, false);
     public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(NoFeatureConfig::deserialize, false);
     public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTree(NoFeatureConfig::deserialize, false);
+    
+    public static final HugeTreeFeatureConfig BIRCH_M_TREE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(BIRCH_LEAVES))).func_225569_d_(13).func_227283_b_(15).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig field_226824_s_ = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(field_226776_ak_), new SimpleBlockStateProvider(field_226777_al_))).func_225569_d_(13).func_227283_b_(15).func_227284_c_(3).func_227282_a_(ImmutableList.of(new AlterGroundTreeDecorator(new SimpleBlockStateProvider(field_226771_af_)))).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig field_226825_t_ = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(field_226774_ai_), new SimpleBlockStateProvider(field_226775_aj_))).func_225569_d_(10).func_227283_b_(20).func_227282_a_(ImmutableList.of(new TrunkVineTreeDecorator(), new LeaveVineTreeDecorator())).setSapling((net.minecraftforge.common.IPlantable)Blocks.JUNGLE_SAPLING).func_225568_b_();
 
+    
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
     public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> JUNGLE_TEMPLE_UA = new JungleTempleUA(NoFeatureConfig::deserialize);

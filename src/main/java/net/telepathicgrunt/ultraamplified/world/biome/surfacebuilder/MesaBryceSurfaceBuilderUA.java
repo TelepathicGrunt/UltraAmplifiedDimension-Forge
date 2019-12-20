@@ -26,9 +26,9 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 
 	   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
 	      double d0 = 0.0D;
-	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.getValue((double)x * 0.25D, (double)z * 0.25D));
+	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double)x * 0.25D, (double)z * 0.25D, false));
 	      if (d1 > -1.5D) {
-	         double d3 = Math.abs(this.field_215437_d.getValue((double)x * 1500.001953125D, (double)z * 1500.001953125D));
+	         double d3 = Math.abs(this.field_215437_d.noiseAt((double)x * 1500.001953125D, (double)z * 1500.001953125D, false));
 	         d0 = d1 * d1 * 8.5D;
 	         double d4 = Math.ceil(d3 * 1200.0D) + 1000.0D;
 	         if (d0 > d4) {
@@ -46,16 +46,16 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	      boolean flag = Math.cos(noise / 3.0D * Math.PI) > 0.0D;
 	      int j = -1;
 	      boolean flag1 = false;
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
 	      //might need to make k start at 255
 	      for(int k = Math.max(startHeight, (int)d0 + 1); k >= 0; --k) {
-	         blockpos$mutableblockpos.setPos(l, k, i);
-	         if (chunkIn.getBlockState(blockpos$mutableblockpos).getMaterial() == Material.AIR && k < (int)d0) {
-	            chunkIn.setBlockState(blockpos$mutableblockpos, defaultBlock, false);
+	         blockpos$Mutable.setPos(l, k, i);
+	         if (chunkIn.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && k < (int)d0) {
+	            chunkIn.setBlockState(blockpos$Mutable, defaultBlock, false);
 	         }
 
-	         BlockState iblockstate1 = chunkIn.getBlockState(blockpos$mutableblockpos);
+	         BlockState iblockstate1 = chunkIn.getBlockState(blockpos$Mutable);
 	         if (iblockstate1.getMaterial() == Material.AIR) {
 	            j = -1;
 	         } else if (iblockstate1.getBlock() == defaultBlock.getBlock() || iblockstate1.getBlock() == Blocks.NETHERRACK || iblockstate1.getBlock() == Blocks.END_STONE) {
@@ -76,7 +76,7 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	               j = i1 + Math.max(0, k - seaLevel);
 	               if (k >= seaLevel - 1) {
 	                  if (k <= seaLevel + 25 + i1) {
-	                     chunkIn.setBlockState(blockpos$mutableblockpos, biomeIn.getSurfaceBuilderConfig().getTop(), false);
+	                     chunkIn.setBlockState(blockpos$Mutable, biomeIn.getSurfaceBuilderConfig().getTop(), false);
 	                     flag1 = true;
 	                  } else {
 	                     BlockState iblockstate3;
@@ -90,21 +90,21 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	                        iblockstate3 = ORANGE_TERRACOTTA;
 	                     }
 
-	                     chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate3, false);
+	                     chunkIn.setBlockState(blockpos$Mutable, iblockstate3, false);
 	                  }
 	               } else {
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+	                  chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
 	                  Block block = iblockstate.getBlock();
 	                  if (block == Blocks.WHITE_TERRACOTTA || block == Blocks.ORANGE_TERRACOTTA || block == Blocks.MAGENTA_TERRACOTTA || block == Blocks.LIGHT_BLUE_TERRACOTTA || block == Blocks.YELLOW_TERRACOTTA || block == Blocks.LIME_TERRACOTTA || block == Blocks.PINK_TERRACOTTA || block == Blocks.GRAY_TERRACOTTA || block == Blocks.LIGHT_GRAY_TERRACOTTA || block == Blocks.CYAN_TERRACOTTA || block == Blocks.PURPLE_TERRACOTTA || block == Blocks.BLUE_TERRACOTTA || block == Blocks.BROWN_TERRACOTTA || block == Blocks.GREEN_TERRACOTTA || block == Blocks.RED_TERRACOTTA || block == Blocks.BLACK_TERRACOTTA) {
-	                     chunkIn.setBlockState(blockpos$mutableblockpos, ORANGE_TERRACOTTA, false);
+	                     chunkIn.setBlockState(blockpos$Mutable, ORANGE_TERRACOTTA, false);
 	                  }
 	               }
 	            } else if (j > 0) {
 	               --j;
 	               if (flag1) {
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, ORANGE_TERRACOTTA, false);
+	                  chunkIn.setBlockState(blockpos$Mutable, ORANGE_TERRACOTTA, false);
 	               } else {
-	                  chunkIn.setBlockState(blockpos$mutableblockpos, this.func_215431_a(x, k, z), false);
+	                  chunkIn.setBlockState(blockpos$Mutable, this.func_215431_a(x, k, z), false);
 	               }
 	            }
 	         }

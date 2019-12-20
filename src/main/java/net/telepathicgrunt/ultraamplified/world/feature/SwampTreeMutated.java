@@ -65,7 +65,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	                    k = 3;
 	                }
 
-	                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	                BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
 	                for (int x = position.getX() - k; x <= position.getX() + k && flag; ++x)
 	                {
@@ -73,10 +73,10 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	                    {
 	                        if (y >= 0 && y < 256)
 	                        {
-	                            blockpos$mutableblockpos.setPos(x, y, z);
-	                            if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos))
+	                            blockpos$Mutable.setPos(x, y, z);
+	                            if (!isAirOrLeaves(worldIn, blockpos$Mutable))
 	                            {
-	                                if (isWater(worldIn, blockpos$mutableblockpos))
+	                                if (isWater(worldIn, blockpos$Mutable))
 	                                {
 	                                    flag = false;
 	                                }
@@ -155,20 +155,20 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
                     {
                         int heightDiff = currentHeight - (position.getY() + height);
                         int i3 = 2 - heightDiff / 2;
-                        BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+                        BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
                         for (int x = position.getX() - i3 - 1; x <= position.getX() + i3; ++x)
                         {
                             for (int z = position.getZ() - i3 - 1; z <= position.getZ() + i3; ++z)
                             {
-                                blockpos$mutableblockpos1.setPos(x, currentHeight, z);
+                                blockpos$Mutable1.setPos(x, currentHeight, z);
 
-                                if (world.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.LEAVES)
+                                if (world.getBlockState(blockpos$Mutable1).getMaterial() == Material.LEAVES)
                                 {
-                                    BlockPos blockpos3 = blockpos$mutableblockpos1.west();
-                                    BlockPos blockpos4 = blockpos$mutableblockpos1.east();
-                                    BlockPos blockpos1 = blockpos$mutableblockpos1.north();
-                                    BlockPos blockpos2 = blockpos$mutableblockpos1.south();
+                                    BlockPos blockpos3 = blockpos$Mutable1.west();
+                                    BlockPos blockpos4 = blockpos$Mutable1.east();
+                                    BlockPos blockpos1 = blockpos$Mutable1.north();
+                                    BlockPos blockpos2 = blockpos$Mutable1.south();
 
                                     if (rand.nextInt(4) == 0 && world.isAirBlock(blockpos3))
                                     {

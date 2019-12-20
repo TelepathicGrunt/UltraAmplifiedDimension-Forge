@@ -1386,44 +1386,44 @@ public class VillagePiecesUA
 	         BlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OAK_PLANKS.getDefaultState());
 	         BlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.GRAVEL.getDefaultState());
 	         BlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
-	         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 	         this.boundingBox.minY = 1000;
 	         this.boundingBox.maxY = 0;
 
 	         for(int i = this.boundingBox.minX; i <= this.boundingBox.maxX; ++i) {
 	            for(int j = this.boundingBox.minZ; j <= this.boundingBox.maxZ; ++j) {
-	               blockpos$mutableblockpos.setPos(i, 64, j);
-	               if (structureBoundingBoxIn.isVecInside(blockpos$mutableblockpos)) {
-	                  int k = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, blockpos$mutableblockpos.getX(), blockpos$mutableblockpos.getZ());
-	                  blockpos$mutableblockpos.setPos(blockpos$mutableblockpos.getX(), k, blockpos$mutableblockpos.getZ()).move(Direction.DOWN);
-	                  if (blockpos$mutableblockpos.getY() < worldIn.getSeaLevel()) {
-	                     blockpos$mutableblockpos.setY(worldIn.getSeaLevel() - 1);
+	               blockpos$Mutable.setPos(i, 64, j);
+	               if (structureBoundingBoxIn.isVecInside(blockpos$Mutable)) {
+	                  int k = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, blockpos$Mutable.getX(), blockpos$Mutable.getZ());
+	                  blockpos$Mutable.setPos(blockpos$Mutable.getX(), k, blockpos$Mutable.getZ()).move(Direction.DOWN);
+	                  if (blockpos$Mutable.getY() < worldIn.getSeaLevel()) {
+	                     blockpos$Mutable.setY(worldIn.getSeaLevel() - 1);
 	                  }
 
-	                  while(blockpos$mutableblockpos.getY() >= worldIn.getSeaLevel() - 1) {
-	                     BlockState iblockstate4 = worldIn.getBlockState(blockpos$mutableblockpos);
+	                  while(blockpos$Mutable.getY() >= worldIn.getSeaLevel() - 1) {
+	                     BlockState iblockstate4 = worldIn.getBlockState(blockpos$Mutable);
 	                     Block block = iblockstate4.getBlock();
-	                     if (block == Blocks.GRASS_BLOCK && worldIn.isAirBlock(blockpos$mutableblockpos.up())) {
-	                        worldIn.setBlockState(blockpos$mutableblockpos, iblockstate, 2);
+	                     if (block == Blocks.GRASS_BLOCK && worldIn.isAirBlock(blockpos$Mutable.up())) {
+	                        worldIn.setBlockState(blockpos$Mutable, iblockstate, 2);
 	                        break;
 	                     }
 
 	                     if (iblockstate4.getMaterial().isLiquid()) {
-	                        worldIn.setBlockState(new BlockPos(blockpos$mutableblockpos), iblockstate1, 2);
+	                        worldIn.setBlockState(new BlockPos(blockpos$Mutable), iblockstate1, 2);
 	                        break;
 	                     }
 
 	                     if (block == Blocks.STONE || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.RED_SANDSTONE || block == Blocks.CHISELED_SANDSTONE || block == Blocks.CUT_SANDSTONE || block == Blocks.END_STONE || block == Blocks.NETHERRACK || block == Blocks.SNOW_BLOCK || block == Blocks.ORANGE_TERRACOTTA) {
-	                        worldIn.setBlockState(blockpos$mutableblockpos, iblockstate2, 2);
-	                        worldIn.setBlockState(blockpos$mutableblockpos.down(), iblockstate3, 2);
+	                        worldIn.setBlockState(blockpos$Mutable, iblockstate2, 2);
+	                        worldIn.setBlockState(blockpos$Mutable.down(), iblockstate3, 2);
 	                        break;
 	                     }
 
-	                     blockpos$mutableblockpos.move(Direction.DOWN);
+	                     blockpos$Mutable.move(Direction.DOWN);
 	                  }
 
-	                  this.boundingBox.minY = Math.min(this.boundingBox.minY, blockpos$mutableblockpos.getY());
-	                  this.boundingBox.maxY = Math.max(this.boundingBox.maxY, blockpos$mutableblockpos.getY());
+	                  this.boundingBox.minY = Math.min(this.boundingBox.minY, blockpos$Mutable.getY());
+	                  this.boundingBox.maxY = Math.max(this.boundingBox.maxY, blockpos$Mutable.getY());
 	               }
 	            }
 	         }
@@ -1646,7 +1646,7 @@ public class VillagePiecesUA
 
 
 	      protected int getBestGroundLevel(IWorld worldIn, MutableBoundingBox structurebb) {
-	         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
 	         int halfXWidth = this.boundingBox.getXSize();
 	         int halfZWidth = this.boundingBox.getZSize();
@@ -1656,9 +1656,9 @@ public class VillagePiecesUA
 	         
 	         for(int j = 0; j < this.boundingBox.getXSize(); j++) {
 	        	 for(int k = 0; k < this.boundingBox.getZSize(); k++) {
-	        		 blockpos$mutableblockpos.setPos(x+j, this.boundingBox.minY, z+k);
-		  	         if (structurebb.isVecInside(blockpos$mutableblockpos)) {
-		  	        	heightArray[k + j*this.boundingBox.getZSize()] = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos$mutableblockpos).getY();
+	        		 blockpos$Mutable.setPos(x+j, this.boundingBox.minY, z+k);
+		  	         if (structurebb.isVecInside(blockpos$Mutable)) {
+		  	        	heightArray[k + j*this.boundingBox.getZSize()] = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos$Mutable).getY();
 		  	         }
 		         }
 	         }

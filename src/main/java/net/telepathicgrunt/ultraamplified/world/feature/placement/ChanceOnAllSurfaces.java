@@ -51,7 +51,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         while(height > lowestHeight) {
 		        	 BlockState currentBlock = worldIn.getBlockState(pos.add(x, height, z));
 		        	 
-		        	 if(worldIn.getBiome(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
+		        	 if(worldIn.func_226691_t_(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
 		        	    currentBlock == SAND ||
 		        		currentBlock == SOULSAND) 
 		        	 {

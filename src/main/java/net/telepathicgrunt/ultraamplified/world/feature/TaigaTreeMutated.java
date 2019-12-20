@@ -54,7 +54,7 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
                     bounds = l;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
                 for (int x = position.getX() - bounds; x <= position.getX() + bounds && flag; ++x)
                 {
@@ -62,8 +62,8 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
                     {
                         if (y >= 0 && y < 256)
                         {
-                        	blockpos$mutableblockpos.setPos(x, y, z);
-                            if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos))
+                        	blockpos$Mutable.setPos(x, y, z);
+                            if (!isAirOrLeaves(worldIn, blockpos$Mutable))
                             {
                                 flag = false;
                             }

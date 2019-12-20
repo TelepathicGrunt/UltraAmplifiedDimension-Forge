@@ -51,7 +51,7 @@ public class RootsUA extends Feature<BlockConfig> {
 		}
 		
 		position = position.down();
-		BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable Mutable = new BlockPos.Mutable();
 		BlockState currentBlockState;
 		int xOffset;
 		int zOffset;
@@ -62,7 +62,7 @@ public class RootsUA extends Feature<BlockConfig> {
 		for(int rootNum = 1; rootNum < numOfRoots+1; rootNum++){
 			
 			//set mutable block pos back to the starting block of the roots
-			mutableBlockPos.setPos(position);
+			Mutable.setPos(position);
 			
 
 			//makes root length increase the higher up in the world it is
@@ -72,8 +72,8 @@ public class RootsUA extends Feature<BlockConfig> {
 			for(int length = 0; length < rootLength; length++){
 
 				//checks to see if air block is not higher than starting place
-				currentBlockState = worldIn.getBlockState(mutableBlockPos);
-				if(mutableBlockPos.getY() <= position.getY() && 
+				currentBlockState = worldIn.getBlockState(Mutable);
+				if(Mutable.getY() <= position.getY() && 
 				    (currentBlockState.getMaterial() == Material.AIR ||
 				     currentBlockState == blockConfig.block.getDefaultState() || 
 				     currentBlockState == Blocks.VINE.getDefaultState())
@@ -81,17 +81,17 @@ public class RootsUA extends Feature<BlockConfig> {
 
 					
 					//checks to see if there is solid land still above (1 blocks higher than position height)
-					if(worldIn.getBlockState( new BlockPos(mutableBlockPos.getX(), 
+					if(worldIn.getBlockState( new BlockPos(Mutable.getX(), 
 															position.getY()+1, 
-															mutableBlockPos.getZ()
+															Mutable.getZ()
 														   )).isSolid()) {
 
 						//set root block
-						worldIn.setBlockState(mutableBlockPos, blockConfig.block.getDefaultState(), 2);
+						worldIn.setBlockState(Mutable, blockConfig.block.getDefaultState(), 2);
 						
 						//rare chance to also generate a vine
 						if(rand.nextFloat() < 1F) {
-							generateTinyVine(worldIn, rand, mutableBlockPos);
+							generateTinyVine(worldIn, rand, Mutable);
 						}
 						
 
@@ -109,14 +109,14 @@ public class RootsUA extends Feature<BlockConfig> {
 				
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(mutableBlockPos.getX() * 2D+20000*rootNum, mutableBlockPos.getZ() * 2D+20000*rootNum, mutableBlockPos.getY()*1D+20000*rootNum), -1, 1);
-				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(mutableBlockPos.getX() * 2D+10000*rootNum, mutableBlockPos.getZ() * 2D+10000*rootNum, mutableBlockPos.getY()*1D+10000*rootNum), -1, 1);
-				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(mutableBlockPos.getX() * 2D-10000*rootNum, mutableBlockPos.getZ() * 2D-10000*rootNum, mutableBlockPos.getY()*1D-10000)*rootNum - 1, -1, 1);
+				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+20000*rootNum, Mutable.getZ() * 2D+20000*rootNum, Mutable.getY()*1D+20000*rootNum), -1, 1);
+				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+10000*rootNum, Mutable.getZ() * 2D+10000*rootNum, Mutable.getY()*1D+10000*rootNum), -1, 1);
+				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D-10000*rootNum, Mutable.getZ() * 2D-10000*rootNum, Mutable.getY()*1D-10000)*rootNum - 1, -1, 1);
 
 				
 				//debugging
 				//System.out.println(xOffset +", "+zOffset+", "+yOffset);
-				mutableBlockPos.move(xOffset, yOffset, zOffset);
+				Mutable.move(xOffset, yOffset, zOffset);
 			}
 		}
 
