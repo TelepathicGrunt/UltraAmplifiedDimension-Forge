@@ -32,7 +32,7 @@ public class Roots extends Feature<BlockConfig> {
 
 	public void setSeed(long seed) {
 		if (this.noiseGen == null) {
-			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
 		}
 
 		this.seed = seed;

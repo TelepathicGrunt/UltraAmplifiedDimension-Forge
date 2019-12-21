@@ -36,11 +36,11 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 	            int y = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, x, z);
 	            blockpos$Mutable.setPos(x, y, z);
 	            blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN, 1);
-	            Biome biome = worldIn.getBiome(blockpos$Mutable);
+	            Biome biome = worldIn.func_226691_t_(blockpos$Mutable);
 	            
 	            //decorates only cold ocean with just snow
 	            if(biome == BiomeInit.COLD_OCEAN || biome == BiomeInit.DEEP_COLD_OCEAN) {
-	            	if (blockpos$Mutable.getY() >= 0 && blockpos$Mutable.getY() < 256 && worldIn.getLightFor(LightType.BLOCK, blockpos$Mutable) < 10) {
+	            	if (blockpos$Mutable.getY() >= 0 && blockpos$Mutable.getY() < 256 && worldIn.func_226658_a_(LightType.BLOCK, blockpos$Mutable) < 10) {
 		                
 	            		BlockState iblockstate = worldIn.getBlockState(blockpos$Mutable);
 		                if (iblockstate.isAir(worldIn, blockpos$Mutable) && Blocks.SNOW.getDefaultState().isValidPosition(worldIn, blockpos$Mutable)) {
