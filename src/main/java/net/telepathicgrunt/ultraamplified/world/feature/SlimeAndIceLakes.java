@@ -12,17 +12,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakesConfig;
 
-public class SlimeAndIceLakes extends Feature<LakesConfig> {
-	   public SlimeAndIceLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
+public class SlimeAndIceLakes extends Feature<BlockStateFeatureConfig> {
+	   public SlimeAndIceLakes(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState(); 
 
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
+	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
 	     
          pos = pos.down(4);
          boolean[] aboolean = new boolean[2048];
@@ -61,7 +61,7 @@ public class SlimeAndIceLakes extends Feature<LakesConfig> {
                         return false;
                      }
 
-                     if (y < 4 && !material.isSolid() && worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
+                     if (y < 4 && !material.isSolid() && worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
                         return false;
                      }
                   }
@@ -73,7 +73,7 @@ public class SlimeAndIceLakes extends Feature<LakesConfig> {
             for(int z = 0; z < 16; ++z) {
                for(int y = 0; y < 8; ++y) {
                   if (aboolean[(x * 16 + z) * 8 + y]) {
-                     worldIn.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.state, 2);
+                     worldIn.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.field_227270_a_, 2);
                   }
                }
             }
@@ -86,7 +86,7 @@ public class SlimeAndIceLakes extends Feature<LakesConfig> {
                  
                  Material blockMaterial = worldIn.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
                  if (flag1 && (y < 4 || random.nextInt(2) != 0) && blockMaterial.isSolid() && blockMaterial != Material.LEAVES) {
-                    worldIn.setBlockState(pos.add(x-8, y, z-8), configBlock.state, 2);
+                    worldIn.setBlockState(pos.add(x-8, y, z-8), configBlock.field_227270_a_, 2);
                  }
               }
            }

@@ -52,7 +52,7 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
          //breaks out of nested loop if ocean if found so oceanBiome holds the ocean
     	 for(int x = 0; x < 16; ++x) {
              for(int z = 0; z < 16; ++z) {
-            	 oceanBiome = worldIn.getBiome(blockpos$Mutable.add(x, 0, z));
+            	 oceanBiome = worldIn.func_226691_t_(blockpos$Mutable.add(x, 0, z));
             	 if(BiomeGenHelper.isOcean(oceanBiome)) {
             		 bordersOcean = true;
             		 x = 16;

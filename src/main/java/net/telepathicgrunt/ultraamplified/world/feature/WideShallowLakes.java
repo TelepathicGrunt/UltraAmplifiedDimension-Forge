@@ -10,18 +10,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakesConfig;
 
-public class WideShallowLakes extends Feature<LakesConfig> {
+public class WideShallowLakes extends Feature<BlockStateFeatureConfig> {
 	
 	
 	
-	public WideShallowLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
+	public WideShallowLakes(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
 	     
 		  pos = pos.down(2);
          boolean[] aboolean = new boolean[2048];
@@ -69,7 +69,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
             	  
                  if (!material.isSolid() && 
                 	  material != Material.WATER && 
-                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
+                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
                     return false;
                  }
               }
@@ -147,7 +147,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
               if (aboolean[(x * 16 + z) * 8 + y] &&
             	 !notContainedFlag )
               {
-                 worldIn.setBlockState(pos.add(x, y, z), configBlock.state, 2);
+                 worldIn.setBlockState(pos.add(x, y, z), configBlock.field_227270_a_, 2);
               }
             }
          }

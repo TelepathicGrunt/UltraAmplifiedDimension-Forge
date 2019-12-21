@@ -33,7 +33,7 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 	         for(int zOffset = 0; zOffset < 16; ++zOffset) {
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
-	            Biome biome = worldIn.getBiome(blockpos$Mutable.setPos(x, 60, z));
+	            Biome biome = worldIn.func_226691_t_(blockpos$Mutable.setPos(x, 60, z));
 	            
 		         for(int y = 256; y > ConfigUA.seaLevel-1; --y) {
 		        	 

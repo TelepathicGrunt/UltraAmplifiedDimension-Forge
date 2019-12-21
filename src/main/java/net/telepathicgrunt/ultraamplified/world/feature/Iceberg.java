@@ -16,13 +16,13 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IcebergConfig;
 
-public class Iceberg extends Feature<IcebergConfig> {
+public class Iceberg extends Feature<BlockStateFeatureConfig> {
 	
 
-	  public Iceberg(Function<Dynamic<?>, ? extends IcebergConfig> configFactoryIn) {
+	  public Iceberg(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
@@ -32,10 +32,10 @@ public class Iceberg extends Feature<IcebergConfig> {
 	  private final static BlockState STONE = Blocks.STONE.getDefaultState();
 	  private final static BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 	
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, IcebergConfig icebergConfig) {
+	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig icebergConfig) {
 		      
 		      boolean flag = random.nextDouble() > 0.7D;
-		      BlockState iblockstate = icebergConfig.state;
+		      BlockState iblockstate = icebergConfig.field_227270_a_;
 		      double d0 = random.nextDouble() * 2.0D * Math.PI;
 		      int i = 11 - random.nextInt(5);
 		      int j = 3 + random.nextInt(3);
