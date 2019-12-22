@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
+package net.telepathicgrunt.ultraamplified.World.gen.structure;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;

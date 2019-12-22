@@ -1,6 +1,6 @@
-package net.TelepathicGrunt.UltraAmplified.capabilities;
+package net.telepathicgrunt.ultraamplified.capabilities;
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

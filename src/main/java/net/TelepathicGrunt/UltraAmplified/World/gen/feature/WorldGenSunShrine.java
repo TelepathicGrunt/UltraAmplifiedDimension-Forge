@@ -1,9 +1,9 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
+package net.telepathicgrunt.ultraamplified.World.gen.feature;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;

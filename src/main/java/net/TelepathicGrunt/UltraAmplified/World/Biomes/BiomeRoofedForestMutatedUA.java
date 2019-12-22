@@ -1,8 +1,8 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.World.Biomes;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDarkOakMTree;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenDarkOakMTree;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 

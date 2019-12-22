@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
+package net.telepathicgrunt.ultraamplified.World.gen.feature;
 
 import java.util.Random;
 

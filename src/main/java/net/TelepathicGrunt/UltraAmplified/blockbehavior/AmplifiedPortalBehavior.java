@@ -1,11 +1,11 @@
-package net.TelepathicGrunt.UltraAmplified.blockbehavior;
+package net.telepathicgrunt.ultraamplified.blockbehavior;
 
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
-import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksAndItemsInit;
-import net.TelepathicGrunt.UltraAmplified.World.dimension.UATeleporter;
-import net.TelepathicGrunt.UltraAmplified.capabilities.IPlayerPosAndDim;
-import net.TelepathicGrunt.UltraAmplified.capabilities.PlayerPositionAndDimension;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.Blocks.BlocksAndItemsInit;
+import net.telepathicgrunt.ultraamplified.World.dimension.UATeleporter;
+import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
+import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;

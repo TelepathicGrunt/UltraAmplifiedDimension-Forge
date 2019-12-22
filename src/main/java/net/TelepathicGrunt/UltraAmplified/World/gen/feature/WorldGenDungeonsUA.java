@@ -1,15 +1,15 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
+package net.telepathicgrunt.ultraamplified.World.gen.feature;
 
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeDesertUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeMesaUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSnowUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSwampUA;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityBlaze;

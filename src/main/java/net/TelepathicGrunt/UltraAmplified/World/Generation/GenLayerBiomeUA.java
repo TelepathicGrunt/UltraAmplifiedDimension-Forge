@@ -1,6 +1,6 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.World.Generation;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;

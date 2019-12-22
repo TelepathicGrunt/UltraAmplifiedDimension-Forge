@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.World.Generation;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;

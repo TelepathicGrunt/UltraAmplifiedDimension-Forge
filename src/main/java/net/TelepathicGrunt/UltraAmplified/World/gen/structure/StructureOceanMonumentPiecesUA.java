@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
+package net.telepathicgrunt.ultraamplified.World.gen.structure;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -7,7 +7,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;

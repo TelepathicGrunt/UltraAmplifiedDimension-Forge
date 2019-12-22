@@ -1,16 +1,16 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.World.Biomes;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenGreenPowConcretePatchUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenHayBalePileUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenVinesShortUA;
+import net.telepathicgrunt.ultraamplified.Config.UAConfig;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenGreenPowConcretePatchUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenHayBalePileUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenStonehenge;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenSunShrine;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenVinesShortUA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;

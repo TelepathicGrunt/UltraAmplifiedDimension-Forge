@@ -1,7 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.World.dimension;
+package net.telepathicgrunt.ultraamplified.World.dimension;
 
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
+import net.telepathicgrunt.ultraamplified.World.Generation.BiomeProviderUA;
+import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;

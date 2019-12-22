@@ -1,8 +1,8 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.World.Biomes;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
 import net.minecraft.block.BlockSilverfish;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

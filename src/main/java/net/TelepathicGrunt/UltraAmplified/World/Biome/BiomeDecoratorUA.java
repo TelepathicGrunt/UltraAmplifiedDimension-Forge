@@ -1,12 +1,12 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biome;
+package net.telepathicgrunt.ultraamplified.World.Biome;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorSettingsUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBetterCactusUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDeadBushUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenLiquidsUA;
-import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenTallGrassUA;
+import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorSettingsUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenBetterCactusUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenDeadBushUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenLiquidsUA;
+import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenTallGrassUA;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockTallGrass;

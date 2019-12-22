@@ -1,7 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.Blocks;
 
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

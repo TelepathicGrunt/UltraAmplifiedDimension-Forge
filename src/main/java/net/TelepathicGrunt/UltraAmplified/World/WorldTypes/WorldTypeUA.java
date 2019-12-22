@@ -1,10 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.World.WorldTypes;
+package net.telepathicgrunt.ultraamplified.World.WorldTypes;
 
 import java.lang.reflect.Method;
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
-import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.World.Generation.BiomeProviderUA;
+import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;

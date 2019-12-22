@@ -1,13 +1,13 @@
 
 
 
-package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
+package net.telepathicgrunt.ultraamplified.World.gen.structure;
 
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockFlowerPot;

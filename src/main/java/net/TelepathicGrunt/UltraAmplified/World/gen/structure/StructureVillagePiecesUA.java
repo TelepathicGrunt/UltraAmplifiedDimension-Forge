@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
+package net.telepathicgrunt.ultraamplified.World.gen.structure;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,17 +8,17 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeJungleUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeStoneBeachUA;
-import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
+import net.telepathicgrunt.ultraamplified.Config.UAConfig;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeDesertUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeEndUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeHellUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeJungleUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeMesaUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSavannaUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSnowUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeStoneBeachUA;
+import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeTaigaUA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockCrops;

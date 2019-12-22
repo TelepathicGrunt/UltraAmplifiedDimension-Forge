@@ -1,6 +1,6 @@
-package net.TelepathicGrunt.UltraAmplified.Config;
+package net.telepathicgrunt.ultraamplified.Config;
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.config.Config.Type;

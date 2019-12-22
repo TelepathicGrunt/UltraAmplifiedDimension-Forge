@@ -1,9 +1,9 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.World.Biomes;
 
 import java.util.Arrays;
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSand;

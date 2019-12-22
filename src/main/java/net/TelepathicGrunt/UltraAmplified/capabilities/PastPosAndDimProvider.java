@@ -1,4 +1,4 @@
-package net.TelepathicGrunt.UltraAmplified.capabilities;
+package net.telepathicgrunt.ultraamplified.capabilities;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

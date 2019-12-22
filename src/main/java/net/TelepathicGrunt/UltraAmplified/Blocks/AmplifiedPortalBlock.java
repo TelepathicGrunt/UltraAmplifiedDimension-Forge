@@ -1,10 +1,10 @@
-package net.TelepathicGrunt.UltraAmplified.Blocks;
+package net.telepathicgrunt.ultraamplified.Blocks;
 
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStone;

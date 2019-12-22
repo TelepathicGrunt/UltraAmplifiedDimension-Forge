@@ -1,8 +1,8 @@
-package net.TelepathicGrunt.UltraAmplified.World.Biomes;
+package net.telepathicgrunt.ultraamplified.World.Biomes;
 
 import java.util.Random;
 
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;

@@ -1,7 +1,7 @@
-package net.TelepathicGrunt.UltraAmplified.World.Generation;
+package net.telepathicgrunt.ultraamplified.World.Generation;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
-import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.Config.UAConfig;
+import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
