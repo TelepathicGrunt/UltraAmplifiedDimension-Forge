@@ -203,8 +203,10 @@ public class BiomeAddModdedFeatures {
 			
 			// we have a list of vanilla biomes in the order to match the UA biome list in BiomeInit.
 			// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
-			for (int biomeIndex = 0; biomeIndex < vanillaBiomesToCheck.length; biomeIndex++) {
-				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (BiomeUA) BiomeInit.getBiomeArray()[biomeIndex]);
+			int biomeIndex = 0;
+			for (Biome biome : BiomeInit.getBiomeArray()) {
+				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (BiomeUA)biome);
+				biomeIndex++;
 			}
 			
 			//edge case as UA End biome will grab features from multiple end biomes
