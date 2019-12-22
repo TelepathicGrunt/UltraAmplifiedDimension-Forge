@@ -1,13 +1,13 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 
 public class BiomeStoneBeachUA extends BiomeExtendedUA
 {

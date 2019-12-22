@@ -1,7 +1,6 @@
-package net.telepathicgrunt.ultraamplified.Blocks;
+package net.TelepathicGrunt.UltraAmplified.Blocks;
 
 
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,6 +10,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 
 @ObjectHolder(UltraAmplified.MOD_ID)

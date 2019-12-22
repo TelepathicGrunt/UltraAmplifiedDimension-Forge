@@ -1,11 +1,10 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.init.Blocks;
@@ -29,6 +28,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 
 public class StructureEndCityPiecesUA
 {

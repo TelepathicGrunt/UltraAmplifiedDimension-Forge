@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.dimension;
+package net.TelepathicGrunt.UltraAmplified.World.dimension;
 
 import javax.annotation.Nonnull;
 

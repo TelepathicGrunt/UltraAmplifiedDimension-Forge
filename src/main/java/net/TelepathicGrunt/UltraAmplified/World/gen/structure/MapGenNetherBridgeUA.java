@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -19,6 +18,7 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureNetherBridgePieces;
 import net.minecraft.world.gen.structure.StructureStart;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 
 public class MapGenNetherBridgeUA extends MapGenStructure
 {

@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
@@ -7,8 +7,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenMineshaftUA.Type;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockEndRod;
 import net.minecraft.block.BlockPlanks;
@@ -34,6 +32,8 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA.Type;
 
 public class StructureMineshaftPiecesUA
 {

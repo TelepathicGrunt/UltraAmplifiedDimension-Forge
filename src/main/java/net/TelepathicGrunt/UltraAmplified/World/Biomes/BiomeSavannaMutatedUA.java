@@ -1,9 +1,7 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +10,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenFossils;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
 
 public class BiomeSavannaMutatedUA extends BiomeSavannaUA
 {

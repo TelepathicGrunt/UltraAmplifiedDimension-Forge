@@ -1,22 +1,10 @@
-package net.telepathicgrunt.ultraamplified.World.Generation;
+package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
 import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenDungeonsUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenSlimeLakeUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenCaveCavity;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenMineshaftUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenRavineUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenScatteredFeatureUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenStrongholdUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenVillageUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureOceanMonumentUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.WoodlandMansionUA;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -34,6 +22,18 @@ import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenDungeonsUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSlimeLakeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenCaveCavity;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenMineshaftUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenRavineUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenScatteredFeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenStrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenVillageUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureOceanMonumentUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
 
 public class ChunkGeneratorOverworldUA implements IChunkGenerator{
 	

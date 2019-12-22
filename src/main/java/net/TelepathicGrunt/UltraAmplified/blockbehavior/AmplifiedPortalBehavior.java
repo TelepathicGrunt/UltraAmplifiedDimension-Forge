@@ -1,11 +1,6 @@
-package net.telepathicgrunt.ultraamplified.blockbehavior;
+package net.TelepathicGrunt.UltraAmplified.blockbehavior;
 
 
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.Blocks.BlocksAndItemsInit;
-import net.telepathicgrunt.ultraamplified.World.dimension.UATeleporter;
-import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
-import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;
@@ -25,6 +20,11 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
+import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksAndItemsInit;
+import net.TelepathicGrunt.UltraAmplified.World.dimension.UATeleporter;
+import net.TelepathicGrunt.UltraAmplified.capabilities.IPlayerPosAndDim;
+import net.TelepathicGrunt.UltraAmplified.capabilities.PlayerPositionAndDimension;
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MOD_ID)
 public class AmplifiedPortalBehavior {

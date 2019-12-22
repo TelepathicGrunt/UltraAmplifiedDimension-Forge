@@ -1,10 +1,10 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenBirchMTree;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchMTree;
 
 public class BiomeBirchForestMutatedUA extends BiomeForestUA
 {

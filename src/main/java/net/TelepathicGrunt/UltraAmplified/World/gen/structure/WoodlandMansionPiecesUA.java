@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
@@ -31,6 +30,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 
 public class WoodlandMansionPiecesUA
 {

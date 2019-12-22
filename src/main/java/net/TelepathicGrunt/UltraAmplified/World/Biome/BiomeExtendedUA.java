@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.Biome;
+package net.TelepathicGrunt.UltraAmplified.World.Biome;
 
 import java.util.Random;
 

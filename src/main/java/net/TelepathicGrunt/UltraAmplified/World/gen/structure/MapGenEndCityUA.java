@@ -1,11 +1,9 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
-import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,6 +11,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 
 public class MapGenEndCityUA extends MapGenStructure
 {

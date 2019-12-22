@@ -1,13 +1,12 @@
 
 
 
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockFlowerPot;
@@ -48,6 +47,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 
 public class ComponentScatteredFeaturePiecesUA
 {

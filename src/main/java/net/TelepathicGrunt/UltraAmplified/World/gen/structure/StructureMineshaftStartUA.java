@@ -1,10 +1,10 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureMineshaftPiecesUA.Room;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureStart;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureMineshaftPiecesUA.Room;
 
 public class StructureMineshaftStartUA extends StructureStart
 {

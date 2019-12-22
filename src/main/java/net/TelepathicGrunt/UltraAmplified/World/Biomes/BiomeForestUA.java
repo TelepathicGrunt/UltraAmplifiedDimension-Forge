@@ -1,13 +1,7 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenBirchTreeUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenStonehenge;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenSunShrine;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.passive.EntityRabbit;
@@ -24,6 +18,12 @@ import net.minecraft.world.gen.feature.WorldGenCanopyTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBirchTreeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 
 public class BiomeForestUA extends BiomeExtendedUA
 {

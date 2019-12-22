@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
@@ -24,6 +23,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 
 @SuppressWarnings("incomplete-switch")
 public class StructureNetherBridgePiecesUA

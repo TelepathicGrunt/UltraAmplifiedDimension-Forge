@@ -1,14 +1,8 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Iterator;
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenBetterCactusUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenStonehenge;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenSunShrine;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityHusk;
@@ -23,6 +17,12 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenDesertWells;
 import net.minecraft.world.gen.feature.WorldGenFossils;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenBetterCactusUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenStonehenge;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSunShrine;
 
 public class BiomeDesertUA extends BiomeExtendedUA
 {

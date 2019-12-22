@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.capabilities;
+package net.TelepathicGrunt.UltraAmplified.capabilities;
 
 import javax.annotation.Nullable;
 

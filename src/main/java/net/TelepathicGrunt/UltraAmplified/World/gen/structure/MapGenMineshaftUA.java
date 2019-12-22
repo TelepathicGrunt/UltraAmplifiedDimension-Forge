@@ -1,22 +1,22 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeColdBeachUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeDesertUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeEndUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeHellUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeHillsUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeJungleUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeMesaUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSavannaUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSnowUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeStoneBeachUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSwampUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeTaigaUA;
-import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeColdBeachUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeEndUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHellUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeHillsUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeJungleUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSavannaUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeStoneBeachUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeTaigaUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 
 public class MapGenMineshaftUA extends MapGenStructure
 {

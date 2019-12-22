@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.World.gen.structure;
+package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 
 import java.util.List;
 import java.util.Random;
@@ -6,7 +6,6 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -14,6 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 
 public class MapGenStrongholdUA extends MapGenStructure
 {

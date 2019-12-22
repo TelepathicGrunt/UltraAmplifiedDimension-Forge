@@ -1,7 +1,5 @@
-package net.telepathicgrunt.ultraamplified.World.dimension;
+package net.TelepathicGrunt.UltraAmplified.World.dimension;
 
-import net.telepathicgrunt.ultraamplified.World.Generation.BiomeProviderUA;
-import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -9,6 +7,8 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.BiomeProviderUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 
 public class UltraAmplifiedWorldProvider extends WorldProviderSurface{
 
@@ -20,7 +20,7 @@ public class UltraAmplifiedWorldProvider extends WorldProviderSurface{
     }
 
 	//mimics vanilla sky movement
-	@Override
+	@SideOnly(Side.CLIENT)
 	public float calculateCelestialAngle(long worldTime, float partialTicks) {
 	      double d0 = MathHelper.frac((double)worldTime / 24000.0D - 0.25D);
 	      double d1 = 0.5D - Math.cos(d0 * Math.PI) / 2.0D;
@@ -31,6 +31,7 @@ public class UltraAmplifiedWorldProvider extends WorldProviderSurface{
 	   /**
 	    * Creates the light to brightness table. It changes how light levels looks to the players but does not change the actual values of the light levels.
 	    */
+	   @SideOnly(Side.CLIENT)
 	   protected void generateLightBrightnessTable() {
 	      for(int i = 0; i <= 15; ++i) {
 	         this.lightBrightnessTable[i] = (float)i / 20.0F;
@@ -56,7 +57,7 @@ public class UltraAmplifiedWorldProvider extends WorldProviderSurface{
 		return true;
 	}
 
-	@Override
+	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float celestialAngle, float partialTicks) {
 	      float f = MathHelper.cos(celestialAngle * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
 	      f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -87,7 +88,7 @@ public class UltraAmplifiedWorldProvider extends WorldProviderSurface{
 		return false;
 	}
 
-	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return false;
 	}

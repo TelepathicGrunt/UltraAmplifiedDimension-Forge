@@ -1,12 +1,12 @@
-package net.telepathicgrunt.ultraamplified.World.Generation;
+package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 
 public class GenLayerBiomeUA extends GenLayer
 {

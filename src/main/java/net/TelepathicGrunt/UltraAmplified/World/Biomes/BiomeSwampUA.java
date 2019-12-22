@@ -1,12 +1,7 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenCross;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenSwampMutatedUA;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +16,11 @@ import net.minecraft.world.gen.feature.WorldGenFossils;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenCross;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenSwampMutatedUA;
 
 public class BiomeSwampUA extends BiomeExtendedUA
 {

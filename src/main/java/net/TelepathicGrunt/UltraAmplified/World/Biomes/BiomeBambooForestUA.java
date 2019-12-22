@@ -1,11 +1,8 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenVinesLongUA;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityBat;
@@ -18,6 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenVinesLongUA;
 
 public class BiomeBambooForestUA extends BiomeExtendedUA
 {

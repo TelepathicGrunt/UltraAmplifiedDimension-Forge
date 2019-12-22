@@ -1,10 +1,7 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeExtendedUA;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.passive.EntityHorse;
@@ -17,6 +14,9 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenFossils;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeExtendedUA;
 
 public class BiomeSavannaUA extends BiomeExtendedUA
 {

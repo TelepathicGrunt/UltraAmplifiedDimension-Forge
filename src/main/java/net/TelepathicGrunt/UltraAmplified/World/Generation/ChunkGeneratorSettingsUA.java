@@ -1,6 +1,6 @@
-package net.telepathicgrunt.ultraamplified.World.Generation;
+package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 
 //holds values that is set in configs at start of world generation 
 //May be removed in 1.13 when configs work on a per world basis.

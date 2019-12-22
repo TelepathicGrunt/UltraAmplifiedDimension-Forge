@@ -1,12 +1,12 @@
-package net.telepathicgrunt.ultraamplified.capabilities;
+package net.TelepathicGrunt.UltraAmplified.capabilities;
 
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 @EventBusSubscriber(modid=UltraAmplified.MOD_ID)
 public class CapabilityEventHandler

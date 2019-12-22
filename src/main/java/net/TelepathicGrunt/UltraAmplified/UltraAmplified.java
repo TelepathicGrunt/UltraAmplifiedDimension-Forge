@@ -1,31 +1,9 @@
-package net.telepathicgrunt.ultraamplified;
+package net.TelepathicGrunt.UltraAmplified;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.telepathicgrunt.ultraamplified.Blocks.BlocksAndItemsInit;
-import net.telepathicgrunt.ultraamplified.Config.UAConfig;
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
-import net.telepathicgrunt.ultraamplified.World.WorldTypes.WorldTypeUA;
-import net.telepathicgrunt.ultraamplified.World.dimension.UltraAmplifiedWorldProvider;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.ComponentScatteredFeaturePiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenEndCityUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenNetherBridgeUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenScatteredFeatureUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenStrongholdUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.MapGenVillageUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureEndCityPiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureMineshaftPiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureMineshaftStartUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureNetherBridgePiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureOceanMonumentPiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureOceanMonumentUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureStrongholdPiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.StructureVillagePiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.WoodlandMansionPiecesUA;
-import net.telepathicgrunt.ultraamplified.World.gen.structure.WoodlandMansionUA;
-import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -43,6 +21,28 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksAndItemsInit;
+import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.WorldTypes.WorldTypeUA;
+import net.TelepathicGrunt.UltraAmplified.World.dimension.UltraAmplifiedWorldProvider;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.ComponentScatteredFeaturePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenEndCityUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenNetherBridgeUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenScatteredFeatureUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenStrongholdUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.MapGenVillageUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureEndCityPiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureMineshaftPiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureMineshaftStartUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureNetherBridgePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureOceanMonumentPiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureOceanMonumentUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureStrongholdPiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.StructureVillagePiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionPiecesUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.structure.WoodlandMansionUA;
+import net.TelepathicGrunt.UltraAmplified.capabilities.CapabilityPlayerPosAndDim;
 
 @Mod(modid = UltraAmplified.MOD_ID, name = UltraAmplified.MOD_NAME, version = UltraAmplified.VERSION)
 public class UltraAmplified {
@@ -52,7 +52,7 @@ public class UltraAmplified {
 	public static final String MOD_NAME = "Ultra Amplified Mod";
 	
 	//Change mod version here, in mcmod.info, in UAConfig, and in build.gradlew. I probably should automate this lol.
-	public static final String VERSION = "4.6.1";
+	public static final String VERSION = "4.6.2";
 	
 	public static WorldType UltraAmplifiedWorldType;
 	

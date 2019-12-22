@@ -1,15 +1,15 @@
-package net.telepathicgrunt.ultraamplified.World.Biomes;
+package net.TelepathicGrunt.UltraAmplified.World.Biomes;
 
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeDecoratorUA;
-import net.telepathicgrunt.ultraamplified.World.Generation.ChunkGeneratorSettingsUA;
-import net.telepathicgrunt.ultraamplified.World.gen.feature.WorldGenChorusPlantUA;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenEndIsland;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeDecoratorUA;
+import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorSettingsUA;
+import net.TelepathicGrunt.UltraAmplified.World.gen.feature.WorldGenChorusPlantUA;
 
 public class BiomeEndDecoratorUA extends BiomeDecoratorUA
 {

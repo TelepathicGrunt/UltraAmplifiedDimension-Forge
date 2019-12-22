@@ -12,6 +12,12 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        | Ultra Amplified mod changelog |
        
        
+    (V.4.6.2 Changes)
+    
+      Dimension:
+·Fixed bug where putting the Ultra Amplified Dimension on a server will crash the server. (Siding issue. Forgot to put the graphic stuff to be only on client side)
+   
+       
     (V.4.6.1 Changes)
        
      Block:

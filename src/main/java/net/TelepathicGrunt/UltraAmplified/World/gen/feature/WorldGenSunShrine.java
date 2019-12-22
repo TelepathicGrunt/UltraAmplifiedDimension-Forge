@@ -1,9 +1,8 @@
-package net.telepathicgrunt.ultraamplified.World.gen.feature;
+package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
@@ -21,6 +20,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 public class WorldGenSunShrine extends WorldGenerator{
 

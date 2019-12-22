@@ -1,6 +1,5 @@
-package net.telepathicgrunt.ultraamplified.Config;
+package net.TelepathicGrunt.UltraAmplified.Config;
 
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.config.Config.Type;
@@ -8,6 +7,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 
 
 @Config.LangKey("ultra_amplified.config.title")

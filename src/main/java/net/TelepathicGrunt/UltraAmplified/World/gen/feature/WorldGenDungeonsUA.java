@@ -1,15 +1,10 @@
-package net.telepathicgrunt.ultraamplified.World.gen.feature;
+package net.TelepathicGrunt.UltraAmplified.World.gen.feature;
 
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.telepathicgrunt.ultraamplified.World.Biome.BiomeInit;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeDesertUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeMesaUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSnowUA;
-import net.telepathicgrunt.ultraamplified.World.Biomes.BiomeSwampUA;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -38,6 +33,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeDesertUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeMesaUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSnowUA;
+import net.TelepathicGrunt.UltraAmplified.World.Biomes.BiomeSwampUA;
 
 public class WorldGenDungeonsUA extends WorldGenerator
 {
