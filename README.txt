@@ -18,7 +18,7 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
 ·Amplified Portal Block's flame particles now show up correctly.     
      
      Misc:
---·Fixed weird bug where teleporting between any dimensions will crash the game.
+·Fixed weird bug where teleporting between any dimensions will crash the game. In order to fix this bug, I had to remove the percentage that shows how much of the world was created when creating a new world.
 
 
     (V.4.6.0 Changes)
