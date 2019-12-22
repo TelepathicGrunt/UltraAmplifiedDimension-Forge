@@ -20,7 +20,7 @@ public class BiomeMesaDecoratorUA extends BiomeDecoratorUA{
 		super.decorate(worldIn, rand, biome, pos);
         
 		//adds the additional gold ores for the mesa biome
-		 for (int numPerChunk = 0; numPerChunk < this.chunkProviderSettingsUA.mesaGoldCount; ++numPerChunk)
+		 for (int numPerChunk = 0; numPerChunk < BiomeDecoratorUA.chunkProviderSettingsUA.mesaGoldCount; ++numPerChunk)
          {
              int x = rand.nextInt(16);
              int y = rand.nextInt(246)+5;

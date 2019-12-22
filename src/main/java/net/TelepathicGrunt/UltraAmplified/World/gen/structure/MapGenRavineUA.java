@@ -5,7 +5,6 @@ import java.util.Random;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -145,7 +144,6 @@ public class MapGenRavineUA extends MapGenBase
                             {
                                 if (l1 >= 0 && l1 < 256)
                                 {
-                                    IBlockState iblockstate = chunkPrimer.getBlockState(j1, l1, k1);
 
                                     if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1)
                                     {
@@ -155,8 +153,6 @@ public class MapGenRavineUA extends MapGenBase
                             }
                         }
                     }
-
-                    BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
                     for (int xInChunk = k2; xInChunk < k; ++xInChunk)
                     {
@@ -220,7 +216,6 @@ public class MapGenRavineUA extends MapGenBase
         double x = (double)(chunkX * 16 + this.rand.nextInt(16));
         double y = (double)(this.rand.nextInt(this.rand.nextInt(3) + 2) + 31);
         double z = (double)(chunkZ * 16 + this.rand.nextInt(16));
-        int i = 1;
 
         for (int j = 0; j < 1; ++j)
         {

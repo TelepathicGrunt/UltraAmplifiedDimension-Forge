@@ -117,7 +117,6 @@ public class BiomeMesaUA extends BiomeExtendedUA
 
             if (d0 > -2.5D)
             {
-                double d1 = 0.001953125D;
                 double d2 = Math.abs(this.pillarRoofNoise.getValue((double)i * 1500.001953125D, (double)j * 1500.001953125D));
                 d4 = d0 * d0 * 8.5D;
                 double d3 = Math.ceil(d2 * 1200.0D) + 1000.0D;
@@ -320,7 +319,6 @@ public class BiomeMesaUA extends BiomeExtendedUA
 
         for (int l4 = 0; l4 < k3; ++l4)
         {
-            int i5 = 1;
             j4 += random.nextInt(16) + 4;
 
             for (int k1 = 0; j4 + k1 < 64 && k1 < 1; ++k1)

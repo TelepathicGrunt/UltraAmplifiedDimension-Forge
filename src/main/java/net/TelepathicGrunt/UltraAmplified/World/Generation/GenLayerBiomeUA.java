@@ -10,7 +10,7 @@ import net.minecraftforge.common.BiomeManager.BiomeEntry;
 
 public class GenLayerBiomeUA extends GenLayer
 {
-    //@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry>[] biomes = new java.util.ArrayList[net.minecraftforge.common.BiomeManager.BiomeType.values().length];
 
     private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> oceanReplacedBiomes = new java.util.ArrayList<BiomeEntry>();

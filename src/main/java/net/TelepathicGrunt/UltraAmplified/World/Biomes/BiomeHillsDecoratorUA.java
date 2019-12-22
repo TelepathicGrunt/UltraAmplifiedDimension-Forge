@@ -22,7 +22,7 @@ public class BiomeHillsDecoratorUA extends BiomeDecoratorUA{
     	super.decorate(worldIn, rand, biome, pos);
     	
     	//generates emerald ores throughout the chunk. The number to spawn per chunk varies greatly between 20 and 55 but can be modified by config setting
-		int numberToSpawn = (int)((20 + rand.nextInt(35))*this.chunkProviderSettingsUA.emeraldCountPercentage);
+		int numberToSpawn = (int)((20 + rand.nextInt(35))*BiomeDecoratorUA.chunkProviderSettingsUA.emeraldCountPercentage);
 	    for (int currentCount = 0; currentCount < numberToSpawn; currentCount++)
 	    {
 	    	int x = rand.nextInt(16) + 8;
@@ -34,7 +34,7 @@ public class BiomeHillsDecoratorUA extends BiomeDecoratorUA{
     	
 
 	    //generates a silverfish stone block through the biome
-        for (int numPerChunk = 0; numPerChunk < this.chunkProviderSettingsUA.silverfishCount; ++numPerChunk)
+        for (int numPerChunk = 0; numPerChunk < BiomeDecoratorUA.chunkProviderSettingsUA.silverfishCount; ++numPerChunk)
         {
             int x = rand.nextInt(16);
             int y = rand.nextInt(251) + 4;

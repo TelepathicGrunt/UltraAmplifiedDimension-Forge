@@ -23,7 +23,7 @@ public class BiomeEndDecoratorUA extends BiomeDecoratorUA
     @Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     { 
-        this.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
+        BiomeDecoratorUA.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
         this.chunkPos = pos;
         this.genDecorations(biome, worldIn, random);
         this.decorating = false;
@@ -33,7 +33,7 @@ public class BiomeEndDecoratorUA extends BiomeDecoratorUA
     protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
     	//generates end islands. These may be why end biome are slower to load
-    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.endIslandCount; ++currentCount)
+    	for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.endIslandCount; ++currentCount)
         {
             int x = random.nextInt(16) + 8;
             int z = random.nextInt(16) + 8;

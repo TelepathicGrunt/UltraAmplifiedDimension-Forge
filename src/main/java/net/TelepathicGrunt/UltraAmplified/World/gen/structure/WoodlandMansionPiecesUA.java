@@ -100,7 +100,6 @@ public class WoodlandMansionPiecesUA
             public Grid(Random randomIn)
             {
                 this.random = randomIn;
-                int i = 11;
                 this.entranceX = 7;
                 this.entranceY = 4;
                 this.baseGrid = new WoodlandMansionPiecesUA.SimpleGrid(11, 11, 5);
@@ -253,7 +252,7 @@ public class WoodlandMansionPiecesUA
 
                         if (l == 131072 && (k & 2097152) == 2097152)
                         {
-                            list.add(new Tuple(j, i));
+                            list.add(new Tuple<Integer, Integer>(j, i));
                         }
                     }
                 }
@@ -264,12 +263,12 @@ public class WoodlandMansionPiecesUA
                 }
                 else
                 {
-                    Tuple<Integer, Integer> tuple = (Tuple)list.get(this.random.nextInt(list.size()));
-                    int l1 = woodlandmansionpieces$simplegrid.get(((Integer)tuple.getFirst()).intValue(), ((Integer)tuple.getSecond()).intValue());
-                    woodlandmansionpieces$simplegrid.set(((Integer)tuple.getFirst()).intValue(), ((Integer)tuple.getSecond()).intValue(), l1 | 4194304);
-                    EnumFacing enumfacing1 = this.get1x2RoomDirection(this.baseGrid, ((Integer)tuple.getFirst()).intValue(), ((Integer)tuple.getSecond()).intValue(), 1, l1 & 65535);
-                    int i2 = ((Integer)tuple.getFirst()).intValue() + enumfacing1.getFrontOffsetX();
-                    int i1 = ((Integer)tuple.getSecond()).intValue() + enumfacing1.getFrontOffsetZ();
+                    Tuple<Integer, Integer> tuple = list.get(this.random.nextInt(list.size()));
+                    int l1 = woodlandmansionpieces$simplegrid.get(tuple.getFirst().intValue(), tuple.getSecond().intValue());
+                    woodlandmansionpieces$simplegrid.set(tuple.getFirst().intValue(), tuple.getSecond().intValue(), l1 | 4194304);
+                    EnumFacing enumfacing1 = this.get1x2RoomDirection(this.baseGrid, tuple.getFirst().intValue(), tuple.getSecond().intValue(), 1, l1 & 65535);
+                    int i2 = tuple.getFirst().intValue() + enumfacing1.getFrontOffsetX();
+                    int i1 = tuple.getSecond().intValue() + enumfacing1.getFrontOffsetZ();
 
                     for (int j1 = 0; j1 < this.thirdFloorGrid.height; ++j1)
                     {
@@ -279,7 +278,7 @@ public class WoodlandMansionPiecesUA
                             {
                                 this.thirdFloorGrid.set(k1, j1, 5);
                             }
-                            else if (k1 == ((Integer)tuple.getFirst()).intValue() && j1 == ((Integer)tuple.getSecond()).intValue())
+                            else if (k1 == tuple.getFirst().intValue() && j1 == tuple.getSecond().intValue())
                             {
                                 this.thirdFloorGrid.set(k1, j1, 3);
                             }
@@ -304,7 +303,7 @@ public class WoodlandMansionPiecesUA
                     if (list1.isEmpty())
                     {
                         this.thirdFloorGrid.set(0, 0, this.thirdFloorGrid.width, this.thirdFloorGrid.height, 5);
-                        woodlandmansionpieces$simplegrid.set(((Integer)tuple.getFirst()).intValue(), ((Integer)tuple.getSecond()).intValue(), l1);
+                        woodlandmansionpieces$simplegrid.set(tuple.getFirst().intValue(), tuple.getSecond().intValue(), l1);
                     }
                     else
                     {
@@ -329,7 +328,7 @@ public class WoodlandMansionPiecesUA
                     {
                         if (p_191116_1_.get(j, i) == 2)
                         {
-                            list.add(new Tuple(j, i));
+                            list.add(new Tuple<Integer, Integer>(j, i));
                         }
                     }
                 }

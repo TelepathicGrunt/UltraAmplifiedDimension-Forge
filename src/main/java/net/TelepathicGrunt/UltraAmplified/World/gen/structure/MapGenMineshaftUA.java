@@ -21,7 +21,6 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 public class MapGenMineshaftUA extends MapGenStructure
 {
     private double chance = 0.0025D;
-    private ChunkGeneratorOverworldUA settings;
 
     public MapGenMineshaftUA()
     {
@@ -29,7 +28,6 @@ public class MapGenMineshaftUA extends MapGenStructure
     
     public MapGenMineshaftUA(ChunkGeneratorOverworldUA settings)
     {
-    	this.settings = settings;
     	chance = settings.settings.mineshaftSpawnrate/10000;
     }
 
@@ -45,7 +43,6 @@ public class MapGenMineshaftUA extends MapGenStructure
 
     public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored)
     {
-        int i = 1000;
         int j = pos.getX() >> 4;
         int k = pos.getZ() >> 4;
 

@@ -198,14 +198,12 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
     private void createCrown(World worldIn, int x, int z, int y, int extraRadius, Random rand)
     {
     	  int i = 4;
-          int j = 0;
 
           for (int k = y - i; k <= y+3; ++k)
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
               this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5));
-              j = radius;
           }
           
           this.growLeavesLayerStrict(worldIn, new BlockPos(x, y+4, z), 1);
@@ -216,7 +214,6 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
     private void createWoodCrown(World worldIn, int x, int z, int y, Random rand)
     {
     	  int i = 2;
-          int j = 0;
 
           for (int k = y - (i + 4); k <= y-1; ++k)
           {
@@ -234,7 +231,6 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
               }
 
               this.growWoodLayerStrict(worldIn, new BlockPos(x, k, z), radius);
-              j = radius;
           }
     }
 
@@ -242,14 +238,12 @@ public class WorldGenDarkOakMTree extends WorldGenHugeTrees{
     {
     	//generates a tiny patch of leaves
     	  int i = rand.nextInt(2) + 1;
-          int j = 0;
 
           for (int k = y - i; k <= y+1; ++k)
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
               this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2));
-              j = radius;
           }
     }
     

@@ -111,7 +111,7 @@ public class MapGenStrongholdUA extends MapGenStructure
     {
         this.initializeStructureData(this.world);
         int i = 0;
-        ObjectIterator lvt_2_1_ = this.structureMap.values().iterator();
+        ObjectIterator<StructureStart> lvt_2_1_ = this.structureMap.values().iterator();
 
         while (lvt_2_1_.hasNext())
         {

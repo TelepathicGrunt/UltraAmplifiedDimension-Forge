@@ -3,20 +3,13 @@ package net.TelepathicGrunt.UltraAmplified.World.gen.structure;
 import java.util.Random;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
-import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Generation.ChunkGeneratorOverworldUA;
-import net.minecraft.block.BlockColored;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
@@ -160,8 +153,6 @@ public class MapGenCaveCavity extends MapGenBase
                             {
                                 if (l1 >= 0 && l1 < 256)
                                 {
-                                    IBlockState iblockstate = chunkPrimer.getBlockState(j1, l1, k1);
-                                    
                                     if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1)
                                     {
                                         l1 = l2;
@@ -354,22 +345,5 @@ public class MapGenCaveCavity extends MapGenBase
     {
         net.minecraft.block.Block block = data.getBlockState(x, y, z).getBlock();
         return block== Blocks.FLOWING_WATER || block == Blocks.WATER;
-    }
-
-    //Exception biomes to make sure we generate like vanilla
-    private boolean isExceptionBiome(net.minecraft.world.biome.Biome biome)
-    {
-        if (biome == net.minecraft.init.Biomes.BEACH) return true;
-        if (biome == net.minecraft.init.Biomes.DESERT) return true;
-        return false;
-    }
-
-    //Determine if the block at the specified location is the top block for the biome, we take into account
-    //Vanilla bugs to make sure that we generate the map the same way vanilla does.
-    private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ)
-    {
-        net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
-        IBlockState state = data.getBlockState(x, y, z);
-        return (isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock);
     }
 }

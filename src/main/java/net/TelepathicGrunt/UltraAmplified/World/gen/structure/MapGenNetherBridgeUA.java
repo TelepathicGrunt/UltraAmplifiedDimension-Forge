@@ -71,7 +71,6 @@ public class MapGenNetherBridgeUA extends MapGenStructure
 
     public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos, boolean p_180706_3_)
     {
-        int i = 1000;
         int j = pos.getX() >> 4;
         int k = pos.getZ() >> 4;
 

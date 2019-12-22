@@ -290,6 +290,7 @@ public class StructureStrongholdPiecesUA
             return canStrongholdGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175868_0_, structureboundingbox) == null ? new StructureStrongholdPiecesUA.ChestCorridor(p_175868_6_, p_175868_1_, structureboundingbox, p_175868_5_) : null;
         }
 
+		@SuppressWarnings("deprecation")
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
             if (this.isLiquidInStructureBoundingBox(worldIn, structureBoundingBoxIn))
@@ -355,7 +356,6 @@ public class StructureStrongholdPiecesUA
 
         public static StructureBoundingBox findPieceBox(List<StructureComponent> p_175869_0_, Random p_175869_1_, int p_175869_2_, int p_175869_3_, int p_175869_4_, EnumFacing p_175869_5_)
         {
-            int i = 3;
             StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175869_2_, p_175869_3_, p_175869_4_, -1, -1, 0, 5, 5, 4, p_175869_5_);
             StructureComponent structurecomponent = StructureComponent.findIntersecting(p_175869_0_, structureboundingbox);
 
@@ -676,9 +676,7 @@ public class StructureStrongholdPiecesUA
                 this.fillWithRandomizedBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 13, i - 1, 14, false, randomIn, StructureStrongholdPiecesUA.STRONGHOLD_STONES);
                 this.placeDoor(worldIn, randomIn, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
                 this.generateMaybeBox(worldIn, structureBoundingBoxIn, randomIn, 0.07F, 2, 1, 1, 11, 4, 13, Blocks.WEB.getDefaultState(), Blocks.WEB.getDefaultState(), false, 0);
-                int j = 1;
-                int k = 12;
-
+               
                 for (int l = 1; l <= 13; ++l)
                 {
                     if ((l - 1) % 4 == 0)
@@ -738,8 +736,6 @@ public class StructureStrongholdPiecesUA
                     this.setBlockState(worldIn, iblockstate1, 10, 5, 13, structureBoundingBoxIn);
                     this.setBlockState(worldIn, iblockstate1, 10, 6, 13, structureBoundingBoxIn);
                     this.setBlockState(worldIn, iblockstate1, 10, 7, 13, structureBoundingBoxIn);
-                    int i1 = 7;
-                    int j1 = 7;
                     this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 6, 9, 7, structureBoundingBoxIn);
                     this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 7, 9, 7, structureBoundingBoxIn);
                     this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 6, 8, 7, structureBoundingBoxIn);
@@ -1322,6 +1318,7 @@ public class StructureStrongholdPiecesUA
             return canStrongholdGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175863_0_, structureboundingbox) == null ? new StructureStrongholdPiecesUA.Stairs(p_175863_6_, p_175863_1_, structureboundingbox, p_175863_5_) : null;
         }
 
+		@SuppressWarnings("deprecation")
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
             if (this.isLiquidInStructureBoundingBox(worldIn, structureBoundingBoxIn))

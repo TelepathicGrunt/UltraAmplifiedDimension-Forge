@@ -489,6 +489,7 @@ public class StructureVillagePiecesUA
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175851_1_, structureboundingbox) == null ? new StructureVillagePiecesUA.Field1(start, p_175851_7_, rand, structureboundingbox, facing) : null;
         }
 
+		@SuppressWarnings("deprecation")
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
             if (this.averageGroundLvl < 0)
@@ -608,6 +609,7 @@ public class StructureVillagePiecesUA
             return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175852_1_, structureboundingbox) == null ? new StructureVillagePiecesUA.Field2(start, p_175852_7_, rand, structureboundingbox, facing) : null;
         }
 
+		@SuppressWarnings("deprecation")
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
             if (this.averageGroundLvl < 0)
@@ -1684,6 +1686,7 @@ public class StructureVillagePiecesUA
             return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null : structureboundingbox;
         }
 
+		@SuppressWarnings("deprecation")
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
         {
             if (this.averageGroundLvl < 0)
@@ -1890,7 +1893,8 @@ public class StructureVillagePiecesUA
         {
             return currentVillagerProfession;
         }
-        
+
+		@SuppressWarnings("deprecation")
         protected net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession chooseForgeProfession(int count, net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof)
         {
             return net.minecraftforge.fml.common.registry.VillagerRegistry.getById(chooseProfession(count, net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof)));

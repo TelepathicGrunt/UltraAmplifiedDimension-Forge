@@ -1,8 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
 import net.minecraft.world.biome.Biome;
@@ -16,7 +13,6 @@ public class GenLayerHillsAndAmplifiedUA extends GenLayer
 	 */
 	
 	
-    private static final Logger LOGGER = LogManager.getLogger();
     private final GenLayer riverLayer;
     private ChunkGeneratorSettingsUA settings;
 

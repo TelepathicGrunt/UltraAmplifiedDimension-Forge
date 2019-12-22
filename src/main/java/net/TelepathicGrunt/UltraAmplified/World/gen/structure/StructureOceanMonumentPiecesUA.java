@@ -678,7 +678,7 @@ public class StructureOceanMonumentPiecesUA
 			for (StructureOceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition : list) {
 				if (!structureoceanmonumentpieces$roomdefinition.claimed
 						&& !structureoceanmonumentpieces$roomdefinition.isSpecial()) {
-					Iterator lvt_10_1_ = list1.iterator();
+					Iterator<MonumentRoomFitHelper> lvt_10_1_ = list1.iterator();
 					StructureOceanMonumentPiecesUA.MonumentRoomFitHelper structureoceanmonumentpieces$monumentroomfithelper;
 
 					while (true) {
@@ -775,7 +775,6 @@ public class StructureOceanMonumentPiecesUA
 
 			for (int i = 0; i < 5; ++i) {
 				for (int j = 0; j < 4; ++j) {
-					int k = 0;
 					int l = getRoomIndex(i, 0, j);
 					astructureoceanmonumentpieces$roomdefinition[l] = new StructureOceanMonumentPiecesUA.RoomDefinition(
 							l);
@@ -784,7 +783,6 @@ public class StructureOceanMonumentPiecesUA
 
 			for (int i2 = 0; i2 < 5; ++i2) {
 				for (int l2 = 0; l2 < 4; ++l2) {
-					int k3 = 1;
 					int j4 = getRoomIndex(i2, 1, l2);
 					astructureoceanmonumentpieces$roomdefinition[j4] = new StructureOceanMonumentPiecesUA.RoomDefinition(
 							j4);
@@ -793,7 +791,6 @@ public class StructureOceanMonumentPiecesUA
 
 			for (int j2 = 1; j2 < 4; ++j2) {
 				for (int i3 = 0; i3 < 2; ++i3) {
-					int l3 = 2;
 					int k4 = getRoomIndex(j2, 2, i3);
 					astructureoceanmonumentpieces$roomdefinition[k4] = new StructureOceanMonumentPiecesUA.RoomDefinition(
 							k4);
@@ -958,7 +955,6 @@ public class StructureOceanMonumentPiecesUA
 
 		private void generateWing(boolean p_175840_1_, int p_175840_2_, World worldIn, Random p_175840_4_,
 				StructureBoundingBox p_175840_5_) {
-			int i = 24;
 
 			if (this.doesChunkIntersect(p_175840_5_, p_175840_2_, 0, p_175840_2_ + 23, 20)) {
 				this.fillWithBlocks(worldIn, p_175840_5_, p_175840_2_ + 0, 0, 0, p_175840_2_ + 24, 0, 20,
@@ -1549,6 +1545,7 @@ public class StructureOceanMonumentPiecesUA
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public abstract static class Piece extends StructureComponent {
 		protected static final IBlockState ROUGH_PRISMARINE = Blocks.PRISMARINE
 				.getStateFromMeta(BlockPrismarine.ROUGH_META);
@@ -2066,6 +2063,7 @@ public class StructureOceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@SuppressWarnings("deprecation")
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
 			
 				if (this.roomDefinition.index / 25 > 0) {
@@ -2221,8 +2219,6 @@ public class StructureOceanMonumentPiecesUA
 					this.fillWithBlocks(worldIn, structureBoundingBoxIn, 13, 0, 18, 13, 2, 18, BRICKS_PRISMARINE,
 							BRICKS_PRISMARINE, false);
 					int j1 = 9;
-					int j = 20;
-					int k = 5;
 
 					for (int l = 0; l < 2; ++l) {
 						this.setBlockState(worldIn, BRICKS_PRISMARINE, j1, 6, 20, structureBoundingBoxIn);

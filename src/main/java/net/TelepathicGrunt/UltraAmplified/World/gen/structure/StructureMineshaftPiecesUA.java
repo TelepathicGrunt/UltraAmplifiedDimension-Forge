@@ -332,10 +332,6 @@ public class StructureMineshaftPiecesUA
             }
             else
             {
-                int i = 0;
-                int j = 2;
-                int k = 0;
-                int l = 2;
                 int i1 = this.sectionCount * 5 - 1;
                 IBlockState iblockstate = this.func_189917_F_();
                 this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 1, i1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
@@ -397,12 +393,10 @@ public class StructureMineshaftPiecesUA
                 {
                     for (int i3 = 0; i3 <= i1; ++i3)
                     {
-                        int k3 = -1;
                         IBlockState iblockstate3 = this.getBlockStateFromPos(worldIn, l2, -1, i3, structureBoundingBoxIn);
 
                         if (iblockstate3.getMaterial() == Material.AIR)
                         {
-                            int l3 = -1;
                             this.setBlockState(worldIn, iblockstate, l2, -1, i3, structureBoundingBoxIn);
                         }
                     }
@@ -915,7 +909,7 @@ public class StructureMineshaftPiecesUA
         {
         	IBlockState flooring;
         	
-        	if(this.mineShaftType == mineShaftType.HELL) 
+        	if(this.mineShaftType == Type.HELL) 
             {
         		flooring = Blocks.SOUL_SAND.getDefaultState();
             }

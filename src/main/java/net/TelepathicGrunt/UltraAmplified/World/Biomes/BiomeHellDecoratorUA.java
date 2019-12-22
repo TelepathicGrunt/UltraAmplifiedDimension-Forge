@@ -31,11 +31,11 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
 	
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     { 
-        this.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
+        BiomeDecoratorUA.chunkProviderSettingsUA = new ChunkGeneratorSettingsUA();
         
         
         //generates large blobs of magma blocks below Y = 100
-        for (int currentCount = random.nextInt(3); currentCount < this.chunkProviderSettingsUA.magmaCount; ++currentCount)
+        for (int currentCount = random.nextInt(3); currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.magmaCount; ++currentCount)
         {
             int x = random.nextInt(16);
             int y = random.nextInt(101);
@@ -45,7 +45,7 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
 
         
     	//generates quartz below Y = 240
-    	for (int currentCount = random.nextInt(3); currentCount < this.chunkProviderSettingsUA.quartzCount; ++currentCount)
+    	for (int currentCount = random.nextInt(3); currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.quartzCount; ++currentCount)
         {
             int x = random.nextInt(16);
             int y = random.nextInt(241);
@@ -56,7 +56,7 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
         
     	
     	//spawns a single block of lava and how many can spawn may vary greatly chunk by chunk.
-        for (int currentCount = random.nextInt(50); currentCount < this.chunkProviderSettingsUA.lavaCount; currentCount++)
+        for (int currentCount = random.nextInt(50); currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.lavaCount; currentCount++)
         {
         	int x = random.nextInt(16) + 8;
             int y = random.nextInt(236) + 4;
@@ -82,7 +82,7 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
         }
     	
     	//generates glowstone in the first pattern
-    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
+    	for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
         {
             int x = random.nextInt(16) + 8;
             int z = random.nextInt(16) + 8;
@@ -91,7 +91,7 @@ public class BiomeHellDecoratorUA extends BiomeDecoratorUA
         }
 
     	//generates glowstone in the second pattern
-    	for (int currentCount = 0; currentCount < this.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
+    	for (int currentCount = 0; currentCount < BiomeDecoratorUA.chunkProviderSettingsUA.glowstoneCount; ++currentCount)
         {
             int x = random.nextInt(16) + 8;
             int z = random.nextInt(16) + 8;

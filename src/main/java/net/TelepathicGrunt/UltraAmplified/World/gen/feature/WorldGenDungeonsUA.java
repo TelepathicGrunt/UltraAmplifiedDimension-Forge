@@ -47,12 +47,9 @@ public class WorldGenDungeonsUA extends WorldGenerator
     
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = 3;
         int j = rand.nextInt(2) + 2;
         int k = -j - 1;
         int l = j + 1;
-        int i1 = -1;
-        int j1 = 4;
         int k1 = rand.nextInt(2) + 2;
         int l1 = -k1 - 1;
         int i2 = k1 + 1;

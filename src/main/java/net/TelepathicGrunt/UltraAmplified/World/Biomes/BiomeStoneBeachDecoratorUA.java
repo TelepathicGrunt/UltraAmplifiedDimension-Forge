@@ -60,7 +60,7 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
          }
     	 
     	 //generates additional iron at reduced spawnrate in a bigger range than default range
-    	 int ironCount = (this.chunkProviderSettingsUA.ironCount/5)*2;
+    	 int ironCount = (BiomeDecoratorUA.chunkProviderSettingsUA.ironCount/5)*2;
     	 for (int currentCount = 0; currentCount < ironCount; ++currentCount)
          {
              int x = random.nextInt(16);
@@ -72,7 +72,7 @@ public class BiomeStoneBeachDecoratorUA extends BiomeDecoratorUA{
          }
     	 
     	 //generates additonal coal at reduced spawnrate in a bigger range than default range
-    	 int coalCount = (this.chunkProviderSettingsUA.coalCount/3)*2;
+    	 int coalCount = (BiomeDecoratorUA.chunkProviderSettingsUA.coalCount/3)*2;
     	 for (int currentCount = 0; currentCount < coalCount; ++currentCount)
          {
              int x = random.nextInt(16);

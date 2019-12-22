@@ -26,7 +26,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -54,11 +53,9 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     public NoiseGeneratorOctaves forestNoise;
     private final World worldObj;
     private final boolean mapFeaturesEnabled;
-    private final WorldType terrainType;
     private final double[] heightMap;
     private final float[] biomeWeights;
     public ChunkGeneratorSettingsUA settings;
-    private IBlockState oceanBlock = Blocks.WATER.getDefaultState();
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator;
     private MapGenStrongholdUA strongholdGenerator;
@@ -79,7 +76,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
     {
         this.worldObj = worldIn;
         this.mapFeaturesEnabled = mapFeaturesEnabledIn;
-        this.terrainType = worldIn.getWorldInfo().getTerrainType();
         this.rand = new Random(seed);
         this.minLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
         this.maxLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
@@ -105,8 +101,6 @@ public class ChunkGeneratorOverworldUA implements IChunkGenerator{
         //Might be removed in 1.13 when configs can be per world
         this.settings = new ChunkGeneratorSettingsUA();
         
-        //this is not actually used at the moment
-        this.oceanBlock = UAConfig.biomeOptions.lavaOcean ? Blocks.LAVA.getDefaultState() : Blocks.WATER.getDefaultState();
         
         worldIn.setSeaLevel(UAConfig.biomeOptions.seaLevel);
         caveGenerator = new MapGenCaveCavity(this);

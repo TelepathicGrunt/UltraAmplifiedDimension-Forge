@@ -20,7 +20,6 @@ public class MapGenEndCityUA extends MapGenStructure
 	//this class is used only to register end cities. End Cities are generated in MapGenScatteredFeatureUA to reduce slowdown with world generation 
 	
     private final int citySpacing = 25;
-    private final int minCitySeparation = 5;
     private ChunkGeneratorOverworldUA overworldProvider;
 
     public static final List<Biome> field_191072_a = Arrays.<Biome>asList(new Biome[] {BiomeInit.BiomeEnd});

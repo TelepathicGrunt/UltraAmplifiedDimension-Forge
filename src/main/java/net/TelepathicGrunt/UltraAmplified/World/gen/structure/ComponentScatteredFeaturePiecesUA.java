@@ -157,7 +157,6 @@ public class ComponentScatteredFeaturePiecesUA
             {
                 for (int j = 0; j < this.scatteredFeatureSizeZ; ++j)
                 {
-                    int k = -5;
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.SANDSTONE.getDefaultState(), i2, -5, j, structureBoundingBoxIn);
                 }
             }
