@@ -1,8 +1,5 @@
 package net.TelepathicGrunt.UltraAmplified.World.Generation;
 
-import java.lang.reflect.Field;
-
-import net.TelepathicGrunt.UltraAmplified.UltraAmplified;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;
@@ -22,7 +19,6 @@ import net.minecraft.world.gen.layer.GenLayerShore;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class BiomeProviderUA extends BiomeProvider{
 
@@ -39,24 +35,8 @@ public class BiomeProviderUA extends BiomeProvider{
         //generates the world and biome layouts
         GenLayer[] agenlayer = initializeAllBiomeGenerators(seed, worldType, this.settings);
         agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
-        
-        
-        //reflections to set two fields because they are private and we need to pass in our version of agenlayer to generate properly.
-        try {
-	        Field genBiomeField = ReflectionHelper.findField(BiomeProvider.class,"genBiomes", "field_76944_d");
-	        genBiomeField.set(this, agenlayer[0]);
-        }
-        catch(Exception e) {
-        	UltraAmplified.logger.warn("BiomeProviderUA error with setting genBiome: "+e.getMessage());
-        }
-        
-        try {
-        	Field genBiomeField = ReflectionHelper.findField(BiomeProvider.class, "biomeIndexLayer", "field_76945_e");
-	        genBiomeField.set(this, agenlayer[1]);
-        }
-        catch(Exception e) {
-        	UltraAmplified.logger.warn("BiomeProviderUA error with setting biomeIndexLayer: "+e.getMessage());
-        }
+	    genBiomes = agenlayer[0];
+        biomeIndexLayer = agenlayer[1];
     }
 	
 	public BiomeProviderUA(World world)

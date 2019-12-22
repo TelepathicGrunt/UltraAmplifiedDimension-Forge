@@ -154,7 +154,7 @@ public class AmplifiedPortalBlock extends Block
 	 * faster particle movement than normal EndPortal block
 	 */
 	@SideOnly(Side.CLIENT)
-	public void animateTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
 		double d0 = (double) ((float) pos.getX() + (rand.nextFloat() * 3 - 1));
 		double d1 = (double) ((float) pos.getY() + (rand.nextFloat() * 3 - 1));

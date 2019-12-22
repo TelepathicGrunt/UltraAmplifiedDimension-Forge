@@ -12,6 +12,11 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        | Ultra Amplified mod changelog |
        
        
+    (V.4.6.1 Changes)
+       
+     Block:
+·Amplified Portal Block's flame particles now show up correctly.     
+     
        
     (V.4.6.0 Changes)
     
