@@ -167,7 +167,7 @@ public class MapGenStrongholdUA extends MapGenStructure
 
     protected StructureStart getStructureStart(int chunkX, int chunkZ)
     {
-    	System.out.println("Stronghold | "+chunkX*16+" "+chunkZ*16);
+    	//System.out.println("Stronghold | "+chunkX*16+" "+chunkZ*16);
     	
         MapGenStrongholdUA.Start mapgenstronghold$start;
 

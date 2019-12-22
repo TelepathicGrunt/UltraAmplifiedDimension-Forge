@@ -46,7 +46,7 @@ public class WorldGenSunShrine extends WorldGenerator{
 		//Also makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
 		if(position.getY() < 248 && acceptableBlocks.contains(worldIn.getBlockState(position.down().west(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().north(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().east(4))) && acceptableBlocks.contains(worldIn.getBlockState(position.down().south(4)))) 
 		{
-			System.out.println("Sun Shrine | " + position.getX() + " "+position.getZ());
+			//System.out.println("Sun Shrine | " + position.getX() + " "+position.getZ());
 			
 			WorldServer worldserver = (WorldServer) worldIn;
 			MinecraftServer minecraftserver = worldIn.getMinecraftServer();

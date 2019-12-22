@@ -107,7 +107,7 @@ public class WoodlandMansionUA extends MapGenStructure
 
         private void create(World p_191092_1_, ChunkGeneratorOverworldUA provider, Random p_191092_3_, int chunkX, int chunkZ)
         {
-        	System.out.println("Woodland Mansion | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Woodland Mansion | "+chunkX*16+" "+chunkZ*16);
         	
             Rotation rotation = Rotation.values()[p_191092_3_.nextInt(Rotation.values().length)];
             ChunkPrimer chunkprimer = new ChunkPrimer();

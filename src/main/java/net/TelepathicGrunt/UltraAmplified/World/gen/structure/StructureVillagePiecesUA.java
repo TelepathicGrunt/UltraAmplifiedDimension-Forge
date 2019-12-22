@@ -1605,62 +1605,62 @@ public class StructureVillagePiecesUA
 
             if (biome instanceof BiomeDesertUA)
             {
-            	System.out.println("Village | Desert | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Desert | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 1;
             }
             else if (biome instanceof BiomeSavannaUA)
             {
-            	System.out.println("Village | Savanna | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Savanna | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 2;
             }
             else if (biome instanceof BiomeTaigaUA)
             {
-            	System.out.println("Village | Taiga | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Taiga | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 3;
             }
             else if (biome instanceof BiomeSnowUA)
             {
             	if(biome.isMutation() || biome.getBaseHeight() > 0.5F) {
-                	System.out.println("Village | Ice Spike | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+                	//System.out.println("Village | Ice Spike | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
             		this.structureType = 9;
             	}
             	else {
-                	System.out.println("Village | Taiga | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+                	//System.out.println("Village | Taiga | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
             		this.structureType = 3;
             	}
             }
             else if (biome instanceof BiomeJungleUA)
             {
-            	System.out.println("Village | Jungle | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Jungle | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 4;
             } 
             else if (biome instanceof BiomeStoneBeachUA)
             {
-            	System.out.println("Village | Stone | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Stone | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 5;
             } 
             else if (biome instanceof BiomeEndUA)
             {
-            	System.out.println("Village | End | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | End | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 6;
             } 
             else if (biome instanceof BiomeHellUA)
             {
-            	System.out.println("Village | Nether | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Nether | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 7;
             }
             else if (biome instanceof BiomeMesaUA)
             {
-            	System.out.println("Village | Mesa | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Mesa | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 8;
             }
             else if (biome == BiomeInit.BiomeRoofedForest || biome == BiomeInit.BiomeRoofedForestM)
             {
-            	System.out.println("Village | Dark Oak | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Dark Oak | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
                 this.structureType = 10;
             }
             else {
-            	System.out.println("Village | Normal | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
+            	//System.out.println("Village | Normal | "+x+" "+z+" | Zombie: "+this.isZombieInfested);
             }
 
             this.func_189924_a(this.structureType);

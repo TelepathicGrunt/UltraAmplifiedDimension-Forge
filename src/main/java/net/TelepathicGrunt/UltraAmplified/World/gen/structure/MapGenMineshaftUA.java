@@ -84,68 +84,68 @@ public class MapGenMineshaftUA extends MapGenStructure
 
         if(biome instanceof BiomeMesaUA  || biome instanceof BiomeHellUA) 
         {
-        	System.out.println("Mineshaft | Mesa | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Mesa | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.MESA;
         }
         else if(biome instanceof BiomeSnowUA || biome instanceof BiomeColdBeachUA) 
         {
         	if(biome.isMutation()) {
-            	System.out.println("Mineshaft | Icey | "+chunkX*16+" "+chunkZ*16);
+            	//System.out.println("Mineshaft | Icey | "+chunkX*16+" "+chunkZ*16);
         		mapgenmineshaft$type = MapGenMineshaftUA.Type.ICEY;
         	}
         	else {
-            	System.out.println("Mineshaft | Cold or Birch | "+chunkX*16+" "+chunkZ*16);
+            	//System.out.println("Mineshaft | Cold or Birch | "+chunkX*16+" "+chunkZ*16);
         		mapgenmineshaft$type = MapGenMineshaftUA.Type.COLDORBIRCH;
         	}
         }
         else if(biome instanceof BiomeJungleUA) 
         {
-        	System.out.println("Mineshaft | Jungle | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Jungle | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.JUNGLE;
         }
         else if(biome instanceof BiomeTaigaUA || biome instanceof BiomeHillsUA) 
         {
-        	System.out.println("Mineshaft | Taiga | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Taiga | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.TAIGA;
         }
         else if(biome instanceof BiomeDesertUA) 
         {
-        	System.out.println("Mineshaft | Desert | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Desert | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.DESERT;
         }
         else if(biome instanceof BiomeEndUA) 
         {
-        	System.out.println("Mineshaft | End | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | End | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.END;
         }
         else if(biome instanceof BiomeHellUA) 
         {
-        	System.out.println("Mineshaft | Nether | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Nether | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.HELL;
         }
         else if(biome instanceof BiomeSavannaUA) 
         {
-        	System.out.println("Mineshaft | Savanna | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Savanna | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.SAVANNA;
         }
         else if(biome instanceof BiomeStoneBeachUA) 
         {
-        	System.out.println("Mineshaft | Stone | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Stone | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.STONE;
         }
         else if(biome instanceof BiomeSwampUA) 
         {
-        	System.out.println("Mineshaft | Swamp | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Swamp | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.SWAMP;
         }
         else if(biome.getBiomeName() == "Birch Forest" || biome.getBiomeName() == "Birch Forest Hills" || biome.getBiomeName() == "Birch Forest M" || biome.getBiomeName() == "Birch Forest Hills M") 
         {
-        	System.out.println("Mineshaft | Cold or Birch | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Cold or Birch | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.COLDORBIRCH;
         }
         else 
         {
-        	System.out.println("Mineshaft | Normal | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Mineshaft | Normal | "+chunkX*16+" "+chunkZ*16);
         	mapgenmineshaft$type = MapGenMineshaftUA.Type.NORMAL;
         }
         

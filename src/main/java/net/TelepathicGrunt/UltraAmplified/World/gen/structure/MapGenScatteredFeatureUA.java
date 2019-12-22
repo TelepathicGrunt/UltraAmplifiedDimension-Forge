@@ -143,7 +143,7 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 	            {
 	                if (biomeIn == BiomeInit.BiomeSwampland || biomeIn == BiomeInit.BiomeSwamplandM)
 	                {
-	                	System.out.println("Witch Hut | "+chunkX*16+" "+chunkZ*16);
+	                	//System.out.println("Witch Hut | "+chunkX*16+" "+chunkZ*16);
 	                    ComponentScatteredFeaturePiecesUA.SwampHut componentscatteredfeaturepieces$swamphut = new ComponentScatteredFeaturePiecesUA.SwampHut(random, chunkX * 16, chunkZ * 16);
 	                    this.components.add(componentscatteredfeaturepieces$swamphut);
 	                }
@@ -153,27 +153,27 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 	                    {
 	                    	if(biomeIn == BiomeInit.BiomeEnd) 
 	                    	{
-	                        	System.out.println("End City | "+chunkX*16+" "+chunkZ*16);
+	                        	//System.out.println("End City | "+chunkX*16+" "+chunkZ*16);
 	                    		this.createEndCity(worldIn, random, chunkX, chunkZ);
 	                    	}
 	                    }
 	                    else 
 	                    {
-	                    	System.out.println("Igloo | "+chunkX*16+" "+chunkZ*16);
+	                    	//System.out.println("Igloo | "+chunkX*16+" "+chunkZ*16);
 	                        ComponentScatteredFeaturePiecesUA.Igloo componentscatteredfeaturepieces$igloo = new ComponentScatteredFeaturePiecesUA.Igloo(random, chunkX * 16, chunkZ * 16);
 	                        this.components.add(componentscatteredfeaturepieces$igloo);
 	                    }
 	                }
 	                else
 	                {
-	                	System.out.println("Desert Temple | "+chunkX*16+" "+chunkZ*16);
+	                	//System.out.println("Desert Temple | "+chunkX*16+" "+chunkZ*16);
 	                    ComponentScatteredFeaturePiecesUA.DesertPyramid componentscatteredfeaturepieces$desertpyramid = new ComponentScatteredFeaturePiecesUA.DesertPyramid(random, chunkX * 16, chunkZ * 16);
 	                    this.components.add(componentscatteredfeaturepieces$desertpyramid);
 	                }
 	            }
 	            else
 	            {
-	            	System.out.println("Jungle Temple | "+chunkX*16+" "+chunkZ*16);
+	            	//System.out.println("Jungle Temple | "+chunkX*16+" "+chunkZ*16);
 	                ComponentScatteredFeaturePiecesUA.JunglePyramid componentscatteredfeaturepieces$junglepyramid = new ComponentScatteredFeaturePiecesUA.JunglePyramid(random, chunkX * 16, chunkZ * 16);
 	                this.components.add(componentscatteredfeaturepieces$junglepyramid);
 	            }
@@ -183,7 +183,7 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 	
 	            if(biomeIn == BiomeInit.BiomeNether) 
 	            {
-	            	System.out.println("Nether Fortress | aboveground | "+chunkX*16+" "+chunkZ*16);
+	            	//System.out.println("Nether Fortress | aboveground | "+chunkX*16+" "+chunkZ*16);
 	        		StructureNetherBridgePiecesUA.Start structurenetherbridgepieces$start = new StructureNetherBridgePiecesUA.Start(random, (chunkX << 4) + 2, (chunkZ << 4) + 2);
 	                this.components.add(structurenetherbridgepieces$start);
 	                structurenetherbridgepieces$start.buildComponent(structurenetherbridgepieces$start, this.components, random);
@@ -201,7 +201,7 @@ public class MapGenScatteredFeatureUA extends MapGenStructure
 	        	}
             }
             else{
-            	System.out.println("Nether Fortress | underground | "+chunkX*16+" "+chunkZ*16);
+            	//System.out.println("Nether Fortress | underground | "+chunkX*16+" "+chunkZ*16);
             	
             	StructureNetherBridgePiecesUA.Start structurenetherbridgepieces$start = new StructureNetherBridgePiecesUA.Start(random, (chunkX << 4) + 2, (chunkZ << 4) + 2);
                 this.components.add(structurenetherbridgepieces$start);

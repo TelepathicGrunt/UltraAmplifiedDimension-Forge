@@ -124,7 +124,7 @@ public class StructureOceanMonumentUA extends MapGenStructure
 
         private void create(World worldIn, Random random, int chunkX, int chunkZ)
         {
-        	System.out.println("Ocean Monument | "+chunkX*16+" "+chunkZ*16);
+        	//System.out.println("Ocean Monument | "+chunkX*16+" "+chunkZ*16);
         	
             random.setSeed(worldIn.getSeed());
             long i = random.nextLong();

@@ -59,7 +59,7 @@ public class WorldGenStonehenge extends WorldGenerator{
 			
 			
 		 
-			System.out.println("Stonehenge | " + position.getX() + " "+position.getZ());
+			//System.out.println("Stonehenge | " + position.getX() + " "+position.getZ());
 			
 			
 			//field
