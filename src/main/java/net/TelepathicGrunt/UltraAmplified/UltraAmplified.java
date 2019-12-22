@@ -61,9 +61,6 @@ public class UltraAmplified {
 	@Instance(MOD_ID)
 	public static UltraAmplified instance;
 	
-	@SidedProxy(clientSide = "net.TelepathicGrunt.UltraAmplified.ClientProxy", serverSide = "net.TelepathicGrunt.UltraAmplified.CommonProxy")
-	public static CommonProxy proxy;
-
 	public static final Logger logger = LogManager.getLogger(MOD_ID);
 	
 	public static DimensionType UADimType;
