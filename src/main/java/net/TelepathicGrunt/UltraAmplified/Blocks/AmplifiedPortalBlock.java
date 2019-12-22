@@ -120,7 +120,7 @@ public class AmplifiedPortalBlock extends Block
 	{
 
 		// cannot create amplified portal in Ultra Amplified Worldtype
-		if (worldIn.getWorldType() == UltraAmplified.UltraAmplified)
+		if (worldIn.getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
 		{
 			return false;
 		}

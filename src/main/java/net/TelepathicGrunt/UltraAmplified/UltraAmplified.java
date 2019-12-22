@@ -52,10 +52,9 @@ public class UltraAmplified {
 	public static final String MOD_NAME = "Ultra Amplified Mod";
 	
 	//Change mod version here, in mcmod.info, in UAConfig, and in build.gradlew. I probably should automate this lol.
-	public static final String VERSION = "4.6.0";
+	public static final String VERSION = "4.6.1";
 	
-	public static WorldType UltraAmplified;
-	public static WorldType UltraAmplifiedLargeBiome;
+	public static WorldType UltraAmplifiedWorldType;
 	
 	@Instance(MOD_ID)
 	public static UltraAmplified instance;
@@ -121,7 +120,7 @@ public class UltraAmplified {
     public void post(FMLPostInitializationEvent event)
     {
 		//registers the worldtype used for this mod so we can select that worldtype
-		UltraAmplified = new WorldTypeUA();
+		UltraAmplifiedWorldType = new WorldTypeUA();
     }
 
 	

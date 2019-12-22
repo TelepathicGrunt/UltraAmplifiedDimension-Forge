@@ -17,7 +17,10 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
      Block:
 ·Amplified Portal Block's flame particles now show up correctly.     
      
-       
+     Misc:
+--·Fixed weird bug where teleporting between any dimensions will crash the game.
+
+
     (V.4.6.0 Changes)
     
     Major changes:

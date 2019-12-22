@@ -167,7 +167,7 @@ public class AmplifiedPortalBehavior {
 
 			// checks to see if player uses right click with flint and steel on Polished Diorite. 
 			//If so, tries to create portal if possible. only works in non-ultra amplified world types
-			if (worldIn.getWorldType() != UltraAmplified.UltraAmplified && 
+			if (worldIn.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
 					worldIn.getBlockState(event.getPos()) == POLISHED_DIORITE &&
 				    event.getItemStack().getItem() == Items.FLINT_AND_STEEL) 
 			{
