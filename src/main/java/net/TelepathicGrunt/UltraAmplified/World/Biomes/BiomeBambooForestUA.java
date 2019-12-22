@@ -27,7 +27,7 @@ public class BiomeBambooForestUA extends BiomeExtendedUA
     public BiomeBambooForestUA()
     {
     	//set properties
-        super(new BiomeProperties("Bamboo Forest").setBaseHeight(0.0F).setHeightVariation(0.025F).setTemperature(0.8F).setRainfall(0.4F).setWaterColor(10613441));
+        super(new BiomeProperties("Ultra Amplified Mod : Bamboo Forest").setBaseHeight(0.0F).setHeightVariation(0.025F).setTemperature(0.8F).setRainfall(0.4F).setWaterColor(10613441));
        
         this.decorator = new BiomeDecoratorUA();
         
