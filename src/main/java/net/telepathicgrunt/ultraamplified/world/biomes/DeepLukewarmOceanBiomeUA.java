@@ -40,11 +40,11 @@ public class DeepLukewarmOceanBiomeUA extends BiomeUA {
 	public DeepLukewarmOceanBiomeUA() {
 		      super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(DEEP_OCEAN_SURFACE_BUILDER_UA, GRASS_SAND_SANDSTONE_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.OCEAN).depth(-1.8F).scale(0.1F).temperature(0.7F).downfall(0.5F).waterColor(4566514).waterFogColor(267827).parent((String)null));
 		      
-	    	  this.addStructure(FeatureUA.MINESHAFT_UA, new MineshaftConfigUA(MineshaftUA.Type.OCEAN));
-	    	  this.addStructure(FeatureUA.STRONGHOLD_UA, IFeatureConfig.NO_FEATURE_CONFIG);
-	    	  this.addStructure(FeatureUA.FORTRESS_UA, new FortressConfigUA(false));
-	    	  this.addStructure(FeatureUA.SHIPWRECK_UA, new ShipwreckConfig(false));
-	    	  this.addStructure(FeatureUA.OCEAN_MONUMENT_UA, IFeatureConfig.NO_FEATURE_CONFIG);
+	    	  this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.OCEAN)));
+	    	  this.func_226711_a_(FeatureUA.STRONGHOLD_UA.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
+	    	  this.func_226711_a_(FeatureUA.FORTRESS_UA.func_225566_b_(new FortressConfigUA(false)));
+	    	  this.func_226711_a_(FeatureUA.SHIPWRECK_UA.func_225566_b_(new ShipwreckConfig(false)));
+	    	  this.func_226711_a_(FeatureUA.OCEAN_MONUMENT_UA.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
 
 			  this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(FeatureUA.MARKED_TREASURE_CHEST_UA, IFeatureConfig.NO_FEATURE_CONFIG, FIXED_HEIGHT_WITH_CHANCE, new PercentageAndHeightConfig(0.025f, 64)));
 
