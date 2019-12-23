@@ -6,7 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -21,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.TelepathicGrunt.UltraAmplified.Blocks.BlocksAndItemsInit;
 import net.TelepathicGrunt.UltraAmplified.Config.UAConfig;
 import net.TelepathicGrunt.UltraAmplified.World.Biome.BiomeInit;
@@ -107,7 +110,6 @@ public class UltraAmplified {
 
 		MapGenStructureIO.registerStructure(WoodlandMansionUA.Start.class, MOD_ID+":mansion");
 		WoodlandMansionPiecesUA.registerMansionPieces();
-		
 	}
 	
 	@EventHandler

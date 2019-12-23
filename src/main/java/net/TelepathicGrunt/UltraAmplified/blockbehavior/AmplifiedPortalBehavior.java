@@ -1,8 +1,10 @@
 package net.TelepathicGrunt.UltraAmplified.blockbehavior;
 
 
+import net.minecraft.block.BlockHalfStoneSlab;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStone;
+import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -30,8 +32,8 @@ import net.TelepathicGrunt.UltraAmplified.capabilities.PlayerPositionAndDimensio
 public class AmplifiedPortalBehavior {
 	private static final IBlockState POLISHED_DIORITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH);
 	private static final IBlockState POLISHED_GRANITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH);
-	private static final IBlockState STONE_BRICK_SLAB_TOP = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
-	private static final IBlockState STONE_BRICK_SLAB_BOTTOM = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+	private static final IBlockState STONE_BRICK_SLAB_TOP = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP).withProperty(BlockHalfStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK);
+	private static final IBlockState STONE_BRICK_SLAB_BOTTOM = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM).withProperty(BlockHalfStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK);
 
 	
 	@CapabilityInject(IPlayerPosAndDim.class)
