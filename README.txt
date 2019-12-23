@@ -14,6 +14,9 @@ Just be sure to give me credit if you do take parts of my mod. That's all. Enjoy
        
     (V.4.6.2 Changes)
     
+      Block:
+·Amplified Portal needs Stone Brick Slabs instead of Smooth Stone Slabs because I'm an idiot and forgot you can't get Smooth Stone in 1.12 survival lol.
+
       Dimension:
 ·Fixed bug where putting the Ultra Amplified Dimension on a server will crash the server. (Siding issue. Forgot to put the graphic stuff to be only on client side)
    

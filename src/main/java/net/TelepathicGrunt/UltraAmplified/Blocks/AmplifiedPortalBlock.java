@@ -174,8 +174,8 @@ public class AmplifiedPortalBlock extends Block
 
 	private static final IBlockState POLISHED_GRANITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH);
 	private static final IBlockState POLISHED_DIORITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH);
-	private static final IBlockState POLISHED_SMOOTH_STONE_SLAB_TOP = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
-	private static final IBlockState POLISHED_SMOOTH_STONE_SLAB_BOTTOM = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+	private static final IBlockState STONE_BRICK_SLAB_TOP = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
+	private static final IBlockState STONE_BRICK_SLAB_BOTTOM = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
 
 
 	public boolean isValid(World worldIn, BlockPos pos)
@@ -195,7 +195,7 @@ public class AmplifiedPortalBlock extends Block
 				}
 				else
 				{
-					if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_SMOOTH_STONE_SLAB_BOTTOM)
+					if (worldIn.getBlockState(pos.add(x, -1, z)) != STONE_BRICK_SLAB_BOTTOM)
 					{
 						return false;
 					}
@@ -223,7 +223,7 @@ public class AmplifiedPortalBlock extends Block
 				}
 				else
 				{
-					if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_SMOOTH_STONE_SLAB_TOP)
+					if (worldIn.getBlockState(pos.add(x, 1, z)) != STONE_BRICK_SLAB_TOP)
 					{
 						return false;
 					}

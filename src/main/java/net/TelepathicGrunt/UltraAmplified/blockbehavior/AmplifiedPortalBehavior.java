@@ -30,8 +30,8 @@ import net.TelepathicGrunt.UltraAmplified.capabilities.PlayerPositionAndDimensio
 public class AmplifiedPortalBehavior {
 	private static final IBlockState POLISHED_DIORITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH);
 	private static final IBlockState POLISHED_GRANITE = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH);
-	private static final IBlockState POLISHED_SMOOTH_STONE_SLAB_TOP = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
-	private static final IBlockState POLISHED_SMOOTH_STONE_SLAB_BOTTOM = Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+	private static final IBlockState STONE_BRICK_SLAB_TOP = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
+	private static final IBlockState STONE_BRICK_SLAB_BOTTOM = Blocks.STONE_SLAB2.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
 
 	
 	@CapabilityInject(IPlayerPosAndDim.class)
@@ -220,7 +220,7 @@ public class AmplifiedPortalBehavior {
 	 				   //sets slab but also waterlogs it if block it replaces is water based
 	 				   worldIn.setBlockState(
 	 						   pos.add(x, 0, z), 
-	 						  POLISHED_SMOOTH_STONE_SLAB_BOTTOM, 
+	 						   STONE_BRICK_SLAB_BOTTOM, 
 	 						   3);
 	 			   }
 	 		   }
@@ -239,7 +239,7 @@ public class AmplifiedPortalBehavior {
 	 				   //sets slab but also waterlogs it if block it replaces is water based
 	 				   worldIn.setBlockState(
 	 						   pos.add(x, 2, z), 
-	 						   POLISHED_SMOOTH_STONE_SLAB_TOP, 
+	 						   STONE_BRICK_SLAB_TOP, 
 	 						   3);
 	 			   }
 	 		   }
