@@ -1,56 +1,32 @@
 package net.telepathicgrunt.ultraamplified.world.biomes;
 
-import java.util.Random;
-
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.PerlinNoiseGenerator;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
-import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.BushConfig;
 import net.minecraft.world.gen.feature.DoublePlantConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureRadiusConfig;
-import net.minecraft.world.gen.feature.GrassFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.IcebergConfig;
-import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
+import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleWithChanceRandomFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraft.world.gen.feature.ReplaceBlockConfig;
-import net.minecraft.world.gen.feature.SeaGrassConfig;
-import net.minecraft.world.gen.feature.SingleRandomFeature;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
-import net.minecraft.world.gen.feature.TwoFeatureChoiceConfig;
-import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
-import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
-import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
-import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.ChanceRangeConfig;
 import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
@@ -60,7 +36,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndType
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
@@ -91,7 +66,7 @@ public class TaigaBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.SLIME_BLOCK.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ROOTS.func_225566_b_(new BlockConfig(Blocks.STRIPPED_SPRUCE_WOOD)).func_227228_a_(RANDOM_BOTTOM_LAYER.func_227446_a_(new CountRangeConfig(12, 70, 0, 250))));
 
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.DOUBLE_PLANT.func_225566_b_(new DoublePlantConfig(Blocks.LARGE_FERN.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226728_P_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.GENERIC_DUNGEONS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(DUNGEON_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.DIRT.getDefaultState(), 33)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(10, 0, 0, 175))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.GRAVEL.getDefaultState(), 33)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(8, 0, 0, 256))));
@@ -113,8 +88,8 @@ public class TaigaBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(new Feature[] { Feature.PINE_TREE }, new IFeatureConfig[] { IFeatureConfig.NO_FEATURE_CONFIG }, new float[] { 0.33333334F }, Feature.SPRUCE_TREE, IFeatureConfig.NO_FEATURE_CONFIG)).func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(10, 0.1F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(new Feature[] { Feature.PINE_TREE }, new IFeatureConfig[] { IFeatureConfig.NO_FEATURE_CONFIG }, new float[] { 0.33333334F }, Feature.SPRUCE_TREE, IFeatureConfig.NO_FEATURE_CONFIG)).func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(8, 0.1F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226831_z_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.TAIGA_GRASS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.SWEET_BERRY_BUSH.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.1F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226827_v_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226718_F_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.1F, 1))));
 		//twice the mushrooms
 		DefaultBiomeFeatures.addMushrooms(this);
 		DefaultBiomeFeatures.addMushrooms(this);

@@ -1,68 +1,46 @@
 package net.telepathicgrunt.ultraamplified.world.biomes;
 
-import java.util.Random;
-
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.BushConfig;
-import net.minecraft.world.gen.feature.DoublePlantConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.GrassFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.IcebergConfig;
-import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleWithChanceRandomFeatureConfig;
+import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraft.world.gen.feature.SeaGrassConfig;
-import net.minecraft.world.gen.feature.SingleRandomFeature;
-import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
-import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
-import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePiecesUA;
 
 public class FrozenOceanBiomeUA extends BiomeUA {
-	protected static final PerlinNoiseGenerator field_205163_aV = new PerlinNoiseGenerator(new Random(3456L), 3);
+	protected static final PerlinNoiseGenerator field_205163_aV = new PerlinNoiseGenerator(new SharedSeedRandom(3456L), 2, 0);
 
 	public FrozenOceanBiomeUA() {
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(OCEAN_SURFACE_BUILDER_UA, ICE_GRAVEL_STONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-1.0F).scale(0.1F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String) null));
@@ -85,8 +63,8 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.GLOWPATCH.func_225566_b_(new CountConfig(100)).func_227228_a_(GENERAL_PLACEMENT.func_227446_a_(new CountRangeAndTypeConfig(0.005f, 45, 45, 60, false, CountRangeAndTypeConfig.Type.GLOWSTONE_VARIANT_PATCH))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.CONTAIN_LIQUID.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ICEBERG_UA.func_225566_b_(new IcebergConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_WATER_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.35F, 3))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ICEBERG_UA.func_225566_b_(new IcebergConfig(Blocks.BLUE_ICE.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_WATER_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.07F, 1))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ICEBERG_UA.func_225566_b_(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_WATER_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.35F, 3))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ICEBERG_UA.func_225566_b_(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_WATER_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.07F, 1))));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.SNOW_DUNGEONS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(DUNGEON_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
@@ -133,32 +111,30 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
 	}
 
-	/**
-	 * Gets the current temperature at the given location, based off of the default
-	 * for this biome, the elevation of the position, and
-	 * {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
-	 */
-	public float getTemperature(BlockPos pos) {
-   	 
-		float f = this.getDefaultTemperature();
-		double d0 = field_205163_aV.getValue((double) pos.getX() * 0.05D, (double) pos.getZ() * 0.05D);
-		double d1 = INFO_NOISE.getValue((double) pos.getX() * 0.2D, (double) pos.getZ() * 0.2D);
-		double d2 = d0 + d1;
-		if (d2 < 0.3D) {
-			double d3 = INFO_NOISE.getValue((double) pos.getX() * 0.09D, (double) pos.getZ() * 0.09D);
-			if (d3 < 0.8D) {
-				f = 0.2F;
-			}
-		}
+   /**
+    * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
+    * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
+    */
+   public float getTemperature(BlockPos pos) {
+      float f = this.getDefaultTemperature();
+      double d0 = field_205163_aV.noiseAt((double)pos.getX() * 0.05D, (double)pos.getZ() * 0.05D, false) * 7.0D;
+      double d1 = INFO_NOISE.noiseAt((double)pos.getX() * 0.2D, (double)pos.getZ() * 0.2D, false);
+      double d2 = d0 + d1;
+      if (d2 < 0.3D) {
+         double d3 = INFO_NOISE.noiseAt((double)pos.getX() * 0.09D, (double)pos.getZ() * 0.09D, false);
+         if (d3 < 0.8D) {
+            f = 0.2F;
+         }
+      }
 
-		if (pos.getY() > 64) {
-			float f1 = (float) (TEMPERATURE_NOISE.getValue((double) ((float) pos.getX() / 8.0F), (double) ((float) pos.getZ() / 8.0F)) * 4.0D);
-			return f - (f1 + (float) pos.getY() - 64.0F) * 0.05F / 30.0F;
-		} else {
-			return f;
-		}
-	}
-
+      if (pos.getY() > 64) {
+         float f1 = (float)(TEMPERATURE_NOISE.noiseAt((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F), false) * 4.0D);
+         return f - (f1 + (float)pos.getY() - 64.0F) * 0.05F / 30.0F;
+      } else {
+         return f;
+      }
+   }
+	   
 	@OnlyIn(Dist.CLIENT)
 	public int getGrassColor(BlockPos pos) {
 		return 37488;

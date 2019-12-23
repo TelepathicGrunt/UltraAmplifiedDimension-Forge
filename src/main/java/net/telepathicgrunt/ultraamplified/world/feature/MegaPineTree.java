@@ -15,10 +15,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class MegaPineTree extends HugeTreesFeature<NoFeatureConfig> {
+public class MegaPineTree extends HugeTreesFeature<HugeTreeFeatureConfig> {
 	
     private static final BlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
     private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();

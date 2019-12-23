@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
@@ -16,6 +17,7 @@ import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -88,7 +90,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> HANGING_RUINS = new HangingRuins(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> FOSSILS_UA = new Fossil(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
-    public static Feature<IcebergConfig> ICEBERG_UA = new Iceberg(IcebergConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> ICEBERG_UA = new Iceberg(BlockStateFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MARKED_TREASURE_CHEST_UA = new MarkedTreasureChest(NoFeatureConfig::deserialize);
 
     public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new GiantStackableBoulder(BlockBlobConfig::deserialize);
@@ -125,18 +127,13 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> BAMBOO_UA = new Bamboo(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
-    public static AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(NoFeatureConfig::deserialize);
+    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(TreeFeatureConfig::func_227338_a_);
     public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(HugeTreeFeatureConfig::deserializeDarkOak); //may need to fix deserialize
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, false);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, true);
-    public static AbstractTreeFeature<HugeTreeFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTree(NoFeatureConfig::deserialize, false);
-    
-    public static final HugeTreeFeatureConfig BIRCH_M_TREE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(BIRCH_LEAVES))).func_225569_d_(18).func_227283_b_(50).func_227284_c_(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig field_226824_s_ = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(field_226776_ak_), new SimpleBlockStateProvider(field_226777_al_))).func_225569_d_(13).func_227283_b_(15).func_227284_c_(3).func_227282_a_(ImmutableList.of(new AlterGroundTreeDecorator(new SimpleBlockStateProvider(field_226771_af_)))).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig field_226825_t_ = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(field_226774_ai_), new SimpleBlockStateProvider(field_226775_aj_))).func_225569_d_(10).func_227283_b_(20).func_227282_a_(ImmutableList.of(new TrunkVineTreeDecorator(), new LeaveVineTreeDecorator())).setSapling((net.minecraftforge.common.IPlantable)Blocks.JUNGLE_SAPLING).func_225568_b_();
-
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(HugeTreeFeatureConfig::deserializeSpruce);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(HugeTreeFeatureConfig::deserializeSpruce);
+    public static AbstractTreeFeature<HugeTreeFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(HugeTreeFeatureConfig::deserializeDarkOak);
+    public static AbstractTreeFeature<TreeFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(TreeFeatureConfig::func_227338_a_);
+    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new EndTree(TreeFeatureConfig::func_227338_a_);
     
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
     public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
