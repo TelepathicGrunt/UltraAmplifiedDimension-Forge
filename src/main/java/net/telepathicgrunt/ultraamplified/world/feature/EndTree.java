@@ -15,20 +15,21 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
-public class EndTree extends AbstractTreeFeature<NoFeatureConfig> 
+public class EndTree extends AbstractTreeFeature<TreeFeatureConfig> 
 {
    private static final BlockState LOG = Blocks.BIRCH_LOG.getDefaultState();
    private static final BlockState LEAF = Blocks.DARK_OAK_LEAVES.getDefaultState();
    private static final BlockState PURPLE_TERRACOTTA = Blocks.BLUE_TERRACOTTA.getDefaultState();
 
-   public EndTree(Function<Dynamic<?>, ? extends NoFeatureConfig> configIn, boolean doBlockNotifyIn) {
-      super(configIn, doBlockNotifyIn);
-      this.setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING);
-   }
+   public EndTree(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
+       super(p_i225808_1_);
+    }
 
-   public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
+
+   public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+   {
       int i = rand.nextInt(3) + 5;
 
       boolean flag = true;
@@ -60,7 +61,7 @@ public class EndTree extends AbstractTreeFeature<NoFeatureConfig>
 
          if (!flag) {
             return false;
-         } else if ((isSoil(worldIn, position.down(), getSapling())) && position.getY() < worldIn.getMaxHeight() - i - 1) {
+         } else if ((isSoil(worldIn, position.down(), p_225557_7_.getSapling())) && position.getY() < worldIn.getMaxHeight() - i - 1) {
         	 placeTerracottaCircle((IWorld)worldIn, position.down());
 
             for(int l1 = position.getY() - 3 + i; l1 <= position.getY() + i; ++l1) {
@@ -75,7 +76,7 @@ public class EndTree extends AbstractTreeFeature<NoFeatureConfig>
                      if (Math.abs(i3) != k2 || Math.abs(k1) != k2 || rand.nextInt(2) != 0 && j2 != 0) {
                         BlockPos blockpos = new BlockPos(l2, l1, j1);
                         if (isAirOrLeaves(worldIn, blockpos)) {
-                           this.setLogState(changedBlocks, worldIn, blockpos, LEAF, p_208519_5_);
+                        	this.setBlockState(worldIn, blockpos, LEAF);
                         }
                      }
                   }
@@ -84,7 +85,7 @@ public class EndTree extends AbstractTreeFeature<NoFeatureConfig>
 
             for(int i2 = 0; i2 < i; ++i2) {
                if (isAirOrLeaves(worldIn, position.up(i2))) {
-                  this.setLogState(changedBlocks, worldIn, position.up(i2), LOG, p_208519_5_);
+            	  this.setBlockState(worldIn, position.up(i2), LOG);
                }
             }
 

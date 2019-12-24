@@ -19,19 +19,19 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
-public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig> 
+public class SwampTreeMutated extends AbstractTreeFeature<TreeFeatureConfig> 
 {
 	 	private static final BlockState TRUNK = Blocks.OAK_LOG.getDefaultState();
 	   private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState();
 
-	    public SwampTreeMutated(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51425_1_) {
-	        super(p_i51425_1_, false);
-	    }
+	    public SwampTreeMutated(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
+	        super(p_i225808_1_);
+	     }
 
 	    //generate the spooky horned swamp m trees
-	    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_)
+	    public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
 	    {
 	        int height = rand.nextInt(4) + 6;
 	        IWorld world = (IWorld) worldIn;
@@ -98,7 +98,7 @@ public class SwampTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 	            {
 	                return false;
 	            }
-	            else if (isSoil(worldIn, position.down(), getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
+	            else if (isSoil(worldIn, position.down(), p_225557_7_.getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
 	            {
 	                this.setDirtAt(worldIn, position.down(), position);
 	                

@@ -10,7 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.BushConfig;
+import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
@@ -56,11 +58,11 @@ public class NetherBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.SPRING_FEATURE.func_225566_b_(new LiquidsConfig(Fluids.LAVA.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.NETHERRACK))).func_227228_a_(Placement.COUNT_VERY_BIASED_RANGE.func_227446_a_(new CountRangeConfig(40, 8, 16, 256))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226722_J_).func_227228_a_(Placement.CHANCE_RANGE.func_227446_a_(new ChanceRangeConfig(0.9F, 10, 0, 255))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226721_I_).func_227228_a_( Placement.CHANCE_RANGE.func_227446_a_(new ChanceRangeConfig(0.9F, 10, 0, 255))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.NETHER_SPRING.func_225566_b_(new HellLavaConfig(false)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(23, 4, 8, 256))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.HELL_FIRE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.18F, 1))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.func_225566_b_(DefaultBiomeFeatures.field_226738_Z_).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(23, 4, 8, 256))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226719_G_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.18F, 1))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(GLOWSTONE_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(GENERAL_PLACEMENT.func_227446_a_(new CountRangeAndTypeConfig(1f, 0, 0, 256, false, CountRangeAndTypeConfig.Type.GLOWSTONE))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.BUSH.func_225566_b_(new BushConfig(Blocks.NETHER_WART.getDefaultState())).func_227228_a_(NETHERWART_SOUL_SAND_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.NETHER_WART.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_()).func_227228_a_(NETHERWART_SOUL_SAND_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.7F, 2))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226722_J_).func_227228_a_(Placement.CHANCE_RANGE.func_227446_a_(new ChanceRangeConfig(1F, 0, 0, 75))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226721_I_).func_227228_a_(Placement.CHANCE_RANGE.func_227446_a_(new ChanceRangeConfig(1F, 0, 0, 75))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226722_J_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.05F, 1))));
@@ -69,7 +71,7 @@ public class NetherBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25)).func_227228_a_(GENERAL_PLACEMENT.func_227446_a_(new CountRangeAndTypeConfig(0.5f, 10, 20, 120, false, CountRangeAndTypeConfig.Type.QUARTZ))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 25)).func_227228_a_(GENERAL_PLACEMENT.func_227446_a_(new CountRangeAndTypeConfig(0.1f, 10, 120, 240, false, CountRangeAndTypeConfig.Type.QUARTZ))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, Blocks.MAGMA_BLOCK.getDefaultState(), 55)).func_227228_a_(GENERAL_PLACEMENT.func_227446_a_(new CountRangeAndTypeConfig(1f, 10, 20, 100, false, CountRangeAndTypeConfig.Type.MAGMA))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.NETHER_SPRING.func_225566_b_(new HellLavaConfig(true)).func_227228_a_(LAVAFALL_RANGE.func_227446_a_(new CountRangeConfig(1, 10, 20, 240))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.func_225566_b_(DefaultBiomeFeatures.field_226766_aa_).func_227228_a_(LAVAFALL_RANGE.func_227446_a_(new CountRangeConfig(1, 10, 20, 240))));
 		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, Feature.FREEZE_TOP_LAYER.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.GHAST, 50, 4, 4));

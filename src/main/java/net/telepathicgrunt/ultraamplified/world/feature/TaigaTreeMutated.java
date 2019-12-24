@@ -16,21 +16,20 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
-public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig> 
+public class TaigaTreeMutated extends AbstractTreeFeature<TreeFeatureConfig> 
 {
     private static final BlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
     private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
     private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
     
-    public TaigaTreeMutated(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51429_1_, boolean p_i51429_2_) {
-        super(p_i51429_1_, p_i51429_2_);
-        setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING);
+    public TaigaTreeMutated(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
+        super(p_i225808_1_);
      }
 
     //taller taiga trees with slightly thicker leaves and podzol soil below it.
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) 
+    public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
     {
         IWorld world = (IWorld) worldIn;
         int height = rand.nextInt(6) + 8;
@@ -80,7 +79,7 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
             {
                 return false;
             }
-            else if (isSoil(worldIn, position.down(), getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
+            else if (isSoil(worldIn, position.down(), p_225557_7_.getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
             {
             	//places podzol +'s. Can generate up to 5.
             	if(rand.nextBoolean())
@@ -143,7 +142,7 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
                     }
                 }
 
-                placeTrunkVines(world, changedBlocks, rand, position, bottomOfLeaves, p_208519_5_);
+                placeTrunkVines(world, p_225557_4_, rand, position, bottomOfLeaves, boundingBox);
                 
                 int randomNum = rand.nextInt(3);
 
@@ -153,7 +152,7 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
 
                     if (isAirOrLeaves(worldIn, upN))
                     {
-                    	this.setLogState(changedBlocks, worldIn, upN, TRUNK, p_208519_5_);
+                    	this.setBlockState(worldIn, upN, TRUNK);
                     }
                 }
                 
@@ -213,7 +212,7 @@ public class TaigaTreeMutated extends AbstractTreeFeature<NoFeatureConfig>
             BlockState iblockstate1 = worldIn.getBlockState(position.up(height));
             
             if (iblockstate1.canBeReplacedByLeaves(worldIn, position.up(height))) {
-               this.setLogState(changedBlocks, worldIn, position.up(height), TRUNK, p_208519_5_);
+            	this.setBlockState(worldIn, position.up(height), TRUNK);
               
               int chance = 1 + height;
                
