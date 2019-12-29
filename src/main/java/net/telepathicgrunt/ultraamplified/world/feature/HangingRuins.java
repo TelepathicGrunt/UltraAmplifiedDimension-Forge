@@ -73,7 +73,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		
 		
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
-		
+		//[Server-Worker-6/WARN] [minecraft/WorldGenRegion]: Tried to access a block entity before it was created. BlockPos{x=2078, y=219, z=4057}
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
 		
