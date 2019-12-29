@@ -44,25 +44,13 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
             }
             else if(currentBiomeID == BiomeGenHelper.END) 
             {
-            	int nonEndSides = 0;
-            	if(north != BiomeGenHelper.END && north != BiomeGenHelper.BARREN_END_FIELD) {
-            		nonEndSides++;
+            	if(north != BiomeGenHelper.END && north != BiomeGenHelper.BARREN_END_FIELD ||
+        			west != BiomeGenHelper.END && west != BiomeGenHelper.BARREN_END_FIELD ||
+        			east != BiomeGenHelper.END && east != BiomeGenHelper.BARREN_END_FIELD ||
+        			south != BiomeGenHelper.END && south != BiomeGenHelper.BARREN_END_FIELD) 
+            	{
+                    return BiomeGenHelper.BARREN_END_FIELD;
             	}
-            	if(west != BiomeGenHelper.END && west != BiomeGenHelper.BARREN_END_FIELD){
-            		nonEndSides++;
-            	}
-            	if(east != BiomeGenHelper.END && east != BiomeGenHelper.BARREN_END_FIELD) {
-            		nonEndSides++;
-            	}
-            	if(south != BiomeGenHelper.END && south != BiomeGenHelper.BARREN_END_FIELD) {
-            		nonEndSides++;
-            	}
-            	
-            	//makes the barren end field thinner. In theory 
-               if (nonEndSides >= 2)
-               {
-                  return BiomeGenHelper.BARREN_END_FIELD;
-               }
             }
             else if(currentBiomeID == BiomeGenHelper.JUNGLE) {
                if ((north != BiomeGenHelper.JUNGLE && north != BiomeGenHelper.BAMBOO_JUNGLE) || 
