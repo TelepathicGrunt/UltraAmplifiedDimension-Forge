@@ -163,6 +163,7 @@ public class BiomeUA extends Biome {
     public static final SurfaceBuilder<SurfaceBuilderConfig> PLATEAU_SURFACE_BUILDER = new PlateauSurfaceBuilder(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA_SURFACE_BUILDER_UA = new ShatteredSavannaSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 	
+    
 	protected BiomeUA(Biome.Builder biomeBuilder) {
 		super(biomeBuilder);
 	}

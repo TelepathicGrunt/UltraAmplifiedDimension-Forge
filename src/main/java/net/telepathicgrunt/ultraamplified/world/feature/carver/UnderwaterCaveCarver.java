@@ -76,18 +76,18 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 		return false;
 	}
 
-	protected boolean func_225556_a_(IChunk chunkIn, Function<BlockPos, Biome> p_225556_2_, BitSet carvingMask, Random randomIn,
+	protected boolean func_225556_a_(IChunk chunkIn, Function<BlockPos, Biome> biomeBlockPos, BitSet carvingMask, Random randomIn,
 			BlockPos.Mutable MutableIn, 
 			BlockPos.Mutable p_222703_5_,
 			BlockPos.Mutable p_222703_6_, 
 			int minHeight, int chunkX, int chunkZ, int x, int z, int maskY, int y,
 			int atomicBoolean, AtomicBoolean p_222703_15_) 
 	{
-		return carvingBlock(this, chunkIn, carvingMask, randomIn, MutableIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
+		return carvingBlock(this, biomeBlockPos, chunkIn, carvingMask, randomIn, MutableIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
 	}
 
-	protected static boolean carvingBlock(WorldCarver<?> worldCarver, IChunk chunkIn, BitSet carvingMask,
-			Random randomIn, BlockPos.Mutable MutableIn, 
+	protected static boolean carvingBlock(WorldCarver<?> worldCarver, Function<BlockPos, Biome> biomeBlockPos, 
+			IChunk chunkIn, BitSet carvingMask, Random randomIn, BlockPos.Mutable MutableIn, 
 			int minHeight, int chunkX, int chunkZ, int xStart, int zStart, int maskY, int y, int atomicBoolean) 
 	{
 		if (y >= minHeight) {
@@ -95,7 +95,7 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 		} else {
 			MutableIn.setPos(xStart, y, zStart);
 
-			BlockState fillerBlock = fillerBiomeMap.get(chunkIn.getWorldForge().func_226691_t_(MutableIn));
+			BlockState fillerBlock = fillerBiomeMap.get(biomeBlockPos.apply(MutableIn));
 			if (fillerBlock == null) {
 				fillerBlock = STONE;
 			}

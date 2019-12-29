@@ -19,7 +19,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     
     Major Change: 
 ·Ported to 1.15.1! Celebration time!
-       
+ 
+    Biomes:
+·Desert biomes now spawn Dead Bush at a reduced rate under ledges instead of just top layer.
+      
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)
     

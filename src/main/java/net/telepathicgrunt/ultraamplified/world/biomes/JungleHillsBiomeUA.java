@@ -93,13 +93,13 @@ public class JungleHillsBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, FeatureUA.GREEN_CONCRETE_POWDER_PATCH.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(25))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.func_225566_b_(DefaultBiomeFeatures.field_226815_j_).func_227227_a_(0.1F), FeatureUA.JUNGLE_BUSH_UA.func_225566_b_(DefaultBiomeFeatures.field_226821_p_).func_227227_a_(0.5F), Feature.MEGA_JUNGLE_TREE.func_225566_b_(DefaultBiomeFeatures.field_226825_t_).func_227227_a_(0.33333334F)),
-								Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226792_b_)))
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226815_j_)).func_227227_a_(0.1F), FeatureUA.JUNGLE_BUSH_UA.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226821_p_)).func_227227_a_(0.5F), Feature.MEGA_JUNGLE_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226825_t_)).func_227227_a_(0.33333334F)),
+								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226792_b_))))
 						.func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(40, 0.1F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.func_225566_b_(DefaultBiomeFeatures.field_226815_j_).func_227227_a_(0.1F), FeatureUA.JUNGLE_BUSH_UA.func_225566_b_(DefaultBiomeFeatures.field_226821_p_).func_227227_a_(0.5F), Feature.MEGA_JUNGLE_TREE.func_225566_b_(DefaultBiomeFeatures.field_226825_t_).func_227227_a_(0.33333334F)),
-								Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226792_b_)))
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226815_j_)).func_227227_a_(0.1F), FeatureUA.JUNGLE_BUSH_UA.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226821_p_)).func_227227_a_(0.5F), Feature.MEGA_JUNGLE_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226825_t_)).func_227227_a_(0.33333334F)),
+								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226792_b_))))
 						.func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(33, 0.1F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.BAMBOO.func_225566_b_(new ProbabilityConfig(1F)).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.02F, 3))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226831_z_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));

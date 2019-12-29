@@ -92,13 +92,13 @@ public class GiantTreeTaigaHillsBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.func_225566_b_(new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()))).func_227228_a_(CHANCE_ON_ALL_WATER_BOTTOMS_UA.func_227446_a_(new PercentageAndFrequencyConfig(1F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226809_d_).func_227227_a_(0.23333334F)),
-								Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226810_e_)))
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
+								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226810_e_))))
 						.func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(25, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226809_d_).func_227227_a_(0.23333334F)),
-								Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226810_e_)))
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
+								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226810_e_))))
 						.func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(20, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226831_z_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226831_z_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));
