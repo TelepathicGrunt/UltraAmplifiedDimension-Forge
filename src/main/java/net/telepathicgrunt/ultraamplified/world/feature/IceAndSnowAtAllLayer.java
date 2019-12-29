@@ -34,6 +34,11 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 	            int x = pos.getX() + xOffset;
 	            int z = pos.getZ() + zOffset;
 	            Biome biome = worldIn.func_226691_t_(blockpos$Mutable.setPos(x, 60, z));
+
+	             //Skip snow layering if it is in Ice Mountain biome
+	             if(biome == BiomeInit.ICE_MOUNTAIN) {
+	            	 continue;
+	             }
 	            
 		         for(int y = 256; y > ConfigUA.seaLevel-1; --y) {
 		        	 
@@ -60,11 +65,6 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 			                  worldIn.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 			               }
 			            }
-
-		               //does not check rest of height if it is in Ice Mountain biome
-		               if(biome == BiomeInit.ICE_MOUNTAIN) {
-		            	   break;
-		               }
 		        	}
 		         }
 	         }

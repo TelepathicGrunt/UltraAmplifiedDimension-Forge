@@ -22,6 +22,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
  
     Biomes:
 ·Desert biomes now spawn Dead Bush at a reduced rate under ledges instead of just top layer.
+·Nether biome now has more Fire below Y = 100.
+·Fixed bug where the Magma block layer below sealevel in Nether was not creating bubble columns.
+·Fixed bug where in the Nether, single lava blocks on the surface will not flow. Now they do flow and as a result, I restricted their spawning condition a bit and reduced spawn rate since the lava will end up making more lavafalls if generated on a slope. 
       
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)

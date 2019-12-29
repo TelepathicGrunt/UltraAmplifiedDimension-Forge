@@ -109,9 +109,9 @@ public class Roots extends Feature<BlockConfig> {
 				
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+20000*rootNum, Mutable.getZ() * 2D+20000*rootNum, Mutable.getY()*1D+20000*rootNum) * 10.0D, -1, 1);
-				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+10000*rootNum, Mutable.getZ() * 2D+10000*rootNum, Mutable.getY()*1D+10000*rootNum) * 10.0D, -1, 1);
-				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D-10000*rootNum, Mutable.getZ() * 2D-10000*rootNum, Mutable.getY()*1D-10000) * 10.0D *rootNum - 1, -1, 1);
+				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+20000*rootNum, Mutable.getZ() * 2D+20000*rootNum, Mutable.getY()*1D+20000*rootNum) * 15.0D, -1, 1);
+				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+10000*rootNum, Mutable.getZ() * 2D+10000*rootNum, Mutable.getY()*1D+10000*rootNum) * 15.0D, -1, 1);
+				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D-10000*rootNum, Mutable.getZ() * 2D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 1, -1, 1);
 
 				
 				//debugging

@@ -107,7 +107,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	   }
 
 	   private double func_222574_c(int p_222574_1_, int p_222574_2_) {
-	      double d0 = this.depthNoise.getValue((double)(p_222574_1_ * 200), 10.0D, (double)(p_222574_2_ * 200), 1.0D, 0.0D, true) / 8000.0D;
+	      double d0 = this.depthNoise.getValue((double)(p_222574_1_ * 200), 10.0D, (double)(p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 	      if (d0 < 0.0D) {
 	         d0 = -d0 * 0.3D;
 	      }

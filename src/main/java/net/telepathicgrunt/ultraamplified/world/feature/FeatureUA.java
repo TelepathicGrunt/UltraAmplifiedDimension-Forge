@@ -1,7 +1,5 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -21,7 +19,6 @@ import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.CountConfig;
-import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
@@ -52,8 +49,8 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansio
 public class FeatureUA
 {
 
-    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).func_227282_a_(ImmutableList.of(new AlterGroundTreeDecorator(new SimpleBlockStateProvider(Blocks.PODZOL.getDefaultState())))).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(3).func_227282_a_(ImmutableList.of(new AlterGroundTreeDecorator(new SimpleBlockStateProvider(Blocks.PODZOL.getDefaultState())))).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(3).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
     public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(3).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
     
     public static <T extends BaseTreeFeatureConfig> T getConfiguredForUndergroundTreeConfig(T treeConfig)
@@ -100,8 +97,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_AND_SNOW_ICE_MOUNTAIN = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_FOR_COLD_OCEAN = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
     public static Feature<ColumnBlocksConfig> COLUMN = new Column(ColumnBlocksConfig::deserialize);
     public static Feature<ColumnBlocksConfig> RAMP = new RampColumn(ColumnBlocksConfig::deserialize);
     public static Feature<CountConfig> GLOWPATCH = new GlowPatch(CountConfig::deserialize);
@@ -117,6 +113,9 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> BAMBOO_UA = new Bamboo(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
+    public static Feature<NoFeatureConfig> UNDERWATER_MAGMA = new UnderwaterMagmaForNether(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> RARE_LAVA = new RareNetherSurfaceLava(NoFeatureConfig::deserialize);
+    
     public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(TreeFeatureConfig::func_227338_a_);
     public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(HugeTreeFeatureConfig::deserializeDarkOak); //may need to fix deserialize
     public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(HugeTreeFeatureConfig::deserializeSpruce, false);
@@ -143,7 +142,7 @@ public class FeatureUA
     public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleUA(NoFeatureConfig::deserialize);
     
-
+    //bug fix until the mushroom class is no longer broken.
     public static final Feature<BigMushroomFeatureConfig> HUGE_RED_MUSHROOM_FIX = new BigRedMushroomTempFix(BigMushroomFeatureConfig::deserialize);
     public static final Feature<BigMushroomFeatureConfig> HUGE_BROWN_MUSHROOM_FIX = new BigBrownMushroomTempFix(BigMushroomFeatureConfig::deserialize);
     
@@ -192,7 +191,7 @@ public class FeatureUA
         registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
         registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
         registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");
-        registerFeature(SNOW_FIXED, "cold_ocean_snow_feature_ua");
+        registerFeature(SNOW_FOR_COLD_OCEAN, "cold_ocean_snow_feature_ua");
         registerFeature(LONG_VINES, "vines_long_ua");
         registerFeature(SHORT_VINES, "vines_short_ua");
         registerFeature(SEA_GRASS_UA, "sea_grass_ua");
