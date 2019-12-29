@@ -1413,8 +1413,9 @@ public class VillagePiecesUA {
 		private boolean isRoofAccessible;
 
 		protected FlatTopTinyHouse(VillagePiecesUA.Start start, int p_i45573_1_, Random rand,
-				MutableBoundingBox boundingBoxIn, Direction p_i45573_4_) {
+				MutableBoundingBox boundingBoxIn, Direction facing) {
 			super(start, StructureInitUA.VISHUA, p_i45573_1_);
+			this.setCoordBaseMode(facing);
 			this.boundingBox = boundingBoxIn;
 			this.isRoofAccessible = rand.nextBoolean();
 		}
