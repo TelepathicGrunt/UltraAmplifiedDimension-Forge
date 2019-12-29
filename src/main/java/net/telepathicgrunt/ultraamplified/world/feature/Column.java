@@ -158,7 +158,7 @@ public class Column extends Feature<ColumnBlocksConfig>
                 
                 	//scratches the surface for more imperfection
                     //cut the number of scratches on smallest part of pillar by 4
-                    boolean flagImperfection3 = this.noiseGen.func_205563_a(x*0.5D, z*0.5D, y*0.5D) * 50.0D < -0;
+                    boolean flagImperfection3 = this.noiseGen.func_205563_a(x*0.5D, z*0.5D, y*0.5D) * 10.0D < -0;
                     if(flagImperfection3 && (widthAtHeight > thinnestWidth || (widthAtHeight == thinnestWidth && rand.nextInt(4) == 0))) {
                     	currentWidth = widthAtHeight-1;
                     }
