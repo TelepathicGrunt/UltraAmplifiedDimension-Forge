@@ -37,8 +37,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePiecesUA;
 
-public class SnowyBeachBiomeUA extends BiomeUA {
-	public SnowyBeachBiomeUA() {
+
+public class SnowyBeachBiomeUA extends BiomeUA
+{
+	public SnowyBeachBiomeUA()
+	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SAND_SURFACE_BUILDER, SAND_SAND_SANDSTONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.BEACH).depth(0.0F).scale(0.025F).temperature(0.05F).downfall(0.3F).waterColor(11854335).waterFogColor(11847915).parent((String) null));
 
 		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.COLDORBIRCH)));

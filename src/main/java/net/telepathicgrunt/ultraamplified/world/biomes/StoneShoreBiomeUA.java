@@ -38,8 +38,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePiecesUA;
 
-public final class StoneShoreBiomeUA extends BiomeUA {
-	public StoneShoreBiomeUA() {
+
+public final class StoneShoreBiomeUA extends BiomeUA
+{
+	public StoneShoreBiomeUA()
+	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.STONE_STONE_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.NONE).depth(0.1F).scale(0.8F).temperature(0.44F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent((String) null));
 
 		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.STONE)));

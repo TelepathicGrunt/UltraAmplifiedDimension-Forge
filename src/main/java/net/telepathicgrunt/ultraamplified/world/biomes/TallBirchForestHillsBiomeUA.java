@@ -41,8 +41,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfig
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 
-public class TallBirchForestHillsBiomeUA extends BiomeUA {
-	public TallBirchForestHillsBiomeUA() {
+
+public class TallBirchForestHillsBiomeUA extends BiomeUA
+{
+	public TallBirchForestHillsBiomeUA()
+	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST).depth(0.2F).scale(0.4F).temperature(0.9F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent("birch_forest"));
 
 		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.COLDORBIRCH)));
@@ -63,7 +66,7 @@ public class TallBirchForestHillsBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.LAVA.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(80, LakeCountRangeAndTypeConfig.Type.LAVA))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.SLIME_BLOCK.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ROOTS.func_225566_b_(new BlockConfig(Blocks.STRIPPED_BIRCH_WOOD)).func_227228_a_(RANDOM_BOTTOM_LAYER.func_227446_a_(new CountRangeConfig(20, 70, 0, 250))));
-		
+
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.SUN_SHRINE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(AT_CENTER_SURFACE_MINI_FEATURE.func_227446_a_(new ChanceAndTypeConfig(1f, ChanceAndTypeConfig.Type.SUNSHRINE))));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.STONEHENGE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(AT_CENTER_SURFACE_MINI_FEATURE.func_227446_a_(new ChanceAndTypeConfig(1f, ChanceAndTypeConfig.Type.STONEHENGE))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.GENERIC_DUNGEONS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(DUNGEON_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
@@ -84,9 +87,16 @@ public class TallBirchForestHillsBiomeUA extends BiomeUA {
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.func_225566_b_(new SphereReplaceConfig(Blocks.COARSE_DIRT.getDefaultState(), 7, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()))).func_227228_a_(CHANCE_ON_ALL_WATER_BOTTOMS_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.9F, 3))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.func_225566_b_(new SphereReplaceConfig(Blocks.CLAY.getDefaultState(), 4, 1, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.CLAY.getDefaultState(), Blocks.STONE.getDefaultState()))).func_227228_a_(CHANCE_ON_ALL_WATER_BOTTOMS_UA.func_227446_a_(new PercentageAndFrequencyConfig(1F, 4))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.func_225566_b_(new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()))).func_227228_a_(CHANCE_ON_ALL_WATER_BOTTOMS_UA.func_227446_a_(new PercentageAndFrequencyConfig(1F, 2))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_BIRCH_TREE.func_225566_b_(DefaultBiomeFeatures.field_226823_r_).func_227227_a_(0.85F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226813_h_).func_227227_a_(0.2F)), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226812_g_))).func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(17, 0.75F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_BIRCH_TREE.func_225566_b_(DefaultBiomeFeatures.field_226823_r_).func_227227_a_(0.85F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226813_h_).func_227227_a_(0.2F)), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226812_g_))).func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(15, 0.75F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_RANDOM_SELECTOR.func_225566_b_(new MultipleWithChanceRandomFeatureConfig(ImmutableList.of(Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226723_K_), Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226724_L_), Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226725_M_), Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226829_x_)), 0)).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.2F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
+				Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_BIRCH_TREE.func_225566_b_(FeatureUA.GIANT_BIRCH_CONFIG).func_227227_a_(0.85F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226813_h_).func_227227_a_(0.2F)), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226812_g_)))
+						.func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(17, 0.75F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
+				Feature.RANDOM_SELECTOR.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_BIRCH_TREE.func_225566_b_(FeatureUA.GIANT_BIRCH_CONFIG).func_227227_a_(0.85F), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226813_h_).func_227227_a_(0.2F)), Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226812_g_)))
+						.func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(15, 0.75F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_RANDOM_SELECTOR
+				.func_225566_b_(
+						new MultipleWithChanceRandomFeatureConfig(ImmutableList.of(Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226723_K_), Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226724_L_), Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226725_M_), Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226829_x_)), 0))
+				.func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.2F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(DefaultBiomeFeatures.field_226831_z_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(DefaultBiomeFeatures.field_226826_u_).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.3F, 3))));
 		DefaultBiomeFeatures.addMushrooms(this);

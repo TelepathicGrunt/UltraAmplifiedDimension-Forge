@@ -21,6 +21,14 @@ public class UltraAmplifiedWorldProvider extends Dimension{
 
     public UltraAmplifiedWorldProvider(World worldIn, DimensionType typeIn) {
 		super(worldIn, typeIn, 1.0f); //set 1.0f. I think it has to do with maximum brightness?
+		
+	   /**
+	    * Creates the light to brightness table. 
+	    * It changes how light levels looks to the players but does not change the actual values of the light levels.
+	    */
+      for(int i = 0; i <= 15; ++i) {
+          this.lightBrightnessTable[i] = (float)i / 20.0F;
+       }
     }
 
 	@Override
@@ -41,17 +49,6 @@ public class UltraAmplifiedWorldProvider extends Dimension{
 	      double d1 = 0.5D - Math.cos(d0 * Math.PI) / 2.0D;
 	      return (float)(d0 * 2.0D + d1) / 3.0F;
 	}
-
-
-	   /**
-	    * Creates the light to brightness table. It changes how light levels looks to the players but does not change the actual values of the light levels.
-	    */
-	   protected void generateLightBrightnessTable() {
-	      for(int i = 0; i <= 15; ++i) {
-	         this.lightBrightnessTable[i] = (float)i / 20.0F;
-	      }
-
-	   }
 	
    /**
     * the y level at which clouds are rendered.

@@ -205,6 +205,10 @@ public class BiomeAddModdedFeatures {
 			// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
 			int biomeIndex = 0;
 			for (Biome biome : BiomeInit.getBiomeArray()) {
+				if(biomeIndex == vanillaBiomesToCheck.length) {
+					break; //stop when we hit end of vanilla biome list
+				}
+				
 				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (BiomeUA)biome);
 				biomeIndex++;
 			}

@@ -22,8 +22,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePiecesUA;
 
-public class IceMountainsBiomeUA extends BiomeUA {
-	public IceMountainsBiomeUA() {
+
+public class IceMountainsBiomeUA extends BiomeUA
+{
+	public IceMountainsBiomeUA()
+	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(ICE_MOUNTAIN_SURFACE_BUILDER, SNOWBLOCK_ICE_ICE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.45F).scale(0.3F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent((String) null));
 		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.ICEY)));
 		this.func_226711_a_(FeatureUA.STRONGHOLD_UA.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
@@ -61,10 +64,12 @@ public class IceMountainsBiomeUA extends BiomeUA {
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.STRAY, 80, 4, 4));
 	}
 
+
 	/**
 	 * returns the chance a creature has to spawn.
 	 */
-	public float getSpawningChance() {
+	public float getSpawningChance()
+	{
 		return 0.04F;
 	}
 }

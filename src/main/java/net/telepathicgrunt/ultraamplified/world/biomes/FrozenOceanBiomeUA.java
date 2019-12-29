@@ -39,10 +39,14 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfig
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
 
-public class FrozenOceanBiomeUA extends BiomeUA {
+
+public class FrozenOceanBiomeUA extends BiomeUA
+{
 	protected static final PerlinNoiseGenerator field_205163_aV = new PerlinNoiseGenerator(new SharedSeedRandom(3456L), 2, 0);
 
-	public FrozenOceanBiomeUA() {
+
+	public FrozenOceanBiomeUA()
+	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(OCEAN_SURFACE_BUILDER_UA, ICE_GRAVEL_STONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-1.0F).scale(0.1F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String) null));
 
 		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.OCEAN)));
@@ -98,7 +102,7 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.SQUID, 3, 1, 4));
 		this.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.SALMON, 40, 1, 5));
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.POLAR_BEAR, 8, 1, 2));
-	    this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.TURTLE, 5, 2, 5));
+		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.TURTLE, 5, 2, 5));
 		this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
@@ -111,37 +115,54 @@ public class FrozenOceanBiomeUA extends BiomeUA {
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
 	}
 
-   /**
-    * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
-    * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
-    */
-   public float getTemperature(BlockPos pos) {
-      float f = this.getDefaultTemperature();
-      double d0 = field_205163_aV.noiseAt((double)pos.getX() * 0.05D, (double)pos.getZ() * 0.05D, false) * 7.0D;
-      double d1 = INFO_NOISE.noiseAt((double)pos.getX() * 0.2D, (double)pos.getZ() * 0.2D, false);
-      double d2 = d0 + d1;
-      if (d2 < 0.3D) {
-         double d3 = INFO_NOISE.noiseAt((double)pos.getX() * 0.09D, (double)pos.getZ() * 0.09D, false);
-         if (d3 < 0.8D) {
-            f = 0.2F;
-         }
-      }
 
-      if (pos.getY() > 64) {
-         float f1 = (float)(TEMPERATURE_NOISE.noiseAt((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F), false) * 4.0D);
-         return f - (f1 + (float)pos.getY() - 64.0F) * 0.05F / 30.0F;
-      } else {
-         return f;
-      }
-   }
-	   
+	/**
+	 * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
+	 * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
+	 */
+	public float getTemperature(BlockPos pos)
+	{
+		float f = this.getDefaultTemperature();
+		double d0 = field_205163_aV.noiseAt((double) pos.getX() * 0.05D, (double) pos.getZ() * 0.05D, false) * 7.0D;
+		double d1 = INFO_NOISE.noiseAt((double) pos.getX() * 0.2D, (double) pos.getZ() * 0.2D, false);
+		double d2 = d0 + d1;
+		if (d2 < 0.3D)
+		{
+			double d3 = INFO_NOISE.noiseAt((double) pos.getX() * 0.09D, (double) pos.getZ() * 0.09D, false);
+			if (d3 < 0.8D)
+			{
+				f = 0.2F;
+			}
+		}
+
+		if (pos.getY() > 64)
+		{
+			float f1 = (float) (TEMPERATURE_NOISE.noiseAt((double) ((float) pos.getX() / 8.0F), (double) ((float) pos.getZ() / 8.0F), false) * 4.0D);
+			return f - (f1 + (float) pos.getY() - 64.0F) * 0.05F / 30.0F;
+		}
+		else
+		{
+			return f;
+		}
+	}
+
+
+	/*
+	 * set grass color
+	 */
 	@OnlyIn(Dist.CLIENT)
-	public int getGrassColor(BlockPos pos) {
+	public int func_225528_a_(double p_225528_1_, double p_225528_3_)
+	{
 		return 37488;
 	}
 
+
+	/*
+	 * set foliage/plant color
+	 */
 	@OnlyIn(Dist.CLIENT)
-	public int getFoliageColor(BlockPos pos) {
+	public int func_225527_a_()
+	{
 		return 36456;
 	}
 }

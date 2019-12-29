@@ -264,7 +264,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									//
 									//Increase step in X and Z to make pillars less frequent but thicker
 									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.12D, (double) z * 0.12D,
-											y * 0.035D) - (15 / yPillarModifier) + random.nextDouble() * 0.1D > -2.0D;
+											y * 0.035D) * 10.0D - (15 / yPillarModifier) + random.nextDouble() * 0.1D > -2.0D;
 	
 									if(!flagPillars) {
 										//skip position if we are in pillar space
@@ -287,7 +287,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
 										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.33125D,
-												(double) z * 0.33125D, y * 0.06D) + (360D / (y));
+												(double) z * 0.33125D, y * 0.06D) * 10.0D + (360D / (y));
 										
 										//adds more tiny stalagmites to ceiling
 										if(y>54) {

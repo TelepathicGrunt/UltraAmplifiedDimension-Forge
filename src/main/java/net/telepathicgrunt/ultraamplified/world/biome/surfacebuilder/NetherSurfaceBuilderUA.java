@@ -67,8 +67,8 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
     	 }else {
     		 if (iblockstate2 == STONE) {
         		 
-       	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.13125D, (double)z * 0.13125D, ypos/5) + random.nextDouble() * 0.2D > 4.5D;
-       	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.13125D, (ypos/5)+109.0D, (double)z * 0.13125D) + random.nextDouble() * 0.2D > 5.5D;
+       	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.13125D, (double)z * 0.13125D, ypos/5) * 75.0D + random.nextDouble() * 0.2D > 4.5D;
+       	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.13125D, (ypos/5)+109.0D, (double)z * 0.13125D) * 75.0D + random.nextDouble() * 0.2D > 5.5D;
        	     
        	       if (i1 == -1) {
                      if (l <= 0) {

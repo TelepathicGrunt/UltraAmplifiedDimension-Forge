@@ -8,29 +8,19 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 
 public class RampColumn extends Feature<ColumnBlocksConfig> 
 {
-    protected OctavesNoiseGenerator noiseGen;
     protected long seed;
     private final BlockState AIR = Blocks.AIR.getDefaultState();
     
-    public void setSeed(long seed) {
-       if (this.noiseGen == null) {
-          this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
-       }
-
-       this.seed = seed;
-    }
     
     public RampColumn(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactoryIn) {
 		super(configFactoryIn);
@@ -44,7 +34,6 @@ public class RampColumn extends Feature<ColumnBlocksConfig>
     		 return false;
      	}
     	
-    	setSeed(rand.nextLong());
         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
     	int minWidth = 4;
     	int currentHeight = 0;
