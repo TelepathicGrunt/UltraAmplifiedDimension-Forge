@@ -24,7 +24,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Hanging Ruins check is now fixed so it matches the ruin's actual location and prevents it from hanging off edges of ledges.
 ·Removed floating row of Dirt I forgot to remove from Mushroom Temple.
 ·Added 3 Tropical Fish to the pond in Mushroom Temple.
-·Ramps shouldn't replace leaves or tree logs with air now.
+·Ramps shouldn't replace leaves, logs, or Bee Nests with Air now.
 
     Biomes:
 ·Fixed bug where lavafalls and waterfalls underground could get blocked by Stone due to the ContainUndergroundLiquids feature I need running.

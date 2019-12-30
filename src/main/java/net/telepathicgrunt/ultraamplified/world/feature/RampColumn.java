@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -191,7 +192,7 @@ public class RampColumn extends Feature<ColumnBlocksConfig>
                 		//adds top block to exposed middle block after air was set
                 		BlockState blockBelowAir = worldIn.getBlockState(blockpos$Mutable.up(holeHeight-1));
                         BlockState blockBelowBelowAir = worldIn.getBlockState(blockpos$Mutable.up(holeHeight-2));
-                        if (blockBelowAir.isSolid())
+                        if (blockBelowAir.isSolid() && !blockBelowAir.isIn(BlockTags.LEAVES) && !blockBelowAir.isIn(BlockTags.LOGS) && blockBelowAir != Blocks.field_226905_ma_.getDefaultState())
                         {
                         	if(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
                         		worldIn.setBlockState(blockpos$Mutable.up(holeHeight-1), blocksConfig.middleBlock, 2);
