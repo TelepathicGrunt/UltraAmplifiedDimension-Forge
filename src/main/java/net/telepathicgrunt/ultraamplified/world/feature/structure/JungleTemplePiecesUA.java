@@ -32,9 +32,9 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece {
 	private boolean trap2;
 	private static final JungleTemplePiecesUA.MossStoneSelector MOSS_STONE_SELECTOR = new JungleTemplePiecesUA.MossStoneSelector();
 	public static final ResourceLocation CHESTS_JUNGLE_TEMPLE_UA = new ResourceLocation(
-			"ultra_amplified_mod:chests/jungle_temple_ua");
+			"ultra_amplified_dimension:chests/jungle_temple_ua");
 	public static final ResourceLocation CHESTS_JUNGLE_TEMPLE_DISPENSER_UA = new ResourceLocation(
-			"ultra_amplified_mod:chests/jungle_temple_dispenser_ua");
+			"ultra_amplified_dimension:chests/jungle_temple_dispenser_ua");
 
 	public JungleTemplePiecesUA(Random random, int x, int y, int z) {
 		super(StructureInitUA.TEJPUA, random, x, y, z, 12, 10, 15);

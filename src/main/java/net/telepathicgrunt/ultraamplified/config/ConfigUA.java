@@ -266,7 +266,7 @@ public class ConfigUA {
                     		+"To blacklist all of a mod's biomes, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
                     		+"To blacklist a specific mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
                     		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n"
-                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
                     .translation("ultraamplified.config.structure.blacklistedbiomelist")
                     .define("blacklistedBiomeList", "");
 
@@ -276,7 +276,7 @@ public class ConfigUA {
                     		+"To blacklist all structures in a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
                     		+"To blacklist a specific mod's structure, type out the resourcelocation. Example: \"example_mod_id:wizard_tower\"\r\n"
                     		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:wizard_tower, example_mod_id_2:*, example_mod_id_1:super_village\"\r\n"
-                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
                     .translation("ultraamplified.config.structure.blacklistedfeaturelist")
                     .define("blacklistedFeatureList", "");
 

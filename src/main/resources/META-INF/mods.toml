@@ -3,7 +3,7 @@ modLoader="javafml" #mandatory
 loaderVersion="[28,)" #mandatory
 
 [[mods]] #mandatory
-modId="ultra_amplified_mod" #mandatory
+modId="ultra_amplified_dimension" #mandatory
 logoFile="ultraamplifiedlogo.png"
 version="${version}" #mandatory
 displayName="Ultra Amplified Mod" #mandatory

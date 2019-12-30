@@ -49,7 +49,7 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 public class UltraAmplified {
 	
 	public static UltraAmplified instance;
-	public static final String MODID = "ultra_amplified_mod";
+	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	//worldTypes

@@ -15,7 +15,7 @@ apply plugin: 'maven-publish'
 
 version = '1.15.1-7.0.0'
 group = 'com.telepathicgrunt.ultraamplified' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'ultra_amplified_mod'
+archivesBaseName = 'ultra_amplified_dimension'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 

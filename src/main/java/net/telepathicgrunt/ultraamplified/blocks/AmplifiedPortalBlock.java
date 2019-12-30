@@ -2,30 +2,24 @@ package net.telepathicgrunt.ultraamplified.blocks;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.properties.SlabType;
 import net.minecraft.tileentity.EndPortalTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 
 
@@ -52,13 +46,6 @@ public class AmplifiedPortalBlock extends Block
 	{
 		return SHAPE;
 	}
-
-//
-//	public BlockRenderLayer getRenderLayer()
-//	{
-//		return BlockRenderLayer.SOLID;
-//	}
-//
 
 	/**
 	 * mining portal block in ultra amplified dimension will be denied if it is the highest Amplified Portal Block at x=8,
@@ -133,39 +120,6 @@ public class AmplifiedPortalBlock extends Block
 	}
 
 
-	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos)
-	{
-
-		// cannot create amplified portal in Ultra Amplified Worldtype
-		if (worldIn.getWorld().getWorldType() == UltraAmplified.UltraAmplified)
-		{
-			return false;
-		}
-
-		boolean canMakePortal = this.isPortal(worldIn, pos);
-		if (canMakePortal)
-		{
-			placePortalBlocks(worldIn, pos);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-
-	@Nullable
-	public boolean isPortal(IWorld worldIn, BlockPos pos)
-	{
-		if (isValid(worldIn, pos))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
 
 	/**
 	 * faster particle movement than normal EndPortal block
@@ -184,78 +138,6 @@ public class AmplifiedPortalBlock extends Block
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
 	{
 		return ItemStack.EMPTY;
-	}
-
-	// ------------------------------------------------------------------------------------//
-	// Portal creation and validation check
-
-	private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
-	private static final BlockState POLISHED_DIORITE = Blocks.POLISHED_DIORITE.getDefaultState();
-	private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
-	private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
-
-
-	public boolean isValid(IWorld worldIn, BlockPos pos)
-	{
-
-		// bottom of portal frame
-		for (int x = -1; x <= 1; x++)
-		{
-			for (int z = -1; z <= 1; z++)
-			{
-				if (Math.abs(x * z) == 1)
-				{
-					if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_GRANITE)
-					{
-						return false;
-					}
-				}
-				else
-				{
-					if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_ANDESITE_SLAB_BOTTOM)
-					{
-						return false;
-					}
-				}
-			}
-		}
-
-		// the center itself
-		if (worldIn.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
-		{
-			return false;
-		}
-
-		// top of portal frame
-		for (int x = -1; x <= 1; x++)
-		{
-			for (int z = -1; z <= 1; z++)
-			{
-				if (Math.abs(x * z) == 1)
-				{
-					if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_GRANITE)
-					{
-						return false;
-					}
-				}
-				else
-				{
-					if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_ANDESITE_SLAB_TOP)
-					{
-						return false;
-					}
-				}
-			}
-		}
-
-		return true;
-	}
-
-
-	public void placePortalBlocks(IWorld worldIn, BlockPos pos)
-	{
-		// the portal itself
-		worldIn.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.getDefaultState(), 18);
 	}
 
 }

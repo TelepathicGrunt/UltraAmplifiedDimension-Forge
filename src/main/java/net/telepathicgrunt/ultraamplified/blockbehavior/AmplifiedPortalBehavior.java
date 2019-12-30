@@ -3,14 +3,21 @@ package net.telepathicgrunt.ultraamplified.blockbehavior;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
@@ -179,11 +186,18 @@ public class AmplifiedPortalBehavior {
 			if (worldIn.getWorldType() != UltraAmplified.UltraAmplified && 
 				    event.getItemStack().getItem() == Items.FLINT_AND_STEEL) 
 			{
-				BlocksInit.AMPLIFIEDPORTAL.trySpawnPortal(worldIn, event.getPos());
+				trySpawnPortal(worldIn, event.getPos());
 			}
 		}
 		
 
+		// ------------------------------------------------------------------------------------//
+		// Portal creation and validation check
+
+		private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
+		private static final BlockState POLISHED_DIORITE = Blocks.POLISHED_DIORITE.getDefaultState();
+		private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
+		private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
 
 	    private static boolean checkForGeneratedPortal(World worldIn) {
 	    	BlockPos pos = new BlockPos(8, 255, 8);
@@ -198,6 +212,7 @@ public class AmplifiedPortalBehavior {
 	    	
 	    	return false;
 	    }
+	    
 	    
 	    private static void generatePortal(World worldIn) {
 	    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
@@ -214,6 +229,103 @@ public class AmplifiedPortalBehavior {
 
 	    	amplifiedportalfeature.place(worldIn, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
 	 	}
+	    
+	    
+		public static boolean isValid(IWorld worldIn, BlockPos pos)
+		{
+
+			// bottom of portal frame
+			for (int x = -1; x <= 1; x++)
+			{
+				for (int z = -1; z <= 1; z++)
+				{
+					if (Math.abs(x * z) == 1)
+					{
+						if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_GRANITE)
+						{
+							return false;
+						}
+					}
+					else
+					{
+						if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_ANDESITE_SLAB_BOTTOM)
+						{
+							return false;
+						}
+					}
+				}
+			}
+
+			// the center itself
+			if (worldIn.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
+			{
+				return false;
+			}
+
+			// top of portal frame
+			for (int x = -1; x <= 1; x++)
+			{
+				for (int z = -1; z <= 1; z++)
+				{
+					if (Math.abs(x * z) == 1)
+					{
+						if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_GRANITE)
+						{
+							return false;
+						}
+					}
+					else
+					{
+						if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_ANDESITE_SLAB_TOP)
+						{
+							return false;
+						}
+					}
+				}
+			}
+
+			return true;
+		}
+
+
+		public static void placePortalBlocks(IWorld worldIn, BlockPos pos)
+		{
+			// the portal itself
+			worldIn.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.getDefaultState(), 18);
+		}
+
+		public static boolean trySpawnPortal(IWorld worldIn, BlockPos pos)
+		{
+
+			// cannot create amplified portal in Ultra Amplified Worldtype
+			if (worldIn.getWorld().getWorldType() == UltraAmplified.UltraAmplified)
+			{
+				return false;
+			}
+
+			boolean canMakePortal = isPortal(worldIn, pos);
+			if (canMakePortal)
+			{
+				placePortalBlocks(worldIn, pos);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		@Nullable
+		public static boolean isPortal(IWorld worldIn, BlockPos pos)
+		{
+			if (isValid(worldIn, pos))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 }

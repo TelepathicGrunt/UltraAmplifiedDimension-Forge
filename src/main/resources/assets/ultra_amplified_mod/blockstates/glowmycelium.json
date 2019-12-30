@@ -1,23 +1,23 @@
 {
     "variants": {
         "snowy=false": [
-            { "model": "ultra_amplified_mod:block/glowmycelium" },
-            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 90 },
-            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 180 },
-            { "model": "ultra_amplified_mod:block/glowmycelium", "y": 270 },
-            { "model": "ultra_amplified_mod:block/glowmycelium2" },
-            { "model": "ultra_amplified_mod:block/glowmycelium2", "y": 90 },
-            { "model": "ultra_amplified_mod:block/glowmycelium2", "y": 180 },
-            { "model": "ultra_amplified_mod:block/glowmycelium2", "y": 270 },
-            { "model": "ultra_amplified_mod:block/glowmycelium3" },
-            { "model": "ultra_amplified_mod:block/glowmycelium3", "y": 90 },
-            { "model": "ultra_amplified_mod:block/glowmycelium3", "y": 180 },
-            { "model": "ultra_amplified_mod:block/glowmycelium3", "y": 270 }
+            { "model": "ultra_amplified_dimension:block/glowmycelium" },
+            { "model": "ultra_amplified_dimension:block/glowmycelium", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium", "y": 270 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium2" },
+            { "model": "ultra_amplified_dimension:block/glowmycelium2", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium2", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium2", "y": 270 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium3" },
+            { "model": "ultra_amplified_dimension:block/glowmycelium3", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium3", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowmycelium3", "y": 270 }
         ],
         "snowy=true": [ 
-        	{ "model": "ultra_amplified_mod:block/glowgrass_block_snow" } ,
-	        { "model": "ultra_amplified_mod:block/glowgrass_block_snow2" } ,
-	        { "model": "ultra_amplified_mod:block/glowgrass_block_snow3" } 
+        	{ "model": "ultra_amplified_dimension:block/glowgrass_block_snow" } ,
+	        { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2" } ,
+	        { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3" } 
         
         ]
     }

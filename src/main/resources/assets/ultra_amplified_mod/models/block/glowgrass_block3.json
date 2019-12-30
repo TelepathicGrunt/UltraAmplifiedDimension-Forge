@@ -1,10 +1,10 @@
 {   "parent": "block/block",
     "textures": {
         "particle": "block/dirt",
-        "bottom": "ultra_amplified_mod:block/glowdirt3",
+        "bottom": "ultra_amplified_dimension:block/glowdirt3",
         "top": "block/grass_block_top",
-        "side": "ultra_amplified_mod:block/glowgrass_block_side3",
-        "topoverlay": "ultra_amplified_mod:block/glowgrass_block_top_overlay3",
+        "side": "ultra_amplified_dimension:block/glowgrass_block_side3",
+        "topoverlay": "ultra_amplified_dimension:block/glowgrass_block_top_overlay3",
         "overlay": "block/grass_block_side_overlay"
     },
     "elements": [

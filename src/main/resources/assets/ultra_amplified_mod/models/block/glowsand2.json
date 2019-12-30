@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "ultra_amplified_mod:block/glowsand2"
+        "all": "ultra_amplified_dimension:block/glowsand2"
     }
 }

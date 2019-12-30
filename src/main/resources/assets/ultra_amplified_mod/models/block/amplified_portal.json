@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "ultra_amplified_mod:block/amplified_portal"
+        "all": "ultra_amplified_dimension:block/amplified_portal"
     }
 }

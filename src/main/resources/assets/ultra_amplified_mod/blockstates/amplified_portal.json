@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "ultra_amplified_mod:block/amplified_portal" }
+        "": { "model": "ultra_amplified_dimension:block/amplified_portal" }
     }
 }

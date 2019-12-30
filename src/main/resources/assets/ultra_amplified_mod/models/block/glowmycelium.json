@@ -1,8 +1,8 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "bottom": "ultra_amplified_mod:block/glowdirt",
-        "top": "ultra_amplified_mod:block/glowmycelium_top",
-        "side": "ultra_amplified_mod:block/glowmycelium_side"
+        "bottom": "ultra_amplified_dimension:block/glowdirt",
+        "top": "ultra_amplified_dimension:block/glowmycelium_top",
+        "side": "ultra_amplified_dimension:block/glowmycelium_side"
     }
 }

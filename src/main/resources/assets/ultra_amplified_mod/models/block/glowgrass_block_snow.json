@@ -1,9 +1,9 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "particle": "ultra_amplified_mod:block/glowdirt",
-        "bottom": "ultra_amplified_mod:block/glowdirt",
+        "particle": "ultra_amplified_dimension:block/glowdirt",
+        "bottom": "ultra_amplified_dimension:block/glowdirt",
         "top": "block/grass_block_top",
-        "side": "ultra_amplified_mod:block/glowgrass_block_snow"
+        "side": "ultra_amplified_dimension:block/glowgrass_block_snow"
     }
 }

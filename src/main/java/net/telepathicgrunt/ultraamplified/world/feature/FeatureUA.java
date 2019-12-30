@@ -6,6 +6,7 @@ import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
@@ -57,6 +58,12 @@ public class FeatureUA
     {
         treeConfig.func_227373_a_();
         return treeConfig;
+    }
+
+    public static <T extends BlockClusterFeatureConfig> T getConfiguredClusterConfig(T clusterConfig)
+    {
+    	clusterConfig.field_227298_k_ = false;
+        return clusterConfig;
     }
     
     public static Feature<NoFeatureConfig> BETTER_CACTUS = new BetterCactus(NoFeatureConfig::deserialize);

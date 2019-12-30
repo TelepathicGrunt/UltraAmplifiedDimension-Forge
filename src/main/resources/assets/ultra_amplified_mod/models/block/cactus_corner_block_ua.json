@@ -1,11 +1,11 @@
 {   "parent": "block/orientable",
     "ambientocclusion": false,
     "textures": {
-        "particle": "ultra_amplified_mod:block/cactus_side_ua",
-        "bottom": "ultra_amplified_mod:block/cactus_bottom_ua",
-        "top": "ultra_amplified_mod:block/cactus_top_ua",
-        "side": "ultra_amplified_mod:block/cactus_side_ua",
-        "corner": "ultra_amplified_mod:block/cactus_corner_side_ua"
+        "particle": "ultra_amplified_dimension:block/cactus_side_ua",
+        "bottom": "ultra_amplified_dimension:block/cactus_bottom_ua",
+        "top": "ultra_amplified_dimension:block/cactus_top_ua",
+        "side": "ultra_amplified_dimension:block/cactus_side_ua",
+        "corner": "ultra_amplified_dimension:block/cactus_corner_side_ua"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

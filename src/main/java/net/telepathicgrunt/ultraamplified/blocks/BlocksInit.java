@@ -27,40 +27,40 @@ public class BlocksInit
 	public static final ItemGroup ULTRAMAPLIFIED = UA;
 
 	//Instances of the modded blocks to use anywhere else in this mod
-	@ObjectHolder("ultra_amplified_mod:amplified_portal")
+	@ObjectHolder("ultra_amplified_dimension:amplified_portal")
 	public static AmplifiedPortalBlock AMPLIFIEDPORTAL;
 
-	@ObjectHolder("ultra_amplified_mod:glowstone_ore")
+	@ObjectHolder("ultra_amplified_dimension:glowstone_ore")
 	public static GlowstoneOreBlock GLOWSTONE_ORE;
 
-	@ObjectHolder("ultra_amplified_mod:coarse_glowdirt")
+	@ObjectHolder("ultra_amplified_dimension:coarse_glowdirt")
 	public static CoarseGlowdirtBlock COARSE_GLOWDIRT;
 
-	@ObjectHolder("ultra_amplified_mod:glowdirt")
+	@ObjectHolder("ultra_amplified_dimension:glowdirt")
 	public static GlowdirtBlock GLOWDIRT;
 
-	@ObjectHolder("ultra_amplified_mod:glowgrass_block")
+	@ObjectHolder("ultra_amplified_dimension:glowgrass_block")
 	public static GlowgrassBlock GLOWGRASS_BLOCK;
 
-	@ObjectHolder("ultra_amplified_mod:glowmycelium")
+	@ObjectHolder("ultra_amplified_dimension:glowmycelium")
 	public static GlowmyceliumBlock GLOWMYCELIUM;
 
-	@ObjectHolder("ultra_amplified_mod:glowpodzol")
+	@ObjectHolder("ultra_amplified_dimension:glowpodzol")
 	public static GlowpodzolBlock GLOWPODZOL;
 
-	@ObjectHolder("ultra_amplified_mod:glowsand")
+	@ObjectHolder("ultra_amplified_dimension:glowsand")
 	public static GlowsandBlock GLOWSAND;
 
-	@ObjectHolder("ultra_amplified_mod:red_glowsand")
+	@ObjectHolder("ultra_amplified_dimension:red_glowsand")
 	public static RedGlowsandBlock REDGLOWSAND;
 
-	@ObjectHolder("ultra_amplified_mod:cactus_body_block_ua")
+	@ObjectHolder("ultra_amplified_dimension:cactus_body_block_ua")
 	public static CactusBodyBlockUA CACTUSBODYBLOCKUA;
 
-	@ObjectHolder("ultra_amplified_mod:cactus_corner_block_ua")
+	@ObjectHolder("ultra_amplified_dimension:cactus_corner_block_ua")
 	public static CactusCornerBlockUA CACTUSCORNERBLOCKUA;
 
-	@ObjectHolder("ultra_amplified_mod:cactus_main_block_ua")
+	@ObjectHolder("ultra_amplified_dimension:cactus_main_block_ua")
 	public static CactusMainBlockUA CACTUSMAINBLOCKUA;
 
 

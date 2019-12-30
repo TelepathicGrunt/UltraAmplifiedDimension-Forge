@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_mirrored_all",
     "textures": {
-        "all": "ultra_amplified_mod:block/glowstone_ore5"
+        "all": "ultra_amplified_dimension:block/glowstone_ore5"
     }
 }
