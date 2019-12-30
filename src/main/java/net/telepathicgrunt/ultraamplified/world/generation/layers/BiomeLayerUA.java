@@ -205,7 +205,7 @@ public class BiomeLayerUA implements IC0Transformer
         if(ConfigUA.desert) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.DESERT, 40));
         if(ConfigUA.savanna) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.SAVANNA, 40));
         if(ConfigUA.plains) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.PLAINS, 20));
-        if(ConfigUA.nether) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.NETHER, 26));
+        if(ConfigUA.nether) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.NETHER, 30));
         if(ConfigUA.mushroom) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
         //warm
@@ -221,9 +221,9 @@ public class BiomeLayerUA implements IC0Transformer
         if(ConfigUA.forest) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.FOREST, 30));
         if(ConfigUA.mountains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MOUNTAINS, 30));
         if(ConfigUA.taiga) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.TAIGA, 30));
-        if(ConfigUA.plains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 13));
-        if(ConfigUA.stoneBeach) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_SHORE, 10));
-        if(ConfigUA.end) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END, 20));
+        if(ConfigUA.plains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 10));
+        if(ConfigUA.stoneBeach) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_SHORE, 15));
+        if(ConfigUA.end) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END, 30));
         if(ConfigUA.mushroom) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
         //icy
