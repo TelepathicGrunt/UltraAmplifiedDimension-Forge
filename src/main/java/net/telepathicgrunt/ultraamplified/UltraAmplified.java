@@ -42,9 +42,6 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
  * 
  * @author TelepathicGrunt
  */
-		//workaround because the events for colors is firing before the blocks are registered which is causing a crash
-		//BlockColorManager.onBlockColorsInit(Minecraft.getInstance().getBlockColors());
-		//BlockColorManager.onItemColorsInit(Minecraft.getInstance().getItemColors(), Minecraft.getInstance().getBlockColors());
 @Mod(UltraAmplified.MODID)
 public class UltraAmplified {
 	

@@ -103,7 +103,7 @@ public class FeatureUA
     public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDry(SphereReplaceConfig::deserialize);
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_AND_ICE_LAYERER = new SnowIceLayerHandlerFeature(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SNOW_FOR_COLD_OCEAN = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
     public static Feature<ColumnBlocksConfig> COLUMN = new Column(ColumnBlocksConfig::deserialize);
     public static Feature<ColumnBlocksConfig> RAMP = new RampColumn(ColumnBlocksConfig::deserialize);
@@ -197,7 +197,7 @@ public class FeatureUA
         registerFeature(GLOWPATCH, "glowpatch_ua");
         registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
         registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
-        registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");
+        registerFeature(SNOW_AND_ICE_LAYERER, "ice_and_snow_at_all_layer_ua");
         registerFeature(SNOW_FOR_COLD_OCEAN, "cold_ocean_snow_feature_ua");
         registerFeature(LONG_VINES, "vines_long_ua");
         registerFeature(SHORT_VINES, "vines_short_ua");

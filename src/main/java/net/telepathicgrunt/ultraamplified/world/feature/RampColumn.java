@@ -186,13 +186,18 @@ public class RampColumn extends Feature<ColumnBlocksConfig>
 	                //clears out space above disk so there is a hole for entire ramp
 	                int holeHeight = 5;
                     BlockState block = worldIn.getBlockState(blockpos$Mutable.up(holeHeight));
-	                if(block.getMaterial() != Material.AIR && xzDiffSquaredStretched <= (widthAtHeight-1) * (widthAtHeight-1) - 0.5F) {
+	                if(block.getMaterial() != Material.AIR && 
+	                  !block.isIn(BlockTags.LEAVES) && 
+	                  !block.isIn(BlockTags.LOGS) && 
+	                  block != Blocks.field_226905_ma_.getDefaultState() && 
+	                  xzDiffSquaredStretched <= (widthAtHeight-1) * (widthAtHeight-1) - 0.5F) 
+	                {
                 		worldIn.setBlockState(blockpos$Mutable.up(holeHeight), AIR, 2);
                 		
                 		//adds top block to exposed middle block after air was set
                 		BlockState blockBelowAir = worldIn.getBlockState(blockpos$Mutable.up(holeHeight-1));
                         BlockState blockBelowBelowAir = worldIn.getBlockState(blockpos$Mutable.up(holeHeight-2));
-                        if (blockBelowAir.isSolid() && !blockBelowAir.isIn(BlockTags.LEAVES) && !blockBelowAir.isIn(BlockTags.LOGS) && blockBelowAir != Blocks.field_226905_ma_.getDefaultState())
+                        if (blockBelowAir.isSolid())
                         {
                         	if(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
                         		worldIn.setBlockState(blockpos$Mutable.up(holeHeight-1), blocksConfig.middleBlock, 2);

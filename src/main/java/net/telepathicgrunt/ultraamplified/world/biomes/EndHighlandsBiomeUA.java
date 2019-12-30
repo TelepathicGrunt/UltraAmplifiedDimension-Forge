@@ -76,7 +76,7 @@ public class EndHighlandsBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, FeatureUA.SINGLE_BLOCK.func_225566_b_(new BlockConfig(Blocks.SHULKER_BOX)).func_227228_a_(HEIGHT_BIASED_RANGE_UA.func_227446_a_(new CountRangeConfig(1, 25, 1, 70))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, FeatureUA.SINGLE_BLOCK.func_225566_b_(new BlockConfig(Blocks.DRAGON_EGG)).func_227228_a_(HEIGHT_BIASED_RANGE_UA.func_227446_a_(new CountRangeConfig(1, 10, 1, 255))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.func_225566_b_(new LiquidsConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.END_STONE, Blocks.END_STONE_BRICKS))).func_227228_a_(WATERFALL_RANGE.func_227446_a_(new CountRangeConfig(2, 70, 8, 256))));
-		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, Feature.FREEZE_TOP_LAYER.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, FeatureUA.SNOW_AND_ICE_LAYERER.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 4, 4));
 	}

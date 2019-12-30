@@ -28,6 +28,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Ramps shouldn't replace leaves, logs, or Bee Nests with Air now.
 
     Biomes:
+·Redid how Snow and Ice layer is done to fix several bugs with snow placement. Especially when biomes bordering each other both requires different snow layering.
 ·Adjusted biome default rates to make Nether and End slightly more common/bigger.
 ·Fixed bug where lavafalls and waterfalls underground could get blocked by Stone due to the ContainUndergroundLiquids feature I need running.
 ·Desert biomes now spawn Dead Bush at a reduced rate under ledges instead of just top layer.

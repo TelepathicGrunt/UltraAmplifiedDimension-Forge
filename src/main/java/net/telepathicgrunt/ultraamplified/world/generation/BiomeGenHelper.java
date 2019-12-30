@@ -1,8 +1,8 @@
 package net.telepathicgrunt.ultraamplified.world.generation;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -54,7 +54,24 @@ public enum BiomeGenHelper {
    public static final int VANILLA_OCEAN = BiomeRegistry.getID(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = BiomeRegistry.getID(Biomes.DEEP_OCEAN);
 	
-   private static final Biome[] OCEAN_VALUES = new Biome[] { 
+
+	public static Set<Biome> frozenBiomes = ImmutableSet.of(
+			BiomeInit.DEEP_FROZEN_OCEAN,
+			BiomeInit.FROZEN_OCEAN,
+			BiomeInit.ICE_SPIKES,
+			BiomeInit.SNOWY_BEACH,
+			BiomeInit.SNOWY_TAIGA,
+			BiomeInit.SNOWY_TAIGA_HILLS,
+			BiomeInit.SNOWY_TAIGA_MOUNTAINS,
+			BiomeInit.SNOWY_TUNDRA
+			);
+	
+	public static Set<Biome> coldOceanBiomes = ImmutableSet.of(
+			BiomeInit.DEEP_COLD_OCEAN,
+			BiomeInit.COLD_OCEAN
+			);
+   
+   private static final Set<Biome> OCEAN_LIST = ImmutableSet.of(
 		   BiomeInit.WARM_OCEAN,
 		   BiomeInit.LUKEWARM_OCEAN,
 		   BiomeInit.OCEAN,
@@ -65,8 +82,7 @@ public enum BiomeGenHelper {
 		   BiomeInit.DEEP_OCEAN,
 		   BiomeInit.DEEP_COLD_OCEAN,
 		   BiomeInit.DEEP_FROZEN_OCEAN
-		   };
-   private static final Set<Biome> OCEAN_LIST = new HashSet<Biome>(Arrays.asList(OCEAN_VALUES)); 
+		  );
    
    public static boolean isOcean(Biome biomeIn) {
 	   return OCEAN_LIST.contains(biomeIn);
