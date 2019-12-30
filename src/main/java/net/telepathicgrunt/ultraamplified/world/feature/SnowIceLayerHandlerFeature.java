@@ -34,7 +34,7 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig> {
 				}
 				else if(BiomeGenHelper.coldOceanBiomes.contains(biome)) 
 				{
-					FeatureUA.SNOW_FOR_COLD_OCEAN.place(worldIn, generator, rand, blockpos$mutable, config);
+					ColdOceanSnowFeature.place(worldIn, generator, rand, blockpos$mutable, config, biome);
 				}
 				else 
 				{

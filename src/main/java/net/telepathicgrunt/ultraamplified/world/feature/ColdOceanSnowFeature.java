@@ -12,6 +12,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.LightType;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
@@ -23,8 +24,9 @@ public class ColdOceanSnowFeature extends Feature<NoFeatureConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random p_212245_3_,
-			BlockPos blockPos, NoFeatureConfig p_212245_5_) {
+	public static boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random p_212245_3_,
+			BlockPos blockPos, NoFeatureConfig p_212245_5_, Biome biome) {
+		
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
@@ -48,4 +50,11 @@ public class ColdOceanSnowFeature extends Feature<NoFeatureConfig> {
 
 		return true;
 	}
+
+	// unused as snowlayerhandlerfeature will call the above place method
+	@Override
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+		return false;
+	}
+	
 }
