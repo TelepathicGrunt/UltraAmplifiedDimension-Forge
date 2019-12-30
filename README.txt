@@ -12,13 +12,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 ------------------------------------------------
-       | Ultra Amplified mod changelog |
+       | Ultra Amplified Dimension changelog |
        
        
     (V.7.0.0 Changes) (1.15.1 Minecraft)
     
     Major Change: 
 ·Ported to 1.15.1! Celebration time!
+·This mod is now renamed from Ultra Amplified Mod to Ultra Amplified Dimension !
  
     Structures:
 ·Hanging Ruins check is now fixed so it matches the ruin's actual location and prevents it from hanging off edges of ledges.
