@@ -111,7 +111,7 @@ public class UltraAmplified {
 	@OnlyIn(Dist.CLIENT)
 	public void clientSetup(final FMLClientSetupEvent event) 
 	{
-		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK, RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
 	}
 	
 	public void setup(final FMLCommonSetupEvent event) 

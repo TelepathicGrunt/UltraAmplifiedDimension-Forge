@@ -34,7 +34,7 @@ public class BlockColorManager
 		blockColors.register((p_210225_0_, p_210225_1_, p_210225_2_, p_210225_3_) ->
 		{
 			return p_210225_1_ != null && p_210225_2_ != null ? BiomeColors.func_228358_a_(p_210225_1_, p_210225_2_) : GrassColors.get(0.5D, 1.0D);
-		}, BlocksInit.GLOWGRASS_BLOCK);
+		}, BlocksInit.GLOWGRASS_BLOCK.get());
 	}
 
 
@@ -55,6 +55,6 @@ public class BlockColorManager
 			return blockColors.func_228054_a_(state, null, null, tintIndex);
 		};
 
-		itemColors.register(itemBlockColourHandler, BlocksInit.GLOWGRASS_BLOCK);
+		itemColors.register(itemBlockColourHandler, BlocksInit.GLOWGRASS_BLOCK.get());
 	}
 }

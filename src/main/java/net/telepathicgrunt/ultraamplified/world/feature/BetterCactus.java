@@ -51,11 +51,11 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
         		  
         		  //finds what the center should be
         		  if(frontSideHeight == backSideHeight) {
-        			  worldIn.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSBODYBLOCKUA.getDefaultState().with(CactusBodyBlockUA.FACING, cactusFacing), 18);
+        			  worldIn.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState().with(CactusBodyBlockUA.FACING, cactusFacing), 18);
                   }else {
                 	  worldIn.setBlockState(
                 			  blockpos.up(currentHeight), 
-                			  BlocksInit.CACTUSCORNERBLOCKUA.getDefaultState().with(CactusCornerBlockUA.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), 
+                			  BlocksInit.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), 
                 			  18);
                   }
 
@@ -69,7 +69,7 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
         		  
         	  }else {
         		  //places normal vertical cactus
-        		  worldIn.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
+        		  worldIn.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
         	  }
           }
             
@@ -91,7 +91,7 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
 		//horizontal part of branch first
 		position = position.offset(branchDirection);
 		if(worldIn.isAirBlock(position)){
-			worldIn.setBlockState(position, BlocksInit.CACTUSMAINBLOCKUA.getDefaultState().with(CactusMainBlockUA.FACING, branchDirection), 18);
+			worldIn.setBlockState(position, BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, branchDirection), 18);
 		}else {
 			return;
 		}
@@ -99,7 +99,7 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
 		//corner
 		position = position.offset(branchDirection);
 		if(worldIn.isAirBlock(position)){
-			worldIn.setBlockState(position, BlocksInit.CACTUSCORNERBLOCKUA.getDefaultState().with(CactusCornerBlockUA.FACING, branchDirection), 18);
+			worldIn.setBlockState(position, BlocksInit.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, branchDirection), 18);
 		}else {
 			return;
 		}
@@ -108,7 +108,7 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
 		for (int currentHeight = 1; currentHeight < maxHeightUp && position.up(currentHeight).getY() <= 255; currentHeight++)
         {
         	if(worldIn.isAirBlock(position.up(currentHeight))){
-        		worldIn.setBlockState(position.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
+        		worldIn.setBlockState(position.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
                 
         	}else {
         		return;

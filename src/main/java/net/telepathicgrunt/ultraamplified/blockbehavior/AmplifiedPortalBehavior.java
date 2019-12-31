@@ -54,7 +54,7 @@ public class AmplifiedPortalBehavior {
 
 			// checks to see if player uses right click on amplified portal and if so
 			// teleports player to other dimension
-			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState())
+			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
 			{
 				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
@@ -111,7 +111,7 @@ public class AmplifiedPortalBehavior {
 						
 						//finds where portal block is
 						while(portalY > 0) {
-							if(serverworld.getBlockState(pos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
+							if(serverworld.getBlockState(pos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
 								break;
 							}
 							portalY--;
@@ -204,7 +204,7 @@ public class AmplifiedPortalBehavior {
 	    	worldIn.getChunkAt(pos);
 	    	
 	    	while(pos.getY() >= 0) {
-	    		if(worldIn.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.getDefaultState()) {
+	    		if(worldIn.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
 	    			return true;
 	    		}
 	    		pos = pos.down();
@@ -291,7 +291,7 @@ public class AmplifiedPortalBehavior {
 		public static void placePortalBlocks(IWorld worldIn, BlockPos pos)
 		{
 			// the portal itself
-			worldIn.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.getDefaultState(), 18);
+			worldIn.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 		}
 
 		public static boolean trySpawnPortal(IWorld worldIn, BlockPos pos)

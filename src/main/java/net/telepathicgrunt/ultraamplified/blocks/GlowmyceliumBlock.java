@@ -35,7 +35,7 @@ public class GlowmyceliumBlock extends MyceliumBlock
 			if (!func_220257_b(state, worldIn, pos))
 			{
 				//block is covered and so will turn into glowdirt
-				worldIn.setBlockState(pos, BlocksInit.GLOWDIRT.getDefaultState());
+				worldIn.setBlockState(pos, BlocksInit.GLOWDIRT.get().getDefaultState());
 			}
 			else if (worldIn.getLight(pos.up()) >= 4)
 			{
