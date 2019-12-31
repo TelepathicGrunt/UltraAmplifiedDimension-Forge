@@ -49,6 +49,7 @@ public class WideShallowLakes extends Feature<BlockStateFeatureConfig> {
          }
          
 
+         //creates solid land patches by returning early
          for(int x = 0; x < 16; ++x) {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
@@ -76,15 +77,18 @@ public class WideShallowLakes extends Feature<BlockStateFeatureConfig> {
             }
          }
 
+         
+         //creates the actual lakes
          for(int x = 0; x < 16; ++x) {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
 
             	Material material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
             	
-            	while(!material.isSolid() &&
-            		   material != Material.WATER && 
-                	   y > 0) 
+            	//finds first solid block of land starting from 5 blocks higher than initial input position
+            	while(!material.isSolid() && 
+            		  material != Material.WATER && 
+                	  y > 0) 
             	{
             		y--;
             		material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
@@ -99,28 +103,31 @@ public class WideShallowLakes extends Feature<BlockStateFeatureConfig> {
 	                	
 	            		material = worldIn.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
 	            		
-	            		if(!material.isSolid() &&
-	                        material != Material.WATER ) 
+	            		if(!material.isSolid() && 
+	                       material != Material.WATER ) 
 	                   	{
 	                   		notContainedFlag = true;
 	                   	}
 	            	}
 	            }
 	            
+	            //must be solid below
+	            material = worldIn.getBlockState(pos.add(x, y, z).down()).getMaterial();
+	            if(!material.isSolid()  && 
+	          	   material != Material.WATER ) 
+	           	{
+	           		notContainedFlag = true;
+	           	}
+
+	            
+	            //cannot have solid or water above as that makes the lake
+	            //no longer shallow or on the surface
 	            material = worldIn.getBlockState(pos.add(x, y, z).up()).getMaterial();
 	            if(material.isSolid() ||
 	               material == Material.WATER) 
 	        	{
 	        		notContainedFlag = true;
 	        	}
-	            
-	            material = worldIn.getBlockState(pos.add(x, y, z).down()).getMaterial();
-	            if(!material.isSolid() &&
-	          		material != Material.WATER ) 
-	           	{
-	           		notContainedFlag = true;
-	           	}
-            
             
             
 	        //Adjacent blocks must be solid    

@@ -14,6 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.BadlandsSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	   public MesaBryceSurfaceBuilderUA(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51317_1_) {
@@ -25,19 +26,41 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	   private static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();
 
 	   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-	      double d0 = 0.0D;
-	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double)x * 0.25D, (double)z * 0.25D, false));
+	      double spikeHeight = 0.0D;
+	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double)x * 0.25D, (double)z * 0.25D, false) * 15.0D);
 	      if (d1 > -1.5D) {
-	         double d3 = Math.abs(this.field_215437_d.noiseAt((double)x * 1500.001953125D, (double)z * 1500.001953125D, false));
-	         d0 = d1 * d1 * 8.5D;
+	         double d3 = Math.abs(this.field_215437_d.noiseAt((double)x * 1500.001953125D, (double)z * 1500.001953125D, false) * 15.0D);
+	         spikeHeight = d1 * d1 * 8.5D;
 	         double d4 = Math.ceil(d3 * 1200.0D) + 1000.0D;
-	         if (d0 > d4) {
-	            d0 = d4;
+	         if (spikeHeight > d4) {
+	            spikeHeight = d4;
 	         }
 
-	         d0 = d0 + 95.0D;
+	         spikeHeight = spikeHeight + 95.0D;
 	      }
+	      
+	      //messy spiky spikes
+//	      if(spikeHeight > 160D) {
+//	    	  spikeHeight *= 1.2D;
+//	      }
+//	      else if(spikeHeight > 135D) {
+//	    	  spikeHeight *= 1.5D;
+//	      }
+//	      else if(spikeHeight > 115D) {
+//	    	  spikeHeight *= 1.9D;
+//	      }
 
+	      //Wall-like smoother spikes
+	      if(spikeHeight > 170D) {
+	    	  spikeHeight = spikeHeight + ((256-spikeHeight)*0.8D);
+	      }
+	      else if(spikeHeight > 120D) {
+	    	  spikeHeight = spikeHeight + ((256-spikeHeight)*0.88D);
+	      }
+	      else if(spikeHeight > 115D) {
+	    	  spikeHeight *= 1.5D;
+	      }
+	      
 	      int l = x & 15;
 	      int i = z & 15;
 	      BlockState iblockstate2 = WHITE_TERRACOTTA;
@@ -46,19 +69,24 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 	      boolean flag = Math.cos(noise / 3.0D * Math.PI) > 0.0D;
 	      int j = -1;
 	      boolean flag1 = false;
+	      boolean hitSolidUnderwaterBlock = false;
 	      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
 	      //might need to make k start at 255
-	      for(int k = Math.max(startHeight, (int)d0 + 1); k >= 0; --k) {
+	      for(int k = Math.max(startHeight, (int)spikeHeight + 1); k >= 0; --k) {
 	         blockpos$Mutable.setPos(l, k, i);
-	         if (chunkIn.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && k < (int)d0) {
+	         Material material = chunkIn.getBlockState(blockpos$Mutable).getMaterial();
+	         if ((material == Material.AIR || material == Material.WATER || material == Material.LAVA) && k < (int)spikeHeight && !hitSolidUnderwaterBlock) {
 	            chunkIn.setBlockState(blockpos$Mutable, defaultBlock, false);
+	         }
+	         else if(k < ConfigUA.seaLevel+1) {
+	        	 hitSolidUnderwaterBlock = true;
 	         }
 
 	         BlockState iblockstate1 = chunkIn.getBlockState(blockpos$Mutable);
 	         if (iblockstate1.getMaterial() == Material.AIR) {
 	            j = -1;
-	         } else if (iblockstate1.getBlock() == defaultBlock.getBlock() || iblockstate1.getBlock() == Blocks.NETHERRACK || iblockstate1.getBlock() == Blocks.END_STONE) {
+	         } else if (iblockstate1.getBlock() == defaultBlock.getBlock()) {
 	            if (j == -1) {
 	               flag1 = false;
 	               if (i1 <= 0) {
