@@ -6,6 +6,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -31,7 +32,7 @@ public class BetterCactus extends Feature<NoFeatureConfig> {
     	//randomly set this cactus to a random spot. (thus passed in position must be the corner of the 4 loaded chunks)
         BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-        if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.down()) == Blocks.SAND.getDefaultState())
+        if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.down()).isIn(BlockTags.SAND))
         {
         	
         	//gets height with some variations

@@ -26,6 +26,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Removed floating row of Dirt I forgot to remove from Mushroom Temple.
 ·Added 3 Tropical Fish to the pond in Mushroom Temple.
 ·Ramps shouldn't replace leaves, logs, or Bee Nests with Air now.
+·Dungeons in Badlands biomes can have a Cave Spider spawner now.
 
     Biomes:
 ·Redid how Snow and Ice layer is done to fix several bugs with snow placement. Especially when biomes bordering each other both requires different snow layering.
@@ -38,7 +39,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Slightly increased lavafall rates in Stone Shore biome.
 ·Slightly increased waterfall rates in End biome.
 ·Adjusted tree generation in all Jungles to fix some ground trees not spawning underground.
-·Eroded Badlands' giant spikes are now more common and all spikes now will go through water at sealevel instead of being cut off.
+·Eroded Badlands' giant spikes are spiker, more common, and all spikes now will go through water at sealevel instead of being cut off.
+·Mutated Badlands Plateau now has giant flat-topped spikes that are thick.
+·All Badlands now can natually spawn Husk and Cave Spider mobs.
+·All Deserts now can naturally spawn Cave Spider mobs.
+·Fixed bug that prevented the Better Cactus from spawning in any Badlands biome.
+
 
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)

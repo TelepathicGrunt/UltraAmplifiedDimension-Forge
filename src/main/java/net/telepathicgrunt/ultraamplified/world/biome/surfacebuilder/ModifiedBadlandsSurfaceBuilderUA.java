@@ -16,8 +16,8 @@ import net.minecraft.world.gen.surfacebuilders.BadlandsSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
-	   public MesaBryceSurfaceBuilderUA(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51317_1_) {
+public class ModifiedBadlandsSurfaceBuilderUA extends BadlandsSurfaceBuilder {
+	   public ModifiedBadlandsSurfaceBuilderUA(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51317_1_) {
 		super(p_i51317_1_);
 	}
 
@@ -27,29 +27,22 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder {
 
 	   public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
 	      double spikeHeight = 0.0D;
-	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double)x * 0.25D, (double)z * 0.25D, false) * 15.0D);
-	      if (d1 > -1.5D) {
-	         double d3 = Math.abs(this.field_215437_d.noiseAt((double)x * 1500.001953125D, (double)z * 1500.001953125D, false) * 15.0D);
-	         spikeHeight = d1 * d1 * 8.5D;
-	         double d4 = Math.ceil(d3 * 1200.0D) + 1000.0D;
-	         if (spikeHeight > d4) {
-	            spikeHeight = d4;
-	         }
+	      double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double)x * 0.20D, (double)z * 0.20D, false) * 15.0D);
+	      if (d1 > -2.5D) {
+	    	  d1 += 2.5f;
+	         spikeHeight = (d1 * d1) * 2.5D;
 
 	         spikeHeight = spikeHeight + 95.0D;
 	      }
 	      
-	      //messy spiky spikes
-	      if(spikeHeight > 160D) {
-	    	  spikeHeight *= 1.2D;
-	      }
-	      else if(spikeHeight > 135D) {
-	    	  spikeHeight *= 1.5D;
-	      }
-	      else if(spikeHeight > 115D) {
-	    	  spikeHeight *= 1.9D;
-	      }
 
+	      //Wall-like smoother spikes
+	      if(spikeHeight > 125D) {
+	    	  spikeHeight = spikeHeight + ((256-spikeHeight)*0.9D);
+	      }
+	      else {
+	    	  spikeHeight = 0;
+	      }
 	      
 	      int l = x & 15;
 	      int i = z & 15;
