@@ -21,6 +21,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Ported to 1.15.1! Celebration time!
 ·This mod is now renamed from Ultra Amplified Mod to Ultra Amplified Dimension !
  
+	Config: 
+·Lowered the default maximum Y value for terrain gen to 245 from 248. This is to help prevent floating flat lands with no trees because it is too high for tree to spawn.
+·Added config for Honey Lakes.
+
     Structures:
 ·Hanging Ruins check is now fixed so it matches the ruin's actual location and prevents it from hanging off edges of ledges.
 ·Removed floating row of Dirt I forgot to remove from Mushroom Temple.
@@ -29,6 +33,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Dungeons in Badlands biomes can have a Cave Spider spawner now.
 
     Biomes:
+·Added Honey Lakes to very rarely spawn in any hills variant biome.
 ·Redid how Snow and Ice layer is done to fix several bugs with snow placement. Especially when biomes bordering each other both requires different snow layering.
 ·Adjusted biome default rates to make Nether and End slightly more common/bigger.
 ·Fixed bug where lavafalls and waterfalls underground could get blocked by Stone due to the ContainUndergroundLiquids feature I need running.

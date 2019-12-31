@@ -15,8 +15,8 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
-public class SlimeAndIceLakes extends Feature<BlockStateFeatureConfig> {
-	   public SlimeAndIceLakes(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
+public class StonelessLakes extends Feature<BlockStateFeatureConfig> {
+	   public StonelessLakes(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 

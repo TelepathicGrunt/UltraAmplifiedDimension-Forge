@@ -71,6 +71,26 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig> {
 					}
 				}
 			}
+			case HONEY: {
+				if (!ConfigUA.honeyLakeGen) {//change to honey
+					return Stream.empty();
+				}
+	
+				if (random.nextInt(lakeConfig.chance) == 0) {
+					
+					// counteract the -8 I do in the actual generation of Honey Lakes so Honey Lakes generate
+					// around chosen position instead of in corner like the water and lava lakes do
+					x += 8;
+					z += 8;  
+					
+					int y = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
+					if (y > worldIn.getSeaLevel() && y <= 170) {
+						return Stream.of(new BlockPos(pos.getX() + x, y - 2, pos.getZ() + z));
+					}
+				}
+			}
+		default:
+			break;
 		}
 
 		return Stream.empty();

@@ -69,7 +69,7 @@ public class SwampBiomeUA extends BiomeUA
 
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SHALLOW_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(100, 200))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.LAVA.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(80, LakeCountRangeAndTypeConfig.Type.LAVA))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.SLIME_BLOCK.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.SLIME_BLOCK.getDefaultState())).func_227228_a_(LAKE_PLACEMENT.func_227446_a_(new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME))));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.FOSSILS_UA.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(RANDOM_SURFACE_BELOW_TOP_LAYER.func_227446_a_(new ChanceConfig(50))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.SWAMP_DUNGEONS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(DUNGEON_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));

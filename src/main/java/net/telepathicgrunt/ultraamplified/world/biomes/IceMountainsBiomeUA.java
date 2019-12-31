@@ -42,9 +42,9 @@ public class IceMountainsBiomeUA extends BiomeUA
 		this.addStructureFeaturesUA();
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.COLUMN.func_225566_b_(new ColumnBlocksConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(2, 70, 0, 220))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.CONTAIN_LIQUID.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(10, 30, 0, 250))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(8, 17, 0, 100))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SLIME_AND_ICE_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(1, 10, 0, 40))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(10, 30, 0, 250))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(8, 17, 0, 100))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(1, 10, 0, 40))));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.SNOW_DUNGEONS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(DUNGEON_PLACEMENT.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		DefaultBiomeFeatures.addMushrooms(this);

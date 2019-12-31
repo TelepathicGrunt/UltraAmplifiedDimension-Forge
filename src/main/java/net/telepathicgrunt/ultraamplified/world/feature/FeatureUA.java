@@ -93,7 +93,7 @@ public class FeatureUA
     public static Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal(BlockBlobConfig::deserialize);
     public static Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny(BlockBlobConfig::deserialize);
 
-    public static Feature<BlockStateFeatureConfig> SLIME_AND_ICE_LAKE = new SlimeAndIceLakes(BlockStateFeatureConfig::func_227271_a_);
+    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new StonelessLakes(BlockStateFeatureConfig::func_227271_a_);
     public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new WideShallowLakes(BlockStateFeatureConfig::func_227271_a_);
     public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
@@ -184,7 +184,7 @@ public class FeatureUA
         registerFeature(LARGE_BOULDER, "boulder_giant_ua");
         registerFeature(MEDIUM_BOULDER, "boulder_normal_ua");
         registerFeature(SMALL_BOULDER, "boulder_tiny_ua");
-        registerFeature(SLIME_AND_ICE_LAKE, "slime_lakes_ua");
+        registerFeature(STONELESS_LAKE, "slime_lakes_ua");
         registerFeature(SHALLOW_LAKE, "wide_shallow_lakes_ua");
         registerFeature(CONTAIN_LIQUID, "contain_water_for_oceans_ua");
         registerFeature(ICE_PATCH_SANDY, "ice_patch_ua");

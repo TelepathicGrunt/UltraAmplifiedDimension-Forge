@@ -35,12 +35,13 @@ public class ConfigUA {
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
     public static double yScaleModifier = 428.613D;
-    public static int yMaximum = 256;
+    public static int yMaximum = 245;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
     public static int oceanCaveSpawnrate = 20;
     public static boolean pillarGen = true;
+    public static boolean honeyLakeGen = true;
     public static boolean slimeLakeGen = true;
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
@@ -144,6 +145,7 @@ public class ConfigUA {
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
         public final ForgeConfigSpec.IntValue oceanCaveSpawnrate;
         public final ForgeConfigSpec.BooleanValue pillarGen;
+        public final ForgeConfigSpec.BooleanValue honeyLakeGen;
         public final ForgeConfigSpec.BooleanValue slimeLakeGen;
         public final ForgeConfigSpec.BooleanValue waterLakeGen;
         public final ForgeConfigSpec.BooleanValue lavaLakeGen;
@@ -312,6 +314,11 @@ public class ConfigUA {
 	                    .comment("\r\nControls whether pillars features (both ramp and straight kind) spawn or not.")
 	                    .translation("ultraamplified.config.structure.pillargen")
 	                    .define("pillarGen", true);
+
+	            		honeyLakeGen = builder
+	                    .comment("\r\nControls whether Honey Lakes spawn or not.")
+	                    .translation("ultraamplified.config.structure.honeylakegen")
+	                    .define("honeyLakeGen", true);
 
 	            		slimeLakeGen = builder
 	                    .comment("\r\nControls whether Slime Lakes spawn or not.")
@@ -526,7 +533,7 @@ public class ConfigUA {
 	  				yMaximum = builder
             		.comment("\r\nMaxium height the terrain can generate up to.")
             		.translation("ultraamplified.config.structure.ymaximum")
-            		.defineInRange("yMaximum", 248, 100, 256);
+            		.defineInRange("yMaximum", 245, 100, 256);
 	  		        
 	  		        
 	  		        xzTerrainModifier = builder
@@ -871,6 +878,7 @@ public class ConfigUA {
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
     	oceanCaveSpawnrate = SERVER.oceanCaveSpawnrate.get();
     	pillarGen = SERVER.pillarGen.get();
+    	honeyLakeGen = SERVER.honeyLakeGen.get();
     	slimeLakeGen = SERVER.slimeLakeGen.get();
     	waterLakeGen = SERVER.waterLakeGen.get();
     	lavaLakeGen = SERVER.lavaLakeGen.get();
