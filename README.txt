@@ -122,7 +122,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.6.12.2 Changes) (1.14.4 Minecraft)
     
     Blocks: 
-·Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if its coordinate has x = 8 or z = 8 instead of x = 8 and z = 8. Now only the highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
+ï¿½Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if its coordinate has x = 8 or z = 8 instead of x = 8 and z = 8. Now only the highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
    
     Structures: 
 Â·Fixed rare crash that occurs when generating non-vanilla Villages.
