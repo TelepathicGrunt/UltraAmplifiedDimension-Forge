@@ -17,7 +17,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataFixer {
 
-	//Converts from old namespace to new namespace
+	//Converts from old namespace to new namespace since we changed our mode from
+	//"ultra_amplified_mod" to "ultra_amplified_dimension".
+	
+	//items
 	@SubscribeEvent
     public void missingMappingItem(RegistryEvent.MissingMappings<Item> event) {
         for (MissingMappings.Mapping<Item> entry : event.getAllMappings()) {
@@ -28,6 +31,7 @@ public class DataFixer {
         }
     }
 
+	//blocks
 	@SubscribeEvent
     public void missingMappingBlock(RegistryEvent.MissingMappings<Block> event) {
         for (MissingMappings.Mapping<Block> entry : event.getAllMappings()) {
@@ -38,6 +42,7 @@ public class DataFixer {
         }
     }
 
+	//features
 	@SubscribeEvent
     public void missingMappingFeature(RegistryEvent.MissingMappings<Feature<?>> event) {
         for (MissingMappings.Mapping<Feature<?>> entry : event.getAllMappings()) {
@@ -48,6 +53,7 @@ public class DataFixer {
         }
     }
 	
+	//dimension
 	@SubscribeEvent
     public void missingMappingDimension(RegistryEvent.MissingMappings<ModDimension> event) {
         for (MissingMappings.Mapping<ModDimension> entry : event.getAllMappings()) {
@@ -58,6 +64,7 @@ public class DataFixer {
         }
     }
 
+	//chunk generator?
 	@SubscribeEvent
     public void missingMappingChunkgenerator(RegistryEvent.MissingMappings<ChunkGeneratorType<?,?>> event) {
         for (MissingMappings.Mapping<ChunkGeneratorType<?,?>> entry : event.getAllMappings()) {
@@ -68,6 +75,7 @@ public class DataFixer {
         }
     }
 
+	//biome provider?
 	@SubscribeEvent
     public void missingMappingBiomeProvider(RegistryEvent.MissingMappings<BiomeProviderType<?,?>> event) {
         for (MissingMappings.Mapping<BiomeProviderType<?,?>> entry : event.getAllMappings()) {
@@ -78,7 +86,8 @@ public class DataFixer {
         }
     }
 	
-	
+
+	//biomes
 	//convert to new namespace and new biome names
 	@SubscribeEvent
     public void missingMappingBiomes(RegistryEvent.MissingMappings<Biome> event) {
