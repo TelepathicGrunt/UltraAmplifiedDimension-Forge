@@ -31,7 +31,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Biomes:
 ·Fixed bug where leaves would decay on trees in certain biomes.
 ·Increased ramps and columns spawnrate even more in Stone Shore biome.
-·Increased columns spawnrate much more in Gravelly Columns Field biome.
+·Increased columns spawnrate much more in Gravelly Columns Field biome and removed ramps from it.
 ·Increased columns spawnrate some more in Rocky Field, Wooden Rocky Field, and Gravelly Field.
 ·Tiny boulders in Rocky Taiga and Snowy Rocky Taiga now spawns under ledges too and slightly sticks out of the ground more often to give a more rocky feel.
 ·Zombies and Spiders no longer spawn in Iced Terrain. Cave Spiders now do and Stray's spawnrate is increased.
