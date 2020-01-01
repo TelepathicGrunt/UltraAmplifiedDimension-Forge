@@ -114,12 +114,6 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 		return OUTLINE_DIMENSION;
 	}
 
-//
-//	public boolean isSolid(BlockState state)
-//	{
-//		return true;
-//	}
-
 
 	/**
 	 * Update the provided state given the provided neighbor facing and neighbor state, returning a new state. For example,
@@ -219,16 +213,6 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
-
-//
-//	/**
-//	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
-//	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
-//	 */
-//	public BlockRenderLayer getRenderLayer()
-//	{
-//		return BlockRenderLayer.CUTOUT;
-//	}
 
 
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)

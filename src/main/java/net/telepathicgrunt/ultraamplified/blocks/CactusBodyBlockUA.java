@@ -103,11 +103,6 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 		return OUTLINE_DIMENSION;
 	}
 
-//
-//	public boolean isSolid(BlockState state)
-//	{
-//		return true;
-//	}
 
 
 	/**
@@ -163,16 +158,6 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 
-//
-//	/**
-//	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
-//	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
-//	 */
-//	public BlockRenderLayer getRenderLayer()
-//	{
-//		return BlockRenderLayer.CUTOUT;
-//	}
-//
 
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
 	{
