@@ -20,7 +20,6 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Major Change: 
 ·Ported to 1.15.1! Celebration time!
 ·This mod is now renamed from Ultra Amplified Mod to Ultra Amplified Dimension !
-·The Ultra Amplified Dimension in worlds made in 1.14.4 will not break when opened in 1.15.1. I added data fixers to maintain compatibility even with the renaming of the mod and all the biome renaming I did for my dimension.
  
 	Config: 
 ·Lowered the default maximum Y value for terrain gen to 245 from 248. This is to help prevent floating flat lands with no trees because it is too high for tree to spawn.

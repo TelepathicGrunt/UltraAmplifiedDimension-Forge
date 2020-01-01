@@ -172,7 +172,7 @@ public class BiomeInit {
 		initBiome(NETHERLAND, "Netherland", BiomeType.DESERT, Type.NETHER, Type.HOT, Type.DRY);
 		initBiome(END_FIELD, "End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
 		initBiome(SNOWY_TUNDRA, "Snowy Tundra", BiomeType.ICY, Type.COLD, Type.WASTELAND, Type.SNOWY);
-		initBiome(ICED_TERRAIN, "Ice Mountain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
+		initBiome(ICED_TERRAIN, "Iced Terrain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
 		initBiome(MUSHROOM_FIELDS, "Mushroom Field", BiomeType.WARM, Type.MAGICAL, Type.MUSHROOM, Type.RARE);
 		initBiome(RELIC_DESERT, "Relic Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS);
 		initBiome(RELIC_FOREST, "Relic Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS);
@@ -210,8 +210,8 @@ public class BiomeInit {
 		initBiome(RELIC_TALL_BIRCH_FOREST, "Relic Tall Birch Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.MOUNTAIN, Type.RARE);
 		initBiome(RELIC_DARK_FOREST, "Relic Dark Forest", BiomeType.WARM, Type.SPOOKY, Type.DENSE, Type.FOREST, Type.MOUNTAIN, Type.RARE);
 		initBiome(SNOWY_ROCKY_TAIGA, "Snowy Rocky Taiga", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.CONIFEROUS, Type.MOUNTAIN, Type.FOREST, Type.RARE);
-		initBiome(GIANT_SPRUCE_TAIGA_PILLARS, "Giant Spruce Taiga", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.RARE);
-		initBiome(RELIC_GIANT_SPRUCE_TAIGA_PILLARS, "Relic Giant Spruce Taiga", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
+		initBiome(GIANT_SPRUCE_TAIGA_PILLARS, "Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.RARE);
+		initBiome(RELIC_GIANT_SPRUCE_TAIGA_PILLARS, "Relic Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
 		initBiome(GRAVELLY_COLUMNS_FIELD, "Gravelly Columns Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
 		initBiome(SHATTERED_SAVANNA, "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
 		initBiome(SHATTERED_SAVANNA_TERRACE, "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
