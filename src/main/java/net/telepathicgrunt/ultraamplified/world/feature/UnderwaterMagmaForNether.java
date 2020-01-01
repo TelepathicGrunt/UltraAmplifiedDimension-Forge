@@ -51,7 +51,7 @@ public class UnderwaterMagmaForNether extends Feature<NoFeatureConfig>
 				}
 				
 				netherBiome = worldIn.func_226691_t_(blockpos$Mutable.add(x, 0, z));
-				if (netherBiome == BiomeInit.NETHER)
+				if (netherBiome == BiomeInit.NETHERLAND)
 				{
 					hasNetherBiome = true;
 					x = 16;
@@ -73,7 +73,7 @@ public class UnderwaterMagmaForNether extends Feature<NoFeatureConfig>
 			{
 
 				netherBiome = worldIn.func_226691_t_(blockpos$Mutable.add(x, 0, z));
-				if (netherBiome != BiomeInit.NETHER)
+				if (netherBiome != BiomeInit.NETHERLAND)
 				{
 					continue;
 				}

@@ -33,28 +33,57 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Dungeons in Badlands biomes can have a Cave Spider spawner now.
 
     Biomes:
-·Added Honey Lakes to very rarely spawn in any hills variant biome.
+·Added Honey Lakes to very rarely spawn in any Relics variant biome.
 ·Redid how Snow and Ice layer is done to fix several bugs with snow placement. Especially when biomes bordering each other both requires different snow layering.
-·Adjusted biome default rates to make Nether and End slightly more common/bigger.
+·Adjusted biome default rates to make Netherland and End Field slightly more common/bigger.
 ·Fixed bug where lavafalls and waterfalls underground could get blocked by Stone due to the ContainUndergroundLiquids feature I need running.
 ·Desert biomes now spawn Dead Bush at a reduced rate under ledges instead of just top layer.
-·Nether biome now has more Fire below Y = 100.
-·Fixed bug where the Magma block layer below sealevel in Nether was not creating bubble columns.
-·Fixed bug where in the Nether, single lava blocks on the surface will not flow. Now they do flow and as a result, I restricted their spawning condition a bit and reduced spawn rate since the lava will end up making more lavafalls if generated on a slope. 
-·Slightly increased lavafall rates in Stone Shore biome.
-·Slightly increased waterfall rates in End biome.
+·Netherland biome now has more Fire below Y = 100.
+·Fixed bug where the Magma block layer below sealevel in Netherland was not creating bubble columns.
+·Fixed bug where in the Netherland, single lava blocks on the surface will not flow. Now they do flow and as a result, I restricted their spawning condition a bit and reduced spawn rate since the lava will end up making more lavafalls if generated on a slope. 
+·Slightly increased lavafall rates in Stone Plains biome.
+·Slightly increased waterfall rates in End Field biome.
 ·Adjusted tree generation in all Jungles to fix some ground trees not spawning underground.
-·Eroded Badlands' giant spikes are spiker, more common, and all spikes now will go through water at sealevel instead of being cut off.
-·Mutated Badlands Plateau now has giant flat-topped spikes that are thick.
+·Spiky Badlands' giant spikes are spiker, more common, and all spikes now will go through water at sealevel instead of being cut off.
+·Badlands Dissected Plateau now has giant flat-topped pillars that are thick.
 ·All Badlands now can natually spawn Husk and Cave Spider mobs.
 ·All Deserts now can naturally spawn Cave Spider mobs.
 ·Fixed bug that prevented the Better Cactus from spawning in any Badlands biome.
 ·Increased ramps and columns in Stone Shore biome.
-·Removed Mushroom biome from hot temperature and icy temperature region. Will still spawn in cool and cold temperature regions.
+·Removed Mushroom Field biome from hot temperature and icy temperature region. Will still spawn in cool and cold temperature regions.
 
     Biomes renamed to match the terrain generation better:
 ·Savana Plateau -> Savanna Terrace
 ·Shattered Savana Plateau -> Shattered Savanna Terrace
+·Ice Mountain -> Ice
+·Wooded Badlands Plateau -> Wooded Badlands
+·Badlands Plateau -> Sandless Badlands
+·Swampland Hills -> Spooky Swampland
+·Modified Jungle -> Flower Jungle
+·Modified Jungle Edge -> Flower Jungle Edge
+·Snowy Beach -> Frozen Desert
+·Stone Shore -> Stone Plains
+·Modified Wooded Badlands Plateau UA -> Densed Wooded Badlands UA
+·Eroded Badlands UA -> Spiky Badlands UA
+·Modified Badlands Plateau -> Badlands Dissected Plateau
+·The End -> End Field
+·Nether -> Netherland
+·Taiga Mountain UA -> Rocky Taiga UA
+·Snowy Taiga Mountain UA -> Snowy Rocky Taiga UA
+·Ice Mountain -> Iced Terrain
+·
+·Desert Hills -> Relic Desert
+·Wooden Hills -> Relic Forest
+·Taiga Hills -> Relic Taiga
+·Bamboo Jungle Hills -> Relic Bamboo Jungle
+·Jungle Hills -> Relic Jungle
+·Birch Forest Hills -> Relic Birch Forest
+·Snowy Taiga Hills -> Relic Snowy Taiga
+·Tall Birch Forest Hills -> Relic Tall Birch Forest
+·Dark Forest Hills -> Relic Dark Forest
+·Giant Tree Taiga Hills -> Relic Giant Tree Taiga 
+·Giant Spruce Taiga Hills -> Relic Giant Spruce Taiga Pillars
+·Giant Spruce Taiga -> Giant Spruce Taiga Pillars
 
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)

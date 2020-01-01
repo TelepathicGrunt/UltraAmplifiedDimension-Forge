@@ -214,10 +214,10 @@ public class BiomeAddModdedFeatures {
 			}
 			
 			//edge case as UA End biome will grab features from multiple end biomes
-			addModdedFeatureAndSpawns(Biomes.SMALL_END_ISLANDS, (BiomeUA) BiomeInit.END);
-			addModdedFeatureAndSpawns(Biomes.END_MIDLANDS, (BiomeUA) BiomeInit.END);
-			addModdedFeatureAndSpawns(Biomes.END_HIGHLANDS, (BiomeUA) BiomeInit.END);
-			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.END);
+			addModdedFeatureAndSpawns(Biomes.SMALL_END_ISLANDS, (BiomeUA) BiomeInit.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_MIDLANDS, (BiomeUA) BiomeInit.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_HIGHLANDS, (BiomeUA) BiomeInit.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.END_FIELD);
 			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.BARREN_END_FIELD);
 		}
 	}

@@ -55,13 +55,13 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
 		if (fillerBiomeMap == null) {
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
-			fillerBiomeMap.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState()); 
-			fillerBiomeMap.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.NETHERLAND, Blocks.NETHERRACK.getDefaultState()); 
+			fillerBiomeMap.put(BiomeInit.ICED_TERRAIN, Blocks.ICE.getDefaultState()); 
 			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState()); 
 			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
 			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState()); 
 	        fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState()); 
-	        fillerBiomeMap.put(BiomeInit.END, Blocks.END_STONE.getDefaultState()); 
+	        fillerBiomeMap.put(BiomeInit.END_FIELD, Blocks.END_STONE.getDefaultState()); 
 		}
 	}
 
@@ -76,13 +76,13 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig> {
     	Biome biome = biomeBlockPos.apply(new BlockPos(originalX * 16, 100, originalZ * 16));
     	int i = (this.func_222704_c() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
-        double height = biome == BiomeInit.NETHER ? 25 : (double)(random.nextInt(random.nextInt(2) + 1) + 42);
+        double height = biome == BiomeInit.NETHERLAND ? 25 : (double)(random.nextInt(random.nextInt(2) + 1) + 42);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
         float f = random.nextFloat() * ((float)Math.PI * 2F);
         float f1 = (random.nextFloat() - 0.5F) / 8.0F;
         float f2 = (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
         int j = i - random.nextInt(i / 4);
-        this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, f2, f, f1, 0, j, biome == BiomeInit.NETHER ? random.nextDouble()+2.5D : random.nextDouble()/3+1.9D, mask);
+        this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, f2, f, f1, 0, j, biome == BiomeInit.NETHERLAND ? random.nextDouble()+2.5D : random.nextDouble()/3+1.9D, mask);
         return true;
      }
 

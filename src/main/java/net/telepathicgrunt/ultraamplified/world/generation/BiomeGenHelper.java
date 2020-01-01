@@ -19,15 +19,15 @@ public enum BiomeGenHelper {
    public static final int FOREST = BiomeRegistry.getID(BiomeInit.FOREST);
    public static final int DESERT = BiomeRegistry.getID(BiomeInit.DESERT);
    public static final int WOODED_MOUNTAINS = BiomeRegistry.getID(BiomeInit.WOODED_MOUNTAINS);
-   public static final int WOODED_HILLS = BiomeRegistry.getID(BiomeInit.WOODED_HILLS);
+   public static final int RELIC_FOREST = BiomeRegistry.getID(BiomeInit.RELIC_FOREST);
    public static final int SNOWY_TUNDRA = BiomeRegistry.getID(BiomeInit.SNOWY_TUNDRA);
-   public static final int ICE_MOUNTAINS = BiomeRegistry.getID(BiomeInit.ICE_MOUNTAIN);
+   public static final int ICED_LAND = BiomeRegistry.getID(BiomeInit.ICED_TERRAIN);
    public static final int BAMBOO_JUNGLE = BiomeRegistry.getID(BiomeInit.BAMBOO_JUNGLE);
    public static final int JUNGLE = BiomeRegistry.getID(BiomeInit.JUNGLE);
    public static final int JUNGLE_EDGE = BiomeRegistry.getID(BiomeInit.JUNGLE_EDGE);
    public static final int BADLANDS = BiomeRegistry.getID(BiomeInit.BADLANDS);
-   public static final int WOODED_BADLANDS_PLATEAU = BiomeRegistry.getID(BiomeInit.WOODED_BADLANDS_PLATEAU);
-   public static final int BADLANDS_PLATEAU = BiomeRegistry.getID(BiomeInit.BADLANDS_PLATEAU);
+   public static final int WOODED_BADLANDS = BiomeRegistry.getID(BiomeInit.WOODED_BADLANDS);
+   public static final int SANDLESS_BADLANDS = BiomeRegistry.getID(BiomeInit.SANDLESS_BADLANDS);
    public static final int MUSHROOM_FIELDS = BiomeRegistry.getID(BiomeInit.MUSHROOM_FIELDS);
    public static final int GIANT_TREE_TAIGA = BiomeRegistry.getID(BiomeInit.GIANT_TREE_TAIGA);
    public static final int DARK_FOREST = BiomeRegistry.getID(BiomeInit.DARK_FOREST);
@@ -45,11 +45,11 @@ public enum BiomeGenHelper {
    public static final int DEEP_COLD_OCEAN = BiomeRegistry.getID(BiomeInit.DEEP_COLD_OCEAN);
    public static final int DEEP_FROZEN_OCEAN = BiomeRegistry.getID(BiomeInit.DEEP_FROZEN_OCEAN);
    public static final int SUNFLOWER_PLAINS = BiomeRegistry.getID(BiomeInit.SUNFLOWER_PLAINS);
-   public static final int NETHER = BiomeRegistry.getID(BiomeInit.NETHER);
-   public static final int END = BiomeRegistry.getID(BiomeInit.END);
+   public static final int NETHERLAND = BiomeRegistry.getID(BiomeInit.NETHERLAND);
+   public static final int END_FIELD = BiomeRegistry.getID(BiomeInit.END_FIELD);
    public static final int BARREN_END_FIELD = BiomeRegistry.getID(BiomeInit.BARREN_END_FIELD);
-   public static final int SNOWY_BEACH = BiomeRegistry.getID(BiomeInit.SNOWY_BEACH);
-   public static final int STONE_BEACH = BiomeRegistry.getID(BiomeInit.STONE_SHORE);
+   public static final int FROZEN_DESERT = BiomeRegistry.getID(BiomeInit.FROZEN_DESERT);
+   public static final int STONE_PLAINS = BiomeRegistry.getID(BiomeInit.STONE_PLAINS);
 
    public static final int VANILLA_OCEAN = BiomeRegistry.getID(Biomes.OCEAN);
    public static final int VANILLA_DEEP_OCEAN = BiomeRegistry.getID(Biomes.DEEP_OCEAN);
@@ -59,10 +59,10 @@ public enum BiomeGenHelper {
 			BiomeInit.DEEP_FROZEN_OCEAN,
 			BiomeInit.FROZEN_OCEAN,
 			BiomeInit.ICE_SPIKES,
-			BiomeInit.SNOWY_BEACH,
+			BiomeInit.FROZEN_DESERT,
 			BiomeInit.SNOWY_TAIGA,
-			BiomeInit.SNOWY_TAIGA_HILLS,
-			BiomeInit.SNOWY_TAIGA_MOUNTAINS,
+			BiomeInit.RELIC_SNOWY_TAIGA,
+			BiomeInit.SNOWY_ROCKY_TAIGA,
 			BiomeInit.SNOWY_TUNDRA
 			);
 	
@@ -104,14 +104,14 @@ public enum BiomeGenHelper {
          Biome biome1 = BiomeRegistry.getValue(biome1ID);
          Biome biome2 = BiomeRegistry.getValue(biome2ID);
          if (biome1 != null && biome2 != null) {
-            if (biome1 != BiomeInit.WOODED_BADLANDS_PLATEAU && biome1 != BiomeInit.BADLANDS_PLATEAU) {
+            if (biome1 != BiomeInit.WOODED_BADLANDS && biome1 != BiomeInit.SANDLESS_BADLANDS) {
                if (biome1.getCategory() != Biome.Category.NONE && biome2.getCategory() != Biome.Category.NONE && biome1.getCategory() == biome2.getCategory()) {
                   return true;
                } else {
                   return biome1 == biome2;
                }
             } else {
-               return biome2 == BiomeInit.WOODED_BADLANDS_PLATEAU || biome2 == BiomeInit.BADLANDS_PLATEAU;
+               return biome2 == BiomeInit.WOODED_BADLANDS || biome2 == BiomeInit.SANDLESS_BADLANDS;
             }
          } else {
             return false;
