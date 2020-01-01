@@ -30,6 +30,7 @@ public BlueIceWaterfall(Function<Dynamic<?>, ? extends NoFeatureConfig> configFa
 private static final BlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
 private static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 private static final BlockState SNOW = Blocks.SNOW.getDefaultState();
+private static final BlockState ICE = Blocks.ICE.getDefaultState();
 private static final BlockState AIR = Blocks.AIR.getDefaultState();
 
 	protected static final Set<Block> acceptableBlocks = 
@@ -47,15 +48,19 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
          {
              return false;
          }
-         else if (!acceptableBlocks.contains(worldIn.getBlockState(position.down()).getBlock()))
-         {
-             return false;
-         }
          else
          {
         	 //checks if we are in the side of a wall with air exposed on one side
         	 
              int numberOfSolidSides = 0;
+             int neededNumberOfSides = 0;
+             
+             if(!acceptableBlocks.contains(worldIn.getBlockState(position.down()).getBlock())) {
+            	 neededNumberOfSides = 4;
+             }else {
+            	 neededNumberOfSides = 3;
+             }
+             
              Direction emptySpot = Direction.NORTH;
 
              for (Direction face : Direction.Plane.HORIZONTAL) {
@@ -71,18 +76,21 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
              
              
              //position valid. begin making ice waterfall
-             if (numberOfSolidSides == 3)
+             if (numberOfSolidSides == neededNumberOfSides)
              {
             	 
-            	 //spot in wall
+            	 //initial starting point of icefall
                  worldIn.setBlockState(position, BLUE_ICE, 2);
+                 BlockPos curPos = position;
                  
-                 //set what direction the open side of the wall is
-                 BlockPos curPos = position.offset(emptySpot);
-   			     worldIn.setBlockState(curPos, BLUE_ICE, 2);
+                 //in wall, offset to out of wall
+                 if(numberOfSolidSides == 3) {
+                     //set what direction the open side of the wall is
+                     curPos = position.offset(emptySpot);
+       			     worldIn.setBlockState(curPos, BLUE_ICE, 2);
+                 }
             	 
             	 
-   			     int ledges = 0;
             	 //places blue ice downward until it hit solid block
             	 while(true) 
             	 {
@@ -97,11 +105,6 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
             			  curPos = curPos.down();
             			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
             			  continue;
-            		 }
-            		 
-            		 
-            		 if(ledges >= 2) {
-            			 break;
             		 }
             		 
             		 
@@ -120,7 +123,6 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
     	           			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
     	           			  curPos = curPos.down();
     	           			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
-    	           			  ledges++;
     	           			  spotFound = true;
     	           			  
     	           			  if(curPos.getY() <= 1) 
@@ -156,7 +158,8 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
                             		 BlockPos blockpos = new BlockPos(x + curPos.getX(), y, z + curPos.getZ());
 	                                 BlockState block = worldIn.getBlockState(blockpos);
 	
-	                                 if (block == Blocks.ICE.getDefaultState() || block == SNOW_BLOCK)
+	                                 //replace solid and liquid blocks
+	                                 if (block.isSolid() || !block.getFluidState().isEmpty() || block == ICE)
 	                                 {
 	                                     worldIn.setBlockState(blockpos, BLUE_ICE, 2);
 	                                 }

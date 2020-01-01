@@ -200,7 +200,14 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
     	}
     	else if(roll < 98) {
     		//25% chance
-    		return pickRandomDungeonMob(rand);
+    		EntityType<?> et= pickRandomDungeonMob(rand);
+    		if(et != EntityType.ZOMBIE) 
+    		{
+        		return et;
+    		}
+    		else {
+        		return EntityType.HUSK;
+    		}
     	}
     	else if(roll == 98) {
     		//1% chance

@@ -188,7 +188,14 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
     	
     	if(roll < 47) {
     		//47% chance
-    		return pickRandomDungeonMob(rand);
+    		EntityType<?> et= pickRandomDungeonMob(rand);
+    		if(et != EntityType.ZOMBIE) 
+    		{
+        		return et;
+    		}
+    		else {
+        		return EntityType.STRAY;
+    		}
     	}
     	else if(roll < 72) {
     		//25% chance
@@ -196,7 +203,7 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
     	}
     	else if(roll < 97) {
     		//25% chance
-    		return pickRandomDungeonMob(rand);
+    		return EntityType.CAVE_SPIDER;
     	}
     	else if(roll < 98) {
     		//25% chance
