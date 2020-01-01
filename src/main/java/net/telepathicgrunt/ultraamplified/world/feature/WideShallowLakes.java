@@ -10,18 +10,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakesConfig;
 
-public class WideShallowLakes extends Feature<LakesConfig> {
+public class WideShallowLakes extends Feature<BlockStateFeatureConfig> {
 	
 	
 	
-	public WideShallowLakes(Function<Dynamic<?>, ? extends LakesConfig> configFactoryIn) {
+	public WideShallowLakes(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, LakesConfig configBlock) {
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
 	     
 		  pos = pos.down(2);
          boolean[] aboolean = new boolean[2048];
@@ -49,6 +49,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
          }
          
 
+         //creates solid land patches by returning early
          for(int x = 0; x < 16; ++x) {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
@@ -69,22 +70,25 @@ public class WideShallowLakes extends Feature<LakesConfig> {
             	  
                  if (!material.isSolid() && 
                 	  material != Material.WATER && 
-                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
+                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
                     return false;
                  }
               }
             }
          }
 
+         
+         //creates the actual lakes
          for(int x = 0; x < 16; ++x) {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
 
             	Material material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
             	
-            	while(!material.isSolid() &&
-            		   material != Material.WATER && 
-                	   y > 0) 
+            	//finds first solid block of land starting from 5 blocks higher than initial input position
+            	while(!material.isSolid() && 
+            		  material != Material.WATER && 
+                	  y > 0) 
             	{
             		y--;
             		material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
@@ -99,28 +103,31 @@ public class WideShallowLakes extends Feature<LakesConfig> {
 	                	
 	            		material = worldIn.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
 	            		
-	            		if(!material.isSolid() &&
-	                        material != Material.WATER ) 
+	            		if(!material.isSolid() && 
+	                       material != Material.WATER ) 
 	                   	{
 	                   		notContainedFlag = true;
 	                   	}
 	            	}
 	            }
 	            
+	            //must be solid below
+	            material = worldIn.getBlockState(pos.add(x, y, z).down()).getMaterial();
+	            if(!material.isSolid()  && 
+	          	   material != Material.WATER ) 
+	           	{
+	           		notContainedFlag = true;
+	           	}
+
+	            
+	            //cannot have solid or water above as that makes the lake
+	            //no longer shallow or on the surface
 	            material = worldIn.getBlockState(pos.add(x, y, z).up()).getMaterial();
 	            if(material.isSolid() ||
 	               material == Material.WATER) 
 	        	{
 	        		notContainedFlag = true;
 	        	}
-	            
-	            material = worldIn.getBlockState(pos.add(x, y, z).down()).getMaterial();
-	            if(!material.isSolid() &&
-	          		material != Material.WATER ) 
-	           	{
-	           		notContainedFlag = true;
-	           	}
-            
             
             
 	        //Adjacent blocks must be solid    
@@ -147,7 +154,7 @@ public class WideShallowLakes extends Feature<LakesConfig> {
               if (aboolean[(x * 16 + z) * 8 + y] &&
             	 !notContainedFlag )
               {
-                 worldIn.setBlockState(pos.add(x, y, z), configBlock.state, 2);
+                 worldIn.setBlockState(pos.add(x, y, z), configBlock.field_227270_a_, 2);
               }
             }
          }

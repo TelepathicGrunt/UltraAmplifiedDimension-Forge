@@ -35,14 +35,14 @@ public class GlowPatch extends Feature<CountConfig> {
 		if(GLOWBLOCKMAP == null) {
 			Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
 
-			result.put(Blocks.DIRT.getDefaultState(), BlocksInit.GLOWDIRT.getDefaultState());
-			result.put(Blocks.COARSE_DIRT.getDefaultState(), BlocksInit.COARSE_GLOWDIRT.getDefaultState());
-			result.put(Blocks.GRASS_BLOCK.getDefaultState(), BlocksInit.GLOWGRASS_BLOCK.getDefaultState());
-			result.put(Blocks.MYCELIUM.getDefaultState(), BlocksInit.GLOWMYCELIUM.getDefaultState());
-			result.put(Blocks.STONE.getDefaultState(), BlocksInit.GLOWSTONE_ORE.getDefaultState());
-			result.put(Blocks.PODZOL.getDefaultState(), BlocksInit.GLOWPODZOL.getDefaultState());
-			result.put(Blocks.SAND.getDefaultState(), BlocksInit.GLOWSAND.getDefaultState());
-			result.put(Blocks.RED_SAND.getDefaultState(), BlocksInit.REDGLOWSAND.getDefaultState());
+			result.put(Blocks.DIRT.getDefaultState(), BlocksInit.GLOWDIRT.get().getDefaultState());
+			result.put(Blocks.COARSE_DIRT.getDefaultState(), BlocksInit.COARSE_GLOWDIRT.get().getDefaultState());
+			result.put(Blocks.GRASS_BLOCK.getDefaultState(), BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState());
+			result.put(Blocks.MYCELIUM.getDefaultState(), BlocksInit.GLOWMYCELIUM.get().getDefaultState());
+			result.put(Blocks.STONE.getDefaultState(), BlocksInit.GLOWSTONE_ORE.get().getDefaultState());
+			result.put(Blocks.PODZOL.getDefaultState(), BlocksInit.GLOWPODZOL.get().getDefaultState());
+			result.put(Blocks.SAND.getDefaultState(), BlocksInit.GLOWSAND.get().getDefaultState());
+			result.put(Blocks.RED_SAND.getDefaultState(), BlocksInit.REDGLOWSAND.get().getDefaultState());
 			
 			GLOWBLOCKMAP = result;
 		}

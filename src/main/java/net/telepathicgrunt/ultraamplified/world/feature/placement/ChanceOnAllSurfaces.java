@@ -25,6 +25,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 
 	private final BlockState SAND =  Blocks.SAND.getDefaultState();
 	private final BlockState SOULSAND =  Blocks.SOUL_SAND.getDefaultState();
+	private final BlockState GRAVEL =  Blocks.GRAVEL.getDefaultState();
 	
    public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 	   int lowestHeight = 40;
@@ -51,9 +52,10 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         while(height > lowestHeight) {
 		        	 BlockState currentBlock = worldIn.getBlockState(pos.add(x, height, z));
 		        	 
-		        	 if(worldIn.getBiome(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
+		        	 if(worldIn.func_226691_t_(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
 		        	    currentBlock == SAND ||
-		        		currentBlock == SOULSAND) 
+		        		currentBlock == SOULSAND ||
+		        		currentBlock == GRAVEL) 
 		        	 {
 		        		 break;
 		        	 }

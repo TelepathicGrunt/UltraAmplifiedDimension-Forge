@@ -1,16 +1,21 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
-import net.minecraft.world.gen.feature.IcebergConfig;
-import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.LiquidsConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -44,6 +49,23 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansio
 
 public class FeatureUA
 {
+
+    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(5).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
+    
+    public static <T extends BaseTreeFeatureConfig> T getConfiguredForUndergroundTreeConfig(T treeConfig)
+    {
+        treeConfig.func_227373_a_();
+        return treeConfig;
+    }
+
+    public static <T extends BlockClusterFeatureConfig> T getConfiguredClusterConfig(T clusterConfig)
+    {
+    	clusterConfig.field_227298_k_ = false;
+        return clusterConfig;
+    }
+    
     public static Feature<NoFeatureConfig> BETTER_CACTUS = new BetterCactus(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> GENERIC_DUNGEONS = new DungeonDefault(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MESA_DUNGEONS = new DungeonsBadlands(NoFeatureConfig::deserialize);
@@ -63,7 +85,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> HANGING_RUINS = new HangingRuins(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> FOSSILS_UA = new Fossil(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
-    public static Feature<IcebergConfig> ICEBERG_UA = new Iceberg(IcebergConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> ICEBERG_UA = new Iceberg(BlockStateFeatureConfig::func_227271_a_);
     public static Feature<NoFeatureConfig> MARKED_TREASURE_CHEST_UA = new MarkedTreasureChest(NoFeatureConfig::deserialize);
 
     public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new GiantStackableBoulder(BlockBlobConfig::deserialize);
@@ -71,8 +93,8 @@ public class FeatureUA
     public static Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal(BlockBlobConfig::deserialize);
     public static Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny(BlockBlobConfig::deserialize);
 
-    public static Feature<LakesConfig> SLIME_AND_ICE_LAKE = new SlimeAndIceLakes(LakesConfig::deserialize);
-    public static Feature<LakesConfig> SHALLOW_LAKE = new WideShallowLakes(LakesConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new StonelessLakes(BlockStateFeatureConfig::func_227271_a_);
+    public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new WideShallowLakes(BlockStateFeatureConfig::func_227271_a_);
     public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatch(NoFeatureConfig::deserialize);
@@ -81,9 +103,7 @@ public class FeatureUA
     public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDry(SphereReplaceConfig::deserialize);
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<LiquidsConfig> CEILING_FLUID = new CeilingFluid(LiquidsConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_AND_SNOW_UNDER_LEDGES = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_AND_SNOW_ICE_MOUNTAIN = new IceAndSnowAtAllLayer(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SNOW_FIXED = new ColdOceanSnowFeature(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_AND_ICE_LAYERER = new SnowIceLayerHandlerFeature(NoFeatureConfig::deserialize);
     public static Feature<ColumnBlocksConfig> COLUMN = new Column(ColumnBlocksConfig::deserialize);
     public static Feature<ColumnBlocksConfig> RAMP = new RampColumn(ColumnBlocksConfig::deserialize);
     public static Feature<CountConfig> GLOWPATCH = new GlowPatch(CountConfig::deserialize);
@@ -96,18 +116,21 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> CORAL_CLAW_UA = new CoralClaw(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CORAL_TREE_UA = new CoralMushroom(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CORAL_MUSHROOM_UA = new CoralTree(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> JUNGLE_BUSH_UA = new JungleShrub(NoFeatureConfig::deserialize, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
     public static Feature<NoFeatureConfig> BAMBOO_UA = new Bamboo(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
-    public static AbstractTreeFeature<NoFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(NoFeatureConfig::deserialize);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(NoFeatureConfig::deserialize, false, false);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, false);
-    public static HugeTreesFeature<NoFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(NoFeatureConfig::deserialize, false, true);
-    public static AbstractTreeFeature<NoFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(NoFeatureConfig::deserialize, false);
-    public static AbstractTreeFeature<NoFeatureConfig> END_TREE = new EndTree(NoFeatureConfig::deserialize, false);
-
+    public static Feature<NoFeatureConfig> UNDERWATER_MAGMA = new UnderwaterMagmaForNether(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> RARE_LAVA = new RareNetherSurfaceLava(NoFeatureConfig::deserialize);
+    
+    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new SwampTreeMutated(TreeFeatureConfig::func_227338_a_);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_BIRCH_TREE = new BirchMTree(HugeTreeFeatureConfig::deserializeDarkOak); //may need to fix deserialize
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_PINE_TREE_1_UA = new MegaPineTree(HugeTreeFeatureConfig::deserializeSpruce, false);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> MEGA_PINE_TREE_2_UA = new MegaPineTree(HugeTreeFeatureConfig::deserializeSpruce, true);
+    public static AbstractTreeFeature<HugeTreeFeatureConfig> DARK_FOREST_M_TREE = new DarkOakMTree(HugeTreeFeatureConfig::deserializeDarkOak);
+    public static AbstractTreeFeature<TreeFeatureConfig> TAIGA_M_TREE = new TaigaTreeMutated(TreeFeatureConfig::func_227338_a_);
+    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new EndTree(TreeFeatureConfig::func_227338_a_);
+    public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH_UA = new JungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
+    
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
     public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> JUNGLE_TEMPLE_UA = new JungleTempleUA(NoFeatureConfig::deserialize);
@@ -125,7 +148,10 @@ public class FeatureUA
     public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleUA(NoFeatureConfig::deserialize);
     
-
+    //bug fix until the mushroom class is no longer broken.
+    public static final Feature<BigMushroomFeatureConfig> HUGE_RED_MUSHROOM_FIX = new BigRedMushroomTempFix(BigMushroomFeatureConfig::deserialize);
+    public static final Feature<BigMushroomFeatureConfig> HUGE_BROWN_MUSHROOM_FIX = new BigBrownMushroomTempFix(BigMushroomFeatureConfig::deserialize);
+    
     @SuppressWarnings("unchecked")
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
     {
@@ -158,7 +184,7 @@ public class FeatureUA
         registerFeature(LARGE_BOULDER, "boulder_giant_ua");
         registerFeature(MEDIUM_BOULDER, "boulder_normal_ua");
         registerFeature(SMALL_BOULDER, "boulder_tiny_ua");
-        registerFeature(SLIME_AND_ICE_LAKE, "slime_lakes_ua");
+        registerFeature(STONELESS_LAKE, "slime_lakes_ua");
         registerFeature(SHALLOW_LAKE, "wide_shallow_lakes_ua");
         registerFeature(CONTAIN_LIQUID, "contain_water_for_oceans_ua");
         registerFeature(ICE_PATCH_SANDY, "ice_patch_ua");
@@ -170,8 +196,7 @@ public class FeatureUA
         registerFeature(GLOWPATCH, "glowpatch_ua");
         registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
         registerFeature(CEILING_FLUID, "ceiling_fluid_ua");
-        registerFeature(ICE_AND_SNOW_UNDER_LEDGES, "ice_and_snow_at_all_layer_ua");
-        registerFeature(SNOW_FIXED, "cold_ocean_snow_feature_ua");
+        registerFeature(SNOW_AND_ICE_LAYERER, "snow_and_ice_layerer_ua");
         registerFeature(LONG_VINES, "vines_long_ua");
         registerFeature(SHORT_VINES, "vines_short_ua");
         registerFeature(SEA_GRASS_UA, "sea_grass_ua");

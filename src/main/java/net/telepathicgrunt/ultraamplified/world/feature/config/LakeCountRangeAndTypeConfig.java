@@ -18,7 +18,8 @@ public class LakeCountRangeAndTypeConfig implements IPlacementConfig {
    public static enum Type {
 	   LAVA,
 	   WATER,
-	   SLIME;
+	   SLIME,
+	   HONEY;
    }
 
 	@Override

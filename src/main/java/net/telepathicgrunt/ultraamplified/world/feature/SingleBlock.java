@@ -20,8 +20,8 @@ public class SingleBlock extends Feature<BlockConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, BlockConfig blockConfig) {
 	      
 	         if (worldIn.isAirBlock(pos) && 
-	        	(worldIn.getBlockState(pos.down()) == worldIn.getBiome(pos).getSurfaceBuilderConfig().getTop() ||
-	        	 worldIn.getBlockState(pos.down()) == worldIn.getBiome(pos).getSurfaceBuilderConfig().getUnder() )
+	        	(worldIn.getBlockState(pos.down()) == worldIn.func_226691_t_(pos).getSurfaceBuilderConfig().getTop() ||
+	        	 worldIn.getBlockState(pos.down()) == worldIn.func_226691_t_(pos).getSurfaceBuilderConfig().getUnder() )
 	        	) {
 	            worldIn.setBlockState(pos, blockConfig.block.getDefaultState(), 2);
 	         }

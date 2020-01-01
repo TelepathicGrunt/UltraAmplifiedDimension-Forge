@@ -196,7 +196,7 @@ public class DungeonsBadlands extends Feature<NoFeatureConfig>
     	}
     	else if(roll < 73) {
     		//25% chance
-        	return pickRandomDungeonMob(rand);
+        	return EntityType.CAVE_SPIDER;
     	}
     	else if(roll < 98) {
     		//25% chance

@@ -39,14 +39,14 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
       int xpos = x & 15;
       int zpos = z & 15;
       int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
-      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
       int i1 = -1;
       BlockState iblockstate = NETHERRACK;
       BlockState iblockstate1 = NETHERRACK;
 
       for(int ypos = 255; ypos >= 0; --ypos) {
-         blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
-         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+         blockpos$Mutable.setPos(xpos, ypos, zpos);
+         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
          
          if (iblockstate2.getBlock() == null || iblockstate2.getMaterial() == Material.AIR) {
              i1 = -1;
@@ -54,21 +54,18 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
          else if(iblockstate2.getMaterial() == Material.WATER) {
 
         	 if(ypos < ConfigUA.seaLevel - 7) {
-        		 chunkIn.setBlockState(blockpos$mutableblockpos, LAVA, false);
-        	 }
-        	 else if(ypos == ConfigUA.seaLevel - 7) {
-        		 chunkIn.setBlockState(blockpos$mutableblockpos, MAGMA, false);
+        		 chunkIn.setBlockState(blockpos$Mutable, LAVA, false);
         	 }
         	 else{
-        		 chunkIn.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean ? LAVA : WATER, false);
+        		 chunkIn.setBlockState(blockpos$Mutable, ConfigUA.lavaOcean ? LAVA : WATER, false);
         	 }
         	 
              i1 = -1;
     	 }else {
     		 if (iblockstate2 == STONE) {
         		 
-       	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.13125D, (double)z * 0.13125D, ypos/5) + random.nextDouble() * 0.2D > 4.5D;
-       	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.13125D, (ypos/5)+109.0D, (double)z * 0.13125D) + random.nextDouble() * 0.2D > 5.5D;
+       	      boolean flag = this.field_205553_b.func_205563_a((double)x * 0.13125D, (double)z * 0.13125D, ypos/5) * 15.0D + random.nextDouble() * 0.2D > 4.5D;
+       	      boolean flag1 = this.field_205553_b.func_205563_a((double)x * 0.13125D, (ypos/5)+109.0D, (double)z * 0.13125D) * 15.0D + random.nextDouble() * 0.2D > 5.0D;
        	     
        	       if (i1 == -1) {
                      if (l <= 0) {
@@ -80,53 +77,32 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 
                         
                         if((noise > -3.85 && noise < -3.7) || (noise > -0.1 && noise < 0.05) || (noise > 3.7 && noise < 3.85)) {
-                       	 iblockstate = MAGMA;
+                       	    iblockstate = MAGMA;
                         }
                         
                         
                         if (flag1) {
-                       	 if(random.nextFloat() < 0.015F) {
-                                iblockstate = LAVA;
-                       	 }
-                       	 else {
-                            	iblockstate = GRAVEL;
-                       	 }
+                            iblockstate = GRAVEL;
                         }
 
                         if (flag) {
-                       	 if(random.nextFloat() < 0.005F) {
-                                iblockstate = LAVA;
-                       	 }
-                       	 else {
-                       		 iblockstate = SOUL_SAND;
-                       	 }
-                       	 
+                       		iblockstate = SOUL_SAND;
                             iblockstate1 = SOUL_SAND;
                         }
-                        
-                        
-                        
-                        
-                        
-                        //rare lava spot
-                   	 if(random.nextFloat() < 0.0005F) {
-                            iblockstate = LAVA;
-                   	 }
-                   	 
                      }
                      
                      i1 = l;
                      if (ypos >= sealevel - 1) {
-                        chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+                        chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
                      } else {
-                        chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+                        chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
                      }
                   } else if (i1 > 0) {
                      --i1;
-                     chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+                     chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
                   }
                   else {
-                	  chunkIn.setBlockState(blockpos$mutableblockpos, NETHERRACK, false);
+                	  chunkIn.setBlockState(blockpos$Mutable, NETHERRACK, false);
                   }
            	 }
          }
@@ -136,7 +112,7 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 
    public void setSeed(long seed) {
       if (this.field_205552_a != seed || this.field_205553_b == null) {
-         this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+         this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4, 0); // lower to 3?
       }
 
       this.field_205552_a = seed;

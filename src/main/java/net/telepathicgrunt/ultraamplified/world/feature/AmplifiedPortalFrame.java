@@ -25,7 +25,13 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig> {
       super(NoFeatureConfig::deserialize);
    }
 
+   //need to be made due to extending feature
    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	   return false;
+   }
+   
+   //is called in AmplifiedPortalBehavior which doesn't have a chunk generator passed in
+   public boolean place(IWorld worldIn, Random rand, BlockPos pos, NoFeatureConfig config) {
       
 	   //7x7 flooring around bottom of frame
 	   for(int x = -3; x <= 3; x++) {
@@ -54,7 +60,7 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig> {
 	   
 
 	   //the portal itself
-	   worldIn.setBlockState(pos.add(0, 1, 0), BlocksInit.AMPLIFIEDPORTAL.getDefaultState(), 3);
+	   worldIn.setBlockState(pos.add(0, 1, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 3);
 
 	   //top of portal frame
 	   for(int x = -1; x <= 1; x++) {

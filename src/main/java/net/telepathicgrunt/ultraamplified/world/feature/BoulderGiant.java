@@ -51,7 +51,7 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
 
 
             	//boulder will ignore other boulders and will generate only on ground
-            	if (block != Blocks.GRASS_BLOCK && !Block.isDirt(block))
+            	if (block != Blocks.GRASS_BLOCK && !func_227250_b_(block))
                 {
                     break label0;
                 }

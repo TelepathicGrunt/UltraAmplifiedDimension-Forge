@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "ultra_amplified_mod:block/cactus_main_block_ua", "x": 270  },
-        "facing=south": { "model": "ultra_amplified_mod:block/cactus_main_block_ua", "x": 90 },
-        "facing=west" : { "model": "ultra_amplified_mod:block/cactus_main_block_ua", "x": 90, "y": 90 },
-        "facing=east" : { "model": "ultra_amplified_mod:block/cactus_main_block_ua", "x": 270, "y": 90 },
-        "facing=up"   : { "model": "ultra_amplified_mod:block/cactus_main_block_ua" }
-    }
-}

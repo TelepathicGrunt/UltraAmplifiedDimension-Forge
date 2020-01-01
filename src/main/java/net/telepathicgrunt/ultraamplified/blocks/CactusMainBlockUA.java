@@ -16,7 +16,6 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -62,8 +61,8 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 				int i;
 
 				for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this
-						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA
-						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA; ++i)
+						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get()
+						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
 				{ ; }
 
 				if (i < 3)
@@ -115,11 +114,11 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 		return OUTLINE_DIMENSION;
 	}
 
-
-	public boolean isSolid(BlockState state)
-	{
-		return true;
-	}
+//
+//	public boolean isSolid(BlockState state)
+//	{
+//		return true;
+//	}
 
 
 	/**
@@ -221,15 +220,15 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 
-
-	/**
-	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
-	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
-	 */
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+//
+//	/**
+//	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
+//	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
+//	 */
+//	public BlockRenderLayer getRenderLayer()
+//	{
+//		return BlockRenderLayer.CUTOUT;
+//	}
 
 
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)

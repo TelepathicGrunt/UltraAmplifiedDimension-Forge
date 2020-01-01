@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "ultra_amplified_mod:block/glowstone_ore3"
-    }
-}

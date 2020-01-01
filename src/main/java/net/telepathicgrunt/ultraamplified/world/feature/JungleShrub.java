@@ -11,24 +11,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 
-public class JungleShrub extends AbstractTreeFeature<NoFeatureConfig> {
+public class JungleShrub extends AbstractTreeFeature<BaseTreeFeatureConfig> {
 	   private final BlockState leaf;
 	   private final BlockState trunk;
 
-	   public JungleShrub(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49868_1_, BlockState trunk, BlockState leaf) {
-	      super(p_i49868_1_, false);
+	   public JungleShrub(Function<Dynamic<?>, ? extends BaseTreeFeatureConfig> p_i225808_1_, BlockState trunk, BlockState leaf) {
+	      super(p_i225808_1_);
 	      this.trunk = trunk;
 	      this.leaf = leaf;
-	      setSapling((net.minecraftforge.common.IPlantable)net.minecraft.block.Blocks.JUNGLE_SAPLING);
 	   }
 
-	   public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
-	      position.down();
-	      if (isSoil(worldIn, position, getSapling())) {
-	         position = position.up();
-	         this.setLogState(changedBlocks, worldIn, position, this.trunk, p_208519_5_);
+	   public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_) {
+		  
+ 	      if (isSoil(worldIn, position.down(), p_225557_7_.getSapling())) {
+         	this.setBlockState(worldIn, position, this.trunk);
 
 	         for(int i = position.getY(); i <= position.getY() + 2; ++i) {
 	            int j = i - position.getY();
@@ -39,10 +37,10 @@ public class JungleShrub extends AbstractTreeFeature<NoFeatureConfig> {
 
 	               for(int j1 = position.getZ() - k; j1 <= position.getZ() + k; ++j1) {
 	                  int k1 = j1 - position.getZ();
-	                  if (Math.abs(i1) != k || Math.abs(k1) != k || rand.nextInt(2) != 0) {
+	                  if (Math.abs(i1) != k || Math.abs(k1) != k || rand.nextInt(3) == 0) {
 	                     BlockPos blockpos = new BlockPos(l, i, j1);
 	                     if (isAirOrLeaves(worldIn, blockpos)) {
-	                        this.setLogState(changedBlocks, worldIn, blockpos, this.leaf, p_208519_5_);
+	                     	this.setBlockState(worldIn, blockpos, this.leaf);
 	                     }
 	                  }
 	               }

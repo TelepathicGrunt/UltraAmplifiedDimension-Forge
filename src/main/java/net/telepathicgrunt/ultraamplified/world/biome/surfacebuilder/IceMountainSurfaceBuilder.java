@@ -30,15 +30,15 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 		  BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
 		  BlockState iblockstate = SNOW_BLOCK;
 	      BlockState iblockstate1 = ICE;
-	      BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 	      int i = -1;
 	      int j = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 	      int xpos = x & 15;
 	      int zpos = z & 15;
 	
 	      for(int ypos = 255; ypos >= 0; --ypos) {
-	         blockpos$mutableblockpos.setPos(xpos, ypos, zpos);
-	         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+	         blockpos$Mutable.setPos(xpos, ypos, zpos);
+	         BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
 
 	         if (iblockstate2.getBlock() == null || iblockstate2.getMaterial() == Material.AIR) {
 	        	 i = -1;
@@ -46,7 +46,7 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 	         else if(iblockstate2.getMaterial() == Material.WATER) {
 
 	        	 if(ypos < ConfigUA.seaLevel) {
-	        		 chunkIn.setBlockState(blockpos$mutableblockpos, ConfigUA.lavaOcean ? LAVA : SNOW_BLOCK, false);
+	        		 chunkIn.setBlockState(blockpos$Mutable, ConfigUA.lavaOcean ? LAVA : SNOW_BLOCK, false);
 	        	 }
 	        	 
 	        	 i = -1;
@@ -64,16 +64,16 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 		               
 		               i = j;
 		               if (ypos >= seaLevel - 1) {
-		                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+		                  chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
 		               } else {
-		                  chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+		                  chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
 		               }
 		            } else if (i > 0) {
 		               --i;
-		               chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
+		               chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
 		            }
 	                else {
-	              	  chunkIn.setBlockState(blockpos$mutableblockpos, ICE, false);
+	              	  chunkIn.setBlockState(blockpos$Mutable, ICE, false);
 	                }
 		    	}
 	         }

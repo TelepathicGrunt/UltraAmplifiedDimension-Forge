@@ -15,7 +15,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.ChunkSection;
@@ -26,6 +25,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
+import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.jigsaw.JigsawJunction;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
@@ -78,10 +78,10 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		this.noiseSizeY = p_i49931_5_ / this.verticalNoiseGranularity;
 		this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
 		this.randomSeed = new SharedSeedRandom(this.seed);
-		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
-		this.maxNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
-		this.mainNoise = new OctavesNoiseGenerator(this.randomSeed, 8);
-		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 4));
+		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
+		this.maxNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
+		this.mainNoise = new OctavesNoiseGenerator(this.randomSeed, 7, 0);
+		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
 	}
 
 	private double internalSetupPerlinNoiseGenerators(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222552_10_) {
@@ -114,18 +114,18 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 	protected double[] func_222547_b(int p_222547_1_, int p_222547_2_) {
 		double[] adouble = new double[this.noiseSizeY + 1];
-		this.func_222548_a(adouble, p_222547_1_, p_222547_2_);
+		this.fillNoiseColumn(adouble, p_222547_1_, p_222547_2_);
 		return adouble;
 	}
 
 	protected void setupPerlinNoiseGenerators(double[] areaArrayIn, int x, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double p_222546_8_, double p_222546_10_, int p_222546_12_, int p_222546_13_) {
-		double[] localAreaArray = this.func_222549_a(x, z);
+		double[] localAreaArray = this.getBiomeNoiseColumn(x, z);
 		double d0 = localAreaArray[0];
 		double d1 = localAreaArray[1];
 		double d2 = this.func_222551_g();
 		double d3 = this.func_222553_h();
 
-		for (int y = 0; y < this.func_222550_i(); ++y) {
+		for (int y = 0; y < this.noiseSizeY(); ++y) {
 			double d4 = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_10_);
 			d4 = d4 - this.func_222545_a(d0, d1, y);
 			if ((double) y > d2) {
@@ -139,19 +139,19 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 	}
 
-	protected abstract double[] func_222549_a(int p_222549_1_, int p_222549_2_);
+	protected abstract double[] getBiomeNoiseColumn(int noiseX, int noiseZ);
 
 	protected abstract double func_222545_a(double p_222545_1_, double p_222545_3_, int p_222545_5_);
 
 	protected double func_222551_g() {
-		return (double) (this.func_222550_i() - 4);
+		return (double) (this.noiseSizeY() - 4);
 	}
 
 	protected double func_222553_h() {
 		return 0.0D;
 	}
 
-	public int func_222529_a(int chunkX, int chunkZ, Heightmap.Type p_222529_3_) {
+	public int func_222529_a(int chunkX, int chunkZ, Heightmap.Type heightmapType) {
 		int i = Math.floorDiv(chunkX, this.horizontalNoiseGranularity);
 		int j = Math.floorDiv(chunkZ, this.horizontalNoiseGranularity);
 		int k = Math.floorMod(chunkX, this.horizontalNoiseGranularity);
@@ -183,7 +183,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 						blockstate = this.defaultFluid;
 					}
 
-					if (p_222529_3_.func_222684_d().test(blockstate)) {
+					if (heightmapType.getHeightLimitPredicate().test(blockstate)) {
 						return y + 1;
 					}
 				}
@@ -193,13 +193,13 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		return 0;
 	}
 
-	protected abstract void func_222548_a(double[] p_222548_1_, int p_222548_2_, int p_222548_3_);
+	protected abstract void fillNoiseColumn(double[] p_222548_1_, int p_222548_2_, int p_222548_3_);
 
-	public int func_222550_i() {
+	public int noiseSizeY() {
 		return this.noiseSizeY + 1;
 	}
 
-	public void generateSurface(IChunk p_222535_1_) {
+	public void func_225551_a_(WorldGenRegion p_225551_1_, IChunk p_222535_1_) {
 		ChunkPos chunkpos = p_222535_1_.getPos();
 		int i = chunkpos.x;
 		int j = chunkpos.z;
@@ -208,15 +208,15 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		ChunkPos chunkpos1 = p_222535_1_.getPos();
 		int k = chunkpos1.getXStart();
 		int l = chunkpos1.getZStart();
-		Biome[] abiome = p_222535_1_.getBiomes();
+	    BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		for (int i1 = 0; i1 < 16; ++i1) {
 			for (int j1 = 0; j1 < 16; ++j1) {
 				int k1 = k + i1;
 				int l1 = l + j1;
 				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-				double d1 = this.surfaceDepthNoise.func_215460_a((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D, (double) i1 * 0.0625D);
-				abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, ConfigUA.seaLevel, this.world.getSeed());
+				double d1 = this.surfaceDepthNoise.noiseAt((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D, (double) i1 * 0.0625D) * 10.0D;
+				p_225551_1_.func_226691_t_(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, ConfigUA.seaLevel, this.world.getSeed());
 			}
 		}
 
@@ -224,7 +224,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	}
 
 	protected void makeBedrock(IChunk p_222555_1_, Random p_222555_2_) {
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		int i = p_222555_1_.getPos().getXStart();
 		int j = p_222555_1_.getPos().getZStart();
 		T t = this.getSettings();
@@ -235,7 +235,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 			if (l > 0) {
 				for (int i1 = l; i1 >= l - 4; --i1) {
 					if (i1 >= l - p_222555_2_.nextInt(5)) {
-						p_222555_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -243,7 +243,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 			if (k < 256) {
 				for (int j1 = k + 4; j1 >= k; --j1) {
 					if (j1 <= k + p_222555_2_.nextInt(5)) {
-						p_222555_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -295,21 +295,21 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 		for (int j5 = 0; j5 < this.noiseSizeZ + 1; ++j5) {
 			adouble[0][j5] = new double[this.noiseSizeY + 1];
-			this.func_222548_a(adouble[0][j5], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + j5);
+			this.fillNoiseColumn(adouble[0][j5], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + j5);
 			adouble[1][j5] = new double[this.noiseSizeY + 1];
 		}
 
 		ChunkPrimer chunkprimer = (ChunkPrimer) p_222537_2_;
-		Heightmap heightmap = chunkprimer.func_217303_b(Heightmap.Type.OCEAN_FLOOR_WG);
-		Heightmap heightmap1 = chunkprimer.func_217303_b(Heightmap.Type.WORLD_SURFACE_WG);
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		Heightmap heightmap = chunkprimer.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG);
+		Heightmap heightmap1 = chunkprimer.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		ObjectListIterator<AbstractVillagePiece> objectlistiterator = objectlist.iterator();
 		ObjectListIterator<JigsawJunction> objectlistiterator1 = objectlist1.iterator();
 		
 
 		for (int k5 = 0; k5 < this.noiseSizeX; ++k5) {
 			for (int l5 = 0; l5 < this.noiseSizeZ + 1; ++l5) {
-				this.func_222548_a(adouble[1][l5], chunkX * this.noiseSizeX + k5 + 1, chunkZ * this.noiseSizeZ + l5);
+				this.fillNoiseColumn(adouble[1][l5], chunkX * this.noiseSizeX + k5 + 1, chunkZ * this.noiseSizeZ + l5);
 			}
 
 			for (int i6 = 0; i6 < this.noiseSizeZ; ++i6) {
@@ -395,8 +395,8 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 								if (blockstate != AIR) {
 									if (blockstate.getLightValue() != 0) {
-										blockpos$mutableblockpos.setPos(j3, currentY, i4);
-										chunkprimer.addLightPosition(blockpos$mutableblockpos);
+										blockpos$Mutable.setPos(j3, currentY, i4);
+										chunkprimer.addLightPosition(blockpos$Mutable);
 									}
 
 									chunksection.setBlockState(x, y, z, blockstate, false);

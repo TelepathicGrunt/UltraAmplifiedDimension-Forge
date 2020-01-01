@@ -35,12 +35,13 @@ public class ConfigUA {
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
     public static double yScaleModifier = 428.613D;
-    public static int yMaximum = 256;
+    public static int yMaximum = 245;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
     public static int caveCavitySpawnrate = 5;
     public static int oceanCaveSpawnrate = 20;
     public static boolean pillarGen = true;
+    public static boolean honeyLakeGen = true;
     public static boolean slimeLakeGen = true;
     public static boolean waterLakeGen = true;
     public static boolean lavaLakeGen = true;
@@ -84,24 +85,24 @@ public class ConfigUA {
     public static boolean desert = true;
     public static boolean forest = true;
     public static boolean taiga = true;
-    public static boolean mountains = true;
+    public static boolean rockyField = true;
     public static boolean swamplands = true;
     public static boolean nether = true;
     public static boolean end = true;
     public static boolean snowyTundra = true;
-    public static boolean iceMountain = true;
+    public static boolean icedTerrain = true;
     public static boolean mushroom = true;
-    public static boolean stoneBeach = true;
+    public static boolean stonePlains = true;
     public static boolean bambooJungle = true;
     public static boolean jungle = true;
-    public static boolean coldBeach = true;
+    public static boolean frozenDesert = true;
     public static boolean birchForest = true;
     public static boolean darkForest = true;
     public static boolean snowyTaiga = true;
     public static boolean giantTreeTaiga = true;
     public static boolean savanna = true;
     public static boolean badlands = true;
-    public static boolean erodedBadlands = true;
+    public static boolean spikyBadlands = true;
     public static boolean iceSpike = true;
     public static boolean frozenOcean = true;
     public static boolean coldOcean = true;
@@ -144,6 +145,7 @@ public class ConfigUA {
         public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
         public final ForgeConfigSpec.IntValue oceanCaveSpawnrate;
         public final ForgeConfigSpec.BooleanValue pillarGen;
+        public final ForgeConfigSpec.BooleanValue honeyLakeGen;
         public final ForgeConfigSpec.BooleanValue slimeLakeGen;
         public final ForgeConfigSpec.BooleanValue waterLakeGen;
         public final ForgeConfigSpec.BooleanValue lavaLakeGen;
@@ -187,24 +189,24 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue desert;
 		public final ForgeConfigSpec.BooleanValue forest;
 		public final ForgeConfigSpec.BooleanValue taiga;
-		public final ForgeConfigSpec.BooleanValue mountains;
+		public final ForgeConfigSpec.BooleanValue rockyField;
 		public final ForgeConfigSpec.BooleanValue swamplands;
 		public final ForgeConfigSpec.BooleanValue nether;
 		public final ForgeConfigSpec.BooleanValue end;
 		public final ForgeConfigSpec.BooleanValue snowyTundra;
-		public final ForgeConfigSpec.BooleanValue iceMountain;
+		public final ForgeConfigSpec.BooleanValue icedTerrain;
 		public final ForgeConfigSpec.BooleanValue mushroom;
-		public final ForgeConfigSpec.BooleanValue stoneBeach;
+		public final ForgeConfigSpec.BooleanValue stonePlains;
 		public final ForgeConfigSpec.BooleanValue bambooJungle;
 		public final ForgeConfigSpec.BooleanValue jungle;
-		public final ForgeConfigSpec.BooleanValue coldBeach;
+		public final ForgeConfigSpec.BooleanValue frozenDesert;
 		public final ForgeConfigSpec.BooleanValue birchForest;
 		public final ForgeConfigSpec.BooleanValue darkForest;
 		public final ForgeConfigSpec.BooleanValue snowyTaiga;
 		public final ForgeConfigSpec.BooleanValue giantTreeTaiga;
 		public final ForgeConfigSpec.BooleanValue savanna;
 		public final ForgeConfigSpec.BooleanValue badlands;
-		public final ForgeConfigSpec.BooleanValue erodedBadlands;
+		public final ForgeConfigSpec.BooleanValue spikyBadlands;
 		public final ForgeConfigSpec.BooleanValue iceSpike;
 		public final ForgeConfigSpec.BooleanValue frozenOcean;
 		public final ForgeConfigSpec.BooleanValue coldOcean;
@@ -266,7 +268,7 @@ public class ConfigUA {
                     		+"To blacklist all of a mod's biomes, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
                     		+"To blacklist a specific mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
                     		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n"
-                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
                     .translation("ultraamplified.config.structure.blacklistedbiomelist")
                     .define("blacklistedBiomeList", "");
 
@@ -276,7 +278,7 @@ public class ConfigUA {
                     		+"To blacklist all structures in a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
                     		+"To blacklist a specific mod's structure, type out the resourcelocation. Example: \"example_mod_id:wizard_tower\"\r\n"
                     		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:wizard_tower, example_mod_id_2:*, example_mod_id_1:super_village\"\r\n"
-                    		+"Also, any entry using ultra_amplified_mod or minecraft id will be ignored as I already handle those ids internally.")
+                    		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
                     .translation("ultraamplified.config.structure.blacklistedfeaturelist")
                     .define("blacklistedFeatureList", "");
 
@@ -312,6 +314,11 @@ public class ConfigUA {
 	                    .comment("\r\nControls whether pillars features (both ramp and straight kind) spawn or not.")
 	                    .translation("ultraamplified.config.structure.pillargen")
 	                    .define("pillarGen", true);
+
+	            		honeyLakeGen = builder
+	                    .comment("\r\nControls whether Honey Lakes spawn or not.")
+	                    .translation("ultraamplified.config.structure.honeylakegen")
+	                    .define("honeyLakeGen", true);
 
 	            		slimeLakeGen = builder
 	                    .comment("\r\nControls whether Slime Lakes spawn or not.")
@@ -526,7 +533,7 @@ public class ConfigUA {
 	  				yMaximum = builder
             		.comment("\r\nMaxium height the terrain can generate up to.")
             		.translation("ultraamplified.config.structure.ymaximum")
-            		.defineInRange("yMaximum", 248, 100, 256);
+            		.defineInRange("yMaximum", 245, 100, 256);
 	  		        
 	  		        
 	  		        xzTerrainModifier = builder
@@ -628,10 +635,10 @@ public class ConfigUA {
             		.define("taiga", true);
 
 
-            		mountains = builder
+            		rockyField = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.mountains")
-            		.define("mountains", true);
+            		.translation("ultraamplified.config.structure.rockyfield")
+            		.define("rockyField", true);
 
 
             		swamplands = builder
@@ -658,10 +665,10 @@ public class ConfigUA {
             		.define("snowyTundra", true);
 
 
-            		iceMountain = builder
+            		icedTerrain = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.icemountain")
-            		.define("iceMountain", true);
+            		.translation("ultraamplified.config.structure.icedterrain")
+            		.define("icedTerrain", true);
 
 
             		mushroom = builder
@@ -670,10 +677,10 @@ public class ConfigUA {
             		.define("mushroom", true);
 
 
-            		stoneBeach = builder
+            		stonePlains = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.stonebeach")
-            		.define("stoneBeach", true);
+            		.translation("ultraamplified.config.structure.stoneplains")
+            		.define("stonePlains", true);
 
 
             		bambooJungle = builder
@@ -688,10 +695,10 @@ public class ConfigUA {
             		.define("jungle", true);
 
 
-            		coldBeach = builder
+            		frozenDesert = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.coldbeach")
-            		.define("coldBeach", true);
+            		.translation("ultraamplified.config.structure.frozendesert")
+            		.define("frozenDesert", true);
 
 
             		birchForest = builder
@@ -730,10 +737,10 @@ public class ConfigUA {
             		.define("badlands", true);
 
 
-            		erodedBadlands = builder
+            		spikyBadlands = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.erodedbadlands")
-            		.define("erodedBadlands", true);
+            		.translation("ultraamplified.config.structure.spikybadlands")
+            		.define("spikyBadlands", true);
 
             		
             		iceSpike = builder
@@ -871,6 +878,7 @@ public class ConfigUA {
     	caveCavitySpawnrate = SERVER.caveCavitySpawnrate.get();
     	oceanCaveSpawnrate = SERVER.oceanCaveSpawnrate.get();
     	pillarGen = SERVER.pillarGen.get();
+    	honeyLakeGen = SERVER.honeyLakeGen.get();
     	slimeLakeGen = SERVER.slimeLakeGen.get();
     	waterLakeGen = SERVER.waterLakeGen.get();
     	lavaLakeGen = SERVER.lavaLakeGen.get();
@@ -914,24 +922,24 @@ public class ConfigUA {
     	desert = SERVER.desert.get();
     	forest = SERVER.forest.get();
     	taiga = SERVER.taiga.get();
-    	mountains = SERVER.mountains.get();
+    	rockyField = SERVER.rockyField.get();
     	swamplands = SERVER.swamplands.get();
     	nether = SERVER.nether.get();
     	end = SERVER.end.get();
     	snowyTundra = SERVER.snowyTundra.get();
-    	iceMountain = SERVER.iceMountain.get();
+    	icedTerrain = SERVER.icedTerrain.get();
     	mushroom = SERVER.mushroom.get();
-    	stoneBeach = SERVER.stoneBeach.get();
+    	stonePlains = SERVER.stonePlains.get();
     	bambooJungle = SERVER.bambooJungle.get();
     	jungle = SERVER.jungle.get();
-    	coldBeach = SERVER.coldBeach.get();
+    	frozenDesert = SERVER.frozenDesert.get();
     	birchForest = SERVER.birchForest.get();
     	darkForest = SERVER.darkForest.get();
     	snowyTaiga = SERVER.snowyTaiga.get();
     	giantTreeTaiga = SERVER.giantTreeTaiga.get();
     	savanna = SERVER.savanna.get();
     	badlands = SERVER.badlands.get();
-    	erodedBadlands = SERVER.erodedBadlands.get();
+    	spikyBadlands = SERVER.spikyBadlands.get();
     	iceSpike = SERVER.iceSpike.get();
     	frozenOcean = SERVER.frozenOcean.get();
     	coldOcean = SERVER.coldOcean.get();

@@ -16,7 +16,6 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +62,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				{
 					if (j == 15)
 					{
-						worldIn.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.getDefaultState());
+						worldIn.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState());
 						BlockState blockstate = state.with(AGE, Integer.valueOf(0));
 						worldIn.setBlockState(pos, blockstate, 4);
 						blockstate.neighborChanged(worldIn, blockpos, this, pos, false);
@@ -104,11 +103,11 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 		return OUTLINE_DIMENSION;
 	}
 
-
-	public boolean isSolid(BlockState state)
-	{
-		return true;
-	}
+//
+//	public boolean isSolid(BlockState state)
+//	{
+//		return true;
+//	}
 
 
 	/**
@@ -155,7 +154,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				//handling two edge cases
 				//Case 1: attached to horizontal main cactus block that has corner blocks on both sides but neither corner block has a valid block below
 				//Case 2: two corner blocks are facing each otehr with no valid space below
-				if (offsetBlock.getBlock() == BlocksInit.CACTUSMAINBLOCKUA)
+				if (offsetBlock.getBlock() == BlocksInit.CACTUSMAINBLOCKUA.get())
 				{
 					return ((CactusMainBlockUA) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) worldIn, pos.offset(facing.getOpposite()));
 				}
@@ -197,16 +196,16 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
-
-
-	/**
-	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
-	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
-	 */
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+//
+//
+//	/**
+//	 * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
+//	 * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
+//	 */
+//	public BlockRenderLayer getRenderLayer()
+//	{
+//		return BlockRenderLayer.CUTOUT;
+//	}
 
 
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)

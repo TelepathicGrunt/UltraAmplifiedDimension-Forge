@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -20,28 +19,28 @@ public class CeilingFluid extends Feature<LiquidsConfig> {
 		super(configFactoryIn);
 	}
 
-public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, LiquidsConfig liquid) {
-	      if (!Block.isRock(worldIn.getBlockState(position.up()).getBlock())) {
+public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, LiquidsConfig config) {
+	      if (!config.field_227366_f_.contains(worldIn.getBlockState(position.up()).getBlock())) {
 	         return false;
-	      } else if (Block.isRock(worldIn.getBlockState(position.down()).getBlock())) {
+	      } else if (config.field_227366_f_.contains(worldIn.getBlockState(position.down()).getBlock())) {
 	         return false;
 	      } else {
 	         BlockState iblockstate = worldIn.getBlockState(position);
-	         if (!iblockstate.isAir(worldIn, position) && !Block.isRock(iblockstate.getBlock())) {
+	         if (!iblockstate.isAir(worldIn, position) && !config.field_227366_f_.contains(iblockstate.getBlock())) {
 	            return false;
 	         } else {
 	            int j = 0;
 
                 for (Direction face : Direction.Plane.HORIZONTAL) 
                 {
-    	            if (Block.isRock(worldIn.getBlockState(position.offset(face)).getBlock())) {
+    	            if (config.field_227366_f_.contains(worldIn.getBlockState(position.offset(face)).getBlock())) {
     	               ++j;
     	            }
                 }
 
 	            if (j == 4) {
-	               worldIn.setBlockState(position, liquid.state.getBlockState(), 2);
-	               worldIn.getPendingFluidTicks().scheduleTick(position, liquid.state.getFluid(), 0);
+	               worldIn.setBlockState(position, config.state.getBlockState(), 2);
+	               worldIn.getPendingFluidTicks().scheduleTick(position, config.state.getFluid(), 0);
 	            }
 
 	            return true;

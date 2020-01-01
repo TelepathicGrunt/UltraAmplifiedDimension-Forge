@@ -1,4 +1,4 @@
-    Made for Minecraft v.1.14.4
+    Made for Minecraft v.1.15.1
     Created by TelepathicGrunt
 
 Hello! If you are reading this, you must be on Github then! I strongly encourage you to only download and run the master branch as that should be the most stable version of my mod. 
@@ -12,7 +12,88 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 ------------------------------------------------
-       | Ultra Amplified mod changelog |
+       | Ultra Amplified Dimension changelog |
+       
+       
+    (V.7.0.0 Changes) (1.15.1 Minecraft)
+    
+    Major Change: 
+·Ported to 1.15.1! Celebration time!
+·This mod is now renamed from Ultra Amplified Mod to Ultra Amplified Dimension !
+ 
+	Config: 
+·Lowered the default maximum Y value for terrain gen to 245 from 248. This is to help prevent floating flat lands with no trees because it is too high for tree to spawn.
+·Added config for Honey Lakes.
+
+    Structures:
+·Hanging Ruins check is now fixed so it matches the ruin's actual location and prevents it from hanging off edges of ledges.
+·Removed floating row of Dirt I forgot to remove from Mushroom Temple.
+·Added 3 Tropical Fish to the pond in Mushroom Temple.
+·Ramps shouldn't replace leaves, logs, or Bee Nests with Air now.
+·Dungeons in Badlands biomes can have a Cave Spider spawner now.
+
+    Biomes:
+·Added Honey Lakes to very rarely spawn in any Relics variant biome.
+·Redid how Snow and Ice layer is done to fix several bugs with snow placement. Especially when biomes bordering each other both requires different snow layering.
+·Adjusted biome default rates to make Netherland and End Field slightly more common/bigger.
+·Fixed bug where lavafalls and waterfalls underground could get blocked by Stone due to the ContainUndergroundLiquids feature I need running.
+·Desert biomes now spawn Dead Bush at a reduced rate under ledges instead of just top layer.
+·Netherland biome now has more Fire below Y = 100.
+·Fixed bug where the Magma block layer below sealevel in Netherland was not creating bubble columns.
+·Fixed bug where in the Netherland, single lava blocks on the surface will not flow. Now they do flow and as a result, I restricted their spawning condition a bit and reduced spawn rate since the lava will end up making more lavafalls if generated on a slope. 
+·Slightly increased lavafall rates in Stone Plains biome.
+·Slightly increased waterfall rates in End Field biome.
+·Adjusted tree generation in all Jungles to fix some ground trees not spawning underground.
+·Spiky Badlands' giant spikes are spiker, more common, and all spikes now will go through water at sealevel instead of being cut off.
+·Badlands Dissected Plateau now has giant flat-topped pillars that are thick.
+·All Badlands now can natually spawn Husk and Cave Spider mobs.
+·All Deserts now can naturally spawn Cave Spider mobs.
+·Fixed bug that prevented the Better Cactus from spawning in any Badlands biome.
+·Increased ramps and columns spawnrate in Stone Shore biome.
+·Increased columns spawnrate a lot in Gravelly Columns Field biome.
+·Slightly increased columns spawnrate in Rocky Field, Wooden Rocky Field, and Gravelly Field
+·Removed Mushroom Field biome from hot temperature and icy temperature region. Will still spawn in cool and cold temperature regions.
+
+    Biomes renamed to match the terrain generation better:
+·Savanna Plateau -> Savanna Terrace
+·Shattered Savanna Plateau -> Shattered Savanna Terrace
+·Ice Mountain -> Iced Terrain
+·Wooded Badlands Plateau -> Wooded Badlands
+·Badlands Plateau -> Sandless Badlands
+·Swampland Hills -> Spooky Swampland
+·Modified Jungle -> Flower Jungle
+·Modified Jungle Edge -> Flower Jungle Edge
+·Snowy Beach -> Frozen Desert
+·Stone Shore -> Stone Plains
+·Modified Wooded Badlands Plateau UA -> Densed Wooded Badlands UA
+·Eroded Badlands UA -> Spiky Badlands UA
+·Modified Badlands Plateau -> Badlands Dissected Plateau
+·The End -> End Field
+·Nether -> Netherland
+·Taiga Mountain UA -> Rocky Taiga UA
+·Snowy Taiga Mountain UA -> Snowy Rocky Taiga UA
+·Mountains -> Rocky Field
+·Wooden Mountains -> Wooden Rocky Field
+·Gravelly Mountains -> Gravelly Field
+·Modified Gravelly Mountains Field
+·Desert Hills -> Relic Desert
+·Wooden Hills -> Relic Forest
+·Taiga Hills -> Relic Taiga
+·Bamboo Jungle Hills -> Relic Bamboo Jungle
+·Jungle Hills -> Relic Jungle
+·Birch Forest Hills -> Relic Birch Forest
+·Snowy Taiga Hills -> Relic Snowy Taiga
+·Tall Birch Forest Hills -> Relic Tall Birch Forest
+·Dark Forest Hills -> Relic Dark Forest
+·Giant Tree Taiga Hills -> Relic Giant Tree Taiga 
+·Giant Spruce Taiga Hills -> Relic Giant Spruce Taiga Pillars
+·Giant Spruce Taiga -> Giant Spruce Taiga Pillars
+
+       
+    (V.6.12.2 Changes) (1.14.4 Minecraft)
+    
+    Blocks: 
+·Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if their coordinate is 8 in x OR z instead of x AND z. Now only highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
        
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)

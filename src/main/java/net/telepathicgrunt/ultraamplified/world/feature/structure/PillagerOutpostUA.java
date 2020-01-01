@@ -12,6 +12,7 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -24,77 +25,81 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
 public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
-   private static final List<Biome.SpawnListEntry> field_214558_a = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
+	private static final List<Biome.SpawnListEntry> field_214558_a = Lists
+			.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
 
-   public PillagerOutpostUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
-      super(p_i51470_1_);
-   }
+	public PillagerOutpostUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
+		super(p_i51470_1_);
+	}
 
-   public String getStructureName() {
-      return UltraAmplified.MODID+":pillager_outpost";
-   }
+	public String getStructureName() {
+		return UltraAmplified.MODID + ":pillager_outpost";
+	}
 
-   public int getSize() {
-      return 3;
-   }
+	public int getSize() {
+		return 3;
+	}
 
-   public List<Biome.SpawnListEntry> getSpawnList() {
-      return field_214558_a;
-   }
+	public List<Biome.SpawnListEntry> getSpawnList() {
+		return field_214558_a;
+	}
 
-   public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
-      ((SharedSeedRandom)rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
-      Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-      
-      if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
-    	  
-    	  if(rand.nextFloat() < 1/((double)(ConfigUA.pillageOutpostRarity-1)*4.5D+1)) {
-	         for(int k = chunkPosX - 3; k <= chunkPosX + 3; ++k) {
-	            for(int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l) {
-	               if (FeatureUA.VILLAGE_UA.hasStartAt(chunkGen, rand, k, l)) {
-	                  return false;
-	               }
-	            }
-	         }
-	         
-	         return true;
-    	  }
-      }
+	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
+			int chunkPosZ, Biome biome) {
+		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-      return false;
-   }
+		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
 
-   public Structure.IStartFactory getStartFactory() {
-      return PillagerOutpostUA.Start::new;
-   }
+			if (rand.nextFloat() < 1 / ((double) (ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1)) {
+				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k) {
+					for (int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l) {
+						if (FeatureUA.VILLAGE_UA.func_225558_a_(p_225558_1_, chunkGen, rand, k, l, biome)) {
+							return false;
+						}
+					}
+				}
 
-   protected int getSeedModifier() {
-      return 165745296;
-   }
+				return true;
+			}
+		}
 
-   public static class Start extends MarginedStructureStart {
-      public Start(Structure<?> p_i50497_1_, int p_i50497_2_, int p_i50497_3_, Biome p_i50497_4_, MutableBoundingBox p_i50497_5_, int p_i50497_6_, long p_i50497_7_) {
-         super(p_i50497_1_, p_i50497_2_, p_i50497_3_, p_i50497_4_, p_i50497_5_, p_i50497_6_, p_i50497_7_);
-      }
+		return false;
+	}
 
-      public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
-    	  
-    	 int offsetX = 7;
-    	 int offsetZ = 7;
-         int x = (chunkX << 4) + offsetX;
-         int z = (chunkZ << 4) + offsetZ;
-         int i1 = generator.func_222531_c(x, z, Heightmap.Type.WORLD_SURFACE_WG);
-         int j1 = generator.func_222531_c(x, z + 1, Heightmap.Type.WORLD_SURFACE_WG);
-         int k1 = generator.func_222531_c(x + 1, z, Heightmap.Type.WORLD_SURFACE_WG);
-         int l1 = generator.func_222531_c(x + 1, z + 1, Heightmap.Type.WORLD_SURFACE_WG);
-         int y = Math.max(Math.max(i1, j1), Math.max(k1, l1));
-         
-         if (y >= 70 && y <= 200) {
-        	 BlockPos blockpos = new BlockPos(chunkX * 16, y, chunkZ * 16);
-        	 PillagerOutpostPieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
-             this.recalculateStructureSize();
-            // UltraAmplified.LOGGER.log(Level.DEBUG, "Pillager Outpost | "+(x)+" "+(y+1)+" "+(z));
-         }
-      }
-   }
+	public Structure.IStartFactory getStartFactory() {
+		return PillagerOutpostUA.Start::new;
+	}
+
+	protected int getSeedModifier() {
+		return 165745296;
+	}
+
+	public static class Start extends MarginedStructureStart {
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
+				int referenceIn, long seedIn) {
+			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
+		}
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
+				Biome biomeIn) {
+
+			int offsetX = 7;
+			int offsetZ = 7;
+			int x = (chunkX << 4) + offsetX;
+			int z = (chunkZ << 4) + offsetZ;
+			int i1 = generator.func_222531_c(x, z, Heightmap.Type.WORLD_SURFACE_WG);
+			int j1 = generator.func_222531_c(x, z + 1, Heightmap.Type.WORLD_SURFACE_WG);
+			int k1 = generator.func_222531_c(x + 1, z, Heightmap.Type.WORLD_SURFACE_WG);
+			int l1 = generator.func_222531_c(x + 1, z + 1, Heightmap.Type.WORLD_SURFACE_WG);
+			int y = Math.max(Math.max(i1, j1), Math.max(k1, l1));
+
+			if (y >= 70 && y <= 200) {
+				BlockPos blockpos = new BlockPos(chunkX * 16, y, chunkZ * 16);
+				PillagerOutpostPieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
+				this.recalculateStructureSize();
+				// UltraAmplified.LOGGER.log(Level.DEBUG, "Pillager Outpost | "+(x)+" "+(y+1)+"
+				// "+(z));
+			}
+		}
+	}
 }

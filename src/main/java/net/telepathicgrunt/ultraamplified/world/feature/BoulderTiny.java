@@ -49,7 +49,7 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
 
             
             	//boulder will ignore other boulders and will generate only on ground
-            	if (block != Blocks.GRASS && !Block.isDirt(block))
+            	if (block != Blocks.GRASS && !func_227250_b_(block))
                 {
                     break label0;
                 }

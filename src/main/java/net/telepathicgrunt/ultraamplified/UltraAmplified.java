@@ -6,16 +6,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
@@ -37,14 +42,11 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
  * 
  * @author TelepathicGrunt
  */
-		//workaround because the events for colors is firing before the blocks are registered which is causing a crash
-		//BlockColorManager.onBlockColorsInit(Minecraft.getInstance().getBlockColors());
-		//BlockColorManager.onItemColorsInit(Minecraft.getInstance().getItemColors(), Minecraft.getInstance().getBlockColors());
 @Mod(UltraAmplified.MODID)
 public class UltraAmplified {
 	
 	public static UltraAmplified instance;
-	public static final String MODID = "ultra_amplified_mod";
+	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	//worldTypes
@@ -58,12 +60,11 @@ public class UltraAmplified {
         
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::modConfig);
+        modEventBus.addListener(this::clientSetup);
         modEventBus.register(new BlockColorManager());
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
-        
-
 	}
 	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -107,8 +108,11 @@ public class UltraAmplified {
 
 	}
 	
-
-	
+	@OnlyIn(Dist.CLIENT)
+	public void clientSetup(final FMLClientSetupEvent event) 
+	{
+		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
+	}
 	
 	public void setup(final FMLCommonSetupEvent event) 
 	{

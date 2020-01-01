@@ -15,6 +15,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -33,7 +34,8 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 		super(p_i51427_1_);
 	}
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
+			int spacingOffsetsX, int spacingOffsetsZ) {
 
 		int maxSpacing = ConfigUA.mansionSpawnrate;
 		int minSpacing = (int) (maxSpacing * 0.75);
@@ -56,11 +58,13 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
+	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
+			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (ConfigUA.mansionSpawnrate != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			for (Biome biome : chunkGen.getBiomeProvider().getBiomesInSquare(chunkPosX * 16 + 9, chunkPosZ * 16 + 9, 32)) {
-				if (!chunkGen.hasStructure(biome, FeatureUA.WOODLAND_MANSION_UA)) {
+			for (Biome biome2 : chunkGen.getBiomeProvider().func_225530_a_(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
+					chunkPosZ * 16 + 9, 32)) {
+				if (!chunkGen.hasStructure(biome2, FeatureUA.WOODLAND_MANSION_UA)) {
 					return false;
 				}
 			}
@@ -78,7 +82,7 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 	}
 
 	public String getStructureName() {
-		return UltraAmplified.MODID+":woodland_mansion";
+		return UltraAmplified.MODID + ":woodland_mansion";
 	}
 
 	public int getSize() {
@@ -86,11 +90,13 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 	}
 
 	public static class Start extends StructureStart {
-		public Start(Structure<?> p_i50437_1_, int p_i50437_2_, int p_i50437_3_, Biome p_i50437_4_, MutableBoundingBox p_i50437_5_, int p_i50437_6_, long p_i50437_7_) {
-			super(p_i50437_1_, p_i50437_2_, p_i50437_3_, p_i50437_4_, p_i50437_5_, p_i50437_6_, p_i50437_7_);
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
+				int referenceIn, long seedIn) {
+			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
+				Biome biomeIn) {
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			int i = 5;
 			int j = 5;
@@ -120,15 +126,17 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 				this.recalculateStructureSize();
 			}
 
-			// UltraAmplified.LOGGER.log(Level.DEBUG, "Woodland Mansion | " + (chunkX * 16) + " " + (chunkZ * 16));
+			// UltraAmplified.LOGGER.log(Level.DEBUG, "Woodland Mansion | " + (chunkX * 16)
+			// + " " + (chunkZ * 16));
 		}
 
 		/**
 		 * Keeps iterating Structure Pieces and spawning them until the checks tell it
 		 * to stop
 		 */
-		public void generateStructure(IWorld worldIn, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
-			super.generateStructure(worldIn, rand, structurebb, p_75068_4_);
+		public void func_225565_a_(IWorld worldIn, ChunkGenerator<?> p_225565_2_, Random rand,
+				MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
+			super.func_225565_a_(worldIn, p_225565_2_, rand, structurebb, p_75068_4_);
 			int i = this.bounds.minY;
 
 			for (int j = structurebb.minX; j <= structurebb.maxX; ++j) {
@@ -147,7 +155,8 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 						if (flag) {
 							for (int l = i - 1; l > 1; --l) {
 								BlockPos blockpos1 = new BlockPos(j, l, k);
-								if (!worldIn.isAirBlock(blockpos1) && !worldIn.getBlockState(blockpos1).getMaterial().isLiquid()) {
+								if (!worldIn.isAirBlock(blockpos1)
+										&& !worldIn.getBlockState(blockpos1).getMaterial().isLiquid()) {
 									break;
 								}
 

@@ -12,15 +12,15 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
 	
 	   public int apply(INoiseRandom context, int north, int west, int south, int east, int currentBiomeID) {
 	      int[] areaArray = new int[1];
-	      if (!this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.WOODED_BADLANDS_PLATEAU, BiomeGenHelper.BADLANDS)
-	    	  && !this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.BADLANDS_PLATEAU, BiomeGenHelper.BADLANDS)
+	      if (!this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.WOODED_BADLANDS, BiomeGenHelper.BADLANDS)
+	    	  && !this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.SANDLESS_BADLANDS, BiomeGenHelper.BADLANDS)
 	    	  && !this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.GIANT_TREE_TAIGA, BiomeGenHelper.TAIGA))
 	      {
-        	if (ConfigUA.mountains && currentBiomeID == BiomeGenHelper.DESERT)
+        	if (ConfigUA.rockyField && currentBiomeID == BiomeGenHelper.DESERT)
             {
                if (north == BiomeGenHelper.SNOWY_TUNDRA || west == BiomeGenHelper.SNOWY_TUNDRA || east == BiomeGenHelper.SNOWY_TUNDRA || south == BiomeGenHelper.SNOWY_TUNDRA) 
                {
-                  return BiomeGenHelper.WOODED_MOUNTAINS;
+                  return BiomeGenHelper.WOODED_ROCKY_FIELD;
                }
             }
             else if (ConfigUA.plains && currentBiomeID == BiomeGenHelper.SWAMP)
@@ -32,25 +32,25 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
                   return BiomeGenHelper.PLAINS;
                }
             }
-            else if(ConfigUA.savanna && currentBiomeID == BiomeGenHelper.NETHER)
+            else if(ConfigUA.savanna && currentBiomeID == BiomeGenHelper.NETHERLAND)
             {
-               if ((north != BiomeGenHelper.NETHER && north != BiomeGenHelper.SAVANNA) || 
-            	   (west != BiomeGenHelper.NETHER && west != BiomeGenHelper.SAVANNA) || 
-        		   (east != BiomeGenHelper.NETHER && east != BiomeGenHelper.SAVANNA) || 
-        		   (south != BiomeGenHelper.NETHER && south != BiomeGenHelper.SAVANNA))
+               if ((north != BiomeGenHelper.NETHERLAND && north != BiomeGenHelper.SAVANNA) || 
+            	   (west != BiomeGenHelper.NETHERLAND && west != BiomeGenHelper.SAVANNA) || 
+        		   (east != BiomeGenHelper.NETHERLAND && east != BiomeGenHelper.SAVANNA) || 
+        		   (south != BiomeGenHelper.NETHERLAND && south != BiomeGenHelper.SAVANNA))
                {
                   return BiomeGenHelper.SAVANNA;
                }
             }
-            else if(currentBiomeID == BiomeGenHelper.END) 
+            else if(currentBiomeID == BiomeGenHelper.END_FIELD) 
             {
-               if ((north != BiomeGenHelper.END && north != BiomeGenHelper.BARREN_END_FIELD) || 
-            	   (west != BiomeGenHelper.END && west != BiomeGenHelper.BARREN_END_FIELD) || 
-        		   (east != BiomeGenHelper.END && east != BiomeGenHelper.BARREN_END_FIELD) || 
-        		   (south != BiomeGenHelper.END && south != BiomeGenHelper.BARREN_END_FIELD))
-               {
-                  return BiomeGenHelper.BARREN_END_FIELD;
-               }
+            	if(north != BiomeGenHelper.END_FIELD && north != BiomeGenHelper.BARREN_END_FIELD ||
+        			west != BiomeGenHelper.END_FIELD && west != BiomeGenHelper.BARREN_END_FIELD ||
+        			east != BiomeGenHelper.END_FIELD && east != BiomeGenHelper.BARREN_END_FIELD ||
+        			south != BiomeGenHelper.END_FIELD && south != BiomeGenHelper.BARREN_END_FIELD) 
+            	{
+                    return BiomeGenHelper.BARREN_END_FIELD;
+            	}
             }
             else if(currentBiomeID == BiomeGenHelper.JUNGLE) {
                if ((north != BiomeGenHelper.JUNGLE && north != BiomeGenHelper.BAMBOO_JUNGLE) || 
@@ -61,22 +61,22 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
                   return BiomeGenHelper.JUNGLE_EDGE;
                }
             }
-			else if(ConfigUA.coldBeach && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.ICY) {
+			else if(ConfigUA.frozenDesert && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.ICY) {
 				if (	BiomeGenHelper.isOcean(north) ||
 						BiomeGenHelper.isOcean(west) ||
 						BiomeGenHelper.isOcean(east) ||
 						BiomeGenHelper.isOcean(south))
 				{
-					return BiomeGenHelper.SNOWY_BEACH;
+					return BiomeGenHelper.FROZEN_DESERT;
 				}
 			}
-			else if(ConfigUA.stoneBeach && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.EXTREME_HILLS) {
+			else if(ConfigUA.stonePlains && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.EXTREME_HILLS) {
 				if (	BiomeGenHelper.isOcean(north) ||
 						BiomeGenHelper.isOcean(west) ||
 						BiomeGenHelper.isOcean(east) ||
 						BiomeGenHelper.isOcean(south))
 				{
-					return BiomeGenHelper.STONE_BEACH;
+					return BiomeGenHelper.STONE_PLAINS;
 				}
 			}
 

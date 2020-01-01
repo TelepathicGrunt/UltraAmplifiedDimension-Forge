@@ -52,13 +52,13 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 		if (fillerBiomeMap == null) {
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
-			fillerBiomeMap.put(BiomeInit.NETHER, Blocks.NETHERRACK.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.ICE_MOUNTAIN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(BiomeInit.NETHERLAND, Blocks.NETHERRACK.getDefaultState());
+			fillerBiomeMap.put(BiomeInit.ICED_TERRAIN, Blocks.ICE.getDefaultState());
 			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState());
 			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState());
 			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState());
 			fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.END, Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(BiomeInit.END_FIELD, Blocks.END_STONE.getDefaultState());
 		}
 	}
 
@@ -76,50 +76,50 @@ public class UnderwaterCaveCarver extends CaveWorldCarver {
 		return false;
 	}
 
-	protected boolean carveBlock(IChunk chunkIn, BitSet carvingMask, Random randomIn,
-			BlockPos.MutableBlockPos mutableBlockPosIn, 
-			BlockPos.MutableBlockPos p_222703_5_,
-			BlockPos.MutableBlockPos p_222703_6_, 
+	protected boolean func_225556_a_(IChunk chunkIn, Function<BlockPos, Biome> biomeBlockPos, BitSet carvingMask, Random randomIn,
+			BlockPos.Mutable MutableIn, 
+			BlockPos.Mutable p_222703_5_,
+			BlockPos.Mutable p_222703_6_, 
 			int minHeight, int chunkX, int chunkZ, int x, int z, int maskY, int y,
 			int atomicBoolean, AtomicBoolean p_222703_15_) 
 	{
-		return carvingBlock(this, chunkIn, carvingMask, randomIn, mutableBlockPosIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
+		return carvingBlock(this, biomeBlockPos, chunkIn, carvingMask, randomIn, MutableIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
 	}
 
-	protected static boolean carvingBlock(WorldCarver<?> worldCarver, IChunk chunkIn, BitSet carvingMask,
-			Random randomIn, BlockPos.MutableBlockPos mutableBlockPosIn, 
+	protected static boolean carvingBlock(WorldCarver<?> worldCarver, Function<BlockPos, Biome> biomeBlockPos, 
+			IChunk chunkIn, BitSet carvingMask, Random randomIn, BlockPos.Mutable MutableIn, 
 			int minHeight, int chunkX, int chunkZ, int xStart, int zStart, int maskY, int y, int atomicBoolean) 
 	{
 		if (y >= minHeight) {
 			return false;
 		} else {
-			mutableBlockPosIn.setPos(xStart, y, zStart);
+			MutableIn.setPos(xStart, y, zStart);
 
-			BlockState fillerBlock = fillerBiomeMap.get(chunkIn.getBiome(mutableBlockPosIn));
+			BlockState fillerBlock = fillerBiomeMap.get(biomeBlockPos.apply(MutableIn));
 			if (fillerBlock == null) {
 				fillerBlock = STONE;
 			}
 
-			BlockState blockstate = chunkIn.getBlockState(mutableBlockPosIn);
+			BlockState blockstate = chunkIn.getBlockState(MutableIn);
 			if (!CARVABLE_BLOCKS.contains(blockstate)) {
 				return false;
 			} else if (y == 10) {
 				float f = randomIn.nextFloat();
 				if ((double) f < 0.25D) {
-					chunkIn.setBlockState(mutableBlockPosIn, Blocks.MAGMA_BLOCK.getDefaultState(), false);
-					chunkIn.getBlocksToBeTicked().scheduleTick(mutableBlockPosIn, Blocks.MAGMA_BLOCK, 0);
+					chunkIn.setBlockState(MutableIn, Blocks.MAGMA_BLOCK.getDefaultState(), false);
+					chunkIn.getBlocksToBeTicked().scheduleTick(MutableIn, Blocks.MAGMA_BLOCK, 0);
 				} else {
-					chunkIn.setBlockState(mutableBlockPosIn, Blocks.OBSIDIAN.getDefaultState(), false);
+					chunkIn.setBlockState(MutableIn, Blocks.OBSIDIAN.getDefaultState(), false);
 				}
 
 				return true;
 			} else if (y < 10) {
-				chunkIn.setBlockState(mutableBlockPosIn, Blocks.LAVA.getDefaultState(), false);
+				chunkIn.setBlockState(MutableIn, Blocks.LAVA.getDefaultState(), false);
 				return false;
 			} else {
 
-				mutableBlockPosIn.setPos(xStart, y, zStart);
-				chunkIn.setBlockState(mutableBlockPosIn, WATER.getBlockState(), false);
+				MutableIn.setPos(xStart, y, zStart);
+				chunkIn.setBlockState(MutableIn, WATER.getBlockState(), false);
 
 				return true;
 			}

@@ -36,15 +36,23 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 			return false;
 		}
 
+		Rotation rot = Rotation.values()[rand.nextInt(Rotation.values().length)];
+		BlockPos.Mutable offset = new BlockPos.Mutable();
 	     
 		//makes sure there is enough solid blocks on ledge to hold this feature.
 		for(int x = -5; x <= 5; x++) 
 		{
 			for(int z = -5; z <= 5; z++)  
 			{
-				if( Math.abs(x*z) > 9 && Math.abs(x*z) < 20 && !worldIn.getBlockState(position.up(1).west(x).north(z)).isSolid()) 
+				if( Math.abs(x*z) > 9 && Math.abs(x*z) < 20) 
 				{
-					return false;
+					//match rotation of structure as it rotates around 0, 0 I think.
+					//The -4 is to make the check rotate the same way as structure and 
+					//then we do +4 to get the actual position again.
+					offset.setPos(x-4, 0, z-4).setPos(offset.rotate(rot));
+					if(!worldIn.getBlockState(position.up(1).west(offset.getX()+4).north(offset.getZ()+4)).isSolid()) {
+						return false;
+					}
 				}
 			}
 		}
@@ -65,7 +73,6 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		
 		
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
-		
 		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
 		
@@ -78,11 +85,11 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		PlacementSettings placementsettings = (
 				new PlacementSettings())
 				.setMirror(Mirror.NONE)
-				.setRotation(Rotation.values()[rand.nextInt(Rotation.values().length)])
+				.setRotation(rot)
 				.setIgnoreEntities(false)
 				.setChunk((ChunkPos)null);
 		
-		template.addBlocksToWorld(worldIn, position.down(8).north(4).west(4), placementsettings);
+		template.addBlocksToWorld(worldIn, position.down(8).north(4).west(4), placementsettings, 2);
 		
 		return true;
 		
