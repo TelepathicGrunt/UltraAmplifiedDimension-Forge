@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -21,7 +22,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig> {
    private static final BlockState DARK_OAK_LOG = Blocks.DARK_OAK_LOG.getDefaultState();
-   private static final BlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState();
+   private static final BlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
 
    public TreeGiantDarkOak(Function<Dynamic<?>, ? extends HugeTreeFeatureConfig> p_i225808_1_) {
        super(p_i225808_1_);

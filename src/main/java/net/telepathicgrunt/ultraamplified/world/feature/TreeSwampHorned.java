@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.BooleanProperty;
@@ -24,7 +25,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig> 
 {
 	 	private static final BlockState TRUNK = Blocks.OAK_LOG.getDefaultState();
-	   private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState();
+	   private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
 
 	    public TreeSwampHorned(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
 	        super(p_i225808_1_);

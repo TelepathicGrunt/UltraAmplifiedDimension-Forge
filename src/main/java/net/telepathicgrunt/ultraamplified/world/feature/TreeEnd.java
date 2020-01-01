@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -20,7 +21,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig> 
 {
    private static final BlockState LOG = Blocks.BIRCH_LOG.getDefaultState();
-   private static final BlockState LEAF = Blocks.DARK_OAK_LEAVES.getDefaultState();
+   private static final BlockState LEAF = Blocks.DARK_OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
    private static final BlockState PURPLE_TERRACOTTA = Blocks.BLUE_TERRACOTTA.getDefaultState();
 
    public TreeEnd(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
@@ -64,6 +65,13 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
          } else if ((isSoil(worldIn, position.down(), p_225557_7_.getSapling())) && position.getY() < worldIn.getMaxHeight() - i - 1) {
         	 placeTerracottaCircle((IWorld)worldIn, position.down());
 
+
+            for(int i2 = 0; i2 < i; ++i2) {
+               if (isAirOrLeaves(worldIn, position.up(i2))) {
+            	  this.setBlockState(worldIn, position.up(i2), LOG);
+               }
+            }
+
             for(int l1 = position.getY() - 3 + i; l1 <= position.getY() + i; ++l1) {
                int j2 = l1 - (position.getY() + i);
                int k2 = 1 - j2 / 2;
@@ -82,13 +90,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
                   }
                }
             }
-
-            for(int i2 = 0; i2 < i; ++i2) {
-               if (isAirOrLeaves(worldIn, position.up(i2))) {
-            	  this.setBlockState(worldIn, position.up(i2), LOG);
-               }
-            }
-
+            
             return true;
          } else {
             return false;

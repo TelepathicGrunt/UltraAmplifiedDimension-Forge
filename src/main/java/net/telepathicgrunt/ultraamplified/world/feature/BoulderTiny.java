@@ -31,82 +31,62 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
 
     public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
-        while (true)
+        Block block = worldIn.getBlockState(position).getBlock();
+        Block block2 = worldIn.getBlockState(position.add(-1,0,-1)).getBlock();
+
+    	//boulder can only generate on grass/dirt
+    	if ((block != Blocks.GRASS_BLOCK && block != Blocks.PODZOL && !func_227250_b_(block)) ||
+    		(block2 != Blocks.GRASS_BLOCK && block2 != Blocks.PODZOL && !func_227250_b_(block2) ))
         {
-            label0:
-            { 
-        		if (position.getY() <= 6 || position.getY() >= 250)
-                {
-                    return false;
-                }
-            
-        		//this and position = position.down(); will keeps moving down position until it finds ground to generate on
-                if (worldIn.isAirBlock(position.down()))
-                {
-                    break label0;
-                }
-                Block block = worldIn.getBlockState(position.down()).getBlock();
-
-            
-            	//boulder will ignore other boulders and will generate only on ground
-            	if (block != Blocks.GRASS && !func_227250_b_(block))
-                {
-                    break label0;
-                }
-                
-
-                for (int currentCount = 0; startRadius >= 0 && currentCount < 3; ++currentCount)
-                {
-                    int x = startRadius + rand.nextInt(2);
-                    int y = startRadius + rand.nextInt(2);
-                    int z = startRadius + rand.nextInt(2);
-                    float calculatedDistance = (float)(x + y + z) * 0.333F + 0.5F;
-
-                    for (BlockPos blockpos : BlockPos.getAllInBoxMutable(position.add(-x, -y, -z), position.add(x, y, z)))
-                    {
-                        if (blockpos.distanceSq(position) <= (double)(calculatedDistance * calculatedDistance))
-                        {
-                        	//adds the blocks for generation in this boulder
-                        	//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation
-                        	int randomChance = rand.nextInt(1400);
-                        	
-                        	// 40/1400th chance for iron ore
-                        	if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 40){
-                        		worldIn.setBlockState(blockpos, ironOre, 4);
-                        	}
-                        	
-                        	// 60/1400th chance for coal ore
-                        	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 100){
-                        		worldIn.setBlockState(blockpos, coalOre, 4);
-                        	}
-                        	
-                        	// 300/1400th chance for andesite
-                        	else if(randomChance <= 400){
-                        		worldIn.setBlockState(blockpos, andesite, 4);
-                        	}
-                        	
-                        	// 300/1400th chance for cobblestone
-                        	else if(randomChance <= 700){
-                        		worldIn.setBlockState(blockpos, cobblestone, 4);
-                        	}
-                        	
-                        	// 700/1400th chance for mossyCobblestone
-                        	else {
-                        		worldIn.setBlockState(blockpos, mossyCobblestone, 4);
-                        	}
-                        }
-                    }
-                    position = position.add(-(startRadius + 1) + rand.nextInt(2 + startRadius * 2), 0 - rand.nextInt(2), -(startRadius + 1) + rand.nextInt(2 + startRadius * 2));
-               
-                    
-                }
-                //finished generating the boulder
-                return true;
-            }
+            return false;
+        }
         
 
-			//this and worldIn.isAirBlock(position.down()) will keeps moving down position until it finds ground to generate on
-            position = position.down();
+        for (int currentCount = 0; startRadius >= 0 && currentCount < 3; ++currentCount)
+        {
+            int x = startRadius + rand.nextInt(2);
+            int y = startRadius + rand.nextInt(2);
+            int z = startRadius + rand.nextInt(2);
+            float calculatedDistance = (float)(x + y + z) * 0.333F + 0.5F;
+
+            for (BlockPos blockpos : BlockPos.getAllInBoxMutable(position.add(-x, -y, -z), position.add(x, y, z)))
+            {
+                if (blockpos.distanceSq(position) <= (double)(calculatedDistance * calculatedDistance))
+                {
+                	//adds the blocks for generation in this boulder
+                	//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation
+                	int randomChance = rand.nextInt(1400);
+                	
+                	// 40/1400th chance for iron ore
+                	if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 40){
+                		worldIn.setBlockState(blockpos.up(), ironOre, 4);
+                	}
+                	
+                	// 60/1400th chance for coal ore
+                	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 100){
+                		worldIn.setBlockState(blockpos.up(), coalOre, 4);
+                	}
+                	
+                	// 300/1400th chance for andesite
+                	else if(randomChance <= 400){
+                		worldIn.setBlockState(blockpos.up(), andesite, 4);
+                	}
+                	
+                	// 300/1400th chance for cobblestone
+                	else if(randomChance <= 700){
+                		worldIn.setBlockState(blockpos.up(), cobblestone, 4);
+                	}
+                	
+                	// 700/1400th chance for mossyCobblestone
+                	else {
+                		worldIn.setBlockState(blockpos.up(), mossyCobblestone, 4);
+                	}
+                }
+            }
+            position = position.add(-(startRadius + 1) + rand.nextInt(2 + startRadius * 2),  -rand.nextInt(2), -(startRadius + 1) + rand.nextInt(2 + startRadius * 2));
         }
+        
+        //finished generating the boulder
+        return true;
     }
 }

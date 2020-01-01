@@ -1,6 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -49,9 +50,9 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansio
 public class FeatureUA
 {
 
-    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(5).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState()))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(5).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
     
     public static <T extends BaseTreeFeatureConfig> T getConfiguredForUndergroundTreeConfig(T treeConfig)
     {
@@ -127,7 +128,7 @@ public class FeatureUA
     public static AbstractTreeFeature<HugeTreeFeatureConfig> GIANT_DARK_FOREST_TREE = new TreeGiantDarkOak(HugeTreeFeatureConfig::deserializeDarkOak);
     public static AbstractTreeFeature<TreeFeatureConfig> PODZOL_TAIGA_TREE = new TreePodzolTaiga(TreeFeatureConfig::func_227338_a_);
     public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new TreeEnd(TreeFeatureConfig::func_227338_a_);
-    public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH_UA = new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
+    public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH_UA = new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1)));
     
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
     public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);

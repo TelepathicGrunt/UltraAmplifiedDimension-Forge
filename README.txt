@@ -16,14 +16,20 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
        
     (V.7.0.1 Changes) (1.15.1 Minecraft)
+    
+    Blocks: 
+·Bamboo can be placed on Glowgrass block, Glowpodzol, Glowdirt, and Coarse Glowdirt.
+·Amplified Portal block now has portal tag, impermeable tag, and dragon immune tag.
 
     Structures:
 ·Made Hanging Ruins more rare in all biomes but more common in all Relic variant biomes.    
 
     Biomes:
+·Fixed bug where leaves would decay on trees in certain biomes.
 ·Increased ramps and columns spawnrate even more in Stone Shore biome.
 ·Increased columns spawnrate much more in Gravelly Columns Field biome.
-·Increased columns spawnrate some more in Rocky Field, Wooden Rocky Field, and Gravelly Field
+·Increased columns spawnrate some more in Rocky Field, Wooden Rocky Field, and Gravelly Field.
+·Tiny boulders in Rocky Taiga and Snowy Rocky Taiga now spawns under ledges too and slightly sticks out of the ground more often to give a more rocky feel.
 
        
     (V.7.0.0 Changes) (1.15.1 Minecraft)

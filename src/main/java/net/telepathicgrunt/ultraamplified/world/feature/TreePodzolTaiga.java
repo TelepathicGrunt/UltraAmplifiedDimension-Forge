@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +22,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig> 
 {
     private static final BlockState TRUNK = Blocks.SPRUCE_LOG.getDefaultState();
-    private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState();
+    private static final BlockState LEAF = Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
     private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
     
     public TreePodzolTaiga(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_) {
@@ -96,7 +97,22 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
         		
         		this.setDirtAt(worldIn, position.down(), position);
                 
-        		
+
+                
+                int randomNum = rand.nextInt(3);
+
+                for (int currentHeight = bottomOfLeaves; currentHeight < height - randomNum; ++currentHeight)
+                {
+                    BlockPos upN = position.up(currentHeight);
+
+                    if (isAirOrLeaves(worldIn, upN))
+                    {
+                    	this.setBlockState(worldIn, upN, TRUNK);
+                    }
+                }
+                
+                placeTrunkVines(world, p_225557_4_, rand, position, bottomOfLeaves, boundingBox);
+                
                 int bounds = rand.nextInt(2);
                 int j3 = 1;
                 int k3 = 0;
@@ -141,22 +157,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
                         ++bounds;
                     }
                 }
-
-                placeTrunkVines(world, p_225557_4_, rand, position, bottomOfLeaves, boundingBox);
                 
-                int randomNum = rand.nextInt(3);
-
-                for (int currentHeight = bottomOfLeaves; currentHeight < height - randomNum; ++currentHeight)
-                {
-                    BlockPos upN = position.up(currentHeight);
-
-                    if (isAirOrLeaves(worldIn, upN))
-                    {
-                    	this.setBlockState(worldIn, upN, TRUNK);
-                    }
-                }
-                
-
                 return true;
             }
             else
