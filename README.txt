@@ -25,6 +25,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Made Hanging Ruins more rare in all biomes but more common in all Relic variant biomes.    
 ·Snow Dungeons, Desert Dungeon, and Badlands Dungeons now cannot have Zombie spawners.
 ·Snow Dungeons can have a Cave Spider spawner.
+·Mushroom Temples now has dirt to cover the exposed Mushroom Stem Blocks on its underside.
+·Ramps now won't replace cactus or mushroom blocks with air blocks.
 
     Biomes:
 ·Fixed bug where leaves would decay on trees in certain biomes.

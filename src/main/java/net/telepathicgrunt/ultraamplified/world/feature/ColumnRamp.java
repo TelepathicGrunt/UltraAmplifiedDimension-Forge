@@ -1,10 +1,13 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -14,6 +17,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
+import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 
@@ -21,10 +25,22 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 {
     protected long seed;
     private final BlockState AIR = Blocks.AIR.getDefaultState();
+	public final Set<Block> irreplacableBlocks;
     
     
     public ColumnRamp(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactoryIn) {
 		super(configFactoryIn);
+		
+		irreplacableBlocks = ImmutableSet.of(Blocks.field_226905_ma_, 
+											 Blocks.AIR,  
+											 Blocks.CAVE_AIR, 
+											 Blocks.BROWN_MUSHROOM_BLOCK, 
+											 Blocks.RED_MUSHROOM_BLOCK, 
+											 Blocks.MUSHROOM_STEM, 
+										  	 Blocks.CACTUS, 
+										  	 BlocksInit.CACTUSBODYBLOCKUA.get(), 
+										  	 BlocksInit.CACTUSCORNERBLOCKUA.get(), 
+										  	 BlocksInit.CACTUSMAINBLOCKUA.get());
 	}
 
 
@@ -186,10 +202,9 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	                //clears out space above disk so there is a hole for entire ramp
 	                int holeHeight = 5;
                     BlockState block = worldIn.getBlockState(blockpos$Mutable.up(holeHeight));
-	                if(block.getMaterial() != Material.AIR && 
-	                  !block.isIn(BlockTags.LEAVES) && 
-	                  !block.isIn(BlockTags.LOGS) && 
-	                  block != Blocks.field_226905_ma_.getDefaultState() && 
+	                if(!block.isIn(BlockTags.LEAVES) && 
+	                   !block.isIn(BlockTags.LOGS) && 
+	                   !irreplacableBlocks.contains(block.getBlock()) && 
 	                  xzDiffSquaredStretched <= (widthAtHeight-1) * (widthAtHeight-1) - 0.5F) 
 	                {
                 		worldIn.setBlockState(blockpos$Mutable.up(holeHeight), AIR, 2);
