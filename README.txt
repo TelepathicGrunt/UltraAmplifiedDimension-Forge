@@ -18,7 +18,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.7.0.1 Changes) (1.15.1 Minecraft)
     
     Blocks: 
-·Bamboo can be placed on Glowgrass block, Glowpodzol, Glowdirt, and Coarse Glowdirt.
+·Bamboo can be placed on Glowgrass Block, Glowpodzol, Glowdirt, Glowmycelium, and Coarse Glowdirt.
 ·Amplified Portal block now has portal tag, impermeable tag, and dragon immune tag.
 
     Structures:
