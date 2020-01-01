@@ -29,17 +29,12 @@ import net.minecraft.world.gen.layer.IslandLayer;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.RemoveTooMuchOceanLayer;
-import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddOceansLayerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.AddSunflowerPlainsLayerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerPickerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
-import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeDebugLayer;
 
 public class BiomeProviderUA extends BiomeProvider{
 
@@ -109,28 +104,28 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 
 
       //generates the main biome layout
-      //IAreaFactory<T>lvt_8_1_ = new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1);
-      IAreaFactory<T>lvt_8_1_ = new BiomeLayerPickerUA().apply(contextFactory.apply(200L), areaFactory1);
-
-
-      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
-
-      //creates biomes that border incompatible biomes
-      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-
-      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
-
-      //generates the hills and M variants/patches of biomes
-      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
-      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
-
-
-      for(int k = 0; k < biomeSize; ++k) {
-         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
-      }
-
-      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
-      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, areaFactory2);
+      IAreaFactory<T>lvt_8_1_ = new BiomeDebugLayer(worldTypeIn, null).apply(contextFactory.apply(200L), areaFactory1);
+//      IAreaFactory<T>lvt_8_1_ = new BiomeLayerPickerUA().apply(contextFactory.apply(200L), areaFactory1);
+//
+//
+//      lvt_8_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_8_1_, 2, contextFactory);
+//
+//      //creates biomes that border incompatible biomes
+//      lvt_8_1_ = BiomeEdgeLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//
+//      IAreaFactory<T> lvt_9_1_ = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, lvt_7_1_, 2, contextFactory);
+//
+//      //generates the hills and M variants/patches of biomes
+//      lvt_8_1_ = HillsAndAmplifiedLayerUA.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_, lvt_9_1_);
+//      lvt_8_1_ = AddSunflowerPlainsLayerUA.INSTANCE.apply(contextFactory.apply(1001L), lvt_8_1_);
+//
+//
+//      for(int k = 0; k < biomeSize; ++k) {
+//         lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+//      }
+//
+//      lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
+//      lvt_8_1_ = MixOceanLayerUA.INSTANCE.apply(contextFactory.apply(100L), lvt_8_1_, areaFactory2);
       return ImmutableList.of(lvt_8_1_, lvt_8_1_, lvt_8_1_);
    }
 	
