@@ -15,6 +15,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+    (V.7.0.1 Changes) (1.15.1 Minecraft)
+
+    Structures:
+·Made Hanging Ruins more rare in all biomes but more common in all Relic variant biomes.    
+
+    Biomes:
+·Increased ramps and columns spawnrate even more in Stone Shore biome.
+·Increased columns spawnrate much more in Gravelly Columns Field biome.
+·Increased columns spawnrate some more in Rocky Field, Wooden Rocky Field, and Gravelly Field
+
+       
     (V.7.0.0 Changes) (1.15.1 Minecraft)
     
     Major Change: 

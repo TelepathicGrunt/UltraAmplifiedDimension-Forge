@@ -377,7 +377,7 @@ public class ConfigUA {
                             		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n"
                             		 +"Spawns in most biomes except for oceans, Nether, and Ice Mountain Biomes.")
                             .translation("ultraamplified.config.structure.hangingruinsspawnrate")
-                            .defineInRange("hangingRuinsSpawnrate", 40, 0, 100);
+                            .defineInRange("hangingRuinsSpawnrate", 60, 0, 100);
             		
             		
             		miniStructureGeneration = builder

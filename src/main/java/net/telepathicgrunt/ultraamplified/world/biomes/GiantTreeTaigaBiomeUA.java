@@ -53,7 +53,7 @@ public class GiantTreeTaigaBiomeUA extends BiomeUA
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.HANGING_RUINS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(LEDGE_UNDERSIDE_MINI_FEATURE.func_227446_a_(new ChanceAndTypeConfig(1f, ChanceAndTypeConfig.Type.HANGING_RUINS))));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.HANGING_RUINS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(LEDGE_UNDERSIDE_MINI_FEATURE.func_227446_a_(new ChanceAndTypeConfig(0.6f, ChanceAndTypeConfig.Type.HANGING_RUINS))));
 		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, FeatureUA.CONTAIN_UNDERGROUND_LIQUID.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addStructureFeaturesUA();
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.COLUMN.func_225566_b_(new ColumnBlocksConfig(Blocks.PODZOL.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState())).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(2, 70, 0, 220))));
@@ -89,12 +89,12 @@ public class GiantTreeTaigaBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.func_225566_b_(new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()))).func_227228_a_(CHANCE_ON_ALL_WATER_BOTTOMS_UA.func_227446_a_(new PercentageAndFrequencyConfig(1F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.GIANT_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.GIANT_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
 								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226810_e_))))
 						.func_227228_a_(AT_SURFACE_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(25, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR
-						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.MEGA_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.MEGA_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
+						.func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(FeatureUA.GIANT_PINE_TREE_2_UA.func_225566_b_(FeatureUA.GIANT_SPRUCE_CONFIG).func_227227_a_(0.040641026F), FeatureUA.GIANT_PINE_TREE_1_UA.func_225566_b_(FeatureUA.GIANT_PINE_CONFIG).func_227227_a_(0.50769232F), Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226809_d_)).func_227227_a_(0.23333334F)),
 								Feature.NORMAL_TREE.func_225566_b_(FeatureUA.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.field_226810_e_))))
 						.func_227228_a_(AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA.func_227446_a_(new AtSurfaceWithExtraConfig(20, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227247_y_.func_225566_b_(FeatureUA.getConfiguredClusterConfig(DefaultBiomeFeatures.field_226831_z_)).func_227228_a_(CHANCE_ON_ALL_SURFACES_UA.func_227446_a_(new PercentageAndFrequencyConfig(0.20F, 2))));

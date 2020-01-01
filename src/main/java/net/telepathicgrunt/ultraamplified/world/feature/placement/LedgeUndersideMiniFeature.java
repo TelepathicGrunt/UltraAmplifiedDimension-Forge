@@ -36,21 +36,26 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   }
 	   
 	   //more logical to do chance like this as this feature does not need to have chances less than 1% while other features/structures do
-	   if(random.nextFloat() * 100 >= chance) {
-		   return Stream.empty();
-	   }
-	   
-	   
-	   int x = random.nextInt(16);
-	   int z = random.nextInt(16);
-	   int topYLayer = YPositionOfBottomOfLayer(worldIn, random.nextInt(174)+74, random, pos.add(x, 0 ,z));
+	   //We do it based on percentage
+	   if(random.nextFloat() * 100 < chance) 
+	   {
+		   int x = random.nextInt(16);
+		   int z = random.nextInt(16);
+		   int topYLayer = YPositionOfBottomOfLayer(worldIn, random.nextInt(174)+74, random, pos.add(x, 0 ,z));
 
-	   //cannot be too low or high 
-	   if(topYLayer < 75 || topYLayer > 248) {
+		   //cannot be too low or high 
+		   if(topYLayer < 75 || topYLayer > 248) {
+			   return Stream.empty();
+		   }
+		   
+		   return Stream.of(pos.add(x-4, topYLayer-1, z-4));
+	   }
+	   else 
+	   {
 		   return Stream.empty();
 	   }
 	   
-	   return Stream.of(pos.add(x-4, topYLayer-1, z-4));
+	   
 	}
 
 	private int YPositionOfBottomOfLayer(IWorld worldIn, int height, Random random, BlockPos pos) {

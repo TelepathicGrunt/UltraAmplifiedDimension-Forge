@@ -30,15 +30,15 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig> {
 
 				if (BiomeGenHelper.frozenBiomes.contains(biome)) 
 				{
-					IceAndSnowAtAllLayer.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowIceAllLayer.place(worldIn, generator, rand, blockpos$mutable, config, biome);
 				}
 				else if(BiomeGenHelper.coldOceanBiomes.contains(biome)) 
 				{
-					ColdOceanSnowFeature.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowLayerColdOceanFeature.place(worldIn, generator, rand, blockpos$mutable, config, biome);
 				}
 				else 
 				{
-					IceAndSnowFeatureUA.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowIceTopLayer.place(worldIn, generator, rand, blockpos$mutable, config, biome);
 				}
 			}
 		}
