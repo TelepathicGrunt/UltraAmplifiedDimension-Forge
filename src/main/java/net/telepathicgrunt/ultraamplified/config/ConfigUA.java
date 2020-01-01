@@ -85,24 +85,24 @@ public class ConfigUA {
     public static boolean desert = true;
     public static boolean forest = true;
     public static boolean taiga = true;
-    public static boolean mountains = true;
+    public static boolean rockyField = true;
     public static boolean swamplands = true;
     public static boolean nether = true;
     public static boolean end = true;
     public static boolean snowyTundra = true;
-    public static boolean iceMountain = true;
+    public static boolean icedTerrain = true;
     public static boolean mushroom = true;
-    public static boolean stoneBeach = true;
+    public static boolean stonePlains = true;
     public static boolean bambooJungle = true;
     public static boolean jungle = true;
-    public static boolean coldBeach = true;
+    public static boolean frozenDesert = true;
     public static boolean birchForest = true;
     public static boolean darkForest = true;
     public static boolean snowyTaiga = true;
     public static boolean giantTreeTaiga = true;
     public static boolean savanna = true;
     public static boolean badlands = true;
-    public static boolean erodedBadlands = true;
+    public static boolean spikyBadlands = true;
     public static boolean iceSpike = true;
     public static boolean frozenOcean = true;
     public static boolean coldOcean = true;
@@ -189,24 +189,24 @@ public class ConfigUA {
 		public final ForgeConfigSpec.BooleanValue desert;
 		public final ForgeConfigSpec.BooleanValue forest;
 		public final ForgeConfigSpec.BooleanValue taiga;
-		public final ForgeConfigSpec.BooleanValue mountains;
+		public final ForgeConfigSpec.BooleanValue rockyField;
 		public final ForgeConfigSpec.BooleanValue swamplands;
 		public final ForgeConfigSpec.BooleanValue nether;
 		public final ForgeConfigSpec.BooleanValue end;
 		public final ForgeConfigSpec.BooleanValue snowyTundra;
-		public final ForgeConfigSpec.BooleanValue iceMountain;
+		public final ForgeConfigSpec.BooleanValue icedTerrain;
 		public final ForgeConfigSpec.BooleanValue mushroom;
-		public final ForgeConfigSpec.BooleanValue stoneBeach;
+		public final ForgeConfigSpec.BooleanValue stonePlains;
 		public final ForgeConfigSpec.BooleanValue bambooJungle;
 		public final ForgeConfigSpec.BooleanValue jungle;
-		public final ForgeConfigSpec.BooleanValue coldBeach;
+		public final ForgeConfigSpec.BooleanValue frozenDesert;
 		public final ForgeConfigSpec.BooleanValue birchForest;
 		public final ForgeConfigSpec.BooleanValue darkForest;
 		public final ForgeConfigSpec.BooleanValue snowyTaiga;
 		public final ForgeConfigSpec.BooleanValue giantTreeTaiga;
 		public final ForgeConfigSpec.BooleanValue savanna;
 		public final ForgeConfigSpec.BooleanValue badlands;
-		public final ForgeConfigSpec.BooleanValue erodedBadlands;
+		public final ForgeConfigSpec.BooleanValue spikyBadlands;
 		public final ForgeConfigSpec.BooleanValue iceSpike;
 		public final ForgeConfigSpec.BooleanValue frozenOcean;
 		public final ForgeConfigSpec.BooleanValue coldOcean;
@@ -635,10 +635,10 @@ public class ConfigUA {
             		.define("taiga", true);
 
 
-            		mountains = builder
+            		rockyField = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.mountains")
-            		.define("mountains", true);
+            		.translation("ultraamplified.config.structure.rockyfield")
+            		.define("rockyField", true);
 
 
             		swamplands = builder
@@ -665,10 +665,10 @@ public class ConfigUA {
             		.define("snowyTundra", true);
 
 
-            		iceMountain = builder
+            		icedTerrain = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.icemountain")
-            		.define("iceMountain", true);
+            		.translation("ultraamplified.config.structure.icedterrain")
+            		.define("icedTerrain", true);
 
 
             		mushroom = builder
@@ -677,10 +677,10 @@ public class ConfigUA {
             		.define("mushroom", true);
 
 
-            		stoneBeach = builder
+            		stonePlains = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.stonebeach")
-            		.define("stoneBeach", true);
+            		.translation("ultraamplified.config.structure.stoneplains")
+            		.define("stonePlains", true);
 
 
             		bambooJungle = builder
@@ -695,10 +695,10 @@ public class ConfigUA {
             		.define("jungle", true);
 
 
-            		coldBeach = builder
+            		frozenDesert = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.coldbeach")
-            		.define("coldBeach", true);
+            		.translation("ultraamplified.config.structure.frozendesert")
+            		.define("frozenDesert", true);
 
 
             		birchForest = builder
@@ -737,10 +737,10 @@ public class ConfigUA {
             		.define("badlands", true);
 
 
-            		erodedBadlands = builder
+            		spikyBadlands = builder
             		.comment("\r\nShould this biome be allowed to spawn?")
-            		.translation("ultraamplified.config.structure.erodedbadlands")
-            		.define("erodedBadlands", true);
+            		.translation("ultraamplified.config.structure.spikybadlands")
+            		.define("spikyBadlands", true);
 
             		
             		iceSpike = builder
@@ -922,24 +922,24 @@ public class ConfigUA {
     	desert = SERVER.desert.get();
     	forest = SERVER.forest.get();
     	taiga = SERVER.taiga.get();
-    	mountains = SERVER.mountains.get();
+    	rockyField = SERVER.rockyField.get();
     	swamplands = SERVER.swamplands.get();
     	nether = SERVER.nether.get();
     	end = SERVER.end.get();
     	snowyTundra = SERVER.snowyTundra.get();
-    	iceMountain = SERVER.iceMountain.get();
+    	icedTerrain = SERVER.icedTerrain.get();
     	mushroom = SERVER.mushroom.get();
-    	stoneBeach = SERVER.stoneBeach.get();
+    	stonePlains = SERVER.stonePlains.get();
     	bambooJungle = SERVER.bambooJungle.get();
     	jungle = SERVER.jungle.get();
-    	coldBeach = SERVER.coldBeach.get();
+    	frozenDesert = SERVER.frozenDesert.get();
     	birchForest = SERVER.birchForest.get();
     	darkForest = SERVER.darkForest.get();
     	snowyTaiga = SERVER.snowyTaiga.get();
     	giantTreeTaiga = SERVER.giantTreeTaiga.get();
     	savanna = SERVER.savanna.get();
     	badlands = SERVER.badlands.get();
-    	erodedBadlands = SERVER.erodedBadlands.get();
+    	spikyBadlands = SERVER.spikyBadlands.get();
     	iceSpike = SERVER.iceSpike.get();
     	frozenOcean = SERVER.frozenOcean.get();
     	coldOcean = SERVER.coldOcean.get();

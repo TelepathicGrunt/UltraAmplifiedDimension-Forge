@@ -170,6 +170,18 @@ public class DataFixer {
                 else if(entry.key.getPath().equals("ice_mountain")) {
                     newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "iced_terrain");
                 }
+                else if(entry.key.getPath().equals("mountains")) {
+                    newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "rocky_field");
+                }
+                else if(entry.key.getPath().equals("wooden_mountains")) {
+                    newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "wooden_rocky_field");
+                }
+                else if(entry.key.getPath().equals("gravelly_mountains")) {
+                    newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "gravelly_field");
+                }
+                else if(entry.key.getPath().equals("modified_gravelly_mountains")) {
+                    newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "gravelly_columns_field");
+                }
                 else {
                     newRL = new ResourceLocation(UltraAmplified.MODID + ":" + entry.key.getPath());
                 }

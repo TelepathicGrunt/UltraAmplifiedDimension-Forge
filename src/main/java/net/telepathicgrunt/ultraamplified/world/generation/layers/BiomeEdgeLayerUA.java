@@ -16,11 +16,11 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
 	    	  && !this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.SANDLESS_BADLANDS, BiomeGenHelper.BADLANDS)
 	    	  && !this.replaceBiomeEdge(areaArray, north, west, south, east, currentBiomeID, BiomeGenHelper.GIANT_TREE_TAIGA, BiomeGenHelper.TAIGA))
 	      {
-        	if (ConfigUA.mountains && currentBiomeID == BiomeGenHelper.DESERT)
+        	if (ConfigUA.rockyField && currentBiomeID == BiomeGenHelper.DESERT)
             {
                if (north == BiomeGenHelper.SNOWY_TUNDRA || west == BiomeGenHelper.SNOWY_TUNDRA || east == BiomeGenHelper.SNOWY_TUNDRA || south == BiomeGenHelper.SNOWY_TUNDRA) 
                {
-                  return BiomeGenHelper.WOODED_MOUNTAINS;
+                  return BiomeGenHelper.WOODED_ROCKY_FIELD;
                }
             }
             else if (ConfigUA.plains && currentBiomeID == BiomeGenHelper.SWAMP)
@@ -61,7 +61,7 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
                   return BiomeGenHelper.JUNGLE_EDGE;
                }
             }
-			else if(ConfigUA.coldBeach && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.ICY) {
+			else if(ConfigUA.frozenDesert && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.ICY) {
 				if (	BiomeGenHelper.isOcean(north) ||
 						BiomeGenHelper.isOcean(west) ||
 						BiomeGenHelper.isOcean(east) ||
@@ -70,7 +70,7 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer {
 					return BiomeGenHelper.FROZEN_DESERT;
 				}
 			}
-			else if(ConfigUA.stoneBeach && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.EXTREME_HILLS) {
+			else if(ConfigUA.stonePlains && BiomeGenHelper.BiomeRegistry.getValue(currentBiomeID).getCategory() == Biome.Category.EXTREME_HILLS) {
 				if (	BiomeGenHelper.isOcean(north) ||
 						BiomeGenHelper.isOcean(west) ||
 						BiomeGenHelper.isOcean(east) ||

@@ -61,8 +61,8 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
         	//makes sure forest is selected in the config setting before allowing it to spawn through here
             biomeIdToReturn = context.random(3) == 0 ? BiomeGenHelper.RELIC_FOREST : BiomeGenHelper.FOREST;
          }
-         else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && ConfigUA.iceMountain) {
-            biomeIdToReturn = BiomeGenHelper.ICED_LAND;
+         else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && ConfigUA.icedTerrain) {
+            biomeIdToReturn = BiomeGenHelper.ICED_TERRAIN;
          }
          else if (BiomeGenHelper.areUABiomesSimilar(biomeId1, BiomeGenHelper.WOODED_BADLANDS)) {
             biomeIdToReturn = BiomeGenHelper.BADLANDS;

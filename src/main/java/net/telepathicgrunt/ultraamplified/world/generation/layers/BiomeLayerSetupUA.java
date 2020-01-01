@@ -206,7 +206,7 @@ public class BiomeLayerSetupUA {
         //warm
         if(ConfigUA.forest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.FOREST, 26));
         if(ConfigUA.darkForest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.DARK_FOREST, 26));
-        if(ConfigUA.mountains) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MOUNTAINS, 26));
+        if(ConfigUA.rockyField) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.ROCKY_FIELD, 26));
         if(ConfigUA.plains) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.PLAINS, 26));
         if(ConfigUA.birchForest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.BIRCH_FOREST, 26));
         if(ConfigUA.swamplands) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.SWAMP, 26));
@@ -214,10 +214,10 @@ public class BiomeLayerSetupUA {
         
         //cool
         if(ConfigUA.forest) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.FOREST, 30));
-        if(ConfigUA.mountains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MOUNTAINS, 30));
+        if(ConfigUA.rockyField) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.ROCKY_FIELD, 30));
         if(ConfigUA.taiga) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.TAIGA, 30));
         if(ConfigUA.plains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 10));
-        if(ConfigUA.stoneBeach) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_PLAINS, 15));
+        if(ConfigUA.stonePlains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_PLAINS, 15));
         if(ConfigUA.end) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END_FIELD, 30));
         if(ConfigUA.mushroom) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 12));
 
@@ -228,12 +228,12 @@ public class BiomeLayerSetupUA {
         	if(ConfigUA.iceSpike) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_SPIKES, 26));
         	
         	//turns snowy tundra into ice mountain only if config has snowy tundra off and ice mountain on
-            if(ConfigUA.iceMountain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 26));
+            if(ConfigUA.icedTerrain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 26));
         }
 
-        if(ConfigUA.iceMountain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 17));
+        if(ConfigUA.icedTerrain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 17));
         if(ConfigUA.snowyTaiga) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
-        if(ConfigUA.coldBeach) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.FROZEN_DESERT, 10));
+        if(ConfigUA.frozenDesert) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.FROZEN_DESERT, 10));
         
        
         
@@ -247,7 +247,7 @@ public class BiomeLayerSetupUA {
 		    mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.WOODED_BADLANDS, 10));
         } 
         //turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
-        else if(ConfigUA.erodedBadlands) mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
+        else if(ConfigUA.spikyBadlands) mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
         
 
         

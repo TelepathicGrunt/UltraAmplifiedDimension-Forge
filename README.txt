@@ -49,13 +49,15 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·All Badlands now can natually spawn Husk and Cave Spider mobs.
 ·All Deserts now can naturally spawn Cave Spider mobs.
 ·Fixed bug that prevented the Better Cactus from spawning in any Badlands biome.
-·Increased ramps and columns in Stone Shore biome.
+·Increased ramps and columns spawnrate in Stone Shore biome.
+·Increased columns spawnrate a lot in Gravelly Columns Field biome.
+·Slightly increased columns spawnrate in Rocky Field, Wooden Rocky Field, and Gravelly Field
 ·Removed Mushroom Field biome from hot temperature and icy temperature region. Will still spawn in cool and cold temperature regions.
 
     Biomes renamed to match the terrain generation better:
-·Savana Plateau -> Savanna Terrace
-·Shattered Savana Plateau -> Shattered Savanna Terrace
-·Ice Mountain -> Ice
+·Savanna Plateau -> Savanna Terrace
+·Shattered Savanna Plateau -> Shattered Savanna Terrace
+·Ice Mountain -> Iced Terrain
 ·Wooded Badlands Plateau -> Wooded Badlands
 ·Badlands Plateau -> Sandless Badlands
 ·Swampland Hills -> Spooky Swampland
@@ -70,8 +72,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Nether -> Netherland
 ·Taiga Mountain UA -> Rocky Taiga UA
 ·Snowy Taiga Mountain UA -> Snowy Rocky Taiga UA
-·Ice Mountain -> Iced Terrain
-·
+·Mountains -> Rocky Field
+·Wooden Mountains -> Wooden Rocky Field
+·Gravelly Mountains -> Gravelly Field
+·Modified Gravelly Mountains Field
 ·Desert Hills -> Relic Desert
 ·Wooden Hills -> Relic Forest
 ·Taiga Hills -> Relic Taiga

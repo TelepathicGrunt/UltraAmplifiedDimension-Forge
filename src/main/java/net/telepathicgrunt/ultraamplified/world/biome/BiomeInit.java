@@ -40,7 +40,7 @@ import net.telepathicgrunt.ultraamplified.world.biomes.GiantSpruceTaigaPillarsBi
 import net.telepathicgrunt.ultraamplified.world.biomes.GiantSpruceTaigaRelicPillarsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.GiantTreeTaigaBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.GiantTreeTaigaRelicBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.biomes.GravellyMountainsBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biomes.GravellyFieldBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.IcedTerrainBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.IceSpikesBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.JungleBiomeUA;
@@ -48,11 +48,11 @@ import net.telepathicgrunt.ultraamplified.world.biomes.JungleEdgeBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.JungleRelicBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.OceanLukewarmBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDissectedPlateauBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.biomes.ModifiedGravellyMountainsBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biomes.GravellyColumnsFieldBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.FlowerJungleBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.FlowerJungleEdgeBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDensedWoodedBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.biomes.MountainsBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biomes.RockyFieldBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.MushroomFieldsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.NetherlandBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.OceanBiomeUA;
@@ -78,7 +78,7 @@ import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestRelicBiome
 import net.telepathicgrunt.ultraamplified.world.biomes.OceanWarmBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsWoodedBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.ForestRelicBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.biomes.WoodedMountainsBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biomes.RockyFieldWoodedBiomeUA;
 
 public class BiomeInit {
 
@@ -91,7 +91,7 @@ public class BiomeInit {
 	public static Biome DESERT = new DesertBiomeUA();
 	public static Biome FOREST = new ForestBiomeUA();
 	public static Biome TAIGA = new TaigaBiomeUA();
-	public static Biome MOUNTAINS = new MountainsBiomeUA();
+	public static Biome ROCKY_FIELD = new RockyFieldBiomeUA();
 	public static Biome SWAMP = new SwampBiomeUA();
 	public static Biome NETHERLAND =  new NetherlandBiomeUA();
 	public static Biome END_FIELD = new EndFieldBiomeUA();
@@ -115,7 +115,7 @@ public class BiomeInit {
 	public static Biome RELIC_SNOWY_TAIGA = new SnowyTaigaRelicBiomeUA();
 	public static Biome GIANT_TREE_TAIGA = new GiantTreeTaigaBiomeUA();
 	public static Biome RELIC_GIANT_TREE_TAIGA = new GiantTreeTaigaRelicBiomeUA();
-	public static Biome WOODED_MOUNTAINS = new WoodedMountainsBiomeUA();
+	public static Biome WOODED_ROCKY_FIELD = new RockyFieldWoodedBiomeUA();
 	public static Biome SAVANNA = new SavannaBiomeUA();
 	public static Biome SAVANNA_TERRACE = new SavannaTerraceBiomeUA();
 	public static Biome BADLANDS = new BadlandsBiomeUA();
@@ -123,7 +123,7 @@ public class BiomeInit {
 	public static Biome SANDLESS_BADLANDS = new BadlandsSandlessBiomeUA();
 	public static Biome SUNFLOWER_PLAINS = new SunflowerPlainsBiomeUA();
 	public static Biome DESERT_LAKES = new DesertLakesBiomeUA();
-	public static Biome GRAVELLY_MOUNTAINS = new GravellyMountainsBiomeUA();
+	public static Biome GRAVELLY_FIELD = new GravellyFieldBiomeUA();
 	public static Biome FLOWER_FOREST = new FlowerForestBiomeUA();
 	public static Biome ROCKY_TAIGA = new TaigaRockyBiomeUA();
 	public static Biome SPOOKY_SWAMP = new SwampSpookyBiomeUA();
@@ -136,7 +136,7 @@ public class BiomeInit {
 	public static Biome SNOWY_ROCKY_TAIGA = new SnowyTaigaRockyBiomeUA();
 	public static Biome GIANT_SPRUCE_TAIGA_PILLARS = new GiantSpruceTaigaPillarsBiomeUA();
 	public static Biome RELIC_GIANT_SPRUCE_TAIGA_PILLARS = new GiantSpruceTaigaRelicPillarsBiomeUA();
-	public static Biome MODIFIED_GRAVELLY_MOUNTAINS = new ModifiedGravellyMountainsBiomeUA();
+	public static Biome GRAVELLY_COLUMNS_FIELD = new GravellyColumnsFieldBiomeUA();
 	public static Biome SHATTERED_SAVANNA = new ShatteredSavannaBiomeUA();
 	public static Biome SHATTERED_SAVANNA_TERRACE = new ShatteredSavannaTerraceBiomeUA();
 	public static Biome SPIKY_BADLANDS = new BadlandsSpikyBiomeUA();
@@ -167,7 +167,7 @@ public class BiomeInit {
 		initBiome(DESERT, "Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY);
 		initBiome(FOREST, "Forest", BiomeType.WARM, Type.FOREST);
 		initBiome(TAIGA, "Taiga", BiomeType.COOL, Type.CONIFEROUS, Type.FOREST);
-		initBiome(MOUNTAINS, "Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.HILLS);
+		initBiome(ROCKY_FIELD, "Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.HILLS);
 		initBiome(SWAMP, "Swamp", BiomeType.WARM, Type.WET, Type.SWAMP);
 		initBiome(NETHERLAND, "Netherland", BiomeType.DESERT, Type.NETHER, Type.HOT, Type.DRY);
 		initBiome(END_FIELD, "End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
@@ -191,7 +191,7 @@ public class BiomeInit {
 		initBiome(RELIC_SNOWY_TAIGA, "Relic Snowy Taiga", BiomeType.ICY, Type.FOREST, Type.CONIFEROUS, Type.SNOWY, Type.COLD, Type.HILLS);
 		initBiome(GIANT_TREE_TAIGA, "Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST);
 		initBiome(RELIC_GIANT_TREE_TAIGA, "Relic Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.HILLS);
-		initBiome(WOODED_MOUNTAINS, "Wooden Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.FOREST, Type.SPARSE);
+		initBiome(WOODED_ROCKY_FIELD, "Wooden Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.FOREST, Type.SPARSE);
 		initBiome(SAVANNA, "Savanna", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE);
 		initBiome(SAVANNA_TERRACE, "Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
 		initBiome(BADLANDS, "Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
@@ -199,7 +199,7 @@ public class BiomeInit {
 		initBiome(SANDLESS_BADLANDS, "Sandless_Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
 		initBiome(SUNFLOWER_PLAINS, "Sunflower Plains", BiomeType.WARM, Type.PLAINS, Type.RARE);
 		initBiome(DESERT_LAKES, "Desert Lakes", BiomeType.DESERT, Type.HOT, Type.SANDY, Type.RARE);
-		initBiome(GRAVELLY_MOUNTAINS, "Gravelly Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
+		initBiome(GRAVELLY_FIELD, "Gravelly Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
 		initBiome(FLOWER_FOREST, "Flower Forest", BiomeType.WARM, Type.FOREST, Type.HILLS, Type.RARE);
 		initBiome(ROCKY_TAIGA, "Rocky Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.MOUNTAIN, Type.RARE);
 		initBiome(SPOOKY_SWAMP, "Spooky Swampland", BiomeType.WARM, Type.SWAMP, Type.WET, Type.HILLS, Type.RARE);
@@ -212,7 +212,7 @@ public class BiomeInit {
 		initBiome(SNOWY_ROCKY_TAIGA, "Snowy Rocky Taiga", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.CONIFEROUS, Type.MOUNTAIN, Type.FOREST, Type.RARE);
 		initBiome(GIANT_SPRUCE_TAIGA_PILLARS, "Giant Spruce Taiga", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.RARE);
 		initBiome(RELIC_GIANT_SPRUCE_TAIGA_PILLARS, "Relic Giant Spruce Taiga", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
-		initBiome(MODIFIED_GRAVELLY_MOUNTAINS, "Modified Gravelly Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
+		initBiome(GRAVELLY_COLUMNS_FIELD, "Gravelly Columns Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
 		initBiome(SHATTERED_SAVANNA, "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
 		initBiome(SHATTERED_SAVANNA_TERRACE, "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
 		initBiome(SPIKY_BADLANDS, "Spiky Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
@@ -239,7 +239,7 @@ public class BiomeInit {
 		biomes = ImmutableSet.of(
 				PLAINS, 
 				DESERT, 
-				MOUNTAINS, 
+				ROCKY_FIELD, 
 				FOREST, 
 				TAIGA, 
 				SWAMP, 
@@ -265,7 +265,7 @@ public class BiomeInit {
 				RELIC_SNOWY_TAIGA, 
 				GIANT_TREE_TAIGA, 
 				RELIC_GIANT_TREE_TAIGA, 
-				WOODED_MOUNTAINS, 
+				WOODED_ROCKY_FIELD, 
 				SAVANNA, 
 				SAVANNA_TERRACE, 
 				BADLANDS, 
@@ -273,7 +273,7 @@ public class BiomeInit {
 				SANDLESS_BADLANDS, 
 				SUNFLOWER_PLAINS, 
 				DESERT_LAKES, 
-				GRAVELLY_MOUNTAINS, 
+				GRAVELLY_FIELD, 
 				FLOWER_FOREST, 
 				ROCKY_TAIGA, 
 				SPOOKY_SWAMP, 
@@ -286,7 +286,7 @@ public class BiomeInit {
 				SNOWY_ROCKY_TAIGA, 
 				GIANT_SPRUCE_TAIGA_PILLARS, 
 				RELIC_GIANT_SPRUCE_TAIGA_PILLARS,
-				MODIFIED_GRAVELLY_MOUNTAINS,
+				GRAVELLY_COLUMNS_FIELD,
 				SHATTERED_SAVANNA, 
 				SHATTERED_SAVANNA_TERRACE, 
 				SPIKY_BADLANDS, 
@@ -338,8 +338,8 @@ public class BiomeInit {
     	BASE_TO_MUTATION_MAP.put(BIRCH_FOREST, TALL_BIRCH_FOREST);
     	BASE_TO_MUTATION_MAP.put(RELIC_BIRCH_FOREST, RELIC_TALL_BIRCH_FOREST);
     	BASE_TO_MUTATION_MAP.put(SNOWY_TAIGA, SNOWY_ROCKY_TAIGA);
-    	BASE_TO_MUTATION_MAP.put(MOUNTAINS, GRAVELLY_MOUNTAINS);
-    	BASE_TO_MUTATION_MAP.put(WOODED_MOUNTAINS, MODIFIED_GRAVELLY_MOUNTAINS);
+    	BASE_TO_MUTATION_MAP.put(ROCKY_FIELD, GRAVELLY_FIELD);
+    	BASE_TO_MUTATION_MAP.put(WOODED_ROCKY_FIELD, GRAVELLY_COLUMNS_FIELD);
     	BASE_TO_MUTATION_MAP.put(FOREST, FLOWER_FOREST);
     	BASE_TO_MUTATION_MAP.put(SNOWY_TUNDRA, ICE_SPIKES);
     	BASE_TO_MUTATION_MAP.put(JUNGLE, FLOWER_JUNGLE);
@@ -373,7 +373,7 @@ public class BiomeInit {
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(BIRCH_FOREST), BiomeRegistry.getID(RELIC_BIRCH_FOREST));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SNOWY_TAIGA), BiomeRegistry.getID(RELIC_SNOWY_TAIGA));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(GIANT_TREE_TAIGA), BiomeRegistry.getID(RELIC_GIANT_TREE_TAIGA));
-    	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(MOUNTAINS), BiomeRegistry.getID(WOODED_MOUNTAINS));
+    	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(ROCKY_FIELD), BiomeRegistry.getID(WOODED_ROCKY_FIELD));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SAVANNA), BiomeRegistry.getID(SAVANNA_TERRACE));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(OCEAN), BiomeRegistry.getID(DEEP_OCEAN));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(COLD_OCEAN), BiomeRegistry.getID(DEEP_COLD_OCEAN));

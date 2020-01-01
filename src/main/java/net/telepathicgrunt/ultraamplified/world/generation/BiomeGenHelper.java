@@ -18,10 +18,10 @@ public enum BiomeGenHelper {
    public static final int SWAMP = BiomeRegistry.getID(BiomeInit.SWAMP);
    public static final int FOREST = BiomeRegistry.getID(BiomeInit.FOREST);
    public static final int DESERT = BiomeRegistry.getID(BiomeInit.DESERT);
-   public static final int WOODED_MOUNTAINS = BiomeRegistry.getID(BiomeInit.WOODED_MOUNTAINS);
+   public static final int WOODED_ROCKY_FIELD = BiomeRegistry.getID(BiomeInit.WOODED_ROCKY_FIELD);
    public static final int RELIC_FOREST = BiomeRegistry.getID(BiomeInit.RELIC_FOREST);
    public static final int SNOWY_TUNDRA = BiomeRegistry.getID(BiomeInit.SNOWY_TUNDRA);
-   public static final int ICED_LAND = BiomeRegistry.getID(BiomeInit.ICED_TERRAIN);
+   public static final int ICED_TERRAIN = BiomeRegistry.getID(BiomeInit.ICED_TERRAIN);
    public static final int BAMBOO_JUNGLE = BiomeRegistry.getID(BiomeInit.BAMBOO_JUNGLE);
    public static final int JUNGLE = BiomeRegistry.getID(BiomeInit.JUNGLE);
    public static final int JUNGLE_EDGE = BiomeRegistry.getID(BiomeInit.JUNGLE_EDGE);
