@@ -202,7 +202,6 @@ public class BiomeLayerSetupUA {
         if(ConfigUA.savanna) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.SAVANNA, 40));
         if(ConfigUA.plains) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.PLAINS, 20));
         if(ConfigUA.nether) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.NETHER, 30));
-        if(ConfigUA.mushroom) biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
 
         //warm
         if(ConfigUA.forest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.FOREST, 26));
@@ -211,7 +210,7 @@ public class BiomeLayerSetupUA {
         if(ConfigUA.plains) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.PLAINS, 26));
         if(ConfigUA.birchForest) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.BIRCH_FOREST, 26));
         if(ConfigUA.swamplands) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.SWAMP, 26));
-        if(ConfigUA.mushroom) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+        if(ConfigUA.mushroom) biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 12));
         
         //cool
         if(ConfigUA.forest) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.FOREST, 30));
@@ -220,7 +219,7 @@ public class BiomeLayerSetupUA {
         if(ConfigUA.plains) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 10));
         if(ConfigUA.stoneBeach) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_SHORE, 15));
         if(ConfigUA.end) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END, 30));
-        if(ConfigUA.mushroom) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
+        if(ConfigUA.mushroom) biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 12));
 
         //icy
         if(ConfigUA.snowyTundra) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TUNDRA, 45));
@@ -235,7 +234,6 @@ public class BiomeLayerSetupUA {
         if(ConfigUA.iceMountain) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_MOUNTAIN, 17));
         if(ConfigUA.snowyTaiga) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
         if(ConfigUA.coldBeach) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_BEACH, 10));
-        if(ConfigUA.mushroom) biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 10));
         
        
         

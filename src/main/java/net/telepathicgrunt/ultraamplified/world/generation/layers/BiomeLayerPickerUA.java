@@ -12,14 +12,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
-public class BiomeLayerUA implements IC0Transformer 
+public class BiomeLayerPickerUA implements IC0Transformer 
 {
-	BiomeLayerSetupUA biomeLayerHelper;
+	BiomeLayerSetupUA biomeLayer;
     private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>)ForgeRegistries.BIOMES);
     
-    public BiomeLayerUA()
+    public BiomeLayerPickerUA()
     {
-    	biomeLayerHelper = new BiomeLayerSetupUA();
+    	biomeLayer = new BiomeLayerSetupUA();
     }
     
     public int apply(INoiseRandom context, int value) {

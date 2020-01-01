@@ -49,7 +49,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·All Badlands now can natually spawn Husk and Cave Spider mobs.
 ·All Deserts now can naturally spawn Cave Spider mobs.
 ·Fixed bug that prevented the Better Cactus from spawning in any Badlands biome.
+·Increased ramps and columns in Stone Shore biome.
+·Removed Mushroom biome from hot temperature and icy temperature region. Will still spawn in cool and cold temperature regions.
 
+    Biomes renamed to match the terrain generation better:
+·Savana Plateau -> Savanna Terrace
+·Shattered Savana Plateau -> Shattered Savanna Terrace
 
        
     (V.6.12.2 Changes) (1.14.4 Minecraft)

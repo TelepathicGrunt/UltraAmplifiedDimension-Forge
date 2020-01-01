@@ -117,7 +117,7 @@ public class BiomeInit {
 	public static Biome GIANT_TREE_TAIGA_HILLS = new GiantTreeTaigaHillsBiomeUA();
 	public static Biome WOODED_MOUNTAINS = new WoodedMountainsBiomeUA();
 	public static Biome SAVANNA = new SavannaBiomeUA();
-	public static Biome SAVANNA_PLATEAU = new SavannaPlateauBiomeUA();
+	public static Biome SAVANNA_TERRACE = new SavannaPlateauBiomeUA();
 	public static Biome BADLANDS = new BadlandsBiomeUA();
 	public static Biome WOODED_BADLANDS_PLATEAU = new WoodedBadlandsPlateauBiomeUA();
 	public static Biome BADLANDS_PLATEAU = new BadlandsPlateauBiomeUA();
@@ -138,7 +138,7 @@ public class BiomeInit {
 	public static Biome GIANT_SPRUCE_TAIGA_HILLS = new GiantSpruceTaigaHillsBiomeUA();
 	public static Biome MODIFIED_GRAVELLY_MOUNTAINS = new ModifiedGravellyMountainsBiomeUA();
 	public static Biome SHATTERED_SAVANNA = new ShatteredSavannaBiomeUA();
-	public static Biome SHATTERED_SAVANNA_PLATEAU = new ShatteredSavannaPlateauBiomeUA();
+	public static Biome SHATTERED_SAVANNA_TERRACE = new ShatteredSavannaPlateauBiomeUA();
 	public static Biome ERODED_BADLANDS = new ErodedBadlandsBiomeUA();
 	public static Biome MODIFIED_WOODED_BADLANDS_PLATEAU = new ModifiedWoodedBadlandsPlateauBiomeUA();
 	public static Biome MODIFIED_BADLANDS_PLATEAU = new ModifiedBadlandsPlateauBiomeUA();
@@ -193,7 +193,7 @@ public class BiomeInit {
 		initBiome(GIANT_TREE_TAIGA_HILLS, "Giant Tree Taiga Hills", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.HILLS);
 		initBiome(WOODED_MOUNTAINS, "Wooden Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.FOREST, Type.SPARSE);
 		initBiome(SAVANNA, "Savanna", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE);
-		initBiome(SAVANNA_PLATEAU, "Savanna Plateau", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
+		initBiome(SAVANNA_TERRACE, "Savanna Plateau", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
 		initBiome(BADLANDS, "Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
 		initBiome(WOODED_BADLANDS_PLATEAU, "Wooded Badlands Plateau", BiomeType.DESERT, Type.MESA, Type.SANDY, Type.SPARSE);
 		initBiome(BADLANDS_PLATEAU, "Badlands Plateau", BiomeType.DESERT, Type.MESA, Type.SANDY);
@@ -214,7 +214,7 @@ public class BiomeInit {
 		initBiome(GIANT_SPRUCE_TAIGA_HILLS, "Giant Spruce Taiga Hills", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
 		initBiome(MODIFIED_GRAVELLY_MOUNTAINS, "Modified Gravelly Mountains", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
 		initBiome(SHATTERED_SAVANNA, "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
-		initBiome(SHATTERED_SAVANNA_PLATEAU, "Shattered Savanna Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
+		initBiome(SHATTERED_SAVANNA_TERRACE, "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
 		initBiome(ERODED_BADLANDS, "Eroded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(MODIFIED_WOODED_BADLANDS_PLATEAU, "Modified Wooded Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
 		initBiome(MODIFIED_BADLANDS_PLATEAU, "Modified Badlands Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
@@ -267,7 +267,7 @@ public class BiomeInit {
 				GIANT_TREE_TAIGA_HILLS, 
 				WOODED_MOUNTAINS, 
 				SAVANNA, 
-				SAVANNA_PLATEAU, 
+				SAVANNA_TERRACE, 
 				BADLANDS, 
 				WOODED_BADLANDS_PLATEAU, 
 				BADLANDS_PLATEAU, 
@@ -288,7 +288,7 @@ public class BiomeInit {
 				GIANT_SPRUCE_TAIGA_HILLS,
 				MODIFIED_GRAVELLY_MOUNTAINS,
 				SHATTERED_SAVANNA, 
-				SHATTERED_SAVANNA_PLATEAU, 
+				SHATTERED_SAVANNA_TERRACE, 
 				ERODED_BADLANDS, 
 				MODIFIED_WOODED_BADLANDS_PLATEAU,
 				MODIFIED_BADLANDS_PLATEAU,
@@ -351,7 +351,7 @@ public class BiomeInit {
     	BASE_TO_MUTATION_MAP.put(GIANT_TREE_TAIGA_HILLS, GIANT_SPRUCE_TAIGA_HILLS);
     	BASE_TO_MUTATION_MAP.put(DARK_FOREST, DARK_FOREST_HILLS);
     	BASE_TO_MUTATION_MAP.put(SAVANNA, SHATTERED_SAVANNA);
-    	BASE_TO_MUTATION_MAP.put(SAVANNA_PLATEAU, SHATTERED_SAVANNA_PLATEAU);
+    	BASE_TO_MUTATION_MAP.put(SAVANNA_TERRACE, SHATTERED_SAVANNA_TERRACE);
     	BASE_TO_MUTATION_MAP.put(SWAMP, SWAMP_HILLS);
     	BASE_TO_MUTATION_MAP.put(TAIGA, TAIGA_MOUNTAINS);
     }
@@ -374,7 +374,7 @@ public class BiomeInit {
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SNOWY_TAIGA), BiomeRegistry.getID(SNOWY_TAIGA_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(GIANT_TREE_TAIGA), BiomeRegistry.getID(GIANT_TREE_TAIGA_HILLS));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(MOUNTAINS), BiomeRegistry.getID(WOODED_MOUNTAINS));
-    	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SAVANNA), BiomeRegistry.getID(SAVANNA_PLATEAU));
+    	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(SAVANNA), BiomeRegistry.getID(SAVANNA_TERRACE));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(OCEAN), BiomeRegistry.getID(DEEP_OCEAN));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(COLD_OCEAN), BiomeRegistry.getID(DEEP_COLD_OCEAN));
     	BASE_TO_HILLS_MAP.put(BiomeRegistry.getID(FROZEN_OCEAN), BiomeRegistry.getID(DEEP_FROZEN_OCEAN));
