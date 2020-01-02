@@ -1,49 +1,35 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class WitchHutUA extends Structure<NoFeatureConfig> {
+public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig> {
 
-	private static final List<Biome.SpawnListEntry> WITCH_HUT_ENEMIES = Lists
-			.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
-	private static final List<Biome.SpawnListEntry> WITCH_HUT_PASSIVE = Lists
-			.newArrayList(new Biome.SpawnListEntry(EntityType.CAT, 1, 1, 1));
-
-	public WitchHutUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+	public IceSpikeTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
 		super(p_i51427_1_);
-	}
-
-	public Structure.IStartFactory getStartFactory() {
-		return WitchHutUA.Start::new;
 	}
 
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
 			int spacingOffsetsX, int spacingOffsetsZ) {
-		int maxDistance = ConfigUA.witchHutSpawnrate;
+		int maxDistance = ConfigUA.iceSpikeTempleSpawnrate;
 		int minDistance = 8;
 		if (maxDistance < 9) {
 			minDistance = maxDistance - 1;
@@ -63,46 +49,27 @@ public class WitchHutUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public String getStructureName() {
-		return UltraAmplified.MODID + ":witch_hut";
+		return UltraAmplified.MODID + ":ice_spike_temple";
 	}
 
 	public int getSize() {
 		return 3;
 	}
 
+	public Structure.IStartFactory getStartFactory() {
+		return IceSpikeTempleStructureUA.Start::new;
+	}
+
 	protected int getSeedModifier() {
-		return 14357620;
-	}
-
-	public List<Biome.SpawnListEntry> getSpawnList() {
-		return WITCH_HUT_ENEMIES;
-	}
-
-	public List<Biome.SpawnListEntry> getCreatureSpawnList() {
-		return WITCH_HUT_PASSIVE;
-	}
-
-	public boolean func_202383_b(IWorld p_202383_1_, BlockPos p_202383_2_) {
-		StructureStart structurestart = this.getStart(p_202383_1_, p_202383_2_, true);
-		if (structurestart != StructureStart.DUMMY && structurestart instanceof WitchHutUA.Start
-				&& !structurestart.getComponents().isEmpty()) {
-			StructurePiece structurepiece = structurestart.getComponents().get(0);
-			return structurepiece instanceof WitchHutPiecesUA;
-		} else {
-			return false;
-		}
+		return 14357621;
 	}
 
 	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.witchHutSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+			if (ConfigUA.iceSpikeTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
 				return true;
 			}
 		}
@@ -115,35 +82,36 @@ public class WitchHutUA extends Structure<NoFeatureConfig> {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int x, int z, Biome biomeIn) {
-
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
+				Biome biomeIn) {
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			int i = 5;
-			int j = 5;
+			//
+			int xOffset = 9;
+			int zOffset = 20;
 			if (rotation == Rotation.CLOCKWISE_90) {
-				i = -5;
+				xOffset = -20;
+				zOffset = 9;
 			} else if (rotation == Rotation.CLOCKWISE_180) {
-				i = -5;
-				j = -5;
+				xOffset = -9;
+				zOffset = -20;
 			} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
-				j = -5;
+				xOffset = 20;
+				zOffset = -9;
 			}
 
-			int k = (x << 4) + 7;
-			int l = (z << 4) + 7;
-			int i1 = generator.func_222531_c(k, l, Heightmap.Type.WORLD_SURFACE_WG);
-			int j1 = generator.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-			int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
-			int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-			int y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
-			y = Math.min(y, 244);
+			int x = (chunkX << 4) + 7;
+			int z = (chunkZ << 4) + 7;
+			int surfaceY = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+			int y = Math.min(surfaceY, 230);
 
 			if (y >= 70) {
-				WitchHutPiecesUA swamphutpiece = new WitchHutPiecesUA(this.rand, x * 16, y, z * 16);
-				this.components.add(swamphutpiece);
+				BlockPos blockpos = new BlockPos(x, y, z);
+				IceSpikeTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
 				this.recalculateStructureSize();
-				// UltraAmplified.LOGGER.log(Level.DEBUG, "Witch Hut | "+(x*16)+" "+(z*16));
+				// UltraAmplified.LOGGER.log(Level.DEBUG, "Ice Spike Temple | "+(blockpos.getX()
+				// + xOffset)+" "+blockpos.getY()+" "+(blockpos.getZ() + zOffset));
 			}
 		}
+
 	}
 }

@@ -67,6 +67,31 @@ public class UltraAmplified {
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
 	}
 	
+	@OnlyIn(Dist.CLIENT)
+	public void clientSetup(final FMLClientSetupEvent event) 
+	{
+		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
+	}
+	
+	public void setup(final FMLCommonSetupEvent event) 
+	{
+		//registers the worldtype used for this mod so we can select that worldtype
+		UltraAmplified = new WorldTypeUA();
+		CapabilityPlayerPosAndDim.register();
+		RavineCarver.setFillerMap();
+		SuperLongRavineCarver.setFillerMap();
+		UnderwaterCaveCarver.setFillerMap();
+		CaveCavityCarver.setFillerMap();
+	}
+	
+	public void modConfig(final ModConfig.ModConfigEvent event)
+    {
+        ModConfig config = event.getConfig();
+        if (config.getSpec() == ConfigUA.SERVER_SPEC)
+            ConfigUA.refreshServer();
+    }
+	
+	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents
 	{
@@ -107,30 +132,4 @@ public class UltraAmplified {
 		}
 
 	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public void clientSetup(final FMLClientSetupEvent event) 
-	{
-		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
-	}
-	
-	public void setup(final FMLCommonSetupEvent event) 
-	{
-		//registers the worldtype used for this mod so we can select that worldtype
-		UltraAmplified = new WorldTypeUA();
-		StructureInitUA.registerStructurePieces();
-		CapabilityPlayerPosAndDim.register();
-		RavineCarver.setFillerMap();
-		SuperLongRavineCarver.setFillerMap();
-		UnderwaterCaveCarver.setFillerMap();
-		CaveCavityCarver.setFillerMap();
-	}
-	
-	public void modConfig(final ModConfig.ModConfigEvent event)
-    {
-        ModConfig config = event.getConfig();
-        if (config.getSpec() == ConfigUA.SERVER_SPEC)
-            ConfigUA.refreshServer();
-    }
-	
 }

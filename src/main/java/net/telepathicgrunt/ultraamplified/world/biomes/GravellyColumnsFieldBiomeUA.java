@@ -38,7 +38,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeCo
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 
 
 public class GravellyColumnsFieldBiomeUA extends BiomeUA
@@ -46,7 +46,7 @@ public class GravellyColumnsFieldBiomeUA extends BiomeUA
 	public GravellyColumnsFieldBiomeUA()
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.EXTREME_HILLS).depth(1.0F).scale(0.5F).temperature(0.5F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent("wooded_mountains"));
-		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftUA.Type.STONE)));
+		this.func_226711_a_(FeatureUA.MINESHAFT_UA.func_225566_b_(new MineshaftConfigUA(MineshaftStructureUA.Type.STONE)));
 		this.func_226711_a_(FeatureUA.STRONGHOLD_UA.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.func_226711_a_(FeatureUA.FORTRESS_UA.func_225566_b_(new FortressConfigUA(false)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));

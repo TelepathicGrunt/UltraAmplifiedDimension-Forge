@@ -7,7 +7,6 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -18,8 +17,8 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class MineshaftUA extends Structure<MineshaftConfigUA> {
-	public MineshaftUA(Function<Dynamic<?>, ? extends MineshaftConfigUA> p_i51427_1_) {
+public class MineshaftStructureUA extends Structure<MineshaftConfigUA> {
+	public MineshaftStructureUA(Function<Dynamic<?>, ? extends MineshaftConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -35,12 +34,8 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
 		}
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public Structure.IStartFactory getStartFactory() {
-		return MineshaftUA.Start::new;
+		return MineshaftStructureUA.Start::new;
 	}
 
 	public String getStructureName() {
@@ -52,7 +47,7 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
 	}
 
 	public static class Start extends StructureStart {
-		private MineshaftUA.Type type;
+		private MineshaftStructureUA.Type type;
 
 		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
 				int referenceIn, long seedIn) {
@@ -89,7 +84,7 @@ public class MineshaftUA extends Structure<MineshaftConfigUA> {
 	public static enum Type {
 		NORMAL, MESA, ICEY, COLDORBIRCH, JUNGLE, TAIGA, DESERT, STONE, SAVANNA, SWAMPORDARKFOREST, END, HELL, OCEAN;
 
-		public static MineshaftUA.Type byId(int id) {
+		public static MineshaftStructureUA.Type byId(int id) {
 			return id >= 0 && id < values().length ? values()[id] : NORMAL;
 		}
 	}

@@ -24,11 +24,11 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
+public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
 	private static final List<Biome.SpawnListEntry> field_214558_a = Lists
 			.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
 
-	public PillagerOutpostUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
+	public PillagerOutpostStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
 		super(p_i51470_1_);
 	}
 
@@ -67,7 +67,7 @@ public class PillagerOutpostUA extends Structure<NoFeatureConfig> {
 	}
 
 	public Structure.IStartFactory getStartFactory() {
-		return PillagerOutpostUA.Start::new;
+		return PillagerOutpostStructureUA.Start::new;
 	}
 
 	protected int getSeedModifier() {

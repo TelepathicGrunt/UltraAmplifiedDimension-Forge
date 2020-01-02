@@ -9,7 +9,6 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -21,7 +20,7 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class FortressUA extends Structure<FortressConfigUA> {
+public class FortressStructureUA extends Structure<FortressConfigUA> {
 	private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(
 			new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3),
 			new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4),
@@ -29,7 +28,7 @@ public class FortressUA extends Structure<FortressConfigUA> {
 			new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5),
 			new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
 
-	public FortressUA(Function<Dynamic<?>, ? extends FortressConfigUA> p_i51427_1_) {
+	public FortressStructureUA(Function<Dynamic<?>, ? extends FortressConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -51,13 +50,9 @@ public class FortressUA extends Structure<FortressConfigUA> {
 
 		return false;
 	}
-
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
+	
 	public Structure.IStartFactory getStartFactory() {
-		return FortressUA.Start::new;
+		return FortressStructureUA.Start::new;
 	}
 
 	public String getStructureName() {

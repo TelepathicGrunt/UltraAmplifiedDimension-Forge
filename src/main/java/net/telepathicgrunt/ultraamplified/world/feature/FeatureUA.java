@@ -26,26 +26,26 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.EndCityUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.EndCityStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.IceSpikeTempleUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.IglooUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.JungleTempleUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.IceSpikeTempleStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.IglooStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.JungleTempleStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.MushroomTempleUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanMonumentUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanRuinsUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.PillagerOutpostUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.ShipwreckUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.StrongholdUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MushroomTempleStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanMonumentStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.OceanRuinsStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.PillagerOutpostStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.ShipwreckStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.StrongholdStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInitUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.WitchHutUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansionUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.WitchHutStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansionStructureUA;
 
 public class FeatureUA
 {
@@ -130,22 +130,22 @@ public class FeatureUA
     public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new TreeEnd(TreeFeatureConfig::func_227338_a_);
     public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH_UA = new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1)));
     
-    public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftUA(MineshaftConfigUA::deserialize);
-    public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> JUNGLE_TEMPLE_UA = new JungleTempleUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> DESERT_TEMPLE_UA = new DesertTempleUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> IGLOO_UA = new IglooUA(NoFeatureConfig::deserialize);
-    public static Structure<ShipwreckConfig> SHIPWRECK_UA = new ShipwreckUA(ShipwreckConfig::deserialize);
-    public static WitchHutUA WITCH_HUT_UA = new WitchHutUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> STRONGHOLD_UA = new StrongholdUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> OCEAN_MONUMENT_UA = new OceanMonumentUA(NoFeatureConfig::deserialize);
-    public static Structure<OceanRuinConfig> OCEAN_RUIN_UA = new OceanRuinsUA(OceanRuinConfig::deserialize);
-    public static Structure<FortressConfigUA> FORTRESS_UA = new FortressUA(FortressConfigUA::deserialize);
-    public static Structure<NoFeatureConfig> END_CITY_UA = new EndCityUA(NoFeatureConfig::deserialize);
-    public static Structure<VillageConfigUA> VILLAGE_UA = new VillageUA(VillageConfigUA::deserialize);
-    public static Structure<NoFeatureConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleUA(NoFeatureConfig::deserialize);
+    public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftStructureUA(MineshaftConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> WOODLAND_MANSION_UA = new WoodlandMansionStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> JUNGLE_TEMPLE_UA = new JungleTempleStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> DESERT_TEMPLE_UA = new DesertTempleStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> IGLOO_UA = new IglooStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<ShipwreckConfig> SHIPWRECK_UA = new ShipwreckStructureUA(ShipwreckConfig::deserialize);
+    public static WitchHutStructureUA WITCH_HUT_UA = new WitchHutStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> STRONGHOLD_UA = new StrongholdStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> OCEAN_MONUMENT_UA = new OceanMonumentStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<OceanRuinConfig> OCEAN_RUIN_UA = new OceanRuinsStructureUA(OceanRuinConfig::deserialize);
+    public static Structure<FortressConfigUA> FORTRESS_UA = new FortressStructureUA(FortressConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> END_CITY_UA = new EndCityStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<VillageConfigUA> VILLAGE_UA = new VillageStructureUA(VillageConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> PILLAGER_OUTPOST_UA = new PillagerOutpostStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleStructureUA(NoFeatureConfig::deserialize);
     
     //bug fix until the mushroom class is no longer broken.
     public static final Feature<BigMushroomFeatureConfig> HUGE_RED_MUSHROOM_FIX = new BigRedMushroomTempFix(BigMushroomFeatureConfig::deserialize);
@@ -218,7 +218,7 @@ public class FeatureUA
         DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(DESERT_TEMPLE_UA, "desert_temple");
         IGLOO_UA = (Structure<NoFeatureConfig>) registerStructure(IGLOO_UA, "igloo");
         SHIPWRECK_UA = (Structure<ShipwreckConfig>) registerStructure(SHIPWRECK_UA, "shipwreck");
-        WITCH_HUT_UA = (WitchHutUA) registerStructure(WITCH_HUT_UA, "witch_hut");
+        WITCH_HUT_UA = (WitchHutStructureUA) registerStructure(WITCH_HUT_UA, "witch_hut");
         STRONGHOLD_UA = (Structure<NoFeatureConfig>) registerStructure(STRONGHOLD_UA, "stronghold");
         OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) registerStructure(OCEAN_MONUMENT_UA, "ocean_monument");
         OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) registerStructure(OCEAN_RUIN_UA, "ocean_ruins");
@@ -230,17 +230,13 @@ public class FeatureUA
         ICE_SPIKE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
 
 
-      
+        //registers the structure pieces.
         StructureInitUA.registerStructurePieces();
     }
 
     @SuppressWarnings("rawtypes")
     private static Feature registerFeature(Feature<?> feature, String name)
     {
-        if(registry == null)
-            throw new NullPointerException("Feature Registry not set");
-
-
         feature.setRegistryName(UltraAmplified.MODID, name);
         registry.register(feature);
 
@@ -248,10 +244,6 @@ public class FeatureUA
     }
 
 	private static Structure<?> registerStructure(Structure<?> structure, String name) {
-    	if(registry == null)
-            throw new NullPointerException("Feature Registry not set (Structure)");
-
-
     	structure.setRegistryName(UltraAmplified.MODID, name);
         registry.register(structure);
 

@@ -61,30 +61,30 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
 
-public class VillagePiecesUA {
+public class VillagePastStyledPiecesUA {
 	private static final IVillagerType[] VILLAGER_SKIN_ENUM = { IVillagerType.PLAINS, IVillagerType.DESERT,
 			IVillagerType.SAVANNA, IVillagerType.TAIGA, IVillagerType.SNOW, IVillagerType.SWAMP, IVillagerType.JUNGLE,
 			IVillagerType.TAIGA, IVillagerType.JUNGLE, IVillagerType.TAIGA, IVillagerType.DESERT, IVillagerType.SNOW, };
 
 	public static List<PieceWeightUA> getStructureVillageWeightedPieceList(Random random, int size) {
 		List<PieceWeightUA> list = Lists.newArrayList();
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.FlatTopTinyHouse.class, 4,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.FlatTopTinyHouse.class, 4,
 				MathHelper.nextInt(random, 2 + size, 4 + size * 2)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.Church.class, 20,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.Church.class, 20,
 				MathHelper.nextInt(random, 0 + size, 1 + size)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.LibraryHouse.class, 20,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.LibraryHouse.class, 20,
 				MathHelper.nextInt(random, 0 + size, 2 + size)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.TinyHouse.class, 3,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.TinyHouse.class, 3,
 				MathHelper.nextInt(random, 2 + size, 5 + size * 3)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.WorkHouse.class, 15,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.WorkHouse.class, 15,
 				MathHelper.nextInt(random, 0 + size, 2 + size)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.Field1.class, 3,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.Field1.class, 3,
 				MathHelper.nextInt(random, 1 + size, 4 + size)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.Field2.class, 3,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.Field2.class, 3,
 				MathHelper.nextInt(random, 2 + size, 4 + size * 2)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.Blacksmith.class, 15,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.Blacksmith.class, 15,
 				MathHelper.nextInt(random, 0, 1 + size)));
-		list.add(new VillagePiecesUA.PieceWeightUA(VillagePiecesUA.LargeHouse.class, 8,
+		list.add(new VillagePastStyledPiecesUA.PieceWeightUA(VillagePastStyledPiecesUA.LargeHouse.class, 8,
 				MathHelper.nextInt(random, 0 + size, 3 + size * 2)));
 		Iterator<PieceWeightUA> iterator = list.iterator();
 
@@ -97,11 +97,11 @@ public class VillagePiecesUA {
 		return list;
 	}
 
-	private static int updatePieceWeight(List<VillagePiecesUA.PieceWeightUA> p_75079_0_) {
+	private static int updatePieceWeight(List<VillagePastStyledPiecesUA.PieceWeightUA> p_75079_0_) {
 		boolean flag = false;
 		int i = 0;
 
-		for (VillagePiecesUA.PieceWeightUA villagepieces$pieceweight : p_75079_0_) {
+		for (VillagePastStyledPiecesUA.PieceWeightUA villagepieces$pieceweight : p_75079_0_) {
 			if (villagepieces$pieceweight.villagePiecesLimit > 0
 					&& villagepieces$pieceweight.villagePiecesSpawned < villagepieces$pieceweight.villagePiecesLimit) {
 				flag = true;
@@ -113,44 +113,44 @@ public class VillagePiecesUA {
 		return flag ? i : -1;
 	}
 
-	private static VillagePiecesUA.Village findAndCreateComponentFactory(VillagePiecesUA.Start start,
-			VillagePiecesUA.PieceWeightUA weight, List<StructurePiece> structureComponents, Random rand,
+	private static VillagePastStyledPiecesUA.Village findAndCreateComponentFactory(VillagePastStyledPiecesUA.Start start,
+			VillagePastStyledPiecesUA.PieceWeightUA weight, List<StructurePiece> structureComponents, Random rand,
 			int structureMinX, int structureMinY, int structureMinZ, Direction facing, int componentType) {
-		Class<? extends VillagePiecesUA.Village> oclass = weight.villagePieceClass;
-		VillagePiecesUA.Village villagepieces$village = null;
-		if (oclass == VillagePiecesUA.FlatTopTinyHouse.class) {
-			villagepieces$village = VillagePiecesUA.FlatTopTinyHouse.createPiece(start, structureComponents, rand,
+		Class<? extends VillagePastStyledPiecesUA.Village> oclass = weight.villagePieceClass;
+		VillagePastStyledPiecesUA.Village villagepieces$village = null;
+		if (oclass == VillagePastStyledPiecesUA.FlatTopTinyHouse.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.FlatTopTinyHouse.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.Church.class) {
-			villagepieces$village = VillagePiecesUA.Church.createPiece(start, structureComponents, rand, structureMinX,
+		} else if (oclass == VillagePastStyledPiecesUA.Church.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.Church.createPiece(start, structureComponents, rand, structureMinX,
 					structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.LibraryHouse.class) {
-			villagepieces$village = VillagePiecesUA.LibraryHouse.createPiece(start, structureComponents, rand,
+		} else if (oclass == VillagePastStyledPiecesUA.LibraryHouse.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.LibraryHouse.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.TinyHouse.class) {
-			villagepieces$village = VillagePiecesUA.TinyHouse.createPiece(start, structureComponents, rand,
+		} else if (oclass == VillagePastStyledPiecesUA.TinyHouse.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.TinyHouse.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.WorkHouse.class) {
-			villagepieces$village = VillagePiecesUA.WorkHouse.createPiece(start, structureComponents, rand,
+		} else if (oclass == VillagePastStyledPiecesUA.WorkHouse.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.WorkHouse.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.Field1.class) {
-			villagepieces$village = VillagePiecesUA.Field1.createPiece(start, structureComponents, rand, structureMinX,
+		} else if (oclass == VillagePastStyledPiecesUA.Field1.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.Field1.createPiece(start, structureComponents, rand, structureMinX,
 					structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.Field2.class) {
-			villagepieces$village = VillagePiecesUA.Field2.createPiece(start, structureComponents, rand, structureMinX,
+		} else if (oclass == VillagePastStyledPiecesUA.Field2.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.Field2.createPiece(start, structureComponents, rand, structureMinX,
 					structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.Blacksmith.class) {
-			villagepieces$village = VillagePiecesUA.Blacksmith.createPiece(start, structureComponents, rand,
+		} else if (oclass == VillagePastStyledPiecesUA.Blacksmith.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.Blacksmith.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
-		} else if (oclass == VillagePiecesUA.LargeHouse.class) {
-			villagepieces$village = VillagePiecesUA.LargeHouse.createPiece(start, structureComponents, rand,
+		} else if (oclass == VillagePastStyledPiecesUA.LargeHouse.class) {
+			villagepieces$village = VillagePastStyledPiecesUA.LargeHouse.createPiece(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing, componentType);
 		}
 
 		return villagepieces$village;
 	}
 
-	private static VillagePiecesUA.Village generateComponent(VillagePiecesUA.Start start,
+	private static VillagePastStyledPiecesUA.Village generateComponent(VillagePastStyledPiecesUA.Start start,
 			List<StructurePiece> structureComponents, Random rand, int structureMinX, int structureMinY,
 			int structureMinZ, Direction facing, int componentType) {
 		int i = updatePieceWeight(start.structureVillageWeightedPieceList);
@@ -163,7 +163,7 @@ public class VillagePiecesUA {
 				++j;
 				int k = rand.nextInt(i);
 
-				for (VillagePiecesUA.PieceWeightUA villagepieces$pieceweight : start.structureVillageWeightedPieceList) {
+				for (VillagePastStyledPiecesUA.PieceWeightUA villagepieces$pieceweight : start.structureVillageWeightedPieceList) {
 					k -= villagepieces$pieceweight.villagePieceWeight;
 					if (k < 0) {
 						if (!villagepieces$pieceweight.canSpawnMoreVillagePiecesOfType(componentType)
@@ -172,7 +172,7 @@ public class VillagePiecesUA {
 							break;
 						}
 
-						VillagePiecesUA.Village villagepieces$village = findAndCreateComponentFactory(start,
+						VillagePastStyledPiecesUA.Village villagepieces$village = findAndCreateComponentFactory(start,
 								villagepieces$pieceweight, structureComponents, rand, structureMinX, structureMinY,
 								structureMinZ, facing, componentType);
 						if (villagepieces$village != null) {
@@ -188,17 +188,17 @@ public class VillagePiecesUA {
 				}
 			}
 
-			MutableBoundingBox mutableboundingbox = VillagePiecesUA.Torch.findPieceBox(start, structureComponents, rand,
+			MutableBoundingBox mutableboundingbox = VillagePastStyledPiecesUA.Torch.findPieceBox(start, structureComponents, rand,
 					structureMinX, structureMinY, structureMinZ, facing);
 			if (mutableboundingbox != null) {
-				return new VillagePiecesUA.Torch(start, componentType, rand, mutableboundingbox, facing);
+				return new VillagePastStyledPiecesUA.Torch(start, componentType, rand, mutableboundingbox, facing);
 			} else {
 				return null;
 			}
 		}
 	}
 
-	private static StructurePiece generateAndAddComponent(VillagePiecesUA.Start start,
+	private static StructurePiece generateAndAddComponent(VillagePastStyledPiecesUA.Start start,
 			List<StructurePiece> structureComponents, Random rand, int structureMinX, int structureMinY,
 			int structureMinZ, Direction facing, int componentType) {
 		if (componentType > 50) {
@@ -219,16 +219,16 @@ public class VillagePiecesUA {
 		}
 	}
 
-	private static StructurePiece generateAndAddRoadPiece(VillagePiecesUA.Start start, List<StructurePiece> p_176069_1_,
+	private static StructurePiece generateAndAddRoadPiece(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_176069_1_,
 			Random rand, int p_176069_3_, int p_176069_4_, int p_176069_5_, Direction facing, int p_176069_7_) {
 		if (p_176069_7_ > 3 + start.terrainType) {
 			return null;
 		} else if (Math.abs(p_176069_3_ - start.getBoundingBox().minX) <= 112
 				&& Math.abs(p_176069_5_ - start.getBoundingBox().minZ) <= 112) {
-			MutableBoundingBox mutableboundingbox = VillagePiecesUA.Path.findPieceBox(start, p_176069_1_, rand,
+			MutableBoundingBox mutableboundingbox = VillagePastStyledPiecesUA.Path.findPieceBox(start, p_176069_1_, rand,
 					p_176069_3_, p_176069_4_, p_176069_5_, facing);
 			if (mutableboundingbox != null && mutableboundingbox.minY > 10) {
-				StructurePiece structurepiece = new VillagePiecesUA.Path(start, p_176069_7_, rand, mutableboundingbox,
+				StructurePiece structurepiece = new VillagePastStyledPiecesUA.Path(start, p_176069_7_, rand, mutableboundingbox,
 						facing);
 				p_176069_1_.add(structurepiece);
 				start.pendingRoads.add(structurepiece);
@@ -241,9 +241,9 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Church extends VillagePiecesUA.Village {
+	public static class Church extends VillagePastStyledPiecesUA.Village {
 
-		protected Church(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+		protected Church(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VISTUA, type);
 			this.setCoordBaseMode(facing);
@@ -254,13 +254,13 @@ public class VillagePiecesUA {
 			super(StructureInitUA.VISTUA, p_i50111_2_);
 		}
 
-		public static VillagePiecesUA.Church createPiece(VillagePiecesUA.Start start, List<StructurePiece> p_175854_1_,
+		public static VillagePastStyledPiecesUA.Church createPiece(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_175854_1_,
 				Random rand, int p_175854_3_, int p_175854_4_, int p_175854_5_, Direction facing, int p_175854_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175854_3_,
 					p_175854_4_, p_175854_5_, 0, 0, 0, 5, 12, 9, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175854_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.Church(start, p_175854_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.Church(start, p_175854_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -421,7 +421,7 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Field1 extends VillagePiecesUA.Village {
+	public static class Field1 extends VillagePastStyledPiecesUA.Village {
 		/** First crop type for this field. */
 		private BlockState cropTypeA;
 		/** Second crop type for this field. */
@@ -431,7 +431,7 @@ public class VillagePiecesUA {
 		/** Fourth crop type for this field. */
 		private BlockState cropTypeD;
 
-		protected Field1(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+		protected Field1(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VIDFUA, type);
 			this.setCoordBaseMode(facing);
@@ -476,13 +476,13 @@ public class VillagePiecesUA {
 			}
 		}
 
-		public static VillagePiecesUA.Field1 createPiece(VillagePiecesUA.Start start, List<StructurePiece> p_175851_1_,
+		public static VillagePastStyledPiecesUA.Field1 createPiece(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_175851_1_,
 				Random rand, int p_175851_3_, int p_175851_4_, int p_175851_5_, Direction facing, int p_175851_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175851_3_,
 					p_175851_4_, p_175851_5_, 0, 0, 0, 13, 4, 9, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175851_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.Field1(start, p_175851_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.Field1(start, p_175851_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -574,13 +574,13 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Field2 extends VillagePiecesUA.Village {
+	public static class Field2 extends VillagePastStyledPiecesUA.Village {
 		/** First crop type for this field. */
 		private BlockState cropTypeA;
 		/** Second crop type for this field. */
 		private BlockState cropTypeB;
 
-		protected Field2(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+		protected Field2(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VIFUA, type);
 			this.setCoordBaseMode(facing);
@@ -619,13 +619,13 @@ public class VillagePiecesUA {
 			}
 		}
 
-		public static VillagePiecesUA.Field2 createPiece(VillagePiecesUA.Start start, List<StructurePiece> p_175852_1_,
+		public static VillagePastStyledPiecesUA.Field2 createPiece(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_175852_1_,
 				Random rand, int p_175852_3_, int p_175852_4_, int p_175852_5_, Direction facing, int p_175852_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175852_3_,
 					p_175852_4_, p_175852_5_, 0, 0, 0, 7, 4, 9, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175852_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.Field2(start, p_175852_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.Field2(start, p_175852_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -688,8 +688,8 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class WorkHouse extends VillagePiecesUA.Village {
-		protected WorkHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+	public static class WorkHouse extends VillagePastStyledPiecesUA.Village {
+		protected WorkHouse(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VIPHUA, type);
 			this.setCoordBaseMode(facing);
@@ -700,14 +700,14 @@ public class VillagePiecesUA {
 			super(StructureInitUA.VIPHUA, p_i50111_2_);
 		}
 
-		public static VillagePiecesUA.WorkHouse createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.WorkHouse createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175857_1_, Random rand, int p_175857_3_, int p_175857_4_, int p_175857_5_,
 				Direction facing, int p_175857_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175857_3_,
 					p_175857_4_, p_175857_5_, 0, 0, 0, 9, 7, 11, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175857_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.WorkHouse(start, p_175857_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.WorkHouse(start, p_175857_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -848,8 +848,8 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class LibraryHouse extends VillagePiecesUA.Village {
-		protected LibraryHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+	public static class LibraryHouse extends VillagePastStyledPiecesUA.Village {
+		protected LibraryHouse(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VIBHUA, type);
 			this.setCoordBaseMode(facing);
@@ -860,14 +860,14 @@ public class VillagePiecesUA {
 			super(StructureInitUA.VIBHUA, p_i50111_2_);
 		}
 
-		public static VillagePiecesUA.LibraryHouse createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.LibraryHouse createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175850_1_, Random rand, int p_175850_3_, int p_175850_4_, int p_175850_5_,
 				Direction facing, int p_175850_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175850_3_,
 					p_175850_4_, p_175850_5_, 0, 0, 0, 9, 9, 6, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175850_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.LibraryHouse(start, p_175850_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.LibraryHouse(start, p_175850_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -1010,10 +1010,10 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Blacksmith extends VillagePiecesUA.Village {
+	public static class Blacksmith extends VillagePastStyledPiecesUA.Village {
 		private boolean hasMadeChest;
 
-		protected Blacksmith(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+		protected Blacksmith(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VISUA, type);
 			this.setCoordBaseMode(facing);
@@ -1033,14 +1033,14 @@ public class VillagePiecesUA {
 			tagCompound.putBoolean("hasMadeChest", this.hasMadeChest);
 		}
 
-		public static VillagePiecesUA.Blacksmith createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.Blacksmith createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175855_1_, Random rand, int p_175855_3_, int p_175855_4_, int p_175855_5_,
 				Direction facing, int p_175855_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175855_3_,
 					p_175855_4_, p_175855_5_, 0, 0, 0, 10, 6, 7, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175855_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.Blacksmith(start, p_175855_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.Blacksmith(start, p_175855_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -1162,10 +1162,10 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class LargeHouse extends VillagePiecesUA.Village {
+	public static class LargeHouse extends VillagePastStyledPiecesUA.Village {
 		private boolean hasMadeChest;
 
-		protected LargeHouse(VillagePiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_,
+		protected LargeHouse(VillagePastStyledPiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_,
 				MutableBoundingBox boundingBoxIn, Direction facing) {
 			super(start, StructureInitUA.VITRHUA, p_i45573_1_);
 			;
@@ -1186,14 +1186,14 @@ public class VillagePiecesUA {
 			tagCompound.putBoolean("hasMadeChest", this.hasMadeChest);
 		}
 
-		public static VillagePiecesUA.LargeHouse createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.LargeHouse createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175849_1_, Random rand, int p_175849_3_, int p_175849_4_, int p_175849_5_,
 				Direction facing, int p_175849_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175849_3_,
 					p_175849_4_, p_175849_5_, 0, 0, 0, 9, 7, 12, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175849_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.LargeHouse(start, p_175849_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.LargeHouse(start, p_175849_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 
@@ -1409,10 +1409,10 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class FlatTopTinyHouse extends VillagePiecesUA.Village {
+	public static class FlatTopTinyHouse extends VillagePastStyledPiecesUA.Village {
 		private boolean isRoofAccessible;
 
-		protected FlatTopTinyHouse(VillagePiecesUA.Start start, int p_i45573_1_, Random rand,
+		protected FlatTopTinyHouse(VillagePastStyledPiecesUA.Start start, int p_i45573_1_, Random rand,
 				MutableBoundingBox boundingBoxIn, Direction facing) {
 			super(start, StructureInitUA.VISHUA, p_i45573_1_);
 			this.setCoordBaseMode(facing);
@@ -1433,13 +1433,13 @@ public class VillagePiecesUA {
 			tagCompound.putBoolean("isRoofAccessible", this.isRoofAccessible);
 		}
 
-		public static VillagePiecesUA.FlatTopTinyHouse createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.FlatTopTinyHouse createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175858_1_, Random rand, int p_175858_3_, int p_175858_4_, int p_175858_5_,
 				Direction facing, int p_175858_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175858_3_,
 					p_175858_4_, p_175858_5_, 0, 0, 0, 5, 6, 5, facing);
 			return StructurePiece.findIntersecting(p_175858_1_, mutableboundingbox) != null ? null
-					: new VillagePiecesUA.FlatTopTinyHouse(start, p_175858_7_, rand, mutableboundingbox, facing);
+					: new VillagePastStyledPiecesUA.FlatTopTinyHouse(start, p_175858_7_, rand, mutableboundingbox, facing);
 		}
 
 		/**
@@ -1557,10 +1557,10 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Path extends VillagePiecesUA.Village {
+	public static class Path extends VillagePastStyledPiecesUA.Village {
 		private int length;
 
-		protected Path(VillagePiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_,
+		protected Path(VillagePastStyledPiecesUA.Start start, int p_i45573_1_, Random p_i45573_2_,
 				MutableBoundingBox boundingBoxIn, Direction facing) {
 			super(start, StructureInitUA.VISRUA, p_i45573_1_);
 			this.setCoordBaseMode(facing);
@@ -1589,7 +1589,7 @@ public class VillagePiecesUA {
 			boolean flag = false;
 
 			for (int i = rand.nextInt(5); i < this.length - 8; i += 2 + rand.nextInt(5)) {
-				StructurePiece structurepiece = this.getNextComponentNN((VillagePiecesUA.Start) componentIn, listIn,
+				StructurePiece structurepiece = this.getNextComponentNN((VillagePastStyledPiecesUA.Start) componentIn, listIn,
 						rand, 0, i);
 				if (structurepiece != null) {
 					i += Math.max(structurepiece.getBoundingBox().getXSize(),
@@ -1599,7 +1599,7 @@ public class VillagePiecesUA {
 			}
 
 			for (int j = rand.nextInt(5); j < this.length - 8; j += 2 + rand.nextInt(5)) {
-				StructurePiece structurepiece1 = this.getNextComponentPP((VillagePiecesUA.Start) componentIn, listIn,
+				StructurePiece structurepiece1 = this.getNextComponentPP((VillagePastStyledPiecesUA.Start) componentIn, listIn,
 						rand, 0, j);
 				if (structurepiece1 != null) {
 					j += Math.max(structurepiece1.getBoundingBox().getXSize(),
@@ -1613,22 +1613,22 @@ public class VillagePiecesUA {
 				switch (enumfacing) {
 				case NORTH:
 				default:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ, Direction.WEST,
 							this.getComponentType());
 					break;
 				case SOUTH:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, Direction.WEST,
 							this.getComponentType());
 					break;
 				case WEST:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ - 1, Direction.NORTH,
 							this.getComponentType());
 					break;
 				case EAST:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.minZ - 1,
 							Direction.NORTH, this.getComponentType());
 				}
@@ -1638,22 +1638,22 @@ public class VillagePiecesUA {
 				switch (enumfacing) {
 				case NORTH:
 				default:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ, Direction.EAST,
 							this.getComponentType());
 					break;
 				case SOUTH:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 2, Direction.EAST,
 							this.getComponentType());
 					break;
 				case WEST:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1, Direction.SOUTH,
 							this.getComponentType());
 					break;
 				case EAST:
-					VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+					VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 							this.boundingBox.maxX - 2, this.boundingBox.minY, this.boundingBox.maxZ + 1,
 							Direction.SOUTH, this.getComponentType());
 				}
@@ -1661,7 +1661,7 @@ public class VillagePiecesUA {
 
 		}
 
-		public static MutableBoundingBox findPieceBox(VillagePiecesUA.Start start, List<StructurePiece> p_175848_1_,
+		public static MutableBoundingBox findPieceBox(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_175848_1_,
 				Random rand, int p_175848_3_, int p_175848_4_, int p_175848_5_, Direction facing) {
 			for (int i = 7 * MathHelper.nextInt(rand, 3, 5); i >= 7; i -= 7) {
 				MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175848_3_,
@@ -1739,12 +1739,12 @@ public class VillagePiecesUA {
 
 	public static class PieceWeightUA {
 		/** The Class object for the represantation of this village piece. */
-		public Class<? extends VillagePiecesUA.Village> villagePieceClass;
+		public Class<? extends VillagePastStyledPiecesUA.Village> villagePieceClass;
 		public final int villagePieceWeight;
 		public int villagePiecesSpawned;
 		public int villagePiecesLimit;
 
-		public PieceWeightUA(Class<? extends VillagePiecesUA.Village> classIn, int weightIn, int limitIn) {
+		public PieceWeightUA(Class<? extends VillagePastStyledPiecesUA.Village> classIn, int weightIn, int limitIn) {
 			this.villagePieceClass = classIn;
 			this.villagePieceWeight = weightIn;
 			this.villagePiecesLimit = limitIn;
@@ -1759,15 +1759,15 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Start extends VillagePiecesUA.Well {
+	public static class Start extends VillagePastStyledPiecesUA.Well {
 		/** World terrain type, 0 for normal, 1 for flap map */
 		public int terrainType;
-		public VillagePiecesUA.PieceWeightUA lastPlaced;
+		public VillagePastStyledPiecesUA.PieceWeightUA lastPlaced;
 		/**
 		 * Contains List of all spawnable Structure Piece Weights. If no more Pieces of
 		 * a type can be spawned, they are removed from this list
 		 */
-		public List<VillagePiecesUA.PieceWeightUA> structureVillageWeightedPieceList;
+		public List<VillagePastStyledPiecesUA.PieceWeightUA> structureVillageWeightedPieceList;
 		public List<StructurePiece> pendingHouses = Lists.newArrayList();
 		public List<StructurePiece> pendingRoads = Lists.newArrayList();
 		public @javax.annotation.Nullable net.minecraft.world.biome.Biome biome;
@@ -1777,9 +1777,9 @@ public class VillagePiecesUA {
 		}
 
 		public Start(int p_i48769_1_, Random p_i48769_2_, int p_i48769_3_, int p_i48769_4_,
-				List<VillagePiecesUA.PieceWeightUA> p_i48769_5_, VillageConfigUA p_i48769_6_,
+				List<VillagePastStyledPiecesUA.PieceWeightUA> p_i48769_5_, VillageConfigUA p_i48769_6_,
 				net.minecraft.world.biome.Biome biome) {
-			super((VillagePiecesUA.Start) null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
+			super((VillagePastStyledPiecesUA.Start) null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
 			this.structureVillageWeightedPieceList = p_i48769_5_;
 			this.terrainType = p_i48769_6_.terrainType;
 			this.structureType = p_i48769_6_.type;
@@ -1789,8 +1789,8 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class Torch extends VillagePiecesUA.Village {
-		protected Torch(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+	public static class Torch extends VillagePastStyledPiecesUA.Village {
+		protected Torch(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VILUA, type);
 			this.setCoordBaseMode(facing);
@@ -1801,7 +1801,7 @@ public class VillagePiecesUA {
 			super(StructureInitUA.VILUA, p_i50111_2_);
 		}
 
-		public static MutableBoundingBox findPieceBox(VillagePiecesUA.Start start, List<StructurePiece> p_175856_1_,
+		public static MutableBoundingBox findPieceBox(VillagePastStyledPiecesUA.Start start, List<StructurePiece> p_175856_1_,
 				Random rand, int p_175856_3_, int p_175856_4_, int p_175856_5_, Direction facing) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175856_3_,
 					p_175856_4_, p_175856_5_, 0, 0, 0, 3, 4, 2, facing);
@@ -1857,8 +1857,8 @@ public class VillagePiecesUA {
 			return this.field_202605_e;
 		}
 
-		public static VillagePiecesUA.Type typeById(int p_202603_0_) {
-			VillagePiecesUA.Type[] avillagepieces$type = values();
+		public static VillagePastStyledPiecesUA.Type typeById(int p_202603_0_) {
+			VillagePastStyledPiecesUA.Type[] avillagepieces$type = values();
 			return p_202603_0_ >= 0 && p_202603_0_ < avillagepieces$type.length ? avillagepieces$type[p_202603_0_]
 					: DARK;
 		}
@@ -1868,10 +1868,10 @@ public class VillagePiecesUA {
 		protected int averageGroundLvl = -1;
 		/** The number of villagers that have been spawned in this component. */
 		private int villagersSpawned;
-		protected VillagePiecesUA.Type structureType;
+		protected VillagePastStyledPiecesUA.Type structureType;
 		protected boolean isZombieInfested;
 
-		protected Village(VillagePiecesUA.Start start, IStructurePieceType struct, int type) {
+		protected Village(VillagePastStyledPiecesUA.Start start, IStructurePieceType struct, int type) {
 			super(struct, type);
 			if (start != null) {
 				this.structureType = start.structureType;
@@ -1881,7 +1881,7 @@ public class VillagePiecesUA {
 
 		public Village(IStructurePieceType p_i50111_1_, CompoundNBT p_i50111_2_) {
 			super(p_i50111_1_, p_i50111_2_);
-			this.structureType = VillagePiecesUA.Type.valueOf(p_i50111_2_.getString("Type"));
+			this.structureType = VillagePastStyledPiecesUA.Type.valueOf(p_i50111_2_.getString("Type"));
 			this.isZombieInfested = p_i50111_2_.getBoolean("Zombie");
 			this.villagersSpawned = p_i50111_2_.getInt("VCount");
 			this.averageGroundLvl = p_i50111_2_.getInt("HPos");
@@ -1902,26 +1902,26 @@ public class VillagePiecesUA {
 		 * and Z direction.
 		 */
 		@Nullable
-		protected StructurePiece getNextComponentNN(VillagePiecesUA.Start start,
+		protected StructurePiece getNextComponentNN(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> structureComponents, Random rand, int p_74891_4_, int p_74891_5_) {
 			Direction enumfacing = this.getCoordBaseMode();
 			if (enumfacing != null) {
 				switch (enumfacing) {
 				case NORTH:
 				default:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX - 1, this.boundingBox.minY + p_74891_4_,
 							this.boundingBox.minZ + p_74891_5_, Direction.WEST, this.getComponentType());
 				case SOUTH:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX - 1, this.boundingBox.minY + p_74891_4_,
 							this.boundingBox.minZ + p_74891_5_, Direction.WEST, this.getComponentType());
 				case WEST:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX + p_74891_5_, this.boundingBox.minY + p_74891_4_,
 							this.boundingBox.minZ - 1, Direction.NORTH, this.getComponentType());
 				case EAST:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX + p_74891_5_, this.boundingBox.minY + p_74891_4_,
 							this.boundingBox.minZ - 1, Direction.NORTH, this.getComponentType());
 				}
@@ -1935,26 +1935,26 @@ public class VillagePiecesUA {
 		 * and Z direction.
 		 */
 		@Nullable
-		protected StructurePiece getNextComponentPP(VillagePiecesUA.Start start,
+		protected StructurePiece getNextComponentPP(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> structureComponents, Random rand, int p_74894_4_, int p_74894_5_) {
 			Direction enumfacing = this.getCoordBaseMode();
 			if (enumfacing != null) {
 				switch (enumfacing) {
 				case NORTH:
 				default:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.maxX + 1, this.boundingBox.minY + p_74894_4_,
 							this.boundingBox.minZ + p_74894_5_, Direction.EAST, this.getComponentType());
 				case SOUTH:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.maxX + 1, this.boundingBox.minY + p_74894_4_,
 							this.boundingBox.minZ + p_74894_5_, Direction.EAST, this.getComponentType());
 				case WEST:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX + p_74894_5_, this.boundingBox.minY + p_74894_4_,
 							this.boundingBox.maxZ + 1, Direction.SOUTH, this.getComponentType());
 				case EAST:
-					return VillagePiecesUA.generateAndAddComponent(start, structureComponents, rand,
+					return VillagePastStyledPiecesUA.generateAndAddComponent(start, structureComponents, rand,
 							this.boundingBox.minX + p_74894_5_, this.boundingBox.minY + p_74894_4_,
 							this.boundingBox.maxZ + 1, Direction.SOUTH, this.getComponentType());
 				}
@@ -2088,7 +2088,7 @@ public class VillagePiecesUA {
 		protected BlockState getBiomeSpecificBlockState(BlockState blockstateIn) {
 			Block block = blockstateIn.getBlock();
 
-			if (this.structureType == VillagePiecesUA.Type.SANDSTONE) {
+			if (this.structureType == VillagePastStyledPiecesUA.Type.SANDSTONE) {
 				if (block.isIn(BlockTags.LOGS) || block == Blocks.COBBLESTONE) {
 					return Blocks.SANDSTONE.getDefaultState();
 				}
@@ -2114,7 +2114,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.OAK_PRESSURE_PLATE) {
 					return Blocks.BIRCH_PRESSURE_PLATE.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.SPRUCE) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.SPRUCE) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
 				}
@@ -2135,7 +2135,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.OAK_PRESSURE_PLATE) {
 					return Blocks.SPRUCE_PRESSURE_PLATE.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.ACACIA) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.ACACIA) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.ACACIA_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
 				}
@@ -2161,7 +2161,7 @@ public class VillagePiecesUA {
 					return Blocks.ACACIA_PRESSURE_PLATE.getDefaultState();
 				}
 			}
-			if (this.structureType == VillagePiecesUA.Type.DARK) {
+			if (this.structureType == VillagePastStyledPiecesUA.Type.DARK) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.DARK_OAK_LOG.getDefaultState();
 				}
@@ -2199,7 +2199,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.COBBLESTONE) {
 					return Blocks.COARSE_DIRT.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.JUNGLE) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.JUNGLE) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.JUNGLE_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
 				}
@@ -2228,7 +2228,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.COBBLESTONE) {
 					return Blocks.MOSSY_STONE_BRICKS.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.STONE) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.STONE) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.STONE.getDefaultState();
 				}
@@ -2264,7 +2264,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.MOSSY_STONE_BRICKS) {
 					return Blocks.CRACKED_STONE_BRICKS.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.END) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.END) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.PURPUR_BLOCK.getDefaultState();
 				}
@@ -2319,7 +2319,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.MOSSY_STONE_BRICKS) {
 					return Blocks.END_STONE_BRICKS.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.HELL) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.HELL) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.NETHER_BRICKS.getDefaultState();
 				}
@@ -2374,7 +2374,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.MOSSY_STONE_BRICKS) {
 					return Blocks.BLACK_TERRACOTTA.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.BADLANDS) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.BADLANDS) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.RED_TERRACOTTA.getDefaultState();
 				}
@@ -2420,7 +2420,7 @@ public class VillagePiecesUA {
 				if (block == Blocks.MOSSY_STONE_BRICKS) {
 					return Blocks.CHISELED_RED_SANDSTONE.getDefaultState();
 				}
-			} else if (this.structureType == VillagePiecesUA.Type.ICY) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.ICY) {
 				if (block.isIn(BlockTags.LOGS)) {
 					return Blocks.SNOW_BLOCK.getDefaultState();
 				}
@@ -2483,19 +2483,19 @@ public class VillagePiecesUA {
 		}
 
 		protected DoorBlock biomeDoor() {
-			if (this.structureType == VillagePiecesUA.Type.DARK) {
+			if (this.structureType == VillagePastStyledPiecesUA.Type.DARK) {
 				return (DoorBlock) Blocks.DARK_OAK_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.END) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.END) {
 				return (DoorBlock) Blocks.BIRCH_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.HELL) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.HELL) {
 				return (DoorBlock) Blocks.DARK_OAK_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.JUNGLE) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.JUNGLE) {
 				return (DoorBlock) Blocks.JUNGLE_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.BADLANDS) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.BADLANDS) {
 				return (DoorBlock) Blocks.ACACIA_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.ICY) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.ICY) {
 				return (DoorBlock) Blocks.BIRCH_DOOR;
-			} else if (this.structureType == VillagePiecesUA.Type.STONE) {
+			} else if (this.structureType == VillagePastStyledPiecesUA.Type.STONE) {
 				return (DoorBlock) Blocks.SPRUCE_DOOR;
 			} else {
 				return (DoorBlock) Blocks.OAK_DOOR;
@@ -2540,18 +2540,18 @@ public class VillagePiecesUA {
 			super.replaceAirAndLiquidDownwards(worldIn, iblockstate, x, y, z, boundingboxIn);
 		}
 
-		protected void func_202579_a(VillagePiecesUA.Type p_202579_1_) {
+		protected void func_202579_a(VillagePastStyledPiecesUA.Type p_202579_1_) {
 			this.structureType = p_202579_1_;
 		}
 	}
 
-	public static class Well extends VillagePiecesUA.Village {
+	public static class Well extends VillagePastStyledPiecesUA.Village {
 
 		protected Well(IStructurePieceType p_i50287_1_, CompoundNBT p_i50287_2_) {
 			super(p_i50287_1_, p_i50287_2_);
 		}
 
-		public Well(VillagePiecesUA.Start start, int type, Random rand, int x, int z) {
+		public Well(VillagePastStyledPiecesUA.Start start, int type, Random rand, int x, int z) {
 			super(start, StructureInitUA.VIWUA, 0);
 			this.setCoordBaseMode(Direction.Plane.HORIZONTAL.random(rand));
 			if (this.getCoordBaseMode().getAxis() == Direction.Axis.Z) {
@@ -2570,16 +2570,16 @@ public class VillagePiecesUA {
 		 * Location of StructGen
 		 */
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand) {
-			VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+			VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 					this.boundingBox.minX - 1, this.boundingBox.maxY - 4, this.boundingBox.minZ + 1, Direction.WEST,
 					this.getComponentType());
-			VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+			VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 					this.boundingBox.maxX + 1, this.boundingBox.maxY - 4, this.boundingBox.minZ + 1, Direction.EAST,
 					this.getComponentType());
-			VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+			VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 					this.boundingBox.minX + 1, this.boundingBox.maxY - 4, this.boundingBox.minZ - 1, Direction.NORTH,
 					this.getComponentType());
-			VillagePiecesUA.generateAndAddRoadPiece((VillagePiecesUA.Start) componentIn, listIn, rand,
+			VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand,
 					this.boundingBox.minX + 1, this.boundingBox.maxY - 4, this.boundingBox.maxZ + 1, Direction.SOUTH,
 					this.getComponentType());
 		}
@@ -2632,11 +2632,11 @@ public class VillagePiecesUA {
 		}
 	}
 
-	public static class TinyHouse extends VillagePiecesUA.Village {
+	public static class TinyHouse extends VillagePastStyledPiecesUA.Village {
 		private boolean isTallHouse;
 		private int tablePosition;
 
-		protected TinyHouse(VillagePiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
+		protected TinyHouse(VillagePastStyledPiecesUA.Start start, int type, Random rand, MutableBoundingBox boundingBoxIn,
 				Direction facing) {
 			super(start, StructureInitUA.VISMHUA, type);
 			this.setCoordBaseMode(facing);
@@ -2658,14 +2658,14 @@ public class VillagePiecesUA {
 			tagCompound.putInt("tablePosition", this.tablePosition);
 		}
 
-		public static VillagePiecesUA.TinyHouse createPiece(VillagePiecesUA.Start start,
+		public static VillagePastStyledPiecesUA.TinyHouse createPiece(VillagePastStyledPiecesUA.Start start,
 				List<StructurePiece> p_175853_1_, Random rand, int p_175853_3_, int p_175853_4_, int p_175853_5_,
 				Direction facing, int p_175853_7_) {
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175853_3_,
 					p_175853_4_, p_175853_5_, 0, 0, 0, 4, 6, 5, facing);
 			return canVillageGoDeeper(mutableboundingbox)
 					&& StructurePiece.findIntersecting(p_175853_1_, mutableboundingbox) == null
-							? new VillagePiecesUA.TinyHouse(start, p_175853_7_, rand, mutableboundingbox, facing)
+							? new VillagePastStyledPiecesUA.TinyHouse(start, p_175853_7_, rand, mutableboundingbox, facing)
 							: null;
 		}
 

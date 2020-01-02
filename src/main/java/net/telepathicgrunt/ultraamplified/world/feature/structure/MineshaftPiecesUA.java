@@ -38,13 +38,13 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftUA.Type;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA.Type;
 
 public class MineshaftPiecesUA {
 
 	private static MineshaftPiecesUA.Piece createRandomShaftPiece(List<StructurePiece> p_189940_0_, Random p_189940_1_,
 			int p_189940_2_, int p_189940_3_, int p_189940_4_, @Nullable Direction p_189940_5_, int p_189940_6_,
-			MineshaftUA.Type p_189940_7_) {
+			MineshaftStructureUA.Type p_189940_7_) {
 		int i = p_189940_1_.nextInt(100);
 
 		if (i >= 80) {
@@ -81,7 +81,7 @@ public class MineshaftPiecesUA {
 			return null;
 		} else if (Math.abs(p_189938_3_ - p_189938_0_.getBoundingBox().minX) <= 80
 				&& Math.abs(p_189938_5_ - p_189938_0_.getBoundingBox().minZ) <= 80) {
-			MineshaftUA.Type mapgenmineshaft$type = ((MineshaftPiecesUA.Piece) p_189938_0_).mineShaftType;
+			MineshaftStructureUA.Type mapgenmineshaft$type = ((MineshaftPiecesUA.Piece) p_189938_0_).mineShaftType;
 			MineshaftPiecesUA.Piece structuremineshaftpieces$peice = createRandomShaftPiece(p_189938_1_, p_189938_2_,
 					p_189938_3_, p_189938_4_, p_189938_5_, p_189938_6_, p_189938_7_ + 1, mapgenmineshaft$type);
 
@@ -122,7 +122,7 @@ public class MineshaftPiecesUA {
 		}
 
 		public Corridor(int p_i47140_1_, Random p_i47140_2_, MutableBoundingBox p_i47140_3_, Direction p_i47140_4_,
-				MineshaftUA.Type p_i47140_5_) {
+				MineshaftStructureUA.Type p_i47140_5_) {
 			super(StructureInitUA.MSCORRIDORUA, p_i47140_1_, p_i47140_5_);
 			this.setCoordBaseMode(p_i47140_4_);
 			this.boundingBox = p_i47140_3_;
@@ -473,7 +473,7 @@ public class MineshaftPiecesUA {
 		}
 
 		public Cross(int p_i50455_1_, MutableBoundingBox p_i50455_2_, @Nullable Direction p_i50455_3_,
-				MineshaftUA.Type p_i50455_4_) {
+				MineshaftStructureUA.Type p_i50455_4_) {
 			super(StructureInitUA.MSCROSSINGUA, p_i50455_1_, p_i50455_4_);
 			this.corridorDirection = p_i50455_3_;
 			this.boundingBox = p_i50455_2_;
@@ -649,16 +649,16 @@ public class MineshaftPiecesUA {
 	}
 
 	abstract static class Piece extends StructurePiece {
-		protected MineshaftUA.Type mineShaftType;
+		protected MineshaftStructureUA.Type mineShaftType;
 
-		public Piece(IStructurePieceType p_i50452_1_, int p_i50452_2_, MineshaftUA.Type p_i50452_3_) {
+		public Piece(IStructurePieceType p_i50452_1_, int p_i50452_2_, MineshaftStructureUA.Type p_i50452_3_) {
 			super(p_i50452_1_, p_i50452_2_);
 			this.mineShaftType = p_i50452_3_;
 		}
 
 		public Piece(IStructurePieceType p_i50453_1_, CompoundNBT p_i50453_2_) {
 			super(p_i50453_1_, p_i50453_2_);
-			this.mineShaftType = MineshaftUA.Type.byId(p_i50453_2_.getInt("MST"));
+			this.mineShaftType = MineshaftStructureUA.Type.byId(p_i50453_2_.getInt("MST"));
 		}
 
 		/**
@@ -810,7 +810,7 @@ public class MineshaftPiecesUA {
 		private final boolean normalRoom;
 
 		public Room(int p_i47137_1_, Random p_i47137_2_, int p_i47137_3_, int p_i47137_4_,
-				MineshaftUA.Type p_i47137_5_) {
+				MineshaftStructureUA.Type p_i47137_5_) {
 			super(StructureInitUA.MSROOMUA, p_i47137_1_, p_i47137_5_);
 			this.mineShaftType = p_i47137_5_;
 			// if the pit rooms are not allowed, makes this boolean always true.
@@ -990,7 +990,7 @@ public class MineshaftPiecesUA {
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState flooring;
 
-			if (this.mineShaftType == MineshaftUA.Type.HELL) {
+			if (this.mineShaftType == MineshaftStructureUA.Type.HELL) {
 				flooring = Blocks.SOUL_SAND.getDefaultState();
 			} else {
 				flooring = Blocks.COARSE_DIRT.getDefaultState();
@@ -1088,7 +1088,7 @@ public class MineshaftPiecesUA {
 
 	public static class Stairs extends MineshaftPiecesUA.Piece {
 		public Stairs(int p_i50449_1_, MutableBoundingBox p_i50449_2_, Direction p_i50449_3_,
-				MineshaftUA.Type p_i50449_4_) {
+				MineshaftStructureUA.Type p_i50449_4_) {
 			super(StructureInitUA.MSSTAIRSUA, p_i50449_1_, p_i50449_4_);
 			this.setCoordBaseMode(p_i50449_3_);
 			this.boundingBox = p_i50449_2_;

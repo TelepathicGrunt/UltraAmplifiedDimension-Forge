@@ -24,8 +24,8 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class OceanMonumentUA extends Structure<NoFeatureConfig> {
-	public OceanMonumentUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
+	public OceanMonumentStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -69,12 +69,8 @@ public class OceanMonumentUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public Structure.IStartFactory getStartFactory() {
-		return OceanMonumentUA.Start::new;
+		return OceanMonumentStructureUA.Start::new;
 	}
 
 	public String getStructureName() {

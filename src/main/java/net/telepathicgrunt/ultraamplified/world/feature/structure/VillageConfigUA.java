@@ -8,9 +8,9 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class VillageConfigUA implements IFeatureConfig {
 	public final int terrainType;
-	public final VillagePiecesUA.Type type;
+	public final VillagePastStyledPiecesUA.Type type;
 
-	public VillageConfigUA(int terraintypeIn, VillagePiecesUA.Type typeIn) {
+	public VillageConfigUA(int terraintypeIn, VillagePastStyledPiecesUA.Type typeIn) {
 		this.terrainType = terraintypeIn;
 		this.type = typeIn;
 	}
@@ -21,7 +21,7 @@ public class VillageConfigUA implements IFeatureConfig {
 	}
 
 	public static <T> VillageConfigUA deserialize(Dynamic<T> p_214679_0_) {
-		VillagePiecesUA.Type s = VillagePiecesUA.Type.typeById(p_214679_0_.get("type").asInt(0));
+		VillagePastStyledPiecesUA.Type s = VillagePastStyledPiecesUA.Type.typeById(p_214679_0_.get("type").asInt(0));
 		int i = p_214679_0_.get("terrainType").asInt(0);
 		return new VillageConfigUA(i, s);
 	}

@@ -28,9 +28,9 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
+public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 
-	public WoodlandMansionUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+	public WoodlandMansionStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -73,12 +73,8 @@ public class WoodlandMansionUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public Structure.IStartFactory getStartFactory() {
-		return WoodlandMansionUA.Start::new;
+		return WoodlandMansionStructureUA.Start::new;
 	}
 
 	public String getStructureName() {

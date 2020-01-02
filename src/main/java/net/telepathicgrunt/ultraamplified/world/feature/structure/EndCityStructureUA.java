@@ -10,7 +10,6 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -22,8 +21,8 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class EndCityUA extends Structure<NoFeatureConfig> {
-	public EndCityUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+public class EndCityStructureUA extends Structure<NoFeatureConfig> {
+	public EndCityStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -60,13 +59,9 @@ public class EndCityUA extends Structure<NoFeatureConfig> {
 
 		return false;
 	}
-
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
+	
 	public Structure.IStartFactory getStartFactory() {
-		return EndCityUA.Start::new;
+		return EndCityStructureUA.Start::new;
 	}
 
 	public String getStructureName() {
@@ -109,7 +104,7 @@ public class EndCityUA extends Structure<NoFeatureConfig> {
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
 				Biome biomeIn) {
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			int height = EndCityUA.getYPosForStructure(chunkX, chunkZ, generator);
+			int height = EndCityStructureUA.getYPosForStructure(chunkX, chunkZ, generator);
 
 			if (height >= 60) {
 				BlockPos blockpos = new BlockPos(chunkX * 16 + 8, height, chunkZ * 16 + 8);

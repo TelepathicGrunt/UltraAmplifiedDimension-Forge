@@ -10,27 +10,25 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class IceSpikeTempleUA extends Structure<NoFeatureConfig> {
+public class ShipwreckStructureUA extends Structure<ShipwreckConfig> {
 
-	public IceSpikeTempleUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+	public ShipwreckStructureUA(Function<Dynamic<?>, ? extends ShipwreckConfig> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
 			int spacingOffsetsX, int spacingOffsetsZ) {
-		int maxDistance = ConfigUA.iceSpikeTempleSpawnrate;
+		int maxDistance = ConfigUA.shipwreckSpawnrate;
 		int minDistance = 8;
 		if (maxDistance < 9) {
 			minDistance = maxDistance - 1;
@@ -50,12 +48,8 @@ public class IceSpikeTempleUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public String getStructureName() {
-		return UltraAmplified.MODID + ":ice_spike_temple";
+		return UltraAmplified.MODID + ":shipwreck";
 	}
 
 	public int getSize() {
@@ -63,18 +57,18 @@ public class IceSpikeTempleUA extends Structure<NoFeatureConfig> {
 	}
 
 	public Structure.IStartFactory getStartFactory() {
-		return IceSpikeTempleUA.Start::new;
+		return ShipwreckStructureUA.Start::new;
 	}
 
 	protected int getSeedModifier() {
-		return 14357621;
+		return 165745295;
 	}
 
 	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.iceSpikeTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+			if (ConfigUA.shipwreckSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
 				return true;
 			}
 		}
@@ -90,32 +84,20 @@ public class IceSpikeTempleUA extends Structure<NoFeatureConfig> {
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
 				Biome biomeIn) {
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			//
-			int xOffset = 9;
-			int zOffset = 20;
-			if (rotation == Rotation.CLOCKWISE_90) {
-				xOffset = -20;
-				zOffset = 9;
-			} else if (rotation == Rotation.CLOCKWISE_180) {
-				xOffset = -9;
-				zOffset = -20;
-			} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
-				xOffset = 20;
-				zOffset = -9;
-			}
 
-			int x = (chunkX << 4) + 7;
-			int z = (chunkZ << 4) + 7;
-			int surfaceY = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-			int y = Math.min(surfaceY, 230);
+			BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 
-			if (y >= 70) {
-				BlockPos blockpos = new BlockPos(x, y, z);
-				IceSpikeTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
-				this.recalculateStructureSize();
-				// UltraAmplified.LOGGER.log(Level.DEBUG, "Ice Spike Temple | "+(blockpos.getX()
-				// + xOffset)+" "+blockpos.getY()+" "+(blockpos.getZ() + zOffset));
-			}
+			// Our shipwreck can generate all kinds of variants regardless of what biome it
+			// is in
+			ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(this.rand.nextBoolean() ? true : false);
+
+			ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos, rotation, this.components, this.rand,
+					newShipwreckConfig);
+			this.recalculateStructureSize();
+
+			// UltraAmplified.LOGGER.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+"
+			// "+this.bounds.minY+" "+blockpos.getZ());
+
 		}
 
 	}

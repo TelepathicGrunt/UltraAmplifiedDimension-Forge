@@ -10,7 +10,6 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -21,15 +20,15 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class IglooUA extends Structure<NoFeatureConfig> {
+public class MushroomTempleStructureUA extends Structure<NoFeatureConfig> {
 
-	public IglooUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+	public MushroomTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
 			int spacingOffsetsX, int spacingOffsetsZ) {
-		int maxDistance = ConfigUA.iglooSpawnrate;
+		int maxDistance = ConfigUA.mushroomTempleSpawnrate;
 		int minDistance = 8;
 		if (maxDistance < 9) {
 			minDistance = maxDistance - 1;
@@ -49,12 +48,8 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
-	}
-
 	public String getStructureName() {
-		return UltraAmplified.MODID + ":igloo";
+		return UltraAmplified.MODID + ":mushroom_temple";
 	}
 
 	public int getSize() {
@@ -62,18 +57,18 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 	}
 
 	public Structure.IStartFactory getStartFactory() {
-		return IglooUA.Start::new;
+		return MushroomTempleStructureUA.Start::new;
 	}
 
 	protected int getSeedModifier() {
-		return 14357618;
+		return 14357876;
 	}
 
 	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.iglooSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+			if (ConfigUA.mushroomTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
 				return true;
 			}
 		}
@@ -93,10 +88,10 @@ public class IglooUA extends Structure<NoFeatureConfig> {
 			int z = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(x, 90, z);
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			IglooPiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
+			MushroomTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
 			this.recalculateStructureSize();
 
-			// UltraAmplified.LOGGER.log(Level.DEBUG, "Igloo | "+(chunkX*16)+"
+			// UltraAmplified.LOGGER.log(Level.DEBUG, "mushroom temple | "+(chunkX*16)+"
 			// "+(chunkZ*16));
 		}
 	}

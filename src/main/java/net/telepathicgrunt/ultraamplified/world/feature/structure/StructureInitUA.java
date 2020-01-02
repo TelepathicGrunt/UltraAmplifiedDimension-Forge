@@ -128,19 +128,19 @@ public class StructureInitUA {
 		SHSTARTUA = register(StrongholdPiecesUA.Stairs2::new, "SHStartUA");
 		SHSUA = register(StrongholdPiecesUA.Straight::new, "SHSUA");
 		SHSSDUA = register(StrongholdPiecesUA.StairsStraight::new, "SHSSDUA");
-		VISTUA = register(VillagePiecesUA.Church::new, "ViSTUA");
-		VIDFUA = register(VillagePiecesUA.Field1::new, "ViDFUA");
-		VIFUA = register(VillagePiecesUA.Field2::new, "ViFUA");
-		VIPHUA = register(VillagePiecesUA.WorkHouse::new, "ViPHUA");
-		VIBHUA = register(VillagePiecesUA.LibraryHouse::new, "ViBHUA");
-		VISUA = register(VillagePiecesUA.Blacksmith::new, "ViSUA");
-		VITRHUA = register(VillagePiecesUA.LargeHouse::new, "ViTRHUA");
-		VISHUA = register(VillagePiecesUA.FlatTopTinyHouse::new, "ViSHUA");
-		VISRUA = register(VillagePiecesUA.Path::new, "ViSRUA");
-		VIWUA = register(VillagePiecesUA.Well::new, "ViWUA");
-		VISMHUA = register(VillagePiecesUA.TinyHouse::new, "ViSmHUA");
-		VILUA = register(VillagePiecesUA.Torch::new, "ViLUA");
-		VISTARTUA = register(VillagePiecesUA.Start::new, "ViStartUA");
+		VISTUA = register(VillagePastStyledPiecesUA.Church::new, "ViSTUA");
+		VIDFUA = register(VillagePastStyledPiecesUA.Field1::new, "ViDFUA");
+		VIFUA = register(VillagePastStyledPiecesUA.Field2::new, "ViFUA");
+		VIPHUA = register(VillagePastStyledPiecesUA.WorkHouse::new, "ViPHUA");
+		VIBHUA = register(VillagePastStyledPiecesUA.LibraryHouse::new, "ViBHUA");
+		VISUA = register(VillagePastStyledPiecesUA.Blacksmith::new, "ViSUA");
+		VITRHUA = register(VillagePastStyledPiecesUA.LargeHouse::new, "ViTRHUA");
+		VISHUA = register(VillagePastStyledPiecesUA.FlatTopTinyHouse::new, "ViSHUA");
+		VISRUA = register(VillagePastStyledPiecesUA.Path::new, "ViSRUA");
+		VIWUA = register(VillagePastStyledPiecesUA.Well::new, "ViWUA");
+		VISMHUA = register(VillagePastStyledPiecesUA.TinyHouse::new, "ViSmHUA");
+		VILUA = register(VillagePastStyledPiecesUA.Torch::new, "ViLUA");
+		VISTARTUA = register(VillagePastStyledPiecesUA.Start::new, "ViStartUA");
 	}
 
 	static IStructurePieceType register(IStructurePieceType p_214750_0_, String key) {

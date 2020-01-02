@@ -10,7 +10,6 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -24,8 +23,8 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class VillageUA extends Structure<VillageConfigUA> {
-	public VillageUA(Function<Dynamic<?>, ? extends VillageConfigUA> p_i51427_1_) {
+public class VillageStructureUA extends Structure<VillageConfigUA> {
+	public VillageStructureUA(Function<Dynamic<?>, ? extends VillageConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
 	}
 
@@ -35,10 +34,6 @@ public class VillageUA extends Structure<VillageConfigUA> {
 
 	public int getSize() {
 		return 8;
-	}
-
-	protected boolean isEnabledIn(IWorld worldIn) {
-		return worldIn.getWorldInfo().isMapFeaturesEnabled();
 	}
 
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
@@ -74,7 +69,7 @@ public class VillageUA extends Structure<VillageConfigUA> {
 	}
 
 	public Structure.IStartFactory getStartFactory() {
-		return VillageUA.Start::new;
+		return VillageStructureUA.Start::new;
 	}
 
 	public static class Start extends StructureStart {
@@ -93,18 +88,18 @@ public class VillageUA extends Structure<VillageConfigUA> {
 			// This sets up the config that vanilla needs
 			VillageConfig vanillaVillageConfig = new VillageConfig("village/plains/town_centers", 6);
 			boolean genVanillaVillage = false;
-			if (villageconfig.type == VillagePiecesUA.Type.OAK) {
+			if (villageconfig.type == VillagePastStyledPiecesUA.Type.OAK) {
 				genVanillaVillage = true;
-			} else if (villageconfig.type == VillagePiecesUA.Type.SANDSTONE) {
+			} else if (villageconfig.type == VillagePastStyledPiecesUA.Type.SANDSTONE) {
 				vanillaVillageConfig = new VillageConfig("village/desert/town_centers", 6);
 				genVanillaVillage = true;
-			} else if (villageconfig.type == VillagePiecesUA.Type.ACACIA) {
+			} else if (villageconfig.type == VillagePastStyledPiecesUA.Type.ACACIA) {
 				vanillaVillageConfig = new VillageConfig("village/savanna/town_centers", 6);
 				genVanillaVillage = true;
-			} else if (villageconfig.type == VillagePiecesUA.Type.SNOWYSPRUCE) {
+			} else if (villageconfig.type == VillagePastStyledPiecesUA.Type.SNOWYSPRUCE) {
 				vanillaVillageConfig = new VillageConfig("village/snowy/town_centers", 6);
 				genVanillaVillage = true;
-			} else if (villageconfig.type == VillagePiecesUA.Type.SPRUCE) {
+			} else if (villageconfig.type == VillagePastStyledPiecesUA.Type.SPRUCE) {
 				vanillaVillageConfig = new VillageConfig("village/taiga/town_centers", 6);
 				genVanillaVillage = true;
 			}
@@ -118,9 +113,9 @@ public class VillageUA extends Structure<VillageConfigUA> {
 				this.recalculateStructureSize();
 			} else {
 				// generates our own kind of village
-				List<VillagePiecesUA.PieceWeightUA> list = VillagePiecesUA
+				List<VillagePastStyledPiecesUA.PieceWeightUA> list = VillagePastStyledPiecesUA
 						.getStructureVillageWeightedPieceList(this.rand, this.rand.nextInt(3));
-				VillagePiecesUA.Start villagepiecesua$start = new VillagePiecesUA.Start(0, this.rand, (chunkX << 4) + 2,
+				VillagePastStyledPiecesUA.Start villagepiecesua$start = new VillagePastStyledPiecesUA.Start(0, this.rand, (chunkX << 4) + 2,
 						(chunkZ << 4) + 2, list, villageconfig, biomeIn);
 				this.components.add(villagepiecesua$start);
 				villagepiecesua$start.buildComponent(villagepiecesua$start, this.components, this.rand);
