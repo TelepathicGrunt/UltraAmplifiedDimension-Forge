@@ -1,6 +1,6 @@
 # Find more information on toml format here:?  https://github.com/toml-lang/toml???
 modLoader="javafml" #mandatory
-loaderVersion="[28,)" #mandatory
+loaderVersion="[30,)" #mandatory
 
 [[mods]] #mandatory
 modId="ultra_amplified_dimension" #mandatory
