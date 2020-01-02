@@ -44,7 +44,6 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 @Mod(UltraAmplified.MODID)
 public class UltraAmplified {
 	
-	public static UltraAmplified instance;
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
@@ -52,8 +51,6 @@ public class UltraAmplified {
 	public static WorldType UltraAmplified;
 	
 	public UltraAmplified() {
-		instance = this;
-		
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
