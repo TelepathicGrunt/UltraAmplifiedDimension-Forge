@@ -33,7 +33,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.StructureInitUA;
 import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 /*
