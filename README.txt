@@ -15,6 +15,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+    (V.7.0.2 Changes) (1.15.1 Minecraft)
+    
+       
     (V.7.0.1 Changes) (1.15.1 Minecraft)
     
     Blocks: 
