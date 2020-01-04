@@ -183,7 +183,7 @@ public class AmplifiedPortalBehavior {
 
 			// checks to see if player uses right click with flint and steel. If so, tries
 			// to create portal if possible. only works in non-ultra amplified world types
-			if (worldIn.getWorldType() != UltraAmplified.UltraAmplified && 
+			if (worldIn.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
 				    event.getItemStack().getItem() == Items.FLINT_AND_STEEL) 
 			{
 				trySpawnPortal(worldIn, event.getPos());
@@ -298,7 +298,7 @@ public class AmplifiedPortalBehavior {
 		{
 
 			// cannot create amplified portal in Ultra Amplified Worldtype
-			if (worldIn.getWorld().getWorldType() == UltraAmplified.UltraAmplified)
+			if (worldIn.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
 			{
 				return false;
 			}

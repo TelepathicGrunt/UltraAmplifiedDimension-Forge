@@ -151,104 +151,86 @@ public class FeatureUA
     public static final Feature<BigMushroomFeatureConfig> HUGE_RED_MUSHROOM_FIX = new BigRedMushroomTempFix(BigMushroomFeatureConfig::deserialize);
     public static final Feature<BigMushroomFeatureConfig> HUGE_BROWN_MUSHROOM_FIX = new BigBrownMushroomTempFix(BigMushroomFeatureConfig::deserialize);
     
+    
     @SuppressWarnings("unchecked")
-    public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
     {
-        if(registry == null)
-            registry = event.getRegistry();
+    	IForgeRegistry<Feature<?>> registry = event.getRegistry();
 
         UltraAmplified.LOGGER.debug("FEATURE REGISTER");
 
-        registerFeature(BETTER_CACTUS, "better_cactus_ua");
-        registerFeature(GENERIC_DUNGEONS, "dungeon_default_ua");
-        registerFeature(MESA_DUNGEONS, "dungeons_badlands_ua");
-        registerFeature(DARK_FOREST_DUNGEONS, "dungeons_dark_forest_ua");
-        registerFeature(DESERT_DUNGEONS, "dungeons_desert_ua");
-        registerFeature(END_DUNGEONS, "dungeons_end_ua");
-        registerFeature(NETHER_DUNGEONS, "dungeons_nether_ua");
-        registerFeature(SNOW_DUNGEONS, "dungeons_snow_ua");
-        registerFeature(SWAMP_DUNGEONS, "dungeons_swamp_ua");
-        registerFeature(MUSHROOM_DUNGEONS, "dungeons_mushroom_ua");
-        registerFeature(CROSS, "swamp_cross_ua");
-        registerFeature(HAY_BALE, "hay_bale_pile_ua");
-        registerFeature(TINY_HAY_BALE, "hay_bale_tiny_pile_ua");
-        registerFeature(STONEHENGE, "stonehenge_ua");
-        registerFeature(SUN_SHRINE, "sun_shrine_ua");
-        registerFeature(HANGING_RUINS, "hanging_ruins_ua");
-        registerFeature(FOSSILS_UA, "fossil_ua");
-        registerFeature(SINGLE_BLOCK, "single_block_ua");
-        registerFeature(ICEBERG_UA, "iceberg_ua");
-        registerFeature(MARKED_TREASURE_CHEST_UA, "marked_treasure_chest_ua");
-        registerFeature(LARGE_STACKABLE_BOULDER, "giant_stackable_boulder_ua");
-        registerFeature(LARGE_BOULDER, "boulder_giant_ua");
-        registerFeature(MEDIUM_BOULDER, "boulder_normal_ua");
-        registerFeature(SMALL_BOULDER, "boulder_tiny_ua");
-        registerFeature(STONELESS_LAKE, "stoneless_lakes_ua");
-        registerFeature(SHALLOW_LAKE, "wide_shallow_lakes_ua");
-        registerFeature(CONTAIN_LIQUID, "contain_water_ua");
-        registerFeature(ICE_PATCH_SANDY, "ice_patch_ua");
-        registerFeature(GIANT_ICE_SPIKE, "ice_spike_ua");
-        registerFeature(GREEN_CONCRETE_POWDER_PATCH, "green_powder_concrete_patch_ua");
-        registerFeature(DISK_DRY, "disk_dry_ua");
-        registerFeature(COLUMN, "column_ua");
-        registerFeature(RAMP, "ramp_column_ua");
-        registerFeature(GLOWPATCH, "glowpatch_ua");
-        registerFeature(BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
-        registerFeature(SNOW_AND_ICE_LAYERER, "snow_and_ice_layerer_ua");
-        registerFeature(LONG_VINES, "vines_long_ua");
-        registerFeature(SHORT_VINES, "vines_short_ua");
-        registerFeature(SEA_GRASS_UA, "sea_grass_ua");
-        registerFeature(KELP_UA, "kelp_ua");
-        registerFeature(SEA_PICKLE_UA, "sea_pickle_ua");
-        registerFeature(CORAL_CLAW_UA, "coral_claw_ua");
-        registerFeature(CORAL_TREE_UA, "coral_tree_ua");
-        registerFeature(CORAL_MUSHROOM_UA, "coral_mushroom_ua");
-        registerFeature(BAMBOO_UA, "bamboo_ua");
-        registerFeature(ROOTS, "roots_ua");
-        registerFeature(HORNED_SWAMP_TREE, "horned_swamp_tree_ua");
-        registerFeature(GIANT_BIRCH_TREE, "giant_birch_tree_ua");
-        registerFeature(GIANT_PINE_TREE_1_UA, "giant_pine_1_tree_ua");
-        registerFeature(GIANT_PINE_TREE_2_UA, "giant_pine_2_tree_ua");
-        registerFeature(GIANT_DARK_FOREST_TREE, "giant_dark_oak_tree_ua");
-        registerFeature(PODZOL_TAIGA_TREE, "podzol_taiga_tree_ua");
-        registerFeature(END_TREE, "end_tree_ua");
-        MINESHAFT_UA = (Structure<MineshaftConfigUA>) registerStructure(MINESHAFT_UA, "mineshaft");
-        WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) registerStructure(WOODLAND_MANSION_UA, "woodland_mansion");
-        JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(JUNGLE_TEMPLE_UA, "jungle_temple");
-        DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(DESERT_TEMPLE_UA, "desert_temple");
-        IGLOO_UA = (Structure<NoFeatureConfig>) registerStructure(IGLOO_UA, "igloo");
-        SHIPWRECK_UA = (Structure<ShipwreckConfig>) registerStructure(SHIPWRECK_UA, "shipwreck");
-        WITCH_HUT_UA = (WitchHutStructureUA) registerStructure(WITCH_HUT_UA, "witch_hut");
-        STRONGHOLD_UA = (Structure<NoFeatureConfig>) registerStructure(STRONGHOLD_UA, "stronghold");
-        OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) registerStructure(OCEAN_MONUMENT_UA, "ocean_monument");
-        OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) registerStructure(OCEAN_RUIN_UA, "ocean_ruins");
-        FORTRESS_UA = (Structure<FortressConfigUA>) registerStructure(FORTRESS_UA, "fortress");
-        END_CITY_UA = (Structure<NoFeatureConfig>) registerStructure(END_CITY_UA, "endcity");
-        VILLAGE_UA = (Structure<VillageConfigUA>) registerStructure(VILLAGE_UA, "village");
-        PILLAGER_OUTPOST_UA = (Structure<NoFeatureConfig>) registerStructure(PILLAGER_OUTPOST_UA, "pillager_outpost");
-        MUSHROOM_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(MUSHROOM_TEMPLE_UA, "mushroom_temple");
-        ICE_SPIKE_TEMPLE_UA = (Structure<NoFeatureConfig>) registerStructure(ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
+        UltraAmplified.register(registry, BETTER_CACTUS, "better_cactus_ua");
+        UltraAmplified.register(registry, GENERIC_DUNGEONS, "dungeon_default_ua");
+        UltraAmplified.register(registry, MESA_DUNGEONS, "dungeons_badlands_ua");
+        UltraAmplified.register(registry, DARK_FOREST_DUNGEONS, "dungeons_dark_forest_ua");
+        UltraAmplified.register(registry, DESERT_DUNGEONS, "dungeons_desert_ua");
+        UltraAmplified.register(registry, END_DUNGEONS, "dungeons_end_ua");
+        UltraAmplified.register(registry, NETHER_DUNGEONS, "dungeons_nether_ua");
+        UltraAmplified.register(registry, SNOW_DUNGEONS, "dungeons_snow_ua");
+        UltraAmplified.register(registry, SWAMP_DUNGEONS, "dungeons_swamp_ua");
+        UltraAmplified.register(registry, MUSHROOM_DUNGEONS, "dungeons_mushroom_ua");
+        UltraAmplified.register(registry, CROSS, "swamp_cross_ua");
+        UltraAmplified.register(registry, HAY_BALE, "hay_bale_pile_ua");
+        UltraAmplified.register(registry, TINY_HAY_BALE, "hay_bale_tiny_pile_ua");
+        UltraAmplified.register(registry, STONEHENGE, "stonehenge_ua");
+        UltraAmplified.register(registry, SUN_SHRINE, "sun_shrine_ua");
+        UltraAmplified.register(registry, HANGING_RUINS, "hanging_ruins_ua");
+        UltraAmplified.register(registry, FOSSILS_UA, "fossil_ua");
+        UltraAmplified.register(registry, SINGLE_BLOCK, "single_block_ua");
+        UltraAmplified.register(registry, ICEBERG_UA, "iceberg_ua");
+        UltraAmplified.register(registry, MARKED_TREASURE_CHEST_UA, "marked_treasure_chest_ua");
+        UltraAmplified.register(registry, LARGE_STACKABLE_BOULDER, "giant_stackable_boulder_ua");
+        UltraAmplified.register(registry, LARGE_BOULDER, "boulder_giant_ua");
+        UltraAmplified.register(registry, MEDIUM_BOULDER, "boulder_normal_ua");
+        UltraAmplified.register(registry, SMALL_BOULDER, "boulder_tiny_ua");
+        UltraAmplified.register(registry, STONELESS_LAKE, "stoneless_lakes_ua");
+        UltraAmplified.register(registry, SHALLOW_LAKE, "wide_shallow_lakes_ua");
+        UltraAmplified.register(registry, CONTAIN_LIQUID, "contain_water_ua");
+        UltraAmplified.register(registry, ICE_PATCH_SANDY, "ice_patch_ua");
+        UltraAmplified.register(registry, GIANT_ICE_SPIKE, "ice_spike_ua");
+        UltraAmplified.register(registry, GREEN_CONCRETE_POWDER_PATCH, "green_powder_concrete_patch_ua");
+        UltraAmplified.register(registry, DISK_DRY, "disk_dry_ua");
+        UltraAmplified.register(registry, COLUMN, "column_ua");
+        UltraAmplified.register(registry, RAMP, "ramp_column_ua");
+        UltraAmplified.register(registry, GLOWPATCH, "glowpatch_ua");
+        UltraAmplified.register(registry, BLUE_ICE_WATERFALL, "blue_ice_waterfall_ua");
+        UltraAmplified.register(registry, SNOW_AND_ICE_LAYERER, "snow_and_ice_layerer_ua");
+        UltraAmplified.register(registry, LONG_VINES, "vines_long_ua");
+        UltraAmplified.register(registry, SHORT_VINES, "vines_short_ua");
+        UltraAmplified.register(registry, SEA_GRASS_UA, "sea_grass_ua");
+        UltraAmplified.register(registry, KELP_UA, "kelp_ua");
+        UltraAmplified.register(registry, SEA_PICKLE_UA, "sea_pickle_ua");
+        UltraAmplified.register(registry, CORAL_CLAW_UA, "coral_claw_ua");
+        UltraAmplified.register(registry, CORAL_TREE_UA, "coral_tree_ua");
+        UltraAmplified.register(registry, CORAL_MUSHROOM_UA, "coral_mushroom_ua");
+        UltraAmplified.register(registry, BAMBOO_UA, "bamboo_ua");
+        UltraAmplified.register(registry, ROOTS, "roots_ua");
+        UltraAmplified.register(registry, HORNED_SWAMP_TREE, "horned_swamp_tree_ua");
+        UltraAmplified.register(registry, GIANT_BIRCH_TREE, "giant_birch_tree_ua");
+        UltraAmplified.register(registry, GIANT_PINE_TREE_1_UA, "giant_pine_1_tree_ua");
+        UltraAmplified.register(registry, GIANT_PINE_TREE_2_UA, "giant_pine_2_tree_ua");
+        UltraAmplified.register(registry, GIANT_DARK_FOREST_TREE, "giant_dark_oak_tree_ua");
+        UltraAmplified.register(registry, PODZOL_TAIGA_TREE, "podzol_taiga_tree_ua");
+        UltraAmplified.register(registry, END_TREE, "end_tree_ua");
+        MINESHAFT_UA = (Structure<MineshaftConfigUA>) UltraAmplified.register(registry, MINESHAFT_UA, "mineshaft");
+        WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, WOODLAND_MANSION_UA, "woodland_mansion");
+        JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, JUNGLE_TEMPLE_UA, "jungle_temple");
+        DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, DESERT_TEMPLE_UA, "desert_temple");
+        IGLOO_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, IGLOO_UA, "igloo");
+        SHIPWRECK_UA = (Structure<ShipwreckConfig>) UltraAmplified.register(registry, SHIPWRECK_UA, "shipwreck");
+        WITCH_HUT_UA = (WitchHutStructureUA) UltraAmplified.register(registry, WITCH_HUT_UA, "witch_hut");
+        STRONGHOLD_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, STRONGHOLD_UA, "stronghold");
+        OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, OCEAN_MONUMENT_UA, "ocean_monument");
+        OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) UltraAmplified.register(registry, OCEAN_RUIN_UA, "ocean_ruins");
+        FORTRESS_UA = (Structure<FortressConfigUA>) UltraAmplified.register(registry, FORTRESS_UA, "fortress");
+        END_CITY_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, END_CITY_UA, "endcity");
+        VILLAGE_UA = (Structure<VillageConfigUA>) UltraAmplified.register(registry, VILLAGE_UA, "village");
+        PILLAGER_OUTPOST_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, PILLAGER_OUTPOST_UA, "pillager_outpost");
+        MUSHROOM_TEMPLE_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, MUSHROOM_TEMPLE_UA, "mushroom_temple");
+        ICE_SPIKE_TEMPLE_UA = (Structure<NoFeatureConfig>) UltraAmplified.register(registry, ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
 
 
         //registers the structure pieces.
         StructureInitUA.registerStructurePieces();
     }
-
-    @SuppressWarnings("rawtypes")
-    private static Feature registerFeature(Feature<?> feature, String name)
-    {
-        feature.setRegistryName(UltraAmplified.MODID, name);
-        registry.register(feature);
-
-        return feature;
-    }
-
-	private static Structure<?> registerStructure(Structure<?> structure, String name) {
-    	structure.setRegistryName(UltraAmplified.MODID, name);
-        registry.register(structure);
-
-        return structure;
-    }
-
-    private static IForgeRegistry<Feature<?>> registry;
 }

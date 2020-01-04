@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
@@ -23,6 +24,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
@@ -48,7 +51,7 @@ public class UltraAmplified {
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	//worldTypes
-	public static WorldType UltraAmplified;
+	public static WorldType UltraAmplifiedWorldType;
 	
 	public UltraAmplified() {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
@@ -72,7 +75,7 @@ public class UltraAmplified {
 	public void setup(final FMLCommonSetupEvent event) 
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
-		UltraAmplified = new WorldTypeUA();
+		UltraAmplifiedWorldType = new WorldTypeUA();
 		CapabilityPlayerPosAndDim.register();
 		RavineCarver.setFillerMap();
 		SuperLongRavineCarver.setFillerMap();
@@ -127,5 +130,15 @@ public class UltraAmplified {
 			LOGGER.log(Level.INFO, "features registered.");
 		}
 
+	}
+	
+	/*
+	 * Helper method to quickly register features, blocks, items, structures, biomes, anything that can be registered.
+	 */
+	public static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T entry, String registryKey)
+	{
+		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey));
+		registry.register(entry);
+		return entry;
 	}
 }
