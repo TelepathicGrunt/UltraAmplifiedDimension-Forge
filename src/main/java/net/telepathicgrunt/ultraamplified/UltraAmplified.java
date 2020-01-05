@@ -6,22 +6,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -56,21 +54,17 @@ public class UltraAmplified {
 	public UltraAmplified() {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::modConfig);
-        modEventBus.addListener(this::clientSetup);
         modEventBus.register(new BlockColorManager());
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); //client side only for glowgrass color
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
 	}
 	
-	@OnlyIn(Dist.CLIENT)
-	public void clientSetup(final FMLClientSetupEvent event) 
-	{
-		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
-	}
 	
 	public void setup(final FMLCommonSetupEvent event) 
 	{
@@ -137,7 +131,7 @@ public class UltraAmplified {
 	 */
 	public static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T entry, String registryKey)
 	{
-		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey));
+		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey.toLowerCase().replace(' ', '_')));
 		registry.register(entry);
 		return entry;
 	}

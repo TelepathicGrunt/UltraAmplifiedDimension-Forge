@@ -17,6 +17,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
     (V.7.0.2 Changes) (1.15.1 Minecraft)
     
+    Misc: 
+·Fixed crash when trying to run this mod on a server.
+
        
     (V.7.0.1 Changes) (1.15.1 Minecraft)
     

@@ -309,7 +309,6 @@ public class BiomeInit {
 
 	//adds biome to registry with their type to the registry and to the biome dictionary
 	private static Biome initBiome(IForgeRegistry<Biome> registry, Biome biome, String name, BiomeType biomeType, Type... types) {
-		biome.setRegistryName(name.toLowerCase().replace(' ', '_'));
 		UltraAmplified.register(registry, biome, name);
 		BiomeDictionary.addTypes(biome, types);
 		return biome;
