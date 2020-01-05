@@ -15,11 +15,6 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
-    (V.7.0.4 Changes) (1.15.1 Minecraft)
-    
-    _:
-· 
-       
     (V.7.0.3 Changes) (1.15.1 Minecraft)
     
     Biome: 
