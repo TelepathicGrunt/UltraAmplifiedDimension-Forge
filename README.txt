@@ -15,6 +15,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+    (V.7.0.4 Changes) (1.15.1 Minecraft)
+    
+    _:
+· 
+       
+    (V.7.0.3 Changes) (1.15.1 Minecraft)
+    
+    Biome: 
+·Made Mushroom Biome more rare.
+       
+       
     (V.7.0.2 Changes) (1.15.1 Minecraft)
     
     Misc: 
@@ -94,13 +105,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Modified Jungle Edge -> Flower Jungle Edge
 ·Snowy Beach -> Frozen Desert
 ·Stone Shore -> Stone Plains
-·Modified Wooded Badlands Plateau UA -> Densed Wooded Badlands UA
-·Eroded Badlands UA -> Spiky Badlands UA
+·Modified Wooded Badlands Plateau UA -> Densed Wooded Badlands 
+·Eroded Badlands UA -> Spiky Badlands 
 ·Modified Badlands Plateau -> Badlands Dissected Plateau
 ·The End -> End Field
 ·Nether -> Netherland
-·Taiga Mountain UA -> Rocky Taiga UA
-·Snowy Taiga Mountain UA -> Snowy Rocky Taiga UA
+·Taiga Mountain UA -> Rocky Taiga 
+·Snowy Taiga Mountain UA -> Snowy Rocky Taiga 
 ·Mountains -> Rocky Field
 ·Wooden Mountains -> Wooden Rocky Field
 ·Gravelly Mountains -> Gravelly Field
