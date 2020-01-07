@@ -32,7 +32,7 @@ public class Roots extends Feature<BlockConfig> {
 
 	public void setSeed(long seed) {
 		if (this.noiseGen == null) {
-			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
+			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
 		}
 
 		this.seed = seed;
@@ -106,12 +106,14 @@ public class Roots extends Feature<BlockConfig> {
 					break;
 				}
 				
+				//debugging
+				//UltraAmplified.LOGGER.info(this.noiseGen.func_205563_a(Mutable.getX() * 1.6D-10000*rootNum, Mutable.getZ() * 1.6D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 5.0D);
 				
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
 				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+20000*rootNum, Mutable.getZ() * 2D+20000*rootNum, Mutable.getY()*1D+20000*rootNum) * 15.0D, -1, 1);
 				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+10000*rootNum, Mutable.getZ() * 2D+10000*rootNum, Mutable.getY()*1D+10000*rootNum) * 15.0D, -1, 1);
-				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D-10000*rootNum, Mutable.getZ() * 2D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 1, -1, 1);
+				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 1.9D-10000*rootNum, Mutable.getZ() * 1.9D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 5.0D, -1, 1);
 
 				
 				//debugging

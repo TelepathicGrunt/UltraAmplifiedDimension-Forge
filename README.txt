@@ -17,6 +17,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
     (V.7.0.3 Changes) (1.15.1 Minecraft)
     
+    Structures:
+·Optimizes hanging roots.
+
     Biome: 
 ·Made Mushroom Biome more rare.
        
