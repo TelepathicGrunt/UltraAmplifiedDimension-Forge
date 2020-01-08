@@ -11,7 +11,7 @@ public class BiomeDebugLayer implements IC0Transformer
 {
 
    @SuppressWarnings("deprecation")
-   private static final int TESTING_BIOME = Registry.BIOME.getId(BiomeInit.ICED_TERRAIN);
+   private static final int TESTING_BIOME = Registry.BIOME.getId(BiomeInit.GRAVELLY_COLUMNS_FIELD);
    
    public BiomeDebugLayer(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_) {
    }

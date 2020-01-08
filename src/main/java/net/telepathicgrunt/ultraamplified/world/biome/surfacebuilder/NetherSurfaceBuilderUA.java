@@ -112,7 +112,7 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 
    public void setSeed(long seed) {
       if (this.field_205552_a != seed || this.field_205553_b == null) {
-         this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4, 0); // lower to 3?
+         this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4, 0);
       }
 
       this.field_205552_a = seed;
