@@ -118,7 +118,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> BAMBOO_UA = new Bamboo(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
-    public static Feature<NoFeatureConfig> UNDERWATER_MAGMA = new NetherUnderwaterMagma(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> NETHER_UNDERWATER_MAGMA = new NetherUnderwaterMagma(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> RARE_LAVA = new NetherSurfaceLavaRare(NoFeatureConfig::deserialize);
     
     public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new TreeSwampHorned(TreeFeatureConfig::func_227338_a_);

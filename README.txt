@@ -23,7 +23,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Optimized Cave Cavities generation.
 
     Biome: 
-·Made Mushroom Biome more rare.
+·Made Mushroom Field biome more rare.
+·Fixed bug where Magma floor underwater would be cut off when Netherland borders another biome.
        
        
     (V.7.0.2 Changes) (1.15.1 Minecraft)
