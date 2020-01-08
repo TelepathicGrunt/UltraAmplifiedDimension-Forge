@@ -20,25 +20,25 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig> {
 		super(p_i51435_1_);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		for (int xOffset = 0; xOffset < 16; xOffset++) {
 			for (int zOffset = 0; zOffset < 16; zOffset++) {
 				blockpos$mutable.setPos(pos.add(xOffset, 0, zOffset));
-				Biome biome = worldIn.func_226691_t_(blockpos$mutable);
+				Biome biome = world.func_226691_t_(blockpos$mutable);
 
 				if (BiomeGenHelper.frozenBiomes.contains(biome)) 
 				{
-					SnowIceAllLayer.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowIceAllLayer.place(world, generator, rand, blockpos$mutable, config, biome);
 				}
 				else if(BiomeGenHelper.coldOceanBiomes.contains(biome)) 
 				{
-					SnowLayerColdOceanFeature.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowLayerColdOceanFeature.place(world, generator, rand, blockpos$mutable, config, biome);
 				}
 				else 
 				{
-					SnowIceTopLayer.place(worldIn, generator, rand, blockpos$mutable, config, biome);
+					SnowIceTopLayer.place(world, generator, rand, blockpos$mutable, config, biome);
 				}
 			}
 		}

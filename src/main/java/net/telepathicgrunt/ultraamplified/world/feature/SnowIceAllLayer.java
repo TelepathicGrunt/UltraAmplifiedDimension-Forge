@@ -24,7 +24,7 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig> {
 		super(configFactoryIn);
 	}
 
-	public static boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig config, Biome biome) {
+	public static boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig config, Biome biome) {
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
@@ -34,24 +34,24 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig> {
 			blockpos$Mutable.setPos(pos.getX(), y, pos.getZ());
 			blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN, 1);
 
-			if (worldIn.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && 
-					worldIn.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) 
+			if (world.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && 
+					world.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) 
 			{
 				
-				if (!worldIn.getBlockState(blockpos$Mutable1).getFluidState().isEmpty() && 
-						biome.doesWaterFreeze(worldIn, blockpos$Mutable1, false)) 
+				if (!world.getBlockState(blockpos$Mutable1).getFluidState().isEmpty() && 
+						biome.doesWaterFreeze(world, blockpos$Mutable1, false)) 
 				{
-					worldIn.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
+					world.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
 				}
 
-				if (biome.doesSnowGenerate(worldIn, blockpos$Mutable)) 
+				if (biome.doesSnowGenerate(world, blockpos$Mutable)) 
 				{
-					worldIn.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
-					BlockState iblockstate = worldIn.getBlockState(blockpos$Mutable1);
+					world.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
+					BlockState iblockstate = world.getBlockState(blockpos$Mutable1);
 					
 					if (iblockstate.has(SnowyDirtBlock.SNOWY)) 
 					{
-						worldIn.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
+						world.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(true)), 2);
 					}
 				}
 			}
@@ -61,7 +61,7 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig> {
 
 	// unused as snowlayerhandlerfeature will call the above place method
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		return false;
 	}
 }

@@ -36,13 +36,13 @@ public class AmplifiedPortalBlock extends Block
 	}
 
 
-	public TileEntity createNewTileEntity(IBlockReader worldIn)
+	public TileEntity createNewTileEntity(IBlockReader world)
 	{
 		return new EndPortalTileEntity();
 	}
 
 
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return SHAPE;
 	}
@@ -125,17 +125,17 @@ public class AmplifiedPortalBlock extends Block
 	 * faster particle movement than normal EndPortal block
 	 */
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void animateTick(BlockState stateIn, World world, BlockPos pos, Random rand)
 	{
 		double d0 = (double) ((float) pos.getX() + (rand.nextFloat() * 3 - 1));
 		double d1 = (double) ((float) pos.getY() + (rand.nextFloat() * 3 - 1));
 		double d2 = (double) ((float) pos.getZ() + (rand.nextFloat() * 3 - 1));
-		worldIn.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+		world.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	}
 
 
 	// has no item form
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
 	{
 		return ItemStack.EMPTY;
 	}

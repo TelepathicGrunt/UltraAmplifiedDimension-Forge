@@ -18,7 +18,7 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
 	      if (random.nextFloat() < 1.0F / (float)placementConfig.chance) {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
@@ -26,7 +26,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	         
 	         //if height is inside a non-air block, move down until we reached an air block
 	         while(height > 74) {
-	        	 if(worldIn.isAirBlock(pos.add(x, height, z))) {
+	        	 if(world.isAirBlock(pos.add(x, height, z))) {
 	        		 break;
 	        	 }
 	        	 
@@ -35,7 +35,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	         
 	         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
 	         while(height > 74) {
-	        	 if(!worldIn.isAirBlock(pos.add(x, height, z))) {
+	        	 if(!world.isAirBlock(pos.add(x, height, z))) {
 	        		 break;
 	        	 }
 	        	 

@@ -51,7 +51,7 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
 	
     
     
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
     	int boulderSpawned = 0;
     	BlockPos tempPos = new BlockPos(position.getX()+rand.nextInt(3), 249, position.getZ()+rand.nextInt(3));
@@ -59,7 +59,7 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
         while (boulderSpawned < 15)
         {
         	//exit if there is a boulder already at 249
-        	BlockState block = worldIn.getBlockState(tempPos);
+        	BlockState block = world.getBlockState(tempPos);
             if (acceptableBlocks.contains(block))
             {
                break;
@@ -76,7 +76,7 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                 }
             	
 
-                block = worldIn.getBlockState(tempPos.down());
+                block = world.getBlockState(tempPos.down());
                 
             	//allows the boulder to be set on top of another boulder
                 if (acceptableBlocks.contains(block))
@@ -103,32 +103,32 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                     	
                     	// 2/1400th chance for diamond ore
                     	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance <= 1) {
-                    		worldIn.setBlockState(blockpos, diamondOre, 4);
+                    		world.setBlockState(blockpos, diamondOre, 4);
                     	}
                     	
                     	// 48/1400th chance for iron ore
                     	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 50){
-                    		worldIn.setBlockState(blockpos, ironOre, 4);
+                    		world.setBlockState(blockpos, ironOre, 4);
                     	}
                     	
                     	// 82/1400th chance for coal ore
                     	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 130){
-                    		worldIn.setBlockState(blockpos, coalOre, 4);
+                    		world.setBlockState(blockpos, coalOre, 4);
                     	}
                     	
                     	// 398/1400th chance for andesite
                     	else if(randomChance <= 480){
-                    		worldIn.setBlockState(blockpos, andesite, 4);
+                    		world.setBlockState(blockpos, andesite, 4);
                     	}
                     	
                     	// 352/1400th chance for cobblestone
                     	else if(randomChance <= 750){
-                    		worldIn.setBlockState(blockpos, cobblestone, 4);
+                    		world.setBlockState(blockpos, cobblestone, 4);
                     	}
                     	
                     	// 650/1400th chance for mossyCobblestone
                     	else {
-                    		worldIn.setBlockState(blockpos, mossyCobblestone, 4);
+                    		world.setBlockState(blockpos, mossyCobblestone, 4);
                     	}
                     }
                 }

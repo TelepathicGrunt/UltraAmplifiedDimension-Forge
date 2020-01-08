@@ -25,7 +25,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 
 	private final BlockState SOULSAND = Blocks.SOUL_SAND.getDefaultState();
 
-	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 
        ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
        
@@ -38,7 +38,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         
 		         //if height is inside a non-air block, move down until we reached an air block
 		         while(height > 74) {
-		        	 if(worldIn.isAirBlock(pos.add(x, height, z))) {
+		        	 if(world.isAirBlock(pos.add(x, height, z))) {
 		        		 break;
 		        	 }
 		        	 
@@ -47,7 +47,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         
 		         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
 		         while(height > 74) {
-		        	 if(worldIn.getBlockState(pos.add(x, height, z)) == SOULSAND) 
+		        	 if(world.getBlockState(pos.add(x, height, z)) == SOULSAND) 
 		        	 {
 		        		 break;
 		        	 }

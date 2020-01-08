@@ -34,7 +34,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	}
 
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig) 
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig) 
     {
     	//check if user turned pillars off.
     	if(!ConfigUA.pillarGen) {
@@ -52,7 +52,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
     	
     	//checks to see if position is acceptable for pillar gen
         //finds ceiling
-        while (!worldIn.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
+        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too high for column to generate
         	if(blockpos$Mutable.up(currentHeight).getY() > 254) {
@@ -65,7 +65,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
         
         //find floor
         currentHeight = 0;
-        while (!worldIn.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
+        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too low for column to generate
         	if(blockpos$Mutable.up(currentHeight).getY() < 50) {
@@ -101,8 +101,8 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
                 int xDiff = x - position.getX();
                 int zDiff = z - position.getZ();
             	if(xDiff * xDiff + zDiff * zDiff <= (widthAtHeight) * (widthAtHeight)) {
-                    BlockState block1 = worldIn.getBlockState(blockpos$Mutable.setPos(x, ceilingHeight + 3, z));
-                    BlockState block2 = worldIn.getBlockState(blockpos$Mutable.setPos(x, floorHeight - 2, z));
+                    BlockState block1 = world.getBlockState(blockpos$Mutable.setPos(x, ceilingHeight + 3, z));
+                    BlockState block2 = world.getBlockState(blockpos$Mutable.setPos(x, floorHeight - 2, z));
                     
                     //there is not enough land to contain bases of pillar
                     if(!block1.isSolid() || !block2.isSolid()) {
@@ -173,11 +173,11 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
                     int xzDiffSquared = (xDiff * xDiff) + (zDiff * zDiff);
                     if (xzDiffSquaredStretched <= (currentWidth-1) * (currentWidth-1))
 	                {
-                        BlockState block = worldIn.getBlockState(blockpos$Mutable);
+                        BlockState block = world.getBlockState(blockpos$Mutable);
 
                         if (!block.isSolid())
                         {
-                            worldIn.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
+                            world.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
                         }
                     }
 	                //We are at non-pillar space 
@@ -186,11 +186,11 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	                	//top block followed by 4 middle blocks below that
 	                	for(int downward = 0; downward < 6 && y - downward >= -3; downward++) 
 	                	{
-	                        BlockState block = worldIn.getBlockState(blockpos$Mutable.down(downward));
-	                       // BlockState blockBelow = worldIn.getBlockState(blockpos$Mutable.down(downward+1));
+	                        BlockState block = world.getBlockState(blockpos$Mutable.down(downward));
+	                       // BlockState blockBelow = world.getBlockState(blockpos$Mutable.down(downward+1));
 	                        if (block == blocksConfig.insideBlock)
 	                        {
-	                            worldIn.setBlockState(blockpos$Mutable.down(downward), downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
+	                            world.setBlockState(blockpos$Mutable.down(downward), downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
 	                        }
 	                	}
                     }

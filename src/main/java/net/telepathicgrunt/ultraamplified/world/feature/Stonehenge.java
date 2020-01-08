@@ -59,7 +59,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 	
 	
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
         
 		//makes sure this stonehenge does not spawn too close to world height border or it will get cut off.
@@ -73,9 +73,9 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 			for(int z = -10; z <= 10; z = z + 5) 
 			{
 				if( Math.abs(x * z) != 100 && 
-						(unAcceptableBlocks.contains(worldIn.getBlockState(position.down(2).west(x).north(z))) &&
-						 unAcceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z))) &&
-						 unAcceptableBlocks.contains(worldIn.getBlockState(position.west(x).north(z)))
+						(unAcceptableBlocks.contains(world.getBlockState(position.down(2).west(x).north(z))) &&
+						 unAcceptableBlocks.contains(world.getBlockState(position.down(1).west(x).north(z))) &&
+						 unAcceptableBlocks.contains(world.getBlockState(position.west(x).north(z)))
 						)) {
 					return false;
 				}
@@ -90,11 +90,11 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 		//6.7% of being a perfect stonehenge right off the bat
 		markedForPerfection = rand.nextInt(15) == 0;
 		perfectStoneCount = 0;
-		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
+		TemplateManager templatemanager = ((ServerWorld)world.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template;
-		BlockState iblockstate = worldIn.getBlockState(position);
+		BlockState iblockstate = world.getBlockState(position);
 		
-		worldIn.setBlockState(position, iblockstate, 3);
+		world.setBlockState(position, iblockstate, 3);
 		
 		
 		
@@ -112,7 +112,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).north(11).west(2), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).north(11).west(2), placementsettings);
 
 
 		//East stone - rotated 90 degrees
@@ -127,7 +127,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).north(2).east(11), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).north(2).east(11), placementsettings);
 		
 		
 		//south stone - rotated 180 degrees
@@ -142,7 +142,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).south(11).east(2), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).south(11).east(2), placementsettings);
 		
 		
 		
@@ -158,7 +158,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).south(2).west(11), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).south(2).west(11), placementsettings);
 		
 		
 		
@@ -177,7 +177,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).north(9).west(9), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).north(9).west(9), placementsettings);
 
 
 		//north east stone
@@ -192,7 +192,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.CLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).north(9).east(9), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).north(9).east(9), placementsettings);
 
 		
 		//south east stone
@@ -207,7 +207,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).south(9).east(9), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).south(9).east(9), placementsettings);
 		
 		
 		//south west stone
@@ -222,7 +222,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.COUNTERCLOCKWISE_90).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down(2).south(9).west(9), placementsettings);
+		template.addBlocksToWorld(world, position.down(2).south(9).west(9), placementsettings);
 		
 		
 		
@@ -249,7 +249,7 @@ public class Stonehenge extends Feature<NoFeatureConfig> {
 				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
 		
-		template.addBlocksToWorld(worldIn, position.down().north(2).west(2), placementsettings);
+		template.addBlocksToWorld(world, position.down().north(2).west(2), placementsettings);
 		
 		return true;
 	}

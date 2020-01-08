@@ -32,7 +32,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 	  private final static BlockState STONE = Blocks.STONE.getDefaultState();
 	  private final static BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 	
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig icebergConfig) {
+	   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig icebergConfig) {
 		      
 		      boolean flag = random.nextDouble() > 0.7D;
 		      BlockState iblockstate = icebergConfig.field_227270_a_;
@@ -54,13 +54,13 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 		            for(int y = 0; y < upperHeight; ++y) {
 		               int k2 = flag1 ? this.func_205178_b(y, upperHeight, j1) : this.func_205183_a(random, y, upperHeight, j1);
 		               if (flag1 || x < k2) {
-		                  this.func_205181_a(worldIn, random, pos, upperHeight, x, y, z, k2, radius, flag1, j, d0, flag, iblockstate);
+		                  this.func_205181_a(world, random, pos, upperHeight, x, y, z, k2, radius, flag1, j, d0, flag, iblockstate);
 		               }
 		            }
 		         }
 		      }
 
-		      this.func_205186_a(worldIn, pos, j1, upperHeight, flag1, i);
+		      this.func_205186_a(world, pos, j1, upperHeight, flag1, i);
 
 		      for(int x = -radius; x < radius; ++x) {
 		         for(int z = -radius; z < radius; ++z) {
@@ -68,7 +68,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 		               int l3 = flag1 ? MathHelper.ceil((float)radius * (1.0F - (float)Math.pow((double)y, 2.0D) / ((float)downHeight * 8.0F))) : radius;
 		               int l2 = this.func_205187_b(random, -y, downHeight, j1);
 		               if (x < l2) {
-		                  this.func_205181_a(worldIn, random, pos, downHeight, x, y, z, l2, l3, flag1, j, d0, flag, iblockstate);
+		                  this.func_205181_a(world, random, pos, downHeight, x, y, z, l2, l3, flag1, j, d0, flag, iblockstate);
 		               }
 		            }
 		         }
@@ -76,13 +76,13 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 
 		      boolean flag2 = flag1 ? random.nextDouble() > 0.1D : random.nextDouble() > 0.7D;
 		      if (flag2) {
-		         this.func_205184_a(random, worldIn, j1, upperHeight, pos, flag1, i, d0, j);
+		         this.func_205184_a(random, world, j1, upperHeight, pos, flag1, i, d0, j);
 		      }
 
 		      return true;
 		   }
 
-		   private void func_205184_a(Random random, IWorld worldIn, int p_205184_3_, int height, BlockPos pos, boolean flag, int p_205184_7_, double p_205184_8_, int p_205184_10_) {
+		   private void func_205184_a(Random random, IWorld world, int p_205184_3_, int height, BlockPos pos, boolean flag, int p_205184_7_, double p_205184_8_, int p_205184_10_) {
 		      int i = random.nextBoolean() ? -1 : 1;
 		      int j = random.nextBoolean() ? -1 : 1;
 		      int k = random.nextInt(Math.max(p_205184_3_ / 2 - 2, 1));
@@ -104,17 +104,17 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 
 		      for(int i1 = 0; i1 < height - 3; ++i1) {
 		         int j1 = this.func_205183_a(random, i1, height, p_205184_3_);
-		         this.func_205174_a(j1, i1, pos, worldIn, false, d0, blockpos, p_205184_7_, p_205184_10_);
+		         this.func_205174_a(j1, i1, pos, world, false, d0, blockpos, p_205184_7_, p_205184_10_);
 		      }
 
 		      for(int k1 = -1; k1 > -height + random.nextInt(5); --k1) {
 		         int l1 = this.func_205187_b(random, -k1, height, p_205184_3_);
-		         this.func_205174_a(l1, k1, pos, worldIn, true, d0, blockpos, p_205184_7_, p_205184_10_);
+		         this.func_205174_a(l1, k1, pos, world, true, d0, blockpos, p_205184_7_, p_205184_10_);
 		      }
 
 		   }
 
-		   private void func_205174_a(int p_205174_1_, int p_205174_2_, BlockPos pos, IWorld worldIn, boolean placeWater, double p_205174_6_, BlockPos pos2, int p_205174_9_, int p_205174_10_) {
+		   private void func_205174_a(int p_205174_1_, int p_205174_2_, BlockPos pos, IWorld world, boolean placeWater, double p_205174_6_, BlockPos pos2, int p_205174_9_, int p_205174_10_) {
 		      int i = p_205174_1_ + 1 + p_205174_9_ / 3;
 		      int j = Math.min(p_205174_1_ - 3, 3) + p_205174_10_ / 2 - 1;
 
@@ -123,13 +123,13 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 		            double d0 = this.func_205180_a(k, l, pos2, i, j, p_205174_6_);
 		            if (d0 < 0.0D) {
 		               BlockPos blockpos = pos.add(k, p_205174_2_, l);
-		               Block block = worldIn.getBlockState(blockpos).getBlock();
+		               Block block = world.getBlockState(blockpos).getBlock();
 		               if (this.isIce(block) || block == Blocks.SNOW_BLOCK) {
 		            	  if (placeWater) {
-			                 worldIn.setBlockState(blockpos, appropriateBlockForNeighbors(worldIn, pos), 3);
+			                 world.setBlockState(blockpos, appropriateBlockForNeighbors(world, pos), 3);
 		                   } else {
-		                     this.setBlockState(worldIn, blockpos, appropriateBlockForNeighbors(worldIn, pos));
-		                     this.removeSnowLayer(worldIn, blockpos);
+		                     this.setBlockState(world, blockpos, appropriateBlockForNeighbors(world, pos));
+		                     this.removeSnowLayer(world, blockpos);
 		                  }
 		               }
 		            }
@@ -138,9 +138,9 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 
 		   }
 
-		   private void removeSnowLayer(IWorld worldIn, BlockPos pos) {
-		      if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.SNOW) {
-		         this.setBlockState(worldIn, pos.up(), appropriateBlockForNeighbors(worldIn, pos));
+		   private void removeSnowLayer(IWorld world, BlockPos pos) {
+		      if (world.getBlockState(pos.up()).getBlock() == Blocks.SNOW) {
+		         this.setBlockState(world, pos.up(), appropriateBlockForNeighbors(world, pos));
 		      }
 
 		   }
@@ -223,7 +223,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 		      return reader.getBlockState(pos.down()).getMaterial() == Material.AIR;
 		   }
 
-		   private BlockState appropriateBlockForNeighbors(IWorld worldIn, BlockPos pos) {
+		   private BlockState appropriateBlockForNeighbors(IWorld world, BlockPos pos) {
 			   
 			   boolean bordersWater = false;
 			   boolean bordersAir = false;
@@ -237,7 +237,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
             		   continue;
             	   }
             	   
-		           	iblockstate = worldIn.getBlockState(pos.offset(face));
+		           	iblockstate = world.getBlockState(pos.offset(face));
 		           	blockArray[i] = iblockstate;
 		            i++;
 		           	if(!isIce(iblockstate.getBlock())) {
@@ -263,20 +263,20 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 			   }
 		   }
 		   
-		   private void func_205186_a(IWorld worldIn, BlockPos pos, int smallRadiusIn, int height, boolean flag, int largeRadiusIn) {
+		   private void func_205186_a(IWorld world, BlockPos pos, int smallRadiusIn, int height, boolean flag, int largeRadiusIn) {
 		      int radius = flag ? largeRadiusIn : smallRadiusIn / 2;
 
 		      for(int j = -radius; j <= radius; ++j) {
 		         for(int k = -radius; k <= radius; ++k) {
 		            for(int l = 0; l <= height; ++l) {
 		               BlockPos blockpos = pos.add(j, l, k);
-		               Block block = worldIn.getBlockState(blockpos).getBlock();
+		               Block block = world.getBlockState(blockpos).getBlock();
 		               if (this.isIce(block) || block == Blocks.SNOW) {
-		                  if (this.isAirBelow(worldIn, blockpos)) {
-		                     this.setBlockState(worldIn, blockpos, appropriateBlockForNeighbors(worldIn, blockpos));
-		                     this.setBlockState(worldIn, blockpos.up(), appropriateBlockForNeighbors(worldIn, blockpos));
+		                  if (this.isAirBelow(world, blockpos)) {
+		                     this.setBlockState(world, blockpos, appropriateBlockForNeighbors(world, blockpos));
+		                     this.setBlockState(world, blockpos.up(), appropriateBlockForNeighbors(world, blockpos));
 		                  } else if (this.isIce(block)) {
-		                     Block[] ablock = new Block[]{worldIn.getBlockState(blockpos.west()).getBlock(), worldIn.getBlockState(blockpos.east()).getBlock(), worldIn.getBlockState(blockpos.north()).getBlock(), worldIn.getBlockState(blockpos.south()).getBlock()};
+		                     Block[] ablock = new Block[]{world.getBlockState(blockpos.west()).getBlock(), world.getBlockState(blockpos.east()).getBlock(), world.getBlockState(blockpos.north()).getBlock(), world.getBlockState(blockpos.south()).getBlock()};
 		                     int i1 = 0;
 
 		                     for(Block block1 : ablock) {
@@ -286,7 +286,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 		                     }
 
 		                     if (i1 >= 3) {
-		                        this.setBlockState(worldIn, blockpos, appropriateBlockForNeighbors(worldIn, blockpos));
+		                        this.setBlockState(world, blockpos, appropriateBlockForNeighbors(world, blockpos));
 		                     }
 		                  }
 		               }

@@ -29,7 +29,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 	}
 
 	
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
 		//makes sure this ruins does not spawn too close to world height border.
 		if(!ConfigUA.miniStructureGeneration) {
@@ -50,7 +50,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 					//The -4 is to make the check rotate the same way as structure and 
 					//then we do +4 to get the actual position again.
 					offset.setPos(x-4, 0, z-4).setPos(offset.rotate(rot));
-					if(!worldIn.getBlockState(position.up(1).west(offset.getX()+4).north(offset.getZ()+4)).isSolid()) {
+					if(!world.getBlockState(position.up(1).west(offset.getX()+4).north(offset.getZ()+4)).isSolid()) {
 						return false;
 					}
 				}
@@ -62,7 +62,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		{
 			for(int z = -5; z <= 5; z++)  
 			{
-				if(!worldIn.getBlockState(position.up(2)).isSolid()) {
+				if(!world.getBlockState(position.up(2)).isSolid()) {
 					position = position.down();
 					z = 6;
 					x = 6;
@@ -73,7 +73,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		
 		
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
-		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
+		TemplateManager templatemanager = ((ServerWorld)world.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":hanging_ruins"));
 		
 		if(template == null)
@@ -89,7 +89,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 				.setIgnoreEntities(false)
 				.setChunk((ChunkPos)null);
 		
-		template.addBlocksToWorld(worldIn, position.down(8).north(4).west(4), placementsettings, 2);
+		template.addBlocksToWorld(world, position.down(8).north(4).west(4), placementsettings, 2);
 		
 		return true;
 		

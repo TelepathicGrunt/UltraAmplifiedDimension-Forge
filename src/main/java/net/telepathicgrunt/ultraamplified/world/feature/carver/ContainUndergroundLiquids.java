@@ -48,7 +48,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 		}
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random,
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random,
 			BlockPos pos, NoFeatureConfig configBlock) {
 
 		setFillerMap();
@@ -66,12 +66,12 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 				for (int y = 61; y >= 10; y--) {
 
 					blockpos$Mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
-					currentblock = worldIn.getBlockState(blockpos$Mutable.up(y));
+					currentblock = world.getBlockState(blockpos$Mutable.up(y));
 
 					// move down until we hit an air block
 					while (currentblock != Blocks.AIR.getDefaultState() && y > 11) {
 						y--;
-						currentblock = worldIn.getBlockState(blockpos$Mutable.up(y));
+						currentblock = world.getBlockState(blockpos$Mutable.up(y));
 					}
 					
 					//checks one last time at y = 11 to see if we should quit now
@@ -87,18 +87,18 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 
 					for (Direction face : Direction.Plane.HORIZONTAL) {
 
-						currentblock = worldIn.getBlockState(blockpos$Mutable.offset(face));
+						currentblock = world.getBlockState(blockpos$Mutable.offset(face));
 						if (!currentblock.getFluidState().isEmpty()) {
 							notContainedFlag = true;
 						}
 					}
 
-					currentblock = worldIn.getBlockState(blockpos$Mutable.up());
+					currentblock = world.getBlockState(blockpos$Mutable.up());
 					if (!currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 
-					currentblock = worldIn.getBlockState(blockpos$Mutable.down());
+					currentblock = world.getBlockState(blockpos$Mutable.down());
 					if (blockpos$Mutable.down().getY() > 10 && !currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
@@ -107,12 +107,12 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					if (notContainedFlag) {
 						
 						//grabs what block to use based on what biome we are in
-						replacementBlock = fillerBiomeMap.get(worldIn.func_226691_t_(blockpos$Mutable));
+						replacementBlock = fillerBiomeMap.get(world.func_226691_t_(blockpos$Mutable));
 						if (replacementBlock == null) {
 							replacementBlock = STONE;
 						}
 
-						worldIn.setBlockState(blockpos$Mutable, replacementBlock, 2);
+						world.setBlockState(blockpos$Mutable, replacementBlock, 2);
 					}
 				}
 			}

@@ -20,7 +20,7 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
 	      int count = ConfigUA.dungeonSpawnrate;
 
 	      return IntStream.range(0, count).mapToObj((p_215051_3_) -> {

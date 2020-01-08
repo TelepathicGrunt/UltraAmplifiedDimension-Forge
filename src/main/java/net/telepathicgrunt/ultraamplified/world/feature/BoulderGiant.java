@@ -31,7 +31,7 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
     private final static int startRadius = 4;
 
     
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
         while (true)
         {
@@ -43,11 +43,11 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
                 }
             
         		//this and position = position.down(); will keeps moving down position until it finds ground to generate on
-                if (worldIn.isAirBlock(position.down()))
+                if (world.isAirBlock(position.down()))
                 {
                     break label0;
                 }
-                Block block = worldIn.getBlockState(position.down()).getBlock();
+                Block block = world.getBlockState(position.down()).getBlock();
 
 
             	//boulder will ignore other boulders and will generate only on ground
@@ -74,32 +74,32 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
                         	
                         	// 2/1400th chance for diamond ore
                         	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance <= 1) {
-                        		worldIn.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
                         	}
                         	
                         	// 48/1400th chance for iron ore
                         	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 50){
-                        		worldIn.setBlockState(blockpos, ironOre.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, ironOre.getDefaultState(), 4);
                         	}
                         	
                         	// 82/1400th chance for coal ore
                         	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 130){
-                        		worldIn.setBlockState(blockpos, coalOre.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, coalOre.getDefaultState(), 4);
                         	}
                         	
                         	// 398/1400th chance for andesite
                         	else if(randomChance <= 480){
-                        		worldIn.setBlockState(blockpos, andesite.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, andesite.getDefaultState(), 4);
                         	}
                         	
                         	// 352/1400th chance for cobblestone
                         	else if(randomChance <= 750){
-                        		worldIn.setBlockState(blockpos, cobblestone.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, cobblestone.getDefaultState(), 4);
                         	}
                         	
                         	// 650/1400th chance for mossyCobblestone
                         	else {
-                        		worldIn.setBlockState(blockpos, mossyCobblestone.getDefaultState(), 4);
+                        		world.setBlockState(blockpos, mossyCobblestone.getDefaultState(), 4);
                         	}
                         }
                     }
@@ -112,7 +112,7 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
             }
         
 
-			//this and worldIn.isAirBlock(position.down()) will keeps moving down position until it finds ground to generate on
+			//this and world.isAirBlock(position.down()) will keeps moving down position until it finds ground to generate on
             position = position.down();
         }
     }

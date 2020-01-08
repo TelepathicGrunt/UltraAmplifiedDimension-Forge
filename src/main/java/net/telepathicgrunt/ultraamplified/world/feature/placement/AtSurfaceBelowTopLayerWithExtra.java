@@ -22,7 +22,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos) {
 	   int c = chancesConfig.count;
        if (random.nextFloat() < chancesConfig.extraChance) {
           c += chancesConfig.extraCount;
@@ -35,12 +35,12 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   for (int i = 0; i < c; i++) {
 	         int x = random.nextInt(16);
 	         int z = random.nextInt(16);
-	         int height = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+	         int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
 	          
 	         
 	         while(height > 74) {
 	        	 
-	        	 airBlock = worldIn.isAirBlock(pos.add(x, height, z));
+	        	 airBlock = world.isAirBlock(pos.add(x, height, z));
 	        	 
 	        	 //if height is is an air block and previous block was a solid block, store the fact that we are in an air block now
 	        	 if(!airFlag && airBlock) {

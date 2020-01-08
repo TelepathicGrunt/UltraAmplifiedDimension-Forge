@@ -98,14 +98,14 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 	   }
 	   
 	   @Override
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BigMushroomFeatureConfig config) {
+	   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BigMushroomFeatureConfig config) {
 	      int i = this.func_227211_a_(rand);
 	      BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
-	      if (!this.validatePosition(worldIn, pos, i, blockpos$mutable, config)) {
+	      if (!this.validatePosition(world, pos, i, blockpos$mutable, config)) {
 	         return false;
 	      } else {
-	         this.mushroomCap(worldIn, rand, pos, i, blockpos$mutable, config);
-	         this.mushroomStem(worldIn, rand, pos, config, i, blockpos$mutable);
+	         this.mushroomCap(world, rand, pos, i, blockpos$mutable, config);
+	         this.mushroomStem(world, rand, pos, config, i, blockpos$mutable);
 	         return true;
 	      }
 	   }

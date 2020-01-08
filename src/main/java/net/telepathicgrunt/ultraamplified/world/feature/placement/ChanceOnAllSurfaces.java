@@ -27,7 +27,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 	private final BlockState SOULSAND =  Blocks.SOUL_SAND.getDefaultState();
 	private final BlockState GRAVEL =  Blocks.GRAVEL.getDefaultState();
 	
-   public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
+   public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 	   int lowestHeight = 40;
        ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
        
@@ -41,7 +41,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         
 		         //if height is inside a non-air block, move down until we reached an air block
 		         while(height > lowestHeight) {
-		        	 if(worldIn.isAirBlock(pos.add(x, height, z))) {
+		        	 if(world.isAirBlock(pos.add(x, height, z))) {
 		        		 break;
 		        	 }
 		        	 
@@ -50,9 +50,9 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 		         
 		         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
 		         while(height > lowestHeight) {
-		        	 BlockState currentBlock = worldIn.getBlockState(pos.add(x, height, z));
+		        	 BlockState currentBlock = world.getBlockState(pos.add(x, height, z));
 		        	 
-		        	 if(worldIn.func_226691_t_(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
+		        	 if(world.func_226691_t_(pos.add(x, height, z)).getSurfaceBuilderConfig().getTop() == currentBlock ||
 		        	    currentBlock == SAND ||
 		        		currentBlock == SOULSAND ||
 		        		currentBlock == GRAVEL) 

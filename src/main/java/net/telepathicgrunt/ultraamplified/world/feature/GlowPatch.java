@@ -26,7 +26,7 @@ public class GlowPatch extends Feature<CountConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig) {
 		
 		//create the map here because it contains our modded blocks.
 		//If we make the map in the constructor or as a class field, it'll cause
@@ -63,21 +63,21 @@ public class GlowPatch extends Feature<CountConfig> {
 			int gausY =  rand.nextInt(4) - rand.nextInt(4); // range of -4 to 4
 			int gausZ = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
 			BlockPos blockpos = pos.add(gausX, gausY, gausZ);
-			BlockState chosenBlock = worldIn.getBlockState(blockpos);
-			BlockState chosenAboveBlock = worldIn.getBlockState(blockpos.up());
+			BlockState chosenBlock = world.getBlockState(blockpos);
+			BlockState chosenAboveBlock = world.getBlockState(blockpos.up());
 			
 			if (chosenBlock.getMaterial() != Material.AIR) {
 
 				// turns stone into glowstone ore even if no air above
 				if (chosenBlock == Blocks.STONE.getDefaultState()) {
 
-					worldIn.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
+					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
 					generatedSuccessfully = true;
 				}
 				// turns valid surface blocks with air above into glowstone variants
 				else if (GLOWBLOCKMAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR) {
 
-					worldIn.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
+					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
 					generatedSuccessfully = true;
 				}
 			}

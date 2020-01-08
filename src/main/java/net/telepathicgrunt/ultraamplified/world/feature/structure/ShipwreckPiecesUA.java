@@ -102,24 +102,24 @@ public class ShipwreckPiecesUA {
 			this.setup(template, this.templatePosition, placementsettings);
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
 				MutableBoundingBox sbb) {
 			if (ConfigUA.chestGeneration) {
 				if ("map_chest".equals(function)) {
-					LockableLootTileEntity.setLootTable(worldIn, rand, pos.down(), LootTables.CHESTS_SHIPWRECK_MAP);
+					LockableLootTileEntity.setLootTable(world, rand, pos.down(), LootTables.CHESTS_SHIPWRECK_MAP);
 				} else if ("treasure_chest".equals(function)) {
-					LockableLootTileEntity.setLootTable(worldIn, rand, pos.down(),
+					LockableLootTileEntity.setLootTable(world, rand, pos.down(),
 							LootTables.CHESTS_SHIPWRECK_TREASURE);
 				} else if ("supply_chest".equals(function)) {
-					LockableLootTileEntity.setLootTable(worldIn, rand, pos.down(), LootTables.CHESTS_SHIPWRECK_SUPPLY);
+					LockableLootTileEntity.setLootTable(world, rand, pos.down(), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 				}
 			} else {
 
 				// removes chest
-				if (worldIn.getBlockState(pos.down()).getFluidState().isEmpty()) {
-					worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
+				if (world.getBlockState(pos.down()).getFluidState().isEmpty()) {
+					world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 				} else {
-					worldIn.setBlockState(pos.down(), Blocks.WATER.getDefaultState(), 2);
+					world.setBlockState(pos.down(), Blocks.WATER.getDefaultState(), 2);
 				}
 			}
 
@@ -129,7 +129,7 @@ public class ShipwreckPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			// applies a height offset that the rest of the shipwreck will use
@@ -151,12 +151,12 @@ public class ShipwreckPiecesUA {
 						templatePosition.getZ() + zOffset);
 
 				// finds surface on water
-				while (randHeight > 65 && worldIn.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
+				while (randHeight > 65 && world.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
 					randHeight--;
 				}
 
 				// finds bottom of water body
-				while (randHeight > 65 && !worldIn.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
+				while (randHeight > 65 && !world.getBlockState(blockpos.up(randHeight)).getFluidState().isEmpty()) {
 					randHeight--;
 				}
 
@@ -164,7 +164,7 @@ public class ShipwreckPiecesUA {
 			}
 			templatePosition = new BlockPos(templatePosition.getX(), heightOffset, templatePosition.getZ());
 
-			return super.func_225577_a_(worldIn, p_225577_2_, randomIn, structureBoundingBoxIn, p_74875_4_);
+			return super.func_225577_a_(world, p_225577_2_, randomIn, structureBoundingBoxIn, p_74875_4_);
 		}
 	}
 }

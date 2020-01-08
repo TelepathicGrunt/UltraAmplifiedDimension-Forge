@@ -273,62 +273,62 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		protected boolean generateChest(IWorld worldIn, MutableBoundingBox structurebb, Random randomIn, int x, int y,
+		protected boolean generateChest(IWorld world, MutableBoundingBox structurebb, Random randomIn, int x, int y,
 				int z, ResourceLocation loot) {
 			BlockPos blockpos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y),
 					this.getZWithOffset(x, z));
 
-			if (structurebb.isVecInside(blockpos) && worldIn.getBlockState(blockpos).getMaterial() == Material.AIR) {
+			if (structurebb.isVecInside(blockpos) && world.getBlockState(blockpos).getMaterial() == Material.AIR) {
 				BlockState iblockstate = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE,
 						randomIn.nextBoolean() ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST);
-				this.setBlockState(worldIn, iblockstate, x, y, z, structurebb);
-				ChestMinecartEntity entityminecartchest = new ChestMinecartEntity(worldIn.getWorld(),
+				this.setBlockState(world, iblockstate, x, y, z, structurebb);
+				ChestMinecartEntity entityminecartchest = new ChestMinecartEntity(world.getWorld(),
 						(double) ((float) blockpos.getX() + 0.5F), (double) ((float) blockpos.getY() + 0.5F),
 						(double) ((float) blockpos.getZ() + 0.5F));
 				entityminecartchest.setLootTable(loot, randomIn.nextLong());
-				worldIn.addEntity(entityminecartchest);
+				world.addEntity(entityminecartchest);
 				return true;
 			} else {
 				return false;
 			}
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
-			if (this.isLiquidInStructureBoundingBox(worldIn, MutableBoundingBoxIn)) {
+			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;
 			} else {
 				int i1 = this.sectionCount * 5 - 1;
 				BlockState iblockstate = this.getPlanksBlock();
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, 0, 0, 0, 2, 1, i1, CAVE_AIR, CAVE_AIR, false);
-				this.generateMaybeBox(worldIn, MutableBoundingBoxIn, randomIn, 0.8F, 0, 2, 0, 2, 2, i1, CAVE_AIR,
+				this.fillWithBlocks(world, MutableBoundingBoxIn, 0, 0, 0, 2, 1, i1, CAVE_AIR, CAVE_AIR, false);
+				this.generateMaybeBox(world, MutableBoundingBoxIn, randomIn, 0.8F, 0, 2, 0, 2, 2, i1, CAVE_AIR,
 						CAVE_AIR, false, false);
 
 				if (this.hasSpiders) {
-					this.generateMaybeBox(worldIn, MutableBoundingBoxIn, randomIn, 0.6F, 0, 0, 0, 2, 1, i1,
+					this.generateMaybeBox(world, MutableBoundingBoxIn, randomIn, 0.6F, 0, 0, 0, 2, 1, i1,
 							Blocks.COBWEB.getDefaultState(), CAVE_AIR, false, true);
 				}
 
 				for (int j1 = 0; j1 < this.sectionCount; ++j1) {
 					int k1 = 2 + j1 * 5;
-					this.placeSupport(worldIn, MutableBoundingBoxIn, 0, 0, k1, 2, 2, randomIn);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 - 1);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 - 1);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 + 1);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 + 1);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 - 2);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 - 2);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 + 2);
-					this.placeCobWeb(worldIn, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 + 2);
+					this.placeSupport(world, MutableBoundingBoxIn, 0, 0, k1, 2, 2, randomIn);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 - 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 - 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 + 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 + 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 - 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 - 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 + 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 + 2);
 
 					if (ConfigUA.chestGeneration) {
 						if (randomIn.nextInt(50) == 0) {
-							this.generateChest(worldIn, MutableBoundingBoxIn, randomIn, 2, 0, k1 - 1,
+							this.generateChest(world, MutableBoundingBoxIn, randomIn, 2, 0, k1 - 1,
 									LootTables.CHESTS_ABANDONED_MINESHAFT);
 						}
 
 						if (randomIn.nextInt(50) == 0) {
-							this.generateChest(worldIn, MutableBoundingBoxIn, randomIn, 0, 0, k1 + 1,
+							this.generateChest(world, MutableBoundingBoxIn, randomIn, 0, 0, k1 + 1,
 									LootTables.CHESTS_ABANDONED_MINESHAFT);
 						}
 					}
@@ -341,10 +341,10 @@ public class MineshaftPiecesUA {
 						BlockPos blockpos = new BlockPos(j2, l1, k2);
 
 						if (MutableBoundingBoxIn.isVecInside(blockpos)
-								&& this.getSkyBrightness(worldIn, 1, 0, i2, MutableBoundingBoxIn)) {
+								&& this.getSkyBrightness(world, 1, 0, i2, MutableBoundingBoxIn)) {
 							this.spawnerPlaced = true;
-							worldIn.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-							TileEntity tileentity = worldIn.getTileEntity(blockpos);
+							world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
+							TileEntity tileentity = world.getTileEntity(blockpos);
 
 							if (tileentity instanceof MobSpawnerTileEntity) {
 								((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic()
@@ -356,10 +356,10 @@ public class MineshaftPiecesUA {
 
 				for (int l2 = 0; l2 <= 2; ++l2) {
 					for (int i3 = 0; i3 <= i1; ++i3) {
-						BlockState iblockstate3 = this.getBlockStateFromPos(worldIn, l2, -1, i3, MutableBoundingBoxIn);
+						BlockState iblockstate3 = this.getBlockStateFromPos(world, l2, -1, i3, MutableBoundingBoxIn);
 
 						if (iblockstate3.getMaterial() == Material.AIR) {
-							this.setBlockState(worldIn, iblockstate, l2, -1, i3, MutableBoundingBoxIn);
+							this.setBlockState(world, iblockstate, l2, -1, i3, MutableBoundingBoxIn);
 						}
 					}
 				}
@@ -369,11 +369,11 @@ public class MineshaftPiecesUA {
 							RailShape.NORTH_SOUTH);
 
 					for (int j3 = 0; j3 <= i1; ++j3) {
-						BlockState iblockstate2 = this.getBlockStateFromPos(worldIn, 1, -1, j3, MutableBoundingBoxIn);
+						BlockState iblockstate2 = this.getBlockStateFromPos(world, 1, -1, j3, MutableBoundingBoxIn);
 
 						if (iblockstate2.getMaterial() != Material.AIR) {
-							float f = this.getSkyBrightness(worldIn, 1, 0, j3, MutableBoundingBoxIn) ? 0.7F : 0.9F;
-							this.randomlyPlaceBlock(worldIn, MutableBoundingBoxIn, randomIn, f, 1, 0, j3, iblockstate1);
+							float f = this.getSkyBrightness(world, 1, 0, j3, MutableBoundingBoxIn) ? 0.7F : 0.9F;
+							this.randomlyPlaceBlock(world, MutableBoundingBoxIn, randomIn, f, 1, 0, j3, iblockstate1);
 						}
 					}
 				}
@@ -382,62 +382,62 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		private void placeSupport(IWorld worldIn, MutableBoundingBox boundingBox, int x, int y2, int z, int y, int x2,
+		private void placeSupport(IWorld world, MutableBoundingBox boundingBox, int x, int y2, int z, int y, int x2,
 				Random random) {
 
 			BlockState iblockstate = this.getArchBlock();
 			BlockState iblockstate1 = this.getFenceBlock();
 			BlockState iblockstate2 = CAVE_AIR;
-			this.fillWithBlocks(worldIn, boundingBox, x, y2, z, x, y - 1, z, iblockstate1, iblockstate2, false);
-			this.fillWithBlocks(worldIn, boundingBox, x2, y2, z, x2, y - 1, z, iblockstate1, iblockstate2, false);
-			this.fillWithBlocks(worldIn, boundingBox, x, y, z, x2, y, z, iblockstate, iblockstate2, false);
+			this.fillWithBlocks(world, boundingBox, x, y2, z, x, y - 1, z, iblockstate1, iblockstate2, false);
+			this.fillWithBlocks(world, boundingBox, x2, y2, z, x2, y - 1, z, iblockstate1, iblockstate2, false);
+			this.fillWithBlocks(world, boundingBox, x, y, z, x2, y, z, iblockstate, iblockstate2, false);
 
 			if (this.mineShaftType == Type.END) {
 				if (random.nextFloat() < 0.08F) {
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z - 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z - 1,
 							Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.SOUTH));
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x, y, z + 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z + 1,
 							Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.NORTH));
 				}
 
 				if (random.nextFloat() < 0.08F) {
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z - 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z - 1,
 							Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.SOUTH));
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 1F, x + 2, y, z + 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z + 1,
 							Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.NORTH));
 				}
 			} else if (this.mineShaftType == Type.HELL) {
 				if (random.nextFloat() < 0.1f) {
-					this.setBlockState(worldIn,
+					this.setBlockState(world,
 							Blocks.REDSTONE_LAMP.getDefaultState().with(RedstoneLampBlock.LIT, Boolean.valueOf(true)),
 							x + 1, y, z, boundingBox);
-					this.setBlockState(worldIn, Blocks.REDSTONE_TORCH.getDefaultState(), x, y + 1, z, boundingBox);
-					this.setBlockState(worldIn, Blocks.REDSTONE_TORCH.getDefaultState(), x + 2, y + 1, z, boundingBox);
-					this.setBlockState(worldIn,
+					this.setBlockState(world, Blocks.REDSTONE_TORCH.getDefaultState(), x, y + 1, z, boundingBox);
+					this.setBlockState(world, Blocks.REDSTONE_TORCH.getDefaultState(), x + 2, y + 1, z, boundingBox);
+					this.setBlockState(world,
 							Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.POWER, Integer.valueOf(14))
 									.with(RedstoneWireBlock.EAST, RedstoneSide.SIDE)
 									.with(RedstoneWireBlock.WEST, RedstoneSide.SIDE),
 							x + 1, y + 1, z, boundingBox);
 				} else {
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z - 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 0.1F, x + 1, y, z - 1,
 							Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING,
 									Direction.SOUTH));
-					this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.1F, x + 1, y, z + 1,
+					this.randomlyPlaceBlock(world, boundingBox, random, 0.1F, x + 1, y, z + 1,
 							Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING,
 									Direction.NORTH));
 				}
 			} else if (this.mineShaftType == Type.OCEAN) {
-				this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.2F, x + 1, y, z,
+				this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, x + 1, y, z,
 						Blocks.SEA_LANTERN.getDefaultState());
 			} else if (this.mineShaftType == Type.ICEY) {
-				this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH
+				this.randomlyPlaceBlock(world, boundingBox, random, 0.08F, x + 1, y, z - 1, Blocks.REDSTONE_WALL_TORCH
 						.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
-				this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH
+				this.randomlyPlaceBlock(world, boundingBox, random, 0.08F, x + 1, y, z + 1, Blocks.REDSTONE_WALL_TORCH
 						.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
 			} else {
-				this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z - 1,
+				this.randomlyPlaceBlock(world, boundingBox, random, 0.08F, x + 1, y, z - 1,
 						Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.SOUTH));
-				this.randomlyPlaceBlock(worldIn, boundingBox, random, 0.08F, x + 1, y, z + 1,
+				this.randomlyPlaceBlock(world, boundingBox, random, 0.08F, x + 1, y, z + 1,
 						Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING, Direction.NORTH));
 			}
 
@@ -581,54 +581,54 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
-			if (this.isLiquidInStructureBoundingBox(worldIn, MutableBoundingBoxIn)) {
+			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;
 			} else {
 				BlockState iblockstate = this.getPlanksBlock();
 
 				if (this.isMultipleFloors) {
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
 							this.boundingBox.minZ, this.boundingBox.maxX - 1, this.boundingBox.minY + 3 - 1,
 							this.boundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
 							this.boundingBox.minZ + 1, this.boundingBox.maxX, this.boundingBox.minY + 3 - 1,
 							this.boundingBox.maxZ - 1, CAVE_AIR, CAVE_AIR, false);
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX + 1,
 							this.boundingBox.maxY - 2, this.boundingBox.minZ, this.boundingBox.maxX - 1,
 							this.boundingBox.maxY, this.boundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.maxY - 2,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.maxY - 2,
 							this.boundingBox.minZ + 1, this.boundingBox.maxX, this.boundingBox.maxY,
 							this.boundingBox.maxZ - 1, CAVE_AIR, CAVE_AIR, false);
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX + 1,
 							this.boundingBox.minY + 3, this.boundingBox.minZ + 1, this.boundingBox.maxX - 1,
 							this.boundingBox.minY + 3, this.boundingBox.maxZ - 1, CAVE_AIR, CAVE_AIR, false);
 				} else {
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
 							this.boundingBox.minZ, this.boundingBox.maxX - 1, this.boundingBox.maxY,
 							this.boundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
 							this.boundingBox.minZ + 1, this.boundingBox.maxX, this.boundingBox.maxY,
 							this.boundingBox.maxZ - 1, CAVE_AIR, CAVE_AIR, false);
 				}
 
-				this.placeSupportPillar(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
+				this.placeSupportPillar(world, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
 						this.boundingBox.minZ + 1, this.boundingBox.maxY);
-				this.placeSupportPillar(worldIn, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
+				this.placeSupportPillar(world, MutableBoundingBoxIn, this.boundingBox.minX + 1, this.boundingBox.minY,
 						this.boundingBox.maxZ - 1, this.boundingBox.maxY);
-				this.placeSupportPillar(worldIn, MutableBoundingBoxIn, this.boundingBox.maxX - 1, this.boundingBox.minY,
+				this.placeSupportPillar(world, MutableBoundingBoxIn, this.boundingBox.maxX - 1, this.boundingBox.minY,
 						this.boundingBox.minZ + 1, this.boundingBox.maxY);
-				this.placeSupportPillar(worldIn, MutableBoundingBoxIn, this.boundingBox.maxX - 1, this.boundingBox.minY,
+				this.placeSupportPillar(world, MutableBoundingBoxIn, this.boundingBox.maxX - 1, this.boundingBox.minY,
 						this.boundingBox.maxZ - 1, this.boundingBox.maxY);
 
 				for (int i = this.boundingBox.minX; i <= this.boundingBox.maxX; ++i) {
 					for (int j = this.boundingBox.minZ; j <= this.boundingBox.maxZ; ++j) {
-						if (this.getBlockStateFromPos(worldIn, i, this.boundingBox.minY - 1, j, MutableBoundingBoxIn)
+						if (this.getBlockStateFromPos(world, i, this.boundingBox.minY - 1, j, MutableBoundingBoxIn)
 								.getMaterial() == Material.AIR
-								&& this.getSkyBrightness(worldIn, i, this.boundingBox.minY - 1, j,
+								&& this.getSkyBrightness(world, i, this.boundingBox.minY - 1, j,
 										MutableBoundingBoxIn)) {
-							this.setBlockState(worldIn, iblockstate, i, this.boundingBox.minY - 1, j,
+							this.setBlockState(world, iblockstate, i, this.boundingBox.minY - 1, j,
 									MutableBoundingBoxIn);
 						}
 					}
@@ -986,7 +986,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState flooring;
 
@@ -998,44 +998,44 @@ public class MineshaftPiecesUA {
 
 			if (this.boundingBox.getYSize() > 100) {
 				// floor
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX - 10, this.boundingBox.minY,
+				this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX - 10, this.boundingBox.minY,
 						this.boundingBox.minZ - 10, this.boundingBox.maxX + 8, this.boundingBox.minY,
 						this.boundingBox.maxZ + 10, flooring, CAVE_AIR, false);
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX - 3, this.boundingBox.minY + 1,
+				this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX - 3, this.boundingBox.minY + 1,
 						this.boundingBox.minZ - 3, this.boundingBox.maxX + 1,
 						Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ + 3, CAVE_AIR,
 						CAVE_AIR, false);
 
 				for (MutableBoundingBox MutableBoundingBox : this.roomsLinkedToTheRoom) {
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, MutableBoundingBox.minX,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, MutableBoundingBox.minX,
 							MutableBoundingBox.maxY - 2, MutableBoundingBox.minZ, MutableBoundingBox.maxX,
 							MutableBoundingBox.maxY, MutableBoundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
 				}
 
 				// wall
-				this.randomlyRareFillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX - 1,
+				this.randomlyRareFillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX - 1,
 						this.boundingBox.minY + 4, this.boundingBox.minZ - 1, this.boundingBox.maxX,
 						this.boundingBox.maxY, this.boundingBox.maxZ + 1, CAVE_AIR, false);
-				this.updateLiquidBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX - 5,
+				this.updateLiquidBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX - 5,
 						this.boundingBox.minY + 4, this.boundingBox.minZ - 5, this.boundingBox.maxX + 5,
 						this.boundingBox.maxY + 4, this.boundingBox.maxZ + 7);
 				return true;
 			} else {
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
+				this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY,
 						this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.minY, this.boundingBox.maxZ,
 						flooring, CAVE_AIR, false);
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY + 1,
+				this.fillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX, this.boundingBox.minY + 1,
 						this.boundingBox.minZ, this.boundingBox.maxX,
 						Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ, CAVE_AIR,
 						CAVE_AIR, false);
 
 				for (MutableBoundingBox MutableBoundingBox : this.roomsLinkedToTheRoom) {
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, MutableBoundingBox.minX,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, MutableBoundingBox.minX,
 							MutableBoundingBox.maxY - 2, MutableBoundingBox.minZ, MutableBoundingBox.maxX,
 							MutableBoundingBox.maxY, MutableBoundingBox.maxZ, CAVE_AIR, CAVE_AIR, false);
 				}
 
-				this.randomlyRareFillWithBlocks(worldIn, MutableBoundingBoxIn, this.boundingBox.minX,
+				this.randomlyRareFillWithBlocks(world, MutableBoundingBoxIn, this.boundingBox.minX,
 						this.boundingBox.minY + 4, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.maxY,
 						this.boundingBox.maxZ, CAVE_AIR, false);
 				return true;
@@ -1050,7 +1050,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		protected void updateLiquidBlocks(IWorld worldIn, MutableBoundingBox boundingboxIn, int minX, int minY,
+		protected void updateLiquidBlocks(IWorld world, MutableBoundingBox boundingboxIn, int minX, int minY,
 				int minZ, int maxX, int maxY, int maxZ) {
 			float f = (float) (maxX - minX + 1);
 			float f1 = (float) (maxY - minY + 1);
@@ -1066,15 +1066,15 @@ public class MineshaftPiecesUA {
 
 					for (int z = minZ; z <= maxZ; ++z) {
 						float f7 = ((float) z - f4) / (f2 * 0.5F);
-						if (!this.getBlockStateFromPos(worldIn, x, y, z, boundingboxIn).getFluidState().isEmpty()) {
+						if (!this.getBlockStateFromPos(world, x, y, z, boundingboxIn).getFluidState().isEmpty()) {
 							float f8 = f6 * f6 + f5 * f5 + f7 * f7;
 							if (f8 <= 1.05F) {
 								BlockPos blockpos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y),
 										this.getZWithOffset(x, z));
 
-								IFluidState ifluidstate = worldIn.getFluidState(blockpos);
+								IFluidState ifluidstate = world.getFluidState(blockpos);
 								if (!ifluidstate.isEmpty()) {
-									worldIn.getPendingFluidTicks().scheduleTick(blockpos, ifluidstate.getFluid(), 0);
+									world.getPendingFluidTicks().scheduleTick(blockpos, ifluidstate.getFluid(), 0);
 
 								}
 							}
@@ -1156,16 +1156,16 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
-			if (this.isLiquidInStructureBoundingBox(worldIn, MutableBoundingBoxIn)) {
+			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;
 			} else {
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, 0, 5, 0, 2, 7, 1, CAVE_AIR, CAVE_AIR, false);
-				this.fillWithBlocks(worldIn, MutableBoundingBoxIn, 0, 0, 7, 2, 2, 8, CAVE_AIR, CAVE_AIR, false);
+				this.fillWithBlocks(world, MutableBoundingBoxIn, 0, 5, 0, 2, 7, 1, CAVE_AIR, CAVE_AIR, false);
+				this.fillWithBlocks(world, MutableBoundingBoxIn, 0, 0, 7, 2, 2, 8, CAVE_AIR, CAVE_AIR, false);
 
 				for (int i = 0; i < 5; ++i) {
-					this.fillWithBlocks(worldIn, MutableBoundingBoxIn, 0, 5 - i - (i < 4 ? 1 : 0), 2 + i, 2, 7 - i,
+					this.fillWithBlocks(world, MutableBoundingBoxIn, 0, 5 - i - (i < 4 ? 1 : 0), 2 + i, 2, 7 - i,
 							2 + i, CAVE_AIR, CAVE_AIR, false);
 				}
 

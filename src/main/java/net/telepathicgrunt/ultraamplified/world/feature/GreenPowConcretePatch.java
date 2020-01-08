@@ -26,7 +26,7 @@ public class GreenPowConcretePatch extends Feature<NoFeatureConfig> {
     private final int maximumRadius = 6;
 
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
         
         int radius = rand.nextInt(this.maximumRadius - 2) + 2;
@@ -43,11 +43,11 @@ public class GreenPowConcretePatch extends Feature<NoFeatureConfig> {
                     for (int y = position.getY() - 2; y <= position.getY() + 2; ++y)
                     {
                         BlockPos blockpos = new BlockPos(x, y, z);
-                        Block block = worldIn.getBlockState(blockpos).getBlock();
+                        Block block = world.getBlockState(blockpos).getBlock();
 
                         if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK)
                         {
-                            worldIn.setBlockState(blockpos, this.greenConcretePowder, 2);
+                            world.setBlockState(blockpos, this.greenConcretePowder, 2);
                         }
                     }
                 }

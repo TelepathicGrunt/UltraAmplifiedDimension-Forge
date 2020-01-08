@@ -49,51 +49,51 @@ public class GlowdirtBlock extends Block
 	}
 
 
-	public static boolean validNeighboringBlockSpace(BlockState blockStateIn, IWorldReader worldIn, BlockPos blockPosIn)
+	public static boolean validNeighboringBlockSpace(BlockState blockStateIn, IWorldReader world, BlockPos blockPosIn)
 	{
 		BlockPos blockpos = blockPosIn.up();
-		return validLightAndSpacing(blockStateIn, worldIn, blockPosIn) && !worldIn.getFluidState(blockpos).isTagged(FluidTags.WATER);
+		return validLightAndSpacing(blockStateIn, world, blockPosIn) && !world.getFluidState(blockpos).isTagged(FluidTags.WATER);
 	}
 
 
 	// checks to see if there is a nearby grass block, glowgrass block, mycelium, or
 	// glow mycelium and will transform into glowgrass block or mycelium block
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (!worldIn.isRemote)
+		if (!world.isRemote)
 		{
-			if (!worldIn.isAreaLoaded(pos, 3))
+			if (!world.isAreaLoaded(pos, 3))
 				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 
 			//if block is already in an invalid light level or has water/non-air/non-snow layer block above, exits method
 			//as this block cannot convert now.
-			if (!validNeighboringBlockSpace(this.getDefaultState(), worldIn, pos))
+			if (!validNeighboringBlockSpace(this.getDefaultState(), world, pos))
 			{
 				return;
 			}
 
-			if (worldIn.getLight(pos.up()) >= 4)
+			if (world.getLight(pos.up()) >= 4)
 			{
-				if (worldIn.getLight(pos.up()) >= 9)
+				if (world.getLight(pos.up()) >= 9)
 				{
 					BlockState replacementBlock = BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState();
 
 					for (int i = 0; i < 4; ++i)
 					{
 						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-						Block neighborBlock = worldIn.getBlockState(blockpos).getBlock();
+						Block neighborBlock = world.getBlockState(blockpos).getBlock();
 
 						if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == BlocksInit.GLOWGRASS_BLOCK.get())
 						{
 							replacementBlock = BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState();
-							worldIn.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
-									Boolean.valueOf(worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+							world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
+									Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 						else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == BlocksInit.GLOWMYCELIUM.get())
 						{
 							replacementBlock = BlocksInit.GLOWMYCELIUM.get().getDefaultState();
-							worldIn.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
-									Boolean.valueOf(worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+							world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
+									Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 					}
 				}

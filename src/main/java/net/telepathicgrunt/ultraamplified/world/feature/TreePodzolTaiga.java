@@ -30,9 +30,9 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
      }
 
     //taller taiga trees with slightly thicker leaves and podzol soil below it.
-    public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
+    public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
     {
-        IWorld world = (IWorld) worldIn;
+        IWorld world = (IWorld) worldReader;
         int height = rand.nextInt(6) + 8;
         int bottomOfLeaves = (2 + rand.nextInt(3));
         int leavesRange = height - bottomOfLeaves;
@@ -63,7 +63,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
                         if (y >= 0 && y < 256)
                         {
                         	blockpos$Mutable.setPos(x, y, z);
-                            if (!isAirOrLeaves(worldIn, blockpos$Mutable))
+                            if (!isAirOrLeaves(world, blockpos$Mutable))
                             {
                                 flag = false;
                             }
@@ -80,7 +80,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
             {
                 return false;
             }
-            else if (isSoil(worldIn, position.down(), p_225557_7_.getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
+            else if (isSoil(world, position.down(), p_225557_7_.getSapling()) && position.getY() < world.getMaxHeight() - height - 1) 
             {
             	//places podzol +'s. Can generate up to 5.
             	if(rand.nextBoolean())
@@ -95,7 +95,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
         		this.placePodzolCircle(world, position);
         		
         		
-        		this.setDirtAt(worldIn, position.down(), position);
+        		this.setDirtAt(world, position.down(), position);
                 
 
                 
@@ -105,9 +105,9 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
                 {
                     BlockPos upN = position.up(currentHeight);
 
-                    if (isAirOrLeaves(worldIn, upN))
+                    if (isAirOrLeaves(world, upN))
                     {
-                    	this.setBlockState(worldIn, upN, TRUNK);
+                    	this.setBlockState(world, upN, TRUNK);
                     }
                 }
                 
@@ -133,9 +133,9 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
                             {
                                 BlockPos blockpos = new BlockPos(x, y, z);
 
-                                if (isAirOrLeaves(worldIn, blockpos))
+                                if (isAirOrLeaves(world, blockpos))
                                 {
-                                    this.setBlockState(worldIn, blockpos, LEAF);
+                                    this.setBlockState(world, blockpos, LEAF);
                                 }
                             }
                         }
@@ -172,7 +172,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
         }
     }
     
-    private void placePodzolCircle(IWorld worldIn, BlockPos center)
+    private void placePodzolCircle(IWorld world, BlockPos center)
     {
         for (int x = -1; x <= 1; ++x)
         {
@@ -180,23 +180,23 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
             {
                 if (Math.abs(x) != 1 || Math.abs(z) != 1)
                 {
-                    this.placePodzolAt(worldIn, center.add(x, 0, z));
+                    this.placePodzolAt(world, center.add(x, 0, z));
                 }
             }
         }
     }
     
-    private void placePodzolAt(IWorld worldIn, BlockPos pos)
+    private void placePodzolAt(IWorld world, BlockPos pos)
     {
         for (int level = 2; level >= -3; --level)
         {
             BlockPos blockpos = pos.up(level);
-            BlockState iblockstate = worldIn.getBlockState(blockpos);
+            BlockState iblockstate = world.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
             if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT)
             {
-                this.setBlockState(worldIn, blockpos, PODZOL);
+                this.setBlockState(world, blockpos, PODZOL);
                 break;
             }
 
@@ -207,30 +207,30 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
         }
     }
     
-    private void placeTrunkVines(IWorld worldIn, Set<BlockPos> changedBlocks, Random rand, BlockPos position, int bottomLeavesHeight, MutableBoundingBox p_208519_5_) {
+    private void placeTrunkVines(IWorld world, Set<BlockPos> changedBlocks, Random rand, BlockPos position, int bottomLeavesHeight, MutableBoundingBox p_208519_5_) {
     	 
     	for(int height = 0; height < bottomLeavesHeight; height++) {
-            BlockState iblockstate1 = worldIn.getBlockState(position.up(height));
+            BlockState iblockstate1 = world.getBlockState(position.up(height));
             
-            if (iblockstate1.canBeReplacedByLeaves(worldIn, position.up(height))) {
-            	this.setBlockState(worldIn, position.up(height), TRUNK);
+            if (iblockstate1.canBeReplacedByLeaves(world, position.up(height))) {
+            	this.setBlockState(world, position.up(height), TRUNK);
               
               int chance = 1 + height;
                
-              if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(-1, height, 0))) {
-            	  this.setBlockState(worldIn, position.add(-1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)));
+              if (rand.nextInt(chance) == 0 && world.isAirBlock(position.add(-1, height, 0))) {
+            	  this.setBlockState(world, position.add(-1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.EAST, Boolean.valueOf(true)));
               }
 
-              if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(1, height, 0))) {
-            	  this.setBlockState(worldIn, position.add(1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.WEST, Boolean.valueOf(true)));
+              if (rand.nextInt(chance) == 0 && world.isAirBlock(position.add(1, height, 0))) {
+            	  this.setBlockState(world, position.add(1, height, 0), Blocks.VINE.getDefaultState().with(VineBlock.WEST, Boolean.valueOf(true)));
               }
 
-              if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(0, height, -1))) {
-            	  this.setBlockState(worldIn, position.add(0, height, -1), Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)));
+              if (rand.nextInt(chance) == 0 && world.isAirBlock(position.add(0, height, -1))) {
+            	  this.setBlockState(world, position.add(0, height, -1), Blocks.VINE.getDefaultState().with(VineBlock.SOUTH, Boolean.valueOf(true)));
               }
 
-              if (rand.nextInt(chance) == 0 && worldIn.isAirBlock(position.add(0, height, 1))) {
-            	  this.setBlockState(worldIn, position.add(0, height, 1), Blocks.VINE.getDefaultState().with(VineBlock.NORTH, Boolean.valueOf(true)));
+              if (rand.nextInt(chance) == 0 && world.isAirBlock(position.add(0, height, 1))) {
+            	  this.setBlockState(world, position.add(0, height, 1), Blocks.VINE.getDefaultState().with(VineBlock.NORTH, Boolean.valueOf(true)));
               }
             }
          }

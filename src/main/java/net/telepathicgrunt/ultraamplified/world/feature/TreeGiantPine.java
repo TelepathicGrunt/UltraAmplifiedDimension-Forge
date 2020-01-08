@@ -26,18 +26,18 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig> {
         useBaseHeight = useBaseHeightIn;
      }
 
-    public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_) 
+    public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_) 
     {
         int height = this.func_227256_a_(rand, p_225557_7_);
-        IWorld world = (IWorld) worldIn;
+        IWorld world = (IWorld) worldReader;
 
-        if (!this.hasRoom(worldIn, position, height+8, p_225557_7_)) 
+        if (!this.hasRoom(world, position, height+8, p_225557_7_)) 
         {
             return false;
         }
         else
         {
-            this.createCrown(worldIn, position.getX(), position.getZ(), position.getY() + height, 0, rand, boundingBox, p_225557_5_, p_225557_7_);
+            this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, boundingBox, p_225557_5_, p_225557_7_);
 
             for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
@@ -45,7 +45,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig> {
 
                 if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                 {
-                    this.func_227216_a_(worldIn, rand, position.up(currentHeight), p_225557_4_, boundingBox, p_225557_7_);
+                    this.func_227216_a_(world, rand, position.up(currentHeight), p_225557_4_, boundingBox, p_225557_7_);
                 }
 
                 if (currentHeight < height - 1)
@@ -54,21 +54,21 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig> {
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.func_227216_a_(worldIn, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, p_225557_7_);
+                        this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, p_225557_7_);
                     }
 
                     iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.func_227216_a_(worldIn, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
+                        this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
                     }
 
                     iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
                     if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
                     {
-                        this.func_227216_a_(worldIn, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
+                        this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig> {
         }
     }
 
-    private void createCrown(IWorldGenerationReader worldIn, int x, int z, int y, int extraRadiusSize, Random rand, MutableBoundingBox p_214596_7_, Set<BlockPos> p_214596_8_, HugeTreeFeatureConfig p_225557_7_)
+    private void createCrown(IWorldGenerationReader world, int x, int z, int y, int extraRadiusSize, Random rand, MutableBoundingBox p_214596_7_, Set<BlockPos> p_214596_8_, HugeTreeFeatureConfig p_225557_7_)
     {
         int height = rand.nextInt(5) + (this.useBaseHeight ?  p_225557_7_.field_227276_b_ : 3);
         int prevRadius = 0;
@@ -86,7 +86,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig> {
         {
             int heightDiff = y - currentHeight;
             int radius = extraRadiusSize + MathHelper.floor((float)heightDiff / (float)height * 3.5F);
-            this.func_227255_a_(worldIn, rand, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0)*2), p_214596_8_, p_214596_7_, p_225557_7_);
+            this.func_227255_a_(world, rand, new BlockPos(x, currentHeight, z), radius + (int)((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0)*2), p_214596_8_, p_214596_7_, p_225557_7_);
             prevRadius = radius;
         }
     }

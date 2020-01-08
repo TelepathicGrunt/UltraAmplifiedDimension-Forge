@@ -39,14 +39,14 @@ public class Roots extends Feature<BlockConfig> {
 	}
 
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
     {
 		setSeed(rand.nextLong());
 		
 		//wont generate root if config is turned off
 		//won't generate root on leaves, water, etc.
 		//Only solid blocks can have roots
-		if(!ConfigUA.rootGen || !worldIn.getBlockState(position).isSolid()) {
+		if(!ConfigUA.rootGen || !world.getBlockState(position).isSolid()) {
 			return false;
 		}
 		
@@ -72,7 +72,7 @@ public class Roots extends Feature<BlockConfig> {
 			for(int length = 0; length < rootLength; length++){
 
 				//checks to see if air block is not higher than starting place
-				currentBlockState = worldIn.getBlockState(Mutable);
+				currentBlockState = world.getBlockState(Mutable);
 				if(Mutable.getY() <= position.getY() && 
 				    (currentBlockState.getMaterial() == Material.AIR ||
 				     currentBlockState == blockConfig.block.getDefaultState() || 
@@ -81,17 +81,17 @@ public class Roots extends Feature<BlockConfig> {
 
 					
 					//checks to see if there is solid land still above (1 blocks higher than position height)
-					if(worldIn.getBlockState( new BlockPos(Mutable.getX(), 
+					if(world.getBlockState( new BlockPos(Mutable.getX(), 
 															position.getY()+1, 
 															Mutable.getZ()
 														   )).isSolid()) {
 
 						//set root block
-						worldIn.setBlockState(Mutable, blockConfig.block.getDefaultState(), 2);
+						world.setBlockState(Mutable, blockConfig.block.getDefaultState(), 2);
 						
 						//rare chance to also generate a vine
 						if(rand.nextFloat() < 0.13F) {
-							generateTinyVine(worldIn, rand, Mutable);
+							generateTinyVine(world, rand, Mutable);
 						}
 						
 
@@ -127,7 +127,7 @@ public class Roots extends Feature<BlockConfig> {
 	}
     
     
-    private void generateTinyVine(IWorld worldIn, Random rand, BlockPos position) {
+    private void generateTinyVine(IWorld world, Random rand, BlockPos position) {
     	//generates vines from given position down 5 blocks if path is clear and the given position is valid
 		//Also won't generate vines below Y = 1.
 		int length = 0;
@@ -138,20 +138,20 @@ public class Roots extends Feature<BlockConfig> {
 		//begin vine generation
 		for (; position.getY() > 1 && length < 5; position = position.down()) 
 		{
-			if (worldIn.isAirBlock(position)) 
+			if (world.isAirBlock(position)) 
 			{
 				for (Direction Direction : Direction.Plane.HORIZONTAL) 
 				{
 					BlockState iblockstate = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(Direction), Boolean.valueOf(true));
-					if (iblockstate.isValidPosition(worldIn, position)) 
+					if (iblockstate.isValidPosition(world, position)) 
 					{
-						worldIn.setBlockState(position, iblockstate, 2);
+						world.setBlockState(position, iblockstate, 2);
 						length++;
 						break;
 					} 
-					else if (worldIn.getBlockState(position.up()).getBlock() == Blocks.VINE) 
+					else if (world.getBlockState(position.up()).getBlock() == Blocks.VINE) 
 					{
-						worldIn.setBlockState(position, worldIn.getBlockState(position.up()), 2);
+						world.setBlockState(position, world.getBlockState(position.up()), 2);
 						length++;
 						break;
 					}

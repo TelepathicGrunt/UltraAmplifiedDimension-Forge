@@ -37,8 +37,8 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	   private final PatrolSpawner patrolSpawner = new PatrolSpawner();
 	   private final CatSpawnerUA catSpawner = new CatSpawnerUA();
 
-	   public UAChunkGenerator(IWorld worldIn, BiomeProvider provider, OverworldGenSettings settingsIn) {
-	      super(worldIn, provider, 4, 8, 256, settingsIn);
+	   public UAChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn) {
+	      super(world, provider, 4, 8, 256, settingsIn);
 	      this.randomSeed.skip(2620);
 	      this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 	   }
@@ -150,10 +150,10 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	      return super.getPossibleCreatures(creatureType, pos);
 	   }
 
-	   public void spawnMobs(ServerWorld worldIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs) {
-	      this.phantomSpawner.tick(worldIn, spawnHostileMobs, spawnPeacefulMobs);
-	      this.patrolSpawner.tick(worldIn, spawnHostileMobs, spawnPeacefulMobs);
-	      this.catSpawner.tick(worldIn, spawnHostileMobs, spawnPeacefulMobs);
+	   public void spawnMobs(ServerWorld world, boolean spawnHostileMobs, boolean spawnPeacefulMobs) {
+	      this.phantomSpawner.tick(world, spawnHostileMobs, spawnPeacefulMobs);
+	      this.patrolSpawner.tick(world, spawnHostileMobs, spawnPeacefulMobs);
+	      this.catSpawner.tick(world, spawnHostileMobs, spawnPeacefulMobs);
 	   }
 
 	   public int getGroundHeight() {

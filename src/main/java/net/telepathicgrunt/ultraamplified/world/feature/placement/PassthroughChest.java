@@ -19,7 +19,7 @@ public class PassthroughChest extends Placement<NoPlacementConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
       
 	   //needed so we can prevent vanilla treasure chest from spawning if config is off
 	   if(!ConfigUA.chestGeneration) {

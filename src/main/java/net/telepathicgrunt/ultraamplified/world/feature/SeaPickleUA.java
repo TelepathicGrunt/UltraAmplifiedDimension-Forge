@@ -19,7 +19,7 @@ public class SeaPickleUA extends Feature<CountConfig> {
 		super(configFactoryIn);
 	}
 
-public boolean place(IWorld worldIn, ChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {
+public boolean place(IWorld world, ChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {
 	      int howManyPickleGenerated = 0;
 
 	      for(int count = 0; count < configCount.count; ++count) {
@@ -32,8 +32,8 @@ public boolean place(IWorld worldIn, ChunkGenerator<?> generator, Random random,
 	         BlockPos blockpos = new BlockPos(pos.getX() + xOffset, pos.getY(), pos.getZ() + zOffset);
 	         BlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
 	         
-	         if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && pickle.isValidPosition(worldIn, blockpos)) {
-	            worldIn.setBlockState(blockpos, pickle, 2);
+	         if (world.getBlockState(blockpos).getBlock() == Blocks.WATER && pickle.isValidPosition(world, blockpos)) {
+	            world.setBlockState(blockpos, pickle, 2);
 	            ++howManyPickleGenerated;
 	         }
 	      }

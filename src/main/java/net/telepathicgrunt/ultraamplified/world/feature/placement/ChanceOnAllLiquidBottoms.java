@@ -38,7 +38,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
     		).collect(Collectors.toCollection(HashSet::new));
 	
 	
-   public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
+   public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
        int lowestHeight = 40;
 
        ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
@@ -54,7 +54,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 
 		         //if height is inside a non-water block, move down until we reached a water block
 		         while(height > lowestHeight) {
-		        	 if(!worldIn.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty()) {
+		        	 if(!world.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty()) {
 		        		 break;
 		        	 }
 		        	 
@@ -66,7 +66,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 		         //ignores Ocean Monument blocks
 		         BlockState currentBlock;
 		         while(height > lowestHeight) {
-		        	 currentBlock = worldIn.getBlockState(pos.add(x, height, z));
+		        	 currentBlock = world.getBlockState(pos.add(x, height, z));
 		        	 
 		        	 if(currentBlock.getFluidState().isEmpty() && 
 		        		!UNACCEPTABLE_BLOCKS.contains(currentBlock))

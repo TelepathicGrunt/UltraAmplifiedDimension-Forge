@@ -19,7 +19,7 @@ public class FixedHeightWithChance extends Placement<PercentageAndHeightConfig> 
 		super(configFactoryIn);
 	}
 
-	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndHeightConfig percentageAndHeightConfig, BlockPos pos) {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndHeightConfig percentageAndHeightConfig, BlockPos pos) {
 	   
    	   if(random.nextFloat() < percentageAndHeightConfig.percentage) {
 	   			

@@ -44,14 +44,14 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
     private static final BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
 	
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
 		//System.out.println(position.getX()+", "+position.getY()+", "+position.getZ());
-        while ((worldIn.isAirBlock(position) || worldIn.getBlockState(position) == Blocks.WATER.getDefaultState())&& position.getY() > 2)
+        while ((world.isAirBlock(position) || world.getBlockState(position) == Blocks.WATER.getDefaultState())&& position.getY() > 2)
         {
             position = position.down();
         }
 
-        if (worldIn.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
+        if (world.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
         {
             return false;
         }
@@ -88,25 +88,25 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 
                         if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
-                            BlockState iblockstate = worldIn.getBlockState(position.add(x, y, z));
+                            BlockState iblockstate = world.getBlockState(position.add(x, y, z));
                             if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > ConfigUA.seaLevel-2)
                             {
-                                this.setBlockState(worldIn, position.add(x, y, z), PACKED_ICE);
+                                this.setBlockState(world, position.add(x, y, z), PACKED_ICE);
                             }
                             else if(iblockstate == WATER) {
-                            	this.setBlockState(worldIn, position.add(x, y, z), ICE);
+                            	this.setBlockState(world, position.add(x, y, z), ICE);
                             }
 
                             if (y != 0 && l > 1)
                             {
-                                iblockstate = worldIn.getBlockState(position.add(x, -y, z));
+                                iblockstate = world.getBlockState(position.add(x, -y, z));
 
                                 if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, -y, z).getY() > ConfigUA.seaLevel-2)
                                 {
-                                    this.setBlockState(worldIn, position.add(x, -y, z), PACKED_ICE);
+                                    this.setBlockState(world, position.add(x, -y, z), PACKED_ICE);
                                 }
                                 else if(iblockstate == WATER) {
-                                	this.setBlockState(worldIn, position.add(x, -y, z), ICE);
+                                	this.setBlockState(world, position.add(x, -y, z), ICE);
                                 }
                             }
                         }
@@ -140,7 +140,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                     //how far down the ice spike can generate
                     while (blockpos.getY() > 5)
                     {
-                        BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+                        BlockState iblockstate1 = world.getBlockState(blockpos);
 
                         if (!ALLOWED_BLOCKS.contains(iblockstate1))
                         {
@@ -148,9 +148,9 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                         }
 
                         if(iblockstate1 == WATER || iblockstate1 == ICE) {
-                        	this.setBlockState(worldIn, blockpos, Blocks.ICE.getDefaultState());
+                        	this.setBlockState(world, blockpos, Blocks.ICE.getDefaultState());
                         }else {
-                            this.setBlockState(worldIn, blockpos, Blocks.PACKED_ICE.getDefaultState());
+                            this.setBlockState(world, blockpos, Blocks.PACKED_ICE.getDefaultState());
                         }
                         blockpos = blockpos.down();
                         --j2;

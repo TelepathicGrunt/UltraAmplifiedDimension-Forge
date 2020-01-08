@@ -20,7 +20,7 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 		super(configFactoryIn);
 	}
 
-	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
 
 		return IntStream.range(0, placementConfig.count).mapToObj((p_215051_3_) -> {
 			int x = random.nextInt(16);
@@ -29,7 +29,7 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 			int height = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset) + placementConfig.bottomOffset;
 
 			// gets y value of a layer below top layer
-			int bottomYLayer = YPositionOfBottomOfLayer(worldIn, height, random, pos.add(x, 0, z));
+			int bottomYLayer = YPositionOfBottomOfLayer(world, height, random, pos.add(x, 0, z));
 
 			if (bottomYLayer > placementConfig.maximum) {
 				return null;
@@ -39,11 +39,11 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 		}).filter(Objects::nonNull);
 	}
 
-	private int YPositionOfBottomOfLayer(IWorld worldIn, int height, Random random, BlockPos pos) {
+	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos) {
 
 		// if height is inside a non-air block, move up until we reached an air block
 		while (height < 255) {
-			if (worldIn.isAirBlock(pos.add(0, height, 0))) {
+			if (world.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}
 
@@ -53,7 +53,7 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
 		while (height < 255) {
-			if (!worldIn.isAirBlock(pos.add(0, height, 0))) {
+			if (!world.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}
 

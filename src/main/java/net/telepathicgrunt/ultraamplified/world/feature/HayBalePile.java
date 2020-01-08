@@ -35,7 +35,7 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
     private final BlockState railEWAscending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_EAST);
     private final BlockState railEWDecending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_WEST);
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
         
   		if(!ConfigUA.miniStructureGeneration) {
@@ -46,31 +46,31 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
 		if(rand.nextBoolean()) {
 			
 			//makes sure it is generating completely on land and not over water or air
-			if( this.isBlockNormalCube(worldIn, position.down().north(2), false) && 
-				this.isBlockNormalCube(worldIn, position.down().south(2), false) && 
-				this.isBlockNormalCube(worldIn, position.down().east(2).north(), false) && 
-				this.isBlockNormalCube(worldIn, position.down().west(2).north(), false) && 
-				this.isBlockNormalCube(worldIn, position.down().east(2).south(), false) && 
-				this.isBlockNormalCube(worldIn, position.down().west(2).south(), false))
+			if( this.isBlockNormalCube(world, position.down().north(2), false) && 
+				this.isBlockNormalCube(world, position.down().south(2), false) && 
+				this.isBlockNormalCube(world, position.down().east(2).north(), false) && 
+				this.isBlockNormalCube(world, position.down().west(2).north(), false) && 
+				this.isBlockNormalCube(world, position.down().east(2).south(), false) && 
+				this.isBlockNormalCube(world, position.down().west(2).south(), false))
 			{
 				for(int i = -2; i <= 2; i++) {
-					worldIn.setBlockState(position.north(i), hayBaleNS, 2);
-					worldIn.setBlockState(position.north(i).up(), hayBaleNS, 2);
-					worldIn.setBlockState(position.north(i).west(), hayBaleNS, 2);
-					worldIn.setBlockState(position.north(i).east(), hayBaleNS, 2);
+					world.setBlockState(position.north(i), hayBaleNS, 2);
+					world.setBlockState(position.north(i).up(), hayBaleNS, 2);
+					world.setBlockState(position.north(i).west(), hayBaleNS, 2);
+					world.setBlockState(position.north(i).east(), hayBaleNS, 2);
 				}
 				
-				worldIn.setBlockState(position.north().up(2), railEWFlat, 2);
-				worldIn.setBlockState(position.west(2).north(), railEWAscending, 2);
-				worldIn.setBlockState(position.west().north().up(), railEWAscending, 2);
-				worldIn.setBlockState(position.east(2).north(), railEWDecending, 2);
-				worldIn.setBlockState(position.east().north().up(), railEWDecending, 2);
+				world.setBlockState(position.north().up(2), railEWFlat, 2);
+				world.setBlockState(position.west(2).north(), railEWAscending, 2);
+				world.setBlockState(position.west().north().up(), railEWAscending, 2);
+				world.setBlockState(position.east(2).north(), railEWDecending, 2);
+				world.setBlockState(position.east().north().up(), railEWDecending, 2);
 				
-				worldIn.setBlockState(position.south().up(2), railEWFlat, 2);
-				worldIn.setBlockState(position.west(2).south(), railEWAscending, 2);
-				worldIn.setBlockState(position.west().south().up(), railEWAscending, 2);
-				worldIn.setBlockState(position.east(2).south(), railEWDecending, 2);
-				worldIn.setBlockState(position.east().south().up(), railEWDecending, 2);
+				world.setBlockState(position.south().up(2), railEWFlat, 2);
+				world.setBlockState(position.west(2).south(), railEWAscending, 2);
+				world.setBlockState(position.west().south().up(), railEWAscending, 2);
+				world.setBlockState(position.east(2).south(), railEWDecending, 2);
+				world.setBlockState(position.east().south().up(), railEWDecending, 2);
 			}
 		}
 		
@@ -78,33 +78,33 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
 		else {
 			
 			//makes sure it is generating completely on land and not over water or air
-			if(this.isBlockNormalCube(worldIn, position.down().west(2), false) && 
-			   this.isBlockNormalCube(worldIn, position.down().east(2), false) && 
-			   this.isBlockNormalCube(worldIn, position.down().north(2).west(), false) && 
-			   this.isBlockNormalCube(worldIn, position.down().north(2).east(), false) && 
-			   this.isBlockNormalCube(worldIn, position.down().south(2).east(), false) && 
-			   this.isBlockNormalCube(worldIn, position.down().south(2).west(), false))
+			if(this.isBlockNormalCube(world, position.down().west(2), false) && 
+			   this.isBlockNormalCube(world, position.down().east(2), false) && 
+			   this.isBlockNormalCube(world, position.down().north(2).west(), false) && 
+			   this.isBlockNormalCube(world, position.down().north(2).east(), false) && 
+			   this.isBlockNormalCube(world, position.down().south(2).east(), false) && 
+			   this.isBlockNormalCube(world, position.down().south(2).west(), false))
 			{
 				
 				for(int i = -2; i <= 2; i++) {
-					worldIn.setBlockState(position.east(i), hayBaleEW, 2);
-					worldIn.setBlockState(position.east(i).up(), hayBaleEW, 2);
-					worldIn.setBlockState(position.east(i).north(), hayBaleEW, 2);
-					worldIn.setBlockState(position.east(i).south(), hayBaleEW, 2);
+					world.setBlockState(position.east(i), hayBaleEW, 2);
+					world.setBlockState(position.east(i).up(), hayBaleEW, 2);
+					world.setBlockState(position.east(i).north(), hayBaleEW, 2);
+					world.setBlockState(position.east(i).south(), hayBaleEW, 2);
 				}
 				
 				
-				worldIn.setBlockState(position.east().up(2), railNSFlat, 2);
-				worldIn.setBlockState(position.north(2).east(), railNSDecending, 2);
-				worldIn.setBlockState(position.north().east().up(), railNSDecending, 2);
-				worldIn.setBlockState(position.south(2).east(), railNSAscending, 2);
-				worldIn.setBlockState(position.south().east().up(), railNSAscending, 2);
+				world.setBlockState(position.east().up(2), railNSFlat, 2);
+				world.setBlockState(position.north(2).east(), railNSDecending, 2);
+				world.setBlockState(position.north().east().up(), railNSDecending, 2);
+				world.setBlockState(position.south(2).east(), railNSAscending, 2);
+				world.setBlockState(position.south().east().up(), railNSAscending, 2);
 				
-				worldIn.setBlockState(position.west().up(2), railNSFlat, 2);
-				worldIn.setBlockState(position.north(2).west(), railNSDecending, 2);
-				worldIn.setBlockState(position.north().west().up(), railNSDecending, 2);
-				worldIn.setBlockState(position.south(2).west(), railNSAscending, 2);
-				worldIn.setBlockState(position.south().west().up(), railNSAscending, 2);
+				world.setBlockState(position.west().up(2), railNSFlat, 2);
+				world.setBlockState(position.north(2).west(), railNSDecending, 2);
+				world.setBlockState(position.north().west().up(), railNSDecending, 2);
+				world.setBlockState(position.south(2).west(), railNSAscending, 2);
+				world.setBlockState(position.south().west().up(), railNSAscending, 2);
 			}
 		}
 			
@@ -114,7 +114,7 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
     /**
      * Checks if a block's material is opaque, and that it takes up a full cube
      */
-    private boolean isBlockNormalCube(IWorld worldIn, BlockPos pos, boolean _default)
+    private boolean isBlockNormalCube(IWorld world, BlockPos pos, boolean _default)
     {
         if (pos.getY() > 255)
         {
@@ -122,7 +122,7 @@ public class HayBalePile extends Feature<NoFeatureConfig> {
         }
         else
         {
-            return worldIn.getBlockState(pos).isNormalCube(worldIn, pos);
+            return world.getBlockState(pos).isNormalCube(world, pos);
         }
     }
 }

@@ -22,7 +22,7 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos) {
 	   int c = chancesConfig.count;
        if (random.nextFloat() < chancesConfig.extraChance) {
           c += chancesConfig.extraCount;
@@ -40,7 +40,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	         
 	         while(height > 60) {
 	        	 
-	        	 airWaterBlock = worldIn.isAirBlock(pos.add(x, height, z)) || worldIn.getBlockState(pos.add(x, height, z)) == Blocks.WATER.getDefaultState();
+	        	 airWaterBlock = world.isAirBlock(pos.add(x, height, z)) || world.getBlockState(pos.add(x, height, z)) == Blocks.WATER.getDefaultState();
 	        	 
 	        	 //if height is at an air/water block and previous block was a solid block, store the fact that we are in an air/water block now
 	        	 if(!airWaterFlag && airWaterBlock) {

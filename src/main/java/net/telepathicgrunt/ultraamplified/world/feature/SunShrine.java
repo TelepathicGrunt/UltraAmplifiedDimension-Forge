@@ -51,7 +51,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 	//first NTB structure I made to work by watching tutorials lol. 
 	//PRAISE THE SUN!!!
 	
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
 		if(!ConfigUA.miniStructureGeneration || position.getY() > 248) {
 			return false;
@@ -63,7 +63,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 		{
 			for(int z = -4; z <= 4; z++)  
 			{
-				if( Math.abs(x*z) > 2 && Math.abs(x*z) < 8 && !acceptableBlocks.contains(worldIn.getBlockState(position.down(1).west(x).north(z)))) 
+				if( Math.abs(x*z) > 2 && Math.abs(x*z) < 8 && !acceptableBlocks.contains(world.getBlockState(position.down(1).west(x).north(z)))) 
 				{
 					return false;
 				}
@@ -72,7 +72,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 		
 		//UltraAmplified.LOGGER.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
 		
-		TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
+		TemplateManager templatemanager = ((ServerWorld)world.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID+":sunshrine"));
 		
 		if(template == null)
@@ -84,7 +84,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
 				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
-		template.addBlocksToWorld(worldIn, position.down().north(3).west(3), placementsettings);
+		template.addBlocksToWorld(world, position.down().north(3).west(3), placementsettings);
 		
 		return true;
 		

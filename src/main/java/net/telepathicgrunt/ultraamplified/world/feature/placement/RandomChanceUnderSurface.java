@@ -20,11 +20,11 @@ public RandomChanceUnderSurface(Function<Dynamic<?>, ? extends ChanceConfig> con
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig chanceConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig chanceConfig, BlockPos pos) {
 		   if (random.nextFloat() < 1.0F / (float)chanceConfig.chance) {
 		         int x = random.nextInt(16);
 		         int z = random.nextInt(16);
-		         int height = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY() * 2;
+		         int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY() * 2;
 		         
 		 		if (height > 75) {
 		 			height -= 75;

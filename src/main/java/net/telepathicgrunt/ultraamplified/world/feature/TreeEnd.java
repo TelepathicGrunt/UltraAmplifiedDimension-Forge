@@ -29,12 +29,12 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
     }
 
 
-   public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+   public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
    {
       int i = rand.nextInt(3) + 5;
 
       boolean flag = true;
-      if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getMaxHeight()) {
+      if (position.getY() >= 1 && position.getY() + i + 1 <= world.getMaxHeight()) {
          for(int j = position.getY(); j <= position.getY() + 1 + i; ++j) {
             int k = 1;
             if (j == position.getY()) {
@@ -49,8 +49,8 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
 
             for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
                for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
-                  if (j >= 0 && j < worldIn.getMaxHeight()) {
-                     if (!func_214587_a(worldIn, blockpos$Mutable.setPos(l, j, i1))) {
+                  if (j >= 0 && j < world.getMaxHeight()) {
+                     if (!func_214587_a(world, blockpos$Mutable.setPos(l, j, i1))) {
                         flag = false;
                      }
                   } else {
@@ -62,13 +62,13 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
 
          if (!flag) {
             return false;
-         } else if ((isSoil(worldIn, position.down(), p_225557_7_.getSapling())) && position.getY() < worldIn.getMaxHeight() - i - 1) {
-        	 placeTerracottaCircle((IWorld)worldIn, position.down());
+         } else if ((isSoil(world, position.down(), p_225557_7_.getSapling())) && position.getY() < world.getMaxHeight() - i - 1) {
+        	 placeTerracottaCircle((IWorld)world, position.down());
 
 
             for(int i2 = 0; i2 < i; ++i2) {
-               if (isAirOrLeaves(worldIn, position.up(i2))) {
-            	  this.setBlockState(worldIn, position.up(i2), LOG);
+               if (isAirOrLeaves(world, position.up(i2))) {
+            	  this.setBlockState(world, position.up(i2), LOG);
                }
             }
 
@@ -83,8 +83,8 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
                      int k1 = j1 - position.getZ();
                      if (Math.abs(i3) != k2 || Math.abs(k1) != k2 || rand.nextInt(2) != 0 && j2 != 0) {
                         BlockPos blockpos = new BlockPos(l2, l1, j1);
-                        if (isAirOrLeaves(worldIn, blockpos)) {
-                        	this.setBlockState(worldIn, blockpos, LEAF);
+                        if (isAirOrLeaves(world, blockpos)) {
+                        	this.setBlockState(world, blockpos, LEAF);
                         }
                      }
                   }
@@ -100,7 +100,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
       }
    }
     
-    private void placeTerracottaCircle(IWorld worldIn, BlockPos center)
+    private void placeTerracottaCircle(IWorld world, BlockPos center)
     {
         for (int x = -2; x <= 2; ++x)
         {
@@ -108,23 +108,23 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
             {
                 if (Math.abs(x) + Math.abs(z) < 3)
                 {
-                    this.placeTerracottaAt(worldIn, center.add(x, 0, z));
+                    this.placeTerracottaAt(world, center.add(x, 0, z));
                 }
             }
         }
     }
     
-    private void placeTerracottaAt(IWorld worldIn, BlockPos pos)
+    private void placeTerracottaAt(IWorld world, BlockPos pos)
     {
         for (int level = 2; level >= -3; --level)
         {
             BlockPos blockpos = pos.up(level);
-            BlockState iblockstate = worldIn.getBlockState(blockpos);
+            BlockState iblockstate = world.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
             if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT)
             {
-                this.setBlockState(worldIn, blockpos, PURPLE_TERRACOTTA);
+                this.setBlockState(world, blockpos, PURPLE_TERRACOTTA);
                 break;
             }
 

@@ -29,7 +29,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 	private final static BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
 
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock)
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock)
 	{
 
 		//set y to 0
@@ -50,7 +50,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 					continue;
 				}
 				
-				netherBiome = worldIn.func_226691_t_(blockpos$Mutable.add(x, 0, z));
+				netherBiome = world.func_226691_t_(blockpos$Mutable.add(x, 0, z));
 				if (netherBiome == BiomeInit.NETHERLAND)
 				{
 					hasNetherBiome = true;
@@ -72,18 +72,18 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 			for (int z = 0; z < 16; ++z)
 			{
 
-				netherBiome = worldIn.func_226691_t_(blockpos$Mutable.add(x, 0, z));
+				netherBiome = world.func_226691_t_(blockpos$Mutable.add(x, 0, z));
 				if (netherBiome != BiomeInit.NETHERLAND)
 				{
 					continue;
 				}
 				
-				currentblock = worldIn.getBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z));
+				currentblock = world.getBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z));
 
 				//if water, place magma block
 				if (currentblock.getMaterial() == Material.WATER)
 				{
-					worldIn.setBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z), MAGMA, 3);
+					world.setBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z), MAGMA, 3);
 				}
 			}
 		}

@@ -20,7 +20,7 @@ public class AtCenterSurfaceMiniFeature extends Placement<ChanceAndTypeConfig> {
 		super(configFactoryIn);
 	}
 
-	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos) {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos) {
 
 		float chance;
 		
@@ -41,7 +41,7 @@ public class AtCenterSurfaceMiniFeature extends Placement<ChanceAndTypeConfig> {
 		   }
 		
 		if (random.nextFloat() < 1.0F / chance) {
-			BlockPos blockpos = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(8, 0, 8));
+			BlockPos blockpos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(8, 0, 8));
 			return Stream.of(blockpos);
 		}
 		

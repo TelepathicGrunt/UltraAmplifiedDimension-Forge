@@ -130,15 +130,15 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 		 * Keeps iterating Structure Pieces and spawning them until the checks tell it
 		 * to stop
 		 */
-		public void func_225565_a_(IWorld worldIn, ChunkGenerator<?> p_225565_2_, Random rand,
+		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand,
 				MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
-			super.func_225565_a_(worldIn, p_225565_2_, rand, structurebb, p_75068_4_);
+			super.func_225565_a_(world, p_225565_2_, rand, structurebb, p_75068_4_);
 			int i = this.bounds.minY;
 
 			for (int j = structurebb.minX; j <= structurebb.maxX; ++j) {
 				for (int k = structurebb.minZ; k <= structurebb.maxZ; ++k) {
 					BlockPos blockpos = new BlockPos(j, i, k);
-					if (!worldIn.isAirBlock(blockpos) && this.bounds.isVecInside(blockpos)) {
+					if (!world.isAirBlock(blockpos) && this.bounds.isVecInside(blockpos)) {
 						boolean flag = false;
 
 						for (StructurePiece structurepiece : this.components) {
@@ -151,12 +151,12 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 						if (flag) {
 							for (int l = i - 1; l > 1; --l) {
 								BlockPos blockpos1 = new BlockPos(j, l, k);
-								if (!worldIn.isAirBlock(blockpos1)
-										&& !worldIn.getBlockState(blockpos1).getMaterial().isLiquid()) {
+								if (!world.isAirBlock(blockpos1)
+										&& !world.getBlockState(blockpos1).getMaterial().isLiquid()) {
 									break;
 								}
 
-								worldIn.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState(), 2);
+								world.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState(), 2);
 							}
 						}
 					}

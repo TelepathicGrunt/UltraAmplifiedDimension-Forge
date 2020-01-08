@@ -64,7 +64,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	 */
 	public static void setSeed(long seed) {
 		if (noiseGen == null) {
-			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
+			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		return true;
 	}
 
-	private void func_222729_a(IChunk worldIn, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ,
+	private void func_222729_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ,
 			double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2,
 			float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
 		
@@ -162,14 +162,14 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 				return;
 			}
 
-			this.carveAtTarget(worldIn, biomeBlockPos, random, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY,
+			this.carveAtTarget(world, biomeBlockPos, random, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY,
 					randomBlockZ, placementXZBound, placementYBound, mask);
 
 		}
 
 	}
 
-	protected boolean carveAtTarget(IChunk worldIn, Function<BlockPos, Biome> biomeBlockPos, Random random, long seed, int mainChunkX, int mainChunkZ,
+	protected boolean carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, long seed, int mainChunkX, int mainChunkZ,
 			double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
 		
 		
@@ -237,7 +237,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 								
 								//Use this value to control how much lava is shown at bottom
 								//Increase constant for less lava
-								yPillarModifier -= 4.0D;
+								yPillarModifier -= 4D;
 
 								if (y < 10) {
 									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
@@ -263,8 +263,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 									// out.
 									//
 									//Increase step in X and Z to make pillars less frequent but thicker
-									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.12D, (double) z * 0.12D,
-											y * 0.035D) * 15.0D - (15 / yPillarModifier) + random.nextDouble() * 0.1D > -2.0D;
+									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.04D, (double) z * 0.04D,
+											y * 0.016D) * 15.0D - (26 / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
 	
 									if(!flagPillars) {
 										//skip position if we are in pillar space
@@ -286,16 +286,16 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										// while the 400/y has already carved out the rest of the cave.
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
-										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.33125D,
-												(double) z * 0.33125D, y * 0.06D) * 15.0D + (360D / (y));
+										double stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.23125D,
+												(double) z * 0.23125D, y * 0.02D) * 15.0D + (480D / (y));
 										
 										//adds more tiny stalagmites to ceiling
-										if(y>54) {
+										if(y>48) {
 											stalagmiteDouble -= (y-53D)/3D;
 										}
 										
-										//increase constant to make stalagmites smaller and thinner
-										boolean flagStalagmites = stalagmiteDouble > 6.0D;
+										//decrease constant to make stalagmites smaller and thinner
+										boolean flagStalagmites = stalagmiteDouble > 7.3D;
 
 										if(!flagStalagmites) {
 											//skip position if we are in stalagmite space
@@ -314,10 +314,10 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										+ ySquaringModified * ySquaringModified / 6.0D + random.nextFloat() * 0.1f < 1.0D) {
 									
 									blockpos$Mutable.setPos(x, y, z);
-									currentBlockstate = worldIn.getBlockState(blockpos$Mutable);
+									currentBlockstate = world.getBlockState(blockpos$Mutable);
 									blockpos$Mutableup.setPos(blockpos$Mutable).move(Direction.UP);
 									blockpos$Mutabledown.setPos(blockpos$Mutable).move(Direction.DOWN);
-									aboveBlockstate = worldIn.getBlockState(blockpos$Mutableup);
+									aboveBlockstate = world.getBlockState(blockpos$Mutableup);
 
 									
 									if(y >= 60) {
@@ -327,21 +327,21 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 										//floors.
 										
 										if (!currentBlockstate.getFluidState().isEmpty()) {
-											worldIn.setBlockState(blockpos$Mutable, replacementBlock, false);
+											world.setBlockState(blockpos$Mutable, replacementBlock, false);
 										} else if (!aboveBlockstate.getFluidState().isEmpty()) {
-											worldIn.setBlockState(blockpos$Mutable, replacementBlock, false);
-											worldIn.setBlockState(blockpos$Mutableup, replacementBlock, false);
-											worldIn.setBlockState(blockpos$Mutabledown, replacementBlock, false);
+											world.setBlockState(blockpos$Mutable, replacementBlock, false);
+											world.setBlockState(blockpos$Mutableup, replacementBlock, false);
+											world.setBlockState(blockpos$Mutabledown, replacementBlock, false);
 											flag = true;
 										}
 									} else if (this.canCarveBlock(currentBlockstate, aboveBlockstate)
 											|| canReplaceMap.containsKey(currentBlockstate)) {
 										
 										if (y < 11) {
-											worldIn.setBlockState(blockpos$Mutable, LAVA, false);
+											world.setBlockState(blockpos$Mutable, LAVA, false);
 										} else {
 											//carves the cave
-											worldIn.setBlockState(blockpos$Mutable, AIR.getBlockState(), false);
+											world.setBlockState(blockpos$Mutable, AIR.getBlockState(), false);
 										}
 
 										flag = true;

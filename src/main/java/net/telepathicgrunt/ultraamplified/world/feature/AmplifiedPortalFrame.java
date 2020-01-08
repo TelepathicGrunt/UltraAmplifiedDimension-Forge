@@ -26,17 +26,17 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig> {
    }
 
    //need to be made due to extending feature
-   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 	   return false;
    }
    
    //is called in AmplifiedPortalBehavior which doesn't have a chunk generator passed in
-   public boolean place(IWorld worldIn, Random rand, BlockPos pos, NoFeatureConfig config) {
+   public boolean place(IWorld world, Random rand, BlockPos pos, NoFeatureConfig config) {
       
 	   //7x7 flooring around bottom of frame
 	   for(int x = -3; x <= 3; x++) {
 		   for(int z = -3; z <= 3; z++) {
-			  worldIn.setBlockState(pos.add(x, -1, z), POLISHED_GRANITE, 3);
+			  world.setBlockState(pos.add(x, -1, z), POLISHED_GRANITE, 3);
 		   }
 	   }
 	   
@@ -45,14 +45,14 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig> {
 	   for(int x = -1; x <= 1; x++) {
 		   for(int z = -1; z <= 1; z++) {
 			   if(Math.abs(x*z) == 1) {
-				   worldIn.setBlockState(pos.add(x, 0, z), POLISHED_GRANITE, 3);
+				   world.setBlockState(pos.add(x, 0, z), POLISHED_GRANITE, 3);
 			   }else {
 				   //sets slab but also waterlogs it if block it replaces is water based
-				   worldIn.setBlockState(
+				   world.setBlockState(
 						   pos.add(x, 0, z), 
 						   POLISHED_ANDESITE_SLAB_BOTTOM.with(
 								   SlabBlock.WATERLOGGED, 
-								   worldIn.getBlockState(pos.add(x, 0, z)).getMaterial() == Material.WATER), 
+								   world.getBlockState(pos.add(x, 0, z)).getMaterial() == Material.WATER), 
 						   3);
 			   }
 		   }
@@ -60,20 +60,20 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig> {
 	   
 
 	   //the portal itself
-	   worldIn.setBlockState(pos.add(0, 1, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 3);
+	   world.setBlockState(pos.add(0, 1, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 3);
 
 	   //top of portal frame
 	   for(int x = -1; x <= 1; x++) {
 		   for(int z = -1; z <= 1; z++) {
 			   if(Math.abs(x*z) == 1) {
-				   worldIn.setBlockState(pos.add(x, 2, z), POLISHED_GRANITE, 3);
+				   world.setBlockState(pos.add(x, 2, z), POLISHED_GRANITE, 3);
 			   }else {
 				   //sets slab but also waterlogs it if block it replaces is water based
-				   worldIn.setBlockState(
+				   world.setBlockState(
 						   pos.add(x, 2, z), 
 						   POLISHED_ANDESITE_SLAB_TOP.with(
 								   SlabBlock.WATERLOGGED, 
-								   worldIn.getBlockState(pos.add(x, 2, z)).getMaterial() == Material.WATER), 
+								   world.getBlockState(pos.add(x, 2, z)).getMaterial() == Material.WATER), 
 						   3);
 			   }
 		   }

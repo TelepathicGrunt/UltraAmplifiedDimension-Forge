@@ -23,10 +23,10 @@ public class TreeJungleShrub extends AbstractTreeFeature<BaseTreeFeatureConfig> 
 	      this.leaf = leaf;
 	   }
 
-	   public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_) {
+	   public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_) {
 		  
- 	      if (isSoil(worldIn, position.down(), p_225557_7_.getSapling())) {
-         	this.setBlockState(worldIn, position, this.trunk);
+ 	      if (isSoil(world, position.down(), p_225557_7_.getSapling())) {
+         	this.setBlockState(world, position, this.trunk);
 
 	         for(int i = position.getY(); i <= position.getY() + 2; ++i) {
 	            int j = i - position.getY();
@@ -39,8 +39,8 @@ public class TreeJungleShrub extends AbstractTreeFeature<BaseTreeFeatureConfig> 
 	                  int k1 = j1 - position.getZ();
 	                  if (Math.abs(i1) != k || Math.abs(k1) != k || rand.nextInt(3) == 0) {
 	                     BlockPos blockpos = new BlockPos(l, i, j1);
-	                     if (isAirOrLeaves(worldIn, blockpos)) {
-	                     	this.setBlockState(worldIn, blockpos, this.leaf);
+	                     if (isAirOrLeaves(world, blockpos)) {
+	                     	this.setBlockState(world, blockpos, this.leaf);
 	                     }
 	                  }
 	               }

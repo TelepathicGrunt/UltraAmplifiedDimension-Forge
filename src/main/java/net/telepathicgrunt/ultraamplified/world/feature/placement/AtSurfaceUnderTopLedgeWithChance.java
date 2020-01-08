@@ -18,11 +18,11 @@ public class AtSurfaceUnderTopLedgeWithChance extends Placement<ChanceConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig chancesConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig chancesConfig, BlockPos pos) {
 
 	   int x = random.nextInt(16);
 	   int z = random.nextInt(16);
-	   int topYLayer = YPositionOfBelowLayer(worldIn, 255, random, pos.add(x, 0 ,z));
+	   int topYLayer = YPositionOfBelowLayer(world, 255, random, pos.add(x, 0 ,z));
 	   
 	   if(topYLayer < 75 || chancesConfig.chance == 0) {
 		   return Stream.empty();
@@ -31,7 +31,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   int height = random.nextInt(topYLayer-74) + 75;
 	   
 	     //gets y value of a layer below top layer
-	     topYLayer = YPositionOfBelowLayer(worldIn, height, random, pos.add(x, 0 ,z));
+	     topYLayer = YPositionOfBelowLayer(world, height, random, pos.add(x, 0 ,z));
 	     
 	     if(topYLayer < 75) {
 	    	 return Stream.empty();
@@ -44,12 +44,12 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 		 return Stream.empty();
 	}
    
-	private int YPositionOfBelowLayer(IWorld worldIn, int height, Random random, BlockPos pos) {
+	private int YPositionOfBelowLayer(IWorld world, int height, Random random, BlockPos pos) {
 		
          
          //if height is inside a non-air block, move down until we reached an air block
          while(height > 74) {
-        	 if(worldIn.isAirBlock(pos.add(0, height, 0))) {
+        	 if(world.isAirBlock(pos.add(0, height, 0))) {
         		 break;
         	 }
         	 
@@ -58,7 +58,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
          
          //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
          while(height > 74) {
-        	 if(!worldIn.isAirBlock(pos.add(0, height, 0))) {
+        	 if(!world.isAirBlock(pos.add(0, height, 0))) {
         		 break;
         	 }
         	 

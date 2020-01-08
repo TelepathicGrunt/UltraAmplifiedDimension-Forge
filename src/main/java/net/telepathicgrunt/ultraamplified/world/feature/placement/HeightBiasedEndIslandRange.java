@@ -20,7 +20,7 @@ public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
 	   return IntStream.range(0, ConfigUA.endIslandSpawnrate / placementConfig.count).mapToObj((p_215051_3_) -> {
 	         int j = random.nextInt(16);
 	         int k = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset - placementConfig.topOffset) + placementConfig.bottomOffset;

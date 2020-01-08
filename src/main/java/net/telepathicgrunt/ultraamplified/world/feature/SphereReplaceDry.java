@@ -18,8 +18,8 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig> {
 	      super(p_i49885_1_);
 	   }
 
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, SphereReplaceConfig config) {
-	      if (!worldIn.getFluidState(pos).isEmpty()) {
+	   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, SphereReplaceConfig config) {
+	      if (!world.getFluidState(pos).isEmpty()) {
 	         return false;
 	      } else {
 	         int i = 0;
@@ -32,11 +32,11 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig> {
 	               if (i1 * i1 + j1 * j1 <= j * j) {
 	                  for(int k1 = pos.getY() - config.ySize; k1 <= pos.getY() + config.ySize; ++k1) {
 	                     BlockPos blockpos = new BlockPos(k, k1, l);
-	                     BlockState blockstate = worldIn.getBlockState(blockpos);
+	                     BlockState blockstate = world.getBlockState(blockpos);
 
 	                     for(BlockState blockstate1 : config.targets) {
 	                        if (blockstate1.getBlock() == blockstate.getBlock()) {
-	                           worldIn.setBlockState(blockpos, config.state, 2);
+	                           world.setBlockState(blockpos, config.state, 2);
 	                           ++i;
 	                           break;
 	                        }

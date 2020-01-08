@@ -43,35 +43,35 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	}
 
 
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (!worldIn.isAreaLoaded(pos, 1))
+		if (!world.isAreaLoaded(pos, 1))
 			return; // Forge: prevent growing cactus from loading unloaded chunks with block update
-		if (!state.isValidPosition(worldIn, pos))
+		if (!state.isValidPosition(world, pos))
 		{
-			worldIn.destroyBlock(pos, true);
+			world.destroyBlock(pos, true);
 		}
 		else
 		{
 			BlockPos blockpos = pos.up();
-			if (worldIn.isAirBlock(blockpos))
+			if (world.isAirBlock(blockpos))
 			{
 
 				int j = state.get(AGE);
-				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, blockpos, state, true))
+				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(world, blockpos, state, true))
 				{
 					if (j == 15)
 					{
-						worldIn.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState());
+						world.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState());
 						BlockState blockstate = state.with(AGE, Integer.valueOf(0));
-						worldIn.setBlockState(pos, blockstate, 4);
-						blockstate.neighborChanged(worldIn, blockpos, this, pos, false);
+						world.setBlockState(pos, blockstate, 4);
+						blockstate.neighborChanged(world, blockpos, this, pos, false);
 					}
 					else
 					{
-						worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(j + 1)), 4);
+						world.setBlockState(pos, state.with(AGE, Integer.valueOf(j + 1)), 4);
 					}
-					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(world, pos, state);
 				}
 
 			}
@@ -92,13 +92,13 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	}
 
 
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return HITBOX_DIMENSIONS;
 	}
 
 
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return OUTLINE_DIMENSION;
 	}
@@ -110,39 +110,39 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	 * solidified counterpart. Note that this method should ideally consider only the specific face passed in.
 	 */
 	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos)
 	{
-		if (!stateIn.isValidPosition(worldIn, currentPos))
+		if (!stateIn.isValidPosition(world, currentPos))
 		{
-			worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+			world.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
 		}
 
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updatePostPlacement(stateIn, facing, facingState, world, currentPos, facingPos);
 	}
 
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
 		for (Direction direction : Direction.Plane.HORIZONTAL)
 		{
-			if (worldIn.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+			if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
 			{
 				return false;
 			}
 		}
 
-		return this.canCactusSurviveHere(worldIn, pos, state.get(FACING), this) && !worldIn.getBlockState(pos.up()).getMaterial().isLiquid();
+		return this.canCactusSurviveHere(world, pos, state.get(FACING), this) && !world.getBlockState(pos.up()).getMaterial().isLiquid();
 	}
 
 
-	public boolean canCactusSurviveHere(IBlockReader worldIn, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable)
+	public boolean canCactusSurviveHere(IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable)
 	{
-		BlockState belowBlock = worldIn.getBlockState(pos.down());
+		BlockState belowBlock = world.getBlockState(pos.down());
 
 		if (belowBlock.getMaterial() == Material.AIR)
 		{
 
-			BlockState offsetBlock = worldIn.getBlockState(pos.offset(facing.getOpposite()));
+			BlockState offsetBlock = world.getBlockState(pos.offset(facing.getOpposite()));
 			if (offsetBlock.getBlock() != Blocks.CACTUS && offsetBlock.getMaterial() == Material.CACTUS)
 			{
 				//handling two edge cases
@@ -150,11 +150,11 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				//Case 2: two corner blocks are facing each otehr with no valid space below
 				if (offsetBlock.getBlock() == BlocksInit.CACTUSMAINBLOCKUA.get())
 				{
-					return ((CactusMainBlockUA) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) worldIn, pos.offset(facing.getOpposite()));
+					return ((CactusMainBlockUA) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) world, pos.offset(facing.getOpposite()));
 				}
 				else if (offsetBlock.getBlock() == this)
 				{
-					belowBlock = worldIn.getBlockState(pos.offset(facing.getOpposite()).down());
+					belowBlock = world.getBlockState(pos.offset(facing.getOpposite()).down());
 					//any sand or modded cactus block below
 					if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND
 							|| (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
@@ -172,7 +172,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 		}
 		else
 		{
-			belowBlock = worldIn.getBlockState(pos.down());
+			belowBlock = world.getBlockState(pos.down());
 
 			//any sand or modded cactus block below
 			if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND
@@ -186,12 +186,12 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	}
 
 
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
 		return false;
 	}

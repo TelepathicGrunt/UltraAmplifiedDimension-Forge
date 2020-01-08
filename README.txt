@@ -19,7 +19,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     
     Structures:
 ·Optimized hanging roots.
-·Optimized columns generation.
+·Optimized Column generation.
+·Optimized Cave Cavities generation.
 
     Biome: 
 ·Made Mushroom Biome more rare.

@@ -39,7 +39,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
         int j = rand.nextInt(2) + 2;
         int xMin = -j - 1;
@@ -57,7 +57,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
                 for (int i3 = zMin; i3 <= zMax; ++i3)
                 {
                     BlockPos blockpos = position.add(k2, l2, i3);
-                    Material material = worldIn.getBlockState(blockpos).getMaterial();
+                    Material material = world.getBlockState(blockpos).getMaterial();
                     boolean flag = material.isSolid();
 
                     if (l2 == -1 && !flag)
@@ -70,7 +70,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
                     	ceilingOpenings++;
                     }
 
-                    if ((k2 == xMin || k2 == xMax || i3 == zMin || i3 == zMax) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
+                    if ((k2 == xMin || k2 == xMax || i3 == zMin || i3 == zMax) && l2 == 0 && world.isAirBlock(blockpos) && world.isAirBlock(blockpos.up()))
                     {
                         ++j2;
                     }
@@ -94,36 +94,36 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
                         		//ceiling
                             	if (rand.nextInt(4) == 0)
                             	{
-                                	worldIn.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
+                                	world.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
                             	}else 
                             	{
-                                	worldIn.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
+                                	world.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
                             	}
                         	}
-                        	else if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        	else if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                worldIn.setBlockState(blockpos1, CAVE_AIR, 2);
+                                world.setBlockState(blockpos1, CAVE_AIR, 2);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getMaterial().isSolid())
+                        else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            worldIn.setBlockState(blockpos1, CAVE_AIR, 2);
+                            world.setBlockState(blockpos1, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
-                        else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        else if (world.getBlockState(blockpos1).getMaterial().isSolid() && world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                         {
                             if (y == -1 && rand.nextInt(4) != 0)
                             {
-                                worldIn.setBlockState(blockpos1, RED_TERRACOTTA, 2);
+                                world.setBlockState(blockpos1, RED_TERRACOTTA, 2);
                             }
                             else if (rand.nextInt(2) == 0)
                             {
-                                worldIn.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
+                                world.setBlockState(blockpos1, ORANGE_TERRACOTTA, 2);
                             }
                             else
                             {
-                                worldIn.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
+                                world.setBlockState(blockpos1, CUT_RED_SANDSTONE, 2);
                             }
                         }
                     }
@@ -139,13 +139,13 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
                     int j5 = position.getZ() + rand.nextInt(k1 * 2 + 1) - k1;
                     BlockPos blockpos2 = new BlockPos(l4, i5, j5);
 
-                    if (worldIn.isAirBlock(blockpos2))
+                    if (world.isAirBlock(blockpos2))
                     {
                         int j3 = 0;
 
                         for (Direction Direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (worldIn.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
+                            if (world.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -153,8 +153,8 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
 
                         if (j3 == 1)
                         {
-                        	worldIn.setBlockState(blockpos2, StructurePiece.func_197528_a(worldIn, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
-                        	LockableLootTileEntity.setLootTable(worldIn, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
+                        	world.setBlockState(blockpos2, StructurePiece.func_197528_a(world, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
+                        	LockableLootTileEntity.setLootTable(world, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }
@@ -162,12 +162,12 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
                 }
             }
 
-            worldIn.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
-            TileEntity tileentity = worldIn.getTileEntity(position);
+            world.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
+            TileEntity tileentity = world.getTileEntity(position);
 
             if (tileentity instanceof MobSpawnerTileEntity)
             {
-             ((MobSpawnerTileEntity)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(worldIn, rand, position));
+             ((MobSpawnerTileEntity)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand, position));
             }
             else
             {
@@ -186,7 +186,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
     /**
      * Randomly decides which spawner to use in a dungeon
      */
-    private EntityType<?> pickMobSpawner(IWorld worldIn, Random rand, BlockPos position)
+    private EntityType<?> pickMobSpawner(IWorld world, Random rand, BlockPos position)
     {
     	int roll = rand.nextInt(100);
     	

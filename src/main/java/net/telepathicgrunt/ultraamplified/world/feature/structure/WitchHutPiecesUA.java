@@ -51,66 +51,66 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece {
 		tagCompound.putBoolean("Cat", this.cat);
 	}
 
-	public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random random,
+	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 			MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
-		if (!this.isInsideBounds(worldIn, structureBoundingBoxIn, 0)) {
+		if (!this.isInsideBounds(world, structureBoundingBoxIn, 0)) {
 			return false;
 		} else {
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 5, 1, 7,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 1, 5, 1, 7,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 2, 5, 4, 7,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 4, 2, 5, 4, 7,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 0, 4, 1, 0,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 2, 1, 0, 4, 1, 0,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 2, 2, 3, 3, 2,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 2, 2, 2, 3, 3, 2,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 3, 1, 3, 6,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 2, 3, 1, 3, 6,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 2, 3, 5, 3, 6,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 5, 2, 3, 5, 3, 6,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 2, 7, 4, 3, 7,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 2, 2, 7, 4, 3, 7,
 					Blocks.SPRUCE_PLANKS.getDefaultState(), Blocks.SPRUCE_PLANKS.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 2, 1, 3, 2, Blocks.OAK_LOG.getDefaultState(),
+			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 2, 1, 3, 2, Blocks.OAK_LOG.getDefaultState(),
 					Blocks.OAK_LOG.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 2, 5, 3, 2, Blocks.OAK_LOG.getDefaultState(),
+			this.fillWithBlocks(world, structureBoundingBoxIn, 5, 0, 2, 5, 3, 2, Blocks.OAK_LOG.getDefaultState(),
 					Blocks.OAK_LOG.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 7, 1, 3, 7, Blocks.OAK_LOG.getDefaultState(),
+			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 7, 1, 3, 7, Blocks.OAK_LOG.getDefaultState(),
 					Blocks.OAK_LOG.getDefaultState(), false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 7, 5, 3, 7, Blocks.OAK_LOG.getDefaultState(),
+			this.fillWithBlocks(world, structureBoundingBoxIn, 5, 0, 7, 5, 3, 7, Blocks.OAK_LOG.getDefaultState(),
 					Blocks.OAK_LOG.getDefaultState(), false);
-			this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 2, 3, 2, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 3, 3, 7, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 3, 4, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 5, 3, 4, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 5, 3, 5, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.POTTED_RED_MUSHROOM.getDefaultState(), 1, 3, 5, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.CRAFTING_TABLE.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.BREWING_STAND.getDefaultState(), 2, 3, 6, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 2), 4, 2, 6,
+			this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState(), 2, 3, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState(), 3, 3, 7, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.AIR.getDefaultState(), 1, 3, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.AIR.getDefaultState(), 5, 3, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.AIR.getDefaultState(), 5, 3, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.POTTED_RED_MUSHROOM.getDefaultState(), 1, 3, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.CRAFTING_TABLE.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.BREWING_STAND.getDefaultState(), 2, 3, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 2), 4, 2, 6,
 					structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 1, 2, 1, structureBoundingBoxIn);
-			this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 5, 2, 1, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState(), 1, 2, 1, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState(), 5, 2, 1, structureBoundingBoxIn);
 			BlockState iblockstate = Blocks.SPRUCE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.NORTH);
 			BlockState iblockstate1 = Blocks.SPRUCE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.EAST);
 			BlockState iblockstate2 = Blocks.SPRUCE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.WEST);
 			BlockState iblockstate3 = Blocks.SPRUCE_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 1, 6, 4, 1, iblockstate, iblockstate, false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 2, 0, 4, 7, iblockstate1, iblockstate1, false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 4, 2, 6, 4, 7, iblockstate2, iblockstate2, false);
-			this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 8, 6, 4, 8, iblockstate3, iblockstate3, false);
-			this.setBlockState(worldIn, iblockstate.with(StairsBlock.SHAPE, StairsShape.OUTER_RIGHT), 0, 4, 1,
+			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 4, 1, 6, 4, 1, iblockstate, iblockstate, false);
+			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 4, 2, 0, 4, 7, iblockstate1, iblockstate1, false);
+			this.fillWithBlocks(world, structureBoundingBoxIn, 6, 4, 2, 6, 4, 7, iblockstate2, iblockstate2, false);
+			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 4, 8, 6, 4, 8, iblockstate3, iblockstate3, false);
+			this.setBlockState(world, iblockstate.with(StairsBlock.SHAPE, StairsShape.OUTER_RIGHT), 0, 4, 1,
 					structureBoundingBoxIn);
-			this.setBlockState(worldIn, iblockstate.with(StairsBlock.SHAPE, StairsShape.OUTER_LEFT), 6, 4, 1,
+			this.setBlockState(world, iblockstate.with(StairsBlock.SHAPE, StairsShape.OUTER_LEFT), 6, 4, 1,
 					structureBoundingBoxIn);
-			this.setBlockState(worldIn, iblockstate3.with(StairsBlock.SHAPE, StairsShape.OUTER_LEFT), 0, 4, 8,
+			this.setBlockState(world, iblockstate3.with(StairsBlock.SHAPE, StairsShape.OUTER_LEFT), 0, 4, 8,
 					structureBoundingBoxIn);
-			this.setBlockState(worldIn, iblockstate3.with(StairsBlock.SHAPE, StairsShape.OUTER_RIGHT), 6, 4, 8,
+			this.setBlockState(world, iblockstate3.with(StairsBlock.SHAPE, StairsShape.OUTER_RIGHT), 6, 4, 8,
 					structureBoundingBoxIn);
 
 			// following code is a modified version from JavaMan7's youtube tutorial about
 			// making structures (But went into detail about how to put potions in brewing
 			// stands)
-			TileEntity tileentity = worldIn.getTileEntity(
+			TileEntity tileentity = world.getTileEntity(
 					new BlockPos(this.getXWithOffset(2, 6), this.getYWithOffset(3), this.getZWithOffset(2, 6)));
 
 			if (tileentity instanceof BrewingStandTileEntity) {
@@ -144,7 +144,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece {
 
 			for (int i = 2; i <= 7; i += 5) {
 				for (int j = 1; j <= 5; j += 4) {
-					this.replaceAirAndLiquidDownwards(worldIn, Blocks.OAK_LOG.getDefaultState(), j, -1, i,
+					this.replaceAirAndLiquidDownwards(world, Blocks.OAK_LOG.getDefaultState(), j, -1, i,
 							structureBoundingBoxIn);
 				}
 			}
@@ -156,17 +156,17 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece {
 				if (structureBoundingBoxIn.isVecInside(new BlockPos(l, i1, k))) {
 					this.witch = true;
 					for (int i = 0; i < 2; i++) {
-						WitchEntity entitywitch = EntityType.WITCH.create(worldIn.getWorld());
+						WitchEntity entitywitch = EntityType.WITCH.create(world.getWorld());
 						entitywitch.enablePersistence();
 						entitywitch.setLocationAndAngles((double) l + 0.5D, (double) i1, (double) k + 0.5D, 0.0F, 0.0F);
-						entitywitch.onInitialSpawn(worldIn, worldIn.getDifficultyForLocation(new BlockPos(l, i1, k)),
+						entitywitch.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(l, i1, k)),
 								SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
-						worldIn.addEntity(entitywitch);
+						world.addEntity(entitywitch);
 					}
 				}
 			}
 
-			this.spawnCat(worldIn, structureBoundingBoxIn);
+			this.spawnCat(world, structureBoundingBoxIn);
 			return true;
 		}
 	}

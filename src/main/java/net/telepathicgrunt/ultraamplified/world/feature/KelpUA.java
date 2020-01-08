@@ -20,29 +20,29 @@ public class KelpUA extends Feature<NoFeatureConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
 		      int i = 0;
 		      
 		      //same as vanilla kelp class but now generates at position we passed in instead of finding the top y value. 
 		      //We have placement classes for a reason. Features should not be finding their own positions.
 		      
-		      if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER) {
+		      if (world.getBlockState(blockpos).getBlock() == Blocks.WATER) {
 		         BlockState iblockstate = Blocks.KELP.getDefaultState();
 		         BlockState iblockstate1 = Blocks.KELP_PLANT.getDefaultState();
 		         int k = 1 + random.nextInt(10);
 
 		         for(int l = 0; l <= k; ++l) {
-		            if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.WATER && iblockstate1.isValidPosition(worldIn, blockpos)) {
+		            if (world.getBlockState(blockpos).getBlock() == Blocks.WATER && world.getBlockState(blockpos.up()).getBlock() == Blocks.WATER && iblockstate1.isValidPosition(world, blockpos)) {
 		               if (l == k) {
-		                  worldIn.setBlockState(blockpos, iblockstate.with(KelpTopBlock.AGE, Integer.valueOf(random.nextInt(23))), 2);
+		                  world.setBlockState(blockpos, iblockstate.with(KelpTopBlock.AGE, Integer.valueOf(random.nextInt(23))), 2);
 		                  ++i;
 		               } else {
-		                  worldIn.setBlockState(blockpos, iblockstate1, 2);
+		                  world.setBlockState(blockpos, iblockstate1, 2);
 		               }
 		            } else if (l > 0) {
 		               BlockPos blockpos1 = blockpos.down();
-		               if (iblockstate.isValidPosition(worldIn, blockpos1) && worldIn.getBlockState(blockpos1.down()).getBlock() != Blocks.KELP) {
-		                  worldIn.setBlockState(blockpos1, iblockstate.with(KelpTopBlock.AGE, Integer.valueOf(random.nextInt(23))), 2);
+		               if (iblockstate.isValidPosition(world, blockpos1) && world.getBlockState(blockpos1.down()).getBlock() != Blocks.KELP) {
+		                  world.setBlockState(blockpos1, iblockstate.with(KelpTopBlock.AGE, Integer.valueOf(random.nextInt(23))), 2);
 		                  ++i;
 		               }
 		               break;

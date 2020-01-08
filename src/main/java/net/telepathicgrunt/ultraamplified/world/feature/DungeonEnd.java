@@ -37,7 +37,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
         int j = rand.nextInt(2) + 2;
         int k = -j - 1;
@@ -55,7 +55,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
                 for (int i3 = l1; i3 <= i2; ++i3)
                 {
                     BlockPos blockpos = position.add(k2, l2, i3);
-                    Material material = worldIn.getBlockState(blockpos).getMaterial();
+                    Material material = world.getBlockState(blockpos).getMaterial();
                     boolean flag = material.isSolid();
 
                     if (l2 == -1 && !flag)
@@ -68,7 +68,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
                     	ceilingOpenings++;
                     }
 
-                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && worldIn.isAirBlock(blockpos) && worldIn.isAirBlock(blockpos.up()))
+                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && world.isAirBlock(blockpos) && world.isAirBlock(blockpos.up()))
                     {
                         ++j2;
                     }
@@ -88,20 +88,20 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
 
                         if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
                         {
-                            if (worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                            if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                worldIn.setBlockState(blockpos1, CaveAir, 2);
+                                world.setBlockState(blockpos1, CaveAir, 2);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !worldIn.getBlockState(blockpos1.down()).getMaterial().isSolid())
+                        else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            worldIn.setBlockState(blockpos1, CaveAir, 2);
+                            world.setBlockState(blockpos1, CaveAir, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
-                        else if (worldIn.getBlockState(blockpos1).getMaterial().isSolid() && worldIn.getBlockState(blockpos1).getBlock() != Blocks.CHEST && worldIn.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        else if (world.getBlockState(blockpos1).getMaterial().isSolid() && world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                         {
-                             worldIn.setBlockState(blockpos1, Blocks.END_STONE_BRICKS.getDefaultState(), 2);
+                             world.setBlockState(blockpos1, Blocks.END_STONE_BRICKS.getDefaultState(), 2);
                         }
                     }
                 }
@@ -116,13 +116,13 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
                     int j5 = position.getZ() + rand.nextInt(k1 * 2 + 1) - k1;
                     BlockPos blockpos2 = new BlockPos(l4, i5, j5);
 
-                    if (worldIn.isAirBlock(blockpos2))
+                    if (world.isAirBlock(blockpos2))
                     {
                         int j3 = 0;
 
                         for (Direction Direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (worldIn.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
+                            if (world.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -130,8 +130,8 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
 
                         if (j3 == 1)
                         {
-                        	worldIn.setBlockState(blockpos2, Blocks.SHULKER_BOX.getDefaultState(), 2); 
-                        	LockableLootTileEntity.setLootTable(worldIn, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
+                        	world.setBlockState(blockpos2, Blocks.SHULKER_BOX.getDefaultState(), 2); 
+                        	LockableLootTileEntity.setLootTable(world, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }
@@ -139,13 +139,13 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
                 }
             }
             
-            worldIn.setBlockState(position, Blocks.END_PORTAL_FRAME.getDefaultState().with(BlockStateProperties.EYE, true), 2);
-            worldIn.setBlockState(position.down(), Blocks.SPAWNER.getDefaultState(), 2);
-            TileEntity tileentity = worldIn.getTileEntity(position.down());
+            world.setBlockState(position, Blocks.END_PORTAL_FRAME.getDefaultState().with(BlockStateProperties.EYE, true), 2);
+            world.setBlockState(position.down(), Blocks.SPAWNER.getDefaultState(), 2);
+            TileEntity tileentity = world.getTileEntity(position.down());
 
             if (tileentity instanceof MobSpawnerTileEntity)
             {
-             ((MobSpawnerTileEntity)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(worldIn, rand, position.down()));
+             ((MobSpawnerTileEntity)tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand, position.down()));
             }
             else
             {
@@ -164,7 +164,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
     /**
      * Randomly decides which spawner to use in a dungeon
      */
-    private EntityType<?> pickMobSpawner(IWorld worldIn, Random rand, BlockPos position)
+    private EntityType<?> pickMobSpawner(IWorld world, Random rand, BlockPos position)
     {
     	int roll = rand.nextInt(100);
     	

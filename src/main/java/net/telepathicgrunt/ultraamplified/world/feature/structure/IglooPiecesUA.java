@@ -86,16 +86,16 @@ public class IglooPiecesUA {
 			tagCompound.putString("Rot", this.rotation.name());
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
 				MutableBoundingBox sbb) {
 			if ("chest".equals(function)) {
-				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-				TileEntity tileentity = worldIn.getTileEntity(pos.down());
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity) {
 					if (ConfigUA.chestGeneration) {
 						((ChestTileEntity) tileentity).setLootTable(LootTables.CHESTS_IGLOO_CHEST, rand.nextLong());
 					} else {
-						worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
+						world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 					}
 				}
 
@@ -106,7 +106,7 @@ public class IglooPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
 					.setMirror(Mirror.NONE).setCenterOffset(IglooPiecesUA.OFFSET1.get(this.resourceLocation));
@@ -114,7 +114,7 @@ public class IglooPiecesUA {
 			BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings,
 					new BlockPos(3 - blockpos.getX(), 0, 0 - blockpos.getZ())));
 
-			int i = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX(), blockpos1.getZ());
+			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX(), blockpos1.getZ());
 
 			if (i > 244) {
 				i = 244;
@@ -122,7 +122,7 @@ public class IglooPiecesUA {
 
 			BlockPos blockpos2 = this.templatePosition;
 			this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
-			boolean flag = super.func_225577_a_(worldIn, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
+			boolean flag = super.func_225577_a_(world, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
 
 			this.templatePosition = blockpos2;
 			return flag;

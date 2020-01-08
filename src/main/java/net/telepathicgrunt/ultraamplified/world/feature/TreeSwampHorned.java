@@ -32,13 +32,13 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	     }
 
 	    //generate the spooky horned swamp m trees
-	    public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
+	    public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
 	    {
 	        int height = rand.nextInt(4) + 6;
-	        IWorld world = (IWorld) worldIn;
+	        IWorld world = (IWorld) worldReader;
 	        
 	        //checks to see if there is room to generate tree
-	        if (!this.isSpaceAt(worldIn, position, height)) {
+	        if (!this.isSpaceAt(world, position, height)) {
 	            return false;
             } 
 	        
@@ -75,9 +75,9 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	                        if (y >= 0 && y < 256)
 	                        {
 	                            blockpos$Mutable.setPos(x, y, z);
-	                            if (!isAirOrLeaves(worldIn, blockpos$Mutable))
+	                            if (!isAirOrLeaves(world, blockpos$Mutable))
 	                            {
-	                                if (isWater(worldIn, blockpos$Mutable))
+	                                if (isWater(world, blockpos$Mutable))
 	                                {
 	                                    flag = false;
 	                                }
@@ -99,9 +99,9 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	            {
 	                return false;
 	            }
-	            else if (isSoil(worldIn, position.down(), p_225557_7_.getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) 
+	            else if (isSoil(world, position.down(), p_225557_7_.getSapling()) && position.getY() < world.getMaxHeight() - height - 1) 
 	            {
-	                this.setDirtAt(worldIn, position.down(), position);
+	                this.setDirtAt(world, position.down(), position);
 	                
                     for (int currentHeight = position.getY() - 4 + height; currentHeight <= position.getY() + height; ++currentHeight)
                     {
@@ -135,9 +135,9 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
                                 {
                                     BlockPos blockpos = new BlockPos(x, currentHeight, z);
 
-                                    if (isAirOrLeaves(worldIn, blockpos) || isTallPlants(worldIn, blockpos))
+                                    if (isAirOrLeaves(world, blockpos) || isTallPlants(world, blockpos))
                                     {
-                                        this.setBlockState(worldIn, blockpos, LEAF);
+                                        this.setBlockState(world, blockpos, LEAF);
                                     }
                                 }
                             }
@@ -209,42 +209,42 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	        }
 	    }
 
-	    private void addVine(IWorld worldIn, BlockPos pos, BooleanProperty prop)
+	    private void addVine(IWorld world, BlockPos pos, BooleanProperty prop)
 	    {
 	        BlockState iblockstate = Blocks.VINE.getDefaultState().with(prop, Boolean.valueOf(true));
-	        this.setBlockState(worldIn, pos, iblockstate);
+	        this.setBlockState(world, pos, iblockstate);
 	        int i = 4;
 
-	        for (BlockPos blockpos = pos.down(); worldIn.isAirBlock(blockpos) && i > 0; --i)
+	        for (BlockPos blockpos = pos.down(); world.isAirBlock(blockpos) && i > 0; --i)
 	        {
-	            this.setBlockState(worldIn, blockpos, iblockstate);
+	            this.setBlockState(world, blockpos, iblockstate);
 	            blockpos = blockpos.down();
 	        }
 	    }
 	    
-	    private void genTrunk(IWorld worldIn, BlockPos position, int height)  {
+	    private void genTrunk(IWorld world, BlockPos position, int height)  {
 	    	for (int currentHeight = 0; currentHeight < height; ++currentHeight)
             {
                 BlockPos upN = position.up(currentHeight);
-                BlockState iblockstate1 = worldIn.getBlockState(upN);
+                BlockState iblockstate1 = world.getBlockState(upN);
                 Block block2 = iblockstate1.getBlock();
 
                 if (currentHeight != height-1 && 
-                	(block2.isAir(iblockstate1, worldIn, upN) || 
+                	(block2.isAir(iblockstate1, world, upN) || 
                 	iblockstate1.isIn(BlockTags.LEAVES) || 
                 	block2 == Blocks.WATER || 
                 	block2 == Blocks.LILY_PAD))
                 {
-                    this.setBlockState(worldIn, upN, TRUNK);
+                    this.setBlockState(world, upN, TRUNK);
                 }else {
-                	this.setBlockState(worldIn, upN, LEAF);
+                	this.setBlockState(world, upN, LEAF);
                 }
             }
 	    }
 	    
-	    private boolean isSpaceAt(IWorldGenerationBaseReader worldIn, BlockPos leavesPos, int height) {
+	    private boolean isSpaceAt(IWorldGenerationBaseReader world, BlockPos leavesPos, int height) {
 	        boolean flag = true;
-	        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= worldIn.getMaxHeight()) {
+	        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= world.getMaxHeight()) {
 	           for(int i = 0; i <= 1 + height; ++i) {
 	              int j = 2;
 	              if (i == 0) {
@@ -255,7 +255,7 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 
 	              for(int k = -j; k <= j && flag; ++k) {
 	                 for(int l = -j; l <= j && flag; ++l) {
-	                    if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= worldIn.getMaxHeight() || !func_214587_a(worldIn, leavesPos.add(k, i, l))) {
+	                    if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !func_214587_a(world, leavesPos.add(k, i, l))) {
 	                       flag = false;
 	                    }
 	                 }

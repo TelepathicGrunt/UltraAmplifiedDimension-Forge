@@ -218,35 +218,35 @@ public class OceanRuinsPiecesUA {
 			tagCompound.putBoolean("IsLarge", this.isLarge);
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
 				MutableBoundingBox sbb) {
 			if ("chest".equals(function)) {
 				if (ConfigUA.chestGeneration) {
-					worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED,
-							Boolean.valueOf(worldIn.getFluidState(pos).isTagged(FluidTags.WATER))), 2);
-					TileEntity tileentity = worldIn.getTileEntity(pos);
+					world.setBlockState(pos, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED,
+							Boolean.valueOf(world.getFluidState(pos).isTagged(FluidTags.WATER))), 2);
+					TileEntity tileentity = world.getTileEntity(pos);
 					if (tileentity instanceof ChestTileEntity) {
 						((ChestTileEntity) tileentity).setLootTable(this.isLarge ? LootTables.CHESTS_UNDERWATER_RUIN_BIG
 								: LootTables.CHESTS_UNDERWATER_RUIN_SMALL, rand.nextLong());
 					}
 				}
 			} else if ("drowned".equals(function)) {
-				DrownedEntity entitydrowned = EntityType.DROWNED.create(worldIn.getWorld());
+				DrownedEntity entitydrowned = EntityType.DROWNED.create(world.getWorld());
 				entitydrowned.enablePersistence();
 				entitydrowned.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
-				entitydrowned.onInitialSpawn(worldIn, worldIn.getDifficultyForLocation(pos), SpawnReason.STRUCTURE,
+				entitydrowned.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.STRUCTURE,
 						(ILivingEntityData) null, (CompoundNBT) null);
-				worldIn.addEntity(entitydrowned);
-				if (pos.getY() > worldIn.getSeaLevel()) {
-					worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+				world.addEntity(entitydrowned);
+				if (pos.getY() > world.getSeaLevel()) {
+					world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 				} else {
-					worldIn.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
+					world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
 				}
 			}
 
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.placeSettings.clearProcessors().addProcessor(new IntegrityProcessor(this.integrity))
 					.addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
@@ -264,7 +264,7 @@ public class OceanRuinsPiecesUA {
 				// generate on the land below. Seems like it work somewhat ok but not always
 
 				// gets the highest height that this ruins can be
-				int baseHeight = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, this.templatePosition.getX(),
+				int baseHeight = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, this.templatePosition.getX(),
 						this.templatePosition.getZ());
 
 				// correct the chunk we are in
@@ -277,7 +277,7 @@ public class OceanRuinsPiecesUA {
 				for (int x = 0; x < 16; x++) {
 					for (int z = 0; z < 16; z++) {
 						int height = Math.min(baseHeight,
-								worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR, xChunkCorner + x, zChunkCorner + z));
+								world.getHeight(Heightmap.Type.OCEAN_FLOOR, xChunkCorner + x, zChunkCorner + z));
 
 						// cannot go higher
 						if (height < baseHeight) {
@@ -305,8 +305,8 @@ public class OceanRuinsPiecesUA {
 					new BlockPos(this.template.getSize().getX() - 1, 0, this.template.getSize().getZ() - 1),
 					Mirror.NONE, this.rotation, new BlockPos(0, 0, 0)).add(this.templatePosition);
 			this.templatePosition = new BlockPos(this.templatePosition.getX(),
-					this.setWaterloggedBlocks(this.templatePosition, worldIn, blockpos), this.templatePosition.getZ());
-			return super.func_225577_a_(worldIn, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
+					this.setWaterloggedBlocks(this.templatePosition, world, blockpos), this.templatePosition.getZ());
+			return super.func_225577_a_(world, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
 		}
 
 		private int setWaterloggedBlocks(BlockPos pos1, IBlockReader blockReader, BlockPos pos2) {

@@ -44,26 +44,26 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 	}
 
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
 	{
 
-		BlockState blockstate = worldIn.getBlockState(pos);
+		BlockState blockstate = world.getBlockState(pos);
 		boolean generateLava = false;
         int solidSurrounding = 0;
 
-        if (acceptableSurroundingBlocks.contains(worldIn.getBlockState(pos.west()).getBlock())) {
+        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.west()).getBlock())) {
            ++solidSurrounding;
         }
 
-        if (acceptableSurroundingBlocks.contains(worldIn.getBlockState(pos.east()).getBlock())) {
+        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.east()).getBlock())) {
            ++solidSurrounding;
         }
 
-        if (acceptableSurroundingBlocks.contains(worldIn.getBlockState(pos.north()).getBlock())) {
+        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.north()).getBlock())) {
            ++solidSurrounding;
         }
 
-        if (acceptableSurroundingBlocks.contains(worldIn.getBlockState(pos.south()).getBlock())) {
+        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.south()).getBlock())) {
            ++solidSurrounding;
         }
         
@@ -74,7 +74,7 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 		
 		//full chance to generate in gravel
 		if(blockstate == GRAVEL) {
-	        if (acceptableSurroundingBlocks.contains(worldIn.getBlockState(pos.down()).getBlock())) {
+	        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.down()).getBlock())) {
 	        	//can only generate in gravel if below is also a solid block to prevent
 	        	//lava spawning in 1 thick gravel which causes the gravel to fall,
 	        	//leaving a pilalr of lava floating in mid-air which looks bad.
@@ -96,8 +96,8 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 		
 		//generates surface lava that can flow
 		if(generateLava) {
-			worldIn.setBlockState(pos, LAVA, 2);
-			worldIn.getPendingFluidTicks().scheduleTick(pos, LAVA_FLUID, 0);
+			world.setBlockState(pos, LAVA, 2);
+			world.getPendingFluidTicks().scheduleTick(pos, LAVA_FLUID, 0);
 		}
 		return true;
 	}

@@ -47,17 +47,17 @@ private static final ResourceLocation STRUCTURE_SPINE_01 = new ResourceLocation(
    private static final ResourceLocation[] FOSSILS = new ResourceLocation[]{STRUCTURE_SPINE_01, STRUCTURE_SPINE_02, STRUCTURE_SPINE_03, STRUCTURE_SPINE_04, STRUCTURE_SKULL_01, STRUCTURE_SKULL_02, STRUCTURE_SKULL_03, STRUCTURE_SKULL_04};
    private static final ResourceLocation[] FOSSILS_COAL = new ResourceLocation[]{STRUCTURE_SPINE_01_COAL, STRUCTURE_SPINE_02_COAL, STRUCTURE_SPINE_03_COAL, STRUCTURE_SPINE_04_COAL, STRUCTURE_SKULL_01_COAL, STRUCTURE_SKULL_02_COAL, STRUCTURE_SKULL_03_COAL, STRUCTURE_SKULL_04_COAL};
 
-   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config) {
+   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config) {
 	      
 	  if(!ConfigUA.miniStructureGeneration) {
 		return false;
 	  }
 	   
-	  Random random = worldIn.getRandom();
+	  Random random = world.getRandom();
       Rotation[] arotation = Rotation.values();
       Rotation rotation = arotation[random.nextInt(arotation.length)];
       int i = random.nextInt(FOSSILS.length);
-      TemplateManager templatemanager = ((ServerWorld)worldIn.getWorld()).getSaveHandler().getStructureTemplateManager();
+      TemplateManager templatemanager = ((ServerWorld)world.getWorld()).getSaveHandler().getStructureTemplateManager();
       Template template = templatemanager.getTemplateDefaulted(FOSSILS[i]);
       Template template1 = templatemanager.getTemplateDefaulted(FOSSILS_COAL[i]);
       ChunkPos chunkpos = new ChunkPos(position);
@@ -67,11 +67,11 @@ private static final ResourceLocation STRUCTURE_SPINE_01 = new ResourceLocation(
       BlockPos blockpos1 = template.getZeroPositionWithTransform(position, Mirror.NONE, rotation);
       IntegrityProcessor integrityprocessor = new IntegrityProcessor(0.9F);
       placementsettings.clearProcessors().addProcessor(integrityprocessor);
-      template.addBlocksToWorld(worldIn, blockpos1, placementsettings, 4);
+      template.addBlocksToWorld(world, blockpos1, placementsettings, 4);
       placementsettings.func_215220_b(integrityprocessor);
       IntegrityProcessor integrityprocessor1 = new IntegrityProcessor(0.1F);
       placementsettings.clearProcessors().addProcessor(integrityprocessor1);
-      template1.addBlocksToWorld(worldIn, blockpos1, placementsettings, 4);
+      template1.addBlocksToWorld(world, blockpos1, placementsettings, 4);
       return true;
    }
 }

@@ -17,13 +17,13 @@ public class SingleBlock extends Feature<BlockConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, BlockConfig blockConfig) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, BlockConfig blockConfig) {
 	      
-	         if (worldIn.isAirBlock(pos) && 
-	        	(worldIn.getBlockState(pos.down()) == worldIn.func_226691_t_(pos).getSurfaceBuilderConfig().getTop() ||
-	        	 worldIn.getBlockState(pos.down()) == worldIn.func_226691_t_(pos).getSurfaceBuilderConfig().getUnder() )
+	         if (world.isAirBlock(pos) && 
+	        	(world.getBlockState(pos.down()) == world.func_226691_t_(pos).getSurfaceBuilderConfig().getTop() ||
+	        	 world.getBlockState(pos.down()) == world.func_226691_t_(pos).getSurfaceBuilderConfig().getUnder() )
 	        	) {
-	            worldIn.setBlockState(pos, blockConfig.block.getDefaultState(), 2);
+	            world.setBlockState(pos, blockConfig.block.getDefaultState(), 2);
 	         }
 
 		      return true;

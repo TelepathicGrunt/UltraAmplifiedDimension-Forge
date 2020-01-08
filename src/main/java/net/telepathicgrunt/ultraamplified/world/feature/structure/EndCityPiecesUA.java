@@ -328,24 +328,24 @@ public class EndCityPiecesUA {
 			tagCompound.putBoolean("OW", this.overwrite);
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
 				MutableBoundingBox sbb) {
 			if (function.startsWith("Chest")) {
 				BlockPos blockpos = pos.down();
 				if (sbb.isVecInside(blockpos)) {
-					LockableLootTileEntity.setLootTable(worldIn, rand, blockpos, LootTables.CHESTS_END_CITY_TREASURE);
+					LockableLootTileEntity.setLootTable(world, rand, blockpos, LootTables.CHESTS_END_CITY_TREASURE);
 				}
 			} else if (function.startsWith("Sentry")) {
-				ShulkerEntity entityshulker = EntityType.SHULKER.create(worldIn.getWorld());
+				ShulkerEntity entityshulker = EntityType.SHULKER.create(world.getWorld());
 				entityshulker.setPosition((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D,
 						(double) pos.getZ() + 0.5D);
 				entityshulker.setAttachmentPos(pos);
-				worldIn.addEntity(entityshulker);
+				world.addEntity(entityshulker);
 			} else if (function.startsWith("Elytra")) {
-				ItemFrameEntity itemframeentity = new ItemFrameEntity(worldIn.getWorld(), pos,
+				ItemFrameEntity itemframeentity = new ItemFrameEntity(world.getWorld(), pos,
 						this.rotation.rotate(Direction.SOUTH));
 				itemframeentity.setDisplayedItemWithUpdate(new ItemStack(Items.ELYTRA), false);
-				worldIn.addEntity(itemframeentity);
+				world.addEntity(itemframeentity);
 			}
 
 		}

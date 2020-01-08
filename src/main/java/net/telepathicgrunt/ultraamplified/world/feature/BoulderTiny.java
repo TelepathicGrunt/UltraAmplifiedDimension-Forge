@@ -29,10 +29,10 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
     private final static BlockState ironOre = Blocks.IRON_ORE.getDefaultState();
     private final static int startRadius = 0;
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
-        Block block = worldIn.getBlockState(position).getBlock();
-        Block block2 = worldIn.getBlockState(position.add(-1,0,-1)).getBlock();
+        Block block = world.getBlockState(position).getBlock();
+        Block block2 = world.getBlockState(position.add(-1,0,-1)).getBlock();
 
     	//boulder can only generate on grass/dirt
     	if ((block != Blocks.GRASS_BLOCK && block != Blocks.PODZOL && !func_227250_b_(block)) ||
@@ -59,27 +59,27 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
                 	
                 	// 40/1400th chance for iron ore
                 	if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 40){
-                		worldIn.setBlockState(blockpos.up(), ironOre, 4);
+                		world.setBlockState(blockpos.up(), ironOre, 4);
                 	}
                 	
                 	// 60/1400th chance for coal ore
                 	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 100){
-                		worldIn.setBlockState(blockpos.up(), coalOre, 4);
+                		world.setBlockState(blockpos.up(), coalOre, 4);
                 	}
                 	
                 	// 300/1400th chance for andesite
                 	else if(randomChance <= 400){
-                		worldIn.setBlockState(blockpos.up(), andesite, 4);
+                		world.setBlockState(blockpos.up(), andesite, 4);
                 	}
                 	
                 	// 300/1400th chance for cobblestone
                 	else if(randomChance <= 700){
-                		worldIn.setBlockState(blockpos.up(), cobblestone, 4);
+                		world.setBlockState(blockpos.up(), cobblestone, 4);
                 	}
                 	
                 	// 700/1400th chance for mossyCobblestone
                 	else {
-                		worldIn.setBlockState(blockpos.up(), mossyCobblestone, 4);
+                		world.setBlockState(blockpos.up(), mossyCobblestone, 4);
                 	}
                 }
             }

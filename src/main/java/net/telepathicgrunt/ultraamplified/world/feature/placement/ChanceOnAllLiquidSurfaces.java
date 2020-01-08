@@ -22,7 +22,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 		super(configFactoryIn);
 	}
 
-   public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
+   public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos) {
 	   int lowestHeight = 40;
 
        ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
@@ -37,7 +37,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 
 		         //if height is inside am air block, move down until we reached a liquid block
 		         while(height > lowestHeight) {
-		        	 if(!worldIn.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty()) {
+		        	 if(!world.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty()) {
 		        		 break;
 		        	 }
 		        	 
@@ -54,7 +54,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 		         
 		         //height is a water block, move down until we reached an air block. We are now on the top surface of a body of water
 		         while(height > lowestHeight) {
-		        	 if(worldIn.isAirBlock(pos.add(x, height, z)))
+		        	 if(world.isAirBlock(pos.add(x, height, z)))
 		        	 {
 		        		 break;
 		        	 }

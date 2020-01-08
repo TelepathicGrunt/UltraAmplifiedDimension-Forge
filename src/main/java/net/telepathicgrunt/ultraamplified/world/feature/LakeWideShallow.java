@@ -21,7 +21,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
 	     
 		  pos = pos.down(2);
          boolean[] aboolean = new boolean[2048];
@@ -54,23 +54,23 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
             	
-            	Material material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
+            	Material material = world.getBlockState(pos.add(x, y, z)).getMaterial();
             	
             	while(!material.isSolid() &&
             			material != Material.WATER && 
                 		y > 0) {
             		y--;
-            		material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
+            		material = world.getBlockState(pos.add(x, y, z)).getMaterial();
             	}
             	
               boolean flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
               if (flag) {
             	  
-            	  material = worldIn.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
+            	  material = world.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
             	  
                  if (!material.isSolid() && 
                 	  material != Material.WATER && 
-                	  worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
+                	  world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
                     return false;
                  }
               }
@@ -83,7 +83,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
             for(int z = 0; z < 16; ++z) {
             	int y = 5;
 
-            	Material material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
+            	Material material = world.getBlockState(pos.add(x, y, z)).getMaterial();
             	
             	//finds first solid block of land starting from 5 blocks higher than initial input position
             	while(!material.isSolid() && 
@@ -91,7 +91,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
                 	  y > 0) 
             	{
             		y--;
-            		material = worldIn.getBlockState(pos.add(x, y, z)).getMaterial();
+            		material = world.getBlockState(pos.add(x, y, z)).getMaterial();
             	}
             	
 	            boolean notContainedFlag = false;
@@ -101,7 +101,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 	            for(int x2 = -1; x2 < 2; x2++) {
 	            	for(int z2 = -1; z2 < 2; z2++) {
 	                	
-	            		material = worldIn.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
+	            		material = world.getBlockState(pos.add(x, y, z).west(x2).north(z2)).getMaterial();
 	            		
 	            		if(!material.isSolid() && 
 	                       material != Material.WATER ) 
@@ -112,7 +112,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 	            }
 	            
 	            //must be solid below
-	            material = worldIn.getBlockState(pos.add(x, y, z).down()).getMaterial();
+	            material = world.getBlockState(pos.add(x, y, z).down()).getMaterial();
 	            if(!material.isSolid()  && 
 	          	   material != Material.WATER ) 
 	           	{
@@ -122,7 +122,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 	            
 	            //cannot have solid or water above as that makes the lake
 	            //no longer shallow or on the surface
-	            material = worldIn.getBlockState(pos.add(x, y, z).up()).getMaterial();
+	            material = world.getBlockState(pos.add(x, y, z).up()).getMaterial();
 	            if(material.isSolid() ||
 	               material == Material.WATER) 
 	        	{
@@ -134,7 +134,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 	        /*
             for (Direction face : Direction.values()) {
 
-            	material = worldIn.getBlockState(pos.add(x, y, z).offset(face)).getMaterial();
+            	material = world.getBlockState(pos.add(x, y, z).offset(face)).getMaterial();
             	
             	if(face == Direction.UP)
             	{
@@ -154,7 +154,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
               if (aboolean[(x * 16 + z) * 8 + y] &&
             	 !notContainedFlag )
               {
-                 worldIn.setBlockState(pos.add(x, y, z), configBlock.field_227270_a_, 2);
+                 world.setBlockState(pos.add(x, y, z), configBlock.field_227270_a_, 2);
               }
             }
          }

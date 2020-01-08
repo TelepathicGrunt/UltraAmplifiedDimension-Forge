@@ -22,7 +22,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
 
 	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState(); 
 
-	   public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
+	   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {
 	     
          pos = pos.down(4);
          boolean[] aboolean = new boolean[2048];
@@ -56,12 +56,12 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
                for(int y = 0; y < 8; ++y) {
                   boolean flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
                   if (flag) {
-                     Material material = worldIn.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
+                     Material material = world.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
                      if (y >= 4 && material.isLiquid()) {
                         return false;
                      }
 
-                     if (y < 4 && !material.isSolid() && worldIn.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
+                     if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
                         return false;
                      }
                   }
@@ -73,7 +73,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
             for(int z = 0; z < 16; ++z) {
                for(int y = 0; y < 8; ++y) {
                   if (aboolean[(x * 16 + z) * 8 + y]) {
-                     worldIn.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.field_227270_a_, 2);
+                     world.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.field_227270_a_, 2);
                   }
                }
             }
@@ -84,9 +84,9 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
               for(int y = 0; y < 8; ++y) {
                  boolean flag1 = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
                  
-                 Material blockMaterial = worldIn.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
+                 Material blockMaterial = world.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
                  if (flag1 && (y < 4 || random.nextInt(2) != 0) && blockMaterial.isSolid() && blockMaterial != Material.LEAVES) {
-                    worldIn.setBlockState(pos.add(x-8, y, z-8), configBlock.field_227270_a_, 2);
+                    world.setBlockState(pos.add(x-8, y, z-8), configBlock.field_227270_a_, 2);
                  }
               }
            }

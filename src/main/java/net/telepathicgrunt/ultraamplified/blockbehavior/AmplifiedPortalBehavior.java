@@ -48,7 +48,7 @@ public class AmplifiedPortalBehavior {
 
 		@SubscribeEvent
 		public static void BlockRightClickEvent(PlayerInteractEvent.RightClickBlock event) {
-			World worldIn = event.getWorld();
+			World world = event.getWorld();
 			Entity entityIn = event.getEntity();
 			MinecraftServer minecraftserver = entityIn.getServer();
 
@@ -58,7 +58,7 @@ public class AmplifiedPortalBehavior {
 			{
 				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
-				if(!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && !((PlayerEntity)entityIn).isCrouching())
+				if(!world.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && !((PlayerEntity)entityIn).isCrouching())
 				{
 					//grabs the capability attached to player for dimension hopping
 					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entityIn.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
@@ -183,10 +183,10 @@ public class AmplifiedPortalBehavior {
 
 			// checks to see if player uses right click with flint and steel. If so, tries
 			// to create portal if possible. only works in non-ultra amplified world types
-			if (worldIn.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
+			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
 				    event.getItemStack().getItem() == Items.FLINT_AND_STEEL) 
 			{
-				trySpawnPortal(worldIn, event.getPos());
+				trySpawnPortal(world, event.getPos());
 			}
 		}
 		
@@ -199,12 +199,12 @@ public class AmplifiedPortalBehavior {
 		private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
 		private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
 
-	    private static boolean checkForGeneratedPortal(World worldIn) {
+	    private static boolean checkForGeneratedPortal(World world) {
 	    	BlockPos pos = new BlockPos(8, 255, 8);
-	    	worldIn.getChunkAt(pos);
+	    	world.getChunkAt(pos);
 	    	
 	    	while(pos.getY() >= 0) {
-	    		if(worldIn.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
+	    		if(world.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
 	    			return true;
 	    		}
 	    		pos = pos.down();
@@ -214,12 +214,12 @@ public class AmplifiedPortalBehavior {
 	    }
 	    
 	    
-	    private static void generatePortal(World worldIn) {
+	    private static void generatePortal(World world) {
 	    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
 	    	BlockPos pos = new BlockPos(8, 255, 8);
-	    	worldIn.getChunkAt(pos);
+	    	world.getChunkAt(pos);
 	    	
-	    	pos = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
+	    	pos = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
 	    	if(pos.getY() > 252) {
 	    		pos = pos.down(3);
 	    	}
@@ -227,11 +227,11 @@ public class AmplifiedPortalBehavior {
 	    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
 	    	}
 
-	    	amplifiedportalfeature.place(worldIn, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
+	    	amplifiedportalfeature.place(world, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
 	 	}
 	    
 	    
-		public static boolean isValid(IWorld worldIn, BlockPos pos)
+		public static boolean isValid(IWorld world, BlockPos pos)
 		{
 
 			// bottom of portal frame
@@ -241,14 +241,14 @@ public class AmplifiedPortalBehavior {
 				{
 					if (Math.abs(x * z) == 1)
 					{
-						if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_GRANITE)
+						if (world.getBlockState(pos.add(x, -1, z)) != POLISHED_GRANITE)
 						{
 							return false;
 						}
 					}
 					else
 					{
-						if (worldIn.getBlockState(pos.add(x, -1, z)) != POLISHED_ANDESITE_SLAB_BOTTOM)
+						if (world.getBlockState(pos.add(x, -1, z)) != POLISHED_ANDESITE_SLAB_BOTTOM)
 						{
 							return false;
 						}
@@ -257,7 +257,7 @@ public class AmplifiedPortalBehavior {
 			}
 
 			// the center itself
-			if (worldIn.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
+			if (world.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
 			{
 				return false;
 			}
@@ -269,14 +269,14 @@ public class AmplifiedPortalBehavior {
 				{
 					if (Math.abs(x * z) == 1)
 					{
-						if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_GRANITE)
+						if (world.getBlockState(pos.add(x, 1, z)) != POLISHED_GRANITE)
 						{
 							return false;
 						}
 					}
 					else
 					{
-						if (worldIn.getBlockState(pos.add(x, 1, z)) != POLISHED_ANDESITE_SLAB_TOP)
+						if (world.getBlockState(pos.add(x, 1, z)) != POLISHED_ANDESITE_SLAB_TOP)
 						{
 							return false;
 						}
@@ -288,25 +288,25 @@ public class AmplifiedPortalBehavior {
 		}
 
 
-		public static void placePortalBlocks(IWorld worldIn, BlockPos pos)
+		public static void placePortalBlocks(IWorld world, BlockPos pos)
 		{
 			// the portal itself
-			worldIn.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
+			world.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 		}
 
-		public static boolean trySpawnPortal(IWorld worldIn, BlockPos pos)
+		public static boolean trySpawnPortal(IWorld world, BlockPos pos)
 		{
 
 			// cannot create amplified portal in Ultra Amplified Worldtype
-			if (worldIn.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
+			if (world.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
 			{
 				return false;
 			}
 
-			boolean canMakePortal = isPortal(worldIn, pos);
+			boolean canMakePortal = isPortal(world, pos);
 			if (canMakePortal)
 			{
-				placePortalBlocks(worldIn, pos);
+				placePortalBlocks(world, pos);
 				return true;
 			}
 			else
@@ -316,9 +316,9 @@ public class AmplifiedPortalBehavior {
 		}
 
 		@Nullable
-		public static boolean isPortal(IWorld worldIn, BlockPos pos)
+		public static boolean isPortal(IWorld world, BlockPos pos)
 		{
-			if (isValid(worldIn, pos))
+			if (isValid(world, pos))
 			{
 				return true;
 			}

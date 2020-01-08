@@ -20,14 +20,14 @@ public class RandomPositionEvery5Height extends Placement<FrequencyConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, FrequencyConfig countConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, FrequencyConfig countConfig, BlockPos pos) {
 		   int numberOfChunkAttempts = random.nextInt(Math.max(countConfig.count, 1)+1);
 	       ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 		   
 		   for(int count = 0; count < numberOfChunkAttempts; ++count) {
 			   
 			   //offset the attempt so there's less chances of patches without grass
-			   int startHeight = worldIn.getSeaLevel()-count;
+			   int startHeight = world.getSeaLevel()-count;
 			   if(startHeight <= 0) {
 				   startHeight = 1;
 			   }

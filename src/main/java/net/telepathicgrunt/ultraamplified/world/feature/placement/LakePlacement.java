@@ -20,7 +20,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig> {
 		super(configFactoryIn);
 	}
 
-	public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, LakeCountRangeAndTypeConfig lakeConfig, BlockPos pos) {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, LakeCountRangeAndTypeConfig lakeConfig, BlockPos pos) {
 
 		int x = random.nextInt(16)-8;
 		int z = random.nextInt(16)-8;
@@ -35,7 +35,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig> {
 	
 				if (random.nextInt(lakeConfig.chance / 10) == 0) {
 					int y = random.nextInt(random.nextInt(chunkGenerator.getMaxHeight() - 8) + 8);
-					if (y < worldIn.getSeaLevel() || random.nextInt(lakeConfig.chance / 8) == 0) {
+					if (y < world.getSeaLevel() || random.nextInt(lakeConfig.chance / 8) == 0) {
 						return Stream.of(pos.add(x, y, z));
 					}
 				}
@@ -65,8 +65,8 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig> {
 					x += 8;
 					z += 8;  
 					
-					int y = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
-					if (y > worldIn.getSeaLevel() && y <= 170) {
+					int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
+					if (y > world.getSeaLevel() && y <= 170) {
 						return Stream.of(new BlockPos(pos.getX() + x, y - 2, pos.getZ() + z));
 					}
 				}
@@ -83,8 +83,8 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig> {
 					x += 8;
 					z += 8;  
 					
-					int y = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
-					if (y > worldIn.getSeaLevel() && y <= 170) {
+					int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
+					if (y > world.getSeaLevel() && y <= 170) {
 						return Stream.of(new BlockPos(pos.getX() + x, y - 2, pos.getZ() + z));
 					}
 				}

@@ -27,7 +27,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 
 	private static final BlockState RED_SAND = Blocks.RED_SAND.getDefaultState();
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos blockpos, NoFeatureConfig config) {
 
 		if(!ConfigUA.chestGeneration) {
 			return false;
@@ -35,8 +35,8 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 		
 		
 		//surface block must be solid with water above
-		if(!worldIn.getBlockState(blockpos).isSolid() || 
-			worldIn.getBlockState(blockpos.up()).getFluidState().isEmpty()) 
+		if(!world.getBlockState(blockpos).isSolid() || 
+			world.getBlockState(blockpos.up()).getFluidState().isEmpty()) 
 		{
 			return false;
 		}
@@ -48,7 +48,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 				continue;
 			}
 			
-			if(!worldIn.getBlockState(blockpos.down().offset(face)).isSolid()) {
+			if(!world.getBlockState(blockpos.down().offset(face)).isSolid()) {
 				return false;
 			}
 		}
@@ -70,18 +70,18 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 				
 				//creates a thick x shape
 				if(random.nextFloat() < 0.85 && Math.abs(absx-absz) < 2) {
-					worldIn.setBlockState(blockpos.add(x, 0, z), RED_SAND, 2);
+					world.setBlockState(blockpos.add(x, 0, z), RED_SAND, 2);
 				}
 			}
 		}
 		
 		//places chest with a 50/50 split between treasure chest and end city loot
-		worldIn.setBlockState(blockpos.down(), StructurePiece.func_197528_a(worldIn, blockpos.down(), Blocks.CHEST.getDefaultState()), 2);
+		world.setBlockState(blockpos.down(), StructurePiece.func_197528_a(world, blockpos.down(), Blocks.CHEST.getDefaultState()), 2);
 		if(random.nextFloat() < 0.5f) {
-			LockableLootTileEntity.setLootTable(worldIn, random, blockpos.down(), LootTables.CHESTS_BURIED_TREASURE);
+			LockableLootTileEntity.setLootTable(world, random, blockpos.down(), LootTables.CHESTS_BURIED_TREASURE);
 		}
 		else {
-			LockableLootTileEntity.setLootTable(worldIn, random, blockpos.down(), LootTables.CHESTS_END_CITY_TREASURE);
+			LockableLootTileEntity.setLootTable(world, random, blockpos.down(), LootTables.CHESTS_END_CITY_TREASURE);
 		}
         //UltraAmplified.Logger.log(Level.DEBUG, "Marked Treasure Chest "+" | "+blockpos.getX()+" "+blockpos.getZ());
 

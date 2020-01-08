@@ -19,7 +19,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos) {
 
 	float chance;
 	
@@ -41,7 +41,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   {
 		   int x = random.nextInt(16);
 		   int z = random.nextInt(16);
-		   int topYLayer = YPositionOfBottomOfLayer(worldIn, random.nextInt(174)+74, random, pos.add(x, 0 ,z));
+		   int topYLayer = YPositionOfBottomOfLayer(world, random.nextInt(174)+74, random, pos.add(x, 0 ,z));
 
 		   //cannot be too low or high 
 		   if(topYLayer < 75 || topYLayer > 248) {
@@ -58,11 +58,11 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 	   
 	}
 
-	private int YPositionOfBottomOfLayer(IWorld worldIn, int height, Random random, BlockPos pos) {
+	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos) {
 	
 		// if height is inside a non-air block, move up until we reached an air block
 		while (height < 255) {
-			if (worldIn.isAirBlock(pos.add(0, height, 0))) {
+			if (world.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}
 	
@@ -72,7 +72,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
 		while (height < 255) {
-			if (!worldIn.isAirBlock(pos.add(0, height, 0))) {
+			if (!world.isAirBlock(pos.add(0, height, 0))) {
 				break;
 			}
 	

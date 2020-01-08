@@ -108,29 +108,29 @@ public class IceSpikeTemplePiecesUA {
 			tagCompound.putString("Rot", this.rotation.name());
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
 				MutableBoundingBox sbb) {
 			if ("chest".equals(function)) {
-				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 				if (ConfigUA.chestGeneration) {
-					TileEntity tileentity = worldIn.getTileEntity(pos.down());
+					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity) {
 						if (ConfigUA.chestGeneration) {
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_1_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						} else {
-							worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
+							world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 						}
 					}
 				}
 			} else if ("chest2".equals(function)) {
-				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 				if (ConfigUA.chestGeneration) {
-					TileEntity tileentity = worldIn.getTileEntity(pos.down());
+					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity) {
 						if (ConfigUA.chestGeneration) {
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_2_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						} else {
-							worldIn.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
+							world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 						}
 					}
 				}
@@ -138,14 +138,14 @@ public class IceSpikeTemplePiecesUA {
 
 		}
 
-		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
 					.setMirror(Mirror.NONE);
 			BlockPos blockpos = IceSpikeTemplePiecesUA.OFFSET.get(this.resourceLocation);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings,
 					new BlockPos(3 - blockpos.getX(), 0, 0 - blockpos.getZ())));
-			return super.func_225577_a_(worldIn, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
+			return super.func_225577_a_(world, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
 		}
 	}
 

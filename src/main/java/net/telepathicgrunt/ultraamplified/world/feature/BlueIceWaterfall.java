@@ -40,11 +40,11 @@ private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	    		Blocks.PACKED_ICE
     		).collect(Collectors.toCollection(HashSet::new));
 	
-public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
+public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
 	
 		//creates a waterfall of blue ice that has a puddle at bottom
 	
-    	 if (!acceptableBlocks.contains(worldIn.getBlockState(position.up()).getBlock()))
+    	 if (!acceptableBlocks.contains(world.getBlockState(position.up()).getBlock()))
          {
              return false;
          }
@@ -55,7 +55,7 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
              int numberOfSolidSides = 0;
              int neededNumberOfSides = 0;
              
-             if(!acceptableBlocks.contains(worldIn.getBlockState(position.down()).getBlock())) {
+             if(!acceptableBlocks.contains(world.getBlockState(position.down()).getBlock())) {
             	 neededNumberOfSides = 4;
              }else {
             	 neededNumberOfSides = 3;
@@ -65,7 +65,7 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
 
              for (Direction face : Direction.Plane.HORIZONTAL) {
    
-             	if(acceptableBlocks.contains(worldIn.getBlockState(position.offset(face)).getBlock())) 
+             	if(acceptableBlocks.contains(world.getBlockState(position.offset(face)).getBlock())) 
              	{
              		++numberOfSolidSides;
              	}
@@ -80,14 +80,14 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
              {
             	 
             	 //initial starting point of icefall
-                 worldIn.setBlockState(position, BLUE_ICE, 2);
+                 world.setBlockState(position, BLUE_ICE, 2);
                  BlockPos curPos = position;
                  
                  //in wall, offset to out of wall
                  if(numberOfSolidSides == 3) {
                      //set what direction the open side of the wall is
                      curPos = position.offset(emptySpot);
-       			     worldIn.setBlockState(curPos, BLUE_ICE, 2);
+       			     world.setBlockState(curPos, BLUE_ICE, 2);
                  }
             	 
             	 
@@ -98,12 +98,12 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
             			 return false;
             		 }
             		 
-            		 if(worldIn.getBlockState(curPos.down()).getMaterial() == Material.AIR ||
-            			worldIn.getBlockState(curPos.down()) == BLUE_ICE ||
-            			worldIn.getBlockState(curPos.down()) == SNOW_BLOCK)
+            		 if(world.getBlockState(curPos.down()).getMaterial() == Material.AIR ||
+            			world.getBlockState(curPos.down()) == BLUE_ICE ||
+            			world.getBlockState(curPos.down()) == SNOW_BLOCK)
             		 {
             			  curPos = curPos.down();
-            			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
+            			  world.setBlockState(curPos, BLUE_ICE, 2);
             			  continue;
             		 }
             		 
@@ -114,15 +114,15 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
                      for (Direction face : Direction.Plane.HORIZONTAL) 
                      {
                     	 
-                		 if((worldIn.getBlockState(curPos.offset(face)).getMaterial() == Material.AIR ||
-                     		 worldIn.getBlockState(curPos.offset(face)) == BLUE_ICE) &&
-                			(worldIn.getBlockState(curPos.down().offset(face)).getMaterial() == Material.AIR ||
-                			 worldIn.getBlockState(curPos.down().offset(face)) == BLUE_ICE)) 
+                		 if((world.getBlockState(curPos.offset(face)).getMaterial() == Material.AIR ||
+                     		 world.getBlockState(curPos.offset(face)) == BLUE_ICE) &&
+                			(world.getBlockState(curPos.down().offset(face)).getMaterial() == Material.AIR ||
+                			 world.getBlockState(curPos.down().offset(face)) == BLUE_ICE)) 
                 		 {
     	           			  curPos = curPos.offset(emptySpot);
-    	           			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
+    	           			  world.setBlockState(curPos, BLUE_ICE, 2);
     	           			  curPos = curPos.down();
-    	           			  worldIn.setBlockState(curPos, BLUE_ICE, 2);
+    	           			  world.setBlockState(curPos, BLUE_ICE, 2);
     	           			  spotFound = true;
     	           			  
     	           			  if(curPos.getY() <= 1) 
@@ -156,12 +156,12 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
                             	 if(y > 1 && y < 255) {
                             		 
                             		 BlockPos blockpos = new BlockPos(x + curPos.getX(), y, z + curPos.getZ());
-	                                 BlockState block = worldIn.getBlockState(blockpos);
+	                                 BlockState block = world.getBlockState(blockpos);
 	
 	                                 //replace solid and liquid blocks
 	                                 if (block.isSolid() || !block.getFluidState().isEmpty() || block == ICE)
 	                                 {
-	                                     worldIn.setBlockState(blockpos, BLUE_ICE, 2);
+	                                     world.setBlockState(blockpos, BLUE_ICE, 2);
 	                                 }
                             	 }
                             	 else {
@@ -184,11 +184,11 @@ public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings
                     	 if (x * x + z * z <= width * width)
 	                     {
                     		 BlockPos blockpos = new BlockPos(x + curPos.getX(), curPos.getY() + 1, z + curPos.getZ());
-                             BlockState block = worldIn.getBlockState(blockpos);
+                             BlockState block = world.getBlockState(blockpos);
                              
 	                    	 if(block == SNOW) 
 	                         {
-	                        	 worldIn.setBlockState(blockpos, AIR, 2);
+	                        	 world.setBlockState(blockpos, AIR, 2);
 	                         }
 	                     }
                      }

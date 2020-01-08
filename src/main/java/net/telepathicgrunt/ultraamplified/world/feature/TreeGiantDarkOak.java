@@ -28,13 +28,13 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
        super(p_i225808_1_);
     }
 
-   public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_) 
+   public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_) 
     {
         int height = 11 + rand.nextInt(3);
-        IWorld world = (IWorld) worldIn;
+        IWorld world = (IWorld) worldReader;
 
         //checks to see if there is room to generate tree
-        if (!this.isSpaceAt(worldIn, position, height + 4)) {
+        if (!this.isSpaceAt(world, position, height + 4)) {
             return false;
         } 
         
@@ -50,7 +50,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 	        for(int x = -1; x < 3; x++) {
 	        	for(int z = -1; z < 3; z++) {
 		        	if(x + z != -2 && x * z != -2 && x + z != 4) {
-		    	        this.setDirtAt(worldIn, blockpos.east(x).south(z), blockpos);
+		    	        this.setDirtAt(world, blockpos.east(x).south(z), blockpos);
 		        	}
 		        }
 	        }
@@ -92,7 +92,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
         
     }
 
-    private void createCrown(IWorld worldIn, int x, int z, int y, int extraRadius, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
+    private void createCrown(IWorld world, int x, int z, int y, int extraRadius, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
     {
     	  int i = 4;
 
@@ -100,15 +100,15 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5), p_214596_8_, p_208519_5_, p_227252_7_);
+              this.growLeavesLayerStrict(world, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*5.5), p_214596_8_, p_208519_5_, p_227252_7_);
           }
           
-          this.growLeavesLayerStrict(worldIn, new BlockPos(x, y+4, z), 1, p_214596_8_, p_208519_5_, p_227252_7_);
+          this.growLeavesLayerStrict(world, new BlockPos(x, y+4, z), 1, p_214596_8_, p_208519_5_, p_227252_7_);
     }
     
     
     //generates the wood as an upside-down cone that curves out at end.
-    private void createWoodCrown(IWorld worldIn, int x, int z, int y, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
+    private void createWoodCrown(IWorld world, int x, int z, int y, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
     {
     	  int i = 2;
 
@@ -127,11 +127,11 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
             	  radius = 2;
               }
 
-              this.growWoodLayerStrict(worldIn, new BlockPos(x, k, z), radius, p_214596_8_, p_208519_5_, p_227252_7_);
+              this.growWoodLayerStrict(world, new BlockPos(x, k, z), radius, p_214596_8_, p_208519_5_, p_227252_7_);
           }
     }
 
-    private void createMiniCrown(IWorld worldIn, int x, int z, int y, int extraRadius, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
+    private void createMiniCrown(IWorld world, int x, int z, int y, int extraRadius, Random rand, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
     {
     	//generates a tiny patch of leaves
     	  int i = rand.nextInt(2) + 1;
@@ -140,7 +140,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
           {
               int l = y - k;
               int radius = extraRadius + MathHelper.floor((float)l / (float)i*1.5F);
-              this.growLeavesLayerStrict(worldIn, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2), p_214596_8_, p_208519_5_, p_227252_7_);
+              this.growLeavesLayerStrict(world, new BlockPos(x, k, z), radius + (int)((l > 0 && (k & 1) == 0 ? 0.9 : 1)*2), p_214596_8_, p_208519_5_, p_227252_7_);
           }
     }
     
@@ -148,7 +148,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
     /**
      * grow leaves in a circle with the outsides being within the circle
      */
-    protected void growLeavesLayerStrict(IWorld worldIn, BlockPos layerCenter, int width, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
+    protected void growLeavesLayerStrict(IWorld world, BlockPos layerCenter, int width, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
     {
         int i = width * width;
 
@@ -162,11 +162,11 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
                 if (j * j + k * k <= i || l * l + i1 * i1 <= i || j * j + i1 * i1 <= i || l * l + k * k <= i)
                 {
                     BlockPos blockpos = layerCenter.add(j, 0, k);
-                    BlockState state = worldIn.getBlockState(blockpos);
+                    BlockState state = world.getBlockState(blockpos);
 
-                    if (state.getBlock().isAir(state, worldIn, blockpos) || state.getMaterial() == Material.LEAVES)
+                    if (state.getBlock().isAir(state, world, blockpos) || state.getMaterial() == Material.LEAVES)
                     {
-                    	this.setBlockState(worldIn, blockpos, DARK_OAK_LEAVES);
+                    	this.setBlockState(world, blockpos, DARK_OAK_LEAVES);
                     }
                 }
             }
@@ -177,7 +177,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
     /**
      * grow wood in a circle with the outsides being within the circle
      */
-    protected void growWoodLayerStrict(IWorld worldIn, BlockPos layerCenter, int width, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
+    protected void growWoodLayerStrict(IWorld world, BlockPos layerCenter, int width, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_)
     {
         int i = width * width;
 
@@ -191,37 +191,37 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
                 if (j * j + k * k <= i || l * l + i1 * i1 <= i || j * j + i1 * i1 <= i || l * l + k * k <= i)
                 {
                     BlockPos blockpos = layerCenter.add(j, 0, k);
-                    BlockState state = worldIn.getBlockState(blockpos);
+                    BlockState state = world.getBlockState(blockpos);
 
-                    if (state.getBlock().isAir(state, worldIn, blockpos) || state.getMaterial() == Material.LEAVES)
+                    if (state.getBlock().isAir(state, world, blockpos) || state.getMaterial() == Material.LEAVES)
                     {
-                    	this.setBlockState(worldIn, blockpos, DARK_OAK_LOG);
+                    	this.setBlockState(world, blockpos, DARK_OAK_LOG);
                     }
                 }
             }
         }
     }
     
-    private void placeColumnOfWood(IWorld worldIn, int yMax, Random rand, BlockPos tempPos, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_) {
+    private void placeColumnOfWood(IWorld world, int yMax, Random rand, BlockPos tempPos, Set<BlockPos> p_214596_8_, MutableBoundingBox p_208519_5_, HugeTreeFeatureConfig p_227252_7_) {
     	while(tempPos.getY() < yMax)
         {
     		tempPos = tempPos.up();
-            BlockState iblockstate = worldIn.getBlockState(tempPos);
+            BlockState iblockstate = world.getBlockState(tempPos);
 	
 	        if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 	        {
 	        	if(rand.nextInt(70) == 0) {
-	        		createMiniCrown(worldIn, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand, p_214596_8_, p_208519_5_, p_227252_7_);
+	        		createMiniCrown(world, tempPos.getX(), tempPos.getZ(), tempPos.getY(), 0, rand, p_214596_8_, p_208519_5_, p_227252_7_);
 	        	}
 	        	else {
-                	this.setBlockState(worldIn, tempPos, DARK_OAK_LOG);
+                	this.setBlockState(world, tempPos, DARK_OAK_LOG);
 	        	}
 	        }
         }
     }
 
 
-    private boolean placeTreeOfHeight(IWorldGenerationBaseReader worldIn, BlockPos pos, int height) {
+    private boolean placeTreeOfHeight(IWorldGenerationBaseReader world, BlockPos pos, int height) {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
@@ -239,7 +239,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 
            for(int j1 = -i1; j1 <= i1; ++j1) {
               for(int k1 = -i1; k1 <= i1; ++k1) {
-                 if (!func_214587_a(worldIn, blockpos$Mutable.setPos(i + j1, j + l, k + k1))) {
+                 if (!func_214587_a(world, blockpos$Mutable.setPos(i + j1, j + l, k + k1))) {
                     return false;
                  }
               }
@@ -250,9 +250,9 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
      }
     
     
-    private boolean isSpaceAt(IWorldGenerationBaseReader worldIn, BlockPos leavesPos, int height) {
+    private boolean isSpaceAt(IWorldGenerationBaseReader world, BlockPos leavesPos, int height) {
         boolean flag = true;
-        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= worldIn.getMaxHeight()) {
+        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= world.getMaxHeight()) {
            for(int i = 0; i <= 1 + height; ++i) {
               int j = 2;
               if (i == 0) {
@@ -263,7 +263,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 
               for(int k = -j; k <= j && flag; ++k) {
                  for(int l = -j; l <= j && flag; ++l) {
-                    if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= worldIn.getMaxHeight() || !func_214587_a(worldIn, leavesPos.add(k, i, l))) {
+                    if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !func_214587_a(world, leavesPos.add(k, i, l))) {
                        flag = false;
                     }
                  }

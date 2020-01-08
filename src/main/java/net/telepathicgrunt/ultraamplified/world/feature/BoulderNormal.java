@@ -32,7 +32,7 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
     private final int startRadius = 3;
 
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
         while (true)
         {
@@ -44,11 +44,11 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
                 }
             
         		//this and position = position.down(); will keeps moving down position until it finds ground to generate on
-                if (worldIn.isAirBlock(position.down()))
+                if (world.isAirBlock(position.down()))
                 {
                     break label0;
                 }
-                Block block = worldIn.getBlockState(position.down()).getBlock();
+                Block block = world.getBlockState(position.down()).getBlock();
 
             
             	//boulder will ignore other boulders and will generate only on ground
@@ -76,32 +76,32 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
                         	
                         	// 1/1400th chance for diamond ore
                         	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance == 0) {
-                        		worldIn.setBlockState(blockpos, diamondOre, 4);
+                        		world.setBlockState(blockpos, diamondOre, 4);
                         	}
                         	
                         	// 39/1400th chance for iron ore
                         	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 40){
-                        		worldIn.setBlockState(blockpos, ironOre, 4);
+                        		world.setBlockState(blockpos, ironOre, 4);
                         	}
                         	
                         	// 60/1400th chance for coal ore
                         	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 100){
-                        		worldIn.setBlockState(blockpos, coalOre, 4);
+                        		world.setBlockState(blockpos, coalOre, 4);
                         	}
                         	
                         	// 300/1400th chance for andesite
                         	else if(randomChance <= 400){
-                        		worldIn.setBlockState(blockpos, andesite, 4);
+                        		world.setBlockState(blockpos, andesite, 4);
                         	}
                         	
                         	// 300/1400th chance for cobblestone
                         	else if(randomChance <= 700){
-                        		worldIn.setBlockState(blockpos, cobblestone, 4);
+                        		world.setBlockState(blockpos, cobblestone, 4);
                         	}
                         	
                         	// 700/1400th chance for mossyCobblestone
                         	else {
-                        		worldIn.setBlockState(blockpos, mossyCobblestone, 4);
+                        		world.setBlockState(blockpos, mossyCobblestone, 4);
                         	}
                         }
                     }
@@ -114,7 +114,7 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
             }
         
 
-			//this and worldIn.isAirBlock(position.down()) will keeps moving down position until it finds ground to generate on
+			//this and world.isAirBlock(position.down()) will keeps moving down position until it finds ground to generate on
             position = position.down();
         }
     }

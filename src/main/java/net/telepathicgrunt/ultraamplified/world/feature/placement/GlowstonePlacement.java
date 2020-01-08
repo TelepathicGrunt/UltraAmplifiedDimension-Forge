@@ -20,7 +20,7 @@ public class GlowstonePlacement extends Placement<NoPlacementConfig> {
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
 	   return IntStream.range(0, random.nextInt(random.nextInt(ConfigUA.glowstoneSpawnrate) + 1)).mapToObj((p_215051_3_) -> {
 	         int x = random.nextInt(16);
 	         int y = random.nextInt(250) + 4;

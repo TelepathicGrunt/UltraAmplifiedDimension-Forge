@@ -20,7 +20,7 @@ public AtSurfaceWithChanceDesertWell(Function<Dynamic<?>, ? extends ChanceConfig
 		super(configFactoryIn);
 	}
 
-public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
+public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
     
 	if(!ConfigUA.miniStructureGeneration) {
 		return Stream.empty();
@@ -29,7 +29,7 @@ public Stream<BlockPos> getPositions(IWorld worldIn, ChunkGenerator<? extends Ge
    	  if (random.nextFloat() < 1.0F / (float)placementConfig.chance) {
          int i = random.nextInt(16);
          int j = random.nextInt(16);
-         BlockPos blockpos = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(i, 0, j));
+         BlockPos blockpos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(i, 0, j));
          return Stream.of(blockpos);
       }
 

@@ -21,7 +21,7 @@ public class SeaGrassUA extends Feature<SeaGrassConfig> {
 		super(configFactoryIn);
 	}
 
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, SeaGrassConfig config) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, SeaGrassConfig config) {
 		      int i = 0;
 
 		      for(int j = 0; j < config.count; ++j) {
@@ -34,19 +34,19 @@ public class SeaGrassUA extends Feature<SeaGrassConfig> {
 		         BlockPos blockpos = new BlockPos(pos.getX() + k, pos.getY(), pos.getZ() + l);
 		         
 		         
-		         if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER) {
+		         if (world.getBlockState(blockpos).getBlock() == Blocks.WATER) {
 		            boolean flag = random.nextDouble() < config.tallProbability;
 		            BlockState iblockstate = flag ? Blocks.TALL_SEAGRASS.getDefaultState() : Blocks.SEAGRASS.getDefaultState();
-		            if (iblockstate.isValidPosition(worldIn, blockpos)) {
+		            if (iblockstate.isValidPosition(world, blockpos)) {
 		               if (flag) {
 		                  BlockState iblockstate1 = iblockstate.with(TallSeaGrassBlock.field_208065_c, DoubleBlockHalf.UPPER);
 		                  BlockPos blockpos1 = blockpos.up();
-		                  if (worldIn.getBlockState(blockpos1).getBlock() == Blocks.WATER) {
-		                     worldIn.setBlockState(blockpos, iblockstate, 2);
-		                     worldIn.setBlockState(blockpos1, iblockstate1, 2);
+		                  if (world.getBlockState(blockpos1).getBlock() == Blocks.WATER) {
+		                     world.setBlockState(blockpos, iblockstate, 2);
+		                     world.setBlockState(blockpos1, iblockstate1, 2);
 		                  }
 		               } else {
-		                  worldIn.setBlockState(blockpos, iblockstate, 2);
+		                  world.setBlockState(blockpos, iblockstate, 2);
 		               }
 
 		               ++i;

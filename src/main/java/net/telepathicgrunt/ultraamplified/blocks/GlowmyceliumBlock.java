@@ -26,20 +26,20 @@ public class GlowmyceliumBlock extends MyceliumBlock
 	 * every tick, it'll attempt to spread normal mycelium instead of itself. If covered, will turn into glowdirt.
 	 */
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
+	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
-		if (!worldIn.isRemote)
+		if (!world.isRemote)
 		{
-			if (!worldIn.isAreaLoaded(pos, 3))
+			if (!world.isAreaLoaded(pos, 3))
 				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-			if (!func_220257_b(state, worldIn, pos))
+			if (!func_220257_b(state, world, pos))
 			{
 				//block is covered and so will turn into glowdirt
-				worldIn.setBlockState(pos, BlocksInit.GLOWDIRT.get().getDefaultState());
+				world.setBlockState(pos, BlocksInit.GLOWDIRT.get().getDefaultState());
 			}
-			else if (worldIn.getLight(pos.up()) >= 4)
+			else if (world.getLight(pos.up()) >= 4)
 			{
-				if (worldIn.getLight(pos.up()) >= 9)
+				if (world.getLight(pos.up()) >= 9)
 				{
 					//attempt to spread mycelium onto neighboring dirt (glowdirt handles its own conversion)
 					BlockState replacementBlock = Blocks.MYCELIUM.getDefaultState();
@@ -47,10 +47,10 @@ public class GlowmyceliumBlock extends MyceliumBlock
 					for (int i = 0; i < 4; ++i)
 					{
 						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-						if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && func_220256_c(replacementBlock, worldIn, blockpos))
+						if (world.getBlockState(blockpos).getBlock() == Blocks.DIRT && func_220256_c(replacementBlock, world, blockpos))
 						{
-							worldIn.setBlockState(blockpos,
-									replacementBlock.with(SNOWY, Boolean.valueOf(worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+							world.setBlockState(blockpos,
+									replacementBlock.with(SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 					}
 				}

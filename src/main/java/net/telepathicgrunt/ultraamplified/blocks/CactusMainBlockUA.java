@@ -45,43 +45,43 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (!worldIn.isAreaLoaded(pos, 1))
+		if (!world.isAreaLoaded(pos, 1))
 			return; // Forge: prevent growing cactus from loading unloaded chunks with block update
-		if (!state.isValidPosition(worldIn, pos))
+		if (!state.isValidPosition(world, pos))
 		{
-			worldIn.destroyBlock(pos, true);
+			world.destroyBlock(pos, true);
 		}
 		else
 		{
 			BlockPos blockpos = pos.up();
-			if (worldIn.isAirBlock(blockpos))
+			if (world.isAirBlock(blockpos))
 			{
 				int i;
 
-				for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this
-						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get()
-						|| worldIn.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
+				for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this
+						|| world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get()
+						|| world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
 				{ ; }
 
 				if (i < 3)
 				{
 					int j = state.get(AGE);
-					if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, blockpos, state, true))
+					if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(world, blockpos, state, true))
 					{
 						if (j == 15)
 						{
-							worldIn.setBlockState(blockpos, this.getDefaultState());
+							world.setBlockState(blockpos, this.getDefaultState());
 							BlockState blockstate = state.with(AGE, Integer.valueOf(0));
-							worldIn.setBlockState(pos, blockstate, 4);
-							blockstate.neighborChanged(worldIn, blockpos, this, pos, false);
+							world.setBlockState(pos, blockstate, 4);
+							blockstate.neighborChanged(world, blockpos, this, pos, false);
 						}
 						else
 						{
-							worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(j + 1)), 4);
+							world.setBlockState(pos, state.with(AGE, Integer.valueOf(j + 1)), 4);
 						}
-						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+						net.minecraftforge.common.ForgeHooks.onCropsGrowPost(world, pos, state);
 					}
 				}
 			}
@@ -103,13 +103,13 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return HITBOX_DIMENSIONS;
 	}
 
 
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return OUTLINE_DIMENSION;
 	}
@@ -121,18 +121,18 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	 * solidified counterpart. Note that this method should ideally consider only the specific face passed in.
 	 */
 	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos)
 	{
-		if (!stateIn.isValidPosition(worldIn, currentPos))
+		if (!stateIn.isValidPosition(world, currentPos))
 		{
-			worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+			world.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
 		}
 
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updatePostPlacement(stateIn, facing, facingState, world, currentPos, facingPos);
 	}
 
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
 
 		//up needs a cactus block below
@@ -142,13 +142,13 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 			//cannot have lava next to it
 			for (Direction direction : Direction.Plane.HORIZONTAL)
 			{
-				if (worldIn.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+				if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
 				{
 					return false;
 				}
 			}
 
-			return validBlockBelow(worldIn, pos.down());
+			return validBlockBelow(world, pos.down());
 		}
 
 		//sideways needs 1 body or corner cactus block next to it with valid block below that and no lava nearby too
@@ -165,10 +165,10 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 					continue;
 				}
 
-				BlockState blockstate = worldIn.getBlockState(pos.offset(direction));
+				BlockState blockstate = world.getBlockState(pos.offset(direction));
 
 				//NO LAVA ALLOWED
-				if (worldIn.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
+				if (world.getFluidState(pos.offset(direction)).isTagged(FluidTags.LAVA))
 				{
 					return false;
 				}
@@ -178,7 +178,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 				//main cactus body is breaking even though this block may have a upward branch on the other side.
 				if (blockstate.getBlock() != Blocks.CACTUS && blockstate.getBlock() != this && blockstate.getMaterial() == Material.CACTUS)
 				{
-					if (validBlockBelow(worldIn, pos.offset(direction).down()))
+					if (validBlockBelow(world, pos.offset(direction).down()))
 					{
 						hasMainCactusBody = true;
 					}
@@ -193,13 +193,13 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	/**
 	 * Will return true if it is sand or modded cactus at desired position
 	 * 
-	 * @param worldIn - current world to check in
+	 * @param world - current world to check in
 	 * @param pos     - position of where to check
 	 * @return - is sand or modded cactus at pos
 	 */
-	private boolean validBlockBelow(IWorldReader worldIn, BlockPos pos)
+	private boolean validBlockBelow(IWorldReader world, BlockPos pos)
 	{
-		BlockState blockToCheck = worldIn.getBlockState(pos);
+		BlockState blockToCheck = world.getBlockState(pos);
 		if (blockToCheck.getBlock() == Blocks.SAND || blockToCheck.getBlock() == Blocks.RED_SAND
 				|| (blockToCheck.getBlock() != Blocks.CACTUS && blockToCheck.getMaterial() == Material.CACTUS))
 		{
@@ -209,13 +209,13 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 
 
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
 		return false;
 	}

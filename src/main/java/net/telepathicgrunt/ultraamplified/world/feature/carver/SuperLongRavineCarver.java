@@ -84,7 +84,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
         return true;
      }
 
-     private void func_202535_a(IChunk worldIn, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
+     private void func_202535_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float p_202535_12_, float p_202535_13_, float p_202535_14_, int p_202535_15_, int p_202535_16_, double heightMultiplier, BitSet mask) {
         Random random = new Random(randomSeed);
         
         float f = 1.0F;
@@ -120,13 +120,13 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                  return;
               }
 
-              this.carveAtTarget(worldIn, biomeBlockPos, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
+              this.carveAtTarget(world, biomeBlockPos, randomSeed, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
            }
         }
 
      }
 
-     protected boolean carveAtTarget(IChunk worldIn, Function<BlockPos, Biome> biomeBlockPos, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+     protected boolean carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long seed, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
         double d0 = (double)(mainChunkX * 16 + 8);
         double d1 = (double)(mainChunkZ * 16 + 8);
         if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
@@ -168,19 +168,19 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
                           
                            blockpos$Mutable.setPos(x, y, z);
 
-                           BlockState currentBlockstate = worldIn.getBlockState(blockpos$Mutable);
+                           BlockState currentBlockstate = world.getBlockState(blockpos$Mutable);
                            blockpos$Mutableup.setPos(blockpos$Mutable).move(Direction.UP);
                            blockpos$Mutabledown.setPos(blockpos$Mutable).move(Direction.DOWN);
-                           BlockState aboveBlockstate = worldIn.getBlockState(blockpos$Mutableup);
+                           BlockState aboveBlockstate = world.getBlockState(blockpos$Mutableup);
 
                            if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || 
                         		   canReplaceMap.containsKey(currentBlockstate)) {
                         	   
                               if (y - 1 < 10) {
-                                 worldIn.setBlockState(blockpos$Mutable, LAVA.getBlockState(), false);
+                                 world.setBlockState(blockpos$Mutable, LAVA.getBlockState(), false);
                               } else {
            	                	   //carves the ravine
-           	                	   worldIn.setBlockState(blockpos$Mutable, AIR.getBlockState(), false);
+           	                	   world.setBlockState(blockpos$Mutable, AIR.getBlockState(), false);
                               }
 
                               flag = true;
