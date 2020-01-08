@@ -21,6 +21,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Optimized hanging roots.
 ·Optimized Column generation.
 ·Optimized Cave Cavities generation.
+·Added Jungle styled Dungeons for all jungle biomes.
 
     Biome: 
 ·Made Mushroom Field biome more rare.

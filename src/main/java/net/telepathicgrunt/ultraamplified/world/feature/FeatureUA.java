@@ -76,6 +76,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> SNOW_DUNGEONS = new DungeonSnow(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SWAMP_DUNGEONS = new DungeonSwamp(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MUSHROOM_DUNGEONS = new DungeonMushroom(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> JUNGLE_DUNGEONS = new DungeonJungle(NoFeatureConfig::deserialize);
 
     public static Feature<NoFeatureConfig> CROSS = new SwampCross(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> HAY_BALE = new HayBalePile(NoFeatureConfig::deserialize);
@@ -169,6 +170,7 @@ public class FeatureUA
         UltraAmplified.register(registry, SNOW_DUNGEONS, "dungeons_snow_ua");
         UltraAmplified.register(registry, SWAMP_DUNGEONS, "dungeons_swamp_ua");
         UltraAmplified.register(registry, MUSHROOM_DUNGEONS, "dungeons_mushroom_ua");
+        UltraAmplified.register(registry, JUNGLE_DUNGEONS, "dungeons_jungle_ua");
         UltraAmplified.register(registry, CROSS, "swamp_cross_ua");
         UltraAmplified.register(registry, HAY_BALE, "hay_bale_pile_ua");
         UltraAmplified.register(registry, TINY_HAY_BALE, "hay_bale_tiny_pile_ua");
