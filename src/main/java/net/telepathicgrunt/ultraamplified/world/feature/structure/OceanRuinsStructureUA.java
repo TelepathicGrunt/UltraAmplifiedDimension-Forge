@@ -77,24 +77,19 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig> {
 	}
 
 	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
-			OceanRuinConfig oceanruinconfig = (OceanRuinConfig) generator.getStructureConfig(biomeIn,
-					FeatureUA.OCEAN_RUIN_UA);
-			int i = chunkX * 16;
-			int j = chunkZ * 16;
-			BlockPos blockpos = new BlockPos(i, 90, j);
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+			OceanRuinConfig oceanruinconfig = (OceanRuinConfig) generator.getStructureConfig(biomeIn, FeatureUA.OCEAN_RUIN_UA);
+			int x = chunkX * 16;
+			int z = chunkZ * 16;
+			BlockPos blockpos = new BlockPos(x, 0, z);
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			OceanRuinsPiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand,
-					oceanruinconfig);
+			OceanRuinsPiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand, oceanruinconfig);
 			this.recalculateStructureSize();
-			// UltraAmplified.LOGGER.log(Level.DEBUG, "Ocean Ruins | "+(chunkX*16)+"
-			// "+(chunkZ*16));
+			// UltraAmplified.LOGGER.log(Level.DEBUG, "Ocean Ruins | "+(chunkX*16)+" "+(chunkZ*16));
 		}
 
 	}

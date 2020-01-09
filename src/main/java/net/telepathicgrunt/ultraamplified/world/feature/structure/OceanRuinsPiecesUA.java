@@ -40,7 +40,6 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
@@ -103,19 +102,20 @@ public class OceanRuinsPiecesUA
 		MutableBoundingBox mutableboundingbox = MutableBoundingBox.createProper(x, 0, z, blockpos.getX(), 0, blockpos.getZ());
 		BlockPos blockpos1 = new BlockPos(Math.min(x, blockpos.getX()), 0, Math.min(z, blockpos.getZ()));
 		List<BlockPos> list = getPlacements(random, blockpos1.getX(), blockpos1.getZ());
-		int k = MathHelper.nextInt(random, 4, 8);
+		int maximumRuinsCount = MathHelper.nextInt(random, 4, 8);
 
-		for (int l = 0; l < k; ++l)
+		for (int ruinsCount = 0; ruinsCount < maximumRuinsCount; ++ruinsCount)
 		{
 			if (!list.isEmpty())
 			{
-				int i1 = random.nextInt(list.size());
-				BlockPos blockpos2 = list.remove(i1);
-				int j1 = blockpos2.getX();
-				int k1 = blockpos2.getZ();
+				int randomPlacement = random.nextInt(list.size());
+				BlockPos blockpos2 = list.remove(randomPlacement);
+				int xPos = blockpos2.getX();
+				int zPos = blockpos2.getZ();
 				Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
-				BlockPos blockpos3 = Template.getTransformedPos(new BlockPos(5, 0, 6), Mirror.NONE, rotation, new BlockPos(0, 0, 0)).add(j1, 0, k1);
-				MutableBoundingBox mutableboundingbox1 = MutableBoundingBox.createProper(j1, 0, k1, blockpos3.getX(), 0, blockpos3.getZ());
+				BlockPos blockpos3 = Template.getTransformedPos(new BlockPos(5, 0, 6), Mirror.NONE, rotation, new BlockPos(0, 0, 0)).add(xPos, 0, zPos);
+				MutableBoundingBox mutableboundingbox1 = MutableBoundingBox.createProper(xPos, 0, zPos, blockpos3.getX(), 0, blockpos3.getZ());
+				
 				if (!mutableboundingbox1.intersectsWith(mutableboundingbox))
 				{
 					addRuinsToList(templateManager, blockpos2, rotation, pieceList, random, ruinsConfig, false, 0.8F);
@@ -263,76 +263,53 @@ public class OceanRuinsPiecesUA
 			int highestHeight = 0;
 			BlockPos blockpos = templatePosition;
 			
-			if (random.nextInt(3) == 0)
-			{
-				// a third of the ruins will generate at the bottom of the world (y = 53)
-				highestHeight = 64;
-			}
-			else
-			{
-				int halfSizeX = this.template.getSize().getX()/2;
-				int halfSizeZ = this.template.getSize().getZ()/2;
-				
-				// The following code will check a chunk for the highest height that can
-				// support the entire ruins.
-				//
-				// This was an attempt to make it so ruins that generates off edges would
-				// generate on the land below.
+			//get center of ruins
+			int halfSizeX = this.template.getSize().getX()/2;
+			int halfSizeZ = this.template.getSize().getZ()/2;
+			
+			
+			// The following code will check if land can hold ruins.
+			// If not, then generate at y = 64.
+			//
+			// This was an attempt to make it so ruins that generates off edges would
+			// generate at bottom of ocean instead.
 
-				// gets the highest height that this ruins can be
-				blockpos = Template
-						.getTransformedPos(new BlockPos(this.template.getSize().getX()/2 - 1, 0, this.template.getSize().getZ()/2 - 1), Mirror.NONE, this.rotation, new BlockPos(0, 0, 0))
-						.add(this.templatePosition);
-				highestHeight = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockpos.getX(), blockpos.getZ());
-				blockpos = blockpos.up(highestHeight - blockpos.getY());
-				
-				boolean validPosition = false;
-				while(!validPosition) {
-					validPosition = true;
-					for(int x = -halfSizeX; x <= halfSizeX; x += halfSizeX) {
-						for(int z = -halfSizeZ; z <= halfSizeZ; z+= halfSizeZ) {
-							if(world.getBlockState(blockpos.add(x, 0, z)) == Blocks.AIR.getDefaultState()) {
-								validPosition = false;
-								x = halfSizeX;
-								blockpos = findNextValidPos(world, blockpos);
-								break;
-							}
-						}
+			// gets the highest height that this ruins can be
+			blockpos = Template
+					.getTransformedPos(new BlockPos(this.template.getSize().getX()/2 - 1, 0, this.template.getSize().getZ()/2 - 1), Mirror.NONE, this.rotation, new BlockPos(0, 0, 0))
+					.add(this.templatePosition);
+			highestHeight = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockpos.getX(), blockpos.getZ());
+			blockpos = blockpos.up(highestHeight - blockpos.getY());
+			
+			//check corners for air blocks.
+			boolean validPosition = true;
+			for(int x = -halfSizeX; x <= halfSizeX; x += halfSizeX) {
+				for(int z = -halfSizeZ; z <= halfSizeZ; z+= halfSizeZ) {
+					if(world.getBlockState(blockpos.add(x, 0, z)) == Blocks.AIR.getDefaultState()) {
+						validPosition = false;
+						
+						//break out of double loop
+						x = halfSizeX;
+						break;
 					}
 				}
-				
-				highestHeight = blockpos.getY();
 			}
 			
-			blockpos = blockpos.up(highestHeight - blockpos.getY());
+			//if air is present, we are on edge of land. Go to bottom of ocean instead
+			if(!validPosition) 
+			{
+				highestHeight = 64;
+			}
+			
+			
+			//these two lines are needed for set waterlogged blocks
 			this.templatePosition = new BlockPos(this.templatePosition.getX(), highestHeight - 1, this.templatePosition.getZ());
+			blockpos = Template.getTransformedPos(new BlockPos(this.template.getSize().getX() - 1, 2, this.template.getSize().getZ() - 1), Mirror.NONE, this.rotation, BlockPos.ZERO).add(this.templatePosition);
 			
-
-			world.setBlockState(blockpos, Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
-			world.setBlockState(blockpos.up(2), Blocks.BROWN_WOOL.getDefaultState(), 2);
-			world.setBlockState(blockpos.up(4), Blocks.GREEN_WOOL.getDefaultState(), 2);
-			world.setBlockState(blockpos.up(6), Blocks.MAGENTA_WOOL.getDefaultState(), 2);
-			world.setBlockState(blockpos.up(8), Blocks.PURPLE_WOOL.getDefaultState(), 2);
-			world.setBlockState(blockpos.up(10), Blocks.YELLOW_WOOL.getDefaultState(), 2);
-			UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
-			
+			//debug
+			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
 			this.templatePosition = new BlockPos(this.templatePosition.getX(), this.setWaterloggedBlocks(this.templatePosition, world, blockpos), this.templatePosition.getZ());
 			return super.func_225577_a_(world, chunkGen, random, structureBoundingBox, chunkPos);
-		}
-		
-		private BlockPos findNextValidPos(IWorld world, BlockPos blockpos) {
-			// finds surface on water
-			while (blockpos.getY() > 65 && world.getBlockState(blockpos).getFluidState().isEmpty())
-			{
-				blockpos = blockpos.down();
-			}
-
-			// finds bottom of water body
-			while (blockpos.getY() > 65 && !world.getBlockState(blockpos).getFluidState().isEmpty())
-			{
-				blockpos = blockpos.down();
-			}
-			return blockpos;
 		}
 
 		private int setWaterloggedBlocks(BlockPos pos1, IBlockReader blockReader, BlockPos pos2)

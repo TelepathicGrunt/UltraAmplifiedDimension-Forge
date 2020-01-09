@@ -166,27 +166,15 @@ public class ShipwreckPiecesUA
 			// finds surface on water
 			while (blockpos.getY() > 65 && world.getBlockState(blockpos).getFluidState().isEmpty())
 			{
-				//stays at position if wooden part of ship takes original place
-				if(world.getBlockState(blockpos).isIn(WOOD_TAG)) 
-				{
-					break;
-				}
-				
 				blockpos = blockpos.down();
 			}
 
 			// finds bottom of water body
 			while (blockpos.getY() > 65 && !world.getBlockState(blockpos).getFluidState().isEmpty())
 			{
-				//stays at position if wooden part of ship takes original place
-				if(world.getBlockState(blockpos).isIn(WOOD_TAG)) 
-				{
-					break;
-				}
-				
 				blockpos = blockpos.down();
 			}
-
+			
 			
 			//debugging
 			//world.setBlockState(blockpos, Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
