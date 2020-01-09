@@ -22,6 +22,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Optimized Column generation.
 ·Optimized Cave Cavities generation.
 ·Added Jungle styled Dungeons for all jungle biomes.
+·Fixed bug where Shipwrecks will generate at same height always instead of being based on land.
 
     Biome: 
 ·Made Mushroom Field biome more rare.

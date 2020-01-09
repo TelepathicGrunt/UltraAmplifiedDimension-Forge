@@ -81,10 +81,11 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig> {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+			
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-
+			int randHeight = rand.nextInt(130) + 70;
+			
 			BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 
 			// Our shipwreck can generate all kinds of variants regardless of what biome it
@@ -92,7 +93,7 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig> {
 			ShipwreckConfig newShipwreckConfig = new ShipwreckConfig(this.rand.nextBoolean() ? true : false);
 
 			ShipwreckPiecesUA.beginGeneration(templateManagerIn, blockpos, rotation, this.components, this.rand,
-					newShipwreckConfig);
+					newShipwreckConfig, randHeight);
 			this.recalculateStructureSize();
 
 			// UltraAmplified.LOGGER.log(Level.DEBUG, "Shipwreck | "+blockpos.getX()+"
