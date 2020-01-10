@@ -1,10 +1,13 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
+import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -26,6 +29,11 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig> {
 		super(p_i51427_1_);
 	}
 
+	private static final List<Biome.SpawnListEntry> END_CITY_ENEMIES = Lists.newArrayList(
+			new Biome.SpawnListEntry(EntityType.ENDERMITE, 14, 3, 5),
+			new Biome.SpawnListEntry(EntityType.ENDERMAN, 7, 1, 2),
+			new Biome.SpawnListEntry(EntityType.PHANTOM, 1, 1, 2));
+	
 	private final int citySpacing = 25;
 	private final int minCitySeparation = 5;
 
@@ -72,6 +80,10 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig> {
 		return 9;
 	}
 
+	public List<Biome.SpawnListEntry> getSpawnList() {
+		return END_CITY_ENEMIES;
+	}
+	
 	private static int getYPosForStructure(int chunkX, int chunkY, ChunkGenerator<?> generatorIn) {
 		Random random = new Random((long) (chunkX + chunkY * 10387313));
 		Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];

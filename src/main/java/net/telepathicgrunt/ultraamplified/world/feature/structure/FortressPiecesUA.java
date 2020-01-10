@@ -1938,7 +1938,7 @@ public class FortressPiecesUA {
 			}
 
 			if (ConfigUA.chestGeneration) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 5, 7, LootTables.CHESTS_NETHER_BRIDGE);
+				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
 			}
 
 			return true;

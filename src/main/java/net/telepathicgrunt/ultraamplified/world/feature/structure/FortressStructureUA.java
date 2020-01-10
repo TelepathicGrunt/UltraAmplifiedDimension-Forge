@@ -27,6 +27,15 @@ public class FortressStructureUA extends Structure<FortressConfigUA> {
 			new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5),
 			new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5),
 			new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
+	
+	private static final List<Biome.SpawnListEntry> STONE_FORTRESS_ENEMIES = Lists.newArrayList(
+			new Biome.SpawnListEntry(EntityType.SILVERFISH, 2, 4, 8),
+			new Biome.SpawnListEntry(EntityType.SLIME, 4, 4, 4),
+			new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 7, 5, 5),
+			new Biome.SpawnListEntry(EntityType.SKELETON, 10, 5, 5),
+			new Biome.SpawnListEntry(EntityType.BLAZE, 3, 4, 4),
+			new Biome.SpawnListEntry(EntityType.CAVE_SPIDER, 3, 4, 4),
+			new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
 
 	public FortressStructureUA(Function<Dynamic<?>, ? extends FortressConfigUA> p_i51427_1_) {
 		super(p_i51427_1_);
@@ -63,10 +72,17 @@ public class FortressStructureUA extends Structure<FortressConfigUA> {
 		return 8;
 	}
 
-	public List<Biome.SpawnListEntry> getSpawnList() {
+	
+	//Specific spawn list for each kind of fortress
+	public List<Biome.SpawnListEntry> getNetherFortressSpawnList() {
 		return NETHER_FORTRESS_ENEMIES;
 	}
-
+	
+	public List<Biome.SpawnListEntry> getStoneFortressSpawnList() {
+		return STONE_FORTRESS_ENEMIES;
+	}
+	
+	
 	public static class Start extends StructureStart {
 		private boolean genAboveSeaLevel;
 
