@@ -109,7 +109,6 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
         	return false;
         }
 
-
         //how much to turn on a range of -1 to 1. -1 for north, 0 for south
         float randFloat = rand.nextFloat();
         float xTurningValue = (float) Math.sin(randFloat*Math.PI*2);
@@ -117,63 +116,145 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
         
         
         
-        
-        int widthAtHeight = 0;
         //min thickness   where we are in height  /  controls thickening rate 
-     	widthAtHeight = getWidthAtHeight(0, heightDiff+5, minWidth);
+        int widthAtHeight = getWidthAtHeight(0, heightDiff+5, minWidth);
+        
+        //gets center of the ceiling position and floor position
+     	int xPosCeiling = position.getX() + getOffsetAtHeight(heightDiff + 1, heightDiff, xTurningValue);
+     	int zPosCeiling = position.getZ() + getOffsetAtHeight(0, heightDiff, zTurningValue);
+     	int xPosFloor = position.getX() - getOffsetAtHeight(heightDiff - 1, heightDiff, xTurningValue);
+     	int zPosFloor = position.getZ() + getOffsetAtHeight(0, heightDiff, zTurningValue);
         
         //checks to see if there is enough land above and below to hold pillar
-        for (int x = position.getX() - widthAtHeight; x <= position.getX() + widthAtHeight; x+=3)
+        for (int x = -widthAtHeight; x <= widthAtHeight; x++)
         {
-            for (int z = position.getZ() - widthAtHeight; z <= position.getZ() + widthAtHeight; z+=3)
+            for (int z = -widthAtHeight; z <= widthAtHeight; z++)
             {
-                int xDiff = x - position.getX();
-                int zDiff = z - position.getZ();
-            	if(xDiff * xDiff + zDiff * zDiff <= (widthAtHeight * widthAtHeight)) {
-                    BlockState block1 = world.getBlockState(blockpos$Mutable.setPos(x + getOffsetAtHeight(heightDiff + 1, heightDiff, xTurningValue), ceilingHeight + 2, z + getOffsetAtHeight(0, heightDiff, zTurningValue)));
-                    BlockState block2 = world.getBlockState(blockpos$Mutable.setPos(x - getOffsetAtHeight(-1, heightDiff, xTurningValue), bottomFloorHeight - 2, z - getOffsetAtHeight(0, heightDiff, zTurningValue)));
+				if(x*x+z*z > widthAtHeight*widthAtHeight*0.85 && x*x+z*z < widthAtHeight*widthAtHeight) 
+				{
+                    BlockState block1 = world.getBlockState(blockpos$Mutable.setPos(xPosCeiling + x, ceilingHeight + 2, zPosCeiling + z));
+                    BlockState block2 = world.getBlockState(blockpos$Mutable.setPos(xPosFloor + x, bottomFloorHeight - 2, zPosFloor + z));
                     
-                    //there is not enough land to contain bases of pillar
-                    if(!block1.isSolid() || !block2.isSolid()) {
+                    //debugging
+                    //world.setBlockState(blockpos$Mutable.setPos(position.getX() + x + getOffsetAtHeight(heightDiff + 1, heightDiff, xTurningValue), ceilingHeight + 2, position.getZ() + z + getOffsetAtHeight(0, heightDiff, zTurningValue)), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
+                    //world.setBlockState(blockpos$Mutable.setPos(position.getX() + x - getOffsetAtHeight(-1, heightDiff, xTurningValue), bottomFloorHeight - 2, position.getZ() + z - getOffsetAtHeight(0, heightDiff, zTurningValue)), Blocks.LAPIS_BLOCK.getDefaultState(), 2);
+                    
+                    //there is not enough land to contain bases of ramp
+                    if(!block1.isSolid() || !block2.isSolid()) 
+                    {
                     	return false;
                     }
             	}
             }
         }
+
+        //If this is reached, position is valid for pillar gen.
         
+        //debugging
+//        if(heightDiff > 18) {
+//        	UltraAmplified.LOGGER.info("Large Ramp: "+position.getX()+" "+position.getY()+" "+position.getZ());
+//        }
         
-        //position is valid for pillar gen.
-        //UltraAmplified.Logger.log(Level.DEBUG, "Ramp at "+position.getX() +", "+position.getY()+", "+position.getZ() +"  | "+xTurningValue +", "+zTurningValue);
+
+        int xOffset = 0;
+    	int zOffset = 0;
+        int xDiff = 0;
+        int zDiff = 0;
         
+        //clears hole for ramp
+        for (int y = -2; y <= heightDiff+3; y++)
+        {
+        	// Method interprets input as:  min thickness  ,  where we are in height  ,  controls thickening rate 
+            widthAtHeight = getWidthAtHeight(y, heightDiff+2, minWidth);
+        	
+            if(heightDiff < 16)
+            {
+            	xOffset = (int) (getOffsetAtHeight(y, heightDiff, xTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, xTurningValue)/2)*2);
+            	zOffset = (int) (getOffsetAtHeight(y, heightDiff, zTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, zTurningValue)/2)*2);
+            }
+            else if(heightDiff < 21)
+            {
+            	xOffset = (int) (getOffsetAtHeight(y, heightDiff, xTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, xTurningValue)/3)*4);
+            	zOffset = (int) (getOffsetAtHeight(y, heightDiff, zTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, zTurningValue)/3)*4);
+            }
+            else
+            {
+            	xOffset = (int) (getOffsetAtHeight(y, heightDiff, xTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, xTurningValue)/3)*6);
+            	zOffset = (int) (getOffsetAtHeight(y, heightDiff, zTurningValue)-Math.signum(getOffsetAtHeight(y, heightDiff, zTurningValue)/3)*6);
+            }
+            
+	        //Begin clearing gen
+	        for (int x = position.getX() - widthAtHeight - 1; x <= position.getX() + widthAtHeight + 1; ++x)
+	        {
+	            for (int z = position.getZ() - widthAtHeight - 1; z <= position.getZ() + widthAtHeight + 1; ++z)
+	            {
+	                xDiff = x - position.getX();
+	                zDiff = z - position.getZ();
+                    blockpos$Mutable.setPos(x + xOffset, y + bottomFloorHeight + 3, z + zOffset);
+                    
+	                //creates pillar with inside block
+                    int xzDiffSquaredStretched = (xDiff * xDiff) + (zDiff * zDiff);
+                    int circleBounds = (int) ((widthAtHeight-1) * (widthAtHeight-1) - 0.5F);
+                    
+                    if(y > heightDiff) {
+                    	circleBounds *= (0.6f/(y-heightDiff));
+                    }
+	                
+                    BlockState block = world.getBlockState(blockpos$Mutable);
+	                if(!block.isIn(BlockTags.LEAVES) && 
+	                   !block.isIn(BlockTags.LOGS) && 
+	                   !irreplacableBlocks.contains(block.getBlock()) && 
+	                  xzDiffSquaredStretched <= circleBounds)
+	                {
+                		world.setBlockState(blockpos$Mutable, AIR, 2);
+                		
+                		//adds top block to exposed middle block after air was set
+                		BlockState blockBelowAir = world.getBlockState(blockpos$Mutable.down());
+                        BlockState blockBelowBelowAir = world.getBlockState(blockpos$Mutable.down(2));
+                        if (blockBelowAir.isSolid())
+                        {
+                        	if(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
+                        		world.setBlockState(blockpos$Mutable.down(), blocksConfig.middleBlock, 2);
+                        	}else {
+                        		world.setBlockState(blockpos$Mutable.down(), blocksConfig.topBlock, 2);
+                        	}
+                            
+                        }
+	                }
+                }
+            }
+        }
         
         //makes ramp
-        for (int y = -2; y <= heightDiff+5; y++)
+        for (int y = -2; y <= heightDiff+4; y++)
         {
-        	               //min thickness   where we are in height  /  controls thickening rate 
+        	// Method interprets input as:  min thickness  ,  where we are in height  ,  controls thickening rate
         	widthAtHeight = getWidthAtHeight(y, heightDiff+5, minWidth);
+        	xOffset = getOffsetAtHeight(y, heightDiff, xTurningValue);
+        	zOffset = getOffsetAtHeight(y, heightDiff, zTurningValue);
         	
-
-        	int xOffset = getOffsetAtHeight(y, heightDiff, xTurningValue);
-        	int zOffset = getOffsetAtHeight(y, heightDiff, zTurningValue);
         	
 	        //Begin column gen
 	        for (int x = position.getX() - widthAtHeight - 1; x <= position.getX() + widthAtHeight + 1; ++x)
 	        {
 	            for (int z = position.getZ() - widthAtHeight - 1; z <= position.getZ() + widthAtHeight + 1; ++z)
 	            {
-	                int xDiff = x - position.getX();
-	                int zDiff = z - position.getZ();
+	                xDiff = x - position.getX();
+	                zDiff = z - position.getZ();
                     blockpos$Mutable.setPos(x + xOffset, y + bottomFloorHeight, z + zOffset);
-                    
                     
                     
 	                //creates pillar with inside block
                     int xzDiffSquaredStretched = (xDiff * xDiff) + (zDiff * zDiff);
-	                if (y <= heightDiff && xzDiffSquaredStretched <= (widthAtHeight-1) * (widthAtHeight-1) - 0.5F)
+                    int circleBounds = (int) ((widthAtHeight-1) * (widthAtHeight-1) - 0.5F);
+                    
+                    if(y > heightDiff-3) {
+                    	circleBounds *= (0.8f/(y-(heightDiff-3)));
+                    }
+                    
+	                if (y <= heightDiff && xzDiffSquaredStretched <= circleBounds)
 	                {
-                        BlockState block = world.getBlockState(blockpos$Mutable);
-
-                        if (!block.isSolid())
+                        if (!world.getBlockState(blockpos$Mutable).isSolid())
                         {
                             world.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
                         }
@@ -197,35 +278,10 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	                        }
 	                	}
                     }
-	                
-
-	                //clears out space above disk so there is a hole for entire ramp
-	                int holeHeight = 5;
-                    BlockState block = world.getBlockState(blockpos$Mutable.up(holeHeight));
-	                if(!block.isIn(BlockTags.LEAVES) && 
-	                   !block.isIn(BlockTags.LOGS) && 
-	                   !irreplacableBlocks.contains(block.getBlock()) && 
-	                  xzDiffSquaredStretched <= (widthAtHeight-1) * (widthAtHeight-1) - 0.5F) 
-	                {
-                		world.setBlockState(blockpos$Mutable.up(holeHeight), AIR, 2);
-                		
-                		//adds top block to exposed middle block after air was set
-                		BlockState blockBelowAir = world.getBlockState(blockpos$Mutable.up(holeHeight-1));
-                        BlockState blockBelowBelowAir = world.getBlockState(blockpos$Mutable.up(holeHeight-2));
-                        if (blockBelowAir.isSolid())
-                        {
-                        	if(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
-                        		world.setBlockState(blockpos$Mutable.up(holeHeight-1), blocksConfig.middleBlock, 2);
-                        	}else {
-                        		world.setBlockState(blockpos$Mutable.up(holeHeight-1), blocksConfig.topBlock, 2);
-                        	}
-                            
-                        }
-	                }
                 }
             }
         }
-
+        
         return true;
     }
     

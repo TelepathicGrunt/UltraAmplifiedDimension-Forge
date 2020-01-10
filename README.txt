@@ -21,6 +21,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Optimized hanging roots.
 ·Optimized Column generation.
 ·Optimized Cave Cavities generation.
+·Ramps openings now look better and flow better with rest of the ramp.
 ·Added Jungle styled Dungeons for all jungle biomes.
 ·Fixed bug where Shipwrecks will generate at same height always (even in midair) instead of being based on land/water.
 ·Fixed bug where Ocean Ruins could generate in midair.
