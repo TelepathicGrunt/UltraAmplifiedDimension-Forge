@@ -20,7 +20,6 @@ import net.minecraft.world.gen.placement.AtSurfaceWithExtra;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.HeightBiasedRange;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
@@ -78,7 +77,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.placement.LapisPlacement
 import net.telepathicgrunt.ultraamplified.world.feature.placement.LedgeUndersideMiniFeature;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.PassthroughChest;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.RandomChanceUnderSurface;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.RandomPositionEvery5Height;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
@@ -88,7 +86,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePastSty
 public class BiomeUA extends Biome {
 
     //set up custom position placements
-	public static final Placement<FrequencyConfig> RANDOM_POSITION_EVERY_5_HEIGHT = new RandomPositionEvery5Height(FrequencyConfig::deserialize);
 	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLedgeWithChance(ChanceConfig::deserialize);
 	public static final Placement<ChanceConfig> RANDOM_CHANCE_UNDER_SURFACE = new RandomChanceUnderSurface(ChanceConfig::deserialize);
 	public static final Placement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfLedge(CountRangeConfig::deserialize);
