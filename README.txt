@@ -36,6 +36,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Badlands biome columns and ramps now has Stone center.
 ·Sandless Badlands columns and ramps now has Terracotta center with Orange Terracotta base.
 ·Sandless Badlands now has no sand at the very top layer anymore. It is... sandless lol.
+·N
 
     Misc: 
 ·Optimized a bit and cleaned some code in the back end.      

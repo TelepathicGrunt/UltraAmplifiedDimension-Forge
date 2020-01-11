@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
@@ -27,6 +28,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 	}
 
 	private final static BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
+	private final static BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock)
@@ -84,6 +86,22 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 				if (currentblock.getMaterial() == Material.WATER)
 				{
 					world.setBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z), MAGMA, 3);
+				}
+				
+				//check if lava below is bordering water and set it to obsidian if so
+				for(int y = ConfigUA.seaLevel - 8; y > 20; y--) 
+				{
+
+                    for (Direction face : Direction.Plane.HORIZONTAL) 
+                    {
+    					currentblock = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face));
+    					
+    					if (currentblock.getMaterial() == Material.WATER)
+    					{
+    						world.setBlockState(blockpos$Mutable.add(x, y, z), OBSIDIAN, 2);
+    						continue;
+    					}
+                    }
 				}
 			}
 		}
