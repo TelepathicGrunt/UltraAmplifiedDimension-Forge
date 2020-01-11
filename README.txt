@@ -17,6 +17,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
     
+    Config: 
+
     Structures:
 ·Stone and Nether Fortresses now will naturally spawn enemies specific to their kind of fortress at a low rate. You can manually swap the kinds of bricks between the two fortresses to get the other fortress's natural spawning entities.
 ·Buffed loot from chest next to spawners in Stone and Nether Fortresses.    
@@ -27,6 +29,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed bug that prevented giant mushrooms from generating in Dark forest and Relic Dark Forest biome.
 ·Dark Forest now generates more grass including some Tall Grass.
 ·Relic Dark Forest now generates a lot more grass and with it mainly being Tall Grass.
+·Dissected Badlands Plateau biome columns and ramps now has Terracotta center.
+·Badlands biome columns and ramps now has Stone center.
 
     Misc: 
 ·Optimized a bit and cleaned some code in the back end.      
