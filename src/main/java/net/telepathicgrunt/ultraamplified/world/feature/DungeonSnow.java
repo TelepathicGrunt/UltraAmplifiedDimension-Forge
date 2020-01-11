@@ -27,8 +27,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonSnow extends Feature<NoFeatureConfig> 
 {
-    public DungeonSnow(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonSnow(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private static final Logger LOGGER = LogManager.getLogger();

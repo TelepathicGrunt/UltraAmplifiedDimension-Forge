@@ -20,8 +20,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
-	public ContainUndergroundLiquids(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public ContainUndergroundLiquids(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	// Used to keep track of what block to use to fill in certain air/liquids

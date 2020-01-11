@@ -24,8 +24,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class HangingRuins extends Feature<NoFeatureConfig> {
 
-	public HangingRuins(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public HangingRuins(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	

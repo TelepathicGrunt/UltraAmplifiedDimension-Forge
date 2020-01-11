@@ -20,8 +20,8 @@ import net.telepathicgrunt.ultraamplified.blocks.CactusMainBlockUA;
 
 public class BetterCactus extends Feature<NoFeatureConfig> {
 	   
-	public BetterCactus(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public BetterCactus(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private final int height = 9; 

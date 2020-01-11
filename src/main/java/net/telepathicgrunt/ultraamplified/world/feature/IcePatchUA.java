@@ -17,8 +17,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class IcePatchUA extends Feature<NoFeatureConfig> 
 {
-    public IcePatchUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public IcePatchUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private final BlockState packedIce = Blocks.PACKED_ICE.getDefaultState();

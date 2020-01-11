@@ -12,17 +12,23 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.SimplePlacement;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class HeightBasedLavafallsRange2 extends SimplePlacement<CountRangeConfig> {
-	public HeightBasedLavafallsRange2(Function<Dynamic<?>, ? extends CountRangeConfig> config) {
+
+public class HeightBasedLavafallsRange2 extends SimplePlacement<CountRangeConfig>
+{
+	public HeightBasedLavafallsRange2(Function<Dynamic<?>, ? extends CountRangeConfig> config)
+	{
 		super(config);
 	}
 
-	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos) {
+
+	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
+	{
 		//we do * instead of / as no biome reduces number of lavafalls. only 2 increases the number of lavafalls
-		return IntStream.range(0, ConfigUA.lavafallSpawnrate*config.count).mapToObj((p_215057_3_) -> {
+		return IntStream.range(0, ConfigUA.lavafallSpawnrate * config.count).mapToObj((p_215057_3_) ->
+		{
 			int i = rand.nextInt(16);
 			int j = rand.nextInt(rand.nextInt(rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset) + config.bottomOffset);
-	        int k = rand.nextInt(16);
+			int k = rand.nextInt(16);
 			return pos.add(i, j, k);
 		});
 	}

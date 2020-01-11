@@ -29,8 +29,8 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
        this.seed = seed;
     }
     
-    public ColumnVertical(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public ColumnVertical(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactory) {
+		super(configFactory);
 	}
 
 

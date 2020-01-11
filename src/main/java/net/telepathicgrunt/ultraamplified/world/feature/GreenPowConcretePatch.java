@@ -17,8 +17,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class GreenPowConcretePatch extends Feature<NoFeatureConfig> {
 	  
-    public GreenPowConcretePatch(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public GreenPowConcretePatch(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 

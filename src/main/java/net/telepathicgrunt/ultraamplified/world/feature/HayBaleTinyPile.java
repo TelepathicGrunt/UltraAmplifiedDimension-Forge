@@ -22,8 +22,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 public class HayBaleTinyPile extends Feature<NoFeatureConfig> {
 	
 
-    public HayBaleTinyPile(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public HayBaleTinyPile(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private final BlockState hayBaleNS = Blocks.HAY_BLOCK.getDefaultState().with(HayBlock.AXIS, Direction.Axis.Z);

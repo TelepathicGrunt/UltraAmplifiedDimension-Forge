@@ -22,8 +22,8 @@ import net.minecraft.world.gen.feature.Feature;
 public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 	
 
-	  public IcebergUA(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	  public IcebergUA(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private final static BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();

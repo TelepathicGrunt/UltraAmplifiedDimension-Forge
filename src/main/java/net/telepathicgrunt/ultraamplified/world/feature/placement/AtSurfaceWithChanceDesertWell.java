@@ -15,24 +15,31 @@ import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig> {
-public AtSurfaceWithChanceDesertWell(Function<Dynamic<?>, ? extends ChanceConfig> configFactoryIn) {
-		super(configFactoryIn);
+
+public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
+{
+	public AtSurfaceWithChanceDesertWell(Function<Dynamic<?>, ? extends ChanceConfig> configFactory)
+	{
+		super(configFactory);
 	}
 
-public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
-    
-	if(!ConfigUA.miniStructureGeneration) {
+
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
+	{
+
+		if (!ConfigUA.miniStructureGeneration)
+		{
+			return Stream.empty();
+		}
+
+		if (random.nextFloat() < 1.0F / (float) placementConfig.chance)
+		{
+			int i = random.nextInt(16);
+			int j = random.nextInt(16);
+			BlockPos blockpos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(i, 0, j));
+			return Stream.of(blockpos);
+		}
+
 		return Stream.empty();
 	}
-		   
-   	  if (random.nextFloat() < 1.0F / (float)placementConfig.chance) {
-         int i = random.nextInt(16);
-         int j = random.nextInt(16);
-         BlockPos blockpos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(i, 0, j));
-         return Stream.of(blockpos);
-      }
-
-      return Stream.empty();
-   }
 }

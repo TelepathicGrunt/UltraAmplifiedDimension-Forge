@@ -20,8 +20,8 @@ import net.minecraft.world.storage.loot.LootTables;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class SwampCross extends Feature<NoFeatureConfig> {
-	   public SwampCross(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	   public SwampCross(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {

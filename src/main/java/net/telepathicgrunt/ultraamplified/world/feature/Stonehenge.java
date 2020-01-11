@@ -30,8 +30,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class Stonehenge extends Feature<NoFeatureConfig> {
 	
-	public Stonehenge(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public Stonehenge(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 

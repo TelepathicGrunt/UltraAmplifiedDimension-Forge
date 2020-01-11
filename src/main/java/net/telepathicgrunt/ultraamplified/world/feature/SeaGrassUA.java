@@ -17,8 +17,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 
 public class SeaGrassUA extends Feature<SeaGrassConfig> {
-	   public SeaGrassUA(Function<Dynamic<?>, ? extends SeaGrassConfig> configFactoryIn) {
-		super(configFactoryIn);
+	   public SeaGrassUA(Function<Dynamic<?>, ? extends SeaGrassConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, SeaGrassConfig config) {

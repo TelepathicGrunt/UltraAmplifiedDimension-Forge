@@ -27,8 +27,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonMushroom extends Feature<NoFeatureConfig> 
 {
-    public DungeonMushroom(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonMushroom(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 

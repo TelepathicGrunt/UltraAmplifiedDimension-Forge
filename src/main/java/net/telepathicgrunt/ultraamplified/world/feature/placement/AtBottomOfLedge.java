@@ -15,14 +15,20 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class AtBottomOfLedge extends Placement<CountRangeConfig> {
-	public AtBottomOfLedge(Function<Dynamic<?>, ? extends CountRangeConfig> configFactoryIn) {
-		super(configFactoryIn);
+
+public class AtBottomOfLedge extends Placement<CountRangeConfig>
+{
+	public AtBottomOfLedge(Function<Dynamic<?>, ? extends CountRangeConfig> configFactory)
+	{
+		super(configFactory);
 	}
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) {
 
-		return IntStream.range(0, placementConfig.count).mapToObj((p_215051_3_) -> {
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos)
+	{
+
+		return IntStream.range(0, placementConfig.count).mapToObj((p_215051_3_) ->
+		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
 
@@ -31,7 +37,8 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 			// gets y value of a layer below top layer
 			int bottomYLayer = YPositionOfBottomOfLayer(world, height, random, pos.add(x, 0, z));
 
-			if (bottomYLayer > placementConfig.maximum) {
+			if (bottomYLayer > placementConfig.maximum)
+			{
 				return null;
 			}
 			return pos.add(x, bottomYLayer, z);
@@ -39,11 +46,15 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 		}).filter(Objects::nonNull);
 	}
 
-	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos) {
+
+	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos)
+	{
 
 		// if height is inside a non-air block, move up until we reached an air block
-		while (height < 255) {
-			if (world.isAirBlock(pos.add(0, height, 0))) {
+		while (height < 255)
+		{
+			if (world.isAirBlock(pos.add(0, height, 0)))
+			{
 				break;
 			}
 
@@ -52,8 +63,10 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig> {
 
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
-		while (height < 255) {
-			if (!world.isAirBlock(pos.add(0, height, 0))) {
+		while (height < 255)
+		{
+			if (!world.isAirBlock(pos.add(0, height, 0)))
+			{
 				break;
 			}
 

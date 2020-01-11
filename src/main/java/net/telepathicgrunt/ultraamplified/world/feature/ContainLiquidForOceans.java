@@ -20,8 +20,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
-	  public ContainLiquidForOceans(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	  public ContainLiquidForOceans(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	  private final static BlockState ICE = Blocks.ICE.getDefaultState();

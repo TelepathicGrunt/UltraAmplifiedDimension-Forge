@@ -20,9 +20,9 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class BoulderGiant extends Feature<BlockBlobConfig>
 {
-	public BoulderGiant(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactoryIn)
+	public BoulderGiant(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactory)
 	{
-		super(configFactoryIn);
+		super(configFactory);
 	}
 
 	private final static Block mossyCobblestone = Blocks.MOSSY_COBBLESTONE;

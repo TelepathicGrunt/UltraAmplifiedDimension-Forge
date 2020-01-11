@@ -32,8 +32,8 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 
 	
 
-	public SunShrine(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public SunShrine(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	protected static final Set<BlockState> acceptableBlocks = 

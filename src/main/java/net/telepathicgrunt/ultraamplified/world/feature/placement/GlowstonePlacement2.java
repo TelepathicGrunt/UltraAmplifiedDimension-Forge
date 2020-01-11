@@ -11,13 +11,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.SimplePlacement;
 
-public class GlowstonePlacement2 extends SimplePlacement<CountRangeConfig> {
-	public GlowstonePlacement2(Function<Dynamic<?>, ? extends CountRangeConfig> config) {
+
+public class GlowstonePlacement2 extends SimplePlacement<CountRangeConfig>
+{
+	public GlowstonePlacement2(Function<Dynamic<?>, ? extends CountRangeConfig> config)
+	{
 		super(config);
 	}
 
-	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos) {
-		return IntStream.range(0, config.count).mapToObj((p_215061_3_) -> {
+
+	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
+	{
+		return IntStream.range(0, config.count).mapToObj((p_215061_3_) ->
+		{
 			int x = rand.nextInt(16);
 			int y = rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset;
 			int z = rand.nextInt(16);

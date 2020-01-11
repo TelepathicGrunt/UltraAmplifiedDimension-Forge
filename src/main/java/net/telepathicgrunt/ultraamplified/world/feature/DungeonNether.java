@@ -27,8 +27,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonNether extends Feature<NoFeatureConfig> 
 {
-    public DungeonNether(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonNether(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 

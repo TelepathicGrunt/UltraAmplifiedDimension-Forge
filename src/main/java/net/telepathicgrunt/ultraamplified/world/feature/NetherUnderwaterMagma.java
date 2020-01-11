@@ -21,9 +21,9 @@ import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 
 public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 {
-	public NetherUnderwaterMagma(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn)
+	public NetherUnderwaterMagma(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
 	{
-		super(configFactoryIn);
+		super(configFactory);
 	}
 
 	private final static BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();

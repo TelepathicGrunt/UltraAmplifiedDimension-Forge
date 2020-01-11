@@ -13,8 +13,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
 public class SingleBlock extends Feature<BlockConfig> {
-	   public SingleBlock(Function<Dynamic<?>, ? extends BlockConfig> configFactoryIn) {
-		super(configFactoryIn);
+	   public SingleBlock(Function<Dynamic<?>, ? extends BlockConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, BlockConfig blockConfig) {

@@ -15,8 +15,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
 
 public class SeaPickleUA extends Feature<CountConfig> {
-   public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactoryIn) {
-		super(configFactoryIn);
+   public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactory) {
+		super(configFactory);
 	}
 
 public boolean place(IWorld world, ChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {

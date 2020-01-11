@@ -14,18 +14,24 @@ import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class PassthroughChest extends Placement<NoPlacementConfig> {
-   public PassthroughChest(Function<Dynamic<?>, ? extends NoPlacementConfig> configFactoryIn) {
-		super(configFactoryIn);
+
+public class PassthroughChest extends Placement<NoPlacementConfig>
+{
+	public PassthroughChest(Function<Dynamic<?>, ? extends NoPlacementConfig> configFactory)
+	{
+		super(configFactory);
 	}
 
-public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos) {
-      
-	   //needed so we can prevent vanilla treasure chest from spawning if config is off
-	   if(!ConfigUA.chestGeneration) {
-		   return Stream.empty();
-	   }
-	   
-	   return Stream.of(pos);
-   }
+
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
+	{
+
+		//needed so we can prevent vanilla treasure chest from spawning if config is off
+		if (!ConfigUA.chestGeneration)
+		{
+			return Stream.empty();
+		}
+
+		return Stream.of(pos);
+	}
 }

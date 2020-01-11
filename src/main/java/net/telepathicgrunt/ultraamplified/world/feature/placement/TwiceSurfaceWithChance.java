@@ -13,42 +13,53 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class TwiceSurfaceWithChance extends Placement<ChanceConfig> {
-   public TwiceSurfaceWithChance(Function<Dynamic<?>, ? extends ChanceConfig> configFactoryIn) {
-		super(configFactoryIn);
+
+public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
+{
+	public TwiceSurfaceWithChance(Function<Dynamic<?>, ? extends ChanceConfig> configFactory)
+	{
+		super(configFactory);
 	}
 
-public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos) {
-	      if (random.nextFloat() < 1.0F / (float)placementConfig.chance) {
-	         int x = random.nextInt(16);
-	         int z = random.nextInt(16);
-	         int height = random.nextInt(180)+75;
-	         
-	         //if height is inside a non-air block, move down until we reached an air block
-	         while(height > 74) {
-	        	 if(world.isAirBlock(pos.add(x, height, z))) {
-	        		 break;
-	        	 }
-	        	 
-	        	 height--;
-	         }
-	         
-	         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-	         while(height > 74) {
-	        	 if(!world.isAirBlock(pos.add(x, height, z))) {
-	        		 break;
-	        	 }
-	        	 
-	        	 height--;
-	         }
-	         
-	         if (height <= 74) {
-	            return Stream.empty();
-	         }
 
-	         Stream.of(pos.add(x, height, z));
-	      }
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
+	{
+		if (random.nextFloat() < 1.0F / (float) placementConfig.chance)
+		{
+			int x = random.nextInt(16);
+			int z = random.nextInt(16);
+			int height = random.nextInt(180) + 75;
 
-	      return Stream.empty();
-	   }
+			//if height is inside a non-air block, move down until we reached an air block
+			while (height > 74)
+			{
+				if (world.isAirBlock(pos.add(x, height, z)))
+				{
+					break;
+				}
+
+				height--;
+			}
+
+			//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
+			while (height > 74)
+			{
+				if (!world.isAirBlock(pos.add(x, height, z)))
+				{
+					break;
+				}
+
+				height--;
+			}
+
+			if (height <= 74)
+			{
+				return Stream.empty();
+			}
+
+			Stream.of(pos.add(x, height, z));
+		}
+
+		return Stream.empty();
 	}
+}

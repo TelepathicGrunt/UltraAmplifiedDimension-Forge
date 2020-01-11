@@ -29,8 +29,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonDesert extends Feature<NoFeatureConfig> 
 {
-    public DungeonDesert(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonDesert(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private static final Logger LOGGER = LogManager.getLogger();

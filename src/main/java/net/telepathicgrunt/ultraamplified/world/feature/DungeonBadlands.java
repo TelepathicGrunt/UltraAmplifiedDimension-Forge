@@ -27,8 +27,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonBadlands extends Feature<NoFeatureConfig> 
 {
-    public DungeonBadlands(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonBadlands(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private static final Logger LOGGER = LogManager.getLogger();

@@ -22,8 +22,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
 public class Roots extends Feature<BlockConfig> {
-    public Roots(Function<Dynamic<?>, ? extends BlockConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public Roots(Function<Dynamic<?>, ? extends BlockConfig> configFactory) {
+		super(configFactory);
 	}
 
 

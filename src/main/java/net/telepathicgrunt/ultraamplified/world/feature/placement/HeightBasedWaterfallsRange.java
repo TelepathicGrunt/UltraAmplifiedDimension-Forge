@@ -12,16 +12,21 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.SimplePlacement;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class HeightBasedWaterfallsRange extends SimplePlacement<CountRangeConfig> {
-	public HeightBasedWaterfallsRange(Function<Dynamic<?>, ? extends CountRangeConfig> config) {
+
+public class HeightBasedWaterfallsRange extends SimplePlacement<CountRangeConfig>
+{
+	public HeightBasedWaterfallsRange(Function<Dynamic<?>, ? extends CountRangeConfig> config)
+	{
 		super(config);
 	}
 
-	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos) {
-		return IntStream.range(0, ConfigUA.waterfallSpawnrate / config.count).mapToObj((p_215057_3_) -> {
+
+	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
+	{
+		return IntStream.range(0, ConfigUA.waterfallSpawnrate / config.count).mapToObj((p_215057_3_) ->
+		{
 			int i = rand.nextInt(16);
-			int j = rand.nextInt(
-					rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset);
+			int j = rand.nextInt(rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset);
 			int k = rand.nextInt(16);
 			return pos.add(i, j, k);
 		});

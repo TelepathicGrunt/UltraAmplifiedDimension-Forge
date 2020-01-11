@@ -21,8 +21,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class MarkedTreasureChest extends Feature<NoFeatureConfig> {
 
-	public MarkedTreasureChest(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public MarkedTreasureChest(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private static final BlockState RED_SAND = Blocks.RED_SAND.getDefaultState();

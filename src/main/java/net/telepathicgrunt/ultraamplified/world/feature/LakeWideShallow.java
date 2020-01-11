@@ -17,8 +17,8 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 	
 	
 	
-	public LakeWideShallow(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public LakeWideShallow(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig configBlock) {

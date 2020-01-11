@@ -22,8 +22,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class IceSpikeUA extends Feature<NoFeatureConfig> {
 	
-	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	protected static final Set<BlockState> ALLOWED_BLOCKS = 

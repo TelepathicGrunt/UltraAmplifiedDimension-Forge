@@ -16,8 +16,8 @@ import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
-	   public LakeStoneless(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	   public LakeStoneless(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState(); 

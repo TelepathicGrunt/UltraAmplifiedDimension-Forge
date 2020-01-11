@@ -22,8 +22,8 @@ public class GlowPatch extends Feature<CountConfig> {
 
 	private Map<BlockState, BlockState> GLOWBLOCKMAP;
 
-	public GlowPatch(Function<Dynamic<?>, ? extends CountConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public GlowPatch(Function<Dynamic<?>, ? extends CountConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig) {

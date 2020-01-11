@@ -27,8 +27,8 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class DungeonEnd extends Feature<NoFeatureConfig> 
 {
-    public DungeonEnd(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public DungeonEnd(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 

@@ -21,7 +21,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Stone and Nether Fortresses now will naturally spawn enemies specific to their kind of fortress at a low rate. You can manually swap the kinds of bricks between the two fortresses to get the other fortress's natural spawning entities.
 ·Buffed loot from chest next to spawners in Stone and Nether Fortresses.    
 ·End Cities now naturally spawn Endermites at a low rate and very rarely, Phantoms too.
-·Optimized Glowpatches placement code a bit.
+·Optimized a few feature placement codes a bit.
        
        
     (V.7.0.3 Changes) (1.15.1 Minecraft)

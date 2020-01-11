@@ -17,9 +17,9 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>
 {
-	public GlowstonePatchPlacement1(Function<Dynamic<?>, ? extends ChanceConfig> configFactoryIn)
+	public GlowstonePatchPlacement1(Function<Dynamic<?>, ? extends ChanceConfig> configFactory)
 	{
-		super(configFactoryIn);
+		super(configFactory);
 	}
 
 

@@ -19,8 +19,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 public class VinesShort extends Feature<NoFeatureConfig> 
 {
 	   
-	public VinesShort(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public VinesShort(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlocks, Random rand, BlockPos position, NoFeatureConfig config) {

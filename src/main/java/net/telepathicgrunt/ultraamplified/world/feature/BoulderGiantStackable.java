@@ -21,8 +21,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class BoulderGiantStackable extends Feature<BlockBlobConfig> 
 {
-    public BoulderGiantStackable(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public BoulderGiantStackable(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactory) {
+		super(configFactory);
 	}
 
 

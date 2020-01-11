@@ -23,8 +23,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
 
-public BlueIceWaterfall(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+public BlueIceWaterfall(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 private static final BlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();

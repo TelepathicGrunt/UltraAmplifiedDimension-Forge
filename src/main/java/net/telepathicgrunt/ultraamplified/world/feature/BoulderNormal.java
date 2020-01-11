@@ -19,9 +19,9 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class BoulderNormal extends Feature<BlockBlobConfig>
 {
-	public BoulderNormal(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactoryIn)
+	public BoulderNormal(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactory)
 	{
-		super(configFactoryIn);
+		super(configFactory);
 	}
 
 	private final static BlockState mossyCobblestone = Blocks.MOSSY_COBBLESTONE.getDefaultState();

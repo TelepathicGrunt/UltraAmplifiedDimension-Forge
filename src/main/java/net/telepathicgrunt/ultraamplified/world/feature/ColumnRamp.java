@@ -28,8 +28,8 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	public final Set<Block> irreplacableBlocks;
     
     
-    public ColumnRamp(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public ColumnRamp(Function<Dynamic<?>, ? extends ColumnBlocksConfig> configFactory) {
+		super(configFactory);
 		
 		irreplacableBlocks = ImmutableSet.of(Blocks.field_226905_ma_, 
 											 Blocks.AIR,  

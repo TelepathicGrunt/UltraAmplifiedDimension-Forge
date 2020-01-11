@@ -18,8 +18,8 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class BoulderTiny extends Feature<BlockBlobConfig> 
 {
-    public BoulderTiny(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactoryIn) {
-		super(configFactoryIn);
+    public BoulderTiny(Function<Dynamic<?>, ? extends BlockBlobConfig> configFactory) {
+		super(configFactory);
 	}
 
 	private final static BlockState mossyCobblestone = Blocks.MOSSY_COBBLESTONE.getDefaultState();

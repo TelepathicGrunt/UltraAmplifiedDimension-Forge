@@ -20,8 +20,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class SnowIceAllLayer extends Feature<NoFeatureConfig> {
-	public SnowIceAllLayer(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-		super(configFactoryIn);
+	public SnowIceAllLayer(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+		super(configFactory);
 	}
 
 	public static boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig config, Biome biome) {
