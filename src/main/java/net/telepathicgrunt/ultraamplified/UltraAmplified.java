@@ -30,7 +30,9 @@ import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
@@ -75,6 +77,8 @@ public class UltraAmplified {
 		SuperLongRavineCarver.setFillerMap();
 		UnderwaterCaveCarver.setFillerMap();
 		CaveCavityCarver.setFillerMap();
+		GlowPatch.setFillerMap();
+		ContainUndergroundLiquids.setFillerMap();
 	}
 	
 	public void modConfig(final ModConfig.ModConfigEvent event)
