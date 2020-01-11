@@ -246,10 +246,15 @@ public class BiomeLayerSetupUA {
 		    mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SANDLESS_BADLANDS, 20));
 		    mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.WOODED_BADLANDS, 10));
         } 
-        //turns mesa completely into eroded badlands only if config has mesa off and eroded badlands on
-        else if(ConfigUA.spikyBadlands) mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
+        //turns mesa completely into spiky/dissected plateau badlands only if config has mesa off and spiky badlands on
+        else if(ConfigUA.spikyBadlands)
+    	{
+        	mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
+        	mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.BADLANDS_DISSECTED_PLATEAU, 10));
+    	}
         
-
+        //Setup what m variants are mapped and not
+		BiomeInit.mapMBiomes();
         
         
 		    

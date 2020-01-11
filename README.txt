@@ -18,6 +18,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.7.0.4 Changes) (1.15.1 Minecraft)
     
     Config: 
+·Turning off Spiky Badlands or Ice Spike config will now properly apply.
+·Spike Badlands config option will now also apply to Dissected Badlands Plateau biome.
 
     Structures:
 ·Stone and Nether Fortresses now will naturally spawn enemies specific to their kind of fortress at a low rate. You can manually swap the kinds of bricks between the two fortresses to get the other fortress's natural spawning entities.

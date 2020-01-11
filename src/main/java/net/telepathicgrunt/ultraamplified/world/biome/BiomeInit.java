@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDensedWoodedBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDissectedPlateauBiomeUA;
@@ -230,7 +231,6 @@ public class BiomeInit {
 		initBiome(registry, BARREN_END_FIELD, "Barren End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
 		
 		
-		mapMBiomes();
 		mapHillsBiomes();
 		
 		
@@ -328,8 +328,9 @@ public class BiomeInit {
 	//Also better as I can specify new M variant biomes or make any biome an M variant of another unrelated biome.
     public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<>();
     
-    private static void mapMBiomes() {
+    public static void mapMBiomes() {
     	//registers who is an M variant of another biome
+    	BASE_TO_MUTATION_MAP.clear();
     	
     	BASE_TO_MUTATION_MAP.put(PLAINS, SUNFLOWER_PLAINS);
     	BASE_TO_MUTATION_MAP.put(DESERT, DESERT_LAKES);
@@ -339,11 +340,8 @@ public class BiomeInit {
     	BASE_TO_MUTATION_MAP.put(ROCKY_FIELD, GRAVELLY_FIELD);
     	BASE_TO_MUTATION_MAP.put(WOODED_ROCKY_FIELD, GRAVELLY_COLUMNS_FIELD);
     	BASE_TO_MUTATION_MAP.put(FOREST, FLOWER_FOREST);
-    	BASE_TO_MUTATION_MAP.put(SNOWY_TUNDRA, ICE_SPIKES);
     	BASE_TO_MUTATION_MAP.put(JUNGLE, FLOWER_JUNGLE);
     	BASE_TO_MUTATION_MAP.put(JUNGLE_EDGE, FLOWER_JUNGLE_EDGE);
-    	BASE_TO_MUTATION_MAP.put(BADLANDS, SPIKY_BADLANDS);
-    	BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, BADLANDS_DISSECTED_PLATEAU);
     	BASE_TO_MUTATION_MAP.put(WOODED_BADLANDS, DENSED_WOODED_BADLANDS);
     	BASE_TO_MUTATION_MAP.put(GIANT_TREE_TAIGA, GIANT_SPRUCE_TAIGA_PILLARS);
     	BASE_TO_MUTATION_MAP.put(RELIC_GIANT_TREE_TAIGA, RELIC_GIANT_SPRUCE_TAIGA_PILLARS);
@@ -352,6 +350,17 @@ public class BiomeInit {
     	BASE_TO_MUTATION_MAP.put(SAVANNA_TERRACE, SHATTERED_SAVANNA_TERRACE);
     	BASE_TO_MUTATION_MAP.put(SWAMP, SPOOKY_SWAMP);
     	BASE_TO_MUTATION_MAP.put(TAIGA, ROCKY_TAIGA);
+    	
+    	if(ConfigUA.iceSpike) 
+    	{
+    		BASE_TO_MUTATION_MAP.put(SNOWY_TUNDRA, ICE_SPIKES);
+    	}
+    	
+    	if(ConfigUA.spikyBadlands)
+    	{
+	    	BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, BADLANDS_DISSECTED_PLATEAU);
+	    	BASE_TO_MUTATION_MAP.put(BADLANDS, SPIKY_BADLANDS);
+    	}
     }
 
     
