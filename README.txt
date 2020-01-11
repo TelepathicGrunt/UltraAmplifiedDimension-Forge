@@ -16,8 +16,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
         
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
-    
+     
+    Dimension: 
+·Beds no longer explode in the dimension! Sleeping in the bed will turn night into day and set your respawn point. Bad weather will not be affected however.
+
     Config: 
+·A config is added to let you choose whether beds should explode or not in the dimension. Set to false by default.
 ·Turning off Spiky Badlands or Ice Spike config will now properly apply.
 ·Spike Badlands config option will now also apply to Dissected Badlands Plateau biome.
 ·Fixed but where setting mutated biome spawnrate to max with multiple biomes in world may cause small part of biomes bordering each other to not be mutated.
@@ -27,6 +31,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Buffed loot from chest next to spawners in Stone and Nether Fortresses.    
 ·End Cities now naturally spawn Endermites at a low rate and very rarely, Phantoms too.
 ·Fixed bug where leaves in Dark Oak Dungeons and Jungle Dungeons would decay right away.
+·Barely lowered the long ravines towards bottom of world so they have lava filled floor more often.
 
     Biome: 
 ·Fixed bug that prevented giant mushrooms from generating in Dark forest and Relic Dark Forest biome.
@@ -36,7 +41,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Badlands biome columns and ramps now has Stone center.
 ·Sandless Badlands columns and ramps now has Terracotta center with Orange Terracotta base.
 ·Sandless Badlands now has no sand at the very top layer anymore. It is... sandless lol.
-·N
+·Lava below sealevel in Netherland will be set to Obsidian when bordering water right away to prevent a potential crash if Netherland borders another biome over a great distance and the lava updates on its own...
 
     Misc: 
 ·Optimized a bit and cleaned some code in the back end.      

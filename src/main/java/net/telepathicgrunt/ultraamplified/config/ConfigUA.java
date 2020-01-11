@@ -35,6 +35,7 @@ public class ConfigUA {
     public static double xzScaleModifier = 8.55515F;
     public static double yTerrainModifier = 68419.786D;
     public static double yScaleModifier = 428.613D;
+    public static boolean bedExplodes = false;
     public static int yMaximum = 245;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
@@ -139,6 +140,7 @@ public class ConfigUA {
         public final ForgeConfigSpec.DoubleValue xzScaleModifier;
         public final ForgeConfigSpec.DoubleValue yTerrainModifier;
         public final ForgeConfigSpec.DoubleValue yScaleModifier;
+	    public final ForgeConfigSpec.BooleanValue bedExplodes;
         public final ForgeConfigSpec.IntValue yMaximum;
         public final ForgeConfigSpec.IntValue dungeonSpawnrate;
         public final ForgeConfigSpec.IntValue ravineSpawnrate;
@@ -529,6 +531,11 @@ public class ConfigUA {
             		.translation("ultraamplified.config.structure.heavyfog")
             		.define("heavyFog", false);
 
+            		bedExplodes = builder
+                    .comment("\r\nShould beds explode in the Ultra Amplified Dimension?")
+                    .translation("ultraamplified.config.dimension.bedexplodes")
+                    .define("bedExplodes", false);
+            		
 
 	  				yMaximum = builder
             		.comment("\r\nMaxium height the terrain can generate up to.")
@@ -872,6 +879,7 @@ public class ConfigUA {
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
+	    bedExplodes = SERVER.bedExplodes.get();
 	    yMaximum = SERVER.yMaximum.get();
     	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();
