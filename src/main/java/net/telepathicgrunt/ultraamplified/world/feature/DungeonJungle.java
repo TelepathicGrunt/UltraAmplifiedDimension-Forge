@@ -10,6 +10,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.tileentity.LockableLootTileEntity;
@@ -32,7 +33,10 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 	}
 
 	private static final Logger LOGGER = LogManager.getLogger();
-    private static final BlockState CaveAir = Blocks.CAVE_AIR.getDefaultState();
+    private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
+    private static final BlockState LEAVES = Blocks.JUNGLE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
+    private static final BlockState LOGS = Blocks.JUNGLE_LOG.getDefaultState();
+    private static final BlockState PLANKS = Blocks.JUNGLE_PLANKS.getDefaultState();
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
@@ -89,12 +93,12 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
                         {
                             if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                world.setBlockState(blockpos1, CaveAir, 2);
+                                world.setBlockState(blockpos1, CAVE_AIR, 2);
                             }
                         }
                         else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            world.setBlockState(blockpos1, CaveAir, 2);
+                            world.setBlockState(blockpos1, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
@@ -102,16 +106,16 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
                         {
                             if (i4 == -1 && rand.nextInt(5) != 0)
                             {
-                                world.setBlockState(blockpos1, Blocks.JUNGLE_PLANKS.getDefaultState(), 2);
+                                world.setBlockState(blockpos1, PLANKS, 2);
                             }
                             else
                             {
                             	if(rand.nextInt(3) == 0) 
                             	{
-                                    world.setBlockState(blockpos1, Blocks.JUNGLE_LOG.getDefaultState(), 2);
+                                    world.setBlockState(blockpos1, LOGS, 2);
                             	}
                             	else {
-                            		world.setBlockState(blockpos1, Blocks.JUNGLE_LEAVES.getDefaultState(), 2);
+                            		world.setBlockState(blockpos1, LEAVES, 2);
                             	}
                             }
                         }

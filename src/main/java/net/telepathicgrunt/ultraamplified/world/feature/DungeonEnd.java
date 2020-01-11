@@ -33,7 +33,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
 
 
 	private static final Logger LOGGER = LogManager.getLogger();
-    private static final BlockState CaveAir = Blocks.CAVE_AIR.getDefaultState();
+    private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
     
     //only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
     
@@ -90,12 +90,12 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
                         {
                             if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
                             {
-                                world.setBlockState(blockpos1, CaveAir, 2);
+                                world.setBlockState(blockpos1, CAVE_AIR, 2);
                             }
                         }
                         else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
                         {
-                            world.setBlockState(blockpos1, CaveAir, 2);
+                            world.setBlockState(blockpos1, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
