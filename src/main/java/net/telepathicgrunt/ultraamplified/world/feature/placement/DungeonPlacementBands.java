@@ -28,7 +28,7 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig>
 	{
 		int count = ConfigUA.dungeonSpawnrate;
 
-		return IntStream.range(0, count).mapToObj((p_215051_3_) ->
+		return IntStream.range(0, count).mapToObj((function) ->
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
@@ -40,18 +40,24 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig>
 			{
 				y = random.nextInt(26) + 75;
 				//range: 75 - 100
+				//gap: 25
+				//chance per pos: 1.200%
 			}
 			//35% chance
 			else if (rand < 65)
 			{
 				y = random.nextInt(160) + 1;
 				//range 1 - 160
+				//gap: 160
+				//chance per pos: 0.219%
 			}
 			//35%
 			else
 			{
 				y = random.nextInt(86) + 160;
 				//range: 160 - 245
+				//gap: 85
+				//chance per pos: 0.412%
 			}
 
 			return pos.add(x, y, z);
