@@ -80,7 +80,7 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 
 	    	  //forge fix as it forgot check for mycelium for mushrooms
 	         Block block = p_227209_1_.getBlockState(p_227209_2_.down()).getBlock();
-	         if (!func_227250_b_(block) && block != Blocks.MYCELIUM) {
+	         if (!func_227250_b_(block) && block != Blocks.MYCELIUM && block != Blocks.GRASS_BLOCK) {
 	            return false;
 	         } else {
 	            for(int j = 0; j <= p_227209_3_; ++j) {
