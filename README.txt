@@ -20,6 +20,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Config: 
 ·Turning off Spiky Badlands or Ice Spike config will now properly apply.
 ·Spike Badlands config option will now also apply to Dissected Badlands Plateau biome.
+·Fixed but where setting mutated biome spawnrate to max with multiple biomes in world may cause small part of biomes bordering each other to not be mutated.
 
     Structures:
 ·Stone and Nether Fortresses now will naturally spawn enemies specific to their kind of fortress at a low rate. You can manually swap the kinds of bricks between the two fortresses to get the other fortress's natural spawning entities.
