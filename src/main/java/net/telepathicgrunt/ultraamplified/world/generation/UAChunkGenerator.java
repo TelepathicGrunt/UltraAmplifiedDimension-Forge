@@ -148,28 +148,28 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 
 	private double func_222574_c(int p_222574_1_, int p_222574_2_)
 	{
-		double d0 = this.depthNoise.getValue((double) (p_222574_1_ * 200), 10.0D, (double) (p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
-		if (d0 < 0.0D)
+		double noise = this.depthNoise.getValue((double) (p_222574_1_ * 200), 10.0D, (double) (p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+		if (noise < 0.0D)
 		{
-			d0 = -d0 * 0.3D;
+			noise = -noise * 0.3D;
 		}
 
-		d0 = d0 * 3.0D - 2.0D;
-		if (d0 < 0.0D)
+		noise = noise * 3.0D - 2.0D;
+		if (noise < 0.0D)
 		{
-			d0 = d0 / 28.0D;
+			noise = noise / 28.0D;
 		}
 		else
 		{
-			if (d0 > 1.0D)
+			if (noise > 1.0D)
 			{
-				d0 = 1.0D;
+				noise = 1.0D;
 			}
 
-			d0 = d0 / 40.0D;
+			noise = noise / 40.0D;
 		}
 
-		return d0;
+		return noise;
 	}
 
 
@@ -277,7 +277,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 
 	public int getGroundHeight()
 	{
-		return this.world.getSeaLevel() + 1;
+		return ConfigUA.seaLevel + 1;
 	}
 
 
