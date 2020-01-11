@@ -33,6 +33,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Relic Dark Forest now generates a lot more grass and with it mainly being Tall Grass.
 ·Dissected Badlands Plateau biome columns and ramps now has Terracotta center.
 ·Badlands biome columns and ramps now has Stone center.
+·Sandless Badlands columns and ramps now has Terracotta center with Orange Terracotta base.
+·Sandless Badlands now has no sand at the very top layer anymore. It is... sandless lol.
 
     Misc: 
 ·Optimized a bit and cleaned some code in the back end.      

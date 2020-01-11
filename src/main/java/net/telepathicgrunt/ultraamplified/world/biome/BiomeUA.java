@@ -135,6 +135,8 @@ public class BiomeUA extends Biome {
     protected static final BlockState STONE = Blocks.STONE.getDefaultState();
     protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
     protected static final BlockState COARSE_DIRT = Blocks.COARSE_DIRT.getDefaultState();
+    protected static final BlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
+    protected static final BlockState WHITE_TERRACOTTA = Blocks.WHITE_TERRACOTTA.getDefaultState();
 
     public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SAND, SANDSTONE);
     public static final SurfaceBuilderConfig SAND_SANDSTONE_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SANDSTONE, SANDSTONE);
@@ -147,7 +149,8 @@ public class BiomeUA extends Biome {
     public static final SurfaceBuilderConfig GRASS_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, SANDSTONE);
     public static final SurfaceBuilderConfig GRASS_SAND_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
     public static final SurfaceBuilderConfig COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(COARSE_DIRT, COARSE_DIRT, GRAVEL);
-
+    public static final SurfaceBuilderConfig RED_TERRACOTTA_WHITE_TERRACOTTA_GRAVEL_SURFACE = new SurfaceBuilderConfig(RED_TERRACOTTA, WHITE_TERRACOTTA, GRAVEL);
+    
     public static final SurfaceBuilder<SurfaceBuilderConfig> DESERT_LAKE_SURFACE_BUILDER = new DesertLakesSurfaceBuilder(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> BADLANDS_SURFACE_BUILDER_UA = new BadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> MODIFIED_BADLANDS_SURFACE_BUILDER_UA = new ModifiedBadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
