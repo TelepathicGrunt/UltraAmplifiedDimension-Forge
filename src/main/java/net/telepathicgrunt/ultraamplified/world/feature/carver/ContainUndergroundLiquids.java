@@ -31,10 +31,9 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 	private static Map<Biome, BlockState> fillerBiomeMap;
 
 	/**
-	 * Have to make this map much later since the biomes needs to be initialized
-	 * first and that's delayed a bit
+	 * Have to make this map in UltraAmplified setup method since the biomes needs to be initialized first
 	 */
-	public void setFillerMap() {
+	public static void setFillerMap() {
 		if (fillerBiomeMap == null) {
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
@@ -48,11 +47,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 		}
 	}
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random,
-			BlockPos pos, NoFeatureConfig configBlock) {
-
-		setFillerMap();
-
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock) {
 		// set y to 0
 		pos.down(pos.getY());
 

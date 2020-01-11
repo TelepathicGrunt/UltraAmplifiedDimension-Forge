@@ -273,19 +273,19 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		protected boolean generateChest(IWorld world, MutableBoundingBox structurebb, Random randomIn, int x, int y,
+		protected boolean generateChest(IWorld world, MutableBoundingBox structurebb, Random random, int x, int y,
 				int z, ResourceLocation loot) {
 			BlockPos blockpos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y),
 					this.getZWithOffset(x, z));
 
 			if (structurebb.isVecInside(blockpos) && world.getBlockState(blockpos).getMaterial() == Material.AIR) {
 				BlockState iblockstate = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE,
-						randomIn.nextBoolean() ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST);
+						random.nextBoolean() ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST);
 				this.setBlockState(world, iblockstate, x, y, z, structurebb);
 				ChestMinecartEntity entityminecartchest = new ChestMinecartEntity(world.getWorld(),
 						(double) ((float) blockpos.getX() + 0.5F), (double) ((float) blockpos.getY() + 0.5F),
 						(double) ((float) blockpos.getZ() + 0.5F));
-				entityminecartchest.setLootTable(loot, randomIn.nextLong());
+				entityminecartchest.setLootTable(loot, random.nextLong());
 				world.addEntity(entityminecartchest);
 				return true;
 			} else {
@@ -293,7 +293,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;
@@ -301,41 +301,41 @@ public class MineshaftPiecesUA {
 				int i1 = this.sectionCount * 5 - 1;
 				BlockState iblockstate = this.getPlanksBlock();
 				this.fillWithBlocks(world, MutableBoundingBoxIn, 0, 0, 0, 2, 1, i1, CAVE_AIR, CAVE_AIR, false);
-				this.generateMaybeBox(world, MutableBoundingBoxIn, randomIn, 0.8F, 0, 2, 0, 2, 2, i1, CAVE_AIR,
+				this.generateMaybeBox(world, MutableBoundingBoxIn, random, 0.8F, 0, 2, 0, 2, 2, i1, CAVE_AIR,
 						CAVE_AIR, false, false);
 
 				if (this.hasSpiders) {
-					this.generateMaybeBox(world, MutableBoundingBoxIn, randomIn, 0.6F, 0, 0, 0, 2, 1, i1,
+					this.generateMaybeBox(world, MutableBoundingBoxIn, random, 0.6F, 0, 0, 0, 2, 1, i1,
 							Blocks.COBWEB.getDefaultState(), CAVE_AIR, false, true);
 				}
 
 				for (int j1 = 0; j1 < this.sectionCount; ++j1) {
 					int k1 = 2 + j1 * 5;
-					this.placeSupport(world, MutableBoundingBoxIn, 0, 0, k1, 2, 2, randomIn);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 - 1);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 - 1);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 0, 2, k1 + 1);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.1F, 2, 2, k1 + 1);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 - 2);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 - 2);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 0, 2, k1 + 2);
-					this.placeCobWeb(world, MutableBoundingBoxIn, randomIn, 0.05F, 2, 2, k1 + 2);
+					this.placeSupport(world, MutableBoundingBoxIn, 0, 0, k1, 2, 2, random);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.1F, 0, 2, k1 - 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.1F, 2, 2, k1 - 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.1F, 0, 2, k1 + 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.1F, 2, 2, k1 + 1);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 0, 2, k1 - 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 2, 2, k1 - 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 0, 2, k1 + 2);
+					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 2, 2, k1 + 2);
 
 					if (ConfigUA.chestGeneration) {
-						if (randomIn.nextInt(50) == 0) {
-							this.generateChest(world, MutableBoundingBoxIn, randomIn, 2, 0, k1 - 1,
+						if (random.nextInt(50) == 0) {
+							this.generateChest(world, MutableBoundingBoxIn, random, 2, 0, k1 - 1,
 									LootTables.CHESTS_ABANDONED_MINESHAFT);
 						}
 
-						if (randomIn.nextInt(50) == 0) {
-							this.generateChest(world, MutableBoundingBoxIn, randomIn, 0, 0, k1 + 1,
+						if (random.nextInt(50) == 0) {
+							this.generateChest(world, MutableBoundingBoxIn, random, 0, 0, k1 + 1,
 									LootTables.CHESTS_ABANDONED_MINESHAFT);
 						}
 					}
 
 					if (this.hasSpiders && !this.spawnerPlaced) {
 						int l1 = this.getYWithOffset(0);
-						int i2 = k1 - 1 + randomIn.nextInt(3);
+						int i2 = k1 - 1 + random.nextInt(3);
 						int j2 = this.getXWithOffset(1, i2);
 						int k2 = this.getZWithOffset(1, i2);
 						BlockPos blockpos = new BlockPos(j2, l1, k2);
@@ -373,7 +373,7 @@ public class MineshaftPiecesUA {
 
 						if (iblockstate2.getMaterial() != Material.AIR) {
 							float f = this.getSkyBrightness(world, 1, 0, j3, MutableBoundingBoxIn) ? 0.7F : 0.9F;
-							this.randomlyPlaceBlock(world, MutableBoundingBoxIn, randomIn, f, 1, 0, j3, iblockstate1);
+							this.randomlyPlaceBlock(world, MutableBoundingBoxIn, random, f, 1, 0, j3, iblockstate1);
 						}
 					}
 				}
@@ -581,7 +581,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;
@@ -986,7 +986,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState flooring;
 
@@ -1156,7 +1156,7 @@ public class MineshaftPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn)) {
 				return false;

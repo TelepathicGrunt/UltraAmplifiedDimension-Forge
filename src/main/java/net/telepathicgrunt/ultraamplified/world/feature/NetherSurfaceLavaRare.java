@@ -28,19 +28,18 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 	private static final BlockState SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
 	private static final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
 	
-	public final Set<Block> acceptableSurroundingBlocks;
-	
-	public NetherSurfaceLavaRare(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51430_1_)
-	{
-		super(p_i51430_1_);
-		
-		acceptableSurroundingBlocks = ImmutableSet.of(
+	public final Set<Block> acceptableSurroundingBlocks = ImmutableSet.of(
 											Blocks.NETHERRACK, 
 											Blocks.GRAVEL, 
 											Blocks.SOUL_SAND, 
 											Blocks.MAGMA_BLOCK, 
 											Blocks.NETHER_QUARTZ_ORE, 
 											Blocks.NETHER_BRICKS);
+	
+	
+	public NetherSurfaceLavaRare(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51430_1_)
+	{
+		super(p_i51430_1_);
 	}
 
 

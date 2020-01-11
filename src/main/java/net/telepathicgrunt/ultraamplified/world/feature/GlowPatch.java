@@ -18,72 +18,72 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 
-public class GlowPatch extends Feature<CountConfig> {
 
-	private Map<BlockState, BlockState> GLOWBLOCKMAP;
+public class GlowPatch extends Feature<CountConfig>
+{
 
-	public GlowPatch(Function<Dynamic<?>, ? extends CountConfig> configFactory) {
+	private static Map<BlockState, BlockState> GLOWBLOCKMAP;
+
+
+	/**
+	 * Have to make this map in UltraAmplified setup method since the blocks needs to be initialized first
+	 */
+	public static void setFillerMap()
+	{
+		if (GLOWBLOCKMAP == null)
+		{
+			GLOWBLOCKMAP = new HashMap<BlockState, BlockState>();
+
+			GLOWBLOCKMAP.put(Blocks.DIRT.getDefaultState(), BlocksInit.GLOWDIRT.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.COARSE_DIRT.getDefaultState(), BlocksInit.COARSE_GLOWDIRT.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.GRASS_BLOCK.getDefaultState(), BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.MYCELIUM.getDefaultState(), BlocksInit.GLOWMYCELIUM.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.STONE.getDefaultState(), BlocksInit.GLOWSTONE_ORE.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.PODZOL.getDefaultState(), BlocksInit.GLOWPODZOL.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.SAND.getDefaultState(), BlocksInit.GLOWSAND.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.RED_SAND.getDefaultState(), BlocksInit.REDGLOWSAND.get().getDefaultState());
+		}
+	}
+
+
+	public GlowPatch(Function<Dynamic<?>, ? extends CountConfig> configFactory)
+	{
 		super(configFactory);
 	}
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig) {
-		
-		//create the map here because it contains our modded blocks.
-		//If we make the map in the constructor or as a class field, it'll cause
-		//forge to get stuck whe registering this feature and no other registry events
-		//will fire which will cause forge to not load this mod at all. Failing without errors...
-		if(GLOWBLOCKMAP == null) {
-			Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
 
-			result.put(Blocks.DIRT.getDefaultState(), BlocksInit.GLOWDIRT.get().getDefaultState());
-			result.put(Blocks.COARSE_DIRT.getDefaultState(), BlocksInit.COARSE_GLOWDIRT.get().getDefaultState());
-			result.put(Blocks.GRASS_BLOCK.getDefaultState(), BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState());
-			result.put(Blocks.MYCELIUM.getDefaultState(), BlocksInit.GLOWMYCELIUM.get().getDefaultState());
-			result.put(Blocks.STONE.getDefaultState(), BlocksInit.GLOWSTONE_ORE.get().getDefaultState());
-			result.put(Blocks.PODZOL.getDefaultState(), BlocksInit.GLOWPODZOL.get().getDefaultState());
-			result.put(Blocks.SAND.getDefaultState(), BlocksInit.GLOWSAND.get().getDefaultState());
-			result.put(Blocks.RED_SAND.getDefaultState(), BlocksInit.REDGLOWSAND.get().getDefaultState());
-			
-			GLOWBLOCKMAP = result;
-		}
-		
-		
-        //UltraAmplified.Logger.log(Level.DEBUG, "Glowpatch at "+pos.getX() +", "+pos.getY()+", "+pos.getZ());
-        
-        
-		
-		boolean generatedSuccessfully = false;
-		
-
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig)
+	{
 		// tries as times specified to convert a randomly chosen nearby block
-		for (int attempts = 0; attempts < countConfig.count; ++attempts) {
-
+		for (int attempts = 0; attempts < countConfig.count; ++attempts)
+		{
 			// clustered around the center the most
 			int gausX = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
-			int gausY =  rand.nextInt(4) - rand.nextInt(4); // range of -4 to 4
+			int gausY = rand.nextInt(4) - rand.nextInt(4); // range of -4 to 4
 			int gausZ = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
 			BlockPos blockpos = pos.add(gausX, gausY, gausZ);
 			BlockState chosenBlock = world.getBlockState(blockpos);
 			BlockState chosenAboveBlock = world.getBlockState(blockpos.up());
-			
-			if (chosenBlock.getMaterial() != Material.AIR) {
+
+			if (chosenBlock.getMaterial() != Material.AIR)
+			{
 
 				// turns stone into glowstone ore even if no air above
-				if (chosenBlock == Blocks.STONE.getDefaultState()) {
-
+				if (chosenBlock == Blocks.STONE.getDefaultState())
+				{
 					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
-					generatedSuccessfully = true;
 				}
 				// turns valid surface blocks with air above into glowstone variants
-				else if (GLOWBLOCKMAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR) {
-
+				else if (GLOWBLOCKMAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR)
+				{
 					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
-					generatedSuccessfully = true;
 				}
 			}
 		}
 
-		return generatedSuccessfully;
+		//debugging
+		//UltraAmplified.Logger.log(Level.DEBUG, "Glowpatch at "+pos.getX() +", "+pos.getY()+", "+pos.getZ());
+		return true;
 	}
 
 }

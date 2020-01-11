@@ -1,7 +1,6 @@
 package net.telepathicgrunt.ultraamplified.world.feature.carver;
 
 import java.util.BitSet;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -34,15 +33,18 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	protected static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
 	// Blocks that we can carve out.
-	private static final Map<BlockState, BlockState> canReplaceMap = createMap();
-	private static Map<BlockState, BlockState> createMap() {
+	private static final Map<BlockState, BlockState> canReplaceMap;
+	static
+	{
 		Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
+		
 		result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState());
 		result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState());
 		result.put(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState());
 		result.put(Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState());
 		result.put(Blocks.LAVA.getDefaultState(), Blocks.LAVA.getDefaultState());
-		return Collections.unmodifiableMap(result);
+		
+		canReplaceMap = result;
 	}
 	
 	// Used to keep track of what block to use to fill in certain air/liquids
@@ -50,27 +52,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	
 	// Associates what block to use when in which biome when setting the replacementBlock.
     private static Map<Biome, BlockState> fillerBiomeMap;
-	
-    
-	public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight) {
-		super(probabilityConfig, maximumHeight);
-		
-	}
 
-	
 	/**
-	 * Sets the internal seed for this carver after we get the world seed. 
-	 * (Based on Nether's surface builder code)
-	 */
-	public static void setSeed(long seed) {
-		if (noiseGen == null) {
-			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
-		}
-	}
-	
-	/**
-	 * Have to make this map much later instead of in constructor since 
-	 * the biomes needs to be initialized first and that's delayed a bit
+	 * Have to make this map in UltraAmplified setup method since the biomes needs to be initialized first
 	 */
 	public static void setFillerMap() {
 		if (fillerBiomeMap == null) {
@@ -87,11 +71,28 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	}
 
 	/**
+	 * Sets the internal seed for this carver after we get the world seed. 
+	 * (Based on Nether's surface builder code)
+	 */
+	public static void setSeed(long seed) {
+		if (noiseGen == null) {
+			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
+		}
+	}
+	
+	
+	public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight) {
+		super(probabilityConfig, maximumHeight);
+		
+	}
+
+
+	/**
 	 * Checks whether the entire cave can spawn or not. (Not the individual parts)
 	 */
-	public boolean shouldCarve(Random randomIn, int chunkX, int chunkZ, ProbabilityConfig config) {
-		setSeed(randomIn.nextLong());
-		return randomIn.nextFloat() <= (float) (ConfigUA.caveCavitySpawnrate) / 1000f;
+	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config) {
+		setSeed(random.nextLong());
+		return random.nextFloat() <= (float) (ConfigUA.caveCavitySpawnrate) / 1000f;
 	}
 
 	

@@ -127,47 +127,47 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 4, 5, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 4, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 1, 4, 4, 1, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 3, 4, 4, 3, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 0, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 4, 3, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 4, 1, 4, 4, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 3, 4, 3, 4, 4, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 
-			if (ConfigUA.chestGeneration && (this.stoneVariant ? randomIn.nextInt(9) == 0 : randomIn.nextInt(6) == 0)
+			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0)
 					&& structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3),
 							this.getYWithOffset(2), this.getZWithOffset(3, 3)))) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 2, 3,
+				this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3,
 						(this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 0; j <= 4; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -211,45 +211,45 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 4, 5, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
-			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), randomIn)
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
+			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), random)
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true));
-			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), randomIn)
+			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), random)
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true));
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 0, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 1, 0, 4, 1, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 3, 0, 4, 3, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 4, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 2, 4, 4, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 4, 1, 4, 4, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 3, 4, 3, 4, 4, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 
-			if (ConfigUA.chestGeneration && (this.stoneVariant ? randomIn.nextInt(9) == 0 : randomIn.nextInt(6) == 0)
+			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0)
 					&& structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(1, 3),
 							this.getYWithOffset(2), this.getZWithOffset(1, 3)))) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 1, 2, 3,
+				this.generateChest(world, structureBoundingBoxIn, random, 1, 2, 3,
 						(this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 0; j <= 4; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -283,13 +283,13 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = getStoneVariantBlockState(
-					Blocks.NETHER_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH), randomIn);
+					Blocks.NETHER_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH), random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 
 			for (int i = 0; i <= 9; ++i) {
 				int j = Math.max(1, 7 - i);
@@ -297,9 +297,9 @@ public class FortressPiecesUA {
 				int l = i;
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, i, 4, j, i,
 						Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-						randomIn);
+						random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, j + 1, i, 3, k - 1, i,
-						Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+						Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 
 				if (i <= 6) {
 					this.setBlockState(world, iblockstate, 1, j + 1, i, structureBoundingBoxIn);
@@ -309,24 +309,24 @@ public class FortressPiecesUA {
 
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, k, i, 4, k, i,
 						Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-						randomIn);
+						random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, j + 1, i, 0, k - 1, i,
 						Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-						randomIn);
+						random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, j + 1, i, 4, k - 1, i,
 						Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-						randomIn);
+						random);
 
 				if ((i & 1) == 0) {
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, j + 2, i, 0, j + 3, i, iblockstate1,
-							iblockstate1, false, randomIn);
+							iblockstate1, false, random);
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, j + 2, i, 4, j + 3, i, iblockstate1,
-							iblockstate1, false, randomIn);
+							iblockstate1, false, random);
 				}
 
 				for (int i1 = 0; i1 <= 4; ++i1) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i1,
-							-1, l, structureBoundingBoxIn, randomIn);
+							-1, l, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -368,68 +368,68 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 1, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 8, 5, 8,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 8, 6, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 2, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 2, 0, 8, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 0, 1, 4, 0, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 3, 0, 7, 4, 0, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 4, 8, 2, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 1, 4, 2, 2, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 1, 4, 7, 2, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 8, 7, 3, 8, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.EAST, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 3, 8, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					8, 3, 8, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 6, 0, 3, 7, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 3, 6, 8, 3, 7, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 4, 0, 5, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 3, 4, 8, 5, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 5, 2, 5, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 3, 5, 7, 5, 5,
 					Blocks.NETHER_BRICKS.getDefaultState(),
-					getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn), false, randomIn);
+					getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 4, 5, 1, 5, 5, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 4, 5, 7, 5, 5, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 
 			for (int i = 0; i <= 5; ++i) {
 				for (int j = 0; j <= 8; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), j,
-							-1, i, structureBoundingBoxIn, randomIn);
+							-1, i, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -463,34 +463,34 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 4, 5, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 0, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 4, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 1, 0, 4, 1, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 3, 0, 4, 3, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 1, 4, 4, 1, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 3, 4, 4, 3, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 0; j <= 4; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -526,55 +526,55 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 6, 1, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 6, 7, 6,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 1, 6, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 6, 1, 6, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 2, 0, 6, 6, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 2, 6, 6, 6, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 0, 6, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 5, 0, 6, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 2, 0, 6, 6, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 2, 5, 6, 6, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 6, 0, 4, 6, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 0, 4, 5, 0, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 6, 6, 4, 6, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 6, 4, 5, 6, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 2, 0, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 2, 0, 5, 4, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 6, 2, 6, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 5, 2, 6, 5, 4, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 
 			for (int i = 0; i <= 6; ++i) {
 				for (int j = 0; j <= 6; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -610,27 +610,27 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 4, 5, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 0, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 4, 5, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 4, 0, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 4, 4, 5, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 0; j <= 4; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -684,65 +684,65 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 3, 0, 11, 4, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 7, 18, 4, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 0, 10, 7, 18,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 8, 18, 7, 10,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 5, 0, 7, 5, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 5, 11, 7, 5, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 0, 11, 5, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 11, 11, 5, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 7, 7, 5, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 7, 18, 5, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 11, 7, 5, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 11, 18, 5, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 2, 0, 11, 2, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 2, 13, 11, 2, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 0, 0, 11, 1, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 0, 15, 11, 1, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 7; i <= 11; ++i) {
 				for (int j = 0; j <= 2; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, 18 - j, structureBoundingBoxIn, randomIn);
+							-1, 18 - j, structureBoundingBoxIn, random);
 				}
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 7, 5, 2, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 13, 2, 7, 18, 2, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 7, 3, 1, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 15, 0, 7, 18, 1, 11,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int k = 0; k <= 2; ++k) {
 				for (int l = 7; l <= 11; ++l) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), k,
-							-1, l, structureBoundingBoxIn, randomIn);
+							-1, l, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(),
-							18 - k, -1, l, structureBoundingBoxIn, randomIn);
+							18 - k, -1, l, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -786,39 +786,39 @@ public class FortressPiecesUA {
 			tagCompound.putInt("Seed", this.fillSeed);
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
-			Random random = new Random((long) this.fillSeed);
+			Random seededRandom = new Random((long) this.fillSeed);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 3; j <= 4; ++j) {
-					int k = random.nextInt(8);
+					int k = seededRandom.nextInt(8);
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, i, j, 0, i, j, k,
 							Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-							randomIn);
+							random);
 				}
 			}
 
-			int l = random.nextInt(8);
+			int l = seededRandom.nextInt(8);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 0, 5, l,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
-			l = random.nextInt(8);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
+			l = seededRandom.nextInt(8);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 5, 0, 4, 5, l,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (l = 0; l <= 4; ++l) {
-				int i1 = random.nextInt(5);
+				int i1 = seededRandom.nextInt(5);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, l, 2, 0, l, 2, i1,
 						Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-						randomIn);
+						random);
 			}
 
 			for (l = 0; l <= 4; ++l) {
 				for (int j1 = 0; j1 <= 1; ++j1) {
-					int k1 = random.nextInt(3);
+					int k1 = seededRandom.nextInt(3);
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, l, j1, 0, l, j1, k1,
 							Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-							randomIn);
+							random);
 				}
 			}
 
@@ -854,56 +854,56 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 12, 4, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 12, 13, 12,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 1, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 0, 12, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 11, 4, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 11, 10, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 9, 11, 7, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 0, 4, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 0, 10, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 9, 0, 7, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 11, 2, 10, 12, 10,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 8, 0, 7, 8, 0,
-					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), randomIn),
-					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), randomIn), false, randomIn);
+					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), random),
+					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState(), random), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 
 			for (int i = 1; i <= 11; i += 2) {
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, i, 10, 0, i, 11, 0, iblockstate, iblockstate,
-						false, randomIn);
+						false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, i, 10, 12, i, 11, 12, iblockstate,
-						iblockstate, false, randomIn);
+						iblockstate, false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 10, i, 0, 11, i, iblockstate1,
-						iblockstate1, false, randomIn);
+						iblockstate1, false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 12, 10, i, 12, 11, i, iblockstate1,
-						iblockstate1, false, randomIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+						iblockstate1, false, random);
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						i, 13, 0, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						i, 13, 12, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						0, 13, i, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						12, 13, i, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate, i + 1, 13, 0, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate, i + 1, 13, 12, structureBoundingBoxIn);
@@ -914,77 +914,77 @@ public class FortressPiecesUA {
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 13, 0, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 13, 12, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					12, 13, 12, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					12, 13, 0, structureBoundingBoxIn);
 
 			for (int k = 3; k <= 9; k += 2) {
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 7, k, 1, 8, k,
 						iblockstate.with(FenceBlock.WEST, Boolean.valueOf(true)),
-						iblockstate.with(FenceBlock.WEST, Boolean.valueOf(true)), false, randomIn);
+						iblockstate.with(FenceBlock.WEST, Boolean.valueOf(true)), false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 7, k, 11, 8, k,
 						iblockstate.with(FenceBlock.EAST, Boolean.valueOf(true)),
-						iblockstate.with(FenceBlock.EAST, Boolean.valueOf(true)), false, randomIn);
+						iblockstate.with(FenceBlock.EAST, Boolean.valueOf(true)), false, random);
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 8, 2, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 4, 12, 2, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 0, 0, 8, 1, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 0, 9, 8, 1, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 4, 3, 1, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 9, 0, 4, 12, 1, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int l = 4; l <= 8; ++l) {
 				for (int j = 0; j <= 2; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), l,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), l,
-							-1, 12 - j, structureBoundingBoxIn, randomIn);
+							-1, 12 - j, structureBoundingBoxIn, random);
 				}
 			}
 
 			for (int i1 = 0; i1 <= 2; ++i1) {
 				for (int j1 = 4; j1 <= 8; ++j1) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i1,
-							-1, j1, structureBoundingBoxIn, randomIn);
+							-1, j1, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(),
-							12 - i1, -1, j1, structureBoundingBoxIn, randomIn);
+							12 - i1, -1, j1, structureBoundingBoxIn, random);
 				}
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 5, 5, 7, 5, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 1, 6, 6, 4, 6,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
-			this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn), 6,
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
+			this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random), 6,
 					0, 6, structureBoundingBoxIn);
-			this.setBlockState(world, getStoneVariantBlockState(Blocks.LAVA.getDefaultState(), randomIn), 6, 5, 6,
+			this.setBlockState(world, getStoneVariantBlockState(Blocks.LAVA.getDefaultState(), random), 6, 5, 6,
 					structureBoundingBoxIn);
 			BlockPos blockpos = new BlockPos(this.getXWithOffset(6, 6), this.getYWithOffset(5),
 					this.getZWithOffset(6, 6));
 
 			if (ConfigUA.chestGeneration) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 6, 5, 8,
+				this.generateChest(world, structureBoundingBoxIn, random, 6, 5, 8,
 						(this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
@@ -1025,55 +1025,55 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 12, 4, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 12, 13, 12,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 1, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 5, 0, 12, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 11, 4, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 11, 10, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 9, 11, 7, 12, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 0, 4, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 0, 10, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 9, 0, 7, 12, 1,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 11, 2, 10, 12, 10,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate2 = iblockstate1.with(FenceBlock.WEST, Boolean.valueOf(true));
 			BlockState iblockstate3 = iblockstate1.with(FenceBlock.EAST, Boolean.valueOf(true));
 
 			for (int i = 1; i <= 11; i += 2) {
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, i, 10, 0, i, 11, 0, iblockstate, iblockstate,
-						false, randomIn);
+						false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, i, 10, 12, i, 11, 12, iblockstate,
-						iblockstate, false, randomIn);
+						iblockstate, false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 10, i, 0, 11, i, iblockstate1,
-						iblockstate1, false, randomIn);
+						iblockstate1, false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 12, 10, i, 12, 11, i, iblockstate1,
-						iblockstate1, false, randomIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+						iblockstate1, false, random);
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						i, 13, 0, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						i, 13, 12, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						0, 13, i, structureBoundingBoxIn);
-				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn),
+				this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random),
 						12, 13, i, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate, i + 1, 13, 0, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate, i + 1, 13, 12, structureBoundingBoxIn);
@@ -1084,33 +1084,33 @@ public class FortressPiecesUA {
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 13, 0, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 13, 12, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					12, 13, 12, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					12, 13, 0, structureBoundingBoxIn);
 
 			for (int j1 = 3; j1 <= 9; j1 += 2) {
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 7, j1, 1, 8, j1, iblockstate2,
-						iblockstate2, false, randomIn);
+						iblockstate2, false, random);
 				this.fillWithRandomBlocks(world, structureBoundingBoxIn, 11, 7, j1, 11, 8, j1, iblockstate3,
-						iblockstate3, false, randomIn);
+						iblockstate3, false, random);
 			}
 
 			BlockState iblockstate4 = getStoneVariantBlockState(
-					Blocks.NETHER_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.NORTH), randomIn);
+					Blocks.NETHER_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.NORTH), random);
 
 			for (int j = 0; j <= 6; ++j) {
 				int k = j + 4;
@@ -1122,16 +1122,16 @@ public class FortressPiecesUA {
 				if (k >= 5 && k <= 8) {
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 5, k, 7, j + 4, k,
 							Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-							randomIn);
+							random);
 				} else if (k >= 9 && k <= 10) {
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 8, k, 7, j + 4, k,
 							Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false,
-							randomIn);
+							random);
 				}
 
 				if (j >= 1) {
 					this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 6 + j, k, 7, 9 + j, k,
-							Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+							Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 				}
 			}
 
@@ -1140,23 +1140,23 @@ public class FortressPiecesUA {
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 6, 7, 5, 7, 7, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 6, 7, 7, 7, 7, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 13, 12, 7, 13, 12,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 2, 3, 5, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 9, 3, 5, 10,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 4, 2, 5, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 9, 5, 2, 10, 5, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 9, 5, 9, 10, 5, 10,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 10, 5, 4, 10, 5, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			BlockState iblockstate5 = iblockstate4.with(StairsBlock.FACING, Direction.EAST);
 			BlockState iblockstate6 = iblockstate4.with(StairsBlock.FACING, Direction.WEST);
 			this.setBlockState(world, iblockstate6, 4, 5, 2, structureBoundingBoxIn);
@@ -1168,41 +1168,41 @@ public class FortressPiecesUA {
 			this.setBlockState(world, iblockstate5, 8, 5, 9, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate5, 8, 5, 10, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 4, 4, 4, 4, 8,
-					Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SAND.getDefaultState(), false, randomIn);
+					Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SAND.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 4, 4, 9, 4, 8,
-					Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SAND.getDefaultState(), false, randomIn);
+					Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SAND.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 5, 4, 4, 5, 8,
-					Blocks.NETHER_WART.getDefaultState(), Blocks.NETHER_WART.getDefaultState(), false, randomIn);
+					Blocks.NETHER_WART.getDefaultState(), Blocks.NETHER_WART.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 8, 5, 4, 9, 5, 8,
-					Blocks.NETHER_WART.getDefaultState(), Blocks.NETHER_WART.getDefaultState(), false, randomIn);
+					Blocks.NETHER_WART.getDefaultState(), Blocks.NETHER_WART.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 0, 8, 2, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 4, 12, 2, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 0, 0, 8, 1, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 0, 9, 8, 1, 12,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 4, 3, 1, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 9, 0, 4, 12, 1, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int l1 = 4; l1 <= 8; ++l1) {
 				for (int i1 = 0; i1 <= 2; ++i1) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), l1,
-							-1, i1, structureBoundingBoxIn, randomIn);
+							-1, i1, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), l1,
-							-1, 12 - i1, structureBoundingBoxIn, randomIn);
+							-1, 12 - i1, structureBoundingBoxIn, random);
 				}
 			}
 
 			for (int i2 = 0; i2 <= 2; ++i2) {
 				for (int j2 = 4; j2 <= 8; ++j2) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i2,
-							-1, j2, structureBoundingBoxIn, randomIn);
+							-1, j2, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(),
-							12 - i2, -1, j2, structureBoundingBoxIn, randomIn);
+							12 - i2, -1, j2, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -1601,57 +1601,57 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 6, 1, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 6, 10, 6,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 1, 8, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 2, 0, 6, 8, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 1, 0, 8, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 2, 1, 6, 8, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 2, 6, 5, 8, 6,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 2, 0, 5, 4, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 3, 2, 6, 5, 2, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 3, 4, 6, 5, 4, iblockstate1, iblockstate1,
-					false, randomIn);
-			this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), randomIn), 5,
+					false, random);
+			this.setBlockState(world, getStoneVariantBlockState(Blocks.NETHER_BRICKS.getDefaultState(), random), 5,
 					2, 5, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 2, 5, 4, 3, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 2, 5, 3, 4, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 2, 5, 2, 5, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 2, 5, 1, 6, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 7, 1, 5, 7, 4,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 8, 2, 6, 8, 4,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 6, 0, 4, 8, 0,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 5, 0, 4, 5, 0, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 
 			for (int i = 0; i <= 6; ++i) {
 				for (int j = 0; j <= 6; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
@@ -1717,55 +1717,55 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 4, 4, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 5, 0, 3, 7, 18,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 0, 0, 5, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 5, 0, 4, 5, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 4, 2, 5,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 13, 4, 2, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 15, 4, 1, 18,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 
 			for (int i = 0; i <= 4; ++i) {
 				for (int j = 0; j <= 2; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, 18 - j, structureBoundingBoxIn, randomIn);
+							-1, 18 - j, structureBoundingBoxIn, random);
 				}
 			}
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate2 = iblockstate1.with(FenceBlock.EAST, Boolean.valueOf(true));
 			BlockState iblockstate3 = iblockstate1.with(FenceBlock.WEST, Boolean.valueOf(true));
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 1, 1, 0, 4, 1, iblockstate2, iblockstate2,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 4, 0, 4, 4, iblockstate2, iblockstate2,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 14, 0, 4, 14, iblockstate2, iblockstate2,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 1, 17, 0, 4, 17, iblockstate2, iblockstate2,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 1, 1, 4, 4, 1, iblockstate3, iblockstate3,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 4, 4, 4, 4, iblockstate3, iblockstate3,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 14, 4, 4, 14, iblockstate3, iblockstate3,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 1, 17, 4, 4, 17, iblockstate3, iblockstate3,
-					false, randomIn);
+					false, random);
 			return true;
 		}
 	}
@@ -1805,96 +1805,96 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 6, 7, 7,
-					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, randomIn);
+					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 0, 0, 5, 1, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 2, 1, 5, 2, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 2, 5, 3, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 4, 3, 5, 4, 7,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 2, 0, 1, 4, 2,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 2, 0, 5, 4, 2,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 5, 2, 1, 5, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 5, 5, 2, 5, 5, 3,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 5, 3, 0, 5, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 5, 3, 6, 5, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 5, 8, 5, 5, 8,
-					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, randomIn);
+					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			BlockState iblockstate1 = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-					randomIn);
+					random);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					1, 6, 3, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					5, 6, 3, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.EAST, Boolean.valueOf(true)).with(FenceBlock.NORTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 6, 3, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.NORTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					6, 6, 3, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 4, 0, 6, 7, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 6, 6, 4, 6, 6, 7, iblockstate1, iblockstate1,
-					false, randomIn);
+					false, random);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.EAST, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					0, 6, 8, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 							.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					6, 6, 8, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 6, 8, 5, 6, 8, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					1, 7, 8, structureBoundingBoxIn);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 2, 7, 8, 4, 7, 8, iblockstate, iblockstate,
-					false, randomIn);
+					false, random);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					5, 7, 8, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.EAST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					2, 8, 8, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate, 3, 8, 8, structureBoundingBoxIn);
 			this.setBlockState(world,
 					getStoneVariantBlockState(
 							Blocks.NETHER_BRICK_FENCE.getDefaultState().with(FenceBlock.WEST, Boolean.valueOf(true)),
-							randomIn),
+							random),
 					4, 8, 8, structureBoundingBoxIn);
 
 			if (!this.hasSpawner) {
@@ -1933,12 +1933,12 @@ public class FortressPiecesUA {
 			for (int i = 0; i <= 6; ++i) {
 				for (int j = 0; j <= 6; ++j) {
 					this.replaceAirAndLiquidDownwardsRandomBlocks(world, Blocks.NETHER_BRICKS.getDefaultState(), i,
-							-1, j, structureBoundingBoxIn, randomIn);
+							-1, j, structureBoundingBoxIn, random);
 				}
 			}
 
 			if (ConfigUA.chestGeneration) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
+				this.generateChest(world, structureBoundingBoxIn, random, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
 			}
 
 			return true;

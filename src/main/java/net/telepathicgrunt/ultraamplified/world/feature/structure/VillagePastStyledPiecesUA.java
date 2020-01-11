@@ -268,7 +268,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -359,11 +359,11 @@ public class VillagePastStyledPiecesUA {
 					new BlockPos(this.getXWithOffset(2, 5), this.getYWithOffset(1), this.getZWithOffset(2, 5)));
 
 			if (tileentity instanceof BrewingStandTileEntity) {
-				int potionSlot = 1 + randomIn.nextInt(3);
+				int potionSlot = 1 + random.nextInt(3);
 
 				for (int j = 0; j < potionSlot; j++) {
 
-					int potionType = randomIn.nextInt(9);
+					int potionType = random.nextInt(9);
 
 					ItemStack potion = null;
 
@@ -393,7 +393,7 @@ public class VillagePastStyledPiecesUA {
 
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 2, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 2, 1, 0, Direction.NORTH);
 			if (this.getBlockStateFromPos(world, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
 					&& this.getBlockStateFromPos(world, 2, -1, -1, structureBoundingBoxIn)
 							.getMaterial() != Material.AIR) {
@@ -412,7 +412,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 2, 1, 2, 1, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 2, 1, 2, 1, random);
 			return true;
 		}
 
@@ -490,7 +490,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -528,37 +528,37 @@ public class VillagePastStyledPiecesUA {
 				int j = CropsBlock.getMaxAge();
 				int k = j / 3;
 				this.setBlockState(world, this.cropTypeA.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, k, j))), 1, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, k, j))), 1, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world, this.cropTypeA.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, k, j))), 2, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, k, j))), 2, 1, i, structureBoundingBoxIn);
 				CropsBlock = (CropsBlock) this.cropTypeB.getBlock();
 				int l = CropsBlock.getMaxAge();
 				int i1 = l / 3;
 				this.setBlockState(world, this.cropTypeB.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, i1, l))), 4, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, i1, l))), 4, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world, this.cropTypeB.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, i1, l))), 5, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, i1, l))), 5, 1, i, structureBoundingBoxIn);
 				CropsBlock = (CropsBlock) this.cropTypeC.getBlock();
 				int j1 = CropsBlock.getMaxAge();
 				int k1 = j1 / 3;
 				this.setBlockState(world,
 						this.cropTypeC.with(CropsBlock.getAgeProperty(),
-								Integer.valueOf(MathHelper.nextInt(randomIn, k1, j1))),
+								Integer.valueOf(MathHelper.nextInt(random, k1, j1))),
 						7, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world,
 						this.cropTypeC.with(CropsBlock.getAgeProperty(),
-								Integer.valueOf(MathHelper.nextInt(randomIn, k1, j1))),
+								Integer.valueOf(MathHelper.nextInt(random, k1, j1))),
 						8, 1, i, structureBoundingBoxIn);
 				CropsBlock = (CropsBlock) this.cropTypeD.getBlock();
 				int l1 = CropsBlock.getMaxAge();
 				int i2 = l1 / 3;
 				this.setBlockState(world,
 						this.cropTypeD.with(CropsBlock.getAgeProperty(),
-								Integer.valueOf(MathHelper.nextInt(randomIn, i2, l1))),
+								Integer.valueOf(MathHelper.nextInt(random, i2, l1))),
 						10, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world,
 						this.cropTypeD.with(CropsBlock.getAgeProperty(),
-								Integer.valueOf(MathHelper.nextInt(randomIn, i2, l1))),
+								Integer.valueOf(MathHelper.nextInt(random, i2, l1))),
 						11, 1, i, structureBoundingBoxIn);
 			}
 
@@ -633,7 +633,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -664,16 +664,16 @@ public class VillagePastStyledPiecesUA {
 				int j = CropsBlock.getMaxAge();
 				int k = j / 3;
 				this.setBlockState(world, this.cropTypeA.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, k, j))), 1, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, k, j))), 1, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world, this.cropTypeA.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, k, j))), 2, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, k, j))), 2, 1, i, structureBoundingBoxIn);
 				CropsBlock = (CropsBlock) this.cropTypeB.getBlock();
 				int l = CropsBlock.getMaxAge();
 				int i1 = l / 3;
 				this.setBlockState(world, this.cropTypeB.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, i1, l))), 4, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, i1, l))), 4, 1, i, structureBoundingBoxIn);
 				this.setBlockState(world, this.cropTypeB.with(CropsBlock.getAgeProperty(),
-						Integer.valueOf(MathHelper.nextInt(randomIn, i1, l))), 5, 1, i, structureBoundingBoxIn);
+						Integer.valueOf(MathHelper.nextInt(random, i1, l))), 5, 1, i, structureBoundingBoxIn);
 			}
 
 			for (int j1 = 0; j1 < 9; ++j1) {
@@ -715,7 +715,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -819,7 +819,7 @@ public class VillagePastStyledPiecesUA {
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.NORTH, 2, 3, 1, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 2, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 2, 1, 0, Direction.NORTH);
 			if (this.getBlockStateFromPos(world, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
 					&& this.getBlockStateFromPos(world, 2, -1, -1, structureBoundingBoxIn)
 							.getMaterial() != Material.AIR) {
@@ -834,7 +834,7 @@ public class VillagePastStyledPiecesUA {
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 6, 1, 5, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.SOUTH, 6, 3, 4, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 6, 1, 5, Direction.SOUTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 6, 1, 5, Direction.SOUTH);
 
 			for (int l = 0; l < 5; ++l) {
 				for (int k = 0; k < 9; ++k) {
@@ -843,7 +843,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 4, 1, 2, 2, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 4, 1, 2, 2, random);
 			return true;
 		}
 	}
@@ -875,7 +875,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -986,7 +986,7 @@ public class VillagePastStyledPiecesUA {
 			this.setBlockState(world, Blocks.LECTERN.getDefaultState(), 6, 1, 1, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 1, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 1, 1, 0, Direction.NORTH);
 			if (this.getBlockStateFromPos(world, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
 					&& this.getBlockStateFromPos(world, 1, -1, -1, structureBoundingBoxIn)
 							.getMaterial() != Material.AIR) {
@@ -1005,7 +1005,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 2, 1, 2, 1, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 2, 1, 2, 1, random);
 			return true;
 		}
 	}
@@ -1048,7 +1048,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1082,7 +1082,7 @@ public class VillagePastStyledPiecesUA {
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 0, 3, 4, 0, iblockstate5, iblockstate5, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 1, 6, 0, 4, 6, iblockstate5, iblockstate5, false);
 			this.setBlockState(world, iblockstate3, 3, 3, 1, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 3, 1, 1, Direction.SOUTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 3, 1, 1, Direction.SOUTH);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 2, 3, 3, 2, iblockstate3, iblockstate3, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 4, 1, 3, 5, 3, 3, iblockstate3, iblockstate3, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 1, 1, 0, 3, 5, iblockstate3, iblockstate3, false);
@@ -1129,7 +1129,7 @@ public class VillagePastStyledPiecesUA {
 			if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(
 					new BlockPos(this.getXWithOffset(5, 5), this.getYWithOffset(1), this.getZWithOffset(5, 5)))) {
 				this.hasMadeChest = true;
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 5, 1, 5,
+				this.generateChest(world, structureBoundingBoxIn, random, 5, 1, 5,
 						LootTables.CHESTS_VILLAGE_VILLAGE_WEAPONSMITH);
 			}
 
@@ -1153,7 +1153,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 7, 1, 1, 1, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 7, 1, 1, 1, random);
 			return true;
 		}
 
@@ -1201,7 +1201,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1270,13 +1270,13 @@ public class VillagePastStyledPiecesUA {
 			if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(
 					new BlockPos(this.getXWithOffset(3, 8), this.getYWithOffset(1), this.getZWithOffset(3, 6)))) {
 				this.hasMadeChest = true;
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 1, 6,
+				this.generateChest(world, structureBoundingBoxIn, random, 3, 1, 6,
 						LootTables.CHESTS_VILLAGE_VILLAGE_FLETCHER);
 			}
 			if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(
 					new BlockPos(this.getXWithOffset(7, 8), this.getYWithOffset(1), this.getZWithOffset(7, 6)))) {
 				this.hasMadeChest = true;
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 7, 1, 6,
+				this.generateChest(world, structureBoundingBoxIn, random, 7, 1, 6,
 						LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE);
 			}
 			this.setBlockState(world, Blocks.CRAFTING_TABLE.getDefaultState(), 3, 1, 5, structureBoundingBoxIn);
@@ -1376,7 +1376,7 @@ public class VillagePastStyledPiecesUA {
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.NORTH, 2, 3, 1, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 2, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 2, 1, 0, Direction.NORTH);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, -1, 3, 2, -1, Blocks.AIR.getDefaultState(),
 					Blocks.AIR.getDefaultState(), false);
 			if (this.getBlockStateFromPos(world, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
@@ -1404,7 +1404,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 4, 1, 2, 2, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 4, 1, 2, 2, random);
 			return true;
 		}
 	}
@@ -1446,7 +1446,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1495,7 +1495,7 @@ public class VillagePastStyledPiecesUA {
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 0, 1, 3, 0, iblockstate1, iblockstate1, false);
 			this.setBlockState(world, iblockstate1, 2, 3, 0, structureBoundingBoxIn);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 0, 3, 3, 0, iblockstate1, iblockstate1, false);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 2, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 2, 1, 0, Direction.NORTH);
 			if (this.getBlockStateFromPos(world, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
 					&& this.getBlockStateFromPos(world, 2, -1, -1, structureBoundingBoxIn)
 							.getMaterial() != Material.AIR) {
@@ -1552,7 +1552,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 1, 1, 2, 1, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 1, 1, 2, 1, random);
 			return true;
 		}
 	}
@@ -1678,7 +1678,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.GRASS_PATH.getDefaultState());
 			BlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OAK_PLANKS.getDefaultState());
@@ -1812,7 +1812,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -2048,7 +2048,7 @@ public class VillagePastStyledPiecesUA {
 		 * bounding box, x offset, y offset, z offset, number of villagers
 		 */
 		protected void spawnVillagers(IWorld world, MutableBoundingBox structurebb, int x, int y, int z, int count,
-				Random randomIn) {
+				Random random) {
 			if (this.villagersSpawned < count) {
 				for (int i = this.villagersSpawned; i < count; ++i) {
 					int j = this.getXWithOffset(x + i, z);
@@ -2588,7 +2588,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -2673,7 +2673,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -2757,7 +2757,7 @@ public class VillagePastStyledPiecesUA {
 
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
-			this.createVillageDoor(world, structureBoundingBoxIn, randomIn, 1, 1, 0, Direction.NORTH);
+			this.createVillageDoor(world, structureBoundingBoxIn, random, 1, 1, 0, Direction.NORTH);
 			if (this.getBlockStateFromPos(world, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR
 					&& this.getBlockStateFromPos(world, 1, -1, -1, structureBoundingBoxIn)
 							.getMaterial() != Material.AIR) {
@@ -2776,7 +2776,7 @@ public class VillagePastStyledPiecesUA {
 				}
 			}
 
-			this.spawnVillagers(world, structureBoundingBoxIn, 1, 1, 2, 1, randomIn);
+			this.spawnVillagers(world, structureBoundingBoxIn, 1, 1, 2, 1, random);
 			return true;
 		}
 	}

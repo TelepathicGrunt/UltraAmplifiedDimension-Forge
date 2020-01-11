@@ -40,7 +40,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
@@ -99,7 +99,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
@@ -178,7 +178,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
@@ -300,7 +300,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.NORTH
@@ -402,7 +402,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
@@ -494,7 +494,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 2, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE,
@@ -749,18 +749,18 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos chunkPos) {
 
 			this.generateWaterBox(world, mutableBoundingBoxIn);
-			this.generateWing(false, 0, world, randomIn, mutableBoundingBoxIn);
-			this.generateWing(true, 33, world, randomIn, mutableBoundingBoxIn);
-			this.generateEntranceArchs(world, randomIn, mutableBoundingBoxIn);
-			this.generateEntranceWall(world, randomIn, mutableBoundingBoxIn);
-			this.generateRoofPiece(world, randomIn, mutableBoundingBoxIn);
-			this.generateLowerWall(world, randomIn, mutableBoundingBoxIn);
-			this.generateMiddleWall(world, randomIn, mutableBoundingBoxIn);
-			this.generateUpperWall(world, randomIn, mutableBoundingBoxIn);
+			this.generateWing(false, 0, world, random, mutableBoundingBoxIn);
+			this.generateWing(true, 33, world, random, mutableBoundingBoxIn);
+			this.generateEntranceArchs(world, random, mutableBoundingBoxIn);
+			this.generateEntranceWall(world, random, mutableBoundingBoxIn);
+			this.generateRoofPiece(world, random, mutableBoundingBoxIn);
+			this.generateLowerWall(world, random, mutableBoundingBoxIn);
+			this.generateMiddleWall(world, random, mutableBoundingBoxIn);
+			this.generateUpperWall(world, random, mutableBoundingBoxIn);
 
 			for (int j = 0; j < 7; ++j) {
 				int k = 0;
@@ -791,7 +791,7 @@ public class OceanMonumentPiecesUA {
 
 			for (OceanMonumentPiecesUA.Piece structureoceanmonumentpieces$piece : this.childPieces) {
 				if (structureoceanmonumentpieces$piece.getBoundingBox().intersectsWith(mutableBoundingBoxIn)) {
-					structureoceanmonumentpieces$piece.func_225577_a_(world, p_225577_2_, randomIn,
+					structureoceanmonumentpieces$piece.func_225577_a_(world, p_225577_2_, random,
 							mutableBoundingBoxIn, chunkPos);
 				}
 			}
@@ -1183,7 +1183,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 0, 14, 8, 14, ROUGH_PRISMARINE);
@@ -1314,7 +1314,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, -1, 2, 11, -1, 11, BRICKS_PRISMARINE,
@@ -1378,9 +1378,9 @@ public class OceanMonumentPiecesUA {
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, -1, 3, 7, -1, 4, WATER, WATER, false);
 			this.spawnElder(world, mutableBoundingBoxIn, 6, 1, 6);
 			if (ConfigUA.chestGeneration) {
-				this.generateChest(world, mutableBoundingBoxIn, randomIn, 6, 0, 8,
+				this.generateChest(world, mutableBoundingBoxIn, random, 6, 0, 8,
 						LootTables.CHESTS_END_CITY_TREASURE);
-				this.generateChest(world, mutableBoundingBoxIn, randomIn, 7, 0, 8,
+				this.generateChest(world, mutableBoundingBoxIn, random, 7, 0, 8,
 						LootTables.CHESTS_END_CITY_TREASURE);
 			}
 			return true;
@@ -1711,14 +1711,14 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
 				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
 			}
 
-			boolean flag = this.mainDesign != 0 && randomIn.nextBoolean()
+			boolean flag = this.mainDesign != 0 && random.nextBoolean()
 					&& !this.roomDefinition.hasOpening[Direction.DOWN.getIndex()]
 					&& !this.roomDefinition.hasOpening[Direction.UP.getIndex()]
 					&& this.roomDefinition.countOpenings() > 1;
@@ -1945,7 +1945,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.roomDefinition.index / 25 > 0) {
@@ -1954,8 +1954,8 @@ public class OceanMonumentPiecesUA {
 
 			for (int i = 1; i <= 6; ++i) {
 				for (int j = 1; j <= 6; ++j) {
-					if (randomIn.nextInt(3) != 0) {
-						int k = 2 + (randomIn.nextInt(4) == 0 ? 0 : 1);
+					if (random.nextInt(3) != 0) {
+						int k = 2 + (random.nextInt(4) == 0 ? 0 : 1);
 						this.fillWithBlocks(world, mutableBoundingBoxIn, i, k, j, i, 3, j,
 								Blocks.WET_SPONGE.getDefaultState(), Blocks.WET_SPONGE.getDefaultState(), false);
 					}
@@ -2017,7 +2017,7 @@ public class OceanMonumentPiecesUA {
 
 		protected int horizontalPos = -1;
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_) {
 
 			if (this.mainDesign == 0) {
@@ -2084,9 +2084,9 @@ public class OceanMonumentPiecesUA {
 						BRICKS_PRISMARINE, false);
 
 				if (ConfigUA.chestGeneration) {
-					this.generateChest(world, mutableBoundingBoxIn, randomIn, 11, 1, 17,
+					this.generateChest(world, mutableBoundingBoxIn, random, 11, 1, 17,
 							LootTables.CHESTS_END_CITY_TREASURE);
-					this.generateChest(world, mutableBoundingBoxIn, randomIn, 12, 1, 17,
+					this.generateChest(world, mutableBoundingBoxIn, random, 12, 1, 17,
 							LootTables.CHESTS_END_CITY_TREASURE);
 				}
 
@@ -2142,9 +2142,9 @@ public class OceanMonumentPiecesUA {
 						DARK_PRISMARINE, false);
 
 				if (ConfigUA.chestGeneration) {
-					this.generateChest(world, mutableBoundingBoxIn, randomIn, 11, 4, 9,
+					this.generateChest(world, mutableBoundingBoxIn, random, 11, 4, 9,
 							LootTables.CHESTS_END_CITY_TREASURE);
-					this.generateChest(world, mutableBoundingBoxIn, randomIn, 10, 4, 9,
+					this.generateChest(world, mutableBoundingBoxIn, random, 10, 4, 9,
 							LootTables.CHESTS_END_CITY_TREASURE);
 				}
 

@@ -1,7 +1,6 @@
 package net.telepathicgrunt.ultraamplified.world.feature.carver;
 
 import java.util.BitSet;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -32,9 +31,8 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
     protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
     
-    private static Map<BlockState, BlockState> canReplaceMap = createMap();
-	
-	private static final Map<BlockState, BlockState> createMap() 
+    private static Map<BlockState, BlockState> canReplaceMap;
+	static
 	{
         Map<BlockState, BlockState> result = new HashMap<BlockState, BlockState>();
         
@@ -43,13 +41,13 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
         result.put(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState()); 
         result.put(Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()); 
         
-        return Collections.unmodifiableMap(result);
+        canReplaceMap = result;
     }
 	
     private static Map<Biome, BlockState> fillerBiomeMap;
 
 	/**
-	 * Have to make this map much later since the biomes needs to be initialized first and that's delayed a bit
+	 * Have to make this map in UltraAmplified setup method since the biomes needs to be initialized first
 	 */
 	public static void setFillerMap() {
 		if (fillerBiomeMap == null) {

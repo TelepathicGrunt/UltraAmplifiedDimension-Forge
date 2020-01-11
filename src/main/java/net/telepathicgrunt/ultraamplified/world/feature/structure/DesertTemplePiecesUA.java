@@ -43,7 +43,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 	 * second Part of Structure generating, this for example places Spiderwebs, Mob
 	 * Spawners, it closes Mineshafts at the end, it adds Fences...
 	 */
-	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 			MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 
 		this.fillWithBlocks(world, structureBoundingBoxIn, 0, -4, 0, this.width - 1, 0, this.depth - 1,
@@ -286,7 +286,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece {
 				int i1 = enumfacing.getXOffset() * 2;
 				int j1 = enumfacing.getZOffset() * 2;
 				this.hasPlacedChest[enumfacing.getHorizontalIndex()] = this.generateChest(world,
-						structureBoundingBoxIn, randomIn, 10 + i1, -11, 10 + j1, LootTables.CHESTS_DESERT_PYRAMID);
+						structureBoundingBoxIn, random, 10 + i1, -11, 10 + j1, LootTables.CHESTS_DESERT_PYRAMID);
 			}
 		}
 

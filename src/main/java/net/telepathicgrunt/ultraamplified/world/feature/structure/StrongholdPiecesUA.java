@@ -254,12 +254,12 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
 					6);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 2, 3, 1, 4,
 					Blocks.STONE_BRICKS.getDefaultState(), Blocks.STONE_BRICKS.getDefaultState(), false);
@@ -276,7 +276,7 @@ public class StrongholdPiecesUA {
 					new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3)))) {
 				this.hasMadeChest = true;
 				if (ConfigUA.chestGeneration) {
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 2, 3,
+					this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3,
 							LootTables.CHESTS_STRONGHOLD_CORRIDOR);
 				}
 			}
@@ -334,7 +334,7 @@ public class StrongholdPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			for (int i = 0; i < this.steps; ++i) {
 				this.setBlockState(world, Blocks.STONE_BRICKS.getDefaultState(), 0, 0, i, structureBoundingBoxIn);
@@ -438,11 +438,11 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 9, 8, 10, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 9, 8, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 4, 3, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 4, 3, 0);
 
 			if (this.leftLow) {
 				this.fillWithBlocks(world, structureBoundingBoxIn, 0, 3, 1, 0, 5, 3, Blocks.AIR.getDefaultState(),
@@ -466,21 +466,21 @@ public class StrongholdPiecesUA {
 
 			this.fillWithBlocks(world, structureBoundingBoxIn, 5, 1, 10, 7, 3, 10, Blocks.AIR.getDefaultState(),
 					Blocks.AIR.getDefaultState(), false);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 2, 1, 8, 2, 6, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 2, 1, 8, 2, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 5, 4, 4, 9, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 5, 4, 4, 9, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 8, 1, 5, 8, 4, 9, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 8, 1, 5, 8, 4, 9, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 4, 7, 3, 4, 9, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 4, 7, 3, 4, 9, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 3, 5, 3, 3, 6, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 3, 5, 3, 3, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 3, 4, 3, 3, 4, Blocks.STONE_SLAB.getDefaultState(),
 					Blocks.STONE_SLAB.getDefaultState(), false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 4, 6, 3, 4, 6, Blocks.STONE_SLAB.getDefaultState(),
 					Blocks.STONE_SLAB.getDefaultState(), false);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 5, 1, 7, 7, 1, 8, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 5, 1, 7, 7, 1, 8, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 5, 1, 9, 7, 1, 9, Blocks.STONE_SLAB.getDefaultState(),
 					Blocks.STONE_SLAB.getDefaultState(), false);
@@ -532,11 +532,11 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
 			Direction enumfacing = this.getCoordBaseMode();
 
 			if (enumfacing != Direction.NORTH && enumfacing != Direction.EAST) {
@@ -594,7 +594,7 @@ public class StrongholdPiecesUA {
 			return new StrongholdPiecesUA.Library(p_175864_6_, p_175864_1_, mutableboundingbox, p_175864_5_);
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			int i = 11;
 
@@ -602,10 +602,10 @@ public class StrongholdPiecesUA {
 				i = 6;
 			}
 
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 13, i - 1, 14, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 13, i - 1, 14, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
-			this.generateMaybeBox(world, structureBoundingBoxIn, randomIn, 0.07F, 2, 1, 1, 11, 4, 13,
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
+			this.generateMaybeBox(world, structureBoundingBoxIn, random, 0.07F, 2, 1, 1, 11, 4, 13,
 					Blocks.COBWEB.getDefaultState(), Blocks.COBWEB.getDefaultState(), false, false);
 
 			for (int l = 1; l <= 13; ++l) {
@@ -736,7 +736,7 @@ public class StrongholdPiecesUA {
 			}
 
 			if (ConfigUA.chestGeneration) {
-				this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 3, 5,
+				this.generateChest(world, structureBoundingBoxIn, random, 3, 3, 5,
 						LootTables.CHESTS_STRONGHOLD_LIBRARY);
 			}
 
@@ -744,7 +744,7 @@ public class StrongholdPiecesUA {
 				this.setBlockState(world, Blocks.AIR.getDefaultState(), 12, 9, 1, structureBoundingBoxIn);
 
 				if (ConfigUA.chestGeneration) {
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 12, 8, 1,
+					this.generateChest(world, structureBoundingBoxIn, random, 12, 8, 1,
 							LootTables.CHESTS_STRONGHOLD_LIBRARY);
 				}
 			}
@@ -812,30 +812,30 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 7, 15, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 7, 15, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.GRATES, 4, 1,
+			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.GRATES, 4, 1,
 					0);
 			int i = 6;
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, i, 1, 1, i, 14, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, i, 1, 1, i, 14, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 9, i, 1, 9, i, 14, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 9, i, 1, 9, i, 14, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 2, i, 1, 8, i, 2, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 2, i, 1, 8, i, 2, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 2, i, 14, 8, i, 14, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 2, i, 14, 8, i, 14, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 1, 1, 2, 1, 4, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 1, 1, 2, 1, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 8, 1, 1, 9, 1, 4, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 8, 1, 1, 9, 1, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 1, 1, 1, 3, Blocks.LAVA.getDefaultState(),
 					Blocks.LAVA.getDefaultState(), false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 9, 1, 1, 9, 1, 3, Blocks.LAVA.getDefaultState(),
 					Blocks.LAVA.getDefaultState(), false);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 3, 1, 8, 7, 1, 12, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 3, 1, 8, 7, 1, 12, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 4, 1, 9, 6, 1, 11, Blocks.LAVA.getDefaultState(),
 					Blocks.LAVA.getDefaultState(), false);
@@ -854,11 +854,11 @@ public class StrongholdPiecesUA {
 
 			BlockState iblockstate3 = Blocks.STONE_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING,
 					Direction.NORTH);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 5, 6, 1, 7, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 5, 6, 1, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 2, 6, 6, 2, 7, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 2, 6, 6, 2, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 3, 7, 6, 3, 7, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 3, 7, 6, 3, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 
 			for (int k = 4; k <= 6; ++k) {
@@ -879,7 +879,7 @@ public class StrongholdPiecesUA {
 			boolean[] aboolean = new boolean[12];
 
 			for (int l = 0; l < aboolean.length; ++l) {
-				aboolean[l] = randomIn.nextFloat() > 0.9F;
+				aboolean[l] = random.nextFloat() > 0.9F;
 				flag &= aboolean[l];
 			}
 
@@ -966,20 +966,20 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 4, 10, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 4, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 10, 3, 3, 10, Blocks.AIR.getDefaultState(),
 					Blocks.AIR.getDefaultState(), false);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 1, 4, 3, 1, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 1, 4, 3, 1, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 3, 4, 3, 3, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 3, 4, 3, 3, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 7, 4, 3, 7, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 7, 4, 3, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 9, 4, 3, 9, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 4, 1, 9, 4, 3, 9, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 4, 1, 4, 4, 3, 6, Blocks.IRON_BARS.getDefaultState(),
 					Blocks.IRON_BARS.getDefaultState(), false);
@@ -1021,11 +1021,11 @@ public class StrongholdPiecesUA {
 
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
 			Direction enumfacing = this.getCoordBaseMode();
 
 			if (enumfacing != Direction.NORTH && enumfacing != Direction.EAST) {
@@ -1094,11 +1094,11 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 6, 10, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 6, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 4, 1, 10, 6, 3, 10, Blocks.AIR.getDefaultState(),
 					Blocks.AIR.getDefaultState(), false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 1, 4, 0, 3, 6, Blocks.AIR.getDefaultState(),
@@ -1252,13 +1252,13 @@ public class StrongholdPiecesUA {
 				this.setBlockState(world, iblockstate, 9, 3, 3, structureBoundingBoxIn);
 
 				if (ConfigUA.chestGeneration) {
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 3, 4, 8,
+					this.generateChest(world, structureBoundingBoxIn, random, 3, 4, 8,
 							LootTables.CHESTS_STRONGHOLD_CROSSING);
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 5, 4, 2,
+					this.generateChest(world, structureBoundingBoxIn, random, 5, 4, 2,
 							LootTables.CHESTS_STRONGHOLD_CROSSING);
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 6, 4, 8,
+					this.generateChest(world, structureBoundingBoxIn, random, 6, 4, 8,
 							LootTables.CHESTS_STRONGHOLD_CROSSING);
-					this.generateChest(world, structureBoundingBoxIn, randomIn, 8, 4, 4,
+					this.generateChest(world, structureBoundingBoxIn, random, 8, 4, 4,
 							LootTables.CHESTS_STRONGHOLD_CROSSING);
 				}
 			}
@@ -1329,12 +1329,12 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 4, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
 					4);
 			this.setBlockState(world, Blocks.STONE_BRICKS.getDefaultState(), 2, 6, 1, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.STONE_BRICKS.getDefaultState(), 1, 5, 1, structureBoundingBoxIn);
@@ -1401,12 +1401,12 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 7, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
 					7);
 			BlockState iblockstate = Blocks.STONE_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING,
 					Direction.SOUTH);
@@ -1503,21 +1503,21 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
-			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, randomIn,
+			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
-			this.placeDoor(world, randomIn, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
+			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
+			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.OPENING, 1, 1,
 					6);
 			BlockState iblockstate = Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING,
 					Direction.EAST);
 			BlockState iblockstate1 = Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.HORIZONTAL_FACING,
 					Direction.WEST);
-			this.randomlyPlaceBlock(world, structureBoundingBoxIn, randomIn, 0.1F, 1, 2, 1, iblockstate);
-			this.randomlyPlaceBlock(world, structureBoundingBoxIn, randomIn, 0.1F, 3, 2, 1, iblockstate1);
-			this.randomlyPlaceBlock(world, structureBoundingBoxIn, randomIn, 0.1F, 1, 2, 5, iblockstate);
-			this.randomlyPlaceBlock(world, structureBoundingBoxIn, randomIn, 0.1F, 3, 2, 5, iblockstate1);
+			this.randomlyPlaceBlock(world, structureBoundingBoxIn, random, 0.1F, 1, 2, 1, iblockstate);
+			this.randomlyPlaceBlock(world, structureBoundingBoxIn, random, 0.1F, 3, 2, 1, iblockstate1);
+			this.randomlyPlaceBlock(world, structureBoundingBoxIn, random, 0.1F, 1, 2, 5, iblockstate);
+			this.randomlyPlaceBlock(world, structureBoundingBoxIn, random, 0.1F, 3, 2, 5, iblockstate1);
 
 			if (this.expandsX) {
 				this.fillWithBlocks(world, structureBoundingBoxIn, 0, 1, 2, 0, 3, 4, Blocks.AIR.getDefaultState(),

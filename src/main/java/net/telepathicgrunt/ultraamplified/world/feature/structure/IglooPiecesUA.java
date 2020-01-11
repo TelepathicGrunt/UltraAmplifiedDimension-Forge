@@ -106,7 +106,7 @@ public class IglooPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random randomIn,
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
 					.setMirror(Mirror.NONE).setCenterOffset(IglooPiecesUA.OFFSET1.get(this.resourceLocation));
@@ -122,7 +122,7 @@ public class IglooPiecesUA {
 
 			BlockPos blockpos2 = this.templatePosition;
 			this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
-			boolean flag = super.func_225577_a_(world, p_225577_2_, randomIn, structureBoundingBoxIn, chunkPos);
+			boolean flag = super.func_225577_a_(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
 
 			this.templatePosition = blockpos2;
 			return flag;
