@@ -927,11 +927,19 @@ public class StrongholdPiecesUA {
 
 				if (structureBoundingBoxIn.isVecInside(blockpos)) {
 					this.hasSpawner = true;
-					world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-					TileEntity tileentity = world.getTileEntity(blockpos);
+					
+					if(ConfigUA.allowSilverfishSpawnerStronghold)
+					{
+						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
+						TileEntity tileentity = world.getTileEntity(blockpos);
 
-					if (tileentity instanceof MobSpawnerTileEntity) {
-						((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
+						if (tileentity instanceof MobSpawnerTileEntity) {
+							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
+						}
+					}
+					else
+					{
+						world.setBlockState(blockpos, Blocks.STONE_BRICKS.getDefaultState(), 2);
 					}
 				}
 			}
@@ -1115,12 +1123,19 @@ public class StrongholdPiecesUA {
 
 					if (structureBoundingBoxIn.isVecInside(blockpos)) {
 						this.hasSpawner = true;
-						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-						TileEntity tileentity = world.getTileEntity(blockpos);
+						
+						if(ConfigUA.allowSilverfishSpawnerStronghold)
+						{
+							world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
+							TileEntity tileentity = world.getTileEntity(blockpos);
 
-						if (tileentity instanceof MobSpawnerTileEntity) {
-							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic()
-									.setEntityType(EntityType.SILVERFISH);
+							if (tileentity instanceof MobSpawnerTileEntity) {
+								((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
+							}
+						}
+						else
+						{
+							world.setBlockState(blockpos, Blocks.STONE_BRICKS.getDefaultState(), 2);
 						}
 					}
 				}
@@ -1170,12 +1185,19 @@ public class StrongholdPiecesUA {
 
 					if (structureBoundingBoxIn.isVecInside(blockpos)) {
 						this.hasSpawner = true;
-						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-						TileEntity tileentity = world.getTileEntity(blockpos);
+						
+						if(ConfigUA.allowSilverfishSpawnerStronghold)
+						{
+							world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
+							TileEntity tileentity = world.getTileEntity(blockpos);
 
-						if (tileentity instanceof MobSpawnerTileEntity) {
-							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic()
-									.setEntityType(EntityType.SILVERFISH);
+							if (tileentity instanceof MobSpawnerTileEntity) {
+								((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
+							}
+						}
+						else
+						{
+							world.setBlockState(blockpos, Blocks.STONE_BRICKS.getDefaultState(), 2);
 						}
 					}
 				}
@@ -1218,12 +1240,19 @@ public class StrongholdPiecesUA {
 
 					if (structureBoundingBoxIn.isVecInside(blockpos)) {
 						this.hasSpawner = true;
-						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-						TileEntity tileentity = world.getTileEntity(blockpos);
+						
+						if(ConfigUA.allowSilverfishSpawnerStronghold)
+						{
+							world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
+							TileEntity tileentity = world.getTileEntity(blockpos);
 
-						if (tileentity instanceof MobSpawnerTileEntity) {
-							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic()
-									.setEntityType(EntityType.SILVERFISH);
+							if (tileentity instanceof MobSpawnerTileEntity) {
+								((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
+							}
+						}
+						else
+						{
+							world.setBlockState(blockpos, Blocks.STONE_BRICKS.getDefaultState(), 2);
 						}
 					}
 				}

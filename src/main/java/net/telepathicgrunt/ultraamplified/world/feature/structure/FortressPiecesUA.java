@@ -1905,18 +1905,32 @@ public class FortressPiecesUA {
 
 					if (stoneVariant) {
 						this.hasSpawner = true;
+						
+						//skeleton mob spawner
 						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
-						world.setBlockState(blockpos.down(), Blocks.SPAWNER.getDefaultState(), 2);
-
 						TileEntity tileentity = world.getTileEntity(blockpos);
-						TileEntity tileentity2 = world.getTileEntity(blockpos.down());
-
 						if (tileentity instanceof MobSpawnerTileEntity) {
 							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic()
 									.setEntityType(EntityType.SKELETON);
-							((MobSpawnerTileEntity) tileentity2).getSpawnerBaseLogic()
-									.setEntityType(EntityType.SILVERFISH);
 						}
+						
+						//silverfish mob spawner
+						if(ConfigUA.allowSilverfishSpawnerFortress)
+						{
+							world.setBlockState(blockpos.down(), Blocks.SPAWNER.getDefaultState(), 2);
+							TileEntity tileentity2 = world.getTileEntity(blockpos.down());
+							
+							if (tileentity2 instanceof MobSpawnerTileEntity) {
+								((MobSpawnerTileEntity) tileentity2).getSpawnerBaseLogic()
+									.setEntityType(EntityType.SILVERFISH);
+							}
+						}
+						else
+						{
+							world.setBlockState(blockpos.down(), Blocks.STONE_BRICKS.getDefaultState(), 2);
+						}
+						
+						
 					} else {
 						this.hasSpawner = true;
 						world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);

@@ -68,9 +68,12 @@ public class ConfigUA {
     public static int shipwreckSpawnrate = 7;
     public static int strongholdSpawnrate = 62;
     public static double silverfishStrongholdSpawnrate = 4D;
+    public static boolean allowSilverfishSpawnerStronghold = true;
     public static int netherFortressSpawnrate = 14;
     public static boolean netherFortressAboveground = true;
     public static boolean netherFortressUnderground = true;
+    public static boolean allowSilverfishSpawnerFortress = true;
+    public static boolean allowNaturalSilverfishFortress = true;
     public static int endCitySpawnrate = 18;
     public static int pillageOutpostRarity = 20;
     public static boolean secretSetting = false;
@@ -173,9 +176,12 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue shipwreckSpawnrate;
 		public final ForgeConfigSpec.IntValue strongholdSpawnrate;
 		public final ForgeConfigSpec.DoubleValue silverfishStrongholdSpawnrate;
+		public final ForgeConfigSpec.BooleanValue allowSilverfishSpawnerStronghold;
 		public final ForgeConfigSpec.IntValue netherFortressSpawnrate;
 		public final ForgeConfigSpec.BooleanValue netherFortressAboveground;
 		public final ForgeConfigSpec.BooleanValue netherFortressUnderground;
+		public final ForgeConfigSpec.BooleanValue allowSilverfishSpawnerFortress;
+		public final ForgeConfigSpec.BooleanValue allowNaturalSilverfishFortress;
 		public final ForgeConfigSpec.IntValue endCitySpawnrate;
 		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
@@ -485,6 +491,11 @@ public class ConfigUA {
             		.translation("ultraamplified.config.structure.silverfishstrongholdspawnrate")
             		.defineInRange("silverfishStrongholdSpawnrate", 4D, 0, 100);
 
+            		allowSilverfishSpawnerStronghold = builder
+            		.comment("\r\nCan Silverfish Mob Spawners generate in Stronghold?.")
+            		.translation("ultraamplified.config.structure.allowsilverfishspawnerstronghold")
+            		.define("allowSilverfishSpawnerStronghold", true);
+            		
 
             		netherFortressSpawnrate = builder
             		.comment("\r\nHow rare are Nether Fortresses." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
@@ -500,8 +511,17 @@ public class ConfigUA {
             		.comment("\r\nCan stone variant Nether Fortresses spawn underground or not (below y = 60)." + "\n" + "(Stone variant Nether Fortress spawn underground in all biomes except End biome)")
             		.translation("ultraamplified.config.structure.netherfortressunderground")
             		.define("netherFortressUnderground", true);
-            		
 
+            		allowSilverfishSpawnerFortress = builder
+            		.comment("\r\nCan Silverfish Mob Spawners generate in Stone Fortresses?")
+            		.translation("ultraamplified.config.structure.allowsilverfishspawnerfortress")
+            		.define("allowSilverfishSpawnerFortress", true);
+            		
+            		allowNaturalSilverfishFortress = builder
+            		.comment("\r\nCan Silverfish spawn naturally over time in Stone Fortresses?")
+            		.translation("ultraamplified.config.structure.allownaturalsilverfishfortress")
+            		.define("allowNaturalSilverfishFortress", true);
+            		
             		endCitySpawnrate = builder
             		.comment("\r\nHow rare are End Cities." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
             		.translation("ultraamplified.config.structure.endcityspawnrate")
@@ -912,9 +932,12 @@ public class ConfigUA {
     	shipwreckSpawnrate = SERVER.shipwreckSpawnrate.get();
 		strongholdSpawnrate = SERVER.strongholdSpawnrate.get();
     	silverfishStrongholdSpawnrate = SERVER.silverfishStrongholdSpawnrate.get();
+    	allowSilverfishSpawnerStronghold = SERVER.allowSilverfishSpawnerStronghold.get();
     	netherFortressSpawnrate = SERVER.netherFortressSpawnrate.get();
     	netherFortressAboveground = SERVER.netherFortressAboveground.get();
     	netherFortressUnderground = SERVER.netherFortressUnderground.get();
+    	allowSilverfishSpawnerFortress = SERVER.allowSilverfishSpawnerFortress.get();
+    	allowNaturalSilverfishFortress = SERVER.allowNaturalSilverfishFortress.get();
     	endCitySpawnrate = SERVER.endCitySpawnrate.get();
     	pillageOutpostRarity = SERVER.pillageOutpostRarity.get();
     	secretSetting = SERVER.secretSetting.get();
