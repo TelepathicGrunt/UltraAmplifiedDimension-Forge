@@ -95,8 +95,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig> {
 			this.recalculateStructureSize();
 
 			this.func_214626_a(this.rand, 100, 120);
-			// UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+"
-			// "+(chunkZ*16));
+//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
 		}
 	}
 }
