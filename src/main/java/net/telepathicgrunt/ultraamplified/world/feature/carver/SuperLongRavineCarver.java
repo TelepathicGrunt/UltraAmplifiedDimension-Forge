@@ -72,7 +72,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     	
     	int i = (this.func_222704_c() * 2 - 1) * 16;
         double xpos = (double)(chunkX * 16 + random.nextInt(16));
-        double height = (double)(random.nextInt(random.nextInt(3) + 3) + 17);
+        double height = (double)(random.nextInt(random.nextInt(3) + 3) + 15);
         double zpos = (double)(chunkZ * 16 + random.nextInt(16));
         float f = random.nextFloat() * ((float)Math.PI * 2F);
         float f1 = (random.nextFloat() - 0.5F) / 8.0F;
