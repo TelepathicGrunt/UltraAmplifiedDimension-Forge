@@ -18,7 +18,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     (V.7.0.5 Changes) (1.15.1 Minecraft)
     
     Config: 
-·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. 
+·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like: https://hatebin.com/ymymlwefwq  (Alternative link here if previous link expires: https://pastebin.com/ZvkKAuwE)
 ·Added config to disable spawning Silverfish Mob Spawner in Strongholds.
 ·Added config to disable spawning Silverfish Mob Spawner in Stone Fortresses.
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
