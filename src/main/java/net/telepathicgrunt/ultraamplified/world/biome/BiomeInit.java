@@ -144,7 +144,7 @@ public class BiomeInit {
 	public static Biome SHATTERED_SAVANNA_TERRACE = new ShatteredSavannaTerraceBiomeUA();
 	public static Biome SPIKY_BADLANDS = new BadlandsSpikyBiomeUA();
 	public static Biome DENSED_WOODED_BADLANDS = new BadlandsDensedWoodedBiomeUA();
-	public static Biome BADLANDS_DISSECTED_PLATEAU = new BadlandsDissectedPlateauBiomeUA();
+	public static Biome DISSECTED_PLATEAU_BADLANDS = new BadlandsDissectedPlateauBiomeUA();
 	public static Biome COLD_OCEAN = new OceanColdBiomeUA();
 	public static Biome DEEP_COLD_OCEAN = new OceanDeepColdBiomeUA();
 	public static Biome DEEP_FROZEN_OCEAN = new OceanDeepFrozenBiomeUA();
@@ -217,7 +217,7 @@ public class BiomeInit {
 		initBiome(registry, SHATTERED_SAVANNA_TERRACE, "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
 		initBiome(registry, SPIKY_BADLANDS, "Spiky Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(registry, DENSED_WOODED_BADLANDS, "Densed Wooded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
-		initBiome(registry, BADLANDS_DISSECTED_PLATEAU, "Badlands Dissected Plateau", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
+		initBiome(registry, DISSECTED_PLATEAU_BADLANDS, "Dissected Plateau Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
 		initBiome(registry, COLD_OCEAN, "Cold Ocean", BiomeType.COOL, Type.OCEAN);
 		initBiome(registry, DEEP_COLD_OCEAN, "Deep Cold Ocean", BiomeType.COOL, Type.OCEAN, Type.COLD);
 		initBiome(registry, DEEP_FROZEN_OCEAN, "Deep Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
@@ -290,7 +290,7 @@ public class BiomeInit {
 				SHATTERED_SAVANNA_TERRACE, 
 				SPIKY_BADLANDS, 
 				DENSED_WOODED_BADLANDS,
-				BADLANDS_DISSECTED_PLATEAU,
+				DISSECTED_PLATEAU_BADLANDS,
 				FROZEN_OCEAN,
 				COLD_OCEAN,
 				OCEAN,
@@ -358,7 +358,7 @@ public class BiomeInit {
     	
     	if(ConfigUA.spikyBadlands)
     	{
-	    	BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, BADLANDS_DISSECTED_PLATEAU);
+	    	BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, DISSECTED_PLATEAU_BADLANDS);
 	    	BASE_TO_MUTATION_MAP.put(BADLANDS, SPIKY_BADLANDS);
     	}
     }

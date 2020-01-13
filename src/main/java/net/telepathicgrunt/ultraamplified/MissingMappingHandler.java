@@ -165,6 +165,10 @@ public class MissingMappingHandler
 				{
 					newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "badlands_dissected_plateau");
 				}
+				else if (entry.key.getPath().equals("badlands_dissected_plateau"))
+				{
+					newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "dissected_plateau_badlands");
+				}
 				else if (entry.key.getPath().equals("the_end"))
 				{
 					newRL = new ResourceLocation(UltraAmplified.MODID + ":" + "end_field");

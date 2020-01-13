@@ -250,7 +250,7 @@ public class BiomeLayerSetupUA {
         else if(ConfigUA.spikyBadlands)
     	{
         	mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
-        	mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.BADLANDS_DISSECTED_PLATEAU, 10));
+        	mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.DISSECTED_PLATEAU_BADLANDS, 10));
     	}
         
         //Setup what m variants are mapped and not
