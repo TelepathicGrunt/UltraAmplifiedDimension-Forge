@@ -24,7 +24,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
 ·Turning off ministructures config now will turn off Desert Wells properly.   
 
+    Structures:
+·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
+
     Biome: 
+·Fixed very rare crash when generating beehives due to vanilla's code.
+·Added chance for Beehives in fancy oak trees in Flower Jungle and Flower Jungle Edge biomes.
 ·Dark Forest biomes should generate larger than before.
 ·Slightly reduced Mushroom biome spawnrate again...
 ·Significantly increased spawnrate of Crosses in Spooky Swamp biome.

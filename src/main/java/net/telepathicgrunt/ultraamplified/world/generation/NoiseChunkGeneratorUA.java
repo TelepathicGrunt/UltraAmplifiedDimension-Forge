@@ -26,7 +26,6 @@ import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.jigsaw.JigsawJunction;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
@@ -34,6 +33,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
 public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extends ChunkGenerator<T> {
 
@@ -260,7 +260,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		int coordinateX = chunkX << 4;
 		int coordinateZ = chunkZ << 4;
 		
-		for (Structure<?> structure : Feature.ILLAGER_STRUCTURES) {
+		for (Structure<?> structure : FeatureUA.ILLAGER_STRUCTURES) {
 			String s = structure.getStructureName();
 			LongIterator longiterator = p_222537_2_.getStructureReferences(s).iterator();
 
