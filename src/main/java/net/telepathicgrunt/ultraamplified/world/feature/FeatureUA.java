@@ -9,7 +9,6 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
@@ -158,10 +157,6 @@ public class FeatureUA
     public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE_UA = new MushroomTempleStructureUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE_UA = new IceSpikeTempleStructureUA(NoFeatureConfig::deserialize);
     
-    //bug fix until the mushroom class is no longer broken.
-    public static final Feature<BigMushroomFeatureConfig> HUGE_RED_MUSHROOM_FIX = new BigRedMushroomTempFix(BigMushroomFeatureConfig::deserialize);
-    public static final Feature<BigMushroomFeatureConfig> HUGE_BROWN_MUSHROOM_FIX = new BigBrownMushroomTempFix(BigMushroomFeatureConfig::deserialize);
-
     //for making the terrain bases for these structure
     public static final List<Structure<?>> ILLAGER_STRUCTURES = ImmutableList.of(PILLAGER_OUTPOST_UA, VILLAGE_UA);
     

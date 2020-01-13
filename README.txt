@@ -35,7 +35,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Significantly increased spawnrate of Crosses in Spooky Swamp biome.
 
 	Misc.
-·Switched to yarn over MCP mappings in backend. (Might had caused some bugs so please report anything that seems off or wrong)
+·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
        
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
