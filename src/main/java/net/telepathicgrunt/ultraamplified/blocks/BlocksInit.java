@@ -23,47 +23,47 @@ public class BlocksInit
     );
     
     public static final RegistryObject<Block> GLOWSTONE_ORE = BLOCKS.register("glowstone_ore",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowstoneOreBlock()
     );
     
     public static final RegistryObject<Block> COARSE_GLOWDIRT = BLOCKS.register("coarse_glowdirt",
-            () -> new AmplifiedPortalBlock()
+            () -> new CoarseGlowdirtBlock()
     );
     
     public static final RegistryObject<Block> GLOWDIRT = BLOCKS.register("glowdirt",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowdirtBlock()
     );
     
     public static final RegistryObject<Block> GLOWGRASS_BLOCK = BLOCKS.register("glowgrass_block",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowgrassBlock()
     );
     
     public static final RegistryObject<Block> GLOWMYCELIUM = BLOCKS.register("glowmycelium",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowmyceliumBlock()
     );
     
     public static final RegistryObject<Block> GLOWPODZOL = BLOCKS.register("glowpodzol",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowpodzolBlock()
     );
     
     public static final RegistryObject<Block> GLOWSAND = BLOCKS.register("glowsand",
-            () -> new AmplifiedPortalBlock()
+            () -> new GlowsandBlock()
     );
     
     public static final RegistryObject<Block> REDGLOWSAND = BLOCKS.register("red_glowsand",
-            () -> new AmplifiedPortalBlock()
+            () -> new RedGlowsandBlock()
     );
     
     public static final RegistryObject<Block> CACTUSBODYBLOCKUA = BLOCKS.register("cactus_body_block_ua",
-            () -> new AmplifiedPortalBlock()
+            () -> new CactusBodyBlockUA()
     );
     
     public static final RegistryObject<Block> CACTUSCORNERBLOCKUA = BLOCKS.register("cactus_corner_block_ua",
-            () -> new AmplifiedPortalBlock()
+            () -> new CactusCornerBlockUA()
     );
     
     public static final RegistryObject<Block> CACTUSMAINBLOCKUA = BLOCKS.register("cactus_main_block_ua",
-            () -> new AmplifiedPortalBlock()
+            () -> new CactusMainBlockUA()
     );
     
 	//creative tab to hold our block items

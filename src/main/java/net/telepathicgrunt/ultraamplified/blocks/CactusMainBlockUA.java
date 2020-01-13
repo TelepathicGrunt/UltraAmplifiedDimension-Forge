@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 
 public class CactusMainBlockUA extends DirectionalBlock implements net.minecraftforge.common.IPlantable
@@ -45,7 +46,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
-	public void tick(BlockState state, World world, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		if (!world.isAreaLoaded(pos, 1))
 			return; // Forge: prevent growing cactus from loading unloaded chunks with block update

@@ -32,7 +32,7 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	     }
 
 	    //generate the spooky horned swamp m trees
-	    public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
+	    public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_) 
 	    {
 	        int height = rand.nextInt(4) + 6;
 	        IWorld world = (IWorld) worldReader;

@@ -21,7 +21,15 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Added config to disable spawning Silverfish Mob Spawner in Strongholds.
 ·Added config to disable spawning Silverfish Mob Spawner in Stone Fortresses.
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
-·Turning off ministructures config now will turn off Desert Wells properly.        
+·Turning off ministructures config now will turn off Desert Wells properly.   
+
+    Biome: 
+·Dark Forest biomes should generate larger than before.
+·Slightly reduced Mushroom biome spawnrate again...
+·Significantly increased spawnrate of Crosses in Spooky Swamp biome.
+
+	Misc.
+·Switched to yarn over MCP mappings in backend.
        
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)

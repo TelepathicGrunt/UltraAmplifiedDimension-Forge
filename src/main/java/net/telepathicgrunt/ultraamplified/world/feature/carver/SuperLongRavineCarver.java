@@ -67,7 +67,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig> {
     	return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 850f;
      }
 
-     public boolean func_225555_a_(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
+     public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
        	 
     	
     	int i = (this.func_222704_c() * 2 - 1) * 16;

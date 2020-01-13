@@ -26,8 +26,8 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 
 	   protected void mushroomCap(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_, BlockPos.Mutable p_225564_5_, BigMushroomFeatureConfig p_225564_6_) {
 	      for(int i = p_225564_4_ - 3; i <= p_225564_4_; ++i) {
-	         int j = i < p_225564_4_ ? p_225564_6_.field_227274_c_ : p_225564_6_.field_227274_c_ - 1;
-	         int k = p_225564_6_.field_227274_c_ - 2;
+	         int j = i < p_225564_4_ ? p_225564_6_.capSize : p_225564_6_.capSize - 1;
+	         int k = p_225564_6_.capSize - 2;
 
 	         for(int l = -j; l <= j; ++l) {
 	            for(int i1 = -j; i1 <= j; ++i1) {
@@ -42,7 +42,7 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 	                  
 	     	         //fixed forge bug where it was only placing block in solid blocks instead of air or leaves
 	                  if (p_225564_1_.getBlockState(p_225564_5_).canBeReplacedByLeaves(p_225564_1_, p_225564_5_)) {
-	                     this.setBlockState(p_225564_1_, p_225564_5_, p_225564_6_.field_227272_a_.func_225574_a_(p_225564_2_, p_225564_3_).with(HugeMushroomBlock.UP, Boolean.valueOf(i >= p_225564_4_ - 1)).with(HugeMushroomBlock.WEST, Boolean.valueOf(l < -k)).with(HugeMushroomBlock.EAST, Boolean.valueOf(l > k)).with(HugeMushroomBlock.NORTH, Boolean.valueOf(i1 < -k)).with(HugeMushroomBlock.SOUTH, Boolean.valueOf(i1 > k)));
+	                     this.setBlockState(p_225564_1_, p_225564_5_, p_225564_6_.capProvider.getBlockState(p_225564_2_, p_225564_3_).with(HugeMushroomBlock.UP, Boolean.valueOf(i >= p_225564_4_ - 1)).with(HugeMushroomBlock.WEST, Boolean.valueOf(l < -k)).with(HugeMushroomBlock.EAST, Boolean.valueOf(l > k)).with(HugeMushroomBlock.NORTH, Boolean.valueOf(i1 < -k)).with(HugeMushroomBlock.SOUTH, Boolean.valueOf(i1 > k)));
 	                  }
 	               }
 	            }
@@ -68,7 +68,7 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 	         
 	         //fixed forge bug where it was only placing block in solid blocks instead of air or leaves
 	         if (p_227210_1_.getBlockState(p_227210_6_).canBeReplacedByLeaves(p_227210_1_, p_227210_6_)) {
-	            this.setBlockState(p_227210_1_, p_227210_6_, p_227210_4_.field_227273_b_.func_225574_a_(p_227210_2_, p_227210_3_));
+	            this.setBlockState(p_227210_1_, p_227210_6_, p_227210_4_.stemProvider.getBlockState(p_227210_2_, p_227210_3_));
 	         }
 	      }
 
@@ -80,11 +80,11 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 
 	    	  //forge fix as it forgot check for mycelium for mushrooms
 	         Block block = p_227209_1_.getBlockState(p_227209_2_.down()).getBlock();
-	         if (!func_227250_b_(block) && block != Blocks.MYCELIUM && block != Blocks.GRASS_BLOCK) {
+	         if (!isDirt(block) && block != Blocks.MYCELIUM && block != Blocks.GRASS_BLOCK) {
 	            return false;
 	         } else {
 	            for(int j = 0; j <= p_227209_3_; ++j) {
-	               int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
+	               int k = this.func_225563_a_(-1, -1, p_227209_5_.capSize, j);
 
 	               for(int l = -k; l <= k; ++l) {
 	                  for(int i1 = -k; i1 <= k; ++i1) {
@@ -119,7 +119,7 @@ public class BigRedMushroomTempFix extends AbstractBigMushroomFeature {
 	   
 	   //isn't called in our place()
 		@Override
-		protected void func_225564_a_(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_,
+		protected void generate(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_,
 				Mutable p_225564_5_, BigMushroomFeatureConfig p_225564_6_) {
 		}
 	}

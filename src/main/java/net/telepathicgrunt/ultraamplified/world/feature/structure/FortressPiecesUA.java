@@ -127,7 +127,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -211,7 +211,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -283,7 +283,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = getStoneVariantBlockState(
 					Blocks.NETHER_BRICK_STAIRS.getDefaultState().with(StairsBlock.FACING, Direction.SOUTH), random);
@@ -368,7 +368,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = getStoneVariantBlockState(Blocks.NETHER_BRICK_FENCE.getDefaultState()
 					.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true)),
@@ -463,7 +463,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -526,7 +526,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 6, 1, 6,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -610,7 +610,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 1, 4,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -684,7 +684,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 7, 3, 0, 11, 4, 18,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -786,7 +786,7 @@ public class FortressPiecesUA {
 			tagCompound.putInt("Seed", this.fillSeed);
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			Random seededRandom = new Random((long) this.fillSeed);
 
@@ -854,7 +854,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 12, 4, 12,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -1025,7 +1025,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 12, 4, 12,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -1601,7 +1601,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 0, 0, 6, 1, 6,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -1717,7 +1717,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 3, 0, 4, 4, 18,
 					Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -1805,7 +1805,7 @@ public class FortressPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 2, 0, 6, 7, 7,
 					Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false, random);

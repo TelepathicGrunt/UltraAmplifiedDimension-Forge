@@ -302,7 +302,7 @@ public class BiomeAddModdedFeatures {
 					else if (insideFeature instanceof LakesFeature) {
 						BlockStateFeatureConfig lakeConfig = (BlockStateFeatureConfig) insideConfig.feature.config;
 
-						if (checkIfBlockIsAllowed(lakeConfig.field_227270_a_.getBlock())) {
+						if (checkIfBlockIsAllowed(lakeConfig.state.getBlock())) {
 							uaBiome.addFeature(decorationType, feature);
 						}
 					}
@@ -478,7 +478,7 @@ public class BiomeAddModdedFeatures {
 					else if (insideFeature instanceof LakesFeature) {
 						BlockStateFeatureConfig blockStateFeatureConfig = (BlockStateFeatureConfig) insideConfig.feature.config;
 
-						if (checkIfBlockIsAllowed(blockStateFeatureConfig.field_227270_a_.getBlock())) {
+						if (checkIfBlockIsAllowed(blockStateFeatureConfig.state.getBlock())) {
 							uaBiome.getFeatures(decorationType).remove(featureIndex);
 						}
 					}

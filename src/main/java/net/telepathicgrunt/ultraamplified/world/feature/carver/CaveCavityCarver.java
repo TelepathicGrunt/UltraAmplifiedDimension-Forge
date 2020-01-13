@@ -96,7 +96,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 	}
 
 	
-	public boolean func_225555_a_(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX,
+	public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX,
 			int originalZ, BitSet mask, ProbabilityConfig config) {
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;
@@ -106,12 +106,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig> {
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 1F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
 		float widthHeightBase = (random.nextFloat() + random.nextFloat()) / 16; // width And Height Modifier
-		this.func_222729_a(region, biomeBlockPos, random.nextLong(), seaLevel, originalX, originalZ, xpos, height, zpos,
+		this.carveRavine(region, biomeBlockPos, random.nextLong(), seaLevel, originalX, originalZ, xpos, height, zpos,
 				widthHeightBase, xzNoise2, xzCosNoise, 0, i, random.nextDouble() + 20D, mask);
 		return true;
 	}
 
-	private void func_222729_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ,
+	private void carveRavine(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int seaLevel, int mainChunkX, int mainChunkZ,
 			double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2,
 			float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
 		

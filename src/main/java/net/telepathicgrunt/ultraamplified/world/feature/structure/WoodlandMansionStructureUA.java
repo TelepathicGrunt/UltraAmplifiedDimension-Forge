@@ -58,11 +58,11 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (ConfigUA.mansionSpawnrate != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			for (Biome biome2 : chunkGen.getBiomeProvider().func_225530_a_(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
+			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
 					chunkPosZ * 16 + 9, 32)) {
 				if (!chunkGen.hasStructure(biome2, FeatureUA.WOODLAND_MANSION_UA)) {
 					return false;
@@ -132,7 +132,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 		 */
 		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand,
 				MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
-			super.func_225565_a_(world, p_225565_2_, rand, structurebb, p_75068_4_);
+			super.generateStructure(world, p_225565_2_, rand, structurebb, p_75068_4_);
 			int i = this.bounds.minY;
 
 			for (int j = structurebb.minX; j <= structurebb.maxX; ++j) {

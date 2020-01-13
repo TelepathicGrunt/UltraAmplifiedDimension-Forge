@@ -23,7 +23,6 @@ import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleStructureUA;
@@ -50,9 +49,9 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansio
 public class FeatureUA
 {
 
-    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(5).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).func_225568_b_();
-    public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).func_225569_d_(13).func_227283_b_(50).func_227284_c_(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).func_225568_b_();
+    public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).baseHeight(13).heightInterval(50).crownHeight(13).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).build();
+    public static final HugeTreeFeatureConfig GIANT_SPRUCE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).baseHeight(13).heightInterval(50).crownHeight(5).setSapling((net.minecraftforge.common.IPlantable)Blocks.SPRUCE_SAPLING).build();
+    public static final HugeTreeFeatureConfig GIANT_BIRCH_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.BIRCH_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.BIRCH_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).baseHeight(13).heightInterval(50).crownHeight(18).setSapling((net.minecraftforge.common.IPlantable)Blocks.BIRCH_SAPLING).build();
     
     public static <T extends BaseTreeFeatureConfig> T getConfiguredForUndergroundTreeConfig(T treeConfig)
     {
@@ -62,7 +61,7 @@ public class FeatureUA
 
     public static <T extends BlockClusterFeatureConfig> T getConfiguredClusterConfig(T clusterConfig)
     {
-    	clusterConfig.field_227298_k_ = false;
+    	clusterConfig.project = false;
         return clusterConfig;
     }
     
@@ -86,7 +85,7 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> HANGING_RUINS = new HangingRuins(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> FOSSILS_UA = new FossilUA(NoFeatureConfig::deserialize);
     public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
-    public static Feature<BlockStateFeatureConfig> ICEBERG_UA = new IcebergUA(BlockStateFeatureConfig::func_227271_a_);
+    public static Feature<BlockStateFeatureConfig> ICEBERG_UA = new IcebergUA(BlockStateFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MARKED_TREASURE_CHEST_UA = new MarkedTreasureChest(NoFeatureConfig::deserialize);
 
     public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new BoulderGiantStackable(BlockBlobConfig::deserialize);
@@ -94,8 +93,8 @@ public class FeatureUA
     public static Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal(BlockBlobConfig::deserialize);
     public static Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny(BlockBlobConfig::deserialize);
 
-    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new LakeStoneless(BlockStateFeatureConfig::func_227271_a_);
-    public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new LakeWideShallow(BlockStateFeatureConfig::func_227271_a_);
+    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new LakeStoneless(BlockStateFeatureConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new LakeWideShallow(BlockStateFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
@@ -122,13 +121,13 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> NETHER_UNDERWATER_MAGMA = new NetherUnderwaterMagma(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> RARE_LAVA = new NetherSurfaceLavaRare(NoFeatureConfig::deserialize);
     
-    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new TreeSwampHorned(TreeFeatureConfig::func_227338_a_);
+    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new TreeSwampHorned(TreeFeatureConfig::deserialize);
     public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_BIRCH_TREE = new TreeGiantBirch(HugeTreeFeatureConfig::deserializeDarkOak); //may need to fix deserialize
     public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_1_UA = new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, false);
     public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_2_UA = new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, true);
     public static AbstractTreeFeature<HugeTreeFeatureConfig> GIANT_DARK_FOREST_TREE = new TreeGiantDarkOak(HugeTreeFeatureConfig::deserializeDarkOak);
-    public static AbstractTreeFeature<TreeFeatureConfig> PODZOL_TAIGA_TREE = new TreePodzolTaiga(TreeFeatureConfig::func_227338_a_);
-    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new TreeEnd(TreeFeatureConfig::func_227338_a_);
+    public static AbstractTreeFeature<TreeFeatureConfig> PODZOL_TAIGA_TREE = new TreePodzolTaiga(TreeFeatureConfig::deserialize);
+    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new TreeEnd(TreeFeatureConfig::deserialize);
     public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH_UA = new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1)));
     
     public static Structure<MineshaftConfigUA> MINESHAFT_UA = new MineshaftStructureUA(MineshaftConfigUA::deserialize);

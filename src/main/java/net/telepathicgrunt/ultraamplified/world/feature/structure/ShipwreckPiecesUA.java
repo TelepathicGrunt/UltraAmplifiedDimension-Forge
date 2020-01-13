@@ -140,7 +140,7 @@ public class ShipwreckPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
+		public boolean generate(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
 		{
 			BlockPos blockpos;
 			BlockPos blockposSize = this.template.getSize();
@@ -176,7 +176,7 @@ public class ShipwreckPiecesUA
 			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
 			templatePosition = new BlockPos(templatePosition.getX(), blockpos.getY() - 2, templatePosition.getZ());
 
-			return super.func_225577_a_(world, chunkGen, random, structureBoundingBox, chunkPos);
+			return super.generate(world, chunkGen, random, structureBoundingBox, chunkPos);
 		}
 	}
 }

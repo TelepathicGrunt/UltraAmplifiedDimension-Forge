@@ -50,7 +50,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 	}
 
 
-	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		if (ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground)
 		{

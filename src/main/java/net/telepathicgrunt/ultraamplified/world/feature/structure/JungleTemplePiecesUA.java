@@ -56,7 +56,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece {
 		tagCompound.putBoolean("placedTrap2", this.trap2);
 	}
 
-	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 			MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 
 		this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, -4, 0, this.width - 1, 0, this.depth - 1,

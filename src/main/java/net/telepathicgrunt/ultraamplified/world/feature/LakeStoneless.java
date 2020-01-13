@@ -61,7 +61,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
                         return false;
                      }
 
-                     if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
+                     if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
                         return false;
                      }
                   }
@@ -73,7 +73,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
             for(int z = 0; z < 16; ++z) {
                for(int y = 0; y < 8; ++y) {
                   if (aboolean[(x * 16 + z) * 8 + y]) {
-                     world.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.field_227270_a_, 2);
+                     world.setBlockState(pos.add(x-8, y, z-8), y >= 4 ? CAVE_AIR : configBlock.state, 2);
                   }
                }
             }
@@ -86,7 +86,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig> {
                  
                  Material blockMaterial = world.getBlockState(pos.add(x-8, y, z-8)).getMaterial();
                  if (flag1 && (y < 4 || random.nextInt(2) != 0) && blockMaterial.isSolid() && blockMaterial != Material.LEAVES) {
-                    world.setBlockState(pos.add(x-8, y, z-8), configBlock.field_227270_a_, 2);
+                    world.setBlockState(pos.add(x-8, y, z-8), configBlock.state, 2);
                  }
               }
            }

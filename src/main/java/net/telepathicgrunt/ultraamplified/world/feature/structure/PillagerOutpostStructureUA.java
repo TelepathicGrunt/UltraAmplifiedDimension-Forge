@@ -44,7 +44,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
 		return field_214558_a;
 	}
 
-	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
@@ -53,7 +53,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
 			if (rand.nextFloat() < 1 / ((double) (ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1)) {
 				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k) {
 					for (int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l) {
-						if (FeatureUA.VILLAGE_UA.func_225558_a_(p_225558_1_, chunkGen, rand, k, l, biome)) {
+						if (FeatureUA.VILLAGE_UA.shouldStartAt(p_225558_1_, chunkGen, rand, k, l, biome)) {
 							return false;
 						}
 					}

@@ -58,11 +58,6 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			{
 				biomeIdToReturn = BiomeInit.BASE_TO_HILLS_MAP.get(biomeId1);
 			}
-			else if (biomeId1 == BiomeGenHelper.DARK_FOREST && ConfigUA.plains)
-			{
-				//makes sure plains is selected in the config setting before allowing it to spawn through here
-				biomeIdToReturn = BiomeGenHelper.PLAINS;
-			}
 			else if (biomeId1 == BiomeGenHelper.PLAINS && ConfigUA.forest)
 			{
 				//makes sure forest is selected in the config setting before allowing it to spawn through here
@@ -78,7 +73,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			}
 
 			//second way to create m variant biomes of both base and hills biomes
-			if (allowMForm && biomeIdToReturn != biomeId1)
+			if (allowMForm)
 			{
 				Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
 				biomeIdToReturn = biomeTemp == null ? biomeId1 : BiomeRegistry.getID(biomeTemp);

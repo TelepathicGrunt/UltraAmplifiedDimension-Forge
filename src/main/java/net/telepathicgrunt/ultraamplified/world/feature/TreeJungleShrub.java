@@ -23,7 +23,7 @@ public class TreeJungleShrub extends AbstractTreeFeature<BaseTreeFeatureConfig> 
 	      this.leaf = leaf;
 	   }
 
-	   public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_) {
+	   public boolean generate(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_) {
 		  
  	      if (isSoil(world, position.down(), p_225557_7_.getSapling())) {
          	this.setBlockState(world, position, this.trunk);

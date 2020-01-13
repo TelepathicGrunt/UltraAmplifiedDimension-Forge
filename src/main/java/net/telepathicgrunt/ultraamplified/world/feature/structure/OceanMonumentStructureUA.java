@@ -53,11 +53,11 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
 			int chunkPosZ, Biome biome) {
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			for (Biome biome2 : chunkGen.getBiomeProvider().func_225530_a_(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
+			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
 					chunkPosZ * 16 + 9, 32)) {
 				if (ConfigUA.oceanMonumentSpawnrate != 101
 						&& chunkGen.hasStructure(biome2, FeatureUA.OCEAN_MONUMENT_UA)) {
@@ -122,7 +122,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
 				this.generate(this.getChunkPosX(), this.getChunkPosZ());
 			}
 
-			super.func_225565_a_(world, p_225565_2_, rand, structurebb, pos);
+			super.generateStructure(world, p_225565_2_, rand, structurebb, pos);
 		}
 	}
 }

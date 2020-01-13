@@ -25,7 +25,7 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 	   }
 
 	   protected void mushroomCap(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_, BlockPos.Mutable p_225564_5_, BigMushroomFeatureConfig p_225564_6_) {
-	      int i = p_225564_6_.field_227274_c_;
+	      int i = p_225564_6_.capSize;
 
 	      for(int j = -i; j <= i; ++j) {
 	         for(int k = -i; k <= i; ++k) {
@@ -44,7 +44,7 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 	                  boolean flag7 = flag1 || flag5 && j == i - 1;
 	                  boolean flag8 = flag2 || flag4 && k == 1 - i;
 	                  boolean flag9 = flag3 || flag4 && k == i - 1;
-	                  this.setBlockState(p_225564_1_, p_225564_5_, p_225564_6_.field_227272_a_.func_225574_a_(p_225564_2_, p_225564_3_).with(HugeMushroomBlock.WEST, Boolean.valueOf(flag6)).with(HugeMushroomBlock.EAST, Boolean.valueOf(flag7)).with(HugeMushroomBlock.NORTH, Boolean.valueOf(flag8)).with(HugeMushroomBlock.SOUTH, Boolean.valueOf(flag9)));
+	                  this.setBlockState(p_225564_1_, p_225564_5_, p_225564_6_.capProvider.getBlockState(p_225564_2_, p_225564_3_).with(HugeMushroomBlock.WEST, Boolean.valueOf(flag6)).with(HugeMushroomBlock.EAST, Boolean.valueOf(flag7)).with(HugeMushroomBlock.NORTH, Boolean.valueOf(flag8)).with(HugeMushroomBlock.SOUTH, Boolean.valueOf(flag9)));
 	               }
 	            }
 	         }
@@ -62,7 +62,7 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 		         
 		         //fixed forge bug where it was only placing block in solid blocks instead of air or leaves
 		         if (p_227210_1_.getBlockState(p_227210_6_).canBeReplacedByLeaves(p_227210_1_, p_227210_6_)) {
-		            this.setBlockState(p_227210_1_, p_227210_6_, p_227210_4_.field_227273_b_.func_225574_a_(p_227210_2_, p_227210_3_));
+		            this.setBlockState(p_227210_1_, p_227210_6_, p_227210_4_.stemProvider.getBlockState(p_227210_2_, p_227210_3_));
 	         }
 	      }
 
@@ -74,11 +74,11 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 	    	  
 	    	  //forge fix as it forgot check for mycelium for mushrooms
 	         Block block = p_227209_1_.getBlockState(p_227209_2_.down()).getBlock();
-	         if (!func_227250_b_(block) && block != Blocks.MYCELIUM && block != Blocks.GRASS_BLOCK) {
+	         if (!isDirt(block) && block != Blocks.MYCELIUM && block != Blocks.GRASS_BLOCK) {
 	            return false;
 	         } else {
 	            for(int j = 0; j <= p_227209_3_; ++j) {
-	               int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
+	               int k = this.func_225563_a_(-1, -1, p_227209_5_.capSize, j);
 
 	               for(int l = -k; l <= k; ++l) {
 	                  for(int i1 = -k; i1 <= k; ++i1) {
@@ -114,7 +114,7 @@ public class BigBrownMushroomTempFix extends AbstractBigMushroomFeature {
 
 	   //isn't called in our place()
 		@Override
-		protected void func_225564_a_(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_,
+		protected void generate(IWorld p_225564_1_, Random p_225564_2_, BlockPos p_225564_3_, int p_225564_4_,
 				Mutable p_225564_5_, BigMushroomFeatureConfig p_225564_6_) {
 			// TODO Auto-generated method stub
 			

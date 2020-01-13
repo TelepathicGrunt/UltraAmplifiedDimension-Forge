@@ -73,7 +73,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	{
 		int i = region.getMainChunkX();
 		int j = region.getMainChunkZ();
-		Biome biome = region.func_226691_t_((new ChunkPos(i, j)).asBlockPos());
+		Biome biome = region.getBiome((new ChunkPos(i, j)).asBlockPos());
 		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
 		sharedseedrandom.setDecorationSeed(region.getSeed(), i << 4, j << 4);
 		WorldEntitySpawner.performWorldGenSpawning(region, biome, i, j, sharedseedrandom);
@@ -107,13 +107,13 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 		float f1 = 0.0F;
 		float f2 = 0.0F;
 		int y = this.getSeaLevel();
-		float f3 = this.biomeProvider.func_225526_b_(noiseX, y, noiseZ).getDepth();
+		float f3 = this.biomeProvider.getBiomeForNoiseGen(noiseX, y, noiseZ).getDepth();
 
 		for (int j = -2; j <= 2; ++j)
 		{
 			for (int k = -2; k <= 2; ++k)
 			{
-				Biome biome = this.biomeProvider.func_225526_b_(noiseX + j, y, noiseZ + k);
+				Biome biome = this.biomeProvider.getBiomeForNoiseGen(noiseX + j, y, noiseZ + k);
 				float depthWeight = 0; //biome.getDepth();
 				float scaleWeight = 0; //biome.getScale();
 
@@ -140,13 +140,13 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 		f1 = f1 / f2;
 		f = f * 0.9F + 0.1F;
 		f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-		adouble[0] = (double) f1 + this.func_222574_c(noiseX, noiseZ);
+		adouble[0] = (double) f1 + this.getNoiseDepthAt(noiseX, noiseZ);
 		adouble[1] = (double) f;
 		return adouble;
 	}
 
 
-	private double func_222574_c(int p_222574_1_, int p_222574_2_)
+	private double getNoiseDepthAt(int p_222574_1_, int p_222574_2_)
 	{
 		double noise = this.depthNoise.getValue((double) (p_222574_1_ * 200), 10.0D, (double) (p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 		if (noise < 0.0D)

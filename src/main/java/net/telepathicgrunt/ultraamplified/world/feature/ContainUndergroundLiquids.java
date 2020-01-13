@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.world.feature.carver;
+package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +102,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 					if (notContainedFlag) {
 						
 						//grabs what block to use based on what biome we are in
-						replacementBlock = fillerBiomeMap.get(world.func_226691_t_(blockpos$Mutable));
+						replacementBlock = fillerBiomeMap.get(world.getBiome(blockpos$Mutable));
 						if (replacementBlock == null) {
 							replacementBlock = STONE;
 						}

@@ -29,7 +29,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
     }
 
 
-   public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+   public boolean generate(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
    {
       int i = rand.nextInt(3) + 5;
 

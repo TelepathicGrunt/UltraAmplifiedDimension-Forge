@@ -35,7 +35,7 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig> {
 	   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, BlockStateFeatureConfig icebergConfig) {
 		      
 		      boolean flag = random.nextDouble() > 0.7D;
-		      BlockState iblockstate = icebergConfig.field_227270_a_;
+		      BlockState iblockstate = icebergConfig.state;
 		      double d0 = random.nextDouble() * 2.0D * Math.PI;
 		      int i = 11 - random.nextInt(5);
 		      int j = 3 + random.nextInt(3);

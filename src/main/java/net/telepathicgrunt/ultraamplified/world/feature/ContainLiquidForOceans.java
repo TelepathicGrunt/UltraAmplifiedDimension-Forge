@@ -57,7 +57,7 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
  					continue;
  				}
  				
-            	 oceanBiome = world.func_226691_t_(blockpos$Mutable.add(x, 0, z));
+            	 oceanBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
             	 if(BiomeGenHelper.isOcean(oceanBiome)) {
             		 bordersOcean = true;
             		 x = 16;

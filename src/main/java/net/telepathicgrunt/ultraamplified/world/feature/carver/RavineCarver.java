@@ -76,7 +76,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 	}
 
 
-	public boolean func_225555_a_(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
+	public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
 	{
 
 		Biome biome = biomeBlockPos.apply(new BlockPos(originalX * 16, 100, originalZ * 16));

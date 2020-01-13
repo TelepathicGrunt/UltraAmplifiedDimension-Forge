@@ -134,7 +134,7 @@ public class MushroomTemplePiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
 					.setMirror(Mirror.NONE).setCenterOffset(MushroomTemplePiecesUA.OFFSET1.get(this.resourceLocation));
@@ -150,7 +150,7 @@ public class MushroomTemplePiecesUA {
 
 			BlockPos blockpos2 = this.templatePosition;
 			this.templatePosition = this.templatePosition.add(0, i - 90 - 2, 0);
-			boolean flag = super.func_225577_a_(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
+			boolean flag = super.generate(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
 
 			this.templatePosition = blockpos2;
 			return flag;

@@ -15,6 +15,6 @@ public class ClientEvents
 	
 	public static void onClientSetup(FMLClientSetupEvent event)
 	{
-		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.getCutout());
 	}
 }

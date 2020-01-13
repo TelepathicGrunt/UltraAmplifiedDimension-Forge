@@ -254,7 +254,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -334,7 +334,7 @@ public class StrongholdPiecesUA {
 			}
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			for (int i = 0; i < this.steps; ++i) {
 				this.setBlockState(world, Blocks.STONE_BRICKS.getDefaultState(), 0, 0, i, structureBoundingBoxIn);
@@ -438,7 +438,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 9, 8, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -532,7 +532,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -594,7 +594,7 @@ public class StrongholdPiecesUA {
 			return new StrongholdPiecesUA.Library(p_175864_6_, p_175864_1_, mutableboundingbox, p_175864_5_);
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			int i = 11;
 
@@ -812,7 +812,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 7, 15, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -974,7 +974,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 4, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1029,7 +1029,7 @@ public class StrongholdPiecesUA {
 
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1102,7 +1102,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 6, 10, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1358,7 +1358,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 4, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1430,7 +1430,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 7, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1532,7 +1532,7 @@ public class StrongholdPiecesUA {
 							: null;
 		}
 
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random,
 					StrongholdPiecesUA.STRONGHOLD_STONES);

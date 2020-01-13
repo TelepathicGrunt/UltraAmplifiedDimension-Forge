@@ -41,7 +41,7 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 		while (position.getY() >= 6)
 		{
 			if (blockState.getMaterial() == Material.AIR || 
-				(blockState.getBlock() != Blocks.GRASS_BLOCK && !func_227250_b_(blockState.getBlock())))
+				(blockState.getBlock() != Blocks.GRASS_BLOCK && !isDirt(blockState.getBlock())))
 			{
 				//block was air or a non-dirt/grass block. Thus move down one.
 				position = position.down();

@@ -268,7 +268,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -490,7 +490,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -633,7 +633,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -715,7 +715,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -875,7 +875,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1048,7 +1048,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1201,7 +1201,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1446,7 +1446,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -1678,7 +1678,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			BlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.GRASS_PATH.getDefaultState());
 			BlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OAK_PLANKS.getDefaultState());
@@ -1812,7 +1812,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -2588,7 +2588,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);
@@ -2673,7 +2673,7 @@ public class VillagePastStyledPiecesUA {
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob
 		 * Spawners, it closes Mineshafts at the end, it adds Fences...
 		 */
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
 				MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_) {
 			if (this.averageGroundLvl < 0) {
 				this.averageGroundLvl = this.getBestGroundLevel(world, structureBoundingBoxIn);

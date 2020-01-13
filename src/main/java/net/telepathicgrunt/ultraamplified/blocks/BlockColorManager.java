@@ -32,9 +32,9 @@ public class BlockColorManager
 			final BlockColors blockColors = event.getBlockColors();
 	
 			//registers the colors for blocks that changes colors based on biome
-			blockColors.register((p_210225_0_, p_210225_1_, p_210225_2_, p_210225_3_) ->
+			blockColors.register((unknown1, lightReader, pos, unknown2) ->
 			{
-				return p_210225_1_ != null && p_210225_2_ != null ? BiomeColors.func_228358_a_(p_210225_1_, p_210225_2_) : GrassColors.get(0.5D, 1.0D);
+				return lightReader != null && pos != null ? BiomeColors.getGrassColor(lightReader, pos) : GrassColors.get(0.5D, 1.0D);
 			}, BlocksInit.GLOWGRASS_BLOCK.get());
 		}
 	
@@ -52,7 +52,7 @@ public class BlockColorManager
 			final IItemColor itemBlockColourHandler = (stack, tintIndex) ->
 			{
 				final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
-				return blockColors.func_228054_a_(state, null, null, tintIndex);
+				return blockColors.getColor(state, null, null, tintIndex);
 			};
 	
 			itemColors.register(itemBlockColourHandler, BlocksInit.GLOWGRASS_BLOCK.get());

@@ -134,7 +134,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
       return ImmutableList.of(lvt_8_1_, lvt_8_1_, lvt_8_1_);
    }
 	
-	public Set<Biome> func_225530_a_(int centerX, int centerY, int centerZ, int sideLength) {
+	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength) {
 	      int i = centerX - sideLength >> 2;
 	      int j = centerY - sideLength >> 2;
 	      int k = centerZ - sideLength >> 2;
@@ -152,7 +152,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	               int i3 = i + k2;
 	               int j3 = j + l2;
 	               int k3 = k + j2;
-	               set.add(this.func_225526_b_(i3, j3, k3));
+	               set.add(this.getBiomeForNoiseGen(i3, j3, k3));
 	            }
 	         }
 	      }
@@ -160,7 +160,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	}
 	
 	@Nullable
-	public BlockPos func_225531_a_(int x, int z, int range, List<Biome> biomes, Random random) {
+	public BlockPos locateBiome(int x, int z, int range, List<Biome> biomes, Random random) {
 	   int i = x - range >> 2;
 	   int j = z - range >> 2;
 	   int k = x + range >> 2;
@@ -173,7 +173,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	   for(int l1 = 0; l1 < i1 * j1; ++l1) {
 	      int i2 = i + l1 % i1 << 2;
 	      int j2 = j + l1 / i1 << 2;
-	      if (biomes.contains(this.func_225526_b_(i2, k1, j2))) {
+	      if (biomes.contains(this.getBiomeForNoiseGen(i2, k1, j2))) {
 	         if (blockpos == null || random.nextInt(k1 + 1) == 0) {
 	            blockpos = new BlockPos(i2, 0, j2);
 	         }
@@ -207,7 +207,7 @@ public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList
 	   return this.topBlocksCache;
 	}
 
-   public Biome func_225526_b_(int p_225526_1_, int p_225526_2_, int p_225526_3_) {
+   public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_) {
       return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);
    }
 }

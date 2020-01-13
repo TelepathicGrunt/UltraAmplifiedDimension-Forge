@@ -26,7 +26,7 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig> {
 		for (int xOffset = 0; xOffset < 16; xOffset++) {
 			for (int zOffset = 0; zOffset < 16; zOffset++) {
 				blockpos$mutable.setPos(pos.add(xOffset, 0, zOffset));
-				Biome biome = world.func_226691_t_(blockpos$mutable);
+				Biome biome = world.getBiome(blockpos$mutable);
 
 				if (BiomeGenHelper.frozenBiomes.contains(biome)) 
 				{

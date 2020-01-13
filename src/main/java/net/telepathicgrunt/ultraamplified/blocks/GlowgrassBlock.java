@@ -25,7 +25,7 @@ public class GlowgrassBlock extends GrassBlock
 	 * every tick, it'll attempt to spread normal mycelium instead of itself. If covered, will turn into glowdirt.
 	 */
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		if (!world.isRemote)
 		{

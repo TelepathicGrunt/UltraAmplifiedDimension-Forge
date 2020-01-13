@@ -35,8 +35,8 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
         Block block2 = world.getBlockState(position.add(-1,0,-1)).getBlock();
 
     	//boulder can only generate on grass/dirt
-    	if ((block != Blocks.GRASS_BLOCK && block != Blocks.PODZOL && !func_227250_b_(block)) ||
-    		(block2 != Blocks.GRASS_BLOCK && block2 != Blocks.PODZOL && !func_227250_b_(block2) ))
+    	if ((block != Blocks.GRASS_BLOCK && block != Blocks.PODZOL && !isDirt(block)) ||
+    		(block2 != Blocks.GRASS_BLOCK && block2 != Blocks.PODZOL && !isDirt(block2) ))
         {
             return false;
         }

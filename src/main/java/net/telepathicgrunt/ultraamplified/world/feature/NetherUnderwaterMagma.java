@@ -52,7 +52,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 					continue;
 				}
 				
-				netherBiome = world.func_226691_t_(blockpos$Mutable.add(x, 0, z));
+				netherBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
 				if (netherBiome == BiomeInit.NETHERLAND)
 				{
 					hasNetherBiome = true;
@@ -74,7 +74,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 			for (int z = 0; z < 16; ++z)
 			{
 
-				netherBiome = world.func_226691_t_(blockpos$Mutable.add(x, 0, z));
+				netherBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
 				if (netherBiome != BiomeInit.NETHERLAND)
 				{
 					continue;

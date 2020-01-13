@@ -70,7 +70,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
             	  
                  if (!material.isSolid() && 
                 	  material != Material.WATER && 
-                	  world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.field_227270_a_) {
+                	  world.getBlockState(pos.add(x-8, y, z-8)) != configBlock.state) {
                     return false;
                  }
               }
@@ -154,7 +154,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
               if (aboolean[(x * 16 + z) * 8 + y] &&
             	 !notContainedFlag )
               {
-                 world.setBlockState(pos.add(x, y, z), configBlock.field_227270_a_, 2);
+                 world.setBlockState(pos.add(x, y, z), configBlock.state, 2);
               }
             }
          }
