@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
@@ -15,8 +16,11 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.state.properties.SlabType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
@@ -29,10 +33,13 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
@@ -49,8 +56,8 @@ public class AmplifiedPortalBehavior {
 		@SubscribeEvent
 		public static void BlockRightClickEvent(PlayerInteractEvent.RightClickBlock event) {
 			World world = event.getWorld();
-			Entity entityIn = event.getEntity();
-			MinecraftServer minecraftserver = entityIn.getServer();
+			Entity entity = event.getEntity();
+			MinecraftServer minecraftserver = entity.getServer();
 
 			// checks to see if player uses right click on amplified portal and if so
 			// teleports player to other dimension
@@ -58,10 +65,10 @@ public class AmplifiedPortalBehavior {
 			{
 				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
-				if(!world.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && !((PlayerEntity)entityIn).isCrouching())
+				if(!world.isRemote && !entity.isPassenger() && !entity.isBeingRidden() && entity.isNonBoss() && !((PlayerEntity)entity).isCrouching())
 				{
 					//grabs the capability attached to player for dimension hopping
-					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entityIn.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
+					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
 					boolean firstTime = false;
 					
 					//gets previous dimension
@@ -79,7 +86,7 @@ public class AmplifiedPortalBehavior {
 			        	   generatePortal(minecraftserver.getWorld(destination));
 			    	   }
 					}
-					else if(cap.getDim() == entityIn.dimension){
+					else if(cap.getDim() == entity.dimension){
 						// if our stored dimension somehow ends up being our current dimension and isn't the ultra amplified dimension, 
 						// then just take us to ultra amplified dimension instead
 						if(cap.getDim() != UltraAmplifiedDimension.ultraamplified()) {
@@ -100,7 +107,7 @@ public class AmplifiedPortalBehavior {
 					//gets top block in other world or original location
 					BlockPos blockpos = new BlockPos(8, 0, 8);
 					ChunkPos chunkpos;
-					if(firstTime || cap.getDim() == entityIn.dimension) {
+					if(firstTime || cap.getDim() == entity.dimension) {
 						//if it is player's first time teleporting or our stored dimension was our current dimension, 
 						//find top block at world origin closest to portal
 						
@@ -157,26 +164,26 @@ public class AmplifiedPortalBehavior {
 						chunkpos = new ChunkPos(blockpos);
 					}
 
-					serverworld.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entityIn.getEntityId());
+					serverworld.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entity.getEntityId());
 					
 					 //dunno how a sleeping player clicked on the portal but if they do, they wake up
-			         if (((ServerPlayerEntity)entityIn).isSleeping()) {
-			            ((ServerPlayerEntity)entityIn).wakeUp();
+			         if (((ServerPlayerEntity)entity).isSleeping()) {
+			            ((ServerPlayerEntity)entity).wakeUp();
 			         }
 			         
 	
 					//store current blockpos and dim before teleporting
-					cap.setDim(entityIn.dimension);
-					cap.setPos(entityIn.getPosition());
+					cap.setDim(entity.dimension);
+					cap.setPos(entity.getPosition());
 					
 					
-					((ServerPlayerEntity)entityIn).teleport(
+					((ServerPlayerEntity)entity).teleport(
 							minecraftserver.getWorld(destination), 
 							blockpos.getX()+0.5D, 
 							blockpos.getY()+1, 
 							blockpos.getZ()+0.5D, 
-							entityIn.rotationYaw, 
-							entityIn.rotationPitch);
+							entity.rotationYaw, 
+							entity.rotationPitch);
 				}
 			}
 			
@@ -186,7 +193,7 @@ public class AmplifiedPortalBehavior {
 			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
 				    event.getItemStack().getItem() == Items.FLINT_AND_STEEL) 
 			{
-				trySpawnPortal(world, event.getPos());
+				trySpawnPortal(world, event.getPos(), entity);
 			}
 		}
 		
@@ -231,8 +238,82 @@ public class AmplifiedPortalBehavior {
 	 	}
 	    
 	    
-		public static boolean isValid(IWorld world, BlockPos pos)
+		public static boolean isValid(IWorld world, BlockPos pos, Entity entity)
 		{
+			ForgeRegistry<Block> registry = ((ForgeRegistry<Block>)ForgeRegistries.BLOCKS);
+			
+			//grabs resourcelocation from config and tries to find that block to use for corners
+			BlockState blockCorner;
+			if(!ConfigUA.portalCornerBlocks.equals("")) {
+				if(registry.containsKey(new ResourceLocation(ConfigUA.portalCornerBlocks))){
+					blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks)).getDefaultState();
+				}
+				else {
+					if(entity instanceof ServerPlayerEntity) 
+					{
+						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame corner cannot be found! Here is what was put in: "+ConfigUA.portalCornerBlocks);
+						entity.sendMessage(message);
+					}
+						
+					return false;
+				}
+			} 
+			else {
+				blockCorner = POLISHED_GRANITE;
+			}
+			
+
+			//grabs resourcelocation from config and tries to find that block to use for ceiling
+			BlockState blockCeiling;
+			if(!ConfigUA.portalCeilingBlocks.equals("")){
+				if(registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks))){
+					blockCeiling = registry.getValue(new ResourceLocation(ConfigUA.portalCeilingBlocks)).getDefaultState();
+					
+					if(blockCeiling.getBlock() instanceof SlabBlock) 
+					{
+						blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
+					}
+				}
+				else {
+					if(entity instanceof ServerPlayerEntity) 
+					{
+						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame ceiling cannot be found! Here is what was put in: "+ConfigUA.portalCeilingBlocks);
+						entity.sendMessage(message);
+					}
+					
+					return false;
+				}
+			}
+			else {
+				blockCeiling = POLISHED_ANDESITE_SLAB_TOP;
+			}
+			
+
+			//grabs resourcelocation from config and tries to find that block to use for floor
+			BlockState blockFloor;
+			if(!ConfigUA.portalFloorBlocks.equals("")) {
+				if(registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks))){
+					blockFloor = registry.getValue(new ResourceLocation(ConfigUA.portalFloorBlocks)).getDefaultState();
+					
+					if(blockFloor.getBlock() instanceof SlabBlock) 
+					{
+						blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
+					}
+				}
+				else {
+					if(entity instanceof ServerPlayerEntity) 
+					{
+						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame floor cannot be found! Here is what was put in: "+ConfigUA.portalFloorBlocks);
+						entity.sendMessage(message);
+					}
+					
+					return false;
+				}
+			}
+			else {
+				blockFloor = POLISHED_ANDESITE_SLAB_BOTTOM;
+			}
+			
 
 			// bottom of portal frame
 			for (int x = -1; x <= 1; x++)
@@ -241,14 +322,14 @@ public class AmplifiedPortalBehavior {
 				{
 					if (Math.abs(x * z) == 1)
 					{
-						if (world.getBlockState(pos.add(x, -1, z)) != POLISHED_GRANITE)
+						if (world.getBlockState(pos.add(x, -1, z)) != blockCorner)
 						{
 							return false;
 						}
 					}
 					else
 					{
-						if (world.getBlockState(pos.add(x, -1, z)) != POLISHED_ANDESITE_SLAB_BOTTOM)
+						if (world.getBlockState(pos.add(x, -1, z)) != blockFloor)
 						{
 							return false;
 						}
@@ -269,14 +350,14 @@ public class AmplifiedPortalBehavior {
 				{
 					if (Math.abs(x * z) == 1)
 					{
-						if (world.getBlockState(pos.add(x, 1, z)) != POLISHED_GRANITE)
+						if (world.getBlockState(pos.add(x, 1, z)) != blockCorner)
 						{
 							return false;
 						}
 					}
 					else
 					{
-						if (world.getBlockState(pos.add(x, 1, z)) != POLISHED_ANDESITE_SLAB_TOP)
+						if (world.getBlockState(pos.add(x, 1, z)) != blockCeiling)
 						{
 							return false;
 						}
@@ -294,7 +375,7 @@ public class AmplifiedPortalBehavior {
 			world.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 		}
 
-		public static boolean trySpawnPortal(IWorld world, BlockPos pos)
+		public static boolean trySpawnPortal(IWorld world, BlockPos pos, Entity entity)
 		{
 
 			// cannot create amplified portal in Ultra Amplified Worldtype
@@ -303,7 +384,7 @@ public class AmplifiedPortalBehavior {
 				return false;
 			}
 
-			boolean canMakePortal = isPortal(world, pos);
+			boolean canMakePortal = isPortal(world, pos, entity);
 			if (canMakePortal)
 			{
 				placePortalBlocks(world, pos);
@@ -316,9 +397,9 @@ public class AmplifiedPortalBehavior {
 		}
 
 		@Nullable
-		public static boolean isPortal(IWorld world, BlockPos pos)
+		public static boolean isPortal(IWorld world, BlockPos pos, Entity entity)
 		{
-			if (isValid(world, pos))
+			if (isValid(world, pos, entity))
 			{
 				return true;
 			}

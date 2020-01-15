@@ -78,6 +78,9 @@ public class ConfigUA {
     public static int pillageOutpostRarity = 20;
     public static boolean secretSetting = false;
     public static boolean heavyFog = false;
+    public static String portalCornerBlocks = "";
+    public static String portalCeilingBlocks = "";
+    public static String portalFloorBlocks = "";
     public static int biomeSize = 3;
     public static int mutatedBiomeSpawnrate = 2;
     public static int seaLevel = 75;
@@ -186,6 +189,9 @@ public class ConfigUA {
 		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
 		public final ForgeConfigSpec.BooleanValue secretSetting;
 		public final ForgeConfigSpec.BooleanValue heavyFog;
+	    public final ForgeConfigSpec.ConfigValue<String> portalCornerBlocks;
+	    public final ForgeConfigSpec.ConfigValue<String> portalCeilingBlocks;
+	    public final ForgeConfigSpec.ConfigValue<String> portalFloorBlocks;
 		public final ForgeConfigSpec.IntValue biomeSize;
 		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
 		public final ForgeConfigSpec.IntValue seaLevel;
@@ -242,52 +248,52 @@ public class ConfigUA {
             builder.push("Mod Compatibility Options");
             
             		importModdedFeatures = builder
-                    .comment("\r\nAttempt to add modded features from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    .comment("\r\n Attempt to add modded features from vanilla biomes into Ultra Amplified version of that biome.\r\n "
                     		+"Only works if other mod added the feature by addFeature(...) to vanilla biome and registered the feature correctly without the 'minecraft' namespace.")
-                    .translation("ultraamplified.config.structure.importmoddedfeatures")
+                    .translation("ultraamplified.config.compatibility.importmoddedfeatures")
                     .define("importModdedFeatures", false);
             		
             		importModdedStructure = builder
-                    .comment("\r\nAttempt to add modded structures from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    .comment("\r\n Attempt to add modded structures from vanilla biomes into Ultra Amplified version of that biome.\r\n "
                     		+"Only works if other mod added the structure by addFeature(...) to vanilla biome and registered the structure correctly without the 'minecraft' namespace.")
-                    .translation("ultraamplified.config.structure.importmoddedstructure")
+                    .translation("ultraamplified.config.compatibility.importmoddedstructure")
                     .define("importModdedStructure", false);
             		
             		importModdedMobs = builder
-                    .comment("\r\nAttempt to add modded mobs from vanilla biomes into Ultra Amplified version of that biome.\r\n"
+                    .comment("\r\n Attempt to add modded mobs from vanilla biomes into Ultra Amplified version of that biome.\r\n "
                     		+"Only works if other mod added the mob by addSpawn(...) to vanilla biome and registered the mob correctly without the 'minecraft' namespace.")
-                    .translation("ultraamplified.config.structure.importmoddedmobs")
+                    .translation("ultraamplified.config.compatibility.importmoddedmobs")
                     .define("importModdedMobs", false);
             		
             		importModdedBiomes = builder
-                    .comment("\r\nAttempt to add modded biomes from Overworld into Ultra Amplified dimension. (or into Overworld in Ultra Amplified worldtype)\r\n"
+                    .comment("\r\n Attempt to add modded biomes from Overworld into Ultra Amplified dimension. (or into Overworld in Ultra Amplified worldtype)\r\n "
                     		+"Only works if other mod added the biome to the BiomeDictionary with the BiomeType of DESERT, WARM, COOL, or ICY type.")
-                    .translation("ultraamplified.config.structure.importmoddedbiomes")
+                    .translation("ultraamplified.config.compatibility.importmoddedbiomes")
                     .define("importModdedBiomes", false);
 
             		importAllModdedBiomes = builder
-                    .comment("\r\nAttempt to add all registered modded biomes into Ultra Amplified dimension or worldtype.\r\n"
+                    .comment("\r\n Attempt to add all registered modded biomes into Ultra Amplified dimension or worldtype.\r\n "
                     		+"You may want to turn up biome size to 4 or 5 as this may make biomes very crowded. Also overrides importModdedBiomes setting.")
-                    .translation("ultraamplified.config.structure.importmoddedbiomes")
+                    .translation("ultraamplified.config.compatibility.importmoddedbiomes")
                     .define("importAllModdedBiomes", false);
             		
             		blacklistedBiomeList = builder
-                    .comment("\r\nBlacklist either all of a mod's biomes or its specific biomes from being imported into Ultra Amplified dimension/worldtype.\r\n"
-                    		+"To blacklist all of a mod's biomes, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
-                    		+"To blacklist a specific mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n"
-                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n"
+                    .comment("\r\n Blacklist either all of a mod's biomes or its specific biomes from being imported into Ultra Amplified dimension/worldtype.\r\n "
+                    		+"To blacklist all of a mod's biomes, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n "
+                    		+"To blacklist a specific mod's biome, type out the resourcelocation. Example: \"example_mod_id:lava_desert\"\r\n "
+                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:lava_desert, example_mod_id_2:*, example_mod_id_1:ender_forest\"\r\n "
                     		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
-                    .translation("ultraamplified.config.structure.blacklistedbiomelist")
+                    .translation("ultraamplified.config.compatibility.blacklistedbiomelist")
                     .define("blacklistedBiomeList", "");
 
             		
             		blacklistedStructureList = builder
-                    .comment("\r\nBlacklist either all of a mod's structures or specific structures from being imported into Ultra Amplified dimension/worldtype.\r\n"
-                    		+"To blacklist all structures in a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n"
-                    		+"To blacklist a specific mod's structure, type out the resourcelocation. Example: \"example_mod_id:wizard_tower\"\r\n"
-                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:wizard_tower, example_mod_id_2:*, example_mod_id_1:super_village\"\r\n"
+                    .comment("\r\n Blacklist either all of a mod's structures or specific structures from being imported into Ultra Amplified dimension/worldtype.\r\n "
+                    		+"To blacklist all structures in a mod, type out its id like so with :* attached at end. Example: \"example_mod_id:*\"\r\n "
+                    		+"To blacklist a specific mod's structure, type out the resourcelocation. Example: \"example_mod_id:wizard_tower\"\r\n "
+                    		+"NOTE: Seperate each entry with a comma. Example: \"example_mod_id_1:wizard_tower, example_mod_id_2:*, example_mod_id_1:super_village\"\r\n "
                     		+"Also, any entry using ultra_amplified_dimension or minecraft id will be ignored as I already handle those ids internally.")
-                    .translation("ultraamplified.config.structure.blacklistedfeaturelist")
+                    .translation("ultraamplified.config.compatibility.blacklistedfeaturelist")
                     .define("blacklistedFeatureList", "");
 
             builder.pop();
@@ -295,94 +301,111 @@ public class ConfigUA {
             builder.push("General Dimension Options");
 
 	  				heavyFog = builder
-            		.comment("\r\nAdds very heavy fog to make the world look more spoky and limit visibility.\n"+
+            		.comment("\r\n Adds very heavy fog to make the world look more spoky and limit visibility.\n "+
             				"This is not the same as distance fog which does not make chunks near you foggy.")
-            		.translation("ultraamplified.config.structure.heavyfog")
+            		.translation("ultraamplified.config.dimension.heavyfog")
             		.define("heavyFog", false);
 
             		bedExplodes = builder
-                    .comment("\r\nShould beds explode in the Ultra Amplified Dimension?")
+                    .comment("\r\n Should beds explode in the Ultra Amplified Dimension?")
                     .translation("ultraamplified.config.dimension.bedexplodes")
                     .define("bedExplodes", false);
+
+            		portalCornerBlocks = builder
+                    .comment("\r\n What corner blocks should we use to make a portal frame instead of Polish Granite?\r\n "
+                    		+ "Example entry: minecraft:polish_granite")
+                    .translation("ultraamplified.config.dimension.portalcornerblocks")
+                    .define("portalCornerBlocks", "");
+
+            		portalCeilingBlocks = builder
+                    .comment("\r\n What ceiling blocks should we use to make a portal frame instead of Polish Andesite Slab?\r\n "
+                    		+ "Example entry: minecraft:polish_andesite")
+                    .translation("ultraamplified.config.dimension.portalceilingblocks")
+                    .define("portalCeilingBlocks", "");
             		
+            		portalFloorBlocks = builder
+                    .comment("\r\n What floor blocks should we use to make a portal frame instead of Polish Andesite Slab?\r\n "
+                    		+ "Example entry: minecraft:polish_andesite")
+                    .translation("ultraamplified.config.dimension.portalfloorblocks")
+                    .define("portalFloorBlocks", "");
             builder.pop();
             
             builder.push("Terrain Options");
 
             
 					secretSetting = builder
-		    		.comment("\r\nDoes something neat! Give it a try lol\n" +
-		    		  		  "You might want to use this on a fresh new world... ;)\n"+
+		    		.comment("\r\n Does something neat! Give it a try lol\n " +
+		    		  		  "You might want to use this on a fresh new world... ;)\n "+
 		    		  		  "Changes the terrain's look!")
-		    		.translation("ultraamplified.config.structure.secretsettings")
+		    		.translation("ultraamplified.config.terrain.secretsettings")
 		    		.define("secretSettings", false);
 					
 
 	  				yMaximum = builder
-            		.comment("\r\nMaxium height the terrain can generate up to.")
-            		.translation("ultraamplified.config.structure.ymaximum")
+            		.comment("\r\n Maxium height the terrain can generate up to.")
+            		.translation("ultraamplified.config.terrain.ymaximum")
             		.defineInRange("yMaximum", 245, 100, 256);
 	  		        
 	  		        
 	  		        xzTerrainModifier = builder
-            		.comment("\r\nChanges the xz terrain modifier.\n" +
-            		  		  "I believe lower numbers will make the layers longer in the xz plane.\n"+
+            		.comment("\r\n Changes the xz terrain modifier.\n " +
+            		  		  "I believe lower numbers will make the layers longer in the xz plane.\n "+
             		  		  "Default value is 684.412D")
-            		.translation("ultraamplified.config.structure.xzterrainmodifier")
+            		.translation("ultraamplified.config.terrain.xzterrainmodifier")
             		.defineInRange("xzTerrainModifier", 684.412D, 1D, 10000000D);
 
 	  		        
 	  		        xzScaleModifier = builder
-            		.comment("\r\nChanges the xz terrain scale.\n" +
-            		  		  "Not exactly sure what this does.\n"+
+            		.comment("\r\n Changes the xz terrain scale.\n " +
+            		  		  "Not exactly sure what this does.\n "+
             		  		  "Default value is 8.55515F")
-            		.translation("ultraamplified.config.structure.xzscalemodifier")
+            		.translation("ultraamplified.config.terrain.xzscalemodifier")
             		.defineInRange("xzScaleModifier", 8.55515F, 1D, 10000000D);
 
 	  		        
 	  		      	yTerrainModifier = builder
-            		.comment("\r\nChanges the y terrain modifier.\n" +
-            		  		  "I believe lower numbers will make less layers and thicken layers that do spawn.\n"+
+            		.comment("\r\n Changes the y terrain modifier.\n " +
+            		  		  "I believe lower numbers will make less layers and thicken layers that do spawn.\n "+
             		  		  "Default value is 68419.786D")
-            		.translation("ultraamplified.config.structure.yterrainmodifier")
+            		.translation("ultraamplified.config.terrain.yterrainmodifier")
             		.defineInRange("yTerrainModifier", 68419.786D, 1D, 10000000D);
 	  		        
 	  		        
 	  		        yScaleModifier = builder
-            		.comment("\r\nChanges the y terrain scale.\n" +
-            		  		  "Not exactly sure what this does.\n"+
+            		.comment("\r\n Changes the y terrain scale.\n " +
+            		  		  "Not exactly sure what this does.\n "+
             		  		  "Default value is 428.613D")
-            		.translation("ultraamplified.config.structure.yscalemodifier")
+            		.translation("ultraamplified.config.terrain.yscalemodifier")
             		.defineInRange("yScaleModifier", 428.613D, 1D, 10000000D);
 	  		        
 
             		seaLevel = builder
-            		.comment("\r\nSea Level. Default is 75.")
-            		.translation("ultraamplified.config.structure.sealevel")
+            		.comment("\r\n Sea Level. Default is 75.")
+            		.translation("ultraamplified.config.terrain.sealevel")
             		.defineInRange("seaLevel", 75, 0, 250);
 
 
             		lavaOcean = builder
-            		.comment("\r\nReplace the water at sea level with lava instead. DO NOT CHANGE THIS OPTION IN AN ALREADY GENERATED DIMENSION. IT WILL CRASH DUE TO LAVA OCEAN UPDATING NEXT TO OCEAN WATER!!")
-            		.translation("ultraamplified.config.structure.lavaocean")
+            		.comment("\r\n Replace the water at sea level with lava instead. DO NOT CHANGE THIS OPTION IN AN ALREADY GENERATED DIMENSION. IT WILL CRASH DUE TO LAVA OCEAN UPDATING NEXT TO OCEAN WATER!!")
+            		.translation("ultraamplified.config.terrain.lavaocean")
             		.define("lavaOcean", false);
 
 
             		waterfallSpawnrate = builder
-            		.comment("\r\nHow often waterfalls will spawn." + "\n" + "0 for no waterfalls and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.waterfallspawnrate")
+            		.comment("\r\n How often waterfalls will spawn." + "\n " + "0 for no waterfalls and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.terrain.waterfallspawnrate")
             		.defineInRange("waterfallSpawnrate", 35, 0, 1000);
 
 
             		lavafallSpawnrate = builder
-            		.comment("\r\nHow often lavafalls will spawn." + "\n" + "0 for no lavafalls and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.lavafallspawnrate")
+            		.comment("\r\n How often lavafalls will spawn." + "\n " + "0 for no lavafalls and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.terrain.lavafallspawnrate")
             		.defineInRange("lavafallSpawnrate", 14, 0, 1000);
 
 
             		endIslandSpawnrate = builder
-            		.comment("\r\nHow often End Islands will spawn in the End Biome." + "\n" + "0 for no End Islands and 100 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.endislandspawnrate")
+            		.comment("\r\n How often End Islands will spawn in the End Biome." + "\n " + "0 for no End Islands and 100 for max spawnrate.")
+            		.translation("ultraamplified.config.terrain.endislandspawnrate")
             		.defineInRange("endIslandSpawnrate", 6, 0, 100);
             
 				
@@ -393,63 +416,63 @@ public class ConfigUA {
             	builder.push("Feature Options");
             
 	        			dungeonSpawnrate = builder
-	                    .comment("\r\nHow often Dungeons will spawn.\r\n" 
+	                    .comment("\r\n How often Dungeons will spawn.\r\n " 
 	                    		+"0 for no Dungeons and 300 for max spawnrate.")
-	                    .translation("ultraamplified.config.structure.dungeonspawnrate")
+	                    .translation("ultraamplified.config.feature.dungeonspawnrate")
 	                    .defineInRange("dungeonSpawnrate", 30, 0, 300);
 	            
 	    	   			ravineSpawnrate = builder
-	                    .comment("\r\nHow often Ravines will spawn.\r\n"
+	                    .comment("\r\n How often Ravines will spawn.\r\n "
 	                    		+"0 for no Ravines and 100 for max spawnrate.")
-	                    .translation("ultraamplified.config.structure.ravinespawnrate")
+	                    .translation("ultraamplified.config.feature.ravinespawnrate")
 	                    .defineInRange("ravineSpawnrate", 25, 0, 100);
 	
 	            		caveCavitySpawnrate = builder
-	                    .comment("\r\nHow often Cave Cavity will spawn.\r\n"
+	                    .comment("\r\n How often Cave Cavity will spawn.\r\n "
 	                    		+"0 for no Cave Cavity and 22 for max spawnrate.")
-	                    .translation("ultraamplified.config.structure.cavecavityspawnrate")
+	                    .translation("ultraamplified.config.feature.cavecavityspawnrate")
 	                    .defineInRange("caveCavitySpawnrate", 5, 0, 22);
 	
 	            		oceanCaveSpawnrate = builder
-	                    .comment("\r\nHow often Underwater Caves will spawn in ocean biomes.\r\n"
+	                    .comment("\r\n How often Underwater Caves will spawn in ocean biomes.\r\n "
 	                    		+"0 for no Underwater Caves and 100 for max spawnrate.")
-	                    .translation("ultraamplified.config.structure.oceancavespawnrate")
+	                    .translation("ultraamplified.config.feature.oceancavespawnrate")
 	                    .defineInRange("oceanCaveSpawnrate", 20, 0, 100);
 	
 	            		pillarGen = builder
-	                    .comment("\r\nControls whether pillars features (both ramp and straight kind) spawn or not.")
-	                    .translation("ultraamplified.config.structure.pillargen")
+	                    .comment("\r\n Controls whether pillars features (both ramp and straight kind) spawn or not.")
+	                    .translation("ultraamplified.config.feature.pillargen")
 	                    .define("pillarGen", true);
 	
 	            		honeyLakeGen = builder
-	                    .comment("\r\nControls whether Honey Lakes spawn or not.")
-	                    .translation("ultraamplified.config.structure.honeylakegen")
+	                    .comment("\r\n Controls whether Honey Lakes spawn or not.")
+	                    .translation("ultraamplified.config.feature.honeylakegen")
 	                    .define("honeyLakeGen", true);
 	
 	            		slimeLakeGen = builder
-	                    .comment("\r\nControls whether Slime Lakes spawn or not.")
-	                    .translation("ultraamplified.config.structure.slimelakegen")
+	                    .comment("\r\n Controls whether Slime Lakes spawn or not.")
+	                    .translation("ultraamplified.config.feature.slimelakegen")
 	                    .define("slimeLakeGen", true);
 	
 	            		waterLakeGen = builder
-	                    .comment("\r\nControls whether Water Lakes spawn or not.")
-	                    .translation("ultraamplified.config.structure.waterlakegen")
+	                    .comment("\r\n Controls whether Water Lakes spawn or not.")
+	                    .translation("ultraamplified.config.feature.waterlakegen")
 	                    .define("waterLakeGen", true);
 	
 	            		lavaLakeGen = builder
-	                    .comment("\r\nControls whether Lava Lakes spawn or not.")
-	                    .translation("ultraamplified.config.structure.lavalakegen")
+	                    .comment("\r\n Controls whether Lava Lakes spawn or not.")
+	                    .translation("ultraamplified.config.feature.lavalakegen")
 	                    .define("lavaLakeGen", true);
 	
 	            		glowstoneVariantsSpawnrate = builder
-	                    .comment("\r\nControls how often patches of Glowdirt and other modded Glowstone variants spawn.\r\n"
+	                    .comment("\r\n Controls how often patches of Glowdirt and other modded Glowstone variants spawn.\r\n "
 	                    		+"0 for no patches and 1000 for max amount of patches.")
-	                    .translation("ultraamplified.config.structure.glowstonevariantsspawnrate")
+	                    .translation("ultraamplified.config.feature.glowstonevariantsspawnrate")
 	                    .defineInRange("glowstoneVariantsSpawnrate", 50, 0, 1000);
 	            		
 	            		rootGen = builder
-	                    .comment("\r\nControls whether roots and short vines spawn or not on the underside of the floating land.")
-	                    .translation("ultraamplified.config.structure.rootgen")
+	                    .comment("\r\n Controls whether roots and short vines spawn or not on the underside of the floating land.")
+	                    .translation("ultraamplified.config.feature.rootgen")
 	                    .define("rootGen", true);
 	
 	            builder.pop();
@@ -457,29 +480,29 @@ public class ConfigUA {
 	            builder.push("Mini-structure Options");
 	    		
 			    		miniStructureGeneration = builder
-			            .comment("\r\nControls whether Desert Wells, Hay Piles, Sun Shrines, Stonehenges, and Crosses spawn or not.")
+			            .comment("\r\n Controls whether Desert Wells, Hay Piles, Sun Shrines, Stonehenges, and Crosses spawn or not.")
 			            .translation("ultraamplified.config.structure.ministructuregeneration")
 			            .define("miniStructureGeneration", true);
 			    		
 			    		sunShrineSpawnrate = builder
-			            .comment("\r\nHow rare are Sun Shrines.\r\n"
-			            		 +"1 for Sun Shrines spawning in most chunks and 1000 for very rare spawn.\r\n"
+			            .comment("\r\n How rare are Sun Shrines.\r\n "
+			            		 +"1 for Sun Shrines spawning in most chunks and 1000 for very rare spawn.\r\n "
 			            		 +"Spawns mainly in relic variant of biomes.")
 			            .translation("ultraamplified.config.structure.sunshrinespawnrate")
 			            .defineInRange("sunShrineSpawnrate", 130, 1, 100);
 			
 			    		stonehengeSpawnrate = builder
-			            .comment("\r\nHow rare are Stonehenges.\r\n"
-			            		 +"1 for Stonehenges spawning in most chunks and 1000 for very rare spawn.\r\n"
+			            .comment("\r\n How rare are Stonehenges.\r\n "
+			            		 +"1 for Stonehenges spawning in most chunks and 1000 for very rare spawn.\r\n "
 			            		 +"Spawns mainly in relic variant of biomes.")
 			            .translation("ultraamplified.config.structure.stonehengespawnrate")
 			            .defineInRange("stonehengeSpawnrate", 15, 1, 100);
 			            
 			    		hangingRuinsSpawnrate = builder
-	                    .comment("\r\nHow rare are Hanging Ruins.\r\n"
-	                    		 +"100 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n"
-	                    		 +"NOTE: this is backwards than other spawnrates.\r\n"
-	                    		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n"
+	                    .comment("\r\n How rare are Hanging Ruins.\r\n "
+	                    		 +"100 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n "
+	                    		 +"NOTE: this is backwards than other spawnrates.\r\n "
+	                    		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n "
 	                    		 +"Spawns in most biomes except for oceans, Netherland, and Iced Terrain Biomes and more often in Rocky Fields variants and Stone Fields biomes.")
 	                    .translation("ultraamplified.config.structure.hangingruinsspawnrate")
 	                    .defineInRange("hangingRuinsSpawnrate", 60, 0, 100);
@@ -490,7 +513,7 @@ public class ConfigUA {
 	            builder.push("Structure Options");
 	            
 	            		chestGeneration = builder
-	                    .comment("\r\nControls whether loot chests spawn or not in all structures.")
+	                    .comment("\r\n Controls whether loot chests spawn or not in all structures.")
 	                    .translation("ultraamplified.config.structure.chestgeneration")
 	                    .define("chestGeneration", true);
 
@@ -498,13 +521,13 @@ public class ConfigUA {
 			            builder.push("Villages");
 			            		
 			            		villageSpawnrate = builder
-			                    .comment("\r\nHow rare are Villages.\r\n"
+			                    .comment("\r\n How rare are Villages.\r\n "
 			                    		 +"1 for Village spawning in most chunks and 101 for no spawn.")
 			                    .translation("ultraamplified.config.structure.villagespawnrate")
 			                    .defineInRange("villageSpawnrate", 16, 1, 101);
 			
 			            		villageZombieSpawnrate = builder
-			                    .comment("\r\nWhat percentage of Classic Styled Villages are Zombie Villages.\r\n"
+			                    .comment("\r\n What percentage of Classic Styled Villages are Zombie Villages.\r\n "
 			                    		 +"0 for no Zombie Village spawning and 100 for all Villages being zombified.")
 			                    .translation("ultraamplified.config.structure.villagezombiespawnrate")
 			                    .defineInRange("villageZombieSpawnrate", 10, 0, 100);
@@ -514,18 +537,18 @@ public class ConfigUA {
 			            builder.push("Mineshaft");
 			            		
 			            		mineshaftSpawnrate = builder
-			                    .comment("\r\nHow often Mineshafts will spawn.\r\n" 
+			                    .comment("\r\n How often Mineshafts will spawn.\r\n " 
 			                    		 +"0 for no Mineshafts and 1000 for max spawnrate.")
 			                    .translation("ultraamplified.config.structure.mineshaftspawnrate")
 			                    .defineInRange("mineshaftSpawnrate", 22, 0, 1000);
 			
 			            		mineshaftAbovegroundAllowed = builder
-			                    .comment("\r\nCan aboveground floating Mineshafts spawn?")
+			                    .comment("\r\n Can aboveground floating Mineshafts spawn?")
 			                    .translation("ultraamplified.config.structure.mineshaftabovegroundallowed")
 			                    .define("mineshaftAbovegroundAllowed", true);
 			            
 			            		mineshaftUndergroundAllowed = builder
-			                    .comment("\r\nCan undergound giant pit Mineshafts spawn?")
+			                    .comment("\r\n Can undergound giant pit Mineshafts spawn?")
 			                    .translation("ultraamplified.config.structure.mineshaftundergroundallowed")
 			                    .define("mineshaftUndergroundAllowed", true);
 			
@@ -535,7 +558,7 @@ public class ConfigUA {
 			            		
 				
 			            		mansionSpawnrate = builder
-			            		.comment("\r\nHow rare are Woodland Mansion." + "\n" + "1 for Woodland Mansion spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Woodland Mansion." + "\n " + "1 for Woodland Mansion spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.mansionspawnrate")
 			            		.defineInRange("mansionSpawnrate", 18, 1, 101);
 			
@@ -544,7 +567,7 @@ public class ConfigUA {
 			            builder.push("Desert Temple");
 			            
 			            		desertTempleSpawnrate = builder
-			            		.comment("\r\nHow rare are Desert Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Desert Temples." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.deserttemplespawnrate")
 			            		.defineInRange("desertTempleSpawnrate", 20, 1, 101);
 			            		
@@ -553,7 +576,7 @@ public class ConfigUA {
 			            builder.push("Jungle Temple");
 			                    		
 			            		jungleTempleSpawnrate = builder
-			            		.comment("\r\nHow rare are Jungle Temples." + "\n" + "1 for a spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Jungle Temples." + "\n " + "1 for a spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.jungletemplespawnrate")
 			            		.defineInRange("jungleTempleSpawnrate", 20, 1, 101);
 			
@@ -562,7 +585,7 @@ public class ConfigUA {
 			            builder.push("Igloo");
 			                    		
 			            		iglooSpawnrate = builder
-			            		.comment("\r\nHow rare are igloos." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are igloos." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.igloospawnrate")
 			            		.defineInRange("iglooSpawnrate", 14, 1, 101);
 			
@@ -571,7 +594,7 @@ public class ConfigUA {
 			            builder.push("Mushroom Temple");
 			                    		
 			            		mushroomTempleSpawnrate = builder
-			            		.comment("\r\nHow rare are Mushroom Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Mushroom Temples." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.mushroomtemplespawnrate")
 			            		.defineInRange("mushroomTempleSpawnrate", 12, 1, 101);
 			
@@ -580,7 +603,7 @@ public class ConfigUA {
 			            builder.push("Ice Spike Temple");
 			            		
 			            		iceSpikeTempleSpawnrate = builder
-			            		.comment("\r\nHow rare are Ice Spike Temples." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Ice Spike Temples." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.icespiketemplespawnrate")
 			            		.defineInRange("iceSpikeTempleSpawnrate", 20, 1, 101);
 			
@@ -589,7 +612,7 @@ public class ConfigUA {
 			            builder.push("Witch Hut");
 			                    		
 			            		witchHutSpawnrate = builder
-			            		.comment("\r\nHow rare are Witch Huts." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Witch Huts." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.witchhutspawnrate")
 			            		.defineInRange("witchHutSpawnrate", 14, 1, 101);
 			
@@ -598,7 +621,7 @@ public class ConfigUA {
 			            builder.push("Ocean Monument");
 			                    		
 			            		oceanMonumentSpawnrate = builder
-			            		.comment("\r\nHow rare are Ocean Monuments." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Ocean Monuments." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.oceanmonumentspawnrate")
 			            		.defineInRange("oceanMonumentSpawnrate", 22, 1, 101);
 			
@@ -607,7 +630,7 @@ public class ConfigUA {
 			            builder.push("Ocean Ruins");
 			                    		
 			            		oceanRuinsSpawnrate = builder
-			            		.comment("\r\nHow rare are Ocean Ruins." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Ocean Ruins." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.oceanruinsspawnrate")
 			            		.defineInRange("oceanRuinsSpawnrate", 7, 1, 101);
 			
@@ -616,7 +639,7 @@ public class ConfigUA {
 			            builder.push("Shipwreck");
 			                    		
 			            		shipwreckSpawnrate = builder
-			            		.comment("\r\nHow rare are Shipwrecks." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Shipwrecks." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.shipwreckspawnrate")
 			            		.defineInRange("shipwreckSpawnrate", 7, 1, 101);
 			
@@ -625,17 +648,17 @@ public class ConfigUA {
 			            builder.push("Stronghold");
 			                    		
 			            		strongholdSpawnrate = builder
-			            		.comment("\r\nHow rare are Strongholds." + "\n" + "1 for spawning in most chunks and 501 for no spawn.")
+			            		.comment("\r\n How rare are Strongholds." + "\n " + "1 for spawning in most chunks and 501 for no spawn.")
 			            		.translation("ultraamplified.config.structure.strongholdspawnrate")
 			            		.defineInRange("strongholdSpawnrate", 62, 1, 501);
 			
 			            		silverfishStrongholdSpawnrate = builder
-			            		.comment("\r\nHow often Silverfish Blocks will generate in Strongholds." + "\n" + "0 for no Silverfish Blocks and 100 for max spawnrate.")
+			            		.comment("\r\n How often Silverfish Blocks will generate in Strongholds." + "\n " + "0 for no Silverfish Blocks and 100 for max spawnrate.")
 			            		.translation("ultraamplified.config.structure.silverfishstrongholdspawnrate")
 			            		.defineInRange("silverfishStrongholdSpawnrate", 4D, 0, 100);
 			
 			            		allowSilverfishSpawnerStronghold = builder
-			            		.comment("\r\nCan Silverfish Mob Spawners generate in Stronghold?.")
+			            		.comment("\r\n Can Silverfish Mob Spawners generate in Stronghold?.")
 			            		.translation("ultraamplified.config.structure.allowsilverfishspawnerstronghold")
 			            		.define("allowSilverfishSpawnerStronghold", true);
 			
@@ -644,27 +667,27 @@ public class ConfigUA {
 			            builder.push("Nether/Stone Fortress");
 			                    		
 			            		netherFortressSpawnrate = builder
-			            		.comment("\r\nHow rare are Nether/Stone Fortresses." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Nether/Stone Fortresses." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.netherfortressspawnrate")
 			            		.defineInRange("netherFortressSpawnrate", 14, 1, 101);
 			
 			            		netherFortressAboveground = builder
-			            		.comment("\r\nCan Nether Fortresses spawn aboveground in the Netherland biome (between y = 85 and 130).")
+			            		.comment("\r\n Can Nether Fortresses spawn aboveground in the Netherland biome (between y = 85 and 130).")
 			            		.translation("ultraamplified.config.structure.netherfortressaboveground")
 			            		.define("netherFortressAboveground", true);
 			            		
 			            		netherFortressUnderground = builder
-			            		.comment("\r\nCan stone-styled Nether Fortresses spawn underground or not (below y = 60)." + "\n" + "(Stone Fortresses spawn underground in all biomes except End biome)")
+			            		.comment("\r\n Can stone-styled Nether Fortresses spawn underground or not (below y = 60)." + "\n " + "(Stone Fortresses spawn underground in all biomes except End biome)")
 			            		.translation("ultraamplified.config.structure.netherfortressunderground")
 			            		.define("netherFortressUnderground", true);
 			
 			            		allowSilverfishSpawnerFortress = builder
-			            		.comment("\r\nCan Silverfish Mob Spawners generate in Stone Fortresses?")
+			            		.comment("\r\n Can Silverfish Mob Spawners generate in Stone Fortresses?")
 			            		.translation("ultraamplified.config.structure.allowsilverfishspawnerfortress")
 			            		.define("allowSilverfishSpawnerFortress", true);
 			            		
 			            		allowNaturalSilverfishFortress = builder
-			            		.comment("\r\nCan Silverfish spawn naturally over time in Stone Fortresses?")
+			            		.comment("\r\n Can Silverfish spawn naturally over time in Stone Fortresses?")
 			            		.translation("ultraamplified.config.structure.allownaturalsilverfishfortress")
 			            		.define("allowNaturalSilverfishFortress", true);
 			
@@ -673,7 +696,7 @@ public class ConfigUA {
 			            builder.push("End City");
 			                    		
 			            		endCitySpawnrate = builder
-			            		.comment("\r\nHow rare are End Cities." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are End Cities." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.endcityspawnrate")
 			            		.defineInRange("endCitySpawnrate", 22, 1, 101);
 			
@@ -682,7 +705,7 @@ public class ConfigUA {
 			            builder.push("Outpost");
 			            		
 			            	    pillageOutpostRarity = builder
-			            		.comment("\r\nHow rare are Pillager Outposts." + "\n" + "1 for spawning in most chunks and 101 for no spawn.")
+			            		.comment("\r\n How rare are Pillager Outposts." + "\n " + "1 for spawning in most chunks and 101 for no spawn.")
 			            		.translation("ultraamplified.config.structure.pillageoutpostrarity")
 			            		.defineInRange("pillageOutpostRarity", 20, 1, 101);
 
@@ -693,183 +716,183 @@ public class ConfigUA {
             builder.push("Biome Options");
 
 		    		biomeSize = builder
-		    		.comment("\r\nHow large the biomes are." + "\n" + "Bigger number means bigger biomes.")
-		    		.translation("ultraamplified.config.structure.biomesize")
+		    		.comment("\r\n How large the biomes are." + "\n " + "Bigger number means bigger biomes.")
+		    		.translation("ultraamplified.config.biome.biomesize")
 		    		.defineInRange("biomeSize", 3, 1, 8);
 		
 		    		mutatedBiomeSpawnrate = builder
-		    		.comment("\r\nHow often the mutated form of a biome will generate" + "\n" + "0 for no mutated biomes and 10 for all biomes to be mutated.")
-		    		.translation("ultraamplified.config.structure.mutatedbiomespawnrate")
+		    		.comment("\r\n How often the mutated form of a biome will generate" + "\n " + "0 for no mutated biomes and 10 for all biomes to be mutated.")
+		    		.translation("ultraamplified.config.biome.mutatedbiomespawnrate")
 		    		.defineInRange("mutatedBiomeSpawnrate", 2, 0, 10);
 
 		    		
 				    builder.push("Allowed Biome Options");
 				            
 		            		plains = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.plains")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.plains")
 		            		.define("plains", true);
 		
 		
 		            		desert = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.desert")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.desert")
 		            		.define("desert", true);
 		
 		
 		            		forest = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.forest")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.forest")
 		            		.define("forest", true);
 		
 		
 		            		taiga = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.taiga")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.taiga")
 		            		.define("taiga", true);
 		
 		
 		            		rockyField = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.rockyfield")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.rockyfield")
 		            		.define("rockyField", true);
 		
 		
 		            		swamplands = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.swamplands")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.swamplands")
 		            		.define("swamplands", true);
 		
 		
 		            		netherland = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.netherland")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.netherland")
 		            		.define("netherland", true);
 		
 		
 		            		endField = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.end")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.end")
 		            		.define("end", true);
 		
 		
 		            		snowyTundra = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.snowytundra")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.snowytundra")
 		            		.define("snowyTundra", true);
 		
 		
 		            		icedTerrain = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.icedterrain")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.icedterrain")
 		            		.define("icedTerrain", true);
 		
 		
 		            		mushroom = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.mushroom")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.mushroom")
 		            		.define("mushroom", true);
 		
 		
 		            		stonePlains = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.stoneplains")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.stoneplains")
 		            		.define("stonePlains", true);
 		
 		
 		            		bambooJungle = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.bamboojungle")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.bamboojungle")
 		            		.define("bambooJungle", true);
 		
 		
 		            		jungle = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.jungle")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.jungle")
 		            		.define("jungle", true);
 		
 		
 		            		frozenDesert = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.frozendesert")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.frozendesert")
 		            		.define("frozenDesert", true);
 		
 		
 		            		birchForest = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.birchforest")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.birchforest")
 		            		.define("birchForest", true);
 		
 		
 		            		darkForest = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.darkforest")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.darkforest")
 		            		.define("darkForest", true);
 		
 		
 		            		snowyTaiga = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.snowytaiga")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.snowytaiga")
 		            		.define("snowyTaiga", true);
 		
 		
 		            		giantTreeTaiga = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.gianttreetaiga")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.gianttreetaiga")
 		            		.define("giantTreeTaiga", true);
 		
 		
 		            		savanna = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.savanna")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.savanna")
 		            		.define("savanna", true);
 		
 		
 		            		badlands = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.badlands")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.badlands")
 		            		.define("badlands", true);
 		
 		
 		            		spikyBadlands = builder
-		            		.comment("\r\nShould Spiky Badlands and Dissected Plateau Badlands be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.spikybadlands")
+		            		.comment("\r\n Should Spiky Badlands and Dissected Plateau Badlands be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.spikybadlands")
 		            		.define("spikyBadlands", true);
 		
 		            		
 		            		iceSpike = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.icespike")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.icespike")
 		            		.define("iceSpike", true);
 		
 		            		
 		            		frozenOcean = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.frozenocean")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.frozenocean")
 		            		.define("frozenOcean", true);
 		            		
 		            		
 		            		coldOcean = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.coldocean")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.coldocean")
 		            		.define("coldOcean", true);
 		            		
 		            		
 		            		ocean = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.ocean")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.ocean")
 		            		.define("ocean", true);
 		            		
 		            		
 		            		lukewarmOcean = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.lukewarmocean")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.lukewarmocean")
 		            		.define("lukewarmOcean", true);
 		
 		            		
 		            		warmOcean = builder
-		            		.comment("\r\nShould this biome be allowed to spawn?")
-		            		.translation("ultraamplified.config.structure.warmocean")
+		            		.comment("\r\n Should this biome be allowed to spawn?")
+		            		.translation("ultraamplified.config.biome.warmocean")
 		            		.define("warmOcean", true);
 
 		            builder.pop();
@@ -878,51 +901,51 @@ public class ConfigUA {
             builder.push("Main Ores Options");
             
             		coalOreSpawnrate = builder
-            		.comment("\r\nHow often Coal Ores will spawn." + "\n" + "0 for no Coal Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.coalorespawnrate")
+            		.comment("\r\n How often Coal Ores will spawn." + "\n " + "0 for no Coal Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.coalorespawnrate")
             		.defineInRange("coalOreSpawnrate", 35, 0, 1000);
 
 
             		ironOreSpawnrate = builder
-            		.comment("\r\nHow often Iron Ores will spawn." + "\n" + "0 for no Iron Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.ironorespawnrate")
+            		.comment("\r\n How often Iron Ores will spawn." + "\n " + "0 for no Iron Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.ironorespawnrate")
             		.defineInRange("ironOreSpawnrate", 50, 0, 1000);
 
 
             		redstoneOreSpawnrate = builder
-            		.comment("\r\nHow often Redstone Ores will spawn." + "\n" + "0 for no Redstone Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.redstoneorespawnrate")
+            		.comment("\r\n How often Redstone Ores will spawn." + "\n " + "0 for no Redstone Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.redstoneorespawnrate")
             		.defineInRange("redstoneOreSpawnrate", 12, 0, 1000);
 
 
             		lapisOreSpawnrate = builder
-            		.comment("\r\nHow often Lapis Lazuli Ores will spawn." + "\n" + "0 for no Lapis Lazuli Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.lapisorespawnrate")
+            		.comment("\r\n How often Lapis Lazuli Ores will spawn." + "\n " + "0 for no Lapis Lazuli Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.lapisorespawnrate")
             		.defineInRange("lapisOreSpawnrate", 2, 0, 1000);
 
 
             		diamondOreSpawnrate = builder
-            		.comment("\r\nHow often Diamond Ores will spawn." + "\n" + "0 for no Diamond Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.diamondorespawnrate")
+            		.comment("\r\n How often Diamond Ores will spawn." + "\n " + "0 for no Diamond Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.diamondorespawnrate")
             		.defineInRange("diamondOreSpawnrate", 1, 0, 1000);
 
 
             		goldOreSpawnrate = builder
-            		.comment("\r\nHow often Gold Ores will spawn." + "\n" + "0 for no Gold Ores and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.structure.goldorespawnrate")
+            		.comment("\r\n How often Gold Ores will spawn." + "\n " + "0 for no Gold Ores and 1000 for max spawnrate.")
+            		.translation("ultraamplified.config.ore.goldorespawnrate")
             		.defineInRange("goldOreSpawnrate", 2, 0, 1000);
             
 		            builder.push("Rocky Fields Ores and Features Options");
 		            
 		            		emeraldOreSpawnrate = builder
-		            		.comment("\r\nHow often Emerald Ores will spawn in all Rocky Fields variant biomes in the form of a percentage." + "\n" + "0 for no Emerald Ores and 1000 for max spawnrate.")
-		            		.translation("ultraamplified.config.structure.emeraldorespawnrate")
+		            		.comment("\r\n How often Emerald Ores will spawn in all Rocky Fields variant biomes in the form of a percentage." + "\n " + "0 for no Emerald Ores and 1000 for max spawnrate.")
+		            		.translation("ultraamplified.config.ore.emeraldorespawnrate")
 		            		.defineInRange("emeraldOreSpawnrate", 100, 0, 1000);
 		
 		
 		            		silverfishSpawnrate = builder
-		            		.comment("\r\nHow often Silverfish Blocks will spawn in all Rocky Fields variant biomes." + "\n" + "0 for no Silverfish Blocks and 1000 for max spawnrate.")
-		            		.translation("ultraamplified.config.structure.silverfishspawnrate")
+		            		.comment("\r\n How often Silverfish Blocks will spawn in all Rocky Fields variant biomes." + "\n " + "0 for no Silverfish Blocks and 1000 for max spawnrate.")
+		            		.translation("ultraamplified.config.ore.silverfishspawnrate")
 		            		.defineInRange("silverfishSpawnrate", 18, 0, 1000);
 		            		
 		    		builder.pop();
@@ -930,28 +953,28 @@ public class ConfigUA {
 		            builder.push("Netherland Ores and Features Options");
 		            
 		           			quartzOreSpawnrate = builder
-		            		.comment("\r\nHow often Quartz Ores will spawn." + "\n" + "0 for no Quartz Ores and 1000 for max spawnrate.")
-		            		.translation("ultraamplified.config.structure.quartzorespawnrate")
+		            		.comment("\r\n How often Quartz Ores will spawn." + "\n " + "0 for no Quartz Ores and 1000 for max spawnrate.")
+		            		.translation("ultraamplified.config.ore.quartzorespawnrate")
 		            		.defineInRange("quartzOreSpawnrate", 14, 0, 1000);
 		
 		
 		            		glowstoneSpawnrate = builder
-		            		.comment("\r\nHow often Glowstone will spawn in Netherland biome." + "\n" + "0 for no Glowstone and 1000 for max spawnrate.")
-		            		.translation("ultraamplified.config.structure.glowstonespawnrate")
+		            		.comment("\r\n How often Glowstone will spawn in Netherland biome." + "\n " + "0 for no Glowstone and 1000 for max spawnrate.")
+		            		.translation("ultraamplified.config.ore.glowstonespawnrate")
 		            		.defineInRange("glowstoneSpawnrate", 20, 0, 1000);
 		
 		
 		            		magmaSpawnrate = builder
-		            		.comment("\r\nHow often Magma Blocks will spawn below Y = 100 in Netherland biome." 
-		            				+ "\n" + "0 for no Magma Blocks and 1000 for max spawnrate."
-		            				+ "\n" + "Note: Will not affect the flat Magma layer separating water from lava below sealevel.")
-		            		.translation("ultraamplified.config.structure.magmaspawnrate")
+		            		.comment("\r\n How often Magma Blocks will spawn below Y = 100 in Netherland biome." 
+		            				+ "\n " + "0 for no Magma Blocks and 1000 for max spawnrate."
+		            				+ "\n " + "Note: Will not affect the flat Magma layer separating water from lava below sealevel.")
+		            		.translation("ultraamplified.config.ore.magmaspawnrate")
 		            		.defineInRange("magmaSpawnrate", 5, 0, 1000);
 		
 		
 		            		lavaSpawnrate = builder
-		            		.comment("\r\nHow often single Lava Blocks will spawn in Netherland biome." + "\n" + "0 for no single Lava Blocks and 1000 for max spawnrate.")
-		            		.translation("ultraamplified.config.structure.lavaspawnrate")
+		            		.comment("\r\n How often single Lava Blocks will spawn in Netherland biome." + "\n " + "0 for no single Lava Blocks and 1000 for max spawnrate.")
+		            		.translation("ultraamplified.config.ore.lavaspawnrate")
 		            		.defineInRange("lavaSpawnrate", 70, 0, 1000);
 
 		    		builder.pop();
@@ -968,6 +991,9 @@ public class ConfigUA {
     	importAllModdedBiomes = SERVER.importAllModdedBiomes.get();
     	blacklistedBiomeList = SERVER.blacklistedBiomeList.get();
     	blacklistedStructureList = SERVER.blacklistedStructureList.get();
+    	portalCornerBlocks = SERVER.portalCornerBlocks.get();
+    	portalCeilingBlocks = SERVER.portalCeilingBlocks.get();
+    	portalFloorBlocks = SERVER.portalFloorBlocks.get();
 	    xzTerrainModifier = SERVER.xzTerrainModifier.get();
 	    xzScaleModifier = SERVER.xzScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
