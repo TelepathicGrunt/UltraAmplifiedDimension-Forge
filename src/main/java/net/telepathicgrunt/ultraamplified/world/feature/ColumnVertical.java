@@ -6,6 +6,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -52,28 +53,29 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
     	
     	//checks to see if position is acceptable for pillar gen
         //finds ceiling
-        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
+        while (!world.getBlockState(blockpos$Mutable).isSolid())
         {
         	//too high for column to generate
-        	if(blockpos$Mutable.up(currentHeight).getY() > 254) {
+        	if(blockpos$Mutable.getY() > 254) {
         		return false;
         	}
-        	currentHeight+=2;
+        	blockpos$Mutable.move(Direction.UP, 2);
         }
-        ceilingHeight = blockpos$Mutable.up(currentHeight).getY();
+        ceilingHeight = blockpos$Mutable.getY();
         
         
         //find floor
+        blockpos$Mutable.setPos(position); // reset back to normal height
         currentHeight = 0;
         while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too low for column to generate
-        	if(blockpos$Mutable.up(currentHeight).getY() < 50) {
+        	if(blockpos$Mutable.getY() < 50) {
         		return false;
         	}
-        	currentHeight-=2;
+        	blockpos$Mutable.move(Direction.DOWN, 2);
         }
-        floorHeight = blockpos$Mutable.up(currentHeight).getY();
+        floorHeight = blockpos$Mutable.getY();
         
         
         heightDiff = ceilingHeight - floorHeight;
@@ -186,12 +188,13 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	                	//top block followed by 4 middle blocks below that
 	                	for(int downward = 0; downward < 6 && y - downward >= -3; downward++) 
 	                	{
-	                        BlockState block = world.getBlockState(blockpos$Mutable.down(downward));
-	                       // BlockState blockBelow = world.getBlockState(blockpos$Mutable.down(downward+1));
+	                        BlockState block = world.getBlockState(blockpos$Mutable);
 	                        if (block == blocksConfig.insideBlock)
 	                        {
-	                            world.setBlockState(blockpos$Mutable.down(downward), downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
+	                            world.setBlockState(blockpos$Mutable, downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
 	                        }
+	                        
+	                		blockpos$Mutable.move(Direction.DOWN); //moves down 1 every loop
 	                	}
                     }
                 }

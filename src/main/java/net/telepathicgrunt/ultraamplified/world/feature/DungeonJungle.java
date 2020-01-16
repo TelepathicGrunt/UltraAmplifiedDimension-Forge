@@ -42,80 +42,81 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
     
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
     {
-        int j = rand.nextInt(2) + 2;
-        int k = -j - 1;
-        int l = j + 1;
-        int k1 = rand.nextInt(2) + 2;
-        int l1 = -k1 - 1;
-        int i2 = k1 + 1;
-        int j2 = 0;
+        int randXRange= rand.nextInt(2) + 2;
+        int xMin = -randXRange - 1;
+        int xMax = randXRange + 1;
+        int randZRange = rand.nextInt(2) + 2;
+        int zMin = -randZRange - 1;
+        int zMax = randZRange + 1;
+        int validOpenings = 0;
         int ceilingOpenings = 0;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 
-        for (int k2 = k; k2 <= l; ++k2)
+        for (int x = xMin; x <= xMax; ++x)
         {
-            for (int l2 = -1; l2 <= 4; ++l2)
+            for (int y = -1; y <= 4; ++y)
             {
-                for (int i3 = l1; i3 <= i2; ++i3)
+                for (int z = zMin; z <= zMax; ++z)
                 {
-                    BlockPos blockpos = position.add(k2, l2, i3);
-                    Material material = world.getBlockState(blockpos).getMaterial();
+                    blockpos$Mutable.setPos(position).move(x, y, z);
+                    Material material = world.getBlockState(blockpos$Mutable).getMaterial();
                     boolean flag = material.isSolid();
 
-                    if (l2 == -1 && !flag)
+                    if (y == -1 && !flag)
                     {
                         return false;
                     }
 
-                    if (l2 == 4 && !flag)
+                    if (y == 4 && !flag)
                     {
                     	ceilingOpenings++;
                     }
 
-                    if ((k2 == k || k2 == l || i3 == l1 || i3 == i2) && l2 == 0 && world.isAirBlock(blockpos) && world.isAirBlock(blockpos.up()))
+                    if ((x == xMin || x == xMax || z == zMin || z == zMax) && y == 0 && world.isAirBlock(blockpos$Mutable) && world.isAirBlock(blockpos$Mutable.up()))
                     {
-                        ++j2;
+                        ++validOpenings;
                     }
                 }
             }
         }
 
-        if (j2 >= 1 && j2 <= 14 && ceilingOpenings <14)
+        if (validOpenings >= 1 && validOpenings <= 14 && ceilingOpenings <14)
         {
-            for (int k3 = k; k3 <= l; ++k3)
+            for (int x = xMin; x <= xMax; ++x)
             {
-                for (int i4 = 3; i4 >= -1; --i4)
+                for (int y = 3; y >= -1; --y)
                 {
-                    for (int k4 = l1; k4 <= i2; ++k4)
+                    for (int z = zMin; z <= zMax; ++z)
                     {
-                        BlockPos blockpos1 = position.add(k3, i4, k4);
+                        blockpos$Mutable.setPos(position).move(x, y, z);
 
-                        if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
+                        if (x != xMin && y != -1 && z != zMin && x != xMax && y != 4 && z != zMax)
                         {
-                            if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                            if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
                             {
-                                world.setBlockState(blockpos1, CAVE_AIR, 2);
+                                world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
+                        else if (blockpos$Mutable.getY() >= 0 && !world.getBlockState(blockpos$Mutable.down()).getMaterial().isSolid())
                         {
-                            world.setBlockState(blockpos1, CAVE_AIR, 2);
+                            world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
-                        else if (world.getBlockState(blockpos1).getMaterial().isSolid() && world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        else if (world.getBlockState(blockpos$Mutable).getMaterial().isSolid() && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
                         {
-                            if (i4 == -1 && rand.nextInt(5) != 0)
+                            if (y == -1 && rand.nextInt(5) != 0)
                             {
-                                world.setBlockState(blockpos1, PLANKS, 2);
+                                world.setBlockState(blockpos$Mutable, PLANKS, 2);
                             }
                             else
                             {
                             	if(rand.nextInt(3) == 0) 
                             	{
-                                    world.setBlockState(blockpos1, LOGS, 2);
+                                    world.setBlockState(blockpos$Mutable, LOGS, 2);
                             	}
                             	else {
-                            		world.setBlockState(blockpos1, LEAVES, 2);
+                            		world.setBlockState(blockpos$Mutable, LEAVES, 2);
                             	}
                             }
                         }
@@ -127,18 +128,18 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
             {
                 for (int j4 = 0; j4 < 3; ++j4)
                 {
-                    int l4 = position.getX() + rand.nextInt(j * 2 + 1) - j;
-                    int i5 = position.getY();
-                    int j5 = position.getZ() + rand.nextInt(k1 * 2 + 1) - k1;
-                    BlockPos blockpos2 = new BlockPos(l4, i5, j5);
+                    int x = position.getX() + rand.nextInt(randXRange* 2 + 1) - randXRange;
+                    int y = position.getY();
+                    int z = position.getZ() + rand.nextInt(randZRange * 2 + 1) - randZRange;
+                    blockpos$Mutable.setPos(x, y, z);
 
-                    if (world.isAirBlock(blockpos2))
+                    if (world.isAirBlock(blockpos$Mutable))
                     {
                         int j3 = 0;
 
                         for (Direction Direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (world.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
+                            if (world.getBlockState(blockpos$Mutable.offset(Direction)).getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -146,8 +147,8 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 
                         if (j3 == 1)
                         {
-                        	world.setBlockState(blockpos2, StructurePiece.func_197528_a(world, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
-                        	LockableLootTileEntity.setLootTable(world, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
+                        	world.setBlockState(blockpos$Mutable, StructurePiece.func_197528_a(world, blockpos$Mutable, Blocks.CHEST.getDefaultState()), 2); 
+                        	LockableLootTileEntity.setLootTable(world, rand, blockpos$Mutable, LootTables.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }

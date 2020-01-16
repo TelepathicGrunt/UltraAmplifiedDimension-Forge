@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -32,11 +33,12 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {	
 		//makes sure this ruins does not spawn too close to world height border.
-		if(!ConfigUA.miniStructureGeneration) {
+		if(!ConfigUA.miniStructureGeneration || position.getY() < ConfigUA.seaLevel + 5) {
 			return false;
-		}
-
+		} 
+		
 		Rotation rot = Rotation.values()[rand.nextInt(Rotation.values().length)];
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 		BlockPos.Mutable offset = new BlockPos.Mutable();
 	     
 		//makes sure there is enough solid blocks on ledge to hold this feature.
@@ -50,7 +52,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 					//The -4 is to make the check rotate the same way as structure and 
 					//then we do +4 to get the actual position again.
 					offset.setPos(x-4, 0, z-4).setPos(offset.rotate(rot));
-					if(!world.getBlockState(position.up(1).west(offset.getX()+4).north(offset.getZ()+4)).isSolid()) {
+					if(!world.getBlockState(blockpos$Mutable.add(-offset.getX()+4, 1, -offset.getZ()+4)).isSolid()) {
 						return false;
 					}
 				}
@@ -62,8 +64,8 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 		{
 			for(int z = -5; z <= 5; z++)  
 			{
-				if(!world.getBlockState(position.up(2)).isSolid()) {
-					position = position.down();
+				if(!world.getBlockState(blockpos$Mutable.up(2)).isSolid()) {
+					blockpos$Mutable.move(Direction.DOWN);
 					z = 6;
 					x = 6;
 					break;
@@ -89,7 +91,7 @@ public class HangingRuins extends Feature<NoFeatureConfig> {
 				.setIgnoreEntities(false)
 				.setChunk((ChunkPos)null);
 		
-		template.addBlocksToWorld(world, position.down(8).north(4).west(4), placementsettings, 2);
+		template.addBlocksToWorld(world, blockpos$Mutable.move(4, -8, 4), placementsettings, 2);
 		
 		return true;
 		

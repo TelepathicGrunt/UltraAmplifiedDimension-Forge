@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -68,30 +69,31 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 
 	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos)
 	{
-
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
+		
 		// if height is inside a non-air block, move up until we reached an air block
-		while (height < 255)
+		while (blockpos$Mutable.getY() < 255)
 		{
-			if (world.isAirBlock(pos.add(0, height, 0)))
+			if (world.isAirBlock(blockpos$Mutable))
 			{
 				break;
 			}
 
-			height++;
+			blockpos$Mutable.move(Direction.UP);
 		}
 
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
-		while (height < 255)
+		while (blockpos$Mutable.getY() < 255)
 		{
-			if (!world.isAirBlock(pos.add(0, height, 0)))
+			if (!world.isAirBlock(blockpos$Mutable))
 			{
 				break;
 			}
 
-			height++;
+			blockpos$Mutable.move(Direction.UP);
 		}
 
-		return height > 255 ? 255 : height;
+		return blockpos$Mutable.getY() > 255 ? 255 : blockpos$Mutable.getY();
 	}
 }

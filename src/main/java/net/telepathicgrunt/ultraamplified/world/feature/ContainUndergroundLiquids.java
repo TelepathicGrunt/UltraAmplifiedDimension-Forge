@@ -47,36 +47,33 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 		}
 	}
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock) {
-		// set y to 0
-		pos.down(pos.getY());
-
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig configBlock) {
+		
 		boolean notContainedFlag;
 		BlockState currentblock;
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), 0, position.getZ());  //set y to 0
 
 		for (int x = 0; x < 16; ++x) {
 			for (int z = 0; z < 16; ++z) {
 
 				for (int y = 61; y >= 10; y--) {
 
-					blockpos$Mutable.setPos(pos.getX() + x, 0, pos.getZ() + z);
-					currentblock = world.getBlockState(blockpos$Mutable.up(y));
+					blockpos$Mutable.setPos(position.getX() + x, y, position.getZ() + z);
+					currentblock = world.getBlockState(blockpos$Mutable);
 
 					// move down until we hit an air block
-					while (currentblock != Blocks.AIR.getDefaultState() && y > 11) {
-						y--;
-						currentblock = world.getBlockState(blockpos$Mutable.up(y));
+					while (currentblock != Blocks.AIR.getDefaultState() && blockpos$Mutable.getY() > 11) {
+						blockpos$Mutable.move(Direction.DOWN);
+						currentblock = world.getBlockState(blockpos$Mutable);
 					}
 					
 					//checks one last time at y = 11 to see if we should quit now
-					if(y <= 11 && currentblock != Blocks.AIR.getDefaultState()) {
+					if(blockpos$Mutable.getY() <= 11 && currentblock != Blocks.AIR.getDefaultState()) {
 						continue;
 					}
+					
 
 					// y value is now fully set for rest of code
-					blockpos$Mutable.setPos(pos.getX() + x, y, pos.getZ() + z);
-
 					// checks to see if we are touching a liquid block
 					notContainedFlag = false;
 
@@ -88,19 +85,22 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig> {
 						}
 					}
 
-					currentblock = world.getBlockState(blockpos$Mutable.up());
+					blockpos$Mutable.move(Direction.UP);
+					currentblock = world.getBlockState(blockpos$Mutable);
 					if (!currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 
-					currentblock = world.getBlockState(blockpos$Mutable.down());
-					if (blockpos$Mutable.down().getY() > 10 && !currentblock.getFluidState().isEmpty()) {
+					blockpos$Mutable.move(Direction.DOWN, 2); //move from above block to below block 
+					currentblock = world.getBlockState(blockpos$Mutable);
+					if (blockpos$Mutable.getY() > 10 && !currentblock.getFluidState().isEmpty()) {
 						notContainedFlag = true;
 					}
 
 					// this air block is touching liquid, time to make it solid
 					if (notContainedFlag) {
-						
+
+						blockpos$Mutable.move(Direction.UP); //move back to center block
 						//grabs what block to use based on what biome we are in
 						replacementBlock = fillerBiomeMap.get(world.getBiome(blockpos$Mutable));
 						if (replacementBlock == null) {

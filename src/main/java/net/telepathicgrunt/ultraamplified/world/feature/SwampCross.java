@@ -24,42 +24,44 @@ public class SwampCross extends Feature<NoFeatureConfig> {
 		super(configFactory);
 	}
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
 		      
 		if(!ConfigUA.miniStructureGeneration) {
 			return false;
 		}
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position).move(Direction.DOWN, 2);
 		   
 		//creates vertical log blocks
-		for (int i = -2; i < 6; i++) 
+		for (int i = 0; i < 8; i++) 
 		{
-			this.setBlockState(world, pos.up(i), Blocks.SPRUCE_LOG.getDefaultState());
+			this.setBlockState(world, blockpos$Mutable.move(Direction.UP), Blocks.SPRUCE_LOG.getDefaultState());
 		}
-
+		
+		blockpos$Mutable.move(Direction.DOWN);
 		//adds horizontal log blocks towards top
 		for (int i = -2; i < 3; i++) 
 		{
-			world.setBlockState(pos.up(4).east(i), Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X), 16 | 2);
+			world.setBlockState(blockpos$Mutable.east(i), Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X), 16 | 2);
 		}
 
 		//adds skull underground if block is not water, lava, or air
-		BlockPos positionTemp = pos.down(2).north();
-		if (!world.isAirBlock(positionTemp) && world.getBlockState(positionTemp) != Blocks.WATER.getDefaultState() && world.getBlockState(positionTemp) != Blocks.LAVA.getDefaultState()) 
+		blockpos$Mutable.setPos(position).move(Direction.DOWN, 2).move(Direction.NORTH, 1);
+		if (!world.isAirBlock(blockpos$Mutable) && world.getBlockState(blockpos$Mutable) != Blocks.WATER.getDefaultState() && world.getBlockState(blockpos$Mutable) != Blocks.LAVA.getDefaultState()) 
 		{
 			if(rand.nextFloat() < 0.1F) {
-				world.setBlockState(positionTemp, Blocks.WITHER_SKELETON_WALL_SKULL.getDefaultState(), 2);
+				world.setBlockState(blockpos$Mutable, Blocks.WITHER_SKELETON_WALL_SKULL.getDefaultState(), 2);
 			}else {
-				world.setBlockState(positionTemp, Blocks.SKELETON_WALL_SKULL.getDefaultState(), 2);
+				world.setBlockState(blockpos$Mutable, Blocks.SKELETON_WALL_SKULL.getDefaultState(), 2);
 			}
 		}
 
 		//adds hidden chest underground if block is not water, lava, air, and if next boolean is true
-		positionTemp = pos.down(3);
-		if (!world.isAirBlock(positionTemp) && world.getBlockState(positionTemp) != Blocks.WATER.getDefaultState() && world.getBlockState(positionTemp) != Blocks.LAVA.getDefaultState() && rand.nextBoolean()) 
+		blockpos$Mutable.setPos(position).move(Direction.DOWN, 3);
+		if (!world.isAirBlock(blockpos$Mutable) && world.getBlockState(blockpos$Mutable) != Blocks.WATER.getDefaultState() && world.getBlockState(blockpos$Mutable) != Blocks.LAVA.getDefaultState() && rand.nextBoolean()) 
 		{
-			world.setBlockState(positionTemp, Blocks.CHEST.getDefaultState(), 2);
+			world.setBlockState(blockpos$Mutable, Blocks.CHEST.getDefaultState(), 2);
 
-			TileEntity tileentity = world.getTileEntity(positionTemp);
+			TileEntity tileentity = world.getTileEntity(blockpos$Mutable);
 
 			if (tileentity instanceof ChestTileEntity) 
 			{

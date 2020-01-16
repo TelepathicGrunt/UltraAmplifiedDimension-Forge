@@ -65,7 +65,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllLiq
 import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllSurfaces;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.DungeonPlacementBands;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.FixedHeightWithChance;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.GeneralPlacement;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.GeneralConfigHookupPlacement;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.GlowstonePatchPlacement1;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.GlowstonePlacement;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBasedLavafallsRange;
@@ -106,7 +106,7 @@ public class BiomeUA extends Biome {
 	public static final Placement<ChanceConfig> GLOWSTONE_VARIANT_PATCH = new GlowstonePatchPlacement1(ChanceConfig::deserialize);
     public static final Placement<NoPlacementConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands(NoPlacementConfig::deserialize);
     public static final Placement<NoPlacementConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacement(NoPlacementConfig::deserialize);
-    public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralPlacement(CountRangeAndTypeConfig::deserialize);
+    public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralConfigHookupPlacement(CountRangeAndTypeConfig::deserialize);
     public static final Placement<LapisCountRangeConfig> LAPIS_PLACEMENT = new LapisPlacement(LapisCountRangeConfig::deserialize);
     public static final Placement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRange(CountRangeConfig::deserialize);
     public static final Placement<CountRangeConfig> HEIGHT_BIASED_END_ISLAND_RANGE_UA = new HeightBiasedEndIslandRange(CountRangeConfig::deserialize);

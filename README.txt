@@ -27,16 +27,21 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
     Structures:
 ·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
+·Stonehenges now will attempt to generate twice instead of once. One time at highest piece of land and again and next highest piece of land. This should increase their frequency quite a bit.
+·Sunshrine spawn condition is slightly less restrictive and will make it generate slightly more often.
+·Hanging Ruins now cannot generate fully submerged below sealevel. 
 
     Biome: 
 ·Fixed very rare crash when generating beehives due to vanilla's code.
 ·Added chance for Beehives in fancy oak trees in Flower Jungle and Flower Jungle Edge biomes.
 ·Dark Forest biomes should generate larger than before.
+·Relic Dark Forest biome now is a bit more dense with trees.
 ·Slightly reduced Mushroom biome spawnrate again...
 ·Significantly increased spawnrate of Crosses in Spooky Swamp biome.
 
 	Misc.
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
+·More some optimization and cleaning done in backend.
        
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)

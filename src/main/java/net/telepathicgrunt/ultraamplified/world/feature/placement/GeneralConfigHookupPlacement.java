@@ -13,9 +13,9 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 
 
-public class GeneralPlacement extends SimplePlacement<CountRangeAndTypeConfig>
+public class GeneralConfigHookupPlacement extends SimplePlacement<CountRangeAndTypeConfig>
 {
-	public GeneralPlacement(Function<Dynamic<?>, ? extends CountRangeAndTypeConfig> config)
+	public GeneralConfigHookupPlacement(Function<Dynamic<?>, ? extends CountRangeAndTypeConfig> config)
 	{
 		super(config);
 	}

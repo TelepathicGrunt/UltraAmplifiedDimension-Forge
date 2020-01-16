@@ -10,6 +10,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -52,8 +53,10 @@ public class GlowPatch extends Feature<CountConfig>
 	}
 
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, CountConfig countConfig)
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, CountConfig countConfig)
 	{
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		
 		// tries as times specified to convert a randomly chosen nearby block
 		for (int attempts = 0; attempts < countConfig.count; ++attempts)
 		{
@@ -61,22 +64,21 @@ public class GlowPatch extends Feature<CountConfig>
 			int gausX = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
 			int gausY = rand.nextInt(4) - rand.nextInt(4); // range of -4 to 4
 			int gausZ = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
-			BlockPos blockpos = pos.add(gausX, gausY, gausZ);
-			BlockState chosenBlock = world.getBlockState(blockpos);
-			BlockState chosenAboveBlock = world.getBlockState(blockpos.up());
+			blockpos$Mutable.setPos(position).move(gausX, gausY, gausZ);
+			BlockState chosenBlock = world.getBlockState(blockpos$Mutable);
+			BlockState chosenAboveBlock = world.getBlockState(blockpos$Mutable.move(Direction.UP));
 
 			if (chosenBlock.getMaterial() != Material.AIR)
 			{
-
 				// turns stone into glowstone ore even if no air above
-				if (chosenBlock == Blocks.STONE.getDefaultState())
+				if (chosenBlock.getBlock() == Blocks.STONE)
 				{
-					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
+					world.setBlockState(blockpos$Mutable.move(Direction.DOWN), GLOWBLOCKMAP.get(chosenBlock), 2);
 				}
 				// turns valid surface blocks with air above into glowstone variants
 				else if (GLOWBLOCKMAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR)
 				{
-					world.setBlockState(blockpos, GLOWBLOCKMAP.get(chosenBlock), 2);
+					world.setBlockState(blockpos$Mutable.move(Direction.DOWN), GLOWBLOCKMAP.get(chosenBlock), 2);
 				}
 			}
 		}

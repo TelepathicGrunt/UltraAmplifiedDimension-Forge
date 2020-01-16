@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -24,38 +25,40 @@ public class IcePatchUA extends Feature<NoFeatureConfig>
 	private final BlockState packedIce = Blocks.PACKED_ICE.getDefaultState();
     private final int basePathWidth = 3;
 
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random random, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
-        while (world.isAirBlock(position) && position.getY() > 2)
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable2 = new BlockPos.Mutable(position);
+        while (world.isAirBlock(blockpos$Mutable) && blockpos$Mutable.getY() > 2)
         {
-            position = position.down();
+        	blockpos$Mutable.move(Direction.DOWN);
         }
 
-        if (world.getBlockState(position).getBlock() != Blocks.SAND)
+        if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SAND)
         {
             return false;
         }
         else
         {
-            int width = rand.nextInt(this.basePathWidth - 2) + 2;
+            int width = random.nextInt(this.basePathWidth - 2) + 2;
 
-            for (int x = position.getX() - width; x <= position.getX() + width; ++x)
+            for (int x = blockpos$Mutable.getX() - width; x <= blockpos$Mutable.getX() + width; ++x)
             {
-                for (int z = position.getZ() - width; z <= position.getZ() + width; ++z)
+                for (int z = blockpos$Mutable.getZ() - width; z <= blockpos$Mutable.getZ() + width; ++z)
                 {
-                    int xDiff = x - position.getX();
-                    int zDiff = z - position.getZ();
+                    int xDiff = x - blockpos$Mutable.getX();
+                    int zDiff = z - blockpos$Mutable.getZ();
 
                     if (xDiff * xDiff + zDiff * zDiff <= width * width)
                     {
-                        for (int y = position.getY() - 1; y <= position.getY() + 1; ++y)
+                        for (int y = blockpos$Mutable.getY() - 1; y <= blockpos$Mutable.getY() + 1; ++y)
                         {
-                            BlockPos blockpos = new BlockPos(x, y, z);
-                            Block block = world.getBlockState(blockpos).getBlock();
+                        	blockpos$Mutable2.setPos(x, y, z);
+                            Block block = world.getBlockState(blockpos$Mutable2).getBlock();
 
                             if (block == Blocks.SAND || block == Blocks.SANDSTONE)
                             {
-                                world.setBlockState(blockpos, this.packedIce, 2);
+                                world.setBlockState(blockpos$Mutable2, this.packedIce, 2);
                             }
                         }
                     }

@@ -14,30 +14,38 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
 
-public class SeaPickleUA extends Feature<CountConfig> {
-   public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactory) {
+
+public class SeaPickleUA extends Feature<CountConfig>
+{
+	public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactory)
+	{
 		super(configFactory);
 	}
 
-public boolean place(IWorld world, ChunkGenerator<?> generator, Random random, BlockPos pos, CountConfig configCount) {
-	      int howManyPickleGenerated = 0;
 
-	      for(int count = 0; count < configCount.count; ++count) {
-	         int xOffset = random.nextInt(8) - random.nextInt(8);
-	         int zOffset = random.nextInt(8) - random.nextInt(8);
-	         
-	         //same as vanilla SeaPickle class but now generates at position we passed in instead of finding the top y value. 
-		      //We have placement classes for a reason. Features should not be finding their own positions.
-		      
-	         BlockPos blockpos = new BlockPos(pos.getX() + xOffset, pos.getY(), pos.getZ() + zOffset);
-	         BlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
-	         
-	         if (world.getBlockState(blockpos).getBlock() == Blocks.WATER && pickle.isValidPosition(world, blockpos)) {
-	            world.setBlockState(blockpos, pickle, 2);
-	            ++howManyPickleGenerated;
-	         }
-	      }
+	public boolean place(IWorld world, ChunkGenerator<?> generator, Random random, BlockPos position, CountConfig configCount)
+	{
+		int howManyPickleGenerated = 0;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 
-	      return howManyPickleGenerated > 0;
-	   }
+		for (int count = 0; count < configCount.count; ++count)
+		{
+			int x = random.nextInt(8) - random.nextInt(8);
+			int z = random.nextInt(8) - random.nextInt(8);
+
+			//same as vanilla SeaPickle class but now generates at position we passed in instead of finding the top y value. 
+			//We have placement classes for a reason. Features should not be finding their own positions.
+
+    		blockpos$Mutable.setPos(position).move(x, 0, z);
+			BlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
+
+			if (world.getBlockState(blockpos$Mutable).getBlock() == Blocks.WATER && pickle.isValidPosition(world, blockpos$Mutable))
+			{
+				world.setBlockState(blockpos$Mutable, pickle, 2);
+				++howManyPickleGenerated;
+			}
+		}
+
+		return howManyPickleGenerated > 0;
 	}
+}

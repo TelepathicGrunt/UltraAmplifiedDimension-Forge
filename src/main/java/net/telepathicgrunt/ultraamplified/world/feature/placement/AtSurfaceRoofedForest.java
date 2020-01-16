@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -36,17 +37,17 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 		boolean airFlag = false;
 		boolean airBlock = true;
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		for (int i = 0; i < c; i++)
 		{
-			int height = 250;
-
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
+			blockpos$Mutable.setPos(pos.getX() + x, 250, pos.getZ()+z);
 
-			while (height > 74)
+			while (blockpos$Mutable.getY() > 74)
 			{
-				airBlock = world.isAirBlock(pos.add(x, height, z));
+				airBlock = world.isAirBlock(blockpos$Mutable);
 
 				//if height is is an air block and previous block was a solid block, store the fact that we are in an air block now
 				if (!airFlag && airBlock)
@@ -58,7 +59,7 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 				else if (airFlag && !airBlock)
 				{
 					airFlag = false;
-					blockPosList.add(pos.add(x, height + 1, z));
+					blockPosList.add(blockpos$Mutable.up());
 
 					//pick new coordinates
 					x = random.nextInt(16);
@@ -66,8 +67,7 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 				}
 
 				//move down
-				height--;
-
+				blockpos$Mutable.move(Direction.DOWN);
 			}
 		}
 

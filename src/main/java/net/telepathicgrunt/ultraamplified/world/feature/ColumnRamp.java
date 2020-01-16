@@ -12,6 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -64,22 +65,22 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
         while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too high for ramp to generate
-        	if(blockpos$Mutable.up(currentHeight).getY() > 254) {
+        	if(blockpos$Mutable.getY() > 254) {
         		return false;
         	}
-        	currentHeight+=2;
+        	blockpos$Mutable.move(Direction.UP, 2);
         }
-        ceilingHeight = blockpos$Mutable.up(currentHeight).getY();
+        ceilingHeight = blockpos$Mutable.getY();
         
 
         //finds floor above ceiling
         while (world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
         {
         	//too high for ramp to generate
-        	if(blockpos$Mutable.up(currentHeight).getY() > 254) {
+        	if(blockpos$Mutable.getY() > 254) {
         		return false;
         	}
-        	currentHeight++;
+        	blockpos$Mutable.move(Direction.UP);
         }
         topFloorHeight = blockpos$Mutable.up(currentHeight).getY();
         
@@ -91,16 +92,17 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
         
         
         //find floor
+        blockpos$Mutable.setPos(position); // reset back to normal height
         currentHeight = 0;
-        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid())
+        while (!world.getBlockState(blockpos$Mutable).isSolid())
         {
         	//too low/tall for column to generate
-        	if(blockpos$Mutable.up(currentHeight).getY() < 70) {
+        	if(blockpos$Mutable.getY() < 70) {
         		return false;
         	}
-        	currentHeight-=2;
+        	blockpos$Mutable.move(Direction.DOWN, 2);
         }
-        bottomFloorHeight = blockpos$Mutable.up(currentHeight).getY();
+        bottomFloorHeight = blockpos$Mutable.getY();
         
         
         heightDiff = ceilingHeight - bottomFloorHeight;

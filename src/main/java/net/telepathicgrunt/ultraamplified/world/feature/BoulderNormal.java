@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -35,17 +36,18 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkgen, Random rand, BlockPos position, BlockBlobConfig config)
 	{
-		BlockState blockState = world.getBlockState(position);
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockState blockState = world.getBlockState(blockpos$Mutable);
 
 		//Will keeps moving down position until it finds valid ground to generate on while ignoring other boulders
-		while (position.getY() >= 6)
+		while (blockpos$Mutable.getY() >= 6)
 		{
 			if (blockState.getMaterial() == Material.AIR || 
 				(blockState.getBlock() != Blocks.GRASS_BLOCK && !isDirt(blockState.getBlock())))
 			{
 				//block was air or a non-dirt/grass block. Thus move down one.
-				position = position.down();
-				blockState = world.getBlockState(position);
+				blockpos$Mutable.move(Direction.DOWN);
+				blockState = world.getBlockState(blockpos$Mutable);
 			}
 			else
 			{
@@ -54,7 +56,7 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 		}
 
 		//if the height is too low or high, just quit.
-		if (position.getY() <= 6 || position.getY() >= 250)
+		if (blockpos$Mutable.getY() <= 6 || blockpos$Mutable.getY() >= 250)
 		{
 			return false;
 		}
@@ -69,9 +71,9 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 			int z = radius + rand.nextInt(2);
 			float calculatedDistance = (float) (x + y + z) * 0.333F + 0.5F;
 
-			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(position.add(-x, -y, -z), position.add(x, y, z)))
+			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(blockpos$Mutable.add(-x, -y, -z), blockpos$Mutable.add(x, y, z)))
 			{
-				if (blockpos.distanceSq(position) <= (double) (calculatedDistance * calculatedDistance))
+				if (blockpos.distanceSq(blockpos$Mutable) <= (double) (calculatedDistance * calculatedDistance))
 				{
 					//adds the blocks for generation in this boulder
 					//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation
@@ -114,7 +116,7 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 					}
 				}
 			}
-			position = position.add(-(radius + 1) + rand.nextInt(2 + radius * 2), 0 - rand.nextInt(2), -(radius + 1) + rand.nextInt(2 + radius * 2));
+			blockpos$Mutable.move(-(radius + 1) + rand.nextInt(2 + radius * 2), 0 - rand.nextInt(2), -(radius + 1) + rand.nextInt(2 + radius * 2));
 
 		}
 		//finished generating the boulder

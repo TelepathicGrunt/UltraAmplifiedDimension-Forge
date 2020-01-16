@@ -17,28 +17,28 @@ import net.minecraft.world.gen.feature.CoralMushroomFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class CoralMushroomUA extends CoralMushroomFeature{
-	   public CoralMushroomUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49898_1_) {
-	      super(p_i49898_1_);
+	   public CoralMushroomUA(Function<Dynamic<?>, ? extends NoFeatureConfig> config) {
+	      super(config);
 	   }
 
 	   @Override
-	   protected boolean func_204624_b(IWorld p_204624_1_, Random p_204624_2_, BlockPos p_204624_3_, BlockState p_204624_4_) {
-	      BlockPos blockpos = p_204624_3_.up();
-	      BlockState blockstate = p_204624_1_.getBlockState(p_204624_3_);
-	      if ((blockstate.getBlock() == Blocks.WATER || blockstate.getBlock() == Blocks.LAVA || blockstate.isIn(BlockTags.CORALS)) && (p_204624_1_.getBlockState(blockpos).getBlock() == Blocks.WATER ||  p_204624_1_.getBlockState(blockpos).getBlock() == Blocks.LAVA)) {
-	         p_204624_1_.setBlockState(p_204624_3_, p_204624_4_, 3);
-	         if (p_204624_2_.nextFloat() < 0.25F) {
-	            p_204624_1_.setBlockState(blockpos, BlockTags.CORALS.getRandomElement(p_204624_2_).getDefaultState(), 2);
-	         } else if (p_204624_2_.nextFloat() < 0.05F) {
-	            p_204624_1_.setBlockState(blockpos, Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(p_204624_2_.nextInt(4) + 1)), 2);
+	   protected boolean func_204624_b(IWorld world, Random random, BlockPos position, BlockState blockState) {
+	      BlockPos positionUp = position.up();
+	      BlockState blockstate = world.getBlockState(position);
+	      if ((blockstate.getBlock() == Blocks.WATER || blockstate.getBlock() == Blocks.LAVA || blockstate.isIn(BlockTags.CORALS)) && (world.getBlockState(positionUp).getBlock() == Blocks.WATER ||  world.getBlockState(positionUp).getBlock() == Blocks.LAVA)) {
+	         world.setBlockState(position, blockState, 3);
+	         if (random.nextFloat() < 0.25F) {
+	            world.setBlockState(positionUp, BlockTags.CORALS.getRandomElement(random).getDefaultState(), 2);
+	         } else if (random.nextFloat() < 0.05F) {
+	            world.setBlockState(positionUp, Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1)), 2);
 	         }
 
 	         for(Direction direction : Direction.Plane.HORIZONTAL) {
-	            if (p_204624_2_.nextFloat() < 0.2F) {
-	               BlockPos blockpos1 = p_204624_3_.offset(direction);
-	               if (p_204624_1_.getBlockState(blockpos1).getBlock() == Blocks.WATER || p_204624_1_.getBlockState(blockpos1).getBlock() == Blocks.LAVA) {
-	                  BlockState blockstate1 = BlockTags.WALL_CORALS.getRandomElement(p_204624_2_).getDefaultState().with(DeadCoralWallFanBlock.FACING, direction);
-	                  p_204624_1_.setBlockState(blockpos1, blockstate1, 2);
+	            if (random.nextFloat() < 0.2F) {
+	               BlockPos blockpos1 = position.offset(direction);
+	               if (world.getBlockState(blockpos1).getBlock() == Blocks.WATER || world.getBlockState(blockpos1).getBlock() == Blocks.LAVA) {
+	                  BlockState blockstate1 = BlockTags.WALL_CORALS.getRandomElement(random).getDefaultState().with(DeadCoralWallFanBlock.FACING, direction);
+	                  world.setBlockState(blockpos1, blockstate1, 2);
 	               }
 	            }
 	         }

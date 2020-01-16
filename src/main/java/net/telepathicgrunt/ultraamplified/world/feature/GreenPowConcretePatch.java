@@ -28,7 +28,7 @@ public class GreenPowConcretePatch extends Feature<NoFeatureConfig> {
 
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) 
     {
-        
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
         int radius = rand.nextInt(this.maximumRadius - 2) + 2;
 
         for (int x = position.getX() - radius; x <= position.getX() + radius; ++x)
@@ -42,12 +42,12 @@ public class GreenPowConcretePatch extends Feature<NoFeatureConfig> {
                 {
                     for (int y = position.getY() - 2; y <= position.getY() + 2; ++y)
                     {
-                        BlockPos blockpos = new BlockPos(x, y, z);
-                        Block block = world.getBlockState(blockpos).getBlock();
+                    	blockpos$Mutable.setPos(x, y, z);
+                        Block block = world.getBlockState(blockpos$Mutable).getBlock();
 
                         if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK)
                         {
-                            world.setBlockState(blockpos, this.greenConcretePowder, 2);
+                            world.setBlockState(blockpos$Mutable, this.greenConcretePowder, 2);
                         }
                     }
                 }

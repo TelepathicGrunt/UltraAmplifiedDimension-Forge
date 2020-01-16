@@ -11,6 +11,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
@@ -45,30 +46,34 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 	
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
+		
 		//System.out.println(position.getX()+", "+position.getY()+", "+position.getZ());
-        while ((world.isAirBlock(position) || world.getBlockState(position) == Blocks.WATER.getDefaultState())&& position.getY() > 2)
+		
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable2 = new BlockPos.Mutable(position);
+        while ((world.isAirBlock(blockpos$Mutable) || world.getBlockState(blockpos$Mutable) == Blocks.WATER.getDefaultState())&& blockpos$Mutable.getY() > 2)
         {
-            position = position.down();
+        	blockpos$Mutable.move(Direction.DOWN);
         }
 
-        if (world.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
+        if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SNOW_BLOCK)
         {
             return false;
         }
         else
         {
-            position = position.up(rand.nextInt(4));
+        	blockpos$Mutable.move(Direction.UP, rand.nextInt(4));
             int i = rand.nextInt(4) + 7;
             int j = i / 4 + rand.nextInt(2);
 
             if (j > 1 && rand.nextInt(40) == 0)
             {
             	//if ice spike has the potential to generate over 245, then set the position to 245
-            	if(position.getY()+130 > 245) {
-            		position = position.up((245 - position.getY()));
+            	if(blockpos$Mutable.getY()+130 > 245) {
+            		blockpos$Mutable.move(Direction.UP, (245 - blockpos$Mutable.getY()));
             	}
             	else {
-            		position = position.up(30 + rand.nextInt(100));
+            		blockpos$Mutable.move(Direction.UP, 30 + rand.nextInt(100));
             	}
                 
             }
@@ -88,25 +93,27 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 
                         if ((x == 0 && z == 0 || f1 * f1 + f2 * f2 <= f * f) && (x != -l && x != l && z != -l && z != l || rand.nextFloat() <= 0.75F))
                         {
-                            BlockState iblockstate = world.getBlockState(position.add(x, y, z));
-                            if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, y, z).getY() > ConfigUA.seaLevel-2)
+                        	blockpos$Mutable2.setPos(blockpos$Mutable).move(x, y, z);
+                            BlockState iblockstate = world.getBlockState(blockpos$Mutable2);
+                            if (ALLOWED_BLOCKS.contains(iblockstate) && blockpos$Mutable2.getY() > ConfigUA.seaLevel-2)
                             {
-                                this.setBlockState(world, position.add(x, y, z), PACKED_ICE);
+                                this.setBlockState(world, blockpos$Mutable2, PACKED_ICE);
                             }
                             else if(iblockstate == WATER) {
-                            	this.setBlockState(world, position.add(x, y, z), ICE);
+                            	this.setBlockState(world, blockpos$Mutable2, ICE);
                             }
 
                             if (y != 0 && l > 1)
                             {
-                                iblockstate = world.getBlockState(position.add(x, -y, z));
+                            	blockpos$Mutable2.setPos(blockpos$Mutable).move(x, -y, z);
+                                iblockstate = world.getBlockState(blockpos$Mutable2);
 
-                                if (ALLOWED_BLOCKS.contains(iblockstate) && position.add(x, -y, z).getY() > ConfigUA.seaLevel-2)
+                                if (ALLOWED_BLOCKS.contains(iblockstate) && blockpos$Mutable2.getY() > ConfigUA.seaLevel-2)
                                 {
-                                    this.setBlockState(world, position.add(x, -y, z), PACKED_ICE);
+                                    this.setBlockState(world, blockpos$Mutable2, PACKED_ICE);
                                 }
                                 else if(iblockstate == WATER) {
-                                	this.setBlockState(world, position.add(x, -y, z), ICE);
+                                	this.setBlockState(world, blockpos$Mutable2, ICE);
                                 }
                             }
                         }
@@ -125,11 +132,12 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                 k1 = 1;
             }
 
+        	blockpos$Mutable.setPos(position);
             for (int x = -k1; x <= k1; ++x)
             {
                 for (int z = -k1; z <= k1; ++z)
                 {
-                    BlockPos blockpos = position.add(x, -1, z);
+                	blockpos$Mutable2.setPos(blockpos$Mutable).move(x, -1, z);
                     int j2 = 50;
 
                     if (Math.abs(x) == 1 && Math.abs(z) == 1)
@@ -138,9 +146,9 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                     }
 
                     //how far down the ice spike can generate
-                    while (blockpos.getY() > 5)
+                    while (blockpos$Mutable2.getY() > 5)
                     {
-                        BlockState iblockstate1 = world.getBlockState(blockpos);
+                        BlockState iblockstate1 = world.getBlockState(blockpos$Mutable2);
 
                         if (!ALLOWED_BLOCKS.contains(iblockstate1))
                         {
@@ -148,16 +156,16 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
                         }
 
                         if(iblockstate1 == WATER || iblockstate1 == ICE) {
-                        	this.setBlockState(world, blockpos, Blocks.ICE.getDefaultState());
+                        	this.setBlockState(world, blockpos$Mutable2, Blocks.ICE.getDefaultState());
                         }else {
-                            this.setBlockState(world, blockpos, Blocks.PACKED_ICE.getDefaultState());
+                            this.setBlockState(world, blockpos$Mutable2, Blocks.PACKED_ICE.getDefaultState());
                         }
-                        blockpos = blockpos.down();
+                        blockpos$Mutable2.move(Direction.DOWN);
                         --j2;
 
                         if (j2 <= 0)
                         {
-                            blockpos = blockpos.down(rand.nextInt(5) + 1);
+                            blockpos$Mutable2.move(Direction.DOWN, rand.nextInt(5) + 1);
                             j2 = rand.nextInt(5);
                         }
                     }

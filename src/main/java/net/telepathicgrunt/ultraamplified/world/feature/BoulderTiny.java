@@ -30,9 +30,10 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
     private final static int startRadius = 0;
 
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
-        
-        Block block = world.getBlockState(position).getBlock();
-        Block block2 = world.getBlockState(position.add(-1,0,-1)).getBlock();
+
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+        Block block = world.getBlockState(blockpos$Mutable).getBlock();
+        Block block2 = world.getBlockState(blockpos$Mutable.add(-1,0,-1)).getBlock();
 
     	//boulder can only generate on grass/dirt
     	if ((block != Blocks.GRASS_BLOCK && block != Blocks.PODZOL && !isDirt(block)) ||
@@ -49,9 +50,9 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
             int z = startRadius + rand.nextInt(2);
             float calculatedDistance = (float)(x + y + z) * 0.333F + 0.5F;
 
-            for (BlockPos blockpos : BlockPos.getAllInBoxMutable(position.add(-x, -y, -z), position.add(x, y, z)))
+            for (BlockPos blockpos : BlockPos.getAllInBoxMutable(blockpos$Mutable.add(-x, -y, -z), blockpos$Mutable.add(x, y, z)))
             {
-                if (blockpos.distanceSq(position) <= (double)(calculatedDistance * calculatedDistance))
+                if (blockpos.distanceSq(blockpos$Mutable) <= (double)(calculatedDistance * calculatedDistance))
                 {
                 	//adds the blocks for generation in this boulder
                 	//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation
@@ -83,7 +84,7 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
                 	}
                 }
             }
-            position = position.add(-(startRadius + 1) + rand.nextInt(2 + startRadius * 2),  -rand.nextInt(2), -(startRadius + 1) + rand.nextInt(2 + startRadius * 2));
+            blockpos$Mutable.move(-(startRadius + 1) + rand.nextInt(2 + startRadius * 2),  -rand.nextInt(2), -(startRadius + 1) + rand.nextInt(2 + startRadius * 2));
         }
         
         //finished generating the boulder

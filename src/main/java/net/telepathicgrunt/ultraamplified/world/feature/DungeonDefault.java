@@ -46,6 +46,7 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
         int maxZ = randZRange + 1;
         int validOpenings = 0;
         int ceilingOpenings = 0;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 
         for (int x = minX; x <= maxX; ++x)
         {
@@ -53,8 +54,8 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
             {
                 for (int z = minZ; z <= maxZ; ++z)
                 {
-                    BlockPos blockpos = position.add(x, y, z);
-                    Material material = world.getBlockState(blockpos).getMaterial();
+            		blockpos$Mutable.setPos(position).move(x, y, z);
+                    Material material = world.getBlockState(blockpos$Mutable).getMaterial();
                     boolean flag = material.isSolid();
 
                     if (y == -1 && !flag)
@@ -67,7 +68,7 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
                     	ceilingOpenings++;
                     }
 
-                    if ((x == minX || x == maxX || z == minZ || z == maxZ) && y == 0 && world.isAirBlock(blockpos) && world.isAirBlock(blockpos.up()))
+                    if ((x == minX || x == maxX || z == minZ || z == maxZ) && y == 0 && world.isAirBlock(blockpos$Mutable) && world.isAirBlock(blockpos$Mutable.up()))
                     {
                         validOpenings++;
                     }
@@ -83,30 +84,30 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
                 {
                     for (int z = minZ; z <= maxZ; ++z)
                     {
-                        BlockPos blockpos1 = position.add(x, y, z);
+                		blockpos$Mutable.setPos(position).move(x, y, z);
 
                         if (x != minX && y != -1 && z != minZ && x != maxX && y != 4 && z != maxZ)
                         {
-                            if (world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                            if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
                             {
-                                world.setBlockState(blockpos1, CAVE_AIR, 2);
+                                world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
                             }
                         }
-                        else if (blockpos1.getY() >= 0 && !world.getBlockState(blockpos1.down()).getMaterial().isSolid())
+                        else if (blockpos$Mutable.getY() >= 0 && !world.getBlockState(blockpos$Mutable.down()).getMaterial().isSolid())
                         {
-                            world.setBlockState(blockpos1, CAVE_AIR, 2);
+                            world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
                         }
                         
                         //made sure the dungeon wall cannot replace other dungeon's mob spawner now.
-                        else if (world.getBlockState(blockpos1).getMaterial().isSolid() && world.getBlockState(blockpos1).getBlock() != Blocks.CHEST && world.getBlockState(blockpos1).getBlock() != Blocks.SPAWNER)
+                        else if (world.getBlockState(blockpos$Mutable).getMaterial().isSolid() && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
                         {
                             if (y == -1 && rand.nextInt(4) != 0)
                             {
-                                world.setBlockState(blockpos1, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2);
+                                world.setBlockState(blockpos$Mutable, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2);
                             }
                             else
                             {
-                                world.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState(), 2);
+                                world.setBlockState(blockpos$Mutable, Blocks.COBBLESTONE.getDefaultState(), 2);
                             }
                         }
                     }
@@ -117,18 +118,18 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
             {
                 for (int j4 = 0; j4 < 3; ++j4)
                 {
-                    int l4 = position.getX() + rand.nextInt(randXRange * 2 + 1) - randXRange;
-                    int i5 = position.getY();
-                    int j5 = position.getZ() + rand.nextInt(randZRange * 2 + 1) - randZRange;
-                    BlockPos blockpos2 = new BlockPos(l4, i5, j5);
+                    int x = position.getX() + rand.nextInt(randXRange * 2 + 1) - randXRange;
+                    int y = position.getY();
+                    int z = position.getZ() + rand.nextInt(randZRange * 2 + 1) - randZRange;
+            		blockpos$Mutable.setPos(x, y, z);
 
-                    if (world.isAirBlock(blockpos2))
+                    if (world.isAirBlock(blockpos$Mutable))
                     {
                         int j3 = 0;
 
                         for (Direction Direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (world.getBlockState(blockpos2.offset(Direction)).getMaterial().isSolid())
+                            if (world.getBlockState(blockpos$Mutable.offset(Direction)).getMaterial().isSolid())
                             {
                                 ++j3;
                             }
@@ -136,8 +137,8 @@ public class DungeonDefault extends Feature<NoFeatureConfig>
 
                         if (j3 == 1)
                         {
-                        	world.setBlockState(blockpos2, StructurePiece.func_197528_a(world, blockpos2, Blocks.CHEST.getDefaultState()), 2); 
-                        	LockableLootTileEntity.setLootTable(world, rand, blockpos2, LootTables.CHESTS_SIMPLE_DUNGEON);
+                        	world.setBlockState(blockpos$Mutable, StructurePiece.func_197528_a(world, blockpos$Mutable, Blocks.CHEST.getDefaultState()), 2); 
+                        	LockableLootTileEntity.setLootTable(world, rand, blockpos$Mutable, LootTables.CHESTS_SIMPLE_DUNGEON);
 
                             break;
                         }

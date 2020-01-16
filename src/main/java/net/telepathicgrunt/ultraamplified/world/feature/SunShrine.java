@@ -56,19 +56,45 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 		if(!ConfigUA.miniStructureGeneration || position.getY() > 248) {
 			return false;
 		}
-	
-		//makes sure this shrine does not spawn too close to world height border or it will get cut off.
+
+		boolean sunken = false;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		//makes sure this shrine does not spawn too close to world height border or it will get cut off. 
 		//Also makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
 		for(int x = -4; x <= 4; x++) 
 		{
 			for(int z = -4; z <= 4; z++)  
 			{
-				if( Math.abs(x*z) > 2 && Math.abs(x*z) < 8 && !acceptableBlocks.contains(world.getBlockState(position.down(1).west(x).north(z)))) 
+				if( Math.abs(x*z) > 4 && Math.abs(x*z) < 8) 
 				{
-					return false;
+					blockpos$Mutable.setPos(position).move(-x, -1, -z);
+					BlockState state = world.getBlockState(blockpos$Mutable);
+					if(!acceptableBlocks.contains(state))
+					{
+					    state = world.getBlockState(blockpos$Mutable.down());
+						if(!acceptableBlocks.contains(state))
+						{
+							return false;
+						}
+						else 
+						{
+							sunken = true;
+						}
+					}
+					//world.setBlockState(blockpos$Mutable.up(), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
 				}
 			}
 		}
+		
+		if(sunken) 
+		{
+			blockpos$Mutable.setPos(position).move(-3, -2, -3);
+		}
+		else 
+		{
+			blockpos$Mutable.setPos(position).move(-3, -1, -3);
+		}
+		
 		
 		//UltraAmplified.LOGGER.debug("Sun Shrine | " + position.getX() + " "+position.getZ());
 		
@@ -84,7 +110,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
 				.setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null);
 		
-		template.addBlocksToWorld(world, position.down().north(3).west(3), placementsettings);
+		template.addBlocksToWorld(world, blockpos$Mutable, placementsettings);
 		
 		return true;
 		

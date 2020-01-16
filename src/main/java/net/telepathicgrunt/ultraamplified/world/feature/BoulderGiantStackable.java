@@ -11,6 +11,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -54,12 +55,12 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_) {
         
     	int boulderSpawned = 0;
-    	BlockPos tempPos = new BlockPos(position.getX()+rand.nextInt(3), 249, position.getZ()+rand.nextInt(3));
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX()+rand.nextInt(3), 249, position.getZ()+rand.nextInt(3));
     	
         while (boulderSpawned < 15)
         {
         	//exit if there is a boulder already at 249
-        	BlockState block = world.getBlockState(tempPos);
+        	BlockState block = world.getBlockState(blockpos$Mutable);
             if (acceptableBlocks.contains(block))
             {
                break;
@@ -67,16 +68,16 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
     		
             
     		//this will keeps moving down position until it finds ground to generate on
-            while(tempPos.getY() > 7)
+            while(blockpos$Mutable.getY() > 7)
             {
-            	tempPos = tempPos.down();
-            	if (tempPos.getY() <= 8 || tempPos.getY() >= 250)
+            	blockpos$Mutable.move(Direction.DOWN);
+            	if (blockpos$Mutable.getY() <= 8 || blockpos$Mutable.getY() >= 250)
                 {
                     return false;
                 }
             	
 
-                block = world.getBlockState(tempPos.down());
+                block = world.getBlockState(blockpos$Mutable);
                 
             	//allows the boulder to be set on top of another boulder
                 if (acceptableBlocks.contains(block))
@@ -84,7 +85,7 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                    break;
                 }
             }
-            
+            blockpos$Mutable.move(Direction.UP); //move back up to just above land
             
             for (int currentCount = 0; startRadius >= 0 && currentCount < 3; ++currentCount)
             {
@@ -93,9 +94,9 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                 int z = startRadius + rand.nextInt(2);
                 float calculatedDistance = (float)(x + y + z) * 0.333F + 0.5F;
 
-                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(tempPos.add(-x, -y, -z), tempPos.add(x, y, z)))
+                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(blockpos$Mutable.add(-x, -y, -z), blockpos$Mutable.add(x, y, z)))
                 {
-                    if (blockpos.distanceSq(tempPos) <= (double)(calculatedDistance * calculatedDistance))
+                    if (blockpos.distanceSq(blockpos$Mutable) <= (double)(calculatedDistance * calculatedDistance))
                     {
                     	//adds the blocks for generation in this boulder
                     	//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation
@@ -132,12 +133,12 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                     	}
                     }
                 }
-                tempPos = tempPos.add(-(startRadius + 1) + rand.nextInt((int) (startRadius * 1.2)), 0 - rand.nextInt(2), -(startRadius + 1) + rand.nextInt((int) (startRadius * 1.2)));
+                blockpos$Mutable.move(-(startRadius + 1) + rand.nextInt((int) (startRadius * 1.2)), 0 - rand.nextInt(2), -(startRadius + 1) + rand.nextInt((int) (startRadius * 1.2)));
            
                 
             }
             boulderSpawned++;
-        	tempPos = new BlockPos(position.getX()+rand.nextInt(3), 249, position.getZ()+rand.nextInt(3));
+            blockpos$Mutable.setPos(position.getX()+rand.nextInt(3), 249, position.getZ()+rand.nextInt(3));
         }
         
         //finished generating the boulder

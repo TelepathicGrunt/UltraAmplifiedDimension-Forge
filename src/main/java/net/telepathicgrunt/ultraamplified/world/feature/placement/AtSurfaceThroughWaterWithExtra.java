@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -38,17 +39,18 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 		boolean airWaterFlag = false;
 		boolean airWaterBlock = true;
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		for (int i = 0; i < c; i++)
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int height = 250;
+			blockpos$Mutable.setPos(pos.getX() + x, 250, pos.getZ()+z);
 
-			while (height > 60)
+			while (blockpos$Mutable.getY() > 60)
 			{
 
-				airWaterBlock = world.isAirBlock(pos.add(x, height, z)) || world.getBlockState(pos.add(x, height, z)) == Blocks.WATER.getDefaultState();
+				airWaterBlock = world.isAirBlock(blockpos$Mutable) || world.getBlockState(blockpos$Mutable) == Blocks.WATER.getDefaultState();
 
 				//if height is at an air/water block and previous block was a solid block, store the fact that we are in an air/water block now
 				if (!airWaterFlag && airWaterBlock)
@@ -60,12 +62,12 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 				else if (airWaterFlag && !airWaterBlock)
 				{
 
-					blockPosList.add(pos.add(x, height + 1, z));
+					blockPosList.add(blockpos$Mutable.up());
 					airWaterFlag = false;
 				}
 
 				//move down
-				height--;
+				blockpos$Mutable.move(Direction.DOWN);
 			}
 
 		}

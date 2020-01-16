@@ -14,6 +14,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -41,50 +42,52 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 		int lowestHeight = 40;
 
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		for (int i = 0; i < pfConfig.frequency; i++)
 		{
 
-			int height = 255;
+			blockpos$Mutable.setPos(0, 255, 0);
 
-			while (height > lowestHeight)
+			while (blockpos$Mutable.getY() > lowestHeight)
 			{
 				int x = random.nextInt(16);
 				int z = random.nextInt(16);
+				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ()+z);
 
 				//if height is inside a non-water block, move down until we reached a water block
-				while (height > lowestHeight)
+				while (blockpos$Mutable.getY() > lowestHeight)
 				{
-					if (!world.getBlockState(pos.add(x, height, z)).getFluidState().isEmpty())
+					if (!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty())
 					{
 						break;
 					}
 
-					height--;
+					blockpos$Mutable.move(Direction.DOWN);
 				}
 
 				//Height is a water block, move down until we reached a non-water block.
 				//When done, we are now on the bottom surface of a body of water. (Ignores Ocean Monument blocks)
 				BlockState currentBlock;
-				while (height > lowestHeight)
+				while (blockpos$Mutable.getY() > lowestHeight)
 				{
-					currentBlock = world.getBlockState(pos.add(x, height, z));
+					currentBlock = world.getBlockState(blockpos$Mutable);
 
 					if (currentBlock.getFluidState().isEmpty() && !UNACCEPTABLE_BLOCKS.contains(currentBlock))
 					{
 						break;
 					}
 
-					height--;
+					blockpos$Mutable.move(Direction.DOWN);
 				}
 
-				if (height <= lowestHeight)
+				if (blockpos$Mutable.getY() <= lowestHeight)
 				{
 					break;
 				}
 				else if (random.nextFloat() < pfConfig.percentage)
 				{
-					blockPosList.add(pos.add(x, height + 1, z));
+					blockPosList.add(blockpos$Mutable.up());
 				}
 
 			}

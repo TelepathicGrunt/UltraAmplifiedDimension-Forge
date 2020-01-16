@@ -71,6 +71,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
             	  this.setBlockState(world, position.up(i2), LOG);
                }
             }
+            BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
             for(int l1 = position.getY() - 3 + i; l1 <= position.getY() + i; ++l1) {
                int j2 = l1 - (position.getY() + i);
@@ -82,9 +83,9 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
                   for(int j1 = position.getZ() - k2; j1 <= position.getZ() + k2; ++j1) {
                      int k1 = j1 - position.getZ();
                      if (Math.abs(i3) != k2 || Math.abs(k1) != k2 || rand.nextInt(2) != 0 && j2 != 0) {
-                        BlockPos blockpos = new BlockPos(l2, l1, j1);
-                        if (isAirOrLeaves(world, blockpos)) {
-                        	this.setBlockState(world, blockpos, LEAF);
+                    	 blockpos$Mutable.setPos(l2, l1, j1);
+                        if (isAirOrLeaves(world, blockpos$Mutable)) {
+                        	this.setBlockState(world, blockpos$Mutable, LEAF);
                         }
                      }
                   }

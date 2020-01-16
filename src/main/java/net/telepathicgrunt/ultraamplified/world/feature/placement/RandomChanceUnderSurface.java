@@ -13,6 +13,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class RandomChanceUnderSurface extends Placement<ChanceConfig>
@@ -32,9 +33,10 @@ public class RandomChanceUnderSurface extends Placement<ChanceConfig>
 			int z = random.nextInt(16);
 			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY() * 2;
 
-			if (height > 75)
+			//Generates a range between sealevel and highest land with increased chance below ConfigUA.seaLevel number of the range itself
+			if (height > ConfigUA.seaLevel)
 			{
-				height -= 75;
+				height -= ConfigUA.seaLevel;
 			}
 
 			if (height <= 0)
@@ -42,7 +44,7 @@ public class RandomChanceUnderSurface extends Placement<ChanceConfig>
 				return Stream.empty();
 			}
 
-			int y = random.nextInt(height) + 75;
+			int y = random.nextInt(height) + ConfigUA.seaLevel;
 
 			return Stream.of(pos.add(x, y, z));
 		}

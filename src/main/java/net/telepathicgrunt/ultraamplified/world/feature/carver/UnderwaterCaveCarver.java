@@ -77,7 +77,7 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 	}
 
 
-	protected boolean func_225556_a_(IChunk chunkIn, Function<BlockPos, Biome> biomeBlockPos, BitSet carvingMask, Random random, BlockPos.Mutable MutableIn,
+	protected boolean carveAtPoint(IChunk chunkIn, Function<BlockPos, Biome> biomeBlockPos, BitSet carvingMask, Random random, BlockPos.Mutable MutableIn,
 			BlockPos.Mutable p_222703_5_, BlockPos.Mutable p_222703_6_, int minHeight, int chunkX, int chunkZ, int x, int z, int maskY, int y, int atomicBoolean,
 			AtomicBoolean p_222703_15_)
 	{

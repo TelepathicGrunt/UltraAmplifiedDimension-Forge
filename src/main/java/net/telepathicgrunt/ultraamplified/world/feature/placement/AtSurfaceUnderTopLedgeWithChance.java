@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -50,27 +51,28 @@ public class AtSurfaceUnderTopLedgeWithChance extends Placement<ChanceConfig>
 
 	private int YPositionOfBelowLayer(IWorld world, int height, Random random, BlockPos pos)
 	{
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		//if height is inside a non-air block, move down until we reached an air block
-		while (height > 74)
+		while (blockpos$Mutable.getY() > 74)
 		{
-			if (world.isAirBlock(pos.add(0, height, 0)))
+			if (world.isAirBlock(blockpos$Mutable))
 			{
 				break;
 			}
 
-			height--;
+			blockpos$Mutable.move(Direction.DOWN);
 		}
 
 		//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-		while (height > 74)
+		while (blockpos$Mutable.getY() > 74)
 		{
-			if (!world.isAirBlock(pos.add(0, height, 0)))
+			if (!world.isAirBlock(blockpos$Mutable))
 			{
 				break;
 			}
 
-			height--;
+			blockpos$Mutable.move(Direction.DOWN);
 		}
 
 		return height;

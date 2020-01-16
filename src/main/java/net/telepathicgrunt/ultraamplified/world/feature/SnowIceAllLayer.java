@@ -32,14 +32,14 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig> {
 		{
 
 			blockpos$Mutable.setPos(pos.getX(), y, pos.getZ());
-			blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN, 1);
+			blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN);
 
 			if (world.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && 
-					world.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) 
+				world.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) 
 			{
 				
 				if (!world.getBlockState(blockpos$Mutable1).getFluidState().isEmpty() && 
-						biome.doesWaterFreeze(world, blockpos$Mutable1, false)) 
+					biome.doesWaterFreeze(world, blockpos$Mutable1, false)) 
 				{
 					world.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
 				}

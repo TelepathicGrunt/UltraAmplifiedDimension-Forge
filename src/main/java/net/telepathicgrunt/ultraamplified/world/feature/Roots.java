@@ -21,17 +21,22 @@ import net.minecraft.world.gen.feature.Feature;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
-public class Roots extends Feature<BlockConfig> {
-    public Roots(Function<Dynamic<?>, ? extends BlockConfig> configFactory) {
+
+public class Roots extends Feature<BlockConfig>
+{
+	public Roots(Function<Dynamic<?>, ? extends BlockConfig> configFactory)
+	{
 		super(configFactory);
 	}
-
 
 	protected long seed;
 	protected OctavesNoiseGenerator noiseGen;
 
-	public void setSeed(long seed) {
-		if (this.noiseGen == null) {
+
+	public void setSeed(long seed)
+	{
+		if (this.noiseGen == null)
+		{
 			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
 		}
 
@@ -39,117 +44,114 @@ public class Roots extends Feature<BlockConfig> {
 	}
 
 
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
-    {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
+	{
 		setSeed(rand.nextLong());
-		
+
 		//wont generate root if config is turned off
 		//won't generate root on leaves, water, etc.
 		//Only solid blocks can have roots
-		if(!ConfigUA.rootGen || !world.getBlockState(position).isSolid()) {
+		if (!ConfigUA.rootGen || !world.getBlockState(position).isSolid())
+		{
 			return false;
 		}
-		
+
 		position = position.down();
-		BlockPos.Mutable Mutable = new BlockPos.Mutable();
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		BlockState currentBlockState;
 		int xOffset;
 		int zOffset;
 		int yOffset;
 
 		//increase the number of roots the higher up in the world it is
-		int numOfRoots = 1+(position.getY()-70)/50;
-		for(int rootNum = 1; rootNum < numOfRoots+1; rootNum++){
-			
+		int numOfRoots = 1 + (position.getY() - 70) / 50;
+		for (int rootNum = 1; rootNum < numOfRoots + 1; rootNum++)
+		{
+
 			//set mutable block pos back to the starting block of the roots
-			Mutable.setPos(position);
-			
+			blockpos$Mutable.setPos(position);
 
 			//makes root length increase the higher up in the world it is
-			int rootLength = 2+(position.getY()-70)/22;
-		
+			int rootLength = 2 + (position.getY() - 70) / 22;
+
 			//attempts to grow root branch as long as the new position is an air block. Otherwise, terminate root
-			for(int length = 0; length < rootLength; length++){
+			for (int length = 0; length < rootLength; length++)
+			{
 
 				//checks to see if air block is not higher than starting place
-				currentBlockState = world.getBlockState(Mutable);
-				if(Mutable.getY() <= position.getY() && 
-				    (currentBlockState.getMaterial() == Material.AIR ||
-				     currentBlockState == blockConfig.block.getDefaultState() || 
-				     currentBlockState == Blocks.VINE.getDefaultState())
-				){
+				currentBlockState = world.getBlockState(blockpos$Mutable);
+				if (blockpos$Mutable.getY() <= position.getY() && (currentBlockState.getMaterial() == Material.AIR || currentBlockState == blockConfig.block.getDefaultState() || currentBlockState == Blocks.VINE.getDefaultState()))
+				{
 
-					
 					//checks to see if there is solid land still above (1 blocks higher than position height)
-					if(world.getBlockState( new BlockPos(Mutable.getX(), 
-															position.getY()+1, 
-															Mutable.getZ()
-														   )).isSolid()) {
+					if (world.getBlockState(blockpos$Mutable.up()).isSolid())
+					{
 
 						//set root block
-						world.setBlockState(Mutable, blockConfig.block.getDefaultState(), 2);
-						
-						//rare chance to also generate a vine
-						if(rand.nextFloat() < 0.13F) {
-							generateTinyVine(world, rand, Mutable);
-						}
-						
+						world.setBlockState(blockpos$Mutable, blockConfig.block.getDefaultState(), 2);
 
-					}else {
+						//rare chance to also generate a vine
+						if (rand.nextFloat() < 0.13F)
+						{
+							generateTinyVine(world, rand, blockpos$Mutable);
+						}
+
+					}
+					else
+					{
 						break;
 					}
-					
+
 				}
 				//The position was either too high or was a solid block ( not a root) and so ends this branch
 				else
 				{
 					break;
 				}
-				
+
 				//debugging
 				//UltraAmplified.LOGGER.info(this.noiseGen.func_205563_a(Mutable.getX() * 1.6D-10000*rootNum, Mutable.getZ() * 1.6D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 5.0D);
-				
+
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+20000*rootNum, Mutable.getZ() * 2D+20000*rootNum, Mutable.getY()*1D+20000*rootNum) * 15.0D, -1, 1);
-				zOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 2D+10000*rootNum, Mutable.getZ() * 2D+10000*rootNum, Mutable.getY()*1D+10000*rootNum) * 15.0D, -1, 1);
-				yOffset = (int)MathHelper.clamp(this.noiseGen.func_205563_a(Mutable.getX() * 1.9D-10000*rootNum, Mutable.getZ() * 1.9D-10000*rootNum, Mutable.getY()*1D-10000) * 15.0D *rootNum - 5.0D, -1, 1);
+				xOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 2D + 20000 * rootNum, blockpos$Mutable.getZ() * 2D + 20000 * rootNum, blockpos$Mutable.getY() * 1D + 20000 * rootNum) * 15.0D, -1, 1);
+				zOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 2D + 10000 * rootNum, blockpos$Mutable.getZ() * 2D + 10000 * rootNum, blockpos$Mutable.getY() * 1D + 10000 * rootNum) * 15.0D, -1, 1);
+				yOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 1.9D - 10000 * rootNum, blockpos$Mutable.getZ() * 1.9D - 10000 * rootNum, blockpos$Mutable.getY() * 1D - 10000) * 15.0D * rootNum - 5.0D, -1, 1);
 
-				
 				//debugging
 				//System.out.println(xOffset +", "+zOffset+", "+yOffset);
-				Mutable.move(xOffset, yOffset, zOffset);
+				blockpos$Mutable.move(xOffset, yOffset, zOffset);
 			}
 		}
 
-
 		return true;
 	}
-    
-    
-    private void generateTinyVine(IWorld world, Random rand, BlockPos position) {
-    	//generates vines from given position down 5 blocks if path is clear and the given position is valid
+
+
+	private void generateTinyVine(IWorld world, Random rand, BlockPos position)
+	{
+		//generates vines from given position down 5 blocks if path is clear and the given position is valid
 		//Also won't generate vines below Y = 1.
 		int length = 0;
-		
+
 		Direction face = Direction.Plane.HORIZONTAL.random(rand);
 		position.offset(face);
-		
+
 		//begin vine generation
-		for (; position.getY() > 1 && length < 5; position = position.down()) 
+		for (; position.getY() > 1 && length < 5; position = position.down())
 		{
-			if (world.isAirBlock(position)) 
+			if (world.isAirBlock(position))
 			{
-				for (Direction Direction : Direction.Plane.HORIZONTAL) 
+				for (Direction Direction : Direction.Plane.HORIZONTAL)
 				{
 					BlockState iblockstate = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(Direction), Boolean.valueOf(true));
-					if (iblockstate.isValidPosition(world, position)) 
+					if (iblockstate.isValidPosition(world, position))
 					{
 						world.setBlockState(position, iblockstate, 2);
 						length++;
 						break;
-					} 
-					else if (world.getBlockState(position.up()).getBlock() == Blocks.VINE) 
+					}
+					else if (world.getBlockState(position.up()).getBlock() == Blocks.VINE)
 					{
 						world.setBlockState(position, world.getBlockState(position.up()), 2);
 						length++;
@@ -157,9 +159,10 @@ public class Roots extends Feature<BlockConfig> {
 					}
 				}
 			}
-			else {
+			else
+			{
 				break;
 			}
 		}
-    }
+	}
 }

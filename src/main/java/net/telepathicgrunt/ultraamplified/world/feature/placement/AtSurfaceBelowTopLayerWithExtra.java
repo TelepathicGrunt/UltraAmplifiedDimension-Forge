@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -44,11 +45,12 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
 			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.getX() + x, height, pos.getZ()+z);
 
-			while (height > 74)
+			while (blockpos$Mutable.getY() > 74)
 			{
 
-				airBlock = world.isAirBlock(pos.add(x, height, z));
+				airBlock = world.isAirBlock(blockpos$Mutable);
 
 				//if height is is an air block and previous block was a solid block, store the fact that we are in an air block now
 				if (!airFlag && airBlock)
@@ -60,12 +62,12 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 				else if (airFlag && !airBlock)
 				{
 
-					blockPosList.add(pos.add(x, height + 1, z));
+					blockPosList.add(blockpos$Mutable.up());
 					airFlag = false;
 				}
 
 				//move down
-				height--;
+				blockpos$Mutable.move(Direction.DOWN);
 			}
 
 		}

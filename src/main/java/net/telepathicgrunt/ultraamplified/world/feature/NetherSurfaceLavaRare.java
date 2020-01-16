@@ -45,7 +45,7 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
 	{
-
+		pos = pos.down();
 		BlockState blockstate = world.getBlockState(pos);
 		boolean generateLava = false;
         int solidSurrounding = 0;
