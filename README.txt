@@ -46,6 +46,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Patches of Ice can be found in Stone underground in Ice Spikes, Snowy Taiga, Relic Snowy Taiga, Rocky Snowy Taiga, Snowy Tundra, Frozen Desert, Frozen Ocean, and Frozen Deep Ocean biomes.
 ·Lava in Cave Cavities and Long Ravines inside Ice Terrain biome will now be replaced with Obsidian and Magma as it is too cold to have lava.
 ·Lava in Cave Cavities and Long Ravines will now be partially replaced with Magma blocks as the lava is cooled down inside Ice Spikes, Snowy Taiga, Relic Snowy Taiga, Rocky Snowy Taiga, Snowy Tundra, Frozen Desert, Frozen Ocean, and Frozen Deep Ocean biomes.
+·Patches of Red Sand and Red Sandstone now appears underground in all Badlands biomes.
+·Patches of Sand and Sandstone now appears underground in all Desert biomes.
+·Medium-small sized cave rooms will now appear underground in all Badlands and Desert biomes to make underground more like swiss cheese.
 
 	Misc.
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
