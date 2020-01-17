@@ -35,7 +35,11 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 			Blocks.BLACK_TERRACOTTA.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), Blocks.RED_SANDSTONE.getDefaultState(), Blocks.MYCELIUM.getDefaultState(),
 			Blocks.SNOW.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.GRAVEL.getDefaultState(), Blocks.WATER.getDefaultState(), Blocks.LAVA.getDefaultState(),
 			Blocks.OBSIDIAN.getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), Blocks.PACKED_ICE.getDefaultState());
+	
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
+	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
+	private static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
+	private static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
 	private static Map<Biome, BlockState> fillerBiomeMap;
 
@@ -112,19 +116,19 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 				float f = random.nextFloat();
 				if ((double) f < 0.25D)
 				{
-					chunkIn.setBlockState(mutableBlockPos, Blocks.MAGMA_BLOCK.getDefaultState(), false);
-					chunkIn.getBlocksToBeTicked().scheduleTick(mutableBlockPos, Blocks.MAGMA_BLOCK, 0);
+					chunkIn.setBlockState(mutableBlockPos, MAGMA, false);
+					chunkIn.getBlocksToBeTicked().scheduleTick(mutableBlockPos, MAGMA.getBlock(), 0);
 				}
 				else
 				{
-					chunkIn.setBlockState(mutableBlockPos, Blocks.OBSIDIAN.getDefaultState(), false);
+					chunkIn.setBlockState(mutableBlockPos, OBSIDIAN, false);
 				}
 
 				return true;
 			}
 			else if (y < 10)
 			{
-				chunkIn.setBlockState(mutableBlockPos, Blocks.LAVA.getDefaultState(), false);
+				chunkIn.setBlockState(mutableBlockPos, LAVA, false);
 				
 				return false;
 			}

@@ -16,10 +16,11 @@ public class LakeCountRangeAndTypeConfig implements IPlacementConfig {
    }
    
    public static enum Type {
-	   LAVA,
-	   WATER,
-	   SLIME,
-	   HONEY;
+	   LAVA_ALGORITHM,
+	   ICE_ALGORITHM,
+	   WATER_ALGORITHM,
+	   SLIME_ALGORITHM,
+	   HONEY_ALGORITHM;
    }
 
 	@Override

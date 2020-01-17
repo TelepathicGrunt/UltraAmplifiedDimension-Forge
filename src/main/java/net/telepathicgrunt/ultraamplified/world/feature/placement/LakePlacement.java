@@ -32,7 +32,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 
 		switch (lakeConfig.type)
 		{
-			case LAVA:
+			case LAVA_ALGORITHM:
 			{
 
 				if (!ConfigUA.lavaLakeGen)
@@ -50,7 +50,19 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 				}
 
 			}
-			case WATER:
+			case ICE_ALGORITHM:
+			{
+				if (random.nextInt(lakeConfig.chance / 10) == 0)
+				{
+					int y = random.nextInt(random.nextInt(chunkGenerator.getMaxHeight() - 8) + 8);
+					if (y < world.getSeaLevel() || random.nextInt(lakeConfig.chance / 8) == 0)
+					{
+						return Stream.of(pos.add(x, y, z));
+					}
+				}
+
+			}
+			case WATER_ALGORITHM:
 			{
 
 				if (!ConfigUA.waterLakeGen)
@@ -65,7 +77,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 				}
 
 			}
-			case SLIME:
+			case SLIME_ALGORITHM:
 			{
 				if (!ConfigUA.slimeLakeGen)
 				{
@@ -87,7 +99,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 					}
 				}
 			}
-			case HONEY:
+			case HONEY_ALGORITHM:
 			{
 				if (!ConfigUA.honeyLakeGen)
 				{//change to honey

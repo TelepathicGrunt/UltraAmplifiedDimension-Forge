@@ -75,8 +75,10 @@ public class UltraAmplified {
 		CapabilityPlayerPosAndDim.register();
 		RavineCarver.setFillerMap();
 		SuperLongRavineCarver.setFillerMap();
+		SuperLongRavineCarver.setLavaFloorMap();
 		UnderwaterCaveCarver.setFillerMap();
 		CaveCavityCarver.setFillerMap();
+		CaveCavityCarver.setLavaFloorMap();
 		GlowPatch.setFillerMap();
 		ContainUndergroundLiquids.setFillerMap();
 	}

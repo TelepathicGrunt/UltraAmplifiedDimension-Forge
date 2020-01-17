@@ -109,7 +109,6 @@ public class FeatureUA
     public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> GREEN_CONCRETE_POWDER_PATCH = new GreenPowConcretePatch(NoFeatureConfig::deserialize);
     public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDry(SphereReplaceConfig::deserialize);
     public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> SNOW_AND_ICE_LAYERER = new SnowIceLayerHandlerFeature(NoFeatureConfig::deserialize);
@@ -197,7 +196,6 @@ public class FeatureUA
         UltraAmplified.register(registry, CONTAIN_LIQUID, "contain_water_ua");
         UltraAmplified.register(registry, ICE_PATCH_SANDY, "ice_patch_ua");
         UltraAmplified.register(registry, GIANT_ICE_SPIKE, "ice_spike_ua");
-        UltraAmplified.register(registry, GREEN_CONCRETE_POWDER_PATCH, "green_powder_concrete_patch_ua");
         UltraAmplified.register(registry, DISK_DRY, "disk_dry_ua");
         UltraAmplified.register(registry, COLUMN, "column_ua");
         UltraAmplified.register(registry, RAMP, "ramp_column_ua");

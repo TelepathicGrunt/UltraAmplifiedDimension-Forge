@@ -24,8 +24,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 	}
 
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig,
-			BlockPos pos)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos)
 	{
 
 		float chance;
@@ -49,7 +48,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int topYLayer = YPositionOfBottomOfLayer(world, random.nextInt(174) + 74, random, pos.add(x, 0, z));
+			int topYLayer = YPositionOfBottomOfLayer(world, random, pos.add(x, random.nextInt(174) + 74, z));
 
 			//cannot be too low or high 
 			if (topYLayer < 75 || topYLayer > 248)
@@ -67,7 +66,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 	}
 
 
-	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos pos)
+	private int YPositionOfBottomOfLayer(IWorld world, Random random, BlockPos pos)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 		

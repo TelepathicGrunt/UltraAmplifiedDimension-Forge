@@ -24,44 +24,46 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos position, SphereReplaceConfig config)
 	{
-		if (!world.getFluidState(position).isEmpty())
+		int placedBlocks = 0;
+		int radius;
+		if(config.radius > 2) 
 		{
-			return false;
+			radius = random.nextInt(config.radius - 2) + 2;
 		}
-		else
+		else 
 		{
-			int placedBlocks = 0;
-			int radius = random.nextInt(config.radius - 2) + 2;
-			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+			radius = config.radius;
+		}
+		
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 
-			for (int x = position.getX() - radius; x <= position.getX() + radius; ++x)
+		for (int x = position.getX() - radius; x <= position.getX() + radius; ++x)
+		{
+			for (int z = position.getZ() - radius; z <= position.getZ() + radius; ++z)
 			{
-				for (int z = position.getZ() - radius; z <= position.getZ() + radius; ++z)
+				int trueX = x - position.getX();
+				int trueZ = z - position.getZ();
+				if (trueX * trueX + trueZ * trueZ <= radius * radius)
 				{
-					int i1 = x - position.getX();
-					int j1 = z - position.getZ();
-					if (i1 * i1 + j1 * j1 <= radius * radius)
+					for (int y = position.getY() - config.ySize; y <= position.getY() + config.ySize; ++y)
 					{
-						for (int y = position.getY() - config.ySize; y <= position.getY() + config.ySize; ++y)
-						{
-		            		blockpos$Mutable.setPos(x, y, z);
-							BlockState blockstate = world.getBlockState(blockpos$Mutable);
+	            		blockpos$Mutable.setPos(x, y, z);
+						BlockState blockstate = world.getBlockState(blockpos$Mutable);
 
-							for (BlockState blockstate1 : config.targets)
+						for (BlockState blockstate1 : config.targets)
+						{
+							if (blockstate1.getBlock() == blockstate.getBlock())
 							{
-								if (blockstate1.getBlock() == blockstate.getBlock())
-								{
-									world.setBlockState(blockpos$Mutable, config.state, 2);
-									++placedBlocks;
-									break;
-								}
+								world.setBlockState(blockpos$Mutable, config.state, 2);
+								++placedBlocks;
+								break;
 							}
 						}
 					}
 				}
 			}
-
-			return placedBlocks > 0;
 		}
+
+		return placedBlocks > 0;
 	}
 }

@@ -12,15 +12,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IcebergFeature;
 
 
-public class IcebergUA extends Feature<BlockStateFeatureConfig>
+public class IcebergUA extends IcebergFeature
 {
 
 	public IcebergUA(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
@@ -97,14 +96,14 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig>
 	}
 
 
-	private void func_205184_a(Random random, IWorld world, int maxheight, int height, BlockPos pos, boolean flag, int p_205184_7_, double p_205184_8_, int p_205184_10_)
+	private void func_205184_a(Random random, IWorld world, int maxheight, int height, BlockPos position, boolean flag, int int1, double double1, int int2)
 	{
-		int i = random.nextBoolean() ? -1 : 1;
-		int j = random.nextBoolean() ? -1 : 1;
-		int k = random.nextInt(Math.max(maxheight / 2 - 2, 1));
+		int x = random.nextBoolean() ? -1 : 1;
+		int z = random.nextBoolean() ? -1 : 1;
+		int randomHeightBasedMultiplier = random.nextInt(Math.max(maxheight / 2 - 2, 1));
 		if (random.nextBoolean())
 		{
-			k = maxheight / 2 + 1 - random.nextInt(Math.max(maxheight - maxheight / 2 - 1, 1));
+			randomHeightBasedMultiplier = maxheight / 2 + 1 - random.nextInt(Math.max(maxheight - maxheight / 2 - 1, 1));
 		}
 
 		int l = random.nextInt(Math.max(maxheight / 2 - 2, 1));
@@ -115,51 +114,53 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig>
 
 		if (flag)
 		{
-			k = l = random.nextInt(Math.max(p_205184_7_ - 5, 1));
+			randomHeightBasedMultiplier = l = random.nextInt(Math.max(int1 - 5, 1));
 		}
 
-		BlockPos blockpos = (new BlockPos(0, 0, 0)).add(i * k, 0, j * l);
-		double d0 = flag ? p_205184_8_ + (Math.PI / 2D) : random.nextDouble() * 2.0D * Math.PI;
+		BlockPos blockpos = new BlockPos(x * randomHeightBasedMultiplier, 0, z * l);
+		double double2 = flag ? double1 + (Math.PI / 2D) : random.nextDouble() * 2.0D * Math.PI;
 
 		for (int i1 = 0; i1 < height - 3; ++i1)
 		{
 			int j1 = this.func_205183_a(random, i1, height, maxheight);
-			this.func_205174_a(j1, i1, pos, world, false, d0, blockpos, p_205184_7_, p_205184_10_);
+			this.func_205174_a(j1, i1, position, world, false, double2, blockpos, int1, int2);
 		}
 
 		for (int belowCenterY = -1; belowCenterY > -height + random.nextInt(5); --belowCenterY)
 		{
-			int l1 = this.func_205187_b(random, -belowCenterY, height, maxheight);
-			this.func_205174_a(l1, belowCenterY, pos, world, true, d0, blockpos, p_205184_7_, p_205184_10_);
+			int randomY = this.func_205187_b(random, -belowCenterY, height, maxheight);
+			this.func_205174_a(randomY, belowCenterY, position, world, true, double2, blockpos, int1, int2);
 		}
 
 	}
 
 
-	private void func_205174_a(int p_205174_1_, int p_205174_2_, BlockPos pos, IWorld world, boolean placeWater, double p_205174_6_, BlockPos pos2, int p_205174_9_, int p_205174_10_)
+	private void func_205174_a(int randomY, int belowCenterY, BlockPos position, IWorld world, boolean placeWater, double double1, BlockPos pos2, int int1, int int2)
 	{
-		int i = p_205174_1_ + 1 + p_205174_9_ / 3;
-		int j = Math.min(p_205174_1_ - 3, 3) + p_205174_10_ / 2 - 1;
+		int radius = randomY + 1 + int1 / 3;
+		int int3 = Math.min(randomY - 3, 3) + int2 / 2 - 1;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		Block block;
 
-		for (int k = -i; k < i; ++k)
+		for (int x = -radius; x < radius; ++x)
 		{
-			for (int l = -i; l < i; ++l)
+			for (int z = -radius; z < radius; ++z)
 			{
-				double d0 = this.func_205180_a(k, l, pos2, i, j, p_205174_6_);
+				double d0 = this.func_205180_a(x, z, pos2, radius, int3, double1);
 				if (d0 < 0.0D)
 				{
-					BlockPos blockpos = pos.add(k, p_205174_2_, l);
-					Block block = world.getBlockState(blockpos).getBlock();
+					blockpos$Mutable.setPos(position).move(x, belowCenterY, z);
+					block = world.getBlockState(blockpos$Mutable).getBlock();
 					if (this.isIce(block) || block == Blocks.SNOW_BLOCK)
 					{
 						if (placeWater)
 						{
-							world.setBlockState(blockpos, appropriateBlockForNeighbors(world, pos), 3);
+							world.setBlockState(blockpos$Mutable, appropriateBlockForNeighbors(world, position), 3);
 						}
 						else
 						{
-							this.setBlockState(world, blockpos, appropriateBlockForNeighbors(world, pos));
-							this.removeSnowLayer(world, blockpos);
+							this.setBlockState(world, blockpos$Mutable, appropriateBlockForNeighbors(world, position));
+							this.removeSnowLayer(world, blockpos$Mutable);
 						}
 					}
 				}
@@ -169,119 +170,53 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig>
 	}
 
 
-	private void removeSnowLayer(IWorld world, BlockPos pos)
+	private void removeSnowLayer(IWorld world, BlockPos.Mutable mutableBlockPos)
 	{
-		if (world.getBlockState(pos.up()).getBlock() == Blocks.SNOW)
+		mutableBlockPos.move(Direction.UP);
+		if (world.getBlockState(mutableBlockPos).getBlock() == Blocks.SNOW)
 		{
-			this.setBlockState(world, pos.up(), appropriateBlockForNeighbors(world, pos));
+			this.setBlockState(world, mutableBlockPos, appropriateBlockForNeighbors(world, mutableBlockPos.down()));
 		}
-
 	}
 
 
-	private void func_205181_a(IWorld p_205181_1_, Random p_205181_2_, BlockPos p_205181_3_, int p_205181_4_, int xPos, int yPos, int zPos, int p_205181_8_, int p_205181_9_, boolean p_205181_10_, int p_205181_11_, double p_205181_12_, boolean p_205181_14_, BlockState p_205181_15_)
+	private void func_205181_a(IWorld world, Random random, BlockPos position, int maxHeight, int xPos, int yPos, int zPos, int int1, int int2, boolean flag1, int int3, double double1, boolean flag2, BlockState defaultState)
 	{
-		BlockPos blockpos = new BlockPos(0, 0, 0);
-		double d0 = p_205181_10_ ? this.func_205180_a(xPos, zPos, blockpos, p_205181_9_, this.func_205176_a(yPos, p_205181_4_, p_205181_11_), p_205181_12_) : this.func_205177_a(xPos, zPos, blockpos, p_205181_8_, p_205181_2_);
+		double d0 = flag1 ? this.func_205180_a(xPos, zPos, BlockPos.ZERO, int2, this.func_205176_a(yPos, maxHeight, int3), double1) : this.func_205177_a(xPos, zPos, BlockPos.ZERO, int1, random);
 		if (d0 < 0.0D)
 		{
-			BlockPos blockpos1 = p_205181_3_.add(xPos, yPos, zPos);
-			double d1 = p_205181_10_ ? -0.5D : (double) (-6 - p_205181_2_.nextInt(3));
-			if (d0 > d1 && p_205181_2_.nextDouble() > 0.9D)
+			BlockPos blockpos1 = position.add(xPos, yPos, zPos);
+			double d1 = flag1 ? -0.5D : (double) (-6 - random.nextInt(3));
+			if (d0 > d1 && random.nextDouble() > 0.9D)
 			{
 				return;
 			}
 
-			this.func_205175_a(blockpos1, p_205181_1_, p_205181_2_, p_205181_4_ - yPos, p_205181_4_, p_205181_10_, p_205181_14_, p_205181_15_);
+			this.func_205175_a(blockpos1, world, random, maxHeight - yPos, maxHeight, flag1, flag2, defaultState);
 		}
 
 	}
 
 
-	private void func_205175_a(BlockPos p_205175_1_, IWorld p_205175_2_, Random p_205175_3_, int p_205175_4_, int p_205175_5_, boolean p_205175_6_, boolean p_205175_7_, BlockState p_205175_8_)
+	private void func_205175_a(BlockPos position, IWorld world, Random random, int minHeight, int maxHeight, boolean flag1, boolean flag2, BlockState defaultState)
 	{
-		BlockState iblockstate = p_205175_2_.getBlockState(p_205175_1_);
+		BlockState iblockstate = world.getBlockState(position);
 		Block block = iblockstate.getBlock();
+
 		if (iblockstate.getMaterial() == Material.AIR || block == Blocks.SNOW_BLOCK || block == Blocks.ICE || block == Blocks.WATER || block == Blocks.LAVA)
 		{
-			boolean flag = !p_205175_6_ || p_205175_3_.nextDouble() > 0.05D;
-			int i = p_205175_6_ ? 3 : 2;
-			if (p_205175_7_ && block != Blocks.WATER || block != Blocks.LAVA && (double) p_205175_4_ <= (double) p_205175_3_.nextInt(Math.max(1, p_205175_5_ / i)) + (double) p_205175_5_ * 0.6D && flag)
+			boolean flag = !flag1 || random.nextDouble() > 0.05D;
+			int i = flag1 ? 3 : 2;
+			if (flag2 && block != Blocks.WATER || block != Blocks.LAVA && (double) minHeight <= (double) random.nextInt(Math.max(1, maxHeight / i)) + (double) maxHeight * 0.6D && flag)
 			{
-				this.setBlockState(p_205175_2_, p_205175_1_, SNOW_BLOCK);
+				this.setBlockState(world, position, SNOW_BLOCK);
 			}
 			else
 			{
-				this.setBlockState(p_205175_2_, p_205175_1_, p_205175_8_);
+				this.setBlockState(world, position, defaultState);
 			}
 		}
 
-	}
-
-
-	private int func_205176_a(int belowCenterY, int height, int maxheight)
-	{
-		int i = maxheight;
-		if (belowCenterY > 0 && height - belowCenterY <= 3)
-		{
-			i = maxheight - (4 - (height - belowCenterY));
-		}
-
-		return i;
-	}
-
-
-	private double func_205177_a(int p_205177_1_, int p_205177_2_, BlockPos p_205177_3_, int p_205177_4_, Random p_205177_5_)
-	{
-		float f = 10.0F * MathHelper.clamp(p_205177_5_.nextFloat(), 0.2F, 0.8F) / (float) p_205177_4_;
-		return (double) f + Math.pow((double) (p_205177_1_ - p_205177_3_.getX()), 2.0D) + Math.pow((double) (p_205177_2_ - p_205177_3_.getZ()), 2.0D) - Math.pow((double) p_205177_4_, 2.0D);
-	}
-
-
-	private double func_205180_a(int p_205180_1_, int p_205180_2_, BlockPos p_205180_3_, int p_205180_4_, int p_205180_5_, double p_205180_6_)
-	{
-		return Math.pow(((double) (p_205180_1_ - p_205180_3_.getX()) * Math.cos(p_205180_6_) - (double) (p_205180_2_ - p_205180_3_.getZ()) * Math.sin(p_205180_6_)) / (double) p_205180_4_, 2.0D) + Math.pow(((double) (p_205180_1_ - p_205180_3_.getX()) * Math.sin(p_205180_6_) + (double) (p_205180_2_ - p_205180_3_.getZ()) * Math.cos(p_205180_6_)) / (double) p_205180_5_, 2.0D) - 1.0D;
-	}
-
-
-	private int func_205183_a(Random p_205183_1_, int p_205183_2_, int p_205183_3_, int p_205183_4_)
-	{
-		float f = 3.5F - p_205183_1_.nextFloat();
-		float f1 = (1.0F - (float) Math.pow((double) p_205183_2_, 2.0D) / ((float) p_205183_3_ * f)) * (float) p_205183_4_;
-		if (p_205183_3_ > 15 + p_205183_1_.nextInt(5))
-		{
-			int i = p_205183_2_ < 3 + p_205183_1_.nextInt(6) ? p_205183_2_ / 2 : p_205183_2_;
-			f1 = (1.0F - (float) i / ((float) p_205183_3_ * f * 0.4F)) * (float) p_205183_4_;
-		}
-
-		return MathHelper.ceil(f1 / 2.0F);
-	}
-
-
-	private int func_205178_b(int y, int upperHeight, int p_205178_3_)
-	{
-		float f1 = (1.0F - (float) Math.pow((double) y, 2.0D) / ((float) upperHeight * 1.0F)) * (float) p_205178_3_;
-		return MathHelper.ceil(f1 / 2.0F);
-	}
-
-
-	private int func_205187_b(Random random, int p_205187_2_, int p_205187_3_, int p_205187_4_)
-	{
-		float f = 1.0F + random.nextFloat() / 2.0F;
-		float f1 = (1.0F - (float) p_205187_2_ / ((float) p_205187_3_ * f)) * (float) p_205187_4_;
-		return MathHelper.ceil(f1 / 2.0F);
-	}
-
-
-	private boolean isIce(Block block)
-	{
-		return block == Blocks.PACKED_ICE || block == Blocks.SNOW_BLOCK || block == Blocks.BLUE_ICE;
-	}
-
-
-	private boolean isAirBelow(IBlockReader reader, BlockPos position)
-	{
-		return reader.getBlockState(position.down()).getMaterial() == Material.AIR;
 	}
 
 
@@ -344,38 +279,33 @@ public class IcebergUA extends Feature<BlockStateFeatureConfig>
 
 		for (int x = -radius; x <= radius; ++x)
 		{
-			for (int y = -radius; y <= radius; ++y)
+			for (int z = -radius; z <= radius; ++z)
 			{
-				for (int z = 0; z <= height; ++z)
+				for (int y = 0; y <= height; ++y)
 				{
-            		blockpos$Mutable.setPos(position).move(x, y, z);
+					blockpos$Mutable.setPos(position).move(x, y, z);
 					Block block = world.getBlockState(blockpos$Mutable).getBlock();
 					if (this.isIce(block) || block == Blocks.SNOW)
 					{
-						if (this.isAirBelow(world, blockpos$Mutable))
+						if (isAirBellow(world, blockpos$Mutable))
 						{
 							this.setBlockState(world, blockpos$Mutable, appropriateBlockForNeighbors(world, blockpos$Mutable));
 							this.setBlockState(world, blockpos$Mutable.up(), appropriateBlockForNeighbors(world, blockpos$Mutable));
 						}
 						else if (this.isIce(block))
 						{
-							Block[] ablock = new Block[] { 
-								world.getBlockState(blockpos$Mutable.west()).getBlock(), 
-								world.getBlockState(blockpos$Mutable.east()).getBlock(), 
-								world.getBlockState(blockpos$Mutable.north()).getBlock(), 
-								world.getBlockState(blockpos$Mutable.south()).getBlock() 
-							};
-							int i1 = 0;
+							Block[] ablock = new Block[] { world.getBlockState(blockpos$Mutable.west()).getBlock(), world.getBlockState(blockpos$Mutable.east()).getBlock(), world.getBlockState(blockpos$Mutable.north()).getBlock(), world.getBlockState(blockpos$Mutable.south()).getBlock() };
+							int notIceCounter = 0;
 
 							for (Block block1 : ablock)
 							{
 								if (!this.isIce(block1))
 								{
-									++i1;
+									++notIceCounter;
 								}
 							}
 
-							if (i1 >= 3)
+							if (notIceCounter >= 3)
 							{
 								this.setBlockState(world, blockpos$Mutable, appropriateBlockForNeighbors(world, blockpos$Mutable));
 							}

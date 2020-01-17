@@ -500,12 +500,12 @@ public class ConfigUA {
 			            
 			    		hangingRuinsSpawnrate = builder
 	                    .comment("\r\n How rare are Hanging Ruins.\r\n "
-	                    		 +"100 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n "
+	                    		 +"1000 for Hanging Ruins spawning in most chunks and 0 for no spawn.\r\n "
 	                    		 +"NOTE: this is backwards than other spawnrates.\r\n "
-	                    		 +"This is so you can set chances between 50% and 100% while others need have finer control on chances less than 1%.\r\n "
+	                    		 +"This is because other structures need have finer control on chances less than 1%.\r\n "
 	                    		 +"Spawns in most biomes except for oceans, Netherland, and Iced Terrain Biomes and more often in Rocky Fields variants and Stone Fields biomes.")
 	                    .translation("ultraamplified.config.structure.hangingruinsspawnrate")
-	                    .defineInRange("hangingRuinsSpawnrate", 60, 0, 100);
+	                    .defineInRange("hangingRuinsSpawnrate", 60, 0, 1000);
 			    		
 	            builder.pop();
             

@@ -24,24 +24,32 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Added config to disable spawning Silverfish Mob Spawner in Stone Fortresses.
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
 ·Turning off ministructures config now will turn off Desert Wells properly.   
+·Increased maximum spawnrate of Hanging Ruins config from 100 to 1000.
 
     Structures:
 ·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
 ·Stonehenges now will attempt to generate twice instead of once. One time at highest piece of land and again and next highest piece of land. This should increase their frequency quite a bit.
 ·Sunshrine spawn condition is slightly less restrictive and will make it generate slightly more often.
 ·Hanging Ruins now cannot generate fully submerged below sealevel. 
+·Fixed bug where Hanging Ruins' top can be exposed if it generates on a 1 block thick ledge.
+·Long Ravines (at or very close to lava level at bottom of world) is now longer on average.
 
     Biome: 
-·Fixed very rare crash when generating beehives due to vanilla's code.
+·Fixed very rare crash when generating beehives due to vanilla's code. MC-169848
 ·Added chance for Beehives in fancy oak trees in Flower Jungle and Flower Jungle Edge biomes.
 ·Dark Forest biomes should generate larger than before.
 ·Relic Dark Forest biome now is a bit more dense with trees.
 ·Slightly reduced Mushroom biome spawnrate again...
 ·Significantly increased spawnrate of Crosses in Spooky Swamp biome.
+·Full Lapis Blocks has a very rare chance of spawning in Ice inside Iced Terrain biome.
+·Lava Lakes and Water Lakes were removed from and Ice Lakes was added to Ice Spikes, Snowy Taiga, Relic Snowy Taiga, Rocky Snowy Taiga, Snowy Tundra, and Frozen Desert biomes.
+·Patches of Ice can be found in Stone underground in Ice Spikes, Snowy Taiga, Relic Snowy Taiga, Rocky Snowy Taiga, Snowy Tundra, Frozen Desert, Frozen Ocean, and Frozen Deep Ocean biomes.
+·Lava in Cave Cavities and Long Ravines inside Ice Terrain biome will now be replaced with Obsidian and Magma as it is too cold to have lava.
+·Lava in Cave Cavities and Long Ravines will now be partially replaced with Magma blocks as the lava is cooled down inside Ice Spikes, Snowy Taiga, Relic Snowy Taiga, Rocky Snowy Taiga, Snowy Tundra, Frozen Desert, Frozen Ocean, and Frozen Deep Ocean biomes.
 
 	Misc.
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
-·More some optimization and cleaning done in backend.
+·More optimization and cleaning done in backend.
        
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
