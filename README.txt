@@ -15,26 +15,27 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
         
        
-    (V.7.1.0 Changes) (1.15.1 Minecraft)
-    
-    Config: 
-·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like:   (Alternative link here if previous link expires: )
+   (V.7.1.0 Changes) (1.15.1 Minecraft) 
+
+    Config: 
+·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like: https://hatebin.com/mkuuflcoym  (Alternative link here if previous link expires: https://pastebin.com/jU0WWLG2 )
 ·Added 3 config options to let you change what block to use for the Amplified Portal frame (corners, top, and bottom). Enter the resourcelocation of the block (modded blocks works too) that you want to use instead of the default portal blocks. Example: "minecraft:dirt"
 ·Added config to disable spawning Silverfish Mob Spawner in Strongholds.
 ·Added config to disable spawning Silverfish Mob Spawner in Stone Fortresses.
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
-·Turning off ministructures config now will turn off Desert Wells properly.   
+·Turning off ministructures config now will turn off Desert Wells properly.   
 ·Increased maximum spawnrate of Hanging Ruins config from 100 to 1000.
 
-    Structures:
+
+    Structures:
 ·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
 ·Stonehenges now will attempt to generate twice instead of once. One time at highest piece of land and again and next highest piece of land. This should increase their frequency quite a bit.
 ·Sunshrine spawn condition is slightly less restrictive and will make it generate slightly more often.
-·Hanging Ruins now cannot generate fully submerged below sealevel. 
-·Fixed bug where Hanging Ruins' top can be exposed if it generates on a 1 block thick ledge.
+·Hanging Ruins now cannot generate fully submerged below sealevel. 
+·Fixed bug where Hanging Ruins' top can be exposed if it generates on a 1 block thick ledge. Now it should be even less likely to happen.
 ·Long Ravines (at or very close to lava level at bottom of world) is now longer on average.
 
-    Biome: 
+    Biome: 
 ·Fixed very rare crash when generating beehives due to vanilla's code. MC-169848
 ·Added chance for Beehives in fancy oak trees in Flower Jungle and Flower Jungle Edge biomes.
 ·Dark Forest biomes should generate larger than before.
@@ -50,10 +51,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Patches of Sand and Sandstone now appears underground in all Desert biomes.
 ·Medium-small sized cave rooms will now appear underground in all Badlands and Desert biomes to make underground more like swiss cheese.
 
-	Misc.
+     Misc.
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
-·More optimization and cleaning done in backend.
-       
+·More optimization and cleaning done in backend.              
+
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
      
