@@ -391,18 +391,6 @@ public class ConfigUA {
             		.define("lavaOcean", false);
 
 
-            		waterfallSpawnrate = builder
-            		.comment("\r\n How often waterfalls will spawn." + "\n " + "0 for no waterfalls and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.terrain.waterfallspawnrate")
-            		.defineInRange("waterfallSpawnrate", 35, 0, 1000);
-
-
-            		lavafallSpawnrate = builder
-            		.comment("\r\n How often lavafalls will spawn." + "\n " + "0 for no lavafalls and 1000 for max spawnrate.")
-            		.translation("ultraamplified.config.terrain.lavafallspawnrate")
-            		.defineInRange("lavafallSpawnrate", 14, 0, 1000);
-
-
             		endIslandSpawnrate = builder
             		.comment("\r\n How often End Islands will spawn in the End Biome." + "\n " + "0 for no End Islands and 100 for max spawnrate.")
             		.translation("ultraamplified.config.terrain.endislandspawnrate")
@@ -474,6 +462,17 @@ public class ConfigUA {
 	                    .comment("\r\n Controls whether roots and short vines spawn or not on the underside of the floating land.")
 	                    .translation("ultraamplified.config.feature.rootgen")
 	                    .define("rootGen", true);
+
+	            		waterfallSpawnrate = builder
+	            		.comment("\r\n How often waterfalls will spawn." + "\n " + "0 for no waterfalls and 1000 for max spawnrate.")
+	            		.translation("ultraamplified.config.terrain.waterfallspawnrate")
+	            		.defineInRange("waterfallSpawnrate", 35, 0, 1000);
+
+
+	            		lavafallSpawnrate = builder
+	            		.comment("\r\n How often lavafalls will spawn." + "\n " + "0 for no lavafalls and 1000 for max spawnrate.")
+	            		.translation("ultraamplified.config.terrain.lavafallspawnrate")
+	            		.defineInRange("lavafallSpawnrate", 14, 0, 1000);
 	
 	            builder.pop();
 	            

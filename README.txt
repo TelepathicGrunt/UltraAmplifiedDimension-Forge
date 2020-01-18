@@ -15,6 +15,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
         
        
+   (V.7.1.1 Changes) (1.15.1 Minecraft)
+  
+   Config: 
+·Move lavafall/waterfall rates from terrain section to feature section.
+ 
+       
    (V.7.1.0 Changes) (1.15.1 Minecraft) 
 
     Config: 
