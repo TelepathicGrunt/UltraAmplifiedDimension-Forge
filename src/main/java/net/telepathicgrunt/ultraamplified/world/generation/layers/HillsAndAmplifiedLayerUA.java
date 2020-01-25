@@ -76,7 +76,20 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			if (allowMForm)
 			{
 				Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
-				biomeIdToReturn = biomeTemp == null ? biomeId1 : BiomeRegistry.getID(biomeTemp);
+				
+				if(biomeTemp == null) //hill form does not have mutated form
+				{
+					if(ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
+					{
+						biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
+					}
+					
+					biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
+				}
+				else
+				{
+					biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
+				}
 			}
 
 			//returns hills and m variant biome if it is surrounded by similar biomes on atleast 3 sides
@@ -109,7 +122,16 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 				}
 			}
 		}
-
+		
+		if(ConfigUA.mutatedBiomeSpawnrate == 10) {
+			Biome biome = BiomeRegistry.getValue(biomeId1);
+			if (biome == null || !biome.isMutation())
+			{
+				Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
+				return biome2 == null ? biomeId1 : BiomeRegistry.getID(biome2);
+			}
+		}
+		
 		return biomeId1;
 	}
 

@@ -164,7 +164,7 @@ public class AmplifiedPortalBehavior {
 						chunkpos = new ChunkPos(blockpos);
 					}
 
-					serverworld.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, chunkpos, 1, entity.getEntityId());
+					serverworld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, chunkpos, 1, entity.getEntityId());
 					
 					 //dunno how a sleeping player clicked on the portal but if they do, they wake up
 			         if (((ServerPlayerEntity)entity).isSleeping()) {

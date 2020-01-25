@@ -1,4 +1,4 @@
-    Made for Minecraft v.1.15.1
+    Made for Minecraft v.1.15.2
     Created by TelepathicGrunt
 
 Hello! If you are reading this, you must be on Github then! I strongly encourage you to only download and run the master branch as that should be the most stable version of my mod. 
@@ -15,11 +15,18 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
         
        
-   (V.7.1.1 Changes) (1.15.1 Minecraft)
+   (V.7.2.0 Changes) (1.15.1 Minecraft)
   
-   Config: 
-·Move lavafall/waterfall rates from terrain section to feature section.
+	Major:
+·Updated mod to 1.15.2 to make sure it still works. 1.15.1 version should work but this version is confirmed to work.
  
+	Config: 
+·Moved lavafall/waterfall rates from terrain section to feature section.
+·Fixed bug where some non-mutated biomes can generate even when the mutated config is maxed out due to a weird interaction with how relic biomes generates. 
+    
+    Biome: 
+·Increased overall spawnrate of Beehives a bit.
+
        
    (V.7.1.0 Changes) (1.15.1 Minecraft) 
 
