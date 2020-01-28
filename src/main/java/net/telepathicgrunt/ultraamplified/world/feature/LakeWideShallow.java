@@ -162,7 +162,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				blockState = world.getBlockState(blockpos$Mutable.add(x2, 0, z2));
 				material = blockState.getMaterial();
 
-				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().getFluidState() != Fluids.WATER)
+				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
 				{
 					return false;
 				}
@@ -173,7 +173,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//Will also return false if an unacceptable solid material is found.
 		blockState = world.getBlockState(blockpos$Mutable.down());
 		material = blockState.getMaterial();
-		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().getFluidState() != Fluids.WATER)
+		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
 		{
 			return false;
 		}
@@ -182,7 +182,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//Will not check unacceptable solid set to allow leaves to be over water.
 		blockState = world.getBlockState(blockpos$Mutable.up());
 		material = blockState.getMaterial();
-		if (material.isSolid() || blockState.getFluidState().getFluidState() == Fluids.WATER)
+		if (material.isSolid() || !blockState.getFluidState().isEmpty())
 		{
 			return false;
 		}
