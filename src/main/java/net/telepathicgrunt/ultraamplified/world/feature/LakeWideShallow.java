@@ -10,6 +10,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -128,12 +129,12 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 					
 					if(material == Material.PLANTS && blockState.getBlock() != Blocks.LILY_PAD) 
 					{
-						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 3); 
 					}
 					if(material == Material.TALL_PLANTS && blockState.getBlock() != Blocks.VINE) 
 					{
-						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
-						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 2);  
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 3);
+						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 3);  
 					}
 				}
 			}
@@ -161,7 +162,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				blockState = world.getBlockState(blockpos$Mutable.add(x2, 0, z2));
 				material = blockState.getMaterial();
 
-				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty())
+				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().getFluidState() != Fluids.WATER)
 				{
 					return false;
 				}
@@ -172,7 +173,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//Will also return false if an unacceptable solid material is found.
 		blockState = world.getBlockState(blockpos$Mutable.down());
 		material = blockState.getMaterial();
-		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty())
+		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().getFluidState() != Fluids.WATER)
 		{
 			return false;
 		}
@@ -181,7 +182,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//Will not check unacceptable solid set to allow leaves to be over water.
 		blockState = world.getBlockState(blockpos$Mutable.up());
 		material = blockState.getMaterial();
-		if (material.isSolid() || !blockState.getFluidState().isEmpty())
+		if (material.isSolid() || blockState.getFluidState().getFluidState() == Fluids.WATER)
 		{
 			return false;
 		}
