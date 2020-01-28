@@ -7,6 +7,8 @@ import java.util.function.Function;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -19,8 +21,9 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 {
-	
-	protected static final Set<Material> unacceptableSolidMaterials = ImmutableSet.of(
+
+	protected static final Set<Material> unacceptableSolidMaterials = 
+		ImmutableSet.of(
 			Material.BAMBOO, 
 			Material.BAMBOO_SAPLING,
 			Material.LEAVES, 
@@ -32,7 +35,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 			Material.DRAGON_EGG,
 			Material.BARRIER,
 			Material.CAKE
-			);
+		);
 	
 	
 	public LakeWideShallow(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
@@ -76,6 +79,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//creates the actual lakes
 		boolean containedFlag = true;
 		Material material;
+		BlockState blockState;
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
@@ -101,7 +105,22 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				//Is spot within the mask (sorta a roundish area) and is contained
 				if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag)
 				{
-					world.setBlockState(blockpos$Mutable, configBlock.state, 3); //Update so plants over water will break
+					//sets the water
+					world.setBlockState(blockpos$Mutable, configBlock.state, 2); 
+					
+					//remove floating plants so they aren't hovering.
+					blockState = world.getBlockState(blockpos$Mutable.move(Direction.UP));
+					material = blockState.getMaterial();
+					
+					if(material == Material.PLANTS && blockState.getBlock() != Blocks.LILY_PAD) 
+					{
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
+					}
+					if(material == Material.TALL_PLANTS && blockState.getBlock() != Blocks.VINE) 
+					{
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
+						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 2);  
+					}
 				}
 			}
 		}
