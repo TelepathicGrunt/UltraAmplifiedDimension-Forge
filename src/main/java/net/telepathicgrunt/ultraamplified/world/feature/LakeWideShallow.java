@@ -107,12 +107,11 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				//Is spot within the mask (sorta a roundish area) and is contained
 				if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag)
 				{
-					world.setBlockState(blockpos$Mutable, configBlock.state, 2); 
 					//check below without moving down
 					blockState = world.getBlockState(blockpos$Mutable.down());
 					
 					//sets the water
-					if(isDirt(blockState.getBlock()) && random.nextInt(4) == 0) 
+					if(isDirt(blockState.getBlock()) && random.nextInt(5) == 0) 
 					{
 						world.setBlockState(blockpos$Mutable, Blocks.SEAGRASS.getDefaultState(), 2); 
 					}
@@ -129,12 +128,18 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 					
 					if(material == Material.PLANTS && blockState.getBlock() != Blocks.LILY_PAD) 
 					{
-						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 3); 
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
+						
+						//recursively moves up and breaks floating sugar cane
+						while(blockpos$Mutable.getY() < 255 && world.getBlockState(blockpos$Mutable.move(Direction.UP)) == Blocks.SUGAR_CANE.getDefaultState()) 
+						{
+							world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
+						}
 					}
 					if(material == Material.TALL_PLANTS && blockState.getBlock() != Blocks.VINE) 
 					{
-						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 3);
-						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 3);  
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
+						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 2);  
 					}
 				}
 			}
@@ -186,16 +191,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		{
 			return false;
 		}
-
-		//Adjacent blocks must be solid    
-		/*
-		 * for (Direction face : Direction.values()) {
-		 * 
-		 * material = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face)).getMaterial();
-		 * 
-		 * if(face == Direction.UP) { if(material.isSolid() || material == Material.WATER) { notContainedFlag = true; } } else
-		 * if(!material.isSolid() && material != Material.WATER ) { notContainedFlag = true; } }
-		 */
+		
 
 		return true;
 	}
