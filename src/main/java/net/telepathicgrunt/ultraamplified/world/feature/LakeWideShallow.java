@@ -1,8 +1,10 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.material.Material;
@@ -17,7 +19,22 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 {
-
+	
+	protected static final Set<Material> unacceptableSolidMaterials = ImmutableSet.of(
+			Material.BAMBOO, 
+			Material.BAMBOO_SAPLING,
+			Material.LEAVES, 
+			Material.WEB,
+			Material.CACTUS,
+			Material.ANVIL,
+			Material.GOURD,
+			Material.CAKE,
+			Material.DRAGON_EGG,
+			Material.BARRIER,
+			Material.CAKE
+			);
+	
+	
 	public LakeWideShallow(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
 	{
 		super(configFactory);
@@ -47,7 +64,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 						double xMagnetude = ((double) x - randX) / (rawRandX / 2.0D);
 						double zMagnetude = ((double) z - randZ) / (rawRandZ / 2.0D);
 						double squaredMagnetude = xMagnetude * xMagnetude + zMagnetude * zMagnetude;
-						if (squaredMagnetude < 1.0D)
+						if (squaredMagnetude < 1.2D)
 						{
 							lakeMask[(x * 16 + z) * 8 + y] = true;
 						}
@@ -58,6 +75,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 
 		//creates the actual lakes
 		boolean containedFlag = true;
+		Material material;
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
@@ -65,10 +83,11 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				int y = 5;
 
         		blockpos$Mutable.setPos(position).move(x, y, z);
-				Material material = world.getBlockState(blockpos$Mutable).getMaterial();
+				material = world.getBlockState(blockpos$Mutable).getMaterial();
 
-				//finds first solid block of land starting from 5 blocks higher than initial input position
-				while (!material.isSolid() && material != Material.WATER && y > 0)
+				//Finds first solid block of land starting from 5 blocks higher than initial input position
+				//We use unacceptable solid set to help skip solid blocks like leaves.
+				while ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && y > 0)
 				{
 					y--;
 					material = world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
@@ -82,7 +101,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				//Is spot within the mask (sorta a roundish area) and is contained
 				if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag)
 				{
-					world.setBlockState(blockpos$Mutable, configBlock.state, 2);
+					world.setBlockState(blockpos$Mutable, configBlock.state, 3); //Update so plants over water will break
 				}
 			}
 		}
@@ -99,14 +118,15 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 	{
 		Material material;
 		
-		//must be solid all around even diagonally
+		//Must be solid all around even diagonally.
+		//Will also return false if an unacceptable solid material is found.
 		for (int x2 = -1; x2 < 2; x2++)
 		{
 			for (int z2 = -1; z2 < 2; z2++)
 			{
 				material = world.getBlockState(blockpos$Mutable.add(x2, 0, z2)).getMaterial();
 
-				if (!material.isSolid() && material != Material.WATER)
+				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && material != Material.WATER)
 				{
 					return false;
 				}
@@ -114,14 +134,15 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		}
 
 		//must be solid below
+		//Will also return false if an unacceptable solid material is found.
 		material = world.getBlockState(blockpos$Mutable.down()).getMaterial();
-		if (!material.isSolid() && material != Material.WATER)
+		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && material != Material.WATER)
 		{
 			return false;
 		}
 
-		//cannot have solid or water above as that makes the lake
-		//no longer shallow or on the surface
+		//cannot have solid or water above as that makes the lake no longer shallow or on the surface.
+		//Will not check unacceptable solid set to allow leaves to be over water.
 		material = world.getBlockState(blockpos$Mutable.up()).getMaterial();
 		if (material.isSolid() || material == Material.WATER)
 		{

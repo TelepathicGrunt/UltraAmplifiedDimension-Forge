@@ -1,12 +1,10 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -27,28 +25,19 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
 	}
 
 
-
-	private final static BlockState mossyCobblestone = Blocks.MOSSY_COBBLESTONE.getDefaultState();
-    private final static BlockState cobblestone = Blocks.COBBLESTONE.getDefaultState();
-    private final static BlockState andesite = Blocks.ANDESITE.getDefaultState();
-    private final static BlockState coalOre = Blocks.COAL_ORE.getDefaultState();
-    private final static BlockState ironOre = Blocks.IRON_ORE.getDefaultState();
-    private final static BlockState diamondOre = Blocks.DIAMOND_ORE.getDefaultState();
     private final static int startRadius = 4;
 
-    protected static final Set<BlockState> acceptableBlocks = 
-    		Stream.of(
-	    		Blocks.DIRT.getDefaultState(),
-	    		Blocks.GRASS_BLOCK.getDefaultState(),
-				Blocks.GRASS_PATH.getDefaultState(),
-	    		Blocks.PODZOL.getDefaultState(),
-    			mossyCobblestone,
-	    		cobblestone,
-	    		andesite,
-	    		coalOre,
-	    		ironOre,
-	    		diamondOre
-    		).collect(Collectors.toCollection(HashSet::new));
+    protected static final Set<BlockState> acceptableBlocks = ImmutableSet.of(
+    		Blocks.DIRT.getDefaultState(),
+    		Blocks.GRASS_BLOCK.getDefaultState(),
+			Blocks.GRASS_PATH.getDefaultState(),
+    		Blocks.PODZOL.getDefaultState(),
+    		Blocks.MOSSY_COBBLESTONE.getDefaultState(),
+    		Blocks.COBBLESTONE.getDefaultState(),
+    		Blocks.ANDESITE.getDefaultState(),
+    		Blocks.COAL_ORE.getDefaultState(),
+    		Blocks.IRON_ORE.getDefaultState(),
+    		Blocks.DIAMOND_ORE.getDefaultState());
 	
     
     
@@ -104,32 +93,32 @@ public class BoulderGiantStackable extends Feature<BlockBlobConfig>
                     	
                     	// 2/1400th chance for diamond ore
                     	if(ConfigUA.diamondOreSpawnrate != 0 && randomChance <= 1) {
-                    		world.setBlockState(blockpos, diamondOre, 4);
+                    		world.setBlockState(blockpos, Blocks.DIAMOND_ORE.getDefaultState(), 4);
                     	}
                     	
                     	// 48/1400th chance for iron ore
                     	else if(ConfigUA.ironOreSpawnrate != 0 && randomChance <= 50){
-                    		world.setBlockState(blockpos, ironOre, 4);
+                    		world.setBlockState(blockpos, Blocks.IRON_ORE.getDefaultState(), 4);
                     	}
                     	
                     	// 82/1400th chance for coal ore
                     	else if(ConfigUA.coalOreSpawnrate != 0 && randomChance <= 130){
-                    		world.setBlockState(blockpos, coalOre, 4);
+                    		world.setBlockState(blockpos, Blocks.COAL_ORE.getDefaultState(), 4);
                     	}
                     	
                     	// 398/1400th chance for andesite
                     	else if(randomChance <= 480){
-                    		world.setBlockState(blockpos, andesite, 4);
+                    		world.setBlockState(blockpos, Blocks.ANDESITE.getDefaultState(), 4);
                     	}
                     	
                     	// 352/1400th chance for cobblestone
                     	else if(randomChance <= 750){
-                    		world.setBlockState(blockpos, cobblestone, 4);
+                    		world.setBlockState(blockpos, Blocks.COBBLESTONE.getDefaultState(), 4);
                     	}
                     	
                     	// 650/1400th chance for mossyCobblestone
                     	else {
-                    		world.setBlockState(blockpos, mossyCobblestone, 4);
+                    		world.setBlockState(blockpos, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 4);
                     	}
                     }
                 }

@@ -1,12 +1,10 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -28,7 +26,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 	}
 
 	protected static final Set<BlockState> ALLOWED_BLOCKS = 
-    		Stream.of(
+			ImmutableSet.of(
 	    		Blocks.AIR.getDefaultState(),
 	    		Blocks.CAVE_AIR.getDefaultState(),
 	    		Blocks.ICE.getDefaultState(),
@@ -38,7 +36,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 				Blocks.DIRT.getDefaultState(),
 				Blocks.COARSE_DIRT.getDefaultState(),
 				Blocks.WATER.getDefaultState()
-    		).collect(Collectors.toCollection(HashSet::new));
+    		);
     
     private static final BlockState WATER = Blocks.WATER.getDefaultState();
     private static final BlockState ICE = Blocks.ICE.getDefaultState();

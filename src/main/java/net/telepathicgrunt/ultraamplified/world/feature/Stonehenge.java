@@ -1,12 +1,10 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -41,7 +39,14 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 	private static int perfectStoneCount = 0;
 	private static boolean markedForPerfection = false;
 
-	protected static final Set<BlockState> unAcceptableBlocks = Stream.of(Blocks.AIR.getDefaultState(), Blocks.WATER.getDefaultState(), Blocks.LAVA.getDefaultState(), Blocks.SLIME_BLOCK.getDefaultState(), Blocks.CAVE_AIR.getDefaultState()).collect(Collectors.toCollection(HashSet::new));
+	protected static final Set<BlockState> unAcceptableBlocks = 
+			ImmutableSet.of(
+					Blocks.AIR.getDefaultState(),
+					Blocks.WATER.getDefaultState(), 
+					Blocks.LAVA.getDefaultState(), 
+					Blocks.SLIME_BLOCK.getDefaultState(),
+					Blocks.CAVE_AIR.getDefaultState()
+			);
 
 	private static enum StoneHengeType
 	{

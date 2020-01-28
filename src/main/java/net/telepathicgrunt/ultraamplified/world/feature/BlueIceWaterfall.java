@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
@@ -36,9 +37,13 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig>
 	private static final BlockState ICE = Blocks.ICE.getDefaultState();
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 
-	protected static final Set<Block> acceptableBlocks = Stream.of(Blocks.ICE, Blocks.SNOW_BLOCK, Blocks.PACKED_ICE).collect(Collectors.toCollection(HashSet::new));
+	protected static final Set<Block> acceptableBlocks = ImmutableSet.of(
+			Blocks.ICE, 
+			Blocks.SNOW_BLOCK, 
+			Blocks.PACKED_ICE
+			);
 
-
+	
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig)
 	{
 

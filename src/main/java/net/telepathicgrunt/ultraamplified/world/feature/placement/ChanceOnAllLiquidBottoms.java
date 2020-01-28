@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -32,9 +33,13 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 	}
 
 	// Needed to prevent placing features like coral inside ocean monuments
-	protected static final Set<BlockState> UNACCEPTABLE_BLOCKS = Stream
-			.of(Blocks.PRISMARINE.getDefaultState(), Blocks.PRISMARINE_BRICKS.getDefaultState(), Blocks.DARK_PRISMARINE.getDefaultState(), Blocks.SEA_LANTERN.getDefaultState())
-			.collect(Collectors.toCollection(HashSet::new));
+	protected static final Set<BlockState> UNACCEPTABLE_BLOCKS = 
+				ImmutableSet.of(
+					Blocks.PRISMARINE.getDefaultState(), 
+					Blocks.PRISMARINE_BRICKS.getDefaultState(), 
+					Blocks.DARK_PRISMARINE.getDefaultState(), 
+					Blocks.SEA_LANTERN.getDefaultState()
+				);
 
 
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos)

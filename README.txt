@@ -23,6 +23,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Biome: 
 ·Fixed Bamboo not spawning in all Jungle biomes.
 ·Fixed shallow lakes not spawning in Flower Jungle biomes, Swamp biomes, and Desert Lakes biome.
+·Fixed bug where shallow lakes could replace leaves with water and the water could border non solid-looking blocks like bamboo.
 
        
    (V.7.2.0 Changes) (1.15.1 Minecraft)

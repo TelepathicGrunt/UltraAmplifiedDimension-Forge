@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -37,7 +38,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 	}
 
 	protected static final Set<BlockState> acceptableBlocks = 
-    		Stream.of(
+			ImmutableSet.of(
 	    		Blocks.DIRT.getDefaultState(),
 	    		Blocks.GRASS_BLOCK.getDefaultState(),
 	    		Blocks.PODZOL.getDefaultState(),
@@ -45,7 +46,7 @@ public class SunShrine extends Feature<NoFeatureConfig> {
 	    		Blocks.SAND.getDefaultState(),
 	    		Blocks.SANDSTONE.getDefaultState(),
 				Blocks.GRASS_PATH.getDefaultState()
-    		).collect(Collectors.toCollection(HashSet::new));
+    		);
 	
 	
 	//first NTB structure I made to work by watching tutorials lol. 
