@@ -184,11 +184,11 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 			return false;
 		}
 
-		//cannot have solid or water above as that makes the lake no longer shallow or on the surface.
+		//cannot have solid, rails, or water above as that makes the lake no longer shallow or on the surface.
 		//Will not check unacceptable solid set to allow leaves to be over water.
 		blockState = world.getBlockState(blockpos$Mutable.up());
 		material = blockState.getMaterial();
-		if (material.isSolid() || !blockState.getFluidState().isEmpty())
+		if (material.isSolid() || !blockState.getFluidState().isEmpty() || blockState.getBlock() == Blocks.RAIL)
 		{
 			return false;
 		}
