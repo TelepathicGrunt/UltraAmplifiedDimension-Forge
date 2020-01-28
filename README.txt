@@ -25,7 +25,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed shallow lakes not spawning in Flower Jungle biomes, Swamp biomes, and Desert Lakes biome.
 ·Fixed bug where shallow lakes could replace leaves with water and the water could border non solid-looking blocks like bamboo.
 ·Fixed bug where plants could appear floating on top of shallow lakes.
-·Seagrass can appear in shallow lakes in biomes that normally have dirt-kinds of blocks on the surface.
+·Seagrass can appear in shallow lakes in biomes that normally have dirt-like blocks on the surface.
 
        
    (V.7.2.0 Changes) (1.15.1 Minecraft)
