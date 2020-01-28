@@ -29,8 +29,8 @@ public class Bamboo extends Feature<NoFeatureConfig> {
 
    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
       int i = 0;
-      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.up());
-      BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable(pos.up());
+      BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
+      BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable(pos);
       if (world.isAirBlock(blockpos$Mutable)) {
          if (Blocks.BAMBOO.getDefaultState().isValidPosition(world, blockpos$Mutable)) {
            int maxHeight = rand.nextInt(12) + 5;

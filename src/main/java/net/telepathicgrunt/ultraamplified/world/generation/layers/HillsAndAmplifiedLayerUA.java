@@ -76,19 +76,30 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			if (allowMForm)
 			{
 				Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
-				
-				if(biomeTemp == null) //hill form does not have mutated form
+
+				if(biomeTemp != null) //hill form does have mutated form
 				{
-					if(ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
-					{
-						biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
-					}
-					
 					biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
 				}
 				else
 				{
-					biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
+					if(ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
+					{
+						biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
+						
+						if(biomeTemp == null) //base form does not have mutated form
+						{
+							biomeIdToReturn = biomeId1;
+						}
+						else //mutated form of base form
+						{
+							biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
+						}
+					}
+					else //return base form instead of mutated form
+					{
+						biomeIdToReturn = biomeId1;
+					}
 				}
 			}
 
@@ -116,7 +127,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 					++i1;
 				}
 
-				if (i1 >= 3 || ConfigUA.mutatedBiomeSpawnrate == 10) // If mutated is set to max, always return mutated biome now.
+				if (i1 >= 3)
 				{
 					return biomeIdToReturn;
 				}

@@ -27,16 +27,16 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, BlockStateFeatureConfig configBlock)
 	{
 
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
-		boolean[] aboolean = new boolean[2048];
-		int i = random.nextInt(4) + 4;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.down(2));
+		boolean[] lakeMask = new boolean[2048];
+		int maxInterations = random.nextInt(4) + 4;
 
-		for (int j = 0; j < i; ++j)
+		for (int currentMaskInteration = 0; currentMaskInteration < maxInterations; ++currentMaskInteration)
 		{
-			double d0 = random.nextDouble() * 6.0D + 3.0D;
-			double d2 = random.nextDouble() * 6.0D + 3.0D;
-			double d3 = random.nextDouble() * (16.0D - d0 - 2.0D) + 1.0D + d0 / 2.0D;
-			double d5 = random.nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
+			double rawRandX = random.nextDouble() * 6.0D + 3.0D;
+			double rawRandZ = random.nextDouble() * 6.0D + 3.0D;
+			double randX = random.nextDouble() * (16.0D - rawRandX - 2.0D) + 1.0D + rawRandX / 2.0D;
+			double randZ = random.nextDouble() * (16.0D - rawRandZ - 2.0D) + 1.0D + rawRandZ / 2.0D;
 
 			for (int x = 1; x < 15; ++x)
 			{
@@ -44,49 +44,20 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				{
 					for (int y = 0; y < 5; ++y)
 					{
-						double d6 = ((double) x - d3) / (d0 / 2.0D);
-						double d8 = ((double) z - d5) / (d2 / 2.0D);
-						double d9 = d6 * d6 + d8 * d8;
-						if (d9 < 1.4D)
+						double xMagnetude = ((double) x - randX) / (rawRandX / 2.0D);
+						double zMagnetude = ((double) z - randZ) / (rawRandZ / 2.0D);
+						double squaredMagnetude = xMagnetude * xMagnetude + zMagnetude * zMagnetude;
+						if (squaredMagnetude < 1.0D)
 						{
-							aboolean[(x * 16 + z) * 8 + y] = true;
+							lakeMask[(x * 16 + z) * 8 + y] = true;
 						}
 					}
 				}
 			}
 		}
 
-		//creates solid land patches by returning early
-		for (int x = 0; x < 16; ++x)
-		{
-			for (int z = 0; z < 16; ++z)
-			{
-				int y = 5;
-
-        		blockpos$Mutable.setPos(position).move(x, y, z);
-				Material material = world.getBlockState(blockpos$Mutable).getMaterial();
-
-				while (!material.isSolid() && material != Material.WATER && y > 0)
-				{
-					y--;
-					material = world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
-				}
-
-				boolean flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
-				if (flag)
-				{
-					blockpos$Mutable.move(-8, 0, -8);
-					material = world.getBlockState(blockpos$Mutable).getMaterial();
-
-					if (!material.isSolid() && material != Material.WATER && world.getBlockState(blockpos$Mutable) != configBlock.state)
-					{
-						return false;
-					}
-				}
-			}
-		}
-
 		//creates the actual lakes
+		boolean containedFlag = true;
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
@@ -103,56 +74,70 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 					material = world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
 				}
 
-				boolean notContainedFlag = false;
-
-				//must be solid all around even diagonally
-				for (int x2 = -1; x2 < 2; x2++)
-				{
-					for (int z2 = -1; z2 < 2; z2++)
-					{
-
-						material = world.getBlockState(blockpos$Mutable.add(x2, 0, z2)).getMaterial();
-
-						if (!material.isSolid() && material != Material.WATER)
-						{
-							notContainedFlag = true;
-						}
-					}
-				}
-
-				//must be solid below
-				material = world.getBlockState(blockpos$Mutable.down()).getMaterial();
-				if (!material.isSolid() && material != Material.WATER)
-				{
-					notContainedFlag = true;
-				}
-
-				//cannot have solid or water above as that makes the lake
-				//no longer shallow or on the surface
-				material = world.getBlockState(blockpos$Mutable.up()).getMaterial();
-				if (material.isSolid() || material == Material.WATER)
-				{
-					notContainedFlag = true;
-				}
-
-				//Adjacent blocks must be solid    
-				/*
-				 * for (Direction face : Direction.values()) {
-				 * 
-				 * material = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face)).getMaterial();
-				 * 
-				 * if(face == Direction.UP) { if(material.isSolid() || material == Material.WATER) { notContainedFlag = true; } } else
-				 * if(!material.isSolid() && material != Material.WATER ) { notContainedFlag = true; } }
-				 */
-
-				if (aboolean[(x * 16 + z) * 8 + y] && !notContainedFlag)
+				
+				//checks if the spot is solid all around (diagonally too) and has nothing solid above it
+				containedFlag = checkIfValidSpot(world, blockpos$Mutable);
+				
+				
+				//Is spot within the mask (sorta a roundish area) and is contained
+				if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag)
 				{
 					world.setBlockState(blockpos$Mutable, configBlock.state, 2);
 				}
 			}
 		}
+		return true;
+	}
+	
+	/**
+	 * checks if the spot is surrounded by solid blocks below and all around horizontally plus nothing solid above.
+	 * @param world - world to check for materials in
+	 * @param blockpos$Mutable - location to check if valid
+	 * @return - if the spot is valid
+	 */
+	private boolean checkIfValidSpot(IWorld world, BlockPos.Mutable blockpos$Mutable)
+	{
+		Material material;
+		
+		//must be solid all around even diagonally
+		for (int x2 = -1; x2 < 2; x2++)
+		{
+			for (int z2 = -1; z2 < 2; z2++)
+			{
+				material = world.getBlockState(blockpos$Mutable.add(x2, 0, z2)).getMaterial();
+
+				if (!material.isSolid() && material != Material.WATER)
+				{
+					return false;
+				}
+			}
+		}
+
+		//must be solid below
+		material = world.getBlockState(blockpos$Mutable.down()).getMaterial();
+		if (!material.isSolid() && material != Material.WATER)
+		{
+			return false;
+		}
+
+		//cannot have solid or water above as that makes the lake
+		//no longer shallow or on the surface
+		material = world.getBlockState(blockpos$Mutable.up()).getMaterial();
+		if (material.isSolid() || material == Material.WATER)
+		{
+			return false;
+		}
+
+		//Adjacent blocks must be solid    
+		/*
+		 * for (Direction face : Direction.values()) {
+		 * 
+		 * material = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face)).getMaterial();
+		 * 
+		 * if(face == Direction.UP) { if(material.isSolid() || material == Material.WATER) { notContainedFlag = true; } } else
+		 * if(!material.isSolid() && material != Material.WATER ) { notContainedFlag = true; } }
+		 */
 
 		return true;
-
 	}
 }

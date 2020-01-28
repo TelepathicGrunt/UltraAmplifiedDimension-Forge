@@ -69,7 +69,7 @@ public class SwampSpookyBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.configure(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).createDecoratedFeature(LAKE_PLACEMENT.configure(new LakeCountRangeAndTypeConfig(4, LakeCountRangeAndTypeConfig.Type.WATER_ALGORITHM))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.ROOTS.configure(new BlockConfig(Blocks.DARK_OAK_WOOD)).createDecoratedFeature(RANDOM_BOTTOM_LAYER.configure(new CountRangeConfig(5, 70, 0, 250))));
 
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SHALLOW_LAKE.configure(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).createDecoratedFeature(CHANCE_ON_ALL_SURFACES_UA.configure(new PercentageAndFrequencyConfig(80, 200))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.SHALLOW_LAKE.configure(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).createDecoratedFeature(CHANCE_ON_ALL_SURFACES_UA.configure(new PercentageAndFrequencyConfig(40, 10))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.configure(new BlockStateFeatureConfig(Blocks.LAVA.getDefaultState())).createDecoratedFeature(LAKE_PLACEMENT.configure(new LakeCountRangeAndTypeConfig(80, LakeCountRangeAndTypeConfig.Type.LAVA_ALGORITHM))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.configure(new BlockStateFeatureConfig(Blocks.SLIME_BLOCK.getDefaultState())).createDecoratedFeature(LAKE_PLACEMENT.configure(new LakeCountRangeAndTypeConfig(7, LakeCountRangeAndTypeConfig.Type.SLIME_ALGORITHM))));
 
