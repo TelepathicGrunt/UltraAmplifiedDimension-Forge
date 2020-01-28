@@ -11,6 +11,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -93,7 +94,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 
 				//Finds first solid block of land starting from 5 blocks higher than initial input position
 				//We use unacceptable solid set to help skip solid blocks like leaves.
-				while ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && y > 0)
+				while ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) && y > 0)
 				{
 					y--;
 					material = world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
@@ -167,7 +168,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				blockState = world.getBlockState(blockpos$Mutable.add(x2, 0, z2));
 				material = blockState.getMaterial();
 
-				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
+				if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
 				{
 					return false;
 				}
@@ -178,7 +179,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		//Will also return false if an unacceptable solid material is found.
 		blockState = world.getBlockState(blockpos$Mutable.down());
 		material = blockState.getMaterial();
-		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material)) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
+		if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER)
 		{
 			return false;
 		}
