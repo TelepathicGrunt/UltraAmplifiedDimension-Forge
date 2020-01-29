@@ -1,6 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.biome;
 
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -326,7 +327,7 @@ public class BiomeInit {
 	//Handles conversion between M form and non-M form biomes. 
 	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods
 	//Also better as I can specify new M variant biomes or make any biome an M variant of another unrelated biome.
-    public static Map<Biome,Biome> BASE_TO_MUTATION_MAP;
+    public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<Biome, Biome>();
     
     public static void mapMBiomes() {
     	//registers who is an M variant of another biome
@@ -365,7 +366,7 @@ public class BiomeInit {
 	//Handles conversion between Hills form and non-M form biomes in GenLayerHillsUA. 
 	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods
 	//Also better as I can specify new Hills variant biomes or make any biome an Hills variant of another unrelated biome.
-    public static Map<Integer, Integer> BASE_TO_HILLS_MAP;
+    public static Map<Integer, Integer> BASE_TO_HILLS_MAP = new HashMap<Integer, Integer>();
     
     private static void mapHillsBiomes() {
     	//registers who is an Hills variant of another biome
