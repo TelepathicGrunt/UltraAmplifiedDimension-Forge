@@ -15,6 +15,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+   (V.7.2.2 Changes) (1.15.2 Minecraft)
+       
+    Structures:
+·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block more difficult from them as the Beacon block item has a higher chance of getting destroyed in the explosion.
+       
+       
    (V.7.2.1 Changes) (1.15.2 Minecraft)
  
 	Config: 
