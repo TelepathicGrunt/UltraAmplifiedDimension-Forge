@@ -21,17 +21,22 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig> {
 
-	public IceSpikeTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig>
+{
+
+	public IceSpikeTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 		int maxDistance = ConfigUA.iceSpikeTempleSpawnrate;
 		int minDistance = 8;
-		if (maxDistance < 9) {
+		if (maxDistance < 9)
+		{
 			minDistance = maxDistance - 1;
 		}
 		int k = x + maxDistance * spacingOffsetsX;
@@ -40,8 +45,7 @@ public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig> {
 		int j1 = l < 0 ? l - maxDistance + 1 : l;
 		int k1 = i1 / maxDistance;
 		int l1 = j1 / maxDistance;
-		((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1,
-				this.getSeedModifier());
+		((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
 		k1 = k1 * maxDistance;
 		l1 = l1 * maxDistance;
 		k1 = k1 + random.nextInt(maxDistance - minDistance);
@@ -49,52 +53,70 @@ public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":ice_spike_temple";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 3;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return IceSpikeTempleStructureUA.Start::new;
 	}
 
-	protected int getSeedModifier() {
+
+	protected int getSeedModifier()
+	{
 		return 14357621;
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.iceSpikeTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			if (ConfigUA.iceSpikeTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends StructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			//
 			int xOffset = 9;
 			int zOffset = 20;
-			if (rotation == Rotation.CLOCKWISE_90) {
+			if (rotation == Rotation.CLOCKWISE_90)
+			{
 				xOffset = -20;
 				zOffset = 9;
-			} else if (rotation == Rotation.CLOCKWISE_180) {
+			}
+			else if (rotation == Rotation.CLOCKWISE_180)
+			{
 				xOffset = -9;
 				zOffset = -20;
-			} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+			}
+			else if (rotation == Rotation.COUNTERCLOCKWISE_90)
+			{
 				xOffset = 20;
 				zOffset = -9;
 			}
@@ -104,7 +126,8 @@ public class IceSpikeTempleStructureUA extends Structure<NoFeatureConfig> {
 			int surfaceY = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
 			int y = Math.min(surfaceY, 230);
 
-			if (y >= 70) {
+			if (y >= 70)
+			{
 				BlockPos blockpos = new BlockPos(x, y, z);
 				IceSpikeTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
 				this.recalculateStructureSize();

@@ -20,16 +20,21 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class StrongholdStructureUA extends Structure<NoFeatureConfig> {
-	public StrongholdStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+
+public class StrongholdStructureUA extends Structure<NoFeatureConfig>
+{
+	public StrongholdStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 		int maxDistance = ConfigUA.strongholdSpawnrate;
 		int minDistance = maxDistance - 10;
-		if (maxDistance < 12) {
+		if (maxDistance < 12)
+		{
 			minDistance = maxDistance - 1;
 		}
 		int k = x + maxDistance * spacingOffsetsX;
@@ -46,12 +51,15 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if ((ConfigUA.strongholdSpawnrate != 501) && chunkGen.hasStructure(biome, this)) {
+		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			if ((ConfigUA.strongholdSpawnrate != 501) && chunkGen.hasStructure(biome, this))
+			{
 				return true;
 			}
 		}
@@ -59,34 +67,42 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return StrongholdStructureUA.Start::new;
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":stronghold";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 8;
 	}
 
-	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends StructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 			StrongholdPiecesUA.prepareStructurePieces();
-			StrongholdPiecesUA.Stairs2 strongholdpieces$stairs2 = new StrongholdPiecesUA.Stairs2(this.rand,
-					(chunkX << 4) + 2, (chunkZ << 4) + 2);
+			StrongholdPiecesUA.Stairs2 strongholdpieces$stairs2 = new StrongholdPiecesUA.Stairs2(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2);
 			this.components.add(strongholdpieces$stairs2);
 			strongholdpieces$stairs2.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
 			List<StructurePiece> list = strongholdpieces$stairs2.pendingChildren;
 
-			while (!list.isEmpty()) {
+			while (!list.isEmpty())
+			{
 				int i = this.rand.nextInt(list.size());
 				StructurePiece structurepiece = list.remove(i);
 				structurepiece.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
@@ -95,7 +111,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig> {
 			this.recalculateStructureSize();
 
 			this.func_214626_a(this.rand, 100, 120);
-//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
+			//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
 		}
 	}
 }

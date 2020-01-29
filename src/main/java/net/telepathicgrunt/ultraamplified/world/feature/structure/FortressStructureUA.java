@@ -23,25 +23,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
 public class FortressStructureUA extends Structure<FortressConfigUA>
 {
-	private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(
-													new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3),
-													new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), 
-													new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5),
-													new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), 
-													new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
+	private static final List<Biome.SpawnListEntry> NETHER_FORTRESS_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.BLAZE, 10, 2, 3), new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 5, 4, 4), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 5, 5), new Biome.SpawnListEntry(EntityType.SKELETON, 2, 5, 5), new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 3, 4, 4));
 
-	private static final List<Biome.SpawnListEntry> STONE_FORTRESS_ENEMIES = Lists.newArrayList(
-													new Biome.SpawnListEntry(EntityType.SILVERFISH, 2, 5, 10),
-													new Biome.SpawnListEntry(EntityType.SLIME, 4, 1, 2), 
-													new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 4, 6),
-													new Biome.SpawnListEntry(EntityType.SKELETON, 11, 6, 8), 
-													new Biome.SpawnListEntry(EntityType.CAVE_SPIDER, 4, 2, 4));
+	private static final List<Biome.SpawnListEntry> STONE_FORTRESS_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.SILVERFISH, 2, 5, 10), new Biome.SpawnListEntry(EntityType.SLIME, 4, 1, 2), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 4, 6), new Biome.SpawnListEntry(EntityType.SKELETON, 11, 6, 8), new Biome.SpawnListEntry(EntityType.CAVE_SPIDER, 4, 2, 4));
 
-	private static final List<Biome.SpawnListEntry> STONE_FORTRESS_ENEMIES_WITHOUT_SILVERFISH = Lists.newArrayList(
-													new Biome.SpawnListEntry(EntityType.SLIME, 4, 1, 3),
-													new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 4, 6), 
-													new Biome.SpawnListEntry(EntityType.SKELETON, 10, 6, 8),
-													new Biome.SpawnListEntry(EntityType.CAVE_SPIDER, 5, 2, 5));
+	private static final List<Biome.SpawnListEntry> STONE_FORTRESS_ENEMIES_WITHOUT_SILVERFISH = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.SLIME, 4, 1, 3), new Biome.SpawnListEntry(EntityType.WITHER_SKELETON, 8, 4, 6), new Biome.SpawnListEntry(EntityType.SKELETON, 10, 6, 8), new Biome.SpawnListEntry(EntityType.CAVE_SPIDER, 5, 2, 5));
 
 
 	public FortressStructureUA(Function<Dynamic<?>, ? extends FortressConfigUA> p_i51427_1_)

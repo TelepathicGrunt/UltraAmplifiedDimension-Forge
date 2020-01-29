@@ -48,8 +48,7 @@ public class GlowgrassBlock extends GrassBlock
 						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 						if (world.getBlockState(blockpos).getBlock() == Blocks.DIRT && func_220256_c(replacementBlock, world, blockpos))
 						{
-							world.setBlockState(blockpos,
-									replacementBlock.with(SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+							world.setBlockState(blockpos, replacementBlock.with(SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 					}
 				}

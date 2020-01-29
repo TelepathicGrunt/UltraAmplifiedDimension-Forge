@@ -24,36 +24,51 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
-	private static final List<Biome.SpawnListEntry> field_214558_a = Lists
-			.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
 
-	public PillagerOutpostStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_) {
+public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
+{
+	private static final List<Biome.SpawnListEntry> field_214558_a = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
+
+
+	public PillagerOutpostStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_)
+	{
 		super(p_i51470_1_);
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":pillager_outpost";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 3;
 	}
 
-	public List<Biome.SpawnListEntry> getSpawnList() {
+
+	public List<Biome.SpawnListEntry> getSpawnList()
+	{
 		return field_214558_a;
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA)) {
+		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA))
+		{
 
-			if (rand.nextFloat() < 1 / ((double) (ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1)) {
-				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k) {
-					for (int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l) {
-						if (FeatureUA.VILLAGE_UA.shouldStartAt(p_225558_1_, chunkGen, rand, k, l, biome)) {
+			if (rand.nextFloat() < 1 / ((double) (ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1))
+			{
+				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k)
+				{
+					for (int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l)
+					{
+						if (FeatureUA.VILLAGE_UA.shouldStartAt(p_225558_1_, chunkGen, rand, k, l, biome))
+						{
 							return false;
 						}
 					}
@@ -66,22 +81,28 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return PillagerOutpostStructureUA.Start::new;
 	}
 
-	protected int getSeedModifier() {
+
+	protected int getSeedModifier()
+	{
 		return 165745296;
 	}
 
-	public static class Start extends MarginedStructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends MarginedStructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 
 			int offsetX = 7;
 			int offsetZ = 7;
@@ -93,7 +114,8 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig> {
 			int l1 = generator.func_222531_c(x + 1, z + 1, Heightmap.Type.WORLD_SURFACE_WG);
 			int y = Math.max(Math.max(i1, j1), Math.max(k1, l1));
 
-			if (y >= 70 && y <= 200) {
+			if (y >= 70 && y <= 200)
+			{
 				BlockPos blockpos = new BlockPos(chunkX * 16, y, chunkZ * 16);
 				PillagerOutpostPieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
 				this.recalculateStructureSize();

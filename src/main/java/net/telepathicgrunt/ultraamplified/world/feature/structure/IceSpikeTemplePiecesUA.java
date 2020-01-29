@@ -26,24 +26,20 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class IceSpikeTemplePiecesUA {
-	private static final ResourceLocation CENTER = new ResourceLocation(
-			UltraAmplified.MODID + ":ice_spike_temple_center");
-	private static final ResourceLocation CENTER_TOP = new ResourceLocation(
-			UltraAmplified.MODID + ":ice_spike_temple_center_top");
-	private static final ResourceLocation LEFT_BODY = new ResourceLocation(
-			UltraAmplified.MODID + ":ice_spike_temple_left_body");
-	private static final ResourceLocation RIGHT_BODY = new ResourceLocation(
-			UltraAmplified.MODID + ":ice_spike_temple_right_body");
-	private static final ResourceLocation CHESTS_1_ICE_SPIKE_TEMPLE_UA = new ResourceLocation(
-			UltraAmplified.MODID + ":chests/ice_spike_temple_1_ua");
-	private static final ResourceLocation CHESTS_2_ICE_SPIKE_TEMPLE_UA = new ResourceLocation(
-			UltraAmplified.MODID + ":chests/ice_spike_temple_2_ua");
-	private static final Map<ResourceLocation, BlockPos> OFFSET = ImmutableMap.of(CENTER, new BlockPos(0, -7, 0),
-			CENTER_TOP, new BlockPos(0, 10, 0), LEFT_BODY, new BlockPos(0, -7, 0), RIGHT_BODY, new BlockPos(0, -7, 0));
 
-	public static void start(TemplateManager templateManager, BlockPos pos, Rotation rotation,
-			List<StructurePiece> pieceList, Random random) {
+public class IceSpikeTemplePiecesUA
+{
+	private static final ResourceLocation CENTER = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_center");
+	private static final ResourceLocation CENTER_TOP = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_center_top");
+	private static final ResourceLocation LEFT_BODY = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_left_body");
+	private static final ResourceLocation RIGHT_BODY = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_right_body");
+	private static final ResourceLocation CHESTS_1_ICE_SPIKE_TEMPLE_UA = new ResourceLocation(UltraAmplified.MODID + ":chests/ice_spike_temple_1_ua");
+	private static final ResourceLocation CHESTS_2_ICE_SPIKE_TEMPLE_UA = new ResourceLocation(UltraAmplified.MODID + ":chests/ice_spike_temple_2_ua");
+	private static final Map<ResourceLocation, BlockPos> OFFSET = ImmutableMap.of(CENTER, new BlockPos(0, -7, 0), CENTER_TOP, new BlockPos(0, 10, 0), LEFT_BODY, new BlockPos(0, -7, 0), RIGHT_BODY, new BlockPos(0, -7, 0));
+
+
+	public static void start(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieceList, Random random)
+	{
 
 		addPartToList(templateManager, pos, rotation, pieceList, random, CENTER);
 		addPartToList(templateManager, pos, rotation, pieceList, random, CENTER_TOP);
@@ -51,8 +47,9 @@ public class IceSpikeTemplePiecesUA {
 
 	}
 
-	private static void addSideSpikes(TemplateManager templateManager, Random random, Rotation rotationIn, BlockPos pos,
-			List<StructurePiece> pieceList) {
+
+	private static void addSideSpikes(TemplateManager templateManager, Random random, Rotation rotationIn, BlockPos pos, List<StructurePiece> pieceList)
+	{
 		int x = pos.getX();
 		int z = pos.getZ();
 
@@ -66,17 +63,20 @@ public class IceSpikeTemplePiecesUA {
 
 	}
 
-	private static void addPartToList(TemplateManager templateManager, BlockPos pos, Rotation rotation,
-			List<StructurePiece> pieceList, Random random, ResourceLocation rl) {
+
+	private static void addPartToList(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieceList, Random random, ResourceLocation rl)
+	{
 		pieceList.add(new IceSpikeTemplePiecesUA.Piece(templateManager, rl, pos, rotation));
 	}
 
-	public static class Piece extends TemplateStructurePiece {
+	public static class Piece extends TemplateStructurePiece
+	{
 		private ResourceLocation resourceLocation;
 		private Rotation rotation;
 
-		public Piece(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos,
-				Rotation rotationIn) {
+
+		public Piece(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos, Rotation rotationIn)
+		{
 			super(StructureInitUA.ISTUA, 0);
 			this.resourceLocation = resourceLocationIn;
 			BlockPos blockpos = IceSpikeTemplePiecesUA.OFFSET.get(resourceLocation);
@@ -85,51 +85,70 @@ public class IceSpikeTemplePiecesUA {
 			this.setupPiece(templateManagerIn);
 		}
 
-		public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound) {
+
+		public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound)
+		{
 			super(StructureInitUA.ISTUA, tagCompound);
 			this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
 			this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
 			this.setupPiece(templateManagerIn);
 		}
 
-		private void setupPiece(TemplateManager templateManager) {
+
+		private void setupPiece(TemplateManager templateManager)
+		{
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
-					.setMirror(Mirror.NONE);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE);
 			this.setup(template, this.templatePosition, placementsettings);
 		}
+
 
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
-		protected void readAdditional(CompoundNBT tagCompound) {
+		protected void readAdditional(CompoundNBT tagCompound)
+		{
 			super.readAdditional(tagCompound);
 			tagCompound.putString("Template", this.resourceLocation.toString());
 			tagCompound.putString("Rot", this.rotation.name());
 		}
 
-		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand,
-				MutableBoundingBox sbb) {
-			if ("chest".equals(function)) {
+
+		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
+		{
+			if ("chest".equals(function))
+			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (ConfigUA.chestGeneration) {
+				if (ConfigUA.chestGeneration)
+				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
-					if (tileentity instanceof ChestTileEntity) {
-						if (ConfigUA.chestGeneration) {
+					if (tileentity instanceof ChestTileEntity)
+					{
+						if (ConfigUA.chestGeneration)
+						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_1_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
-						} else {
+						}
+						else
+						{
 							world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 						}
 					}
 				}
-			} else if ("chest2".equals(function)) {
+			}
+			else if ("chest2".equals(function))
+			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (ConfigUA.chestGeneration) {
+				if (ConfigUA.chestGeneration)
+				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
-					if (tileentity instanceof ChestTileEntity) {
-						if (ConfigUA.chestGeneration) {
+					if (tileentity instanceof ChestTileEntity)
+					{
+						if (ConfigUA.chestGeneration)
+						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_2_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
-						} else {
+						}
+						else
+						{
 							world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), 2);
 						}
 					}
@@ -138,13 +157,12 @@ public class IceSpikeTemplePiecesUA {
 
 		}
 
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random,
-				MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
-					.setMirror(Mirror.NONE);
+
+		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+		{
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE);
 			BlockPos blockpos = IceSpikeTemplePiecesUA.OFFSET.get(this.resourceLocation);
-			this.templatePosition.add(Template.transformedBlockPos(placementsettings,
-					new BlockPos(3 - blockpos.getX(), 0, 0 - blockpos.getZ())));
+			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(3 - blockpos.getX(), 0, 0 - blockpos.getZ())));
 			return super.generate(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
 		}
 	}

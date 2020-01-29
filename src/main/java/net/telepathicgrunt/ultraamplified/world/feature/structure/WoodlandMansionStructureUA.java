@@ -28,19 +28,24 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 
-	public WoodlandMansionStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
+{
+
+	public WoodlandMansionStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 
 		int maxSpacing = ConfigUA.mansionSpawnrate;
 		int minSpacing = (int) (maxSpacing * 0.75);
 
-		if (maxSpacing < 10) {
+		if (maxSpacing < 10)
+		{
 			minSpacing = maxSpacing - 1;
 		}
 
@@ -58,13 +63,16 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (ConfigUA.mansionSpawnrate != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
-					chunkPosZ * 16 + 9, 32)) {
-				if (!chunkGen.hasStructure(biome2, FeatureUA.WOODLAND_MANSION_UA)) {
+		if (ConfigUA.mansionSpawnrate != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
+			{
+				if (!chunkGen.hasStructure(biome2, FeatureUA.WOODLAND_MANSION_UA))
+				{
 					return false;
 				}
 			}
@@ -73,35 +81,48 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return WoodlandMansionStructureUA.Start::new;
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":woodland_mansion";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 8;
 	}
 
-	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends StructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			int i = 5;
 			int j = 5;
-			if (rotation == Rotation.CLOCKWISE_90) {
+			if (rotation == Rotation.CLOCKWISE_90)
+			{
 				i = -5;
-			} else if (rotation == Rotation.CLOCKWISE_180) {
+			}
+			else if (rotation == Rotation.CLOCKWISE_180)
+			{
 				i = -5;
 				j = -5;
-			} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+			}
+			else if (rotation == Rotation.COUNTERCLOCKWISE_90)
+			{
 				j = -5;
 			}
 
@@ -114,7 +135,8 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 			int y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 			y = Math.min(y, 220);
 
-			if (y >= 70) {
+			if (y >= 70)
+			{
 				BlockPos blockpos = new BlockPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
 				List<WoodlandMansionPieces.MansionTemplate> list = Lists.newLinkedList();
 				WoodlandMansionPieces.generateMansion(templateManagerIn, blockpos, rotation, list, this.rand);
@@ -126,33 +148,40 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig> {
 			// + " " + (chunkZ * 16));
 		}
 
+
 		/**
-		 * Keeps iterating Structure Pieces and spawning them until the checks tell it
-		 * to stop
+		 * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
 		 */
-		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand,
-				MutableBoundingBox structurebb, ChunkPos p_75068_4_) {
+		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_)
+		{
 			super.generateStructure(world, p_225565_2_, rand, structurebb, p_75068_4_);
 			int i = this.bounds.minY;
 
-			for (int j = structurebb.minX; j <= structurebb.maxX; ++j) {
-				for (int k = structurebb.minZ; k <= structurebb.maxZ; ++k) {
+			for (int j = structurebb.minX; j <= structurebb.maxX; ++j)
+			{
+				for (int k = structurebb.minZ; k <= structurebb.maxZ; ++k)
+				{
 					BlockPos blockpos = new BlockPos(j, i, k);
-					if (!world.isAirBlock(blockpos) && this.bounds.isVecInside(blockpos)) {
+					if (!world.isAirBlock(blockpos) && this.bounds.isVecInside(blockpos))
+					{
 						boolean flag = false;
 
-						for (StructurePiece structurepiece : this.components) {
-							if (structurepiece.getBoundingBox().isVecInside(blockpos)) {
+						for (StructurePiece structurepiece : this.components)
+						{
+							if (structurepiece.getBoundingBox().isVecInside(blockpos))
+							{
 								flag = true;
 								break;
 							}
 						}
 
-						if (flag) {
-							for (int l = i - 1; l > 1; --l) {
+						if (flag)
+						{
+							for (int l = i - 1; l > 1; --l)
+							{
 								BlockPos blockpos1 = new BlockPos(j, l, k);
-								if (!world.isAirBlock(blockpos1)
-										&& !world.getBlockState(blockpos1).getMaterial().isLiquid()) {
+								if (!world.isAirBlock(blockpos1) && !world.getBlockState(blockpos1).getMaterial().isLiquid())
+								{
 									break;
 								}
 

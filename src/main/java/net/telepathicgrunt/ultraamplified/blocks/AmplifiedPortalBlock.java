@@ -47,6 +47,7 @@ public class AmplifiedPortalBlock extends Block
 		return SHAPE;
 	}
 
+
 	/**
 	 * mining portal block in ultra amplified dimension will be denied if it is the highest Amplified Portal Block at x=8,
 	 * z=8
@@ -118,7 +119,6 @@ public class AmplifiedPortalBlock extends Block
 		getBlock().onBlockHarvested(world, pos, state, player);
 		return world.removeBlock(pos, false);
 	}
-
 
 
 	/**

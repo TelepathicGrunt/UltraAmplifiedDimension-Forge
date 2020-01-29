@@ -1,7 +1,6 @@
 package net.telepathicgrunt.ultraamplified.world.biome;
 
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -90,72 +89,72 @@ public class BiomeInit {
 	//static variable to hold all biomes and their properties
 
 	private static Set<Biome> biomes;
-	public static Biome PLAINS = new PlainsBiomeUA();
-	public static Biome DESERT = new DesertBiomeUA();
-	public static Biome FOREST = new ForestBiomeUA();
-	public static Biome TAIGA = new TaigaBiomeUA();
-	public static Biome ROCKY_FIELD = new RockyFieldBiomeUA();
-	public static Biome SWAMP = new SwampBiomeUA();
-	public static Biome NETHERLAND =  new NetherlandBiomeUA();
-	public static Biome END_FIELD = new EndFieldBiomeUA();
-	public static Biome SNOWY_TUNDRA = new SnowyTundraBiomeUA();
-	public static Biome ICED_TERRAIN = new IcedTerrainBiomeUA();
-	public static Biome MUSHROOM_FIELDS= new MushroomFieldsBiomeUA();
-	public static Biome RELIC_DESERT = new DesertRelicBiomeUA();
-	public static Biome RELIC_FOREST = new ForestRelicBiomeUA();
-	public static Biome RELIC_TAIGA = new TaigaRelicBiomeUA();
-	public static Biome BAMBOO_JUNGLE = new BambooJungleBiomeUA();
-	public static Biome RELIC_BAMBOO_JUNGLE = new BambooJungleRelicBiomeUA();
-	public static Biome JUNGLE = new JungleBiomeUA();
-	public static Biome RELIC_JUNGLE = new JungleRelicBiomeUA();
-	public static Biome JUNGLE_EDGE = new JungleEdgeBiomeUA();
-	public static Biome STONE_PLAINS = new StoneFieldsBiomeUA();
-	public static Biome FROZEN_DESERT = new FrozenDesertBiomeUA();
-	public static Biome BIRCH_FOREST = new BirchForestBiomeUA();
-	public static Biome RELIC_BIRCH_FOREST = new BirchForestBiomeUA();
-	public static Biome DARK_FOREST = new DarkForestBiomeUA();
-	public static Biome SNOWY_TAIGA = new SnowyTaigaBiomeUA();
-	public static Biome RELIC_SNOWY_TAIGA = new SnowyTaigaRelicBiomeUA();
-	public static Biome GIANT_TREE_TAIGA = new GiantTreeTaigaBiomeUA();
-	public static Biome RELIC_GIANT_TREE_TAIGA = new GiantTreeTaigaRelicBiomeUA();
-	public static Biome WOODED_ROCKY_FIELD = new RockyFieldWoodedBiomeUA();
-	public static Biome SAVANNA = new SavannaBiomeUA();
-	public static Biome SAVANNA_TERRACE = new SavannaTerraceBiomeUA();
-	public static Biome BADLANDS = new BadlandsBiomeUA();
-	public static Biome WOODED_BADLANDS = new BadlandsWoodedBiomeUA();
-	public static Biome SANDLESS_BADLANDS = new BadlandsSandlessBiomeUA();
-	public static Biome SUNFLOWER_PLAINS = new SunflowerPlainsBiomeUA();
-	public static Biome DESERT_LAKES = new DesertLakesBiomeUA();
-	public static Biome GRAVELLY_FIELD = new GravellyFieldBiomeUA();
-	public static Biome FLOWER_FOREST = new FlowerForestBiomeUA();
-	public static Biome ROCKY_TAIGA = new TaigaRockyBiomeUA();
-	public static Biome SPOOKY_SWAMP = new SwampSpookyBiomeUA();
-	public static Biome ICE_SPIKES = new IceSpikesBiomeUA();
-	public static Biome FLOWER_JUNGLE = new FlowerJungleBiomeUA();
-	public static Biome FLOWER_JUNGLE_EDGE = new FlowerJungleEdgeBiomeUA();
-	public static Biome TALL_BIRCH_FOREST = new TallBirchForestBiomeUA();
-	public static Biome RELIC_TALL_BIRCH_FOREST = new TallBirchForestRelicBiomeUA();
-	public static Biome RELIC_DARK_FOREST = new DarkForestRelicBiomeUA();
-	public static Biome SNOWY_ROCKY_TAIGA = new SnowyTaigaRockyBiomeUA();
-	public static Biome GIANT_SPRUCE_TAIGA_PILLARS = new GiantSpruceTaigaPillarsBiomeUA();
-	public static Biome RELIC_GIANT_SPRUCE_TAIGA_PILLARS = new GiantSpruceTaigaRelicPillarsBiomeUA();
-	public static Biome GRAVELLY_COLUMNS_FIELD = new GravellyColumnsFieldBiomeUA();
-	public static Biome SHATTERED_SAVANNA = new ShatteredSavannaBiomeUA();
-	public static Biome SHATTERED_SAVANNA_TERRACE = new ShatteredSavannaTerraceBiomeUA();
-	public static Biome SPIKY_BADLANDS = new BadlandsSpikyBiomeUA();
-	public static Biome DENSED_WOODED_BADLANDS = new BadlandsDensedWoodedBiomeUA();
-	public static Biome DISSECTED_PLATEAU_BADLANDS = new BadlandsDissectedPlateauBiomeUA();
-	public static Biome COLD_OCEAN = new OceanColdBiomeUA();
-	public static Biome DEEP_COLD_OCEAN = new OceanDeepColdBiomeUA();
-	public static Biome DEEP_FROZEN_OCEAN = new OceanDeepFrozenBiomeUA();
-	public static Biome DEEP_LUKEWARM_OCEAN = new OceanDeepLukewarmBiomeUA();
-	public static Biome DEEP_OCEAN = new OceanDeepBiomeUA();
-	public static Biome DEEP_WARM_OCEAN = new OceanDeepWarmBiomeUA();
-	public static Biome FROZEN_OCEAN = new OceanFrozenBiomeUA();
-	public static Biome LUKEWARM_OCEAN = new OceanLukewarmBiomeUA();
-	public static Biome OCEAN = new OceanBiomeUA();
-	public static Biome WARM_OCEAN = new OceanWarmBiomeUA();
-	public static Biome BARREN_END_FIELD = new EndBarrenFieldBiomeUA();
+	public static Biome PLAINS;	
+	public static Biome DESERT;
+	public static Biome FOREST;
+	public static Biome TAIGA;
+	public static Biome ROCKY_FIELD;
+	public static Biome SWAMP;
+	public static Biome NETHERLAND;
+	public static Biome END_FIELD;
+	public static Biome SNOWY_TUNDRA;
+	public static Biome ICED_TERRAIN;
+	public static Biome MUSHROOM_FIELDS;
+	public static Biome RELIC_DESERT;
+	public static Biome RELIC_FOREST;
+	public static Biome RELIC_TAIGA;
+	public static Biome BAMBOO_JUNGLE;
+	public static Biome RELIC_BAMBOO_JUNGLE;
+	public static Biome JUNGLE;
+	public static Biome RELIC_JUNGLE;
+	public static Biome JUNGLE_EDGE;
+	public static Biome STONE_PLAINS;
+	public static Biome FROZEN_DESERT;
+	public static Biome BIRCH_FOREST;
+	public static Biome RELIC_BIRCH_FOREST;
+	public static Biome DARK_FOREST;
+	public static Biome SNOWY_TAIGA;
+	public static Biome RELIC_SNOWY_TAIGA;
+	public static Biome GIANT_TREE_TAIGA;
+	public static Biome RELIC_GIANT_TREE_TAIGA;
+	public static Biome WOODED_ROCKY_FIELD;
+	public static Biome SAVANNA;
+	public static Biome SAVANNA_TERRACE;
+	public static Biome BADLANDS;
+	public static Biome WOODED_BADLANDS;
+	public static Biome SANDLESS_BADLANDS;
+	public static Biome SUNFLOWER_PLAINS;
+	public static Biome DESERT_LAKES;
+	public static Biome GRAVELLY_FIELD;
+	public static Biome FLOWER_FOREST;
+	public static Biome ROCKY_TAIGA;
+	public static Biome SPOOKY_SWAMP;
+	public static Biome ICE_SPIKES;
+	public static Biome FLOWER_JUNGLE;
+	public static Biome FLOWER_JUNGLE_EDGE;
+	public static Biome TALL_BIRCH_FOREST;
+	public static Biome RELIC_TALL_BIRCH_FOREST;
+	public static Biome RELIC_DARK_FOREST;
+	public static Biome SNOWY_ROCKY_TAIGA;
+	public static Biome GIANT_SPRUCE_TAIGA_PILLARS;
+	public static Biome RELIC_GIANT_SPRUCE_TAIGA_PILLARS;
+	public static Biome GRAVELLY_COLUMNS_FIELD;
+	public static Biome SHATTERED_SAVANNA;
+	public static Biome SHATTERED_SAVANNA_TERRACE;
+	public static Biome SPIKY_BADLANDS;
+	public static Biome DENSED_WOODED_BADLANDS;
+	public static Biome DISSECTED_PLATEAU_BADLANDS;
+	public static Biome COLD_OCEAN;
+	public static Biome DEEP_COLD_OCEAN;
+	public static Biome DEEP_FROZEN_OCEAN;
+	public static Biome DEEP_LUKEWARM_OCEAN;
+	public static Biome DEEP_OCEAN;
+	public static Biome DEEP_WARM_OCEAN;
+	public static Biome FROZEN_OCEAN;
+	public static Biome LUKEWARM_OCEAN;
+	public static Biome OCEAN;
+	public static Biome WARM_OCEAN;
+	public static Biome BARREN_END_FIELD;
 	
 	
 	//registers the biomes so they now exist in the registry along with their types
@@ -163,75 +162,76 @@ public class BiomeInit {
 
    	    IForgeRegistry<Biome> registry = event.getRegistry();
 		
-		initBiome(registry, PLAINS, "Plains", BiomeType.WARM, Type.PLAINS);
-		initBiome(registry, DESERT, "Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY);
-		initBiome(registry, FOREST, "Forest", BiomeType.WARM, Type.FOREST);
-		initBiome(registry, TAIGA, "Taiga", BiomeType.COOL, Type.CONIFEROUS, Type.FOREST);
-		initBiome(registry, ROCKY_FIELD, "Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.HILLS);
-		initBiome(registry, SWAMP, "Swamp", BiomeType.WARM, Type.WET, Type.SWAMP);
-		initBiome(registry, NETHERLAND, "Netherland", BiomeType.DESERT, Type.NETHER, Type.HOT, Type.DRY);
-		initBiome(registry, END_FIELD, "End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
-		initBiome(registry, SNOWY_TUNDRA, "Snowy Tundra", BiomeType.ICY, Type.COLD, Type.WASTELAND, Type.SNOWY);
-		initBiome(registry, ICED_TERRAIN, "Iced Terrain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
-		initBiome(registry, MUSHROOM_FIELDS, "Mushroom Field", BiomeType.WARM, Type.MAGICAL, Type.MUSHROOM, Type.RARE);
-		initBiome(registry, RELIC_DESERT, "Relic Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS);
-		initBiome(registry, RELIC_FOREST, "Relic Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS);
-		initBiome(registry, RELIC_TAIGA, "Relic Taiga", BiomeType.COOL, Type.CONIFEROUS);
-		initBiome(registry, BAMBOO_JUNGLE, "Bamboo Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
-		initBiome(registry, RELIC_BAMBOO_JUNGLE, "Relic Bamboo Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
-		initBiome(registry, JUNGLE, "Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
-		initBiome(registry, RELIC_JUNGLE, "Relic Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.HILLS);
-		initBiome(registry, JUNGLE_EDGE, "Jungle Edge", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.RARE);
-		initBiome(registry, STONE_PLAINS, "Stone Plains", BiomeType.COOL, Type.BEACH);
-		initBiome(registry, FROZEN_DESERT, "Frozen Desert", BiomeType.ICY, Type.BEACH, Type.SNOWY, Type.COLD);
-		initBiome(registry, BIRCH_FOREST, "Birch Forest", BiomeType.WARM, Type.FOREST);
-		initBiome(registry, RELIC_BIRCH_FOREST, "Relic Birch Forest", BiomeType.WARM, Type.FOREST, Type.HILLS);
-		initBiome(registry, DARK_FOREST, "Dark Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.SPOOKY);
-		initBiome(registry, SNOWY_TAIGA, "Snowy Taiga", BiomeType.ICY, Type.FOREST,Type.CONIFEROUS, Type.SNOWY, Type.COLD);
-		initBiome(registry, RELIC_SNOWY_TAIGA, "Relic Snowy Taiga", BiomeType.ICY, Type.FOREST, Type.CONIFEROUS, Type.SNOWY, Type.COLD, Type.HILLS);
-		initBiome(registry, GIANT_TREE_TAIGA, "Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST);
-		initBiome(registry, RELIC_GIANT_TREE_TAIGA, "Relic Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.HILLS);
-		initBiome(registry, WOODED_ROCKY_FIELD, "Wooden Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.FOREST, Type.SPARSE);
-		initBiome(registry, SAVANNA, "Savanna", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE);
-		initBiome(registry, SAVANNA_TERRACE, "Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
-		initBiome(registry, BADLANDS, "Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
-		initBiome(registry, WOODED_BADLANDS, "Wooded Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY, Type.SPARSE);
-		initBiome(registry, SANDLESS_BADLANDS, "Sandless_Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
-		initBiome(registry, SUNFLOWER_PLAINS, "Sunflower Plains", BiomeType.WARM, Type.PLAINS, Type.RARE);
-		initBiome(registry, DESERT_LAKES, "Desert Lakes", BiomeType.DESERT, Type.HOT, Type.SANDY, Type.RARE);
-		initBiome(registry, GRAVELLY_FIELD, "Gravelly Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
-		initBiome(registry, FLOWER_FOREST, "Flower Forest", BiomeType.WARM, Type.FOREST, Type.HILLS, Type.RARE);
-		initBiome(registry, ROCKY_TAIGA, "Rocky Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, SPOOKY_SWAMP, "Spooky Swampland", BiomeType.WARM, Type.SWAMP, Type.WET, Type.HILLS, Type.RARE);
-		initBiome(registry, ICE_SPIKES, "Ice Spikes", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.HILLS, Type.RARE);
-		initBiome(registry, FLOWER_JUNGLE, "Flower Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.JUNGLE, Type.MOUNTAIN, Type.RARE, Type.DENSE);
-		initBiome(registry, FLOWER_JUNGLE_EDGE, "Flower Jungle Edge", BiomeType.WARM, Type.HOT, Type.SPARSE, Type.HILLS, Type.JUNGLE, Type.RARE);
-		initBiome(registry, TALL_BIRCH_FOREST, "Tall Birch Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS, Type.RARE);
-		initBiome(registry, RELIC_TALL_BIRCH_FOREST, "Relic Tall Birch Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, RELIC_DARK_FOREST, "Relic Dark Forest", BiomeType.WARM, Type.SPOOKY, Type.DENSE, Type.FOREST, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, SNOWY_ROCKY_TAIGA, "Snowy Rocky Taiga", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.CONIFEROUS, Type.MOUNTAIN, Type.FOREST, Type.RARE);
-		initBiome(registry, GIANT_SPRUCE_TAIGA_PILLARS, "Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.RARE);
-		initBiome(registry, RELIC_GIANT_SPRUCE_TAIGA_PILLARS, "Relic Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
-		initBiome(registry, GRAVELLY_COLUMNS_FIELD, "Gravelly Columns Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
-		initBiome(registry, SHATTERED_SAVANNA, "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, SHATTERED_SAVANNA_TERRACE, "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
-		initBiome(registry, SPIKY_BADLANDS, "Spiky Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, DENSED_WOODED_BADLANDS, "Densed Wooded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
-		initBiome(registry, DISSECTED_PLATEAU_BADLANDS, "Dissected Plateau Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
-		initBiome(registry, COLD_OCEAN, "Cold Ocean", BiomeType.COOL, Type.OCEAN);
-		initBiome(registry, DEEP_COLD_OCEAN, "Deep Cold Ocean", BiomeType.COOL, Type.OCEAN, Type.COLD);
-		initBiome(registry, DEEP_FROZEN_OCEAN, "Deep Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
-		initBiome(registry, DEEP_LUKEWARM_OCEAN, "Deep Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
-		initBiome(registry, DEEP_OCEAN, "Deep Ocean", BiomeType.COOL, Type.OCEAN);
-		initBiome(registry, DEEP_WARM_OCEAN, "Deep Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
-		initBiome(registry, FROZEN_OCEAN, "Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
-		initBiome(registry, LUKEWARM_OCEAN, "Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
-		initBiome(registry, OCEAN, "Ocean", BiomeType.COOL, Type.OCEAN);
-		initBiome(registry, WARM_OCEAN, "Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
-		initBiome(registry, BARREN_END_FIELD, "Barren End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
+		PLAINS = initBiome(registry, new PlainsBiomeUA(), "Plains", BiomeType.WARM, Type.PLAINS);
+		DESERT = initBiome(registry, new DesertBiomeUA(), "Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY);
+		FOREST = initBiome(registry, new ForestBiomeUA(), "Forest", BiomeType.WARM, Type.FOREST);
+		TAIGA = initBiome(registry, new TaigaBiomeUA(), "Taiga", BiomeType.COOL, Type.CONIFEROUS, Type.FOREST);
+		ROCKY_FIELD = initBiome(registry, new RockyFieldBiomeUA(), "Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.HILLS);
+		SWAMP = initBiome(registry, new SwampBiomeUA(), "Swamp", BiomeType.WARM, Type.WET, Type.SWAMP);
+		NETHERLAND = initBiome(registry,  new NetherlandBiomeUA(), "Netherland", BiomeType.DESERT, Type.NETHER, Type.HOT, Type.DRY);
+		END_FIELD = initBiome(registry, new EndFieldBiomeUA(), "End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
+		SNOWY_TUNDRA = initBiome(registry, new SnowyTundraBiomeUA(), "Snowy Tundra", BiomeType.ICY, Type.COLD, Type.WASTELAND, Type.SNOWY);
+		ICED_TERRAIN = initBiome(registry, new IcedTerrainBiomeUA(), "Iced Terrain", BiomeType.ICY, Type.COLD, Type.MOUNTAIN, Type.SNOWY);
+		MUSHROOM_FIELDS = initBiome(registry, new MushroomFieldsBiomeUA(), "Mushroom Field", BiomeType.WARM, Type.MAGICAL, Type.MUSHROOM, Type.RARE);
+		RELIC_DESERT = initBiome(registry, new DesertRelicBiomeUA(), "Relic Desert", BiomeType.DESERT, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS);
+		RELIC_FOREST = initBiome(registry, new ForestRelicBiomeUA(), "Relic Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS);
+		RELIC_TAIGA = initBiome(registry, new TaigaRelicBiomeUA(), "Relic Taiga", BiomeType.COOL, Type.CONIFEROUS);
+		BAMBOO_JUNGLE = initBiome(registry, new BambooJungleBiomeUA(), "Bamboo Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
+		RELIC_BAMBOO_JUNGLE = initBiome(registry, new BambooJungleRelicBiomeUA(), "Relic Bamboo Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
+		JUNGLE = initBiome(registry, new JungleBiomeUA(), "Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
+		RELIC_JUNGLE = initBiome(registry, new JungleRelicBiomeUA(), "Relic Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.HILLS);
+		JUNGLE_EDGE = initBiome(registry, new JungleEdgeBiomeUA(), "Jungle Edge", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.RARE);
+		STONE_PLAINS = initBiome(registry, new StoneFieldsBiomeUA(), "Stone Plains", BiomeType.COOL, Type.BEACH);
+		FROZEN_DESERT = initBiome(registry, new FrozenDesertBiomeUA(), "Frozen Desert", BiomeType.ICY, Type.BEACH, Type.SNOWY, Type.COLD);
+		BIRCH_FOREST = initBiome(registry, new BirchForestBiomeUA(), "Birch Forest", BiomeType.WARM, Type.FOREST);
+		RELIC_BIRCH_FOREST = initBiome(registry, new BirchForestBiomeUA(), "Relic Birch Forest", BiomeType.WARM, Type.FOREST, Type.HILLS);
+		DARK_FOREST = initBiome(registry, new DarkForestBiomeUA(), "Dark Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.SPOOKY);
+		SNOWY_TAIGA = initBiome(registry, new SnowyTaigaBiomeUA(), "Snowy Taiga", BiomeType.ICY, Type.FOREST,Type.CONIFEROUS, Type.SNOWY, Type.COLD);
+		RELIC_SNOWY_TAIGA = initBiome(registry, new SnowyTaigaRelicBiomeUA(), "Relic Snowy Taiga", BiomeType.ICY, Type.FOREST, Type.CONIFEROUS, Type.SNOWY, Type.COLD, Type.HILLS);
+		GIANT_TREE_TAIGA = initBiome(registry, new GiantTreeTaigaBiomeUA(), "Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST);
+		RELIC_GIANT_TREE_TAIGA = initBiome(registry, new GiantTreeTaigaRelicBiomeUA(), "Relic Giant Tree Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.HILLS);
+		WOODED_ROCKY_FIELD = initBiome(registry, new RockyFieldWoodedBiomeUA(), "Wooden Rocky Field", BiomeType.COOL, Type.MOUNTAIN, Type.FOREST, Type.SPARSE);
+		SAVANNA = initBiome(registry, new SavannaBiomeUA(), "Savanna", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE);
+		SAVANNA_TERRACE = initBiome(registry, new SavannaTerraceBiomeUA(), "Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.SAVANNA, Type.PLAINS, Type.SPARSE, Type.RARE);
+		BADLANDS = initBiome(registry, new BadlandsBiomeUA(), "Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
+		WOODED_BADLANDS = initBiome(registry, new BadlandsWoodedBiomeUA(), "Wooded Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY, Type.SPARSE);
+		SANDLESS_BADLANDS = initBiome(registry, new BadlandsSandlessBiomeUA(), "Sandless_Badlands", BiomeType.DESERT, Type.MESA, Type.SANDY);
+		SUNFLOWER_PLAINS = initBiome(registry, new SunflowerPlainsBiomeUA(), "Sunflower Plains", BiomeType.WARM, Type.PLAINS, Type.RARE);
+		DESERT_LAKES = initBiome(registry, new DesertLakesBiomeUA(), "Desert Lakes", BiomeType.DESERT, Type.HOT, Type.SANDY, Type.RARE);
+		GRAVELLY_FIELD = initBiome(registry, new GravellyFieldBiomeUA(), "Gravelly Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
+		FLOWER_FOREST = initBiome(registry, new FlowerForestBiomeUA(), "Flower Forest", BiomeType.WARM, Type.FOREST, Type.HILLS, Type.RARE);
+		ROCKY_TAIGA = initBiome(registry, new TaigaRockyBiomeUA(), "Rocky Taiga", BiomeType.COOL, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.MOUNTAIN, Type.RARE);
+		SPOOKY_SWAMP = initBiome(registry, new SwampSpookyBiomeUA(), "Spooky Swampland", BiomeType.WARM, Type.SWAMP, Type.WET, Type.HILLS, Type.RARE);
+		ICE_SPIKES = initBiome(registry, new IceSpikesBiomeUA(), "Ice Spikes", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.HILLS, Type.RARE);
+		FLOWER_JUNGLE = initBiome(registry, new FlowerJungleBiomeUA(), "Flower Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.JUNGLE, Type.MOUNTAIN, Type.RARE, Type.DENSE);
+		FLOWER_JUNGLE_EDGE = initBiome(registry, new FlowerJungleEdgeBiomeUA(), "Flower Jungle Edge", BiomeType.WARM, Type.HOT, Type.SPARSE, Type.HILLS, Type.JUNGLE, Type.RARE);
+		TALL_BIRCH_FOREST = initBiome(registry, new TallBirchForestBiomeUA(), "Tall Birch Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.HILLS, Type.RARE);
+		RELIC_TALL_BIRCH_FOREST = initBiome(registry, new TallBirchForestRelicBiomeUA(), "Relic Tall Birch Forest", BiomeType.WARM, Type.FOREST, Type.DENSE, Type.MOUNTAIN, Type.RARE);
+		RELIC_DARK_FOREST = initBiome(registry, new DarkForestRelicBiomeUA(), "Relic Dark Forest", BiomeType.WARM, Type.SPOOKY, Type.DENSE, Type.FOREST, Type.MOUNTAIN, Type.RARE);
+		SNOWY_ROCKY_TAIGA = initBiome(registry, new SnowyTaigaRockyBiomeUA(), "Snowy Rocky Taiga", BiomeType.ICY, Type.COLD, Type.SNOWY, Type.CONIFEROUS, Type.MOUNTAIN, Type.FOREST, Type.RARE);
+		GIANT_SPRUCE_TAIGA_PILLARS = initBiome(registry, new GiantSpruceTaigaPillarsBiomeUA(), "Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.RARE);
+		RELIC_GIANT_SPRUCE_TAIGA_PILLARS = initBiome(registry, new GiantSpruceTaigaRelicPillarsBiomeUA(), "Relic Giant Spruce Taiga Pillars", BiomeType.COOL, Type.DENSE, Type.FOREST, Type.HILLS, Type.RARE);
+		GRAVELLY_COLUMNS_FIELD = initBiome(registry, new GravellyColumnsFieldBiomeUA(), "Gravelly Columns Field", BiomeType.COOL, Type.MOUNTAIN, Type.SPARSE, Type.RARE);
+		SHATTERED_SAVANNA = initBiome(registry, new ShatteredSavannaBiomeUA(), "Shattered Savanna", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.MOUNTAIN, Type.RARE);
+		SHATTERED_SAVANNA_TERRACE = initBiome(registry, new ShatteredSavannaTerraceBiomeUA(), "Shattered Savanna Terrace", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.SAVANNA, Type.HILLS, Type.RARE);
+		SPIKY_BADLANDS = initBiome(registry, new BadlandsSpikyBiomeUA(), "Spiky Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
+		DENSED_WOODED_BADLANDS = initBiome(registry, new BadlandsDensedWoodedBiomeUA(), "Densed Wooded Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.HILLS, Type.RARE);
+		DISSECTED_PLATEAU_BADLANDS = initBiome(registry, new BadlandsDissectedPlateauBiomeUA(), "Dissected Plateau Badlands", BiomeType.DESERT, Type.HOT, Type.DRY, Type.SPARSE, Type.MESA, Type.MOUNTAIN, Type.RARE);
+		COLD_OCEAN = initBiome(registry, new OceanColdBiomeUA(), "Cold Ocean", BiomeType.COOL, Type.OCEAN);
+		DEEP_COLD_OCEAN = initBiome(registry, new OceanDeepColdBiomeUA(), "Deep Cold Ocean", BiomeType.COOL, Type.OCEAN, Type.COLD);
+		DEEP_FROZEN_OCEAN = initBiome(registry, new OceanDeepFrozenBiomeUA(), "Deep Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
+		DEEP_LUKEWARM_OCEAN =initBiome(registry, new OceanDeepLukewarmBiomeUA(), "Deep Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
+		DEEP_OCEAN = initBiome(registry, new OceanDeepBiomeUA(), "Deep Ocean", BiomeType.COOL, Type.OCEAN);
+		DEEP_WARM_OCEAN = initBiome(registry, new OceanDeepWarmBiomeUA(), "Deep Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
+		FROZEN_OCEAN = initBiome(registry, new OceanFrozenBiomeUA(), "Frozen Ocean", BiomeType.ICY, Type.OCEAN, Type.COLD);
+		LUKEWARM_OCEAN = initBiome(registry, new OceanLukewarmBiomeUA(), "Lukewarm Ocean", BiomeType.WARM, Type.OCEAN);
+		OCEAN = initBiome(registry, new OceanBiomeUA(), "Ocean", BiomeType.COOL, Type.OCEAN);
+		WARM_OCEAN = initBiome(registry, new OceanWarmBiomeUA(), "Warm Ocean", BiomeType.WARM, Type.OCEAN, Type.HOT);
+		BARREN_END_FIELD = initBiome(registry, new EndBarrenFieldBiomeUA(), "Barren End Field", BiomeType.COOL, Type.END, Type.SPOOKY, Type.COLD, Type.DRY);
 		
 		
 		mapHillsBiomes();
+		mapMBiomes();
 		
 		
 		//adds to a list which we then need in biomeProviderUA
@@ -326,12 +326,10 @@ public class BiomeInit {
 	//Handles conversion between M form and non-M form biomes. 
 	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods
 	//Also better as I can specify new M variant biomes or make any biome an M variant of another unrelated biome.
-    public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<>();
+    public static Map<Biome,Biome> BASE_TO_MUTATION_MAP;
     
     public static void mapMBiomes() {
     	//registers who is an M variant of another biome
-    	BASE_TO_MUTATION_MAP.clear();
-    	
     	BASE_TO_MUTATION_MAP.put(PLAINS, SUNFLOWER_PLAINS);
     	BASE_TO_MUTATION_MAP.put(DESERT, DESERT_LAKES);
     	BASE_TO_MUTATION_MAP.put(BIRCH_FOREST, TALL_BIRCH_FOREST);
@@ -367,7 +365,7 @@ public class BiomeInit {
 	//Handles conversion between Hills form and non-M form biomes in GenLayerHillsUA. 
 	//Necessary since forge does not have a way of doing this and vanilla uses a map that is initialized at a bad time/place in reference to forge mods
 	//Also better as I can specify new Hills variant biomes or make any biome an Hills variant of another unrelated biome.
-    public static final Map<Integer, Integer> BASE_TO_HILLS_MAP = new HashMap<>();
+    public static Map<Integer, Integer> BASE_TO_HILLS_MAP;
     
     private static void mapHillsBiomes() {
     	//registers who is an Hills variant of another biome

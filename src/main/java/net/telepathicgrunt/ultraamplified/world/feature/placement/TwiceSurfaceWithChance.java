@@ -31,7 +31,7 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
 			int height = random.nextInt(180) + 75;
-			blockpos$Mutable.setPos(pos.getX() + x, height, pos.getZ()+z);
+			blockpos$Mutable.setPos(pos.getX() + x, height, pos.getZ() + z);
 
 			//if height is inside a non-air block, move down until we reached an air block
 			while (blockpos$Mutable.getY() > 74)

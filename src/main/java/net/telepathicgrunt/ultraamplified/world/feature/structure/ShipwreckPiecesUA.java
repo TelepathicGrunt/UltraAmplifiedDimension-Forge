@@ -28,21 +28,13 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 public class ShipwreckPiecesUA
 {
 	private static final BlockPos STRUCTURE_OFFSET = new BlockPos(4, 0, 15);
-	private static final ResourceLocation[] BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/sideways_full"),
-			new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"), new ResourceLocation("shipwreck/rightsideup_full"),
-			new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"), new ResourceLocation("shipwreck/with_mast_degraded"),
-			new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"),
-			new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
-	private static final ResourceLocation[] NOT_BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"),
-			new ResourceLocation("shipwreck/upsidedown_full"), new ResourceLocation("shipwreck/upsidedown_fronthalf"), new ResourceLocation("shipwreck/upsidedown_backhalf"),
-			new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"),
-			new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"),
-			new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/upsidedown_full_degraded"),
-			new ResourceLocation("shipwreck/upsidedown_fronthalf_degraded"), new ResourceLocation("shipwreck/upsidedown_backhalf_degraded"),
-			new ResourceLocation("shipwreck/sideways_full_degraded"), new ResourceLocation("shipwreck/sideways_fronthalf_degraded"),
-			new ResourceLocation("shipwreck/sideways_backhalf_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"),
-			new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
-	
+	private static final ResourceLocation[] BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"), new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"),
+			new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
+	private static final ResourceLocation[] NOT_BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/upsidedown_full"), new ResourceLocation("shipwreck/upsidedown_fronthalf"), new ResourceLocation("shipwreck/upsidedown_backhalf"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"),
+			new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"), new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/upsidedown_full_degraded"), new ResourceLocation("shipwreck/upsidedown_fronthalf_degraded"), new ResourceLocation("shipwreck/upsidedown_backhalf_degraded"), new ResourceLocation("shipwreck/sideways_full_degraded"),
+			new ResourceLocation("shipwreck/sideways_fronthalf_degraded"), new ResourceLocation("shipwreck/sideways_backhalf_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
+
+
 	public static void beginGeneration(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> piecesList, Random random, ShipwreckConfig config, int height)
 	{
 		ResourceLocation resourcelocation = config.isBeached ? BEACHED_SHIPS[random.nextInt(BEACHED_SHIPS.length)] : NOT_BEACHED_SHIPS[random.nextInt(NOT_BEACHED_SHIPS.length)];
@@ -96,8 +88,7 @@ public class ShipwreckPiecesUA
 		private void func_204754_a(TemplateManager templateManager)
 		{
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(ShipwreckPiecesUA.STRUCTURE_OFFSET)
-					.addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(ShipwreckPiecesUA.STRUCTURE_OFFSET).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 			this.setup(template, this.templatePosition, placementsettings);
 		}
 
@@ -145,7 +136,7 @@ public class ShipwreckPiecesUA
 			BlockPos blockpos;
 			BlockPos blockposSize = this.template.getSize();
 			int k = blockposSize.getX() * blockposSize.getZ();
-			
+
 			//This is how vanilla moves the block pos to always be checking land at exact same position to keep shipwreck together at same height
 			if (k == 0)
 			{
@@ -156,8 +147,7 @@ public class ShipwreckPiecesUA
 				blockpos = templatePosition.add(blockposSize.getX() - 1, 0, blockposSize.getZ() - 1);
 				blockpos = new BlockPos(blockpos.getX(), startHeight, blockpos.getZ());
 			}
-			
-			
+
 			// finds surface on water
 			while (blockpos.getY() > 65 && world.getBlockState(blockpos).getFluidState().isEmpty())
 			{
@@ -169,8 +159,7 @@ public class ShipwreckPiecesUA
 			{
 				blockpos = blockpos.down();
 			}
-			
-			
+
 			//debugging
 			//world.setBlockState(blockpos, Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
 			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());

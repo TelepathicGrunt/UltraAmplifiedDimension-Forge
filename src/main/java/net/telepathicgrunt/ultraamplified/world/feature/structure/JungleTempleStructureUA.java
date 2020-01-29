@@ -20,17 +20,22 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class JungleTempleStructureUA extends Structure<NoFeatureConfig> {
 
-	public JungleTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+public class JungleTempleStructureUA extends Structure<NoFeatureConfig>
+{
+
+	public JungleTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 		int maxDistance = ConfigUA.jungleTempleSpawnrate;
 		int minDistance = 8;
-		if (maxDistance < 9) {
+		if (maxDistance < 9)
+		{
 			minDistance = maxDistance - 1;
 		}
 		int k = x + maxDistance * spacingOffsetsX;
@@ -39,8 +44,7 @@ public class JungleTempleStructureUA extends Structure<NoFeatureConfig> {
 		int j1 = l < 0 ? l - maxDistance + 1 : l;
 		int k1 = i1 / maxDistance;
 		int l1 = j1 / maxDistance;
-		((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1,
-				this.getSeedModifier());
+		((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), k1, l1, this.getSeedModifier());
 		k1 = k1 * maxDistance;
 		l1 = l1 * maxDistance;
 		k1 = k1 + random.nextInt(maxDistance - minDistance);
@@ -48,51 +52,69 @@ public class JungleTempleStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":jungle_temple";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 3;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return JungleTempleStructureUA.Start::new;
 	}
 
-	protected int getSeedModifier() {
+
+	protected int getSeedModifier()
+	{
 		return 14357619;
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.jungleTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			if (ConfigUA.jungleTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends StructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			int i = 5;
 			int j = 5;
-			if (rotation == Rotation.CLOCKWISE_90) {
+			if (rotation == Rotation.CLOCKWISE_90)
+			{
 				i = -5;
-			} else if (rotation == Rotation.CLOCKWISE_180) {
+			}
+			else if (rotation == Rotation.CLOCKWISE_180)
+			{
 				i = -5;
 				j = -5;
-			} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+			}
+			else if (rotation == Rotation.COUNTERCLOCKWISE_90)
+			{
 				j = -5;
 			}
 
@@ -105,9 +127,9 @@ public class JungleTempleStructureUA extends Structure<NoFeatureConfig> {
 			int y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 			y = Math.min(y, 244);
 
-			if (y >= 70) {
-				JungleTemplePiecesUA junglepyramidpiece = new JungleTemplePiecesUA(this.rand, chunkX * 16, y,
-						chunkZ * 16);
+			if (y >= 70)
+			{
+				JungleTemplePiecesUA junglepyramidpiece = new JungleTemplePiecesUA(this.rand, chunkX * 16, y, chunkZ * 16);
 				this.components.add(junglepyramidpiece);
 				this.recalculateStructureSize();
 				// UltraAmplified.LOGGER.log(Level.DEBUG, "Jungle Temple | "+(chunkX*16)+"

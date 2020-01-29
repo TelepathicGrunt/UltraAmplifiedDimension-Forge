@@ -26,7 +26,7 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 	}
 
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig,BlockPos pos)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos)
 	{
 		int c = chancesConfig.count;
 		if (random.nextFloat() < chancesConfig.extraChance)
@@ -43,7 +43,7 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			blockpos$Mutable.setPos(pos.getX() + x, 250, pos.getZ()+z);
+			blockpos$Mutable.setPos(pos.getX() + x, 250, pos.getZ() + z);
 
 			while (blockpos$Mutable.getY() > 74)
 			{

@@ -27,8 +27,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 	}
 
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig,
-			BlockPos pos)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos)
 	{
 		int c = chancesConfig.count;
 		if (random.nextFloat() < chancesConfig.extraChance)
@@ -45,7 +44,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
 			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
-			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.getX() + x, height, pos.getZ()+z);
+			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.getX() + x, height, pos.getZ() + z);
 
 			while (blockpos$Mutable.getY() > 74)
 			{

@@ -24,21 +24,22 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class EndCityStructureUA extends Structure<NoFeatureConfig> {
-	public EndCityStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+
+public class EndCityStructureUA extends Structure<NoFeatureConfig>
+{
+	public EndCityStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	private static final List<Biome.SpawnListEntry> END_CITY_ENEMIES = Lists.newArrayList(
-			new Biome.SpawnListEntry(EntityType.ENDERMITE, 14, 3, 5),
-			new Biome.SpawnListEntry(EntityType.ENDERMAN, 7, 1, 2),
-			new Biome.SpawnListEntry(EntityType.PHANTOM, 1, 1, 2));
-	
+	private static final List<Biome.SpawnListEntry> END_CITY_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.ENDERMITE, 14, 3, 5), new Biome.SpawnListEntry(EntityType.ENDERMAN, 7, 1, 2), new Biome.SpawnListEntry(EntityType.PHANTOM, 1, 1, 2));
+
 	private final int citySpacing = 25;
 	private final int minCitySeparation = 5;
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 		int i = citySpacing;
 		int j = minCitySeparation;
 		int k = x + i * spacingOffsetsX;
@@ -55,11 +56,14 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			if (ConfigUA.endCitySpawnrate != 101 && chunkGen.hasStructure(biome, this)) {
+		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			if (ConfigUA.endCitySpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			{
 				int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
 				return i >= 60;
 			}
@@ -67,34 +71,49 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig> {
 
 		return false;
 	}
-	
-	public Structure.IStartFactory getStartFactory() {
+
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return EndCityStructureUA.Start::new;
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":endcity";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 9;
 	}
 
-	public List<Biome.SpawnListEntry> getSpawnList() {
+
+	public List<Biome.SpawnListEntry> getSpawnList()
+	{
 		return END_CITY_ENEMIES;
 	}
-	
-	private static int getYPosForStructure(int chunkX, int chunkY, ChunkGenerator<?> generatorIn) {
+
+
+	private static int getYPosForStructure(int chunkX, int chunkY, ChunkGenerator<?> generatorIn)
+	{
 		Random random = new Random((long) (chunkX + chunkY * 10387313));
 		Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
 		int i = 5;
 		int j = 5;
-		if (rotation == Rotation.CLOCKWISE_90) {
+		if (rotation == Rotation.CLOCKWISE_90)
+		{
 			i = -5;
-		} else if (rotation == Rotation.CLOCKWISE_180) {
+		}
+		else if (rotation == Rotation.CLOCKWISE_180)
+		{
 			i = -5;
 			j = -5;
-		} else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+		}
+		else if (rotation == Rotation.COUNTERCLOCKWISE_90)
+		{
 			j = -5;
 		}
 
@@ -107,18 +126,21 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig> {
 		return Math.min(Math.min(Math.min(i1, j1), Math.min(k1, l1)), 106);
 	}
 
-	public static class Start extends StructureStart {
-		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox,
-				int referenceIn, long seedIn) {
+	public static class Start extends StructureStart
+	{
+		public Start(Structure<?> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn)
+		{
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			int height = EndCityStructureUA.getYPosForStructure(chunkX, chunkZ, generator);
 
-			if (height >= 60) {
+			if (height >= 60)
+			{
 				BlockPos blockpos = new BlockPos(chunkX * 16 + 8, height, chunkZ * 16 + 8);
 				EndCityPiecesUA.startHouseTower(templateManagerIn, blockpos, rotation, this.components, this.rand);
 				this.recalculateStructureSize();

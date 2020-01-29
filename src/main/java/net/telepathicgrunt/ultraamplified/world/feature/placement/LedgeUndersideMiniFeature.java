@@ -69,7 +69,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 	private int YPositionOfBottomOfLayer(IWorld world, Random random, BlockPos pos)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
-		
+
 		// if height is inside a non-air block, move up until we reached an air block
 		while (blockpos$Mutable.getY() < 255)
 		{

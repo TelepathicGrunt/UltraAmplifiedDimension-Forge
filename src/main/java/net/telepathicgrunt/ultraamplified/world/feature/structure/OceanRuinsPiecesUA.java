@@ -45,27 +45,14 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class OceanRuinsPiecesUA
 {
-	private static final ResourceLocation[] WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/warm_1"), new ResourceLocation("underwater_ruin/warm_2"),
-			new ResourceLocation("underwater_ruin/warm_3"), new ResourceLocation("underwater_ruin/warm_4"), new ResourceLocation("underwater_ruin/warm_5"),
-			new ResourceLocation("underwater_ruin/warm_6"), new ResourceLocation("underwater_ruin/warm_7"), new ResourceLocation("underwater_ruin/warm_8") };
-	private static final ResourceLocation[] BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/brick_1"), new ResourceLocation("underwater_ruin/brick_2"),
-			new ResourceLocation("underwater_ruin/brick_3"), new ResourceLocation("underwater_ruin/brick_4"), new ResourceLocation("underwater_ruin/brick_5"),
-			new ResourceLocation("underwater_ruin/brick_6"), new ResourceLocation("underwater_ruin/brick_7"), new ResourceLocation("underwater_ruin/brick_8") };
-	private static final ResourceLocation[] CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/cracked_1"),
-			new ResourceLocation("underwater_ruin/cracked_2"), new ResourceLocation("underwater_ruin/cracked_3"), new ResourceLocation("underwater_ruin/cracked_4"),
-			new ResourceLocation("underwater_ruin/cracked_5"), new ResourceLocation("underwater_ruin/cracked_6"), new ResourceLocation("underwater_ruin/cracked_7"),
-			new ResourceLocation("underwater_ruin/cracked_8") };
-	private static final ResourceLocation[] MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/mossy_1"), new ResourceLocation("underwater_ruin/mossy_2"),
-			new ResourceLocation("underwater_ruin/mossy_3"), new ResourceLocation("underwater_ruin/mossy_4"), new ResourceLocation("underwater_ruin/mossy_5"),
-			new ResourceLocation("underwater_ruin/mossy_6"), new ResourceLocation("underwater_ruin/mossy_7"), new ResourceLocation("underwater_ruin/mossy_8") };
-	private static final ResourceLocation[] BIG_BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_brick_1"),
-			new ResourceLocation("underwater_ruin/big_brick_2"), new ResourceLocation("underwater_ruin/big_brick_3"), new ResourceLocation("underwater_ruin/big_brick_8") };
-	private static final ResourceLocation[] BIG_MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_mossy_1"),
-			new ResourceLocation("underwater_ruin/big_mossy_2"), new ResourceLocation("underwater_ruin/big_mossy_3"), new ResourceLocation("underwater_ruin/big_mossy_8") };
-	private static final ResourceLocation[] BIG_CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_cracked_1"),
-			new ResourceLocation("underwater_ruin/big_cracked_2"), new ResourceLocation("underwater_ruin/big_cracked_3"), new ResourceLocation("underwater_ruin/big_cracked_8") };
-	private static final ResourceLocation[] BIG_WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_warm_4"),
-			new ResourceLocation("underwater_ruin/big_warm_5"), new ResourceLocation("underwater_ruin/big_warm_6"), new ResourceLocation("underwater_ruin/big_warm_7") };
+	private static final ResourceLocation[] WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/warm_1"), new ResourceLocation("underwater_ruin/warm_2"), new ResourceLocation("underwater_ruin/warm_3"), new ResourceLocation("underwater_ruin/warm_4"), new ResourceLocation("underwater_ruin/warm_5"), new ResourceLocation("underwater_ruin/warm_6"), new ResourceLocation("underwater_ruin/warm_7"), new ResourceLocation("underwater_ruin/warm_8") };
+	private static final ResourceLocation[] BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/brick_1"), new ResourceLocation("underwater_ruin/brick_2"), new ResourceLocation("underwater_ruin/brick_3"), new ResourceLocation("underwater_ruin/brick_4"), new ResourceLocation("underwater_ruin/brick_5"), new ResourceLocation("underwater_ruin/brick_6"), new ResourceLocation("underwater_ruin/brick_7"), new ResourceLocation("underwater_ruin/brick_8") };
+	private static final ResourceLocation[] CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/cracked_1"), new ResourceLocation("underwater_ruin/cracked_2"), new ResourceLocation("underwater_ruin/cracked_3"), new ResourceLocation("underwater_ruin/cracked_4"), new ResourceLocation("underwater_ruin/cracked_5"), new ResourceLocation("underwater_ruin/cracked_6"), new ResourceLocation("underwater_ruin/cracked_7"), new ResourceLocation("underwater_ruin/cracked_8") };
+	private static final ResourceLocation[] MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/mossy_1"), new ResourceLocation("underwater_ruin/mossy_2"), new ResourceLocation("underwater_ruin/mossy_3"), new ResourceLocation("underwater_ruin/mossy_4"), new ResourceLocation("underwater_ruin/mossy_5"), new ResourceLocation("underwater_ruin/mossy_6"), new ResourceLocation("underwater_ruin/mossy_7"), new ResourceLocation("underwater_ruin/mossy_8") };
+	private static final ResourceLocation[] BIG_BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_brick_1"), new ResourceLocation("underwater_ruin/big_brick_2"), new ResourceLocation("underwater_ruin/big_brick_3"), new ResourceLocation("underwater_ruin/big_brick_8") };
+	private static final ResourceLocation[] BIG_MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_mossy_1"), new ResourceLocation("underwater_ruin/big_mossy_2"), new ResourceLocation("underwater_ruin/big_mossy_3"), new ResourceLocation("underwater_ruin/big_mossy_8") };
+	private static final ResourceLocation[] BIG_CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_cracked_1"), new ResourceLocation("underwater_ruin/big_cracked_2"), new ResourceLocation("underwater_ruin/big_cracked_3"), new ResourceLocation("underwater_ruin/big_cracked_8") };
+	private static final ResourceLocation[] BIG_WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_warm_4"), new ResourceLocation("underwater_ruin/big_warm_5"), new ResourceLocation("underwater_ruin/big_warm_6"), new ResourceLocation("underwater_ruin/big_warm_7") };
 
 
 	private static ResourceLocation getSmallRuins(Random random)
@@ -93,8 +80,7 @@ public class OceanRuinsPiecesUA
 	}
 
 
-	private static void addChildRuins(TemplateManager templateManager, Random random, Rotation rotationIn, BlockPos pos, OceanRuinConfig ruinsConfig,
-			List<StructurePiece> pieceList)
+	private static void addChildRuins(TemplateManager templateManager, Random random, Rotation rotationIn, BlockPos pos, OceanRuinConfig ruinsConfig, List<StructurePiece> pieceList)
 	{
 		int x = pos.getX();
 		int z = pos.getZ();
@@ -115,7 +101,7 @@ public class OceanRuinsPiecesUA
 				Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
 				BlockPos blockpos3 = Template.getTransformedPos(new BlockPos(5, 0, 6), Mirror.NONE, rotation, new BlockPos(0, 0, 0)).add(xPos, 0, zPos);
 				MutableBoundingBox mutableboundingbox1 = MutableBoundingBox.createProper(xPos, 0, zPos, blockpos3.getX(), 0, blockpos3.getZ());
-				
+
 				if (!mutableboundingbox1.intersectsWith(mutableboundingbox))
 				{
 					addRuinsToList(templateManager, blockpos2, rotation, pieceList, random, ruinsConfig, false, 0.8F);
@@ -141,8 +127,7 @@ public class OceanRuinsPiecesUA
 	}
 
 
-	private static void addRuinsToList(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieceList, Random random, OceanRuinConfig ruinsConfig,
-			boolean isLarge, float integrity)
+	private static void addRuinsToList(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieceList, Random random, OceanRuinConfig ruinsConfig, boolean isLarge, float integrity)
 	{
 		if (ruinsConfig.field_204031_a == OceanRuinStructure.Type.WARM)
 		{
@@ -172,8 +157,7 @@ public class OceanRuinsPiecesUA
 		private boolean isLarge;
 
 
-		public Piece(TemplateManager p_i48868_1_, ResourceLocation p_i48868_2_, BlockPos p_i48868_3_, Rotation p_i48868_4_, float p_i48868_5_, OceanRuinStructure.Type p_i48868_6_,
-				boolean p_i48868_7_)
+		public Piece(TemplateManager p_i48868_1_, ResourceLocation p_i48868_2_, BlockPos p_i48868_3_, Rotation p_i48868_4_, float p_i48868_5_, OceanRuinStructure.Type p_i48868_6_, boolean p_i48868_7_)
 		{
 			super(StructureInitUA.ORPUA, 0);
 			this.ruinsTemplate = p_i48868_2_;
@@ -201,8 +185,7 @@ public class OceanRuinsPiecesUA
 		private void startSetup(TemplateManager templateManager)
 		{
 			Template template = templateManager.getTemplateDefaulted(this.ruinsTemplate);
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE)
-					.addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 			this.setup(template, this.templatePosition, placementsettings);
 		}
 
@@ -231,8 +214,7 @@ public class OceanRuinsPiecesUA
 					TileEntity tileentity = world.getTileEntity(pos);
 					if (tileentity instanceof ChestTileEntity)
 					{
-						((ChestTileEntity) tileentity).setLootTable(this.isLarge ? LootTables.CHESTS_UNDERWATER_RUIN_BIG : LootTables.CHESTS_UNDERWATER_RUIN_SMALL,
-								rand.nextLong());
+						((ChestTileEntity) tileentity).setLootTable(this.isLarge ? LootTables.CHESTS_UNDERWATER_RUIN_BIG : LootTables.CHESTS_UNDERWATER_RUIN_SMALL, rand.nextLong());
 					}
 				}
 			}
@@ -262,12 +244,11 @@ public class OceanRuinsPiecesUA
 
 			int highestHeight = 0;
 			BlockPos blockpos = templatePosition;
-			
+
 			//get center of ruins
-			int halfSizeX = this.template.getSize().getX()/2;
-			int halfSizeZ = this.template.getSize().getZ()/2;
-			
-			
+			int halfSizeX = this.template.getSize().getX() / 2;
+			int halfSizeZ = this.template.getSize().getZ() / 2;
+
 			// The following code will check if land can hold ruins.
 			// If not, then generate at y = 64.
 			//
@@ -275,42 +256,43 @@ public class OceanRuinsPiecesUA
 			// generate at bottom of ocean instead.
 
 			// gets the highest height that this ruins can be
-			blockpos = Template
-					.getTransformedPos(new BlockPos(this.template.getSize().getX()/2 - 1, 0, this.template.getSize().getZ()/2 - 1), Mirror.NONE, this.rotation, new BlockPos(0, 0, 0))
-					.add(this.templatePosition);
+			blockpos = Template.getTransformedPos(new BlockPos(this.template.getSize().getX() / 2 - 1, 0, this.template.getSize().getZ() / 2 - 1), Mirror.NONE, this.rotation, new BlockPos(0, 0, 0)).add(this.templatePosition);
 			highestHeight = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockpos.getX(), blockpos.getZ());
 			blockpos = blockpos.up(highestHeight - blockpos.getY());
-			
+
 			//check corners for air blocks.
 			boolean validPosition = true;
-			for(int x = -halfSizeX; x <= halfSizeX; x += halfSizeX) {
-				for(int z = -halfSizeZ; z <= halfSizeZ; z+= halfSizeZ) {
-					if(world.getBlockState(blockpos.add(x, 0, z)) == Blocks.AIR.getDefaultState()) {
+			for (int x = -halfSizeX; x <= halfSizeX; x += halfSizeX)
+			{
+				for (int z = -halfSizeZ; z <= halfSizeZ; z += halfSizeZ)
+				{
+					if (world.getBlockState(blockpos.add(x, 0, z)) == Blocks.AIR.getDefaultState())
+					{
 						validPosition = false;
-						
+
 						//break out of double loop
 						x = halfSizeX;
 						break;
 					}
 				}
 			}
-			
+
 			//if air is present, we are on edge of land. Go to bottom of ocean instead
-			if(!validPosition) 
+			if (!validPosition)
 			{
 				highestHeight = 64;
 			}
-			
-			
+
 			//these two lines are needed for set waterlogged blocks
 			this.templatePosition = new BlockPos(this.templatePosition.getX(), highestHeight - 1, this.templatePosition.getZ());
 			blockpos = Template.getTransformedPos(new BlockPos(this.template.getSize().getX() - 1, 2, this.template.getSize().getZ() - 1), Mirror.NONE, this.rotation, BlockPos.ZERO).add(this.templatePosition);
-			
+
 			//debug
 			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
 			this.templatePosition = new BlockPos(this.templatePosition.getX(), this.setWaterloggedBlocks(this.templatePosition, world, blockpos), this.templatePosition.getZ());
 			return super.generate(world, chunkGen, random, structureBoundingBox, chunkPos);
 		}
+
 
 		private int setWaterloggedBlocks(BlockPos pos1, IBlockReader blockReader, BlockPos pos2)
 		{
@@ -325,8 +307,7 @@ public class OceanRuinsPiecesUA
 
 				// sets waterlogged blocks in ruins when ruins block replaced water or another
 				// waterlogged block
-				for (IFluidState ifluidstate = blockReader.getFluidState(blockpos$Mutable); (iblockstate.getMaterial() == Material.AIR || ifluidstate.isTagged(FluidTags.WATER)
-						|| iblockstate.getBlock().isIn(BlockTags.ICE)) && y > 1; ifluidstate = blockReader.getFluidState(blockpos$Mutable))
+				for (IFluidState ifluidstate = blockReader.getFluidState(blockpos$Mutable); (iblockstate.getMaterial() == Material.AIR || ifluidstate.isTagged(FluidTags.WATER) || iblockstate.getBlock().isIn(BlockTags.ICE)) && y > 1; ifluidstate = blockReader.getFluidState(blockpos$Mutable))
 				{
 					--y;
 					blockpos$Mutable.setPos(x, y, z);

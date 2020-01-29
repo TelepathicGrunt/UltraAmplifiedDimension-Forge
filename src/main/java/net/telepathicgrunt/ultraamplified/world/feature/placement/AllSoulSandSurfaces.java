@@ -30,13 +30,12 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 	private final BlockState SOULSAND = Blocks.SOUL_SAND.getDefaultState();
 
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig,
-			BlockPos position)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos position)
 	{
 
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
-		
+
 		for (int i = 0; i < pfConfig.frequency; i++)
 		{
 			blockpos$Mutable.setPos(0, 255, 0);
@@ -45,7 +44,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 			{
 				int x = random.nextInt(16);
 				int z = random.nextInt(16);
-				blockpos$Mutable.setPos(position.getX() + x, blockpos$Mutable.getY(), position.getZ()+z);
+				blockpos$Mutable.setPos(position.getX() + x, blockpos$Mutable.getY(), position.getZ() + z);
 
 				//if height is inside a non-air block, move down until we reached an air block
 				while (blockpos$Mutable.getY() > 74)

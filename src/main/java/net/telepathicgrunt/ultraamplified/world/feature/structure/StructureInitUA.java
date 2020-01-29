@@ -5,7 +5,9 @@ import java.util.Locale;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 
-public class StructureInitUA {
+
+public class StructureInitUA
+{
 
 	public static IStructurePieceType TEDPUA;
 	public static IStructurePieceType ECPUA;
@@ -74,7 +76,9 @@ public class StructureInitUA {
 	public static IStructurePieceType VILUA;
 	public static IStructurePieceType VISTARTUA;
 
-	public static void registerStructurePieces() {
+
+	public static void registerStructurePieces()
+	{
 		TEDPUA = register(DesertTemplePiecesUA::new, "TeDPUA");
 		ECPUA = register(EndCityPiecesUA.CityTemplate::new, "ECPUA");
 		ISTUA = register(IceSpikeTemplePiecesUA.Piece::new, "ISTUA");
@@ -143,7 +147,9 @@ public class StructureInitUA {
 		VISTARTUA = register(VillagePastStyledPiecesUA.Start::new, "ViStartUA");
 	}
 
-	static IStructurePieceType register(IStructurePieceType p_214750_0_, String key) {
+
+	static IStructurePieceType register(IStructurePieceType p_214750_0_, String key)
+	{
 		return Registry.register(Registry.STRUCTURE_PIECE, key.toLowerCase(Locale.ROOT), p_214750_0_);
 	}
 }

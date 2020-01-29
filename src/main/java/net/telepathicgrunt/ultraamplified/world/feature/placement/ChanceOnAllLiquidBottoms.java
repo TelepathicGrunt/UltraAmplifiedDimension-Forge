@@ -1,12 +1,10 @@
 package net.telepathicgrunt.ultraamplified.world.feature.placement;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -33,13 +31,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 	}
 
 	// Needed to prevent placing features like coral inside ocean monuments
-	protected static final Set<BlockState> UNACCEPTABLE_BLOCKS = 
-				ImmutableSet.of(
-					Blocks.PRISMARINE.getDefaultState(), 
-					Blocks.PRISMARINE_BRICKS.getDefaultState(), 
-					Blocks.DARK_PRISMARINE.getDefaultState(), 
-					Blocks.SEA_LANTERN.getDefaultState()
-				);
+	protected static final Set<BlockState> UNACCEPTABLE_BLOCKS = ImmutableSet.of(Blocks.PRISMARINE.getDefaultState(), Blocks.PRISMARINE_BRICKS.getDefaultState(), Blocks.DARK_PRISMARINE.getDefaultState(), Blocks.SEA_LANTERN.getDefaultState());
 
 
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos)
@@ -58,7 +50,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 			{
 				int x = random.nextInt(16);
 				int z = random.nextInt(16);
-				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ()+z);
+				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
 
 				//if height is inside a non-water block, move down until we reached a water block
 				while (blockpos$Mutable.getY() > lowestHeight)

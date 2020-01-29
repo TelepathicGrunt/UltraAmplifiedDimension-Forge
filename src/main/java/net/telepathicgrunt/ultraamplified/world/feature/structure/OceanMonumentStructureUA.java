@@ -24,19 +24,23 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 
-public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
-	public OceanMonumentStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_) {
+
+public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
+{
+	public OceanMonumentStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	{
 		super(p_i51427_1_);
 	}
 
-	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists
-			.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
+	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
-	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z,
-			int spacingOffsetsX, int spacingOffsetsZ) {
+
+	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
+	{
 		int maxDistance = ConfigUA.oceanMonumentSpawnrate;
 		int minDistance = 8;
-		if (maxDistance < 9) {
+		if (maxDistance < 9)
+		{
 			minDistance = maxDistance - 1;
 		}
 		int k = x + maxDistance * spacingOffsetsX;
@@ -53,14 +57,16 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
 		return new ChunkPos(k1, l1);
 	}
 
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX,
-			int chunkPosZ, Biome biome) {
+
+	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
-			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(),
-					chunkPosZ * 16 + 9, 32)) {
-				if (ConfigUA.oceanMonumentSpawnrate != 101
-						&& chunkGen.hasStructure(biome2, FeatureUA.OCEAN_MONUMENT_UA)) {
+		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		{
+			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
+			{
+				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, FeatureUA.OCEAN_MONUMENT_UA))
+				{
 					return true;
 				}
 			}
@@ -69,36 +75,49 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
 		return false;
 	}
 
-	public Structure.IStartFactory getStartFactory() {
+
+	public Structure.IStartFactory getStartFactory()
+	{
 		return OceanMonumentStructureUA.Start::new;
 	}
 
-	public String getStructureName() {
+
+	public String getStructureName()
+	{
 		return UltraAmplified.MODID + ":ocean_monument";
 	}
 
-	public int getSize() {
+
+	public int getSize()
+	{
 		return 8;
 	}
 
-	public List<Biome.SpawnListEntry> getSpawnList() {
+
+	public List<Biome.SpawnListEntry> getSpawnList()
+	{
 		return MONUMENT_ENEMIES;
 	}
 
-	public static class Start extends StructureStart {
+	public static class Start extends StructureStart
+	{
 		private boolean wasCreated;
 
-		public Start(Structure<?> p_i225814_1_, int p_i225814_2_, int p_i225814_3_, MutableBoundingBox p_i225814_4_,
-				int p_i225814_5_, long p_i225814_6_) {
+
+		public Start(Structure<?> p_i225814_1_, int p_i225814_2_, int p_i225814_3_, MutableBoundingBox p_i225814_4_, int p_i225814_5_, long p_i225814_6_)
+		{
 			super(p_i225814_1_, p_i225814_2_, p_i225814_3_, p_i225814_4_, p_i225814_5_, p_i225814_6_);
 		}
 
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ,
-				Biome biomeIn) {
+
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
+		{
 			this.generate(chunkX, chunkZ);
 		}
 
-		private void generate(int chunkX, int chunkZ) {
+
+		private void generate(int chunkX, int chunkZ)
+		{
 			int i = chunkX * 16 - 29;
 			int j = chunkZ * 16 - 29;
 			Direction enumfacing = Direction.Plane.HORIZONTAL.random(this.rand);
@@ -111,13 +130,14 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig> {
 			this.wasCreated = true;
 		}
 
+
 		/**
-		 * Keeps iterating Structure Pieces and spawning them until the checks tell it
-		 * to stop
+		 * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
 		 */
-		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand,
-				MutableBoundingBox structurebb, ChunkPos pos) {
-			if (!this.wasCreated) {
+		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos pos)
+		{
+			if (!this.wasCreated)
+			{
 				this.components.clear();
 				this.generate(this.getChunkPosX(), this.getChunkPosZ());
 			}

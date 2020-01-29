@@ -40,7 +40,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 			{
 				int x = random.nextInt(16);
 				int z = random.nextInt(16);
-				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ()+z);
+				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
 
 				//height is inside a non-air block, move down until we reached an air block
 				while (blockpos$Mutable.getY() > lowestHeight)

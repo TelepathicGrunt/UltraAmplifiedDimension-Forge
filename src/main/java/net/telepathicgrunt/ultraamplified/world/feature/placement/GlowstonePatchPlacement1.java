@@ -55,7 +55,7 @@ public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>
 	private int YPositionOfBelowLayer(IWorld world, int height, Random random, BlockPos pos)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
-		
+
 		//if height is inside a non-air block, move down until we reached an air block
 		while (blockpos$Mutable.getY() > 74)
 		{
