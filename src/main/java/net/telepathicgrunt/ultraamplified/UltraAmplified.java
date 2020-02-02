@@ -84,10 +84,9 @@ public class UltraAmplified {
 	 */
     public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
     {
-        ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-
         if(PropertyManager.load(Paths.get("server.properties")).getProperty("ultra-amplifed-overworld").equals("true")) 
         {
+            ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
             serverProperties.worldType = UltraAmplifiedWorldType;
         }
     }
