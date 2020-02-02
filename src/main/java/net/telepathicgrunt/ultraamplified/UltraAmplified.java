@@ -1,12 +1,16 @@
 package net.telepathicgrunt.ultraamplified;
 
 
+import java.nio.file.Paths;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.server.dedicated.PropertyManager;
+import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -21,6 +25,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -60,18 +65,38 @@ public class UltraAmplified {
         
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::modConfig);
+        modEventBus.addListener(this::dedicatedServerSetup);
         modEventBus.register(new BlockColorManager());
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); //client side only for glowgrass color
 
 		//generates config
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
+        
 	}
 	
+
+	/*
+	 * Hacky workaround similar to what Biome O' Plenty did to get around server.properties being read and set too early before
+	 * the mod even loads at all. It's so early that the mod's worldtypes aren't added to WORLD_TYPES array and so it'll
+	 * change level-type to default regardless of what the user added.
+	 * 
+	 * My solution is to tell users to add a new entry called ultra-amplifed-overworld=true and then read that property instead. 
+	 */
+    public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
+    {
+        ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
+
+        if(PropertyManager.load(Paths.get("server.properties")).getProperty("ultra-amplifed-overworld").equals("true")) 
+        {
+            serverProperties.worldType = UltraAmplifiedWorldType;
+        }
+    }
 	
 	public void setup(final FMLCommonSetupEvent event) 
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplifiedWorldType = new WorldTypeUA();
+		
 		CapabilityPlayerPosAndDim.register();
 		RavineCarver.setFillerMap();
 		SuperLongRavineCarver.setFillerMap();
