@@ -19,7 +19,7 @@ public class PlacingUtils
 	 */
 	public static int topOfSurfaceBelowHeight(IWorld world, int startHeight, int minHeight, Random random, BlockPos position)
 	{
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), startHeight, position.getZ());
 
 		//if height is inside a non-air block, move down until we reached an air block
 		while (blockpos$Mutable.getY() > minHeight)
@@ -56,7 +56,7 @@ public class PlacingUtils
 	 */
 	public static int topOfCeilingAboveHeight(IWorld world, int startHeight, Random random, BlockPos position)
 	{
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), startHeight, position.getZ());
 
 		// if height is inside a non-air block, move up until we reached an air block
 		while (blockpos$Mutable.getY() < 255)
@@ -95,7 +95,7 @@ public class PlacingUtils
 	 */
 	public static int topOfUnderwaterSurfaceBelowHeight(IWorld world, int startHeight, Random random, BlockPos position)
 	{
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), startHeight, position.getZ());
 
 		//If height is inside a non-air/water block, move down until we reached an air/waterlogged block
 		//Treats waterlogged wood as non-waterlogged blocks.
