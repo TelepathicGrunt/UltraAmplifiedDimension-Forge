@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -47,7 +48,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, random, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
-				blockpos$Mutable.move(0, height - blockpos$Mutable.getY(), 0);
+				blockpos$Mutable.move(Direction.UP, height - blockpos$Mutable.getY());
 				
 				//if we are in a non-liquid block (not water), don't add this blockpos as it isn't valid. Retry for a new surface.
 				if(!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty()) {

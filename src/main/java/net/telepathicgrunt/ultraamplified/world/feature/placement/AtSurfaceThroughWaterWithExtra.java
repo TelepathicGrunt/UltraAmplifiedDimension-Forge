@@ -48,7 +48,7 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 				int yPosOfSurface = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), random, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
-				blockPosList.add(blockpos$Mutable.move(0, yPosOfSurface - blockpos$Mutable.getY(), 0));
+				blockPosList.add(blockpos$Mutable.move(Direction.UP, yPosOfSurface - blockpos$Mutable.getY()));
 
 				//move down one for next surface searching to not get stuck at surface we are on now.
 				blockpos$Mutable.move(Direction.DOWN);

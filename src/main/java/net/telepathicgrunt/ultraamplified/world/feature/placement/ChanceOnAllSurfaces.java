@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -45,7 +46,7 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, random, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
-				blockpos$Mutable.move(0, height - blockpos$Mutable.getY(), 0);
+				blockpos$Mutable.move(Direction.UP, height - blockpos$Mutable.getY());
 
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{
