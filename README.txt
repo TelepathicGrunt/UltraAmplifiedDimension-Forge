@@ -16,13 +16,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
+Note to self: test AtSurfaceBelowTopLayerWithExtra, AtBottomOfLedge, AtSurfaceRoofedForest, AtSurfaceThroughWaterWithExtra, ChanceOnAllLiquidBottoms, RandomChanceUnderSurface, TwiceSurfaceWithChance, ChanceOnAllSurfaces, ChanceOnAllLiquidSurfaces
     
 	Servers: 
 ·Add ultra-amplifed-overworld=true to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
     
     Structures:
-·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block more difficult from them as the Beacon block item has a higher chance of getting destroyed in the explosion.
-       
+·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.
+·Fixed Fossils not spawning on the correct ledge/places.
+
+    Biome: 
+·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
        
    (V.7.2.1 Changes) (1.15.2 Minecraft)
  

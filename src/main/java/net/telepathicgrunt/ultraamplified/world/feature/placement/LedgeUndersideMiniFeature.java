@@ -48,15 +48,15 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int topYLayer = YPositionOfBottomOfLayer(world, random, pos.add(x, random.nextInt(174) + 74, z));
+			int yPosOfSurface = YPositionOfBottomOfLayer(world, random, pos.add(x, random.nextInt(174) + 74, z));
 
 			//cannot be too low or high 
-			if (topYLayer < 75 || topYLayer > 248)
+			if (yPosOfSurface < 75 || yPosOfSurface > 248)
 			{
 				return Stream.empty();
 			}
 
-			return Stream.of(pos.add(x - 4, topYLayer - 1, z - 4));
+			return Stream.of(pos.add(x - 4, yPosOfSurface - 1, z - 4));
 		}
 		else
 		{

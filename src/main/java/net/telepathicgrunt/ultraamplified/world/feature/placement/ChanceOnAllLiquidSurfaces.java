@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -40,21 +39,22 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 
 			while (blockpos$Mutable.getY() > lowestHeight)
 			{
-				int x = random.nextInt(16);
-				int z = random.nextInt(16);
-				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
+				int xOffset = random.nextInt(16);
+				int zOffset = random.nextInt(16);
+				blockpos$Mutable.setPos(pos.getX() + xOffset, blockpos$Mutable.getY(), pos.getZ() + zOffset);
 
-				//if height is inside am air block, move down until we reached a liquid block
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					if (!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty())
-					{
-						break;
-					}
+				//will stop at first non-air block (could be water)
+				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, random, blockpos$Mutable);
 
-					blockpos$Mutable.move(Direction.DOWN);
+				//gets difference and sets mutable height to yPosOfSurface
+				blockpos$Mutable.move(0, height - blockpos$Mutable.getY(), 0);
+				
+				//if we are in a non-liquid block (not water), don't add this blockpos as it isn't valid. Retry for a new surface.
+				if(!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty()) {
+					continue;
 				}
-
+				
+				//valid surface. Now to check if height and chance allows for the position. Won't generate at 40 itself.
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{
 					break;
@@ -63,18 +63,6 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 				{
 					blockPosList.add(blockpos$Mutable.up());
 				}
-
-				//height is a water block, move down until we reached an air block. We are now on the top surface of a body of water
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					if (world.isAirBlock(blockpos$Mutable))
-					{
-						break;
-					}
-
-					blockpos$Mutable.move(Direction.DOWN);
-				}
-
 			}
 
 		}

@@ -46,7 +46,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 				int z = random.nextInt(16);
 				blockpos$Mutable.setPos(position.getX() + x, blockpos$Mutable.getY(), position.getZ() + z);
 
-				//if height is inside a non-air block, move down until we reached an air block
+				//if height is inside a non-air block, move down until we reached a soulsand block
 				while (blockpos$Mutable.getY() > 74)
 				{
 					if (world.isAirBlock(blockpos$Mutable))
@@ -57,7 +57,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 					blockpos$Mutable.move(Direction.DOWN);
 				}
 
-				//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
+				//if height is an air block, move down until we reached a soulsand block. We are now on the surface of a piece of valid land
 				while (blockpos$Mutable.getY() > 74)
 				{
 					if (world.getBlockState(blockpos$Mutable) == SOULSAND)

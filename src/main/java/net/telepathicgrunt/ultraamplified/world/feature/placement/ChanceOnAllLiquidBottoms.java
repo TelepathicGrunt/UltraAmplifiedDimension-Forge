@@ -13,7 +13,6 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -52,32 +51,17 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 				int z = random.nextInt(16);
 				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
 
-				//if height is inside a non-water block, move down until we reached a water block
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					if (!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty())
-					{
-						break;
-					}
+				int height = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), random, blockpos$Mutable);
 
-					blockpos$Mutable.move(Direction.DOWN);
+				//gets difference and sets mutable height to yPosOfSurface
+				blockpos$Mutable.move(0, height - blockpos$Mutable.getY(), 0);
+				
+				//if we are in ocean monument, don't add this blockpos as it isn't valid. Retry for a new surface.
+				if(UNACCEPTABLE_BLOCKS.contains(world.getBlockState(blockpos$Mutable))) {
+					continue;
 				}
-
-				//Height is a water block, move down until we reached a non-water block.
-				//When done, we are now on the bottom surface of a body of water. (Ignores Ocean Monument blocks)
-				BlockState currentBlock;
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					currentBlock = world.getBlockState(blockpos$Mutable);
-
-					if (currentBlock.getFluidState().isEmpty() && !UNACCEPTABLE_BLOCKS.contains(currentBlock))
-					{
-						break;
-					}
-
-					blockpos$Mutable.move(Direction.DOWN);
-				}
-
+				
+				//valid surface. Now to check if height and chance allows for the position.
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{
 					break;

@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -42,27 +41,11 @@ public class ChanceOnAllSurfaces extends Placement<PercentageAndFrequencyConfig>
 				int z = random.nextInt(16);
 				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
 
-				//height is inside a non-air block, move down until we reached an air block
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					if (world.isAirBlock(blockpos$Mutable))
-					{
-						break;
-					}
+				//will stop at first non-air block (could be water)
+				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, random, blockpos$Mutable);
 
-					blockpos$Mutable.move(Direction.DOWN);
-				}
-
-				//height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-				while (blockpos$Mutable.getY() > lowestHeight)
-				{
-					if (world.getBlockState(blockpos$Mutable).isSolid())
-					{
-						break;
-					}
-
-					blockpos$Mutable.move(Direction.DOWN);
-				}
+				//gets difference and sets mutable height to yPosOfSurface
+				blockpos$Mutable.move(0, height - blockpos$Mutable.getY(), 0);
 
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{

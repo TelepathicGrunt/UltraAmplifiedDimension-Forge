@@ -31,20 +31,20 @@ public class RandomChanceUnderSurface extends Placement<ChanceConfig>
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY() * 2;
+			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+			int y = random.nextInt((int) (height * ((ConfigUA.seaLevel / (height + 1F))) + 1F)); //scale range to be between height + seaLevel
 
 			//Generates a range between sealevel and highest land with increased chance below ConfigUA.seaLevel number of the range itself
-			if (height > ConfigUA.seaLevel)
+			if (y > ConfigUA.seaLevel)
 			{
-				height -= ConfigUA.seaLevel;
+				y -= ConfigUA.seaLevel;
 			}
 
-			if (height <= 0)
+			if (y <= 0)
 			{
-				return Stream.empty();
+				y += ConfigUA.seaLevel;
 			}
 
-			int y = random.nextInt(height) + ConfigUA.seaLevel;
 
 			return Stream.of(pos.add(x, y, z));
 		}

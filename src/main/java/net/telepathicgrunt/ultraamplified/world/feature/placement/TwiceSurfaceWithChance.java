@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -31,35 +30,16 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
 			int height = random.nextInt(180) + 75;
-			blockpos$Mutable.setPos(pos.getX() + x, height, pos.getZ() + z);
 
-			//if height is inside a non-air block, move down until we reached an air block
-			while (blockpos$Mutable.getY() > 74)
-			{
-				if (world.isAirBlock(blockpos$Mutable))
-				{
-					break;
-				}
+			//gets y value of a layer below top layer
+			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, random, pos.add(x, 0, z));
+			blockpos$Mutable.setPos(pos.getX() + x, yPosOfSurface, pos.getZ() + z);
 
-				blockpos$Mutable.move(Direction.DOWN);
-			}
-
-			//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-			while (blockpos$Mutable.getY() > 74)
-			{
-				if (!world.isAirBlock(blockpos$Mutable))
-				{
-					break;
-				}
-
-				blockpos$Mutable.move(Direction.DOWN);
-			}
-
-			if (blockpos$Mutable.getY() <= 74)
+			if (blockpos$Mutable.getY() <= 74) // won't generate at 74 itself.
 			{
 				return Stream.empty();
 			}
-
+			
 			Stream.of(blockpos$Mutable);
 		}
 

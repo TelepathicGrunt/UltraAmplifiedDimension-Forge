@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -27,48 +26,25 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 	}
 
 
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos position)
 	{
-		int c = chancesConfig.count;
+		int maxAttempt = chancesConfig.count;
 		if (random.nextFloat() < chancesConfig.extraChance)
 		{
-			c += chancesConfig.extraCount;
+			maxAttempt += chancesConfig.extraCount;
 		}
 
-		boolean airFlag = false;
-		boolean airBlock = true;
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 
-		for (int i = 0; i < c; i++)
+		for (int currentAttempt = 0; currentAttempt < maxAttempt; currentAttempt++)
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
-			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos.getX() + x, height, pos.getZ() + z);
-
-			while (blockpos$Mutable.getY() > 74)
-			{
-
-				airBlock = world.isAirBlock(blockpos$Mutable);
-
-				//if height is is an air block and previous block was a solid block, store the fact that we are in an air block now
-				if (!airFlag && airBlock)
-				{
-					airFlag = true;
-				}
-
-				//if height is an solid block and last block was air block, we are now on the surface of a piece of land. Generate feature now
-				else if (airFlag && !airBlock)
-				{
-
-					blockPosList.add(blockpos$Mutable.up());
-					airFlag = false;
-				}
-
-				//move down
-				blockpos$Mutable.move(Direction.DOWN);
-			}
-
+			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, position.add(x, 0, z)).getY();
+			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX() + x, 0, position.getZ() + z);
+			
+			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, random, position.add(x, 0, z));
+			blockPosList.add(blockpos$Mutable.up(yPosOfSurface + 1));
 		}
 
 		return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) ->

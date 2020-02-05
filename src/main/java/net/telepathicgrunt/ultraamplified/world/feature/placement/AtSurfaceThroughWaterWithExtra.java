@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -29,43 +28,29 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos)
 	{
-		int c = chancesConfig.count;
+		int maxAttempts = chancesConfig.count;
 		if (random.nextFloat() < chancesConfig.extraChance)
 		{
-			c += chancesConfig.extraCount;
+			maxAttempts += chancesConfig.extraCount;
 		}
 
-		boolean airWaterFlag = false;
-		boolean airWaterBlock = true;
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
-		for (int i = 0; i < c; i++)
+		for (int currentAttempt = 0; currentAttempt < maxAttempts; currentAttempt++)
 		{
-			int x = random.nextInt(16);
-			int z = random.nextInt(16);
-			blockpos$Mutable.setPos(pos.getX() + x, 250, pos.getZ() + z);
+			int xOffset = random.nextInt(16);
+			int zOffset = random.nextInt(16);
+			blockpos$Mutable.setPos(pos.getX() + xOffset, 250, pos.getZ() + zOffset);
 
 			while (blockpos$Mutable.getY() > 60)
 			{
+				int yPosOfSurface = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), random, blockpos$Mutable);
 
-				airWaterBlock = world.isAirBlock(blockpos$Mutable) || world.getBlockState(blockpos$Mutable) == Blocks.WATER.getDefaultState();
+				//gets difference and sets mutable height to yPosOfSurface
+				blockPosList.add(blockpos$Mutable.move(0, yPosOfSurface - blockpos$Mutable.getY(), 0));
 
-				//if height is at an air/water block and previous block was a solid block, store the fact that we are in an air/water block now
-				if (!airWaterFlag && airWaterBlock)
-				{
-					airWaterFlag = true;
-				}
-
-				//if height is an solid block and last block was air/water block, we are now on the surface of a piece of land. Generate feature now
-				else if (airWaterFlag && !airWaterBlock)
-				{
-
-					blockPosList.add(blockpos$Mutable.up());
-					airWaterFlag = false;
-				}
-
-				//move down
+				//move down one for next surface searching to not get stuck at surface we are on now.
 				blockpos$Mutable.move(Direction.DOWN);
 			}
 

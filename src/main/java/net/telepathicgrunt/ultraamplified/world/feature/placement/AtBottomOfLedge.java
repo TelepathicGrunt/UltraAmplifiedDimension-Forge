@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -36,7 +35,7 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig>
 			int height = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset) + placementConfig.bottomOffset;
 
 			// gets y value of a layer below top layer
-			int bottomYLayer = YPositionOfBottomOfLayer(world, height, random, pos.add(x, 0, z));
+			int bottomYLayer = PlacingUtils.topOfCeilingAboveHeight(world, height, random, pos.add(x, 0, z));
 
 			if (bottomYLayer > placementConfig.maximum)
 			{
@@ -45,36 +44,5 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig>
 			return pos.add(x, bottomYLayer, z);
 
 		}).filter(Objects::nonNull);
-	}
-
-
-	private int YPositionOfBottomOfLayer(IWorld world, int height, Random random, BlockPos position)
-	{
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
-
-		// if height is inside a non-air block, move up until we reached an air block
-		while (blockpos$Mutable.getY() < 255)
-		{
-			if (world.isAirBlock(blockpos$Mutable))
-			{
-				break;
-			}
-
-			blockpos$Mutable.move(Direction.UP);
-		}
-
-		// if height is an air block, move up until we reached a solid block. We are now
-		// on the bottom of a piece of land
-		while (blockpos$Mutable.getY() > 255)
-		{
-			if (!world.isAirBlock(blockpos$Mutable))
-			{
-				break;
-			}
-
-			blockpos$Mutable.move(Direction.UP);
-		}
-
-		return blockpos$Mutable.getY() > 255 ? 255 : blockpos$Mutable.getY();
 	}
 }
