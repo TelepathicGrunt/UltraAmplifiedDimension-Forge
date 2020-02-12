@@ -51,7 +51,7 @@ public class BiomeAddModdedFeatures {
 
 	// workaround due to some people registering structures under minecraft namespace
 	private static ArrayList<Structure<?>> listOfVanillaStructures = new ArrayList<Structure<?>>() {
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 13L;
 		{
 			add(Structures.MINESHAFT);
 			add(Structures.PILLAGER_OUTPOST);
@@ -73,7 +73,7 @@ public class BiomeAddModdedFeatures {
 
 	// workaround due to some people registering structures under minecraft namespace
 	private static ArrayList<Feature<?>> listOfVanillaStructureFeatures = new ArrayList<Feature<?>>() {
-		private static final long serialVersionUID = 11L;
+		private static final long serialVersionUID = 14L;
 		{
 			add(Feature.MINESHAFT);
 			add(Feature.PILLAGER_OUTPOST);
@@ -95,7 +95,7 @@ public class BiomeAddModdedFeatures {
 
 	// workaround due to some people registering mobs under minecraft namespace
 	private static ArrayList<EntityType<?>> listOfVanillaMobs = new ArrayList<EntityType<?>>() {
-		private static final long serialVersionUID = 12L;
+		private static final long serialVersionUID = 15L;
 		{
 			add(EntityType.BAT);
 			add(EntityType.BLAZE);

@@ -30,6 +30,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -77,6 +78,7 @@ public class AmplifiedPortalBehavior {
 					{
 						//first trip will always take player to ultra amplified dimension
 						//as default dim for cap is always null when player hasn't teleported yet
+						cap.setDim(DimensionType.OVERWORLD); //set previous to overworld
 						destination = UltraAmplifiedDimension.ultraamplified();
 						firstTime = true;
 						
@@ -198,8 +200,7 @@ public class AmplifiedPortalBehavior {
 			         }
 			         
 	
-					//store current blockpos and dim before teleporting
-					cap.setDim(entity.dimension);
+					//store current blockpos before teleporting.
 					cap.setPos(entity.getPosition());
 					
 					
@@ -222,217 +223,230 @@ public class AmplifiedPortalBehavior {
 				trySpawnPortal(world, event.getPos(), entity);
 			}
 		}
+
+		// Fires just before the teleportation to new dimension begins
+		@SubscribeEvent
+		public static void entityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
+		{
+			if(event.getEntity() instanceof PlayerEntity)
+			{
+				// Updates the past dimension that the player is leaving
+				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+				PlayerPositionAndDimension cap = (PlayerPositionAndDimension) playerEntity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
+				cap.setDim(playerEntity.dimension);
+			}
+		}
+	}
+
+	
+
+	// ------------------------------------------------------------------------------------//
+	// Portal creation and validation check
+
+	private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
+	private static final BlockState POLISHED_DIORITE = Blocks.POLISHED_DIORITE.getDefaultState();
+	private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
+	private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
+
+    private static boolean checkForGeneratedPortal(World world) {
+    	BlockPos pos = new BlockPos(8, 255, 8);
+    	world.getChunkAt(pos);
+    	
+    	while(pos.getY() >= 0) {
+    		if(world.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
+    			return true;
+    		}
+    		pos = pos.down();
+    	}
+    	
+    	return false;
+    }
+    
+    
+    private static void generatePortal(World world) {
+    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
+    	BlockPos pos = new BlockPos(8, 255, 8);
+    	world.getChunkAt(pos);
+    	
+    	pos = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
+    	if(pos.getY() > 252) {
+    		pos = pos.down(3);
+    	}
+    	else if(pos.getY() < 6) {
+    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
+    	}
+
+    	amplifiedportalfeature.place(world, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
+ 	}
+    
+    
+	public static boolean isValid(IWorld world, BlockPos pos, Entity entity)
+	{
+		ForgeRegistry<Block> registry = ((ForgeRegistry<Block>)ForgeRegistries.BLOCKS);
+		
+		//grabs resourcelocation from config and tries to find that block to use for corners
+		BlockState blockCorner;
+		if(!ConfigUA.portalCornerBlocks.equals("")) {
+			if(registry.containsKey(new ResourceLocation(ConfigUA.portalCornerBlocks))){
+				blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks)).getDefaultState();
+			}
+			else {
+				if(entity instanceof ServerPlayerEntity) 
+				{
+					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame corner cannot be found! Here is what was put in: "+ConfigUA.portalCornerBlocks);
+					entity.sendMessage(message);
+				}
+					
+				return false;
+			}
+		} 
+		else {
+			blockCorner = POLISHED_GRANITE;
+		}
 		
 
-		// ------------------------------------------------------------------------------------//
-		// Portal creation and validation check
-
-		private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
-		private static final BlockState POLISHED_DIORITE = Blocks.POLISHED_DIORITE.getDefaultState();
-		private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
-		private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
-
-	    private static boolean checkForGeneratedPortal(World world) {
-	    	BlockPos pos = new BlockPos(8, 255, 8);
-	    	world.getChunkAt(pos);
-	    	
-	    	while(pos.getY() >= 0) {
-	    		if(world.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState()) {
-	    			return true;
-	    		}
-	    		pos = pos.down();
-	    	}
-	    	
-	    	return false;
-	    }
-	    
-	    
-	    private static void generatePortal(World world) {
-	    	AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
-	    	BlockPos pos = new BlockPos(8, 255, 8);
-	    	world.getChunkAt(pos);
-	    	
-	    	pos = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
-	    	if(pos.getY() > 252) {
-	    		pos = pos.down(3);
-	    	}
-	    	else if(pos.getY() < 6) {
-	    		pos = new BlockPos(pos.getX(), 6, pos.getZ());
-	    	}
-
-	    	amplifiedportalfeature.place(world, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
-	 	}
-	    
-	    
-		public static boolean isValid(IWorld world, BlockPos pos, Entity entity)
-		{
-			ForgeRegistry<Block> registry = ((ForgeRegistry<Block>)ForgeRegistries.BLOCKS);
-			
-			//grabs resourcelocation from config and tries to find that block to use for corners
-			BlockState blockCorner;
-			if(!ConfigUA.portalCornerBlocks.equals("")) {
-				if(registry.containsKey(new ResourceLocation(ConfigUA.portalCornerBlocks))){
-					blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks)).getDefaultState();
-				}
-				else {
-					if(entity instanceof ServerPlayerEntity) 
-					{
-						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame corner cannot be found! Here is what was put in: "+ConfigUA.portalCornerBlocks);
-						entity.sendMessage(message);
-					}
-						
-					return false;
-				}
-			} 
-			else {
-				blockCorner = POLISHED_GRANITE;
-			}
-			
-
-			//grabs resourcelocation from config and tries to find that block to use for ceiling
-			BlockState blockCeiling;
-			if(!ConfigUA.portalCeilingBlocks.equals("")){
-				if(registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks))){
-					blockCeiling = registry.getValue(new ResourceLocation(ConfigUA.portalCeilingBlocks)).getDefaultState();
-					
-					if(blockCeiling.getBlock() instanceof SlabBlock) 
-					{
-						blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
-					}
-				}
-				else {
-					if(entity instanceof ServerPlayerEntity) 
-					{
-						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame ceiling cannot be found! Here is what was put in: "+ConfigUA.portalCeilingBlocks);
-						entity.sendMessage(message);
-					}
-					
-					return false;
-				}
-			}
-			else {
-				blockCeiling = POLISHED_ANDESITE_SLAB_TOP;
-			}
-			
-
-			//grabs resourcelocation from config and tries to find that block to use for floor
-			BlockState blockFloor;
-			if(!ConfigUA.portalFloorBlocks.equals("")) {
-				if(registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks))){
-					blockFloor = registry.getValue(new ResourceLocation(ConfigUA.portalFloorBlocks)).getDefaultState();
-					
-					if(blockFloor.getBlock() instanceof SlabBlock) 
-					{
-						blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
-					}
-				}
-				else {
-					if(entity instanceof ServerPlayerEntity) 
-					{
-						ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame floor cannot be found! Here is what was put in: "+ConfigUA.portalFloorBlocks);
-						entity.sendMessage(message);
-					}
-					
-					return false;
-				}
-			}
-			else {
-				blockFloor = POLISHED_ANDESITE_SLAB_BOTTOM;
-			}
-			
-
-			// bottom of portal frame
-			for (int x = -1; x <= 1; x++)
-			{
-				for (int z = -1; z <= 1; z++)
+		//grabs resourcelocation from config and tries to find that block to use for ceiling
+		BlockState blockCeiling;
+		if(!ConfigUA.portalCeilingBlocks.equals("")){
+			if(registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks))){
+				blockCeiling = registry.getValue(new ResourceLocation(ConfigUA.portalCeilingBlocks)).getDefaultState();
+				
+				if(blockCeiling.getBlock() instanceof SlabBlock) 
 				{
-					if (Math.abs(x * z) == 1)
-					{
-						if (world.getBlockState(pos.add(x, -1, z)) != blockCorner)
-						{
-							return false;
-						}
-					}
-					else
-					{
-						if (world.getBlockState(pos.add(x, -1, z)) != blockFloor)
-						{
-							return false;
-						}
-					}
+					blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
 				}
 			}
-
-			// the center itself
-			if (world.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
-			{
-				return false;
-			}
-
-			// top of portal frame
-			for (int x = -1; x <= 1; x++)
-			{
-				for (int z = -1; z <= 1; z++)
+			else {
+				if(entity instanceof ServerPlayerEntity) 
 				{
-					if (Math.abs(x * z) == 1)
+					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame ceiling cannot be found! Here is what was put in: "+ConfigUA.portalCeilingBlocks);
+					entity.sendMessage(message);
+				}
+				
+				return false;
+			}
+		}
+		else {
+			blockCeiling = POLISHED_ANDESITE_SLAB_TOP;
+		}
+		
+
+		//grabs resourcelocation from config and tries to find that block to use for floor
+		BlockState blockFloor;
+		if(!ConfigUA.portalFloorBlocks.equals("")) {
+			if(registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks))){
+				blockFloor = registry.getValue(new ResourceLocation(ConfigUA.portalFloorBlocks)).getDefaultState();
+				
+				if(blockFloor.getBlock() instanceof SlabBlock) 
+				{
+					blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
+				}
+			}
+			else {
+				if(entity instanceof ServerPlayerEntity) 
+				{
+					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame floor cannot be found! Here is what was put in: "+ConfigUA.portalFloorBlocks);
+					entity.sendMessage(message);
+				}
+				
+				return false;
+			}
+		}
+		else {
+			blockFloor = POLISHED_ANDESITE_SLAB_BOTTOM;
+		}
+		
+
+		// bottom of portal frame
+		for (int x = -1; x <= 1; x++)
+		{
+			for (int z = -1; z <= 1; z++)
+			{
+				if (Math.abs(x * z) == 1)
+				{
+					if (world.getBlockState(pos.add(x, -1, z)) != blockCorner)
 					{
-						if (world.getBlockState(pos.add(x, 1, z)) != blockCorner)
-						{
-							return false;
-						}
+						return false;
 					}
-					else
+				}
+				else
+				{
+					if (world.getBlockState(pos.add(x, -1, z)) != blockFloor)
 					{
-						if (world.getBlockState(pos.add(x, 1, z)) != blockCeiling)
-						{
-							return false;
-						}
+						return false;
 					}
 				}
 			}
-
-			return true;
 		}
 
-
-		public static void placePortalBlocks(IWorld world, BlockPos pos)
+		// the center itself
+		if (world.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
 		{
-			// the portal itself
-			world.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
-		}
-
-		public static boolean trySpawnPortal(IWorld world, BlockPos pos, Entity entity)
-		{
-
-			// cannot create amplified portal in Ultra Amplified Worldtype
-			if (world.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
-			{
-				return false;
-			}
-
-			boolean canMakePortal = isPortal(world, pos, entity);
-			if (canMakePortal)
-			{
-				placePortalBlocks(world, pos);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		@Nullable
-		public static boolean isPortal(IWorld world, BlockPos pos, Entity entity)
-		{
-			if (isValid(world, pos, entity))
-			{
-				return true;
-			}
-
 			return false;
 		}
 
+		// top of portal frame
+		for (int x = -1; x <= 1; x++)
+		{
+			for (int z = -1; z <= 1; z++)
+			{
+				if (Math.abs(x * z) == 1)
+				{
+					if (world.getBlockState(pos.add(x, 1, z)) != blockCorner)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					if (world.getBlockState(pos.add(x, 1, z)) != blockCeiling)
+					{
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+
+	public static void placePortalBlocks(IWorld world, BlockPos pos)
+	{
+		// the portal itself
+		world.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
+	}
+
+	public static boolean trySpawnPortal(IWorld world, BlockPos pos, Entity entity)
+	{
+
+		// cannot create amplified portal in Ultra Amplified Worldtype
+		if (world.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
+		{
+			return false;
+		}
+
+		boolean canMakePortal = isPortal(world, pos, entity);
+		if (canMakePortal)
+		{
+			placePortalBlocks(world, pos);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Nullable
+	public static boolean isPortal(IWorld world, BlockPos pos, Entity entity)
+	{
+		if (isValid(world, pos, entity))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 }
