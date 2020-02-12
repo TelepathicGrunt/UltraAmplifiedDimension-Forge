@@ -82,24 +82,13 @@ public class Roots extends Feature<BlockConfig>
 				currentBlockState = world.getBlockState(blockpos$Mutable);
 				if (blockpos$Mutable.getY() <= position.getY() && (currentBlockState.getMaterial() == Material.AIR || currentBlockState == blockConfig.block.getDefaultState() || currentBlockState == Blocks.VINE.getDefaultState()))
 				{
+					//set root block
+					world.setBlockState(blockpos$Mutable, blockConfig.block.getDefaultState(), 2);
 
-					//checks to see if there is solid land still above (1 blocks higher than position height)
-					if (world.getBlockState(blockpos$Mutable.up()).isSolid())
+					//rare chance to also generate a vine
+					if (rand.nextFloat() < 0.13F)
 					{
-
-						//set root block
-						world.setBlockState(blockpos$Mutable, blockConfig.block.getDefaultState(), 2);
-
-						//rare chance to also generate a vine
-						if (rand.nextFloat() < 0.13F)
-						{
-							generateTinyVine(world, rand, blockpos$Mutable);
-						}
-
-					}
-					else
-					{
-						break;
+						generateTinyVine(world, rand, blockpos$Mutable);
 					}
 
 				}
