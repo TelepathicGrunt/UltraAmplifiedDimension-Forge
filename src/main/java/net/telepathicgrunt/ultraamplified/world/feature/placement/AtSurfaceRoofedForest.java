@@ -48,15 +48,9 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 				int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), 74, blockpos$Mutable);
 				
 				//gets difference and sets mutable height to yPosOfSurface + 1
-				blockPosList.add(blockpos$Mutable.move(Direction.UP, yPosOfSurface - blockpos$Mutable.getY() + 1));
-				
-				//move down one for next surface searching to not get stuck at surface we are on now.
-				blockpos$Mutable.move(Direction.DOWN);
+				blockPosList.add(blockpos$Mutable.move(Direction.DOWN, (blockpos$Mutable.getY() - yPosOfSurface) - 1));
+				blockpos$Mutable.move(Direction.DOWN); //move down 1 again so it is at yPosOfSurface
 			}
-			
-			//pick new coordinates for next attempt
-			xOffset = random.nextInt(16);
-			zOffset = random.nextInt(16);
 		}
 
 		return IntStream.range(0, blockPosList.size()).mapToObj((p_215051_3_) ->
