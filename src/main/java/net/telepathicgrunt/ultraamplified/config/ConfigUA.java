@@ -4,6 +4,10 @@ package net.telepathicgrunt.ultraamplified.config;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
@@ -36,6 +40,7 @@ public class ConfigUA {
     public static double yTerrainModifier = 68419.786D;
     public static double yScaleModifier = 428.613D;
     public static boolean bedExplodes = false;
+    public static Boolean forceExitToOverworld;
     public static int yMaximum = 245;
     public static int dungeonSpawnrate = 30;
     public static int ravineSpawnrate = 25;
@@ -135,112 +140,113 @@ public class ConfigUA {
     public static class ServerConfig
     {
     					
-	    public final ForgeConfigSpec.BooleanValue importModdedFeatures;
-	    public final ForgeConfigSpec.BooleanValue importModdedStructure;
-	    public final ForgeConfigSpec.BooleanValue importModdedMobs;
-	    public final ForgeConfigSpec.BooleanValue importModdedBiomes;
-	    public final ForgeConfigSpec.BooleanValue importAllModdedBiomes;
-	    public final ForgeConfigSpec.ConfigValue<String> blacklistedBiomeList;
-	    public final ForgeConfigSpec.ConfigValue<String> blacklistedStructureList;
-        public final ForgeConfigSpec.DoubleValue xzTerrainModifier;
-        public final ForgeConfigSpec.DoubleValue xzScaleModifier;
-        public final ForgeConfigSpec.DoubleValue yTerrainModifier;
-        public final ForgeConfigSpec.DoubleValue yScaleModifier;
-	    public final ForgeConfigSpec.BooleanValue bedExplodes;
-        public final ForgeConfigSpec.IntValue yMaximum;
-        public final ForgeConfigSpec.IntValue dungeonSpawnrate;
-        public final ForgeConfigSpec.IntValue ravineSpawnrate;
-        public final ForgeConfigSpec.IntValue caveCavitySpawnrate;
-        public final ForgeConfigSpec.IntValue oceanCaveSpawnrate;
-        public final ForgeConfigSpec.BooleanValue pillarGen;
-        public final ForgeConfigSpec.BooleanValue honeyLakeGen;
-        public final ForgeConfigSpec.BooleanValue slimeLakeGen;
-        public final ForgeConfigSpec.BooleanValue waterLakeGen;
-        public final ForgeConfigSpec.BooleanValue lavaLakeGen;
-		public final ForgeConfigSpec.BooleanValue chestGeneration;
-		public final ForgeConfigSpec.IntValue sunShrineSpawnrate;
-		public final ForgeConfigSpec.IntValue stonehengeSpawnrate;
-		public final ForgeConfigSpec.IntValue hangingRuinsSpawnrate;
-		public final ForgeConfigSpec.BooleanValue miniStructureGeneration;
-		public final ForgeConfigSpec.IntValue villageSpawnrate;
-		public final ForgeConfigSpec.IntValue villageZombieSpawnrate;
-		public final ForgeConfigSpec.IntValue mineshaftSpawnrate;
-		public final ForgeConfigSpec.BooleanValue mineshaftAbovegroundAllowed;
-		public final ForgeConfigSpec.BooleanValue mineshaftUndergroundAllowed;
-		public final ForgeConfigSpec.IntValue mansionSpawnrate;
-		public final ForgeConfigSpec.IntValue desertTempleSpawnrate;
-		public final ForgeConfigSpec.IntValue jungleTempleSpawnrate;
-		public final ForgeConfigSpec.IntValue iglooSpawnrate;
-		public final ForgeConfigSpec.IntValue mushroomTempleSpawnrate;
-		public final ForgeConfigSpec.IntValue iceSpikeTempleSpawnrate;
-		public final ForgeConfigSpec.IntValue witchHutSpawnrate;
-		public final ForgeConfigSpec.IntValue oceanMonumentSpawnrate;
-		public final ForgeConfigSpec.IntValue oceanRuinsSpawnrate;
-		public final ForgeConfigSpec.IntValue shipwreckSpawnrate;
-		public final ForgeConfigSpec.IntValue strongholdSpawnrate;
-		public final ForgeConfigSpec.DoubleValue silverfishStrongholdSpawnrate;
-		public final ForgeConfigSpec.BooleanValue allowSilverfishSpawnerStronghold;
-		public final ForgeConfigSpec.IntValue netherFortressSpawnrate;
-		public final ForgeConfigSpec.BooleanValue netherFortressAboveground;
-		public final ForgeConfigSpec.BooleanValue netherFortressUnderground;
-		public final ForgeConfigSpec.BooleanValue allowSilverfishSpawnerFortress;
-		public final ForgeConfigSpec.BooleanValue allowNaturalSilverfishFortress;
-		public final ForgeConfigSpec.IntValue endCitySpawnrate;
-		public final ForgeConfigSpec.IntValue pillageOutpostRarity;
-		public final ForgeConfigSpec.BooleanValue secretSetting;
-		public final ForgeConfigSpec.BooleanValue heavyFog;
-	    public final ForgeConfigSpec.ConfigValue<String> portalCornerBlocks;
-	    public final ForgeConfigSpec.ConfigValue<String> portalCeilingBlocks;
-	    public final ForgeConfigSpec.ConfigValue<String> portalFloorBlocks;
-		public final ForgeConfigSpec.IntValue biomeSize;
-		public final ForgeConfigSpec.IntValue mutatedBiomeSpawnrate;
-		public final ForgeConfigSpec.IntValue seaLevel;
-		public final ForgeConfigSpec.BooleanValue lavaOcean;
-		public final ForgeConfigSpec.IntValue waterfallSpawnrate;
-		public final ForgeConfigSpec.IntValue lavafallSpawnrate;
-		public final ForgeConfigSpec.IntValue endIslandSpawnrate;
-		public final ForgeConfigSpec.BooleanValue plains;
-		public final ForgeConfigSpec.BooleanValue desert;
-		public final ForgeConfigSpec.BooleanValue forest;
-		public final ForgeConfigSpec.BooleanValue taiga;
-		public final ForgeConfigSpec.BooleanValue rockyField;
-		public final ForgeConfigSpec.BooleanValue swamplands;
-		public final ForgeConfigSpec.BooleanValue netherland;
-		public final ForgeConfigSpec.BooleanValue endField;
-		public final ForgeConfigSpec.BooleanValue snowyTundra;
-		public final ForgeConfigSpec.BooleanValue icedTerrain;
-		public final ForgeConfigSpec.BooleanValue mushroom;
-		public final ForgeConfigSpec.BooleanValue stonePlains;
-		public final ForgeConfigSpec.BooleanValue bambooJungle;
-		public final ForgeConfigSpec.BooleanValue jungle;
-		public final ForgeConfigSpec.BooleanValue frozenDesert;
-		public final ForgeConfigSpec.BooleanValue birchForest;
-		public final ForgeConfigSpec.BooleanValue darkForest;
-		public final ForgeConfigSpec.BooleanValue snowyTaiga;
-		public final ForgeConfigSpec.BooleanValue giantTreeTaiga;
-		public final ForgeConfigSpec.BooleanValue savanna;
-		public final ForgeConfigSpec.BooleanValue badlands;
-		public final ForgeConfigSpec.BooleanValue spikyBadlands;
-		public final ForgeConfigSpec.BooleanValue iceSpike;
-		public final ForgeConfigSpec.BooleanValue frozenOcean;
-		public final ForgeConfigSpec.BooleanValue coldOcean;
-		public final ForgeConfigSpec.BooleanValue ocean;
-		public final ForgeConfigSpec.BooleanValue lukewarmOcean;
-		public final ForgeConfigSpec.BooleanValue warmOcean;
-		public final ForgeConfigSpec.IntValue coalOreSpawnrate;
-		public final ForgeConfigSpec.IntValue ironOreSpawnrate;
-		public final ForgeConfigSpec.IntValue redstoneOreSpawnrate;
-		public final ForgeConfigSpec.IntValue lapisOreSpawnrate;
-		public final ForgeConfigSpec.IntValue diamondOreSpawnrate;
-		public final ForgeConfigSpec.IntValue goldOreSpawnrate;
-		public final ForgeConfigSpec.IntValue emeraldOreSpawnrate;
-		public final ForgeConfigSpec.IntValue silverfishSpawnrate;
-		public final ForgeConfigSpec.IntValue quartzOreSpawnrate;
-		public final ForgeConfigSpec.IntValue glowstoneSpawnrate;
-		public final ForgeConfigSpec.IntValue magmaSpawnrate;
-		public final ForgeConfigSpec.IntValue lavaSpawnrate;
-		public final ForgeConfigSpec.IntValue glowstoneVariantsSpawnrate;
-		public final ForgeConfigSpec.BooleanValue rootGen;
+	    public final BooleanValue importModdedFeatures;
+	    public final BooleanValue importModdedStructure;
+	    public final BooleanValue importModdedMobs;
+	    public final BooleanValue importModdedBiomes;
+	    public final BooleanValue importAllModdedBiomes;
+	    public final ConfigValue<String> blacklistedBiomeList;
+	    public final ConfigValue<String> blacklistedStructureList;
+        public final DoubleValue xzTerrainModifier;
+        public final DoubleValue xzScaleModifier;
+        public final DoubleValue yTerrainModifier;
+        public final DoubleValue yScaleModifier;
+	    public final BooleanValue bedExplodes;
+	    public final BooleanValue forceExitToOverworld;
+        public final IntValue yMaximum;
+        public final IntValue dungeonSpawnrate;
+        public final IntValue ravineSpawnrate;
+        public final IntValue caveCavitySpawnrate;
+        public final IntValue oceanCaveSpawnrate;
+        public final BooleanValue pillarGen;
+        public final BooleanValue honeyLakeGen;
+        public final BooleanValue slimeLakeGen;
+        public final BooleanValue waterLakeGen;
+        public final BooleanValue lavaLakeGen;
+		public final BooleanValue chestGeneration;
+		public final IntValue sunShrineSpawnrate;
+		public final IntValue stonehengeSpawnrate;
+		public final IntValue hangingRuinsSpawnrate;
+		public final BooleanValue miniStructureGeneration;
+		public final IntValue villageSpawnrate;
+		public final IntValue villageZombieSpawnrate;
+		public final IntValue mineshaftSpawnrate;
+		public final BooleanValue mineshaftAbovegroundAllowed;
+		public final BooleanValue mineshaftUndergroundAllowed;
+		public final IntValue mansionSpawnrate;
+		public final IntValue desertTempleSpawnrate;
+		public final IntValue jungleTempleSpawnrate;
+		public final IntValue iglooSpawnrate;
+		public final IntValue mushroomTempleSpawnrate;
+		public final IntValue iceSpikeTempleSpawnrate;
+		public final IntValue witchHutSpawnrate;
+		public final IntValue oceanMonumentSpawnrate;
+		public final IntValue oceanRuinsSpawnrate;
+		public final IntValue shipwreckSpawnrate;
+		public final IntValue strongholdSpawnrate;
+		public final DoubleValue silverfishStrongholdSpawnrate;
+		public final BooleanValue allowSilverfishSpawnerStronghold;
+		public final IntValue netherFortressSpawnrate;
+		public final BooleanValue netherFortressAboveground;
+		public final BooleanValue netherFortressUnderground;
+		public final BooleanValue allowSilverfishSpawnerFortress;
+		public final BooleanValue allowNaturalSilverfishFortress;
+		public final IntValue endCitySpawnrate;
+		public final IntValue pillageOutpostRarity;
+		public final BooleanValue secretSetting;
+		public final BooleanValue heavyFog;
+	    public final ConfigValue<String> portalCornerBlocks;
+	    public final ConfigValue<String> portalCeilingBlocks;
+	    public final ConfigValue<String> portalFloorBlocks;
+		public final IntValue biomeSize;
+		public final IntValue mutatedBiomeSpawnrate;
+		public final IntValue seaLevel;
+		public final BooleanValue lavaOcean;
+		public final IntValue waterfallSpawnrate;
+		public final IntValue lavafallSpawnrate;
+		public final IntValue endIslandSpawnrate;
+		public final BooleanValue plains;
+		public final BooleanValue desert;
+		public final BooleanValue forest;
+		public final BooleanValue taiga;
+		public final BooleanValue rockyField;
+		public final BooleanValue swamplands;
+		public final BooleanValue netherland;
+		public final BooleanValue endField;
+		public final BooleanValue snowyTundra;
+		public final BooleanValue icedTerrain;
+		public final BooleanValue mushroom;
+		public final BooleanValue stonePlains;
+		public final BooleanValue bambooJungle;
+		public final BooleanValue jungle;
+		public final BooleanValue frozenDesert;
+		public final BooleanValue birchForest;
+		public final BooleanValue darkForest;
+		public final BooleanValue snowyTaiga;
+		public final BooleanValue giantTreeTaiga;
+		public final BooleanValue savanna;
+		public final BooleanValue badlands;
+		public final BooleanValue spikyBadlands;
+		public final BooleanValue iceSpike;
+		public final BooleanValue frozenOcean;
+		public final BooleanValue coldOcean;
+		public final BooleanValue ocean;
+		public final BooleanValue lukewarmOcean;
+		public final BooleanValue warmOcean;
+		public final IntValue coalOreSpawnrate;
+		public final IntValue ironOreSpawnrate;
+		public final IntValue redstoneOreSpawnrate;
+		public final IntValue lapisOreSpawnrate;
+		public final IntValue diamondOreSpawnrate;
+		public final IntValue goldOreSpawnrate;
+		public final IntValue emeraldOreSpawnrate;
+		public final IntValue silverfishSpawnrate;
+		public final IntValue quartzOreSpawnrate;
+		public final IntValue glowstoneSpawnrate;
+		public final IntValue magmaSpawnrate;
+		public final IntValue lavaSpawnrate;
+		public final IntValue glowstoneVariantsSpawnrate;
+		public final BooleanValue rootGen;
 
         ServerConfig(ForgeConfigSpec.Builder builder) 
         {
@@ -310,6 +316,16 @@ public class ConfigUA {
                     .comment("\r\n Should beds explode in the Ultra Amplified Dimension?")
                     .translation("ultraamplified.config.dimension.bedexplodes")
                     .define("bedExplodes", false);
+
+            		forceExitToOverworld = builder
+                    .comment("\r\n Should beds explode in the Ultra Amplified Dimension?"
+                    		+" Makes leaving the Ultra Amplified dimension always places you back\r\n "
+                    		+" in the Overworld regardless of which dimension you originally \r\n"
+                    		+" came from. Use this option if this dimension becomes locked in  \r\n"
+                    		+" with another dimension so you are stuck teleporting between the \r\n"
+                    		+" two and cannot get back to the Overworld\r\n")
+                    .translation("ultraamplified.config.dimension.forceexittooverworld")
+                    .define("forceExitToOverworld", false);
 
             		portalCornerBlocks = builder
                     .comment("\r\n What corner blocks should we use to make a portal frame instead of Polish Granite?\r\n "
@@ -998,6 +1014,7 @@ public class ConfigUA {
 	    yScaleModifier = SERVER.yScaleModifier.get();
 	    yScaleModifier = SERVER.yScaleModifier.get();
 	    bedExplodes = SERVER.bedExplodes.get();
+	    forceExitToOverworld = SERVER.forceExitToOverworld.get();
 	    yMaximum = SERVER.yMaximum.get();
     	dungeonSpawnrate = SERVER.dungeonSpawnrate.get();
     	ravineSpawnrate = SERVER.ravineSpawnrate.get();

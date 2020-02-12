@@ -73,7 +73,8 @@ public class AmplifiedPortalBehavior {
 					
 					//gets previous dimension
 					DimensionType destination;
-					if(cap.getDim() == null) {
+					if(cap.getDim() == null) 
+					{
 						//first trip will always take player to ultra amplified dimension
 						//as default dim for cap is always null when player hasn't teleported yet
 						destination = UltraAmplifiedDimension.ultraamplified();
@@ -82,24 +83,49 @@ public class AmplifiedPortalBehavior {
 			    	   //double check for portal as this class gets made multiple times
 			    	   //before one can save the fact that the portal was made.
 			    	   //So a manual check is made for the portal as a double check.
-			    	   if(!checkForGeneratedPortal(minecraftserver.getWorld(destination))) {
+			    	   if(!checkForGeneratedPortal(minecraftserver.getWorld(destination))) 
+			    	   {
 			        	   generatePortal(minecraftserver.getWorld(destination));
 			    	   }
 					}
-					else if(cap.getDim() == entity.dimension){
-						// if our stored dimension somehow ends up being our current dimension and isn't the ultra amplified dimension, 
-						// then just take us to ultra amplified dimension instead
-						if(cap.getDim() != UltraAmplifiedDimension.ultraamplified()) {
-							destination = UltraAmplifiedDimension.ultraamplified();
-						}
-						//if the store dimension and player dimension is ultra amplified world, take us to overworld
-						else {
+					//past dimension was Ultra Amplified Dimension
+					else if(cap.getDim() == UltraAmplifiedDimension.ultraamplified())
+					{
+						// If our current dimension is also the Ultra Amplified dimension, 
+						// then just take us to Overworld dimension instead
+						if(entity.dimension == cap.getDim()) 
+						{
 							destination = DimensionType.OVERWORLD;
 						}
+						//Otherwise, take us to Ultra Amplified dimension.
+						else 
+						{
+							destination = UltraAmplifiedDimension.ultraamplified();
+						}
 					}
-					else {
-						//gets stored dimension
-						destination = cap.getDim();
+					//past dimension was not Ultra Amplified Dimension.
+					else 
+					{
+						// If current dimension is also not Ultra Amplified dimension,
+						// then take us to Ultra Amplified dimension
+						if(entity.dimension != UltraAmplifiedDimension.ultraamplified())
+						{
+							destination = UltraAmplifiedDimension.ultraamplified();
+						}
+						// Otherwise, take us out of the Ultra Amplified dimension to previous dimension.
+						else
+						{
+							if(ConfigUA.forceExitToOverworld)
+							{
+								// go to Overworld directly because of config option.
+								destination = DimensionType.OVERWORLD;
+							}
+							else
+							{
+								//gets stored dimension
+								destination = cap.getDim();
+							}
+						}
 					}
 							
 					ServerWorld serverworld = minecraftserver.getWorld(destination);

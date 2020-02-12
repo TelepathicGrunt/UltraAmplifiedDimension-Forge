@@ -21,12 +21,20 @@ Note to self: test AtSurfaceBelowTopLayerWithExtra, AtBottomOfLedge, AtSurfaceRo
 	Servers: 
 ·Add ultra-amplifed-overworld=true to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
     
+	Config: 
+·Added config option to force exiting The Bumblezone to place you into the Overworld.
+   
+	Dimension: 
+·Redid some of the teleporting code to handle entering/exiting the Ultra Amplified dimension better when entering from other dimension or you entered it by a different way other than the Amplified Portal block.
+
     Structures:
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.
 ·Fixed Fossils not spawning on the correct ledge/places.
 
     Biome: 
 ·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
+·Fixed roots not generating.
+
        
    (V.7.2.1 Changes) (1.15.2 Minecraft)
  
