@@ -35,7 +35,7 @@ public class AtBottomOfLedge extends Placement<CountRangeConfig>
 			int height = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset) + placementConfig.bottomOffset;
 
 			// gets y value of a layer below top layer
-			int bottomYLayer = PlacingUtils.topOfCeilingAboveHeight(world, height, random, pos.add(x, 0, z));
+			int bottomYLayer = PlacingUtils.topOfCeilingAboveHeight(world, height, 255, pos.add(x, 0, z));
 
 			if (bottomYLayer > placementConfig.maximum)
 			{

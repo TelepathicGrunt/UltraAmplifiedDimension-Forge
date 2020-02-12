@@ -45,7 +45,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 				blockpos$Mutable.setPos(pos.getX() + xOffset, blockpos$Mutable.getY(), pos.getZ() + zOffset);
 
 				//will stop at first non-air block (could be water)
-				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, random, blockpos$Mutable);
+				int height = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
 				blockpos$Mutable.move(Direction.UP, height - blockpos$Mutable.getY());

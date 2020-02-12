@@ -27,7 +27,7 @@ public class AtSurfaceUnderTopLedgeWithChance extends Placement<ChanceConfig>
 
 		int x = random.nextInt(16);
 		int z = random.nextInt(16);
-		int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, 255, 74, random, pos.add(x, 0, z));
+		int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, 255, 74, pos.add(x, 0, z));
 
 		if (random.nextFloat() >= 1.0F / chancesConfig.chance || yPosOfSurface < 75 || chancesConfig.chance == 0)
 		{
@@ -37,7 +37,7 @@ public class AtSurfaceUnderTopLedgeWithChance extends Placement<ChanceConfig>
 		int height = random.nextInt(yPosOfSurface - 74) + 75;
 
 		//gets y value of a layer below top layer
-		yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, random, pos.add(x, 0, z));
+		yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, pos.add(x, 0, z));
 
 		if (yPosOfSurface < 75)
 		{

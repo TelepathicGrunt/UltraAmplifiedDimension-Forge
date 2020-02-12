@@ -43,7 +43,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 			int height = world.getHeight(Heightmap.Type.MOTION_BLOCKING, position.add(x, 0, z)).getY();
 			BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX() + x, 0, position.getZ() + z);
 			
-			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, random, position.add(x, 0, z));
+			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, position.add(x, 0, z));
 			blockPosList.add(blockpos$Mutable.up(yPosOfSurface + 1));
 		}
 

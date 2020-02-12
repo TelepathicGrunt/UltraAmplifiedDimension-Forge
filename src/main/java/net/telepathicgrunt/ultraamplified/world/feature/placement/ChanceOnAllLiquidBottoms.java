@@ -52,7 +52,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 				int z = random.nextInt(16);
 				blockpos$Mutable.setPos(pos.getX() + x, blockpos$Mutable.getY(), pos.getZ() + z);
 
-				int height = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), random, blockpos$Mutable);
+				int height = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), lowestHeight, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
 				blockpos$Mutable.move(Direction.UP, height - blockpos$Mutable.getY());

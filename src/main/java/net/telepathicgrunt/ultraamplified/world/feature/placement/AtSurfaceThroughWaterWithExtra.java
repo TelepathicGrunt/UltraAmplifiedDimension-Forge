@@ -36,6 +36,7 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 
 		ArrayList<BlockPos> blockPosList = new ArrayList<BlockPos>();
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
+		int minHeight = 60;
 
 		for (int currentAttempt = 0; currentAttempt < maxAttempts; currentAttempt++)
 		{
@@ -43,9 +44,9 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 			int zOffset = random.nextInt(16);
 			blockpos$Mutable.setPos(pos.getX() + xOffset, 250, pos.getZ() + zOffset);
 
-			while (blockpos$Mutable.getY() > 60)
+			while (blockpos$Mutable.getY() > minHeight)
 			{
-				int yPosOfSurface = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), random, blockpos$Mutable);
+				int yPosOfSurface = PlacingUtils.topOfUnderwaterSurfaceBelowHeight(world, blockpos$Mutable.getY(), minHeight, blockpos$Mutable);
 
 				//gets difference and sets mutable height to yPosOfSurface
 				blockPosList.add(blockpos$Mutable.move(Direction.UP, yPosOfSurface - blockpos$Mutable.getY()));

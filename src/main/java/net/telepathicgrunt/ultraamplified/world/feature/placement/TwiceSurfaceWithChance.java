@@ -32,7 +32,7 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
 			int height = random.nextInt(180) + 75;
 
 			//gets y value of a layer below top layer
-			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, random, pos.add(x, 0, z));
+			int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, pos.add(x, 0, z));
 			blockpos$Mutable.setPos(pos.getX() + x, yPosOfSurface, pos.getZ() + z);
 
 			if (blockpos$Mutable.getY() <= 74) // won't generate at 74 itself.
