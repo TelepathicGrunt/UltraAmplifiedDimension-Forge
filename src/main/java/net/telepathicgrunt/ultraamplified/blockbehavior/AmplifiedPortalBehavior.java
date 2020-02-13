@@ -74,11 +74,11 @@ public class AmplifiedPortalBehavior {
 					
 					//gets previous dimension
 					DimensionType destination;
-					if(cap.getDim() == null) 
+					if(cap.getNonUADim() == null) 
 					{
 						//first trip will always take player to ultra amplified dimension
 						//as default dim for cap is always null when player hasn't teleported yet
-						cap.setDim(DimensionType.OVERWORLD); //set previous to overworld
+						cap.setNonUADim(DimensionType.OVERWORLD); //set previous to overworld
 						destination = UltraAmplifiedDimension.ultraamplified();
 						firstTime = true;
 						
@@ -91,11 +91,11 @@ public class AmplifiedPortalBehavior {
 			    	   }
 					}
 					//past dimension was Ultra Amplified Dimension
-					else if(cap.getDim() == UltraAmplifiedDimension.ultraamplified())
+					else if(cap.getNonUADim() == UltraAmplifiedDimension.ultraamplified())
 					{
 						// If our current dimension is also the Ultra Amplified dimension, 
 						// then just take us to Overworld dimension instead
-						if(entity.dimension == cap.getDim()) 
+						if(entity.dimension == cap.getNonUADim()) 
 						{
 							destination = DimensionType.OVERWORLD;
 						}
@@ -125,7 +125,7 @@ public class AmplifiedPortalBehavior {
 							else
 							{
 								//gets stored dimension
-								destination = cap.getDim();
+								destination = cap.getNonUADim();
 							}
 						}
 					}
@@ -135,7 +135,7 @@ public class AmplifiedPortalBehavior {
 					//gets top block in other world or original location
 					BlockPos blockpos = new BlockPos(8, 0, 8);
 					ChunkPos chunkpos;
-					if(firstTime || cap.getDim() == entity.dimension) {
+					if(firstTime || cap.getNonUADim() == entity.dimension) {
 						//if it is player's first time teleporting or our stored dimension was our current dimension, 
 						//find top block at world origin closest to portal
 						
@@ -188,7 +188,7 @@ public class AmplifiedPortalBehavior {
 						
 					}else {
 						//otherwise, just go to where our stored location is
-						blockpos = cap.getPos();
+						blockpos = cap.getNonUAPos();
 						chunkpos = new ChunkPos(blockpos);
 					}
 
@@ -201,7 +201,7 @@ public class AmplifiedPortalBehavior {
 			         
 	
 					//store current blockpos before teleporting.
-					cap.setPos(entity.getPosition());
+					cap.setNonUAPos(entity.getPosition());
 					
 					
 					((ServerPlayerEntity)entity).teleport(
@@ -233,7 +233,7 @@ public class AmplifiedPortalBehavior {
 				// Updates the past dimension that the player is leaving
 				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
 				PlayerPositionAndDimension cap = (PlayerPositionAndDimension) playerEntity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
-				cap.setDim(playerEntity.dimension);
+				cap.setNonUADim(playerEntity.dimension);
 				
 //				//player is not entering UA dimension
 //				if(playerEntity.dimension !=  UltraAmplifiedDimension.ultraamplified() &&

@@ -8,26 +8,36 @@ import net.minecraft.world.dimension.DimensionType;
 public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 
 
-	public DimensionType prevDimension = null;
-	public BlockPos prevBlockPos = new BlockPos(0,0,0);
+	public DimensionType nonUADimension = null;
+	public BlockPos nonUABlockPos = new BlockPos(0,0,0);
+	public BlockPos UABlockPos = new BlockPos(0,0,0);
 	public boolean doAltTeleporting = false;
 	
 	@Override
-	public void setDim(DimensionType incomingDim) {
-		prevDimension = incomingDim;
+	public void setNonUADim(DimensionType incomingDim) {
+		nonUADimension = incomingDim;
 	}
 	@Override
-	public DimensionType getDim() {
-		return prevDimension;
+	public DimensionType getNonUADim() {
+		return nonUADimension;
 	}
 
 	@Override
-	public void setPos(BlockPos incomingPos) {
-		prevBlockPos = incomingPos;
+	public void setNonUAPos(BlockPos incomingPos) {
+		nonUABlockPos = incomingPos;
 	}
 	@Override
-	public BlockPos getPos() {
-		return prevBlockPos;
+	public BlockPos getNonUAPos() {
+		return nonUABlockPos;
+	}
+	
+	@Override
+	public void setUAPos(BlockPos incomingPos) {
+		UABlockPos = incomingPos;
+	}
+	@Override
+	public BlockPos getUAPos() {
+		return UABlockPos;
 	}
 
 	@Override
@@ -45,13 +55,13 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 	public CompoundNBT saveNBTData() {
 		CompoundNBT nbt = new CompoundNBT();
 
-		nbt.putInt("PrevX", this.getPos().getX());
-		nbt.putInt("PrevY", this.getPos().getY());
-		nbt.putInt("PrevZ", this.getPos().getZ());
+		nbt.putInt("PrevX", this.getNonUAPos().getX());
+		nbt.putInt("PrevY", this.getNonUAPos().getY());
+		nbt.putInt("PrevZ", this.getNonUAPos().getZ());
 		
-		if(this.getDim() != null) {
-			nbt.putString("PreviousDimensionNamespace", this.getDim().getRegistryName().getNamespace());
-			nbt.putString("PreviousDimensionPath", this.getDim().getRegistryName().getPath());
+		if(this.getNonUADim() != null) {
+			nbt.putString("PreviousDimensionNamespace", this.getNonUADim().getRegistryName().getNamespace());
+			nbt.putString("PreviousDimensionPath", this.getNonUADim().getRegistryName().getPath());
 		}
 		
 		nbt.putBoolean("AltTeleporting", this.getAltTele());
@@ -70,8 +80,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 
 		boolean doAltTeleporting = cnbt.getBoolean("AltTeleporting");
 		
-		this.setDim(storedDimension);
-		this.setPos(storedBlockPos);
+		this.setNonUADim(storedDimension);
+		this.setNonUAPos(storedBlockPos);
 		this.setAltTele(doAltTeleporting);
 	}
 		

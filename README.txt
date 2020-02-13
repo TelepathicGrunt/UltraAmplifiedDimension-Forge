@@ -16,13 +16,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
-Note to self: test AtSurfaceBelowTopLayerWithExtra, AtBottomOfLedge, AtSurfaceRoofedForest, AtSurfaceThroughWaterWithExtra, ChanceOnAllLiquidBottoms, RandomChanceUnderSurface, TwiceSurfaceWithChance, ChanceOnAllSurfaces, ChanceOnAllLiquidSurfaces
     
 	Servers: 
 ·Add ultra-amplifed-overworld=true to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
     
 	Config: 
-·Added config option to force exiting The Bumblezone to place you into the Overworld.
+·Added config option to make exiting Ultra Amplified dimension to always place you into the Overworld.
+·Fixed bug where disabling Spiky Badlands or Ice Spikes config while in a world, exiting, and re-entering won't take effect sometimes. Now it always will.
    
 	Dimension: 
 ·Redid some of the teleporting code to handle entering/exiting the Ultra Amplified dimension better when entering from other dimension or you entered it by a different way other than the Amplified Portal block.

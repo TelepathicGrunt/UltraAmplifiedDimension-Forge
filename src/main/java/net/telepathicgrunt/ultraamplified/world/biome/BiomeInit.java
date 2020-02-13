@@ -330,6 +330,9 @@ public class BiomeInit {
     public static final Map<Biome,Biome> BASE_TO_MUTATION_MAP = new HashMap<Biome, Biome>();
     
     public static void mapMBiomes() {
+    	//clear out old list
+    	BASE_TO_MUTATION_MAP.clear();
+    	
     	//registers who is an M variant of another biome
     	BASE_TO_MUTATION_MAP.put(PLAINS, SUNFLOWER_PLAINS);
     	BASE_TO_MUTATION_MAP.put(DESERT, DESERT_LAKES);
