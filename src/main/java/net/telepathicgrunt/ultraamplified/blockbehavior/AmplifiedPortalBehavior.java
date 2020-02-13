@@ -234,6 +234,13 @@ public class AmplifiedPortalBehavior {
 				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
 				PlayerPositionAndDimension cap = (PlayerPositionAndDimension) playerEntity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
 				cap.setDim(playerEntity.dimension);
+				
+//				//player is not entering UA dimension
+//				if(playerEntity.dimension !=  UltraAmplifiedDimension.ultraamplified() &&
+//				   event.getDimension() !=  UltraAmplifiedDimension.ultraamplified()) 
+//				{
+//					
+//				}
 			}
 		}
 	}

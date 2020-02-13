@@ -47,7 +47,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig> {
 		
 		//System.out.println(position.getX()+", "+position.getY()+", "+position.getZ());
 		
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+ 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 		BlockPos.Mutable blockpos$Mutable2 = new BlockPos.Mutable(position);
         while ((world.isAirBlock(blockpos$Mutable) || world.getBlockState(blockpos$Mutable) == Blocks.WATER.getDefaultState())&& blockpos$Mutable.getY() > 2)
         {

@@ -99,7 +99,7 @@ public class PlacingUtils
 		//Treats waterlogged wood as non-waterlogged blocks.
 		while (blockpos$Mutable.getY() > minHeight)
 		{
-			if (world.isAirBlock(blockpos$Mutable) || (world.getBlockState(blockpos$Mutable).getMaterial() == Material.WATER && world.getBlockState(blockpos$Mutable).getMaterial() != Material.WOOD))
+			if (world.isAirBlock(blockpos$Mutable) || world.getBlockState(blockpos$Mutable).getMaterial() == Material.WATER)
 			{
 				break;
 			}
@@ -110,7 +110,7 @@ public class PlacingUtils
 		//if height is an air/waterlogged block, move down until we reached a solid block. We are now on the surface of a piece of land
 		while (blockpos$Mutable.getY() > minHeight)
 		{
-			if (!world.isAirBlock(blockpos$Mutable) && !(world.getBlockState(blockpos$Mutable).getMaterial() == Material.WATER && world.getBlockState(blockpos$Mutable).getMaterial() != Material.WOOD))
+			if (!world.isAirBlock(blockpos$Mutable) && world.getBlockState(blockpos$Mutable).getMaterial() != Material.WATER)
 			{
 				break;
 			}

@@ -9,11 +9,14 @@ public interface IPlayerPosAndDim {
 	//what methods the capability will have and what the capability is
 	
 	void setDim(DimensionType incomingDim);
-	void setPos(BlockPos incomingPos);
-
 	DimensionType getDim();
+	
+	void setPos(BlockPos incomingPos);
 	BlockPos getPos();
 
+	void setAltTele(boolean shouldDoAltTeleporting);
+	Boolean getAltTele();
+	
 	CompoundNBT saveNBTData();
 	void loadNBTData(CompoundNBT nbtTag);
 }

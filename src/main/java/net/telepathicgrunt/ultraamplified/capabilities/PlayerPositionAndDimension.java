@@ -10,25 +10,35 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 
 	public DimensionType prevDimension = null;
 	public BlockPos prevBlockPos = new BlockPos(0,0,0);
+	public boolean doAltTeleporting = false;
 	
 	@Override
 	public void setDim(DimensionType incomingDim) {
 		prevDimension = incomingDim;
 	}
-
-	@Override
-	public void setPos(BlockPos incomingPos) {
-		prevBlockPos = incomingPos;
-	}
-
 	@Override
 	public DimensionType getDim() {
 		return prevDimension;
 	}
 
 	@Override
+	public void setPos(BlockPos incomingPos) {
+		prevBlockPos = incomingPos;
+	}
+	@Override
 	public BlockPos getPos() {
 		return prevBlockPos;
+	}
+
+	@Override
+	public void setAltTele(boolean shouldDoAltTeleporting)
+	{
+		doAltTeleporting = shouldDoAltTeleporting;
+	}
+	@Override
+	public Boolean getAltTele()
+	{
+		return doAltTeleporting;
 	}
 
 	@Override
@@ -43,6 +53,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 			nbt.putString("PreviousDimensionNamespace", this.getDim().getRegistryName().getNamespace());
 			nbt.putString("PreviousDimensionPath", this.getDim().getRegistryName().getPath());
 		}
+		
+		nbt.putBoolean("AltTeleporting", this.getAltTele());
 
 		return nbt;
 	}
@@ -55,9 +67,12 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 		//grabs past dimension resource location and tries to get that dimension from the registry
 		DimensionType storedDimension = DimensionType.byName(new ResourceLocation(cnbt.getString("PreviousDimensionNamespace"), 
 																			      cnbt.getString("PreviousDimensionPath")));
+
+		boolean doAltTeleporting = cnbt.getBoolean("AltTeleporting");
 		
 		this.setDim(storedDimension);
 		this.setPos(storedBlockPos);
+		this.setAltTele(doAltTeleporting);
 	}
 		
 }

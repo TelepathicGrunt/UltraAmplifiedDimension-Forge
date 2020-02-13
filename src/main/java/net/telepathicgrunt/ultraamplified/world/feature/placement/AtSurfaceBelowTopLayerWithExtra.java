@@ -56,7 +56,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 				int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY() - 1, 74, position.add(x, 0, z));
 				
 				//set to new height and add the position to the list
-				blockPosList.add(blockpos$Mutable.move(Direction.DOWN, blockpos$Mutable.getY() - yPosOfSurface));
+				blockPosList.add(new BlockPos(blockpos$Mutable.move(Direction.DOWN, blockpos$Mutable.getY() - yPosOfSurface)));
 			}
 		}
 
