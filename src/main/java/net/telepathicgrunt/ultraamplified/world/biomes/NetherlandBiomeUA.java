@@ -3,6 +3,7 @@ package net.telepathicgrunt.ultraamplified.world.biomes;
 import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.block.NetherWartBlock;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
@@ -66,7 +67,7 @@ public class NetherlandBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.NETHER_FIRE_CONFIG).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 0, 0, 100))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(GLOWSTONE_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(GENERAL_PLACEMENT.configure(new CountRangeAndTypeConfig(1f, 0, 0, 256, false, CountRangeAndTypeConfig.Type.GLOWSTONE))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.NETHER_WART.getDefaultState()), new SimpleBlockPlacer())).tries(64).cannotProject().build()).createDecoratedFeature(NETHERWART_SOUL_SAND_SURFACES_UA.configure(new PercentageAndFrequencyConfig(0.7F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.NETHER_WART.getDefaultState().with(NetherWartBlock.AGE, 2)), new SimpleBlockPlacer())).tries(64).cannotProject().build()).createDecoratedFeature(NETHERWART_SOUL_SAND_SURFACES_UA.configure(new PercentageAndFrequencyConfig(0.7F, 2))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG).createDecoratedFeature(Placement.CHANCE_RANGE.configure(new ChanceRangeConfig(1F, 0, 0, 75))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.RED_MUSHROOM_CONFIG).createDecoratedFeature(Placement.CHANCE_RANGE.configure(new ChanceRangeConfig(1F, 0, 0, 75))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.field_227248_z_.configure(FeatureUA.getConfiguredClusterConfig(DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG)).createDecoratedFeature(CHANCE_ON_ALL_SURFACES_UA.configure(new PercentageAndFrequencyConfig(0.05F, 1))));

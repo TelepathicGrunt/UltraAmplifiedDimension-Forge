@@ -57,6 +57,7 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 				
 				//set to new height and add the position to the list
 				blockPosList.add(new BlockPos(blockpos$Mutable.move(Direction.DOWN, blockpos$Mutable.getY() - yPosOfSurface)));
+				blockpos$Mutable.move(Direction.DOWN);
 			}
 		}
 

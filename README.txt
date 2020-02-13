@@ -35,6 +35,7 @@ Note to self: test AtSurfaceBelowTopLayerWithExtra, AtBottomOfLedge, AtSurfaceRo
 ·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
 ·Fixed roots not generating.
 ·Added roots to Bamboo Jungle biomes.
+·Netherwart in Netherland biome is now more grown rather than looking like it was just placed. 
 
        
    (V.7.2.1 Changes) (1.15.2 Minecraft)
