@@ -63,13 +63,19 @@ public class AmplifiedPortalBehavior
 			Entity entity = event.getEntity();
 			MinecraftServer minecraftserver = entity.getServer();
 
-			// checks to see if player uses right click on amplified portal and if so
-			// teleports player to other dimension
+			// Checks to see if player uses right click on amplified portal and if so
+			// teleports player to other dimension.
 			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
 			{
-				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
-				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
-				if (!world.isRemote && !entity.isPassenger() && !entity.isBeingRidden() && entity.isNonBoss() && !((PlayerEntity) entity).isCrouching())
+				// Extra checking to make sure it's just the player alone and not riding, being ridden, etc 
+				// Also makes sure player isn't sneaking so players can crouch place blocks on the portal
+				// But only teleport if we aren't in UA worldtype
+				if (!world.isRemote && 
+					minecraftserver.getWorld(DimensionType.OVERWORLD).getWorldType() != UltraAmplified.UltraAmplifiedWorldType &&
+					!entity.isPassenger() && 
+					!entity.isBeingRidden() && 
+					entity.isNonBoss() 
+					&& !((PlayerEntity) entity).isCrouching())
 				{
 					//grabs the capability attached to player for dimension hopping
 					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);

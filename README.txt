@@ -37,6 +37,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Added roots to Bamboo Jungle biomes.
 ·Netherwart in Netherland biome is now more grown rather than looking like it was just placed. 
 
+	Worldtype: 
+·Fixed bug where using the Ultra Amplified worldtype will cause all dimension outside the Overworld to use the Ultra Amplified chunkgenerator (terrain and biomes) when it shouldn't. Now it is fixed.
+
        
    (V.7.2.1 Changes) (1.15.2 Minecraft)
  

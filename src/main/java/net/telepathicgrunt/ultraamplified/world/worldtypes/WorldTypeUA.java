@@ -2,6 +2,7 @@ package net.telepathicgrunt.ultraamplified.world.worldtypes;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
@@ -29,8 +30,14 @@ public class WorldTypeUA extends WorldType
 	@Override
 	public ChunkGenerator<?> createChunkGenerator(World world)
 	{
-		//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
-		return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
+		if(world.dimension.getType() == DimensionType.OVERWORLD)
+		{
+			//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
+			return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
+		}
+		
+		// Run default chunkgenerator for each dimension
+		return super.createChunkGenerator(world);
 	}
 
 
