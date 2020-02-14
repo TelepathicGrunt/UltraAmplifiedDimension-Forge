@@ -196,7 +196,7 @@ public class AmplifiedPortalBehavior
 								worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 							}
 							
-							playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 1D, 0.5D); // Set where player spawns
+							playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 0.2D, 0.5D); // Set where player spawns
 						}
 
 					}
