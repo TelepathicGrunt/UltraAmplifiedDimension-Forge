@@ -14,37 +14,48 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
+
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class UltraAmplifiedDimension {
-
-	public static final ModDimension ULTRAAMPLIFIED = new ModDimension() {
-        @Override
-        public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return UltraAmplifiedWorldProvider::new;
-        }
-    };
-
-    private static final ResourceLocation ULTRAAMPLIFIED_ID = new ResourceLocation(UltraAmplified.MODID, "ultraamplified");
-	
-    
-    //registers the dimension
-    @Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
-    private static class ForgeEvents {
-        @SubscribeEvent
-        public static void registerDimensions(RegisterDimensionsEvent event) {
-            if (DimensionType.byName(ULTRAAMPLIFIED_ID) == null) {
-                DimensionManager.registerDimension(ULTRAAMPLIFIED_ID, ULTRAAMPLIFIED, null, true);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void registerModDimensions(RegistryEvent.Register<ModDimension> event) {
-        RegUtil.generic(event.getRegistry()).add("ultraamplified", ULTRAAMPLIFIED);
-    }
+public class UltraAmplifiedDimension
+{
+	private static final ResourceLocation ULTRAAMPLIFIED_ID = new ResourceLocation(UltraAmplified.MODID, "ultraamplified");
 
 	
-    public static DimensionType ultraamplified() {
-        return DimensionType.byName(ULTRAAMPLIFIED_ID);
-    }
+	public static DimensionType ultraamplified()
+	{
+		return DimensionType.byName(ULTRAAMPLIFIED_ID);
+	}
+
+	
+	public static final ModDimension ULTRAAMPLIFIED = new ModDimension()
+	{
+		@Override
+		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
+		{
+			return UltraAmplifiedWorldProvider::new;
+		}
+	};
+
+
+	//registers the dimension
+	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
+	private static class ForgeEvents
+	{
+		@SubscribeEvent
+		public static void registerDimensions(RegisterDimensionsEvent event)
+		{
+			if (DimensionType.byName(ULTRAAMPLIFIED_ID) == null)
+			{
+				DimensionManager.registerDimension(ULTRAAMPLIFIED_ID, ULTRAAMPLIFIED, null, true);
+			}
+		}
+	}
+
+
+	@SubscribeEvent
+	public static void registerModDimensions(RegistryEvent.Register<ModDimension> event)
+	{
+		RegUtil.generic(event.getRegistry()).add("ultraamplified", ULTRAAMPLIFIED);
+	}
+
 }

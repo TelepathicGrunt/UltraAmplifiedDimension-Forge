@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.server.dedicated.ServerProperties;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
@@ -26,8 +25,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
@@ -45,7 +42,7 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 /*
  * Mod for making insane landscape and a more challenging world to survive on! If you have any questions, advice, or
- * suggestions for this mod, reach out to me on Reddit! (my name is TelepathicGrunt on there as well)
+ * suggestions for this mod, reach out to me on Reddit or CurseForge! (my name is TelepathicGrunt on there as well)
  * 
  * @author TelepathicGrunt
  */
@@ -83,15 +80,36 @@ public class UltraAmplified
 	 * before the mod even loads at all. It's so early that the mod's worldtypes aren't added to WORLD_TYPES array and so
 	 * it'll change level-type to default regardless of what the user added.
 	 * 
-	 * My solution is to tell users to add a new entry called ultra-amplifed-overworld=true and then read that property
-	 * instead.
+	 * My solution is to tell users to add a new entry called use-modded-worldtype=ultra-amplified and then
+	 * read that property instead.
 	 */
 	public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
 	{
-		if (PropertyManager.load(Paths.get("server.properties")).getProperty("ultra-amplifed-overworld").equals("true"))
+		// There's no .contains kind of method to check for if a property exists. 
+		// That's why I have to use Try/Catch as a check for if it exists.
+		try
 		{
-			ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-			serverProperties.worldType = UltraAmplifiedWorldType;
+			if (PropertyManager.load(Paths.get("server.properties")).getProperty("use-modded-worldtype").equals("ultra-amplified"))
+			{
+				ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
+				serverProperties.worldType = UltraAmplifiedWorldType;
+			}
+		}
+		catch(Exception e)
+		{
+			// The property was not added to the server.properties file so check for if the older name (with typo) for the property exists
+			try
+			{
+				if (PropertyManager.load(Paths.get("server.properties")).getProperty("ultra-amplifed-overworld").equals("true"))
+				{
+					ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
+					serverProperties.worldType = UltraAmplifiedWorldType;
+				}
+			}
+			catch(Exception e2)
+			{
+				// Do nothing. Neither property name was added to the server.properties file
+			}
 		}
 	}
 
@@ -166,16 +184,5 @@ public class UltraAmplified
 			LOGGER.log(Level.INFO, "features registered.");
 		}
 
-	}
-
-
-	/*
-	 * Helper method to quickly register features, blocks, items, structures, biomes, anything that can be registered.
-	 */
-	public static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T entry, String registryKey)
-	{
-		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey.toLowerCase().replace(' ', '_')));
-		registry.register(entry);
-		return entry;
 	}
 }

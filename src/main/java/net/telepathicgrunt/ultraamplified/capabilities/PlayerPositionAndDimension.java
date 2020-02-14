@@ -32,8 +32,6 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 			nonUADimension = incomingDim;
 		}
 	}
-
-
 	@Override
 	public DimensionType getNonUADim()
 	{
@@ -46,8 +44,6 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	{
 		nonUABlockPos = incomingPos;
 	}
-
-
 	@Override
 	public BlockPos getNonUAPos()
 	{
@@ -60,8 +56,6 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	{
 		UABlockPos = incomingPos;
 	}
-
-
 	@Override
 	public BlockPos getUAPos()
 	{
@@ -106,6 +100,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	public void loadNBTData(CompoundNBT nbtTag)
 	{
 		CompoundNBT data = (CompoundNBT) nbtTag;
+		data = fixData(data);
+		
 		BlockPos storedBlockPosNonUA = null;
 		BlockPos storedBlockPosUA = null;
 		DimensionType storedDimension = null;
@@ -127,9 +123,11 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 													data.getString("NonUADimensionPath")));
 		}
 
+		
+		
 		this.setNonUADim(storedDimension);
 		this.setNonUAPos(storedBlockPosNonUA);
-		this.setNonUAPos(storedBlockPosUA);
+		this.setUAPos(storedBlockPosUA);
 	}
 
 

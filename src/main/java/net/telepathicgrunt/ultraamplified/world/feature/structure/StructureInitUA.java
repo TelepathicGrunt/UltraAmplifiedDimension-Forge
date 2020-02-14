@@ -1,9 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
-import java.util.Locale;
-
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
 
 
 public class StructureInitUA
@@ -79,77 +77,72 @@ public class StructureInitUA
 
 	public static void registerStructurePieces()
 	{
-		TEDPUA = register(DesertTemplePiecesUA::new, "TeDPUA");
-		ECPUA = register(EndCityPiecesUA.CityTemplate::new, "ECPUA");
-		ISTUA = register(IceSpikeTemplePiecesUA.Piece::new, "ISTUA");
-		IGLUUA = register(IglooPiecesUA.Piece::new, "IgluUA");
-		TEJPUA = register(JungleTemplePiecesUA::new, "TeJPUA");
-		MSCORRIDORUA = register(MineshaftPiecesUA.Corridor::new, "MSCorridorUA");
-		MSCROSSINGUA = register(MineshaftPiecesUA.Cross::new, "MSCrossingUA");
-		MSROOMUA = register(MineshaftPiecesUA.Room::new, "MSRoomUA");
-		MSSTAIRSUA = register(MineshaftPiecesUA.Stairs::new, "MSStairsUA");
-		MTUA = register(MushroomTemplePiecesUA.Piece::new, "MTUA");
-		ORPUA = register(OceanRuinsPiecesUA.Piece::new, "ORPUA");
-		SHIPWRECKUA = register(ShipwreckPiecesUA.Piece::new, "ShipwreckUA");
-		TESHUA = register(WitchHutPiecesUA::new, "TeSHUA");
-		NEBCRUA = register(FortressPiecesUA.Crossing3::new, "NeBCrUA");
-		NEBEFUA = register(FortressPiecesUA.End::new, "NeBEFUA");
-		NEBSUA = register(FortressPiecesUA.Straight::new, "NeBSUA");
-		NECCSUA = register(FortressPiecesUA.Corridor3::new, "NeCCSUA");
-		NECTBUA = register(FortressPiecesUA.Corridor4::new, "NeCTBUA");
-		NECEUA = register(FortressPiecesUA.Entrance::new, "NeCEUA");
-		NESCSCUA = register(FortressPiecesUA.Crossing2::new, "NeSCSCUA");
-		NESCLTUA = register(FortressPiecesUA.Corridor::new, "NeSCLTUA");
-		NESCUA = register(FortressPiecesUA.Corridor5::new, "NeSCUA");
-		NESCRTUA = register(FortressPiecesUA.Corridor2::new, "NeSCRTUA");
-		NECSRUA = register(FortressPiecesUA.NetherStalkRoom::new, "NeCSRUA");
-		NEMTUA = register(FortressPiecesUA.Throne::new, "NeMTUA");
-		NERCUA = register(FortressPiecesUA.Crossing::new, "NeRCUA");
-		NESRUA = register(FortressPiecesUA.Stairs::new, "NeSRUA");
-		NESTARTUA = register(FortressPiecesUA.Start::new, "NeStartUA");
-		OMBUA = register(OceanMonumentPiecesUA.MonumentBuilding::new, "OMBUA");
-		OMCRUA = register(OceanMonumentPiecesUA.MonumentCoreRoom::new, "OMCRUA");
-		OMDXRUA = register(OceanMonumentPiecesUA.DoubleXRoom::new, "OMDXRUA");
-		OMDXYRUA = register(OceanMonumentPiecesUA.DoubleXYRoom::new, "OMDXYRUA");
-		OMDYRUA = register(OceanMonumentPiecesUA.DoubleYRoom::new, "OMDYRUA");
-		OMDYZRUA = register(OceanMonumentPiecesUA.DoubleYZRoom::new, "OMDYZRUA");
-		OMDZRUA = register(OceanMonumentPiecesUA.DoubleZRoom::new, "OMDZRUA");
-		OMENTRYUA = register(OceanMonumentPiecesUA.EntryRoom::new, "OMEntryUA");
-		OMPENTHOUSEUA = register(OceanMonumentPiecesUA.Penthouse::new, "OMPenthouseUA");
-		OMSIMPLEUA = register(OceanMonumentPiecesUA.SimpleRoom::new, "OMSimpleUA");
-		OMSIMPLETUA = register(OceanMonumentPiecesUA.SimpleTopRoom::new, "OMSimpleTUA");
-		OMWRUA = register(OceanMonumentPiecesUA.WingRoom::new, "OMWRUA");
-		SHCCUA = register(StrongholdPiecesUA.ChestCorridor::new, "SHCCUA");
-		SHFCUA = register(StrongholdPiecesUA.Corridor::new, "SHFCUA");
-		SH5CUA = register(StrongholdPiecesUA.Crossing::new, "SH5CUA");
-		SHLTUA = register(StrongholdPiecesUA.LeftTurn::new, "SHLTUA");
-		SHLIUA = register(StrongholdPiecesUA.Library::new, "SHLiUA");
-		SHPRUA = register(StrongholdPiecesUA.PortalRoom::new, "SHPRUA");
-		SHPHUA = register(StrongholdPiecesUA.Prison::new, "SHPHUA");
-		SHRTUA = register(StrongholdPiecesUA.RightTurn::new, "SHRTUA");
-		SHRCUA = register(StrongholdPiecesUA.RoomCrossing::new, "SHRCUA");
-		SHSDUA = register(StrongholdPiecesUA.Stairs::new, "SHSDUA");
-		SHSTARTUA = register(StrongholdPiecesUA.Stairs2::new, "SHStartUA");
-		SHSUA = register(StrongholdPiecesUA.Straight::new, "SHSUA");
-		SHSSDUA = register(StrongholdPiecesUA.StairsStraight::new, "SHSSDUA");
-		VISTUA = register(VillagePastStyledPiecesUA.Church::new, "ViSTUA");
-		VIDFUA = register(VillagePastStyledPiecesUA.Field1::new, "ViDFUA");
-		VIFUA = register(VillagePastStyledPiecesUA.Field2::new, "ViFUA");
-		VIPHUA = register(VillagePastStyledPiecesUA.WorkHouse::new, "ViPHUA");
-		VIBHUA = register(VillagePastStyledPiecesUA.LibraryHouse::new, "ViBHUA");
-		VISUA = register(VillagePastStyledPiecesUA.Blacksmith::new, "ViSUA");
-		VITRHUA = register(VillagePastStyledPiecesUA.LargeHouse::new, "ViTRHUA");
-		VISHUA = register(VillagePastStyledPiecesUA.FlatTopTinyHouse::new, "ViSHUA");
-		VISRUA = register(VillagePastStyledPiecesUA.Path::new, "ViSRUA");
-		VIWUA = register(VillagePastStyledPiecesUA.Well::new, "ViWUA");
-		VISMHUA = register(VillagePastStyledPiecesUA.TinyHouse::new, "ViSmHUA");
-		VILUA = register(VillagePastStyledPiecesUA.Torch::new, "ViLUA");
-		VISTARTUA = register(VillagePastStyledPiecesUA.Start::new, "ViStartUA");
+		TEDPUA = RegUtil.register(DesertTemplePiecesUA::new, "TeDPUA");
+		ECPUA = RegUtil.register(EndCityPiecesUA.CityTemplate::new, "ECPUA");
+		ISTUA = RegUtil.register(IceSpikeTemplePiecesUA.Piece::new, "ISTUA");
+		IGLUUA = RegUtil.register(IglooPiecesUA.Piece::new, "IgluUA");
+		TEJPUA = RegUtil.register(JungleTemplePiecesUA::new, "TeJPUA");
+		MSCORRIDORUA = RegUtil.register(MineshaftPiecesUA.Corridor::new, "MSCorridorUA");
+		MSCROSSINGUA = RegUtil.register(MineshaftPiecesUA.Cross::new, "MSCrossingUA");
+		MSROOMUA = RegUtil.register(MineshaftPiecesUA.Room::new, "MSRoomUA");
+		MSSTAIRSUA = RegUtil.register(MineshaftPiecesUA.Stairs::new, "MSStairsUA");
+		MTUA = RegUtil.register(MushroomTemplePiecesUA.Piece::new, "MTUA");
+		ORPUA = RegUtil.register(OceanRuinsPiecesUA.Piece::new, "ORPUA");
+		SHIPWRECKUA = RegUtil.register(ShipwreckPiecesUA.Piece::new, "ShipwreckUA");
+		TESHUA = RegUtil.register(WitchHutPiecesUA::new, "TeSHUA");
+		NEBCRUA = RegUtil.register(FortressPiecesUA.Crossing3::new, "NeBCrUA");
+		NEBEFUA = RegUtil.register(FortressPiecesUA.End::new, "NeBEFUA");
+		NEBSUA = RegUtil.register(FortressPiecesUA.Straight::new, "NeBSUA");
+		NECCSUA = RegUtil.register(FortressPiecesUA.Corridor3::new, "NeCCSUA");
+		NECTBUA = RegUtil.register(FortressPiecesUA.Corridor4::new, "NeCTBUA");
+		NECEUA = RegUtil.register(FortressPiecesUA.Entrance::new, "NeCEUA");
+		NESCSCUA = RegUtil.register(FortressPiecesUA.Crossing2::new, "NeSCSCUA");
+		NESCLTUA = RegUtil.register(FortressPiecesUA.Corridor::new, "NeSCLTUA");
+		NESCUA = RegUtil.register(FortressPiecesUA.Corridor5::new, "NeSCUA");
+		NESCRTUA = RegUtil.register(FortressPiecesUA.Corridor2::new, "NeSCRTUA");
+		NECSRUA = RegUtil.register(FortressPiecesUA.NetherStalkRoom::new, "NeCSRUA");
+		NEMTUA = RegUtil.register(FortressPiecesUA.Throne::new, "NeMTUA");
+		NERCUA = RegUtil.register(FortressPiecesUA.Crossing::new, "NeRCUA");
+		NESRUA = RegUtil.register(FortressPiecesUA.Stairs::new, "NeSRUA");
+		NESTARTUA = RegUtil.register(FortressPiecesUA.Start::new, "NeStartUA");
+		OMBUA = RegUtil.register(OceanMonumentPiecesUA.MonumentBuilding::new, "OMBUA");
+		OMCRUA = RegUtil.register(OceanMonumentPiecesUA.MonumentCoreRoom::new, "OMCRUA");
+		OMDXRUA = RegUtil.register(OceanMonumentPiecesUA.DoubleXRoom::new, "OMDXRUA");
+		OMDXYRUA = RegUtil.register(OceanMonumentPiecesUA.DoubleXYRoom::new, "OMDXYRUA");
+		OMDYRUA = RegUtil.register(OceanMonumentPiecesUA.DoubleYRoom::new, "OMDYRUA");
+		OMDYZRUA = RegUtil.register(OceanMonumentPiecesUA.DoubleYZRoom::new, "OMDYZRUA");
+		OMDZRUA = RegUtil.register(OceanMonumentPiecesUA.DoubleZRoom::new, "OMDZRUA");
+		OMENTRYUA = RegUtil.register(OceanMonumentPiecesUA.EntryRoom::new, "OMEntryUA");
+		OMPENTHOUSEUA = RegUtil.register(OceanMonumentPiecesUA.Penthouse::new, "OMPenthouseUA");
+		OMSIMPLEUA = RegUtil.register(OceanMonumentPiecesUA.SimpleRoom::new, "OMSimpleUA");
+		OMSIMPLETUA = RegUtil.register(OceanMonumentPiecesUA.SimpleTopRoom::new, "OMSimpleTUA");
+		OMWRUA = RegUtil.register(OceanMonumentPiecesUA.WingRoom::new, "OMWRUA");
+		SHCCUA = RegUtil.register(StrongholdPiecesUA.ChestCorridor::new, "SHCCUA");
+		SHFCUA = RegUtil.register(StrongholdPiecesUA.Corridor::new, "SHFCUA");
+		SH5CUA = RegUtil.register(StrongholdPiecesUA.Crossing::new, "SH5CUA");
+		SHLTUA = RegUtil.register(StrongholdPiecesUA.LeftTurn::new, "SHLTUA");
+		SHLIUA = RegUtil.register(StrongholdPiecesUA.Library::new, "SHLiUA");
+		SHPRUA = RegUtil.register(StrongholdPiecesUA.PortalRoom::new, "SHPRUA");
+		SHPHUA = RegUtil.register(StrongholdPiecesUA.Prison::new, "SHPHUA");
+		SHRTUA = RegUtil.register(StrongholdPiecesUA.RightTurn::new, "SHRTUA");
+		SHRCUA = RegUtil.register(StrongholdPiecesUA.RoomCrossing::new, "SHRCUA");
+		SHSDUA = RegUtil.register(StrongholdPiecesUA.Stairs::new, "SHSDUA");
+		SHSTARTUA = RegUtil.register(StrongholdPiecesUA.Stairs2::new, "SHStartUA");
+		SHSUA = RegUtil.register(StrongholdPiecesUA.Straight::new, "SHSUA");
+		SHSSDUA = RegUtil.register(StrongholdPiecesUA.StairsStraight::new, "SHSSDUA");
+		VISTUA = RegUtil.register(VillagePastStyledPiecesUA.Church::new, "ViSTUA");
+		VIDFUA = RegUtil.register(VillagePastStyledPiecesUA.Field1::new, "ViDFUA");
+		VIFUA = RegUtil.register(VillagePastStyledPiecesUA.Field2::new, "ViFUA");
+		VIPHUA = RegUtil.register(VillagePastStyledPiecesUA.WorkHouse::new, "ViPHUA");
+		VIBHUA = RegUtil.register(VillagePastStyledPiecesUA.LibraryHouse::new, "ViBHUA");
+		VISUA = RegUtil.register(VillagePastStyledPiecesUA.Blacksmith::new, "ViSUA");
+		VITRHUA = RegUtil.register(VillagePastStyledPiecesUA.LargeHouse::new, "ViTRHUA");
+		VISHUA = RegUtil.register(VillagePastStyledPiecesUA.FlatTopTinyHouse::new, "ViSHUA");
+		VISRUA = RegUtil.register(VillagePastStyledPiecesUA.Path::new, "ViSRUA");
+		VIWUA = RegUtil.register(VillagePastStyledPiecesUA.Well::new, "ViWUA");
+		VISMHUA = RegUtil.register(VillagePastStyledPiecesUA.TinyHouse::new, "ViSmHUA");
+		VILUA = RegUtil.register(VillagePastStyledPiecesUA.Torch::new, "ViLUA");
+		VISTARTUA = RegUtil.register(VillagePastStyledPiecesUA.Start::new, "ViStartUA");
 	}
 
-
-	static IStructurePieceType register(IStructurePieceType p_214750_0_, String key)
-	{
-		return Registry.register(Registry.STRUCTURE_PIECE, key.toLowerCase(Locale.ROOT), p_214750_0_);
-	}
 }

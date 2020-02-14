@@ -83,16 +83,22 @@ public class AmplifiedPortalBehavior
 					{
 						if (ConfigUA.forceExitToOverworld)
 						{
-							// go to Overworld directly because of config option.
+							// Go to Overworld directly because of config option.
 							destination = DimensionType.OVERWORLD;
 						}
 						else
 						{
-							//gets stored dimension
+							// Gets stored dimension
 							destination = cap.getNonUADim();
+							
+							// Impressive if this is reached...........
+							if(destination == null)
+							{
+								destination = DimensionType.OVERWORLD;
+							}
 						}
 						
-						//set current UA position
+						// Set current UA position
 						cap.setUAPos(entity.getPosition());
 					}
 
@@ -102,7 +108,7 @@ public class AmplifiedPortalBehavior
 						destination = UltraAmplifiedDimension.ultraamplified();
 						enteringUA = true;
 						
-						//set current nonUA position and dimension before teleporting
+						// Set current nonUA position and dimension before teleporting
 						cap.setNonUAPos(entity.getPosition());
 						cap.setNonUADim(entity.dimension);
 					}
@@ -114,13 +120,13 @@ public class AmplifiedPortalBehavior
 
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 
-					//gets top block in other world or original location
+					// Gets top block in other world or original location
 					BlockPos blockpos = new BlockPos(8, 0, 8);
 					ChunkPos chunkpos;
 					if (enteringUA && cap.getUAPos() == null)
 					{
-						//if it is player's first time teleporting to UA dimension, 
-						//find top block at world origin closest to portal
+						// If it is player's first time teleporting to UA dimension, 
+						// find top block at world origin closest to portal
 
 						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
 
@@ -176,14 +182,34 @@ public class AmplifiedPortalBehavior
 					}
 					else
 					{
-						//otherwise, just go to where our stored location is
+						// Otherwise, just go to where our stored location is
 						if(enteringUA)
 						{
+							// Will never be null because we did check above for null already.
 							blockpos = cap.getUAPos();
 						}
 						else 
 						{
-							blockpos = cap.getNonUAPos();
+							// Check for null which would be impressive if it occurs
+							if(cap.getNonUAPos() == null)
+							{
+								// Set player at world spawn then with Amplified Portal at feet
+								// The portal will try to not replace any block and be at the next air block above non-air blocks.
+								blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING, serverworld.getSpawnPoint());
+								BlockState blockState = serverworld.getBlockState(blockpos);
+								while(blockState.getMaterial() != Material.AIR && blockpos.getY() < serverworld.getActualHeight() - 2)
+								{
+									blockpos = blockpos.up();
+									blockState = serverworld.getBlockState(blockpos);
+								}
+								
+								serverworld.setBlockState(blockpos, BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState());
+							}
+							else
+							{
+								// Get position in non UA dimension as it isn't null
+								blockpos = cap.getNonUAPos();
+							}
 						}
 						chunkpos = new ChunkPos(blockpos);
 					}

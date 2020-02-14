@@ -18,7 +18,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
    (V.7.2.2 Changes) (1.15.2 Minecraft)
     
 	Servers: 
-·Add ultra-amplifed-overworld=true to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
+·Add use-modded-worldtype=ultra-amplified to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain when making a brand new world. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
     
 	Config: 
 ·Added config option to make exiting Ultra Amplified dimension to always place you into the Overworld.

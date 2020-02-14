@@ -15,7 +15,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDensedWoodedBiomeUA;
@@ -82,6 +81,7 @@ import net.telepathicgrunt.ultraamplified.world.biomes.TaigaRelicBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TaigaRockyBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestRelicBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
 
 public class BiomeInit {
 
@@ -310,7 +310,7 @@ public class BiomeInit {
 
 	//adds biome to registry with their type to the registry and to the biome dictionary
 	private static Biome initBiome(IForgeRegistry<Biome> registry, Biome biome, String name, BiomeType biomeType, Type... types) {
-		UltraAmplified.register(registry, biome, name);
+		RegUtil.register(registry, biome, name);
 		BiomeDictionary.addTypes(biome, types);
 		return biome;
 	}
