@@ -18,8 +18,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	public float nonUAPitch = 0;
 	public float nonUAYaw = 0;
 	public BlockPos UABlockPos = null;
-	public float UAPitch = 0;
-	public float UAYaw = 0;
+	public float UAPitch = 3.75F;
+	public float UAYaw = -45F;
 
 
 	//////////////////////////////////////////
@@ -173,16 +173,11 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		
 
 		//Non-UA stuff
-		if(data.contains("NonUADimensionNamespace"))
-		{
-			storedDimension = DimensionType.byName(new ResourceLocation(
-													data.getString("NonUADimensionNamespace"), 
-													data.getString("NonUADimensionPath")));
-		}
-		if(data.contains("NonUA_X"))
-		{
-			storedBlockPosNonUA = new BlockPos(data.getInt("NonUA_X"), data.getInt("NonUA_Y"), data.getInt("NonUA_Z"));
-		}
+		storedDimension = DimensionType.byName(new ResourceLocation(
+												data.getString("NonUADimensionNamespace"), 
+												data.getString("NonUADimensionPath")));
+		storedBlockPosNonUA = new BlockPos(data.getInt("NonUA_X"), data.getInt("NonUA_Y"), data.getInt("NonUA_Z"));
+		//Need to check so if it doesn't exist, we use the default values we set beforehand
 		if(data.contains("NonUAPitch"))
 		{
 			storedNonUAPitch = data.getFloat("NonUAPitch");
@@ -194,10 +189,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		
 
 		//UA stuff
-		if(data.contains("UA_X"))
-		{
-			storedBlockPosUA = new BlockPos(data.getInt("UA_X"), data.getInt("UA_Y"), data.getInt("UA_Z"));
-		}
+		storedBlockPosUA = new BlockPos(data.getInt("UA_X"), data.getInt("UA_Y"), data.getInt("UA_Z"));
+		//Need to check so if it doesn't exist, we use the default values we set beforehand
 		if(data.contains("UAPitch"))
 		{
 			storedUAPitch = data.getFloat("UAPitch");
