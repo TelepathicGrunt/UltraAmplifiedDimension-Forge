@@ -333,13 +333,14 @@ public class AmplifiedPortalBehavior
 	{
 		ForgeRegistry<Block> registry = ((ForgeRegistry<Block>) ForgeRegistries.BLOCKS);
 
-		//grabs resourcelocation from config and tries to find that block to use for corners
-		BlockState blockCorner;
+		// Grabs resourcelocation from config and tries to find that block to use for corners
+		// Doesn't need to be Blockstate as Polished Granite has only 1 state anyway
+		Block blockCorner;
 		if (!ConfigUA.portalCornerBlocks.equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(ConfigUA.portalCornerBlocks)))
 			{
-				blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks)).getDefaultState();
+				blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks));
 			}
 			else
 			{
@@ -354,11 +355,12 @@ public class AmplifiedPortalBehavior
 		}
 		else
 		{
-			blockCorner = POLISHED_GRANITE;
+			blockCorner = POLISHED_GRANITE.getBlock();
 		}
 
 		//grabs resourcelocation from config and tries to find that block to use for ceiling
 		BlockState blockCeiling;
+		boolean customCeiling = false;
 		if (!ConfigUA.portalCeilingBlocks.equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks)))
@@ -368,6 +370,7 @@ public class AmplifiedPortalBehavior
 				if (blockCeiling.getBlock() instanceof SlabBlock)
 				{
 					blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
+					customCeiling = true;
 				}
 			}
 			else
@@ -388,6 +391,7 @@ public class AmplifiedPortalBehavior
 
 		//grabs resourcelocation from config and tries to find that block to use for floor
 		BlockState blockFloor;
+		boolean customFloor = false;
 		if (!ConfigUA.portalFloorBlocks.equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks)))
@@ -397,6 +401,7 @@ public class AmplifiedPortalBehavior
 				if (blockFloor.getBlock() instanceof SlabBlock)
 				{
 					blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
+					customFloor = true;
 				}
 			}
 			else
@@ -420,16 +425,27 @@ public class AmplifiedPortalBehavior
 		{
 			for (int z = -1; z <= 1; z++)
 			{
+				// Floor corners
 				if (Math.abs(x * z) == 1)
 				{
-					if (world.getBlockState(pos.add(x, -1, z)) != blockCorner)
+					if (world.getBlockState(pos.add(x, -1, z)).getBlock() != blockCorner)
 					{
 						return false;
 					}
 				}
+				
+				// Plus shape on floor
 				else
 				{
-					if (world.getBlockState(pos.add(x, -1, z)) != blockFloor)
+					BlockState currentFloor = world.getBlockState(pos.add(x, -1, z));
+					// Convert to default block if use changed the floor block in config so we can ignore properties of the block
+					if(customFloor)
+					{
+						currentFloor = currentFloor.getBlock().getDefaultState(); 
+					}
+					
+					
+					if (currentFloor != blockFloor)
 					{
 						return false;
 					}
@@ -448,16 +464,25 @@ public class AmplifiedPortalBehavior
 		{
 			for (int z = -1; z <= 1; z++)
 			{
+				// Top corners
 				if (Math.abs(x * z) == 1)
 				{
-					if (world.getBlockState(pos.add(x, 1, z)) != blockCorner)
+					if (world.getBlockState(pos.add(x, 1, z)).getBlock() != blockCorner)
 					{
 						return false;
 					}
 				}
+				// Plus shape on ceiling
 				else
 				{
-					if (world.getBlockState(pos.add(x, 1, z)) != blockCeiling)
+					BlockState currentCeiling = world.getBlockState(pos.add(x, 1, z));
+					// Convert to default block if use changed the ceiling block in config so we can ignore properties of the block
+					if(customCeiling)
+					{
+						currentCeiling = currentCeiling.getBlock().getDefaultState(); 
+					}
+					
+					if (currentCeiling != blockCeiling)
 					{
 						return false;
 					}
