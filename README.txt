@@ -25,7 +25,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed bug where disabling Spiky Badlands or Ice Spikes config while in a world, exiting, and re-entering won't take effect sometimes. Now it always will.
    
 	Dimension: 
-·Redid some of the teleporting code to handle entering/exiting the Ultra Amplified dimension better when entering from other dimension or you entered it by a different way other than the Amplified Portal block.
+·Re-did and cleaned up the teleportation code. Next time you try to teleport to/from UA dimension in a world that used an old version of this mod, please place your stuff in a chest and then test teleporting with the Amplified Portal twice to make sure the teleportation code grabbed and converted the old teleportation code's data correctly. Any issues with this means you should teleport a few more times as the new code is self-correcting and should detect the correct dimensions and positions after a few times. The new code for the Amplified Portal block should be less glitchy and always place you at whatever spot you were at when you teleported to/from UA dimension regardless of other teleportation methods you used to enter/exit the UA dimension.
 
     Structures:
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.

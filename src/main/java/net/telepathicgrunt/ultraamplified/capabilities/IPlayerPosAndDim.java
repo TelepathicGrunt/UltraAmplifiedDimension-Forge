@@ -16,9 +16,6 @@ public interface IPlayerPosAndDim {
 	
 	void setUAPos(BlockPos incomingPos);
 	BlockPos getUAPos();
-
-	void setAltTele(boolean shouldDoAltTeleporting);
-	Boolean getAltTele();
 	
 	CompoundNBT saveNBTData();
 	void loadNBTData(CompoundNBT nbtTag);
