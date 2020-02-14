@@ -20,7 +20,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	public float nonUAYaw = 0;
 	public Vec3d UABlockPos = null;
 	public float UAPitch = 3.75F;
-	public float UAYaw = -45F;
+	public float UAYaw = 90F;
 
 
 	//////////////////////////////////////////

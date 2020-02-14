@@ -25,8 +25,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Fixed bug where disabling Spiky Badlands or Ice Spikes config while in a world, exiting, and re-entering won't take effect sometimes. Now it always will.
    
 	Dimension: 
-·Re-did and cleaned up the teleportation code. Next time you try to teleport to/from UA dimension in a world that used an old version of this mod, please place your stuff in a chest and then test teleporting with the Amplified Portal twice to make sure the teleportation code grabbed and converted the old teleportation code's data correctly. Any issues with this means you should teleport a few more times as the new code is self-correcting and should detect the correct dimensions and positions after a few times. The new code for the Amplified Portal block should be less glitchy and always place you at whatever spot you were at when you teleported to/from UA dimension regardless of other teleportation methods you used to enter/exit the UA dimension.
+·Re-did and cleaned up the teleportation code. Next time you try to teleport to/from UA dimension in a world that used an older version of this mod, please place your stuff in a chest and then test teleporting with the Amplified Portal twice to make sure the teleportation code grabbed and converted the old teleportation code's data correctly. Any issues with this means you should teleport a few more times as the new code is self-correcting and should detect the correct dimensions and positions after a few times. The new code for the Amplified Portal block should be less glitchy and always place you at whatever spot you were at when you teleported to/from UA dimension regardless of other teleportation methods you used to enter/exit the UA dimension.
 ·Teleporting between dimensions with Amplified Portal block will now make you face where the Amplified Portal block was at when you last teleported out of that dimension you are currently going into.
+·Teleporting is now more precise with spawning you at the very exact location you were at (instead of storing your position as whole numbers like 9, it can now store decimal numbers such as 9.84343).
 
     Structures:
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.
@@ -35,7 +36,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
     Biome: 
 ·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
 ·Fixed roots not generating.
-·Added roots to Bamboo Jungle biomes.
+·Added roots to Bamboo Jungle and Relic Bamboo Jungle biomes.
 ·Netherwart in Netherland biome is now more grown rather than looking like it was just placed. 
 
 	Worldtype: 
