@@ -18,6 +18,7 @@ import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
@@ -110,7 +111,7 @@ public class AmplifiedPortalBehavior
 						yaw = cap.getNonUAYaw();
 						
 						// Set current UA position and rotations
-						cap.setUAPos(entity.getPosition());
+						cap.setUAPos(entity.getPositionVec());
 						cap.setUAPitch(entity.rotationPitch);
 						cap.setUAYaw(entity.rotationYaw);
 					}
@@ -124,7 +125,7 @@ public class AmplifiedPortalBehavior
 						enteringUA = true;
 						
 						// Set current nonUA position, rotations, and dimension before teleporting
-						cap.setNonUAPos(entity.getPosition());
+						cap.setNonUAPos(entity.getPositionVec());
 						cap.setNonUADim(entity.dimension);
 						cap.setNonUAPitch(entity.rotationPitch);
 						cap.setNonUAYaw(entity.rotationYaw);
@@ -138,22 +139,21 @@ public class AmplifiedPortalBehavior
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 
 					// Gets top block in other world or original location
-					BlockPos blockpos = new BlockPos(8, 0, 8);
-					ChunkPos chunkpos;
+					Vec3d playerVec3Pos = new Vec3d(8.5D, 0, 8.5D);
+					ChunkPos playerChunkPos;
 					if (enteringUA && cap.getUAPos() == null)
 					{
 						// If it is player's first time teleporting to UA dimension, 
 						// find top block at world origin closest to portal
-
-						chunkpos = new ChunkPos(new BlockPos(10, 255, 8));
+						BlockPos worldOriginBlockPos = new BlockPos(10, 0, 8);
+						playerChunkPos = new ChunkPos(worldOriginBlockPos);
 
 						int portalY = 255;
-						BlockPos pos = new BlockPos(8, 0, 8);
 
 						//finds where portal block is
 						while (portalY > 0)
 						{
-							if (serverworld.getBlockState(pos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
+							if (serverworld.getBlockState(worldOriginBlockPos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
 							{
 								break;
 							}
@@ -163,12 +163,12 @@ public class AmplifiedPortalBehavior
 						//not sure how the portal block was not found but if so, spawn player at highest piece of land
 						if (portalY == 0)
 						{
-							blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+							playerVec3Pos = new Vec3d(serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, worldOriginBlockPos)).add(0.5D, 1D, 0.5D);
 						}
 						else
 						{
 							//portal was found so try to find 2 air spaces around it that the player can spawn at
-							pos = pos.up(portalY - 1);
+							worldOriginBlockPos = worldOriginBlockPos.up(portalY - 1);
 							boolean validSpaceFound = false;
 
 							for (int x = -2; x < 3; x++)
@@ -177,10 +177,11 @@ public class AmplifiedPortalBehavior
 								{
 									if (x == -2 || x == 2 || z == -2 || z == 2)
 									{
-										if (serverworld.getBlockState(pos.add(x, 0, z)).getMaterial() == Material.AIR && serverworld.getBlockState(pos.add(x, 1, z)).getMaterial() == Material.AIR)
+										if (serverworld.getBlockState(worldOriginBlockPos.add(x, 0, z)).getMaterial() == Material.AIR && 
+											serverworld.getBlockState(worldOriginBlockPos.add(x, 1, z)).getMaterial() == Material.AIR)
 										{
 											//valid space for player is found
-											blockpos = pos.add(x, 0, z);
+											worldOriginBlockPos = worldOriginBlockPos.add(x, 0, z);
 											validSpaceFound = true;
 											z = 3;
 											x = 3;
@@ -192,8 +193,10 @@ public class AmplifiedPortalBehavior
 							if (!validSpaceFound)
 							{
 								//no valid space found around portal. get top solid block instead
-								blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+								worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 							}
+							
+							playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 1D, 0.5D); // Set where player spawns
 						}
 
 					}
@@ -203,7 +206,7 @@ public class AmplifiedPortalBehavior
 						if(enteringUA)
 						{
 							// Will never be null because we did check above for null already.
-							blockpos = cap.getUAPos();
+							playerVec3Pos = cap.getUAPos();
 						}
 						else 
 						{
@@ -212,27 +215,29 @@ public class AmplifiedPortalBehavior
 							{
 								// Set player at world spawn then with Amplified Portal at feet
 								// The portal will try to not replace any block and be at the next air block above non-air blocks.
-								blockpos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING, serverworld.getSpawnPoint());
-								BlockState blockState = serverworld.getBlockState(blockpos);
-								while(blockState.getMaterial() != Material.AIR && blockpos.getY() < serverworld.getActualHeight() - 2)
+								BlockPos playerBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING, serverworld.getSpawnPoint());
+								BlockState blockState = serverworld.getBlockState(playerBlockPos);
+								while(blockState.getMaterial() != Material.AIR && playerBlockPos.getY() < serverworld.getActualHeight() - 2)
 								{
-									blockpos = blockpos.up();
-									blockState = serverworld.getBlockState(blockpos);
+									playerBlockPos = playerBlockPos.up();
+									blockState = serverworld.getBlockState(playerBlockPos);
 								}
 								
-								serverworld.setBlockState(blockpos, BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState());
+								serverworld.setBlockState(playerBlockPos, BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState());
+								
+								playerVec3Pos = new Vec3d(playerBlockPos).add(0.5D, 1D, 0.5D);
 							}
 							else
 							{
 								// Get position in non UA dimension as it isn't null
-								blockpos = cap.getNonUAPos();
+								playerVec3Pos = cap.getNonUAPos();
 							}
 						}
-						chunkpos = new ChunkPos(blockpos);
+						playerChunkPos = new ChunkPos(new BlockPos(playerVec3Pos));
 					}
 
 					
-					serverworld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, chunkpos, 1, entity.getEntityId());
+					serverworld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, playerChunkPos, 1, entity.getEntityId());
 
 					//dunno how a sleeping player clicked on the portal but if they do, they wake up
 					if (((ServerPlayerEntity) entity).isSleeping())
@@ -243,9 +248,9 @@ public class AmplifiedPortalBehavior
 
 					((ServerPlayerEntity) entity).teleport(
 							minecraftserver.getWorld(destination), 
-							blockpos.getX() + 0.5D, 
-							blockpos.getY() + 1, 
-							blockpos.getZ() + 0.5D, 
+							playerVec3Pos.getX(), 
+							playerVec3Pos.getY() + 0.2D, 
+							playerVec3Pos.getZ(), 
 							yaw, 
 							pitch);
 				}

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.DimensionType;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
@@ -14,10 +15,10 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 {
 
 	public DimensionType nonUADimension = DimensionType.OVERWORLD;
-	public BlockPos nonUABlockPos = null;
+	public Vec3d nonUABlockPos = null;
 	public float nonUAPitch = 0;
 	public float nonUAYaw = 0;
-	public BlockPos UABlockPos = null;
+	public Vec3d UABlockPos = null;
 	public float UAPitch = 3.75F;
 	public float UAYaw = -45F;
 
@@ -71,24 +72,24 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	//UA stuff
 
 	@Override
-	public void setNonUAPos(BlockPos incomingPos)
+	public void setNonUAPos(Vec3d incomingPos)
 	{
 		nonUABlockPos = incomingPos;
 	}
 	@Override
-	public BlockPos getNonUAPos()
+	public Vec3d getNonUAPos()
 	{
 		return nonUABlockPos;
 	}
 
 
 	@Override
-	public void setUAPos(BlockPos incomingPos)
+	public void setUAPos(Vec3d incomingPos)
 	{
 		UABlockPos = incomingPos;
 	}
 	@Override
-	public BlockPos getUAPos()
+	public Vec3d getUAPos()
 	{
 		return UABlockPos;
 	}
@@ -126,18 +127,18 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 
 		if(this.getNonUAPos() != null)
 		{
-			data.putInt("NonUA_X", this.getNonUAPos().getX());
-			data.putInt("NonUA_Y", this.getNonUAPos().getY());
-			data.putInt("NonUA_Z", this.getNonUAPos().getZ());
+			data.putDouble("NonUA_X", this.getNonUAPos().getX());
+			data.putDouble("NonUA_Y", this.getNonUAPos().getY());
+			data.putDouble("NonUA_Z", this.getNonUAPos().getZ());
 		}
 		data.putFloat("NonUAPitch", nonUAPitch);
 		data.putFloat("NonUAYaw", nonUAYaw);
 		
 		if(this.getUAPos() != null)
 		{
-			data.putInt("UA_X", this.getUAPos().getX());
-			data.putInt("UA_Y", this.getUAPos().getY());
-			data.putInt("UA_Z", this.getUAPos().getZ());
+			data.putDouble("UA_X", this.getUAPos().getX());
+			data.putDouble("UA_Y", this.getUAPos().getY());
+			data.putDouble("UA_Z", this.getUAPos().getZ());
 		}
 		data.putFloat("UAPitch", UAPitch);
 		data.putFloat("UAYaw", UAYaw);
@@ -163,12 +164,12 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		data = fixData(data);
 		
 		//temp variables to hold what is read from nbt
-		BlockPos storedBlockPosNonUA = null;
+		Vec3d storedBlockPosNonUA = null;
 		float storedNonUAPitch = 3.75F;
-		float storedNonUAYaw = 0;
-		BlockPos storedBlockPosUA = null;
+		float storedNonUAYaw = 0F;
+		Vec3d storedBlockPosUA = null;
 		float storedUAPitch = 3.75F;
-		float storedUAYaw = -45F;
+		float storedUAYaw = 0F;
 		DimensionType storedDimension = null;
 		
 
@@ -176,29 +177,23 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		storedDimension = DimensionType.byName(new ResourceLocation(
 												data.getString("NonUADimensionNamespace"), 
 												data.getString("NonUADimensionPath")));
-		storedBlockPosNonUA = new BlockPos(data.getInt("NonUA_X"), data.getInt("NonUA_Y"), data.getInt("NonUA_Z"));
-		//Need to check so if it doesn't exist, we use the default values we set beforehand
-		if(data.contains("NonUAPitch"))
+		//Need check for null so we can let rest for code know the player has not exit the dimension yet for the first time.
+		if(data.contains("NonUA_X") && data.contains("NonUA_Y") && data.contains("NonUA_Z"))
 		{
-			storedNonUAPitch = data.getFloat("NonUAPitch");
+			storedBlockPosNonUA = new Vec3d(data.getFloat("NonUA_X"), data.getFloat("NonUA_Y"), data.getFloat("NonUA_Z"));
 		}
-		if(data.contains("NonUAYaw"))
-		{
-			storedNonUAYaw = data.getFloat("NonUAYaw");
-		}
+		storedNonUAPitch = data.getFloat("NonUAPitch");
+		storedNonUAYaw = data.getFloat("NonUAYaw");
 		
 
 		//UA stuff
-		storedBlockPosUA = new BlockPos(data.getInt("UA_X"), data.getInt("UA_Y"), data.getInt("UA_Z"));
-		//Need to check so if it doesn't exist, we use the default values we set beforehand
-		if(data.contains("UAPitch"))
+		//Need check for null so we can let rest for code know the player has not exit the dimension yet for the first time.
+		if(data.contains("UA_X") && data.contains("UA_Y") && data.contains("UA_Z"))
 		{
-			storedUAPitch = data.getFloat("UAPitch");
+			storedBlockPosUA = new Vec3d(data.getFloat("UA_X"), data.getFloat("UA_Y"), data.getFloat("UA_Z"));
 		}
-		if(data.contains("UAYaw"))
-		{
-			storedUAYaw = data.getFloat("UAYaw");
-		}
+		storedUAPitch = data.getFloat("UAPitch");
+		storedUAYaw = data.getFloat("UAYaw");
 
 		
 		

@@ -1,7 +1,7 @@
 package net.telepathicgrunt.ultraamplified.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.DimensionType;
 
 public interface IPlayerPosAndDim {
@@ -13,8 +13,8 @@ public interface IPlayerPosAndDim {
 
 	
 	
-	void setNonUAPos(BlockPos incomingPos);
-	BlockPos getNonUAPos();
+	void setNonUAPos(Vec3d incomingPos);
+	Vec3d getNonUAPos();
 
 	void setNonUAPitch(float incomingPitch);
 	float getNonUAPitch();
@@ -24,8 +24,8 @@ public interface IPlayerPosAndDim {
 	
 	
 	
-	void setUAPos(BlockPos incomingPos);
-	BlockPos getUAPos();
+	void setUAPos(Vec3d incomingPos);
+	Vec3d getUAPos();
 	
 	void setUAPitch(float incomingPitch);
 	float getUAPitch();
