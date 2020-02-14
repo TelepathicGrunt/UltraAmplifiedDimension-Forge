@@ -11,11 +11,27 @@ public interface IPlayerPosAndDim {
 	void setNonUADim(DimensionType incomingDim);
 	DimensionType getNonUADim();
 
+	
+	
 	void setNonUAPos(BlockPos incomingPos);
 	BlockPos getNonUAPos();
+
+	void setNonUAPitch(float incomingPitch);
+	float getNonUAPitch();
+
+	void setNonUAYaw(float incomingYaw);
+	float getNonUAYaw();
+	
+	
 	
 	void setUAPos(BlockPos incomingPos);
 	BlockPos getUAPos();
+	
+	void setUAPitch(float incomingPitch);
+	float getUAPitch();
+
+	void setUAYaw(float incomingYaw);
+	float getUAYaw();
 	
 	CompoundNBT saveNBTData();
 	void loadNBTData(CompoundNBT nbtTag);

@@ -26,6 +26,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
    
 	Dimension: 
 ·Re-did and cleaned up the teleportation code. Next time you try to teleport to/from UA dimension in a world that used an old version of this mod, please place your stuff in a chest and then test teleporting with the Amplified Portal twice to make sure the teleportation code grabbed and converted the old teleportation code's data correctly. Any issues with this means you should teleport a few more times as the new code is self-correcting and should detect the correct dimensions and positions after a few times. The new code for the Amplified Portal block should be less glitchy and always place you at whatever spot you were at when you teleported to/from UA dimension regardless of other teleportation methods you used to enter/exit the UA dimension.
+·Teleporting between dimensions with Amplified Portal block will now make you face where the Amplified Portal block was at when you last teleported out of that dimension you are currently going into.
 
     Structures:
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.

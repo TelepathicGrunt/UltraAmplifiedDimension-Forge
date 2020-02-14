@@ -15,9 +15,16 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 
 	public DimensionType nonUADimension = DimensionType.OVERWORLD;
 	public BlockPos nonUABlockPos = null;
+	public float nonUAPitch = 0;
+	public float nonUAYaw = 0;
 	public BlockPos UABlockPos = null;
+	public float UAPitch = 0;
+	public float UAYaw = 0;
 
 
+	//////////////////////////////////////////
+	//Non-UA stuff
+	
 	@Override
 	public void setNonUADim(DimensionType incomingDim)
 	{
@@ -37,7 +44,31 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	{
 		return nonUADimension;
 	}
+	
+	@Override
+	public void setNonUAPitch(float incomingPitch)
+	{
+		nonUAPitch = incomingPitch;
+	}
+	@Override
+	public float getNonUAPitch()
+	{
+		return nonUAPitch;
+	}
+	
+	@Override
+	public void setNonUAYaw(float incomingYaw)
+	{
+		nonUAYaw = incomingYaw;
+	}
+	@Override
+	public float getNonUAYaw()
+	{
+		return nonUAYaw;
+	}
 
+	////////////////////////////////////////////////////////////
+	//UA stuff
 
 	@Override
 	public void setNonUAPos(BlockPos incomingPos)
@@ -62,6 +93,31 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		return UABlockPos;
 	}
 
+	
+	@Override
+	public void setUAPitch(float incomingPitch)
+	{
+		UAPitch = incomingPitch;
+	}
+	@Override
+	public float getUAPitch()
+	{
+		return UAPitch;
+	}
+	
+	@Override
+	public void setUAYaw(float incomingYaw)
+	{
+		UAYaw = incomingYaw;
+	}
+	@Override
+	public float getUAYaw()
+	{
+		return UAYaw;
+	}
+	
+	///////////////////////////////////////////////////////
+	//Save and load stuff
 
 	@Override
 	public CompoundNBT saveNBTData()
@@ -74,6 +130,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 			data.putInt("NonUA_Y", this.getNonUAPos().getY());
 			data.putInt("NonUA_Z", this.getNonUAPos().getZ());
 		}
+		data.putFloat("NonUAPitch", nonUAPitch);
+		data.putFloat("NonUAYaw", nonUAYaw);
 		
 		if(this.getUAPos() != null)
 		{
@@ -81,6 +139,8 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 			data.putInt("UA_Y", this.getUAPos().getY());
 			data.putInt("UA_Z", this.getUAPos().getZ());
 		}
+		data.putFloat("UAPitch", UAPitch);
+		data.putFloat("UAYaw", UAYaw);
 
 		if (this.getNonUADim() != null)
 		{
@@ -102,31 +162,60 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		CompoundNBT data = (CompoundNBT) nbtTag;
 		data = fixData(data);
 		
+		//temp variables to hold what is read from nbt
 		BlockPos storedBlockPosNonUA = null;
+		float storedNonUAPitch = 3.75F;
+		float storedNonUAYaw = 0;
 		BlockPos storedBlockPosUA = null;
+		float storedUAPitch = 3.75F;
+		float storedUAYaw = -45F;
 		DimensionType storedDimension = null;
+		
 
-		if(data.contains("NonUA_X"))
-		{
-			storedBlockPosNonUA = new BlockPos(data.getInt("NonUA_X"), data.getInt("NonUA_Y"), data.getInt("NonUA_Z"));
-		}
-		
-		if(data.contains("UA_X"))
-		{
-			storedBlockPosUA = new BlockPos(data.getInt("UA_X"), data.getInt("UA_Y"), data.getInt("UA_Z"));
-		}
-		
+		//Non-UA stuff
 		if(data.contains("NonUADimensionNamespace"))
 		{
 			storedDimension = DimensionType.byName(new ResourceLocation(
 													data.getString("NonUADimensionNamespace"), 
 													data.getString("NonUADimensionPath")));
 		}
+		if(data.contains("NonUA_X"))
+		{
+			storedBlockPosNonUA = new BlockPos(data.getInt("NonUA_X"), data.getInt("NonUA_Y"), data.getInt("NonUA_Z"));
+		}
+		if(data.contains("NonUAPitch"))
+		{
+			storedNonUAPitch = data.getFloat("NonUAPitch");
+		}
+		if(data.contains("NonUAYaw"))
+		{
+			storedNonUAYaw = data.getFloat("NonUAYaw");
+		}
+		
+
+		//UA stuff
+		if(data.contains("UA_X"))
+		{
+			storedBlockPosUA = new BlockPos(data.getInt("UA_X"), data.getInt("UA_Y"), data.getInt("UA_Z"));
+		}
+		if(data.contains("UAPitch"))
+		{
+			storedUAPitch = data.getFloat("UAPitch");
+		}
+		if(data.contains("UAYaw"))
+		{
+			storedUAYaw = data.getFloat("UAYaw");
+		}
 
 		
 		
 		this.setNonUADim(storedDimension);
+		this.setNonUAPitch(storedNonUAPitch);
+		this.setNonUAYaw(storedNonUAYaw);
 		this.setNonUAPos(storedBlockPosNonUA);
+		
+		this.setUAPitch(storedUAPitch);
+		this.setUAYaw(storedUAYaw);
 		this.setUAPos(storedBlockPosUA);
 	}
 

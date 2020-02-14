@@ -29,7 +29,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -82,6 +81,8 @@ public class AmplifiedPortalBehavior
 
 					// Gets previous dimension
 					DimensionType destination;
+					float pitch = 3.75F; // Looking straight ahead
+					float yaw = 0; // Facing north 
 					boolean enteringUA = false;
 
 					// Player is leaving Ultra Amplified dimension
@@ -103,20 +104,30 @@ public class AmplifiedPortalBehavior
 								destination = DimensionType.OVERWORLD;
 							}
 						}
+
+						// Get direction to face for Non-UA dimension
+						pitch = cap.getNonUAPitch();
+						yaw = cap.getNonUAYaw();
 						
-						// Set current UA position
+						// Set current UA position and rotations
 						cap.setUAPos(entity.getPosition());
+						cap.setUAPitch(entity.rotationPitch);
+						cap.setUAYaw(entity.rotationYaw);
 					}
 
 					// Otherwise, take us to Ultra Amplified Dimension.
 					else
 					{
 						destination = UltraAmplifiedDimension.ultraamplified();
+						pitch = cap.getUAPitch();
+						yaw = cap.getUAYaw();
 						enteringUA = true;
 						
-						// Set current nonUA position and dimension before teleporting
+						// Set current nonUA position, rotations, and dimension before teleporting
 						cap.setNonUAPos(entity.getPosition());
 						cap.setNonUADim(entity.dimension);
+						cap.setNonUAPitch(entity.rotationPitch);
+						cap.setNonUAYaw(entity.rotationYaw);
 					}
 
 					
@@ -230,35 +241,23 @@ public class AmplifiedPortalBehavior
 					}
 
 
-					((ServerPlayerEntity) entity).teleport(minecraftserver.getWorld(destination), blockpos.getX() + 0.5D, blockpos.getY() + 1, blockpos.getZ() + 0.5D, entity.rotationYaw, entity.rotationPitch);
+					((ServerPlayerEntity) entity).teleport(
+							minecraftserver.getWorld(destination), 
+							blockpos.getX() + 0.5D, 
+							blockpos.getY() + 1, 
+							blockpos.getZ() + 0.5D, 
+							yaw, 
+							pitch);
 				}
 			}
 
 			// checks to see if player uses right click with flint and steel. If so, tries
 			// to create portal if possible. only works in non-ultra amplified world types
-			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && event.getItemStack().getItem() == Items.FLINT_AND_STEEL)
+			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
+				event.getItemStack().getItem() == Items.FLINT_AND_STEEL)
 			{
 				trySpawnPortal(world, event.getPos(), entity);
 			}
-		}
-
-
-		// Fires just before the teleportation to new dimension begins
-		@SubscribeEvent
-		public static void entityTravelToDimensionEvent(EntityTravelToDimensionEvent event)
-		{
-//			if (event.getEntity() instanceof PlayerEntity)
-//			{
-//				// Updates the past dimension that the player is leaving
-//				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
-//				PlayerPositionAndDimension cap = (PlayerPositionAndDimension) playerEntity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
-//				
-//				//player is not entering UA dimension
-//				if(playerEntity.dimension != UltraAmplifiedDimension.ultraamplified()) 
-//				{
-//					cap.setNonUADim(playerEntity.dimension);
-//				}
-//			}
 		}
 
 
