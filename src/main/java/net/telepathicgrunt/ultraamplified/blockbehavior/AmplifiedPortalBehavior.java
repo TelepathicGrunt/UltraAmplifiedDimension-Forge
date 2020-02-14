@@ -346,7 +346,9 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame corner cannot be found! Here is what was put in: " + ConfigUA.portalCornerBlocks);
+					ITextComponent message = new StringTextComponent(
+							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
+							+ " put in the portal frame corner config! Here is what was in the config: §c" + ConfigUA.portalCornerBlocks);
 					entity.sendMessage(message);
 				}
 
@@ -366,18 +368,15 @@ public class AmplifiedPortalBehavior
 			if (registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks)))
 			{
 				blockCeiling = registry.getValue(new ResourceLocation(ConfigUA.portalCeilingBlocks)).getDefaultState();
-
-				if (blockCeiling.getBlock() instanceof SlabBlock)
-				{
-					blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
-					customCeiling = true;
-				}
+				customCeiling = true;
 			}
 			else
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame ceiling cannot be found! Here is what was put in: " + ConfigUA.portalCeilingBlocks);
+					ITextComponent message = new StringTextComponent(
+							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
+							+ " put in the portal frame ceiling config! Here is what was in the config: §c" + ConfigUA.portalCeilingBlocks);
 					entity.sendMessage(message);
 				}
 
@@ -397,18 +396,15 @@ public class AmplifiedPortalBehavior
 			if (registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks)))
 			{
 				blockFloor = registry.getValue(new ResourceLocation(ConfigUA.portalFloorBlocks)).getDefaultState();
-
-				if (blockFloor.getBlock() instanceof SlabBlock)
-				{
-					blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
-					customFloor = true;
-				}
+				customFloor = true;
 			}
 			else
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("Ultra Amplified Dimension: The block resourcelocation that is in the config for the portal frame floor cannot be found! Here is what was put in: " + ConfigUA.portalFloorBlocks);
+					ITextComponent message = new StringTextComponent(
+							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
+							+ " put in the portal frame floor config! Here is what was in the config: §c" + ConfigUA.portalFloorBlocks);
 					entity.sendMessage(message);
 				}
 
