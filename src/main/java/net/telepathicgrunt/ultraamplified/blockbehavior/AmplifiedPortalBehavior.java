@@ -211,7 +211,7 @@ public class AmplifiedPortalBehavior
 						else 
 						{
 							// Check for null which would be impressive if it occurs
-							if(cap.getNonUAPos() == null)
+							if(cap.getNonUAPos() == null || ConfigUA.forceExitToOverworld)
 							{
 								// Set player at world spawn then with Amplified Portal at feet
 								// The portal will try to not replace any block and be at the next air block above non-air blocks.
