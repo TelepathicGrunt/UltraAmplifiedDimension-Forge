@@ -19,6 +19,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
  
    Biome: 
 ·Fixed very rare chance of a crash when trying to find a valid spot for Glowstone in Netherland biome.
+·Ice Spikes now properly makes the pillar under their head spike ine Ice Spike biome.
 
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
