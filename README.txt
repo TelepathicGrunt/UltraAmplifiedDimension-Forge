@@ -15,6 +15,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+   (V.7.2.3 Changes) (1.15.2 Minecraft)
+ 
+       
    (V.7.2.2 Changes) (1.15.2 Minecraft)
     
 	Servers: 

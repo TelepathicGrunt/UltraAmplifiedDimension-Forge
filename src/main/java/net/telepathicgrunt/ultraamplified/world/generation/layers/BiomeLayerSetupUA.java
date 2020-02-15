@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BiomeLayerSetupUA {
@@ -37,7 +38,9 @@ public class BiomeLayerSetupUA {
     
     public BiomeLayerSetupUA()
     {
+    	//we have to do this here as the biome provider will be picking biomes before the world load event fires
     	setupBiomeEntries();
+		BiomeGenHelper.setBiomeEdgeMap();
     }
 
     @Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
@@ -45,7 +48,8 @@ public class BiomeLayerSetupUA {
 		
 		@SubscribeEvent
 		public static void Load(WorldEvent.Load event) {
-			setupBiomeEntries();
+			setupBiomeEntries(); // Update what biomes are used when re-entering a world without closing Minecraft.
+			BiomeGenHelper.setBiomeEdgeMap();
 		}
     }
     
