@@ -120,7 +120,7 @@ public enum BiomeGenHelper
 			
 			if(biomeID != END_FIELD && biomeID != BARREN_END_FIELD)
 			{
-				biomesComboToEdge.put(new Pair<Integer, Integer>(END_FIELD, biomeID), BARREN_END_FIELD);
+				biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, END_FIELD), BARREN_END_FIELD);
 			}
 			
 			if(biomeID != JUNGLE && biomeID != BAMBOO_JUNGLE)
@@ -132,18 +132,18 @@ public enum BiomeGenHelper
 			{
 				if(BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.ICY && !BiomeGenHelper.isOcean(biomeID))
 				{
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, VANILLA_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, VANILLA_DEEP_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, WARM_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, LUKEWARM_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, COLD_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, FROZEN_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_WARM_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_LUKEWARM_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_COLD_OCEAN), FROZEN_DESERT);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_FROZEN_OCEAN), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_DEEP_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(WARM_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(LUKEWARM_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(COLD_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(FROZEN_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_WARM_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_LUKEWARM_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_COLD_OCEAN, biomeID), FROZEN_DESERT);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_FROZEN_OCEAN, biomeID), FROZEN_DESERT);
 				}
 			}
 			
@@ -151,18 +151,18 @@ public enum BiomeGenHelper
 			{
 				if(BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.EXTREME_HILLS)
 				{
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, VANILLA_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, VANILLA_DEEP_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, WARM_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, LUKEWARM_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, COLD_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, FROZEN_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_WARM_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_LUKEWARM_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_COLD_OCEAN), STONE_PLAINS);
-					biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, DEEP_FROZEN_OCEAN), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_DEEP_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(WARM_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(LUKEWARM_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(COLD_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(FROZEN_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_WARM_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_LUKEWARM_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_COLD_OCEAN, biomeID), STONE_PLAINS);
+					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_FROZEN_OCEAN, biomeID), STONE_PLAINS);
 				}
 			}
 			

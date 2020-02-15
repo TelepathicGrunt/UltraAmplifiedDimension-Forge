@@ -19,7 +19,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
  
    Biome: 
 ·Fixed very rare chance of a crash when trying to find a valid spot for Glowstone in Netherland biome.
-·Ice Spikes now properly makes the pillar under their head spike ine Ice Spike biome.
+·Ice Spikes now properly makes the pillar under their head spike in Ice Spike biome.
+·The End Field biome is no longer shrunken too small by the Barren End Field biome that surrounds it.
+·Icy Biomes that borders an ocean will now replace the ocean edge with Frozen Desert biome instead of replacing the land biome with it. (Helps shrink size of oceans a bit)
+·All Rocky Fields variant biomes that borders an ocean will now replace the ocean edge with Stone Plains biome instead of replacing the land biome with it. (Helps shrink size of oceans a bit)
 
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
