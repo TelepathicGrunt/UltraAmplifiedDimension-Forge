@@ -17,6 +17,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
    (V.7.2.3 Changes) (1.15.2 Minecraft)
  
+   Biome: 
+·Fixed very rare chance of a crash when trying to find a valid spot for Glowstone in Netherland biome.
+
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
     

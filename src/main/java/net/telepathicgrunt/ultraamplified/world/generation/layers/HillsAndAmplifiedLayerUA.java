@@ -67,7 +67,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			{
 				biomeIdToReturn = BiomeGenHelper.ICED_TERRAIN;
 			}
-			else if (BiomeGenHelper.areUABiomesSimilar(biomeId1, BiomeGenHelper.WOODED_BADLANDS))
+			else if (biomeId1 == BiomeGenHelper.WOODED_BADLANDS || biomeId1 == BiomeGenHelper.SANDLESS_BADLANDS)
 			{
 				biomeIdToReturn = BiomeGenHelper.BADLANDS;
 			}

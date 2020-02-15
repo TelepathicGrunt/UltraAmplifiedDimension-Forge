@@ -225,25 +225,8 @@ public enum BiomeGenHelper
 			Biome biome1 = BiomeRegistry.getValue(biome1ID);
 			Biome biome2 = BiomeRegistry.getValue(biome2ID);
 			if (biome1 != null && biome2 != null)
-			{
-				if (biome1 != BiomeInit.WOODED_BADLANDS && biome1 != BiomeInit.SANDLESS_BADLANDS)
-				{
-					if (biome1.getCategory() != Biome.Category.NONE && 
-						biome2.getCategory() != Biome.Category.NONE && 
-						biome1.getCategory() == biome2.getCategory())
-					{
-						return true;
-					}
-					else
-					{
-						return biome1 == biome2;
-					}
-				}
-				else
-				{
-					return biome2 == BiomeInit.WOODED_BADLANDS || 
-						   biome2 == BiomeInit.SANDLESS_BADLANDS;
-				}
+			{ 
+				return biome1.getCategory() == biome2.getCategory();
 			}
 			else
 			{

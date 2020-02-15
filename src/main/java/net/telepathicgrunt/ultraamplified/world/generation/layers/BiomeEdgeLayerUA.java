@@ -10,7 +10,6 @@ import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 public enum BiomeEdgeLayerUA implements ICastleTransformer
 {
 	INSTANCE;
-	
 
 	public int apply(INoiseRandom context, int north, int west, int south, int east, int currentBiomeID)
 	{
@@ -42,7 +41,7 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer
 			return borderBiome;
 		}
 
-		// No biome edge was made.
+		// No biome edge was made. Return the original biome then.
 		return currentBiomeID;
 	}
 
