@@ -28,6 +28,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·The End Field biome is no longer shrunken too small by the Barren End Field biome that surrounds it.
 ·Icy Biomes that borders an ocean will now replace the ocean edge with Frozen Desert biome instead of replacing the land biome with it. (Helps shrink size of oceans a bit)
 ·All Rocky Fields variant biomes that borders an ocean will now replace the ocean edge with Stone Plains biome instead of replacing the land biome with it. (Helps shrink size of oceans a bit)
+·Nerfed beehive spawnrate in Forest and Forest Relic biome.
 
        
    (V.7.2.2 Changes) (1.15.2 Minecraft)
