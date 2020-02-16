@@ -22,7 +22,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
    Biome: 
 ·Optimized generating ocean biomes which reduced worldgen time!
-·Fixed bug where thin Snow layers in Ocean biomes could cause the water next to it to not get replaced by land and make it look like the Snow is holding back water. (There's a second different very rare glitch that is causing worldgen to not place blocks around ocean water when oceans meet land biomes. Still under research to find root cause...)
+·Fixed bug where thin Snow layers in Ocean biomes could cause the water next to it to not get replaced by land and make it look like the Snow is holding back water.
 ·Fixed very rare chance of a crash when trying to find a valid spot for Glowstone in Netherland biome.
 ·Ice Spikes now properly makes the pillar under their head spike in Ice Spike biome.
 ·The End Field biome is no longer shrunken too small by the Barren End Field biome that surrounds it.
