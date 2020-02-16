@@ -107,7 +107,7 @@ public class FeatureUA
 
     public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new LakeStoneless(BlockStateFeatureConfig::deserialize);
     public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new LakeWideShallow(BlockStateFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CONTAIN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CONTAIN_OCEAN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatchUA(NoFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpikeUA(NoFeatureConfig::deserialize);
@@ -195,7 +195,7 @@ public class FeatureUA
         RegUtil.register(registry, SMALL_BOULDER, "boulder_tiny_ua");
         RegUtil.register(registry, STONELESS_LAKE, "stoneless_lakes_ua");
         RegUtil.register(registry, SHALLOW_LAKE, "wide_shallow_lakes_ua");
-        RegUtil.register(registry, CONTAIN_LIQUID, "contain_water_ua");
+        RegUtil.register(registry, CONTAIN_OCEAN_LIQUID, "contain_water_ua");
         RegUtil.register(registry, ICE_PATCH_SANDY, "ice_patch_ua");
         RegUtil.register(registry, GIANT_ICE_SPIKE, "ice_spike_ua");
         RegUtil.register(registry, DISK_DRY, "disk_dry_ua");
