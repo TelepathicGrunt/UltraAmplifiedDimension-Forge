@@ -28,50 +28,30 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 	}
 
 	private final static BlockState ICE = Blocks.ICE.getDefaultState();
+	private final static BlockState SNOW = Blocks.SNOW.getDefaultState();
 
 	private final static BlockState[] DEAD_CORAL_ARRAY = { Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState(), Blocks.DEAD_BRAIN_CORAL_BLOCK.getDefaultState(), Blocks.DEAD_BUBBLE_CORAL_BLOCK.getDefaultState(), Blocks.DEAD_FIRE_CORAL_BLOCK.getDefaultState(), Blocks.DEAD_TUBE_CORAL_BLOCK.getDefaultState() };
 
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig configBlock)
 	{
-
-		boolean notContainedFlag;
-		BlockState currentblock;
-		BlockState blockAbove;
-		Biome oceanBiome = null;
-		boolean bordersOcean = false;
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), 0, position.getZ());  //set y to 0
-		BlockPos.Mutable blockpos$MutableAbove = new BlockPos.Mutable(blockpos$Mutable);
-
 		//checks to see if there is an ocean biome in this chunk
 		//breaks out of nested loop if ocean if found so oceanBiome holds the ocean
-		for (int x = 0; x < 16; ++x)
-		{
-			for (int z = 0; z < 16; ++z)
-			{
-				//only check along chunk edges for better performance
-				if (!(z == 0 || z == 16 || x == 0 || x == 16))
-				{
-					continue;
-				}
-
-				blockpos$Mutable.setPos(position.getX() + x, 0, position.getZ() + z);
-				oceanBiome = world.getBiome(blockpos$Mutable);
-				if (BiomeGenHelper.isOcean(oceanBiome))
-				{
-					bordersOcean = true;
-					x = 16;
-					break;
-				}
-			}
-		}
-
+		Biome oceanBiome = getOceanInChunk(world, position);
+			
 		//does not do anything if there is no ocean biome
-		if (!bordersOcean)
+		if (oceanBiome == null)
 		{
 			return false;
 		}
 
+		
+		boolean containedFlag;
+		BlockState currentblock;
+		BlockState blockAbove;
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), 0, position.getZ());  //set y to 0
+		BlockPos.Mutable blockpos$MutableAbove = new BlockPos.Mutable(blockpos$Mutable);
+		
 		//ocean biome was found and thus, is not null. Can safely contain all water in this chunk
 		for (int x = 0; x < 16; ++x)
 		{
@@ -79,29 +59,30 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 			{
 				boolean useCoralTop = oceanBiome.getSurfaceBuilderConfig().getTop() == DEAD_CORAL_ARRAY[0];
 				boolean useCoralBottom = oceanBiome.getSurfaceBuilderConfig().getTop() == DEAD_CORAL_ARRAY[0];
-
-				for (int y = 256; y > ConfigUA.seaLevel - 10; y--)
+				blockpos$Mutable.setPos(position.getX() + x, 256, position.getZ() + z);
+				
+				for (; blockpos$Mutable.getY() >= ConfigUA.seaLevel; blockpos$Mutable.move(Direction.DOWN))
 				{
 
-					blockpos$Mutable.setPos(position.getX() + x, y, position.getZ() + z);
 					currentblock = world.getBlockState(blockpos$Mutable);
 
 					//move down until we hit a liquid block
-					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() > 10)
+					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= ConfigUA.seaLevel)
 					{
 						blockpos$Mutable.move(Direction.DOWN);
 						currentblock = world.getBlockState(blockpos$Mutable);
 					}
-					if (blockpos$Mutable.getY() == 10)
+					
+					//too low now, break out of the loop and move to next xz coordinate
+					if (blockpos$Mutable.getY() < ConfigUA.seaLevel)
 					{
-						continue;
+						break;
 					}
-
 					//y value is now fully set for rest of code
-					notContainedFlag = false;
 
-					/*
-					 * //must be solid all around even diagonally for(int x2 = -1; x2 < 2; x2++) { for(int z2 = -1; z2 < 2; z2++) {
+					
+					/* // Keep this here in case we want to change behavior later
+					 * // Must be solid all around even diagonally for(int x2 = -1; x2 < 2; x2++) { for(int z2 = -1; z2 < 2; z2++) {
 					 * 
 					 * material = world.getBlockState(blockpos$Mutable.west(x2).north(z2)).getMaterial();
 					 * 
@@ -109,22 +90,47 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 					 */
 
 					//Adjacent blocks must be solid    
+					containedFlag = true;
 					for (Direction face : Direction.Plane.HORIZONTAL)
 					{
 						currentblock = world.getBlockState(blockpos$Mutable.offset(face));
 
-						//detects air, snow, etc and ignores Ice as ice is not solid and has a fluid state
-						if (currentblock != ICE && !currentblock.isSolid() && currentblock.getFluidState().isEmpty())
+						
+						// If the block is snow or not solid without liquid, set contains to false.
+						// Yes, snow layers are considered solid and need a second check.
+						if ((!currentblock.isSolid() && currentblock.getFluidState().isEmpty() && currentblock != ICE) || currentblock == SNOW)
 						{
-							notContainedFlag = true;
+							containedFlag = false;
+							break;
 						}
 					}
 
 					
 					blockpos$MutableAbove.setPos(blockpos$Mutable).move(Direction.UP);
-					if (notContainedFlag)
+
+					if (containedFlag)
 					{
-						if (y < 256)
+						//water block is contained 
+
+						blockAbove = world.getBlockState(blockpos$MutableAbove);
+
+						//if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
+						if (blockAbove == oceanBiome.getSurfaceBuilderConfig().getUnder())
+						{
+							if (useCoralBottom)
+							{
+								world.setBlockState(blockpos$MutableAbove, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
+							}
+							else
+							{
+								world.setBlockState(blockpos$MutableAbove, ((SurfaceBuilderConfig) oceanBiome.getSurfaceBuilderConfig()).getUnderWaterMaterial(), 2);
+							}
+						}
+					}
+					else
+					{
+						//water is not contained
+						if (blockpos$Mutable.getY() < 256)
 						{
 							blockAbove = world.getBlockState(blockpos$MutableAbove);
 
@@ -161,30 +167,44 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 							world.setBlockState(blockpos$Mutable, oceanBiome.getSurfaceBuilderConfig().getTop(), 2);
 						}
 					}
-					else
-					{
-						//water block is contained 
-
-						blockAbove = world.getBlockState(blockpos$MutableAbove);
-
-						//if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
-						if (blockAbove == oceanBiome.getSurfaceBuilderConfig().getUnder())
-						{
-							if (useCoralBottom)
-							{
-								world.setBlockState(blockpos$MutableAbove, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], 2);
-							}
-							else
-							{
-								world.setBlockState(blockpos$MutableAbove, ((SurfaceBuilderConfig) oceanBiome.getSurfaceBuilderConfig()).getUnderWaterMaterial(), 2);
-							}
-						}
-					}
 
 				}
 			}
 		}
 		return true;
 
+	}
+	
+	
+	/**
+	 * Gets the first ocean biome found within the edges of the chunk.
+	 */
+	private Biome getOceanInChunk(IWorld world, BlockPos originalPosition)
+	{
+		Biome biomeAtLocation = null;
+		BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable();
+		
+		//checks to see if there is an ocean biome in this chunk
+		//breaks out of nested loop if ocean if found so oceanBiome holds the ocean
+		for (int x = 0; x < 16; ++x)
+		{
+			for (int z = 0; z < 16; ++z)
+			{
+				//only check along chunk edges for better performance
+				if ((x != 0 && x != 16) && (z != 0 && z != 16))
+				{
+					continue;
+				}
+
+				mutableBlockPos.setPos(originalPosition.getX() + x, 0, originalPosition.getZ() + z);
+				biomeAtLocation = world.getBiome(mutableBlockPos);
+				if (BiomeGenHelper.isOcean(biomeAtLocation))
+				{
+					return biomeAtLocation;
+				}
+			}
+		}
+		
+		return null;
 	}
 }
