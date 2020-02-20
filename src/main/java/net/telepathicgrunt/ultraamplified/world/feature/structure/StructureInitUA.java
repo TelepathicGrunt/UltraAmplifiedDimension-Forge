@@ -7,11 +7,11 @@ import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
 public class StructureInitUA
 {
 
-	public static IStructurePieceType TEDPUA;
-	public static IStructurePieceType ECPUA;
-	public static IStructurePieceType ISTUA;
-	public static IStructurePieceType IGLUUA;
-	public static IStructurePieceType TEJPUA;
+	public static IStructurePieceType TEDPUA = DesertTemplePiecesUA::new;
+	public static IStructurePieceType ECPUA = EndCityPiecesUA.CityTemplate::new;
+	public static IStructurePieceType ISTUA = IceSpikeTemplePiecesUA.Piece::new;
+	public static IStructurePieceType IGLUUA = IglooPiecesUA.Piece::new;
+	public static IStructurePieceType TEJPUA = JungleTemplePiecesUA::new;
 	public static IStructurePieceType MSCORRIDORUA;
 	public static IStructurePieceType MSCROSSINGUA;
 	public static IStructurePieceType MSROOMUA;
@@ -77,11 +77,11 @@ public class StructureInitUA
 
 	public static void registerStructurePieces()
 	{
-		TEDPUA = RegUtil.register(DesertTemplePiecesUA::new, "TeDPUA");
-		ECPUA = RegUtil.register(EndCityPiecesUA.CityTemplate::new, "ECPUA");
-		ISTUA = RegUtil.register(IceSpikeTemplePiecesUA.Piece::new, "ISTUA");
-		IGLUUA = RegUtil.register(IglooPiecesUA.Piece::new, "IgluUA");
-		TEJPUA = RegUtil.register(JungleTemplePiecesUA::new, "TeJPUA");
+		RegUtil.register(TEDPUA, "TeDPUA");
+		RegUtil.register(ECPUA, "ECPUA");
+		RegUtil.register(ISTUA, "ISTUA");
+		RegUtil.register(IGLUUA, "IgluUA");
+		RegUtil.register(TEJPUA, "TeJPUA");
 		MSCORRIDORUA = RegUtil.register(MineshaftPiecesUA.Corridor::new, "MSCorridorUA");
 		MSCROSSINGUA = RegUtil.register(MineshaftPiecesUA.Cross::new, "MSCrossingUA");
 		MSROOMUA = RegUtil.register(MineshaftPiecesUA.Room::new, "MSRoomUA");

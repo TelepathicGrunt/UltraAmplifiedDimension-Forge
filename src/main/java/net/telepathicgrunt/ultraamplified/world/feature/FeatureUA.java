@@ -221,22 +221,22 @@ public class FeatureUA
         RegUtil.register(registry, GIANT_DARK_FOREST_TREE, "giant_dark_oak_tree_ua");
         RegUtil.register(registry, PODZOL_TAIGA_TREE, "podzol_taiga_tree_ua");
         RegUtil.register(registry, END_TREE, "end_tree_ua");
-        MINESHAFT_UA = (Structure<MineshaftConfigUA>) RegUtil.register(registry, MINESHAFT_UA, "mineshaft");
-        WOODLAND_MANSION_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, WOODLAND_MANSION_UA, "woodland_mansion");
-        JUNGLE_TEMPLE_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, JUNGLE_TEMPLE_UA, "jungle_temple");
-        DESERT_TEMPLE_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, DESERT_TEMPLE_UA, "desert_temple");
-        IGLOO_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, IGLOO_UA, "igloo");
-        SHIPWRECK_UA = (Structure<ShipwreckConfig>) RegUtil.register(registry, SHIPWRECK_UA, "shipwreck");
-        WITCH_HUT_UA = (WitchHutStructureUA) RegUtil.register(registry, WITCH_HUT_UA, "witch_hut");
-        STRONGHOLD_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, STRONGHOLD_UA, "stronghold");
-        OCEAN_MONUMENT_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, OCEAN_MONUMENT_UA, "ocean_monument");
-        OCEAN_RUIN_UA = (Structure<OceanRuinConfig>) RegUtil.register(registry, OCEAN_RUIN_UA, "ocean_ruins");
-        FORTRESS_UA = (Structure<FortressConfigUA>) RegUtil.register(registry, FORTRESS_UA, "fortress");
-        END_CITY_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, END_CITY_UA, "endcity");
-        VILLAGE_UA = (Structure<VillageConfigUA>) RegUtil.register(registry, VILLAGE_UA, "village");
-        PILLAGER_OUTPOST_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, PILLAGER_OUTPOST_UA, "pillager_outpost");
-        MUSHROOM_TEMPLE_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, MUSHROOM_TEMPLE_UA, "mushroom_temple");
-        ICE_SPIKE_TEMPLE_UA = (Structure<NoFeatureConfig>) RegUtil.register(registry, ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
+        RegUtil.register(registry, MINESHAFT_UA, "mineshaft");
+        RegUtil.register(registry, WOODLAND_MANSION_UA, "woodland_mansion");
+        RegUtil.register(registry, JUNGLE_TEMPLE_UA, "jungle_temple");
+        RegUtil.register(registry, DESERT_TEMPLE_UA, "desert_temple");
+        RegUtil.register(registry, IGLOO_UA, "igloo");
+        RegUtil.register(registry, SHIPWRECK_UA, "shipwreck");
+        RegUtil.register(registry, WITCH_HUT_UA, "witch_hut");
+        RegUtil.register(registry, STRONGHOLD_UA, "stronghold");
+        RegUtil.register(registry, OCEAN_MONUMENT_UA, "ocean_monument");
+        RegUtil.register(registry, OCEAN_RUIN_UA, "ocean_ruins");
+        RegUtil.register(registry, FORTRESS_UA, "fortress");
+        RegUtil.register(registry, END_CITY_UA, "endcity");
+        RegUtil.register(registry, VILLAGE_UA, "village");
+        RegUtil.register(registry, PILLAGER_OUTPOST_UA, "pillager_outpost");
+        RegUtil.register(registry, MUSHROOM_TEMPLE_UA, "mushroom_temple");
+        RegUtil.register(registry, ICE_SPIKE_TEMPLE_UA, "ice_spike_temple");
 
 
         //registers the structure pieces.

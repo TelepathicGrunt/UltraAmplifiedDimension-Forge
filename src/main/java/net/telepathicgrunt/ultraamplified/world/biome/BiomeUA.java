@@ -83,9 +83,11 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStruc
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePastStyledPiecesUA;
 
-public class BiomeUA extends Biome {
 
-    //set up custom position placements
+public class BiomeUA extends Biome
+{
+
+	//set up custom position placements
 	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLedgeWithChance(ChanceConfig::deserialize);
 	public static final Placement<ChanceConfig> RANDOM_CHANCE_UNDER_SURFACE = new RandomChanceUnderSurface(ChanceConfig::deserialize);
 	public static final Placement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfLedge(CountRangeConfig::deserialize);
@@ -104,97 +106,98 @@ public class BiomeUA extends Biome {
 	public static final Placement<ChanceAndTypeConfig> AT_CENTER_SURFACE_MINI_FEATURE = new AtCenterSurfaceMiniFeature(ChanceAndTypeConfig::deserialize);
 	public static final Placement<ChanceAndTypeConfig> LEDGE_UNDERSIDE_MINI_FEATURE = new LedgeUndersideMiniFeature(ChanceAndTypeConfig::deserialize);
 	public static final Placement<ChanceConfig> GLOWSTONE_VARIANT_PATCH = new GlowstonePatchPlacement1(ChanceConfig::deserialize);
-    public static final Placement<NoPlacementConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands(NoPlacementConfig::deserialize);
-    public static final Placement<NoPlacementConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacement(NoPlacementConfig::deserialize);
-    public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralConfigHookupPlacement(CountRangeAndTypeConfig::deserialize);
-    public static final Placement<LapisCountRangeConfig> LAPIS_PLACEMENT = new LapisPlacement(LapisCountRangeConfig::deserialize);
-    public static final Placement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRange(CountRangeConfig::deserialize);
-    public static final Placement<CountRangeConfig> HEIGHT_BIASED_END_ISLAND_RANGE_UA = new HeightBiasedEndIslandRange(CountRangeConfig::deserialize);
-    public static final Placement<PercentageAndHeightConfig> FIXED_HEIGHT_WITH_CHANCE = new FixedHeightWithChance(PercentageAndHeightConfig::deserialize);
-    //needed so we can prevent vanilla Treasure Chest from spawning if config is off
-    public static final Placement<NoPlacementConfig> PASSTHROUGH_CHEST = new PassthroughChest(NoPlacementConfig::deserialize);
-    //needed so we can prevent vanilla Desert Well from spawning if config is off
-    public static final Placement<ChanceConfig> AT_SURFACE_WITH_CHANCE_DESERT_WELL = new AtSurfaceWithChanceDesertWell(ChanceConfig::deserialize);
-    //needed so we can prevent lava lakes and water lakes from spawning if config is off
-    public static final Placement<LakeCountRangeAndTypeConfig> LAKE_PLACEMENT = new LakePlacement(LakeCountRangeAndTypeConfig::deserialize);
+	public static final Placement<NoPlacementConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands(NoPlacementConfig::deserialize);
+	public static final Placement<NoPlacementConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacement(NoPlacementConfig::deserialize);
+	public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralConfigHookupPlacement(CountRangeAndTypeConfig::deserialize);
+	public static final Placement<LapisCountRangeConfig> LAPIS_PLACEMENT = new LapisPlacement(LapisCountRangeConfig::deserialize);
+	public static final Placement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRange(CountRangeConfig::deserialize);
+	public static final Placement<CountRangeConfig> HEIGHT_BIASED_END_ISLAND_RANGE_UA = new HeightBiasedEndIslandRange(CountRangeConfig::deserialize);
+	public static final Placement<PercentageAndHeightConfig> FIXED_HEIGHT_WITH_CHANCE = new FixedHeightWithChance(PercentageAndHeightConfig::deserialize);
+	//needed so we can prevent vanilla Treasure Chest from spawning if config is off
+	public static final Placement<NoPlacementConfig> PASSTHROUGH_CHEST = new PassthroughChest(NoPlacementConfig::deserialize);
+	//needed so we can prevent vanilla Desert Well from spawning if config is off
+	public static final Placement<ChanceConfig> AT_SURFACE_WITH_CHANCE_DESERT_WELL = new AtSurfaceWithChanceDesertWell(ChanceConfig::deserialize);
+	//needed so we can prevent lava lakes and water lakes from spawning if config is off
+	public static final Placement<LakeCountRangeAndTypeConfig> LAKE_PLACEMENT = new LakePlacement(LakeCountRangeAndTypeConfig::deserialize);
 
-    
-    public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver(ProbabilityConfig::deserialize, 70);
-    public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
-    public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
-    public static final WorldCarver<ProbabilityConfig> UNDERWATER_CAVE_CARVER = new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
-    
+	public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver(ProbabilityConfig::deserialize, 70);
+	public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
+	public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
+	public static final WorldCarver<ProbabilityConfig> UNDERWATER_CAVE_CARVER = new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
 
-    protected static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
-    protected static final BlockState WATER = Blocks.WATER.getDefaultState();
-    protected static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
-    protected static final BlockState ICE = Blocks.ICE.getDefaultState();
-    protected static final BlockState SAND = Blocks.SAND.getDefaultState();
-    protected static final BlockState DIRT = Blocks.DIRT.getDefaultState();
-    protected static final BlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
-    protected static final BlockState STONE = Blocks.STONE.getDefaultState();
-    protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
-    protected static final BlockState COARSE_DIRT = Blocks.COARSE_DIRT.getDefaultState();
-    protected static final BlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
-    protected static final BlockState WHITE_TERRACOTTA = Blocks.WHITE_TERRACOTTA.getDefaultState();
+	protected static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
+	protected static final BlockState WATER = Blocks.WATER.getDefaultState();
+	protected static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
+	protected static final BlockState ICE = Blocks.ICE.getDefaultState();
+	protected static final BlockState SAND = Blocks.SAND.getDefaultState();
+	protected static final BlockState DIRT = Blocks.DIRT.getDefaultState();
+	protected static final BlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
+	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
+	protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
+	protected static final BlockState COARSE_DIRT = Blocks.COARSE_DIRT.getDefaultState();
+	protected static final BlockState RED_TERRACOTTA = Blocks.RED_TERRACOTTA.getDefaultState();
+	protected static final BlockState WHITE_TERRACOTTA = Blocks.WHITE_TERRACOTTA.getDefaultState();
 
-    public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SAND, SANDSTONE);
-    public static final SurfaceBuilderConfig SAND_SANDSTONE_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SANDSTONE, SANDSTONE);
-    public static final SurfaceBuilderConfig SANDSTONE_SURFACE = new SurfaceBuilderConfig(SANDSTONE, SANDSTONE, SANDSTONE);
-    public static final SurfaceBuilderConfig THIN_WATER_SURFACE = new SurfaceBuilderConfig(WATER, DIRT, GRAVEL);
-    public static final SurfaceBuilderConfig SNOWBLOCK_ICE_ICE_SURFACE = new SurfaceBuilderConfig(SNOW_BLOCK, ICE, ICE);
-    public static final SurfaceBuilderConfig GRASS_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, STONE);
-    public static final SurfaceBuilderConfig ICE_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(ICE, GRAVEL, STONE);
-    public static final SurfaceBuilderConfig GRASS_GRAVEL_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
-    public static final SurfaceBuilderConfig GRASS_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, SANDSTONE);
-    public static final SurfaceBuilderConfig GRASS_SAND_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
-    public static final SurfaceBuilderConfig COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(COARSE_DIRT, COARSE_DIRT, GRAVEL);
-    public static final SurfaceBuilderConfig RED_TERRACOTTA_WHITE_TERRACOTTA_GRAVEL_SURFACE = new SurfaceBuilderConfig(RED_TERRACOTTA, WHITE_TERRACOTTA, GRAVEL);
-    
-    public static final SurfaceBuilder<SurfaceBuilderConfig> DESERT_LAKE_SURFACE_BUILDER = new DesertLakesSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> BADLANDS_SURFACE_BUILDER_UA = new BadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> MODIFIED_BADLANDS_SURFACE_BUILDER_UA = new ModifiedBadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> ERODED_BADLANDS = new MesaBryceSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> ICE_MOUNTAIN_SURFACE_BUILDER = new IceMountainSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> NETHER_SURFACE_BUILDER_UA = new NetherSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> END_SURFACE_BUILDER_UA = new EndSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> OCEAN_SURFACE_BUILDER_UA = new OceanSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> DEEP_OCEAN_SURFACE_BUILDER_UA = new DeepOceanSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> SAND_SURFACE_BUILDER = new SandSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> GRAVEL_SURFACE_BUILDER = new GravelSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA = new ExtremeHillsMutatedSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> PLATEAU_SURFACE_BUILDER = new PlateauSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-    public static final SurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA_SURFACE_BUILDER_UA = new ShatteredSavannaSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-	
-    
-	protected BiomeUA(Biome.Builder biomeBuilder) {
+	public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SAND, SANDSTONE);
+	public static final SurfaceBuilderConfig SAND_SANDSTONE_SANDSTONE_SURFACE = new SurfaceBuilderConfig(SAND, SANDSTONE, SANDSTONE);
+	public static final SurfaceBuilderConfig SANDSTONE_SURFACE = new SurfaceBuilderConfig(SANDSTONE, SANDSTONE, SANDSTONE);
+	public static final SurfaceBuilderConfig THIN_WATER_SURFACE = new SurfaceBuilderConfig(WATER, DIRT, GRAVEL);
+	public static final SurfaceBuilderConfig SNOWBLOCK_ICE_ICE_SURFACE = new SurfaceBuilderConfig(SNOW_BLOCK, ICE, ICE);
+	public static final SurfaceBuilderConfig GRASS_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, STONE);
+	public static final SurfaceBuilderConfig ICE_GRAVEL_STONE_SURFACE = new SurfaceBuilderConfig(ICE, GRAVEL, STONE);
+	public static final SurfaceBuilderConfig GRASS_GRAVEL_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, GRAVEL, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
+	public static final SurfaceBuilderConfig GRASS_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, SANDSTONE);
+	public static final SurfaceBuilderConfig GRASS_SAND_DEAD_CORAL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, SAND, Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState());
+	public static final SurfaceBuilderConfig COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(COARSE_DIRT, COARSE_DIRT, GRAVEL);
+	public static final SurfaceBuilderConfig RED_TERRACOTTA_WHITE_TERRACOTTA_GRAVEL_SURFACE = new SurfaceBuilderConfig(RED_TERRACOTTA, WHITE_TERRACOTTA, GRAVEL);
+
+	public static final SurfaceBuilder<SurfaceBuilderConfig> DESERT_LAKE_SURFACE_BUILDER = new DesertLakesSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> BADLANDS_SURFACE_BUILDER_UA = new BadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> MODIFIED_BADLANDS_SURFACE_BUILDER_UA = new ModifiedBadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> ERODED_BADLANDS = new MesaBryceSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> ICE_MOUNTAIN_SURFACE_BUILDER = new IceMountainSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> NETHER_SURFACE_BUILDER_UA = new NetherSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> END_SURFACE_BUILDER_UA = new EndSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> OCEAN_SURFACE_BUILDER_UA = new OceanSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> DEEP_OCEAN_SURFACE_BUILDER_UA = new DeepOceanSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> SAND_SURFACE_BUILDER = new SandSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> GRAVEL_SURFACE_BUILDER = new GravelSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA = new ExtremeHillsMutatedSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> PLATEAU_SURFACE_BUILDER = new PlateauSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA_SURFACE_BUILDER_UA = new ShatteredSavannaSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
+
+
+	protected BiomeUA(Biome.Builder biomeBuilder)
+	{
 		super(biomeBuilder);
 	}
-	
-	
-	protected void addStructureFeaturesUA() {
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.NORMAL)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Feature.VILLAGE.configure(new VillageConfig("village/plains/town_centers", 6)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.VILLAGE_UA.configure(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.OAK)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.FORTRESS_UA.configure(new FortressConfigUA(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.DESERT_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.OCEAN_RUIN_UA.configure(new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.OCEAN_MONUMENT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.SHIPWRECK_UA.configure(new ShipwreckConfig(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.END_CITY_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.IGLOO_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.JUNGLE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WITCH_HUT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WOODLAND_MANSION_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.configure(new BuriedTreasureConfig(0.01F)).createDecoratedFeature(PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.PILLAGER_OUTPOST_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.MUSHROOM_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-      this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.ICE_SPIKE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-    }
 
 
-   public <C extends IFeatureConfig> void addStructure(Entry<Structure<?>, IFeatureConfig> structureEntry) {
-      this.structures.put(structureEntry.getKey(), structureEntry.getValue());
-   }
+	protected void addStructureFeaturesUA()
+	{
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.NORMAL)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Feature.VILLAGE.configure(new VillageConfig("village/plains/town_centers", 6)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.VILLAGE_UA.configure(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.OAK)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.FORTRESS_UA.configure(new FortressConfigUA(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.DESERT_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.OCEAN_RUIN_UA.configure(new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.OCEAN_MONUMENT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.SHIPWRECK_UA.configure(new ShipwreckConfig(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.END_CITY_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.IGLOO_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.JUNGLE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WITCH_HUT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WOODLAND_MANSION_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.configure(new BuriedTreasureConfig(0.01F)).createDecoratedFeature(PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.PILLAGER_OUTPOST_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.MUSHROOM_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.ICE_SPIKE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+	}
+
+
+	public <C extends IFeatureConfig> void addStructure(Entry<Structure<?>, IFeatureConfig> structureEntry)
+	{
+		this.structures.put(structureEntry.getKey(), structureEntry.getValue());
+	}
 }
