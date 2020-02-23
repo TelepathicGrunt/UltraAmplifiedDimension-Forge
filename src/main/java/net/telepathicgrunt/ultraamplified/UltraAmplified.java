@@ -1,18 +1,11 @@
 package net.telepathicgrunt.ultraamplified;
 
-import java.nio.file.Paths;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.common.io.Files;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraft.server.dedicated.PropertyManager.Property;
 import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -84,30 +77,25 @@ public class UltraAmplified
 	 * before the mod even loads at all. It's so early that the mod's worldtypes aren't added to WORLD_TYPES array and so
 	 * it'll change level-type to default regardless of what the user added.
 	 * 
-	 * My solution is to tell users to add a new entry called use-modded-worldtype=ultra-amplified and then
-	 * read that property instead.
+	 * My solution is to tell users to add a new entry called use-modded-worldtype=ultra-amplified and then read that
+	 * property instead.
 	 */
 	public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
 	{
-		// Grab if entry is in the property file
-		// Try/Catch is for if the server.property file was removed and cause Paths.get to throw exception.
-		try
+		ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
+
+		if (serverProperties != null)
 		{
-			String entryValue = PropertyManager.load(Paths.get("server.properties")).getProperty("use-modded-worldtype");
-			
-			//if null, the property was not added. if it is added, check if it asking for our mod's worldtype
+			//get entry if it exists or null if it doesn't
+			String entryValue = serverProperties.serverProperties.getProperty("use-modded-worldtype");
+
 			if (entryValue != null && entryValue.equals("ultra-amplified"))
 			{
-				ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-				
-				if(serverProperties != null)
-					serverProperties.worldType = UltraAmplifiedWorldType; //make server use our worldtype
+				//make server use our worldtype
+				serverProperties.worldType = UltraAmplifiedWorldType;
 			}
 		}
-		catch(Exception e)
-		{
-			// Do nothing. server.properties file does not exist.
-		}
+		// Do nothing. server.properties file does not exist.
 	}
 
 
