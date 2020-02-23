@@ -70,7 +70,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig>
 					boolean flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
 					if (flag)
 					{
-	            		blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
+						blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
 						Material material = world.getBlockState(blockpos$Mutable).getMaterial();
 						if (y >= 4 && material.isLiquid())
 						{
@@ -94,7 +94,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig>
 				{
 					if (aboolean[(x * 16 + z) * 8 + y])
 					{
-	            		blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
+						blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
 						world.setBlockState(blockpos$Mutable, y >= 4 ? CAVE_AIR : configBlock.state, 2);
 					}
 				}
@@ -109,7 +109,7 @@ public class LakeStoneless extends Feature<BlockStateFeatureConfig>
 				{
 					boolean flag1 = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
 
-            		blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
+					blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
 					Material blockMaterial = world.getBlockState(blockpos$Mutable).getMaterial();
 					if (flag1 && (y < 4 || random.nextInt(2) != 0) && blockMaterial.isSolid() && blockMaterial != Material.LEAVES)
 					{

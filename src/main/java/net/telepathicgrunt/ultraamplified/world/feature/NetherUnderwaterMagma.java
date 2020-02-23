@@ -48,10 +48,11 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 			for (int z = 0; z < 16; ++z)
 			{
 				//only check along chunk edges for better performance
-				if(!(z == 0 || z == 16 || x == 0 || x == 16)) {
+				if (!(z == 0 || z == 16 || x == 0 || x == 16))
+				{
 					continue;
 				}
-				
+
 				netherBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
 				if (netherBiome == BiomeInit.NETHERLAND)
 				{
@@ -79,7 +80,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 				{
 					continue;
 				}
-				
+
 				currentblock = world.getBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z));
 
 				//if water, place magma block
@@ -87,25 +88,25 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 				{
 					world.setBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z), MAGMA, 3);
 				}
-				
+
 				//check if lava below is bordering water and set it to obsidian if so
-				for(int y = ConfigUA.seaLevel - 8; y > 20; y--) 
+				for (int y = ConfigUA.seaLevel - 8; y > 20; y--)
 				{
 
-                    for (Direction face : Direction.Plane.HORIZONTAL) 
-                    {
-    					currentblock = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face));
-    					
-    					if (currentblock.getMaterial() == Material.WATER)
-    					{
-    						world.setBlockState(blockpos$Mutable.add(x, y, z), OBSIDIAN, 2);
-    						continue;
-    					}
-                    }
+					for (Direction face : Direction.Plane.HORIZONTAL)
+					{
+						currentblock = world.getBlockState(blockpos$Mutable.add(x, y, z).offset(face));
+
+						if (currentblock.getMaterial() == Material.WATER)
+						{
+							world.setBlockState(blockpos$Mutable.add(x, y, z), OBSIDIAN, 2);
+							continue;
+						}
+					}
 				}
 			}
 		}
-		
+
 		return true;
 	}
 }

@@ -49,17 +49,8 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	private final PatrolSpawner patrolSpawner = new PatrolSpawner();
 	private final CatSpawnerUA catSpawner = new CatSpawnerUA();
 
-	protected static final Set<Block> acceptableStoneFortressBlocks = 
-    		Stream.of(
-	    		Blocks.CRACKED_STONE_BRICKS,
-	    		Blocks.CHISELED_STONE_BRICKS,
-	    		Blocks.MOSSY_STONE_BRICKS,
-	    		Blocks.STONE_BRICKS,
-	    		Blocks.INFESTED_CHISELED_STONE_BRICKS,
-	    		Blocks.INFESTED_CRACKED_STONE_BRICKS,
-	    		Blocks.INFESTED_MOSSY_STONE_BRICKS,
-	    		Blocks.INFESTED_STONE_BRICKS
-    		).collect(Collectors.toCollection(HashSet::new));
+	protected static final Set<Block> acceptableStoneFortressBlocks = Stream.of(Blocks.CRACKED_STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.STONE_BRICKS, Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_MOSSY_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS).collect(Collectors.toCollection(HashSet::new));
+
 
 	public UAChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn)
 	{
@@ -82,9 +73,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
-		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : ConfigUA.xzTerrainModifier,
-				ConfigUA.secretSetting ? 468419.786D : ConfigUA.yTerrainModifier, ConfigUA.xzScaleModifier, ConfigUA.secretSetting ? 73.1905915D : ConfigUA.yScaleModifier,
-				8.555149841308594D, 4.277574920654297D, 3, -10);
+		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : ConfigUA.xzTerrainModifier, ConfigUA.secretSetting ? 468419.786D : ConfigUA.yTerrainModifier, ConfigUA.xzScaleModifier, ConfigUA.secretSetting ? 73.1905915D : ConfigUA.yScaleModifier, 8.555149841308594D, 4.277574920654297D, 3, -10);
 	}
 
 
@@ -193,49 +182,46 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 
 			//The following fortress checks has no biome check to let players convert one
 			//fortress into another type manually and get the other fortress's spawning entities.
-			
+
 			//Stone Fortress entity spawning
-			if(acceptableStoneFortressBlocks.contains(this.world.getBlockState(pos.down()).getBlock())) 
+			if (acceptableStoneFortressBlocks.contains(this.world.getBlockState(pos.down()).getBlock()))
 			{
 				if (FeatureUA.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA)FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
 				}
 				if (FeatureUA.FORTRESS_UA.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA)FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
 				}
 			}
 			//Nether Fortress entity spawning
-			else if(this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICKS)
+			else if (this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICKS)
 			{
 				if (FeatureUA.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA)FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
 				}
 				if (FeatureUA.FORTRESS_UA.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA)FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
 				}
 			}
-			
-			
+
 			//Pillager Outpost entity spawning
 			if (FeatureUA.PILLAGER_OUTPOST_UA.isPositionInStructure(this.world, pos))
 			{
 				return FeatureUA.PILLAGER_OUTPOST_UA.getSpawnList();
 			}
 
-			
 			//Ocean Monument entity spawning
 			if (FeatureUA.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos))
 			{
 				return FeatureUA.OCEAN_MONUMENT_UA.getSpawnList();
 			}
-			
-			
+
 			//End City entity spawning
-			if(this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
+			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
 				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{
@@ -250,7 +236,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 		else if (creatureType == EntityClassification.CREATURE)
 		{
 			//End City entity spawning
-			if(this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
+			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
 				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{

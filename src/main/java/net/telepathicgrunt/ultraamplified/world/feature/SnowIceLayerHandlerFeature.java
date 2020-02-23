@@ -14,30 +14,37 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
-public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig> {
 
-	public SnowIceLayerHandlerFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51435_1_) {
+public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig>
+{
+
+	public SnowIceLayerHandlerFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51435_1_)
+	{
 		super(p_i51435_1_);
 	}
 
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos position, NoFeatureConfig config) {
+
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos position, NoFeatureConfig config)
+	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 
-		for (int xOffset = 0; xOffset < 16; xOffset++) {
-			for (int zOffset = 0; zOffset < 16; zOffset++) {
+		for (int xOffset = 0; xOffset < 16; xOffset++)
+		{
+			for (int zOffset = 0; zOffset < 16; zOffset++)
+			{
 				blockpos$Mutable.setPos(position).move(xOffset, 0, zOffset);
-				
+
 				Biome biome = world.getBiome(blockpos$Mutable);
 
-				if (BiomeGenHelper.frozenBiomes.contains(biome)) 
+				if (BiomeGenHelper.frozenBiomes.contains(biome))
 				{
 					SnowIceAllLayer.place(world, generator, random, blockpos$Mutable, config, biome);
 				}
-				else if(BiomeGenHelper.coldOceanBiomes.contains(biome)) 
+				else if (BiomeGenHelper.coldOceanBiomes.contains(biome))
 				{
 					SnowLayerColdOceanFeature.place(world, generator, random, blockpos$Mutable, config, biome);
 				}
-				else 
+				else
 				{
 					SnowIceTopLayer.place(world, generator, random, blockpos$Mutable, config, biome);
 				}

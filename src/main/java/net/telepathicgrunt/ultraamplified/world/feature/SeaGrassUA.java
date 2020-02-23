@@ -39,7 +39,7 @@ public class SeaGrassUA extends Feature<SeaGrassConfig>
 			//same as vanilla SeaGrass class but now generates at position we passed in instead of finding the top y value. 
 			//We have placement classes for a reason. Features should not be finding their own positions.
 
-    		blockpos$Mutable.setPos(position).move(x, 0, z);
+			blockpos$Mutable.setPos(position).move(x, 0, z);
 
 			if (world.getBlockState(blockpos$Mutable).getBlock() == Blocks.WATER)
 			{

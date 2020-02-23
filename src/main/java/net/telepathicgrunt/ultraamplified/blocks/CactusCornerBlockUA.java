@@ -157,8 +157,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				{
 					belowBlock = world.getBlockState(pos.offset(facing.getOpposite()).down());
 					//any sand or modded cactus block below
-					if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND
-							|| (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
+					if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND || (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
 					{
 						return true;
 					}
@@ -176,8 +175,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 			belowBlock = world.getBlockState(pos.down());
 
 			//any sand or modded cactus block below
-			if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND
-					|| (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
+			if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND || (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
 			{
 				return true;
 			}
@@ -191,6 +189,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
+
 
 	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{

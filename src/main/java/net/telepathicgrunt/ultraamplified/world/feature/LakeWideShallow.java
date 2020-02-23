@@ -24,22 +24,9 @@ import net.minecraft.world.gen.feature.Feature;
 public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 {
 
-	protected static final Set<Material> unacceptableSolidMaterials = 
-		ImmutableSet.of(
-			Material.BAMBOO, 
-			Material.BAMBOO_SAPLING,
-			Material.LEAVES, 
-			Material.WEB,
-			Material.CACTUS,
-			Material.ANVIL,
-			Material.GOURD,
-			Material.CAKE,
-			Material.DRAGON_EGG,
-			Material.BARRIER,
-			Material.CAKE
-		);
-	
-	
+	protected static final Set<Material> unacceptableSolidMaterials = ImmutableSet.of(Material.BAMBOO, Material.BAMBOO_SAPLING, Material.LEAVES, Material.WEB, Material.CACTUS, Material.ANVIL, Material.GOURD, Material.CAKE, Material.DRAGON_EGG, Material.BARRIER, Material.CAKE);
+
+
 	public LakeWideShallow(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
 	{
 		super(configFactory);
@@ -88,8 +75,8 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 			{
 				int y = 5;
 
-        		blockpos$Mutable.setPos(position).move(x, y, z);
-        		blockState = world.getBlockState(blockpos$Mutable);
+				blockpos$Mutable.setPos(position).move(x, y, z);
+				blockState = world.getBlockState(blockpos$Mutable);
 				material = blockState.getMaterial();
 
 				//Finds first solid block of land starting from 5 blocks higher than initial input position
@@ -100,57 +87,56 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 					material = world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
 				}
 
-				
 				//checks if the spot is solid all around (diagonally too) and has nothing solid above it
 				containedFlag = checkIfValidSpot(world, blockpos$Mutable);
-				
-				
+
 				//Is spot within the mask (sorta a roundish area) and is contained
 				if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag)
 				{
 					//check below without moving down
 					blockState = world.getBlockState(blockpos$Mutable.down());
-					
+
 					//sets the water
-					if(isDirt(blockState.getBlock()) && random.nextInt(5) == 0) 
+					if (isDirt(blockState.getBlock()) && random.nextInt(5) == 0)
 					{
-						world.setBlockState(blockpos$Mutable, Blocks.SEAGRASS.getDefaultState(), 2); 
+						world.setBlockState(blockpos$Mutable, Blocks.SEAGRASS.getDefaultState(), 2);
 					}
-					else 
+					else
 					{
-						world.setBlockState(blockpos$Mutable, configBlock.state, 2); 
+						world.setBlockState(blockpos$Mutable, configBlock.state, 2);
 					}
-					
-					
+
 					//remove floating plants so they aren't hovering.
 					//check above while moving up one.
 					blockState = world.getBlockState(blockpos$Mutable.move(Direction.UP));
 					material = blockState.getMaterial();
-					
-					if(material == Material.PLANTS && blockState.getBlock() != Blocks.LILY_PAD) 
-					{
-						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
-						
-						//recursively moves up and breaks floating sugar cane
-						while(blockpos$Mutable.getY() < 255 && world.getBlockState(blockpos$Mutable.move(Direction.UP)) == Blocks.SUGAR_CANE.getDefaultState()) 
-						{
-							world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2); 
-						}
-					}
-					if(material == Material.TALL_PLANTS && blockState.getBlock() != Blocks.VINE) 
+
+					if (material == Material.PLANTS && blockState.getBlock() != Blocks.LILY_PAD)
 					{
 						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
-						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 2);  
+
+						//recursively moves up and breaks floating sugar cane
+						while (blockpos$Mutable.getY() < 255 && world.getBlockState(blockpos$Mutable.move(Direction.UP)) == Blocks.SUGAR_CANE.getDefaultState())
+						{
+							world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
+						}
+					}
+					if (material == Material.TALL_PLANTS && blockState.getBlock() != Blocks.VINE)
+					{
+						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
+						world.setBlockState(blockpos$Mutable.up(), Blocks.AIR.getDefaultState(), 2);
 					}
 				}
 			}
 		}
 		return true;
 	}
-	
+
+
 	/**
 	 * checks if the spot is surrounded by solid blocks below and all around horizontally plus nothing solid above.
-	 * @param world - world to check for materials in
+	 * 
+	 * @param world            - world to check for materials in
 	 * @param blockpos$Mutable - location to check if valid
 	 * @return - if the spot is valid
 	 */
@@ -158,7 +144,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 	{
 		Material material;
 		BlockState blockState;
-		
+
 		//Must be solid all around even diagonally.
 		//Will also return false if an unacceptable solid material is found.
 		for (int x2 = -1; x2 < 2; x2++)
@@ -192,7 +178,6 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 		{
 			return false;
 		}
-		
 
 		return true;
 	}

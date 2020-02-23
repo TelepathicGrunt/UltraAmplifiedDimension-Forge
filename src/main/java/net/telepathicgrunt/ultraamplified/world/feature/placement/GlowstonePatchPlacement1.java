@@ -45,7 +45,7 @@ public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>
 		{
 			return Stream.empty();
 		}
-		
+
 		//offset so patch will be centered correctly when generating
 		return Stream.of(pos.add(x - 4, height - 1, z - 4));
 	}

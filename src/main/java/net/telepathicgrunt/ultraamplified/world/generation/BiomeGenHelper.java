@@ -60,77 +60,57 @@ public enum BiomeGenHelper
 	public static final int VANILLA_OCEAN = BiomeRegistry.getID(Biomes.OCEAN);
 	public static final int VANILLA_DEEP_OCEAN = BiomeRegistry.getID(Biomes.DEEP_OCEAN);
 
-	public static Set<Biome> frozenBiomes = ImmutableSet.of(
-			BiomeInit.DEEP_FROZEN_OCEAN, 
-			BiomeInit.FROZEN_OCEAN, 
-			BiomeInit.ICE_SPIKES, 
-			BiomeInit.FROZEN_DESERT, 
-			BiomeInit.SNOWY_TAIGA, 
-			BiomeInit.RELIC_SNOWY_TAIGA, 
-			BiomeInit.SNOWY_ROCKY_TAIGA, 
-			BiomeInit.SNOWY_TUNDRA
-		);
+	public static Set<Biome> frozenBiomes = ImmutableSet.of(BiomeInit.DEEP_FROZEN_OCEAN, BiomeInit.FROZEN_OCEAN, BiomeInit.ICE_SPIKES, BiomeInit.FROZEN_DESERT, BiomeInit.SNOWY_TAIGA, BiomeInit.RELIC_SNOWY_TAIGA, BiomeInit.SNOWY_ROCKY_TAIGA, BiomeInit.SNOWY_TUNDRA);
 
-	public static Set<Biome> coldOceanBiomes = ImmutableSet.of(
-			BiomeInit.DEEP_COLD_OCEAN, 
-			BiomeInit.COLD_OCEAN
-		);
+	public static Set<Biome> coldOceanBiomes = ImmutableSet.of(BiomeInit.DEEP_COLD_OCEAN, BiomeInit.COLD_OCEAN);
 
-	private static final Set<Biome> OCEAN_LIST = ImmutableSet.of(
-			BiomeInit.WARM_OCEAN, 
-			BiomeInit.LUKEWARM_OCEAN, 
-			BiomeInit.OCEAN, 
-			BiomeInit.COLD_OCEAN, 
-			BiomeInit.FROZEN_OCEAN, 
-			BiomeInit.DEEP_WARM_OCEAN, 
-			BiomeInit.DEEP_LUKEWARM_OCEAN, 
-			BiomeInit.DEEP_OCEAN, 
-			BiomeInit.DEEP_COLD_OCEAN, 
-			BiomeInit.DEEP_FROZEN_OCEAN
-		);
+	private static final Set<Biome> OCEAN_LIST = ImmutableSet.of(BiomeInit.WARM_OCEAN, BiomeInit.LUKEWARM_OCEAN, BiomeInit.OCEAN, BiomeInit.COLD_OCEAN, BiomeInit.FROZEN_OCEAN, BiomeInit.DEEP_WARM_OCEAN, BiomeInit.DEEP_LUKEWARM_OCEAN, BiomeInit.DEEP_OCEAN, BiomeInit.DEEP_COLD_OCEAN, BiomeInit.DEEP_FROZEN_OCEAN);
 
 	public static final Map<Pair<Integer, Integer>, Integer> biomesComboToEdge = new HashMap<Pair<Integer, Integer>, Integer>();
-	public static void setBiomeEdgeMap() {
+
+
+	public static void setBiomeEdgeMap()
+	{
 		biomesComboToEdge.clear();
-		
-		if(ConfigUA.rockyField)
+
+		if (ConfigUA.rockyField)
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(DESERT, SNOWY_TUNDRA), WOODED_ROCKY_FIELD);
 		}
-		
-		if(ConfigUA.plains)
+
+		if (ConfigUA.plains)
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, DESERT), PLAINS);
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, SNOWY_TUNDRA), PLAINS);
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, SNOWY_TAIGA), PLAINS);
 		}
-		
+
 		//adds a lot of potential biomes to certain biomes requirements for borders
-		for(Biome biome : BiomeRegistry)
+		for (Biome biome : BiomeRegistry)
 		{
 			int biomeID = BiomeRegistry.getID(biome);
-			
-			if(ConfigUA.savanna)
+
+			if (ConfigUA.savanna)
 			{
-				if(biomeID != NETHERLAND && biomeID != SAVANNA)
+				if (biomeID != NETHERLAND && biomeID != SAVANNA)
 				{
 					biomesComboToEdge.put(new Pair<Integer, Integer>(NETHERLAND, biomeID), SAVANNA);
 				}
 			}
-			
-			if(biomeID != END_FIELD && biomeID != BARREN_END_FIELD)
+
+			if (biomeID != END_FIELD && biomeID != BARREN_END_FIELD)
 			{
 				biomesComboToEdge.put(new Pair<Integer, Integer>(biomeID, END_FIELD), BARREN_END_FIELD);
 			}
-			
-			if(biomeID != JUNGLE && biomeID != BAMBOO_JUNGLE)
+
+			if (biomeID != JUNGLE && biomeID != BAMBOO_JUNGLE)
 			{
 				biomesComboToEdge.put(new Pair<Integer, Integer>(JUNGLE, biomeID), JUNGLE_EDGE);
 			}
-			
-			if(ConfigUA.frozenDesert)
+
+			if (ConfigUA.frozenDesert)
 			{
-				if(BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.ICY && !BiomeGenHelper.isOcean(biomeID))
+				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.ICY && !BiomeGenHelper.isOcean(biomeID))
 				{
 					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_OCEAN, biomeID), FROZEN_DESERT);
 					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_DEEP_OCEAN, biomeID), FROZEN_DESERT);
@@ -146,10 +126,10 @@ public enum BiomeGenHelper
 					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_FROZEN_OCEAN, biomeID), FROZEN_DESERT);
 				}
 			}
-			
+
 			if (ConfigUA.stonePlains)
 			{
-				if(BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.EXTREME_HILLS)
+				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.EXTREME_HILLS)
 				{
 					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_OCEAN, biomeID), STONE_PLAINS);
 					biomesComboToEdge.put(new Pair<Integer, Integer>(VANILLA_DEEP_OCEAN, biomeID), STONE_PLAINS);
@@ -165,14 +145,14 @@ public enum BiomeGenHelper
 					biomesComboToEdge.put(new Pair<Integer, Integer>(DEEP_FROZEN_OCEAN, biomeID), STONE_PLAINS);
 				}
 			}
-			
-			if(biomeID != WOODED_BADLANDS && biomeID != SANDLESS_BADLANDS)
+
+			if (biomeID != WOODED_BADLANDS && biomeID != SANDLESS_BADLANDS)
 			{
 				biomesComboToEdge.put(new Pair<Integer, Integer>(WOODED_BADLANDS, biomeID), BADLANDS);
 				biomesComboToEdge.put(new Pair<Integer, Integer>(SANDLESS_BADLANDS, biomeID), BADLANDS);
 			}
-			
-			if(BiomeRegistry.getValue(biomeID).getCategory() != Biome.Category.TAIGA)
+
+			if (BiomeRegistry.getValue(biomeID).getCategory() != Biome.Category.TAIGA)
 			{
 				biomesComboToEdge.put(new Pair<Integer, Integer>(GIANT_TREE_TAIGA, biomeID), TAIGA);
 			}
@@ -188,32 +168,16 @@ public enum BiomeGenHelper
 
 	public static boolean isOcean(int biomeIn)
 	{
-		return biomeIn == VANILLA_OCEAN || 
-				biomeIn == VANILLA_DEEP_OCEAN || 
-				biomeIn == WARM_OCEAN || 
-				biomeIn == LUKEWARM_OCEAN || 
-				biomeIn == OCEAN || 
-				biomeIn == COLD_OCEAN || 
-				biomeIn == FROZEN_OCEAN || 
-				biomeIn == DEEP_WARM_OCEAN || 
-				biomeIn == DEEP_LUKEWARM_OCEAN || 
-				biomeIn == DEEP_OCEAN || 
-				biomeIn == DEEP_COLD_OCEAN || 
-				biomeIn == DEEP_FROZEN_OCEAN;
+		return biomeIn == VANILLA_OCEAN || biomeIn == VANILLA_DEEP_OCEAN || biomeIn == WARM_OCEAN || biomeIn == LUKEWARM_OCEAN || biomeIn == OCEAN || biomeIn == COLD_OCEAN || biomeIn == FROZEN_OCEAN || biomeIn == DEEP_WARM_OCEAN || biomeIn == DEEP_LUKEWARM_OCEAN || biomeIn == DEEP_OCEAN || biomeIn == DEEP_COLD_OCEAN || biomeIn == DEEP_FROZEN_OCEAN;
 	}
 
 
 	public static boolean isShallowOcean(int biomeIn)
 	{
-		return biomeIn == VANILLA_OCEAN || 
-				biomeIn == WARM_OCEAN || 
-				biomeIn == LUKEWARM_OCEAN || 
-				biomeIn == OCEAN || 
-				biomeIn == COLD_OCEAN ||
-				biomeIn == FROZEN_OCEAN;
+		return biomeIn == VANILLA_OCEAN || biomeIn == WARM_OCEAN || biomeIn == LUKEWARM_OCEAN || biomeIn == OCEAN || biomeIn == COLD_OCEAN || biomeIn == FROZEN_OCEAN;
 	}
-	
-	
+
+
 	public static boolean areUABiomesSimilar(int biome1ID, int biome2ID)
 	{
 		if (biome1ID == biome2ID)
@@ -225,7 +189,7 @@ public enum BiomeGenHelper
 			Biome biome1 = BiomeRegistry.getValue(biome1ID);
 			Biome biome2 = BiomeRegistry.getValue(biome2ID);
 			if (biome1 != null && biome2 != null)
-			{ 
+			{
 				return biome1.getCategory() == biome2.getCategory();
 			}
 			else

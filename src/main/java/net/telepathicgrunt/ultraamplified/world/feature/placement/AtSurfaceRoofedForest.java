@@ -46,7 +46,7 @@ public class AtSurfaceRoofedForest extends Placement<AtSurfaceWithExtraConfig>
 			while (blockpos$Mutable.getY() > 74)
 			{
 				int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY(), 74, blockpos$Mutable);
-				
+
 				//gets difference and sets mutable height to yPosOfSurface + 1
 				blockPosList.add(new BlockPos(blockpos$Mutable.move(Direction.DOWN, (blockpos$Mutable.getY() - yPosOfSurface) + 1)));
 				blockpos$Mutable.move(Direction.DOWN);

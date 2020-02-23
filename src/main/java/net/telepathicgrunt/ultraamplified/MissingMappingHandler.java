@@ -52,8 +52,6 @@ public class MissingMappingHandler
 	}
 
 
-
-
 	// biomes
 	// convert to new namespace and new biome names
 	@SubscribeEvent
@@ -209,14 +207,13 @@ public class MissingMappingHandler
 				{
 					newRL = new ResourceLocation(UltraAmplified.MODID + ":" + entry.key.getPath());
 				}
-				
+
 				//UltraAmplified.LOGGER.info(entry.key.toString() + " -> " + newRL.toString());
 				entry.remap(ForgeRegistries.BIOMES.getValue(newRL));
 			}
 		}
 	}
-	
-	
+
 	/////////////////////////////////
 	//These seem to not fire at all... hmm...
 	//forge issue?
@@ -250,7 +247,7 @@ public class MissingMappingHandler
 			}
 		}
 	}
-	
+
 
 	// chunk generator?
 	@SubscribeEvent
@@ -280,5 +277,5 @@ public class MissingMappingHandler
 			}
 		}
 	}
-	
+
 }

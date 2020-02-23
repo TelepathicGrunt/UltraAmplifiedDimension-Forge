@@ -27,18 +27,10 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 	private static final BlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
 	private static final BlockState SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
 	private static final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
-	
-	public final Set<Block> acceptableSurroundingBlocks = 
-			ImmutableSet.of(
-				Blocks.NETHERRACK, 
-				Blocks.GRAVEL, 
-				Blocks.SOUL_SAND, 
-				Blocks.MAGMA_BLOCK, 
-				Blocks.NETHER_QUARTZ_ORE, 
-				Blocks.NETHER_BRICKS
-			);
-	
-	
+
+	public final Set<Block> acceptableSurroundingBlocks = ImmutableSet.of(Blocks.NETHERRACK, Blocks.GRAVEL, Blocks.SOUL_SAND, Blocks.MAGMA_BLOCK, Blocks.NETHER_QUARTZ_ORE, Blocks.NETHER_BRICKS);
+
+
 	public NetherSurfaceLavaRare(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51430_1_)
 	{
 		super(p_i51430_1_);
@@ -50,53 +42,65 @@ public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig>
 		pos = pos.down();
 		BlockState blockstate = world.getBlockState(pos);
 		boolean generateLava = false;
-        int solidSurrounding = 0;
+		int solidSurrounding = 0;
 
-        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.west()).getBlock())) {
-           ++solidSurrounding;
-        }
+		if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.west()).getBlock()))
+		{
+			++solidSurrounding;
+		}
 
-        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.east()).getBlock())) {
-           ++solidSurrounding;
-        }
+		if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.east()).getBlock()))
+		{
+			++solidSurrounding;
+		}
 
-        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.north()).getBlock())) {
-           ++solidSurrounding;
-        }
+		if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.north()).getBlock()))
+		{
+			++solidSurrounding;
+		}
 
-        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.south()).getBlock())) {
-           ++solidSurrounding;
-        }
-        
-        //not enough solid blocks surrounding area to generate lava
-        if(solidSurrounding < 3) {
-        	return false;
-        }
-		
+		if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.south()).getBlock()))
+		{
+			++solidSurrounding;
+		}
+
+		//not enough solid blocks surrounding area to generate lava
+		if (solidSurrounding < 3)
+		{
+			return false;
+		}
+
 		//full chance to generate in gravel
-		if(blockstate == GRAVEL) {
-	        if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.down()).getBlock())) {
-	        	//can only generate in gravel if below is also a solid block to prevent
-	        	//lava spawning in 1 thick gravel which causes the gravel to fall,
-	        	//leaving a pilalr of lava floating in mid-air which looks bad.
+		if (blockstate == GRAVEL)
+		{
+			if (acceptableSurroundingBlocks.contains(world.getBlockState(pos.down()).getBlock()))
+			{
+				//can only generate in gravel if below is also a solid block to prevent
+				//lava spawning in 1 thick gravel which causes the gravel to fall,
+				//leaving a pilalr of lava floating in mid-air which looks bad.
 				generateLava = true;
-	        }
+			}
 		}
 		//1/3rd chance to generate in soulsand
-		else if(blockstate == SOUL_SAND) {
-			if(rand.nextFloat() < 0.33) {
+		else if (blockstate == SOUL_SAND)
+		{
+			if (rand.nextFloat() < 0.33)
+			{
 				generateLava = true;
 			}
 		}
 		//1/30th chance to generate in netherrack
-		else if(blockstate == NETHERRACK) {
-			if(rand.nextFloat() < 0.033) {
+		else if (blockstate == NETHERRACK)
+		{
+			if (rand.nextFloat() < 0.033)
+			{
 				generateLava = true;
 			}
 		}
-		
+
 		//generates surface lava that can flow
-		if(generateLava) {
+		if (generateLava)
+		{
 			world.setBlockState(pos, LAVA, 2);
 			world.getPendingFluidTicks().scheduleTick(pos, LAVA_FLUID, 0);
 		}

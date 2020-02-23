@@ -70,12 +70,7 @@ public class AmplifiedPortalBehavior
 				// Extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				// Also makes sure player isn't sneaking so players can crouch place blocks on the portal
 				// But only teleport if we aren't in UA worldtype
-				if (!world.isRemote && 
-					minecraftserver.getWorld(DimensionType.OVERWORLD).getWorldType() != UltraAmplified.UltraAmplifiedWorldType &&
-					!entity.isPassenger() && 
-					!entity.isBeingRidden() && 
-					entity.isNonBoss() 
-					&& !((PlayerEntity) entity).isCrouching())
+				if (!world.isRemote && minecraftserver.getWorld(DimensionType.OVERWORLD).getWorldType() != UltraAmplified.UltraAmplifiedWorldType && !entity.isPassenger() && !entity.isBeingRidden() && entity.isNonBoss() && !((PlayerEntity) entity).isCrouching())
 				{
 					//grabs the capability attached to player for dimension hopping
 					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
@@ -98,9 +93,9 @@ public class AmplifiedPortalBehavior
 						{
 							// Gets stored dimension
 							destination = cap.getNonUADim();
-							
+
 							// Impressive if this is reached...........
-							if(destination == null)
+							if (destination == null)
 							{
 								destination = DimensionType.OVERWORLD;
 							}
@@ -109,7 +104,7 @@ public class AmplifiedPortalBehavior
 						// Get direction to face for Non-UA dimension
 						pitch = cap.getNonUAPitch();
 						yaw = cap.getNonUAYaw();
-						
+
 						// Set current UA position and rotations
 						cap.setUAPos(entity.getPositionVec());
 						cap.setUAPitch(entity.rotationPitch);
@@ -123,18 +118,13 @@ public class AmplifiedPortalBehavior
 						pitch = cap.getUAPitch();
 						yaw = cap.getUAYaw();
 						enteringUA = true;
-						
+
 						// Set current nonUA position, rotations, and dimension before teleporting
 						cap.setNonUAPos(entity.getPositionVec());
 						cap.setNonUADim(entity.dimension);
 						cap.setNonUAPitch(entity.rotationPitch);
 						cap.setNonUAYaw(entity.rotationYaw);
 					}
-
-					
-					
-					
-					
 
 					ServerWorld serverworld = minecraftserver.getWorld(destination);
 
@@ -177,8 +167,7 @@ public class AmplifiedPortalBehavior
 								{
 									if (x == -2 || x == 2 || z == -2 || z == 2)
 									{
-										if (serverworld.getBlockState(worldOriginBlockPos.add(x, 0, z)).getMaterial() == Material.AIR && 
-											serverworld.getBlockState(worldOriginBlockPos.add(x, 1, z)).getMaterial() == Material.AIR)
+										if (serverworld.getBlockState(worldOriginBlockPos.add(x, 0, z)).getMaterial() == Material.AIR && serverworld.getBlockState(worldOriginBlockPos.add(x, 1, z)).getMaterial() == Material.AIR)
 										{
 											//valid space for player is found
 											worldOriginBlockPos = worldOriginBlockPos.add(x, 0, z);
@@ -195,7 +184,7 @@ public class AmplifiedPortalBehavior
 								//no valid space found around portal. get top solid block instead
 								worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
 							}
-							
+
 							playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 0.2D, 0.5D); // Set where player spawns
 						}
 
@@ -203,28 +192,28 @@ public class AmplifiedPortalBehavior
 					else
 					{
 						// Otherwise, just go to where our stored location is
-						if(enteringUA)
+						if (enteringUA)
 						{
 							// Will never be null because we did check above for null already.
 							playerVec3Pos = cap.getUAPos();
 						}
-						else 
+						else
 						{
 							// Check for null which would be impressive if it occurs
-							if(cap.getNonUAPos() == null || ConfigUA.forceExitToOverworld)
+							if (cap.getNonUAPos() == null || ConfigUA.forceExitToOverworld)
 							{
 								// Set player at world spawn then with Amplified Portal at feet
 								// The portal will try to not replace any block and be at the next air block above non-air blocks.
 								BlockPos playerBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING, serverworld.getSpawnPoint());
 								BlockState blockState = serverworld.getBlockState(playerBlockPos);
-								while(blockState.getMaterial() != Material.AIR && playerBlockPos.getY() < serverworld.getActualHeight() - 2)
+								while (blockState.getMaterial() != Material.AIR && playerBlockPos.getY() < serverworld.getActualHeight() - 2)
 								{
 									playerBlockPos = playerBlockPos.up();
 									blockState = serverworld.getBlockState(playerBlockPos);
 								}
-								
+
 								serverworld.setBlockState(playerBlockPos, BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState());
-								
+
 								playerVec3Pos = new Vec3d(playerBlockPos).add(0.5D, 1D, 0.5D);
 							}
 							else
@@ -236,7 +225,6 @@ public class AmplifiedPortalBehavior
 						playerChunkPos = new ChunkPos(new BlockPos(playerVec3Pos));
 					}
 
-					
 					serverworld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, playerChunkPos, 1, entity.getEntityId());
 
 					//dunno how a sleeping player clicked on the portal but if they do, they wake up
@@ -245,21 +233,13 @@ public class AmplifiedPortalBehavior
 						((ServerPlayerEntity) entity).wakeUp();
 					}
 
-
-					((ServerPlayerEntity) entity).teleport(
-							minecraftserver.getWorld(destination), 
-							playerVec3Pos.getX(), 
-							playerVec3Pos.getY() + 0.2D, 
-							playerVec3Pos.getZ(), 
-							yaw, 
-							pitch);
+					((ServerPlayerEntity) entity).teleport(minecraftserver.getWorld(destination), playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
 				}
 			}
 
 			// checks to see if player uses right click with flint and steel. If so, tries
 			// to create portal if possible. only works in non-ultra amplified world types
-			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && 
-				event.getItemStack().getItem() == Items.FLINT_AND_STEEL)
+			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && event.getItemStack().getItem() == Items.FLINT_AND_STEEL)
 			{
 				trySpawnPortal(world, event.getPos(), entity);
 			}
@@ -271,7 +251,7 @@ public class AmplifiedPortalBehavior
 		public static void worldLoad(WorldEvent.Load event)
 		{
 			//check for if portal was made in UA and if not, make it.
-			if(event.getWorld().getDimension().getType() == UltraAmplifiedDimension.ultraamplified())
+			if (event.getWorld().getDimension().getType() == UltraAmplifiedDimension.ultraamplified())
 			{
 				IWorld worldUA = event.getWorld();
 				if (!checkForGeneratedPortal(worldUA))
@@ -346,9 +326,7 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent(
-							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
-							+ " put in the portal frame corner config! Here is what was in the config: §c" + ConfigUA.portalCornerBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame corner config! Here is what was in the config: §c" + ConfigUA.portalCornerBlocks);
 					entity.sendMessage(message);
 				}
 
@@ -374,9 +352,7 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent(
-							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
-							+ " put in the portal frame ceiling config! Here is what was in the config: §c" + ConfigUA.portalCeilingBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame ceiling config! Here is what was in the config: §c" + ConfigUA.portalCeilingBlocks);
 					entity.sendMessage(message);
 				}
 
@@ -402,9 +378,7 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent(
-							"§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was"
-							+ " put in the portal frame floor config! Here is what was in the config: §c" + ConfigUA.portalFloorBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame floor config! Here is what was in the config: §c" + ConfigUA.portalFloorBlocks);
 					entity.sendMessage(message);
 				}
 
@@ -429,18 +403,17 @@ public class AmplifiedPortalBehavior
 						return false;
 					}
 				}
-				
+
 				// Plus shape on floor
 				else
 				{
 					BlockState currentFloor = world.getBlockState(pos.add(x, -1, z));
 					// Convert to default block if use changed the floor block in config so we can ignore properties of the block
-					if(customFloor)
+					if (customFloor)
 					{
-						currentFloor = currentFloor.getBlock().getDefaultState(); 
+						currentFloor = currentFloor.getBlock().getDefaultState();
 					}
-					
-					
+
 					if (currentFloor != blockFloor)
 					{
 						return false;
@@ -473,11 +446,11 @@ public class AmplifiedPortalBehavior
 				{
 					BlockState currentCeiling = world.getBlockState(pos.add(x, 1, z));
 					// Convert to default block if use changed the ceiling block in config so we can ignore properties of the block
-					if(customCeiling)
+					if (customCeiling)
 					{
-						currentCeiling = currentCeiling.getBlock().getDefaultState(); 
+						currentCeiling = currentCeiling.getBlock().getDefaultState();
 					}
-					
+
 					if (currentCeiling != blockCeiling)
 					{
 						return false;

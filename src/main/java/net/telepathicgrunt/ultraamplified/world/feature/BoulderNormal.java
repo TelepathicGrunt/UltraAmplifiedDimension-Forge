@@ -36,14 +36,13 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkgen, Random rand, BlockPos position, BlockBlobConfig config)
 	{
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
+		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 		BlockState blockState = world.getBlockState(blockpos$Mutable);
 
 		//Will keeps moving down position until it finds valid ground to generate on while ignoring other boulders
 		while (blockpos$Mutable.getY() >= 6)
 		{
-			if (blockState.getMaterial() == Material.AIR || 
-				(blockState.getBlock() != Blocks.GRASS_BLOCK && !isDirt(blockState.getBlock())))
+			if (blockState.getMaterial() == Material.AIR || (blockState.getBlock() != Blocks.GRASS_BLOCK && !isDirt(blockState.getBlock())))
 			{
 				//block was air or a non-dirt/grass block. Thus move down one.
 				blockpos$Mutable.move(Direction.DOWN);

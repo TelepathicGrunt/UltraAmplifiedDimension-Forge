@@ -45,16 +45,16 @@ public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtr
 			int z = random.nextInt(16);
 			int startHeight = world.getHeight(Heightmap.Type.MOTION_BLOCKING, position.add(x, 0, z)).getY();
 			blockpos$Mutable.setPos(position.add(x, startHeight, z));
-			
+
 			//loop and find random surfaces for every ledge below
-			while(blockpos$Mutable.getY() > 74)
+			while (blockpos$Mutable.getY() > 74)
 			{
 				x = random.nextInt(16);
 				z = random.nextInt(16);
-				
+
 				blockpos$Mutable = new BlockPos.Mutable(position.getX() + x, blockpos$Mutable.getY(), position.getZ() + z);
 				int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, blockpos$Mutable.getY() - 1, 74, position.add(x, 0, z));
-				
+
 				//set to new height and add the position to the list
 				blockPosList.add(new BlockPos(blockpos$Mutable.move(Direction.DOWN, (blockpos$Mutable.getY() - yPosOfSurface) - 1)));
 				blockpos$Mutable.move(Direction.DOWN);

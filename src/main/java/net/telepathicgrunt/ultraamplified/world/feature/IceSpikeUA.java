@@ -19,154 +19,155 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
-public class IceSpikeUA extends Feature<NoFeatureConfig> {
-	
-	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+
+public class IceSpikeUA extends Feature<NoFeatureConfig>
+{
+
+	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+	{
 		super(configFactory);
 	}
 
-	protected static final Set<BlockState> ALLOWED_BLOCKS = 
-			ImmutableSet.of(
-	    		Blocks.AIR.getDefaultState(),
-	    		Blocks.CAVE_AIR.getDefaultState(),
-	    		Blocks.ICE.getDefaultState(),
-	    		Blocks.PACKED_ICE.getDefaultState(),
-	    		Blocks.SNOW.getDefaultState(),
-	    		Blocks.SNOW_BLOCK.getDefaultState(),
-				Blocks.DIRT.getDefaultState(),
-				Blocks.COARSE_DIRT.getDefaultState(),
-				Blocks.WATER.getDefaultState()
-    		);
-    
-    private static final BlockState WATER = Blocks.WATER.getDefaultState();
-    private static final BlockState ICE = Blocks.ICE.getDefaultState();
-    private static final BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
-	
+	protected static final Set<BlockState> ALLOWED_BLOCKS = ImmutableSet.of(Blocks.AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), Blocks.WATER.getDefaultState());
+
+	private static final BlockState WATER = Blocks.WATER.getDefaultState();
+	private static final BlockState ICE = Blocks.ICE.getDefaultState();
+	private static final BlockState PACKED_ICE = Blocks.PACKED_ICE.getDefaultState();
+
+
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_) {
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+	{
 
-        if (world.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
-        {
-            return false;
-        }
-        else
-        {
-    		BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(position);
-    		mutableBlockPos.move(Direction.UP, rand.nextInt(4));
-            int headHeightOffset = rand.nextInt(4) + 7;
-            int tailWidthOffset = headHeightOffset / 4 + rand.nextInt(2);
-            int finalHeight = 0;
+		if (world.getBlockState(position).getBlock() != Blocks.SNOW_BLOCK)
+		{
+			return false;
+		}
+		else
+		{
+			BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(position);
+			mutableBlockPos.move(Direction.UP, rand.nextInt(4));
+			int headHeightOffset = rand.nextInt(4) + 7;
+			int tailWidthOffset = headHeightOffset / 4 + rand.nextInt(2);
+			int finalHeight = 0;
 
-            if (tailWidthOffset > 1 && rand.nextInt(40) == 0)
-            {
-            	//if ice spike has the potential to generate over 245, then set the position to 245
-            	if(mutableBlockPos.getY() + 130 > 245) {
-            		mutableBlockPos.move(Direction.UP, (245 - mutableBlockPos.getY()));
-            	}
-            	else {
-            		mutableBlockPos.move(Direction.UP, 30 + rand.nextInt(100));
-            	}
-                
-            }
-            
-            finalHeight = mutableBlockPos.getY();
-            for (int y = 0; y < headHeightOffset; ++y)
-            {
-                float maxWidth = (1.0F - (float)y / (float)headHeightOffset) * (float)tailWidthOffset;
-                int range = MathHelper.ceil(maxWidth);
+			if (tailWidthOffset > 1 && rand.nextInt(40) == 0)
+			{
+				//if ice spike has the potential to generate over 245, then set the position to 245
+				if (mutableBlockPos.getY() + 130 > 245)
+				{
+					mutableBlockPos.move(Direction.UP, (245 - mutableBlockPos.getY()));
+				}
+				else
+				{
+					mutableBlockPos.move(Direction.UP, 30 + rand.nextInt(100));
+				}
 
-                for (int x = -range; x <= range; ++x)
-                {
-                    float xWidth = (float)MathHelper.abs(x) - 0.25F;
+			}
 
-                    for (int z = -range; z <= range; ++z)
-                    {
-                        float zWidth = (float)MathHelper.abs(z) - 0.25F;
+			finalHeight = mutableBlockPos.getY();
+			for (int y = 0; y < headHeightOffset; ++y)
+			{
+				float maxWidth = (1.0F - (float) y / (float) headHeightOffset) * (float) tailWidthOffset;
+				int range = MathHelper.ceil(maxWidth);
 
-                        if ((x == 0 && z == 0 || xWidth * xWidth + zWidth * zWidth <= maxWidth * maxWidth) && (x != -range && x != range && z != -range && z != range || rand.nextFloat() <= 0.75F))
-                        {
-                        	BlockPos topPos = mutableBlockPos.add(x, y, z);
-                        	BlockPos bottomPos = mutableBlockPos.add(x, -y, z);
-                            BlockState iblockstate = world.getBlockState(topPos);
-                            if (ALLOWED_BLOCKS.contains(iblockstate) && topPos.getY() > ConfigUA.seaLevel-2)
-                            {
-                                this.setBlockState(world, topPos, PACKED_ICE);
-                            }
-                            else if(iblockstate == WATER) {
-                            	this.setBlockState(world, topPos, ICE);
-                            }
+				for (int x = -range; x <= range; ++x)
+				{
+					float xWidth = (float) MathHelper.abs(x) - 0.25F;
 
-                            if (y != 0 && range > 1)
-                            {
-                                iblockstate = world.getBlockState(bottomPos);
+					for (int z = -range; z <= range; ++z)
+					{
+						float zWidth = (float) MathHelper.abs(z) - 0.25F;
 
-                                if (ALLOWED_BLOCKS.contains(iblockstate) && bottomPos.getY() > ConfigUA.seaLevel-2)
-                                {
-                                    this.setBlockState(world, bottomPos, PACKED_ICE);
-                                }
-                                else if(iblockstate == WATER) {
-                                	this.setBlockState(world, bottomPos, ICE);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+						if ((x == 0 && z == 0 || xWidth * xWidth + zWidth * zWidth <= maxWidth * maxWidth) && (x != -range && x != range && z != -range && z != range || rand.nextFloat() <= 0.75F))
+						{
+							BlockPos topPos = mutableBlockPos.add(x, y, z);
+							BlockPos bottomPos = mutableBlockPos.add(x, -y, z);
+							BlockState iblockstate = world.getBlockState(topPos);
+							if (ALLOWED_BLOCKS.contains(iblockstate) && topPos.getY() > ConfigUA.seaLevel - 2)
+							{
+								this.setBlockState(world, topPos, PACKED_ICE);
+							}
+							else if (iblockstate == WATER)
+							{
+								this.setBlockState(world, topPos, ICE);
+							}
 
-            int maxWidth = tailWidthOffset - 1;
+							if (y != 0 && range > 1)
+							{
+								iblockstate = world.getBlockState(bottomPos);
 
-            if (maxWidth < 0)
-            {
-                maxWidth = 0;
-            }
-            else if (maxWidth > 1)
-            {
-                maxWidth = 1;
-            }
+								if (ALLOWED_BLOCKS.contains(iblockstate) && bottomPos.getY() > ConfigUA.seaLevel - 2)
+								{
+									this.setBlockState(world, bottomPos, PACKED_ICE);
+								}
+								else if (iblockstate == WATER)
+								{
+									this.setBlockState(world, bottomPos, ICE);
+								}
+							}
+						}
+					}
+				}
+			}
 
-            for (int x = -maxWidth; x <= maxWidth; ++x)
-            {
-                for (int z = -maxWidth; z <= maxWidth; ++z)
-                {
-                    mutableBlockPos.setPos(position.getX() + x, finalHeight - 1, position.getZ() + z);
-                    int randomSkippingHeightValue = 50;
+			int maxWidth = tailWidthOffset - 1;
 
-                    if (Math.abs(x) == 1 && Math.abs(z) == 1)
-                    {
-                        randomSkippingHeightValue = rand.nextInt(5);
-                    }
+			if (maxWidth < 0)
+			{
+				maxWidth = 0;
+			}
+			else if (maxWidth > 1)
+			{
+				maxWidth = 1;
+			}
 
-                    //how far down the ice spike can generate
-                    while (mutableBlockPos.getY() > 5)
-                    {
-                        BlockState iblockstate1 = world.getBlockState(mutableBlockPos);
+			for (int x = -maxWidth; x <= maxWidth; ++x)
+			{
+				for (int z = -maxWidth; z <= maxWidth; ++z)
+				{
+					mutableBlockPos.setPos(position.getX() + x, finalHeight - 1, position.getZ() + z);
+					int randomSkippingHeightValue = 50;
 
-                        if (!ALLOWED_BLOCKS.contains(iblockstate1))
-                        {
-                            break;
-                        }
+					if (Math.abs(x) == 1 && Math.abs(z) == 1)
+					{
+						randomSkippingHeightValue = rand.nextInt(5);
+					}
 
-                        if(iblockstate1 == WATER || iblockstate1 == ICE) {
-                        	this.setBlockState(world, mutableBlockPos, Blocks.ICE.getDefaultState());
-                        }else {
-                            this.setBlockState(world, mutableBlockPos, Blocks.PACKED_ICE.getDefaultState());
-                        }
-                        mutableBlockPos.move(Direction.DOWN);
-                        --randomSkippingHeightValue;
+					//how far down the ice spike can generate
+					while (mutableBlockPos.getY() > 5)
+					{
+						BlockState iblockstate1 = world.getBlockState(mutableBlockPos);
 
-                        // It's like a stamina bar. Every time we place a block, this goes down and when it hits 0,
-                        // it moves us downward a random height of 1 - 5. This is what makes the missing blocks on 
-                        // the corners of the Ice Spike pillar.
-                        if (randomSkippingHeightValue <= 0)
-                        {
-                            mutableBlockPos.move(Direction.DOWN, rand.nextInt(5) + 1);
-                            randomSkippingHeightValue = rand.nextInt(5);
-                        }
-                    }
-                }
-            }
+						if (!ALLOWED_BLOCKS.contains(iblockstate1))
+						{
+							break;
+						}
 
-            return true;
-        }
-    }
+						if (iblockstate1 == WATER || iblockstate1 == ICE)
+						{
+							this.setBlockState(world, mutableBlockPos, Blocks.ICE.getDefaultState());
+						}
+						else
+						{
+							this.setBlockState(world, mutableBlockPos, Blocks.PACKED_ICE.getDefaultState());
+						}
+						mutableBlockPos.move(Direction.DOWN);
+						--randomSkippingHeightValue;
+
+						// It's like a stamina bar. Every time we place a block, this goes down and when it hits 0,
+						// it moves us downward a random height of 1 - 5. This is what makes the missing blocks on 
+						// the corners of the Ice Spike pillar.
+						if (randomSkippingHeightValue <= 0)
+						{
+							mutableBlockPos.move(Direction.DOWN, rand.nextInt(5) + 1);
+							randomSkippingHeightValue = rand.nextInt(5);
+						}
+					}
+				}
+			}
+
+			return true;
+		}
+	}
 }

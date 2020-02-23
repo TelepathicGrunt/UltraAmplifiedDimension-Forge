@@ -188,7 +188,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 
 		this.carveAtTarget(world, biomeBlockPos, random, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
 
-
 	}
 
 
@@ -378,18 +377,18 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 											currentBlockstate = LAVA;
 											if (secondaryFloorBlockstate != null)
 											{
-												if(secondaryFloorBlockstate == OBSIDIAN)
+												if (secondaryFloorBlockstate == OBSIDIAN)
 												{
 													currentBlockstate = MAGMA;
 												}
-												
-												if(stalagmiteDouble > 13.5D) 
+
+												if (stalagmiteDouble > 13.5D)
 												{
-													if(y == 10) 
+													if (y == 10)
 													{
 														currentBlockstate = secondaryFloorBlockstate;
 													}
-													else if(y == 9 && random.nextBoolean()) 
+													else if (y == 9 && random.nextBoolean())
 													{
 														currentBlockstate = secondaryFloorBlockstate;
 													}

@@ -105,7 +105,6 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 	}
 
 
-
 	/**
 	 * Update the provided state given the provided neighbor facing and neighbor state, returning a new state. For example,
 	 * fences make their connections to the passed in state if possible, and wet concrete powder immediately returns its
@@ -144,8 +143,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 		BlockState belowBlock = world.getBlockState(pos.down());
 
 		//any sand or modded cactus block below
-		if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND
-				|| (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
+		if (belowBlock.getBlock() == Blocks.SAND || belowBlock.getBlock() == Blocks.RED_SAND || (belowBlock.getBlock() != Blocks.CACTUS && belowBlock.getMaterial() == Material.CACTUS))
 		{
 			return true;
 		}

@@ -160,7 +160,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 			if (event.getPlayer().world instanceof ServerWorld && event.getPlayer().dimension == UltraAmplifiedDimension.ultraamplified())
 			{
 				ServerWorld serverWorld = (ServerWorld) event.getPlayer().world;
-				
+
 				//checks if all players are asleep
 				boolean everyoneSleeping = false;
 				if (!serverWorld.getPlayers().isEmpty())
@@ -186,7 +186,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 				if (everyoneSleeping)
 				{
 					ServerWorld overworld = DimensionManager.getWorld(serverWorld.getServer(), DimensionType.OVERWORLD, false, false);
-					
+
 					if (serverWorld.getGameRules().getBoolean(GameRules.DO_DAYLIGHT_CYCLE))
 					{
 						long rawTime = serverWorld.getDayTime() + 24000L;

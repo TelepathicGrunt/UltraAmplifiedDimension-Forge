@@ -36,7 +36,7 @@ public class SeaPickleUA extends Feature<CountConfig>
 			//same as vanilla SeaPickle class but now generates at position we passed in instead of finding the top y value. 
 			//We have placement classes for a reason. Features should not be finding their own positions.
 
-    		blockpos$Mutable.setPos(position).move(x, 0, z);
+			blockpos$Mutable.setPos(position).move(x, 0, z);
 			BlockState pickle = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, Integer.valueOf(random.nextInt(4) + 1));
 
 			if (world.getBlockState(blockpos$Mutable).getBlock() == Blocks.WATER && pickle.isValidPosition(world, blockpos$Mutable))

@@ -56,7 +56,7 @@ public class GlowPatch extends Feature<CountConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, CountConfig countConfig)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
-		
+
 		// tries as times specified to convert a randomly chosen nearby block
 		for (int attempts = 0; attempts < countConfig.count; ++attempts)
 		{

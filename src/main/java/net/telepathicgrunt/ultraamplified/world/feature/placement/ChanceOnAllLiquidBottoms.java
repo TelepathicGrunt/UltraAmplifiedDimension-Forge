@@ -56,12 +56,13 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 
 				//gets difference and sets mutable height to yPosOfSurface
 				blockpos$Mutable.move(Direction.DOWN, blockpos$Mutable.getY() - height);
-				
+
 				//if we are in ocean monument, don't add this blockpos as it isn't valid. Retry for a new surface.
-				if(UNACCEPTABLE_BLOCKS.contains(world.getBlockState(blockpos$Mutable))) {
+				if (UNACCEPTABLE_BLOCKS.contains(world.getBlockState(blockpos$Mutable)))
+				{
 					continue;
 				}
-				
+
 				//valid surface. Now to check if height and chance allows for the position.
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{

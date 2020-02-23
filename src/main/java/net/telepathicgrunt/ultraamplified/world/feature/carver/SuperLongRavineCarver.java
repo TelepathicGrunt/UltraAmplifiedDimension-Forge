@@ -232,24 +232,24 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 											currentBlockstate = LAVA;
 											if (secondaryFloorBlockstate != null)
 											{
-												if(secondaryFloorBlockstate == OBSIDIAN)
+												if (secondaryFloorBlockstate == OBSIDIAN)
 												{
 													currentBlockstate = MAGMA;
 												}
-												
-												if(random.nextFloat() > 0.35F) 
+
+												if (random.nextFloat() > 0.35F)
 												{
-													if(y == 10) 
+													if (y == 10)
 													{
 														currentBlockstate = secondaryFloorBlockstate;
 													}
-													else if(y == 9 && random.nextFloat() < 0.35F) 
+													else if (y == 9 && random.nextFloat() < 0.35F)
 													{
 														currentBlockstate = secondaryFloorBlockstate;
 													}
 												}
 											}
-											
+
 											world.setBlockState(blockpos$Mutable, currentBlockstate, false);
 										}
 										else

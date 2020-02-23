@@ -85,14 +85,12 @@ public class GlowdirtBlock extends Block
 					if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == BlocksInit.GLOWGRASS_BLOCK.get())
 					{
 						replacementBlock = BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState();
-						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
-								Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 					}
 					else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == BlocksInit.GLOWMYCELIUM.get())
 					{
 						replacementBlock = BlocksInit.GLOWMYCELIUM.get().getDefaultState();
-						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY,
-								Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
+						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 					}
 				}
 			}

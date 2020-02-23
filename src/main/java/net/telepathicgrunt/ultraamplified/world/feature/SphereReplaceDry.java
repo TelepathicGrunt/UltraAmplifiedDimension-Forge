@@ -26,15 +26,15 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 	{
 		int placedBlocks = 0;
 		int radius;
-		if(config.radius > 2) 
+		if (config.radius > 2)
 		{
 			radius = random.nextInt(config.radius - 2) + 2;
 		}
-		else 
+		else
 		{
 			radius = config.radius;
 		}
-		
+
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 
 		for (int x = position.getX() - radius; x <= position.getX() + radius; ++x)
@@ -47,7 +47,7 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 				{
 					for (int y = position.getY() - config.ySize; y <= position.getY() + config.ySize; ++y)
 					{
-	            		blockpos$Mutable.setPos(x, y, z);
+						blockpos$Mutable.setPos(x, y, z);
 						BlockState blockstate = world.getBlockState(blockpos$Mutable);
 
 						for (BlockState blockstate1 : config.targets)

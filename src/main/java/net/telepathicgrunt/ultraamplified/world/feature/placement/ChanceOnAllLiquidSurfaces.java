@@ -49,12 +49,13 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 
 				//gets difference and sets mutable height to yPosOfSurface
 				blockpos$Mutable.move(Direction.UP, height - blockpos$Mutable.getY());
-				
+
 				//if we are in a non-liquid block (not water), don't add this blockpos as it isn't valid. Retry for a new surface.
-				if(!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty()) {
+				if (!world.getBlockState(blockpos$Mutable).getFluidState().isEmpty())
+				{
 					continue;
 				}
-				
+
 				//valid surface. Now to check if height and chance allows for the position. Won't generate at 40 itself.
 				if (blockpos$Mutable.getY() <= lowestHeight)
 				{

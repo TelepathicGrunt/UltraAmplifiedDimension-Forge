@@ -39,14 +39,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 	private static int perfectStoneCount = 0;
 	private static boolean markedForPerfection = false;
 
-	protected static final Set<BlockState> unAcceptableBlocks = 
-			ImmutableSet.of(
-					Blocks.AIR.getDefaultState(),
-					Blocks.WATER.getDefaultState(), 
-					Blocks.LAVA.getDefaultState(), 
-					Blocks.SLIME_BLOCK.getDefaultState(),
-					Blocks.CAVE_AIR.getDefaultState()
-			);
+	protected static final Set<BlockState> unAcceptableBlocks = ImmutableSet.of(Blocks.AIR.getDefaultState(), Blocks.WATER.getDefaultState(), Blocks.LAVA.getDefaultState(), Blocks.SLIME_BLOCK.getDefaultState(), Blocks.CAVE_AIR.getDefaultState());
 
 	private static enum StoneHengeType
 	{
@@ -95,7 +88,6 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 				return false; // Too low to generate. 
 			}
 
-			
 			//try seeing if we can spawn here at below layer
 			if (!validatePosition(world, blockpos$Mutable.move(Direction.UP)))
 			{

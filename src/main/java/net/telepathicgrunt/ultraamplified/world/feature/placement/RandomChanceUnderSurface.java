@@ -45,7 +45,6 @@ public class RandomChanceUnderSurface extends Placement<ChanceConfig>
 				y += ConfigUA.seaLevel;
 			}
 
-
 			return Stream.of(pos.add(x, y, z));
 		}
 

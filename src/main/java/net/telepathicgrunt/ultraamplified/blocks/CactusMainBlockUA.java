@@ -61,10 +61,10 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 			{
 				int i;
 
-				for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this
-						|| world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get()
-						|| world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
-				{ ; }
+				for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this || world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get() || world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
+				{
+					;
+				}
 
 				if (i < 3)
 				{
@@ -195,14 +195,13 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	 * Will return true if it is sand or modded cactus at desired position
 	 * 
 	 * @param world - current world to check in
-	 * @param pos     - position of where to check
+	 * @param pos   - position of where to check
 	 * @return - is sand or modded cactus at pos
 	 */
 	private boolean validBlockBelow(IWorldReader world, BlockPos pos)
 	{
 		BlockState blockToCheck = world.getBlockState(pos);
-		if (blockToCheck.getBlock() == Blocks.SAND || blockToCheck.getBlock() == Blocks.RED_SAND
-				|| (blockToCheck.getBlock() != Blocks.CACTUS && blockToCheck.getMaterial() == Material.CACTUS))
+		if (blockToCheck.getBlock() == Blocks.SAND || blockToCheck.getBlock() == Blocks.RED_SAND || (blockToCheck.getBlock() != Blocks.CACTUS && blockToCheck.getMaterial() == Material.CACTUS))
 		{
 			return true;
 		}

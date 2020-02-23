@@ -70,21 +70,14 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 				/*
 				 * for (int y = 61; y >= 10; y--) {
 				 * 
-				 * blockpos$Mutable.setPos(position.getX() + x, y, position.getZ() + z); 
-				 * currentblock = world.getBlockState(blockpos$Mutable);
+				 * blockpos$Mutable.setPos(position.getX() + x, y, position.getZ() + z); currentblock =
+				 * world.getBlockState(blockpos$Mutable);
 				 * 
-				 * // move down until we hit an air block 
-				 * while (currentblock != Blocks.AIR.getDefaultState() && blockpos$Mutable.getY() > 11) 
-				 * { 
-				 * 		blockpos$Mutable.move(Direction.DOWN); 
-				 * 		currentblock = world.getBlockState(blockpos$Mutable); 
-				 * }
+				 * // move down until we hit an air block while (currentblock != Blocks.AIR.getDefaultState() && blockpos$Mutable.getY()
+				 * > 11) { blockpos$Mutable.move(Direction.DOWN); currentblock = world.getBlockState(blockpos$Mutable); }
 				 * 
-				 * //checks one last time at y = 11 to see if we should quit now 
-				 * if(blockpos$Mutable.getY() <= 11 && currentblock != Blocks.AIR.getDefaultState()) 
-				 * { 
-				 * 		continue; 
-				 * }
+				 * //checks one last time at y = 11 to see if we should quit now if(blockpos$Mutable.getY() <= 11 && currentblock !=
+				 * Blocks.AIR.getDefaultState()) { continue; }
 				 */
 
 				blockpos$Mutable.setPos(position.getX() + x, 61, position.getZ() + z);

@@ -39,7 +39,7 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
 			{
 				return Stream.empty();
 			}
-			
+
 			Stream.of(blockpos$Mutable);
 		}
 

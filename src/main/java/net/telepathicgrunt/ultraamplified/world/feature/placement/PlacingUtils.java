@@ -5,14 +5,16 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
+
 public class PlacingUtils
 {
 	/**
 	 * Finds the first non-air land below to given height
-	 * @param world - world to check blocks in
+	 * 
+	 * @param world       - world to check blocks in
 	 * @param startHeight - starting height to go down from
-	 * @param random - rng
-	 * @param position - x/z position to use
+	 * @param random      - rng
+	 * @param position    - x/z position to use
 	 * @return - height of the first non-air block
 	 */
 	public static int topOfSurfaceBelowHeight(IWorld world, int startHeight, int minHeight, BlockPos position)
@@ -44,12 +46,14 @@ public class PlacingUtils
 		return blockpos$Mutable.getY();
 	}
 
+
 	/**
 	 * Finds the first solid ceiling above given height
-	 * @param world - world to check blocks in
+	 * 
+	 * @param world       - world to check blocks in
 	 * @param startHeight - starting height to go up from
-	 * @param random - rng
-	 * @param position - x/z position to use
+	 * @param random      - rng
+	 * @param position    - x/z position to use
 	 * @return - height of the first solid block
 	 */
 	public static int topOfCeilingAboveHeight(IWorld world, int startHeight, int maxHeight, BlockPos position)
@@ -81,14 +85,15 @@ public class PlacingUtils
 
 		return blockpos$Mutable.getY() > 255 ? 255 : blockpos$Mutable.getY();
 	}
-	
+
 
 	/**
 	 * Finds the first solid land below to given height through water
-	 * @param world - world to check blocks in
+	 * 
+	 * @param world       - world to check blocks in
 	 * @param startHeight - starting height to down from
-	 * @param random - rng
-	 * @param position - x/z position to use
+	 * @param random      - rng
+	 * @param position    - x/z position to use
 	 * @return - height of the first solid block
 	 */
 	public static int topOfUnderwaterSurfaceBelowHeight(IWorld world, int startHeight, int minHeight, BlockPos position)

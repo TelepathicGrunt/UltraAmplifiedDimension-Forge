@@ -20,13 +20,12 @@ public class UltraAmplifiedDimension
 {
 	private static final ResourceLocation ULTRAAMPLIFIED_ID = new ResourceLocation(UltraAmplified.MODID, "ultraamplified");
 
-	
+
 	public static DimensionType ultraamplified()
 	{
 		return DimensionType.byName(ULTRAAMPLIFIED_ID);
 	}
 
-	
 	public static final ModDimension ULTRAAMPLIFIED = new ModDimension()
 	{
 		@Override
@@ -35,7 +34,6 @@ public class UltraAmplifiedDimension
 			return UltraAmplifiedWorldProvider::new;
 		}
 	};
-
 
 	//registers the dimension
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)

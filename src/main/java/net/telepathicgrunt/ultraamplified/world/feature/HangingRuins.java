@@ -63,14 +63,13 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 				}
 			}
 		}
-		
+
 		//makes sure top won't be exposed to air
-		if(shouldMoveDownOne(world, blockpos$Mutable, offset, rot))
+		if (shouldMoveDownOne(world, blockpos$Mutable, offset, rot))
 		{
 			blockpos$Mutable.move(Direction.DOWN);
 		}
 
-		
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
 		TemplateManager templatemanager = ((ServerWorld) world.getWorld()).getSaveHandler().getStructureTemplateManager();
 		Template template = templatemanager.getTemplate(new ResourceLocation(UltraAmplified.MODID + ":hanging_ruins"));

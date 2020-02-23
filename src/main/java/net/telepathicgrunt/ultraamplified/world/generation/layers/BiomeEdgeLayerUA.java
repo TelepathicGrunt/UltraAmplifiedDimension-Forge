@@ -15,28 +15,28 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer
 	{
 		// Check if north made a biome edge
 		int borderBiome = BiomeGenHelper.biomesComboToEdge.getOrDefault(new Pair<Integer, Integer>(currentBiomeID, north), -1);
-		if(borderBiome != -1)
+		if (borderBiome != -1)
 		{
 			return borderBiome;
 		}
 
 		// Check if west made a biome edge
 		borderBiome = BiomeGenHelper.biomesComboToEdge.getOrDefault(new Pair<Integer, Integer>(currentBiomeID, west), -1);
-		if(borderBiome != -1)
+		if (borderBiome != -1)
 		{
 			return borderBiome;
 		}
-		
+
 		// Check if south made a biome edge
 		borderBiome = BiomeGenHelper.biomesComboToEdge.getOrDefault(new Pair<Integer, Integer>(currentBiomeID, south), -1);
-		if(borderBiome != -1)
+		if (borderBiome != -1)
 		{
 			return borderBiome;
 		}
-		
+
 		// Check if east made a biome edge
 		borderBiome = BiomeGenHelper.biomesComboToEdge.getOrDefault(new Pair<Integer, Integer>(currentBiomeID, east), -1);
-		if(borderBiome != -1)
+		if (borderBiome != -1)
 		{
 			return borderBiome;
 		}

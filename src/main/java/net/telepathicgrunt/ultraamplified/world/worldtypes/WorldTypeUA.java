@@ -17,9 +17,8 @@ public class WorldTypeUA extends WorldType
 	{
 		/*
 		 * Name of world type. Also had to add this to en_us.json file to display name and info properly:
-		 * 	 
-         *  en_us.json entries
-		 * "generator.UltraAmplified":"Ultra Amplified"
+		 * 
+		 * en_us.json entries "generator.UltraAmplified":"Ultra Amplified"
 		 * "generator.UltraAmplified.info":"May take a minute or two to create a fresh world."
 		 */
 		super("UltraAmplified");
@@ -30,12 +29,12 @@ public class WorldTypeUA extends WorldType
 	@Override
 	public ChunkGenerator<?> createChunkGenerator(World world)
 	{
-		if(world.dimension.getType() == DimensionType.OVERWORLD)
+		if (world.dimension.getType() == DimensionType.OVERWORLD)
 		{
 			//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
 			return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
 		}
-		
+
 		// Run default chunkgenerator for each dimension
 		return super.createChunkGenerator(world);
 	}

@@ -29,8 +29,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 
 		//creates the noise (gennerally in the range of -0.5 to 0.5 but not always)
 		double noise = context.getNoiseGenerator().func_215456_a((double) (x) / 8.0D, (double) (z) / 8.0D, 0.0D, 0.0D, 0.0D);
-		boolean allowMForm = ConfigUA.mutatedBiomeSpawnrate != 0 && 
-							(noise < (ConfigUA.mutatedBiomeSpawnrate / 10D) - 0.5D || ConfigUA.mutatedBiomeSpawnrate == 10);
+		boolean allowMForm = ConfigUA.mutatedBiomeSpawnrate != 0 && (noise < (ConfigUA.mutatedBiomeSpawnrate / 10D) - 0.5D || ConfigUA.mutatedBiomeSpawnrate == 10);
 		boolean allowHills = (biomeId2 - 2) % 29 == 0 || context.random(3) == 0;
 
 		//debugging
@@ -77,17 +76,17 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			{
 				Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
 
-				if(biomeTemp != null) //hill form does have mutated form
+				if (biomeTemp != null) //hill form does have mutated form
 				{
 					biomeIdToReturn = BiomeRegistry.getID(biomeTemp);
 				}
 				else
 				{
-					if(ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
+					if (ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
 					{
 						biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
-						
-						if(biomeTemp == null) //base form does not have mutated form
+
+						if (biomeTemp == null) //base form does not have mutated form
 						{
 							biomeIdToReturn = biomeId1;
 						}
@@ -133,8 +132,9 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 				}
 			}
 		}
-		
-		if(ConfigUA.mutatedBiomeSpawnrate == 10) {
+
+		if (ConfigUA.mutatedBiomeSpawnrate == 10)
+		{
 			Biome biome = BiomeRegistry.getValue(biomeId1);
 			if (biome == null || !biome.isMutation())
 			{
@@ -142,7 +142,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 				return biome2 == null ? biomeId1 : BiomeRegistry.getID(biome2);
 			}
 		}
-		
+
 		return biomeId1;
 	}
 
