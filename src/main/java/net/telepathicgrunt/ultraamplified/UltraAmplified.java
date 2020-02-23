@@ -6,9 +6,13 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.io.Files;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.server.dedicated.PropertyManager;
+import net.minecraft.server.dedicated.PropertyManager.Property;
 import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -85,31 +89,24 @@ public class UltraAmplified
 	 */
 	public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
 	{
-		// There's no .contains kind of method to check for if a property exists. 
-		// That's why I have to use Try/Catch as a check for if it exists.
+		// Grab if entry is in the property file
+		// Try/Catch is for if the server.property file was removed and cause Paths.get to throw exception.
 		try
 		{
-			if (PropertyManager.load(Paths.get("server.properties")).getProperty("use-modded-worldtype").equals("ultra-amplified"))
+			String entryValue = PropertyManager.load(Paths.get("server.properties")).getProperty("use-modded-worldtype");
+			
+			//if null, the property was not added. if it is added, check if it asking for our mod's worldtype
+			if (entryValue != null && entryValue.equals("ultra-amplified"))
 			{
 				ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-				serverProperties.worldType = UltraAmplifiedWorldType;
+				
+				if(serverProperties != null)
+					serverProperties.worldType = UltraAmplifiedWorldType; //make server use our worldtype
 			}
 		}
 		catch(Exception e)
 		{
-			// The property was not added to the server.properties file so check for if the older name (with typo) for the property exists
-			try
-			{
-				if (PropertyManager.load(Paths.get("server.properties")).getProperty("ultra-amplifed-overworld").equals("true"))
-				{
-					ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-					serverProperties.worldType = UltraAmplifiedWorldType;
-				}
-			}
-			catch(Exception e2)
-			{
-				// Do nothing. Neither property name was added to the server.properties file
-			}
+			// Do nothing. server.properties file does not exist.
 		}
 	}
 
