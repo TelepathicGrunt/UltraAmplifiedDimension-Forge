@@ -32,14 +32,14 @@ import net.telepathicgrunt.ultraamplified.world.spawner.CatSpawnerUA;
 
 public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings>
 {
-	private static final float[] field_222576_h = Util.make(new float[25], (p_222575_0_) ->
+	private static final float[] BIOME_WEIGHTING_KERNEL = Util.make(new float[25], (p_222575_0_) ->
 	{
-		for (int i = -2; i <= 2; ++i)
+		for (int xRelative = -2; xRelative <= 2; ++xRelative)
 		{
-			for (int j = -2; j <= 2; ++j)
+			for (int zRelative = -2; zRelative <= 2; ++zRelative)
 			{
-				float f = 10.0F / MathHelper.sqrt((float) (i * i + j * j) + 0.2F);
-				p_222575_0_[i + 2 + (j + 2) * 5] = f;
+				float biomeWeighting = 10.0F / MathHelper.sqrt((float) (xRelative * xRelative + zRelative * zRelative) + 0.2F);
+				p_222575_0_[xRelative + 2 + (zRelative + 2) * 5] = biomeWeighting;
 			}
 		}
 
@@ -113,7 +113,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 				depthWeight = 1.0F + (0.0F + 0.4F) * 2F;
 				scaleWeight = 1.0F + (0.0F + 0.3F) * 12F;
 
-				float f6 = field_222576_h[j + 2 + (k + 2) * 5] / (depthWeight + 2.0F);
+				float f6 = BIOME_WEIGHTING_KERNEL[j + 2 + (k + 2) * 5] / (depthWeight + 2.0F);
 				if (biome.getDepth() > f3)
 				{
 					f6 /= 2.0F;
