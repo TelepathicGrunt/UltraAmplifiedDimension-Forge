@@ -27,7 +27,7 @@ changelog.txt
 UltraAmplified_Changelog.txt
 build.bat
 references
-assets
+\assets
 
 # Files from Forge MDK
 forge*changelog.txt
