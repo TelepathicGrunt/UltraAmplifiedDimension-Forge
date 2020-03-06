@@ -28,6 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CarversUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
@@ -49,9 +50,9 @@ public class NetherlandBiomeUA extends BiomeUA
 		this.addStructureFeature(FeatureUA.FORTRESS_UA.configure(new FortressConfigUA(true)));
 		this.addStructureFeaturesUA();
 
-		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
-		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(RAVINE_CARVER, new ProbabilityConfig(0f)));
-		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
+		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CarversUA.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
+		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CarversUA.RAVINE_CARVER, new ProbabilityConfig(0f)));
+		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(CarversUA.LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
 
 		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, FeatureUA.NETHER_UNDERWATER_MAGMA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.CONTAIN_UNDERGROUND_LIQUID.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));

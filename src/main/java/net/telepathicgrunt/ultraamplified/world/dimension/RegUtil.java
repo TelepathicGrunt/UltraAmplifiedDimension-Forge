@@ -66,7 +66,7 @@ public class RegUtil
 		return entry;
 	}
 
-
+	
 	/**
 	 * For registering structure pieces so Minecraft doesn't spam the logs saying the pieces aren't registered yet
 	 */

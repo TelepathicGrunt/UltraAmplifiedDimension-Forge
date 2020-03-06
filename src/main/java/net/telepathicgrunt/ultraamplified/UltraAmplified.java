@@ -1,6 +1,5 @@
 package net.telepathicgrunt.ultraamplified;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +30,7 @@ import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CarversUA;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
@@ -131,7 +132,7 @@ public class UltraAmplified
 		{
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
-			LOGGER.log(Level.INFO, "Biomes registered.");
+			//LOGGER.log(Level.INFO, "Biomes registered.");
 		}
 
 
@@ -143,7 +144,7 @@ public class UltraAmplified
 		public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 		{
 			BlocksInit.registerBlocks(event);
-			LOGGER.log(Level.INFO, "Blocks registered.");
+			//LOGGER.log(Level.INFO, "Blocks registered.");
 		}
 
 
@@ -155,7 +156,7 @@ public class UltraAmplified
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 		{
 			BlocksInit.registerItems(event);
-			LOGGER.log(Level.INFO, "Items registered.");
+			//LOGGER.log(Level.INFO, "Items registered.");
 		}
 
 
@@ -166,8 +167,18 @@ public class UltraAmplified
 		public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event)
 		{
 			FeatureUA.registerFeatures(event);
-			LOGGER.log(Level.INFO, "features registered.");
+			//LOGGER.log(Level.INFO, "features registered.");
 		}
 
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register carvers.
+		 */
+		@SubscribeEvent
+		public static void onRegisterCarvers(final RegistryEvent.Register<WorldCarver<?>> event)
+		{
+			CarversUA.registerCarvers(event);
+			//LOGGER.log(Level.INFO, "carvers registered.");
+		}
 	}
 }

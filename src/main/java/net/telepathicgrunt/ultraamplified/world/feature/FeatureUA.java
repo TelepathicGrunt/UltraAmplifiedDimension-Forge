@@ -27,7 +27,6 @@ import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
@@ -165,12 +164,9 @@ public class FeatureUA
 	public static final List<Structure<?>> ILLAGER_STRUCTURES = ImmutableList.of(PILLAGER_OUTPOST_UA, VILLAGE_UA);
 
 
-	@SuppressWarnings("unchecked")
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
 	{
 		IForgeRegistry<Feature<?>> registry = event.getRegistry();
-
-		UltraAmplified.LOGGER.debug("FEATURE REGISTER");
 
 		RegUtil.register(registry, BETTER_CACTUS, "better_cactus_ua");
 		RegUtil.register(registry, GENERIC_DUNGEONS, "dungeon_default_ua");

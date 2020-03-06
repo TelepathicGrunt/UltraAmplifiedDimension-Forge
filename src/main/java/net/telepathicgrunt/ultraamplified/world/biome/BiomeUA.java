@@ -6,10 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.feature.structure.BuriedTreasureConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinConfig;
 import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
@@ -42,10 +40,6 @@ import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.PlateauSurf
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.SandSurfaceBuilder;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.ShatteredSavannaSurfaceBuilderUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
@@ -119,11 +113,6 @@ public class BiomeUA extends Biome
 	public static final Placement<ChanceConfig> AT_SURFACE_WITH_CHANCE_DESERT_WELL = new AtSurfaceWithChanceDesertWell(ChanceConfig::deserialize);
 	//needed so we can prevent lava lakes and water lakes from spawning if config is off
 	public static final Placement<LakeCountRangeAndTypeConfig> LAKE_PLACEMENT = new LakePlacement(LakeCountRangeAndTypeConfig::deserialize);
-
-	public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver(ProbabilityConfig::deserialize, 70);
-	public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
-	public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
-	public static final WorldCarver<ProbabilityConfig> UNDERWATER_CAVE_CARVER = new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
 
 	protected static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
 	protected static final BlockState WATER = Blocks.WATER.getDefaultState();
