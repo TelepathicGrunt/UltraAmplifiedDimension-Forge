@@ -12,6 +12,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.telepathicgrunt.ultraamplified.RegUtil;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 

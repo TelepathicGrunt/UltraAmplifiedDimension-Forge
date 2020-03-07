@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.world.dimension;
+package net.telepathicgrunt.ultraamplified;
 
 import java.util.Locale;
 
@@ -10,7 +10,6 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class RegUtil

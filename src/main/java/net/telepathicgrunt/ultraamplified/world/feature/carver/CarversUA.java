@@ -4,7 +4,7 @@ import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
+import net.telepathicgrunt.ultraamplified.RegUtil;
 
 public class CarversUA
 {

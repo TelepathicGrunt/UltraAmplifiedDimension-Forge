@@ -14,6 +14,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.telepathicgrunt.ultraamplified.RegUtil;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDensedWoodedBiomeUA;
@@ -80,7 +81,6 @@ import net.telepathicgrunt.ultraamplified.world.biomes.TaigaRelicBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TaigaRockyBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestRelicBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.dimension.RegUtil;
 
 
 public class BiomeInit
