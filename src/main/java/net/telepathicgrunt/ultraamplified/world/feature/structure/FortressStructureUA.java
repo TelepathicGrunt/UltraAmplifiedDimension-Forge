@@ -36,13 +36,14 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		if (ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground)
 		{
 			int i = chunkPosX >> 4;
 			int j = chunkPosZ >> 4;
-			rand.setSeed((long) (i ^ j << 4) ^ chunkGen.getSeed());
+			rand.setSeed(i ^ j << 4 ^ chunkGen.getSeed());
 			if (chunkPosX != (i << 4) + 4 + rand.nextInt(ConfigUA.netherFortressSpawnrate))
 			{
 				return false;
@@ -62,18 +63,21 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return FortressStructureUA.Start::new;
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":fortress";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 8;
@@ -111,9 +115,10 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			FortressConfigUA fortressconfig = (FortressConfigUA) generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
+			FortressConfigUA fortressconfig = generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
 			this.genAboveSeaLevel = fortressconfig.surfaceAllow;
 			boolean stoneVariant = false;
 

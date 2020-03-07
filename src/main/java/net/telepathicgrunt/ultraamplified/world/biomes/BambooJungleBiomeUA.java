@@ -138,6 +138,7 @@ public class BambooJungleBiomeUA extends BiomeUA
 	/*
 	 * set grass color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getGrassColorAt(double p_225528_1_, double p_225528_3_)
 	{
@@ -148,6 +149,7 @@ public class BambooJungleBiomeUA extends BiomeUA
 	/*
 	 * set foliage/plant color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getFoliageColor()
 	{

@@ -51,6 +51,7 @@ public class FossilUA extends Feature<NoFeatureConfig>
 	private static final ResourceLocation[] FOSSILS_COAL = new ResourceLocation[] { STRUCTURE_SPINE_01_COAL, STRUCTURE_SPINE_02_COAL, STRUCTURE_SPINE_03_COAL, STRUCTURE_SPINE_04_COAL, STRUCTURE_SKULL_01_COAL, STRUCTURE_SKULL_02_COAL, STRUCTURE_SKULL_03_COAL, STRUCTURE_SKULL_04_COAL };
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config)
 	{
 

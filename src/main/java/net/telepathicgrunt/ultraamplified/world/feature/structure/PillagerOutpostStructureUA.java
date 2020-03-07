@@ -36,24 +36,28 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":pillager_outpost";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 3;
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getSpawnList()
 	{
 		return field_214558_a;
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
@@ -61,7 +65,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA))
 		{
 
-			if (rand.nextFloat() < 1 / ((double) (ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1))
+			if (rand.nextFloat() < 1 / ((ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1))
 			{
 				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k)
 				{
@@ -82,6 +86,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return PillagerOutpostStructureUA.Start::new;
@@ -101,6 +106,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 

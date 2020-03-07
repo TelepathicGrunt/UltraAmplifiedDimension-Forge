@@ -32,18 +32,21 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":village";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 8;
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.villageSpawnrate;
@@ -67,6 +70,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -81,6 +85,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return VillageStructureUA.Start::new;
@@ -94,9 +99,10 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			VillageConfigUA villageconfig = (VillageConfigUA) generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA);
+			VillageConfigUA villageconfig = generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA);
 
 			// if we are requesting a village type that vanilla already can make,
 			// we then generate a vanilla village.

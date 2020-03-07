@@ -44,6 +44,7 @@ public class Roots extends Feature<BlockConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
 	{
 		setSeed(rand.nextLong());

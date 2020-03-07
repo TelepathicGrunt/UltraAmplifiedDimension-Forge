@@ -35,6 +35,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.oceanMonumentSpawnrate;
@@ -58,6 +59,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -76,24 +78,28 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return OceanMonumentStructureUA.Start::new;
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":ocean_monument";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 8;
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getSpawnList()
 	{
 		return MONUMENT_ENEMIES;
@@ -110,6 +116,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			this.generate(chunkX, chunkZ);

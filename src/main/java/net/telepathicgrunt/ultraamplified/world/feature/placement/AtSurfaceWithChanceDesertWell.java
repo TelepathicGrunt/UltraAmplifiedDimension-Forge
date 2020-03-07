@@ -24,6 +24,7 @@ public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
 	{
 
@@ -32,7 +33,7 @@ public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
 			return Stream.empty();
 		}
 
-		if (random.nextFloat() < 1.0F / (float) placementConfig.chance)
+		if (random.nextFloat() < 1.0F / placementConfig.chance)
 		{
 			int i = random.nextInt(16);
 			int j = random.nextInt(16);

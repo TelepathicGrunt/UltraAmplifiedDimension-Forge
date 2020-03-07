@@ -26,13 +26,14 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
 		if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, FeatureUA.MINESHAFT_UA))
 		{
-			return rand.nextDouble() < (double) (ConfigUA.mineshaftSpawnrate) / 10000D;
+			return rand.nextDouble() < (ConfigUA.mineshaftSpawnrate) / 10000D;
 		}
 		else
 		{
@@ -41,18 +42,21 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return MineshaftStructureUA.Start::new;
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":mineshaft";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 8;
@@ -69,9 +73,10 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			MineshaftConfigUA mineshaftconfig = (MineshaftConfigUA) generator.getStructureConfig(biomeIn, FeatureUA.MINESHAFT_UA);
+			MineshaftConfigUA mineshaftconfig = generator.getStructureConfig(biomeIn, FeatureUA.MINESHAFT_UA);
 			this.type = mineshaftconfig.type;
 			MineshaftPiecesUA.Room structuremineshaftpiecesua$room = new MineshaftPiecesUA.Room(0, this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, this.type);
 			this.components.add(structuremineshaftpiecesua$room);

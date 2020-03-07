@@ -53,6 +53,7 @@ public class GlowPatch extends Feature<CountConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, CountConfig countConfig)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);

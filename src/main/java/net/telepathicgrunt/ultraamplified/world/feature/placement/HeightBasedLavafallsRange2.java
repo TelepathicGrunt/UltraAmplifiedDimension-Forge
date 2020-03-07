@@ -21,6 +21,7 @@ public class HeightBasedLavafallsRange2 extends SimplePlacement<CountRangeConfig
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
 	{
 		//we do * instead of / as no biome reduces number of lavafalls. only 2 increases the number of lavafalls

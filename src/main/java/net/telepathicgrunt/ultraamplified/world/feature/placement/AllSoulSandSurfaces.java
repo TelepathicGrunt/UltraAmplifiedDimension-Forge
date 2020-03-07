@@ -30,6 +30,7 @@ public class AllSoulSandSurfaces extends Placement<PercentageAndFrequencyConfig>
 	private final BlockState SOULSAND = Blocks.SOUL_SAND.getDefaultState();
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos position)
 	{
 

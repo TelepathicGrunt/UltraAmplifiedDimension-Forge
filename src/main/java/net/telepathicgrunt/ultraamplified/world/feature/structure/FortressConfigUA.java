@@ -18,6 +18,7 @@ public class FortressConfigUA implements IFeatureConfig
 	}
 
 
+	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
 	{
 		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("surfaceAllow"), ops.createBoolean(this.surfaceAllow))));

@@ -37,6 +37,7 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 	protected OctavesNoiseGenerator field_205553_b;
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		int sealevel = seaLevel + 1;
@@ -76,8 +77,8 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 				if (iblockstate2 == STONE)
 				{
 
-					boolean flag = this.field_205553_b.func_205563_a((double) x * 0.13125D, (double) z * 0.13125D, ypos / 5) * 15.0D + random.nextDouble() * 0.2D > 4.5D;
-					boolean flag1 = this.field_205553_b.func_205563_a((double) x * 0.13125D, (ypos / 5) + 109.0D, (double) z * 0.13125D) * 15.0D + random.nextDouble() * 0.2D > 5.0D;
+					boolean flag = this.field_205553_b.func_205563_a(x * 0.13125D, z * 0.13125D, ypos / 5) * 15.0D + random.nextDouble() * 0.2D > 4.5D;
+					boolean flag1 = this.field_205553_b.func_205563_a(x * 0.13125D, (ypos / 5) + 109.0D, z * 0.13125D) * 15.0D + random.nextDouble() * 0.2D > 5.0D;
 
 					if (i1 == -1)
 					{
@@ -134,6 +135,7 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 	}
 
 
+	@Override
 	public void setSeed(long seed)
 	{
 		if (this.field_205552_a != seed || this.field_205553_b == null)

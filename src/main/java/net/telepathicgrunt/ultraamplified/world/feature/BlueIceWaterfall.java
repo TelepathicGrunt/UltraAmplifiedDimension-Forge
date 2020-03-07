@@ -37,6 +37,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig>
 	protected static final Set<Block> acceptableBlocks = ImmutableSet.of(Blocks.ICE, Blocks.SNOW_BLOCK, Blocks.PACKED_ICE);
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig fluidConfig)
 	{
 

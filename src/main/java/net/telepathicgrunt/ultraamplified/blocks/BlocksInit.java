@@ -45,6 +45,7 @@ public class BlocksInit
 	//creative tab to hold our block items
 	public static final ItemGroup ULTRAMAPLIFIED = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplified.MODID)
 	{
+		@Override
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{

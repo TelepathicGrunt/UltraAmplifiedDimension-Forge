@@ -40,7 +40,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		 */
 		for (int i = 0; i <= 15; ++i)
 		{
-			this.lightBrightnessTable[i] = (float) i / 20.0F;
+			this.lightBrightnessTable[i] = i / 20.0F;
 		}
 	}
 
@@ -64,7 +64,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
-		double d0 = MathHelper.frac((double) worldTime / 24000.0D - 0.25D);
+		double d0 = MathHelper.frac(worldTime / 24000.0D - 0.25D);
 		double d1 = 0.5D - Math.cos(d0 * Math.PI) / 2.0D;
 		return (float) (d0 * 2.0D + d1) / 3.0F;
 	}
@@ -73,6 +73,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	/**
 	 * the y level at which clouds are rendered.
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
@@ -87,6 +88,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	}
 
 
+	@Override
 	public boolean isNether()
 	{
 		return false;
@@ -116,7 +118,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		f1 = f1 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
 		f2 = f2 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
 		f3 = f3 * (f * 0.91F + 0.09F) * multiplierOfBrightness;
-		return new Vec3d((double) f1, (double) f2, (double) f3);
+		return new Vec3d(f1, f2, f3);
 	}
 
 
@@ -124,6 +126,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	 * Returns a double value representing the Y value relative to the top of the map at which void fog is at its maximum.
 	 * for example, means the void fog will be at its maximum at 70 here.
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public double getVoidFogYFactor()
 	{
@@ -191,7 +194,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 					{
 						long rawTime = serverWorld.getDayTime() + 24000L;
 						long time = rawTime - rawTime % 24000L;
-						overworld.setDayTime((long) time);
+						overworld.setDayTime(time);
 						overworld.getWorldInfo().setDayTime(time);
 					}
 				}

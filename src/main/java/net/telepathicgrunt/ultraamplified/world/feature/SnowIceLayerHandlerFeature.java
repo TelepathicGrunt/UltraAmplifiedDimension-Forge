@@ -24,6 +24,7 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos position, NoFeatureConfig config)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();

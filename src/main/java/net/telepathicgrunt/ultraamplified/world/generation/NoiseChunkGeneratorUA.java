@@ -86,7 +86,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 		this.maxNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 		this.mainNoise = new OctavesNoiseGenerator(this.randomSeed, 7, 0);
-		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
+		this.surfaceDepthNoise = (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
 	}
 
 
@@ -99,20 +99,20 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 		for (int i = 0; i < 16; ++i)
 		{
-			double limitX = OctavesNoiseGenerator.maintainPrecision((double) x * getCoordinateScale * d3);
-			double limitY = OctavesNoiseGenerator.maintainPrecision((double) y * getHeightScale * d3);
-			double limitZ = OctavesNoiseGenerator.maintainPrecision((double) z * getCoordinateScale * d3);
+			double limitX = OctavesNoiseGenerator.maintainPrecision(x * getCoordinateScale * d3);
+			double limitY = OctavesNoiseGenerator.maintainPrecision(y * getHeightScale * d3);
+			double limitZ = OctavesNoiseGenerator.maintainPrecision(z * getCoordinateScale * d3);
 
-			double mainX = OctavesNoiseGenerator.maintainPrecision((double) x * getMainCoordinateScale * d3);
-			double mainY = OctavesNoiseGenerator.maintainPrecision((double) y * getMainHeightScale * d3);
-			double mainZ = OctavesNoiseGenerator.maintainPrecision((double) z * getMainCoordinateScale * d3);
+			double mainX = OctavesNoiseGenerator.maintainPrecision(x * getMainCoordinateScale * d3);
+			double mainY = OctavesNoiseGenerator.maintainPrecision(y * getMainHeightScale * d3);
+			double mainZ = OctavesNoiseGenerator.maintainPrecision(z * getMainCoordinateScale * d3);
 
 			double d7 = 684.412F * d3;
-			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
-			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
+			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, y * d7) / d3;
+			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, y * d7) / d3;
 			if (i < 8)
 			{
-				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, p_222552_10_ * d3, (double) y * p_222552_10_ * d3) / d3;
+				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, p_222552_10_ * d3, y * p_222552_10_ * d3) / d3;
 			}
 
 			d3 /= 2.0D;
@@ -142,13 +142,13 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 		{
 			double d4 = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, p_222546_10_);
 			d4 = d4 - this.func_222545_a(d0, d1, y);
-			if ((double) y > d2)
+			if (y > d2)
 			{
-				d4 = MathHelper.clampedLerp(d4, (double) p_222546_13_, ((double) y - d2) / (double) p_222546_12_);
+				d4 = MathHelper.clampedLerp(d4, p_222546_13_, (y - d2) / p_222546_12_);
 			}
-			else if ((double) y < d3)
+			else if (y < d3)
 			{
-				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - (double) y) / (d3 - 1.0D));
+				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - y) / (d3 - 1.0D));
 			}
 
 			areaArrayIn[y] = d4;
@@ -165,7 +165,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 	protected double func_222551_g()
 	{
-		return (double) (this.noiseSizeY() - 4);
+		return this.noiseSizeY() - 4;
 	}
 
 
@@ -175,6 +175,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	}
 
 
+	@Override
 	public int func_222529_a(int chunkX, int chunkZ, Heightmap.Type heightmapType)
 	{
 		int i = Math.floorDiv(chunkX, this.horizontalNoiseGranularity);
@@ -235,6 +236,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	}
 
 
+	@Override
 	public void buildSurface(WorldGenRegion p_225551_1_, IChunk p_222535_1_)
 	{
 		ChunkPos chunkpos = p_222535_1_.getPos();
@@ -254,7 +256,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 				int k1 = k + i1;
 				int l1 = l + j1;
 				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-				double d1 = this.surfaceDepthNoise.noiseAt((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D, (double) i1 * 0.0625D) * 10.0D;
+				double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
 				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, ConfigUA.seaLevel, this.world.getSeed());
 			}
 		}
@@ -300,6 +302,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	}
 
 
+	@Override
 	public void makeBase(IWorld p_222537_1_, IChunk p_222537_2_)
 	{
 		ObjectList<AbstractVillagePiece> objectlist = new ObjectArrayList<>(10);
@@ -515,8 +518,8 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 
 	private static double func_222554_b(int p_222554_0_, int p_222554_1_, int p_222554_2_)
 	{
-		double d0 = (double) (p_222554_0_ * p_222554_0_ + p_222554_2_ * p_222554_2_);
-		double d1 = (double) p_222554_1_ + 0.5D;
+		double d0 = p_222554_0_ * p_222554_0_ + p_222554_2_ * p_222554_2_;
+		double d1 = p_222554_1_ + 0.5D;
 		double d2 = d1 * d1;
 		double d3 = Math.pow(Math.E, -(d2 / 16.0D + d0 / 16.0D));
 		double d4 = -d1 * MathHelper.fastInvSqrt(d2 / 2.0D + d0 / 2.0D) / 2.0D;

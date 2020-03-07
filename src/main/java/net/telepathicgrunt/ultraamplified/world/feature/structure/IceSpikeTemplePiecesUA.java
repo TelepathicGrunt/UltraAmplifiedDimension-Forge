@@ -106,6 +106,7 @@ public class IceSpikeTemplePiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -114,6 +115,7 @@ public class IceSpikeTemplePiecesUA
 		}
 
 
+		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			if ("chest".equals(function))
@@ -158,6 +160,7 @@ public class IceSpikeTemplePiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 		{
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE);

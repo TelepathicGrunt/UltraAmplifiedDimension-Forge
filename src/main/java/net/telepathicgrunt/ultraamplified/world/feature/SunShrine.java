@@ -41,6 +41,7 @@ public class SunShrine extends Feature<NoFeatureConfig>
 	//first NTB structure I made to work by watching tutorials lol. 
 	//PRAISE THE SUN!!!
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		if (!ConfigUA.miniStructureGeneration || position.getY() > 248)

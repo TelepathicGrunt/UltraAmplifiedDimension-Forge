@@ -33,6 +33,7 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		//makes sure this ruins does not spawn too close to world height border.

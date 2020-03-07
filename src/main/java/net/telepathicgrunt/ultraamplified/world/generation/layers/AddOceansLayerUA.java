@@ -37,10 +37,11 @@ public class AddOceansLayerUA implements IAreaTransformer0
 	}
 
 
+	@Override
 	public int apply(INoiseRandom context, int x, int z)
 	{
 		ImprovedNoiseGenerator noisegeneratorimproved = context.getNoiseGenerator();
-		double d0 = noisegeneratorimproved.func_215456_a((double) (x) / 8.0D, (double) (z) / 8.0D, 0.0D, 0.0D, 0.0D);
+		double d0 = noisegeneratorimproved.func_215456_a((x) / 8.0D, (z) / 8.0D, 0.0D, 0.0D, 0.0D);
 
 		//dynamic code that will try to equally space oceans depending on how many is allowed
 		if (listSize == 0)
@@ -75,7 +76,7 @@ public class AddOceansLayerUA implements IAreaTransformer0
 			int biomeID = oceanList.get(index);
 
 			//makes deep oceans
-			double d1 = noisegeneratorimproved.func_215456_a((double) (x + 54443) / 5.0D, (double) (z + 34445) / 5.0D, 0.0D, 0.0D, 0.0D);
+			double d1 = noisegeneratorimproved.func_215456_a((x + 54443) / 5.0D, (z + 34445) / 5.0D, 0.0D, 0.0D, 0.0D);
 
 			if (Math.abs(d1 % 0.1D) < 0.03D)
 			{

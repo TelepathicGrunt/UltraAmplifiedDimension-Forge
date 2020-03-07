@@ -20,6 +20,7 @@ public class GlowstonePlacement2 extends SimplePlacement<CountRangeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
 	{
 		return IntStream.range(0, config.count).mapToObj((p_215061_3_) ->

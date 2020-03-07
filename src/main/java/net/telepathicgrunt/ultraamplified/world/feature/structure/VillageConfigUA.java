@@ -20,6 +20,7 @@ public class VillageConfigUA implements IFeatureConfig
 	}
 
 
+	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
 	{
 		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("type"), ops.createInt(this.type.ordinal()), ops.createString("terrainType"), ops.createInt(this.terrainType))));

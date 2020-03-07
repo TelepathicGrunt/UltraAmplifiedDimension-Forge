@@ -139,6 +139,7 @@ public class DarkForestRelicBiomeUA extends BiomeUA
 	}
 
 
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getGrassColorAt(double p_225528_1_, double p_225528_3_)
 	{

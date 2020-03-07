@@ -31,6 +31,7 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 
 
 	//need to be made due to extending feature
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
 	{
 		return false;

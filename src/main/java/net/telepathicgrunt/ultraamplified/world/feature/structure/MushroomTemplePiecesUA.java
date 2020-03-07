@@ -79,6 +79,7 @@ public class MushroomTemplePiecesUA
 		/**
 		 * (abstract) Helper method to write subclass data to NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -87,6 +88,7 @@ public class MushroomTemplePiecesUA
 		}
 
 
+		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			if ("chest".equals(function))
@@ -154,6 +156,7 @@ public class MushroomTemplePiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 		{
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MushroomTemplePiecesUA.OFFSET1.get(this.resourceLocation));

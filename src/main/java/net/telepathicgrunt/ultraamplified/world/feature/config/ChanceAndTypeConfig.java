@@ -26,6 +26,7 @@ public class ChanceAndTypeConfig implements IPlacementConfig
 
 
 	// cannot fit boolean in
+	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
 	{
 		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("chance"), ops.createFloat(this.chanceModifier), ops.createString("type"), ops.createString(this.type.name()))));

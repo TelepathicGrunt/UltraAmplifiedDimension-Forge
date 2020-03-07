@@ -25,6 +25,7 @@ public class SeaGrassUA extends Feature<SeaGrassConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, SeaGrassConfig config)
 	{
 		int i = 0;

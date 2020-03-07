@@ -31,6 +31,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.oceanRuinsSpawnrate;
@@ -54,18 +55,21 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":ocean_ruins";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 3;
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return OceanRuinsStructureUA.Start::new;
@@ -78,6 +82,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -99,9 +104,10 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			OceanRuinConfig oceanruinconfig = (OceanRuinConfig) generator.getStructureConfig(biomeIn, FeatureUA.OCEAN_RUIN_UA);
+			OceanRuinConfig oceanruinconfig = generator.getStructureConfig(biomeIn, FeatureUA.OCEAN_RUIN_UA);
 			int x = chunkX * 16;
 			int z = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(x, 0, z);

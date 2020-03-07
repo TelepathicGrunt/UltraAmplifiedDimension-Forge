@@ -179,7 +179,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	@Override
 	public void loadNBTData(CompoundNBT nbtTag)
 	{
-		CompoundNBT data = (CompoundNBT) nbtTag;
+		CompoundNBT data = nbtTag;
 		data = fixData(data);
 
 		//temp variables to hold what is read from nbt

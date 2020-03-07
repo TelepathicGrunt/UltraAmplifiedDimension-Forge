@@ -21,6 +21,7 @@ public class LapisPlacement extends SimplePlacement<LapisCountRangeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(Random random, LapisCountRangeConfig placementConfig, BlockPos pos)
 	{
 		int count = (int) (ConfigUA.lapisOreSpawnrate * placementConfig.countModifier);

@@ -24,6 +24,7 @@ public class GlowstonePlacement extends Placement<NoPlacementConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
 	{
 		return IntStream.range(0, random.nextInt(random.nextInt(ConfigUA.glowstoneSpawnrate) + 1)).mapToObj((p_215051_3_) ->

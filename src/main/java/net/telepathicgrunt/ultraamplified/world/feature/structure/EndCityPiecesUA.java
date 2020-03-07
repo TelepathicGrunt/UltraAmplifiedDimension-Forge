@@ -35,11 +35,13 @@ public class EndCityPiecesUA
 	private static final EndCityPiecesUA.IGenerator HOUSE_TOWER_GENERATOR = new EndCityPiecesUA.IGenerator()
 	{
 
+		@Override
 		public void init()
 		{
 		}
 
 
+		@Override
 		public boolean generate(TemplateManager p_191086_1_, int p_191086_2_, EndCityPiecesUA.CityTemplate p_191086_3_, BlockPos p_191086_4_, List<StructurePiece> p_191086_5_, Random p_191086_6_)
 		{
 			if (p_191086_2_ > 10)
@@ -63,11 +65,13 @@ public class EndCityPiecesUA
 	private static final List<Tuple<Rotation, BlockPos>> TOWER_BRIDGES = Lists.newArrayList(new Tuple<>(Rotation.NONE, new BlockPos(1, -1, 0)), new Tuple<>(Rotation.CLOCKWISE_90, new BlockPos(6, -1, 1)), new Tuple<>(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 5)), new Tuple<>(Rotation.CLOCKWISE_180, new BlockPos(5, -1, 6)));
 	private static final EndCityPiecesUA.IGenerator TOWER_GENERATOR = new EndCityPiecesUA.IGenerator()
 	{
+		@Override
 		public void init()
 		{
 		}
 
 
+		@Override
 		public boolean generate(TemplateManager p_191086_1_, int p_191086_2_, EndCityPiecesUA.CityTemplate p_191086_3_, BlockPos p_191086_4_, List<StructurePiece> p_191086_5_, Random p_191086_6_)
 		{
 			Rotation rotation = p_191086_3_.placeSettings.getRotation();
@@ -114,12 +118,14 @@ public class EndCityPiecesUA
 		public boolean shipCreated;
 
 
+		@Override
 		public void init()
 		{
 			this.shipCreated = false;
 		}
 
 
+		@Override
 		public boolean generate(TemplateManager p_191086_1_, int p_191086_2_, EndCityPiecesUA.CityTemplate p_191086_3_, BlockPos p_191086_4_, List<StructurePiece> p_191086_5_, Random p_191086_6_)
 		{
 			Rotation rotation = p_191086_3_.placeSettings.getRotation();
@@ -168,11 +174,13 @@ public class EndCityPiecesUA
 	private static final List<Tuple<Rotation, BlockPos>> FAT_TOWER_BRIDGES = Lists.newArrayList(new Tuple<>(Rotation.NONE, new BlockPos(4, -1, 0)), new Tuple<>(Rotation.CLOCKWISE_90, new BlockPos(12, -1, 4)), new Tuple<>(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 8)), new Tuple<>(Rotation.CLOCKWISE_180, new BlockPos(8, -1, 12)));
 	private static final EndCityPiecesUA.IGenerator FAT_TOWER_GENERATOR = new EndCityPiecesUA.IGenerator()
 	{
+		@Override
 		public void init()
 		{
 		}
 
 
+		@Override
 		public boolean generate(TemplateManager p_191086_1_, int p_191086_2_, EndCityPiecesUA.CityTemplate p_191086_3_, BlockPos p_191086_4_, List<StructurePiece> p_191086_5_, Random p_191086_6_)
 		{
 			Rotation rotation = p_191086_3_.placeSettings.getRotation();
@@ -306,6 +314,7 @@ public class EndCityPiecesUA
 		/**
 		 * (abstract) Helper method to write subclass data to NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -315,6 +324,7 @@ public class EndCityPiecesUA
 		}
 
 
+		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			if (function.startsWith("Chest"))
@@ -328,7 +338,7 @@ public class EndCityPiecesUA
 			else if (function.startsWith("Sentry"))
 			{
 				ShulkerEntity entityshulker = EntityType.SHULKER.create(world.getWorld());
-				entityshulker.setPosition((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D);
+				entityshulker.setPosition(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
 				entityshulker.setAttachmentPos(pos);
 				world.addEntity(entityshulker);
 			}

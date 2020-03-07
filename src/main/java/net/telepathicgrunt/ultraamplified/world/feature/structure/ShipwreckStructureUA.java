@@ -30,6 +30,7 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig>
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.shipwreckSpawnrate;
@@ -53,18 +54,21 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":shipwreck";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 3;
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return ShipwreckStructureUA.Start::new;
@@ -77,6 +81,7 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -98,6 +103,7 @@ public class ShipwreckStructureUA extends Structure<ShipwreckConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 

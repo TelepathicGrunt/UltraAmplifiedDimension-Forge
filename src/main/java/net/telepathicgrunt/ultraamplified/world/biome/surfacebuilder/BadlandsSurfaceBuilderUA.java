@@ -41,6 +41,7 @@ public class BadlandsSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfi
 	}
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		int i = x & 15;
@@ -147,6 +148,7 @@ public class BadlandsSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfi
 	}
 
 
+	@Override
 	public void setSeed(long seed)
 	{
 		if (this.field_215433_b != seed || this.field_215432_a == null)
@@ -247,7 +249,7 @@ public class BadlandsSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfi
 
 	protected BlockState func_215431_a(int p_215431_1_, int p_215431_2_, int p_215431_3_)
 	{
-		int i = (int) Math.round(this.field_215439_e.noiseAt((double) p_215431_1_ / 512.0D, (double) p_215431_3_ / 512.0D, false) * 2.0D);
+		int i = (int) Math.round(this.field_215439_e.noiseAt(p_215431_1_ / 512.0D, p_215431_3_ / 512.0D, false) * 2.0D);
 		return this.field_215432_a[(p_215431_2_ + i + 64) % 64];
 	}
 }

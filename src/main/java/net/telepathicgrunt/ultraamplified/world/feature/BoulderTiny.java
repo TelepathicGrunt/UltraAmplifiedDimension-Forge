@@ -32,6 +32,7 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
 	private final static int startRadius = 0;
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, BlockBlobConfig p_212245_5_)
 	{
 
@@ -50,11 +51,11 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
 			int x = startRadius + rand.nextInt(2);
 			int y = startRadius + rand.nextInt(2);
 			int z = startRadius + rand.nextInt(2);
-			float calculatedDistance = (float) (x + y + z) * 0.333F + 0.5F;
+			float calculatedDistance = (x + y + z) * 0.333F + 0.5F;
 
 			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(blockpos$Mutable.add(-x, -y, -z), blockpos$Mutable.add(x, y, z)))
 			{
-				if (blockpos.distanceSq(blockpos$Mutable) <= (double) (calculatedDistance * calculatedDistance))
+				if (blockpos.distanceSq(blockpos$Mutable) <= calculatedDistance * calculatedDistance)
 				{
 					//adds the blocks for generation in this boulder
 					//note, if user turns off an ore, that ore's chance is dumped into the below ore for generation

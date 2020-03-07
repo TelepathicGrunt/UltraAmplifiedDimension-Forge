@@ -24,6 +24,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceAndTypeConfig placementConfig, BlockPos pos)
 	{
 

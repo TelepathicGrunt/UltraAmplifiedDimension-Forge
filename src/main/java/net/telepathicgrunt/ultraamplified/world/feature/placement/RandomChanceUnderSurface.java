@@ -25,9 +25,10 @@ public class RandomChanceUnderSurface extends Placement<ChanceConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig chanceConfig, BlockPos pos)
 	{
-		if (random.nextFloat() < 1.0F / (float) chanceConfig.chance)
+		if (random.nextFloat() < 1.0F / chanceConfig.chance)
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);

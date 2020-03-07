@@ -26,6 +26,7 @@ public class VinesShort extends Feature<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlocks, Random rand, BlockPos position, NoFeatureConfig config)
 	{
 

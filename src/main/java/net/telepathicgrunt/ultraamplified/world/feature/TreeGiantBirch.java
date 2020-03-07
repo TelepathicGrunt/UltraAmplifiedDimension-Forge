@@ -26,6 +26,7 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 	}
 
 
+	@Override
 	public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig treeConfig)
 	{
 		int height = this.getHeight(rand, treeConfig);

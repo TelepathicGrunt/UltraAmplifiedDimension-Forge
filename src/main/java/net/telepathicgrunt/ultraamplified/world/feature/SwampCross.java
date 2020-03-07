@@ -7,6 +7,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -28,6 +29,7 @@ public class SwampCross extends Feature<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
@@ -47,7 +49,7 @@ public class SwampCross extends Feature<NoFeatureConfig>
 		//adds horizontal log blocks towards top
 		for (int i = -2; i < 3; i++)
 		{
-			world.setBlockState(blockpos$Mutable.east(i), Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X), 16 | 2);
+			world.setBlockState(blockpos$Mutable.east(i), Blocks.SPRUCE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X), 16 | 2);
 		}
 
 		//adds skull underground if block is not water, lava, or air

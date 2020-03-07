@@ -34,6 +34,7 @@ public class CountRangeAndTypeConfig implements IPlacementConfig
 
 
 	//cannot fit boolean in
+	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
 	{
 		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("count"), ops.createFloat(this.countModifier), ops.createString("bottom_offset"), ops.createInt(this.bottomOffset), ops.createString("top_offset"), ops.createInt(this.topOffset), ops.createString("maximum"), ops.createInt(this.maximum), ops.createString("type"), ops.createString(this.type.name()))));

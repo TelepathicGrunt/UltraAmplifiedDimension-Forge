@@ -28,6 +28,7 @@ public class IcePatchUA extends Feature<NoFeatureConfig>
 	private final int basePathWidth = 3;
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random random, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);

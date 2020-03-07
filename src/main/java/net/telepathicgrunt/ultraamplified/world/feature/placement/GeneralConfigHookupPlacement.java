@@ -21,6 +21,7 @@ public class GeneralConfigHookupPlacement extends SimplePlacement<CountRangeAndT
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(Random rand, CountRangeAndTypeConfig config, BlockPos pos)
 	{
 		int count;

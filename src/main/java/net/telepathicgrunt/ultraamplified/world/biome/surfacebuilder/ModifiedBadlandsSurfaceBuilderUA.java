@@ -29,10 +29,11 @@ public class ModifiedBadlandsSurfaceBuilderUA extends BadlandsSurfaceBuilder
 	private static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		double spikeHeight = 0.0D;
-		double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double) x * 0.20D, (double) z * 0.20D, false) * 15.0D);
+		double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt(x * 0.20D, z * 0.20D, false) * 15.0D);
 		if (d1 > -2.5D)
 		{
 			d1 += 2.5f;

@@ -73,6 +73,7 @@ public class IcedTerrainBiomeUA extends BiomeUA
 	/**
 	 * returns the chance a creature has to spawn.
 	 */
+	@Override
 	public float getSpawningChance()
 	{
 		return 0.04F;

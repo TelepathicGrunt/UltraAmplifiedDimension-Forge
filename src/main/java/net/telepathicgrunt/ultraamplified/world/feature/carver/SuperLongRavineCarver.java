@@ -96,19 +96,21 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 	}
 
 
+	@Override
 	public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return p_212246_2_.nextFloat() <= (float) (ConfigUA.ravineSpawnrate) / 850f;
+		return p_212246_2_.nextFloat() <= (ConfigUA.ravineSpawnrate) / 850f;
 	}
 
 
+	@Override
 	public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
 	{
 
 		int i = (this.func_222704_c() * 3 - 1) * 16;
-		double xpos = (double) (chunkX * 16 + random.nextInt(16));
-		double height = (double) (random.nextInt(random.nextInt(3) + 3) + 15);
-		double zpos = (double) (chunkZ * 16 + random.nextInt(16));
+		double xpos = chunkX * 16 + random.nextInt(16);
+		double height = random.nextInt(random.nextInt(3) + 3) + 15;
+		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 2F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 8.0F;
 		float widthHeightBase = (random.nextFloat() * 1.3F + random.nextFloat()) * 1.3F;
@@ -137,13 +139,13 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 
 		for (int j = startIteration; j < maxIteration; ++j)
 		{
-			double placementXZBound = 6D + (double) (MathHelper.sin((float) j * (float) Math.PI / (float) maxIteration) * widthHeightBase);
+			double placementXZBound = 6D + MathHelper.sin(j * (float) Math.PI / maxIteration) * widthHeightBase;
 			double placementYBound = placementXZBound * heightMultiplier;
-			placementXZBound = placementXZBound * ((double) random.nextFloat() * 0.10D + 0.4D); //thickness
+			placementXZBound = placementXZBound * (random.nextFloat() * 0.10D + 0.4D); //thickness
 			placementYBound = placementYBound * 0.8D;
 			float f2 = MathHelper.cos(xzCosNoise); //multiply by 0.1f to make cylinders
-			randomBlockX += (double) (MathHelper.cos(xzNoise2) * f2);
-			randomBlockZ += (double) (MathHelper.sin(xzNoise2) * f2);
+			randomBlockX += MathHelper.cos(xzNoise2) * f2;
+			randomBlockZ += MathHelper.sin(xzNoise2) * f2;
 			xzCosNoise = xzCosNoise * 0.5F;
 			xzCosNoise = xzCosNoise + f1 * 0.03F;
 			xzNoise2 += f4 * 0.1F;
@@ -167,8 +169,8 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 
 	protected boolean carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask)
 	{
-		double d0 = (double) (mainChunkX * 16 + 8);
-		double d1 = (double) (mainChunkZ * 16 + 8);
+		double d0 = mainChunkX * 16 + 8;
+		double d1 = mainChunkZ * 16 + 8;
 		if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D))
 		{
 			int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
@@ -189,12 +191,12 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 				for (int k1 = i; k1 < j; ++k1)
 				{
 					int x = k1 + mainChunkX * 16;
-					double xSquaringModified = ((double) x + 0.5D - xRange) / placementXZBound;
+					double xSquaringModified = (x + 0.5D - xRange) / placementXZBound;
 
 					for (int i2 = i1; i2 < j1; ++i2)
 					{
 						int z = i2 + mainChunkZ * 16;
-						double zSquaringModified = ((double) z + 0.5D - zRange) / placementXZBound;
+						double zSquaringModified = (z + 0.5D - zRange) / placementXZBound;
 						double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
 
 						if (xzSquaredModified < 1.0D)
@@ -212,9 +214,9 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 							for (int y = l; y > k; --y)
 							{
 
-								double d4 = ((double) (y - 1) + 0.5D - yRange) / placementYBound;
+								double d4 = (y - 1 + 0.5D - yRange) / placementYBound;
 
-								if (xzSquaredModified * (double) this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D)
+								if (xzSquaredModified * this.field_202536_i[y - 1] + d4 * d4 / 6.0D < 1.0D)
 								{
 
 									blockpos$Mutable.setPos(x, y, z);
@@ -283,6 +285,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 	/**
 	 * MC doesn't seem to do anything with the returned value in the end. Strange. I wonder why.
 	 */
+	@Override
 	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_)
 	{
 		return true;

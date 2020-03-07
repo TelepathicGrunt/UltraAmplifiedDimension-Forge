@@ -33,6 +33,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, BlockStateFeatureConfig configBlock)
 	{
 
@@ -53,8 +54,8 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 				{
 					for (int y = 0; y < 5; ++y)
 					{
-						double xMagnetude = ((double) x - randX) / (rawRandX / 2.0D);
-						double zMagnetude = ((double) z - randZ) / (rawRandZ / 2.0D);
+						double xMagnetude = (x - randX) / (rawRandX / 2.0D);
+						double zMagnetude = (z - randZ) / (rawRandZ / 2.0D);
 						double squaredMagnetude = xMagnetude * xMagnetude + zMagnetude * zMagnetude;
 						if (squaredMagnetude < 1.2D)
 						{

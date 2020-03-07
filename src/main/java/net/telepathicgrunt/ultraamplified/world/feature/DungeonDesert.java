@@ -45,6 +45,7 @@ public class DungeonDesert extends Feature<NoFeatureConfig>
 
 	//only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		int randXRange = rand.nextInt(2) + 2;

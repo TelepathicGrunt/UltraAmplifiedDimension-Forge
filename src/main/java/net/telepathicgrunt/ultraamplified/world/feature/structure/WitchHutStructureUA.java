@@ -40,12 +40,14 @@ public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return WitchHutStructureUA.Start::new;
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.witchHutSpawnrate;
@@ -69,12 +71,14 @@ public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":witch_hut";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 3;
@@ -87,12 +91,14 @@ public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getSpawnList()
 	{
 		return WITCH_HUT_ENEMIES;
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getCreatureSpawnList()
 	{
 		return WITCH_HUT_PASSIVE;
@@ -114,6 +120,7 @@ public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -135,6 +142,7 @@ public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int x, int z, Biome biomeIn)
 		{
 

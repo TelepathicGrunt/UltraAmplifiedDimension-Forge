@@ -64,18 +64,21 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 	}
 
 
+	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return random.nextFloat() <= (float) (ConfigUA.oceanCaveSpawnrate) / 100f;
+		return random.nextFloat() <= (ConfigUA.oceanCaveSpawnrate) / 100f;
 	}
 
 
+	@Override
 	protected boolean func_222700_a(IChunk chunkIn, int chunkX, int chunkZ, int minX, int maxX, int minY, int maxY, int minZ, int maxZ)
 	{
 		return false;
 	}
 
 
+	@Override
 	protected boolean carveAtPoint(IChunk chunkIn, Function<BlockPos, Biome> biomeBlockPos, BitSet carvingMask, Random random, BlockPos.Mutable MutableIn, BlockPos.Mutable p_222703_5_, BlockPos.Mutable p_222703_6_, int minHeight, int chunkX, int chunkZ, int x, int z, int maskY, int y, int atomicBoolean, AtomicBoolean p_222703_15_)
 	{
 		return carvingBlock(this, biomeBlockPos, chunkIn, carvingMask, random, MutableIn, minHeight, chunkX, chunkZ, x, z, maskY, y, atomicBoolean);
@@ -106,7 +109,7 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 			else if (y == 10)
 			{
 				float f = random.nextFloat();
-				if ((double) f < 0.25D)
+				if (f < 0.25D)
 				{
 					chunkIn.setBlockState(mutableBlockPos, MAGMA, false);
 					chunkIn.getBlocksToBeTicked().scheduleTick(mutableBlockPos, MAGMA.getBlock(), 0);

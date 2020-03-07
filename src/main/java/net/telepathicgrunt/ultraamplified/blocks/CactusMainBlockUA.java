@@ -46,6 +46,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		if (!world.isAreaLoaded(pos, 1))
@@ -90,6 +91,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		Direction direction = context.getFace().getOpposite();
@@ -97,6 +99,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(AGE);
@@ -104,12 +107,14 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return HITBOX_DIMENSIONS;
 	}
 
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return OUTLINE_DIMENSION;
@@ -121,6 +126,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	 * fences make their connections to the passed in state if possible, and wet concrete powder immediately returns its
 	 * solidified counterpart. Note that this method should ideally consider only the specific face passed in.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos)
 	{
@@ -133,6 +139,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
 
@@ -209,12 +216,14 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 	}
 
 
+	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 
 
+	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
 		return false;

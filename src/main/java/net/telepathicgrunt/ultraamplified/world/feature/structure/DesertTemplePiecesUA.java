@@ -38,6 +38,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece
 	}
 
 
+	@Override
 	protected void readAdditional(CompoundNBT tagCompound)
 	{
 		super.readAdditional(tagCompound);
@@ -52,6 +53,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece
 	 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 	 * end, it adds Fences...
 	 */
+	@Override
 	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 

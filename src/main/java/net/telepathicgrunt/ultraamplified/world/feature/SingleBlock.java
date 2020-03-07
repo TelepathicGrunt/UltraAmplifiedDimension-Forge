@@ -21,6 +21,7 @@ public class SingleBlock extends Feature<BlockConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos pos, BlockConfig blockConfig)
 	{
 

@@ -38,6 +38,7 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig)
 	{
 		//check if user turned pillars off.

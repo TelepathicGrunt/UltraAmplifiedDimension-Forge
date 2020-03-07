@@ -12,6 +12,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.EndPortalFrameBlock;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FourWayBlock;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
@@ -41,12 +43,14 @@ public class StrongholdPiecesUA
 	private static final StrongholdPiecesUA.PieceWeight[] PIECE_WEIGHTS = new StrongholdPiecesUA.PieceWeight[] { new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Straight.class, 40, 0), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Prison.class, 5, 8), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.LeftTurn.class, 20, 0), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RightTurn.class, 20, 0),
 			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RoomCrossing.class, 10, 9), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.StairsStraight.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Stairs.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Crossing.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.ChestCorridor.class, 5, 16), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Library.class, 10, 6)
 			{
+				@Override
 				public boolean canSpawnMoreStructuresOfType(int p_75189_1_)
 				{
 					return super.canSpawnMoreStructuresOfType(p_75189_1_) && p_75189_1_ > 4;
 				}
 			}, new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.PortalRoom.class, 20, 1)
 			{
+				@Override
 				public boolean canSpawnMoreStructuresOfType(int p_75189_1_)
 				{
 					return super.canSpawnMoreStructuresOfType(p_75189_1_) && p_75189_1_ > 5;
@@ -264,6 +268,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -271,6 +276,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
@@ -284,6 +290,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -337,6 +344,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -373,6 +381,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			for (int i = 0; i < this.steps; ++i)
@@ -438,6 +447,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -448,6 +458,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			int i = 3;
@@ -491,6 +502,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 9, 8, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -552,6 +564,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			Direction enumfacing = this.getCoordBaseMode();
@@ -574,6 +587,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -618,6 +632,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -643,6 +658,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			int i = 11;
@@ -698,22 +714,22 @@ public class StrongholdPiecesUA
 				this.setBlockState(world, Blocks.OAK_PLANKS.getDefaultState(), 9, 5, 11, structureBoundingBoxIn);
 				this.setBlockState(world, Blocks.OAK_PLANKS.getDefaultState(), 8, 5, 11, structureBoundingBoxIn);
 				this.setBlockState(world, Blocks.OAK_PLANKS.getDefaultState(), 9, 5, 10, structureBoundingBoxIn);
-				BlockState iblockstate5 = Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true));
-				BlockState iblockstate = Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true));
+				BlockState iblockstate5 = Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.WEST, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true));
+				BlockState iblockstate = Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.SOUTH, Boolean.valueOf(true));
 				this.fillWithBlocks(world, structureBoundingBoxIn, 3, 6, 3, 3, 6, 11, iblockstate, iblockstate, false);
 				this.fillWithBlocks(world, structureBoundingBoxIn, 10, 6, 3, 10, 6, 9, iblockstate, iblockstate, false);
 				this.fillWithBlocks(world, structureBoundingBoxIn, 4, 6, 2, 9, 6, 2, iblockstate5, iblockstate5, false);
 				this.fillWithBlocks(world, structureBoundingBoxIn, 4, 6, 12, 7, 6, 12, iblockstate5, iblockstate5, false);
-				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)), 3, 6, 2, structureBoundingBoxIn);
-				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)), 3, 6, 12, structureBoundingBoxIn);
-				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)), 10, 6, 2, structureBoundingBoxIn);
+				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true)), 3, 6, 2, structureBoundingBoxIn);
+				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true)), 3, 6, 12, structureBoundingBoxIn);
+				this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 10, 6, 2, structureBoundingBoxIn);
 
 				for (int i1 = 0; i1 <= 2; ++i1)
 				{
-					this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)), 8 + i1, 6, 12 - i1, structureBoundingBoxIn);
+					this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 8 + i1, 6, 12 - i1, structureBoundingBoxIn);
 					if (i1 != 2)
 					{
-						this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)), 8 + i1, 6, 11 - i1, structureBoundingBoxIn);
+						this.setBlockState(world, Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true)), 8 + i1, 6, 11 - i1, structureBoundingBoxIn);
 					}
 				}
 
@@ -725,21 +741,21 @@ public class StrongholdPiecesUA
 				this.setBlockState(world, iblockstate6, 10, 5, 13, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate6, 10, 6, 13, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate6, 10, 7, 13, structureBoundingBoxIn);
-				BlockState iblockstate1 = Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.EAST, Boolean.valueOf(true));
+				BlockState iblockstate1 = Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true));
 				this.setBlockState(world, iblockstate1, 6, 9, 7, structureBoundingBoxIn);
-				BlockState iblockstate2 = Blocks.OAK_FENCE.getDefaultState().with(FenceBlock.WEST, Boolean.valueOf(true));
+				BlockState iblockstate2 = Blocks.OAK_FENCE.getDefaultState().with(FourWayBlock.WEST, Boolean.valueOf(true));
 				this.setBlockState(world, iblockstate2, 7, 9, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate1, 6, 8, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate2, 7, 8, 7, structureBoundingBoxIn);
-				BlockState iblockstate3 = iblockstate.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true));
+				BlockState iblockstate3 = iblockstate.with(FourWayBlock.WEST, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true));
 				this.setBlockState(world, iblockstate3, 6, 7, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate3, 7, 7, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate1, 5, 7, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate2, 8, 7, 7, structureBoundingBoxIn);
-				this.setBlockState(world, iblockstate1.with(FenceBlock.NORTH, Boolean.valueOf(true)), 6, 7, 6, structureBoundingBoxIn);
-				this.setBlockState(world, iblockstate1.with(FenceBlock.SOUTH, Boolean.valueOf(true)), 6, 7, 8, structureBoundingBoxIn);
-				this.setBlockState(world, iblockstate2.with(FenceBlock.NORTH, Boolean.valueOf(true)), 7, 7, 6, structureBoundingBoxIn);
-				this.setBlockState(world, iblockstate2.with(FenceBlock.SOUTH, Boolean.valueOf(true)), 7, 7, 8, structureBoundingBoxIn);
+				this.setBlockState(world, iblockstate1.with(FourWayBlock.NORTH, Boolean.valueOf(true)), 6, 7, 6, structureBoundingBoxIn);
+				this.setBlockState(world, iblockstate1.with(FourWayBlock.SOUTH, Boolean.valueOf(true)), 6, 7, 8, structureBoundingBoxIn);
+				this.setBlockState(world, iblockstate2.with(FourWayBlock.NORTH, Boolean.valueOf(true)), 7, 7, 6, structureBoundingBoxIn);
+				this.setBlockState(world, iblockstate2.with(FourWayBlock.SOUTH, Boolean.valueOf(true)), 7, 7, 8, structureBoundingBoxIn);
 				BlockState iblockstate4 = Blocks.TORCH.getDefaultState();
 				this.setBlockState(world, iblockstate4, 5, 8, 7, structureBoundingBoxIn);
 				this.setBlockState(world, iblockstate4, 8, 8, 7, structureBoundingBoxIn);
@@ -819,6 +835,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -826,6 +843,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			if (componentIn != null)
@@ -842,6 +860,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 7, 15, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -967,6 +986,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
@@ -980,6 +1000,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 4, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1020,6 +1041,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			Direction enumfacing = this.getCoordBaseMode();
@@ -1036,6 +1058,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1088,6 +1111,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1095,6 +1119,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 4, 1);
@@ -1110,6 +1135,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 6, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1344,6 +1370,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1351,6 +1378,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			if (this.source)
@@ -1369,6 +1397,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1432,6 +1461,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
@@ -1445,6 +1475,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 7, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1477,6 +1508,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void selectBlocks(Random rand, int x, int y, int z, boolean p_75062_5_)
 		{
 			if (p_75062_5_)
@@ -1535,6 +1567,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1543,6 +1576,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
@@ -1566,6 +1600,7 @@ public class StrongholdPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
@@ -1613,6 +1648,7 @@ public class StrongholdPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			tagCompound.putString("EntryDoor", this.entryDoor.name());
@@ -1661,8 +1697,8 @@ public class StrongholdPiecesUA
 					this.setBlockState(world, Blocks.STONE_BRICKS.getDefaultState(), p_74990_5_ + 2, p_74990_6_, p_74990_7_, p_74990_3_);
 					this.setBlockState(world, Blocks.IRON_DOOR.getDefaultState(), p_74990_5_ + 1, p_74990_6_, p_74990_7_, p_74990_3_);
 					this.setBlockState(world, Blocks.IRON_DOOR.getDefaultState().with(DoorBlock.HALF, DoubleBlockHalf.UPPER), p_74990_5_ + 1, p_74990_6_ + 1, p_74990_7_, p_74990_3_);
-					this.setBlockState(world, Blocks.STONE_BUTTON.getDefaultState().with(StoneButtonBlock.HORIZONTAL_FACING, Direction.NORTH), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_ + 1, p_74990_3_);
-					this.setBlockState(world, Blocks.STONE_BUTTON.getDefaultState().with(StoneButtonBlock.HORIZONTAL_FACING, Direction.SOUTH), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_ - 1, p_74990_3_);
+					this.setBlockState(world, Blocks.STONE_BUTTON.getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.NORTH), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_ + 1, p_74990_3_);
+					this.setBlockState(world, Blocks.STONE_BUTTON.getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.SOUTH), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_ - 1, p_74990_3_);
 			}
 		}
 

@@ -31,6 +31,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 	}
 
 
+	@Override
 	public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
 	{
 		int height = this.getHeight(rand, p_225557_7_);
@@ -92,7 +93,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 		{
 			int heightDiff = y - currentHeight;
 			int radius = extraRadiusSize + MathHelper.floor((float) heightDiff / (float) height * 3.5F);
-			this.makeSquaredLeafLayer(world, rand, new BlockPos(x, currentHeight, z), radius + (int) ((heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0) * 2), p_214596_8_, p_214596_7_, p_225557_7_);
+			this.makeSquaredLeafLayer(world, rand, new BlockPos(x, currentHeight, z), radius + (heightDiff > 0 && radius == prevRadius && (currentHeight & 1) == 0 ? 1 : 0) * 2, p_214596_8_, p_214596_7_, p_225557_7_);
 			prevRadius = radius;
 		}
 	}

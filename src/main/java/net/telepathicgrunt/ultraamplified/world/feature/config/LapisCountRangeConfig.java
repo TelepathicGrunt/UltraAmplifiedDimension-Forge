@@ -25,6 +25,7 @@ public class LapisCountRangeConfig implements IPlacementConfig
 
 
 	//cannot fit boolean in
+	@Override
 	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
 	{
 		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("count"), ops.createFloat(this.countModifier), ops.createString("baseline"), ops.createInt(this.baseline), ops.createString("spread"), ops.createInt(this.spread), ops.createString("sealevelbased"), ops.createBoolean(sealevelBased))));

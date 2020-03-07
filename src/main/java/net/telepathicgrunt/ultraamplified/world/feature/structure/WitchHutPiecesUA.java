@@ -52,6 +52,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece
 	/**
 	 * (abstract) Helper method to read subclass data from NBT
 	 */
+	@Override
 	protected void readAdditional(CompoundNBT tagCompound)
 	{
 		super.readAdditional(tagCompound);
@@ -60,6 +61,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece
 	}
 
 
+	@Override
 	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 		if (!this.isInsideBounds(world, structureBoundingBoxIn, 0))
@@ -162,7 +164,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece
 					{
 						WitchEntity entitywitch = EntityType.WITCH.create(world.getWorld());
 						entitywitch.enablePersistence();
-						entitywitch.setLocationAndAngles((double) l + 0.5D, (double) i1, (double) k + 0.5D, 0.0F, 0.0F);
+						entitywitch.setLocationAndAngles(l + 0.5D, i1, k + 0.5D, 0.0F, 0.0F);
 						entitywitch.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(l, i1, k)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 						world.addEntity(entitywitch);
 					}
@@ -187,7 +189,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece
 				this.cat = true;
 				CatEntity catentity = EntityType.CAT.create(p_214821_1_.getWorld());
 				catentity.enablePersistence();
-				catentity.setLocationAndAngles((double) i + 0.5D, (double) j, (double) k + 0.5D, 0.0F, 0.0F);
+				catentity.setLocationAndAngles(i + 0.5D, j, k + 0.5D, 0.0F, 0.0F);
 				catentity.onInitialSpawn(p_214821_1_, p_214821_1_.getDifficultyForLocation(new BlockPos(i, j, k)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 				p_214821_1_.addEntity(catentity);
 			}

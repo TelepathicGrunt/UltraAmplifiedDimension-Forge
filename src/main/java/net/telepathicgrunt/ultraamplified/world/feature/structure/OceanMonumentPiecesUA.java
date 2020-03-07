@@ -47,6 +47,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -97,6 +98,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -169,6 +171,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -277,6 +280,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -380,6 +384,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -450,6 +455,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -478,12 +484,14 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			return true;
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -498,12 +506,14 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			return !definition.hasOpening[Direction.WEST.getIndex()] && !definition.hasOpening[Direction.EAST.getIndex()] && !definition.hasOpening[Direction.NORTH.getIndex()] && !definition.hasOpening[Direction.SOUTH.getIndex()] && !definition.hasOpening[Direction.UP.getIndex()];
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -569,7 +579,7 @@ public class OceanMonumentPiecesUA
 							continue label294;
 						}
 
-						structureoceanmonumentpieces$monumentroomfithelper = (OceanMonumentPiecesUA.MonumentRoomFitHelper) lvt_10_1_.next();
+						structureoceanmonumentpieces$monumentroomfithelper = lvt_10_1_.next();
 
 						if (structureoceanmonumentpieces$monumentroomfithelper.fits(structureoceanmonumentpieces$roomdefinition))
 						{
@@ -712,6 +722,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos chunkPos)
 		{
 
@@ -1134,6 +1145,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -1242,6 +1254,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -1382,6 +1395,7 @@ public class OceanMonumentPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 		}
@@ -1535,7 +1549,7 @@ public class OceanMonumentPiecesUA
 			{
 				ElderGuardianEntity entityelderguardian = EntityType.ELDER_GUARDIAN.create(world.getWorld());
 				entityelderguardian.heal(entityelderguardian.getMaxHealth());
-				entityelderguardian.setLocationAndAngles((double) i + 0.5D, (double) j, (double) k + 0.5D, 0.0F, 0.0F);
+				entityelderguardian.setLocationAndAngles(i + 0.5D, j, k + 0.5D, 0.0F, 0.0F);
 				entityelderguardian.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entityelderguardian)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 				world.addEntity(entityelderguardian);
 				return true;
@@ -1557,7 +1571,7 @@ public class OceanMonumentPiecesUA
 			{
 				GuardianEntity entityguardian = EntityType.GUARDIAN.create(world.getWorld());
 				entityguardian.heal(entityguardian.getMaxHealth());
-				entityguardian.setLocationAndAngles((double) i + 0.5D, (double) j, (double) k + 0.5D, 0.0F, 0.0F);
+				entityguardian.setLocationAndAngles(i + 0.5D, j, k + 0.5D, 0.0F, 0.0F);
 				entityguardian.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entityguardian)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 				world.addEntity(entityguardian);
 				return true;
@@ -1666,6 +1680,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -1850,6 +1865,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -1915,6 +1931,7 @@ public class OceanMonumentPiecesUA
 		protected int horizontalPos = -1;
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
@@ -2043,12 +2060,14 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			return definition.hasOpening[Direction.EAST.getIndex()] && !definition.connections[Direction.EAST.getIndex()].claimed;
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -2064,6 +2083,7 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			if (definition.hasOpening[Direction.EAST.getIndex()] && !definition.connections[Direction.EAST.getIndex()].claimed && definition.hasOpening[Direction.UP.getIndex()] && !definition.connections[Direction.UP.getIndex()].claimed)
@@ -2078,6 +2098,7 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -2095,12 +2116,14 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			return definition.hasOpening[Direction.UP.getIndex()] && !definition.connections[Direction.UP.getIndex()].claimed;
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -2116,6 +2139,7 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			if (definition.hasOpening[Direction.NORTH.getIndex()] && !definition.connections[Direction.NORTH.getIndex()].claimed && definition.hasOpening[Direction.UP.getIndex()] && !definition.connections[Direction.UP.getIndex()].claimed)
@@ -2130,6 +2154,7 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			p_175968_2_.claimed = true;
@@ -2147,12 +2172,14 @@ public class OceanMonumentPiecesUA
 		}
 
 
+		@Override
 		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
 		{
 			return definition.hasOpening[Direction.NORTH.getIndex()] && !definition.connections[Direction.NORTH.getIndex()].claimed;
 		}
 
 
+		@Override
 		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
 		{
 			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = p_175968_2_;

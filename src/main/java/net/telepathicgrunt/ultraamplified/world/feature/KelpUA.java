@@ -25,6 +25,7 @@ public class KelpUA extends Feature<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig config)
 	{
 		int i = 0;

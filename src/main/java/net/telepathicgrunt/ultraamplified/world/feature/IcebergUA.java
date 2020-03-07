@@ -34,6 +34,7 @@ public class IcebergUA extends IcebergFeature
 	private final static BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, BlockStateFeatureConfig icebergConfig)
 	{
 
@@ -76,7 +77,7 @@ public class IcebergUA extends IcebergFeature
 			{
 				for (int y = -1; y > -downHeight; --y)
 				{
-					int l3 = flag1 ? MathHelper.ceil((float) radius * (1.0F - (float) Math.pow((double) y, 2.0D) / ((float) downHeight * 8.0F))) : radius;
+					int l3 = flag1 ? MathHelper.ceil(radius * (1.0F - (float) Math.pow(y, 2.0D) / (downHeight * 8.0F))) : radius;
 					int l2 = this.func_205187_b(random, -y, downHeight, maxheight);
 					if (x < l2)
 					{
@@ -207,7 +208,7 @@ public class IcebergUA extends IcebergFeature
 		{
 			boolean flag = !flag1 || random.nextDouble() > 0.05D;
 			int i = flag1 ? 3 : 2;
-			if (flag2 && block != Blocks.WATER || block != Blocks.LAVA && (double) minHeight <= (double) random.nextInt(Math.max(1, maxHeight / i)) + (double) maxHeight * 0.6D && flag)
+			if (flag2 && block != Blocks.WATER || block != Blocks.LAVA && minHeight <= random.nextInt(Math.max(1, maxHeight / i)) + maxHeight * 0.6D && flag)
 			{
 				this.setBlockState(world, position, SNOW_BLOCK);
 			}

@@ -24,6 +24,7 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
 	{
 		int count = ConfigUA.dungeonSpawnrate;

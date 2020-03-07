@@ -34,6 +34,7 @@ public class ChanceOnAllLiquidBottoms extends Placement<PercentageAndFrequencyCo
 	protected static final Set<BlockState> UNACCEPTABLE_BLOCKS = ImmutableSet.of(Blocks.PRISMARINE.getDefaultState(), Blocks.PRISMARINE_BRICKS.getDefaultState(), Blocks.DARK_PRISMARINE.getDefaultState(), Blocks.SEA_LANTERN.getDefaultState());
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, PercentageAndFrequencyConfig pfConfig, BlockPos pos)
 	{
 		int lowestHeight = 40;

@@ -42,6 +42,7 @@ public class AmplifiedPortalBlock extends Block
 	}
 
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return SHAPE;
@@ -124,17 +125,19 @@ public class AmplifiedPortalBlock extends Block
 	/**
 	 * faster particle movement than normal EndPortal block
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World world, BlockPos pos, Random rand)
 	{
-		double d0 = (double) ((float) pos.getX() + (rand.nextFloat() * 3 - 1));
-		double d1 = (double) ((float) pos.getY() + (rand.nextFloat() * 3 - 1));
-		double d2 = (double) ((float) pos.getZ() + (rand.nextFloat() * 3 - 1));
+		double d0 = pos.getX() + (rand.nextFloat() * 3 - 1);
+		double d1 = pos.getY() + (rand.nextFloat() * 3 - 1);
+		double d2 = pos.getZ() + (rand.nextFloat() * 3 - 1);
 		world.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	}
 
 
 	// has no item form
+	@Override
 	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
 	{
 		return ItemStack.EMPTY;

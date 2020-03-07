@@ -123,15 +123,16 @@ public class OceanFrozenBiomeUA extends BiomeUA
 	 * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
 	 * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
 	 */
+	@Override
 	public float getTemperature(BlockPos pos)
 	{
 		float f = this.getDefaultTemperature();
-		double d0 = field_205163_aV.noiseAt((double) pos.getX() * 0.05D, (double) pos.getZ() * 0.05D, false) * 7.0D;
-		double d1 = INFO_NOISE.noiseAt((double) pos.getX() * 0.2D, (double) pos.getZ() * 0.2D, false);
+		double d0 = field_205163_aV.noiseAt(pos.getX() * 0.05D, pos.getZ() * 0.05D, false) * 7.0D;
+		double d1 = INFO_NOISE.noiseAt(pos.getX() * 0.2D, pos.getZ() * 0.2D, false);
 		double d2 = d0 + d1;
 		if (d2 < 0.3D)
 		{
-			double d3 = INFO_NOISE.noiseAt((double) pos.getX() * 0.09D, (double) pos.getZ() * 0.09D, false);
+			double d3 = INFO_NOISE.noiseAt(pos.getX() * 0.09D, pos.getZ() * 0.09D, false);
 			if (d3 < 0.8D)
 			{
 				f = 0.2F;
@@ -140,8 +141,8 @@ public class OceanFrozenBiomeUA extends BiomeUA
 
 		if (pos.getY() > 64)
 		{
-			float f1 = (float) (TEMPERATURE_NOISE.noiseAt((double) ((float) pos.getX() / 8.0F), (double) ((float) pos.getZ() / 8.0F), false) * 4.0D);
-			return f - (f1 + (float) pos.getY() - 64.0F) * 0.05F / 30.0F;
+			float f1 = (float) (TEMPERATURE_NOISE.noiseAt(pos.getX() / 8.0F, pos.getZ() / 8.0F, false) * 4.0D);
+			return f - (f1 + pos.getY() - 64.0F) * 0.05F / 30.0F;
 		}
 		else
 		{
@@ -153,6 +154,7 @@ public class OceanFrozenBiomeUA extends BiomeUA
 	/*
 	 * set grass color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getGrassColorAt(double p_225528_1_, double p_225528_3_)
 	{
@@ -163,6 +165,7 @@ public class OceanFrozenBiomeUA extends BiomeUA
 	/*
 	 * set foliage/plant color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getFoliageColor()
 	{

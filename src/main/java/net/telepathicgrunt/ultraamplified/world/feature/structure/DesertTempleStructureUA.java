@@ -30,6 +30,7 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int maxDistance = ConfigUA.desertTempleSpawnrate;
@@ -53,24 +54,28 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":desert_temple";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 3;
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return DesertTempleStructureUA.Start::new;
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -92,6 +97,7 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];

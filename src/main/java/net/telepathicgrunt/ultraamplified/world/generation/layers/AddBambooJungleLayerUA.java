@@ -10,6 +10,7 @@ public enum AddBambooJungleLayerUA implements IC1Transformer
 {
 	INSTANCE;
 
+	@Override
 	public int apply(INoiseRandom context, int value)
 	{
 		return (context.random(8) == 0 && ConfigUA.bambooJungle) && value == BiomeGenHelper.BAMBOO_JUNGLE ? BiomeGenHelper.JUNGLE : value;

@@ -122,20 +122,22 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	/**
 	 * Checks whether the entire cave can spawn or not. (Not the individual parts)
 	 */
+	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
 		setSeed(random.nextLong());
-		return random.nextFloat() <= (float) (ConfigUA.caveCavitySpawnrate) / 1000f;
+		return random.nextFloat() <= (ConfigUA.caveCavitySpawnrate) / 1000f;
 	}
 
 
+	@Override
 	public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
 	{
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;
-		double xpos = (double) (chunkX * 16 + random.nextInt(16));
-		double height = (double) (random.nextInt(random.nextInt(2) + 1) + 34);
-		double zpos = (double) (chunkZ * 16 + random.nextInt(16));
+		double xpos = chunkX * 16 + random.nextInt(16);
+		double height = random.nextInt(random.nextInt(2) + 1) + 34;
+		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 1F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
 		float widthHeightBase = (random.nextFloat() + random.nextFloat()) / 16; // width And Height Modifier
@@ -175,7 +177,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		float f4 = 0.0F;
 		float f1 = 0.0F;
 
-		double placementXZBound = 2D + (double) (MathHelper.sin((float) 1 * (float) Math.PI / (float) maxIteration) * widthHeightBase);
+		double placementXZBound = 2D + MathHelper.sin(1 * (float) Math.PI / maxIteration) * widthHeightBase;
 		double placementYBound = placementXZBound * heightMultiplier;
 		placementXZBound = placementXZBound * 32D; // thickness of the "room" itself
 		placementYBound = placementYBound * 2.2D;
@@ -194,8 +196,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	protected boolean carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask)
 	{
 
-		double xPos = (double) (mainChunkX * 16 + 8);
-		double zPos = (double) (mainChunkZ * 16 + 8);
+		double xPos = mainChunkX * 16 + 8;
+		double zPos = mainChunkZ * 16 + 8;
 		double multipliedXZBound = placementXZBound * 2.0D;
 
 		if (!(xRange < xPos - 16.0D - multipliedXZBound) && !(zRange < zPos - 16.0D - multipliedXZBound) && !(xRange > xPos + 16.0D + multipliedXZBound) && !(zRange > zPos + 16.0D + multipliedXZBound))
@@ -222,12 +224,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 				for (int smallX = xMin; smallX < xMax; ++smallX)
 				{
 					int x = smallX + mainChunkX * 16;
-					double xSquaringModified = ((double) x + 0.5D - xRange) / placementXZBound;
+					double xSquaringModified = (x + 0.5D - xRange) / placementXZBound;
 
 					for (int smallZ = zMin; smallZ < zMax; ++smallZ)
 					{
 						int z = smallZ + mainChunkZ * 16;
-						double zSquaringModified = ((double) z + 0.5D - zRange) / placementXZBound;
+						double zSquaringModified = (z + 0.5D - zRange) / placementXZBound;
 						double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
 
 						if (xzSquaredModified < 1.0D)
@@ -295,7 +297,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									// out.
 									//
 									//Increase step in X and Z to make pillars less frequent but thicker
-									boolean flagPillars = noiseGen.func_205563_a((double) x * 0.04D, (double) z * 0.04D, y * 0.016D) * 15.0D - (26 / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
+									boolean flagPillars = noiseGen.func_205563_a(x * 0.04D, z * 0.04D, y * 0.016D) * 15.0D - (26 / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
 
 									if (!flagPillars)
 									{
@@ -317,7 +319,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										// while the 400/y has already carved out the rest of the cave.
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
-										stalagmiteDouble = noiseGen.func_205563_a((double) x * 0.23125D, (double) z * 0.23125D, y * 0.01D) * 15.0D + (480D / (y));
+										stalagmiteDouble = noiseGen.func_205563_a(x * 0.23125D, z * 0.23125D, y * 0.01D) * 15.0D + (480D / (y));
 
 										//adds more tiny stalagmites to ceiling
 										if (y > 48)
@@ -336,7 +338,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									}
 								}
 
-								double ySquaringModified = ((double) (y - 1) + 0.5D - yRange) / placementYBound;
+								double ySquaringModified = (y - 1 + 0.5D - yRange) / placementYBound;
 
 								// Where the pillar flag and stalagmite flag both flagged this block to be
 								// carved, begin carving.
@@ -428,6 +430,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	/**
 	 * MC doesn't seem to do anything with the returned value in the end. Strange. I wonder why.
 	 */
+	@Override
 	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_)
 	{
 		return true;

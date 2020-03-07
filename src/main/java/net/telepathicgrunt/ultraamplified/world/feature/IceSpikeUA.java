@@ -36,6 +36,7 @@ public class IceSpikeUA extends Feature<NoFeatureConfig>
 
 
 	//ice spike code was changed to only generate taller ice spikes and to have spikes go all the way to Y = 5 if path is clear.
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
@@ -68,16 +69,16 @@ public class IceSpikeUA extends Feature<NoFeatureConfig>
 			finalHeight = mutableBlockPos.getY();
 			for (int y = 0; y < headHeightOffset; ++y)
 			{
-				float maxWidth = (1.0F - (float) y / (float) headHeightOffset) * (float) tailWidthOffset;
+				float maxWidth = (1.0F - (float) y / (float) headHeightOffset) * tailWidthOffset;
 				int range = MathHelper.ceil(maxWidth);
 
 				for (int x = -range; x <= range; ++x)
 				{
-					float xWidth = (float) MathHelper.abs(x) - 0.25F;
+					float xWidth = MathHelper.abs(x) - 0.25F;
 
 					for (int z = -range; z <= range; ++z)
 					{
-						float zWidth = (float) MathHelper.abs(z) - 0.25F;
+						float zWidth = MathHelper.abs(z) - 0.25F;
 
 						if ((x == 0 && z == 0 || xWidth * xWidth + zWidth * zWidth <= maxWidth * maxWidth) && (x != -range && x != range && z != -range && z != range || rand.nextFloat() <= 0.75F))
 						{

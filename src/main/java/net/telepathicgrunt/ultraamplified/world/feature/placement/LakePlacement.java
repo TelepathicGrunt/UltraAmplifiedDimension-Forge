@@ -24,6 +24,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, LakeCountRangeAndTypeConfig lakeConfig, BlockPos pos)
 	{
 

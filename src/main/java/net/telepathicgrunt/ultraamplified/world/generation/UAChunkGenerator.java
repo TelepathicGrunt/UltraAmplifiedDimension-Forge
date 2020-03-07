@@ -38,7 +38,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 		{
 			for (int zRelative = -2; zRelative <= 2; ++zRelative)
 			{
-				float biomeWeighting = 10.0F / MathHelper.sqrt((float) (xRelative * xRelative + zRelative * zRelative) + 0.2F);
+				float biomeWeighting = 10.0F / MathHelper.sqrt(xRelative * xRelative + zRelative * zRelative + 0.2F);
 				p_222575_0_[xRelative + 2 + (zRelative + 2) * 5] = biomeWeighting;
 			}
 		}
@@ -60,6 +60,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	public void spawnMobs(WorldGenRegion region)
 	{
 		int i = region.getMainChunkX();
@@ -71,15 +72,17 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
 		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : ConfigUA.xzTerrainModifier, ConfigUA.secretSetting ? 468419.786D : ConfigUA.yTerrainModifier, ConfigUA.xzScaleModifier, ConfigUA.secretSetting ? 73.1905915D : ConfigUA.yScaleModifier, 8.555149841308594D, 4.277574920654297D, 3, -10);
 	}
 
 
+	@Override
 	protected double func_222545_a(double p_222545_1_, double p_222545_3_, int p_222545_5_)
 	{
-		double d1 = ((double) p_222545_5_ - (8.5D + p_222545_1_ * 8.5D / 8.0D * 4.0D)) * 12.0D * 128.0D / 256.0D / p_222545_3_;
+		double d1 = (p_222545_5_ - (8.5D + p_222545_1_ * 8.5D / 8.0D * 4.0D)) * 12.0D * 128.0D / 256.0D / p_222545_3_;
 		if (d1 < 0.0D)
 		{
 			d1 *= 4.0D;
@@ -89,6 +92,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	protected double[] getBiomeNoiseColumn(int noiseX, int noiseZ)
 	{
 		double[] adouble = new double[2];
@@ -129,15 +133,15 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 		f1 = f1 / f2;
 		f = f * 0.9F + 0.1F;
 		f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-		adouble[0] = (double) f1 + this.getNoiseDepthAt(noiseX, noiseZ);
-		adouble[1] = (double) f;
+		adouble[0] = f1 + this.getNoiseDepthAt(noiseX, noiseZ);
+		adouble[1] = f;
 		return adouble;
 	}
 
 
 	private double getNoiseDepthAt(int p_222574_1_, int p_222574_2_)
 	{
-		double noise = this.depthNoise.getValue((double) (p_222574_1_ * 200), 10.0D, (double) (p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+		double noise = this.depthNoise.getValue(p_222574_1_ * 200, 10.0D, p_222574_2_ * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 		if (noise < 0.0D)
 		{
 			noise = -noise * 0.3D;
@@ -162,6 +166,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos)
 	{
 		if (FeatureUA.WITCH_HUT_UA.func_202383_b(this.world, pos))
@@ -253,6 +258,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	public void spawnMobs(ServerWorld world, boolean spawnHostileMobs, boolean spawnPeacefulMobs)
 	{
 		this.phantomSpawner.tick(world, spawnHostileMobs, spawnPeacefulMobs);
@@ -261,12 +267,14 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	}
 
 
+	@Override
 	public int getGroundHeight()
 	{
 		return ConfigUA.seaLevel + 1;
 	}
 
 
+	@Override
 	public int getSeaLevel()
 	{
 		return ConfigUA.seaLevel;

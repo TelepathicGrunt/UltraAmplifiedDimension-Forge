@@ -22,10 +22,11 @@ public class TwiceSurfaceWithChance extends Placement<ChanceConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
-		if (random.nextFloat() < 1.0F / (float) placementConfig.chance)
+		if (random.nextFloat() < 1.0F / placementConfig.chance)
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);

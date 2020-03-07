@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.EndRodBlock;
 import net.minecraft.block.LogBlock;
 import net.minecraft.block.RailBlock;
@@ -126,6 +127,7 @@ public class MineshaftPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -197,6 +199,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			int i = this.getComponentType();
@@ -310,6 +313,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		protected boolean generateChest(IWorld world, MutableBoundingBox structurebb, Random random, int x, int y, int z, ResourceLocation loot)
 		{
 			BlockPos blockpos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
@@ -318,7 +322,7 @@ public class MineshaftPiecesUA
 			{
 				BlockState iblockstate = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, random.nextBoolean() ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST);
 				this.setBlockState(world, iblockstate, x, y, z, structurebb);
-				ChestMinecartEntity entityminecartchest = new ChestMinecartEntity(world.getWorld(), (double) ((float) blockpos.getX() + 0.5F), (double) ((float) blockpos.getY() + 0.5F), (double) ((float) blockpos.getZ() + 0.5F));
+				ChestMinecartEntity entityminecartchest = new ChestMinecartEntity(world.getWorld(), blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F);
 				entityminecartchest.setLootTable(loot, random.nextLong());
 				world.addEntity(entityminecartchest);
 				return true;
@@ -330,6 +334,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))
@@ -444,14 +449,14 @@ public class MineshaftPiecesUA
 			{
 				if (random.nextFloat() < 0.08F)
 				{
-					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z - 1, Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.SOUTH));
-					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z + 1, Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.NORTH));
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z - 1, Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, Direction.SOUTH));
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x, y, z + 1, Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, Direction.NORTH));
 				}
 
 				if (random.nextFloat() < 0.08F)
 				{
-					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z - 1, Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.SOUTH));
-					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.NORTH));
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z - 1, Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, Direction.SOUTH));
+					this.randomlyPlaceBlock(world, boundingBox, random, 1F, x + 2, y, z + 1, Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, Direction.NORTH));
 				}
 			}
 			else if (this.mineShaftType == Type.HELL)
@@ -514,6 +519,7 @@ public class MineshaftPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -571,6 +577,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			int i = this.getComponentType();
@@ -627,6 +634,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))
@@ -703,6 +711,7 @@ public class MineshaftPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			tagCompound.putInt("MST", this.mineShaftType.ordinal());
@@ -714,19 +723,19 @@ public class MineshaftPiecesUA
 			switch (this.mineShaftType)
 			{
 				case MESA:
-					return Blocks.DARK_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.DARK_OAK_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 
 				case ICEY:
 					return Blocks.PACKED_ICE.getDefaultState();
 
 				case COLDORBIRCH:
-					return Blocks.STRIPPED_BIRCH_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.STRIPPED_BIRCH_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 
 				case JUNGLE:
-					return Blocks.JUNGLE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.JUNGLE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 
 				case TAIGA:
-					return Blocks.STRIPPED_SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.STRIPPED_SPRUCE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 
 				case DESERT:
 					return Blocks.CHISELED_SANDSTONE.getDefaultState();
@@ -744,14 +753,14 @@ public class MineshaftPiecesUA
 					return Blocks.STONE.getDefaultState();
 
 				case SAVANNA:
-					return Blocks.ACACIA_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.ACACIA_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 
 				case SWAMPORDARKFOREST:
 					return Blocks.DARK_OAK_PLANKS.getDefaultState();
 
 				case NORMAL:
 				default:
-					return Blocks.STRIPPED_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.X);
+					return Blocks.STRIPPED_OAK_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X);
 			}
 		}
 
@@ -844,7 +853,7 @@ public class MineshaftPiecesUA
 					return Blocks.ACACIA_FENCE.getDefaultState();
 
 				case SWAMPORDARKFOREST:
-					return Blocks.DARK_OAK_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.Y);
+					return Blocks.DARK_OAK_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y);
 
 				case NORMAL:
 				default:
@@ -916,6 +925,7 @@ public class MineshaftPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -931,6 +941,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			int i = this.getComponentType();
@@ -1062,6 +1073,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			BlockState flooring;
@@ -1107,6 +1119,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public void offset(int x, int y, int z)
 		{
 			super.offset(x, y, z);
@@ -1120,23 +1133,23 @@ public class MineshaftPiecesUA
 
 		protected void updateLiquidBlocks(IWorld world, MutableBoundingBox boundingboxIn, int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
 		{
-			float f = (float) (maxX - minX + 1);
-			float f1 = (float) (maxY - minY + 1);
-			float f2 = (float) (maxZ - minZ + 1);
-			float f3 = (float) minX + f / 2.0F;
-			float f4 = (float) minZ + f2 / 2.0F;
+			float f = maxX - minX + 1;
+			float f1 = maxY - minY + 1;
+			float f2 = maxZ - minZ + 1;
+			float f3 = minX + f / 2.0F;
+			float f4 = minZ + f2 / 2.0F;
 
 			for (int y = minY; y <= maxY; ++y)
 			{
-				float f5 = (float) (y - minY) / f1;
+				float f5 = (y - minY) / f1;
 
 				for (int x = minX; x <= maxX; ++x)
 				{
-					float f6 = ((float) x - f3) / (f * 0.5F);
+					float f6 = (x - f3) / (f * 0.5F);
 
 					for (int z = minZ; z <= maxZ; ++z)
 					{
-						float f7 = ((float) z - f4) / (f2 * 0.5F);
+						float f7 = (z - f4) / (f2 * 0.5F);
 						if (!this.getBlockStateFromPos(world, x, y, z, boundingboxIn).getFluidState().isEmpty())
 						{
 							float f8 = f6 * f6 + f5 * f5 + f7 * f7;
@@ -1206,6 +1219,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			int i = this.getComponentType();
@@ -1235,6 +1249,7 @@ public class MineshaftPiecesUA
 		}
 
 
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))

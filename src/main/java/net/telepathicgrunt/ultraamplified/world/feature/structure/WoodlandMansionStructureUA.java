@@ -38,6 +38,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 
@@ -64,6 +65,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -82,18 +84,21 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return WoodlandMansionStructureUA.Start::new;
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":woodland_mansion";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 8;
@@ -107,6 +112,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];

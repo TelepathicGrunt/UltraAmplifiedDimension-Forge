@@ -51,6 +51,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 	//If all are unbroken, generates enchanting table in center
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 

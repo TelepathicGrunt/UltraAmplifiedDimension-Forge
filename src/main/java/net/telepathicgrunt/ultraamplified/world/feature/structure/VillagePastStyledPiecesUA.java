@@ -9,15 +9,18 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.CropsBlock;
+import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.EndRodBlock;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FourWayBlock;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.LadderBlock;
@@ -294,6 +297,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -339,21 +343,21 @@ public class VillagePastStyledPiecesUA
 			this.setBlockState(world, Blocks.BREWING_STAND.getDefaultState(), 2, 1, 5, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate2, 1, 2, 7, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate3, 3, 2, 7, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 3, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 3, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 6, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 7, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 6, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 7, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 6, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 7, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 6, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 7, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 3, 6, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 3, 6, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 3, 8, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 3, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 3, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 6, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 7, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 6, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 7, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 6, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 7, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 6, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 7, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 3, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 3, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 3, 8, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.SOUTH, 2, 4, 7, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.EAST, 1, 4, 6, structureBoundingBoxIn);
 			this.placeTorch(world, Direction.WEST, 3, 4, 6, structureBoundingBoxIn);
@@ -473,6 +477,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -512,6 +517,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -606,6 +612,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -643,6 +650,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -721,6 +729,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -747,12 +756,12 @@ public class VillagePastStyledPiecesUA
 			this.setBlockState(world, iblockstate, 6, 0, 6, structureBoundingBoxIn);
 			BlockState iblockstate7 = iblockstate6;
 			BlockState iblockstate8 = iblockstate6;
-			if (iblockstate.has(FenceBlock.SOUTH))
+			if (iblockstate.has(FourWayBlock.SOUTH))
 			{
-				iblockstate7 = iblockstate6.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(FenceBlock.SOUTH, Boolean.valueOf(true));
-				iblockstate8 = iblockstate6.with(FenceBlock.WEST, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true));
-				this.setBlockState(world, iblockstate6.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.EAST, Boolean.valueOf(true)), 2, 1, 10, structureBoundingBoxIn);
-				this.setBlockState(world, iblockstate6.with(FenceBlock.SOUTH, Boolean.valueOf(true)).with(FenceBlock.WEST, Boolean.valueOf(true)), 8, 1, 10, structureBoundingBoxIn);
+				iblockstate7 = iblockstate6.with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.SOUTH, Boolean.valueOf(true));
+				iblockstate8 = iblockstate6.with(FourWayBlock.WEST, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true));
+				this.setBlockState(world, iblockstate6.with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.EAST, Boolean.valueOf(true)), 2, 1, 10, structureBoundingBoxIn);
+				this.setBlockState(world, iblockstate6.with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 8, 1, 10, structureBoundingBoxIn);
 			}
 			else
 			{
@@ -792,13 +801,13 @@ public class VillagePastStyledPiecesUA
 			this.setBlockState(world, iblockstate5, 0, 2, 4, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate5, 8, 2, 1, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate5, 8, 2, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 3, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 3, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 2, 1, 3, structureBoundingBoxIn);
 			this.setBlockState(world, getBiomeSpecificBlockState(Blocks.OAK_PRESSURE_PLATE.getDefaultState()), 2, 2, 3, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.LOOM.getDefaultState(), 3, 1, 3, structureBoundingBoxIn);
@@ -869,6 +878,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -916,24 +926,24 @@ public class VillagePastStyledPiecesUA
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 2, 5, 7, 4, 5, iblockstate4, iblockstate4, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 8, 2, 1, 8, 4, 4, iblockstate4, iblockstate4, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 2, 0, 7, 4, 0, iblockstate4, iblockstate4, false);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 4, 2, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 6, 2, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 4, 3, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 3, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 6, 3, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 3, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 3, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 3, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 3, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 3, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 6, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 4, 2, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 6, 2, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 4, 3, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 3, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 6, 3, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 3, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 3, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 3, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 3, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 3, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 6, 2, 5, structureBoundingBoxIn);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 4, 1, 7, 4, 1, iblockstate4, iblockstate4, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 4, 4, 7, 4, 4, iblockstate4, iblockstate4, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 3, 4, 7, 3, 4, Blocks.BOOKSHELF.getDefaultState(), Blocks.BOOKSHELF.getDefaultState(), false);
@@ -1003,6 +1013,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1021,6 +1032,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -1061,19 +1073,19 @@ public class VillagePastStyledPiecesUA
 			this.fillWithBlocks(world, structureBoundingBoxIn, 6, 1, 4, 9, 4, 6, iblockstate, iblockstate, false);
 			this.setBlockState(world, this.getBiomeSpecificBlockState(Blocks.LAVA.getDefaultState()), 7, 1, 5, structureBoundingBoxIn);
 			this.setBlockState(world, this.getBiomeSpecificBlockState(Blocks.LAVA.getDefaultState()), 8, 1, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.IRON_BARS.getDefaultState().with(PaneBlock.NORTH, Boolean.valueOf(true)).with(PaneBlock.SOUTH, Boolean.valueOf(true)), 9, 2, 5, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.IRON_BARS.getDefaultState().with(PaneBlock.NORTH, Boolean.valueOf(true)), 9, 2, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.IRON_BARS.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(FourWayBlock.SOUTH, Boolean.valueOf(true)), 9, 2, 5, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.IRON_BARS.getDefaultState().with(FourWayBlock.NORTH, Boolean.valueOf(true)), 9, 2, 4, structureBoundingBoxIn);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 7, 2, 4, 8, 2, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			this.setBlockState(world, iblockstate, 6, 1, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.BLAST_FURNACE.getDefaultState().with(FurnaceBlock.FACING, Direction.SOUTH), 6, 2, 3, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.BLAST_FURNACE.getDefaultState().with(FurnaceBlock.FACING, Direction.SOUTH), 6, 3, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.BLAST_FURNACE.getDefaultState().with(AbstractFurnaceBlock.FACING, Direction.SOUTH), 6, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.BLAST_FURNACE.getDefaultState().with(AbstractFurnaceBlock.FACING, Direction.SOUTH), 6, 3, 3, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.SMITHING_TABLE.getDefaultState(), 8, 1, 1, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.STONECUTTER.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.ANVIL.getDefaultState(), 5, 1, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 2, 6, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 4, 2, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 2, 6, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 4, 2, 6, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 2, 1, 4, structureBoundingBoxIn);
 			this.setBlockState(world, getBiomeSpecificBlockState(Blocks.OAK_PRESSURE_PLATE.getDefaultState()), 2, 2, 4, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.GRINDSTONE.getDefaultState(), 5, 1, 1, structureBoundingBoxIn);
@@ -1142,6 +1154,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1160,6 +1173,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -1282,26 +1296,26 @@ public class VillagePastStyledPiecesUA
 
 			this.setBlockState(world, iblockstate6, 0, 2, 1, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 0, 2, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 3, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 4, 2, 0, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 2, 0, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 6, 2, 0, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 8, 2, 1, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 3, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 8, 2, 4, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate5, 8, 2, 5, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 8, 2, 6, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 7, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 8, 2, 8, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 7, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 8, 2, 8, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 8, 2, 9, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 2, 2, 6, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 2, 2, 7, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 2, 2, 8, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 2, 2, 7, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 2, 2, 8, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 2, 2, 9, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 4, 4, 10, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 5, 4, 10, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 5, 4, 10, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate6, 6, 4, 10, structureBoundingBoxIn);
 			this.setBlockState(world, iblockstate5, 5, 5, 10, structureBoundingBoxIn);
 			this.setBlockState(world, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
@@ -1365,6 +1379,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1383,6 +1398,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -1422,9 +1438,9 @@ public class VillagePastStyledPiecesUA
 			this.fillWithBlocks(world, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, iblockstate1, iblockstate1, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, iblockstate1, iblockstate1, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, iblockstate1, iblockstate1, false);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, Boolean.valueOf(true)).with(PaneBlock.WEST, Boolean.valueOf(true)), 2, 2, 4, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 4, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.EAST, Boolean.valueOf(true)).with(FourWayBlock.WEST, Boolean.valueOf(true)), 2, 2, 4, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 4, 2, 2, structureBoundingBoxIn);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 0, 1, 3, 0, iblockstate1, iblockstate1, false);
 			this.setBlockState(world, iblockstate1, 2, 3, 0, structureBoundingBoxIn);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 0, 3, 3, 0, iblockstate1, iblockstate1, false);
@@ -1454,9 +1470,9 @@ public class VillagePastStyledPiecesUA
 							boolean flag3 = l == 0 || l == 4;
 
 							// checks if block has face different direction
-							if (iblockstate.has(FenceBlock.SOUTH))
+							if (iblockstate.has(FourWayBlock.SOUTH))
 							{
-								BlockState iblockstate5 = iblockstate4.with(FenceBlock.SOUTH, Boolean.valueOf(flag2 && l != 0)).with(FenceBlock.NORTH, Boolean.valueOf(flag2 && l != 4)).with(FenceBlock.WEST, Boolean.valueOf(flag3 && k != 0)).with(FenceBlock.EAST, Boolean.valueOf(flag3 && k != 4));
+								BlockState iblockstate5 = iblockstate4.with(FourWayBlock.SOUTH, Boolean.valueOf(flag2 && l != 0)).with(FourWayBlock.NORTH, Boolean.valueOf(flag2 && l != 4)).with(FourWayBlock.WEST, Boolean.valueOf(flag3 && k != 0)).with(FourWayBlock.EAST, Boolean.valueOf(flag3 && k != 4));
 								this.setBlockState(world, iblockstate5, k, 5, l, structureBoundingBoxIn);
 							}
 							else
@@ -1517,6 +1533,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -1527,6 +1544,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			boolean flag = false;
@@ -1612,6 +1630,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			BlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.GRASS_PATH.getDefaultState());
@@ -1761,6 +1780,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -1852,6 +1872,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			tagCompound.putString("Type", this.structureType.name());
@@ -2036,7 +2057,7 @@ public class VillagePastStyledPiecesUA
 					if (this.isZombieInfested)
 					{
 						ZombieVillagerEntity entityzombievillager = EntityType.ZOMBIE_VILLAGER.create(world.getWorld());
-						entityzombievillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
+						entityzombievillager.setLocationAndAngles(j + 0.5D, k, l + 0.5D, 0.0F, 0.0F);
 						entityzombievillager.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entityzombievillager)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 						entityzombievillager.enablePersistence();
 						world.addEntity(entityzombievillager);
@@ -2044,7 +2065,7 @@ public class VillagePastStyledPiecesUA
 					else
 					{
 						VillagerEntity entityvillager = EntityType.VILLAGER.create(world.getWorld());
-						entityvillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
+						entityvillager.setLocationAndAngles(j + 0.5D, k, l + 0.5D, 0.0F, 0.0F);
 						entityvillager.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entityvillager)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
 						entityvillager.setVillagerData(new VillagerData(VILLAGER_SKIN_ENUM[this.structureType.ordinal()], VillagerProfession.NONE, 1));
 						world.addEntity(entityvillager);
@@ -2095,7 +2116,7 @@ public class VillagePastStyledPiecesUA
 			{
 				if (block.isIn(BlockTags.LOGS))
 				{
-					return Blocks.SPRUCE_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
+					return Blocks.SPRUCE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, blockstateIn.get(RotatedPillarBlock.AXIS));
 				}
 
 				if (block.isIn(BlockTags.PLANKS))
@@ -2122,7 +2143,7 @@ public class VillagePastStyledPiecesUA
 			{
 				if (block.isIn(BlockTags.LOGS))
 				{
-					return Blocks.ACACIA_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
+					return Blocks.ACACIA_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, blockstateIn.get(RotatedPillarBlock.AXIS));
 				}
 
 				if (block.isIn(BlockTags.PLANKS))
@@ -2137,7 +2158,7 @@ public class VillagePastStyledPiecesUA
 
 				if (block == Blocks.COBBLESTONE)
 				{
-					return Blocks.ACACIA_LOG.getDefaultState().with(LogBlock.AXIS, Direction.Axis.Y);
+					return Blocks.ACACIA_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y);
 				}
 
 				if (block == Blocks.OAK_FENCE)
@@ -2201,7 +2222,7 @@ public class VillagePastStyledPiecesUA
 			{
 				if (block.isIn(BlockTags.LOGS))
 				{
-					return Blocks.JUNGLE_LOG.getDefaultState().with(LogBlock.AXIS, blockstateIn.get(LogBlock.AXIS));
+					return Blocks.JUNGLE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, blockstateIn.get(RotatedPillarBlock.AXIS));
 				}
 
 				if (block.isIn(BlockTags.PLANKS))
@@ -2305,12 +2326,12 @@ public class VillagePastStyledPiecesUA
 
 				if (blockstateIn.getBlock() == Blocks.WALL_TORCH)
 				{
-					return Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, blockstateIn.get(WallTorchBlock.HORIZONTAL_FACING));
+					return Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, blockstateIn.get(WallTorchBlock.HORIZONTAL_FACING));
 				}
 
 				if (block == Blocks.TORCH)
 				{
-					return Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.UP);
+					return Blocks.END_ROD.getDefaultState().with(DirectionalBlock.FACING, Direction.UP);
 				}
 
 				if (block == Blocks.COBBLESTONE || block == Blocks.GRASS_PATH)
@@ -2616,6 +2637,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * Replaces air and liquid from given position downwards. Stops when hitting anything else than air or liquid
 		 */
+		@Override
 		protected void replaceAirAndLiquidDownwards(IWorld world, BlockState blockstateIn, int x, int y, int z, MutableBoundingBox boundingboxIn)
 		{
 			BlockState iblockstate = this.getBiomeSpecificBlockState(blockstateIn);
@@ -2662,6 +2684,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
 			VillagePastStyledPiecesUA.generateAndAddRoadPiece((VillagePastStyledPiecesUA.Start) componentIn, listIn, rand, this.boundingBox.minX - 1, this.boundingBox.maxY - 4, this.boundingBox.minZ + 1, Direction.WEST, this.getComponentType());
@@ -2675,6 +2698,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -2748,6 +2772,7 @@ public class VillagePastStyledPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -2767,6 +2792,7 @@ public class VillagePastStyledPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
@@ -2815,13 +2841,13 @@ public class VillagePastStyledPiecesUA
 			this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, 1, 3, 3, 3, iblockstate1, iblockstate1, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, iblockstate1, iblockstate1, false);
 			this.fillWithBlocks(world, structureBoundingBoxIn, 1, 1, 4, 2, 3, 4, iblockstate1, iblockstate1, false);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
-			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.SOUTH, Boolean.valueOf(true)).with(PaneBlock.NORTH, Boolean.valueOf(true)), 3, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 0, 2, 2, structureBoundingBoxIn);
+			this.setBlockState(world, Blocks.GLASS_PANE.getDefaultState().with(FourWayBlock.SOUTH, Boolean.valueOf(true)).with(FourWayBlock.NORTH, Boolean.valueOf(true)), 3, 2, 2, structureBoundingBoxIn);
 			if (this.tablePosition > 0)
 			{
-				if (iblockstate.has(FenceBlock.SOUTH))
+				if (iblockstate.has(FourWayBlock.SOUTH))
 				{
-					this.setBlockState(world, iblockstate4.with(FenceBlock.NORTH, Boolean.valueOf(true)).with(this.tablePosition == 1 ? FenceBlock.WEST : FenceBlock.EAST, Boolean.valueOf(true)), this.tablePosition, 1, 3, structureBoundingBoxIn);
+					this.setBlockState(world, iblockstate4.with(FourWayBlock.NORTH, Boolean.valueOf(true)).with(this.tablePosition == 1 ? FourWayBlock.WEST : FourWayBlock.EAST, Boolean.valueOf(true)), this.tablePosition, 1, 3, structureBoundingBoxIn);
 				}
 				else
 				{

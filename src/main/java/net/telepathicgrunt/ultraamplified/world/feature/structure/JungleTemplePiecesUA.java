@@ -4,6 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DirectionalBlock;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.block.LeverBlock;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.RedstoneWireBlock;
@@ -53,6 +56,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 	}
 
 
+	@Override
 	protected void readAdditional(CompoundNBT tagCompound)
 	{
 		super.readAdditional(tagCompound);
@@ -63,6 +67,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 	}
 
 
+	@Override
 	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 
@@ -248,7 +253,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 		this.setBlockState(world, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 8, -2, 11, structureBoundingBoxIn);
 		this.setBlockState(world, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 9, -2, 11, structureBoundingBoxIn);
 		this.setBlockState(world, Blocks.CHISELED_STONE_BRICKS.getDefaultState(), 10, -2, 11, structureBoundingBoxIn);
-		BlockState iblockstate2 = Blocks.LEVER.getDefaultState().with(LeverBlock.HORIZONTAL_FACING, Direction.NORTH).with(LeverBlock.FACE, AttachFace.WALL);
+		BlockState iblockstate2 = Blocks.LEVER.getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.NORTH).with(HorizontalFaceBlock.FACE, AttachFace.WALL);
 		this.setBlockState(world, iblockstate2, 8, -2, 12, structureBoundingBoxIn);
 		this.setBlockState(world, iblockstate2, 9, -2, 12, structureBoundingBoxIn);
 		this.setBlockState(world, iblockstate2, 10, -2, 12, structureBoundingBoxIn);
@@ -258,10 +263,10 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 		this.setBlockState(world, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.NORTH, RedstoneSide.SIDE), 8, -2, 9, structureBoundingBoxIn);
 		this.setBlockState(world, Blocks.REDSTONE_WIRE.getDefaultState().with(RedstoneWireBlock.SOUTH, RedstoneSide.SIDE), 8, -2, 10, structureBoundingBoxIn);
 		this.setBlockState(world, Blocks.REDSTONE_WIRE.getDefaultState(), 10, -1, 9, structureBoundingBoxIn);
-		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.UP), 9, -2, 8, structureBoundingBoxIn);
-		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.WEST), 10, -2, 8, structureBoundingBoxIn);
-		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(PistonBlock.FACING, Direction.WEST), 10, -1, 8, structureBoundingBoxIn);
-		this.setBlockState(world, Blocks.REPEATER.getDefaultState().with(RepeaterBlock.HORIZONTAL_FACING, Direction.NORTH), 10, -2, 10, structureBoundingBoxIn);
+		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(DirectionalBlock.FACING, Direction.UP), 9, -2, 8, structureBoundingBoxIn);
+		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(DirectionalBlock.FACING, Direction.WEST), 10, -2, 8, structureBoundingBoxIn);
+		this.setBlockState(world, Blocks.STICKY_PISTON.getDefaultState().with(DirectionalBlock.FACING, Direction.WEST), 10, -1, 8, structureBoundingBoxIn);
+		this.setBlockState(world, Blocks.REPEATER.getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.NORTH), 10, -2, 10, structureBoundingBoxIn);
 		if (!this.hiddenChest)
 		{
 			this.hiddenChest = this.generateChest(world, structureBoundingBoxIn, random, 9, -3, 10, CHESTS_JUNGLE_TEMPLE_UA);
@@ -279,6 +284,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 		}
 
 
+		@Override
 		public void selectBlocks(Random rand, int x, int y, int z, boolean wall)
 		{
 			if (rand.nextFloat() < 0.08F)

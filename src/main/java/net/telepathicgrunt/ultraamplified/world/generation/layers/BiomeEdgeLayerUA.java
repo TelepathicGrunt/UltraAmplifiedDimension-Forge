@@ -11,6 +11,7 @@ public enum BiomeEdgeLayerUA implements ICastleTransformer
 {
 	INSTANCE;
 
+	@Override
 	public int apply(INoiseRandom context, int north, int west, int south, int east, int currentBiomeID)
 	{
 		// Check if north made a biome edge

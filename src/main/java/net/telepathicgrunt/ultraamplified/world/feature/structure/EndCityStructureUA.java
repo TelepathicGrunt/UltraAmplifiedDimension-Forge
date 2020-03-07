@@ -38,6 +38,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 	private final int minCitySeparation = 5;
 
 
+	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 		int i = citySpacing;
@@ -57,6 +58,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
@@ -73,24 +75,28 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 	}
 
 
+	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
 		return EndCityStructureUA.Start::new;
 	}
 
 
+	@Override
 	public String getStructureName()
 	{
 		return UltraAmplified.MODID + ":endcity";
 	}
 
 
+	@Override
 	public int getSize()
 	{
 		return 9;
 	}
 
 
+	@Override
 	public List<Biome.SpawnListEntry> getSpawnList()
 	{
 		return END_CITY_ENEMIES;
@@ -99,7 +105,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 
 	private static int getYPosForStructure(int chunkX, int chunkY, ChunkGenerator<?> generatorIn)
 	{
-		Random random = new Random((long) (chunkX + chunkY * 10387313));
+		Random random = new Random(chunkX + chunkY * 10387313);
 		Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
 		int i = 5;
 		int j = 5;
@@ -134,6 +140,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 		}
 
 
+		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];

@@ -31,6 +31,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig>
 	private static final BlockState RED_SAND = Blocks.RED_SAND.getDefaultState();
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig config)
 	{
 

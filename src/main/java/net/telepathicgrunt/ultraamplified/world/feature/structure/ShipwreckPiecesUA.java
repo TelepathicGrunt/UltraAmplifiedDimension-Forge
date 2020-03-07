@@ -75,6 +75,7 @@ public class ShipwreckPiecesUA
 		/**
 		 * (abstract) Helper method to read subclass data from NBT
 		 */
+		@Override
 		protected void readAdditional(CompoundNBT tagCompound)
 		{
 			super.readAdditional(tagCompound);
@@ -93,6 +94,7 @@ public class ShipwreckPiecesUA
 		}
 
 
+		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random random, MutableBoundingBox structureBoundingBox)
 		{
 			if (ConfigUA.chestGeneration)
@@ -131,6 +133,7 @@ public class ShipwreckPiecesUA
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at the
 		 * end, it adds Fences...
 		 */
+		@Override
 		public boolean generate(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
 		{
 			BlockPos blockpos;

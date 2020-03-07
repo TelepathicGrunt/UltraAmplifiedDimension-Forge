@@ -31,6 +31,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 	private final static BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos pos, NoFeatureConfig configBlock)
 	{
 

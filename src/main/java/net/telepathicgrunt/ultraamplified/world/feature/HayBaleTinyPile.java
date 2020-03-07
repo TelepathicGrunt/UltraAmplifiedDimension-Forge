@@ -38,6 +38,7 @@ public class HayBaleTinyPile extends Feature<NoFeatureConfig>
 	private final BlockState railEWDecending = Blocks.RAIL.getDefaultState().with(RailBlock.SHAPE, RailShape.ASCENDING_WEST);
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 

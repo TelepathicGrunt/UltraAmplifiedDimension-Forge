@@ -22,6 +22,7 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos position, SphereReplaceConfig config)
 	{
 		int placedBlocks = 0;

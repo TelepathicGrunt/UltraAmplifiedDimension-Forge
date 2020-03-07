@@ -41,6 +41,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	}
 
 
+	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig)
 	{
 		//check if user turned pillars off.
@@ -93,7 +94,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 		}
 
 		//finds how big the smallest part of column should be
-		int thinnestWidth = (int) (maxWidth * ((float) (heightDiff) / 100F));
+		int thinnestWidth = (int) (maxWidth * ((heightDiff) / 100F));
 		if (thinnestWidth < minWidth)
 		{
 			thinnestWidth = minWidth;

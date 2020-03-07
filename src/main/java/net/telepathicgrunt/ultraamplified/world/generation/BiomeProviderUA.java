@@ -72,7 +72,7 @@ public class BiomeProviderUA extends BiomeProvider
 
 		for (int i = 0; i < count; ++i)
 		{
-			iareafactory = parent.apply(contextFactory.apply(seed + (long) i), iareafactory);
+			iareafactory = parent.apply(contextFactory.apply(seed + i), iareafactory);
 		}
 
 		return iareafactory;
@@ -135,7 +135,7 @@ public class BiomeProviderUA extends BiomeProvider
 
 		for (int k = 0; k < biomeSize; ++k)
 		{
-			lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply((long) (1000 + k)), lvt_8_1_);
+			lvt_8_1_ = ZoomLayer.NORMAL.apply(contextFactory.apply(1000 + k), lvt_8_1_);
 		}
 
 		lvt_8_1_ = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), lvt_8_1_);
@@ -144,6 +144,7 @@ public class BiomeProviderUA extends BiomeProvider
 	}
 
 
+	@Override
 	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength)
 	{
 		int i = centerX - sideLength >> 2;
@@ -205,6 +206,7 @@ public class BiomeProviderUA extends BiomeProvider
 	}
 
 
+	@Override
 	public boolean hasStructure(Structure<?> structureIn)
 	{
 		return this.hasStructureCache.computeIfAbsent(structureIn, (p_205006_1_) ->
@@ -222,6 +224,7 @@ public class BiomeProviderUA extends BiomeProvider
 	}
 
 
+	@Override
 	public Set<BlockState> getSurfaceBlocks()
 	{
 		if (this.topBlocksCache.isEmpty())
@@ -236,6 +239,7 @@ public class BiomeProviderUA extends BiomeProvider
 	}
 
 
+	@Override
 	public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_)
 	{
 		return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);

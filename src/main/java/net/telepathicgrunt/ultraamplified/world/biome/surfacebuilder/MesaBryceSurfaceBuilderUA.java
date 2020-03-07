@@ -29,13 +29,14 @@ public class MesaBryceSurfaceBuilderUA extends BadlandsSurfaceBuilder
 	private static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		double spikeHeight = 0.0D;
-		double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt((double) x * 0.25D, (double) z * 0.25D, false) * 15.0D);
+		double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt(x * 0.25D, z * 0.25D, false) * 15.0D);
 		if (d1 > -1.5D)
 		{
-			double d3 = Math.abs(this.field_215437_d.noiseAt((double) x * 1500.001953125D, (double) z * 1500.001953125D, false) * 15.0D);
+			double d3 = Math.abs(this.field_215437_d.noiseAt(x * 1500.001953125D, z * 1500.001953125D, false) * 15.0D);
 			spikeHeight = d1 * d1 * 8.5D;
 			double d4 = Math.ceil(d3 * 1200.0D) + 1000.0D;
 			if (spikeHeight > d4)

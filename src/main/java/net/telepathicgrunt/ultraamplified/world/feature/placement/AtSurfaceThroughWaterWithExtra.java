@@ -26,6 +26,7 @@ public class AtSurfaceThroughWaterWithExtra extends Placement<AtSurfaceWithExtra
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, AtSurfaceWithExtraConfig chancesConfig, BlockPos pos)
 	{
 		int maxAttempts = chancesConfig.count;

@@ -24,6 +24,7 @@ public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos)
 	{
 		return IntStream.range(0, ConfigUA.endIslandSpawnrate / placementConfig.count).mapToObj((p_215051_3_) ->

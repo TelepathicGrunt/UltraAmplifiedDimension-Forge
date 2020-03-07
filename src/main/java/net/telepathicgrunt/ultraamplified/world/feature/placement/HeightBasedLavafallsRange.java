@@ -21,6 +21,7 @@ public class HeightBasedLavafallsRange extends SimplePlacement<CountRangeConfig>
 	}
 
 
+	@Override
 	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
 	{
 		return IntStream.range(0, ConfigUA.lavafallSpawnrate / config.count).mapToObj((p_215057_3_) ->

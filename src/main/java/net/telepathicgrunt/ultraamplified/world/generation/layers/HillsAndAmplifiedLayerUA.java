@@ -22,13 +22,14 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 	private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES);
 
 
+	@Override
 	public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z)
 	{
 		int biomeId1 = area1.getValue(x + 1, z + 1);
 		int biomeId2 = area2.getValue(x + 1, z + 1);
 
 		//creates the noise (gennerally in the range of -0.5 to 0.5 but not always)
-		double noise = context.getNoiseGenerator().func_215456_a((double) (x) / 8.0D, (double) (z) / 8.0D, 0.0D, 0.0D, 0.0D);
+		double noise = context.getNoiseGenerator().func_215456_a((x) / 8.0D, (z) / 8.0D, 0.0D, 0.0D, 0.0D);
 		boolean allowMForm = ConfigUA.mutatedBiomeSpawnrate != 0 && (noise < (ConfigUA.mutatedBiomeSpawnrate / 10D) - 0.5D || ConfigUA.mutatedBiomeSpawnrate == 10);
 		boolean allowHills = (biomeId2 - 2) % 29 == 0 || context.random(3) == 0;
 
