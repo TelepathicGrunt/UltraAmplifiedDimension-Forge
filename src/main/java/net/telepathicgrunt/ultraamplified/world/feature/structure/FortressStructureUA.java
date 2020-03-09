@@ -55,7 +55,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 			else
 			{
 
-				return chunkGen.hasStructure(biome, UAFeatures.FORTRESS_UA);
+				return chunkGen.hasStructure(biome, UAFeatures.FORTRESS);
 			}
 		}
 
@@ -118,7 +118,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			FortressConfigUA fortressconfig = generator.getStructureConfig(biomeIn, UAFeatures.FORTRESS_UA);
+			FortressConfigUA fortressconfig = generator.getStructureConfig(biomeIn, UAFeatures.FORTRESS);
 			this.genAboveSeaLevel = fortressconfig.surfaceAllow;
 			boolean stoneVariant = false;
 

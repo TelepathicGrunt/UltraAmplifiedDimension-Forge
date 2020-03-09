@@ -45,10 +45,10 @@ public class DesertRelicBiomeUA extends UABiome
 	public DesertRelicBiomeUA()
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.SAND_SURFACE_BUILDER, UASurfaceBuilders.SAND_SANDSTONE_SANDSTONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(0.45F).scale(0.3F).temperature(2.0F).downfall(0.0F).waterColor(11260362).waterFogColor(9812925).parent((String) null));
-		this.addStructureFeature(UAFeatures.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.DESERT)));
-		this.addStructureFeature(UAFeatures.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructureFeature(UAFeatures.FORTRESS_UA.configure(new FortressConfigUA(false)));
-		this.addStructureFeature(UAFeatures.DESERT_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.DESERT)));
+		this.addStructureFeature(UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.FORTRESS.configure(new FortressConfigUA(false)));
+		this.addStructureFeature(UAFeatures.DESERT_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG));
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.RAVINE_CARVER, new ProbabilityConfig(0f)));
@@ -67,7 +67,7 @@ public class DesertRelicBiomeUA extends UABiome
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.STONELESS_LAKE.configure(new BlockStateFeatureConfig(Blocks.field_226907_mc_.getDefaultState())).createDecoratedFeature(UAPlacements.LAKE_PLACEMENT.configure(new LakeCountRangeAndTypeConfig(16, LakeCountRangeAndTypeConfig.Type.HONEY_ALGORITHM))));
 
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Feature.DESERT_WELL.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.AT_SURFACE_WITH_CHANCE_DESERT_WELL.configure(new ChanceConfig(100))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, UAFeatures.FOSSILS_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.RANDOM_SURFACE_BELOW_TOP_LAYER.configure(new ChanceConfig(60))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, UAFeatures.FOSSILS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.RANDOM_SURFACE_BELOW_TOP_LAYER.configure(new ChanceConfig(60))));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.SUN_SHRINE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.AT_CENTER_SURFACE_MINI_FEATURE.configure(new ChanceAndTypeConfig(1.15f, ChanceAndTypeConfig.Type.SUNSHRINE))));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.STONEHENGE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.AT_CENTER_SURFACE_MINI_FEATURE.configure(new ChanceAndTypeConfig(2.33f, ChanceAndTypeConfig.Type.STONEHENGE))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.DESERT_DUNGEONS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));

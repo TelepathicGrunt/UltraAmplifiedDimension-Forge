@@ -13,13 +13,13 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.CoralClawFeature;
+import net.minecraft.world.gen.feature.CoralTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 
-public class CoralClawUA extends CoralClawFeature
+public class CoralTree extends CoralTreeFeature
 {
-	public CoralClawUA(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
+	public CoralTree(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
 	{
 		super(config);
 	}

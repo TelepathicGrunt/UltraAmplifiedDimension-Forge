@@ -17,9 +17,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 
-public class KelpUA extends Feature<NoFeatureConfig>
+public class Kelp extends Feature<NoFeatureConfig>
 {
-	public KelpUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+	public Kelp(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}

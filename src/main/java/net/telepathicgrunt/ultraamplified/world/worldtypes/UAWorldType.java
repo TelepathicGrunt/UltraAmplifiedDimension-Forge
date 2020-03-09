@@ -5,15 +5,15 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
+import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 
-public class WorldTypeUA extends WorldType
+public class UAWorldType extends WorldType
 {
 	//displays our mod as a world type
 
-	public WorldTypeUA()
+	public UAWorldType()
 	{
 		/*
 		 * Name of world type. Also had to add this to en_us.json file to display name and info properly:
@@ -32,7 +32,7 @@ public class WorldTypeUA extends WorldType
 		if (world.dimension.getType() == DimensionType.OVERWORLD)
 		{
 			//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.
-			return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
+			return new UAChunkGenerator(world, new UABiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
 		}
 
 		// Run default chunkgenerator for each dimension

@@ -73,7 +73,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (!chunkGen.hasStructure(biome2, UAFeatures.WOODLAND_MANSION_UA))
+				if (!chunkGen.hasStructure(biome2, UAFeatures.WOODLAND_MANSION))
 				{
 					return false;
 				}

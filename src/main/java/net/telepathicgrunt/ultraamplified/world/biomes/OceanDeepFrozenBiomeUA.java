@@ -50,12 +50,12 @@ public class OceanDeepFrozenBiomeUA extends UABiome
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.DEEP_OCEAN_SURFACE_BUILDER_UA, UASurfaceBuilders.ICE_GRAVEL_STONE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-1.8F).scale(0.1F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String) null));
 
-		this.addStructureFeature(UAFeatures.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.OCEAN)));
-		this.addStructureFeature(UAFeatures.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructureFeature(UAFeatures.FORTRESS_UA.configure(new FortressConfigUA(false)));
-		this.addStructureFeature(UAFeatures.SHIPWRECK_UA.configure(new ShipwreckConfig(false)));
-		this.addStructureFeature(UAFeatures.OCEAN_MONUMENT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.MARKED_TREASURE_CHEST_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.FIXED_HEIGHT_WITH_CHANCE.configure(new PercentageAndHeightConfig(0.025f, 64))));
+		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.OCEAN)));
+		this.addStructureFeature(UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.FORTRESS.configure(new FortressConfigUA(false)));
+		this.addStructureFeature(UAFeatures.SHIPWRECK.configure(new ShipwreckConfig(false)));
+		this.addStructureFeature(UAFeatures.OCEAN_MONUMENT.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.MARKED_TREASURE_CHEST.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.FIXED_HEIGHT_WITH_CHANCE.configure(new PercentageAndHeightConfig(0.025f, 64))));
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.RAVINE_CARVER, new ProbabilityConfig(0f)));
@@ -68,8 +68,8 @@ public class OceanDeepFrozenBiomeUA extends UABiome
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.GLOWPATCH.configure(new CountConfig(100)).createDecoratedFeature(UAPlacements.GENERAL_PLACEMENT.configure(new CountRangeAndTypeConfig(0.005f, 45, 45, 60, false, CountRangeAndTypeConfig.Type.GLOWSTONE_VARIANT_PATCH))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.CONTAIN_OCEAN_LIQUID.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.ICEBERG_UA.configure(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_SURFACES.configure(new PercentageAndFrequencyConfig(0.35F, 6))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.ICEBERG_UA.configure(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_SURFACES.configure(new PercentageAndFrequencyConfig(0.09F, 2))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.ICEBERG.configure(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_SURFACES.configure(new PercentageAndFrequencyConfig(0.35F, 6))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.ICEBERG.configure(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_SURFACES.configure(new PercentageAndFrequencyConfig(0.09F, 2))));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.SNOW_DUNGEONS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
@@ -95,7 +95,7 @@ public class OceanDeepFrozenBiomeUA extends UABiome
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.RED_MUSHROOM_CONFIG).createDecoratedFeature(UAPlacements.RANDOM_CHANCE_UNDER_SURFACE.configure(new ChanceConfig(2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.SUGAR_CANE_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.2F, 4))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.PUMPKIN_PATCH_CONFIG).createDecoratedFeature(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(32))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.KELP_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_BOTTOMS.configure(new PercentageAndFrequencyConfig(0.1F, 2))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.KELP.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_BOTTOMS.configure(new PercentageAndFrequencyConfig(0.1F, 2))));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(new LiquidsConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE))).createDecoratedFeature(UAPlacements.WATERFALL_RANGE.configure(new CountRangeConfig(30, 8, 8, 256))));
 

@@ -17,9 +17,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 
-public class IcePatchUA extends Feature<NoFeatureConfig>
+public class IcePatch extends Feature<NoFeatureConfig>
 {
-	public IcePatchUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+	public IcePatch(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}

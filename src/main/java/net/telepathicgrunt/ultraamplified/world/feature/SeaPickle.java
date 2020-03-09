@@ -15,9 +15,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
 
 
-public class SeaPickleUA extends Feature<CountConfig>
+public class SeaPickle extends Feature<CountConfig>
 {
-	public SeaPickleUA(Function<Dynamic<?>, ? extends CountConfig> configFactory)
+	public SeaPickle(Function<Dynamic<?>, ? extends CountConfig> configFactory)
 	{
 		super(configFactory);
 	}

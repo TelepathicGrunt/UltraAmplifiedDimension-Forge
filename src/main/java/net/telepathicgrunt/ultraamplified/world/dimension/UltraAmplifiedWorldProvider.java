@@ -22,7 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.generation.BiomeProviderUA;
+import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 
@@ -42,6 +42,12 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		{
 			this.lightBrightnessTable[i] = i / 20.0F;
 		}
+	}
+
+	@Override
+	public ChunkGenerator<?> createChunkGenerator()
+	{
+		return new UAChunkGenerator(world, new UABiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
 	}
 
 
@@ -147,12 +153,6 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		return ConfigUA.heavyFog;
 	}
 
-
-	@Override
-	public ChunkGenerator<?> createChunkGenerator()
-	{
-		return new UAChunkGenerator(world, new BiomeProviderUA(world), ChunkGeneratorType.SURFACE.createSettings());
-	}
 
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents

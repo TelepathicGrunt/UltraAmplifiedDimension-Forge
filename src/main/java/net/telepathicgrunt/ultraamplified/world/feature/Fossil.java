@@ -24,9 +24,9 @@ import net.minecraft.world.server.ServerWorld;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
-public class FossilUA extends Feature<NoFeatureConfig>
+public class Fossil extends Feature<NoFeatureConfig>
 {
-	public FossilUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+	public Fossil(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}

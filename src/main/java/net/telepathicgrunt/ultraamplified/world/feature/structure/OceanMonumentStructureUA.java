@@ -67,7 +67,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT_UA))
+				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
 				{
 					return true;
 				}

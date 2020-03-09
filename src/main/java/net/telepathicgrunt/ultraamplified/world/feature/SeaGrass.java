@@ -17,9 +17,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
 
 
-public class SeaGrassUA extends Feature<SeaGrassConfig>
+public class SeaGrass extends Feature<SeaGrassConfig>
 {
-	public SeaGrassUA(Function<Dynamic<?>, ? extends SeaGrassConfig> configFactory)
+	public SeaGrass(Function<Dynamic<?>, ? extends SeaGrassConfig> configFactory)
 	{
 		super(configFactory);
 	}

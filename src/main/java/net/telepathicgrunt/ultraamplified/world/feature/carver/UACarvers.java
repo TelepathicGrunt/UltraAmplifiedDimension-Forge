@@ -6,13 +6,14 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.RegUtil;
 
+
 public class UACarvers
 {
-	public static final WorldCarver<ProbabilityConfig> RAVINE_CARVER = new RavineCarver(ProbabilityConfig::deserialize, 70);
-	public static final WorldCarver<ProbabilityConfig> LONG_RAVINE_CARVER = new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
-	public static final WorldCarver<ProbabilityConfig> CAVE_CAVITY_CARVER = new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
-	public static final WorldCarver<ProbabilityConfig> UNDERWATER_CAVE_CARVER = new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
-	
+	public static final WorldCarver<ProbabilityConfig>	RAVINE_CARVER			= new RavineCarver(ProbabilityConfig::deserialize, 70);
+	public static final WorldCarver<ProbabilityConfig>	LONG_RAVINE_CARVER		= new SuperLongRavineCarver(ProbabilityConfig::deserialize, 50);
+	public static final WorldCarver<ProbabilityConfig>	CAVE_CAVITY_CARVER		= new CaveCavityCarver(ProbabilityConfig::deserialize, 70);
+	public static final WorldCarver<ProbabilityConfig>	UNDERWATER_CAVE_CARVER	= new UnderwaterCaveCarver(ProbabilityConfig::deserialize);
+
 
 	public static void registerCarvers(RegistryEvent.Register<WorldCarver<?>> event)
 	{

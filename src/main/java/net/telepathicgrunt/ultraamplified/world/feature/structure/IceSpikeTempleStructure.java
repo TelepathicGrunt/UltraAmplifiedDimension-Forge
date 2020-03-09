@@ -13,6 +13,7 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
@@ -21,10 +22,10 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
-public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
+public class IceSpikeTempleStructure extends Structure<NoFeatureConfig>
 {
 
-	public MushroomTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
+	public IceSpikeTempleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
 	{
 		super(p_i51427_1_);
 	}
@@ -33,7 +34,7 @@ public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = ConfigUA.mushroomTempleSpawnrate;
+		int maxDistance = ConfigUA.iceSpikeTempleSpawnrate;
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -57,7 +58,7 @@ public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	public String getStructureName()
 	{
-		return UltraAmplified.MODID + ":mushroom_temple";
+		return UltraAmplified.MODID + ":ice_spike_temple";
 	}
 
 
@@ -71,13 +72,13 @@ public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
-		return MushroomTempleStructureUA.Start::new;
+		return IceSpikeTempleStructure.Start::new;
 	}
 
 
 	protected int getSeedModifier()
 	{
-		return 14357876;
+		return 14357621;
 	}
 
 
@@ -87,12 +88,11 @@ public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (ConfigUA.mushroomTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			if (ConfigUA.iceSpikeTempleSpawnrate != 101 && chunkGen.hasStructure(biome, this))
 			{
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -107,16 +107,40 @@ public class MushroomTempleStructureUA extends Structure<NoFeatureConfig>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			int x = chunkX * 16;
-			int z = chunkZ * 16;
-			BlockPos blockpos = new BlockPos(x, 90, z);
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			MushroomTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
-			this.recalculateStructureSize();
+			//
+			int xOffset = 9;
+			int zOffset = 20;
+			if (rotation == Rotation.CLOCKWISE_90)
+			{
+				xOffset = -20;
+				zOffset = 9;
+			}
+			else if (rotation == Rotation.CLOCKWISE_180)
+			{
+				xOffset = -9;
+				zOffset = -20;
+			}
+			else if (rotation == Rotation.COUNTERCLOCKWISE_90)
+			{
+				xOffset = 20;
+				zOffset = -9;
+			}
 
-			// UltraAmplified.LOGGER.log(Level.DEBUG, "mushroom temple | "+(chunkX*16)+"
-			// "+(chunkZ*16));
+			int x = (chunkX << 4) + 7;
+			int z = (chunkZ << 4) + 7;
+			int surfaceY = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+			int y = Math.min(surfaceY, 230);
+
+			if (y >= 70)
+			{
+				BlockPos blockpos = new BlockPos(x, y, z);
+				IceSpikeTemplePiecesUA.start(templateManagerIn, blockpos, rotation, this.components, this.rand);
+				this.recalculateStructureSize();
+				// UltraAmplified.LOGGER.log(Level.DEBUG, "Ice Spike Temple | "+(blockpos.getX()
+				// + xOffset)+" "+blockpos.getY()+" "+(blockpos.getZ() + zOffset));
+			}
 		}
-	}
 
+	}
 }

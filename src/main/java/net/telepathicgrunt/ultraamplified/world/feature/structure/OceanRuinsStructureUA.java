@@ -107,7 +107,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			OceanRuinConfig oceanruinconfig = generator.getStructureConfig(biomeIn, UAFeatures.OCEAN_RUIN_UA);
+			OceanRuinConfig oceanruinconfig = generator.getStructureConfig(biomeIn, UAFeatures.OCEAN_RUIN);
 			int x = chunkX * 16;
 			int z = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(x, 0, z);

@@ -10,7 +10,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.world.biome.UABiome;
 
 
 public class ShatteredSavannaSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>

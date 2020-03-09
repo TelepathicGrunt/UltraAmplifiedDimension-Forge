@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.Placement;
@@ -25,7 +24,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
@@ -33,15 +31,15 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.UASurfaceBuilders;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
-import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.UACarvers;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.UACarvers;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
+import net.telepathicgrunt.ultraamplified.world.worldtypes.UAWorldType;
 
 
 /*
@@ -109,7 +107,7 @@ public class UltraAmplified
 	public void setup(final FMLCommonSetupEvent event)
 	{
 		//registers the worldtype used for this mod so we can select that worldtype
-		UltraAmplifiedWorldType = new WorldTypeUA();
+		UltraAmplifiedWorldType = new UAWorldType();
 
 		CapabilityPlayerPosAndDim.register();
 		RavineCarver.setFillerMap();
@@ -182,7 +180,7 @@ public class UltraAmplified
 
 
 		/**
-		 * This method will be called by Forge when it is time for the mod to register placement.
+		 * This method will be called by Forge when it is time for the mod to register surface builders.
 		 */
 		@SubscribeEvent
 		public static void onRegisterSurfacebuilders(final RegistryEvent.Register<SurfaceBuilder<?>> event)
@@ -190,14 +188,6 @@ public class UltraAmplified
 			UASurfaceBuilders.registerSurfaceBuilders(event);
 		}
 
-		/**
-		 * This method will be called by Forge when it is time for the mod to register placement.
-		 */
-		@SubscribeEvent
-		public static void onRegisterChunkGenerator(final RegistryEvent.Register<ChunkGeneratorType<?,?>> event)
-		{
-			
-		}
 		
 		/**
 		 * This method will be called by Forge when it is time for the mod to register carvers.

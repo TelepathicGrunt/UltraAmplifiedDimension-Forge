@@ -36,7 +36,7 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
-public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extends ChunkGenerator<T>
+public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T>
 {
 
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
@@ -72,7 +72,7 @@ public abstract class NoiseChunkGeneratorUA<T extends GenerationSettings> extend
 	protected final BlockState defaultFluid;
 
 
-	public NoiseChunkGeneratorUA(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_)
+	public UANoiseChunkGenerator(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_)
 	{
 		super(p_i49931_1_, p_i49931_2_, p_i49931_6_);
 		this.verticalNoiseGranularity = verticalNoiseGranularityIn;

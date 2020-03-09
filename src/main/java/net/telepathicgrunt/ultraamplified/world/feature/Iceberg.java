@@ -19,10 +19,10 @@ import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.IcebergFeature;
 
 
-public class IcebergUA extends IcebergFeature
+public class Iceberg extends IcebergFeature
 {
 
-	public IcebergUA(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
+	public Iceberg(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}

@@ -42,14 +42,14 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplif
 import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
 
 
-public class BiomeProviderUA extends BiomeProvider
+public class UABiomeProvider extends BiomeProvider
 {
 
 	private final Layer genBiomes;
 	private final Set<Biome> biomes;
 
 
-	public BiomeProviderUA(long seed, WorldType worldType)
+	public UABiomeProvider(long seed, WorldType worldType)
 	{
 		super(UABiomes.getBiomeArray());
 		biomes = UABiomes.getBiomeArray();
@@ -60,7 +60,7 @@ public class BiomeProviderUA extends BiomeProvider
 	}
 
 
-	public BiomeProviderUA(World world)
+	public UABiomeProvider(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getGenerator());
 	}

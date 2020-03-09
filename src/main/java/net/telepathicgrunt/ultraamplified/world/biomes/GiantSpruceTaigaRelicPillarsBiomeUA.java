@@ -49,9 +49,9 @@ public class GiantSpruceTaigaRelicPillarsBiomeUA extends UABiome
 	public GiantSpruceTaigaRelicPillarsBiomeUA()
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.TAIGA).depth(0.2F).scale(0.2F).temperature(0.5F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent("giant_tree_taiga_hills"));
-		this.addStructureFeature(UAFeatures.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.TAIGA)));
-		this.addStructureFeature(UAFeatures.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructureFeature(UAFeatures.FORTRESS_UA.configure(new FortressConfigUA(false)));
+		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.TAIGA)));
+		this.addStructureFeature(UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.FORTRESS.configure(new FortressConfigUA(false)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
@@ -97,10 +97,10 @@ public class GiantSpruceTaigaRelicPillarsBiomeUA extends UABiome
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(Blocks.CLAY.getDefaultState(), 4, 1, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.CLAY.getDefaultState(), Blocks.STONE.getDefaultState()))).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_BOTTOMS.configure(new PercentageAndFrequencyConfig(1F, 4))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()))).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_WATER_BOTTOMS.configure(new PercentageAndFrequencyConfig(1F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.RANDOM_SELECTOR.configure(new MultipleRandomFeatureConfig(ImmutableList.of(UAFeatures.GIANT_PINE_TREE_1_UA.configure(UAFeatures.GIANT_SPRUCE_CONFIG).withChance(0.53333334F), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withChance(0.23333334F)), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG))))
+				Feature.RANDOM_SELECTOR.configure(new MultipleRandomFeatureConfig(ImmutableList.of(UAFeatures.GIANT_PINE_TREE_1.configure(UAFeatures.GIANT_SPRUCE_CONFIG).withChance(0.53333334F), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withChance(0.23333334F)), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG))))
 						.createDecoratedFeature(UAPlacements.AT_SURFACE_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(20, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.RANDOM_SELECTOR.configure(new MultipleRandomFeatureConfig(ImmutableList.of(UAFeatures.GIANT_PINE_TREE_1_UA.configure(UAFeatures.GIANT_SPRUCE_CONFIG).withChance(0.53333334F), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withChance(0.23333334F)), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG))))
+				Feature.RANDOM_SELECTOR.configure(new MultipleRandomFeatureConfig(ImmutableList.of(UAFeatures.GIANT_PINE_TREE_1.configure(UAFeatures.GIANT_SPRUCE_CONFIG).withChance(0.53333334F), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withChance(0.23333334F)), Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG))))
 						.createDecoratedFeature(UAPlacements.AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(17, 0.5F, 1))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.DEFAULT_FLOWER_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.20F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.70F, 3))));

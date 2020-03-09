@@ -50,10 +50,10 @@ public class BambooJungleBiomeUA extends UABiome
 	{
 		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.RAIN).category(Biome.Category.JUNGLE).depth(0.1F).scale(0.2F).temperature(0.95F).downfall(0.9F).waterColor(4159204).waterFogColor(329011).parent((String) null));
 
-		this.addStructureFeature(UAFeatures.MINESHAFT_UA.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.JUNGLE)));
-		this.addStructureFeature(UAFeatures.STRONGHOLD_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructureFeature(UAFeatures.FORTRESS_UA.configure(new FortressConfigUA(false)));
-		this.addStructureFeature(UAFeatures.JUNGLE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.JUNGLE)));
+		this.addStructureFeature(UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructureFeature(UAFeatures.FORTRESS.configure(new FortressConfigUA(false)));
+		this.addStructureFeature(UAFeatures.JUNGLE_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructureFeaturesUA();
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
@@ -94,9 +94,9 @@ public class BambooJungleBiomeUA extends UABiome
 
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.configure(new MultipleRandomFeatureConfig(
-						ImmutableList.of(Feature.FANCY_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.FANCY_TREE_CONFIG)).withChance(0.05F), UAFeatures.JUNGLE_BUSH_UA.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.JUNGLE_GROUND_BUSH_CONFIG)).withChance(0.15F), Feature.MEGA_JUNGLE_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG)).withChance(0.7F)),
+						ImmutableList.of(Feature.FANCY_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.FANCY_TREE_CONFIG)).withChance(0.05F), UAFeatures.JUNGLE_BUSH.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.JUNGLE_GROUND_BUSH_CONFIG)).withChance(0.15F), Feature.MEGA_JUNGLE_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG)).withChance(0.7F)),
 						Feature.NORMAL_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)))).createDecoratedFeature(UAPlacements.AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(5, 0.1F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.BAMBOO_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.85F, 115))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.BAMBOO.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.85F, 115))));
 
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.DEFAULT_FLOWER_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.20F, 2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.MELON_PATCH_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.07F, 1))));

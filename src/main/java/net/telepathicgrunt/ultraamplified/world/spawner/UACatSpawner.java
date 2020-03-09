@@ -13,7 +13,7 @@ import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
-public class CatSpawnerUA extends CatSpawner
+public class UACatSpawner extends CatSpawner
 {
 	private int field_221125_a;
 
@@ -54,7 +54,7 @@ public class CatSpawnerUA extends CatSpawner
 							//                        return this.func_221121_a(world, blockpos);
 							//                     }
 
-							if (UAFeatures.WITCH_HUT_UA.isPositionInsideStructure(world, blockpos))
+							if (UAFeatures.WITCH_HUT.isPositionInsideStructure(world, blockpos))
 							{
 								return this.func_221123_a(world, blockpos);
 							}

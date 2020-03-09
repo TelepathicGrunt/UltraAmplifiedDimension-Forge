@@ -20,10 +20,10 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
-public class IceSpikeUA extends Feature<NoFeatureConfig>
+public class IceSpike extends Feature<NoFeatureConfig>
 {
 
-	public IceSpikeUA(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+	public IceSpike(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}

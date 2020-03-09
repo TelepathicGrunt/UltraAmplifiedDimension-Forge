@@ -18,29 +18,18 @@ public class UABlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, UltraAmplified.MODID);
 
-	public static final RegistryObject<Block> AMPLIFIEDPORTAL = BLOCKS.register("amplified_portal", () -> new AmplifiedPortalBlock());
-
-	public static final RegistryObject<Block> GLOWSTONE_ORE = BLOCKS.register("glowstone_ore", () -> new GlowstoneOreBlock());
-
-	public static final RegistryObject<Block> COARSE_GLOWDIRT = BLOCKS.register("coarse_glowdirt", () -> new CoarseGlowdirtBlock());
-
-	public static final RegistryObject<Block> GLOWDIRT = BLOCKS.register("glowdirt", () -> new GlowdirtBlock());
-
-	public static final RegistryObject<Block> GLOWGRASS_BLOCK = BLOCKS.register("glowgrass_block", () -> new GlowgrassBlock());
-
-	public static final RegistryObject<Block> GLOWMYCELIUM = BLOCKS.register("glowmycelium", () -> new GlowmyceliumBlock());
-
-	public static final RegistryObject<Block> GLOWPODZOL = BLOCKS.register("glowpodzol", () -> new GlowpodzolBlock());
-
-	public static final RegistryObject<Block> GLOWSAND = BLOCKS.register("glowsand", () -> new GlowsandBlock());
-
-	public static final RegistryObject<Block> REDGLOWSAND = BLOCKS.register("red_glowsand", () -> new RedGlowsandBlock());
-
-	public static final RegistryObject<Block> CACTUSBODYBLOCKUA = BLOCKS.register("cactus_body_block_ua", () -> new CactusBodyBlockUA());
-
-	public static final RegistryObject<Block> CACTUSCORNERBLOCKUA = BLOCKS.register("cactus_corner_block_ua", () -> new CactusCornerBlockUA());
-
-	public static final RegistryObject<Block> CACTUSMAINBLOCKUA = BLOCKS.register("cactus_main_block_ua", () -> new CactusMainBlockUA());
+	public static final RegistryObject<Block>	AMPLIFIEDPORTAL		= BLOCKS.register("amplified_portal", () -> new AmplifiedPortalBlock());
+	public static final RegistryObject<Block>	GLOWSTONE_ORE		= BLOCKS.register("glowstone_ore", () -> new GlowstoneOreBlock());
+	public static final RegistryObject<Block>	COARSE_GLOWDIRT		= BLOCKS.register("coarse_glowdirt", () -> new CoarseGlowdirtBlock());
+	public static final RegistryObject<Block>	GLOWDIRT			= BLOCKS.register("glowdirt", () -> new GlowdirtBlock());
+	public static final RegistryObject<Block>	GLOWGRASS_BLOCK		= BLOCKS.register("glowgrass_block", () -> new GlowgrassBlock());
+	public static final RegistryObject<Block>	GLOWMYCELIUM		= BLOCKS.register("glowmycelium", () -> new GlowmyceliumBlock());
+	public static final RegistryObject<Block>	GLOWPODZOL			= BLOCKS.register("glowpodzol", () -> new GlowpodzolBlock());
+	public static final RegistryObject<Block>	GLOWSAND			= BLOCKS.register("glowsand", () -> new GlowsandBlock());
+	public static final RegistryObject<Block>	REDGLOWSAND			= BLOCKS.register("red_glowsand", () -> new RedGlowsandBlock());
+	public static final RegistryObject<Block>	CACTUSBODYBLOCKUA	= BLOCKS.register("cactus_body_block_ua", () -> new CactusBodyBlockUA());
+	public static final RegistryObject<Block>	CACTUSCORNERBLOCKUA	= BLOCKS.register("cactus_corner_block_ua", () -> new CactusCornerBlockUA());
+	public static final RegistryObject<Block>	CACTUSMAINBLOCKUA	= BLOCKS.register("cactus_main_block_ua", () -> new CactusMainBlockUA());
 
 	//creative tab to hold our block items
 	public static final ItemGroup ULTRAMAPLIFIED = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplified.MODID)

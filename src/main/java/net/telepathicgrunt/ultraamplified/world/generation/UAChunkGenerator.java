@@ -27,10 +27,10 @@ import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
-import net.telepathicgrunt.ultraamplified.world.spawner.CatSpawnerUA;
+import net.telepathicgrunt.ultraamplified.world.spawner.UACatSpawner;
 
 
-public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings>
+public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings>
 {
 	private static final float[] BIOME_WEIGHTING_KERNEL = Util.make(new float[25], (p_222575_0_) ->
 	{
@@ -47,7 +47,7 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	private final OctavesNoiseGenerator depthNoise;
 	private final PhantomSpawner phantomSpawner = new PhantomSpawner();
 	private final PatrolSpawner patrolSpawner = new PatrolSpawner();
-	private final CatSpawnerUA catSpawner = new CatSpawnerUA();
+	private final UACatSpawner catSpawner = new UACatSpawner();
 
 	protected static final Set<Block> acceptableStoneFortressBlocks = Stream.of(Blocks.CRACKED_STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.STONE_BRICKS, Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_MOSSY_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS).collect(Collectors.toCollection(HashSet::new));
 
@@ -169,16 +169,16 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos)
 	{
-		if (UAFeatures.WITCH_HUT_UA.func_202383_b(this.world, pos))
+		if (UAFeatures.WITCH_HUT.func_202383_b(this.world, pos))
 		{
 			//Witch Hut entity spawning
 			if (creatureType == EntityClassification.MONSTER)
 			{
-				return UAFeatures.WITCH_HUT_UA.getSpawnList();
+				return UAFeatures.WITCH_HUT.getSpawnList();
 			}
 			if (creatureType == EntityClassification.CREATURE)
 			{
-				return UAFeatures.WITCH_HUT_UA.getCreatureSpawnList();
+				return UAFeatures.WITCH_HUT.getCreatureSpawnList();
 			}
 		}
 		else if (creatureType == EntityClassification.MONSTER)
@@ -191,50 +191,50 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 			//Stone Fortress entity spawning
 			if (acceptableStoneFortressBlocks.contains(this.world.getBlockState(pos.down()).getBlock()))
 			{
-				if (UAFeatures.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.FORTRESS.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS).getStoneFortressSpawnList();
 				}
-				if (UAFeatures.FORTRESS_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.FORTRESS.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS).getStoneFortressSpawnList();
 				}
 			}
 			//Nether Fortress entity spawning
 			else if (this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICKS)
 			{
-				if (UAFeatures.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.FORTRESS.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS).getNetherFortressSpawnList();
 				}
-				if (UAFeatures.FORTRESS_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.FORTRESS.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS).getNetherFortressSpawnList();
 				}
 			}
 
 			//Pillager Outpost entity spawning
-			if (UAFeatures.PILLAGER_OUTPOST_UA.isPositionInStructure(this.world, pos))
+			if (UAFeatures.PILLAGER_OUTPOST.isPositionInStructure(this.world, pos))
 			{
-				return UAFeatures.PILLAGER_OUTPOST_UA.getSpawnList();
+				return UAFeatures.PILLAGER_OUTPOST.getSpawnList();
 			}
 
 			//Ocean Monument entity spawning
-			if (UAFeatures.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos))
+			if (UAFeatures.OCEAN_MONUMENT.isPositionInStructure(this.world, pos))
 			{
-				return UAFeatures.OCEAN_MONUMENT_UA.getSpawnList();
+				return UAFeatures.OCEAN_MONUMENT.getSpawnList();
 			}
 
 			//End City entity spawning
 			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
-				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{
-					return UAFeatures.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY.getSpawnList();
 				}
-				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{
-					return UAFeatures.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY.getSpawnList();
 				}
 			}
 		}
@@ -243,13 +243,13 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 			//End City entity spawning
 			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
-				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{
-					return UAFeatures.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY.getSpawnList();
 				}
-				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{
-					return UAFeatures.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY.getSpawnList();
 				}
 			}
 		}
