@@ -197,6 +197,7 @@ public class UAFeatures
 		RegUtil.register(registry, STONELESS_LAKE, "stoneless_lakes");
 		RegUtil.register(registry, SHALLOW_LAKE, "wide_shallow_lakes");
 		RegUtil.register(registry, CONTAIN_OCEAN_LIQUID, "contain_water");
+		RegUtil.register(registry, CONTAIN_UNDERGROUND_LIQUID, "contain_underground_liquid");
 		RegUtil.register(registry, ICE_PATCH_SANDY, "ice_patch");
 		RegUtil.register(registry, GIANT_ICE_SPIKE, "ice_spike");
 		RegUtil.register(registry, DISK_DRY, "disk_dry");
@@ -215,6 +216,8 @@ public class UAFeatures
 		RegUtil.register(registry, CORAL_MUSHROOM, "coral_mushroom");
 		RegUtil.register(registry, BAMBOO, "bamboo");
 		RegUtil.register(registry, ROOTS, "roots");
+		RegUtil.register(registry, NETHER_UNDERWATER_MAGMA, "nether_underwater_magma");
+		RegUtil.register(registry, RARE_LAVA, "rare_lava");
 		RegUtil.register(registry, HORNED_SWAMP_TREE, "horned_swamp_tree");
 		RegUtil.register(registry, GIANT_BIRCH_TREE, "giant_birch_tree");
 		RegUtil.register(registry, GIANT_PINE_TREE_1, "giant_pine_1_tree");

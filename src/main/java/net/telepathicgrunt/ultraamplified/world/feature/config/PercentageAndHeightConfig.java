@@ -27,10 +27,10 @@ public class PercentageAndHeightConfig implements IPlacementConfig
 	}
 
 
-	public static PercentageAndHeightConfig deserialize(Dynamic<?> p_214723_0_)
+	public static PercentageAndHeightConfig deserialize(Dynamic<?> ops)
 	{
-		float percentage = p_214723_0_.get("percentage").asFloat(0.0f);
-		int height = p_214723_0_.get("height").asInt(0);
+		float percentage = ops.get("percentage").asFloat(0.0f);
+		int height = ops.get("height").asInt(0);
 		return new PercentageAndHeightConfig(percentage, height);
 	}
 }

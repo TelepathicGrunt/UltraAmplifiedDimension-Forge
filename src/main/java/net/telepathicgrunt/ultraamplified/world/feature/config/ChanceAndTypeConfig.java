@@ -33,10 +33,10 @@ public class ChanceAndTypeConfig implements IPlacementConfig
 	}
 
 
-	public static ChanceAndTypeConfig deserialize(Dynamic<?> p_214733_0_)
+	public static ChanceAndTypeConfig deserialize(Dynamic<?> ops)
 	{
-		float chance = p_214733_0_.get("chance").asFloat(0);
-		Type type = Type.valueOf(p_214733_0_.get("type").asString("SUNSHRINE"));
+		float chance = ops.get("chance").asFloat(0);
+		Type type = Type.valueOf(ops.get("type").asString("SUNSHRINE"));
 		return new ChanceAndTypeConfig(chance, type);
 	}
 }

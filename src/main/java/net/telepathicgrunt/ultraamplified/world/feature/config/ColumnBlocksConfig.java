@@ -34,11 +34,11 @@ public class ColumnBlocksConfig implements IFeatureConfig
 	}
 
 
-	public static <T> ColumnBlocksConfig deserialize(Dynamic<T> p_222853_0_)
+	public static <T> ColumnBlocksConfig deserialize(Dynamic<T> ops)
 	{
-		BlockState topBlock = BlockRegistry.getValue(p_222853_0_.get("top_block").asInt(0)).getDefaultState();
-		BlockState middleBlock = BlockRegistry.getValue(p_222853_0_.get("middle_block").asInt(0)).getDefaultState();
-		BlockState insideBlock = BlockRegistry.getValue(p_222853_0_.get("inside_block").asInt(0)).getDefaultState();
+		BlockState topBlock = BlockRegistry.getValue(ops.get("top_block").asInt(0)).getDefaultState();
+		BlockState middleBlock = BlockRegistry.getValue(ops.get("middle_block").asInt(0)).getDefaultState();
+		BlockState insideBlock = BlockRegistry.getValue(ops.get("inside_block").asInt(0)).getDefaultState();
 		return new ColumnBlocksConfig(topBlock, middleBlock, insideBlock);
 	}
 }

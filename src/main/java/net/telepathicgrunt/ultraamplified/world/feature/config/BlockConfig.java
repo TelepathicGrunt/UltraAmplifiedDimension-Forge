@@ -29,9 +29,9 @@ public class BlockConfig implements IFeatureConfig
 	}
 
 
-	public static <T> BlockConfig deserialize(Dynamic<T> p_222853_0_)
+	public static <T> BlockConfig deserialize(Dynamic<T> ops)
 	{
-		Block block = BlockRegistry.getValue(p_222853_0_.get("block").asInt(0));
+		Block block = BlockRegistry.getValue(ops.get("block").asInt(0));
 		return new BlockConfig(block);
 	}
 }

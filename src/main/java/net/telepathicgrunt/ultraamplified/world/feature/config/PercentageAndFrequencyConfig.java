@@ -27,10 +27,10 @@ public class PercentageAndFrequencyConfig implements IPlacementConfig
 	}
 
 
-	public static PercentageAndFrequencyConfig deserialize(Dynamic<?> p_214723_0_)
+	public static PercentageAndFrequencyConfig deserialize(Dynamic<?> ops)
 	{
-		float chance = p_214723_0_.get("percentage").asFloat(0.0f);
-		int type = p_214723_0_.get("frequency").asInt(0);
+		float chance = ops.get("percentage").asFloat(0.0f);
+		int type = ops.get("frequency").asInt(0);
 		return new PercentageAndFrequencyConfig(chance, type);
 	}
 }

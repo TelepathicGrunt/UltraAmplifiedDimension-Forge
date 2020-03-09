@@ -32,10 +32,10 @@ public class LakeCountRangeAndTypeConfig implements IPlacementConfig
 	}
 
 
-	public static LakeCountRangeAndTypeConfig deserialize(Dynamic<?> p_214723_0_)
+	public static LakeCountRangeAndTypeConfig deserialize(Dynamic<?> ops)
 	{
-		int chance = p_214723_0_.get("chance").asInt(0);
-		Type type = Type.valueOf(p_214723_0_.get("type").asString("WATER"));
+		int chance = ops.get("chance").asInt(0);
+		Type type = Type.valueOf(ops.get("type").asString("WATER"));
 		return new LakeCountRangeAndTypeConfig(chance, type);
 	}
 }

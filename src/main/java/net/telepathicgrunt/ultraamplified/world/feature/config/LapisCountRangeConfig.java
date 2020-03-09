@@ -32,12 +32,12 @@ public class LapisCountRangeConfig implements IPlacementConfig
 	}
 
 
-	public static LapisCountRangeConfig deserialize(Dynamic<?> p_214733_0_)
+	public static LapisCountRangeConfig deserialize(Dynamic<?> ops)
 	{
-		float count = p_214733_0_.get("count").asFloat(0);
-		int baseline = p_214733_0_.get("baseline").asInt(0);
-		int spread = p_214733_0_.get("spread").asInt(0);
-		boolean sealevelBased = p_214733_0_.get("sealevelbased").asBoolean(false);
+		float count = ops.get("count").asFloat(0);
+		int baseline = ops.get("baseline").asInt(0);
+		int spread = ops.get("spread").asInt(0);
+		boolean sealevelBased = ops.get("sealevelbased").asBoolean(false);
 		return new LapisCountRangeConfig(count, baseline, spread, sealevelBased);
 	}
 }

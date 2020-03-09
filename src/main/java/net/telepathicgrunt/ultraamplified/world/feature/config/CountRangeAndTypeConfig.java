@@ -41,13 +41,13 @@ public class CountRangeAndTypeConfig implements IPlacementConfig
 	}
 
 
-	public static CountRangeAndTypeConfig deserialize(Dynamic<?> p_214733_0_)
+	public static CountRangeAndTypeConfig deserialize(Dynamic<?> ops)
 	{
-		float count = p_214733_0_.get("count").asFloat(0);
-		int bottom_offset = p_214733_0_.get("bottom_offset").asInt(0);
-		int top_offset = p_214733_0_.get("top_offset").asInt(0);
-		int maximum = p_214733_0_.get("maximum").asInt(0);
-		Type type = Type.valueOf(p_214733_0_.get("type").asString("COAL"));
+		float count = ops.get("count").asFloat(0);
+		int bottom_offset = ops.get("bottom_offset").asInt(0);
+		int top_offset = ops.get("top_offset").asInt(0);
+		int maximum = ops.get("maximum").asInt(0);
+		Type type = Type.valueOf(ops.get("type").asString("COAL"));
 		return new CountRangeAndTypeConfig(count, bottom_offset, top_offset, maximum, false, type);
 	}
 }
