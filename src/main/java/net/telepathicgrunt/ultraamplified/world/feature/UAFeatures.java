@@ -1,11 +1,13 @@
 package net.telepathicgrunt.ultraamplified.world.feature;
 
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -240,5 +242,14 @@ public class UAFeatures
 
 		//registers the structure pieces.
 		StructureInitUA.registerStructurePieces();
+	}
+	
+
+	/**
+	 * Helper method that will return a random dungeon mob that other mods can influence.
+	 */
+	public static EntityType<?> pickRandomDungeonMob(Random random)
+	{
+		return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(random);
 	}
 }

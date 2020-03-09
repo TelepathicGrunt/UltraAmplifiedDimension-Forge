@@ -19,7 +19,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
  
    MISC:
 ·Fixed bug that seemed to cause a very rare chance of a crash upon entering a world.
-·Cleaned up some code and registered Placement classes to the Forge registry.
+·Cleaned up some code and registered Carvers, Placements, and SurfaceBuilders classes to the Forge registry in backend.
        
        
    (V.7.2.3 Changes) (1.15.2 Minecraft)

@@ -210,7 +210,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
 		else if (roll < 98)
 		{
 			//25% chance
-			EntityType<?> et = pickRandomDungeonMob(rand);
+			EntityType<?> et = UAFeatures.pickRandomDungeonMob(rand);
 			if (et != EntityType.ZOMBIE)
 			{
 				return et;
@@ -230,11 +230,5 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
 			//1% chance
 			return EntityType.ILLUSIONER;
 		}
-	}
-
-
-	private EntityType<?> pickRandomDungeonMob(Random p_201043_1_)
-	{
-		return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(p_201043_1_);
 	}
 }

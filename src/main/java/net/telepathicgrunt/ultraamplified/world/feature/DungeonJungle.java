@@ -192,7 +192,7 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 		if (roll < 48)
 		{
 			//48% chance
-			return pickRandomDungeonMob(rand);
+			return UAFeatures.pickRandomDungeonMob(rand);
 		}
 		else if (roll < 73)
 		{
@@ -203,7 +203,7 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 		else if (roll < 98)
 		{
 			//25% chance
-			return pickRandomDungeonMob(rand);
+			return UAFeatures.pickRandomDungeonMob(rand);
 		}
 		else if (roll == 98)
 		{
@@ -215,11 +215,5 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 			//1% chance
 			return EntityType.CHICKEN;
 		}
-	}
-
-
-	private EntityType<?> pickRandomDungeonMob(Random p_201043_1_)
-	{
-		return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(p_201043_1_);
 	}
 }

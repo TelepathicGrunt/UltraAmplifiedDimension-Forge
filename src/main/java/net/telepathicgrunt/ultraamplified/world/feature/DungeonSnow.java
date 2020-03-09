@@ -194,7 +194,7 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
 		if (roll < 47)
 		{
 			//47% chance
-			EntityType<?> et = pickRandomDungeonMob(rand);
+			EntityType<?> et = UAFeatures.pickRandomDungeonMob(rand);
 			if (et != EntityType.ZOMBIE)
 			{
 				return et;
@@ -229,11 +229,5 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
 			//1% chance
 			return EntityType.SNOW_GOLEM;
 		}
-	}
-
-
-	private EntityType<?> pickRandomDungeonMob(Random p_201043_1_)
-	{
-		return net.minecraftforge.common.DungeonHooks.getRandomDungeonMob(p_201043_1_);
 	}
 }
