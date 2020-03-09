@@ -75,21 +75,21 @@ public class GlowdirtBlock extends Block
 		{
 			if (world.getLight(pos.up()) >= 9)
 			{
-				BlockState replacementBlock = BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState();
+				BlockState replacementBlock = UABlocks.GLOWGRASS_BLOCK.get().getDefaultState();
 
 				for (int i = 0; i < 4; ++i)
 				{
 					BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 					Block neighborBlock = world.getBlockState(blockpos).getBlock();
 
-					if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == BlocksInit.GLOWGRASS_BLOCK.get())
+					if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == UABlocks.GLOWGRASS_BLOCK.get())
 					{
-						replacementBlock = BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState();
+						replacementBlock = UABlocks.GLOWGRASS_BLOCK.get().getDefaultState();
 						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 					}
-					else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == BlocksInit.GLOWMYCELIUM.get())
+					else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == UABlocks.GLOWMYCELIUM.get())
 					{
-						replacementBlock = BlocksInit.GLOWMYCELIUM.get().getDefaultState();
+						replacementBlock = UABlocks.GLOWMYCELIUM.get().getDefaultState();
 						world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 					}
 				}

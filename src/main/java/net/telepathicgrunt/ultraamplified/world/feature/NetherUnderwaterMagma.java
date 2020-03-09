@@ -17,7 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
 public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
@@ -55,7 +55,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 				}
 
 				netherBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
-				if (netherBiome == BiomeInit.NETHERLAND)
+				if (netherBiome == UABiomes.NETHERLAND)
 				{
 					hasNetherBiome = true;
 					x = 16;
@@ -77,7 +77,7 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 			{
 
 				netherBiome = world.getBiome(blockpos$Mutable.add(x, 0, z));
-				if (netherBiome != BiomeInit.NETHERLAND)
+				if (netherBiome != UABiomes.NETHERLAND)
 				{
 					continue;
 				}

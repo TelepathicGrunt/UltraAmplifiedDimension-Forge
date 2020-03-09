@@ -83,7 +83,7 @@ import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.TallBirchForestRelicBiomeUA;
 
 
-public class BiomeInit
+public class UABiomes
 {
 
 	private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES);

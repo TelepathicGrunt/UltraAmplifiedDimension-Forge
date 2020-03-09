@@ -13,10 +13,10 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
 import net.telepathicgrunt.ultraamplified.blocks.CactusBodyBlockUA;
 import net.telepathicgrunt.ultraamplified.blocks.CactusCornerBlockUA;
 import net.telepathicgrunt.ultraamplified.blocks.CactusMainBlockUA;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 
 
 public class BetterCactus extends Feature<NoFeatureConfig>
@@ -57,11 +57,11 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 					//finds what the center should be
 					if (frontSideHeight == backSideHeight)
 					{
-						world.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState().with(CactusBodyBlockUA.FACING, cactusFacing), 18);
+						world.setBlockState(blockpos.up(currentHeight), UABlocks.CACTUSBODYBLOCKUA.get().getDefaultState().with(CactusBodyBlockUA.FACING, cactusFacing), 18);
 					}
 					else
 					{
-						world.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), 18);
+						world.setBlockState(blockpos.up(currentHeight), UABlocks.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), 18);
 					}
 
 					//create the branches off of cactus
@@ -78,7 +78,7 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 				else
 				{
 					//places normal vertical cactus
-					world.setBlockState(blockpos.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
+					world.setBlockState(blockpos.up(currentHeight), UABlocks.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
 				}
 			}
 
@@ -104,7 +104,7 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 		position = position.offset(branchDirection);
 		if (world.isAirBlock(position))
 		{
-			world.setBlockState(position, BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, branchDirection), 18);
+			world.setBlockState(position, UABlocks.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, branchDirection), 18);
 		}
 		else
 		{
@@ -115,7 +115,7 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 		position = position.offset(branchDirection);
 		if (world.isAirBlock(position))
 		{
-			world.setBlockState(position, BlocksInit.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, branchDirection), 18);
+			world.setBlockState(position, UABlocks.CACTUSCORNERBLOCKUA.get().getDefaultState().with(CactusCornerBlockUA.FACING, branchDirection), 18);
 		}
 		else
 		{
@@ -127,7 +127,7 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 		{
 			if (world.isAirBlock(position.up(currentHeight)))
 			{
-				world.setBlockState(position.up(currentHeight), BlocksInit.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
+				world.setBlockState(position.up(currentHeight), UABlocks.CACTUSMAINBLOCKUA.get().getDefaultState().with(CactusMainBlockUA.FACING, Direction.UP), 18);
 
 			}
 			else

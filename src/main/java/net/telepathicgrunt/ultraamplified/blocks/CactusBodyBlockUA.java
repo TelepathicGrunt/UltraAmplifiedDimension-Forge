@@ -64,7 +64,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 				{
 					if (j == 15)
 					{
-						world.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState());
+						world.setBlockState(blockpos, UABlocks.CACTUSBODYBLOCKUA.get().getDefaultState());
 						BlockState blockstate = state.with(AGE, Integer.valueOf(0));
 						world.setBlockState(pos, blockstate, 4);
 						blockstate.neighborChanged(world, blockpos, this, pos, false);

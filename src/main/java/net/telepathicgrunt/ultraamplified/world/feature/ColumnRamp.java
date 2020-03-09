@@ -18,7 +18,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 
@@ -34,7 +34,7 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	{
 		super(configFactory);
 
-		irreplacableBlocks = ImmutableSet.of(Blocks.field_226905_ma_, Blocks.AIR, Blocks.CAVE_AIR, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM, Blocks.CACTUS, BlocksInit.CACTUSBODYBLOCKUA.get(), BlocksInit.CACTUSCORNERBLOCKUA.get(), BlocksInit.CACTUSMAINBLOCKUA.get());
+		irreplacableBlocks = ImmutableSet.of(Blocks.field_226905_ma_, Blocks.AIR, Blocks.CAVE_AIR, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM, Blocks.CACTUS, UABlocks.CACTUSBODYBLOCKUA.get(), UABlocks.CACTUSCORNERBLOCKUA.get(), UABlocks.CACTUSMAINBLOCKUA.get());
 	}
 
 

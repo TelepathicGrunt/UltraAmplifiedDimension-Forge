@@ -198,23 +198,23 @@ public class BiomeAddModdedFeatures
 			// we have a list of vanilla biomes in the order to match the UA biome list in BiomeInit.
 			// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
 			int biomeIndex = 0;
-			for (Biome biome : BiomeInit.getBiomeArray())
+			for (Biome biome : UABiomes.getBiomeArray())
 			{
 				if (biomeIndex == vanillaBiomesToCheck.length)
 				{
 					break; //stop when we hit end of vanilla biome list
 				}
 
-				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (BiomeUA) biome);
+				addModdedFeatureAndSpawns(vanillaBiomesToCheck[biomeIndex], (UABiome) biome);
 				biomeIndex++;
 			}
 
 			//edge case as UA End biome will grab features from multiple end biomes
-			addModdedFeatureAndSpawns(Biomes.SMALL_END_ISLANDS, (BiomeUA) BiomeInit.END_FIELD);
-			addModdedFeatureAndSpawns(Biomes.END_MIDLANDS, (BiomeUA) BiomeInit.END_FIELD);
-			addModdedFeatureAndSpawns(Biomes.END_HIGHLANDS, (BiomeUA) BiomeInit.END_FIELD);
-			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.END_FIELD);
-			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (BiomeUA) BiomeInit.BARREN_END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.SMALL_END_ISLANDS, (UABiome) UABiomes.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_MIDLANDS, (UABiome) UABiomes.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_HIGHLANDS, (UABiome) UABiomes.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (UABiome) UABiomes.END_FIELD);
+			addModdedFeatureAndSpawns(Biomes.END_BARRENS, (UABiome) UABiomes.BARREN_END_FIELD);
 		}
 	}
 
@@ -226,7 +226,7 @@ public class BiomeAddModdedFeatures
 	 * @param uaBiome      - UA biome to get modded features/mobs
 	 */
 	@SuppressWarnings("unlikely-arg-type")
-	private static void addModdedFeatureAndSpawns(Biome vanillaBiome, BiomeUA uaBiome)
+	private static void addModdedFeatureAndSpawns(Biome vanillaBiome, UABiome uaBiome)
 	{
 
 		// FEATURES
@@ -437,7 +437,7 @@ public class BiomeAddModdedFeatures
 		// loop through all features and mobs in UA Biomes and checks to see if they
 		// have a minecraft or UA namespace.
 		// If not, it is a modded feature and we should remove it from the UA biome
-		for (Biome uaBiome : BiomeInit.getBiomeArray())
+		for (Biome uaBiome : UABiomes.getBiomeArray())
 		{
 
 			// FEATURES

@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
-public class BlocksInit
+public class UABlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, UltraAmplified.MODID);
 
@@ -72,10 +72,10 @@ public class BlocksInit
 	 */
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().registerAll(new BlockItem(BlocksInit.AMPLIFIEDPORTAL.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("amplified_portal"), new BlockItem(BlocksInit.GLOWSTONE_ORE.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowstone_ore"), new BlockItem(BlocksInit.COARSE_GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("coarse_glowdirt"),
-				new BlockItem(BlocksInit.GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowdirt"), new BlockItem(BlocksInit.GLOWGRASS_BLOCK.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowgrass_block"), new BlockItem(BlocksInit.GLOWMYCELIUM.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowmycelium"),
-				new BlockItem(BlocksInit.GLOWPODZOL.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowpodzol"), new BlockItem(BlocksInit.GLOWSAND.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowsand"), new BlockItem(BlocksInit.REDGLOWSAND.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("red_glowsand"),
-				new BlockItem(BlocksInit.CACTUSBODYBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_body_block_ua"), new BlockItem(BlocksInit.CACTUSCORNERBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_corner_block_ua"), new BlockItem(BlocksInit.CACTUSMAINBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_main_block_ua"));
+		event.getRegistry().registerAll(new BlockItem(UABlocks.AMPLIFIEDPORTAL.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("amplified_portal"), new BlockItem(UABlocks.GLOWSTONE_ORE.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowstone_ore"), new BlockItem(UABlocks.COARSE_GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("coarse_glowdirt"),
+				new BlockItem(UABlocks.GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowdirt"), new BlockItem(UABlocks.GLOWGRASS_BLOCK.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowgrass_block"), new BlockItem(UABlocks.GLOWMYCELIUM.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowmycelium"),
+				new BlockItem(UABlocks.GLOWPODZOL.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowpodzol"), new BlockItem(UABlocks.GLOWSAND.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowsand"), new BlockItem(UABlocks.REDGLOWSAND.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("red_glowsand"),
+				new BlockItem(UABlocks.CACTUSBODYBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_body_block_ua"), new BlockItem(UABlocks.CACTUSCORNERBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_corner_block_ua"), new BlockItem(UABlocks.CACTUSMAINBLOCKUA.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("cactus_main_block_ua"));
 	}
 
 }

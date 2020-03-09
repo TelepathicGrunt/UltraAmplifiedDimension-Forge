@@ -64,7 +64,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				{
 					if (j == 15)
 					{
-						world.setBlockState(blockpos, BlocksInit.CACTUSBODYBLOCKUA.get().getDefaultState());
+						world.setBlockState(blockpos, UABlocks.CACTUSBODYBLOCKUA.get().getDefaultState());
 						BlockState blockstate = state.with(AGE, Integer.valueOf(0));
 						world.setBlockState(pos, blockstate, 4);
 						blockstate.neighborChanged(world, blockpos, this, pos, false);
@@ -156,7 +156,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				//handling two edge cases
 				//Case 1: attached to horizontal main cactus block that has corner blocks on both sides but neither corner block has a valid block below
 				//Case 2: two corner blocks are facing each otehr with no valid space below
-				if (offsetBlock.getBlock() == BlocksInit.CACTUSMAINBLOCKUA.get())
+				if (offsetBlock.getBlock() == UABlocks.CACTUSMAINBLOCKUA.get())
 				{
 					return ((CactusMainBlockUA) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) world, pos.offset(facing.getOpposite()));
 				}

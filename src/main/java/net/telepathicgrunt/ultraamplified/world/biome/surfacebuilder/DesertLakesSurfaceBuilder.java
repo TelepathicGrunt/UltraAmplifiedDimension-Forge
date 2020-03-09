@@ -10,7 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiome;
 
 
 public class DesertLakesSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -27,11 +27,11 @@ public class DesertLakesSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 
 		if (noise > 1.0D)
 		{
-			BiomeUA.SAND_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BiomeUA.SAND_SANDSTONE_SANDSTONE_SURFACE);
+			UABiome.SAND_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UABiome.SAND_SANDSTONE_SANDSTONE_SURFACE);
 		}
 		else
 		{
-			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, BiomeUA.SANDSTONE_SURFACE);
+			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UABiome.SANDSTONE_SURFACE);
 		}
 
 	}

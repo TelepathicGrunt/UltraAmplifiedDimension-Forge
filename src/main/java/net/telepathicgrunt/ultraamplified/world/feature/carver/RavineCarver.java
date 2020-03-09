@@ -18,7 +18,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
 public class RavineCarver extends WorldCarver<ProbabilityConfig>
@@ -59,13 +59,13 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 		{
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
-			fillerBiomeMap.put(BiomeInit.NETHERLAND, Blocks.NETHERRACK.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.ICED_TERRAIN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.END_FIELD, Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.NETHERLAND, Blocks.NETHERRACK.getDefaultState());
+			fillerBiomeMap.put(UABiomes.ICED_TERRAIN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.ICE_SPIKES, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.FROZEN_OCEAN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.END_FIELD, Blocks.END_STONE.getDefaultState());
 		}
 	}
 
@@ -85,13 +85,13 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 		Biome biome = biomeBlockPos.apply(new BlockPos(originalX * 16, 100, originalZ * 16));
 		int i = (this.func_222704_c() * 2 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
-		double height = biome == BiomeInit.NETHERLAND ? 25 : (double) (random.nextInt(random.nextInt(2) + 1) + 42);
+		double height = biome == UABiomes.NETHERLAND ? 25 : (double) (random.nextInt(random.nextInt(2) + 1) + 42);
 		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 2F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 8.0F;
 		float widthHeightBase = (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
 		int maxIteration = i - random.nextInt(i / 4);
-		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, maxIteration, biome == BiomeInit.NETHERLAND ? random.nextDouble() + 2.5D : random.nextDouble() / 3 + 1.9D, mask);
+		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, maxIteration, biome == UABiomes.NETHERLAND ? random.nextDouble() + 2.5D : random.nextDouble() / 3 + 1.9D, mask);
 		return true;
 	}
 

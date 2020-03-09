@@ -20,7 +20,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -220,89 +220,89 @@ public class BiomeLayerSetupUA
 
 		//deserts
 		if (ConfigUA.desert)
-			biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.DESERT, 40));
+			biomeListsByTemperature[desertIdx].add(new BiomeEntry(UABiomes.DESERT, 40));
 		if (ConfigUA.savanna)
-			biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.SAVANNA, 40));
+			biomeListsByTemperature[desertIdx].add(new BiomeEntry(UABiomes.SAVANNA, 40));
 		if (ConfigUA.plains)
-			biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.PLAINS, 20));
+			biomeListsByTemperature[desertIdx].add(new BiomeEntry(UABiomes.PLAINS, 20));
 		if (ConfigUA.nether)
-			biomeListsByTemperature[desertIdx].add(new BiomeEntry(BiomeInit.NETHERLAND, 30));
+			biomeListsByTemperature[desertIdx].add(new BiomeEntry(UABiomes.NETHERLAND, 30));
 
 		//warm
 		if (ConfigUA.forest)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.FOREST, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.FOREST, 28));
 		if (ConfigUA.darkForest)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.DARK_FOREST, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.DARK_FOREST, 28));
 		if (ConfigUA.rockyField)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.ROCKY_FIELD, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.ROCKY_FIELD, 28));
 		if (ConfigUA.plains)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.PLAINS, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.PLAINS, 28));
 		if (ConfigUA.birchForest)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.BIRCH_FOREST, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.BIRCH_FOREST, 28));
 		if (ConfigUA.swamplands)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.SWAMP, 28));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.SWAMP, 28));
 		if (ConfigUA.mushroom)
-			biomeListsByTemperature[warmIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 8));
+			biomeListsByTemperature[warmIdx].add(new BiomeEntry(UABiomes.MUSHROOM_FIELDS, 8));
 
 		//cool
 		if (ConfigUA.forest)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.FOREST, 32));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.FOREST, 32));
 		if (ConfigUA.rockyField)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.ROCKY_FIELD, 32));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.ROCKY_FIELD, 32));
 		if (ConfigUA.taiga)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.TAIGA, 32));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.TAIGA, 32));
 		if (ConfigUA.plains)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.PLAINS, 12));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.PLAINS, 12));
 		if (ConfigUA.stonePlains)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.STONE_PLAINS, 17));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.STONE_PLAINS, 17));
 		if (ConfigUA.end)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.END_FIELD, 32));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.END_FIELD, 32));
 		if (ConfigUA.mushroom)
-			biomeListsByTemperature[coolIdx].add(new BiomeEntry(BiomeInit.MUSHROOM_FIELDS, 8));
+			biomeListsByTemperature[coolIdx].add(new BiomeEntry(UABiomes.MUSHROOM_FIELDS, 8));
 
 		//icy
 		if (ConfigUA.snowyTundra)
-			biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TUNDRA, 45));
+			biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.SNOWY_TUNDRA, 45));
 		else
 		{
 			//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
 			if (ConfigUA.iceSpike)
-				biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICE_SPIKES, 26));
+				biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.ICE_SPIKES, 26));
 
 			//turns snowy tundra into ice mountain only if config has snowy tundra off and ice mountain on
 			if (ConfigUA.icedTerrain)
-				biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 26));
+				biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.ICED_TERRAIN, 26));
 		}
 
 		if (ConfigUA.icedTerrain)
-			biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.ICED_TERRAIN, 17));
+			biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.ICED_TERRAIN, 17));
 		if (ConfigUA.snowyTaiga)
-			biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.SNOWY_TAIGA, 26));
+			biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.SNOWY_TAIGA, 26));
 		if (ConfigUA.frozenDesert)
-			biomeListsByTemperature[icyIdx].add(new BiomeEntry(BiomeInit.FROZEN_DESERT, 10));
+			biomeListsByTemperature[icyIdx].add(new BiomeEntry(UABiomes.FROZEN_DESERT, 10));
 
 		//special biomes lists used to replace vanilla ones such as mesa, jungles, etc
 
 		if (ConfigUA.jungle)
-			jungleReplacedBiomes.add(new BiomeEntry(BiomeInit.JUNGLE, 70));
+			jungleReplacedBiomes.add(new BiomeEntry(UABiomes.JUNGLE, 70));
 		if (ConfigUA.bambooJungle)
-			jungleReplacedBiomes.add(new BiomeEntry(BiomeInit.BAMBOO_JUNGLE, 30));
+			jungleReplacedBiomes.add(new BiomeEntry(UABiomes.BAMBOO_JUNGLE, 30));
 		if (ConfigUA.giantTreeTaiga)
-			megaTaigaReplacedBiomes.add(new BiomeEntry(BiomeInit.GIANT_TREE_TAIGA, 10));
+			megaTaigaReplacedBiomes.add(new BiomeEntry(UABiomes.GIANT_TREE_TAIGA, 10));
 		if (ConfigUA.badlands)
 		{
-			mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SANDLESS_BADLANDS, 20));
-			mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.WOODED_BADLANDS, 10));
+			mesaReplacedBiomes.add(new BiomeEntry(UABiomes.SANDLESS_BADLANDS, 20));
+			mesaReplacedBiomes.add(new BiomeEntry(UABiomes.WOODED_BADLANDS, 10));
 		}
 		//turns mesa completely into spiky/dissected plateau badlands only if config has mesa off and spiky badlands on
 		else if (ConfigUA.spikyBadlands)
 		{
-			mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.SPIKY_BADLANDS, 10));
-			mesaReplacedBiomes.add(new BiomeEntry(BiomeInit.DISSECTED_PLATEAU_BADLANDS, 10));
+			mesaReplacedBiomes.add(new BiomeEntry(UABiomes.SPIKY_BADLANDS, 10));
+			mesaReplacedBiomes.add(new BiomeEntry(UABiomes.DISSECTED_PLATEAU_BADLANDS, 10));
 		}
 
 		//Setup what m variants are mapped and not
-		BiomeInit.mapMBiomes();
+		UABiomes.mapMBiomes();
 
 		//this is used to help fill any biome list that is empty due to player turning off all of its biome.
 		//otherwise, we will crash if a biome list is empty

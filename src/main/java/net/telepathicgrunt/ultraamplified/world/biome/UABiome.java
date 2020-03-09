@@ -14,15 +14,8 @@ import net.minecraft.world.gen.feature.structure.OceanRuinStructure;
 import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtra;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.HeightBiasedRange;
 import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TwiceSurfaceWithChance;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.BadlandsSurfaceBuilderUA;
@@ -40,37 +33,7 @@ import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.PlateauSurf
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.SandSurfaceBuilder;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.ShatteredSavannaSurfaceBuilderUA;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
-import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AllSoulSandSurfaces;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtBottomOfLedge;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtCenterSurfaceMiniFeature;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceBelowTopLayerWithExtra;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceRoofedForest;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceThroughWaterWithExtra;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceUnderTopLedgeWithChance;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.AtSurfaceWithChanceDesertWell;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllLiquidBottoms;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllLiquidSurfaces;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.ChanceOnAllSurfaces;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.DungeonPlacementBands;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.FixedHeightWithChance;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.GeneralConfigHookupPlacement;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.GlowstonePatchPlacement1;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.GlowstonePlacement;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBasedLavafallsRange;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBasedLavafallsRange2;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBasedWaterfallsRange;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.HeightBiasedEndIslandRange;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.LakePlacement;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.LapisPlacement;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.LedgeUndersideMiniFeature;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.PassthroughChest;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.RandomChanceUnderSurface;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacement;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
@@ -78,42 +41,8 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigU
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePastStyledPiecesUA;
 
 
-public class BiomeUA extends Biome
+public class UABiome extends Biome
 {
-
-	//set up custom position placements
-	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLedgeWithChance(ChanceConfig::deserialize);
-	public static final Placement<ChanceConfig> RANDOM_CHANCE_UNDER_SURFACE = new RandomChanceUnderSurface(ChanceConfig::deserialize);
-	public static final Placement<CountRangeConfig> RANDOM_BOTTOM_LAYER = new AtBottomOfLedge(CountRangeConfig::deserialize);
-	public static final Placement<ChanceConfig> TWICE_SURFACE_WITH_CHANCE_UA = new TwiceSurfaceWithChance(ChanceConfig::deserialize);
-	public static final Placement<CountRangeConfig> LAVAFALL_RANGE = new HeightBasedLavafallsRange(CountRangeConfig::deserialize);
-	public static final Placement<CountRangeConfig> LAVAFALL_RANGE_2 = new HeightBasedLavafallsRange2(CountRangeConfig::deserialize);
-	public static final Placement<CountRangeConfig> WATERFALL_RANGE = new HeightBasedWaterfallsRange(CountRangeConfig::deserialize);
-	public static final Placement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_SURFACES_UA = new ChanceOnAllSurfaces(PercentageAndFrequencyConfig::deserialize);
-	public static final Placement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_WATER_SURFACES_UA = new ChanceOnAllLiquidSurfaces(PercentageAndFrequencyConfig::deserialize);
-	public static final Placement<PercentageAndFrequencyConfig> CHANCE_ON_ALL_WATER_BOTTOMS_UA = new ChanceOnAllLiquidBottoms(PercentageAndFrequencyConfig::deserialize);
-	public static final Placement<PercentageAndFrequencyConfig> NETHERWART_SOUL_SAND_SURFACES_UA = new AllSoulSandSurfaces(PercentageAndFrequencyConfig::deserialize);
-	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_WITH_EXTRA_UA = new AtSurfaceWithExtra(AtSurfaceWithExtraConfig::deserialize);
-	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA_UA = new AtSurfaceBelowTopLayerWithExtra(AtSurfaceWithExtraConfig::deserialize);
-	public static final Placement<AtSurfaceWithExtraConfig> AT_SURFACE_THROUGH_WATER_WITH_EXTRA_UA = new AtSurfaceThroughWaterWithExtra(AtSurfaceWithExtraConfig::deserialize);
-	public static final Placement<AtSurfaceWithExtraConfig> ROOFED_TREE_UA = new AtSurfaceRoofedForest(AtSurfaceWithExtraConfig::deserialize);
-	public static final Placement<ChanceAndTypeConfig> AT_CENTER_SURFACE_MINI_FEATURE = new AtCenterSurfaceMiniFeature(ChanceAndTypeConfig::deserialize);
-	public static final Placement<ChanceAndTypeConfig> LEDGE_UNDERSIDE_MINI_FEATURE = new LedgeUndersideMiniFeature(ChanceAndTypeConfig::deserialize);
-	public static final Placement<ChanceConfig> GLOWSTONE_VARIANT_PATCH = new GlowstonePatchPlacement1(ChanceConfig::deserialize);
-	public static final Placement<NoPlacementConfig> DUNGEON_PLACEMENT = new DungeonPlacementBands(NoPlacementConfig::deserialize);
-	public static final Placement<NoPlacementConfig> GLOWSTONE_PLACEMENT = new GlowstonePlacement(NoPlacementConfig::deserialize);
-	public static final Placement<CountRangeAndTypeConfig> GENERAL_PLACEMENT = new GeneralConfigHookupPlacement(CountRangeAndTypeConfig::deserialize);
-	public static final Placement<LapisCountRangeConfig> LAPIS_PLACEMENT = new LapisPlacement(LapisCountRangeConfig::deserialize);
-	public static final Placement<CountRangeConfig> HEIGHT_BIASED_RANGE_UA = new HeightBiasedRange(CountRangeConfig::deserialize);
-	public static final Placement<CountRangeConfig> HEIGHT_BIASED_END_ISLAND_RANGE_UA = new HeightBiasedEndIslandRange(CountRangeConfig::deserialize);
-	public static final Placement<PercentageAndHeightConfig> FIXED_HEIGHT_WITH_CHANCE = new FixedHeightWithChance(PercentageAndHeightConfig::deserialize);
-	//needed so we can prevent vanilla Treasure Chest from spawning if config is off
-	public static final Placement<NoPlacementConfig> PASSTHROUGH_CHEST = new PassthroughChest(NoPlacementConfig::deserialize);
-	//needed so we can prevent vanilla Desert Well from spawning if config is off
-	public static final Placement<ChanceConfig> AT_SURFACE_WITH_CHANCE_DESERT_WELL = new AtSurfaceWithChanceDesertWell(ChanceConfig::deserialize);
-	//needed so we can prevent lava lakes and water lakes from spawning if config is off
-	public static final Placement<LakeCountRangeAndTypeConfig> LAKE_PLACEMENT = new LakePlacement(LakeCountRangeAndTypeConfig::deserialize);
-
 	protected static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
 	protected static final BlockState WATER = Blocks.WATER.getDefaultState();
 	protected static final BlockState SNOW_BLOCK = Blocks.SNOW_BLOCK.getDefaultState();
@@ -156,7 +85,7 @@ public class BiomeUA extends Biome
 	public static final SurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA_SURFACE_BUILDER_UA = new ShatteredSavannaSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 
 
-	protected BiomeUA(Biome.Builder biomeBuilder)
+	protected UABiome(Biome.Builder biomeBuilder)
 	{
 		super(biomeBuilder);
 	}
@@ -178,7 +107,7 @@ public class BiomeUA extends Biome
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.JUNGLE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WITCH_HUT_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.WOODLAND_MANSION_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.configure(new BuriedTreasureConfig(0.01F)).createDecoratedFeature(PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.configure(new BuriedTreasureConfig(0.01F)).createDecoratedFeature(UAPlacement.PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.PILLAGER_OUTPOST_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.MUSHROOM_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, FeatureUA.ICE_SPIKE_TEMPLE_UA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));

@@ -20,7 +20,7 @@ import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
@@ -65,13 +65,13 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		{
 			fillerBiomeMap = new HashMap<Biome, BlockState>();
 
-			fillerBiomeMap.put(BiomeInit.NETHERLAND, Blocks.NETHERRACK.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.ICED_TERRAIN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState());
-			fillerBiomeMap.put(BiomeInit.END_FIELD, Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.NETHERLAND, Blocks.NETHERRACK.getDefaultState());
+			fillerBiomeMap.put(UABiomes.ICED_TERRAIN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.ICE_SPIKES, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.DEEP_FROZEN_OCEAN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.FROZEN_OCEAN, Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.BARREN_END_FIELD, Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(UABiomes.END_FIELD, Blocks.END_STONE.getDefaultState());
 		}
 	}
 
@@ -87,15 +87,15 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		{
 			lavaFloorBiomeMap = new HashMap<Biome, BlockState>();
 
-			lavaFloorBiomeMap.put(BiomeInit.ICED_TERRAIN, Blocks.OBSIDIAN.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.ICE_SPIKES, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.RELIC_SNOWY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.SNOWY_ROCKY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.SNOWY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.SNOWY_TUNDRA, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.FROZEN_DESERT, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.DEEP_FROZEN_OCEAN, Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(BiomeInit.FROZEN_OCEAN, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.ICED_TERRAIN, Blocks.OBSIDIAN.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.ICE_SPIKES, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.RELIC_SNOWY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.SNOWY_ROCKY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.SNOWY_TAIGA, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.SNOWY_TUNDRA, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.FROZEN_DESERT, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.DEEP_FROZEN_OCEAN, Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(UABiomes.FROZEN_OCEAN, Blocks.MAGMA_BLOCK.getDefaultState());
 		}
 	}
 

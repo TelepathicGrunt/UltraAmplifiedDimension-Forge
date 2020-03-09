@@ -62,7 +62,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
 			{
 				int i;
 
-				for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this || world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSBODYBLOCKUA.get() || world.getBlockState(pos.down(i)).getBlock() == BlocksInit.CACTUSCORNERBLOCKUA.get(); ++i)
+				for (i = 1; world.getBlockState(pos.down(i)).getBlock() == this || world.getBlockState(pos.down(i)).getBlock() == UABlocks.CACTUSBODYBLOCKUA.get() || world.getBlockState(pos.down(i)).getBlock() == UABlocks.CACTUSCORNERBLOCKUA.get(); ++i)
 				{
 					;
 				}

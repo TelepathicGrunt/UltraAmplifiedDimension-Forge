@@ -10,6 +10,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,10 +24,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
@@ -35,6 +36,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacement;
 import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 
@@ -131,7 +133,7 @@ public class UltraAmplified
 		public static void registerBiomes(final RegistryEvent.Register<Biome> event)
 		{
 			//registers all my modified biomes
-			BiomeInit.registerBiomes(event);
+			UABiomes.registerBiomes(event);
 			//LOGGER.log(Level.INFO, "Biomes registered.");
 		}
 
@@ -143,7 +145,7 @@ public class UltraAmplified
 		@SubscribeEvent
 		public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 		{
-			BlocksInit.registerBlocks(event);
+			UABlocks.registerBlocks(event);
 			//LOGGER.log(Level.INFO, "Blocks registered.");
 		}
 
@@ -155,7 +157,7 @@ public class UltraAmplified
 		@SubscribeEvent
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 		{
-			BlocksInit.registerItems(event);
+			UABlocks.registerItems(event);
 			//LOGGER.log(Level.INFO, "Items registered.");
 		}
 
@@ -167,6 +169,16 @@ public class UltraAmplified
 		public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event)
 		{
 			FeatureUA.registerFeatures(event);
+			//LOGGER.log(Level.INFO, "features registered.");
+		}
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register placement.
+		 */
+		@SubscribeEvent
+		public static void onRegisterPlacement(final RegistryEvent.Register<Placement<?>> event)
+		{
+			UAPlacement.registerPlacements(event);
 			//LOGGER.log(Level.INFO, "features registered.");
 		}
 

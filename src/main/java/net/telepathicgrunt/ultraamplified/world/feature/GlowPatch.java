@@ -17,7 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.CountConfig;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 
 
 public class GlowPatch extends Feature<CountConfig>
@@ -35,14 +35,14 @@ public class GlowPatch extends Feature<CountConfig>
 		{
 			GLOWBLOCKMAP = new HashMap<BlockState, BlockState>();
 
-			GLOWBLOCKMAP.put(Blocks.DIRT.getDefaultState(), BlocksInit.GLOWDIRT.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.COARSE_DIRT.getDefaultState(), BlocksInit.COARSE_GLOWDIRT.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.GRASS_BLOCK.getDefaultState(), BlocksInit.GLOWGRASS_BLOCK.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.MYCELIUM.getDefaultState(), BlocksInit.GLOWMYCELIUM.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.STONE.getDefaultState(), BlocksInit.GLOWSTONE_ORE.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.PODZOL.getDefaultState(), BlocksInit.GLOWPODZOL.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.SAND.getDefaultState(), BlocksInit.GLOWSAND.get().getDefaultState());
-			GLOWBLOCKMAP.put(Blocks.RED_SAND.getDefaultState(), BlocksInit.REDGLOWSAND.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.DIRT.getDefaultState(), UABlocks.GLOWDIRT.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.COARSE_DIRT.getDefaultState(), UABlocks.COARSE_GLOWDIRT.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.GRASS_BLOCK.getDefaultState(), UABlocks.GLOWGRASS_BLOCK.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.MYCELIUM.getDefaultState(), UABlocks.GLOWMYCELIUM.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.STONE.getDefaultState(), UABlocks.GLOWSTONE_ORE.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.PODZOL.getDefaultState(), UABlocks.GLOWPODZOL.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.SAND.getDefaultState(), UABlocks.GLOWSAND.get().getDefaultState());
+			GLOWBLOCKMAP.put(Blocks.RED_SAND.getDefaultState(), UABlocks.REDGLOWSAND.get().getDefaultState());
 		}
 	}
 

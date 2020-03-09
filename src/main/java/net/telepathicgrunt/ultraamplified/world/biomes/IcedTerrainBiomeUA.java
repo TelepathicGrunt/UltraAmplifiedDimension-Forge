@@ -16,10 +16,11 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiome;
 import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CarversUA;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacement;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
@@ -27,7 +28,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigU
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePastStyledPiecesUA;
 
 
-public class IcedTerrainBiomeUA extends BiomeUA
+public class IcedTerrainBiomeUA extends UABiome
 {
 	public IcedTerrainBiomeUA()
 	{
@@ -50,12 +51,12 @@ public class IcedTerrainBiomeUA extends BiomeUA
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.configure(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 30, 0, 250))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.configure(new BlockStateFeatureConfig(Blocks.PACKED_ICE.getDefaultState())).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 17, 0, 100))));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureUA.STONELESS_LAKE.configure(new BlockStateFeatureConfig(Blocks.BLUE_ICE.getDefaultState())).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 10, 0, 40))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.SNOW_DUNGEONS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, FeatureUA.SNOW_DUNGEONS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacement.DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		DefaultBiomeFeatures.addMushrooms(this);
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, FeatureUA.DISK_DRY.configure(new SphereReplaceConfig(Blocks.LAPIS_BLOCK.getDefaultState(), 0, 0, Lists.newArrayList(Blocks.ICE.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(3, 75, 0, 220))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, FeatureUA.DISK_DRY.configure(new SphereReplaceConfig(Blocks.LAPIS_BLOCK.getDefaultState(), 0, 0, Lists.newArrayList(Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(5, 0, 0, 75))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.BLUE_ICE_WATERFALL.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.COUNT_BIASED_RANGE.configure(new CountRangeConfig(16, 8, 8, 75))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.BLUE_ICE_WATERFALL.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(HEIGHT_BIASED_RANGE_UA.configure(new CountRangeConfig(36, 75, 8, 225))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, FeatureUA.BLUE_ICE_WATERFALL.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacement.HEIGHT_BIASED_RANGE_UA.configure(new CountRangeConfig(36, 75, 8, 225))));
 		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, FeatureUA.SNOW_AND_ICE_LAYERER.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.POLAR_BEAR, 1, 1, 2));

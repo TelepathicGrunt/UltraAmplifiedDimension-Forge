@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 
 
 public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
@@ -69,7 +69,7 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 		}
 
 		//the portal itself
-		world.setBlockState(pos.add(0, 1, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 3);
+		world.setBlockState(pos.add(0, 1, 0), UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 3);
 
 		//top of portal frame
 		for (int x = -1; x <= 1; x++)

@@ -37,7 +37,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
@@ -65,7 +65,7 @@ public class AmplifiedPortalBehavior
 
 			// Checks to see if player uses right click on amplified portal and if so
 			// teleports player to other dimension.
-			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
+			if (event.getWorld().getBlockState(event.getPos()) == UABlocks.AMPLIFIEDPORTAL.get().getDefaultState())
 			{
 				// Extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				// Also makes sure player isn't sneaking so players can crouch place blocks on the portal
@@ -143,7 +143,7 @@ public class AmplifiedPortalBehavior
 						//finds where portal block is
 						while (portalY > 0)
 						{
-							if (serverworld.getBlockState(worldOriginBlockPos.up(portalY)) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
+							if (serverworld.getBlockState(worldOriginBlockPos.up(portalY)) == UABlocks.AMPLIFIEDPORTAL.get().getDefaultState())
 							{
 								break;
 							}
@@ -212,7 +212,7 @@ public class AmplifiedPortalBehavior
 									blockState = serverworld.getBlockState(playerBlockPos);
 								}
 
-								serverworld.setBlockState(playerBlockPos, BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState());
+								serverworld.setBlockState(playerBlockPos, UABlocks.AMPLIFIEDPORTAL.get().getDefaultState());
 
 								playerVec3Pos = new Vec3d(playerBlockPos).add(0.5D, 1D, 0.5D);
 							}
@@ -278,7 +278,7 @@ public class AmplifiedPortalBehavior
 
 		while (pos.getY() >= 0)
 		{
-			if (worldUA.getBlockState(pos) == BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState())
+			if (worldUA.getBlockState(pos) == UABlocks.AMPLIFIEDPORTAL.get().getDefaultState())
 			{
 				return true;
 			}
@@ -466,7 +466,7 @@ public class AmplifiedPortalBehavior
 	public static void placePortalBlocks(IWorld world, BlockPos pos)
 	{
 		// the portal itself
-		world.setBlockState(pos.add(0, 0, 0), BlocksInit.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
+		world.setBlockState(pos.add(0, 0, 0), UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 	}
 
 

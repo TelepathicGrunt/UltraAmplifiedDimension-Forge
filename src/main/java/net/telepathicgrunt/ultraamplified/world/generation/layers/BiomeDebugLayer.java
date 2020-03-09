@@ -5,14 +5,14 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
 public class BiomeDebugLayer implements IC0Transformer
 {
 
 	@SuppressWarnings("deprecation")
-	private static final int TESTING_BIOME = Registry.BIOME.getId(BiomeInit.BARREN_END_FIELD);
+	private static final int TESTING_BIOME = Registry.BIOME.getId(UABiomes.BARREN_END_FIELD);
 
 
 	public BiomeDebugLayer(WorldType p_i48641_1_, OverworldGenSettings p_i48641_2_)

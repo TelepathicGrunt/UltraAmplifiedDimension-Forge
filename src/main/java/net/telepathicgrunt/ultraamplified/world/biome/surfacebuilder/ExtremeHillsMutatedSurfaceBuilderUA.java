@@ -10,7 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiome;
 
 
 public class ExtremeHillsMutatedSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -28,16 +28,16 @@ public class ExtremeHillsMutatedSurfaceBuilderUA extends SurfaceBuilder<SurfaceB
 		{
 			if (noise > 1.0D)
 			{
-				BiomeUA.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.STONE_STONE_GRAVEL_CONFIG);
+				UABiome.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.STONE_STONE_GRAVEL_CONFIG);
 			}
 			else
 			{
-				BiomeUA.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
+				UABiome.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
 			}
 		}
 		else
 		{
-			BiomeUA.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRAVEL_CONFIG);
+			UABiome.GRAVEL_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRAVEL_CONFIG);
 		}
 
 	}

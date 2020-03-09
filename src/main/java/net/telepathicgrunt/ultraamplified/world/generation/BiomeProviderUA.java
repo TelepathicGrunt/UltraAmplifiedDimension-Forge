@@ -33,7 +33,7 @@ import net.minecraft.world.gen.layer.SmoothLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddOceansLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddSunflowerPlainsLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayerUA;
@@ -51,8 +51,8 @@ public class BiomeProviderUA extends BiomeProvider
 
 	public BiomeProviderUA(long seed, WorldType worldType)
 	{
-		super(BiomeInit.getBiomeArray());
-		biomes = BiomeInit.getBiomeArray();
+		super(UABiomes.getBiomeArray());
+		biomes = UABiomes.getBiomeArray();
 
 		//generates the world and biome layouts
 		Layer[] agenlayer = buildOverworldProcedure(seed, worldType);

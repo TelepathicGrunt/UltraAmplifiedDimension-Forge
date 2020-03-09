@@ -35,7 +35,7 @@ public class BlockColorManager
 			blockColors.register((unknown1, lightReader, pos, unknown2) ->
 			{
 				return lightReader != null && pos != null ? BiomeColors.getGrassColor(lightReader, pos) : GrassColors.get(0.5D, 1.0D);
-			}, BlocksInit.GLOWGRASS_BLOCK.get());
+			}, UABlocks.GLOWGRASS_BLOCK.get());
 		}
 
 
@@ -55,7 +55,7 @@ public class BlockColorManager
 				return blockColors.getColor(state, null, null, tintIndex);
 			};
 
-			itemColors.register(itemBlockColourHandler, BlocksInit.GLOWGRASS_BLOCK.get());
+			itemColors.register(itemBlockColourHandler, UABlocks.GLOWGRASS_BLOCK.get());
 		}
 	}
 }

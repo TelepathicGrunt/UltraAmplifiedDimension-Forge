@@ -15,6 +15,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
+   (V.7.2.4 Changes) (1.15.2 Minecraft)
+ 
+   MISC:
+·Fixed bug that seemed to cause a very rare chance of a crash upon entering a world.
+·Cleaned up some code and registered Placement classes to the Forge registry.
+       
+       
    (V.7.2.3 Changes) (1.15.2 Minecraft)
  
    Structures:

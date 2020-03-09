@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.telepathicgrunt.ultraamplified.blocks.BlocksInit;
+import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 
 
 public class ClientEvents
@@ -17,6 +17,6 @@ public class ClientEvents
 
 	public static void onClientSetup(FMLClientSetupEvent event)
 	{
-		RenderTypeLookup.setRenderLayer(BlocksInit.GLOWGRASS_BLOCK.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWGRASS_BLOCK.get(), RenderType.getCutout());
 	}
 }

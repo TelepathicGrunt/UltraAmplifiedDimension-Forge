@@ -6,7 +6,6 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LogBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;

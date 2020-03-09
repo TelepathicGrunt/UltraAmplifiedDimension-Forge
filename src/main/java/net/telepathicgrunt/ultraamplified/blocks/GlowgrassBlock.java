@@ -34,7 +34,7 @@ public class GlowgrassBlock extends GrassBlock
 			if (!func_220257_b(state, world, pos))
 			{
 				//block is covered and so will turn into glowdirt
-				world.setBlockState(pos, BlocksInit.GLOWDIRT.get().getDefaultState());
+				world.setBlockState(pos, UABlocks.GLOWDIRT.get().getDefaultState());
 			}
 			else if (world.getLight(pos.up()) >= 4)
 			{

@@ -268,7 +268,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 
 		// Old data had position of player in UA dimension. Save it.
 		// Player is in non-UA dimension currently so set the entrance correctly.
-		if (storedOldDimension == UltraAmplifiedDimension.ultraamplified())
+		if (storedOldDimension == null || storedOldDimension == UltraAmplifiedDimension.ultraamplified())
 		{
 			newData.putInt("UA_X", storedOldBlockPos.getX());
 			newData.putInt("UA_Y", storedOldBlockPos.getY());

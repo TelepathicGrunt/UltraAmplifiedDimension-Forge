@@ -10,8 +10,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DirectionalBlock;
-import net.minecraft.block.EndRodBlock;
-import net.minecraft.block.LogBlock;
 import net.minecraft.block.RailBlock;
 import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.block.RedstoneWireBlock;

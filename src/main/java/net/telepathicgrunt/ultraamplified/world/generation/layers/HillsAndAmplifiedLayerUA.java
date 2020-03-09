@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.traits.IDimOffset1Transformer;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.biome.BiomeInit;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -42,7 +42,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			Biome biome = BiomeRegistry.getValue(biomeId1);
 			if (biome == null || !biome.isMutation())
 			{
-				Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
+				Biome biome2 = UABiomes.BASE_TO_MUTATION_MAP.get(biome);
 				return biome2 == null ? biomeId1 : BiomeRegistry.getID(biome2);
 			}
 		}
@@ -54,9 +54,9 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 		{
 			int biomeIdToReturn = biomeId1;
 
-			if (BiomeInit.BASE_TO_HILLS_MAP.containsKey(biomeId1))
+			if (UABiomes.BASE_TO_HILLS_MAP.containsKey(biomeId1))
 			{
-				biomeIdToReturn = BiomeInit.BASE_TO_HILLS_MAP.get(biomeId1);
+				biomeIdToReturn = UABiomes.BASE_TO_HILLS_MAP.get(biomeId1);
 			}
 			else if (biomeId1 == BiomeGenHelper.PLAINS && ConfigUA.forest)
 			{
@@ -75,7 +75,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			//second way to create m variant biomes of both base and hills biomes
 			if (allowMForm)
 			{
-				Biome biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
+				Biome biomeTemp = UABiomes.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeIdToReturn));
 
 				if (biomeTemp != null) //hill form does have mutated form
 				{
@@ -85,7 +85,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 				{
 					if (ConfigUA.mutatedBiomeSpawnrate == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
 					{
-						biomeTemp = BiomeInit.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
+						biomeTemp = UABiomes.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
 
 						if (biomeTemp == null) //base form does not have mutated form
 						{
@@ -139,7 +139,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			Biome biome = BiomeRegistry.getValue(biomeId1);
 			if (biome == null || !biome.isMutation())
 			{
-				Biome biome2 = BiomeInit.BASE_TO_MUTATION_MAP.get(biome);
+				Biome biome2 = UABiomes.BASE_TO_MUTATION_MAP.get(biome);
 				return biome2 == null ? biomeId1 : BiomeRegistry.getID(biome2);
 			}
 		}

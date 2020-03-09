@@ -98,7 +98,7 @@ public class AmplifiedPortalBlock extends Block
 					while (posOfHighestPortal.getY() >= 0)
 					{
 						Block blockToCheck = world.getBlockState(posOfHighestPortal).getBlock();
-						if (blockToCheck == BlocksInit.AMPLIFIEDPORTAL.get())
+						if (blockToCheck == UABlocks.AMPLIFIEDPORTAL.get())
 						{
 							break;
 						}
