@@ -10,7 +10,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.CatSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class CatSpawnerUA extends CatSpawner
@@ -54,7 +54,7 @@ public class CatSpawnerUA extends CatSpawner
 							//                        return this.func_221121_a(world, blockpos);
 							//                     }
 
-							if (FeatureUA.WITCH_HUT_UA.isPositionInsideStructure(world, blockpos))
+							if (UAFeatures.WITCH_HUT_UA.isPositionInsideStructure(world, blockpos))
 							{
 								return this.func_221123_a(world, blockpos);
 							}

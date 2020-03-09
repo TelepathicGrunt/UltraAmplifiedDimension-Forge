@@ -27,11 +27,11 @@ public class DesertLakesSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 
 		if (noise > 1.0D)
 		{
-			UABiome.SAND_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UABiome.SAND_SANDSTONE_SANDSTONE_SURFACE);
+			UASurfaceBuilders.SAND_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UASurfaceBuilders.SAND_SANDSTONE_SANDSTONE_SURFACE);
 		}
 		else
 		{
-			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UABiome.SANDSTONE_SURFACE);
+			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UASurfaceBuilders.SANDSTONE_SURFACE);
 		}
 
 	}

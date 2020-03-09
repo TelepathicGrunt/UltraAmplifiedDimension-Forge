@@ -30,11 +30,11 @@ public class ShatteredSavannaSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuil
 		}
 		else if (noise > -0.5D)
 		{
-			UABiome.PLATEAU_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UABiome.COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE);
+			UASurfaceBuilders.PLATEAU_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, UASurfaceBuilders.COARSE_DIRT_COARSE_DIRT_GRAVEL_SURFACE);
 		}
 		else
 		{
-			UABiome.PLATEAU_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
+			UASurfaceBuilders.PLATEAU_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG);
 		}
 
 	}

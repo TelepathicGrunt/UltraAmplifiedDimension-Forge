@@ -8,9 +8,11 @@ import net.minecraft.item.Item;
 import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,20 +25,22 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
+import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.UASurfaceBuilders;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
-import net.telepathicgrunt.ultraamplified.world.feature.carver.CarversUA;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.UACarvers;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.RavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.SuperLongRavineCarver;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UnderwaterCaveCarver;
-import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacement;
+import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
 import net.telepathicgrunt.ultraamplified.world.worldtypes.WorldTypeUA;
 
 
@@ -132,9 +136,7 @@ public class UltraAmplified
 		@SubscribeEvent
 		public static void registerBiomes(final RegistryEvent.Register<Biome> event)
 		{
-			//registers all my modified biomes
 			UABiomes.registerBiomes(event);
-			//LOGGER.log(Level.INFO, "Biomes registered.");
 		}
 
 
@@ -146,7 +148,6 @@ public class UltraAmplified
 		public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 		{
 			UABlocks.registerBlocks(event);
-			//LOGGER.log(Level.INFO, "Blocks registered.");
 		}
 
 
@@ -157,8 +158,7 @@ public class UltraAmplified
 		@SubscribeEvent
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 		{
-			UABlocks.registerItems(event);
-			//LOGGER.log(Level.INFO, "Items registered.");
+			UABlocks.registerBlockItems(event);
 		}
 
 
@@ -168,29 +168,44 @@ public class UltraAmplified
 		@SubscribeEvent
 		public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event)
 		{
-			FeatureUA.registerFeatures(event);
-			//LOGGER.log(Level.INFO, "features registered.");
+			UAFeatures.registerFeatures(event);
 		}
 
 		/**
 		 * This method will be called by Forge when it is time for the mod to register placement.
 		 */
 		@SubscribeEvent
-		public static void onRegisterPlacement(final RegistryEvent.Register<Placement<?>> event)
+		public static void onRegisterPlacements(final RegistryEvent.Register<Placement<?>> event)
 		{
-			UAPlacement.registerPlacements(event);
-			//LOGGER.log(Level.INFO, "features registered.");
+			UAPlacements.registerPlacements(event);
 		}
 
 
+		/**
+		 * This method will be called by Forge when it is time for the mod to register placement.
+		 */
+		@SubscribeEvent
+		public static void onRegisterSurfacebuilders(final RegistryEvent.Register<SurfaceBuilder<?>> event)
+		{
+			UASurfaceBuilders.registerSurfaceBuilders(event);
+		}
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register placement.
+		 */
+		@SubscribeEvent
+		public static void onRegisterChunkGenerator(final RegistryEvent.Register<ChunkGeneratorType<?,?>> event)
+		{
+			
+		}
+		
 		/**
 		 * This method will be called by Forge when it is time for the mod to register carvers.
 		 */
 		@SubscribeEvent
 		public static void onRegisterCarvers(final RegistryEvent.Register<WorldCarver<?>> event)
 		{
-			CarversUA.registerCarvers(event);
-			//LOGGER.log(Level.INFO, "carvers registered.");
+			UACarvers.registerCarvers(event);
 		}
 	}
 }

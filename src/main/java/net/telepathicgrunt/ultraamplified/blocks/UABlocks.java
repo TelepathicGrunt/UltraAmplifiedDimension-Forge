@@ -70,7 +70,7 @@ public class UABlocks
 	 * 
 	 * @param event - registry to add items to
 	 */
-	public static void registerItems(RegistryEvent.Register<Item> event)
+	public static void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().registerAll(new BlockItem(UABlocks.AMPLIFIEDPORTAL.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("amplified_portal"), new BlockItem(UABlocks.GLOWSTONE_ORE.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowstone_ore"), new BlockItem(UABlocks.COARSE_GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("coarse_glowdirt"),
 				new BlockItem(UABlocks.GLOWDIRT.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowdirt"), new BlockItem(UABlocks.GLOWGRASS_BLOCK.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowgrass_block"), new BlockItem(UABlocks.GLOWMYCELIUM.get(), new Item.Properties().group(ULTRAMAPLIFIED)).setRegistryName("glowmycelium"),

@@ -19,7 +19,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
@@ -107,7 +107,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			OceanRuinConfig oceanruinconfig = generator.getStructureConfig(biomeIn, FeatureUA.OCEAN_RUIN_UA);
+			OceanRuinConfig oceanruinconfig = generator.getStructureConfig(biomeIn, UAFeatures.OCEAN_RUIN_UA);
 			int x = chunkX * 16;
 			int z = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(x, 0, z);

@@ -18,7 +18,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeCo
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 
-public class UAPlacement
+public class UAPlacements
 {
 	public static final Placement<ChanceConfig> RANDOM_SURFACE_BELOW_TOP_LAYER = new AtSurfaceUnderTopLedgeWithChance(ChanceConfig::deserialize);
 	public static final Placement<ChanceConfig> RANDOM_CHANCE_UNDER_SURFACE = new RandomChanceUnderSurface(ChanceConfig::deserialize);

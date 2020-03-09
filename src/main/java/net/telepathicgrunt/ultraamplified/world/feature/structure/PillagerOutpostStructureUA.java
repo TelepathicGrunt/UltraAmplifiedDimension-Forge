@@ -22,7 +22,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
@@ -62,7 +62,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, FeatureUA.PILLAGER_OUTPOST_UA))
+		if (ConfigUA.pillageOutpostRarity != 101 && chunkGen.hasStructure(biome, UAFeatures.PILLAGER_OUTPOST_UA))
 		{
 
 			if (rand.nextFloat() < 1 / ((ConfigUA.pillageOutpostRarity - 1) * 4.5D + 1))
@@ -71,7 +71,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 				{
 					for (int l = chunkPosZ - 3; l <= chunkPosZ + 3; ++l)
 					{
-						if (FeatureUA.VILLAGE_UA.shouldStartAt(p_225558_1_, chunkGen, rand, k, l, biome))
+						if (UAFeatures.VILLAGE_UA.shouldStartAt(p_225558_1_, chunkGen, rand, k, l, biome))
 						{
 							return false;
 						}

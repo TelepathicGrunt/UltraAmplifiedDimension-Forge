@@ -15,7 +15,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
@@ -31,7 +31,7 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-		if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, FeatureUA.MINESHAFT_UA))
+		if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, UAFeatures.MINESHAFT_UA))
 		{
 			return rand.nextDouble() < (ConfigUA.mineshaftSpawnrate) / 10000D;
 		}
@@ -76,7 +76,7 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			MineshaftConfigUA mineshaftconfig = generator.getStructureConfig(biomeIn, FeatureUA.MINESHAFT_UA);
+			MineshaftConfigUA mineshaftconfig = generator.getStructureConfig(biomeIn, UAFeatures.MINESHAFT_UA);
 			this.type = mineshaftconfig.type;
 			MineshaftPiecesUA.Room structuremineshaftpiecesua$room = new MineshaftPiecesUA.Room(0, this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2, this.type);
 			this.components.add(structuremineshaftpiecesua$room);

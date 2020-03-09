@@ -25,7 +25,7 @@ import net.minecraft.world.spawner.PatrolSpawner;
 import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
 import net.telepathicgrunt.ultraamplified.world.spawner.CatSpawnerUA;
 
@@ -169,16 +169,16 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos)
 	{
-		if (FeatureUA.WITCH_HUT_UA.func_202383_b(this.world, pos))
+		if (UAFeatures.WITCH_HUT_UA.func_202383_b(this.world, pos))
 		{
 			//Witch Hut entity spawning
 			if (creatureType == EntityClassification.MONSTER)
 			{
-				return FeatureUA.WITCH_HUT_UA.getSpawnList();
+				return UAFeatures.WITCH_HUT_UA.getSpawnList();
 			}
 			if (creatureType == EntityClassification.CREATURE)
 			{
-				return FeatureUA.WITCH_HUT_UA.getCreatureSpawnList();
+				return UAFeatures.WITCH_HUT_UA.getCreatureSpawnList();
 			}
 		}
 		else if (creatureType == EntityClassification.MONSTER)
@@ -191,50 +191,50 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 			//Stone Fortress entity spawning
 			if (acceptableStoneFortressBlocks.contains(this.world.getBlockState(pos.down()).getBlock()))
 			{
-				if (FeatureUA.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getStoneFortressSpawnList();
 				}
-				if (FeatureUA.FORTRESS_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.FORTRESS_UA.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getStoneFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getStoneFortressSpawnList();
 				}
 			}
 			//Nether Fortress entity spawning
 			else if (this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICKS)
 			{
-				if (FeatureUA.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.FORTRESS_UA.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getNetherFortressSpawnList();
 				}
-				if (FeatureUA.FORTRESS_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.FORTRESS_UA.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) FeatureUA.FORTRESS_UA).getNetherFortressSpawnList();
+					return ((FortressStructureUA) UAFeatures.FORTRESS_UA).getNetherFortressSpawnList();
 				}
 			}
 
 			//Pillager Outpost entity spawning
-			if (FeatureUA.PILLAGER_OUTPOST_UA.isPositionInStructure(this.world, pos))
+			if (UAFeatures.PILLAGER_OUTPOST_UA.isPositionInStructure(this.world, pos))
 			{
-				return FeatureUA.PILLAGER_OUTPOST_UA.getSpawnList();
+				return UAFeatures.PILLAGER_OUTPOST_UA.getSpawnList();
 			}
 
 			//Ocean Monument entity spawning
-			if (FeatureUA.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos))
+			if (UAFeatures.OCEAN_MONUMENT_UA.isPositionInStructure(this.world, pos))
 			{
-				return FeatureUA.OCEAN_MONUMENT_UA.getSpawnList();
+				return UAFeatures.OCEAN_MONUMENT_UA.getSpawnList();
 			}
 
 			//End City entity spawning
 			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
-				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{
-					return FeatureUA.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY_UA.getSpawnList();
 				}
-				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{
-					return FeatureUA.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY_UA.getSpawnList();
 				}
 			}
 		}
@@ -243,13 +243,13 @@ public class UAChunkGenerator extends NoiseChunkGeneratorUA<OverworldGenSettings
 			//End City entity spawning
 			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
 			{
-				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{
-					return FeatureUA.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY_UA.getSpawnList();
 				}
-				if (FeatureUA.END_CITY_UA.isPositionInStructure(this.world, pos))
+				if (UAFeatures.END_CITY_UA.isPositionInStructure(this.world, pos))
 				{
-					return FeatureUA.END_CITY_UA.getSpawnList();
+					return UAFeatures.END_CITY_UA.getSpawnList();
 				}
 			}
 		}

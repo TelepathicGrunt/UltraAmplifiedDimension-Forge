@@ -52,7 +52,7 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.WitchHutStruct
 import net.telepathicgrunt.ultraamplified.world.feature.structure.WoodlandMansionStructureUA;
 
 
-public class FeatureUA
+public class UAFeatures
 {
 
 	public static final HugeTreeFeatureConfig GIANT_PINE_CONFIG = (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1))))).baseHeight(13).heightInterval(50).crownHeight(13).setSapling((net.minecraftforge.common.IPlantable) Blocks.SPRUCE_SAPLING).build();

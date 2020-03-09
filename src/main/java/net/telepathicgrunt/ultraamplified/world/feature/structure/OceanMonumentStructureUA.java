@@ -22,7 +22,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
@@ -67,7 +67,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, FeatureUA.OCEAN_MONUMENT_UA))
+				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT_UA))
 				{
 					return true;
 				}

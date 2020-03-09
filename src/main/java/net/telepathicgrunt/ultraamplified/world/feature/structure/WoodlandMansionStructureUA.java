@@ -26,7 +26,7 @@ import net.minecraft.world.gen.feature.structure.WoodlandMansionPieces;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
@@ -73,7 +73,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (!chunkGen.hasStructure(biome2, FeatureUA.WOODLAND_MANSION_UA))
+				if (!chunkGen.hasStructure(biome2, UAFeatures.WOODLAND_MANSION_UA))
 				{
 					return false;
 				}

@@ -18,7 +18,7 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class FortressStructureUA extends Structure<FortressConfigUA>
@@ -55,7 +55,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 			else
 			{
 
-				return chunkGen.hasStructure(biome, FeatureUA.FORTRESS_UA);
+				return chunkGen.hasStructure(biome, UAFeatures.FORTRESS_UA);
 			}
 		}
 
@@ -118,7 +118,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			FortressConfigUA fortressconfig = generator.getStructureConfig(biomeIn, FeatureUA.FORTRESS_UA);
+			FortressConfigUA fortressconfig = generator.getStructureConfig(biomeIn, UAFeatures.FORTRESS_UA);
 			this.genAboveSeaLevel = fortressconfig.surfaceAllow;
 			boolean stoneVariant = false;
 

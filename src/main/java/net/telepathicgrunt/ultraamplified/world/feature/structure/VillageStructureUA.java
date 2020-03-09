@@ -21,7 +21,7 @@ import net.minecraft.world.gen.feature.structure.VillagePieces;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
-import net.telepathicgrunt.ultraamplified.world.feature.FeatureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class VillageStructureUA extends Structure<VillageConfigUA>
@@ -76,7 +76,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (ConfigUA.villageSpawnrate != 101 && chunkGen.hasStructure(biome, FeatureUA.VILLAGE_UA))
+			if (ConfigUA.villageSpawnrate != 101 && chunkGen.hasStructure(biome, UAFeatures.VILLAGE_UA))
 			{
 				return true;
 			}
@@ -102,7 +102,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
-			VillageConfigUA villageconfig = generator.getStructureConfig(biomeIn, FeatureUA.VILLAGE_UA);
+			VillageConfigUA villageconfig = generator.getStructureConfig(biomeIn, UAFeatures.VILLAGE_UA);
 
 			// if we are requesting a village type that vanilla already can make,
 			// we then generate a vanilla village.
