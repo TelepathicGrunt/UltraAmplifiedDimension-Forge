@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
@@ -23,110 +24,119 @@ public class SandSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 	}
 
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
+	private static final BlockState ICE = Blocks.ICE.getDefaultState();
+	private static final BlockState RED_SANDSTONE = Blocks.RED_SANDSTONE.getDefaultState();
+	private static final BlockState SANDSTONE = Blocks.SANDSTONE.getDefaultState();
 
 
 	@Override
-	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
+	public void buildSurface(Random random, IChunk chunk, Biome biome, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
-		this.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getUnder(), config.getUnderWaterMaterial(), seaLevel);
+		this.buildSurface(random, chunk, biome, x, z, startHeight, noise, defaultBlock, defaultFluid, config.getTop(), config.getUnder(), config.getUnderWaterMaterial(), seaLevel);
 	}
 
 
-	protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel)
+	protected void buildSurface(Random random, IChunk chunk, Biome biome, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel)
 	{
 
-		BlockState iblockstate = topBlock;
-		BlockState iblockstate1 = middleBlock;
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
+		BlockState topBlockstate = topBlock;
+		BlockState bottomBlockstate = middleBlock;
 		int bottomLayerNoise = -1;
-		int noiseThing = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
+		int noiseModified = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		int x = xStart & 15;
 		int z = zStart & 15;
+		BlockPos.Mutable blockPosMutable = new BlockPos.Mutable(x, startHeight, z);
 
-		for (int y = startHeight; y >= 0; --y)
+		for (; blockPosMutable.getY() >= 0; blockPosMutable.move(Direction.DOWN))
 		{
-			blockpos$Mutable.setPos(x, y, z);
-			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
-			if (iblockstate2.getMaterial() == Material.AIR)
+			BlockState currentBlock = chunk.getBlockState(blockPosMutable);
+			if (bottomLayerNoise != -1 && currentBlock.getMaterial() == Material.AIR)
 			{
 				bottomLayerNoise = -1;
 			}
-			else if (iblockstate2.getBlock() == defaultBlock.getBlock())
+			else if (currentBlock.getBlock() == defaultBlock.getBlock())
 			{
 				if (bottomLayerNoise == -1)
 				{
-					if (noiseThing <= 0)
+					if (noiseModified <= 0)
 					{
-						iblockstate = Blocks.AIR.getDefaultState();
-						iblockstate1 = defaultBlock;
+						topBlockstate = AIR;
+						bottomBlockstate = defaultBlock;
 					}
-					else if (y >= seaLevel - 4 && y <= seaLevel + 1)
+					else if (blockPosMutable.getY() >= seaLevel - 4 && blockPosMutable.getY() <= seaLevel + 1)
 					{
-						iblockstate = topBlock;
-						iblockstate1 = middleBlock;
+						topBlockstate = topBlock;
+						bottomBlockstate = middleBlock;
 					}
 
-					if (y < seaLevel && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
+					if (blockPosMutable.getY() < seaLevel && topBlockstate.getMaterial() == Material.AIR)
 					{
-						if (biomeIn.getTemperature(blockpos$Mutable.setPos(xStart, y, zStart)) < 0.15F)
+						if (biome.getTemperature(blockPosMutable.setPos(xStart, blockPosMutable.getY(), zStart)) < 0.15F)
 						{
-							iblockstate = Blocks.ICE.getDefaultState();
+							topBlockstate = ICE;
 						}
 						else
 						{
-							iblockstate = defaultFluid;
+							topBlockstate = defaultFluid;
 						}
 
-						blockpos$Mutable.setPos(x, y, z);
+						blockPosMutable.setPos(x, blockPosMutable.getY(), z);
 					}
 
-					bottomLayerNoise = noiseThing;
-					if (y >= seaLevel - 1)
+					bottomLayerNoise = noiseModified;
+					if (blockPosMutable.getY() >= seaLevel - 1)
 					{
-						chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
+						chunk.setBlockState(blockPosMutable, topBlockstate, false);
+						reinforceLedges(chunk, blockPosMutable, bottomBlock);
 					}
-					else if (y < seaLevel - 7 - noiseThing)
+					else if (blockPosMutable.getY() < seaLevel - 7 - noiseModified)
 					{
-						iblockstate = Blocks.AIR.getDefaultState();
-						iblockstate1 = defaultBlock;
-						chunkIn.setBlockState(blockpos$Mutable, bottomBlock, false);
+						topBlockstate = AIR;
+						bottomBlockstate = defaultBlock;
+						chunk.setBlockState(blockPosMutable, bottomBlock, false);
 					}
 					else
 					{
-						chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
+						chunk.setBlockState(blockPosMutable, bottomBlockstate, false);
+						reinforceLedges(chunk, blockPosMutable, bottomBlock);
 					}
 				}
 				else if (bottomLayerNoise > 0)
 				{
 					--bottomLayerNoise;
-					chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
-					if (bottomLayerNoise == 0 && iblockstate1.getBlock() == Blocks.SAND && noiseThing > 1)
+					chunk.setBlockState(blockPosMutable, bottomBlockstate, false);
+					reinforceLedges(chunk, blockPosMutable, bottomBlock);
+					
+					if (bottomLayerNoise == 0 && bottomBlockstate.getBlock() == Blocks.SAND && noiseModified > 1)
 					{
-						bottomLayerNoise = random.nextInt(4) + Math.max(0, y - seaLevel);
-						iblockstate1 = iblockstate1.getBlock() == Blocks.RED_SAND ? Blocks.RED_SANDSTONE.getDefaultState() : Blocks.SANDSTONE.getDefaultState();
+						bottomLayerNoise = random.nextInt(4) + Math.max(0, blockPosMutable.getY() - seaLevel);
+						bottomBlockstate = bottomBlockstate.getBlock() == Blocks.RED_SAND ? RED_SANDSTONE : SANDSTONE;
 					}
 				}
 			}
 
-			//needed to contain fallable blocks
-			if (y < 256 && y > 0)
+		}
+	}
+	
+	private static void reinforceLedges(IChunk chunk, BlockPos.Mutable blockPosMutable, BlockState bottomBlock)
+	{
+		//needed to contain fallable blocks
+		if (blockPosMutable.getY() < 256 && blockPosMutable.getY() > 0)
+		{
+			Material materialAbove = chunk.getBlockState(blockPosMutable.up()).getMaterial();
+			Material materialBelow = chunk.getBlockState(blockPosMutable.down()).getMaterial();
+			if (materialBelow == Material.AIR)
 			{
-				Material materialAbove = chunkIn.getBlockState(blockpos$Mutable.up()).getMaterial();
-				Material materialBelow = chunkIn.getBlockState(blockpos$Mutable.down()).getMaterial();
-				if (materialBelow == Material.AIR)
+				if (materialAbove == Material.SAND)
 				{
-					if (materialAbove == Material.SAND)
-					{
-						// sets bottom block so block above cannot fall
-						chunkIn.setBlockState(blockpos$Mutable, bottomBlock, false);
-					}
-					else if (materialAbove == Material.AIR)
-					{
-						// one block thick ledges gets removed
-						chunkIn.setBlockState(blockpos$Mutable.up(), AIR, false);
-					}
+					// sets bottom block so block above cannot fall
+					chunk.setBlockState(blockPosMutable, bottomBlock, false);
 				}
-
+				else if (materialAbove == Material.AIR)
+				{
+					// one block thick ledges gets removed
+					chunk.setBlockState(blockPosMutable, AIR, false);
+				}
 			}
 		}
 	}

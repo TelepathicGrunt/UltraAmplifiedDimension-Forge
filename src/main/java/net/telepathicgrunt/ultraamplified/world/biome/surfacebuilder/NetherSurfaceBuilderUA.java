@@ -8,14 +8,13 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 
 
 public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -33,32 +32,33 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final BlockState WATER = Blocks.WATER.getDefaultState();
 	private static final BlockState MAGMA = Blocks.MAGMA_BLOCK.getDefaultState();
-	protected long field_205552_a;
-	protected OctavesNoiseGenerator field_205553_b;
+	protected long noiseSeed;
+	protected OpenSimplexNoise noiseGen;
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		int sealevel = seaLevel + 1;
 		int xpos = x & 15;
 		int zpos = z & 15;
-		int l = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
+		int noiseDepth = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
-		int i1 = -1;
-		BlockState iblockstate = NETHERRACK;
-		BlockState iblockstate1 = NETHERRACK;
+		int depth = -1;
+		BlockState topBlockstate = NETHERRACK;
+		BlockState bottomBlockstates = NETHERRACK;
 
 		for (int ypos = 255; ypos >= 0; --ypos)
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
-			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
+			BlockState currentBlockToReplace = chunkIn.getBlockState(blockpos$Mutable);
 
-			if (iblockstate2.getBlock() == null || iblockstate2.getMaterial() == Material.AIR)
+			if (currentBlockToReplace.getBlock() == null || currentBlockToReplace.getMaterial() == Material.AIR)
 			{
-				i1 = -1;
+				depth = -1;
 			}
-			else if (iblockstate2.getMaterial() == Material.WATER)
+			else if (currentBlockToReplace.getMaterial() == Material.WATER)
 			{
 
 				if (ypos < ConfigUA.seaLevel - 7)
@@ -70,59 +70,61 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 					chunkIn.setBlockState(blockpos$Mutable, ConfigUA.lavaOcean ? LAVA : WATER, false);
 				}
 
-				i1 = -1;
+				depth = -1;
 			}
 			else
 			{
-				if (iblockstate2 == STONE)
+				if (currentBlockToReplace == STONE)
 				{
+					boolean soulSandFlag = this.noiseGen.eval(x * 0.015D, ypos / 7, z * 0.015D) > 0.45D;
+					boolean gravelFlag = this.noiseGen.eval(x * 0.02D + 100.0D, (ypos / 8), z * 0.02D - 100.0D) > 0.48D;
 
-					boolean flag = this.field_205553_b.func_205563_a(x * 0.13125D, z * 0.13125D, ypos / 5) * 15.0D + random.nextDouble() * 0.2D > 4.5D;
-					boolean flag1 = this.field_205553_b.func_205563_a(x * 0.13125D, (ypos / 5) + 109.0D, z * 0.13125D) * 15.0D + random.nextDouble() * 0.2D > 5.0D;
-
-					if (i1 == -1)
+					if (depth == -1)
 					{
-						if (l <= 0)
+						if (noiseDepth <= 0)
 						{
-							iblockstate = CAVE_AIR;
-							iblockstate1 = NETHERRACK;
+							topBlockstate = CAVE_AIR;
+							bottomBlockstates = NETHERRACK;
 						}
 						else if (ypos >= sealevel - 4)
 						{
-							iblockstate = NETHERRACK;
-							iblockstate1 = NETHERRACK;
+							topBlockstate = NETHERRACK;
+							bottomBlockstates = NETHERRACK;
 
-							if ((noise > -3.85 && noise < -3.7) || (noise > -0.1 && noise < 0.05) || (noise > 3.7 && noise < 3.85))
+							if (soulSandFlag)
 							{
-								iblockstate = MAGMA;
+								topBlockstate = SOUL_SAND;
+								bottomBlockstates = SOUL_SAND;
 							}
-
-							if (flag1)
+							else if (gravelFlag)
 							{
-								iblockstate = GRAVEL;
+								topBlockstate = GRAVEL;
 							}
-
-							if (flag)
+							else if ((noise > -3.85 && noise < -3.7) || (noise > -0.1 && noise < 0.05) || (noise > 3.7 && noise < 3.85))
 							{
-								iblockstate = SOUL_SAND;
-								iblockstate1 = SOUL_SAND;
+								topBlockstate = MAGMA;
 							}
 						}
 
-						i1 = l;
+						depth = noiseDepth;
 						if (ypos >= sealevel - 1)
 						{
-							chunkIn.setBlockState(blockpos$Mutable, iblockstate, false);
+							chunkIn.setBlockState(blockpos$Mutable, topBlockstate, false);
+							
+							if(gravelFlag && chunkIn.getBlockState(blockpos$Mutable.down()).isAir())
+							{
+								chunkIn.setBlockState(blockpos$Mutable.down(), NETHERRACK, false);
+							}
 						}
 						else
 						{
-							chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
+							chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
 						}
 					}
-					else if (i1 > 0)
+					else if (depth > 0)
 					{
-						--i1;
-						chunkIn.setBlockState(blockpos$Mutable, iblockstate1, false);
+						--depth;
+						chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
 					}
 					else
 					{
@@ -138,11 +140,11 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 	@Override
 	public void setSeed(long seed)
 	{
-		if (this.field_205552_a != seed || this.field_205553_b == null)
+		if (this.noiseSeed != seed || this.noiseGen == null)
 		{
-			this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4, 0);
+			this.noiseGen = new OpenSimplexNoise(seed);
 		}
 
-		this.field_205552_a = seed;
+		this.noiseSeed = seed;
 	}
 }
