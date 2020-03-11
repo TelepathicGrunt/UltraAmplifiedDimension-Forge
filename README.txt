@@ -21,6 +21,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Optimized the surface builder for Netherland and desert/badlands biomes to increase performance.
 ·Soulsand and gravel patches in Netherland are a bit more common and larger.
 ·Optimized the large underground air pockets in Deserts and Badlands biomes.
+·Fixed bug where underground small lakes could get a layer of stone placed on top of the water weirdly.
+·Changed Air in caves and ravines to Cave Air even though it will have no impact for the player right now lol. Mojang might do something with Cave Air so it's better to spawn it underground so your worlds are ready for future MC versions. 
  
    MISC:
 ·Fixed bug that seemed to cause a very rare chance of a crash upon entering a world.

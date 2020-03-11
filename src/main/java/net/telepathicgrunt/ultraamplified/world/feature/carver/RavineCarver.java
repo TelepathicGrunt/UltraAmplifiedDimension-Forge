@@ -218,7 +218,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 										else
 										{
 											//carves the ravine
-											world.setBlockState(blockpos$Mutable, AIR, false);
+											world.setBlockState(blockpos$Mutable, CAVE_AIR, false);
 										}
 
 										flag = true;

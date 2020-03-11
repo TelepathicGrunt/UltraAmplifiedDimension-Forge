@@ -28,8 +28,8 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, LakeCountRangeAndTypeConfig lakeConfig, BlockPos pos)
 	{
 
-		int x = random.nextInt(16) - 8;
-		int z = random.nextInt(16) - 8;
+		int x = random.nextInt(16);
+		int z = random.nextInt(16);
 
 		switch (lakeConfig.type)
 		{
@@ -40,8 +40,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 				{
 					return Stream.empty();
 				}
-
-				if (random.nextInt(lakeConfig.chance / 10) == 0)
+				else if (random.nextInt(lakeConfig.chance / 10) == 0)
 				{
 					int y = random.nextInt(random.nextInt(chunkGenerator.getMaxHeight() - 8) + 8);
 					if (y < world.getSeaLevel() || random.nextInt(lakeConfig.chance / 8) == 0)
@@ -84,15 +83,8 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 				{
 					return Stream.empty();
 				}
-
-				if (random.nextInt(lakeConfig.chance) == 0)
+				else if (random.nextInt(lakeConfig.chance) == 0)
 				{
-
-					// counteract the -8 I do in the actual generation of Slime Lakes so Slime Lakes generate
-					// around chosen position instead of in corner like the water and lava lakes do
-					x += 8;
-					z += 8;
-
 					int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
 					if (y > world.getSeaLevel() && y <= 170)
 					{
@@ -106,15 +98,8 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 				{//change to honey
 					return Stream.empty();
 				}
-
-				if (random.nextInt(lakeConfig.chance) == 0)
+				else if (random.nextInt(lakeConfig.chance) == 0)
 				{
-
-					// counteract the -8 I do in the actual generation of Honey Lakes so Honey Lakes generate
-					// around chosen position instead of in corner like the water and lava lakes do
-					x += 8;
-					z += 8;
-
 					int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z);
 					if (y > world.getSeaLevel() && y <= 170)
 					{

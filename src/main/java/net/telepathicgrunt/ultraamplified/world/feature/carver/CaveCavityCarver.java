@@ -401,7 +401,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										else
 										{
 											//carves the cave
-											world.setBlockState(blockpos$Mutable, AIR, false);
+											world.setBlockState(blockpos$Mutable, CAVE_AIR, false);
 										}
 
 										flag = true;
@@ -434,7 +434,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_)
 	{
 		return true;
-		//return (p_222708_1_ * p_222708_1_ + p_222708_5_ * p_222708_5_) * (double) this.ledgeWidthArrayYIndex[p_222708_7_ - 1] + p_222708_3_ * p_222708_3_ / 6.0D >= 1.0D;
 	}
 
 }

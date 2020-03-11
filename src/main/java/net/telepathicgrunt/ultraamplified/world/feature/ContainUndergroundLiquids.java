@@ -9,7 +9,6 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -67,28 +66,14 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 		{
 			for (int z = 0; z < 16; ++z)
 			{
-
-				/*
-				 * for (int y = 61; y >= 10; y--) {
-				 * 
-				 * blockpos$Mutable.setPos(position.getX() + x, y, position.getZ() + z); currentblock =
-				 * world.getBlockState(blockpos$Mutable);
-				 * 
-				 * // move down until we hit an air block while (currentblock != Blocks.AIR.getDefaultState() && blockpos$Mutable.getY()
-				 * > 11) { blockpos$Mutable.move(Direction.DOWN); currentblock = world.getBlockState(blockpos$Mutable); }
-				 * 
-				 * //checks one last time at y = 11 to see if we should quit now if(blockpos$Mutable.getY() <= 11 && currentblock !=
-				 * Blocks.AIR.getDefaultState()) { continue; }
-				 */
-
 				blockpos$Mutable.setPos(position.getX() + x, 61, position.getZ() + z);
 				for (; blockpos$Mutable.getY() > 10; blockpos$Mutable.move(Direction.DOWN))
 				{
 
 					currentblock = world.getBlockState(blockpos$Mutable);
 
-					// move down until we hit an air block
-					while (currentblock.getMaterial() != Material.AIR && blockpos$Mutable.getY() > 10)
+					// move down until we hit an cave air block
+					while (currentblock.getBlock() != Blocks.CAVE_AIR && blockpos$Mutable.getY() > 10)
 					{
 						currentblock = world.getBlockState(blockpos$Mutable.move(Direction.DOWN));
 					}

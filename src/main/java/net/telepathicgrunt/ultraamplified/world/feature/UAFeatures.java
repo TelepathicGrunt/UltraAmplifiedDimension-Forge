@@ -110,6 +110,7 @@ public class UAFeatures
 	public static Feature<BlockBlobConfig>						MEDIUM_BOULDER				= new BoulderNormal(BlockBlobConfig::deserialize);
 	public static Feature<BlockBlobConfig>						SMALL_BOULDER				= new BoulderTiny(BlockBlobConfig::deserialize);
 
+	public static Feature<BlockStateFeatureConfig>				STONED_LAKE				    = new LakeStoned(BlockStateFeatureConfig::deserialize);
 	public static Feature<BlockStateFeatureConfig>				STONELESS_LAKE				= new LakeStoneless(BlockStateFeatureConfig::deserialize);
 	public static Feature<BlockStateFeatureConfig>				SHALLOW_LAKE				= new LakeWideShallow(BlockStateFeatureConfig::deserialize);
 	public static Feature<NoFeatureConfig>						CONTAIN_OCEAN_LIQUID		= new ContainLiquidForOceans(NoFeatureConfig::deserialize);
@@ -197,6 +198,7 @@ public class UAFeatures
 		RegUtil.register(registry, LARGE_BOULDER, "boulder_giant");
 		RegUtil.register(registry, MEDIUM_BOULDER, "boulder_normal");
 		RegUtil.register(registry, SMALL_BOULDER, "boulder_tiny");
+		RegUtil.register(registry, STONED_LAKE, "stoned_lakes");
 		RegUtil.register(registry, STONELESS_LAKE, "stoneless_lakes");
 		RegUtil.register(registry, SHALLOW_LAKE, "wide_shallow_lakes");
 		RegUtil.register(registry, CONTAIN_OCEAN_LIQUID, "contain_water");
