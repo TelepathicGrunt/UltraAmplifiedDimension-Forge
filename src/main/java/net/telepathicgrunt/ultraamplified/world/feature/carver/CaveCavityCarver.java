@@ -258,7 +258,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 								if(y > 30)
 								{
 									//increase multiplier on end to widen top of pillar
-									yPillarModifier = (Math.pow((yPillarModifier - 30D) / 30, 2) * 30 - (y / 60)) * 18D;
+									yPillarModifier = (Math.pow((yPillarModifier - 30D) * 0.033333D, 2) * 30D - (y * 0.016666D)) * 18D;
 								}
 								else 
 								{
@@ -275,7 +275,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 								else if (y < 10)
 								{
 									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
-									yPillarModifier -= 50;
+									yPillarModifier -= 50D;
 								}
 
 								
@@ -294,9 +294,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									//
 									//Increase step in X and Z to make pillars less frequent but thicker
 									boolean flagPillars = noiseGen.eval(
-																x * 0.045D + (x % 16) * 0.002, 
-																z * 0.045D + (z % 16) * 0.002, 
-																y * 0.015D) - (yPillarModifier / 1000D) + 
+																x * 0.045D + (x % 16) * 0.002D, 
+																z * 0.045D + (z % 16) * 0.002D, 
+																y * 0.015D) - (yPillarModifier * 0.001D) + 
 														 (random.nextDouble() * 0.01D) 
 														 > -0.3D;
 
