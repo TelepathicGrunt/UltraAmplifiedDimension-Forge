@@ -320,7 +320,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										// while the 400/y has already carved out the rest of the cave.
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
-										stalagmiteDouble = noiseGen.eval(x * 0.23125D, z * 0.23125D, y * 0.01D) * 15.0D + (480D / (y));
+										stalagmiteDouble = noiseGen.eval(x * 0.25D, z * 0.25D, y * 0.005D) * 15.0D + (480D / (y));
 
 										//adds more tiny stalagmites to ceiling
 										if (y > 48)
@@ -329,7 +329,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										}
 
 										//decrease constant to make stalagmites smaller and thinner
-										boolean flagStalagmites = stalagmiteDouble > 5.5D;
+										boolean flagStalagmites = stalagmiteDouble > 4.9D;
 
 										if (!flagStalagmites)
 										{
