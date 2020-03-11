@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
+import org.apache.logging.log4j.Level;
+
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
@@ -19,7 +21,9 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
@@ -27,7 +31,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 {
 
 	private final float[] ledgeWidthArrayYIndex = new float[1024];
-	protected static OctavesNoiseGenerator noiseGen;
+	protected static OpenSimplexNoise noiseGen;
 	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
 	protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	protected static final BlockState WATER = Blocks.WATER.getDefaultState();
@@ -107,7 +111,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	{
 		if (noiseGen == null)
 		{
-			noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
+			noiseGen = new OpenSimplexNoise(seed);
 		}
 	}
 
@@ -125,7 +129,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		setSeed(random.nextLong());
+		CaveCavityCarver.setSeed(random.nextLong());
 		return random.nextFloat() <= (ConfigUA.caveCavitySpawnrate) / 1000f;
 	}
 
@@ -255,40 +259,37 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 								// through lava that look good
 								double yPillarModifier = y;
 
-								//makes pillar widen at top
-								if (y >= 40)
+								
+								if(y > 30)
 								{
-									yPillarModifier = 40 - (yPillarModifier - 40) * 2D;
-
-									//prevents it from widening too fast and end up lowering the ceiling
-									if (yPillarModifier < 10)
-									{
-										yPillarModifier += (10 - yPillarModifier) * 0.75D;
-									}
+									//increase multiplier on end to widen top of pillar
+									yPillarModifier = (Math.pow((yPillarModifier - 30D) / 30, 2) * 30 - (y / 60)) * 18D;
 								}
-
-								//Use this value to control how much lava is shown at bottom
-								//Increase constant for less lava
-								yPillarModifier -= 4D;
-
-								if (y < 10)
+								else 
 								{
-									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
-									yPillarModifier++;
+									//increase multiplier on end to widen bottom of pillar
+									yPillarModifier = Math.pow((Math.pow(yPillarModifier - 30D, 2) * 0.033333D), 2) * 2.8D;
 								}
-								else if (yPillarModifier <= 0)
+								
+								if (yPillarModifier <= 0)
 								{
 									// prevents divide by 0 or by negative numbers (decreasing negative would make
 									// more terrain be carved instead of not carve)
 									yPillarModifier = 0.00001D;
 								}
+								else if (y < 10)
+								{
+									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
+									yPillarModifier-=50;
+								}
 
+								
 								//limits calling pillar and stalagmite perlin generators to reduce gen time
 								if (y < 60)
 								{
 									// Creates pillars that are widen at bottom.
 									//
-									// Perlin field creates the main body for pillar by stepping slowly through x
+									// simplex field creates the main body for pillar by stepping slowly through x
 									// and z and extremely slowly through y.
 									// Then subtracted modified target height to flatten bottom of pillar to
 									// make a path through lava.
@@ -297,7 +298,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									// out.
 									//
 									//Increase step in X and Z to make pillars less frequent but thicker
-									boolean flagPillars = noiseGen.func_205563_a(x * 0.04D, z * 0.04D, y * 0.016D) * 15.0D - (26 / yPillarModifier) + random.nextDouble() * 0.1D > -3.5D;
+									boolean flagPillars = noiseGen.eval(
+																x * 0.045D + (x % 16) * 0.002, 
+																z * 0.045D + (z % 16) * 0.002, 
+																y * 0.015D) - (yPillarModifier / 1000D) + 
+														 (random.nextDouble() * 0.01D) 
+														 > -0.3D;
 
 									if (!flagPillars)
 									{
@@ -310,7 +316,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									{
 										// Creates large stalagmites that cannot reach floor of cavern.
 										//
-										// Perlin field creates the main stalagmite shape and placement by stepping
+										// simplex field creates the main stalagmite shape and placement by stepping
 										// though x and z pretty fast and through y very slowly.
 										// Then adds 400/y so that as the y value gets lower, the more area gets carved
 										// which sets the limit on how far down the stalagmites can go.
@@ -319,7 +325,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										// while the 400/y has already carved out the rest of the cave.
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
-										stalagmiteDouble = noiseGen.func_205563_a(x * 0.23125D, z * 0.23125D, y * 0.01D) * 15.0D + (480D / (y));
+										stalagmiteDouble = noiseGen.eval(x * 0.23125D, z * 0.23125D, y * 0.01D) * 15.0D + (480D / (y));
 
 										//adds more tiny stalagmites to ceiling
 										if (y > 48)
@@ -328,7 +334,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										}
 
 										//decrease constant to make stalagmites smaller and thinner
-										boolean flagStalagmites = stalagmiteDouble > 9.2D;
+										boolean flagStalagmites = stalagmiteDouble > 5.5D;
 
 										if (!flagStalagmites)
 										{
