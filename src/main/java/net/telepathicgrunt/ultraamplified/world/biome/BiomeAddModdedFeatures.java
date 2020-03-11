@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
@@ -52,100 +53,88 @@ public class BiomeAddModdedFeatures
 	private static ForgeRegistry<Block> BlockRegistry = ((ForgeRegistry<Block>) ForgeRegistries.BLOCKS);
 
 	// workaround due to some people registering structures under minecraft namespace
-	private static ArrayList<Structure<?>> listOfVanillaStructures = new ArrayList<Structure<?>>()
-	{
-		private static final long serialVersionUID = 13L;
-		{
-			add(Structures.MINESHAFT);
-			add(Structures.PILLAGER_OUTPOST);
-			add(Structures.FORTRESS);
-			add(Structures.STRONGHOLD);
-			add(Structures.JUNGLE_PYRAMID);
-			add(Structures.OCEAN_RUIN);
-			add(Structures.DESERT_PYRAMID);
-			add(Structures.IGLOO);
-			add(Structures.SWAMP_HUT);
-			add(Structures.MONUMENT);
-			add(Structures.ENDCITY);
-			add(Structures.MANSION);
-			add(Structures.BURIED_TREASURE);
-			add(Structures.SHIPWRECK);
-			add(Structures.VILLAGE);
-		}
-	};
+	private static List<Structure<? extends IFeatureConfig>> listOfVanillaStructures = Arrays.asList(
+																							Structures.MINESHAFT,
+																							Structures.PILLAGER_OUTPOST,
+																							Structures.FORTRESS,
+																							Structures.STRONGHOLD,
+																							Structures.JUNGLE_PYRAMID,
+																							Structures.OCEAN_RUIN,
+																							Structures.DESERT_PYRAMID,
+																							Structures.IGLOO,
+																							Structures.SWAMP_HUT,
+																							Structures.MONUMENT,
+																							Structures.ENDCITY,
+																							Structures.MANSION,
+																							Structures.BURIED_TREASURE,
+																							Structures.SHIPWRECK,
+																							Structures.VILLAGE
+																						);
 
 	// workaround due to some people registering structures under minecraft namespace
-	private static ArrayList<Feature<?>> listOfVanillaStructureFeatures = new ArrayList<Feature<?>>()
-	{
-		private static final long serialVersionUID = 14L;
-		{
-			add(Feature.MINESHAFT);
-			add(Feature.PILLAGER_OUTPOST);
-			add(Feature.NETHER_BRIDGE);
-			add(Feature.STRONGHOLD);
-			add(Feature.JUNGLE_TEMPLE);
-			add(Feature.OCEAN_RUIN);
-			add(Feature.DESERT_PYRAMID);
-			add(Feature.IGLOO);
-			add(Feature.SWAMP_HUT);
-			add(Feature.OCEAN_MONUMENT);
-			add(Feature.END_CITY);
-			add(Feature.WOODLAND_MANSION);
-			add(Feature.BURIED_TREASURE);
-			add(Feature.SHIPWRECK);
-			add(Feature.VILLAGE);
-		}
-	};
+	private static List<Structure<? extends IFeatureConfig>> listOfVanillaStructureFeatures = Arrays.asList(
+																								Feature.MINESHAFT,
+																								Feature.PILLAGER_OUTPOST,
+																								Feature.NETHER_BRIDGE,
+																								Feature.STRONGHOLD,
+																								Feature.JUNGLE_TEMPLE,
+																								Feature.OCEAN_RUIN,
+																								Feature.DESERT_PYRAMID,
+																								Feature.IGLOO,
+																								Feature.SWAMP_HUT,
+																								Feature.OCEAN_MONUMENT,
+																								Feature.END_CITY,
+																								Feature.WOODLAND_MANSION,
+																								Feature.BURIED_TREASURE,
+																								Feature.SHIPWRECK,
+																								Feature.VILLAGE
+																							);
 
 	// workaround due to some people registering mobs under minecraft namespace
-	private static ArrayList<EntityType<?>> listOfVanillaMobs = new ArrayList<EntityType<?>>()
-	{
-		private static final long serialVersionUID = 15L;
-		{
-			add(EntityType.BAT);
-			add(EntityType.BLAZE);
-			add(EntityType.CAT);
-			add(EntityType.CHICKEN);
-			add(EntityType.COD);
-			add(EntityType.COW);
-			add(EntityType.CREEPER);
-			add(EntityType.DONKEY);
-			add(EntityType.DOLPHIN);
-			add(EntityType.DROWNED);
-			add(EntityType.ENDERMAN);
-			add(EntityType.ENDERMITE);
-			add(EntityType.FOX);
-			add(EntityType.GHAST);
-			add(EntityType.HORSE);
-			add(EntityType.HUSK);
-			add(EntityType.LLAMA);
-			add(EntityType.MAGMA_CUBE);
-			add(EntityType.MULE);
-			add(EntityType.MOOSHROOM);
-			add(EntityType.OCELOT);
-			add(EntityType.PANDA);
-			add(EntityType.PARROT);
-			add(EntityType.PIG);
-			add(EntityType.PUFFERFISH);
-			add(EntityType.ZOMBIE_PIGMAN);
-			add(EntityType.POLAR_BEAR);
-			add(EntityType.RABBIT);
-			add(EntityType.SALMON);
-			add(EntityType.SHEEP);
-			add(EntityType.SKELETON);
-			add(EntityType.SLIME);
-			add(EntityType.SPIDER);
-			add(EntityType.SQUID);
-			add(EntityType.STRAY);
-			add(EntityType.TROPICAL_FISH);
-			add(EntityType.TURTLE);
-			add(EntityType.WITCH);
-			add(EntityType.WITHER_SKELETON);
-			add(EntityType.WOLF);
-			add(EntityType.ZOMBIE);
-			add(EntityType.ZOMBIE_VILLAGER);
-		}
-	};
+	private static List<EntityType<? extends MobEntity>> listOfVanillaMobs = Arrays.asList(
+																				EntityType.BAT,
+																				EntityType.BLAZE,
+																				EntityType.CAT,
+																				EntityType.CHICKEN,
+																				EntityType.COD,
+																				EntityType.COW,
+																				EntityType.CREEPER,
+																				EntityType.DONKEY,
+																				EntityType.DOLPHIN,
+																				EntityType.DROWNED,
+																				EntityType.ENDERMAN,
+																				EntityType.ENDERMITE,
+																				EntityType.FOX,
+																				EntityType.GHAST,
+																				EntityType.HORSE,
+																				EntityType.HUSK,
+																				EntityType.LLAMA,
+																				EntityType.MAGMA_CUBE,
+																				EntityType.MULE,
+																				EntityType.MOOSHROOM,
+																				EntityType.OCELOT,
+																				EntityType.PANDA,
+																				EntityType.PARROT,
+																				EntityType.PIG,
+																				EntityType.PUFFERFISH,
+																				EntityType.ZOMBIE_PIGMAN,
+																				EntityType.POLAR_BEAR,
+																				EntityType.RABBIT,
+																				EntityType.SALMON,
+																				EntityType.SHEEP,
+																				EntityType.SKELETON,
+																				EntityType.SLIME,
+																				EntityType.SPIDER,
+																				EntityType.SQUID,
+																				EntityType.STRAY,
+																				EntityType.TROPICAL_FISH,
+																				EntityType.TURTLE,
+																				EntityType.WITCH,
+																				EntityType.WITHER_SKELETON,
+																				EntityType.WOLF,
+																				EntityType.ZOMBIE,
+																				EntityType.ZOMBIE_VILLAGER
+																			);
 
 	// we have a list of vanilla biomes in the order to match the UA biome list in BiomeInit.
 	// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
