@@ -7,9 +7,9 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +32,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 	// Used to keep track of what block to use to fill in certain air/liquids
 	protected BlockState replacementBlock = Blocks.STONE.getDefaultState();
 	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
+	protected static final Block CAVE_AIR = Blocks.CAVE_AIR;
 
 	private static Map<Biome, BlockState> fillerBiomeMap;
 
@@ -74,8 +75,8 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 					
 
 					// move down until we hit a water filled block
-					while (currentblock.getFluidState().isEmpty() && 
-							!currentblock.getFluidState().isTagged(FluidTags.WATER) && 
+					while ((currentblock.getFluidState().isEmpty() || 
+							!currentblock.getFluidState().isTagged(FluidTags.WATER)) && 
 							blockpos$Mutable.getY() > 10)
 					{
 						currentblock = world.getBlockState(blockpos$Mutable.move(Direction.DOWN));
@@ -93,7 +94,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 					{
 						blockpos$Mutable.move(face);
 						currentblock = world.getBlockState(blockpos$Mutable);
-						if (currentblock.getMaterial() == Material.AIR)
+						if (currentblock.getBlock() == CAVE_AIR)
 						{
 							//grabs what block to use based on what biome we are in
 							replacementBlock = fillerBiomeMap.get(world.getBiome(blockpos$Mutable));
@@ -111,7 +112,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 					{
 						blockpos$Mutable.move(face);
 						currentblock = world.getBlockState(blockpos$Mutable);
-						if (currentblock.getMaterial() == Material.AIR)
+						if (currentblock.getBlock() == CAVE_AIR)
 						{
 							//grabs what block to use based on what biome we are in
 							replacementBlock = fillerBiomeMap.get(world.getBiome(blockpos$Mutable));

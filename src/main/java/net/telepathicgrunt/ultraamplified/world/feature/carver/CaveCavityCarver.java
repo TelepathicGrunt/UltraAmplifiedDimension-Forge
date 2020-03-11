@@ -298,7 +298,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 																z * 0.045D + (z % 16) * 0.002D, 
 																y * 0.015D) - (yPillarModifier * 0.001D) + 
 														 (random.nextDouble() * 0.01D) 
-														 > -0.3D;
+														 > -0.32D;
 
 									if (!flagPillars)
 									{
