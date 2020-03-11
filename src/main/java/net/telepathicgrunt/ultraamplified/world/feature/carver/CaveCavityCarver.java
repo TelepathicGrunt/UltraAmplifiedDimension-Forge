@@ -6,22 +6,17 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
-import org.apache.logging.log4j.Level;
-
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
@@ -31,6 +26,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 {
 
 	private final float[] ledgeWidthArrayYIndex = new float[1024];
+	protected static long noiseSeed;
 	protected static OpenSimplexNoise noiseGen;
 	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
 	protected static final BlockState LAVA = Blocks.LAVA.getDefaultState();
@@ -109,9 +105,10 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	 */
 	public static void setSeed(long seed)
 	{
-		if (noiseGen == null)
+		if (noiseSeed != seed || noiseGen == null)
 		{
 			noiseGen = new OpenSimplexNoise(seed);
+			noiseSeed = seed;
 		}
 	}
 
@@ -119,7 +116,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	public CaveCavityCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> probabilityConfig, int maximumHeight)
 	{
 		super(probabilityConfig, maximumHeight);
-
 	}
 
 
@@ -129,7 +125,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		CaveCavityCarver.setSeed(random.nextLong());
 		return random.nextFloat() <= (ConfigUA.caveCavitySpawnrate) / 1000f;
 	}
 
@@ -280,7 +275,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 								else if (y < 10)
 								{
 									// creates a deep lava pool that starts 2 blocks deep automatically at edges.
-									yPillarModifier-=50;
+									yPillarModifier -= 50;
 								}
 
 								

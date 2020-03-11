@@ -36,6 +36,18 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 	protected OpenSimplexNoise noiseGen;
 
 
+	@Override
+	public void setSeed(long seed)
+	{
+		if (this.noiseSeed != seed || this.noiseGen == null)
+		{
+			this.noiseGen = new OpenSimplexNoise(seed);
+		}
+
+		this.noiseSeed = seed;
+	}
+
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
@@ -134,17 +146,5 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 			}
 		}
 
-	}
-
-
-	@Override
-	public void setSeed(long seed)
-	{
-		if (this.noiseSeed != seed || this.noiseGen == null)
-		{
-			this.noiseGen = new OpenSimplexNoise(seed);
-		}
-
-		this.noiseSeed = seed;
 	}
 }

@@ -22,6 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
@@ -47,6 +48,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
+		CaveCavityCarver.setSeed(world.getSeed());
 		return new UAChunkGenerator(world, new UABiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
 	}
 

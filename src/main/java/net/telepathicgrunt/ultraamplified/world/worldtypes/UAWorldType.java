@@ -5,6 +5,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
+import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
@@ -29,6 +30,8 @@ public class UAWorldType extends WorldType
 	@Override
 	public ChunkGenerator<?> createChunkGenerator(World world)
 	{
+		CaveCavityCarver.setSeed(world.getSeed());
+		
 		if (world.dimension.getType() == DimensionType.OVERWORLD)
 		{
 			//tells Minecraft to use this mod's ChunkGeneratorOverworld when running this world type in Overworld.

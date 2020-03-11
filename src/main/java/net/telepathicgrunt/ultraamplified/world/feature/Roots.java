@@ -10,15 +10,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
 
@@ -30,24 +29,23 @@ public class Roots extends Feature<BlockConfig>
 	}
 
 	protected long seed;
-	protected OctavesNoiseGenerator noiseGen;
+	protected OpenSimplexNoise noiseGen;
 
 
 	public void setSeed(long seed)
 	{
-		if (this.noiseGen == null)
+		if (this.seed != seed || this.noiseGen == null)
 		{
-			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
+			this.noiseGen = new OpenSimplexNoise(seed);
+			this.seed = seed;
 		}
-
-		this.seed = seed;
 	}
 
 
 	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, BlockConfig blockConfig)
 	{
-		setSeed(rand.nextLong());
+		setSeed(world.getSeed());
 
 		//wont generate root if config is turned off
 		//won't generate root on leaves, water, etc.
@@ -104,9 +102,9 @@ public class Roots extends Feature<BlockConfig>
 
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 2D + 20000 * rootNum, blockpos$Mutable.getZ() * 2D + 20000 * rootNum, blockpos$Mutable.getY() * 1D + 20000 * rootNum) * 15.0D, -1, 1);
-				zOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 2D + 10000 * rootNum, blockpos$Mutable.getZ() * 2D + 10000 * rootNum, blockpos$Mutable.getY() * 1D + 10000 * rootNum) * 15.0D, -1, 1);
-				yOffset = (int) MathHelper.clamp(this.noiseGen.func_205563_a(blockpos$Mutable.getX() * 1.9D - 10000 * rootNum, blockpos$Mutable.getZ() * 1.9D - 10000 * rootNum, blockpos$Mutable.getY() * 1D - 10000) * 15.0D * rootNum - 5.0D, -1, 1);
+				xOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockpos$Mutable.getX() * 1D + 20000 * rootNum, blockpos$Mutable.getZ() * 1D + 20000 * rootNum, blockpos$Mutable.getY() * 0.5D + 20000 * rootNum) * 15.0D, -1, 1);
+				zOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockpos$Mutable.getX() * 1D + 10000 * rootNum, blockpos$Mutable.getZ() * 1D + 10000 * rootNum, blockpos$Mutable.getY() * 0.5D + 10000 * rootNum) * 15.0D, -1, 1);
+				yOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockpos$Mutable.getX() * 0.85D - 10000 * rootNum, blockpos$Mutable.getZ() * 0.85D - 10000 * rootNum, blockpos$Mutable.getY() * 0.5D - 10000) * 15.0D * rootNum - 5.0D, -1, 1);
 
 				//debugging
 				//System.out.println(xOffset +", "+zOffset+", "+yOffset);

@@ -7,31 +7,29 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 
 
 public class ColumnVertical extends Feature<ColumnBlocksConfig>
 {
-	protected OctavesNoiseGenerator noiseGen;
+	protected OpenSimplexNoise noiseGen;
 	protected long seed;
 
 
 	public void setSeed(long seed)
 	{
-		if (this.noiseGen == null)
+		if (this.seed != seed || this.noiseGen == null)
 		{
-			this.noiseGen = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 1, 0);
+			this.noiseGen = new OpenSimplexNoise(seed);
+			this.seed = seed;
 		}
-
-		this.seed = seed;
 	}
 
 
@@ -50,7 +48,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 			return false;
 		}
 
-		setSeed(rand.nextLong());
+		setSeed(world.getSeed());
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 		int minWidth = 3;
 		int maxWidth = 10;
@@ -169,7 +167,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 
 					//scratches the surface for more imperfection
 					//cut the number of scratches on smallest part of pillar by 4
-					boolean flagImperfection3 = this.noiseGen.func_205563_a(x * 0.5D, z * 0.5D, y * 0.15D) * 15.0D < -0;
+					boolean flagImperfection3 = this.noiseGen.eval(x * 0.06D, z * 0.6D, y * 0.02D) < 0;
 					if (flagImperfection3 && (widthAtHeight > thinnestWidth || (widthAtHeight == thinnestWidth && rand.nextInt(4) == 0)))
 					{
 						currentWidth = widthAtHeight - 1;
