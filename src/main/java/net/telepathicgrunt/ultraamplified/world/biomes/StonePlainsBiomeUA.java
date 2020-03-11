@@ -41,9 +41,9 @@ import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigU
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillagePastStyledPiecesUA;
 
 
-public final class StoneFieldsBiomeUA extends UABiome
+public final class StonePlainsBiomeUA extends UABiome
 {
-	public StoneFieldsBiomeUA()
+	public StonePlainsBiomeUA()
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.STONE_STONE_GRAVEL_CONFIG)).precipitation(Biome.RainType.RAIN).category(Biome.Category.NONE).depth(0.1F).scale(0.8F).temperature(0.43F).downfall(0.3F).waterColor(4159204).waterFogColor(329011).parent((String) null));
 

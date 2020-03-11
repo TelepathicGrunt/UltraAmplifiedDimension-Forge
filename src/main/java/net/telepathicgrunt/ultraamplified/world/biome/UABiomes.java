@@ -72,7 +72,7 @@ import net.telepathicgrunt.ultraamplified.world.biomes.SnowyTaigaBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SnowyTaigaRelicBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SnowyTaigaRockyBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SnowyTundraBiomeUA;
-import net.telepathicgrunt.ultraamplified.world.biomes.StoneFieldsBiomeUA;
+import net.telepathicgrunt.ultraamplified.world.biomes.StonePlainsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SunflowerPlainsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SwampBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.SwampSpookyBiomeUA;
@@ -183,7 +183,7 @@ public class UABiomes
 		JUNGLE = initBiome(registry, new JungleBiomeUA(), "Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE);
 		RELIC_JUNGLE = initBiome(registry, new JungleRelicBiomeUA(), "Relic Jungle", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.HILLS);
 		JUNGLE_EDGE = initBiome(registry, new JungleEdgeBiomeUA(), "Jungle Edge", BiomeType.WARM, Type.HOT, Type.WET, Type.DENSE, Type.JUNGLE, Type.RARE);
-		STONE_PLAINS = initBiome(registry, new StoneFieldsBiomeUA(), "Stone Plains", BiomeType.COOL, Type.BEACH);
+		STONE_PLAINS = initBiome(registry, new StonePlainsBiomeUA(), "Stone Plains", BiomeType.COOL, Type.BEACH);
 		FROZEN_DESERT = initBiome(registry, new FrozenDesertBiomeUA(), "Frozen Desert", BiomeType.ICY, Type.BEACH, Type.SNOWY, Type.COLD);
 		BIRCH_FOREST = initBiome(registry, new BirchForestBiomeUA(), "Birch Forest", BiomeType.WARM, Type.FOREST);
 		RELIC_BIRCH_FOREST = initBiome(registry, new BirchForestBiomeUA(), "Relic Birch Forest", BiomeType.WARM, Type.FOREST, Type.HILLS);
