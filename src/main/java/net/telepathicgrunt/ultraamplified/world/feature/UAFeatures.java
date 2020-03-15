@@ -30,7 +30,7 @@ import net.minecraft.world.gen.placement.CountConfig;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.RegUtil;
+import net.telepathicgrunt.ultraamplified.utils.RegUtil;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleStructureUA;

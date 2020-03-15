@@ -10,7 +10,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TwiceSurfaceWithChance;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.RegUtil;
+import net.telepathicgrunt.ultraamplified.utils.RegUtil;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;

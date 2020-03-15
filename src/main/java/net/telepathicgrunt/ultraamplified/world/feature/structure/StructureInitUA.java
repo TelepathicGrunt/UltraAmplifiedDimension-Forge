@@ -1,7 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.telepathicgrunt.ultraamplified.RegUtil;
+import net.telepathicgrunt.ultraamplified.utils.RegUtil;
 
 
 public class StructureInitUA
