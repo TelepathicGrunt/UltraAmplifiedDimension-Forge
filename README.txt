@@ -24,6 +24,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
    (V.7.2.4 Changes) (1.15.2 Minecraft)
  
+   Structures/Features:
+·
+·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
+
    Biome:
 ·Optimized the surface builder for Netherland and desert/badlands biomes to increase performance.
 ·Soulsand and gravel patches in Netherland are a bit more common and larger.
