@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -114,8 +115,25 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 				structurepiece.buildComponent(strongholdpieces$entrancestairs, this.components, this.rand);
 			}
 
-			this.recalculateStructureSize();
 
+
+			if (strongholdpieces$entrancestairs.strongholdPortalRoom == null)
+			{
+				MutableBoundingBox box = this.components.get(this.components.size()-1).getBoundingBox();
+				StrongholdPiecesUA.Stronghold portalRoom = StrongholdPiecesUA.PortalRoom.createPiece(this.components, this.rand, box.minX, box.minY+1, box.minZ, Direction.NORTH);
+				this.components.add(portalRoom);
+				strongholdpieces$entrancestairs.pendingChildren.add(portalRoom);
+				list = strongholdpieces$entrancestairs.pendingChildren;
+				
+				while (!list.isEmpty())
+				{
+					int i = this.rand.nextInt(list.size());
+					StructurePiece structurepiece = list.remove(i);
+					structurepiece.buildComponent(strongholdpieces$entrancestairs, this.components, this.rand);
+				}
+			}
+			
+			this.recalculateStructureSize();
 			this.func_214626_a(this.rand, 100, 120);
 			//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
 		}
