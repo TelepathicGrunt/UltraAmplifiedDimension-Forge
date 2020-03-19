@@ -24,13 +24,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-------------------------------------------------
-    | Ultra Amplified Dimension changelog |
+---------------------------------------
+| Ultra Amplified Dimension changelog |
 
 
 
 
-#(V.7.2.5 Changes) (1.15.2 Minecraft)
+# (V.7.2.5 Changes) (1.15.2 Minecraft)
 
 
 
@@ -57,7 +57,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·All glow variants of blocks (except for Glowstone Ore) can be created in a Crafting Table! Place the non-glow version of the block in the center and put Glowstone Dust above, below, left, and right of the block to craft the glow variant.
 
 
-#(V.7.2.4 Changes) (1.15.2 Minecraft)
+# (V.7.2.4 Changes) (1.15.2 Minecraft)
 
 
 
@@ -91,7 +91,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.2.3 Changes) (1.15.2 Minecraft)
+# (V.7.2.3 Changes) (1.15.2 Minecraft)
 
 
 
@@ -123,7 +123,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.2.2 Changes) (1.15.2 Minecraft)
+# (V.7.2.2 Changes) (1.15.2 Minecraft)
 
 
 
@@ -181,7 +181,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.2.1 Changes) (1.15.2 Minecraft)
+# (V.7.2.1 Changes) (1.15.2 Minecraft)
 
 
 
@@ -207,7 +207,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.2.0 Changes) (1.15.1 Minecraft)
+# (V.7.2.0 Changes) (1.15.1 Minecraft)
 
 
 
@@ -233,7 +233,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.1.0 Changes) (1.15.1 Minecraft) 
+# (V.7.1.0 Changes) (1.15.1 Minecraft) 
 
 
 
@@ -315,7 +315,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.0.4 Changes) (1.15.1 Minecraft)
+# (V.7.0.4 Changes) (1.15.1 Minecraft)
 
 
 
@@ -377,7 +377,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.0.3 Changes) (1.15.1 Minecraft)
+# (V.7.0.3 Changes) (1.15.1 Minecraft)
 
 
 
@@ -407,7 +407,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.0.2 Changes) (1.15.1 Minecraft)
+# (V.7.0.2 Changes) (1.15.1 Minecraft)
 
 
 
@@ -419,7 +419,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.0.1 Changes) (1.15.1 Minecraft)
+# (V.7.0.1 Changes) (1.15.1 Minecraft)
 
 
 
@@ -465,7 +465,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.7.0.0 Changes) (1.15.1 Minecraft)
+# (V.7.0.0 Changes) (1.15.1 Minecraft)
 
 
 
@@ -615,7 +615,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.12.2 Changes) (1.14.4 Minecraft)
+# (V.6.12.2 Changes) (1.14.4 Minecraft)
 
 
 
@@ -625,7 +625,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.12.2 Changes) (1.14.4 Minecraft)
+# (V.6.12.2 Changes) (1.14.4 Minecraft)
 
 
 
@@ -643,7 +643,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.12.1 Changes) (1.14.4 Minecraft)
+# (V.6.12.1 Changes) (1.14.4 Minecraft)
 
 
 
@@ -663,7 +663,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.12.0 Changes) (1.14.4 Minecraft)
+# (V.6.12.0 Changes) (1.14.4 Minecraft)
 
 
 
@@ -693,7 +693,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.11.2 Changes) (1.14.4 Minecraft)
+# (V.6.11.2 Changes) (1.14.4 Minecraft)
 
 
 
@@ -715,7 +715,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.11.1 Changes) (1.14.4 Minecraft)
+# (V.6.11.1 Changes) (1.14.4 Minecraft)
 
 
 
@@ -749,7 +749,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.11.0 Changes) (1.14.4 Minecraft)
+# (V.6.11.0 Changes) (1.14.4 Minecraft)
 
 
 
@@ -771,7 +771,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.10.0 Changes) (1.14.4 Minecraft)
+# (V.6.10.0 Changes) (1.14.4 Minecraft)
 
 
 
@@ -823,7 +823,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.9.1 Changes) (1.14.4 Minecraft)
+# (V.6.9.1 Changes) (1.14.4 Minecraft)
 
 
 
@@ -839,7 +839,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.9 Changes) (1.14.4 Minecraft)
+# (V.6.9 Changes) (1.14.4 Minecraft)
 
 
 
@@ -875,7 +875,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.8 Changes) (1.14.4 Minecraft)
+# (V.6.8 Changes) (1.14.4 Minecraft)
 
 
 
@@ -895,7 +895,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.7 Changes) (1.14.4 Minecraft)
+# (V.6.7 Changes) (1.14.4 Minecraft)
 
 
 
@@ -941,7 +941,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.6 Changes) (1.14.4 Minecraft)
+# (V.6.6 Changes) (1.14.4 Minecraft)
 
 
 
@@ -957,7 +957,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.5 Changes) (1.14.4 Minecraft)
+# (V.6.5 Changes) (1.14.4 Minecraft)
 
 
 
@@ -977,7 +977,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.4 Changes) (1.14.4 Minecraft)
+# (V.6.4 Changes) (1.14.4 Minecraft)
 
 ·Quick fix to patch bug that caused putting this mod into a server would make the server to crash.
 
@@ -985,7 +985,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-#(V.6.3 Changes) (1.14.4 Minecraft)
+# (V.6.3 Changes) (1.14.4 Minecraft)
 
 
 
@@ -1057,7 +1057,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.6.2 Changes) (1.14.4 Minecraft)
+# (V.6.2 Changes) (1.14.4 Minecraft)
 
 
 
@@ -1103,7 +1103,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.6.1 Changes) (1.14.4 Minecraft)
+# (V.6.1 Changes) (1.14.4 Minecraft)
 
 
 
@@ -1113,7 +1113,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.6.0 Changes) (1.14.3 Minecraft)
+# (V.6.0 Changes) (1.14.3 Minecraft)
 
 
 
@@ -1217,7 +1217,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.5.0 Changes) (1.13.2 Minecraft)
+# (V.5.0 Changes) (1.13.2 Minecraft)
 
 
 
@@ -1335,7 +1335,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.4.4 Changes) (1.12 Minecraft)
+# (V.4.4 Changes) (1.12 Minecraft)
 
 
 
@@ -1391,7 +1391,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.4.3 Changes) (1.12 Minecraft)
+# (V.4.3 Changes) (1.12 Minecraft)
 
 
 
@@ -1465,7 +1465,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.4.2 Changes) (1.12 Minecraft)
+# (V.4.2 Changes) (1.12 Minecraft)
 
 
 
@@ -1487,7 +1487,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.4.1 Changes) (1.12 Minecraft)
+# (V.4.1 Changes) (1.12 Minecraft)
 
 
 
@@ -1537,7 +1537,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.4.0 Changes) (1.12 Minecraft)
+# (V.4.0 Changes) (1.12 Minecraft)
 
 
 
@@ -1615,7 +1615,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.3.1 Changes) (1.12 Minecraft)
+# (V.3.1 Changes) (1.12 Minecraft)
 
 
 
@@ -1667,7 +1667,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.3 Changes) (1.12 Minecraft)
+# (V.3 Changes) (1.12 Minecraft)
 
 
 
@@ -1769,7 +1769,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-#(V.1 Changes) (1.12 Minecraft)
+# (V.1 Changes) (1.12 Minecraft)
 
 
 
