@@ -168,7 +168,7 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
 
 			if (tileentity instanceof MobSpawnerTileEntity)
 			{
-				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand, position));
+				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand));
 			}
 			else
 			{
@@ -187,13 +187,13 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
 	/**
 	 * Randomly decides which spawner to use in a dungeon
 	 */
-	private EntityType<?> pickMobSpawner(IWorld world, Random rand, BlockPos position)
+	private EntityType<?> pickMobSpawner(IWorld world, Random rand)
 	{
 		int roll = rand.nextInt(100);
 
-		if (roll < 47)
+		if (roll < 46)
 		{
-			//47% chance
+			//48% chance
 			EntityType<?> et = UAFeatures.pickRandomDungeonMob(rand);
 			if (et != EntityType.ZOMBIE)
 			{
@@ -204,29 +204,24 @@ public class DungeonSnow extends Feature<NoFeatureConfig>
 				return EntityType.STRAY;
 			}
 		}
-		else if (roll < 72)
+		else if (roll < 71)
 		{
 			//25% chance
 			return EntityType.STRAY;
 		}
-		else if (roll < 97)
+		else if (roll < 96)
 		{
 			//25% chance
 			return EntityType.CAVE_SPIDER;
 		}
-		else if (roll < 98)
-		{
-			//25% chance
-			return EntityType.POLAR_BEAR;
-		}
 		else if (roll == 98)
 		{
-			//1% chance
-			return EntityType.CREEPER;
+			//2% chance
+			return EntityType.POLAR_BEAR;
 		}
 		else
 		{
-			//1% chance
+			//2% chance
 			return EntityType.SNOW_GOLEM;
 		}
 	}

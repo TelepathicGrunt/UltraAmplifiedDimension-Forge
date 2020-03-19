@@ -11,8 +11,10 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.VineBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -38,13 +40,14 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
 	private static final BlockState LEAVES = Blocks.JUNGLE_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
 	private static final BlockState LOGS = Blocks.JUNGLE_LOG.getDefaultState();
+	private static final BlockState SIDEWAYS_LOGS = Blocks.JUNGLE_LOG.getDefaultState().with(BlockStateProperties.AXIS, Direction.Axis.X);
 	private static final BlockState PLANKS = Blocks.JUNGLE_PLANKS.getDefaultState();
 
 
 	//only the mob spawner chance and what blocks the wall cannot replace was changed. Everything else is just the normal dungeon code.
 
 	@Override
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		int randXRange = rand.nextInt(2) + 2;
 		int xMin = -randXRange - 1;
@@ -88,19 +91,31 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 		{
 			for (int x = xMin; x <= xMax; ++x)
 			{
-				for (int y = 3; y >= -1; --y)
+				for (int y = 4; y >= -1; --y)
 				{
 					for (int z = zMin; z <= zMax; ++z)
 					{
 						blockpos$Mutable.setPos(position).move(x, y, z);
-
-						if (x != xMin && y != -1 && z != zMin && x != xMax && y != 4 && z != zMax)
+						
+						if(y == 4)
+						{
+							if (rand.nextInt(3) == 0)
+							{
+								world.setBlockState(blockpos$Mutable, SIDEWAYS_LOGS, 2);
+							}
+							else
+							{
+								world.setBlockState(blockpos$Mutable, LEAVES, 2);
+							}
+						}
+						else if (x != xMin && y != -1 && z != zMin && x != xMax && y != 4 && z != zMax)
 						{
 							if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
 							{
 								world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
 							}
 						}
+						
 						else if (blockpos$Mutable.getY() >= 0 && !world.getBlockState(blockpos$Mutable.down()).getMaterial().isSolid())
 						{
 							world.setBlockState(blockpos$Mutable, CAVE_AIR, 2);
@@ -128,6 +143,29 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 					}
 				}
 			}
+			
+
+			for (int x = xMin+1; x <= xMax-1; ++x)
+			{
+				for (int z = zMin+1; z <= zMax-1; ++z)
+				{
+					Direction facing = Direction.Plane.HORIZONTAL.random(rand);
+					if(rand.nextInt(3) == 0)
+					{
+						for (int y = 3; y >= 0; --y)
+						{
+							blockpos$Mutable.setPos(position).move(x, y, z);
+							world.setBlockState(blockpos$Mutable, Blocks.VINE.getDefaultState().with(VineBlock.FACING_TO_PROPERTY_MAP.get(facing), true), 2);
+											
+							if(rand.nextInt(3) == 0)
+							{
+								break;
+							}
+						}
+					}
+				}
+			}
+			
 
 			for (int l3 = 0; l3 < 2; ++l3)
 			{
@@ -166,7 +204,7 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 
 			if (tileentity instanceof MobSpawnerTileEntity)
 			{
-				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand, position));
+				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand));
 			}
 			else
 			{
@@ -185,25 +223,20 @@ public class DungeonJungle extends Feature<NoFeatureConfig>
 	/**
 	 * Randomly decides which spawner to use in a dungeon
 	 */
-	private EntityType<?> pickMobSpawner(IWorld world, Random rand, BlockPos position)
+	private EntityType<?> pickMobSpawner(IWorld world, Random rand)
 	{
 		int roll = rand.nextInt(100);
 
-		if (roll < 48)
+		if (roll < 73)
 		{
-			//48% chance
+			//73% chance
 			return UAFeatures.pickRandomDungeonMob(rand);
-		}
-		else if (roll < 73)
-		{
-			//25% chance
-			return EntityType.PARROT;
-
 		}
 		else if (roll < 98)
 		{
 			//25% chance
-			return UAFeatures.pickRandomDungeonMob(rand);
+			return EntityType.PARROT;
+
 		}
 		else if (roll == 98)
 		{

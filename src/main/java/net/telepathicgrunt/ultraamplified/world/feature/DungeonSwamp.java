@@ -84,13 +84,24 @@ public class DungeonSwamp extends Feature<NoFeatureConfig>
 		{
 			for (int x = xMin; x <= xMax; ++x)
 			{
-				for (int y = 3; y >= -1; --y)
+				for (int y = 4; y >= -1; --y)
 				{
 					for (int z = zMin; z <= zMax; ++z)
 					{
 						blockpos$Mutable.setPos(position).move(x, y, z);
 
-						if (x != xMin && y != -1 && z != zMin && x != xMax && y != 4 && z != zMax)
+						if(y == 4)
+						{
+							if (rand.nextInt(8) != 0)
+							{
+								world.setBlockState(blockpos$Mutable, Blocks.MOSSY_STONE_BRICKS.getDefaultState(), 2);
+							}
+							else
+							{
+								world.setBlockState(blockpos$Mutable, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2);
+							}
+						}
+						else if (x != xMin && y != -1 && z != zMin && x != xMax && y != 4 && z != zMax)
 						{
 							if (world.getBlockState(blockpos$Mutable).getBlock() != Blocks.CHEST && world.getBlockState(blockpos$Mutable).getBlock() != Blocks.SPAWNER)
 							{
@@ -159,7 +170,7 @@ public class DungeonSwamp extends Feature<NoFeatureConfig>
 
 			if (tileentity instanceof MobSpawnerTileEntity)
 			{
-				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand, position));
+				((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(this.pickMobSpawner(world, rand));
 			}
 			else
 			{
@@ -178,34 +189,29 @@ public class DungeonSwamp extends Feature<NoFeatureConfig>
 	/**
 	 * Randomly decides which spawner to use in a dungeon
 	 */
-	private EntityType<?> pickMobSpawner(IWorld world, Random rand, BlockPos position)
+	private EntityType<?> pickMobSpawner(IWorld world, Random rand)
 	{
 		int roll = rand.nextInt(100);
 
-		if (roll < 48)
+		if (roll < 73)
 		{
-			//48% chance
+			//74% chance
 			return UAFeatures.pickRandomDungeonMob(rand);
-		}
-		else if (roll < 73)
-		{
-			//25% chance
-			return EntityType.VEX;
 		}
 		else if (roll < 98)
 		{
 			//25% chance
-			return UAFeatures.pickRandomDungeonMob(rand);
+			return EntityType.VEX;
 		}
-		else if (roll == 98)
+		else if (roll < 99)
 		{
 			//1% chance
-			return EntityType.SLIME;
+			return EntityType.PIG;
 		}
 		else
 		{
 			//1% chance
-			return EntityType.PIG;
+			return EntityType.SLIME;
 		}
 	}
 }

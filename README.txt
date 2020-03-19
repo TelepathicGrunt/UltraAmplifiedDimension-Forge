@@ -17,6 +17,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
    (V.7.2.5 Changes) (1.15.2 Minecraft)
  
+   Structures/Features:
+·Updated dungeons and adjusted some spawn rates of types of spawners to be in parity with Repurposed Structure Mod. Biggest chages is the inclusion of vines in Jungle and Swamp/Dark Forest dungeons as well as a ceiling of the themed blocks is added to some of the dungeons as well. Phantom spawners for End dungeons is reduced to 2% now.
+·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
+ 
    Blocks:
 ·Amplified Portal block is now immune to Wither to prevent it from being destroyed and trapping players in the dimension.
 ·All glow variants of blocks (except for Glowstone Ore) can be created in a Crafting Table! Place the non-glow version of the block in the center and put Glowstone Dust above, below, left, and right of the block to craft the glow variant.
@@ -24,10 +28,6 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        
    (V.7.2.4 Changes) (1.15.2 Minecraft)
  
-   Structures/Features:
-·
-·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
-
    Biome:
 ·Optimized the surface builder for Netherland and desert/badlands biomes to increase performance.
 ·Soulsand and gravel patches in Netherland are a bit more common and larger.

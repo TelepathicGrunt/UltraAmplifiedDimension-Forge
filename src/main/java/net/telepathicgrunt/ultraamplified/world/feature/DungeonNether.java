@@ -198,14 +198,9 @@ public class DungeonNether extends Feature<NoFeatureConfig>
 			//25% chance
 			return EntityType.MAGMA_CUBE;
 		}
-		else if (roll == 98)
-		{
-			//1% chance
-			return EntityType.WITHER_SKELETON;
-		}
 		else
 		{
-			//1% chance
+			//2% chance
 			return EntityType.WITHER_SKELETON;
 		}
 	}
