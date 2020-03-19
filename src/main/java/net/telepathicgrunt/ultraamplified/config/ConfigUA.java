@@ -317,7 +317,7 @@ public class ConfigUA
 
 			builder.push("Feature Options");
 
-			dungeonSpawnrate = builder.comment("\r\n How often Dungeons will spawn.\r\n " + "0 for no Dungeons and 300 for max spawnrate.").translation("ultraamplified.config.feature.dungeonspawnrate").defineInRange("dungeonSpawnrate", 30, 0, 300);
+			dungeonSpawnrate = builder.comment("\r\n How often Dungeons will spawn.\r\n " + "0 for no Dungeons and 1000 for max spawnrate.").translation("ultraamplified.config.feature.dungeonspawnrate").defineInRange("dungeonSpawnrate", 30, 0, 1000);
 
 			ravineSpawnrate = builder.comment("\r\n How often Ravines will spawn.\r\n " + "0 for no Ravines and 100 for max spawnrate.").translation("ultraamplified.config.feature.ravinespawnrate").defineInRange("ravineSpawnrate", 25, 0, 100);
 
