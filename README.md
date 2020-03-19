@@ -1,6 +1,6 @@
-    Made for Minecraft v.1.15.2
+	Made for Minecraft v.1.15.2
 
-    Created by TelepathicGrunt
+	Created by TelepathicGrunt
 
 
 
@@ -26,13 +26,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ------------------------------------------------
 
-       | Ultra Amplified Dimension changelog |
+	| Ultra Amplified Dimension changelog |
 
        
 
        
 
-   (V.7.2.5 Changes) (1.15.2 Minecraft)
+	(V.7.2.5 Changes) (1.15.2 Minecraft)
 
     
 
@@ -44,7 +44,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-   Structures/Features:
+	Structures/Features:
 
 ·Updated dungeons and adjusted some spawn rates of types of spawners to be in parity with Repurposed Structure Mod. Biggest chages is the inclusion of vines in Jungle and Swamp/Dark Forest dungeons as well as a ceiling of the themed blocks is added to some of the dungeons as well. Phantom spawners for End dungeons is reduced to 2% now.
 
@@ -52,7 +52,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
  
 
-   Blocks:
+	Blocks:
 
 ·Amplified Portal block is now immune to Wither to prevent it from being destroyed and trapping players in the dimension.
 
@@ -62,11 +62,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.2.4 Changes) (1.15.2 Minecraft)
+	(V.7.2.4 Changes) (1.15.2 Minecraft)
 
  
 
-   Biome:
+	Biome:
 
 ·Optimized the surface builder for Netherland and desert/badlands biomes to increase performance.
 
@@ -84,7 +84,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
  
 
-   MISC:
+	MISC:
 
 ·Fixed bug that seemed to cause a very rare chance of a crash upon entering a world.
 
@@ -96,17 +96,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.2.3 Changes) (1.15.2 Minecraft)
+	(V.7.2.3 Changes) (1.15.2 Minecraft)
 
  
 
-   Structures:
+	Structures:
 
 ·Optimized containing floating water with solid blocks underground by quite a bit which reduced worldgen time!
 
 
 
-   Biome: 
+	Biome: 
 
 ·Optimized generating ocean biomes which reduced worldgen time!
 
@@ -128,7 +128,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.2.2 Changes) (1.15.2 Minecraft)
+	(V.7.2.2 Changes) (1.15.2 Minecraft)
 
     
 
@@ -158,7 +158,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures:
+	Structures:
 
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.
 
@@ -166,7 +166,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biome: 
+	Biome: 
 
 ·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
 
@@ -186,7 +186,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.2.1 Changes) (1.15.2 Minecraft)
+	(V.7.2.1 Changes) (1.15.2 Minecraft)
 
  
 
@@ -196,7 +196,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biome: 
+	Biome: 
 
 ·Fixed Bamboo not spawning in all Jungle biomes.
 
@@ -212,7 +212,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.2.0 Changes) (1.15.1 Minecraft)
+	(V.7.2.0 Changes) (1.15.1 Minecraft)
 
   
 
@@ -230,7 +230,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
     
 
-    Biome: 
+	Biome: 
 
 ·Increased overall spawnrate of Beehives a bit.
 
@@ -238,11 +238,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-   (V.7.1.0 Changes) (1.15.1 Minecraft) 
+	(V.7.1.0 Changes) (1.15.1 Minecraft) 
 
 
 
-    Config: 
+	Config: 
 
 ·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like: https://hatebin.com/mkuuflcoym  (Alternative link here if previous link expires: https://pastebin.com/jU0WWLG2 )
 
@@ -262,7 +262,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures:
+	Structures:
 
 ·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
 
@@ -278,7 +278,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biome: 
+	Biome: 
 
 ·Fixed very rare crash when generating beehives due to vanilla's code. MC-169848
 
@@ -310,7 +310,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-     Misc.
+	Misc.
 
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
 
@@ -320,17 +320,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.7.0.4 Changes) (1.15.1 Minecraft)
+	(V.7.0.4 Changes) (1.15.1 Minecraft)
 
      
 
-    Dimension: 
+	Dimension: 
 
 ·Beds no longer explode in the dimension! Sleeping in the bed will turn night into day and set your respawn point. Bad weather will not be affected however.
 
 
 
-    Config: 
+	Config: 
 
 ·A config is added to let you choose whether beds should explode or not in the dimension. Set to false by default.
 
@@ -342,7 +342,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures:
+	Structures:
 
 ·Stone and Nether Fortresses now will naturally spawn enemies specific to their kind of fortress at a low rate. You can manually swap the kinds of bricks between the two fortresses to get the other fortress's natural spawning entities.
 
@@ -356,7 +356,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biome: 
+	Biome: 
 
 ·Fixed bug that prevented giant mushrooms from generating in Dark forest and Relic Dark Forest biome.
 
@@ -376,7 +376,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Misc: 
+	Misc: 
 
 ·Optimized a bit and cleaned some code in the back end.      
 
@@ -384,11 +384,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.7.0.3 Changes) (1.15.1 Minecraft)
+	(V.7.0.3 Changes) (1.15.1 Minecraft)
 
     
 
-    Structures:
+	Structures:
 
 ·Optimized hanging roots.
 
@@ -406,7 +406,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biome: 
+	Biome: 
 
 ·Made Mushroom Field biome more rare.
 
@@ -416,11 +416,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.7.0.2 Changes) (1.15.1 Minecraft)
+	(V.7.0.2 Changes) (1.15.1 Minecraft)
 
     
 
-    Misc: 
+	Misc: 
 
 ·Fixed crash when trying to run this mod on a server.
 
@@ -428,11 +428,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.7.0.1 Changes) (1.15.1 Minecraft)
+	(V.7.0.1 Changes) (1.15.1 Minecraft)
 
     
 
-    Blocks: 
+	Blocks: 
 
 ·Bamboo can be placed on Glowgrass Block, Glowpodzol, Glowdirt, Glowmycelium, and Coarse Glowdirt.
 
@@ -440,7 +440,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures:
+	Structures:
 
 ·Made Hanging Ruins more rare in all biomes but more common in all Relic variant biomes.    
 
@@ -454,7 +454,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes:
+	Biomes:
 
 ·Fixed bug where leaves would decay on trees in certain biomes.
 
@@ -474,11 +474,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.7.0.0 Changes) (1.15.1 Minecraft)
+	(V.7.0.0 Changes) (1.15.1 Minecraft)
 
     
 
-    Major Change: 
+	Major Change: 
 
 ·Ported to 1.15.1! Celebration time!
 
@@ -494,7 +494,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures:
+	Structures:
 
 ·Hanging Ruins check is now fixed so it matches the ruin's actual location and prevents it from hanging off edges of ledges.
 
@@ -508,7 +508,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes:
+	Biomes:
 
 ·Added Honey Lakes to very rarely spawn in any Relics variant biome.
 
@@ -552,7 +552,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes renamed to match the terrain generation better:
+	Biomes renamed to match the terrain generation better:
 
 ·Savanna Plateau -> Savanna Terrace
 
@@ -624,11 +624,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.12.2 Changes) (1.14.4 Minecraft)
+	(V.6.12.2 Changes) (1.14.4 Minecraft)
 
     
 
-    Blocks: 
+	Blocks: 
 
 ·Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if their coordinate is 8 in x OR z instead of x AND z. Now only highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
 
@@ -636,17 +636,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.12.2 Changes) (1.14.4 Minecraft)
+	(V.6.12.2 Changes) (1.14.4 Minecraft)
 
     
 
-    Blocks: 
+	Blocks: 
 
 �Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if its coordinate has x = 8 or z = 8 instead of x = 8 and z = 8. Now only the highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
 
    
 
-    Structures: 
+	Structures: 
 
 ·Fixed rare crash that occurs when generating non-vanilla Villages.
 
@@ -654,17 +654,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.12.1 Changes) (1.14.4 Minecraft)
+	(V.6.12.1 Changes) (1.14.4 Minecraft)
 
     
 
-    Internal: 
+	Internal: 
 
 ·Fixed typo in localization of Sunflower Plains. "UASunflower Plains" -> "Sunflower Plains UA" 
 
  
 
-    Blocks: 
+	Blocks: 
 
 ·Amplified Portal Blocks no longer turn to Polished Diorite when left clicked. Instead, you can now mine it and it'll drop Polished Diorite. The highest Amplified Portal block at x = 8, z = 8 in the Ultra Amplified Dimension still cannot be mined to allow escape from the dimension.
 
@@ -676,11 +676,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.12.0 Changes) (1.14.4 Minecraft)
+	(V.6.12.0 Changes) (1.14.4 Minecraft)
 
     
 
-    Structures: 
+	Structures: 
 
 ·Cave Cavities are now optimized even more and looks better too! 
 
@@ -696,7 +696,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes:
+	Biomes:
 
 ·Mushroom Biomes now generates more mushrooms underground.
 
@@ -706,11 +706,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.11.2 Changes) (1.14.4 Minecraft)
+	(V.6.11.2 Changes) (1.14.4 Minecraft)
 
     
 
-    Internal: 
+	Internal: 
 
 ·Localized English version of biome, features, and structure names is added to this mod's en_us.json file. Will help with compatibility with other mods that needs to show the localized name of these stuff.
 
@@ -718,7 +718,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    Structures: 
+	Structures: 
 
 ·Optimized Cave Cavities to speed up world generation slightly.
 
@@ -730,23 +730,23 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.11.1 Changes) (1.14.4 Minecraft)
+	(V.6.11.1 Changes) (1.14.4 Minecraft)
 
     
 
-    WorldType:
+	WorldType:
 
 ·Patched a bug that crashes the game when trying to use the Ultra Amplified WorldType. Sorry about that. 
 
     
 
-    Biomes:
+	Biomes:
 
 ·Removed Hanging Ruins from Nether biome as it doesn't mesh well with Netherrack.
 
 
 
-    Structures: 
+	Structures: 
 
 ·Cave Cavity walls are no longer cut off or broken but I had to change the overall shape of Cave Cavities to fix that bug. (Walls are also slightly messier to make it look more natural)
 
@@ -758,7 +758,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Internal: 
+	Internal: 
 
 ·Changed this mod's version info displayed when in the mod tab in Forge to show the MC version as well. (1.14.4-6.11.1 instead of just 6.11.1)
 
@@ -766,11 +766,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.11.0 Changes) (1.14.4 Minecraft)
+	(V.6.11.0 Changes) (1.14.4 Minecraft)
 
              
 
-    Config: 
+	Config: 
 
 ·Fixed a rare bug where importing features from other mods could cause a crash. Instead, problematic features will be ignored when importing.
 
@@ -782,7 +782,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
   
 
-    Structures: 
+	Structures: 
 
 ·Added Hanging Ruins to all biomes except oceans and Ice Mountains biome. They spawn more often in Mountains biome and its variants. These features (not technically a structure) will spawn on the underside of floating ledges and can be seen by the faint light of Redstone Torches in them. Check them out!
 
@@ -790,11 +790,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.10.0 Changes) (1.14.4 Minecraft)
+	(V.6.10.0 Changes) (1.14.4 Minecraft)
 
           
 
-    Config: 
+	Config: 
 
 ·Lowered default maximum height for terrain from 256 to 248 so trees has less of a chance of being cut off. Can still be changed to 256 in config file.
 
@@ -804,7 +804,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
     
 
-    Dimension
+	Dimension
 
 ·Other mod's ScatteredPlantFeature feature now gets imported correctly.
 
@@ -816,7 +816,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
      
 
-    Biomes: 
+	Biomes: 
 
 ·Fixed bug where Cave Cavities and Ravines would spawn Stone instead of Endstone, Ice, and Netherrack in End, Ice Mountain, and Nether biome.
 
@@ -830,7 +830,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Structures: 
+	Structures: 
 
 ·Mineshafts in Nether biome will now place 2 Redstone Torches with Redstone wire in between at the top of arches that has a Redstone Lamp.
 
@@ -844,17 +844,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
      
 
-    (V.6.9.1 Changes) (1.14.4 Minecraft)
+	(V.6.9.1 Changes) (1.14.4 Minecraft)
 
     
 
-    Versioning:
+	Versioning:
 
 ·Changed versioning of this mod to match the accepted standard versioning practice.
 
     
 
-    Dimension
+	Dimension
 
 ·Fixed bug when player tries teleporting to UA dimension from Overworld but the stored world on the player is also the Overworld, the player gets stuck and cannot enter UA dimension.    
 
@@ -862,11 +862,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.9 Changes) (1.14.4 Minecraft)
+	(V.6.9 Changes) (1.14.4 Minecraft)
 
        
 
-    Config: 
+	Config: 
 
 ·Added config options to allow importing of modded features, structures, and mobs from vanilla biomes to the corresponding Ultra Amplified biome.
 
@@ -874,7 +874,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes: 
+	Biomes: 
 
 ·Adjusted some biome's spawnrates and improved filling temperature regions that all biomes were disallowed by config with allowed biomes.
 
@@ -892,7 +892,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    Structures: 
+	Structures: 
 
 ·Locate command fixed again so it now can find structures again in the Ultra Amplified Dimension. Begin typing "/locate ultra" and all Ultra Amplified structures should show up in the chat that you can search for.
 
@@ -900,17 +900,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.8 Changes) (1.14.4 Minecraft)
+	(V.6.8 Changes) (1.14.4 Minecraft)
 
     
 
-    Config: 
+	Config: 
 
 ·Fixed crash when Glowstone variant config is set to 0 and patches frequency being inverted
 
     
 
-    Dimension
+	Dimension
 
 ·The portal frame made in Ultra Amplified Dimension will have waterlogged Andesite Slabs if the slabs replaces water.
 
@@ -924,11 +924,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
    
 
-    (V.6.7 Changes) (1.14.4 Minecraft)
+	(V.6.7 Changes) (1.14.4 Minecraft)
 
     
 
-    Config: 
+	Config: 
 
 ·Added config option to trigger heavy fog in the Ultra Amplified Dimension for spooky effect. Set to false by default.
 
@@ -950,7 +950,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Biomes:
+	Biomes:
 
 ·Added new cactus blocks to create better cactuses to spawn in desert biomes.
 
@@ -962,7 +962,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-    Blocks:
+	Blocks:
 
 ·All blocks that this mod added is now available in the creative inventory.
 
@@ -970,11 +970,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.6 Changes) (1.14.4 Minecraft)
+	(V.6.6 Changes) (1.14.4 Minecraft)
 
     
 
-    Dimension: 
+	Dimension: 
 
 ·Futher improved portal mechanics so portal now remembers last position you were in Ultra Amplified Dimension when you last teleport out of it.
 
@@ -986,11 +986,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.5 Changes) (1.14.4 Minecraft)
+	(V.6.5 Changes) (1.14.4 Minecraft)
 
     
 
-    Dimension: 
+	Dimension: 
 
 ·Patched bug that prevented the dimension from being registered and working on the latest forge build.
 
@@ -1008,7 +1008,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.4 Changes) (1.14.4 Minecraft)
+	(V.6.4 Changes) (1.14.4 Minecraft)
 
 ·Quick fix to patch bug that caused putting this mod into a server would make the server to crash.
 
@@ -1016,11 +1016,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
        
 
-    (V.6.3 Changes) (1.14.4 Minecraft)
+	(V.6.3 Changes) (1.14.4 Minecraft)
 
        
 
-    Major Changes:
+	Major Changes:
 
 ·This mod is now its own dimension in any worldtype that isn't Ultra Amplified. To enter this dimension, make a portal with these blocks and then use Flint and Steel on Polished Diorite in center. Then right click on portal to enter.
 
@@ -1036,7 +1036,7 @@ PD =  Polished Diorite
 
 
 
-    Bottom Layer:
+	Bottom Layer:
 
 PG   |  BPAS  |  PG
 
@@ -1046,17 +1046,17 @@ PG   |  BPAS  |  PG
 
 
 
-    Middle Layer:
+	Middle Layer:
 
-     |        |  
+	|        |  
 
-     |   PD   |  
+	|   PD   |  
 
-     |        | 
+	|        | 
 
   
 
-     Top Layer:
+	Top Layer:
 
 PG   |  TPAS  |  PG
 
@@ -1072,13 +1072,13 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Config:
+	Config:
 
 ·Added option to modify the values used for the terrain perlin noise generator. Gives people the ability to make it more or less crazy.
 
     
 
-     Biomes:
+	Biomes:
 
 ·Columns in Wooded Hills biomes now generates Dirt under its Grass Blocks correctly on the bottom half of the column.
 
@@ -1090,17 +1090,17 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.6.2 Changes) (1.14.4 Minecraft)
+	(V.6.2 Changes) (1.14.4 Minecraft)
 
 
 
-     Terrain:
+	Terrain:
 
 ·Adjusted terrain so top layers islands are less frequent. Feedback on this change would be appreciated.
 
 
 
-     Config:
+	Config:
 
 ·Made the M form config now correctly make an actual area M form instead of tiny chunk size patches of the M biomes.
 
@@ -1110,7 +1110,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Biomes:
+	Biomes:
 
 ·Snowy Beach biome now spawns less often on land and will now also spawn along edges of where snowy biomes meets oceans.
 
@@ -1124,7 +1124,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Structures:
+	Structures:
 
 ·Strongholds now generate like other structures instead of being limited to a certain number per world so it is easier to find Strongholds.
 
@@ -1136,11 +1136,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.6.1 Changes) (1.14.4 Minecraft)
+	(V.6.1 Changes) (1.14.4 Minecraft)
 
     
 
-    Major Changes:
+	Major Changes:
 
 ·Now compatible with 1.14.4 as 1.14.3 wouldn't work in 1.14 due to some import changes and an accesstransformer issue.
 
@@ -1148,17 +1148,17 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
              
 
-    (V.6.0 Changes) (1.14.3 Minecraft)
+	(V.6.0 Changes) (1.14.3 Minecraft)
 
     
 
-     Major Changes:
+	Major Changes:
 
 ·Mod updated from 1.13.2 to work on 1.14.3 now!
 
 
 
-     Config:
+	Config:
 
 ·Added config option for Pillager Outposts.
 
@@ -1178,7 +1178,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Biomes:
+	Biomes:
 
 ·Added Bamboo Jungle biome to generate in this mod along with some modification. Uses real Bamboo unlike the Sugar Cane that the 1.12 version of this mod used!
 
@@ -1216,7 +1216,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Structures:
+	Structures:
 
 ·Crosses with very rare hidden chest in Swampland Hills biome has their loot nerfed.
 
@@ -1246,7 +1246,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Blocks:
+	Blocks:
 
 ·Coarse Glowdirt, Glowdirt, Glowgrass Block, Glowmycelium, Glowpodzol, Glowsand, Glowstone Ore, and Red Glowsand has been added. The blocks will give off light and when mined, will drop Glowstone dust and the base block. Fortune and Silk Touch works on these blocks.
 
@@ -1254,17 +1254,17 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
       
 
-    (V.5.0 Changes) (1.13.2 Minecraft)
+	(V.5.0 Changes) (1.13.2 Minecraft)
 
        
 
-     Major Changes:
+	Major Changes:
 
 ·Mod updated from 1.12.2 to work on 1.13.2 now!
 
 
 
-     Config:
+	Config:
 
 ·The Config GUI no longer works as 1.13 Forge does not have a working config UI. Instead, exit the Minecraft world you are in, look for the serverconfig folder in the save folder for that specific world, and edit the ultra_amplified_mod-server.toml file to change the config. Then enter the Minecraft world or restart server for the changes to take place. To make a fresh new world with a different config, create a new world and force close Minecraft before it starts showing the generation percentage. Then change the config and re-enter the world.
 
@@ -1278,7 +1278,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Biomes:
+	Biomes:
 
 ·Added Ultra Amplified versions of all Oceans! Deep Oceans has Shipwrecks and Ocean Monuments while shallow Oceans has Ruins, Treasure Chests, and Ocean Monuments!
 
@@ -1326,7 +1326,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
        
 
-       Structures:
+	Structures:
 
 ·Hay Bales in M forms of Jungles are now more common.
 
@@ -1372,11 +1372,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
        
 
-    (V.4.4 Changes) (1.12 Minecraft)
+	(V.4.4 Changes) (1.12 Minecraft)
 
     
 
-     Config:
+	Config:
 
 ·Added super secret setting that does something! (Can't say what lol. Try it!)
 
@@ -1388,7 +1388,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
     
 
-     Biomes:
+	Biomes:
 
 ·Biome distribution is now much better when fewer biomes are selected in the config settings.
 
@@ -1406,7 +1406,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Added a very rare Sun Shrine to generate in any biome with "Hills" in its name. (Except for Extreme Hills Biomes)
 
@@ -1422,7 +1422,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-     Misc:
+	Misc:
 
 ·Updated info that shows under this mod's World Type to be more accurate.
 
@@ -1432,11 +1432,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.4.3 Changes) (1.12 Minecraft)
+	(V.4.3 Changes) (1.12 Minecraft)
 
     
 
-    Config:
+	Config:
 
 ·Fixed several config descriptions, names, and order.
 
@@ -1458,7 +1458,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
     
 
-    Biomes:
+	Biomes:
 
 ·Made Plains, Forest, and Ice Mountain unable to spawn through the GenLayer for hills if those biomes are disabled.(example: Roofed Forests Biomes may generate Plains Biomes in them which is unwanted if player has the option for Plains disabled.)
 
@@ -1488,7 +1488,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Added Dark Oak Village to spawn in Roofed Forest Biome.
 
@@ -1496,7 +1496,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
   
 
-    Misc:
+	Misc:
 
 ·World generation progress is shown on loading screen when creating a new world!
 
@@ -1506,11 +1506,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-   (V.4.2 Changes) (1.12 Minecraft)
+	(V.4.2 Changes) (1.12 Minecraft)
 
    
 
-    Biomes:
+	Biomes:
 
 ·Fixed major crash when selecting certain single biomes to spawn through config.    
 
@@ -1520,7 +1520,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
     
 
-    Structures:
+	Structures:
 
 ·Fixed Mineshaft bug not spawning Rails in them.
 
@@ -1532,17 +1532,17 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-   (V.4.1 Changes) (1.12 Minecraft)
+	(V.4.1 Changes) (1.12 Minecraft)
 
 
 
-    Major Change:
+	Major Change:
 
 ·Added config options to select biomes, biome size, ores spawnrates, structures spawnrates, and certain decorative generations!
 
 
 
-    Biomes:
+	Biomes:
 
 ·Fixed Bug that prevented M variants of biomes from spawning naturally.
 
@@ -1564,7 +1564,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Attempting to optimize Cave Cavities and Ravines to reduce slowdown with world generation.
 
@@ -1582,11 +1582,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.4.0 Changes) (1.12 Minecraft)
+	(V.4.0 Changes) (1.12 Minecraft)
 
 
 
-    Major Change:
+	Major Change:
 
 ·Made the .jar mod now a compatiable Forge mod! WOOOOOOOOOO!!!!!!!!!!!
 
@@ -1594,7 +1594,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Biomes:
+	Biomes:
 
 ·Large Mushrooms now generate under floating islands and overhangs.
 
@@ -1630,7 +1630,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Mineshaft Torches now generate facing correct way.
 
@@ -1660,11 +1660,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.3.1 Changes) (1.12 Minecraft)
+	(V.3.1 Changes) (1.12 Minecraft)
 
     
 
-    Biomes:
+	Biomes:
 
 ·Fixed bug that turned Cold Beach biome into a snowed-in Bamboo Forest.
 
@@ -1688,7 +1688,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Fixed bug that made Woodland Mansion spawn in incorrect biomes.
 
@@ -1712,11 +1712,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.3 Changes) (1.12 Minecraft)
+	(V.3 Changes) (1.12 Minecraft)
 
 
 
-    Biomes:
+	Biomes:
 
 ·Flower Forest generate more flowers in greater density.
 
@@ -1744,7 +1744,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Made Slime Lakes unable to be covered by blocks so more of them are exposed.
 
@@ -1814,11 +1814,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    (V.1 Changes) (1.12 Minecraft)
+	(V.1 Changes) (1.12 Minecraft)
 
 
 
-    Terrain:
+	Terrain:
 
 ·Made world terrain far more amplified than what amplified world type normally makes. The terrain is a mixture of being layered, full of overhangs, and having loads of floating islands.
 
@@ -1832,7 +1832,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Biomes:
+	Biomes:
 
 ·Made all Biomes generate much smaller to help player not have to travel as far to reach a new Biome.
 
@@ -1878,7 +1878,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-    Structures:
+	Structures:
 
 ·Created Slime Lakes that spawn commonly below y = 175 to help facilitate jumping off cliffs safely.
 
