@@ -50,6 +50,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Added vines that spawns on and around the underground Stonebrick Fortress.
 
+·Added Mossy Stonebrick to Swamp/Dark Forest themed Mineshaft and Stone themed Mineshafts can now have Mossy Cobblestone Wall for the arch supports.
+
 ·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
 
 
