@@ -46,6 +46,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Updated dungeons and adjusted some spawn rates of types of spawners to be in parity with Repurposed Structure Mod. Biggest chages is the inclusion of vines in Jungle and Swamp/Dark Forest dungeons as well as a ceiling of the themed blocks is added to some of the dungeons as well. Phantom spawners for End dungeons is reduced to 2% now.
 
+·Changed loot in hallway chests in underground Stonebrick Fortress from using Nether Fortress loot to using Village Blacksmither, Village Armorer, and Jungle Temple loot.
+
+·Added vines that spawns on and around the underground Stonebrick Fortress.
+
 ·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
 
 

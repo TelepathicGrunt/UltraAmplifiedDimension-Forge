@@ -1,6 +1,8 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -19,20 +21,35 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
 public class FortressPiecesUA
 {
+	private static final Map<BlockState, BlockState> INFESTED_STONE_LOOKUP;
+	static {
+		INFESTED_STONE_LOOKUP = new HashMap<BlockState, BlockState>();
+		INFESTED_STONE_LOOKUP.put(Blocks.STONE_BRICKS.getDefaultState(), Blocks.INFESTED_STONE_BRICKS.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.STONE.getDefaultState(), Blocks.INFESTED_STONE.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.MOSSY_COBBLESTONE.getDefaultState(), Blocks.INFESTED_MOSSY_STONE_BRICKS.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.CRACKED_STONE_BRICKS.getDefaultState(), Blocks.INFESTED_CRACKED_STONE_BRICKS.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.COBBLESTONE.getDefaultState(), Blocks.INFESTED_COBBLESTONE.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.CHISELED_STONE_BRICKS.getDefaultState(), Blocks.INFESTED_CHISELED_STONE_BRICKS.getDefaultState());
+		INFESTED_STONE_LOOKUP.put(Blocks.MOSSY_STONE_BRICKS.getDefaultState(), Blocks.MOSSY_STONE_BRICKS.getDefaultState());
+	}
+	
 	private static final FortressPiecesUA.PieceWeight[] PRIMARY_COMPONENTS = new FortressPiecesUA.PieceWeight[] { new FortressPiecesUA.PieceWeight(FortressPiecesUA.Straight.class, 30, 0, true), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing3.class, 10, 4), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing.class, 10, 4), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Stairs.class, 10, 3), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Throne.class, 5, 2),
 			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Entrance.class, 5, 1) };
 	private static final FortressPiecesUA.PieceWeight[] SECONDARY_COMPONENTS = new FortressPiecesUA.PieceWeight[] { new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor5.class, 25, 0, true), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing2.class, 15, 5), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor2.class, 5, 10), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor.class, 5, 10),
@@ -148,7 +165,7 @@ public class FortressPiecesUA
 
 			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
 			{
-				this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3, (this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
+				this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -161,6 +178,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -223,7 +241,7 @@ public class FortressPiecesUA
 
 			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(1, 3), this.getYWithOffset(2), this.getZWithOffset(1, 3))))
 			{
-				this.generateChest(world, structureBoundingBoxIn, random, 1, 2, 3, (this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
+				this.generateChest(world, structureBoundingBoxIn, random, 1, 2, 3, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 0, 6, 0, 4, 6, 4, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHER_BRICKS.getDefaultState(), false, random);
@@ -236,6 +254,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -307,6 +326,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -385,6 +405,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -441,6 +462,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -509,6 +531,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -564,6 +587,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -666,6 +690,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -855,7 +880,7 @@ public class FortressPiecesUA
 
 			if (ConfigUA.chestGeneration)
 			{
-				this.generateChest(world, structureBoundingBoxIn, random, 6, 5, 8, (this.stoneVariant ? LootTables.CHESTS_NETHER_BRIDGE : LootTables.CHESTS_NETHER_BRIDGE));
+				this.generateChest(world, structureBoundingBoxIn, random, 6, 5, 8, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
 
 			if (structureBoundingBoxIn.isVecInside(blockpos))
@@ -863,6 +888,7 @@ public class FortressPiecesUA
 				world.getPendingFluidTicks().scheduleTick(blockpos, Fluids.LAVA, 0);
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1023,6 +1049,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1251,47 +1278,37 @@ public class FortressPiecesUA
 			{
 				if (block == Blocks.NETHER_BRICKS)
 				{
+					BlockState newBlockState;
 					float chance = rand.nextFloat();
-					if (chance < 0.6f)
+					if (chance < 0.60f)
 					{
 						// 60%
-						return Blocks.STONE_BRICKS.getDefaultState();
+						newBlockState = Blocks.STONE_BRICKS.getDefaultState();
 					}
-					else if (chance < 0.80f)
+					else if (chance < 0.70f)
 					{
 						// 20%
-						return Blocks.CRACKED_STONE_BRICKS.getDefaultState();
+						newBlockState = Blocks.CRACKED_STONE_BRICKS.getDefaultState();
 					}
-					else if (chance < 0.95f)
+					else if (chance < 0.85f)
 					{
 						// 15%
-						return Blocks.MOSSY_STONE_BRICKS.getDefaultState();
-					}
-					else if (chance < 0.97f)
-					{
-						// 2%
-						return Blocks.CHISELED_STONE_BRICKS.getDefaultState();
-					}
-					else if (chance < 0.988f)
-					{
-						// 1.8%
-						return Blocks.INFESTED_STONE_BRICKS.getDefaultState();
-					}
-					else if (chance < 0.994f)
-					{
-						// 0.6%
-						return Blocks.INFESTED_CRACKED_STONE_BRICKS.getDefaultState();
-					}
-					else if (chance < 0.997f)
-					{
-						// 0.3%
-						return Blocks.INFESTED_MOSSY_STONE_BRICKS.getDefaultState();
+						newBlockState = Blocks.MOSSY_STONE_BRICKS.getDefaultState();
 					}
 					else
 					{
-						// 0.3%
-						return Blocks.INFESTED_CHISELED_STONE_BRICKS.getDefaultState();
+						// 5%
+						newBlockState = Blocks.CHISELED_STONE_BRICKS.getDefaultState();
 					}
+					
+					chance = rand.nextFloat();
+					float silverfishThreshold = (float) (ConfigUA.silverfishStrongholdSpawnrate / 100);
+					if(chance < silverfishThreshold)
+					{
+						newBlockState = INFESTED_STONE_LOOKUP.get(newBlockState);
+					}
+					
+					return newBlockState;
 				}
 				else if (block == Blocks.NETHER_BRICK_FENCE)
 				{
@@ -1500,6 +1517,7 @@ public class FortressPiecesUA
 				}
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1603,6 +1621,8 @@ public class FortressPiecesUA
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 4, 4, 4, 4, iblockstate3, iblockstate3, false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 14, 4, 4, 14, iblockstate3, iblockstate3, false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 1, 17, 4, 4, 17, iblockstate3, iblockstate3, false, random);
+			
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1742,8 +1762,52 @@ public class FortressPiecesUA
 				this.generateChest(world, structureBoundingBoxIn, random, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
 			}
 
+			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
 
+	private static ResourceLocation pickRandomLoot(Random random)
+	{
+		ResourceLocation lootTable = null;
+		
+		float chance = random.nextFloat();
+		if(chance < 0.38f)
+		{
+			lootTable = LootTables.CHESTS_VILLAGE_VILLAGE_WEAPONSMITH;
+		}
+		else if(chance < 0.76f)
+		{
+			lootTable = LootTables.CHESTS_VILLAGE_VILLAGE_ARMORER;
+		}
+		else
+		{
+			lootTable = LootTables.CHESTS_JUNGLE_TEMPLE;
+		}
+		
+		
+		return lootTable;
+	}
+	
+	
+	private static void attemptToAddVines(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, MutableBoundingBox structureBoundingBoxIn, boolean stoneVariant)
+	{
+		if (stoneVariant)
+		{
+			BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+			for(int x = structureBoundingBoxIn.minX; x <= structureBoundingBoxIn.maxX; x++)
+			{
+				for(int z = structureBoundingBoxIn.minZ; z <= structureBoundingBoxIn.maxZ; z++)
+				{
+					for(int y = 5; y <= 60; y++)
+					{
+						if(random.nextInt(300) == 0)
+						{
+							UAFeatures.SHORT_VINES.place(world, chunkGenerator, random, mutablePos.setPos(x, y, z), NoFeatureConfig.NO_FEATURE_CONFIG);
+						}
+					}
+				}
+			}
+		}
+	}
 }
