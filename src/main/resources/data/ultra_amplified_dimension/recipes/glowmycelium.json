@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        " g ",
+        "gbg",
+        " g "
+    ],
+    "key":
+    {
+        "b":
+        {
+            "item": "minecraft:mycelium"
+        },
+        "g":
+        {
+            "item": "minecraft:glowstone_dust"
+        }
+    },
+    "result":
+    {
+        "item": "ultra_amplified_dimension:glowmycelium",
+        "count": 1
+    }
+}

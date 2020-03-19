@@ -19,7 +19,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
  
    Blocks:
 ·Amplified Portal block is now immune to Wither to prevent it from being destroyed and trapping players in the dimension.
-·
+·All glow variants of blocks (except for Glowstone Ore) can be created in a Crafting Table! Place the non-glow version of the block in the center and put Glowstone Dust above, below, left, and right of the block to craft the glow variant.
 
        
    (V.7.2.4 Changes) (1.15.2 Minecraft)
