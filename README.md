@@ -15,13 +15,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
        | Ultra Amplified Dimension changelog |
        
        
-   (V.7.2.5 Changes) (1.15.2 Minecraft)
+   (V.7.2.5 Changes) (1.15.2 Minecraft)
     
-	Config: 
+	Config: 
 ·Added config to change the size of the Stronghold.
 ·Increased maximum spawnrate of dungeons from 300 to 1000. Dungeon overload time!
 
-   Structures/Features:
+   Structures/Features:
 ·Updated dungeons and adjusted some spawn rates of types of spawners to be in parity with Repurposed Structure Mod. Biggest chages is the inclusion of vines in Jungle and Swamp/Dark Forest dungeons as well as a ceiling of the themed blocks is added to some of the dungeons as well. Phantom spawners for End dungeons is reduced to 2% now.
 ·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
  
@@ -30,7 +30,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·All glow variants of blocks (except for Glowstone Ore) can be created in a Crafting Table! Place the non-glow version of the block in the center and put Glowstone Dust above, below, left, and right of the block to craft the glow variant.
 
        
-   (V.7.2.4 Changes) (1.15.2 Minecraft)
+   (V.7.2.4 Changes) (1.15.2 Minecraft)
  
    Biome:
 ·Optimized the surface builder for Netherland and desert/badlands biomes to increase performance.
@@ -47,12 +47,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Registered some features that weren't registered before in Forge's registry in backend.
        
        
-   (V.7.2.3 Changes) (1.15.2 Minecraft)
+   (V.7.2.3 Changes) (1.15.2 Minecraft)
  
-   Structures:
+   Structures:
 ·Optimized containing floating water with solid blocks underground by quite a bit which reduced worldgen time!
 
-   Biome: 
+   Biome: 
 ·Optimized generating ocean biomes which reduced worldgen time!
 ·Fixed bug where thin Snow layers in Ocean biomes could cause the water next to it to not get replaced by land and make it look like the Snow is holding back water.
 ·Fixed very rare chance of a crash when trying to find a valid spot for Glowstone in Netherland biome.
@@ -63,41 +63,41 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Nerfed beehive spawnrate in Forest and Forest Relic biome.
 
        
-   (V.7.2.2 Changes) (1.15.2 Minecraft)
+   (V.7.2.2 Changes) (1.15.2 Minecraft)
     
-	Servers: 
+	Servers: 
 ·Add use-modded-worldtype=ultra-amplified to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain when making a brand new world. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
     
-	Config: 
+	Config: 
 ·Added config option to make exiting Ultra Amplified dimension to always place you into the Overworld.
 ·Fixed bug where disabling Spiky Badlands or Ice Spikes config while in a world, exiting, and re-entering won't take effect sometimes. Now it always will.
 ·The config to change what blocks is needed to create the portal frame will now work with any variation of the block itself. (In other words, if you specify minecraft:stone_stairs, you can have the stairs face in any direction now)
    
-	Dimension: 
+	Dimension: 
 ·Re-did and cleaned up the teleportation code. Next time you try to teleport to/from UA dimension in a world that used an older version of this mod, please place your stuff in a chest and then test teleporting with the Amplified Portal twice to make sure the teleportation code grabbed and converted the old teleportation code's data correctly. Any issues with this means you should teleport a few more times as the new code is self-correcting and should detect the correct dimensions and positions after a few times. The new code for the Amplified Portal block should be less glitchy and always place you at whatever spot you were at when you teleported to/from UA dimension regardless of other teleportation methods you used to enter/exit the UA dimension.
 ·Teleporting between dimensions with Amplified Portal block will now make you face where the Amplified Portal block was at when you last teleported out of that dimension you are currently going into.
 ·Teleporting is now more precise with spawning you at the very exact location you were at (instead of storing your position as whole numbers like 9, it can now store decimal numbers such as 9.84343).
 
-    Structures:
+    Structures:
 ·Sunshrines now explodes bigger and can deal damage to player. This is to make getting the Beacon block from them more difficult as the Beacon block item has a higher chance of getting destroyed in the explosion.
 ·Fixed Fossils not spawning on the correct ledge/places.
 
-    Biome: 
+    Biome: 
 ·Fixed the spawn placements of Red and Brown Mushrooms in some biomes.
 ·Fixed roots not generating.
 ·Added roots to Bamboo Jungle and Relic Bamboo Jungle biomes.
 ·Netherwart in Netherland biome is now more grown rather than looking like it was just placed. 
 
-	Worldtype: 
+	Worldtype: 
 ·Fixed bug where using the Ultra Amplified worldtype will cause all dimension outside the Overworld to use the Ultra Amplified chunkgenerator (terrain and biomes) when it shouldn't. Now it is fixed.
 
        
-   (V.7.2.1 Changes) (1.15.2 Minecraft)
+   (V.7.2.1 Changes) (1.15.2 Minecraft)
  
-	Config: 
+	Config: 
 ·Fixed bug where changing some settings could cause non-existent biome IDs to cause biome to not generate properly.
 
-    Biome: 
+    Biome: 
 ·Fixed Bamboo not spawning in all Jungle biomes.
 ·Fixed shallow lakes not spawning in Flower Jungle biomes, Swamp biomes, and Desert Lakes biome.
 ·Fixed bug where shallow lakes could replace leaves with water and the water could border non solid-looking blocks like bamboo.
@@ -105,40 +105,40 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Seagrass can appear in shallow lakes in biomes that normally have dirt-like blocks on the surface.
 
        
-   (V.7.2.0 Changes) (1.15.1 Minecraft)
-  
+   (V.7.2.0 Changes) (1.15.1 Minecraft)
+  
 	Major:
 ·Updated mod to 1.15.2 to make sure it still works. 1.15.1 version should work but this version is confirmed to work.
  
-	Config: 
+	Config: 
 ·Moved lavafall/waterfall rates from terrain section to feature section.
 ·Fixed bug where some non-mutated biomes can generate even when the mutated config is maxed out due to a weird interaction with how relic biomes generates. 
-    
-    Biome: 
+    
+    Biome: 
 ·Increased overall spawnrate of Beehives a bit.
 
        
-   (V.7.1.0 Changes) (1.15.1 Minecraft) 
+   (V.7.1.0 Changes) (1.15.1 Minecraft) 
 
-    Config: 
-·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like: https://hatebin.com/mkuuflcoym  (Alternative link here if previous link expires: https://pastebin.com/jU0WWLG2 )
+    Config: 
+·READ THIS: Config file has been updated to be more organized and accurate. Please save your current config file elsewhere so you know what changes you made and can make the same adjustments to the new config file. Here is what the new config format looks like: https://hatebin.com/mkuuflcoym  (Alternative link here if previous link expires: https://pastebin.com/jU0WWLG2 )
 ·Added 3 config options to let you change what block to use for the Amplified Portal frame (corners, top, and bottom). Enter the resourcelocation of the block (modded blocks works too) that you want to use instead of the default portal blocks. Example: "minecraft:dirt"
 ·Added config to disable spawning Silverfish Mob Spawner in Strongholds.
 ·Added config to disable spawning Silverfish Mob Spawner in Stone Fortresses.
 ·Added config to disable natural Silverfish spawning in Stone Fortresses.
-·Turning off ministructures config now will turn off Desert Wells properly.   
+·Turning off ministructures config now will turn off Desert Wells properly.   
 ·Increased maximum spawnrate of Hanging Ruins config from 100 to 1000.
 
 
-    Structures:
+    Structures:
 ·Fixed bug where the terrain base for Villages and Pillager Outposts weren't being created.
 ·Stonehenges now will attempt to generate twice instead of once. One time at highest piece of land and again and next highest piece of land. This should increase their frequency quite a bit.
 ·Sunshrine spawn condition is slightly less restrictive and will make it generate slightly more often.
-·Hanging Ruins now cannot generate fully submerged below sealevel. 
+·Hanging Ruins now cannot generate fully submerged below sealevel. 
 ·Fixed bug where Hanging Ruins' top can be exposed if it generates on a 1 block thick ledge. Now it should be even less likely to happen.
 ·Long Ravines (at or very close to lava level at bottom of world) is now longer on average.
 
-    Biome: 
+    Biome: 
 ·Fixed very rare crash when generating beehives due to vanilla's code. MC-169848
 ·Added chance for Beehives in fancy oak trees in Flower Jungle and Flower Jungle Edge biomes.
 ·Dark Forest biomes should generate larger than before.
@@ -154,9 +154,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·Patches of Sand and Sandstone now appears underground in all Desert biomes.
 ·Medium-small sized cave rooms will now appear underground in all Badlands and Desert biomes to make underground more like swiss cheese.
 
-     Misc.
+     Misc.
 ·Switched to Yarn over MCP mappings in backend. (I might had caused some bugs during the transition so please report anything that seems off or wrong)
-·More optimization and cleaning done in backend.              
+·More optimization and cleaning done in backend.              
 
        
     (V.7.0.4 Changes) (1.15.1 Minecraft)
@@ -961,4 +961,5 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 ·Worked hard to get Strongholds to spawn at height of the land close to their coordinates.
 ·Increased spawn rate of Strongholds as well.
 ·Increased Desert Wells and Lava Lake spawn rates.
+
 
