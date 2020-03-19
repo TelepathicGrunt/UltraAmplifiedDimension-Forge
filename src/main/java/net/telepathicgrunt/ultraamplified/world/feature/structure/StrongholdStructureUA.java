@@ -102,16 +102,16 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			StrongholdPiecesUA.prepareStructurePieces();
-			StrongholdPiecesUA.Stairs2 strongholdpieces$stairs2 = new StrongholdPiecesUA.Stairs2(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2);
-			this.components.add(strongholdpieces$stairs2);
-			strongholdpieces$stairs2.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
-			List<StructurePiece> list = strongholdpieces$stairs2.pendingChildren;
+			StrongholdPiecesUA.EntranceStairs strongholdpieces$entrancestairs = new StrongholdPiecesUA.EntranceStairs(this.rand, (chunkX << 4) + 2, (chunkZ << 4) + 2);
+			this.components.add(strongholdpieces$entrancestairs);
+			strongholdpieces$entrancestairs.buildComponent(strongholdpieces$entrancestairs, this.components, this.rand);
+			List<StructurePiece> list = strongholdpieces$entrancestairs.pendingChildren;
 
 			while (!list.isEmpty())
 			{
 				int i = this.rand.nextInt(list.size());
 				StructurePiece structurepiece = list.remove(i);
-				structurepiece.buildComponent(strongholdpieces$stairs2, this.components, this.rand);
+				structurepiece.buildComponent(strongholdpieces$entrancestairs, this.components, this.rand);
 			}
 
 			this.recalculateStructureSize();

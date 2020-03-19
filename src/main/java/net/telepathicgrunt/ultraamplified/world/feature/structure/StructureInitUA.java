@@ -127,7 +127,7 @@ public class StructureInitUA
 		SHRTUA = RegUtil.register(StrongholdPiecesUA.RightTurn::new, "SHRTUA");
 		SHRCUA = RegUtil.register(StrongholdPiecesUA.RoomCrossing::new, "SHRCUA");
 		SHSDUA = RegUtil.register(StrongholdPiecesUA.Stairs::new, "SHSDUA");
-		SHSTARTUA = RegUtil.register(StrongholdPiecesUA.Stairs2::new, "SHStartUA");
+		SHSTARTUA = RegUtil.register(StrongholdPiecesUA.EntranceStairs::new, "SHStartUA");
 		SHSUA = RegUtil.register(StrongholdPiecesUA.Straight::new, "SHSUA");
 		SHSSDUA = RegUtil.register(StrongholdPiecesUA.StairsStraight::new, "SHSSDUA");
 		VISTUA = RegUtil.register(VillagePastStyledPiecesUA.Church::new, "ViSTUA");

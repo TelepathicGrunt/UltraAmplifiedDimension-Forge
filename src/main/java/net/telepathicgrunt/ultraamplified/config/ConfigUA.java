@@ -76,6 +76,7 @@ public class ConfigUA
 	public static int strongholdSpawnrate = 62;
 	public static double silverfishStrongholdSpawnrate = 4D;
 	public static boolean allowSilverfishSpawnerStronghold = true;
+	public static double strongholdSizeSH = 100D;
 	public static int netherFortressSpawnrate = 14;
 	public static boolean netherFortressAboveground = true;
 	public static boolean netherFortressUnderground = true;
@@ -187,6 +188,7 @@ public class ConfigUA
 		public final IntValue strongholdSpawnrate;
 		public final DoubleValue silverfishStrongholdSpawnrate;
 		public final BooleanValue allowSilverfishSpawnerStronghold;
+		public final DoubleValue strongholdSizeSH;
 		public final IntValue netherFortressSpawnrate;
 		public final BooleanValue netherFortressAboveground;
 		public final BooleanValue netherFortressUnderground;
@@ -446,6 +448,15 @@ public class ConfigUA
 
 			allowSilverfishSpawnerStronghold = builder.comment("\r\n Can Silverfish Mob Spawners generate in Stronghold?.").translation("ultraamplified.config.structure.allowsilverfishspawnerstronghold").define("allowSilverfishSpawnerStronghold", true);
 
+			strongholdSizeSH = builder
+					.comment("\r\n How large the Stronghold is on average as a percentage." 
+							+ "\r\n Note: The Stonghold is much larger by default. To get something "
+							+ "\r\n closer to vanilla stronghold size, use the value of 60."
+							+ "\n "
+							+ "10 for supertiny Strongholds and 2000 for supermassive Strongholds.")
+					.translation("repurposedstructures.config.structure.stronghold.strongholdsizesh")
+					.defineInRange("strongholdSizeSH", 100D, 10, 2000);
+			
 			builder.pop();
 
 			builder.push("Nether/Stone Fortress");
@@ -630,6 +641,7 @@ public class ConfigUA
 		oceanRuinsSpawnrate = SERVER.oceanRuinsSpawnrate.get();
 		shipwreckSpawnrate = SERVER.shipwreckSpawnrate.get();
 		strongholdSpawnrate = SERVER.strongholdSpawnrate.get();
+		strongholdSizeSH = SERVER.strongholdSizeSH.get();
 		silverfishStrongholdSpawnrate = SERVER.silverfishStrongholdSpawnrate.get();
 		allowSilverfishSpawnerStronghold = SERVER.allowSilverfishSpawnerStronghold.get();
 		netherFortressSpawnrate = SERVER.netherFortressSpawnrate.get();

@@ -38,20 +38,36 @@ import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 public class StrongholdPiecesUA
 {
-	private static final StrongholdPiecesUA.PieceWeight[] PIECE_WEIGHTS = new StrongholdPiecesUA.PieceWeight[] { new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Straight.class, 40, 0), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Prison.class, 5, 8), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.LeftTurn.class, 20, 0), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RightTurn.class, 20, 0),
-			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RoomCrossing.class, 10, 9), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.StairsStraight.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Stairs.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Crossing.class, 5, 7), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.ChestCorridor.class, 5, 16), new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Library.class, 10, 6)
+	private static final StrongholdPiecesUA.PieceWeight[] PIECE_WEIGHTS = new StrongholdPiecesUA.PieceWeight[] { 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Straight.class, 40, 0), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Prison.class, 5, 8), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.LeftTurn.class, 20, 0), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RightTurn.class, 20, 0),
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.RoomCrossing.class, 10, 9), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.StairsStraight.class, 5, 7), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Stairs.class, 5, 7), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Crossing.class, 5, 7), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.ChestCorridor.class, 5, 16), 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Library.class, 10, 6)
 			{
 				@Override
-				public boolean canSpawnMoreStructuresOfType(int p_75189_1_)
+				public boolean canSpawnMoreStructures(int distanceFromStart)
 				{
-					return super.canSpawnMoreStructuresOfType(p_75189_1_) && p_75189_1_ > 4;
+					return super.canSpawnMoreStructures(distanceFromStart) && distanceFromStart > 4;
 				}
-			}, new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.PortalRoom.class, 20, 1)
+			}, 
+			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.PortalRoom.class, 20, 1)
 			{
 				@Override
-				public boolean canSpawnMoreStructuresOfType(int p_75189_1_)
+				public boolean canSpawnMoreStructures(int distanceFromStart)
 				{
-					return super.canSpawnMoreStructuresOfType(p_75189_1_) && p_75189_1_ > 5;
+					return this.instancesSpawned < 1 && distanceFromStart > 5;
+				}
+				
+				@Override
+				public boolean canSpawnMoreStructures()
+				{
+					return this.instancesSpawned < 1;
 				}
 			} };
 	private static List<StrongholdPiecesUA.PieceWeight> structurePieceList;
@@ -84,9 +100,22 @@ public class StrongholdPiecesUA
 
 		for (StrongholdPiecesUA.PieceWeight structurestrongholdpieces$pieceweight : structurePieceList)
 		{
-			if (structurestrongholdpieces$pieceweight.instancesLimit > 0 && structurestrongholdpieces$pieceweight.instancesSpawned < structurestrongholdpieces$pieceweight.instancesLimit)
+
+			if (structurestrongholdpieces$pieceweight.instancesLimit > 0)
 			{
-				flag = true;
+				String name = structurestrongholdpieces$pieceweight.pieceClass.getSimpleName();
+				if(name.equals("PortalRoom"))
+				{
+					if (structurestrongholdpieces$pieceweight.instancesSpawned < 1)
+						flag = true;
+				}
+				else
+				{
+					int maxLimit = (int)(structurestrongholdpieces$pieceweight.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+					
+					if (structurestrongholdpieces$pieceweight.instancesSpawned <= maxLimit)
+						flag = true;
+				}
 			}
 
 			totalWeight += structurestrongholdpieces$pieceweight.pieceWeight;
@@ -149,7 +178,7 @@ public class StrongholdPiecesUA
 	}
 
 
-	private static StrongholdPiecesUA.Stronghold generatePieceFromSmallDoor(StrongholdPiecesUA.Stairs2 p_175955_0_, List<StructurePiece> p_175955_1_, Random p_175955_2_, int p_175955_3_, int p_175955_4_, int p_175955_5_, Direction p_175955_6_, int p_175955_7_)
+	private static StrongholdPiecesUA.Stronghold generatePieceFromSmallDoor(StrongholdPiecesUA.EntranceStairs p_175955_0_, List<StructurePiece> p_175955_1_, Random p_175955_2_, int p_175955_3_, int p_175955_4_, int p_175955_5_, Direction p_175955_6_, int p_175955_7_)
 	{
 		if (!canAddStructurePieces())
 		{
@@ -181,7 +210,7 @@ public class StrongholdPiecesUA
 
 					if (i < 0)
 					{
-						if (!structurestrongholdpieces$pieceweight.canSpawnMoreStructuresOfType(p_175955_7_) || structurestrongholdpieces$pieceweight == p_175955_0_.strongholdPieceWeight)
+						if (!structurestrongholdpieces$pieceweight.canSpawnMoreStructures(p_175955_7_) || structurestrongholdpieces$pieceweight == p_175955_0_.strongholdPieceWeight)
 						{
 							break;
 						}
@@ -218,15 +247,16 @@ public class StrongholdPiecesUA
 	}
 
 
-	private static StructurePiece generateAndAddPiece(StrongholdPiecesUA.Stairs2 p_175953_0_, List<StructurePiece> p_175953_1_, Random p_175953_2_, int p_175953_3_, int p_175953_4_, int p_175953_5_, @Nullable Direction p_175953_6_, int p_175953_7_)
+	private static StructurePiece generateAndAddPiece(StrongholdPiecesUA.EntranceStairs p_175953_0_, List<StructurePiece> p_175953_1_, Random p_175953_2_, int p_175953_3_, int p_175953_4_, int p_175953_5_, @Nullable Direction p_175953_6_, int distanceFromStart)
 	{
-		if (p_175953_7_ > 50)
+		int maxComponents = (int)(50 * (ConfigUA.strongholdSizeSH * 0.01D));
+		if (distanceFromStart > maxComponents)
 		{
 			return null;
 		}
 		else if (Math.abs(p_175953_3_ - p_175953_0_.getBoundingBox().minX) <= 112 && Math.abs(p_175953_5_ - p_175953_0_.getBoundingBox().minZ) <= 112)
 		{
-			StructurePiece StructurePiece = generatePieceFromSmallDoor(p_175953_0_, p_175953_1_, p_175953_2_, p_175953_3_, p_175953_4_, p_175953_5_, p_175953_6_, p_175953_7_ + 1);
+			StructurePiece StructurePiece = generatePieceFromSmallDoor(p_175953_0_, p_175953_1_, p_175953_2_, p_175953_3_, p_175953_4_, p_175953_5_, p_175953_6_, distanceFromStart + 1);
 
 			if (StructurePiece != null)
 			{
@@ -277,7 +307,7 @@ public class StrongholdPiecesUA
 		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 		}
 
 
@@ -469,26 +499,26 @@ public class StrongholdPiecesUA
 				j = 8 - j;
 			}
 
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 5, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 5, 1);
 
 			if (this.leftLow)
 			{
-				this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, i, 1);
+				this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, i, 1);
 			}
 
 			if (this.leftHigh)
 			{
-				this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, j, 7);
+				this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, j, 7);
 			}
 
 			if (this.rightLow)
 			{
-				this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, i, 1);
+				this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, i, 1);
 			}
 
 			if (this.rightHigh)
 			{
-				this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, j, 7);
+				this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, j, 7);
 			}
 		}
 
@@ -569,11 +599,11 @@ public class StrongholdPiecesUA
 
 			if (enumfacing != Direction.NORTH && enumfacing != Direction.EAST)
 			{
-				this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+				this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 			}
 			else
 			{
-				this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+				this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 			}
 		}
 
@@ -798,15 +828,19 @@ public class StrongholdPiecesUA
 		}
 
 
-		public boolean canSpawnMoreStructuresOfType(int p_75189_1_)
+		public boolean canSpawnMoreStructures(int distanceFromStart)
 		{
-			return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
+			int maxLimit = (int)(this.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+			
+			return this.instancesLimit == 0 || this.instancesSpawned < maxLimit;
 		}
 
 
 		public boolean canSpawnMoreStructures()
 		{
-			return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
+			int maxLimit = (int)(this.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+			
+			return this.instancesLimit == 0 || this.instancesSpawned < maxLimit;
 		}
 	}
 
@@ -846,7 +880,7 @@ public class StrongholdPiecesUA
 		{
 			if (componentIn != null)
 			{
-				((StrongholdPiecesUA.Stairs2) componentIn).strongholdPortalRoom = this;
+				((StrongholdPiecesUA.EntranceStairs) componentIn).strongholdPortalRoom = this;
 			}
 		}
 
@@ -855,6 +889,12 @@ public class StrongholdPiecesUA
 		{
 			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175865_2_, p_175865_3_, p_175865_4_, -4, -1, 0, 11, 8, 16, p_175865_5_);
 			return canStrongholdGoDeeper(mutableboundingbox) && StructurePiece.findIntersecting(p_175865_0_, mutableboundingbox) == null ? new StrongholdPiecesUA.PortalRoom(p_175865_6_, mutableboundingbox, p_175865_5_) : null;
+		}
+		
+		public static StrongholdPiecesUA.PortalRoom createPiece(List<StructurePiece> p_175865_0_, Random p_175865_1_, int p_175865_2_, int p_175865_3_, int p_175865_4_, Direction p_175865_5_)
+		{
+			MutableBoundingBox mutableboundingbox = MutableBoundingBox.getComponentToAddBoundingBox(p_175865_2_, p_175865_3_, p_175865_4_, -4, -1, 0, 11, 8, 16, p_175865_5_);
+			return new StrongholdPiecesUA.PortalRoom(1, mutableboundingbox, p_175865_5_);
 		}
 
 
@@ -987,7 +1027,7 @@ public class StrongholdPiecesUA
 		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 		}
 
 
@@ -1046,11 +1086,11 @@ public class StrongholdPiecesUA
 
 			if (enumfacing != Direction.NORTH && enumfacing != Direction.EAST)
 			{
-				this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+				this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 			}
 			else
 			{
-				this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+				this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 			}
 
 		}
@@ -1120,9 +1160,9 @@ public class StrongholdPiecesUA
 		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 4, 1);
-			this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 4);
-			this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 4);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 4, 1);
+			this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 4);
+			this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 4);
 		}
 
 
@@ -1384,7 +1424,7 @@ public class StrongholdPiecesUA
 				StrongholdPiecesUA.strongComponentType = StrongholdPiecesUA.Crossing.class;
 			}
 
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 		}
 
 
@@ -1422,7 +1462,7 @@ public class StrongholdPiecesUA
 		}
 	}
 
-	public static class Stairs2 extends StrongholdPiecesUA.Stairs
+	public static class EntranceStairs extends StrongholdPiecesUA.Stairs
 	{
 		public StrongholdPiecesUA.PieceWeight strongholdPieceWeight;
 		@Nullable
@@ -1430,13 +1470,13 @@ public class StrongholdPiecesUA
 		public List<StructurePiece> pendingChildren = Lists.<StructurePiece>newArrayList();
 
 
-		public Stairs2(Random p_i50117_1_, int p_i50117_2_, int p_i50117_3_)
+		public EntranceStairs(Random p_i50117_1_, int p_i50117_2_, int p_i50117_3_)
 		{
 			super(StructureInitUA.SHSTARTUA, 0, p_i50117_1_, p_i50117_2_, p_i50117_3_);
 		}
 
 
-		public Stairs2(TemplateManager p_i50118_1_, CompoundNBT p_i50118_2_)
+		public EntranceStairs(TemplateManager p_i50118_1_, CompoundNBT p_i50118_2_)
 		{
 			super(StructureInitUA.SHSTARTUA, p_i50118_2_);
 		}
@@ -1462,7 +1502,7 @@ public class StrongholdPiecesUA
 		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 		}
 
 
@@ -1577,16 +1617,16 @@ public class StrongholdPiecesUA
 		@Override
 		public void buildComponent(StructurePiece componentIn, List<StructurePiece> listIn, Random rand)
 		{
-			this.getNextComponentNormal((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 1);
+			this.getNextComponentNormal((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 1);
 
 			if (this.expandsX)
 			{
-				this.getNextComponentX((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 2);
+				this.getNextComponentX((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 2);
 			}
 
 			if (this.expandsZ)
 			{
-				this.getNextComponentZ((StrongholdPiecesUA.Stairs2) componentIn, listIn, rand, 1, 2);
+				this.getNextComponentZ((StrongholdPiecesUA.EntranceStairs) componentIn, listIn, rand, 1, 2);
 			}
 		}
 
@@ -1725,7 +1765,7 @@ public class StrongholdPiecesUA
 
 
 		@Nullable
-		protected StructurePiece getNextComponentNormal(StrongholdPiecesUA.Stairs2 p_74986_1_, List<StructurePiece> p_74986_2_, Random p_74986_3_, int p_74986_4_, int p_74986_5_)
+		protected StructurePiece getNextComponentNormal(StrongholdPiecesUA.EntranceStairs p_74986_1_, List<StructurePiece> p_74986_2_, Random p_74986_3_, int p_74986_4_, int p_74986_5_)
 		{
 			Direction enumfacing = this.getCoordBaseMode();
 
@@ -1755,7 +1795,7 @@ public class StrongholdPiecesUA
 
 
 		@Nullable
-		protected StructurePiece getNextComponentX(StrongholdPiecesUA.Stairs2 p_74989_1_, List<StructurePiece> p_74989_2_, Random p_74989_3_, int p_74989_4_, int p_74989_5_)
+		protected StructurePiece getNextComponentX(StrongholdPiecesUA.EntranceStairs p_74989_1_, List<StructurePiece> p_74989_2_, Random p_74989_3_, int p_74989_4_, int p_74989_5_)
 		{
 			Direction enumfacing = this.getCoordBaseMode();
 
@@ -1785,7 +1825,7 @@ public class StrongholdPiecesUA
 
 
 		@Nullable
-		protected StructurePiece getNextComponentZ(StrongholdPiecesUA.Stairs2 p_74987_1_, List<StructurePiece> p_74987_2_, Random p_74987_3_, int p_74987_4_, int p_74987_5_)
+		protected StructurePiece getNextComponentZ(StrongholdPiecesUA.EntranceStairs p_74987_1_, List<StructurePiece> p_74987_2_, Random p_74987_3_, int p_74987_4_, int p_74987_5_)
 		{
 			Direction enumfacing = this.getCoordBaseMode();
 
