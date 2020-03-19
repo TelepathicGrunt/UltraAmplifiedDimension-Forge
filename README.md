@@ -25,16 +25,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 ------------------------------------------------
-
 	| Ultra Amplified Dimension changelog |
 
-       
 
-       
+
 
 	(V.7.2.5 Changes) (1.15.2 Minecraft)
 
-    
+
 
 	Config: 
 
@@ -50,7 +48,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Horned Swamp Trees (the 2x2 trees in Spooky Swamp Biome) now places dirt below the bottom of its trunk so the trunk doesn't partially hang in midair off of ledges anymore.
 
- 
+
 
 	Blocks:
 
@@ -59,12 +57,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ·All glow variants of blocks (except for Glowstone Ore) can be created in a Crafting Table! Place the non-glow version of the block in the center and put Glowstone Dust above, below, left, and right of the block to craft the glow variant.
 
 
-
-       
-
 	(V.7.2.4 Changes) (1.15.2 Minecraft)
 
- 
+
 
 	Biome:
 
@@ -82,7 +77,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Fixed bug where exiting and re-entering world could cause Cave Cavity terrain to become disconnected.
 
- 
+
 
 	MISC:
 
@@ -92,13 +87,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Registered some features that weren't registered before in Forge's registry in backend.
 
-       
 
-       
+
+
 
 	(V.7.2.3 Changes) (1.15.2 Minecraft)
 
- 
+
 
 	Structures:
 
@@ -126,17 +121,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.2.2 Changes) (1.15.2 Minecraft)
 
-    
+
 
 	Servers: 
 
 ·Add use-modded-worldtype=ultra-amplified to your server.properties file to make this mod replace the Overworld with the Ultra Amplified terrain when making a brand new world. Even Biome O' Plenty had to use a hack because of a change with server.properties in 1.13+.
 
-    
+
 
 	Config: 
 
@@ -146,7 +141,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·The config to change what blocks is needed to create the portal frame will now work with any variation of the block itself. (In other words, if you specify minecraft:stone_stairs, you can have the stairs face in any direction now)
 
-   
+
 
 	Dimension: 
 
@@ -184,11 +179,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.2.1 Changes) (1.15.2 Minecraft)
 
- 
+
 
 	Config: 
 
@@ -210,17 +205,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.2.0 Changes) (1.15.1 Minecraft)
 
-  
+
 
 	Major:
 
 ·Updated mod to 1.15.2 to make sure it still works. 1.15.1 version should work but this version is confirmed to work.
 
- 
+
 
 	Config: 
 
@@ -228,7 +223,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Fixed bug where some non-mutated biomes can generate even when the mutated config is maxed out due to a weird interaction with how relic biomes generates. 
 
-    
+
 
 	Biome: 
 
@@ -236,7 +231,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.1.0 Changes) (1.15.1 Minecraft) 
 
@@ -318,11 +313,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.0.4 Changes) (1.15.1 Minecraft)
 
-     
+
 
 	Dimension: 
 
@@ -380,13 +375,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Optimized a bit and cleaned some code in the back end.      
 
-       
 
-       
 
 	(V.7.0.3 Changes) (1.15.1 Minecraft)
 
-    
+
 
 	Structures:
 
@@ -412,13 +405,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Fixed bug where underwater Magma floor would be cut off when Netherland borders another biome.
 
-       
 
-       
 
 	(V.7.0.2 Changes) (1.15.1 Minecraft)
 
-    
+
 
 	Misc: 
 
@@ -426,11 +417,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.0.1 Changes) (1.15.1 Minecraft)
 
-    
+
 
 	Blocks: 
 
@@ -472,11 +463,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.7.0.0 Changes) (1.15.1 Minecraft)
 
-    
+
 
 	Major Change: 
 
@@ -484,7 +475,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·This mod is now renamed from Ultra Amplified Mod to Ultra Amplified Dimension !
 
- 
+
 
 	Config: 
 
@@ -622,29 +613,27 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.12.2 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Blocks: 
 
 ·Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if their coordinate is 8 in x OR z instead of x AND z. Now only highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
 
-       
 
-       
 
 	(V.6.12.2 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Blocks: 
 
 �Fixed bug where highest Amplified Portal Blocks in UA dimension cannot be broken if its coordinate has x = 8 or z = 8 instead of x = 8 and z = 8. Now only the highest portal at 8, ?, 8 cannot be mined in UA dimension as desired.
 
-   
+
 
 	Structures: 
 
@@ -652,17 +641,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.12.1 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Internal: 
 
 ·Fixed typo in localization of Sunflower Plains. "UASunflower Plains" -> "Sunflower Plains UA" 
 
- 
+
 
 	Blocks: 
 
@@ -672,13 +661,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Changed texture of Amplified Portal Block to be opaque and adjusted the texture itself to fit being opaque. This is to stop the bug of clouds appearing through the block when it was translucent.
 
-    
 
-       
 
 	(V.6.12.0 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Structures: 
 
@@ -704,11 +691,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.11.2 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Internal: 
 
@@ -716,7 +703,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Removed underscores from UltraAmplified WorldType's descriptive text.
 
-       
+
 
 	Structures: 
 
@@ -726,19 +713,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Fixed bug where setting the Elytra in ships in End Cities would cause Minecraft to become unresponsive and hang forever.
 
-       
 
-       
 
 	(V.6.11.1 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	WorldType:
 
 ·Patched a bug that crashes the game when trying to use the Ultra Amplified WorldType. Sorry about that. 
 
-    
+
 
 	Biomes:
 
@@ -762,13 +747,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Changed this mod's version info displayed when in the mod tab in Forge to show the MC version as well. (1.14.4-6.11.1 instead of just 6.11.1)
 
-  
 
-       
 
 	(V.6.11.0 Changes) (1.14.4 Minecraft)
 
-             
+
 
 	Config: 
 
@@ -780,19 +763,17 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Added option to blacklist certain mods' structures when importing structures. 
 
-  
+
 
 	Structures: 
 
 ·Added Hanging Ruins to all biomes except oceans and Ice Mountains biome. They spawn more often in Mountains biome and its variants. These features (not technically a structure) will spawn on the underside of floating ledges and can be seen by the faint light of Redstone Torches in them. Check them out!
 
-    
 
-       
 
 	(V.6.10.0 Changes) (1.14.4 Minecraft)
 
-          
+
 
 	Config: 
 
@@ -802,7 +783,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Added blacklistedBiomeList config option that lets players blacklist certain mods or individual biomes from being imported. Please let me know if an issue occurs with this.
 
-    
+
 
 	Dimension
 
@@ -814,7 +795,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Barren End Field biome now grabs modded features, mobs, and structures from the vanilla "End Barrens" biome.
 
-     
+
 
 	Biomes: 
 
@@ -840,31 +821,27 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Improved Stonehenge spawn condition so it hand less chance of hanging over ledges Also increased default spawnrate in config to compensate for slightly more restricted spawn condition.
 
-     
 
-     
 
 	(V.6.9.1 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Versioning:
 
 ·Changed versioning of this mod to match the accepted standard versioning practice.
 
-    
+
 
 	Dimension
 
 ·Fixed bug when player tries teleporting to UA dimension from Overworld but the stored world on the player is also the Overworld, the player gets stuck and cannot enter UA dimension.    
 
-       
 
-       
 
 	(V.6.9 Changes) (1.14.4 Minecraft)
 
-       
+
 
 	Config: 
 
@@ -890,25 +867,23 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Patched bug where Cold Ocean would sometimes spawn bordering Frozen Ocean even when Cold Ocean option is turned off.
 
-       
+
 
 	Structures: 
 
 ·Locate command fixed again so it now can find structures again in the Ultra Amplified Dimension. Begin typing "/locate ultra" and all Ultra Amplified structures should show up in the chat that you can search for.
 
-       
 
-       
 
 	(V.6.8 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Config: 
 
 ·Fixed crash when Glowstone variant config is set to 0 and patches frequency being inverted
 
-    
+
 
 	Dimension
 
@@ -918,15 +893,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Fixed bug where the dimension generates chunk at world origin when no players has entered the dimension. Now after you create the world, modify the config, restart the world, and enter the dimension for the first time, now the spawn chunk will match the config settings and match the surrounding terrain instead of being the default generation.
 
- 
 
-   
-
-   
 
 	(V.6.7 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Config: 
 
@@ -968,11 +939,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.6 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Dimension: 
 
@@ -984,11 +955,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.5 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Dimension: 
 
@@ -1004,9 +975,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ·Added config option to let users select maximum height of terrain.
 
-    
 
-       
 
 	(V.6.4 Changes) (1.14.4 Minecraft)
 
@@ -1014,11 +983,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-       
+
 
 	(V.6.3 Changes) (1.14.4 Minecraft)
 
-       
+
 
 	Major Changes:
 
@@ -1054,7 +1023,7 @@ PG   |  BPAS  |  PG
 
 	|        | 
 
-  
+
 
 	Top Layer:
 
@@ -1076,7 +1045,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Added option to modify the values used for the terrain perlin noise generator. Gives people the ability to make it more or less crazy.
 
-    
+
 
 	Biomes:
 
@@ -1085,8 +1054,6 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 ·Fixed bug that prevent glowstone patches from fully generating.
 
 ·Greatly increased spawnrate of crosses in Swamp Hills biome.
-
-     
 
 
 
@@ -1138,19 +1105,17 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 	(V.6.1 Changes) (1.14.4 Minecraft)
 
-    
+
 
 	Major Changes:
 
 ·Now compatible with 1.14.4 as 1.14.3 wouldn't work in 1.14 due to some import changes and an accesstransformer issue.
 
-       
 
-             
 
 	(V.6.0 Changes) (1.14.3 Minecraft)
 
-    
+
 
 	Major Changes:
 
@@ -1250,13 +1215,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Coarse Glowdirt, Glowdirt, Glowgrass Block, Glowmycelium, Glowpodzol, Glowsand, Glowstone Ore, and Red Glowsand has been added. The blocks will give off light and when mined, will drop Glowstone dust and the base block. Fortune and Silk Touch works on these blocks.
 
-     
 
-      
 
 	(V.5.0 Changes) (1.13.2 Minecraft)
 
-       
+
 
 	Major Changes:
 
@@ -1324,7 +1287,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Removed Bamboo Forest due to Bamboo Jungle being added in vanilla 1.14 and that this biome caused a great deal of lag from all the Sugar Cane.
 
-       
+
 
 	Structures:
 
@@ -1370,11 +1333,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-       
+
 
 	(V.4.4 Changes) (1.12 Minecraft)
 
-    
+
 
 	Config:
 
@@ -1386,7 +1349,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Made lower config values now spawn more Villages, Temples, Nether Fortresses, End Cities, Ocean Monuemnts, and Woodland Mansions but raised default value to keep same default spawnrates.
 
-    
+
 
 	Biomes:
 
@@ -1426,15 +1389,11 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Updated info that shows under this mod's World Type to be more accurate.
 
-  
-
-  
-
 
 
 	(V.4.3 Changes) (1.12 Minecraft)
 
-    
+
 
 	Config:
 
@@ -1456,7 +1415,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Changed Silverfish Block Spawnrate option for Extreme Hills Biome and Stronghold into two seperate options.
 
-    
+
 
 	Biomes:
 
@@ -1494,7 +1453,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Changed what Doors spawn for some Village types.
 
-  
+
 
 	Misc:
 
@@ -1508,7 +1467,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 	(V.4.2 Changes) (1.12 Minecraft)
 
-   
+
 
 	Biomes:
 
@@ -1518,17 +1477,13 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 ·Adjusted world height that giant Birch Trees can generate to in Birch Forest M biome so the tree does not get cut off as often.
 
-    
+
 
 	Structures:
 
 ·Fixed Mineshaft bug not spawning Rails in them.
 
 ·Rails now will spawn in Icy Mineshafts (but will break off Ice Block when a block update occurs).
-
-    
-
-
 
 
 
@@ -1662,7 +1617,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 	(V.3.1 Changes) (1.12 Minecraft)
 
-    
+
 
 	Biomes:
 
