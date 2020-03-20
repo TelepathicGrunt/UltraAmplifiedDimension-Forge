@@ -178,7 +178,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -254,7 +254,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -326,7 +326,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -405,7 +405,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -462,7 +462,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -531,7 +531,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -587,7 +587,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -690,7 +690,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -888,7 +888,7 @@ public class FortressPiecesUA
 				world.getPendingFluidTicks().scheduleTick(blockpos, Fluids.LAVA, 0);
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1049,7 +1049,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1517,7 +1517,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1622,7 +1622,7 @@ public class FortressPiecesUA
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 3, 14, 4, 4, 14, iblockstate3, iblockstate3, false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 4, 1, 17, 4, 4, 17, iblockstate3, iblockstate3, false, random);
 			
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1762,7 +1762,7 @@ public class FortressPiecesUA
 				this.generateChest(world, structureBoundingBoxIn, random, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
 			}
 
-			attemptToAddVines(world, p_225577_2_, random, structureBoundingBoxIn, stoneVariant);
+			attemptToAddVines(world, p_225577_2_, random, this, structureBoundingBoxIn, stoneVariant);
 			return true;
 		}
 	}
@@ -1790,7 +1790,7 @@ public class FortressPiecesUA
 	}
 	
 	
-	private static void attemptToAddVines(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, MutableBoundingBox structureBoundingBoxIn, boolean stoneVariant)
+	private static void attemptToAddVines(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, StructurePiece piece, MutableBoundingBox structureBoundingBoxIn, boolean stoneVariant)
 	{
 		if (stoneVariant)
 		{
@@ -1799,9 +1799,9 @@ public class FortressPiecesUA
 			{
 				for(int z = structureBoundingBoxIn.minZ; z <= structureBoundingBoxIn.maxZ; z++)
 				{
-					for(int y = 5; y <= 60; y++)
+					for(int y = piece.getYWithOffset(-10); y <= piece.getYWithOffset(15); y++)
 					{
-						if(random.nextInt(300) == 0)
+						if(random.nextInt(500) == 0)
 						{
 							UAFeatures.SHORT_VINES.place(world, chunkGenerator, random, mutablePos.setPos(x, y, z), NoFeatureConfig.NO_FEATURE_CONFIG);
 						}
