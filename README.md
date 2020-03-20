@@ -3,8 +3,11 @@
 <p style="text-align: center;"><span style="font-size: 12px;"><strong>(I recommend playing on the latest full release version of this mod for the most polished and best experience!)</strong></span></p>
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;">&nbsp;&nbsp;</p>
-<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;A few more bug fixing and code cleaning in back end!</strong></b></span></em></p>
-<p style="text-align: center;"><span style="color: #3f3bb8; font-size: 18px; text-decoration: underline;"><strong><em>(And please report any bugs you find)</em></strong></span></p>
+<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;Added recipes to craft all 7 glow variant blocks (excluding Glowstone Ore)!</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>In the Crafting Table, just place the block to infuse with Glowstone in the center </strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>and place Glowstone above, below, left, and right of it to create the glow variant.</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>Also changed loot in underground Stonebrick Fortress. See Changelog for more details.</strong></b></span></em></p>
+<p style="text-align: center;"><strong style="color: #3f3bb8; font-size: 18px;"><em>(And please report any bugs you find)</em></strong></p>
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;"><span style="font-size: 18px;"><strong>______________________________________________________________________________</strong></span></p>
 <p style="text-align: center;">&nbsp;</p>
@@ -44,7 +47,7 @@
 <p style="text-align: center;">&nbsp;</p>
 <p><span style="font-size: 18px;"><strong>______________________________________________________________________________</strong></span></p>
 <p>&nbsp;</p>
-<p style="text-align: center;"><span style="font-size: 12px;">For the list of changes in this mod, click the Source tab and check out README.txt file. </span></p>
+<p style="text-align: center;"><span style="font-size: 12px;">For the list of changes in this mod, click the Source tab and check out CHANGELOG.txt file. </span></p>
 <p style="text-align: center;"><span style="font-size: 12px;">This helps me keep track of what I had done so far.&nbsp;</span></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
