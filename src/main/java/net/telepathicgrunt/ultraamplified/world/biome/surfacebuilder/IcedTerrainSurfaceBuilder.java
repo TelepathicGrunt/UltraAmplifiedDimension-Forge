@@ -16,9 +16,9 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
-public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
+public class IcedTerrainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 {
-	public IceMountainSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_)
+	public IcedTerrainSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_)
 	{
 		super(p_i51310_1_);
 	}
@@ -40,7 +40,7 @@ public class IceMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 		int xpos = x & 15;
 		int zpos = z & 15;
 
-		for (int ypos = 255; ypos >= 0; --ypos)
+		for (int ypos = startHeight; ypos >= 0; --ypos)
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);

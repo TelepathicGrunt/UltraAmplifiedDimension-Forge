@@ -41,7 +41,7 @@ public class UASurfaceBuilders
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	BADLANDS_SURFACE_BUILDER_UA						= new BadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	MODIFIED_BADLANDS_SURFACE_BUILDER_UA			= new ModifiedBadlandsSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	ERODED_BADLANDS									= new MesaBryceSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
-	public static final SurfaceBuilder<SurfaceBuilderConfig>	ICE_MOUNTAIN_SURFACE_BUILDER					= new IceMountainSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<SurfaceBuilderConfig>	ICED_TERRAIN_SURFACE_BUILDER					= new IcedTerrainSurfaceBuilder(SurfaceBuilderConfig::deserialize);
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	NETHER_SURFACE_BUILDER_UA						= new NetherSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	END_SURFACE_BUILDER_UA							= new EndSurfaceBuilderUA(SurfaceBuilderConfig::deserialize);
 	public static final SurfaceBuilder<SurfaceBuilderConfig>	OCEAN_SURFACE_BUILDER_UA						= new OceanSurfaceBuilder(SurfaceBuilderConfig::deserialize);
@@ -58,19 +58,19 @@ public class UASurfaceBuilders
 		IForgeRegistry<SurfaceBuilder<?>> registry = event.getRegistry();
 
 		RegUtil.register(registry, DESERT_LAKE_SURFACE_BUILDER, "desert_lake_surface_builder");
-		RegUtil.register(registry, BADLANDS_SURFACE_BUILDER_UA, "badlands_surface_builder_ua");
-		RegUtil.register(registry, MODIFIED_BADLANDS_SURFACE_BUILDER_UA, "modified_badlands_surface_builder_ua");
+		RegUtil.register(registry, BADLANDS_SURFACE_BUILDER_UA, "badlands_surface_builder");
+		RegUtil.register(registry, MODIFIED_BADLANDS_SURFACE_BUILDER_UA, "modified_badlands_surface_builder");
 		RegUtil.register(registry, ERODED_BADLANDS, "eroded_badlands");
-		RegUtil.register(registry, ICE_MOUNTAIN_SURFACE_BUILDER, "ice_mountain_surface_builder");
-		RegUtil.register(registry, NETHER_SURFACE_BUILDER_UA, "nether_surface_builder_ua");
-		RegUtil.register(registry, END_SURFACE_BUILDER_UA, "end_surface_builder_ua");
-		RegUtil.register(registry, OCEAN_SURFACE_BUILDER_UA, "ocean_surface_builder_ua");
-		RegUtil.register(registry, DEEP_OCEAN_SURFACE_BUILDER_UA, "deep_ocean_surface_builder_ua");
+		RegUtil.register(registry, ICED_TERRAIN_SURFACE_BUILDER, "iced_terrain_surface_builder");
+		RegUtil.register(registry, NETHER_SURFACE_BUILDER_UA, "nether_surface_builder");
+		RegUtil.register(registry, END_SURFACE_BUILDER_UA, "end_surface_builder");
+		RegUtil.register(registry, OCEAN_SURFACE_BUILDER_UA, "ocean_surface_builder");
+		RegUtil.register(registry, DEEP_OCEAN_SURFACE_BUILDER_UA, "deep_ocean_surface_builder");
 		RegUtil.register(registry, SAND_SURFACE_BUILDER, "sand_surface_builder");
 		RegUtil.register(registry, GRAVEL_SURFACE_BUILDER, "gravel_surface_builder");
-		RegUtil.register(registry, EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA, "extreme_hills_mutated_surface_builder_ua");
+		RegUtil.register(registry, EXTREME_HILLS_MUTATED_SURFACE_BUILDER_UA, "extreme_hills_mutated_surface_builder");
 		RegUtil.register(registry, PLATEAU_SURFACE_BUILDER, "plateau_surface_builder");
-		RegUtil.register(registry, SHATTERED_SAVANNA_SURFACE_BUILDER_UA, "shattered_savanna_surface_builder_ua");
+		RegUtil.register(registry, SHATTERED_SAVANNA_SURFACE_BUILDER_UA, "shattered_savanna_surface_builder");
 
 	}
 }

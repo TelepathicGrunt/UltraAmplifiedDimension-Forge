@@ -33,7 +33,7 @@ public class IcedTerrainBiomeUA extends UABiome
 {
 	public IcedTerrainBiomeUA()
 	{
-		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.ICE_MOUNTAIN_SURFACE_BUILDER, UASurfaceBuilders.SNOWBLOCK_ICE_ICE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.45F).scale(0.3F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent((String) null));
+		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.ICED_TERRAIN_SURFACE_BUILDER, UASurfaceBuilders.SNOWBLOCK_ICE_ICE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.45F).scale(0.3F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent((String) null));
 		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.ICEY)));
 		this.addStructureFeature(UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructureFeature(UAFeatures.FORTRESS.configure(new FortressConfigUA(false)));

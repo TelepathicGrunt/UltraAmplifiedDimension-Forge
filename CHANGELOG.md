@@ -30,6 +30,16 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
+## (V.7.3.1 Changes) (1.15.2 Minecraft)
+
+
+
+### Biomes: 
+
+-Slightly optimized the surfacebuilder for Oceans, Iced Terrain, End Fields, and Netherlands biomes. 
+
+
+
 ## (V.7.3.0 Changes) (1.15.2 Minecraft)
 
 

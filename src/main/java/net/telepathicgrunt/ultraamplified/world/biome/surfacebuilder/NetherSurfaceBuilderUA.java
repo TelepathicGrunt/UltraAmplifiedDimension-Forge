@@ -61,7 +61,7 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 		BlockState topBlockstate = NETHERRACK;
 		BlockState bottomBlockstates = NETHERRACK;
 
-		for (int ypos = 255; ypos >= 0; --ypos)
+		for (int ypos = startHeight; ypos >= 0; --ypos)
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
 			BlockState currentBlockToReplace = chunkIn.getBlockState(blockpos$Mutable);

@@ -51,7 +51,7 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		BlockState currentBlock;
 		boolean useCoral = bottomBlock == DEAD_CORAL_ARRAY[0];
 
-		for (int y = 255; y >= seaLevel - 10; --y)
+		for (int y = startHeight; y >= seaLevel - 10; --y)
 		{
 			blockpos$Mutable.setPos(x, y, z);
 			currentBlock = chunkIn.getBlockState(blockpos$Mutable);
