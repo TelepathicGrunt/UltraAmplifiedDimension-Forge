@@ -143,6 +143,7 @@ public class DungeonEnd extends Feature<NoFeatureConfig>
 			}
 
 			world.setBlockState(newPosition, Blocks.END_PORTAL_FRAME.getDefaultState().with(BlockStateProperties.EYE, true), 2);
+			world.setBlockState(position.down(), Blocks.AIR.getDefaultState(), 2);
 			world.setBlockState(newPosition.down(), Blocks.SPAWNER.getDefaultState(), 2);
 			TileEntity tileentity = world.getTileEntity(newPosition.down());
 

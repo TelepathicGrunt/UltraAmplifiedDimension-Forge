@@ -173,6 +173,7 @@ public class DungeonDesert extends Feature<NoFeatureConfig>
 				}
 			}
 
+			world.setBlockState(position, Blocks.AIR.getDefaultState(), 2);
 			world.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
 			TileEntity tileentity = world.getTileEntity(position);
 			world.setBlockState(position.down(), SMOOTH_SANDSTONE, 2);

@@ -169,6 +169,7 @@ public class DungeonBadlands extends Feature<NoFeatureConfig>
 				}
 			}
 
+			world.setBlockState(position, Blocks.AIR.getDefaultState(), 2);
 			world.setBlockState(position, Blocks.SPAWNER.getDefaultState(), 2);
 			TileEntity tileentity = world.getTileEntity(position);
 
