@@ -33,6 +33,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ## (V.7.3.1 Changes) (1.15.2 Minecraft)
 
 
+##### Misc: 
+
+-Fixed an issue where computers in some foreign languages could cause Ultra Amplified Dimension to crash at startup. 
 
 ##### Biomes: 
 

@@ -61,7 +61,7 @@ public class RegUtil
 	 */
 	public static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T entry, String registryKey)
 	{
-		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey.toLowerCase().replace(' ', '_')));
+		entry.setRegistryName(new ResourceLocation(UltraAmplified.MODID, registryKey));
 		registry.register(entry);
 		return entry;
 	}

@@ -14,6 +14,7 @@ import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -47,8 +48,7 @@ public class BiomeLayerSetupUA
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
 	{
-
-		@SubscribeEvent
+		@SubscribeEvent(priority = EventPriority.HIGHEST)
 		public static void Load(WorldEvent.Load event)
 		{
 			setupBiomeEntries(); // Update what biomes are used when re-entering a world without closing Minecraft.

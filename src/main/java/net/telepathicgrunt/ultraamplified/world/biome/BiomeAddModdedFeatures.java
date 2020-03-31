@@ -36,6 +36,7 @@ import net.minecraft.world.gen.feature.SpringFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.Structures;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -149,8 +150,7 @@ public class BiomeAddModdedFeatures
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
 	{
-
-		@SubscribeEvent
+		@SubscribeEvent(priority = EventPriority.HIGHEST)
 		public static void Load(WorldEvent.Load event)
 		{
 			// makes sure the registry exists
