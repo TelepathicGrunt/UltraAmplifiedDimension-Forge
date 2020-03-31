@@ -30,6 +30,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
+## (V.7.3.2 Changes) (1.15.2 Minecraft)
+
+
+##### Misc: 
+
+
+
 ## (V.7.3.1 Changes) (1.15.2 Minecraft)
 
 
