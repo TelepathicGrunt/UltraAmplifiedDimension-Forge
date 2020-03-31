@@ -2,8 +2,12 @@
 <h2 style="text-align: center;"><strong><span style="font-size: 36px; color: #b00000;">CURRENTLY FOR 1.15.2 MC</span></strong></h2>
 <p style="text-align: center;"><span style="font-size: 12px;"><strong>(I recommend playing on the latest full release version of this mod for the most polished and best experience!)</strong></span></p>
 <p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;Fix crash that occurred when running the game in </strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>certain foreign languages. Sorry about that! Also, fixed fused dungeons</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>sometimes having a Pig Spawner due to weird Vanilla issue.</strong></b></span></em></p>
 <p style="text-align: center;">&nbsp;&nbsp;</p>
-<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;Added recipes to craft all 7 glow variant blocks (excluding Glowstone Ore)!</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Past 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;Added recipes to craft all 7 glow variant blocks (excluding Glowstone Ore)!</strong></b></span></em></p>
 <p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>In the Crafting Table, just place the block to infuse with Glowstone in the center </strong></b></span></em></p>
 <p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>and place Glowstone above, below, left, and right of it to create the glow variant.</strong></b></span></em></p>
 <p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>Also changed loot in underground Stonebrick Fortress. See Changelog for more details.</strong></b></span></em></p>
