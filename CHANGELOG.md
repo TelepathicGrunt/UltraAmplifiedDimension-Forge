@@ -35,6 +35,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ##### Misc: 
 
+-Fix en_us.json translation for some biomes.
 
 
 ## (V.7.3.1 Changes) (1.15.2 Minecraft)
