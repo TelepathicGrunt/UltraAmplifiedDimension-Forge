@@ -17,7 +17,6 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -39,16 +38,16 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 	@Override
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
-		if (ConfigUA.netherFortressAboveground || ConfigUA.netherFortressUnderground)
+		if (UltraAmplified.UAConfig.netherFortressAboveground.get() || UltraAmplified.UAConfig.netherFortressUnderground.get())
 		{
 			int i = chunkPosX >> 4;
 			int j = chunkPosZ >> 4;
 			rand.setSeed(i ^ j << 4 ^ chunkGen.getSeed());
-			if (chunkPosX != (i << 4) + 4 + rand.nextInt(ConfigUA.netherFortressSpawnrate))
+			if (chunkPosX != (i << 4) + 4 + rand.nextInt(UltraAmplified.UAConfig.netherFortressSpawnrate.get()))
 			{
 				return false;
 			}
-			else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(ConfigUA.netherFortressSpawnrate))
+			else if (chunkPosZ != (j << 4) + 4 + rand.nextInt(UltraAmplified.UAConfig.netherFortressSpawnrate.get()))
 			{
 				return false;
 			}
@@ -93,7 +92,7 @@ public class FortressStructureUA extends Structure<FortressConfigUA>
 
 	public List<Biome.SpawnListEntry> getStoneFortressSpawnList()
 	{
-		if (ConfigUA.allowNaturalSilverfishFortress)
+		if (UltraAmplified.UAConfig.allowNaturalSilverfishFortress.get())
 		{
 			return STONE_FORTRESS_ENEMIES;
 		}

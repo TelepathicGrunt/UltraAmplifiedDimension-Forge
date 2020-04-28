@@ -12,7 +12,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 
 
@@ -35,11 +35,11 @@ public class AtCenterSurfaceMiniFeature extends Placement<ChanceAndTypeConfig>
 		switch (placementConfig.type)
 		{
 			case SUNSHRINE:
-				chance = (int) (ConfigUA.sunShrineSpawnrate * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAConfig.sunShrineSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			case STONEHENGE:
-				chance = (int) (ConfigUA.stonehengeSpawnrate * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAConfig.stonehengeSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			default:

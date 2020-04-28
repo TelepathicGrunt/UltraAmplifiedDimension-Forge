@@ -13,7 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 
 
@@ -73,13 +73,13 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 			else if (currentBlockToReplace.getMaterial() == Material.WATER)
 			{
 
-				if (ypos < ConfigUA.seaLevel - 7)
+				if (ypos < UltraAmplified.UAConfig.seaLevel.get() - 7)
 				{
 					chunkIn.setBlockState(blockpos$Mutable, LAVA, false);
 				}
 				else
 				{
-					chunkIn.setBlockState(blockpos$Mutable, ConfigUA.lavaOcean ? LAVA : WATER, false);
+					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER, false);
 				}
 
 				depth = -1;

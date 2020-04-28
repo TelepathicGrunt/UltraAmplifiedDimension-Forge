@@ -17,7 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class SnowIceAllLayer extends Feature<NoFeatureConfig>
@@ -33,7 +33,7 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig>
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
-		for (int y = 256; y > ConfigUA.seaLevel - 1; --y)
+		for (int y = 256; y > UltraAmplified.UAConfig.seaLevel.get() - 1; --y)
 		{
 
 			blockpos$Mutable.setPos(pos.getX(), y, pos.getZ());

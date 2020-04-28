@@ -9,7 +9,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.placement.SimplePlacement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 
 
@@ -24,8 +24,8 @@ public class LapisPlacement extends SimplePlacement<LapisCountRangeConfig>
 	@Override
 	public Stream<BlockPos> getPositions(Random random, LapisCountRangeConfig placementConfig, BlockPos pos)
 	{
-		int count = (int) (ConfigUA.lapisOreSpawnrate * placementConfig.countModifier);
-		int baseline = placementConfig.sealevelBased ? ConfigUA.seaLevel - placementConfig.baseline : placementConfig.baseline;
+		int count = (int) (UltraAmplified.UAConfig.lapisOreSpawnrate.get() * placementConfig.countModifier);
+		int baseline = placementConfig.sealevelBased ? UltraAmplified.UAConfig.seaLevel.get() - placementConfig.baseline : placementConfig.baseline;
 		int spread = placementConfig.spread;
 		return IntStream.range(0, count).mapToObj((p_215058_4_) ->
 		{

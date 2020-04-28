@@ -32,7 +32,7 @@ import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -78,7 +78,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 		this.verticalNoiseGranularity = verticalNoiseGranularityIn;
 		this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;
 		this.defaultBlock = STONE;
-		this.defaultFluid = ConfigUA.lavaOcean ? LAVA : WATER;
+		this.defaultFluid = UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER;
 		this.noiseSizeX = 16 / this.horizontalNoiseGranularity;
 		this.noiseSizeY = p_i49931_5_ / this.verticalNoiseGranularity;
 		this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
@@ -185,7 +185,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 		double d0 = (double) k / (double) this.horizontalNoiseGranularity;
 		double d1 = (double) l / (double) this.horizontalNoiseGranularity;
 		double[][] adouble = new double[][] { this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1) };
-		int seaLevel = ConfigUA.seaLevel;
+		int seaLevel = UltraAmplified.UAConfig.seaLevel.get();
 
 		for (int j1 = this.noiseSizeY - 1; j1 >= 0; --j1)
 		{
@@ -257,7 +257,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 				int l1 = l + j1;
 				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
 				double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
-				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, ConfigUA.seaLevel, this.world.getSeed());
+				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, UltraAmplified.UAConfig.seaLevel.get(), this.world.getSeed());
 			}
 		}
 
@@ -451,12 +451,12 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 								objectlistiterator1.back(objectlist1.size());
 								BlockState blockstate;
 
-								if (d15 > 0.0D && currentY <= ConfigUA.yMaximum)
+								if (d15 > 0.0D && currentY <= UltraAmplified.UAConfig.yMaximum.get())
 								{
 									//place the biome's solid block
 									blockstate = this.defaultBlock;
 								}
-								else if (currentY < ConfigUA.seaLevel)
+								else if (currentY < UltraAmplified.UAConfig.seaLevel.get())
 								{
 									blockstate = this.defaultFluid;
 								}

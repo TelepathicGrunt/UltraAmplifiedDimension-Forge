@@ -17,7 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class HayBalePile extends Feature<NoFeatureConfig>
@@ -42,7 +42,7 @@ public class HayBalePile extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
-		if (!ConfigUA.miniStructureGeneration)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

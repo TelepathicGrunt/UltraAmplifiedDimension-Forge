@@ -24,7 +24,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.PatrolSpawner;
 import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
 import net.telepathicgrunt.ultraamplified.world.spawner.UACatSpawner;
@@ -75,7 +75,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 	@Override
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
-		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, ConfigUA.secretSetting ? 117104.946D : ConfigUA.xzTerrainModifier, ConfigUA.secretSetting ? 468419.786D : ConfigUA.yTerrainModifier, ConfigUA.xzScaleModifier, ConfigUA.secretSetting ? 73.1905915D : ConfigUA.yScaleModifier, 8.555149841308594D, 4.277574920654297D, 3, -10);
+		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, UltraAmplified.UAConfig.secretSetting.get() ? 117104.946D : UltraAmplified.UAConfig.xzTerrainModifier.get(), UltraAmplified.UAConfig.secretSetting.get() ? 468419.786D : UltraAmplified.UAConfig.yTerrainModifier.get(), UltraAmplified.UAConfig.xzScaleModifier.get(), UltraAmplified.UAConfig.secretSetting.get() ? 73.1905915D : UltraAmplified.UAConfig.yScaleModifier.get(), 8.555149841308594D, 4.277574920654297D, 3, -10);
 	}
 
 
@@ -270,14 +270,14 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 	@Override
 	public int getGroundHeight()
 	{
-		return ConfigUA.seaLevel + 1;
+		return UltraAmplified.UAConfig.seaLevel.get() + 1;
 	}
 
 
 	@Override
 	public int getSeaLevel()
 	{
-		return ConfigUA.seaLevel;
+		return UltraAmplified.UAConfig.seaLevel.get();
 	}
 
 }

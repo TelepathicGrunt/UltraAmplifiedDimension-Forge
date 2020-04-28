@@ -24,7 +24,6 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class IceSpikeTemplePiecesUA
@@ -121,12 +120,12 @@ public class IceSpikeTemplePiecesUA
 			if ("chest".equals(function))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (ConfigUA.chestGeneration)
+				if (UltraAmplified.UAConfig.chestGeneration.get())
 				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity)
 					{
-						if (ConfigUA.chestGeneration)
+						if (UltraAmplified.UAConfig.chestGeneration.get())
 						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_1_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						}
@@ -140,12 +139,12 @@ public class IceSpikeTemplePiecesUA
 			else if ("chest2".equals(function))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (ConfigUA.chestGeneration)
+				if (UltraAmplified.UAConfig.chestGeneration.get())
 				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity)
 					{
-						if (ConfigUA.chestGeneration)
+						if (UltraAmplified.UAConfig.chestGeneration.get())
 						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_2_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						}

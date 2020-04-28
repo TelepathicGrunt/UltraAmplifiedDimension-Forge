@@ -17,7 +17,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
@@ -125,7 +125,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return random.nextFloat() <= (ConfigUA.caveCavitySpawnrate) / 1000f;
+		return random.nextFloat() <= (UltraAmplified.UAConfig.caveCavitySpawnrate.get()) / 1000f;
 	}
 
 

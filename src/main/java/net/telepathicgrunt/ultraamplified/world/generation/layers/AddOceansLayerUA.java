@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -21,15 +21,15 @@ public class AddOceansLayerUA implements IAreaTransformer0
 	{
 		oceanList = new ArrayList<Integer>();
 
-		if (ConfigUA.warmOcean)
+		if (UltraAmplified.UAConfig.warmOcean.get())
 			oceanList.add(BiomeGenHelper.WARM_OCEAN);
-		if (ConfigUA.lukewarmOcean)
+		if (UltraAmplified.UAConfig.lukewarmOcean.get())
 			oceanList.add(BiomeGenHelper.LUKEWARM_OCEAN);
-		if (ConfigUA.ocean)
+		if (UltraAmplified.UAConfig.ocean.get())
 			oceanList.add(BiomeGenHelper.OCEAN);
-		if (ConfigUA.coldOcean)
+		if (UltraAmplified.UAConfig.coldOcean.get())
 			oceanList.add(BiomeGenHelper.COLD_OCEAN);
-		if (ConfigUA.frozenOcean)
+		if (UltraAmplified.UAConfig.frozenOcean.get())
 			oceanList.add(BiomeGenHelper.FROZEN_OCEAN);
 
 		listSize = oceanList.size();

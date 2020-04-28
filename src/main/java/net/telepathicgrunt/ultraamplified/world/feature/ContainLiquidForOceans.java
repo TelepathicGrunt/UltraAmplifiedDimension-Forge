@@ -16,7 +16,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -61,20 +61,20 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 				boolean useCoralBottom = oceanBiome.getSurfaceBuilderConfig().getTop() == DEAD_CORAL_ARRAY[0];
 				blockpos$Mutable.setPos(position.getX() + x, 256, position.getZ() + z);
 
-				for (; blockpos$Mutable.getY() >= ConfigUA.seaLevel; blockpos$Mutable.move(Direction.DOWN))
+				for (; blockpos$Mutable.getY() >= UltraAmplified.UAConfig.seaLevel.get(); blockpos$Mutable.move(Direction.DOWN))
 				{
 
 					currentblock = world.getBlockState(blockpos$Mutable);
 
 					//move down until we hit a liquid block
-					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= ConfigUA.seaLevel)
+					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= UltraAmplified.UAConfig.seaLevel.get())
 					{
 						blockpos$Mutable.move(Direction.DOWN);
 						currentblock = world.getBlockState(blockpos$Mutable);
 					}
 
 					//too low now, break out of the loop and move to next xz coordinate
-					if (blockpos$Mutable.getY() < ConfigUA.seaLevel)
+					if (blockpos$Mutable.getY() < UltraAmplified.UAConfig.seaLevel.get())
 					{
 						break;
 					}

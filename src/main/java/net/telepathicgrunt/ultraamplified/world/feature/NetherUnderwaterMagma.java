@@ -16,7 +16,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
@@ -82,16 +82,16 @@ public class NetherUnderwaterMagma extends Feature<NoFeatureConfig>
 					continue;
 				}
 
-				currentblock = world.getBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z));
+				currentblock = world.getBlockState(blockpos$Mutable.add(x, UltraAmplified.UAConfig.seaLevel.get() - 7, z));
 
 				//if water, place magma block
 				if (currentblock.getMaterial() == Material.WATER)
 				{
-					world.setBlockState(blockpos$Mutable.add(x, ConfigUA.seaLevel - 7, z), MAGMA, 3);
+					world.setBlockState(blockpos$Mutable.add(x, UltraAmplified.UAConfig.seaLevel.get() - 7, z), MAGMA, 3);
 				}
 
 				//check if lava below is bordering water and set it to obsidian if so
-				for (int y = ConfigUA.seaLevel - 8; y > 20; y--)
+				for (int y = UltraAmplified.UAConfig.seaLevel.get() - 8; y > 20; y--)
 				{
 
 					for (Direction face : Direction.Plane.HORIZONTAL)

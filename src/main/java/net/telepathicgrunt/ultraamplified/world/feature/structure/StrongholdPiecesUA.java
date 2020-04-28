@@ -33,7 +33,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class StrongholdPiecesUA
@@ -111,7 +111,7 @@ public class StrongholdPiecesUA
 				}
 				else
 				{
-					int maxLimit = (int)(structurestrongholdpieces$pieceweight.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+					int maxLimit = (int)(structurestrongholdpieces$pieceweight.instancesLimit * (UltraAmplified.UAConfig.strongholdSizeSH.get() * 0.01D));
 					
 					if (structurestrongholdpieces$pieceweight.instancesSpawned <= maxLimit)
 						flag = true;
@@ -249,7 +249,7 @@ public class StrongholdPiecesUA
 
 	private static StructurePiece generateAndAddPiece(StrongholdPiecesUA.EntranceStairs p_175953_0_, List<StructurePiece> p_175953_1_, Random p_175953_2_, int p_175953_3_, int p_175953_4_, int p_175953_5_, @Nullable Direction p_175953_6_, int distanceFromStart)
 	{
-		int maxComponents = (int)(50 * (ConfigUA.strongholdSizeSH * 0.01D));
+		int maxComponents = (int)(50 * (UltraAmplified.UAConfig.strongholdSizeSH.get() * 0.01D));
 		if (distanceFromStart > maxComponents)
 		{
 			return null;
@@ -338,7 +338,7 @@ public class StrongholdPiecesUA
 			if (!this.hasMadeChest && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
 			{
 				this.hasMadeChest = true;
-				if (ConfigUA.chestGeneration)
+				if (UltraAmplified.UAConfig.chestGeneration.get())
 				{
 					this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3, LootTables.CHESTS_STRONGHOLD_CORRIDOR);
 				}
@@ -793,7 +793,7 @@ public class StrongholdPiecesUA
 				this.setBlockState(world, iblockstate4, 7, 8, 8, structureBoundingBoxIn);
 			}
 
-			if (ConfigUA.chestGeneration)
+			if (UltraAmplified.UAConfig.chestGeneration.get())
 			{
 				this.generateChest(world, structureBoundingBoxIn, random, 3, 3, 5, LootTables.CHESTS_STRONGHOLD_LIBRARY);
 			}
@@ -802,7 +802,7 @@ public class StrongholdPiecesUA
 			{
 				this.setBlockState(world, Blocks.AIR.getDefaultState(), 12, 9, 1, structureBoundingBoxIn);
 
-				if (ConfigUA.chestGeneration)
+				if (UltraAmplified.UAConfig.chestGeneration.get())
 				{
 					this.generateChest(world, structureBoundingBoxIn, random, 12, 8, 1, LootTables.CHESTS_STRONGHOLD_LIBRARY);
 				}
@@ -830,7 +830,7 @@ public class StrongholdPiecesUA
 
 		public boolean canSpawnMoreStructures(int distanceFromStart)
 		{
-			int maxLimit = (int)(this.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+			int maxLimit = (int)(this.instancesLimit * (UltraAmplified.UAConfig.strongholdSizeSH.get() * 0.01D));
 			
 			return this.instancesLimit == 0 || this.instancesSpawned < maxLimit;
 		}
@@ -838,7 +838,7 @@ public class StrongholdPiecesUA
 
 		public boolean canSpawnMoreStructures()
 		{
-			int maxLimit = (int)(this.instancesLimit * (ConfigUA.strongholdSizeSH * 0.01D));
+			int maxLimit = (int)(this.instancesLimit * (UltraAmplified.UAConfig.strongholdSizeSH.get() * 0.01D));
 			
 			return this.instancesLimit == 0 || this.instancesSpawned < maxLimit;
 		}
@@ -991,7 +991,7 @@ public class StrongholdPiecesUA
 
 					if (tileentity instanceof MobSpawnerTileEntity)
 					{
-						if (ConfigUA.allowSilverfishSpawnerStronghold)
+						if (UltraAmplified.UAConfig.allowSilverfishSpawnerStronghold.get())
 						{
 							((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic().setEntityType(EntityType.SILVERFISH);
 						}
@@ -1194,7 +1194,7 @@ public class StrongholdPiecesUA
 						{
 							this.hasSpawner = true;
 
-							if (ConfigUA.allowSilverfishSpawnerStronghold)
+							if (UltraAmplified.UAConfig.allowSilverfishSpawnerStronghold.get())
 							{
 								world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
 								TileEntity tileentity = world.getTileEntity(blockpos);
@@ -1247,7 +1247,7 @@ public class StrongholdPiecesUA
 						{
 							this.hasSpawner = true;
 
-							if (ConfigUA.allowSilverfishSpawnerStronghold)
+							if (UltraAmplified.UAConfig.allowSilverfishSpawnerStronghold.get())
 							{
 								world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
 								TileEntity tileentity = world.getTileEntity(blockpos);
@@ -1307,7 +1307,7 @@ public class StrongholdPiecesUA
 						{
 							this.hasSpawner = true;
 
-							if (ConfigUA.allowSilverfishSpawnerStronghold)
+							if (UltraAmplified.UAConfig.allowSilverfishSpawnerStronghold.get())
 							{
 								world.setBlockState(blockpos, Blocks.SPAWNER.getDefaultState(), 2);
 								TileEntity tileentity = world.getTileEntity(blockpos);
@@ -1346,7 +1346,7 @@ public class StrongholdPiecesUA
 					this.setBlockState(world, iblockstate, 9, 2, 3, structureBoundingBoxIn);
 					this.setBlockState(world, iblockstate, 9, 3, 3, structureBoundingBoxIn);
 
-					if (ConfigUA.chestGeneration)
+					if (UltraAmplified.UAConfig.chestGeneration.get())
 					{
 						this.generateChest(world, structureBoundingBoxIn, random, 3, 4, 8, LootTables.CHESTS_STRONGHOLD_CROSSING);
 						this.generateChest(world, structureBoundingBoxIn, random, 5, 4, 2, LootTables.CHESTS_STRONGHOLD_CROSSING);
@@ -1553,7 +1553,7 @@ public class StrongholdPiecesUA
 			{
 				float f = rand.nextFloat();
 
-				if (f < (float) (ConfigUA.silverfishStrongholdSpawnrate / 100))
+				if (f < (float) (UltraAmplified.UAConfig.silverfishStrongholdSpawnrate.get() / 100))
 				{
 					this.blockstate = Blocks.CRACKED_STONE_BRICKS.getDefaultState();
 				}

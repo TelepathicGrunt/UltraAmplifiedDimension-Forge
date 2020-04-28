@@ -24,7 +24,6 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class SunShrine extends Feature<NoFeatureConfig>
@@ -44,7 +43,7 @@ public class SunShrine extends Feature<NoFeatureConfig>
 	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
-		if (!ConfigUA.miniStructureGeneration || position.getY() > 248)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get() || position.getY() > 248)
 		{
 			return false;
 		}

@@ -17,7 +17,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
@@ -99,7 +99,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return p_212246_2_.nextFloat() <= (ConfigUA.ravineSpawnrate) / 850f;
+		return p_212246_2_.nextFloat() <= (UltraAmplified.UAConfig.ravineSpawnrate.get()) / 850f;
 	}
 
 

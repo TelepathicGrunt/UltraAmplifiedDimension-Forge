@@ -32,7 +32,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -163,7 +163,7 @@ public class FortressPiecesUA
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 4, 1, 4, 4, iblockstate, iblockstate, false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 3, 4, 3, 4, 4, iblockstate, iblockstate, false, random);
 
-			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
+			if (UltraAmplified.UAConfig.chestGeneration.get() && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(3, 3), this.getYWithOffset(2), this.getZWithOffset(3, 3))))
 			{
 				this.generateChest(world, structureBoundingBoxIn, random, 3, 2, 3, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
@@ -239,7 +239,7 @@ public class FortressPiecesUA
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 1, 3, 4, 1, 4, 4, iblockstate, iblockstate, false, random);
 			this.fillWithRandomBlocks(world, structureBoundingBoxIn, 3, 3, 4, 3, 4, 4, iblockstate, iblockstate, false, random);
 
-			if (ConfigUA.chestGeneration && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(1, 3), this.getYWithOffset(2), this.getZWithOffset(1, 3))))
+			if (UltraAmplified.UAConfig.chestGeneration.get() && (this.stoneVariant ? random.nextInt(9) == 0 : random.nextInt(6) == 0) && structureBoundingBoxIn.isVecInside(new BlockPos(this.getXWithOffset(1, 3), this.getYWithOffset(2), this.getZWithOffset(1, 3))))
 			{
 				this.generateChest(world, structureBoundingBoxIn, random, 1, 2, 3, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
@@ -878,7 +878,7 @@ public class FortressPiecesUA
 			this.setBlockState(world, getStoneVariantBlockState(Blocks.LAVA.getDefaultState(), random), 6, 5, 6, structureBoundingBoxIn);
 			BlockPos blockpos = new BlockPos(this.getXWithOffset(6, 6), this.getYWithOffset(5), this.getZWithOffset(6, 6));
 
-			if (ConfigUA.chestGeneration)
+			if (UltraAmplified.UAConfig.chestGeneration.get())
 			{
 				this.generateChest(world, structureBoundingBoxIn, random, 6, 5, 8, (this.stoneVariant ? pickRandomLoot(random) : LootTables.CHESTS_NETHER_BRIDGE));
 			}
@@ -1302,7 +1302,7 @@ public class FortressPiecesUA
 					}
 					
 					chance = rand.nextFloat();
-					float silverfishThreshold = (float) (ConfigUA.silverfishStrongholdSpawnrate / 100);
+					float silverfishThreshold = (float) (UltraAmplified.UAConfig.silverfishStrongholdSpawnrate.get() / 100);
 					if(chance < silverfishThreshold)
 					{
 						newBlockState = INFESTED_STONE_LOOKUP.get(newBlockState);
@@ -1718,7 +1718,7 @@ public class FortressPiecesUA
 						}
 
 						//silverfish mob spawner
-						if (ConfigUA.allowSilverfishSpawnerFortress)
+						if (UltraAmplified.UAConfig.allowSilverfishSpawnerFortress.get())
 						{
 							world.setBlockState(blockpos.down(), Blocks.SPAWNER.getDefaultState(), 2);
 							TileEntity tileentity2 = world.getTileEntity(blockpos.down());
@@ -1757,7 +1757,7 @@ public class FortressPiecesUA
 				}
 			}
 
-			if (ConfigUA.chestGeneration)
+			if (UltraAmplified.UAConfig.chestGeneration.get())
 			{
 				this.generateChest(world, structureBoundingBoxIn, random, 3, 5, 7, LootTables.CHESTS_END_CITY_TREASURE);
 			}

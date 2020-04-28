@@ -40,7 +40,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class OceanRuinsPiecesUA
@@ -210,7 +210,7 @@ public class OceanRuinsPiecesUA
 		{
 			if ("chest".equals(function))
 			{
-				if (ConfigUA.chestGeneration)
+				if (UltraAmplified.UAConfig.chestGeneration.get())
 				{
 					world.setBlockState(pos, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, Boolean.valueOf(world.getFluidState(pos).isTagged(FluidTags.WATER))), 2);
 					TileEntity tileentity = world.getTileEntity(pos);

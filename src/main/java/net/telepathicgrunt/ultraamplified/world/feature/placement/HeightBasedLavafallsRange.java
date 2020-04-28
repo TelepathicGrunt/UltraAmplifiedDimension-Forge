@@ -10,7 +10,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.SimplePlacement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class HeightBasedLavafallsRange extends SimplePlacement<CountRangeConfig>
@@ -24,7 +24,7 @@ public class HeightBasedLavafallsRange extends SimplePlacement<CountRangeConfig>
 	@Override
 	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
 	{
-		return IntStream.range(0, ConfigUA.lavafallSpawnrate / config.count).mapToObj((p_215057_3_) ->
+		return IntStream.range(0, UltraAmplified.UAConfig.lavafallSpawnrate.get() / config.count).mapToObj((p_215057_3_) ->
 		{
 			int i = rand.nextInt(16);
 			int j = rand.nextInt(rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset);

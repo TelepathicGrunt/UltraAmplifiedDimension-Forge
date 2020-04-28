@@ -11,7 +11,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
@@ -73,12 +73,12 @@ public enum BiomeGenHelper
 	{
 		biomesComboToEdge.clear();
 
-		if (ConfigUA.rockyField)
+		if (UltraAmplified.UAConfig.rockyField.get())
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(DESERT, SNOWY_TUNDRA), WOODED_ROCKY_FIELD);
 		}
 
-		if (ConfigUA.plains)
+		if (UltraAmplified.UAConfig.plains.get())
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, DESERT), PLAINS);
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, SNOWY_TUNDRA), PLAINS);
@@ -90,7 +90,7 @@ public enum BiomeGenHelper
 		{
 			int biomeID = BiomeRegistry.getID(biome);
 
-			if (ConfigUA.savanna)
+			if (UltraAmplified.UAConfig.savanna.get())
 			{
 				if (biomeID != NETHERLAND && biomeID != SAVANNA)
 				{
@@ -108,7 +108,7 @@ public enum BiomeGenHelper
 				biomesComboToEdge.put(new Pair<Integer, Integer>(JUNGLE, biomeID), JUNGLE_EDGE);
 			}
 
-			if (ConfigUA.frozenDesert)
+			if (UltraAmplified.UAConfig.frozenDesert.get())
 			{
 				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.ICY && !BiomeGenHelper.isOcean(biomeID))
 				{
@@ -127,7 +127,7 @@ public enum BiomeGenHelper
 				}
 			}
 
-			if (ConfigUA.stonePlains)
+			if (UltraAmplified.UAConfig.stonePlains.get())
 			{
 				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.EXTREME_HILLS)
 				{

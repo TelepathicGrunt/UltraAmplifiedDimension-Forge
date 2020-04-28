@@ -14,7 +14,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.utils.RegUtil;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsBiomeUA;
 import net.telepathicgrunt.ultraamplified.world.biomes.BadlandsDensedWoodedBiomeUA;
@@ -287,12 +287,12 @@ public class UABiomes
 		BASE_TO_MUTATION_MAP.put(SWAMP, SPOOKY_SWAMP);
 		BASE_TO_MUTATION_MAP.put(TAIGA, ROCKY_TAIGA);
 
-		if (ConfigUA.iceSpike)
+		if (UltraAmplified.UAConfig.iceSpike.get())
 		{
 			BASE_TO_MUTATION_MAP.put(SNOWY_TUNDRA, ICE_SPIKES);
 		}
 
-		if (ConfigUA.spikyBadlands)
+		if (UltraAmplified.UAConfig.spikyBadlands.get())
 		{
 			BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, DISSECTED_PLATEAU_BADLANDS);
 			BASE_TO_MUTATION_MAP.put(BADLANDS, SPIKY_BADLANDS);

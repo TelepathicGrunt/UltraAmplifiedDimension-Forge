@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class GlowstonePlacement extends Placement<NoPlacementConfig>
@@ -27,7 +27,7 @@ public class GlowstonePlacement extends Placement<NoPlacementConfig>
 	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
 	{
-		return IntStream.range(0, random.nextInt(random.nextInt(ConfigUA.glowstoneSpawnrate) + 1)).mapToObj((p_215051_3_) ->
+		return IntStream.range(0, random.nextInt(random.nextInt(UltraAmplified.UAConfig.glowstoneSpawnrate.get()) + 1)).mapToObj((p_215051_3_) ->
 		{
 			int x = random.nextInt(16);
 			int y = random.nextInt(250) + 4;

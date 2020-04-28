@@ -12,7 +12,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ChanceAndTypeConfig;
 
 
@@ -35,7 +35,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 		switch (placementConfig.type)
 		{
 			case HANGING_RUINS:
-				chance = (int) (ConfigUA.hangingRuinsSpawnrate * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAConfig.hangingRuinsSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			default:

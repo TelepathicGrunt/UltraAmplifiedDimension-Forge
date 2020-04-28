@@ -21,7 +21,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -38,7 +37,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = ConfigUA.oceanMonumentSpawnrate;
+		int maxDistance = UltraAmplified.UAConfig.oceanMonumentSpawnrate.get();
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -67,7 +66,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (ConfigUA.oceanMonumentSpawnrate != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
+				if (UltraAmplified.UAConfig.oceanMonumentSpawnrate.get() != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
 				{
 					return true;
 				}

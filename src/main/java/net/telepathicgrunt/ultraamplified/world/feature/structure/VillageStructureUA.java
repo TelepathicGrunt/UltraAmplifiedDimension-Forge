@@ -20,7 +20,6 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.structure.VillagePieces;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -49,7 +48,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = ConfigUA.villageSpawnrate;
+		int maxDistance = UltraAmplified.UAConfig.villageSpawnrate.get();
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -76,7 +75,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (ConfigUA.villageSpawnrate != 101 && chunkGen.hasStructure(biome, UAFeatures.VILLAGE))
+			if (UltraAmplified.UAConfig.villageSpawnrate.get() != 101 && chunkGen.hasStructure(biome, UAFeatures.VILLAGE))
 			{
 				return true;
 			}

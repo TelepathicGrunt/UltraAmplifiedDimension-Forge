@@ -21,7 +21,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class Fossil extends Feature<NoFeatureConfig>
@@ -55,7 +55,7 @@ public class Fossil extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config)
 	{
 
-		if (!ConfigUA.miniStructureGeneration)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class MarkedTreasureChest extends Feature<NoFeatureConfig>
@@ -35,7 +35,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig config)
 	{
 
-		if (!ConfigUA.chestGeneration)
+		if (!UltraAmplified.UAConfig.chestGeneration.get())
 		{
 			return false;
 		}

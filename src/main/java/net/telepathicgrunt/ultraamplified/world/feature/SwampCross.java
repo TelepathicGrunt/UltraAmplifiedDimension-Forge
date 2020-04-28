@@ -17,7 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class SwampCross extends Feature<NoFeatureConfig>
@@ -32,7 +32,7 @@ public class SwampCross extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
-		if (!ConfigUA.miniStructureGeneration)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

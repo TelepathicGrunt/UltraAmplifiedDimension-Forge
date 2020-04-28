@@ -22,7 +22,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class EndCityStructureUA extends Structure<NoFeatureConfig>
@@ -64,7 +63,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (ConfigUA.endCitySpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			if (UltraAmplified.UAConfig.endCitySpawnrate.get() != 101 && chunkGen.hasStructure(biome, this))
 			{
 				int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
 				return i >= 60;

@@ -21,7 +21,6 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class HangingRuins extends Feature<NoFeatureConfig>
@@ -37,7 +36,7 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		//makes sure this ruins does not spawn too close to world height border.
-		if (!ConfigUA.miniStructureGeneration || position.getY() < ConfigUA.seaLevel + 5)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get() || position.getY() < UltraAmplified.UAConfig.seaLevel.get() + 5)
 		{
 			return false;
 		}

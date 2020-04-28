@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig>
@@ -27,7 +27,7 @@ public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig>
 	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos)
 	{
-		return IntStream.range(0, ConfigUA.endIslandSpawnrate / placementConfig.count).mapToObj((p_215051_3_) ->
+		return IntStream.range(0, UltraAmplified.UAConfig.endIslandSpawnrate.get() / placementConfig.count).mapToObj((p_215051_3_) ->
 		{
 			int j = random.nextInt(16);
 			int k = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset - placementConfig.topOffset) + placementConfig.bottomOffset;

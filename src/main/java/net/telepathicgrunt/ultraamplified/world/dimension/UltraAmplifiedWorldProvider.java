@@ -21,7 +21,6 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
@@ -85,7 +84,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
-		return ConfigUA.yMaximum + 2;
+		return UltraAmplified.UAConfig.yMaximum.get() + 2;
 	}
 
 
@@ -120,7 +119,8 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		float f3 = 1.0F;
 
 		//returns a multiplier between 0 and 1 and will decrease the lower down the player gets from 256
-		float multiplierOfBrightness = ((float) (Minecraft.getInstance().player.getEyePosition(partialTicks).y) - 85) / (ConfigUA.yMaximum - 85);
+		@SuppressWarnings("resource")
+		float multiplierOfBrightness = ((float) (Minecraft.getInstance().player.getEyePosition(partialTicks).y) - 85) / (UltraAmplified.UAConfig.yMaximum.get() - 85);
 		Math.min(Math.max(multiplierOfBrightness, 0), 1);
 
 		f1 = f1 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
@@ -145,14 +145,14 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	@Override
 	public boolean canRespawnHere()
 	{
-		return !ConfigUA.bedExplodes; //negate as bed will explode when respawn is set to false
+		return !UltraAmplified.UAConfig.bedExplodes.get(); //negate as bed will explode when respawn is set to false
 	}
 
 
 	@Override
 	public boolean doesXZShowFog(int x, int z)
 	{
-		return ConfigUA.heavyFog;
+		return UltraAmplified.UAConfig.heavyFog.get();
 	}
 
 

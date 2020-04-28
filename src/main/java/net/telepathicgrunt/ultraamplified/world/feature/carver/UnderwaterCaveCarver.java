@@ -19,7 +19,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.CaveWorldCarver;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 
 
@@ -67,7 +67,7 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return random.nextFloat() <= (ConfigUA.oceanCaveSpawnrate) / 100f;
+		return random.nextFloat() <= (UltraAmplified.UAConfig.oceanCaveSpawnrate.get()) / 100f;
 	}
 
 

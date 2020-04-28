@@ -25,7 +25,6 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class MushroomTemplePiecesUA
@@ -97,7 +96,7 @@ public class MushroomTemplePiecesUA
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					if (ConfigUA.chestGeneration)
+					if (UltraAmplified.UAConfig.chestGeneration.get())
 					{
 						((ChestTileEntity) tileentity).setLootTable(CHESTS_MUSHROOM_TEMPLE_UA, rand.nextLong());
 					}

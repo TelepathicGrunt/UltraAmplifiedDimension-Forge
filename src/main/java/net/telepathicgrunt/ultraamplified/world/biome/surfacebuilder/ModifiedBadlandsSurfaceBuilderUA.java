@@ -14,7 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.BadlandsSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class ModifiedBadlandsSurfaceBuilderUA extends BadlandsSurfaceBuilder
@@ -72,7 +72,7 @@ public class ModifiedBadlandsSurfaceBuilderUA extends BadlandsSurfaceBuilder
 			{
 				chunkIn.setBlockState(blockpos$Mutable, defaultBlock, false);
 			}
-			else if (k < ConfigUA.seaLevel + 1)
+			else if (k < UltraAmplified.UAConfig.seaLevel.get() + 1)
 			{
 				hitSolidUnderwaterBlock = true;
 			}

@@ -14,7 +14,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -31,9 +30,9 @@ public class MineshaftStructureUA extends Structure<MineshaftConfigUA>
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-		if ((ConfigUA.mineshaftAbovegroundAllowed || ConfigUA.mineshaftUndergroundAllowed) && chunkGen.hasStructure(biome, UAFeatures.MINESHAFT))
+		if ((UltraAmplified.UAConfig.mineshaftAbovegroundAllowed.get() || UltraAmplified.UAConfig.mineshaftUndergroundAllowed.get()) && chunkGen.hasStructure(biome, UAFeatures.MINESHAFT))
 		{
-			return rand.nextDouble() < (ConfigUA.mineshaftSpawnrate) / 10000D;
+			return rand.nextDouble() < (UltraAmplified.UAConfig.mineshaftSpawnrate.get()) / 10000D;
 		}
 		else
 		{

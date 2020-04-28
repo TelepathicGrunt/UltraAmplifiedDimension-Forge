@@ -18,7 +18,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -34,7 +33,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = ConfigUA.oceanRuinsSpawnrate;
+		int maxDistance = UltraAmplified.UAConfig.oceanRuinsSpawnrate.get();
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -88,7 +87,7 @@ public class OceanRuinsStructureUA extends Structure<OceanRuinConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (ConfigUA.oceanRuinsSpawnrate != 101 && chunkGen.hasStructure(biome, this))
+			if (UltraAmplified.UAConfig.oceanRuinsSpawnrate.get() != 101 && chunkGen.hasStructure(biome, this))
 			{
 				return true;
 			}

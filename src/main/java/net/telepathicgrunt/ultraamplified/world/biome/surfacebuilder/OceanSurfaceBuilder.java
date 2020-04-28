@@ -13,7 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -38,7 +38,7 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 
 	protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel)
 	{
-		BlockState liquid = ConfigUA.lavaOcean ? LAVA : WATER;
+		BlockState liquid = UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER;
 		int x = xStart & 15;
 		int z = zStart & 15;
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();

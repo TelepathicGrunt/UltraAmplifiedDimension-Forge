@@ -40,7 +40,6 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
@@ -84,7 +83,7 @@ public class AmplifiedPortalBehavior
 					// Player is leaving Ultra Amplified dimension
 					if (entity.dimension == UltraAmplifiedDimension.ultraamplified())
 					{
-						if (ConfigUA.forceExitToOverworld)
+						if (UltraAmplified.UAConfig.forceExitToOverworld.get())
 						{
 							// Go to Overworld directly because of config option.
 							destination = DimensionType.OVERWORLD;
@@ -200,7 +199,7 @@ public class AmplifiedPortalBehavior
 						else
 						{
 							// Check for null which would be impressive if it occurs
-							if (cap.getNonUAPos() == null || ConfigUA.forceExitToOverworld)
+							if (cap.getNonUAPos() == null || UltraAmplified.UAConfig.forceExitToOverworld.get())
 							{
 								// Set player at world spawn then with Amplified Portal at feet
 								// The portal will try to not replace any block and be at the next air block above non-air blocks.
@@ -316,17 +315,17 @@ public class AmplifiedPortalBehavior
 		// Grabs resourcelocation from config and tries to find that block to use for corners
 		// Doesn't need to be Blockstate as Polished Granite has only 1 state anyway
 		Block blockCorner;
-		if (!ConfigUA.portalCornerBlocks.equals(""))
+		if (!UltraAmplified.UAConfig.portalCornerBlocks.get().equals(""))
 		{
-			if (registry.containsKey(new ResourceLocation(ConfigUA.portalCornerBlocks)))
+			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get())))
 			{
-				blockCorner = registry.getValue(new ResourceLocation(ConfigUA.portalCornerBlocks));
+				blockCorner = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get()));
 			}
 			else
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame corner config! Here is what was in the config: §c" + ConfigUA.portalCornerBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame corner config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCornerBlocks.get());
 					entity.sendMessage(message);
 				}
 
@@ -341,18 +340,18 @@ public class AmplifiedPortalBehavior
 		//grabs resourcelocation from config and tries to find that block to use for ceiling
 		BlockState blockCeiling;
 		boolean customCeiling = false;
-		if (!ConfigUA.portalCeilingBlocks.equals(""))
+		if (!UltraAmplified.UAConfig.portalCeilingBlocks.get().equals(""))
 		{
-			if (registry.containsKey(new ResourceLocation(ConfigUA.portalCeilingBlocks)))
+			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())))
 			{
-				blockCeiling = registry.getValue(new ResourceLocation(ConfigUA.portalCeilingBlocks)).getDefaultState();
+				blockCeiling = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())).getDefaultState();
 				customCeiling = true;
 			}
 			else
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame ceiling config! Here is what was in the config: §c" + ConfigUA.portalCeilingBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame ceiling config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCeilingBlocks.get());
 					entity.sendMessage(message);
 				}
 
@@ -367,18 +366,18 @@ public class AmplifiedPortalBehavior
 		//grabs resourcelocation from config and tries to find that block to use for floor
 		BlockState blockFloor;
 		boolean customFloor = false;
-		if (!ConfigUA.portalFloorBlocks.equals(""))
+		if (!UltraAmplified.UAConfig.portalFloorBlocks.get().equals(""))
 		{
-			if (registry.containsKey(new ResourceLocation(ConfigUA.portalFloorBlocks)))
+			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())))
 			{
-				blockFloor = registry.getValue(new ResourceLocation(ConfigUA.portalFloorBlocks)).getDefaultState();
+				blockFloor = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())).getDefaultState();
 				customFloor = true;
 			}
 			else
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame floor config! Here is what was in the config: §c" + ConfigUA.portalFloorBlocks);
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame floor config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalFloorBlocks.get());
 					entity.sendMessage(message);
 				}
 

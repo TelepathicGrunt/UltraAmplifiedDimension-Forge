@@ -16,7 +16,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 
@@ -50,7 +50,7 @@ public class Roots extends Feature<BlockConfig>
 		//wont generate root if config is turned off
 		//won't generate root on leaves, water, etc.
 		//Only solid blocks can have roots
-		if (!ConfigUA.rootGen || !world.getBlockState(position).isSolid())
+		if (!UltraAmplified.UAConfig.rootGen.get() || !world.getBlockState(position).isSolid())
 		{
 			return false;
 		}

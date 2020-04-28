@@ -18,7 +18,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,7 +26,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.config.UAConfig;
+import net.telepathicgrunt.ultraamplified.config.UAConfig.UAConfigValues;
+import net.telepathicgrunt.ultraamplified.utils.ConfigHelper;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.UASurfaceBuilders;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
@@ -54,6 +55,7 @@ public class UltraAmplified
 
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
+	public static UAConfigValues UAConfig = null;
 
 	//worldTypes
 	public static WorldType UltraAmplifiedWorldType;
@@ -61,19 +63,16 @@ public class UltraAmplified
 
 	public UltraAmplified()
 	{
-		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 		modEventBus.addListener(this::setup);
-		modEventBus.addListener(this::modConfig);
 		modEventBus.addListener(this::dedicatedServerSetup);
 		modEventBus.register(new BlockColorManager());
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); //client side only for glowgrass color
 
 		//generates config
-		modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigUA.SERVER_SPEC);
-
+		UAConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAConfig.UAConfigValues(builder, subscriber));
 	}
 
 
@@ -120,13 +119,6 @@ public class UltraAmplified
 		ContainUndergroundLiquids.setFillerMap();
 	}
 
-
-	public void modConfig(final ModConfig.ModConfigEvent event)
-	{
-		ModConfig config = event.getConfig();
-		if (config.getSpec() == ConfigUA.SERVER_SPEC)
-			ConfigUA.refreshServer();
-	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents

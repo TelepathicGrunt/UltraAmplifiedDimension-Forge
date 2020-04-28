@@ -13,7 +13,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class IcedTerrainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -52,9 +52,9 @@ public class IcedTerrainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 			else if (iblockstate2.getMaterial() == Material.WATER)
 			{
 
-				if (ypos < ConfigUA.seaLevel)
+				if (ypos < UltraAmplified.UAConfig.seaLevel.get())
 				{
-					chunkIn.setBlockState(blockpos$Mutable, ConfigUA.lavaOcean ? LAVA : SNOW_BLOCK, false);
+					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : SNOW_BLOCK, false);
 				}
 
 				i = -1;

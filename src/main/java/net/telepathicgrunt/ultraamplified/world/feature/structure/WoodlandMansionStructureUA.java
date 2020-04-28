@@ -25,7 +25,6 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.WoodlandMansionPieces;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 
@@ -42,7 +41,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 
-		int maxSpacing = ConfigUA.mansionSpawnrate;
+		int maxSpacing = UltraAmplified.UAConfig.mansionSpawnrate.get();
 		int minSpacing = (int) (maxSpacing * 0.75);
 
 		if (maxSpacing < 10)
@@ -69,7 +68,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (ConfigUA.mansionSpawnrate != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		if (UltraAmplified.UAConfig.mansionSpawnrate.get() != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{

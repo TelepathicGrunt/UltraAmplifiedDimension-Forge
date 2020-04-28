@@ -12,7 +12,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAndTypeConfig;
 
 
@@ -36,7 +36,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 			case LAVA_ALGORITHM:
 			{
 
-				if (!ConfigUA.lavaLakeGen)
+				if (!UltraAmplified.UAConfig.lavaLakeGen.get())
 				{
 					return Stream.empty();
 				}
@@ -65,7 +65,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 			case WATER_ALGORITHM:
 			{
 
-				if (!ConfigUA.waterLakeGen)
+				if (!UltraAmplified.UAConfig.waterLakeGen.get())
 				{
 					return Stream.empty();
 				}
@@ -79,7 +79,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 			}
 			case SLIME_ALGORITHM:
 			{
-				if (!ConfigUA.slimeLakeGen)
+				if (!UltraAmplified.UAConfig.slimeLakeGen.get())
 				{
 					return Stream.empty();
 				}
@@ -94,7 +94,7 @@ public class LakePlacement extends Placement<LakeCountRangeAndTypeConfig>
 			}
 			case HONEY_ALGORITHM:
 			{
-				if (!ConfigUA.honeyLakeGen)
+				if (!UltraAmplified.UAConfig.honeyLakeGen.get())
 				{//change to honey
 					return Stream.empty();
 				}

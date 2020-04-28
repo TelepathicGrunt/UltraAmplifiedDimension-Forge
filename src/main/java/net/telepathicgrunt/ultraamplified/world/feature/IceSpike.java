@@ -17,7 +17,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class IceSpike extends Feature<NoFeatureConfig>
@@ -85,7 +85,7 @@ public class IceSpike extends Feature<NoFeatureConfig>
 							BlockPos topPos = mutableBlockPos.add(x, y, z);
 							BlockPos bottomPos = mutableBlockPos.add(x, -y, z);
 							BlockState iblockstate = world.getBlockState(topPos);
-							if (ALLOWED_BLOCKS.contains(iblockstate) && topPos.getY() > ConfigUA.seaLevel - 2)
+							if (ALLOWED_BLOCKS.contains(iblockstate) && topPos.getY() > UltraAmplified.UAConfig.seaLevel.get() - 2)
 							{
 								this.setBlockState(world, topPos, PACKED_ICE);
 							}
@@ -98,7 +98,7 @@ public class IceSpike extends Feature<NoFeatureConfig>
 							{
 								iblockstate = world.getBlockState(bottomPos);
 
-								if (ALLOWED_BLOCKS.contains(iblockstate) && bottomPos.getY() > ConfigUA.seaLevel - 2)
+								if (ALLOWED_BLOCKS.contains(iblockstate) && bottomPos.getY() > UltraAmplified.UAConfig.seaLevel.get() - 2)
 								{
 									this.setBlockState(world, bottomPos, PACKED_ICE);
 								}

@@ -9,7 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.placement.ChanceRangeConfig;
 import net.minecraft.world.gen.placement.SimplePlacement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class GlowstonePatchPlacement2 extends SimplePlacement<ChanceRangeConfig>
@@ -23,7 +23,7 @@ public class GlowstonePatchPlacement2 extends SimplePlacement<ChanceRangeConfig>
 	@Override
 	public Stream<BlockPos> getPositions(Random rand, ChanceRangeConfig config, BlockPos pos)
 	{
-		if (rand.nextFloat() < (ConfigUA.glowstoneVariantsSpawnrate / 100f) * config.chance)
+		if (rand.nextFloat() < (UltraAmplified.UAConfig.glowstoneVariantsSpawnrate.get() / 100f) * config.chance)
 		{
 			int x = rand.nextInt(16);
 			int y = rand.nextInt(config.top - config.topOffset) + config.bottomOffset;

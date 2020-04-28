@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class DungeonPlacementBands extends Placement<NoPlacementConfig>
@@ -27,7 +27,7 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig>
 	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
 	{
-		int count = ConfigUA.dungeonSpawnrate;
+		int count = UltraAmplified.UAConfig.dungeonSpawnrate.get();
 
 		return IntStream.range(0, count).mapToObj((function) ->
 		{

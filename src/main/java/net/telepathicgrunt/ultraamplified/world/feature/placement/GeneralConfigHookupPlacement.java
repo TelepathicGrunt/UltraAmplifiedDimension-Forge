@@ -9,7 +9,7 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.placement.SimplePlacement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.config.CountRangeAndTypeConfig;
 
 
@@ -31,9 +31,9 @@ public class GeneralConfigHookupPlacement extends SimplePlacement<CountRangeAndT
 		switch (config.type)
 		{
 			case GLOWSTONE_VARIANT_PATCH:
-				float result = ConfigUA.glowstoneVariantsSpawnrate * config.countModifier;
+				float result = UltraAmplified.UAConfig.glowstoneVariantsSpawnrate.get() * config.countModifier;
 				//if the resulting count is less than one, then we switch to probability
-				if (result < 1 && rand.nextFloat() < ConfigUA.glowstoneVariantsSpawnrate * config.countModifier)
+				if (result < 1 && rand.nextFloat() < UltraAmplified.UAConfig.glowstoneVariantsSpawnrate.get() * config.countModifier)
 				{
 					count = 1;
 				}
@@ -45,43 +45,43 @@ public class GeneralConfigHookupPlacement extends SimplePlacement<CountRangeAndT
 				break;
 
 			case GLOWSTONE:
-				count = (int) (ConfigUA.glowstoneSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.glowstoneSpawnrate.get() * config.countModifier);
 				break;
 
 			case MAGMA:
-				count = (int) (ConfigUA.magmaSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.magmaSpawnrate.get() * config.countModifier);
 				break;
 
 			case QUARTZ:
-				count = (int) (ConfigUA.quartzOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.quartzOreSpawnrate.get() * config.countModifier);
 				break;
 
 			case EMERALD:
-				count = (int) ((20 + rand.nextInt(35)) * ((double) (ConfigUA.emeraldOreSpawnrate * config.countModifier) / 100));
+				count = (int) ((20 + rand.nextInt(35)) * ((double) (UltraAmplified.UAConfig.emeraldOreSpawnrate.get() * config.countModifier) / 100));
 				break;
 
 			case SILVERFISH:
-				count = (int) (ConfigUA.silverfishSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.silverfishSpawnrate.get() * config.countModifier);
 				break;
 
 			case COAL:
-				count = (int) (ConfigUA.coalOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.coalOreSpawnrate.get() * config.countModifier);
 				break;
 
 			case IRON:
-				count = (int) (ConfigUA.ironOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.ironOreSpawnrate.get() * config.countModifier);
 				break;
 
 			case GOLD:
-				count = (int) (ConfigUA.goldOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.goldOreSpawnrate.get() * config.countModifier);
 				break;
 
 			case REDSTONE:
-				count = (int) (ConfigUA.redstoneOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.redstoneOreSpawnrate.get() * config.countModifier);
 				break;
 
 			case DIAMOND:
-				count = (int) (ConfigUA.diamondOreSpawnrate * config.countModifier);
+				count = (int) (UltraAmplified.UAConfig.diamondOreSpawnrate.get() * config.countModifier);
 				break;
 
 			default:
@@ -93,7 +93,7 @@ public class GeneralConfigHookupPlacement extends SimplePlacement<CountRangeAndT
 		{
 			int x = rand.nextInt(16);
 
-			int y = rand.nextInt(config.maximum - config.topOffset) + (config.sealevelBased ? ConfigUA.seaLevel - config.bottomOffset : config.bottomOffset);
+			int y = rand.nextInt(config.maximum - config.topOffset) + (config.sealevelBased ? UltraAmplified.UAConfig.seaLevel.get() - config.bottomOffset : config.bottomOffset);
 
 			int z = rand.nextInt(16);
 			return pos.add(x, y, z);

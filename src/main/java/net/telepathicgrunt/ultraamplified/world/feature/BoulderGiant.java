@@ -16,7 +16,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockBlobConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class BoulderGiant extends Feature<BlockBlobConfig>
@@ -80,19 +80,19 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
 					int randomChance = rand.nextInt(1400);
 
 					// 2/1400th chance for diamond ore
-					if (ConfigUA.diamondOreSpawnrate != 0 && randomChance <= 1)
+					if (UltraAmplified.UAConfig.diamondOreSpawnrate.get() != 0 && randomChance <= 1)
 					{
 						world.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
 					}
 
 					// 48/1400th chance for iron ore
-					else if (ConfigUA.ironOreSpawnrate != 0 && randomChance <= 50)
+					else if (UltraAmplified.UAConfig.ironOreSpawnrate.get() != 0 && randomChance <= 50)
 					{
 						world.setBlockState(blockpos, ironOre.getDefaultState(), 4);
 					}
 
 					// 82/1400th chance for coal ore
-					else if (ConfigUA.coalOreSpawnrate != 0 && randomChance <= 130)
+					else if (UltraAmplified.UAConfig.coalOreSpawnrate.get() != 0 && randomChance <= 130)
 					{
 						world.setBlockState(blockpos, coalOre.getDefaultState(), 4);
 					}

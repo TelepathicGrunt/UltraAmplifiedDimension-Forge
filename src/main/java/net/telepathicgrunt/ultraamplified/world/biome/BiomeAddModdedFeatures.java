@@ -42,7 +42,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -169,7 +168,7 @@ public class BiomeAddModdedFeatures
 			//grabs what the user entered.
 			//is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
 			blacklistedFeatureMods = new ArrayList<String>();
-			blacklistedFeatureResourceLocations = new LinkedList<String>(Arrays.asList(ConfigUA.blacklistedStructureList.split(",")));
+			blacklistedFeatureResourceLocations = new LinkedList<String>(Arrays.asList(UltraAmplified.UAConfig.blacklistedStructureList.get().split(",")));
 			for (int i = 0; i < blacklistedFeatureResourceLocations.size(); i++)
 			{
 				blacklistedFeatureResourceLocations.set(i, blacklistedFeatureResourceLocations.get(i).trim());
@@ -250,11 +249,11 @@ public class BiomeAddModdedFeatures
 
 				// add feature form of structures
 				// workaround due to some people registering structures under minecraft namespace
-				if (ConfigUA.importModdedStructure && insideFeature instanceof Structure)
+				if (UltraAmplified.UAConfig.importModdedStructure.get() && insideFeature instanceof Structure)
 				{
 
 					//check blacklist
-					if (blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedStructureList.contains(rl.toString()))
+					if (blacklistedFeatureMods.contains(namespace) || UltraAmplified.UAConfig.blacklistedStructureList.get().contains(rl.toString()))
 					{
 						continue;
 					}
@@ -264,7 +263,7 @@ public class BiomeAddModdedFeatures
 						uaBiome.addFeature(decorationType, feature);
 					}
 				}
-				else if (ConfigUA.importModdedFeatures)
+				else if (UltraAmplified.UAConfig.importModdedFeatures.get())
 				{
 
 					// modded ores are buried in the state variable within the 
@@ -375,13 +374,13 @@ public class BiomeAddModdedFeatures
 
 			ResourceLocation rl = structureEntry.getKey().getRegistryName();
 			String namespace = rl.getNamespace();
-			if (blacklistedFeatureMods.contains(namespace) || ConfigUA.blacklistedStructureList.contains(rl.toString()))
+			if (blacklistedFeatureMods.contains(namespace) || UltraAmplified.UAConfig.blacklistedStructureList.get().contains(rl.toString()))
 			{
 				continue;
 			}
 
 			// workaround due to some people registering structures under minecraft namespace
-			if (ConfigUA.importModdedStructure && !listOfVanillaStructures.contains(structureEntry.getKey()))
+			if (UltraAmplified.UAConfig.importModdedStructure.get() && !listOfVanillaStructures.contains(structureEntry.getKey()))
 			{
 				uaBiome.addStructure(structureEntry);
 			}
@@ -408,7 +407,7 @@ public class BiomeAddModdedFeatures
 				//				String namespace = rl.getNamespace();
 
 				// workaround due to some people registering mobs under minecraft namespace
-				if (ConfigUA.importModdedMobs && !listOfVanillaMobs.contains(spawnEntry.entityType))
+				if (UltraAmplified.UAConfig.importModdedMobs.get() && !listOfVanillaMobs.contains(spawnEntry.entityType))
 				{
 					uaBiome.addSpawn(entityType, spawnEntry);
 				}
@@ -542,7 +541,7 @@ public class BiomeAddModdedFeatures
 						}
 
 						namespace = rl.getNamespace();
-						if (ConfigUA.importModdedFeatures && !namespace.equals("minecraft"))
+						if (UltraAmplified.UAConfig.importModdedFeatures.get() && !namespace.equals("minecraft"))
 						{
 							uaBiome.getFeatures(decorationType).remove(featureIndex);
 						}

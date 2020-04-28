@@ -19,7 +19,6 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
 
 
 public class StrongholdStructureUA extends Structure<NoFeatureConfig>
@@ -33,7 +32,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = ConfigUA.strongholdSpawnrate;
+		int maxDistance = UltraAmplified.UAConfig.strongholdSpawnrate.get();
 		int minDistance = maxDistance - 10;
 		if (maxDistance < 12)
 		{
@@ -61,7 +60,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if ((ConfigUA.strongholdSpawnrate != 501) && chunkGen.hasStructure(biome, this))
+			if ((UltraAmplified.UAConfig.strongholdSpawnrate.get() != 501) && chunkGen.hasStructure(biome, this))
 			{
 				return true;
 			}

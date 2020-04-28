@@ -13,7 +13,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
@@ -28,7 +28,7 @@ public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
 	{
 
-		if (!ConfigUA.miniStructureGeneration)
+		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
 		{
 			return Stream.empty();
 		}

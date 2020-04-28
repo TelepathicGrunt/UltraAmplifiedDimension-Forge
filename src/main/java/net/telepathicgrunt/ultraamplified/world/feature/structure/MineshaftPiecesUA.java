@@ -36,7 +36,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA.Type;
 
 
@@ -364,7 +364,7 @@ public class MineshaftPiecesUA
 					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 0, 2, k1 + 2);
 					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 2, 2, k1 + 2);
 
-					if (ConfigUA.chestGeneration)
+					if (UltraAmplified.UAConfig.chestGeneration.get())
 					{
 						if (random.nextInt(50) == 0)
 						{
@@ -873,9 +873,9 @@ public class MineshaftPiecesUA
 			// if the pit rooms are not allowed, makes this boolean always true.
 			// if pits are allowed and normal rooms are not allowed, set to always false.
 			// else if both are allowed, runs RNG to determine which room to generate.
-			if (ConfigUA.mineshaftUndergroundAllowed)
+			if (UltraAmplified.UAConfig.mineshaftUndergroundAllowed.get())
 			{
-				if (ConfigUA.mineshaftAbovegroundAllowed)
+				if (UltraAmplified.UAConfig.mineshaftAbovegroundAllowed.get())
 				{
 					normalRoom = p_i47137_2_.nextInt(5) < 3;
 				}

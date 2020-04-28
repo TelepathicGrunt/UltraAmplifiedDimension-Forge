@@ -12,7 +12,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.utils.OpenSimplexNoise;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 
@@ -43,7 +43,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig)
 	{
 		//check if user turned pillars off.
-		if (!ConfigUA.pillarGen)
+		if (!UltraAmplified.UAConfig.pillarGen.get())
 		{
 			return false;
 		}

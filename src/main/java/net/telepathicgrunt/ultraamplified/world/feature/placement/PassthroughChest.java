@@ -12,7 +12,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.telepathicgrunt.ultraamplified.config.ConfigUA;
+import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 
 public class PassthroughChest extends Placement<NoPlacementConfig>
@@ -28,7 +28,7 @@ public class PassthroughChest extends Placement<NoPlacementConfig>
 	{
 
 		//needed so we can prevent vanilla treasure chest from spawning if config is off
-		if (!ConfigUA.chestGeneration)
+		if (!UltraAmplified.UAConfig.chestGeneration.get())
 		{
 			return Stream.empty();
 		}
