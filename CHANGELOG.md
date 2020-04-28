@@ -35,6 +35,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ##### Misc: 
 
+-Forge 1.15.2-31.1.29 pushed a fix for the server.properties so that it now actually works! Put "level-type=ultra_amplified" into the server.properties to generate a world using Ultra Amplified worldtype! As of now, "use-modded-worldtype=ultra-amplified" entry is no longer supported.
+
 -Fix en_us.json translation for some biomes.
 
 

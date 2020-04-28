@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.server.dedicated.ServerProperties;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.carver.WorldCarver;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
@@ -67,39 +65,11 @@ public class UltraAmplified
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 		modEventBus.addListener(this::setup);
-		modEventBus.addListener(this::dedicatedServerSetup);
 		modEventBus.register(new BlockColorManager());
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); //client side only for glowgrass color
 
 		//generates config
 		UAConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAConfig.UAConfigValues(builder, subscriber));
-	}
-
-
-	/*
-	 * Hacky workaround similar to what Biome O' Plenty did to get around server.properties being read and set too early
-	 * before the mod even loads at all. It's so early that the mod's worldtypes aren't added to WORLD_TYPES array and so
-	 * it'll change level-type to default regardless of what the user added.
-	 * 
-	 * My solution is to tell users to add a new entry called use-modded-worldtype=ultra-amplified and then read that
-	 * property instead.
-	 */
-	public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event)
-	{
-		ServerProperties serverProperties = event.getServerSupplier().get().getServerProperties();
-
-		if (serverProperties != null)
-		{
-			//get entry if it exists or null if it doesn't
-			String entryValue = serverProperties.serverProperties.getProperty("use-modded-worldtype");
-
-			if (entryValue != null && entryValue.equals("ultra-amplified"))
-			{
-				//make server use our worldtype
-				serverProperties.worldType = UltraAmplifiedWorldType;
-			}
-		}
-		// Do nothing. server.properties file does not exist.
 	}
 
 

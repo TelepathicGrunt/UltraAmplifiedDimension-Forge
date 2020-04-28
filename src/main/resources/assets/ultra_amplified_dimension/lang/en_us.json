@@ -1,6 +1,6 @@
 {
-  "generator.UltraAmplified": "Ultra Amplified",
-  "generator.UltraAmplified.info": "May take a few minutes to create a fresh new world.",
+  "generator.ultra_amplified": "Ultra Amplified",
+  "generator.ultra_amplified.info": "May take a few minutes to create a fresh new world.",
   "itemGroup.ultra_amplified_dimension": "Ultra Amplified Dimension",
   "block.ultra_amplified_dimension.glowmycelium": "Glowmycelium",
   "block.ultra_amplified_dimension.glowpodzol": "Glowpodzol",

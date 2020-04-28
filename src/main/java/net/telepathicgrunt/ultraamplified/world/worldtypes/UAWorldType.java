@@ -19,10 +19,10 @@ public class UAWorldType extends WorldType
 		/*
 		 * Name of world type. Also had to add this to en_us.json file to display name and info properly:
 		 * 
-		 * en_us.json entries "generator.UltraAmplified":"Ultra Amplified"
-		 * "generator.UltraAmplified.info":"May take a minute or two to create a fresh world."
+		 * en_us.json entries "generator.ultra_amplified":"Ultra Amplified"
+		 * "generator.ultra_amplified.info":"May take a minute or two to create a fresh world."
 		 */
-		super("UltraAmplified");
+		super("ultra_amplified");
 		this.enableInfoNotice();
 	}
 
