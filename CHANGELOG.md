@@ -33,6 +33,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ## (V.7.3.2 Changes) (1.15.2 Minecraft)
 
 
+##### Teleportation:
+
+-Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic!
+
+-Cleaned up the teleporting code so that it doesn't fire for all right clicks and only runs the checks/teleporting when right clicking the portal block. 
+
+
 ##### Misc: 
 
 -Forge 1.15.2-31.1.29 pushed a fix for the server.properties so that it now actually works! Put "level-type=ultra_amplified" into the server.properties to generate a world using Ultra Amplified worldtype! As of now, "use-modded-worldtype=ultra-amplified" entry is no longer supported.

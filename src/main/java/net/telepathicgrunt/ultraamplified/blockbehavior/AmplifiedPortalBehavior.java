@@ -8,28 +8,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.server.TicketType;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,8 +28,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
-import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
-import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
 import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
 import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
@@ -47,9 +35,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AmplifiedPortalBehavior
 {
-
-	@CapabilityInject(IPlayerPosAndDim.class)
-	public static Capability<IPlayerPosAndDim> PAST_POS_AND_DIM = null;
 
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
@@ -60,181 +45,6 @@ public class AmplifiedPortalBehavior
 		{
 			World world = event.getWorld();
 			Entity entity = event.getEntity();
-			MinecraftServer minecraftserver = entity.getServer();
-
-			// Checks to see if player uses right click on amplified portal and if so
-			// teleports player to other dimension.
-			if (event.getWorld().getBlockState(event.getPos()) == UABlocks.AMPLIFIEDPORTAL.get().getDefaultState())
-			{
-				// Extra checking to make sure it's just the player alone and not riding, being ridden, etc 
-				// Also makes sure player isn't sneaking so players can crouch place blocks on the portal
-				// But only teleport if we aren't in UA worldtype
-				if (!world.isRemote && minecraftserver.getWorld(DimensionType.OVERWORLD).getWorldType() != UltraAmplified.UltraAmplifiedWorldType && !entity.isPassenger() && !entity.isBeingRidden() && entity.isNonBoss() && !((PlayerEntity) entity).isCrouching())
-				{
-					//grabs the capability attached to player for dimension hopping
-					PlayerPositionAndDimension cap = (PlayerPositionAndDimension) entity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
-
-					// Gets previous dimension
-					DimensionType destination;
-					float pitch = 3.75F; // Looking straight ahead
-					float yaw = 0; // Facing north 
-					boolean enteringUA = false;
-
-					// Player is leaving Ultra Amplified dimension
-					if (entity.dimension == UltraAmplifiedDimension.ultraamplified())
-					{
-						if (UltraAmplified.UAConfig.forceExitToOverworld.get())
-						{
-							// Go to Overworld directly because of config option.
-							destination = DimensionType.OVERWORLD;
-						}
-						else
-						{
-							// Gets stored dimension
-							destination = cap.getNonUADim();
-
-							// Impressive if this is reached...........
-							if (destination == null)
-							{
-								destination = DimensionType.OVERWORLD;
-							}
-						}
-
-						// Get direction to face for Non-UA dimension
-						pitch = cap.getNonUAPitch();
-						yaw = cap.getNonUAYaw();
-
-						// Set current UA position and rotations
-						cap.setUAPos(entity.getPositionVec());
-						cap.setUAPitch(entity.rotationPitch);
-						cap.setUAYaw(entity.rotationYaw);
-					}
-
-					// Otherwise, take us to Ultra Amplified Dimension.
-					else
-					{
-						destination = UltraAmplifiedDimension.ultraamplified();
-						pitch = cap.getUAPitch();
-						yaw = cap.getUAYaw();
-						enteringUA = true;
-
-						// Set current nonUA position, rotations, and dimension before teleporting
-						cap.setNonUAPos(entity.getPositionVec());
-						cap.setNonUADim(entity.dimension);
-						cap.setNonUAPitch(entity.rotationPitch);
-						cap.setNonUAYaw(entity.rotationYaw);
-					}
-
-					ServerWorld serverworld = minecraftserver.getWorld(destination);
-
-					// Gets top block in other world or original location
-					Vec3d playerVec3Pos = new Vec3d(8.5D, 0, 8.5D);
-					ChunkPos playerChunkPos;
-					if (enteringUA && cap.getUAPos() == null)
-					{
-						// If it is player's first time teleporting to UA dimension, 
-						// find top block at world origin closest to portal
-						BlockPos worldOriginBlockPos = new BlockPos(10, 0, 8);
-						playerChunkPos = new ChunkPos(worldOriginBlockPos);
-
-						int portalY = 255;
-
-						//finds where portal block is
-						while (portalY > 0)
-						{
-							if (serverworld.getBlockState(worldOriginBlockPos.up(portalY)) == UABlocks.AMPLIFIEDPORTAL.get().getDefaultState())
-							{
-								break;
-							}
-							portalY--;
-						}
-
-						//not sure how the portal block was not found but if so, spawn player at highest piece of land
-						if (portalY == 0)
-						{
-							playerVec3Pos = new Vec3d(serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, worldOriginBlockPos)).add(0.5D, 1D, 0.5D);
-						}
-						else
-						{
-							//portal was found so try to find 2 air spaces around it that the player can spawn at
-							worldOriginBlockPos = worldOriginBlockPos.up(portalY - 1);
-							boolean validSpaceFound = false;
-
-							for (int x = -2; x < 3; x++)
-							{
-								for (int z = -2; z < 3; z++)
-								{
-									if (x == -2 || x == 2 || z == -2 || z == 2)
-									{
-										if (serverworld.getBlockState(worldOriginBlockPos.add(x, 0, z)).getMaterial() == Material.AIR && serverworld.getBlockState(worldOriginBlockPos.add(x, 1, z)).getMaterial() == Material.AIR)
-										{
-											//valid space for player is found
-											worldOriginBlockPos = worldOriginBlockPos.add(x, 0, z);
-											validSpaceFound = true;
-											z = 3;
-											x = 3;
-										}
-									}
-								}
-							}
-
-							if (!validSpaceFound)
-							{
-								//no valid space found around portal. get top solid block instead
-								worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
-							}
-
-							playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 0.2D, 0.5D); // Set where player spawns
-						}
-
-					}
-					else
-					{
-						// Otherwise, just go to where our stored location is
-						if (enteringUA)
-						{
-							// Will never be null because we did check above for null already.
-							playerVec3Pos = cap.getUAPos();
-						}
-						else
-						{
-							// Check for null which would be impressive if it occurs
-							if (cap.getNonUAPos() == null || UltraAmplified.UAConfig.forceExitToOverworld.get())
-							{
-								// Set player at world spawn then with Amplified Portal at feet
-								// The portal will try to not replace any block and be at the next air block above non-air blocks.
-								BlockPos playerBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING, serverworld.getSpawnPoint());
-								BlockState blockState = serverworld.getBlockState(playerBlockPos);
-								while (blockState.getMaterial() != Material.AIR && playerBlockPos.getY() < serverworld.getActualHeight() - 2)
-								{
-									playerBlockPos = playerBlockPos.up();
-									blockState = serverworld.getBlockState(playerBlockPos);
-								}
-
-								serverworld.setBlockState(playerBlockPos, UABlocks.AMPLIFIEDPORTAL.get().getDefaultState());
-
-								playerVec3Pos = new Vec3d(playerBlockPos).add(0.5D, 1D, 0.5D);
-							}
-							else
-							{
-								// Get position in non UA dimension as it isn't null
-								playerVec3Pos = cap.getNonUAPos();
-							}
-						}
-						playerChunkPos = new ChunkPos(new BlockPos(playerVec3Pos));
-					}
-
-					serverworld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, playerChunkPos, 1, entity.getEntityId());
-
-					//dunno how a sleeping player clicked on the portal but if they do, they wake up
-					if (((ServerPlayerEntity) entity).isSleeping())
-					{
-						((ServerPlayerEntity) entity).wakeUp();
-					}
-
-					((ServerPlayerEntity) entity).teleport(minecraftserver.getWorld(destination), playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
-				}
-			}
 
 			// checks to see if player uses right click with flint and steel. If so, tries
 			// to create portal if possible. only works in non-ultra amplified world types
