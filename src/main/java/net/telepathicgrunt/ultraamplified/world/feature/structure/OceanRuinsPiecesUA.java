@@ -241,7 +241,7 @@ public class OceanRuinsPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
 		{
 			this.placeSettings.clearProcessors().addProcessor(new IntegrityProcessor(this.integrity)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 
@@ -293,7 +293,7 @@ public class OceanRuinsPiecesUA
 			//debug
 			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
 			this.templatePosition = new BlockPos(this.templatePosition.getX(), this.setWaterloggedBlocks(this.templatePosition, world, blockpos), this.templatePosition.getZ());
-			return super.generate(world, chunkGen, random, structureBoundingBox, chunkPos);
+			return super.func_225577_a_(world, chunkGen, random, structureBoundingBox, chunkPos);
 		}
 
 

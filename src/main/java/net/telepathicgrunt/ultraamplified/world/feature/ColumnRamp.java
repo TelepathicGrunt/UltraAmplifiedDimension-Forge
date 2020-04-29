@@ -34,7 +34,7 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	{
 		super(configFactory);
 
-		irreplacableBlocks = ImmutableSet.of(Blocks.field_226905_ma_, Blocks.AIR, Blocks.CAVE_AIR, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM, Blocks.CACTUS, UABlocks.CACTUSBODYBLOCKUA.get(), UABlocks.CACTUSCORNERBLOCKUA.get(), UABlocks.CACTUSMAINBLOCKUA.get());
+		irreplacableBlocks = ImmutableSet.of(Blocks.BEEHIVE, Blocks.AIR, Blocks.CAVE_AIR, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM, Blocks.CACTUS, UABlocks.CACTUSBODYBLOCKUA.get(), UABlocks.CACTUSCORNERBLOCKUA.get(), UABlocks.CACTUSMAINBLOCKUA.get());
 	}
 
 

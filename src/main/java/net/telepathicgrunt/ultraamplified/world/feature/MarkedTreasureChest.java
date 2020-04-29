@@ -89,7 +89,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig>
 
 		blockpos$Mutable.setPos(position).move(Direction.DOWN);
 		//places chest with a 50/50 split between treasure chest and end city loot
-		world.setBlockState(blockpos$Mutable, StructurePiece.func_197528_a(world, blockpos$Mutable, Blocks.CHEST.getDefaultState()), 2);
+		world.setBlockState(blockpos$Mutable, StructurePiece.correctFacing(world, blockpos$Mutable, Blocks.CHEST.getDefaultState()), 2);
 		if (random.nextFloat() < 0.5f)
 		{
 			LockableLootTileEntity.setLootTable(world, random, blockpos$Mutable, LootTables.CHESTS_BURIED_TREASURE);

@@ -27,9 +27,9 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 
 	@Override
-	public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig treeConfig)
+	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig treeConfig)
 	{
-		int height = this.getHeight(rand, treeConfig);
+		int height = this.func_227256_a_(rand, treeConfig);
 		IWorld world = (IWorld) worldReader;
 
 		//checks to see if there is room to generate tree
@@ -49,7 +49,7 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 				if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 				{
-					this.setLogBlockState(world, rand, position.up(currentHeight), p_225557_4_, boundingBox, treeConfig);
+					this.func_227216_a_(world, rand, position.up(currentHeight), p_225557_4_, boundingBox, treeConfig);
 				}
 
 				if (currentHeight < height - 1)
@@ -58,21 +58,21 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.setLogBlockState(world, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, treeConfig);
 					}
 
 					iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.setLogBlockState(world, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
 					}
 
 					iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.setLogBlockState(world, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
 					}
 				}
 			}
@@ -92,7 +92,7 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 		{
 			int heightDiff = y - currentHeight;
 			int radius = MathHelper.floor((float) heightDiff / (float) depthOfLeaves * 2F);
-			this.makeSquaredLeafLayer(world, rand, new BlockPos(x, currentHeight, z), radius + (int) ((heightDiff > 0 && radius == currentRadius && (currentHeight & 1) == 0 ? 0.5 : 1) * 3.7), p_214596_8_, p_214596_7_, p_227252_7_);
+			this.func_227255_a_(world, rand, new BlockPos(x, currentHeight, z), radius + (int) ((heightDiff > 0 && radius == currentRadius && (currentHeight & 1) == 0 ? 0.5 : 1) * 3.7), p_214596_8_, p_214596_7_, p_227252_7_);
 			currentRadius = radius;
 		}
 	}

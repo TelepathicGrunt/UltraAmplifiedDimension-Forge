@@ -104,7 +104,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 
 
 	@Override
-	public boolean carve(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
+	public boolean func_225555_a_(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config)
 	{
 
 		int i = (this.func_222704_c() * 3 - 1) * 16;

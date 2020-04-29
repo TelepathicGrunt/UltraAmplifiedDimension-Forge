@@ -65,12 +65,12 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 
 
 	@Override
-	public boolean shouldStartAt(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (UltraAmplified.UAConfig.mansionSpawnrate.get() != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomesInArea(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
+			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomes(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
 				if (!chunkGen.hasStructure(biome2, UAFeatures.WOODLAND_MANSION))
 				{

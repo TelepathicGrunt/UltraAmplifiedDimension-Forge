@@ -34,7 +34,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 
 
 	@Override
-	public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
+	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
 	{
 		int height = 11 + rand.nextInt(3);
 		IWorld world = (IWorld) worldReader;
@@ -268,7 +268,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 			{
 				for (int k1 = -i1; k1 <= i1; ++k1)
 				{
-					if (!func_214587_a(world, blockpos$Mutable.setPos(i + j1, j + l, k + k1)))
+					if (!canBeReplacedByLogs(world, blockpos$Mutable.setPos(i + j1, j + l, k + k1)))
 					{
 						return false;
 					}
@@ -301,7 +301,7 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 				{
 					for (int l = -j; l <= j && flag; ++l)
 					{
-						if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !func_214587_a(world, leavesPos.add(k, i, l)))
+						if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !canBeReplacedByLogs(world, leavesPos.add(k, i, l)))
 						{
 							flag = false;
 						}

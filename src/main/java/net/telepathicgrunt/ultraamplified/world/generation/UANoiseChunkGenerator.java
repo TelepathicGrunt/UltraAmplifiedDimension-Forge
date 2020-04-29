@@ -237,14 +237,14 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 
 
 	@Override
-	public void buildSurface(WorldGenRegion p_225551_1_, IChunk p_222535_1_)
+	public void generateSurface(WorldGenRegion region, IChunk chunk)
 	{
-		ChunkPos chunkpos = p_222535_1_.getPos();
+		ChunkPos chunkpos = chunk.getPos();
 		int i = chunkpos.x;
 		int j = chunkpos.z;
 		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
 		sharedseedrandom.setBaseChunkSeed(i, j);
-		ChunkPos chunkpos1 = p_222535_1_.getPos();
+		ChunkPos chunkpos1 = chunk.getPos();
 		int k = chunkpos1.getXStart();
 		int l = chunkpos1.getZStart();
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
@@ -255,13 +255,13 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 			{
 				int k1 = k + i1;
 				int l1 = l + j1;
-				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
+				int i2 = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
 				double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
-				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, UltraAmplified.UAConfig.seaLevel.get(), this.world.getSeed());
+				region.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, chunk, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, UltraAmplified.UAConfig.seaLevel.get(), this.world.getSeed());
 			}
 		}
 
-		this.makeBedrock(p_222535_1_, sharedseedrandom);
+		this.makeBedrock(chunk, sharedseedrandom);
 	}
 
 
@@ -377,7 +377,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 
 			for (int i6 = 0; i6 < this.noiseSizeZ; ++i6)
 			{
-				ChunkSection chunksection = chunkprimer.func_217332_a(15);
+				ChunkSection chunksection = chunkprimer.getSection(15);
 				chunksection.lock();
 
 				for (int j6 = this.noiseSizeY - 1; j6 >= 0; --j6)
@@ -399,7 +399,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 						if (chunksection.getYLocation() >> 4 != l2)
 						{
 							chunksection.unlock();
-							chunksection = chunkprimer.func_217332_a(l2);
+							chunksection = chunkprimer.getSection(l2);
 							chunksection.lock();
 						}
 

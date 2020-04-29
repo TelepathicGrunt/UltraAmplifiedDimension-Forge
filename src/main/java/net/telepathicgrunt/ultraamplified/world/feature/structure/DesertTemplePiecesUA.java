@@ -54,7 +54,7 @@ public class DesertTemplePiecesUA extends ScatteredStructurePiece
 	 * end, it adds Fences...
 	 */
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 
 		this.fillWithBlocks(world, structureBoundingBoxIn, 0, -4, 0, this.width - 1, 0, this.depth - 1, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);

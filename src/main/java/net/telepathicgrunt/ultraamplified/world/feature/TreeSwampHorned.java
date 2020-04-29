@@ -37,7 +37,7 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 
 	//generate the spooky horned swamp m trees
 	@Override
-	public boolean generate(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
 	{
 		int height = rand.nextInt(4) + 6;
 		IWorld world = (IWorld) worldReader;
@@ -276,7 +276,7 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 				{
 					for (int l = -j; l <= j && flag; ++l)
 					{
-						if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !func_214587_a(world, leavesPos.add(k, i, l)))
+						if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= world.getMaxHeight() || !canBeReplacedByLogs(world, leavesPos.add(k, i, l)))
 						{
 							flag = false;
 						}

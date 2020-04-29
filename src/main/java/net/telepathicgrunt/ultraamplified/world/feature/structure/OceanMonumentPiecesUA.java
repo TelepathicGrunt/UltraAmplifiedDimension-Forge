@@ -48,7 +48,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -99,7 +99,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -172,7 +172,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -281,7 +281,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.NORTH.getIndex()];
@@ -385,7 +385,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -456,7 +456,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 2, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -723,7 +723,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos chunkPos)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos chunkPos)
 		{
 
 			this.generateWaterBox(world, mutableBoundingBoxIn);
@@ -774,7 +774,7 @@ public class OceanMonumentPiecesUA
 			{
 				if (structureoceanmonumentpieces$piece.getBoundingBox().intersectsWith(mutableBoundingBoxIn))
 				{
-					structureoceanmonumentpieces$piece.generate(world, p_225577_2_, random, mutableBoundingBoxIn, chunkPos);
+					structureoceanmonumentpieces$piece.func_225577_a_(world, p_225577_2_, random, mutableBoundingBoxIn, chunkPos);
 				}
 			}
 
@@ -1146,7 +1146,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 0, 14, 8, 14, ROUGH_PRISMARINE);
@@ -1255,7 +1255,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, -1, 2, 11, -1, 11, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
@@ -1681,7 +1681,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -1866,7 +1866,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.roomDefinition.index / 25 > 0)
@@ -1932,7 +1932,7 @@ public class OceanMonumentPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 
 			if (this.mainDesign == 0)

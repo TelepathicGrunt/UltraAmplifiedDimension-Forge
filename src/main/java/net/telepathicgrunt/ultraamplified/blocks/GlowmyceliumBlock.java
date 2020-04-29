@@ -26,7 +26,7 @@ public class GlowmyceliumBlock extends MyceliumBlock
 	 * every tick, it'll attempt to spread normal mycelium instead of itself. If covered, will turn into glowdirt.
 	 */
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		if (!world.isRemote)
 		{

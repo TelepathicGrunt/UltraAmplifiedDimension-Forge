@@ -33,7 +33,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
 
 
 	@Override
-	public boolean generate(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+	public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
 	{
 		int i = rand.nextInt(3) + 5;
 
@@ -61,7 +61,7 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
 					{
 						if (j >= 0 && j < world.getMaxHeight())
 						{
-							if (!func_214587_a(world, blockpos$Mutable.setPos(l, j, i1)))
+							if (!canBeReplacedByLogs(world, blockpos$Mutable.setPos(l, j, i1)))
 							{
 								flag = false;
 							}

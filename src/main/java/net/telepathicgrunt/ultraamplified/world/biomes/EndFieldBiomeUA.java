@@ -44,43 +44,43 @@ public class EndFieldBiomeUA extends UABiome
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.END_SURFACE_BUILDER_UA, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.THEEND).depth(0.1F).scale(0.2F).temperature(0.7F).downfall(0.5F).waterColor(9844124).waterFogColor(8205710).parent((String) null));
 
-		this.addStructureFeature(UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.END)));
-		this.addStructureFeature(UAFeatures.VILLAGE.configure(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.END)));
-		this.addStructureFeature(UAFeatures.END_CITY.configure(IFeatureConfig.NO_FEATURE_CONFIG));
+		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.END)));
+		this.addStructure(UAFeatures.VILLAGE.withConfiguration(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.END)));
+		this.addStructure(UAFeatures.END_CITY.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.HANGING_RUINS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.LEDGE_UNDERSIDE_MINI_FEATURE.configure(new ChanceAndTypeConfig(0.6f, ChanceAndTypeConfig.Type.HANGING_RUINS))));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.HANGING_RUINS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.LEDGE_UNDERSIDE_MINI_FEATURE.configure(new ChanceAndTypeConfig(0.6f, ChanceAndTypeConfig.Type.HANGING_RUINS))));
 
-		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, UAFeatures.NETHER_UNDERWATER_MAGMA.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.CONTAIN_UNDERGROUND_LIQUID.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, UAFeatures.NETHER_UNDERWATER_MAGMA.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.CONTAIN_UNDERGROUND_LIQUID.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		this.addStructureFeaturesUA();
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.COLUMN.configure(new ColumnBlocksConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState())).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 70, 0, 220))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.RAMP.configure(new ColumnBlocksConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState())).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 70, 0, 220))));
-		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.CONTAIN_OCEAN_LIQUID.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.COLUMN.withConfiguration(new ColumnBlocksConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 70, 0, 220))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.RAMP.withConfiguration(new ColumnBlocksConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 70, 0, 220))));
+		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, UAFeatures.CONTAIN_OCEAN_LIQUID.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.END_DUNGEONS.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.END_DUNGEONS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.DUNGEON_PLACEMENT.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
-		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(6, 200, 0, 254))));
-		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(3, 140, 0, 199))));
-		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(1, 75, 0, 139))));
-		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(2, 10, 0, 50))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.configure(new SphereReplaceConfig(Blocks.END_STONE.getDefaultState(), 7, 3, Lists.newArrayList(Blocks.STONE.getDefaultState(), Blocks.DIRT.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(15, 70, 10, 250))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.configure(new SphereReplaceConfig(Blocks.END_STONE_BRICKS.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.END_STONE.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(14, 10, 10, 70))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.configure(new SphereReplaceConfig(Blocks.END_STONE_BRICKS.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.END_STONE.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(27, 70, 10, 250))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.configure(new SphereReplaceConfig(Blocks.OBSIDIAN.getDefaultState(), 10, 3, Lists.newArrayList(Blocks.GRASS_BLOCK.getDefaultState()))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 10, 10, 250))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.CHORUS_PLANT.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(130, 75, 10, 255))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.CHORUS_PLANT.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(45, 10, 10, 75))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.END_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).createDecoratedFeature(UAPlacements.AT_SURFACE_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.2F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.END_TREE.configure(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).createDecoratedFeature(UAPlacements.AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.2F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.7F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)).createDecoratedFeature(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.05F, 1))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.configure(new BlockConfig(Blocks.DRAGON_HEAD)).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(2, 10, 1, 50))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.configure(new BlockConfig(Blocks.SHULKER_BOX)).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(1, 25, 1, 70))));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.configure(new BlockConfig(Blocks.DRAGON_EGG)).createDecoratedFeature(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(1, 10, 1, 255))));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(new LiquidsConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.END_STONE, Blocks.END_STONE_BRICKS))).createDecoratedFeature(UAPlacements.WATERFALL_RANGE.configure(new CountRangeConfig(2, 70, 8, 256))));
-		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UAFeatures.SNOW_AND_ICE_LAYERER.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(6, 200, 0, 254))));
+		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(3, 140, 0, 199))));
+		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(1, 75, 0, 139))));
+		this.addFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.END_ISLAND.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_END_ISLAND_RANGE.configure(new CountRangeConfig(2, 10, 0, 50))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.withConfiguration(new SphereReplaceConfig(Blocks.END_STONE.getDefaultState(), 7, 3, Lists.newArrayList(Blocks.STONE.getDefaultState(), Blocks.DIRT.getDefaultState()))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(15, 70, 10, 250))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.withConfiguration(new SphereReplaceConfig(Blocks.END_STONE_BRICKS.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.END_STONE.getDefaultState()))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(14, 10, 10, 70))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.withConfiguration(new SphereReplaceConfig(Blocks.END_STONE_BRICKS.getDefaultState(), 6, 2, Lists.newArrayList(Blocks.END_STONE.getDefaultState()))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(27, 70, 10, 250))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, UAFeatures.DISK_DRY.withConfiguration(new SphereReplaceConfig(Blocks.OBSIDIAN.getDefaultState(), 10, 3, Lists.newArrayList(Blocks.GRASS_BLOCK.getDefaultState()))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 10, 10, 250))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.CHORUS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(130, 75, 10, 255))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.CHORUS_PLANT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(45, 10, 10, 75))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.END_TREE.withConfiguration(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withPlacement(UAPlacements.AT_SURFACE_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.2F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.END_TREE.withConfiguration(UAFeatures.getConfiguredForUndergroundTreeConfig(DefaultBiomeFeatures.PINE_TREE_CONFIG)).withPlacement(UAPlacements.AT_SURFACE_BELOW_TOP_LAYER_WITH_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.2F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)).withPlacement(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.7F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(UAFeatures.getConfiguredClusterConfig(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)).withPlacement(UAPlacements.CHANCE_ON_ALL_SURFACES.configure(new PercentageAndFrequencyConfig(0.05F, 1))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.withConfiguration(new BlockConfig(Blocks.DRAGON_HEAD)).withPlacement(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(2, 10, 1, 50))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.withConfiguration(new BlockConfig(Blocks.SHULKER_BOX)).withPlacement(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(1, 25, 1, 70))));
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.SINGLE_BLOCK.withConfiguration(new BlockConfig(Blocks.DRAGON_EGG)).withPlacement(UAPlacements.HEIGHT_BIASED_RANGE.configure(new CountRangeConfig(1, 10, 1, 255))));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.withConfiguration(new LiquidsConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.END_STONE, Blocks.END_STONE_BRICKS))).withPlacement(UAPlacements.WATERFALL_RANGE.configure(new CountRangeConfig(2, 70, 8, 256))));
+		this.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, UAFeatures.SNOW_AND_ICE_LAYERER.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 4, 4));
 	}
@@ -102,7 +102,7 @@ public class EndFieldBiomeUA extends UABiome
 	 */
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int getGrassColorAt(double p_225528_1_, double p_225528_3_)
+	public int getGrassColor(double p_225528_1_, double p_225528_3_)
 	{
 		return 7037043;
 	}

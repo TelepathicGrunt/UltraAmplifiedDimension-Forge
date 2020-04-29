@@ -65,7 +65,7 @@ public class JungleTemplePiecesUA extends ScatteredStructurePiece
 
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 
 		this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, -4, 0, this.width - 1, 0, this.depth - 1, false, random, MOSS_STONE_SELECTOR);

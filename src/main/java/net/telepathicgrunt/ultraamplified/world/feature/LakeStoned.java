@@ -124,7 +124,7 @@ public class LakeStoned extends Feature<BlockStateFeatureConfig>
 					if (aboolean[(x * 16 + z) * 8 + y])
 					{
 						blockpos$Mutable.setPos(position).move(x - 8, y - 4, z - 8);
-						if (isDirt(world.getBlockState(blockpos$Mutable).getBlock()) && world.getLightLevel(LightType.SKY, blockpos$Mutable.up()) > 0)
+						if (isDirt(world.getBlockState(blockpos$Mutable).getBlock()) && world.getLightFor(LightType.SKY, blockpos$Mutable.up()) > 0)
 						{
 							Biome biome = world.getBiome(blockpos$Mutable);
 							if (biome.getSurfaceBuilderConfig().getTop().getBlock() == Blocks.MYCELIUM)

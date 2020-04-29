@@ -319,7 +319,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
@@ -410,7 +410,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			for (int i = 0; i < this.steps; ++i)
 			{
@@ -531,7 +531,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 9, 8, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 4, 3, 0);
@@ -616,7 +616,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
@@ -687,7 +687,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			int i = 11;
 
@@ -899,7 +899,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 7, 15, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, StrongholdPiecesUA.Stronghold.Door.GRATES, 4, 1, 0);
@@ -1039,7 +1039,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 8, 4, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
@@ -1097,7 +1097,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);
@@ -1174,7 +1174,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 10, 6, 10, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 4, 1, 0);
@@ -1436,7 +1436,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 4, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
@@ -1514,7 +1514,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 10, 7, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 7, 0);
@@ -1639,7 +1639,7 @@ public class StrongholdPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 0, 0, 0, 4, 4, 6, false, random, StrongholdPiecesUA.STRONGHOLD_STONES);
 			this.placeDoor(world, random, structureBoundingBoxIn, this.entryDoor, 1, 1, 0);

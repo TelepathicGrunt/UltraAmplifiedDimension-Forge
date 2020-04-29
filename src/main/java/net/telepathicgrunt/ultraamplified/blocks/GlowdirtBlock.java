@@ -59,7 +59,7 @@ public class GlowdirtBlock extends Block
 	// checks to see if there is a nearby grass block, glowgrass block, mycelium, or
 	// glow mycelium and will transform into glowgrass block or mycelium block
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		if (!world.isAreaLoaded(pos, 3))
 			return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading

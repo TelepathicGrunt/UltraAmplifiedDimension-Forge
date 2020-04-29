@@ -145,29 +145,29 @@ public class UABiomeProvider extends BiomeProvider
 
 
 	@Override
-	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength)
+	public Set<Biome> getBiomes(int centerX, int centerY, int centerZ, int sideLength)
 	{
-		int i = centerX - sideLength >> 2;
-		int j = centerY - sideLength >> 2;
-		int k = centerZ - sideLength >> 2;
-		int l = centerX + sideLength >> 2;
-		int i1 = centerY + sideLength >> 2;
-		int j1 = centerZ + sideLength >> 2;
-		int k1 = l - i + 1;
-		int l1 = i1 - j + 1;
-		int i2 = j1 - k + 1;
+		int minX = centerX - sideLength >> 2;
+		int minY = centerY - sideLength >> 2;
+		int minZ = centerZ - sideLength >> 2;
+		int maxX = centerX + sideLength >> 2;
+		int maxY = centerY + sideLength >> 2;
+		int maxZ = centerZ + sideLength >> 2;
+		int xRange = maxX - minX + 1;
+		int yRange = maxY - minY + 1;
+		int zRange = maxZ - minZ + 1;
 		Set<Biome> set = Sets.newHashSet();
 
-		for (int j2 = 0; j2 < i2; ++j2)
+		for (int zOffset = 0; zOffset < zRange; ++zOffset)
 		{
-			for (int k2 = 0; k2 < k1; ++k2)
+			for (int xOffset = 0; xOffset < xRange; ++xOffset)
 			{
-				for (int l2 = 0; l2 < l1; ++l2)
+				for (int yOffset = 0; yOffset < yRange; ++yOffset)
 				{
-					int i3 = i + k2;
-					int j3 = j + l2;
-					int k3 = k + j2;
-					set.add(this.getBiomeForNoiseGen(i3, j3, k3));
+					int x = minX + xOffset;
+					int y = minY + yOffset;
+					int z = minZ + zOffset;
+					set.add(this.getNoiseBiome(x, y, z));
 				}
 			}
 		}
@@ -191,7 +191,7 @@ public class UABiomeProvider extends BiomeProvider
 		{
 			int i2 = i + l1 % i1 << 2;
 			int j2 = j + l1 / i1 << 2;
-			if (biomes.contains(this.getBiomeForNoiseGen(i2, k1, j2)))
+			if (biomes.contains(this.getNoiseBiome(i2, k1, j2)))
 			{
 				if (blockpos == null || random.nextInt(k1 + 1) == 0)
 				{
@@ -240,8 +240,8 @@ public class UABiomeProvider extends BiomeProvider
 
 
 	@Override
-	public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_)
+	public Biome getNoiseBiome(int x, int y, int z)
 	{
-		return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);
+		return this.genBiomes.func_215738_a(x, z);
 	}
 }

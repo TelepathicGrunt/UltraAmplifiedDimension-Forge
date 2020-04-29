@@ -69,7 +69,7 @@ public class AmplifiedPortalBlock extends Block
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public ActionResultType onUse(BlockState thisBlockState, World world, BlockPos position, PlayerEntity playerEntity, Hand playerHand, BlockRayTraceResult raytraceResult)
+	public ActionResultType onBlockActivated(BlockState thisBlockState, World world, BlockPos position, PlayerEntity playerEntity, Hand playerHand, BlockRayTraceResult raytraceResult)
 	{
 		MinecraftServer minecraftserver = playerEntity.getServer();
 
@@ -243,7 +243,7 @@ public class AmplifiedPortalBlock extends Block
 			((ServerPlayerEntity) playerEntity).teleport(minecraftserver.getWorld(destination), playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
 		}
 		
-		return super.onUse(thisBlockState, world, position, playerEntity, playerHand, raytraceResult);
+		return super.onBlockActivated(thisBlockState, world, position, playerEntity, playerHand, raytraceResult);
 	}
 
 

@@ -34,24 +34,24 @@ public class UABiome extends Biome
 
 	protected void addStructureFeaturesUA()
 	{
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.MINESHAFT.configure(new MineshaftConfigUA(MineshaftStructureUA.Type.NORMAL)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.STRONGHOLD.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Feature.VILLAGE.configure(new VillageConfig("village/plains/town_centers", 6)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.VILLAGE.configure(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.OAK)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, UAFeatures.FORTRESS.configure(new FortressConfigUA(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.DESERT_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.OCEAN_RUIN.configure(new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.OCEAN_MONUMENT.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.SHIPWRECK.configure(new ShipwreckConfig(false)).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.END_CITY.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.IGLOO.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.JUNGLE_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.WITCH_HUT.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.WOODLAND_MANSION.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.configure(new BuriedTreasureConfig(0.01F)).createDecoratedFeature(UAPlacements.PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.PILLAGER_OUTPOST.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.MUSHROOM_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.ICE_SPIKE_TEMPLE.configure(IFeatureConfig.NO_FEATURE_CONFIG).createDecoratedFeature(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.NORMAL)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Feature.VILLAGE.withConfiguration(new VillageConfig("village/plains/town_centers", 6)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.VILLAGE.withConfiguration(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.OAK)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.DESERT_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.OCEAN_RUIN.withConfiguration(new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.OCEAN_MONUMENT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.SHIPWRECK.withConfiguration(new ShipwreckConfig(false)).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.END_CITY.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.IGLOO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.JUNGLE_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.WITCH_HUT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.WOODLAND_MANSION.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Feature.BURIED_TREASURE.withConfiguration(new BuriedTreasureConfig(0.01F)).withPlacement(UAPlacements.PASSTHROUGH_CHEST.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.PILLAGER_OUTPOST.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.MUSHROOM_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, UAFeatures.ICE_SPIKE_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 	}
 
 

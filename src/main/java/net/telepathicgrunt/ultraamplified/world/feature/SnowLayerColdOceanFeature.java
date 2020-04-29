@@ -38,7 +38,7 @@ public class SnowLayerColdOceanFeature extends Feature<NoFeatureConfig>
 		blockpos$Mutable.setPos(position.getX(), y, position.getZ());
 		blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN);
 
-		if (blockpos$Mutable.getY() >= 0 && blockpos$Mutable.getY() < 256 && world.getLightLevel(LightType.BLOCK, blockpos$Mutable) < 10)
+		if (blockpos$Mutable.getY() >= 0 && blockpos$Mutable.getY() < 256 && world.getLightFor(LightType.BLOCK, blockpos$Mutable) < 10)
 		{
 
 			BlockState iblockstate = world.getBlockState(blockpos$Mutable);

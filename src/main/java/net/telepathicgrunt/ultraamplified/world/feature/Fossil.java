@@ -75,7 +75,7 @@ public class Fossil extends Feature<NoFeatureConfig>
 		IntegrityProcessor integrityprocessor = new IntegrityProcessor(0.9F);
 		placementsettings.clearProcessors().addProcessor(integrityprocessor);
 		template.addBlocksToWorld(world, blockpos1, placementsettings, 4);
-		placementsettings.func_215220_b(integrityprocessor);
+		placementsettings.addProcessor(integrityprocessor);
 		IntegrityProcessor integrityprocessor1 = new IntegrityProcessor(0.1F);
 		placementsettings.clearProcessors().addProcessor(integrityprocessor1);
 		template1.addBlocksToWorld(world, blockpos1, placementsettings, 4);

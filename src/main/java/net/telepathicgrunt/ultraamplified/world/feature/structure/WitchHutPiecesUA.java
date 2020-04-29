@@ -62,7 +62,7 @@ public class WitchHutPiecesUA extends ScatteredStructurePiece
 
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 	{
 		if (!this.isInsideBounds(world, structureBoundingBoxIn, 0))
 		{

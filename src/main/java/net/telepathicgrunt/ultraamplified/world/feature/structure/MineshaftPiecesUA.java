@@ -333,7 +333,7 @@ public class MineshaftPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))
 			{
@@ -632,7 +632,7 @@ public class MineshaftPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))
 			{
@@ -1071,7 +1071,7 @@ public class MineshaftPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			BlockState flooring;
 
@@ -1247,7 +1247,7 @@ public class MineshaftPiecesUA
 
 
 		@Override
-		public boolean generate(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox MutableBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.isLiquidInStructureBoundingBox(world, MutableBoundingBoxIn))
 			{

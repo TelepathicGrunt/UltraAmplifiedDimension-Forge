@@ -100,13 +100,13 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 		float f1 = 0.0F;
 		float f2 = 0.0F;
 		int y = this.getSeaLevel();
-		float f3 = this.biomeProvider.getBiomeForNoiseGen(noiseX, y, noiseZ).getDepth();
+		float f3 = this.biomeProvider.getNoiseBiome(noiseX, y, noiseZ).getDepth();
 
-		for (int j = -2; j <= 2; ++j)
+		for (int xOffset = -2; xOffset <= 2; ++xOffset)
 		{
-			for (int k = -2; k <= 2; ++k)
+			for (int zOffset = -2; zOffset <= 2; ++zOffset)
 			{
-				Biome biome = this.biomeProvider.getBiomeForNoiseGen(noiseX + j, y, noiseZ + k);
+				Biome biome = this.biomeProvider.getNoiseBiome(noiseX + xOffset, y, noiseZ + zOffset);
 				float depthWeight = 0; //biome.getDepth();
 				float scaleWeight = 0; //biome.getScale();
 
@@ -117,7 +117,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 				depthWeight = 1.0F + (0.0F + 0.4F) * 2F;
 				scaleWeight = 1.0F + (0.0F + 0.3F) * 12F;
 
-				float f6 = BIOME_WEIGHTING_KERNEL[j + 2 + (k + 2) * 5] / (depthWeight + 2.0F);
+				float f6 = BIOME_WEIGHTING_KERNEL[xOffset + 2 + (zOffset + 2) * 5] / (depthWeight + 2.0F);
 				if (biome.getDepth() > f3)
 				{
 					f6 /= 2.0F;
@@ -139,9 +139,9 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 	}
 
 
-	private double getNoiseDepthAt(int p_222574_1_, int p_222574_2_)
+	private double getNoiseDepthAt(int x, int z)
 	{
-		double noise = this.depthNoise.getValue(p_222574_1_ * 200, 10.0D, p_222574_2_ * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+		double noise = this.depthNoise.getValue(x * 200, 10.0D, z * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 		if (noise < 0.0D)
 		{
 			noise = -noise * 0.3D;
