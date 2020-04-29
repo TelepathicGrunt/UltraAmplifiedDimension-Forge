@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.extrabehavior;
+package net.telepathicgrunt.ultraamplified.world.dimension;
 
 import java.util.function.Supplier;
 
@@ -11,11 +11,9 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
-import net.telepathicgrunt.ultraamplified.world.dimension.UADimension;
 
 
-public class MessageHandler
+public class TimeSyncNetworkPacket
 {
 	//setup channel to send packages through
 	private static final String PROTOCOL_VERSION = "1";
@@ -42,7 +40,7 @@ public class MessageHandler
 
 		public static void sendToClient(long timeIn)
 		{
-			MessageHandler.DEFAULT_CHANNEL.send(PacketDistributor.ALL.noArg(), new UpdateTimePacket(timeIn));
+			TimeSyncNetworkPacket.DEFAULT_CHANNEL.send(PacketDistributor.ALL.noArg(), new UpdateTimePacket(timeIn));
 		}
 
 

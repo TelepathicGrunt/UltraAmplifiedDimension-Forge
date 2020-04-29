@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
+import net.telepathicgrunt.ultraamplified.world.dimension.TimeSyncNetworkPacket;
 import net.telepathicgrunt.ultraamplified.world.dimension.UADimension;
 
 
@@ -41,7 +42,7 @@ public class PlayerSleepBehavior
 					long time = dimension.getWorldTime();
 					long nextDayTime = time + (24000 - time % 24000);
 					((UADimension)dimension).setWorldTime(nextDayTime);
-					MessageHandler.UpdateTimePacket.sendToClient(nextDayTime);
+					TimeSyncNetworkPacket.UpdateTimePacket.sendToClient(nextDayTime);
 					
 					//removes rain and thunder from overworld so it syncs to ultra amplified dimension too
 					if (((World) world).getGameRules().getBoolean(GameRules.DO_WEATHER_CYCLE))

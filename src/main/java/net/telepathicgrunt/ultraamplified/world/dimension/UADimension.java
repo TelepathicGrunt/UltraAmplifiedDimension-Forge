@@ -17,7 +17,6 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.extrabehavior.MessageHandler;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
@@ -80,7 +79,7 @@ public class UADimension extends Dimension
 			//sync time from memory at startup
 			if(!syncedTimeFromMemory) {
 				time = UAWorldSavedData.get(world).getTimeUA();
-				MessageHandler.UpdateTimePacket.sendToClient(this.time);
+				TimeSyncNetworkPacket.UpdateTimePacket.sendToClient(this.time);
 				syncedTimeFromMemory = true;
 			}
 			
@@ -91,7 +90,7 @@ public class UADimension extends Dimension
 				
 				//sync client every 100 ticks
 				if(time % 100 == 0)
-					MessageHandler.UpdateTimePacket.sendToClient(this.time);
+					TimeSyncNetworkPacket.UpdateTimePacket.sendToClient(this.time);
 			}
 		}
 	}
@@ -131,7 +130,7 @@ public class UADimension extends Dimension
 			time = timeIn;
 			UAWorldSavedData.get(world).setTimeUA(time);
 			UAWorldSavedData.get(world).markDirty();
-			MessageHandler.UpdateTimePacket.sendToClient(this.time);
+			TimeSyncNetworkPacket.UpdateTimePacket.sendToClient(this.time);
 		}
 		
 		super.setWorldTime(timeIn); //make overworld time continue to pass.

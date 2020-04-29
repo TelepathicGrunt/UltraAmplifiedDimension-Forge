@@ -10,7 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Items;
+import net.minecraft.item.Item;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -39,6 +39,7 @@ public class AmplifiedPortalBehavior
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
 	{
+		static ForgeRegistry<Item> itemRegistry = ((ForgeRegistry<Item>) ForgeRegistries.ITEMS);
 
 		@SubscribeEvent
 		public static void BlockRightClickEvent(PlayerInteractEvent.RightClickBlock event)
@@ -46,11 +47,27 @@ public class AmplifiedPortalBehavior
 			World world = event.getWorld();
 			Entity entity = event.getEntity();
 
-			// checks to see if player uses right click with flint and steel. If so, tries
-			// to create portal if possible. only works in non-ultra amplified world types
-			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && event.getItemStack().getItem() == Items.FLINT_AND_STEEL)
+			// checks to see if player uses right click with flint and steel or other specified item.
+			// If so, tries to create portal if possible. only works in non-ultra amplified world types
+			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && !entity.isCrouching())
 			{
-				trySpawnPortal(world, event.getPos(), entity);
+				ResourceLocation itemrl = new ResourceLocation(UltraAmplified.UAConfig.portalActivationItem.get());
+				if (itemRegistry.containsKey(itemrl))
+				{
+					Item activationItem = itemRegistry.getValue(itemrl);
+					if(event.getItemStack().getItem() == activationItem) 
+					{
+						trySpawnPortal(world, event.getPos(), entity);
+					}
+				}
+				else
+				{
+					if (entity instanceof ServerPlayerEntity)
+					{
+						ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the item with the resourcelocation that was put in the portal activation item config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalActivationItem.get());
+						entity.sendMessage(message);
+					}
+				}
 			}
 		}
 
@@ -135,7 +152,7 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame corner config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCornerBlocks.get());
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame corner config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCornerBlocks.get());
 					entity.sendMessage(message);
 				}
 
@@ -161,7 +178,7 @@ public class AmplifiedPortalBehavior
 			{
 				if (entity instanceof ServerPlayerEntity)
 				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame ceiling config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCeilingBlocks.get());
+					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame ceiling config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCeilingBlocks.get());
 					entity.sendMessage(message);
 				}
 
@@ -275,7 +292,7 @@ public class AmplifiedPortalBehavior
 	public static void placePortalBlocks(IWorld world, BlockPos pos)
 	{
 		// the portal itself
-		world.setBlockState(pos.add(0, 0, 0), UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
+		world.setBlockState(pos, UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 	}
 
 

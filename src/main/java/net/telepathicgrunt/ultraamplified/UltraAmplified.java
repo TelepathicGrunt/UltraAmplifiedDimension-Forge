@@ -26,10 +26,10 @@ import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.config.UAConfig;
 import net.telepathicgrunt.ultraamplified.config.UAConfig.UAConfigValues;
-import net.telepathicgrunt.ultraamplified.extrabehavior.MessageHandler;
 import net.telepathicgrunt.ultraamplified.utils.ConfigHelper;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.UASurfaceBuilders;
+import net.telepathicgrunt.ultraamplified.world.dimension.TimeSyncNetworkPacket;
 import net.telepathicgrunt.ultraamplified.world.feature.ContainUndergroundLiquids;
 import net.telepathicgrunt.ultraamplified.world.feature.GlowPatch;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
@@ -60,7 +60,6 @@ public class UltraAmplified
 	public static WorldType UltraAmplifiedWorldType;
 
 	//TODO:: fix spawn being made with wrong biomes before reading config
-	//TODO:: fix sleeping not automatically changing to day
 	//TODO:: redo biome picking lists
 	//TODO:: add config to change trigger item
 	public UltraAmplified()
@@ -79,7 +78,7 @@ public class UltraAmplified
 
 	public void setup(final FMLCommonSetupEvent event)
 	{
-		MessageHandler.init();
+		TimeSyncNetworkPacket.init();
 		
 		//registers the worldtype used for this mod so we can select that worldtype
 		UltraAmplifiedWorldType = new UAWorldType();

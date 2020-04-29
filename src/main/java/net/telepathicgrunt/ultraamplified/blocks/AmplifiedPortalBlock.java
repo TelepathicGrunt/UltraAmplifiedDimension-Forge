@@ -319,9 +319,40 @@ public class AmplifiedPortalBlock extends Block
 		return world.removeBlock(pos, false);
 	}
 
+	// has no item form
+	@Override
+	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
+	{
+		return ItemStack.EMPTY;
+	}
+
+
+	
+	/**
+	 * Spawns with tons of particles upon creation
+	 */
+	@Deprecated
+	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving)
+	{
+		createLotsOfParticles(state, (ServerWorld)world, pos, world.rand);
+	}
+
+
+	@OnlyIn(Dist.CLIENT)
+	public void createLotsOfParticles(BlockState blockState, ServerWorld world, BlockPos position, Random random)
+	{
+		double xPos = (double) position.getX() + 0.5D;
+		double yPos = (double) position.getY() + 0.5D;
+		double zPos = (double) position.getZ() + 0.5D;
+		double xOffset = (random.nextFloat() - 0.4D) * 0.8D;
+		double zOffset = (random.nextFloat() - 0.4D) * 0.8D;
+
+		world.spawnParticle(ParticleTypes.FLAME, xPos, yPos, zPos, 50, xOffset, 0, zOffset, random.nextFloat()*0.1D+0.05D);
+	}
+
 
 	/**
-	 * faster particle movement than normal EndPortal block
+	 * more frequent particles than normal EndPortal block
 	 */
 	@Override
 	@OnlyIn(Dist.CLIENT)
@@ -332,13 +363,4 @@ public class AmplifiedPortalBlock extends Block
 		double d2 = pos.getZ() + (rand.nextFloat() * 3 - 1);
 		world.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	}
-
-
-	// has no item form
-	@Override
-	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
-	{
-		return ItemStack.EMPTY;
-	}
-
 }

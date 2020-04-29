@@ -40,12 +40,21 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 -Sleeping in a bed will now automatically wake you up if everyone in the dimension is sleeping.
 
 
+##### Config:
+
+-Added a new option to let you specify any item for creating the portal! The portalActivationItem entry is set to minecraft:flint_and_steel by default.
+
+-portalCornerBlocks, portalCeilingBlocks, and portalFloorBlocks config entries will now be made with the resourcelocation of their default blocks instead of being blank.
+
 ##### Teleportation:
 
 -Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic! Rain and Thunder time is still locked into the Overworld's raina dn thunder tim.e.em 
 
 -Cleaned up the teleporting code so that it doesn't fire for all right clicks and only runs the checks/teleporting when right clicking the portal block. 
 
+-Portal will not be created if you crouch right click with the activation item. Now you have to be standing.
+
+-The Amplified Portal Block will now spawn a ton of flame particles when created because it's cool!
 
 ##### Misc: 
 
