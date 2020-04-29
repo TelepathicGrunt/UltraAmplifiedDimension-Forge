@@ -1,10 +1,13 @@
 package net.telepathicgrunt.ultraamplified.world.dimension;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
@@ -20,14 +23,16 @@ import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 
-public class UltraAmplifiedWorldProvider extends Dimension
+public class UADimension extends Dimension
 {
+	//Used to keep track of time in this dimension and whether we synced the time yet at startup
 	private boolean syncedTimeFromMemory = false;
 	private long time = 0;
 
-	public UltraAmplifiedWorldProvider(World world, DimensionType typeIn)
+	public UADimension(World world, DimensionType typeIn)
 	{
 		super(world, typeIn, 1.0f);
+		
 		/**
 		 * Creates the light to brightness table. It changes how light levels looks to the players but does not change the
 		 * actual values of the light levels.
@@ -38,7 +43,20 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		}
 	}
 	
-	
+	/**
+	 * Terrain and biome generators for our dimension to use.
+	 */
+	@Override
+	public ChunkGenerator<?> createChunkGenerator()
+	{
+		CaveCavityCarver.setSeed(world.getSeed());
+		return new UAChunkGenerator(world, new UABiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
+	}
+
+
+	/**
+	 * Saves all info to memory. In this case, we just save time.
+	 */
 	@Override
 	public void onWorldSave()
 	{
@@ -48,7 +66,39 @@ public class UltraAmplifiedWorldProvider extends Dimension
 			UAWorldSavedData.get(world).markDirty();
 		}
 	}
+	
+	
+	/**
+	 * This is only called on server side for some reason.
+	 * Increments the time while syncing the time to client every 100 ticks.
+	 */
+	@Override
+	public void tick()
+	{
+		if(!world.isRemote)
+		{
+			//sync time from memory at startup
+			if(!syncedTimeFromMemory) {
+				time = UAWorldSavedData.get(world).getTimeUA();
+				MessageHandler.UpdateTimePacket.sendToClient(this.time);
+				syncedTimeFromMemory = true;
+			}
+			
+			
+			if(world.getGameRules().getBoolean(GameRules.DO_DAYLIGHT_CYCLE))
+			{
+				time++;
+				
+				//sync client every 100 ticks
+				if(time % 100 == 0)
+					MessageHandler.UpdateTimePacket.sendToClient(this.time);
+			}
+		}
+	}
 
+	/**
+	 * Will calculate whether it is day or nighttime for UA dimension.
+	 */
 	@Override
 	public boolean isDaytime() {
 		long timeOfDay = (time % 24000);
@@ -60,36 +110,22 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	}
 	
 	/**
-	 * Called when the world is updating entities. Only used in WorldProviderEnd to update the DragonFightManager in
-	 * Vanilla.
+	 * Return our version of time for UA dimension.
 	 */
-	@Override
-	public void tick()
-	{
-		if(!world.isRemote)
-		{
-			if(!syncedTimeFromMemory) {
-				time = UAWorldSavedData.get(world).getTimeUA();
-				MessageHandler.UpdateTimePacket.sendToClient(this.time);
-				syncedTimeFromMemory = true;
-			}
-			
-			time++;
-			if(time % 100 == 0)
-				MessageHandler.UpdateTimePacket.sendToClient(this.time);
-		}
-	}
-
 	@Override
 	public long getWorldTime()
     {
         return time;
     }
-
-
+	
+	/**
+	 * Update the time in this dimension on serverside when players use the
+	 * time command and sync to the client.  
+	 */
 	@Override
 	public void setWorldTime(long timeIn)
     {
+		//Will not update time every tick with the second check here as we update our time in tick()
 		if(!world.isRemote && world.getWorldInfo().getDayTime() + 1L != timeIn)
 		{
 			time = timeIn;
@@ -97,37 +133,30 @@ public class UltraAmplifiedWorldProvider extends Dimension
 			UAWorldSavedData.get(world).markDirty();
 			MessageHandler.UpdateTimePacket.sendToClient(this.time);
 		}
+		
+		super.setWorldTime(timeIn); //make overworld time continue to pass.
     }
 	
+	/**
+	 * Used for specifically syncing the time on client side.
+	 */
 	public void setWorldTimeClientSided(long timeIn)
     {
 		time = timeIn;
     }
+
+	/**
+	 * Make moon phase be based on our time
+	 */
+	@Override
+	public int getMoonPhase(long worldTime)
+	{
+		return (int) (time / 24000L % 8L + 8L) % 8;
+	}
 	   
-	@Override
-	public ChunkGenerator<?> createChunkGenerator()
-	{
-		CaveCavityCarver.setSeed(world.getSeed());
-		return new UAChunkGenerator(world, new UABiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
-	}
-
-
-	@Override
-	public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid)
-	{
-		BlockPos blockpos = this.world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 90, 8));
-		return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;
-	}
-
-
-	@Override
-	public BlockPos findSpawn(int posX, int posZ, boolean checkValid)
-	{
-		return this.findSpawn(new ChunkPos(posX, posZ), checkValid);
-	}
-
-
-	//mimics vanilla sky movement
+	/**
+	 * Used for position of the sun/moon/stars. This mimics vanilla's sky speed.
+	 */
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
@@ -135,7 +164,6 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		double d1 = 0.5D - Math.cos(d0 * Math.PI) / 2.0D;
 		return (float) (d0 * 2.0D + d1) / 3.0F;
 	}
-
 
 	/**
 	 * the y level at which clouds are rendered.
@@ -154,13 +182,11 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		return 256;
 	}
 
-
 	@Override
 	public boolean isNether()
 	{
 		return false;
 	}
-
 
 	@Override
 	public boolean isSurfaceWorld()
@@ -169,6 +195,10 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	}
 
 
+	/**
+	 * Color of the fog for distant chunks and the color of the bottom half of the sky block.
+	 * In this case, the fog will darken as the player gets lower
+	 */
 	@Override
 	public Vec3d getFogColor(float celestialAngle, float partialTicks)
 	{
@@ -189,29 +219,53 @@ public class UltraAmplifiedWorldProvider extends Dimension
 		return new Vec3d(f1, f2, f3);
 	}
 
-
 	/**
-	 * Returns a double value representing the Y value relative to the top of the map at which void fog is at its maximum.
-	 * for example, means the void fog will be at its maximum at 70 here.
+	 * The height at which void fog (the bottom half of the sky map) will start appearing
+	 * and will show up as whatever color getFogColor() returns.
+	 * 0 is y = 0 and 1 is y = 255.
 	 */
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public double getVoidFogYFactor()
 	{
-		return 70;
+		return 1D;
 	}
 
-
-	@Override
-	public boolean canRespawnHere()
-	{
-		return !UltraAmplified.UAConfig.bedExplodes.get(); //negate as bed will explode when respawn is set to false
-	}
-
-
+	/**
+	 * Dense fog everywhere. Severely limits how far once can see.
+	 */
 	@Override
 	public boolean doesXZShowFog(int x, int z)
 	{
 		return UltraAmplified.UAConfig.heavyFog.get();
+	}
+
+	/**
+	 * Used for setting respawn points by beds. If set to false, the bed will explode.
+	 */
+	@Override
+	public boolean canRespawnHere()
+	{
+		return !UltraAmplified.UAConfig.bedExplodes.get();
+	}
+	
+	/**
+	 * Spawn is always at world origin for Ultra Amplified Dimension.
+	 */
+	@Override
+	public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid)
+	{
+		BlockPos blockpos = this.world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 90, 8));
+		
+		if(this.world.getBlockState(blockpos).getFluidState().isTagged(FluidTags.LAVA)) 
+			this.world.setBlockState(blockpos, Blocks.OBSIDIAN.getDefaultState(), 3); //makes spawn safe
+		
+		return blockpos;
+	}
+
+	@Override
+	public BlockPos findSpawn(int posX, int posZ, boolean checkValid)
+	{
+		return this.findSpawn(new ChunkPos(posX, posZ), checkValid);
 	}
 }

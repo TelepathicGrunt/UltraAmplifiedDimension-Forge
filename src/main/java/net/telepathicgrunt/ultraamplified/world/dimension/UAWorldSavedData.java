@@ -32,7 +32,7 @@ public class UAWorldSavedData extends WorldSavedData
 			return CLIENT_DUMMY;
 		}
 		
-		ServerWorld wbWorld = ((ServerWorld)world).getServer().getWorld(UltraAmplifiedDimension.ultraamplified());
+		ServerWorld wbWorld = ((ServerWorld)world).getServer().getWorld(UADimensionRegistration.ultraamplified());
 		DimensionSavedDataManager storage = wbWorld.getSavedData();
 		return storage.getOrCreate(UAWorldSavedData::new, DATANAME);
 	}

@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.DimensionType;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
+import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
 
 
 public class PlayerPositionAndDimension implements IPlayerPosAndDim
@@ -30,7 +30,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 	public void setNonUADim(DimensionType incomingDim)
 	{
 		//error, this should not be UA. Set to Overworld instead and print to log.
-		if (incomingDim == UltraAmplifiedDimension.ultraamplified())
+		if (incomingDim == UADimensionRegistration.ultraamplified())
 		{
 			nonUADimension = DimensionType.OVERWORLD;
 			UltraAmplified.LOGGER.log(Level.ERROR, "Tried to set the NonUADimension variable to UA dimension. Please contact mod owner to report this!");
@@ -268,7 +268,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 
 		// Old data had position of player in UA dimension. Save it.
 		// Player is in non-UA dimension currently so set the entrance correctly.
-		if (storedOldDimension == null || storedOldDimension == UltraAmplifiedDimension.ultraamplified())
+		if (storedOldDimension == null || storedOldDimension == UADimensionRegistration.ultraamplified())
 		{
 			newData.putInt("UA_X", storedOldBlockPos.getX());
 			newData.putInt("UA_Y", storedOldBlockPos.getY());

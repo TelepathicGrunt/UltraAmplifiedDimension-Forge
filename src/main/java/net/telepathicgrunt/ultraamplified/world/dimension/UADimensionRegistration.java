@@ -17,7 +17,7 @@ import net.telepathicgrunt.ultraamplified.utils.RegUtil;
 
 
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class UltraAmplifiedDimension
+public class UADimensionRegistration
 {
 	private static final ResourceLocation ULTRAAMPLIFIED_ID = new ResourceLocation(UltraAmplified.MODID, "ultraamplified");
 
@@ -32,7 +32,7 @@ public class UltraAmplifiedDimension
 		@Override
 		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
 		{
-			return UltraAmplifiedWorldProvider::new;
+			return UADimension::new;
 		}
 	};
 

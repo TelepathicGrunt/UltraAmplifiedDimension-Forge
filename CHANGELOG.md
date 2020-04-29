@@ -35,14 +35,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ##### Dimension:
 
--Ultra Amplified Dimension now has it's own time behind the scenes! Everyone in that specific dimension must sleep together to set the time to day. The /time command now also works in that dimension as well.
+-Ultra Amplified Dimension now has it's own time behind the scenes! Everyone in that specific dimension must sleep together to set the time to day. The /time command now also works in that dimension as well. Rain and thunder time is still locked into the Overworld's rain and thunder time and sleeping in UA dimension will clear the weather for Overworld as well. 
 
 -Sleeping in a bed will now automatically wake you up if everyone in the dimension is sleeping.
 
 
 ##### Teleportation:
 
--Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic!
+-Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic! Rain and Thunder time is still locked into the Overworld's raina dn thunder tim.e.em 
 
 -Cleaned up the teleporting code so that it doesn't fire for all right clicks and only runs the checks/teleporting when right clicking the portal block. 
 

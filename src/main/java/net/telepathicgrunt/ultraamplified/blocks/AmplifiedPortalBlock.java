@@ -36,7 +36,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
-import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
+import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
 
 
 public class AmplifiedPortalBlock extends Block
@@ -88,7 +88,7 @@ public class AmplifiedPortalBlock extends Block
 			boolean enteringUA = false;
 
 			// Player is leaving Ultra Amplified dimension
-			if (playerEntity.dimension == UltraAmplifiedDimension.ultraamplified())
+			if (playerEntity.dimension == UADimensionRegistration.ultraamplified())
 			{
 				if (UltraAmplified.UAConfig.forceExitToOverworld.get())
 				{
@@ -120,7 +120,7 @@ public class AmplifiedPortalBlock extends Block
 			// Otherwise, take us to Ultra Amplified Dimension.
 			else
 			{
-				destination = UltraAmplifiedDimension.ultraamplified();
+				destination = UADimensionRegistration.ultraamplified();
 				pitch = cap.getUAPitch();
 				yaw = cap.getUAYaw();
 				enteringUA = true;
@@ -284,7 +284,7 @@ public class AmplifiedPortalBlock extends Block
 		else
 		{
 			// if we are in UA dimension
-			if (world.getDimension().getType() == UltraAmplifiedDimension.ultraamplified())
+			if (world.getDimension().getType() == UADimensionRegistration.ultraamplified())
 			{
 
 				// if we are at default portal coordinate

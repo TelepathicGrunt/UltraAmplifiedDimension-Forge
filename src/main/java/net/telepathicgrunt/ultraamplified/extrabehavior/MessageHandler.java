@@ -11,8 +11,8 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
-import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
-import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedWorldProvider;
+import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
+import net.telepathicgrunt.ultraamplified.world.dimension.UADimension;
 
 
 public class MessageHandler
@@ -84,8 +84,8 @@ public class MessageHandler
 				Minecraft.getInstance().deferTask(() -> {
 					@SuppressWarnings("resource")
 					IWorld world = Minecraft.getInstance().world;
-					if(world.getDimension().getType() == UltraAmplifiedDimension.ultraamplified()) {
-						((UltraAmplifiedWorldProvider)world.getDimension()).setWorldTimeClientSided(pkt.time);
+					if(world.getDimension().getType() == UADimensionRegistration.ultraamplified()) {
+						((UADimension)world.getDimension()).setWorldTimeClientSided(pkt.time);
 					}
 				});
 				ctx.get().setPacketHandled(true);

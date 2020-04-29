@@ -28,7 +28,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
-import net.telepathicgrunt.ultraamplified.world.dimension.UltraAmplifiedDimension;
+import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
 import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
 
@@ -60,7 +60,7 @@ public class AmplifiedPortalBehavior
 		public static void worldLoad(WorldEvent.Load event)
 		{
 			//check for if portal was made in UA and if not, make it.
-			if (event.getWorld().getDimension().getType() == UltraAmplifiedDimension.ultraamplified())
+			if (event.getWorld().getDimension().getType() == UADimensionRegistration.ultraamplified())
 			{
 				IWorld worldUA = event.getWorld();
 				if (!checkForGeneratedPortal(worldUA))
