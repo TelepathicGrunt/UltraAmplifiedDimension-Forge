@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.blockbehavior;
+package net.telepathicgrunt.ultraamplified.extrabehavior;
 
 import java.util.Random;
 

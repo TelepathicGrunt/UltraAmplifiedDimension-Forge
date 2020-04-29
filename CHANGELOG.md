@@ -33,6 +33,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ## (V.7.3.2 Changes) (1.15.2 Minecraft)
 
 
+##### Dimension:
+
+-Ultra Amplified Dimension now has it's own time behind the scenes! Everyone in that specific dimension must sleep together to set the time to day. The /time command now also works in that dimension as well.
+
+-Sleeping in a bed will now automatically wake you up if everyone in the dimension is sleeping.
+
+
 ##### Teleportation:
 
 -Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic!

@@ -1,39 +1,33 @@
 package net.telepathicgrunt.ultraamplified.world.dimension;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.extrabehavior.MessageHandler;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.CaveCavityCarver;
 import net.telepathicgrunt.ultraamplified.world.generation.UABiomeProvider;
 import net.telepathicgrunt.ultraamplified.world.generation.UAChunkGenerator;
 
 
-@Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UltraAmplifiedWorldProvider extends Dimension
 {
+	private boolean syncedTimeFromMemory = false;
+	private long time = 0;
 
 	public UltraAmplifiedWorldProvider(World world, DimensionType typeIn)
 	{
-		super(world, typeIn, 1.0f); //set 1.0f. I think it has to do with maximum brightness?
-
+		super(world, typeIn, 1.0f);
 		/**
 		 * Creates the light to brightness table. It changes how light levels looks to the players but does not change the
 		 * actual values of the light levels.
@@ -43,7 +37,73 @@ public class UltraAmplifiedWorldProvider extends Dimension
 			this.lightBrightnessTable[i] = i / 20.0F;
 		}
 	}
+	
+	
+	@Override
+	public void onWorldSave()
+	{
+		if(!world.isRemote)
+		{
+			UAWorldSavedData.get(world).setTimeUA(time);
+			UAWorldSavedData.get(world).markDirty();
+		}
+	}
 
+	@Override
+	public boolean isDaytime() {
+		long timeOfDay = (time % 24000);
+		if(timeOfDay - 13000 > 0 && timeOfDay - 13000 < 10000)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Called when the world is updating entities. Only used in WorldProviderEnd to update the DragonFightManager in
+	 * Vanilla.
+	 */
+	@Override
+	public void tick()
+	{
+		if(!world.isRemote)
+		{
+			if(!syncedTimeFromMemory) {
+				time = UAWorldSavedData.get(world).getTimeUA();
+				MessageHandler.UpdateTimePacket.sendToClient(this.time);
+				syncedTimeFromMemory = true;
+			}
+			
+			time++;
+			if(time % 100 == 0)
+				MessageHandler.UpdateTimePacket.sendToClient(this.time);
+		}
+	}
+
+	@Override
+	public long getWorldTime()
+    {
+        return time;
+    }
+
+
+	@Override
+	public void setWorldTime(long timeIn)
+    {
+		if(!world.isRemote && world.getWorldInfo().getDayTime() + 1L != timeIn)
+		{
+			time = timeIn;
+			UAWorldSavedData.get(world).setTimeUA(time);
+			UAWorldSavedData.get(world).markDirty();
+			MessageHandler.UpdateTimePacket.sendToClient(this.time);
+		}
+    }
+	
+	public void setWorldTimeClientSided(long timeIn)
+    {
+		time = timeIn;
+    }
+	   
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
@@ -71,7 +131,7 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
-		double d0 = MathHelper.frac(worldTime / 24000.0D - 0.25D);
+		double d0 = MathHelper.frac(time / 24000.0D - 0.25D);
 		double d1 = 0.5D - Math.cos(d0 * Math.PI) / 2.0D;
 		return (float) (d0 * 2.0D + d1) / 3.0F;
 	}
@@ -153,54 +213,5 @@ public class UltraAmplifiedWorldProvider extends Dimension
 	public boolean doesXZShowFog(int x, int z)
 	{
 		return UltraAmplified.UAConfig.heavyFog.get();
-	}
-
-
-	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
-	private static class ForgeEvents
-	{
-		@SubscribeEvent
-		public static void ChangeTimeToDay(PlayerWakeUpEvent event)
-		{
-			if (event.getPlayer().world instanceof ServerWorld && event.getPlayer().dimension == UltraAmplifiedDimension.ultraamplified())
-			{
-				ServerWorld serverWorld = (ServerWorld) event.getPlayer().world;
-
-				//checks if all players are asleep
-				boolean everyoneSleeping = false;
-				if (!serverWorld.getPlayers().isEmpty())
-				{
-					int i = 0;
-					int j = 0;
-
-					for (ServerPlayerEntity serverplayerentity : serverWorld.getPlayers())
-					{
-						if (serverplayerentity.isSpectator())
-						{
-							++i;
-						}
-						else if (serverplayerentity.isSleeping())
-						{
-							++j;
-						}
-					}
-					everyoneSleeping = j > 0 && j >= serverWorld.getPlayers().size() - i;
-				}
-
-				//set time to morning and
-				if (everyoneSleeping)
-				{
-					ServerWorld overworld = DimensionManager.getWorld(serverWorld.getServer(), DimensionType.OVERWORLD, false, false);
-
-					if (serverWorld.getGameRules().getBoolean(GameRules.DO_DAYLIGHT_CYCLE))
-					{
-						long rawTime = serverWorld.getDayTime() + 24000L;
-						long time = rawTime - rawTime % 24000L;
-						overworld.setDayTime(time);
-						overworld.getWorldInfo().setDayTime(time);
-					}
-				}
-			}
-		}
 	}
 }
