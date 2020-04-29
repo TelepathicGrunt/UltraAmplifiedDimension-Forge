@@ -156,8 +156,8 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 
 		/**
 		 * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
-		 *///generateStructure
-		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_)
+		 */
+		public void generateStructure(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos p_75068_4_)
 		{
 			super.generateStructure(world, p_225565_2_, rand, structurebb, p_75068_4_);
 			int i = this.bounds.minY;

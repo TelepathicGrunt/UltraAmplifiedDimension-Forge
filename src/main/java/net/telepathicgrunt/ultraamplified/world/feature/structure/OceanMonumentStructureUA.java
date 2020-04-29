@@ -140,7 +140,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		/**
 		 * Keeps iterating Structure Pieces and spawning them until the checks tell it to stop
 		 */
-		public void func_225565_a_(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos pos)
+		public void generateStructure(IWorld world, ChunkGenerator<?> p_225565_2_, Random rand, MutableBoundingBox structurebb, ChunkPos pos)
 		{
 			if (!this.wasCreated)
 			{

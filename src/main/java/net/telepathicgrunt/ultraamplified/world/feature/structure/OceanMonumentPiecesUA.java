@@ -31,495 +31,6 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 public class OceanMonumentPiecesUA
 {
 
-	public static class DoubleXRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public DoubleXRoom(Direction p_i50661_1_, OceanMonumentPiecesUA.RoomDefinition p_i50661_2_)
-		{
-			super(StructureInitUA.OMDXRUA, 1, p_i50661_1_, p_i50661_2_, 2, 1, 1);
-		}
-
-
-		public DoubleXRoom(TemplateManager p_i50662_1_, CompoundNBT p_i50662_2_)
-		{
-			super(StructureInitUA.OMDXRUA, p_i50662_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			if (this.roomDefinition.index / 25 > 0)
-			{
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 8, 0, true);
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
-			}
-
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 3, 0, 15, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 0, 15, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 7, 14, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 0, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 2, 0, 15, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 0, 15, 2, 0, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 7, 14, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 1, 0, 15, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 15, 1, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 7, 14, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 0, 10, 1, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 2, 0, 9, 2, 3, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 3, 0, 10, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.setBlockState(world, SEA_LANTERN, 6, 2, 3, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 9, 2, 3, mutableBoundingBoxIn);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 5);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 6, 2, 5);
-
-			return true;
-
-		}
-	}
-
-	public static class DoubleXYRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public DoubleXYRoom(Direction p_i50659_1_, OceanMonumentPiecesUA.RoomDefinition p_i50659_2_)
-		{
-			super(StructureInitUA.OMDXYRUA, 1, p_i50659_1_, p_i50659_2_, 2, 2, 1);
-		}
-
-
-		public DoubleXYRoom(TemplateManager p_i50660_1_, CompoundNBT p_i50660_2_)
-		{
-			super(StructureInitUA.OMDXYRUA, p_i50660_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			if (this.roomDefinition.index / 25 > 0)
-			{
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 8, 0, true);
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
-			}
-
-			for (int i = 1; i <= 7; ++i)
-			{
-				BlockState iblockstate = BRICKS_PRISMARINE;
-
-				if (i == 2 || i == 6)
-				{
-					iblockstate = ROUGH_PRISMARINE;
-				}
-
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, 0, 0, i, 7, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 15, i, 0, 15, i, 7, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 0, 15, i, 0, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 7, 14, i, 7, iblockstate, iblockstate, false);
-			}
-
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 3, 2, 7, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 1, 2, 4, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 1, 5, 4, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 13, 1, 3, 13, 7, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 11, 1, 2, 12, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 11, 1, 5, 12, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 3, 5, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 1, 3, 10, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 7, 2, 10, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 5, 2, 5, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 5, 2, 10, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 5, 5, 5, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 5, 5, 10, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.setBlockState(world, BRICKS_PRISMARINE, 6, 6, 2, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 9, 6, 2, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 6, 6, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 9, 6, 5, mutableBoundingBoxIn);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 3, 6, 4, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 9, 4, 3, 10, 4, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.setBlockState(world, SEA_LANTERN, 5, 4, 2, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 5, 4, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 10, 4, 2, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 10, 4, 5, mutableBoundingBoxIn);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 3);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 3);
-
-			return true;
-
-		}
-
-	}
-
-	public static class DoubleYRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public DoubleYRoom(Direction p_i50657_1_, OceanMonumentPiecesUA.RoomDefinition p_i50657_2_)
-		{
-			super(StructureInitUA.OMDYRUA, 1, p_i50657_1_, p_i50657_2_, 1, 2, 1);
-		}
-
-
-		public DoubleYRoom(TemplateManager p_i50658_1_, CompoundNBT p_i50658_2_)
-		{
-			super(StructureInitUA.OMDYRUA, p_i50658_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			if (this.roomDefinition.index / 25 > 0)
-			{
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
-			}
-
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.UP.getIndex()];
-
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 4, 0, 0, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 4, 0, 7, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 0, 6, 4, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 7, 6, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 4, 1, 2, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 2, 1, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 1, 5, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 4, 2, 6, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 4, 5, 2, 4, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 5, 1, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 5, 5, 4, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 4, 5, 6, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-
-			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 5, 3);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 5, 4);
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
-
-			for (int i = 1; i <= 5; i += 4)
-			{
-				int j = 0;
-
-				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.SOUTH.getIndex()])
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 2, i, j, 2, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 5, i, j, 5, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 3, i + 2, j, 4, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				}
-				else
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, j, 7, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i + 1, j, 7, i + 1, j, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-				}
-
-				j = 7;
-
-				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.NORTH.getIndex()])
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 2, i, j, 2, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 5, i, j, 5, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 3, i + 2, j, 4, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				}
-				else
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, j, 7, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i + 1, j, 7, i + 1, j, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-				}
-
-				int k = 0;
-
-				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.WEST.getIndex()])
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 2, k, i + 2, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 5, k, i + 2, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 2, 3, k, i + 2, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				}
-				else
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 0, k, i + 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 1, 0, k, i + 1, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-				}
-
-				k = 7;
-
-				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.EAST.getIndex()])
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 2, k, i + 2, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 5, k, i + 2, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 2, 3, k, i + 2, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				}
-				else
-				{
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 0, k, i + 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 1, 0, k, i + 1, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-				}
-
-				structureoceanmonumentpieces$roomdefinition1 = structureoceanmonumentpieces$roomdefinition;
-			}
-
-			return true;
-		}
-	}
-
-	public static class DoubleYZRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public DoubleYZRoom(Direction p_i50655_1_, OceanMonumentPiecesUA.RoomDefinition p_i50655_2_)
-		{
-			super(StructureInitUA.OMDYZRUA, 1, p_i50655_1_, p_i50655_2_, 1, 2, 2);
-		}
-
-
-		public DoubleYZRoom(TemplateManager p_i50656_1_, CompoundNBT p_i50656_2_)
-		{
-			super(StructureInitUA.OMDYZRUA, p_i50656_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.NORTH.getIndex()];
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition2 = structureoceanmonumentpieces$roomdefinition.connections[Direction.UP.getIndex()];
-			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition3 = structureoceanmonumentpieces$roomdefinition1.connections[Direction.UP.getIndex()];
-
-			if (this.roomDefinition.index / 25 > 0)
-			{
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 8, true);
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
-			}
-
-			if (structureoceanmonumentpieces$roomdefinition3.connections[Direction.UP.getIndex()] == null)
-			{
-				this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 1, 6, 8, 7, ROUGH_PRISMARINE);
-			}
-
-			if (structureoceanmonumentpieces$roomdefinition2.connections[Direction.UP.getIndex()] == null)
-			{
-				this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 8, 6, 8, 14, ROUGH_PRISMARINE);
-			}
-
-			for (int i = 1; i <= 7; ++i)
-			{
-				BlockState iblockstate = BRICKS_PRISMARINE;
-
-				if (i == 2 || i == 6)
-				{
-					iblockstate = ROUGH_PRISMARINE;
-				}
-
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, 0, 0, i, 15, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 7, i, 0, 7, i, 15, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 0, 6, i, 0, iblockstate, iblockstate, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 15, 6, i, 15, iblockstate, iblockstate, false);
-			}
-
-			for (int j = 1; j <= 7; ++j)
-			{
-				BlockState iblockstate1 = DARK_PRISMARINE;
-
-				if (j == 2 || j == 6)
-				{
-					iblockstate1 = SEA_LANTERN;
-				}
-
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 3, j, 7, 4, j, 8, iblockstate1, iblockstate1, false);
-			}
-
-			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 3);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 2, 2, 3);
-
-			if (structureoceanmonumentpieces$roomdefinition3.hasOpening[Direction.EAST.getIndex()])
-			{
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 2, 6, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 2, 6, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 5, 6, 3, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			}
-
-			if (structureoceanmonumentpieces$roomdefinition3.hasOpening[Direction.WEST.getIndex()])
-			{
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 2, 2, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 2, 1, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 5, 1, 3, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			}
-
-			if (structureoceanmonumentpieces$roomdefinition2.hasOpening[Direction.WEST.getIndex()])
-			{
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 10, 2, 4, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 10, 1, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 13, 1, 3, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			}
-
-			if (structureoceanmonumentpieces$roomdefinition2.hasOpening[Direction.EAST.getIndex()])
-			{
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 10, 6, 4, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 10, 6, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 13, 6, 3, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			}
-
-			return true;
-
-		}
-	}
-
-	public static class DoubleZRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public DoubleZRoom(Direction p_i50653_1_, OceanMonumentPiecesUA.RoomDefinition p_i50653_2_)
-		{
-			super(StructureInitUA.OMDZRUA, 1, p_i50653_1_, p_i50653_2_, 1, 1, 2);
-		}
-
-
-		public DoubleZRoom(TemplateManager p_i50654_1_, CompoundNBT p_i50654_2_)
-		{
-			super(StructureInitUA.OMDZRUA, p_i50654_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			if (this.roomDefinition.index / 25 > 0)
-			{
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 8, true);
-				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
-			}
-
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 3, 0, 7, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 0, 7, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 15, 6, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 0, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 2, 0, 7, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 0, 7, 2, 0, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 15, 6, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 1, 0, 7, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 7, 1, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 15, 6, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 1, 1, 1, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 1, 6, 1, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 1, 1, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 3, 1, 6, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 13, 1, 1, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 13, 6, 1, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 13, 1, 3, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 3, 13, 6, 3, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 6, 2, 3, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 6, 5, 3, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 9, 2, 3, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 9, 5, 3, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 2, 6, 4, 2, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 2, 9, 4, 2, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 2, 7, 2, 2, 8, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 2, 7, 5, 2, 8, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.setBlockState(world, SEA_LANTERN, 2, 2, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 5, 2, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 2, 2, 10, mutableBoundingBoxIn);
-			this.setBlockState(world, SEA_LANTERN, 5, 2, 10, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 2, 3, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 5, 3, 5, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 2, 3, 10, mutableBoundingBoxIn);
-			this.setBlockState(world, BRICKS_PRISMARINE, 5, 3, 10, mutableBoundingBoxIn);
-
-			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 3);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 4, 2, 3);
-
-			return true;
-
-		}
-	}
-
-	public static class EntryRoom extends OceanMonumentPiecesUA.Piece
-	{
-		public EntryRoom(Direction p_i45592_1_, OceanMonumentPiecesUA.RoomDefinition p_i45592_2_)
-		{
-			super(StructureInitUA.OMENTRYUA, 1, p_i45592_1_, p_i45592_2_, 1, 1, 1);
-		}
-
-
-		public EntryRoom(TemplateManager p_i50652_1_, CompoundNBT p_i50652_2_)
-		{
-			super(StructureInitUA.OMENTRYUA, p_i50652_2_);
-		}
-
-		protected int horizontalPos = -1;
-
-
-		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
-		{
-
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 2, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 3, 0, 7, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 1, 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 2, 0, 7, 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 1, 0, 7, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 7, 7, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 2, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 0, 6, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
-
-			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 4);
-			this.spawnGuardian(world, mutableBoundingBoxIn, 4, 2, 3);
-
-			return true;
-
-		}
-	}
-
-	static class FitSimpleRoomHelper implements OceanMonumentPiecesUA.MonumentRoomFitHelper
-	{
-		private FitSimpleRoomHelper()
-		{
-		}
-
-
-		@Override
-		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
-		{
-			return true;
-		}
-
-
-		@Override
-		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
-		{
-			p_175968_2_.claimed = true;
-			return new OceanMonumentPiecesUA.SimpleRoom(p_175968_1_, p_175968_2_, p_175968_3_);
-		}
-	}
-
-	static class FitSimpleRoomTopHelper implements OceanMonumentPiecesUA.MonumentRoomFitHelper
-	{
-		private FitSimpleRoomTopHelper()
-		{
-		}
-
-
-		@Override
-		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
-		{
-			return !definition.hasOpening[Direction.WEST.getIndex()] && !definition.hasOpening[Direction.EAST.getIndex()] && !definition.hasOpening[Direction.NORTH.getIndex()] && !definition.hasOpening[Direction.SOUTH.getIndex()] && !definition.hasOpening[Direction.UP.getIndex()];
-		}
-
-
-		@Override
-		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
-		{
-			p_175968_2_.claimed = true;
-			return new OceanMonumentPiecesUA.SimpleTopRoom(p_175968_1_, p_175968_2_);
-		}
-	}
 
 	public static class MonumentBuilding extends OceanMonumentPiecesUA.Piece
 	{
@@ -1128,7 +639,497 @@ public class OceanMonumentPiecesUA
 			}
 		}
 	}
+	
+	
+	public static class DoubleXRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public DoubleXRoom(Direction p_i50661_1_, OceanMonumentPiecesUA.RoomDefinition p_i50661_2_)
+		{
+			super(StructureInitUA.OMDXRUA, 1, p_i50661_1_, p_i50661_2_, 2, 1, 1);
+		}
 
+
+		public DoubleXRoom(TemplateManager p_i50662_1_, CompoundNBT p_i50662_2_)
+		{
+			super(StructureInitUA.OMDXRUA, p_i50662_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			if (this.roomDefinition.index / 25 > 0)
+			{
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 8, 0, true);
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
+			}
+
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 3, 0, 15, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 0, 15, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 7, 14, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 0, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 2, 0, 15, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 0, 15, 2, 0, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 7, 14, 2, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 1, 0, 15, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 15, 1, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 7, 14, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 0, 10, 1, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 2, 0, 9, 2, 3, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 3, 0, 10, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.setBlockState(world, SEA_LANTERN, 6, 2, 3, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 9, 2, 3, mutableBoundingBoxIn);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 5);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 6, 2, 5);
+
+			return true;
+		}
+	}
+
+	public static class DoubleXYRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public DoubleXYRoom(Direction p_i50659_1_, OceanMonumentPiecesUA.RoomDefinition p_i50659_2_)
+		{
+			super(StructureInitUA.OMDXYRUA, 1, p_i50659_1_, p_i50659_2_, 2, 2, 1);
+		}
+
+
+		public DoubleXYRoom(TemplateManager p_i50660_1_, CompoundNBT p_i50660_2_)
+		{
+			super(StructureInitUA.OMDXYRUA, p_i50660_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			if (this.roomDefinition.index / 25 > 0)
+			{
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 8, 0, true);
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
+			}
+
+			for (int i = 1; i <= 7; ++i)
+			{
+				BlockState iblockstate = BRICKS_PRISMARINE;
+
+				if (i == 2 || i == 6)
+				{
+					iblockstate = ROUGH_PRISMARINE;
+				}
+
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, 0, 0, i, 7, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 15, i, 0, 15, i, 7, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 0, 15, i, 0, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 7, 14, i, 7, iblockstate, iblockstate, false);
+			}
+
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 3, 2, 7, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 1, 2, 4, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 1, 5, 4, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 13, 1, 3, 13, 7, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 11, 1, 2, 12, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 11, 1, 5, 12, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 3, 5, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 1, 3, 10, 3, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 7, 2, 10, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 5, 2, 5, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 5, 2, 10, 7, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 5, 5, 5, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 10, 5, 5, 10, 7, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.setBlockState(world, BRICKS_PRISMARINE, 6, 6, 2, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 9, 6, 2, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 6, 6, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 9, 6, 5, mutableBoundingBoxIn);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 3, 6, 4, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 9, 4, 3, 10, 4, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.setBlockState(world, SEA_LANTERN, 5, 4, 2, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 5, 4, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 10, 4, 2, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 10, 4, 5, mutableBoundingBoxIn);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 3);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 7, 2, 3);
+
+			return true;
+
+		}
+
+	}
+
+	public static class DoubleYRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public DoubleYRoom(Direction p_i50657_1_, OceanMonumentPiecesUA.RoomDefinition p_i50657_2_)
+		{
+			super(StructureInitUA.OMDYRUA, 1, p_i50657_1_, p_i50657_2_, 1, 2, 1);
+		}
+
+
+		public DoubleYRoom(TemplateManager p_i50658_1_, CompoundNBT p_i50658_2_)
+		{
+			super(StructureInitUA.OMDYRUA, p_i50658_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			if (this.roomDefinition.index / 25 > 0)
+			{
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
+			}
+
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.UP.getIndex()];
+
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 4, 0, 0, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 4, 0, 7, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 0, 6, 4, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 7, 6, 4, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 4, 1, 2, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 2, 1, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 1, 5, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 4, 2, 6, 4, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 4, 5, 2, 4, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 5, 1, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 5, 5, 4, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 4, 5, 6, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+
+			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 5, 3);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 5, 4);
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
+
+			for (int i = 1; i <= 5; i += 4)
+			{
+				int j = 0;
+
+				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.SOUTH.getIndex()])
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 2, i, j, 2, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 5, i, j, 5, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 3, i + 2, j, 4, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				}
+				else
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, j, 7, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i + 1, j, 7, i + 1, j, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+				}
+
+				j = 7;
+
+				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.NORTH.getIndex()])
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 2, i, j, 2, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 5, i, j, 5, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 3, i + 2, j, 4, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				}
+				else
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, j, 7, i + 2, j, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i + 1, j, 7, i + 1, j, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+				}
+
+				int k = 0;
+
+				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.WEST.getIndex()])
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 2, k, i + 2, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 5, k, i + 2, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 2, 3, k, i + 2, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				}
+				else
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 0, k, i + 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 1, 0, k, i + 1, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+				}
+
+				k = 7;
+
+				if (structureoceanmonumentpieces$roomdefinition1.hasOpening[Direction.EAST.getIndex()])
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 2, k, i + 2, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 5, k, i + 2, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 2, 3, k, i + 2, 4, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				}
+				else
+				{
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i, 0, k, i + 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+					this.fillWithBlocks(world, mutableBoundingBoxIn, k, i + 1, 0, k, i + 1, 7, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+				}
+
+				structureoceanmonumentpieces$roomdefinition1 = structureoceanmonumentpieces$roomdefinition;
+			}
+
+			return true;
+		}
+	}
+
+	public static class DoubleYZRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public DoubleYZRoom(Direction p_i50655_1_, OceanMonumentPiecesUA.RoomDefinition p_i50655_2_)
+		{
+			super(StructureInitUA.OMDYZRUA, 1, p_i50655_1_, p_i50655_2_, 1, 2, 2);
+		}
+
+
+		public DoubleYZRoom(TemplateManager p_i50656_1_, CompoundNBT p_i50656_2_)
+		{
+			super(StructureInitUA.OMDYZRUA, p_i50656_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition = this.roomDefinition.connections[Direction.NORTH.getIndex()];
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition1 = this.roomDefinition;
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition2 = structureoceanmonumentpieces$roomdefinition.connections[Direction.UP.getIndex()];
+			OceanMonumentPiecesUA.RoomDefinition structureoceanmonumentpieces$roomdefinition3 = structureoceanmonumentpieces$roomdefinition1.connections[Direction.UP.getIndex()];
+
+			if (this.roomDefinition.index / 25 > 0)
+			{
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 8, true);
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition3.connections[Direction.UP.getIndex()] == null)
+			{
+				this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 1, 6, 8, 7, ROUGH_PRISMARINE);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition2.connections[Direction.UP.getIndex()] == null)
+			{
+				this.generateBoxOnFillOnly(world, mutableBoundingBoxIn, 1, 8, 8, 6, 8, 14, ROUGH_PRISMARINE);
+			}
+
+			for (int i = 1; i <= 7; ++i)
+			{
+				BlockState iblockstate = BRICKS_PRISMARINE;
+
+				if (i == 2 || i == 6)
+				{
+					iblockstate = ROUGH_PRISMARINE;
+				}
+
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 0, i, 0, 0, i, 15, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 7, i, 0, 7, i, 15, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 0, 6, i, 0, iblockstate, iblockstate, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, i, 15, 6, i, 15, iblockstate, iblockstate, false);
+			}
+
+			for (int j = 1; j <= 7; ++j)
+			{
+				BlockState iblockstate1 = DARK_PRISMARINE;
+
+				if (j == 2 || j == 6)
+				{
+					iblockstate1 = SEA_LANTERN;
+				}
+
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 3, j, 7, 4, j, 8, iblockstate1, iblockstate1, false);
+			}
+
+			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 3);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 2, 2, 3);
+
+			if (structureoceanmonumentpieces$roomdefinition3.hasOpening[Direction.EAST.getIndex()])
+			{
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 2, 6, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 2, 6, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 5, 6, 3, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition3.hasOpening[Direction.WEST.getIndex()])
+			{
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 2, 2, 4, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 2, 1, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 5, 1, 3, 5, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition2.hasOpening[Direction.WEST.getIndex()])
+			{
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 4, 10, 2, 4, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 10, 1, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 13, 1, 3, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			}
+
+			if (structureoceanmonumentpieces$roomdefinition2.hasOpening[Direction.EAST.getIndex()])
+			{
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 4, 10, 6, 4, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 10, 6, 3, 10, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 13, 6, 3, 13, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			}
+
+			return true;
+
+		}
+	}
+
+	public static class DoubleZRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public DoubleZRoom(Direction p_i50653_1_, OceanMonumentPiecesUA.RoomDefinition p_i50653_2_)
+		{
+			super(StructureInitUA.OMDZRUA, 1, p_i50653_1_, p_i50653_2_, 1, 1, 2);
+		}
+
+
+		public DoubleZRoom(TemplateManager p_i50654_1_, CompoundNBT p_i50654_2_)
+		{
+			super(StructureInitUA.OMDZRUA, p_i50654_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			if (this.roomDefinition.index / 25 > 0)
+			{
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 8, true);
+				this.generateDefaultFloor(world, mutableBoundingBoxIn, 0, 0, true);
+			}
+
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 0, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 3, 0, 7, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 0, 7, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 15, 6, 3, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 0, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 2, 0, 7, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 0, 7, 2, 0, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 2, 15, 6, 2, 15, ROUGH_PRISMARINE, ROUGH_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 1, 0, 7, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 7, 1, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 15, 6, 1, 15, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 1, 1, 1, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 1, 6, 1, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 1, 1, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 3, 1, 6, 3, 2, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 13, 1, 1, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 1, 13, 6, 1, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 3, 13, 1, 3, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 3, 13, 6, 3, 14, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 6, 2, 3, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 6, 5, 3, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 1, 9, 2, 3, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 9, 5, 3, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 2, 6, 4, 2, 6, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 3, 2, 9, 4, 2, 9, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 2, 2, 7, 2, 2, 8, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 2, 7, 5, 2, 8, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.setBlockState(world, SEA_LANTERN, 2, 2, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 5, 2, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 2, 2, 10, mutableBoundingBoxIn);
+			this.setBlockState(world, SEA_LANTERN, 5, 2, 10, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 2, 3, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 5, 3, 5, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 2, 3, 10, mutableBoundingBoxIn);
+			this.setBlockState(world, BRICKS_PRISMARINE, 5, 3, 10, mutableBoundingBoxIn);
+
+			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 3);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 4, 2, 3);
+
+			return true;
+
+		}
+	}
+
+	public static class EntryRoom extends OceanMonumentPiecesUA.Piece
+	{
+		public EntryRoom(Direction p_i45592_1_, OceanMonumentPiecesUA.RoomDefinition p_i45592_2_)
+		{
+			super(StructureInitUA.OMENTRYUA, 1, p_i45592_1_, p_i45592_2_, 1, 1, 1);
+		}
+
+
+		public EntryRoom(TemplateManager p_i50652_1_, CompoundNBT p_i50652_2_)
+		{
+			super(StructureInitUA.OMENTRYUA, p_i50652_2_);
+		}
+
+		protected int horizontalPos = -1;
+
+
+		@Override
+		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox mutableBoundingBoxIn, ChunkPos p_74875_4_)
+		{
+
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 3, 0, 2, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 3, 0, 7, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 2, 0, 1, 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 2, 0, 7, 2, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 0, 0, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 7, 1, 0, 7, 1, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 0, 1, 7, 7, 3, 7, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 1, 1, 0, 2, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+			this.fillWithBlocks(world, mutableBoundingBoxIn, 5, 1, 0, 6, 3, 0, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
+
+			this.spawnGuardian(world, mutableBoundingBoxIn, 3, 2, 4);
+			this.spawnGuardian(world, mutableBoundingBoxIn, 4, 2, 3);
+
+			return true;
+
+		}
+	}
+
+	static class FitSimpleRoomHelper implements OceanMonumentPiecesUA.MonumentRoomFitHelper
+	{
+		private FitSimpleRoomHelper()
+		{
+		}
+
+
+		@Override
+		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
+		{
+			return true;
+		}
+
+
+		@Override
+		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
+		{
+			p_175968_2_.claimed = true;
+			return new OceanMonumentPiecesUA.SimpleRoom(p_175968_1_, p_175968_2_, p_175968_3_);
+		}
+	}
+
+	static class FitSimpleRoomTopHelper implements OceanMonumentPiecesUA.MonumentRoomFitHelper
+	{
+		private FitSimpleRoomTopHelper()
+		{
+		}
+
+
+		@Override
+		public boolean fits(OceanMonumentPiecesUA.RoomDefinition definition)
+		{
+			return !definition.hasOpening[Direction.WEST.getIndex()] && !definition.hasOpening[Direction.EAST.getIndex()] && !definition.hasOpening[Direction.NORTH.getIndex()] && !definition.hasOpening[Direction.SOUTH.getIndex()] && !definition.hasOpening[Direction.UP.getIndex()];
+		}
+
+
+		@Override
+		public OceanMonumentPiecesUA.Piece create(Direction p_175968_1_, OceanMonumentPiecesUA.RoomDefinition p_175968_2_, Random p_175968_3_)
+		{
+			p_175968_2_.claimed = true;
+			return new OceanMonumentPiecesUA.SimpleTopRoom(p_175968_1_, p_175968_2_);
+		}
+	}
+	
 	public static class MonumentCoreRoom extends OceanMonumentPiecesUA.Piece
 	{
 		public MonumentCoreRoom(Direction p_i50663_1_, OceanMonumentPiecesUA.RoomDefinition p_i50663_2_)
