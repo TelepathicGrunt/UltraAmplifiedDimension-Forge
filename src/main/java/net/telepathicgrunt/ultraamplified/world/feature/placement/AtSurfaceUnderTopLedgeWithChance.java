@@ -12,6 +12,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.utils.PlacingUtils;
 
 
 public class AtSurfaceUnderTopLedgeWithChance extends Placement<ChanceConfig>

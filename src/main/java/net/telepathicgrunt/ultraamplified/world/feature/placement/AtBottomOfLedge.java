@@ -14,6 +14,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.utils.PlacingUtils;
 
 
 public class AtBottomOfLedge extends Placement<CountRangeConfig>

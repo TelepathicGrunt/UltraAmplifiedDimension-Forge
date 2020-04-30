@@ -76,6 +76,7 @@ public class UAConfig
 		public ConfigValueListener<String> portalCornerBlocks;
 		public ConfigValueListener<String> portalCeilingBlocks;
 		public ConfigValueListener<String> portalFloorBlocks;
+		public ConfigValueListener<Boolean> allowNetherPortal;
 		public ConfigValueListener<Integer> biomeSize;
 		public ConfigValueListener<Integer> mutatedBiomeSpawnrate;
 		public ConfigValueListener<Integer> seaLevel;
@@ -183,10 +184,10 @@ public class UAConfig
 			builder.pop();
 
 			builder.push("General Dimension Options");
-
+			
 				heavyFog = subscriber.subscribe(builder
 		                .comment("\r\n Adds very heavy fog to make the world look more spoky and limit visibility.\n " 
-		                		+ "This is not the same as distance fog which does not make chunks near you foggy.")
+		                		+" This is not the same as distance fog which does not make chunks near you foggy.")
 		                .translation("ultraamplified.config.dimension.heavyfog")
 		                .define("heavyFog", false));
 	
@@ -194,6 +195,14 @@ public class UAConfig
 		                .comment("\r\n Should beds explode in the Ultra Amplified Dimension?")
 		                .translation("ultraamplified.config.dimension.bedexplodes")
 		                .define("bedExplodes", false));
+				
+				allowNetherPortal = subscriber.subscribe(builder
+		                .comment("\r\n Lets Nether Portals be able to be created in Ultra Amplified DImension.\n " 
+		                		+" Using the portal in this dimension will take you to the Nether but Nether \n"
+		                		+" Portals in the Nether will take you to the Overworld instead. So this option \n"
+		                		+" is good if you want a second way of escaping the Ultra Amplified Dimension.")
+		                .translation("ultraamplified.config.dimension.allownetherportal")
+		                .define("allowNetherPortal", false));
 	
 				forceExitToOverworld = subscriber.subscribe(builder
 		                .comment("\r\n Should beds explode in the Ultra Amplified Dimension?" 

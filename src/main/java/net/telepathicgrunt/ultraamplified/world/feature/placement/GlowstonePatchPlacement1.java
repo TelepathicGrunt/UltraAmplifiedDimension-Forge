@@ -13,6 +13,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.utils.PlacingUtils;
 
 
 public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>

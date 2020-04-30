@@ -1,4 +1,4 @@
-package net.telepathicgrunt.ultraamplified.world.feature.placement;
+package net.telepathicgrunt.ultraamplified.utils;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;

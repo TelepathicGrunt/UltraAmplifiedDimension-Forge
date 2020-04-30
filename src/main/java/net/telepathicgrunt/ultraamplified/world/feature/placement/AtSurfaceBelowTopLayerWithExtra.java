@@ -17,6 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.utils.PlacingUtils;
 
 
 public class AtSurfaceBelowTopLayerWithExtra extends Placement<AtSurfaceWithExtraConfig>

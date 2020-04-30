@@ -39,12 +39,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Sleeping in a bed will now automatically wake you up if everyone in the dimension is sleeping.
 
-
 ##### Config:
 
 -Added a new option to let you specify any item for creating the portal! The portalActivationItem entry is set to minecraft:flint_and_steel by default.
 
 -portalCornerBlocks, portalCeilingBlocks, and portalFloorBlocks config entries will now be made with the resourcelocation of their default blocks instead of being blank.
+
+-Added an option to allow Nether Portals to be created in Ultra Amplified Dimension as an alternative one-way-trip to exit the dimension! This config option is set to off by default.
 
 ##### Teleportation:
 

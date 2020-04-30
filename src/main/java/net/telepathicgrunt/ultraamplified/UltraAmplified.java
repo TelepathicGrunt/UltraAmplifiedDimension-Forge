@@ -61,7 +61,6 @@ public class UltraAmplified
 
 	//TODO:: fix spawn being made with wrong biomes before reading config
 	//TODO:: redo biome picking lists
-	//TODO:: add config to change trigger item
 	public UltraAmplified()
 	{
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

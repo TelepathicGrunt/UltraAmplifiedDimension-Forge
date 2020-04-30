@@ -19,6 +19,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.placement.Placement;
+import net.telepathicgrunt.ultraamplified.utils.PlacingUtils;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 
 
