@@ -59,7 +59,6 @@ public class UltraAmplified
 	//worldTypes
 	public static WorldType UltraAmplifiedWorldType;
 
-	//TODO:: fix spawn being made with wrong biomes before reading config
 	//TODO:: redo biome picking lists
 	public UltraAmplified()
 	{
@@ -72,6 +71,7 @@ public class UltraAmplified
 
 		//generates config
 		UAConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAConfig.UAConfigValues(builder, subscriber));
+		
 	}
 
 

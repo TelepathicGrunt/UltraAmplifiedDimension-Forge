@@ -20,8 +20,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -72,14 +73,14 @@ public class AmplifiedPortalBehavior
 		}
 
 
-		// Fires when entering a world or dimension
-		@SubscribeEvent
-		public static void worldLoad(WorldEvent.Load event)
+		// Fires when player enters UA dimension
+		@SubscribeEvent(priority = EventPriority.HIGHEST)
+		public static void worldLoad(PlayerEvent.PlayerChangedDimensionEvent event)
 		{
 			//check for if portal was made in UA and if not, make it.
-			if (event.getWorld().getDimension().getType() == UADimensionRegistration.ultraamplified())
+			if (event.getPlayer().world.getDimension().getType() == UADimensionRegistration.ultraamplified())
 			{
-				IWorld worldUA = event.getWorld();
+				IWorld worldUA = event.getPlayer().world;
 				if (!checkForGeneratedPortal(worldUA))
 				{
 					generatePortal(worldUA);

@@ -13,10 +13,9 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
@@ -24,7 +23,7 @@ import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
-@Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BiomeLayerSetupUA
 {
 
@@ -39,22 +38,26 @@ public class BiomeLayerSetupUA
 
 	public BiomeLayerSetupUA()
 	{
-		//we have to do this here as the biome provider will be picking biomes before the world load event fires
+		//precaution - default
 		setupBiomeEntries();
 		BiomeGenHelper.setBiomeEdgeMap();
 	}
 
+	
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
 	{
-		@SubscribeEvent(priority = EventPriority.HIGHEST)
-		public static void Load(WorldEvent.Load event)
+		/**
+		 * Updates the biome layout based on the config changes. (fires before the world has a chance to load too)
+		 */
+		@SubscribeEvent
+		public static void updateBiomeLayouts(final ModConfig.Reloading event)
 		{
 			setupBiomeEntries(); // Update what biomes are used when re-entering a world without closing Minecraft.
 			BiomeGenHelper.setBiomeEdgeMap();
 		}
 	}
-
+	
 
 	@SuppressWarnings("unchecked")
 	private static void setupBiomeEntries()

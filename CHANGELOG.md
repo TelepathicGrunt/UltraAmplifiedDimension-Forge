@@ -47,6 +47,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Added an option to allow Nether Portals to be created in Ultra Amplified Dimension as an alternative one-way-trip to exit the dimension! This config option is set to off by default.
 
+-Fixed bug where if you change the worldgen configs in you entered a world and before going into the Ultra Amplified Dimension, the spawn chunks around the portal will use the default settings instead of the new settings. Now it should all be correct.
+
 ##### Teleportation:
 
 -Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic! Rain and Thunder time is still locked into the Overworld's raina dn thunder tim.e.em 
