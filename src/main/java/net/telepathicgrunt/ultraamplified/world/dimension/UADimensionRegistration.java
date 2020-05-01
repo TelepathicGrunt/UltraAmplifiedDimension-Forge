@@ -12,7 +12,6 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
@@ -55,7 +54,7 @@ public class UADimensionRegistration
 		@Override
 		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
 		{
-			return OverworldDimension::new;
+			return UAOverworldDimension::new;
 		}
 	};
 

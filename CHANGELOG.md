@@ -29,9 +29,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
+## (V.7.4.1 Changes) (1.15.2 Minecraft)
+
+##### Worldtype:
+
+-Quick fix to stop a crash when trying to sleep in the UA dimension when using the UA worldtype.
+
 
 ## (V.7.4.0 Changes) (1.15.2 Minecraft)
-
 
 ##### Dimension:
 
