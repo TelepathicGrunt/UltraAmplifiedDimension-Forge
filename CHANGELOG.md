@@ -55,7 +55,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ##### Teleportation:
 
--Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic! Rain and Thunder time is still locked into the Overworld's raina dn thunder tim.e.em 
+-Teleporting to and from Ultra Amplified Dimension now resets the falling time on the player. So if you are fall fast but manage to click the portal block, you'll teleport to the other dimension and not take fall damage. Could make a neat mini-game mechanic! Rain and Thunder time is still locked into the Overworld's rain and thunder time.
 
 -Cleaned up the teleporting code so that it doesn't fire for all right clicks and only runs the checks/teleporting when right clicking the portal block. 
 
