@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
+import net.telepathicgrunt.ultraamplified.extrabehavior.ClientTimeIncrement;
 
 
 public class ClientEvents
@@ -12,6 +13,7 @@ public class ClientEvents
 	public static void subscribeClientEvents(IEventBus modBus, IEventBus forgeBus)
 	{
 		modBus.addListener(ClientEvents::onClientSetup);
+		forgeBus.addListener(ClientTimeIncrement::IncrementTimeClientSided);
 	}
 
 

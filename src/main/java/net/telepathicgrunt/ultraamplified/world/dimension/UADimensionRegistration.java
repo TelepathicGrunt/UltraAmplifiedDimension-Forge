@@ -2,10 +2,14 @@ package net.telepathicgrunt.ultraamplified.world.dimension;
 
 import java.util.function.BiFunction;
 
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ServerPropertiesProvider;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.OverworldDimension;
@@ -59,13 +63,12 @@ public class UADimensionRegistration
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
 	private static class ForgeEvents
 	{
-		private static IntegratedServer server;
+		private static MinecraftServer server;
 
 		@SubscribeEvent
 		public static void registerDimensions(FMLServerAboutToStartEvent event)
 		{
-			if (event.getServer() instanceof IntegratedServer)
-				server = (IntegratedServer) event.getServer();
+			server = event.getServer();
 		}
 
 
@@ -77,15 +80,26 @@ public class UADimensionRegistration
 			
 			if (server != null)
 			{
-				WorldSettings worldSettings = ObfuscationReflectionHelper.getPrivateValue(IntegratedServer.class, server, "field_71350_m");
-
-				if(worldSettings.getTerrainType() == UltraAmplified.UltraAmplifiedWorldType) 
+				WorldType worldtype = null; 
+				if(server instanceof DedicatedServer) 
+				{
+					ServerPropertiesProvider serverPropertiesProvider = ObfuscationReflectionHelper.getPrivateValue(DedicatedServer.class, (DedicatedServer)server, "settings");
+					worldtype = serverPropertiesProvider.getProperties().worldType;
+				}
+				else if(server instanceof IntegratedServer) 
+				{
+					WorldSettings worldSettings = ObfuscationReflectionHelper.getPrivateValue(IntegratedServer.class, (IntegratedServer)server, "field_71350_m");
+					worldtype = worldSettings.getTerrainType();
+				}
+				
+				
+				if(worldtype == UltraAmplified.UltraAmplifiedWorldType) 
 				{
 					dimension = OVERWORLD_ULTRAAMPLIFIED;
 				}
 			}
 
-			if(DimensionManager.getRegistry().containsKey(ULTRAAMPLIFIED_ID)) 
+			if(DimensionManager.getRegistry().getValue(ULTRAAMPLIFIED_ID).isPresent()) 
 			{
 				int id = DimensionManager.getRegistry().getId(DimensionType.byName(ULTRAAMPLIFIED_ID));
 				

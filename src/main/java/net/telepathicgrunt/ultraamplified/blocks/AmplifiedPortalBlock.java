@@ -250,6 +250,7 @@ public class AmplifiedPortalBlock extends Block
 
 			playerEntity.fallDistance = 0;
 			((ServerPlayerEntity) playerEntity).teleport(minecraftserver.getWorld(destination), playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
+			return ActionResultType.SUCCESS;
 		}
 		
 		return super.onBlockActivated(thisBlockState, world, position, playerEntity, playerHand, raytraceResult);
@@ -341,13 +342,12 @@ public class AmplifiedPortalBlock extends Block
 	 * Spawns with tons of particles upon creation
 	 */
 	@Deprecated
+	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving)
 	{
 		createLotsOfParticles(state, (ServerWorld)world, pos, world.rand);
 	}
 
-
-	@OnlyIn(Dist.CLIENT)
 	public void createLotsOfParticles(BlockState blockState, ServerWorld world, BlockPos position, Random random)
 	{
 		double xPos = (double) position.getX() + 0.5D;
