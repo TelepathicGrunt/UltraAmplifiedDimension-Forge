@@ -30,7 +30,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.3.2 Changes) (1.15.2 Minecraft)
+## (V.7.4.0 Changes) (1.15.2 Minecraft)
 
 
 ##### Dimension:
@@ -39,9 +39,13 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Sleeping in a bed will now automatically wake you up if everyone in the dimension is sleeping.
 
+##### Worldtype:
+
+-When using the Ultra Amplified worldtype, the Ultra Amplified Dimension now will use the Overworld Dimension stuff in backend and looks like an exact copy of the Overworld! Making an Amplified Portal in the Ultra Amplified worldtype will teleport you between the Overworld Dimension that looks Ultra Amplified and the Ultra Amplified Dimension that looks like the Overworld.
+
 ##### Config:
 
--Added a new option to let you specify any item for creating the portal! The portalActivationItem entry is set to minecraft:flint_and_steel by default.
+-Added a new option to let you specify any item for creating the portal! The portalActivationItem entry is set to minecraft:flint_and_steel by default. If set to "", the portal creation will be disabled.
 
 -portalCornerBlocks, portalCeilingBlocks, and portalFloorBlocks config entries will now be made with the resourcelocation of their default blocks instead of being blank.
 

@@ -50,7 +50,7 @@ public class AmplifiedPortalBehavior
 
 			// checks to see if player uses right click with flint and steel or other specified item.
 			// If so, tries to create portal if possible. only works in non-ultra amplified world types
-			if (world.getWorldType() != UltraAmplified.UltraAmplifiedWorldType && !entity.isCrouching())
+			if (!entity.isCrouching() && !UltraAmplified.UAConfig.portalActivationItem.get().isEmpty())
 			{
 				ResourceLocation itemrl = new ResourceLocation(UltraAmplified.UAConfig.portalActivationItem.get());
 				if (itemRegistry.containsKey(itemrl))
@@ -143,6 +143,7 @@ public class AmplifiedPortalBehavior
 		// Grabs resourcelocation from config and tries to find that block to use for corners
 		// Doesn't need to be Blockstate as Polished Granite has only 1 state anyway
 		Block blockCorner;
+		//TODO:remove outter if statement in 1.16
 		if (!UltraAmplified.UAConfig.portalCornerBlocks.get().equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get())))
@@ -167,13 +168,15 @@ public class AmplifiedPortalBehavior
 
 		//grabs resourcelocation from config and tries to find that block to use for ceiling
 		BlockState blockCeiling;
-		boolean customCeiling = false;
+		//TODO:remove outter if statement in 1.16
 		if (!UltraAmplified.UAConfig.portalCeilingBlocks.get().equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())))
 			{
 				blockCeiling = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())).getDefaultState();
-				customCeiling = true;
+				if(blockCeiling.getBlock() instanceof SlabBlock){
+					blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
+				}
 			}
 			else
 			{
@@ -193,13 +196,15 @@ public class AmplifiedPortalBehavior
 
 		//grabs resourcelocation from config and tries to find that block to use for floor
 		BlockState blockFloor;
-		boolean customFloor = false;
+		//TODO:remove outter if statement in 1.16
 		if (!UltraAmplified.UAConfig.portalFloorBlocks.get().equals(""))
 		{
 			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())))
 			{
 				blockFloor = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())).getDefaultState();
-				customFloor = true;
+				if(blockFloor.getBlock() instanceof SlabBlock) {
+					blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
+				}
 			}
 			else
 			{
@@ -236,8 +241,11 @@ public class AmplifiedPortalBehavior
 				{
 					BlockState currentFloor = world.getBlockState(pos.add(x, -1, z));
 					// Convert to default block if use changed the floor block in config so we can ignore properties of the block
-					if (customFloor)
-					{
+					if(currentFloor.getBlock() instanceof SlabBlock) {
+						SlabType type = currentFloor.get(SlabBlock.TYPE);
+						currentFloor = currentFloor.getBlock().getDefaultState().with(SlabBlock.TYPE, type);
+					}
+					else {
 						currentFloor = currentFloor.getBlock().getDefaultState();
 					}
 
@@ -273,8 +281,11 @@ public class AmplifiedPortalBehavior
 				{
 					BlockState currentCeiling = world.getBlockState(pos.add(x, 1, z));
 					// Convert to default block if use changed the ceiling block in config so we can ignore properties of the block
-					if (customCeiling)
-					{
+					if(currentCeiling.getBlock() instanceof SlabBlock) {
+						SlabType type = currentCeiling.get(SlabBlock.TYPE);
+						currentCeiling = currentCeiling.getBlock().getDefaultState().with(SlabBlock.TYPE, type);
+					}
+					else {
 						currentCeiling = currentCeiling.getBlock().getDefaultState();
 					}
 
@@ -299,13 +310,6 @@ public class AmplifiedPortalBehavior
 
 	public static boolean trySpawnPortal(IWorld world, BlockPos pos, Entity entity)
 	{
-
-		// cannot create amplified portal in Ultra Amplified Worldtype
-		if (world.getWorld().getWorldType() == UltraAmplified.UltraAmplifiedWorldType)
-		{
-			return false;
-		}
-
 		boolean canMakePortal = isPortal(world, pos, entity);
 		if (canMakePortal)
 		{

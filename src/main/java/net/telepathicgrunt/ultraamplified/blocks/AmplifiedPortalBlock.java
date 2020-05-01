@@ -76,7 +76,7 @@ public class AmplifiedPortalBlock extends Block
 		// Extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 		// Also makes sure player isn't sneaking so players can crouch place blocks on the portal
 		// But only teleport if we aren't in UA worldtype
-		if (!world.isRemote && minecraftserver.getWorld(DimensionType.OVERWORLD).getWorldType() != UltraAmplified.UltraAmplifiedWorldType && !playerEntity.isPassenger() && !playerEntity.isBeingRidden() && playerEntity.isNonBoss() && !playerEntity.isCrouching())
+		if (!world.isRemote && !playerEntity.isPassenger() && !playerEntity.isBeingRidden() && playerEntity.isNonBoss() && !playerEntity.isCrouching())
 		{
 			//grabs the capability attached to player for dimension hopping
 			PlayerPositionAndDimension cap = (PlayerPositionAndDimension) playerEntity.getCapability(PAST_POS_AND_DIM).orElseThrow(RuntimeException::new);
