@@ -20,21 +20,20 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
-import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
 import net.telepathicgrunt.ultraamplified.world.feature.AmplifiedPortalFrame;
 
-
+/**
+ * Handles creating the Amplified Portal block and holds the code to make the portal frame too.
+ */
 @Mod.EventBusSubscriber(modid = UltraAmplified.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class AmplifiedPortalBehavior
+public class AmplifiedPortalCreation
 {
 
 	@Mod.EventBusSubscriber(modid = UltraAmplified.MODID)
@@ -42,14 +41,16 @@ public class AmplifiedPortalBehavior
 	{
 		static ForgeRegistry<Item> itemRegistry = ((ForgeRegistry<Item>) ForgeRegistries.ITEMS);
 
+		/**
+		 * checks to see if player uses right click with flint and steel or other specified item.
+		 * If so, tries to create portal if possible. only works in non-ultra amplified world types
+		 */
 		@SubscribeEvent
 		public static void BlockRightClickEvent(PlayerInteractEvent.RightClickBlock event)
 		{
 			World world = event.getWorld();
 			Entity entity = event.getEntity();
 
-			// checks to see if player uses right click with flint and steel or other specified item.
-			// If so, tries to create portal if possible. only works in non-ultra amplified world types
 			if (!entity.isCrouching() && !UltraAmplified.UAConfig.portalActivationItem.get().isEmpty())
 			{
 				ResourceLocation itemrl = new ResourceLocation(UltraAmplified.UAConfig.portalActivationItem.get());
@@ -71,23 +72,9 @@ public class AmplifiedPortalBehavior
 				}
 			}
 		}
-
-
-		// Fires when player enters UA dimension
-		@SubscribeEvent(priority = EventPriority.HIGHEST)
-		public static void worldLoad(PlayerEvent.PlayerChangedDimensionEvent event)
-		{
-			//check for if portal was made in UA and if not, make it.
-			if (event.getPlayer().world.getDimension().getType() == UADimensionRegistration.ultraamplified())
-			{
-				IWorld worldUA = event.getPlayer().world;
-				if (!checkForGeneratedPortal(worldUA))
-				{
-					generatePortal(worldUA);
-				}
-			}
-		}
 	}
+	
+	
 
 	// ------------------------------------------------------------------------------------//
 	// Portal creation and validation check
@@ -98,7 +85,7 @@ public class AmplifiedPortalBehavior
 	private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
 
 
-	private static boolean checkForGeneratedPortal(IWorld worldUA)
+	public static boolean checkForGeneratedPortal(IWorld worldUA)
 	{
 		BlockPos pos = new BlockPos(8, 255, 8);
 		worldUA.getChunk(pos);
@@ -116,7 +103,7 @@ public class AmplifiedPortalBehavior
 	}
 
 
-	private static void generatePortal(IWorld worldUA)
+	public static void generatePortal(IWorld worldUA)
 	{
 		AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
 		BlockPos pos = new BlockPos(8, 255, 8);
@@ -300,20 +287,13 @@ public class AmplifiedPortalBehavior
 		return true;
 	}
 
-
-	public static void placePortalBlocks(IWorld world, BlockPos pos)
-	{
-		// the portal itself
-		world.setBlockState(pos, UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
-	}
-
-
 	public static boolean trySpawnPortal(IWorld world, BlockPos pos, Entity entity)
 	{
 		boolean canMakePortal = isPortal(world, pos, entity);
 		if (canMakePortal)
 		{
-			placePortalBlocks(world, pos);
+			//place portal at pos in the portal frame.
+			world.setBlockState(pos, UABlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
 			return true;
 		}
 		else

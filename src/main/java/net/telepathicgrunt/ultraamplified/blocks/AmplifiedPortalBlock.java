@@ -36,6 +36,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.ultraamplified.capabilities.PlayerPositionAndDimension;
+import net.telepathicgrunt.ultraamplified.extrabehavior.AmplifiedPortalCreation;
 import net.telepathicgrunt.ultraamplified.world.dimension.UADimensionRegistration;
 
 
@@ -133,6 +134,14 @@ public class AmplifiedPortalBlock extends Block
 			}
 
 			ServerWorld serverworld = minecraftserver.getWorld(destination);
+			
+			//Create portal in UA if it hasn't been made yet in the dimension
+			if(destination == UADimensionRegistration.ultraamplified()) {
+				if (!AmplifiedPortalCreation.checkForGeneratedPortal(serverworld))
+				{
+					AmplifiedPortalCreation.generatePortal(serverworld);
+				}
+			}
 
 			// Gets top block in other world or original location
 			Vec3d playerVec3Pos = new Vec3d(8.5D, 0, 8.5D);

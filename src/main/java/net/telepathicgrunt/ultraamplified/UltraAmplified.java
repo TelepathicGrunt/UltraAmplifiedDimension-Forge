@@ -67,11 +67,12 @@ public class UltraAmplified
 
 		modEventBus.addListener(this::setup);
 		modEventBus.register(new BlockColorManager());
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); //client side only for glowgrass color
-
+		
+		//client side only for glowgrass color
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); 
+		
 		//generates config
 		UAConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAConfig.UAConfigValues(builder, subscriber));
-		
 	}
 
 
