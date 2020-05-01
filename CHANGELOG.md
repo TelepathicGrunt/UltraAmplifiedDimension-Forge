@@ -28,6 +28,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.7.4.2 Changes) (1.15.2 Minecraft)
+
+##### Misc:
+
+-Fixed crash in production on servers due to me not using the right method name for a reflection.
 
 ## (V.7.4.1 Changes) (1.15.2 Minecraft)
 

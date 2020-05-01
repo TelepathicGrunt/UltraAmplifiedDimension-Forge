@@ -82,7 +82,7 @@ public class UADimensionRegistration
 				WorldType worldtype = null; 
 				if(server instanceof DedicatedServer) 
 				{
-					ServerPropertiesProvider serverPropertiesProvider = ObfuscationReflectionHelper.getPrivateValue(DedicatedServer.class, (DedicatedServer)server, "settings");
+					ServerPropertiesProvider serverPropertiesProvider = ObfuscationReflectionHelper.getPrivateValue(DedicatedServer.class, (DedicatedServer)server, "field_71340_o");
 					worldtype = serverPropertiesProvider.getProperties().worldType;
 				}
 				else if(server instanceof IntegratedServer) 
