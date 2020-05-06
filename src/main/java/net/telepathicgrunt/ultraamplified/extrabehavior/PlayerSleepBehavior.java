@@ -22,7 +22,6 @@ public class PlayerSleepBehavior
 	private static class ForgeEvents
 	{
 
-		@SuppressWarnings("resource")
 		@SubscribeEvent
 		/**
 		 * When all players slept and finished sleeping in UA dimension, change the time in UA dimension to daytime and remove
