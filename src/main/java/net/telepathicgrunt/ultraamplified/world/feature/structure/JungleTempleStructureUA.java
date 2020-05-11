@@ -22,7 +22,22 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class JungleTempleStructureUA extends Structure<NoFeatureConfig>
 {
-
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	public JungleTempleStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
 	{
 		super(p_i51427_1_);

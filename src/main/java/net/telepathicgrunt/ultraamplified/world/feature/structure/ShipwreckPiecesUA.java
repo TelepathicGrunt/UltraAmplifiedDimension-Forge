@@ -27,12 +27,58 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class ShipwreckPiecesUA
 {
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	private static final BlockPos STRUCTURE_OFFSET = new BlockPos(4, 0, 15);
-	private static final ResourceLocation[] BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"), new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"),
-			new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
-	private static final ResourceLocation[] NOT_BEACHED_SHIPS = new ResourceLocation[] { new ResourceLocation("shipwreck/with_mast"), new ResourceLocation("shipwreck/upsidedown_full"), new ResourceLocation("shipwreck/upsidedown_fronthalf"), new ResourceLocation("shipwreck/upsidedown_backhalf"), new ResourceLocation("shipwreck/sideways_full"), new ResourceLocation("shipwreck/sideways_fronthalf"), new ResourceLocation("shipwreck/sideways_backhalf"),
-			new ResourceLocation("shipwreck/rightsideup_full"), new ResourceLocation("shipwreck/rightsideup_fronthalf"), new ResourceLocation("shipwreck/rightsideup_backhalf"), new ResourceLocation("shipwreck/with_mast_degraded"), new ResourceLocation("shipwreck/upsidedown_full_degraded"), new ResourceLocation("shipwreck/upsidedown_fronthalf_degraded"), new ResourceLocation("shipwreck/upsidedown_backhalf_degraded"), new ResourceLocation("shipwreck/sideways_full_degraded"),
-			new ResourceLocation("shipwreck/sideways_fronthalf_degraded"), new ResourceLocation("shipwreck/sideways_backhalf_degraded"), new ResourceLocation("shipwreck/rightsideup_full_degraded"), new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
+	
+	private static final ResourceLocation[] BEACHED_SHIPS = new ResourceLocation[] { 
+		new ResourceLocation("shipwreck/with_mast"), 
+		new ResourceLocation("shipwreck/sideways_full"), 
+		new ResourceLocation("shipwreck/sideways_fronthalf"), 
+		new ResourceLocation("shipwreck/sideways_backhalf"), 
+		new ResourceLocation("shipwreck/rightsideup_full"), 
+		new ResourceLocation("shipwreck/rightsideup_fronthalf"), 
+		new ResourceLocation("shipwreck/rightsideup_backhalf"),
+		new ResourceLocation("shipwreck/with_mast_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_full_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
+	
+	private static final ResourceLocation[] NOT_BEACHED_SHIPS = new ResourceLocation[] { 
+		new ResourceLocation("shipwreck/with_mast"), 
+		new ResourceLocation("shipwreck/upsidedown_full"), 
+		new ResourceLocation("shipwreck/upsidedown_fronthalf"), 
+		new ResourceLocation("shipwreck/upsidedown_backhalf"), 
+		new ResourceLocation("shipwreck/sideways_full"), 
+		new ResourceLocation("shipwreck/sideways_fronthalf"), 
+		new ResourceLocation("shipwreck/sideways_backhalf"),
+		new ResourceLocation("shipwreck/rightsideup_full"), 
+		new ResourceLocation("shipwreck/rightsideup_fronthalf"), 
+		new ResourceLocation("shipwreck/rightsideup_backhalf"), 
+		new ResourceLocation("shipwreck/with_mast_degraded"), 
+		new ResourceLocation("shipwreck/upsidedown_full_degraded"), 
+		new ResourceLocation("shipwreck/upsidedown_fronthalf_degraded"), 
+		new ResourceLocation("shipwreck/upsidedown_backhalf_degraded"), 
+		new ResourceLocation("shipwreck/sideways_full_degraded"),
+		new ResourceLocation("shipwreck/sideways_fronthalf_degraded"), 
+		new ResourceLocation("shipwreck/sideways_backhalf_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_full_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_fronthalf_degraded"), 
+		new ResourceLocation("shipwreck/rightsideup_backhalf_degraded") };
 
 
 	public static void beginGeneration(TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> piecesList, Random random, ShipwreckConfig config, int height)

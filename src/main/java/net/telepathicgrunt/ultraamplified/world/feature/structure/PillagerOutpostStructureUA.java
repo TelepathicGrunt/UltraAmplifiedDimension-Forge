@@ -26,8 +26,24 @@ import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 {
-	private static final List<Biome.SpawnListEntry> field_214558_a = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
-
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
+	private static final List<Biome.SpawnListEntry> PILLAGER_ENEMIES = 
+		Lists.newArrayList(new Biome.SpawnListEntry(EntityType.PILLAGER, 1, 1, 1));
 
 	public PillagerOutpostStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51470_1_)
 	{
@@ -52,7 +68,7 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	public List<Biome.SpawnListEntry> getSpawnList()
 	{
-		return field_214558_a;
+		return PILLAGER_ENEMIES;
 	}
 
 

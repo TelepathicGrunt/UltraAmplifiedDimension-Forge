@@ -28,6 +28,22 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class IceSpikeTemplePiecesUA
 {
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	private static final ResourceLocation CENTER = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_center");
 	private static final ResourceLocation CENTER_TOP = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_center_top");
 	private static final ResourceLocation LEFT_BODY = new ResourceLocation(UltraAmplified.MODID + ":ice_spike_temple_left_body");

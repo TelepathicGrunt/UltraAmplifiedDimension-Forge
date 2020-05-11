@@ -62,7 +62,35 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class VillagePastStyledPiecesUA
 {
-	private static final IVillagerType[] VILLAGER_SKIN_ENUM = { IVillagerType.PLAINS, IVillagerType.DESERT, IVillagerType.SAVANNA, IVillagerType.TAIGA, IVillagerType.SNOW, IVillagerType.SWAMP, IVillagerType.JUNGLE, IVillagerType.TAIGA, IVillagerType.JUNGLE, IVillagerType.TAIGA, IVillagerType.DESERT, IVillagerType.SNOW, };
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
+	private static final IVillagerType[] VILLAGER_TYPE_ENUM = { 
+		IVillagerType.PLAINS, 
+		IVillagerType.DESERT, 
+		IVillagerType.SAVANNA, 
+		IVillagerType.TAIGA, 
+		IVillagerType.SNOW, 
+		IVillagerType.SWAMP, 
+		IVillagerType.JUNGLE, 
+		IVillagerType.TAIGA, 
+		IVillagerType.JUNGLE, 
+		IVillagerType.TAIGA, 
+		IVillagerType.DESERT, 
+		IVillagerType.SNOW, };
 
 
 	public static List<PieceWeightUA> getStructureVillageWeightedPieceList(Random random, int size)
@@ -2062,7 +2090,7 @@ public class VillagePastStyledPiecesUA
 						VillagerEntity entityvillager = EntityType.VILLAGER.create(world.getWorld());
 						entityvillager.setLocationAndAngles(j + 0.5D, k, l + 0.5D, 0.0F, 0.0F);
 						entityvillager.onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entityvillager)), SpawnReason.STRUCTURE, (ILivingEntityData) null, (CompoundNBT) null);
-						entityvillager.setVillagerData(new VillagerData(VILLAGER_SKIN_ENUM[this.structureType.ordinal()], VillagerProfession.NONE, 1));
+						entityvillager.setVillagerData(new VillagerData(VILLAGER_TYPE_ENUM[this.structureType.ordinal()], VillagerProfession.NONE, 1));
 						world.addEntity(entityvillager);
 					}
 				}

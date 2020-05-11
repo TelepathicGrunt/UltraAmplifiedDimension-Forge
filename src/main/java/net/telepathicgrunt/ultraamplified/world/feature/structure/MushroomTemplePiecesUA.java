@@ -29,6 +29,22 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class MushroomTemplePiecesUA
 {
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	private static final ResourceLocation MUSHROOM_TEMPLE = new ResourceLocation(UltraAmplified.MODID + ":mushroom_temple");
 	private static final Map<ResourceLocation, BlockPos> OFFSET1 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(0, 4, 0));
 	private static final Map<ResourceLocation, BlockPos> OFFSET2 = ImmutableMap.of(MUSHROOM_TEMPLE, new BlockPos(-8, -1, -8));

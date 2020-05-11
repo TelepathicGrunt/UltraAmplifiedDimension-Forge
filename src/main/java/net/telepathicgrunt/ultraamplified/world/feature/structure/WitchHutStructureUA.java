@@ -28,7 +28,22 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class WitchHutStructureUA extends Structure<NoFeatureConfig>
 {
-
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	private static final List<Biome.SpawnListEntry> WITCH_HUT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.WITCH, 1, 1, 1));
 	private static final List<Biome.SpawnListEntry> WITCH_HUT_PASSIVE = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.CAT, 1, 1, 1));
 

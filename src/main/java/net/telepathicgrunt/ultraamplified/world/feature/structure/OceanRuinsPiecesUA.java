@@ -45,24 +45,92 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class OceanRuinsPiecesUA
 {
-	private static final ResourceLocation[] WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/warm_1"), new ResourceLocation("underwater_ruin/warm_2"), new ResourceLocation("underwater_ruin/warm_3"), new ResourceLocation("underwater_ruin/warm_4"), new ResourceLocation("underwater_ruin/warm_5"), new ResourceLocation("underwater_ruin/warm_6"), new ResourceLocation("underwater_ruin/warm_7"), new ResourceLocation("underwater_ruin/warm_8") };
-	private static final ResourceLocation[] BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/brick_1"), new ResourceLocation("underwater_ruin/brick_2"), new ResourceLocation("underwater_ruin/brick_3"), new ResourceLocation("underwater_ruin/brick_4"), new ResourceLocation("underwater_ruin/brick_5"), new ResourceLocation("underwater_ruin/brick_6"), new ResourceLocation("underwater_ruin/brick_7"), new ResourceLocation("underwater_ruin/brick_8") };
-	private static final ResourceLocation[] CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/cracked_1"), new ResourceLocation("underwater_ruin/cracked_2"), new ResourceLocation("underwater_ruin/cracked_3"), new ResourceLocation("underwater_ruin/cracked_4"), new ResourceLocation("underwater_ruin/cracked_5"), new ResourceLocation("underwater_ruin/cracked_6"), new ResourceLocation("underwater_ruin/cracked_7"), new ResourceLocation("underwater_ruin/cracked_8") };
-	private static final ResourceLocation[] MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/mossy_1"), new ResourceLocation("underwater_ruin/mossy_2"), new ResourceLocation("underwater_ruin/mossy_3"), new ResourceLocation("underwater_ruin/mossy_4"), new ResourceLocation("underwater_ruin/mossy_5"), new ResourceLocation("underwater_ruin/mossy_6"), new ResourceLocation("underwater_ruin/mossy_7"), new ResourceLocation("underwater_ruin/mossy_8") };
-	private static final ResourceLocation[] BIG_BRICK_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_brick_1"), new ResourceLocation("underwater_ruin/big_brick_2"), new ResourceLocation("underwater_ruin/big_brick_3"), new ResourceLocation("underwater_ruin/big_brick_8") };
-	private static final ResourceLocation[] BIG_MOSSY_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_mossy_1"), new ResourceLocation("underwater_ruin/big_mossy_2"), new ResourceLocation("underwater_ruin/big_mossy_3"), new ResourceLocation("underwater_ruin/big_mossy_8") };
-	private static final ResourceLocation[] BIG_CRACKED_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_cracked_1"), new ResourceLocation("underwater_ruin/big_cracked_2"), new ResourceLocation("underwater_ruin/big_cracked_3"), new ResourceLocation("underwater_ruin/big_cracked_8") };
-	private static final ResourceLocation[] BIG_WARM_RUINS = new ResourceLocation[] { new ResourceLocation("underwater_ruin/big_warm_4"), new ResourceLocation("underwater_ruin/big_warm_5"), new ResourceLocation("underwater_ruin/big_warm_6"), new ResourceLocation("underwater_ruin/big_warm_7") };
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
+	private static final ResourceLocation[] WARM_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/warm_1"), 
+		new ResourceLocation("underwater_ruin/warm_2"), 
+		new ResourceLocation("underwater_ruin/warm_3"), 
+		new ResourceLocation("underwater_ruin/warm_4"), 
+		new ResourceLocation("underwater_ruin/warm_5"), 
+		new ResourceLocation("underwater_ruin/warm_6"), 
+		new ResourceLocation("underwater_ruin/warm_7"), 
+		new ResourceLocation("underwater_ruin/warm_8") };
+	
+	private static final ResourceLocation[] BRICK_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/brick_1"), 
+		new ResourceLocation("underwater_ruin/brick_2"), 
+		new ResourceLocation("underwater_ruin/brick_3"), 
+		new ResourceLocation("underwater_ruin/brick_4"), 
+		new ResourceLocation("underwater_ruin/brick_5"), 
+		new ResourceLocation("underwater_ruin/brick_6"), 
+		new ResourceLocation("underwater_ruin/brick_7"), 
+		new ResourceLocation("underwater_ruin/brick_8") };
+	
+	private static final ResourceLocation[] CRACKED_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/cracked_1"), 
+		new ResourceLocation("underwater_ruin/cracked_2"), 
+		new ResourceLocation("underwater_ruin/cracked_3"), 
+		new ResourceLocation("underwater_ruin/cracked_4"), 
+		new ResourceLocation("underwater_ruin/cracked_5"), 
+		new ResourceLocation("underwater_ruin/cracked_6"), 
+		new ResourceLocation("underwater_ruin/cracked_7"), 
+		new ResourceLocation("underwater_ruin/cracked_8") };
+	
+	private static final ResourceLocation[] MOSSY_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/mossy_1"), 
+		new ResourceLocation("underwater_ruin/mossy_2"), 
+		new ResourceLocation("underwater_ruin/mossy_3"), 
+		new ResourceLocation("underwater_ruin/mossy_4"), 
+		new ResourceLocation("underwater_ruin/mossy_5"), 
+		new ResourceLocation("underwater_ruin/mossy_6"), 
+		new ResourceLocation("underwater_ruin/mossy_7"), 
+		new ResourceLocation("underwater_ruin/mossy_8") };
+	
+	private static final ResourceLocation[] BIG_BRICK_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/big_brick_1"), 
+		new ResourceLocation("underwater_ruin/big_brick_2"), 
+		new ResourceLocation("underwater_ruin/big_brick_3"), 
+		new ResourceLocation("underwater_ruin/big_brick_8") };
+	
+	private static final ResourceLocation[] BIG_MOSSY_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/big_mossy_1"), 
+		new ResourceLocation("underwater_ruin/big_mossy_2"), 
+		new ResourceLocation("underwater_ruin/big_mossy_3"), 
+		new ResourceLocation("underwater_ruin/big_mossy_8") };
+	
+	private static final ResourceLocation[] BIG_CRACKED_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/big_cracked_1"), 
+		new ResourceLocation("underwater_ruin/big_cracked_2"), 
+		new ResourceLocation("underwater_ruin/big_cracked_3"), 
+		new ResourceLocation("underwater_ruin/big_cracked_8") };
+	
+	private static final ResourceLocation[] BIG_WARM_RUINS = new ResourceLocation[] { 
+		new ResourceLocation("underwater_ruin/big_warm_4"), 
+		new ResourceLocation("underwater_ruin/big_warm_5"), 
+		new ResourceLocation("underwater_ruin/big_warm_6"), 
+		new ResourceLocation("underwater_ruin/big_warm_7") };
 
 
-	private static ResourceLocation getSmallRuins(Random random)
-	{
+	private static ResourceLocation getSmallRuins(Random random){
 		return WARM_RUINS[random.nextInt(WARM_RUINS.length)];
 	}
 
-
-	private static ResourceLocation getLargeRuins(Random random)
-	{
+	private static ResourceLocation getLargeRuins(Random random){
 		return BIG_WARM_RUINS[random.nextInt(BIG_WARM_RUINS.length)];
 	}
 

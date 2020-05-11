@@ -38,6 +38,22 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class StrongholdPiecesUA
 {
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
 	private static final StrongholdPiecesUA.PieceWeight[] PIECE_WEIGHTS = new StrongholdPiecesUA.PieceWeight[] { 
 			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Straight.class, 40, 0), 
 			new StrongholdPiecesUA.PieceWeight(StrongholdPiecesUA.Prison.class, 5, 8), 

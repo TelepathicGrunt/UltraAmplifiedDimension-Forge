@@ -26,12 +26,30 @@ import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 
 public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 {
+    /**
+     * --------------------------------------------------------------------------
+     * |									|
+     * |	HELLO READERS! IF YOU'RE HERE, YOU'RE PROBABLY			|
+     * |	LOOKING FOR A TUTORIAL ON HOW TO DO STRUCTURES			|
+     * |									|
+     * -------------------------------------------------------------------------
+     * 
+     * Don't worry, I actually have a structure tutorial
+     * mod already setup for you to check out! It's full
+     * of comments on what does what and how to make structures.
+     * 
+     * Here's the link! https://github.com/TelepathicGrunt/StructureTutorialMod
+     * 
+     * Good luck and have fun modding!
+     */
+   
+    	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = 
+    		Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
+
 	public OceanMonumentStructureUA(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i51427_1_)
 	{
 		super(p_i51427_1_);
 	}
-
-	private static final List<Biome.SpawnListEntry> MONUMENT_ENEMIES = Lists.newArrayList(new Biome.SpawnListEntry(EntityType.GUARDIAN, 1, 2, 4));
 
 
 	@Override
@@ -66,7 +84,8 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomes(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (UltraAmplified.UAConfig.oceanMonumentSpawnrate.get() != 101 && chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
+				if (UltraAmplified.UAConfig.oceanMonumentSpawnrate.get() != 101 && 
+					chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
 				{
 					return true;
 				}
