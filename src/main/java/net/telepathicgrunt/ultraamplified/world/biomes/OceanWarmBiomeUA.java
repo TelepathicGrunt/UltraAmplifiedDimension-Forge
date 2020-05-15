@@ -39,7 +39,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeCo
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 
@@ -52,7 +51,7 @@ public class OceanWarmBiomeUA extends UABiome
 
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.OCEAN)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.OCEAN_RUIN.withConfiguration(new OceanRuinConfig(OceanRuinStructure.Type.WARM, 0.3F, 0.9F)));
 		this.addStructure(UAFeatures.OCEAN_MONUMENT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(Feature.BURIED_TREASURE.withConfiguration(new BuriedTreasureConfig(0.05F)));

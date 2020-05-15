@@ -38,7 +38,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAnd
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 
@@ -50,7 +49,7 @@ public class ShatteredSavannaTerraceBiomeUA extends UABiome
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.SHATTERED_SAVANNA_SURFACE_BUILDER_UA, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.SAVANNA).depth(1.05F).scale(1.2125001F).temperature(1.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent("savanna_plateau"));
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.SAVANNA)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.CAVE_CAVITY_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.RAVINE_CARVER, new ProbabilityConfig(0f)));
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(UACarvers.LONG_RAVINE_CARVER, new ProbabilityConfig(0f)));

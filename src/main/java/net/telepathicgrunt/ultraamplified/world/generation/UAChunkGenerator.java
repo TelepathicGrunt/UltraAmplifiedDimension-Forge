@@ -2,6 +2,7 @@ package net.telepathicgrunt.ultraamplified.world.generation;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
@@ -21,8 +22,9 @@ import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressNetherStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressPiecesUA;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStoneStructureUA;
 import net.telepathicgrunt.ultraamplified.world.spawner.UACatSpawner;
 
 
@@ -163,7 +165,9 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos)
 	{
-		if (UAFeatures.WITCH_HUT.func_202383_b(this.world, pos))
+	    	Block belowBlock = this.world.getBlockState(pos.down()).getBlock();
+
+	    	if (UAFeatures.WITCH_HUT.func_202383_b(this.world, pos))
 		{
 			//Witch Hut entity spawning
 			if (creatureType == EntityClassification.MONSTER)
@@ -183,27 +187,27 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 			//fortress into another type manually and get the other fortress's spawning entities.
 
 			//Stone Fortress entity spawning
-			if (FortressPiecesUA.STONE_FORTRESS_BLOCKS.contains(this.world.getBlockState(pos.down()).getBlock()))
+			if (FortressPiecesUA.STONE_FORTRESS_BLOCKS.contains(belowBlock))
 			{
-				if (UAFeatures.FORTRESS.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.STONE_FORTRESS.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS).getStoneFortressSpawnList();
+					return ((FortressStoneStructureUA) UAFeatures.STONE_FORTRESS).getStoneFortressSpawnList();
 				}
-				if (UAFeatures.FORTRESS.isPositionInStructure(this.world, pos))
+				if (UAFeatures.STONE_FORTRESS.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS).getStoneFortressSpawnList();
+					return ((FortressStoneStructureUA) UAFeatures.STONE_FORTRESS).getStoneFortressSpawnList();
 				}
 			}
 			//Nether Fortress entity spawning
-			else if (this.world.getBlockState(pos.down()).getBlock() == Blocks.NETHER_BRICKS)
+			else if (belowBlock == Blocks.NETHER_BRICKS)
 			{
-				if (UAFeatures.FORTRESS.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.STONE_FORTRESS.isPositionInsideStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS).getNetherFortressSpawnList();
+					return ((FortressNetherStructureUA) UAFeatures.NETHER_FORTRESS).getNetherFortressSpawnList();
 				}
-				if (UAFeatures.FORTRESS.isPositionInStructure(this.world, pos))
+				if (UAFeatures.STONE_FORTRESS.isPositionInStructure(this.world, pos))
 				{
-					return ((FortressStructureUA) UAFeatures.FORTRESS).getNetherFortressSpawnList();
+					return ((FortressNetherStructureUA) UAFeatures.NETHER_FORTRESS).getNetherFortressSpawnList();
 				}
 			}
 
@@ -220,7 +224,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 			}
 
 			//End City entity spawning
-			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
+			if (belowBlock == Blocks.PURPUR_BLOCK)
 			{
 				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{
@@ -235,7 +239,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 		else if (creatureType == EntityClassification.CREATURE)
 		{
 			//End City entity spawning
-			if (this.world.getBlockState(pos.down()).getBlock() == Blocks.PURPUR_BLOCK)
+			if (belowBlock == Blocks.PURPUR_BLOCK)
 			{
 				if (UAFeatures.END_CITY.isPositionInStructure(this.world, pos))
 				{

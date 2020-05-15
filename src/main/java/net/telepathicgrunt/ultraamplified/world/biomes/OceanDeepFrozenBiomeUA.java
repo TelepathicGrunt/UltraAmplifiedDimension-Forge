@@ -36,7 +36,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeCo
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndHeightConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 
@@ -52,7 +51,7 @@ public class OceanDeepFrozenBiomeUA extends UABiome
 
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.OCEAN)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.SHIPWRECK.withConfiguration(new ShipwreckConfig(false)));
 		this.addStructure(UAFeatures.OCEAN_MONUMENT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.MARKED_TREASURE_CHEST.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(UAPlacements.FIXED_HEIGHT_WITH_CHANCE.configure(new PercentageAndHeightConfig(0.025f, 64))));

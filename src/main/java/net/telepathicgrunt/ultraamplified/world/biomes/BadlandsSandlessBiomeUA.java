@@ -38,7 +38,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAnd
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
@@ -52,7 +51,7 @@ public class BadlandsSandlessBiomeUA extends UABiome
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.BADLANDS, UASurfaceBuilders.RED_TERRACOTTA_WHITE_TERRACOTTA_GRAVEL_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.MESA).depth(1.5F).scale(0.025F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String) null));
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.MESA)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.VILLAGE.withConfiguration(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.BADLANDS)));
 		this.addStructureFeaturesUA();
 

@@ -22,7 +22,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
 import net.telepathicgrunt.ultraamplified.world.feature.carver.UACarvers;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
@@ -36,7 +35,7 @@ public class IcedTerrainBiomeUA extends UABiome
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(UASurfaceBuilders.ICED_TERRAIN_SURFACE_BUILDER, UASurfaceBuilders.SNOWBLOCK_ICE_ICE_SURFACE)).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.45F).scale(0.3F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent((String) null));
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.ICEY)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.IGLOO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.VILLAGE.withConfiguration(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.ICY)));
 		this.addStructureFeaturesUA();

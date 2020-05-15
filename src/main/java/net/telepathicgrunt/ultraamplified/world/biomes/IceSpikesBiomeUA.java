@@ -38,7 +38,6 @@ import net.telepathicgrunt.ultraamplified.world.feature.config.LakeCountRangeAnd
 import net.telepathicgrunt.ultraamplified.world.feature.config.LapisCountRangeConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.PercentageAndFrequencyConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.placement.UAPlacements;
-import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftConfigUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.MineshaftStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.VillageConfigUA;
@@ -52,7 +51,7 @@ public class IceSpikesBiomeUA extends UABiome
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.GRAVEL.getDefaultState()))).precipitation(Biome.RainType.SNOW).category(Biome.Category.ICY).depth(0.425F).scale(0.45F).temperature(0.0F).downfall(0.5F).waterColor(13172735).waterFogColor(13172735).parent("snowy_tundra"));
 		this.addStructure(UAFeatures.MINESHAFT.withConfiguration(new MineshaftConfigUA(MineshaftStructureUA.Type.ICEY)));
 		this.addStructure(UAFeatures.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(UAFeatures.FORTRESS.withConfiguration(new FortressConfigUA(false)));
+		this.addStructure(UAFeatures.STONE_FORTRESS.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.IGLOO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.ICE_SPIKE_TEMPLE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 		this.addStructure(UAFeatures.VILLAGE.withConfiguration(new VillageConfigUA(0, VillagePastStyledPiecesUA.Type.ICY)));

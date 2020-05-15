@@ -64,8 +64,7 @@ public class UAConfig
 		public ConfigValueListener<Boolean> allowSilverfishSpawnerStronghold;
 		public ConfigValueListener<Double> strongholdSizeSH;
 		public ConfigValueListener<Integer> netherFortressSpawnrate;
-		public ConfigValueListener<Boolean> netherFortressAboveground;
-		public ConfigValueListener<Boolean> netherFortressUnderground;
+		public ConfigValueListener<Integer> stoneFortressSpawnrate;
 		public ConfigValueListener<Boolean> allowSilverfishSpawnerFortress;
 		public ConfigValueListener<Boolean> allowNaturalSilverfishFortress;
 		public ConfigValueListener<Integer> endCitySpawnrate;
@@ -600,26 +599,26 @@ public class UAConfig
 					
 					builder.pop();
 		
-					builder.push("Nether/Stone Fortress");
+					builder.push("Nether Fortress");
 			
 						netherFortressSpawnrate = subscriber.subscribe(builder
-				                .comment("\r\n How rare are Nether/Stone Fortresses." 
-				                		+ "\n " 
-				                		+ "1 for spawning in most chunks and 101 for no spawn.")
+				                .comment("\r\n How rare are Nether Fortresses that spawn "
+				                	+"\r\n aboveground in the Netherland biome (between y = 85 and 130)." 
+				                	+ "\n " 
+				                	+ "1 for spawning in most chunks and 101 for no spawn.")
 				                .translation("ultraamplified.config.structure.netherfortressspawnrate")
-				                .defineInRange("netherFortressSpawnrate", 14, 1, 101));
+				                .defineInRange("netherFortressSpawnrate", 6, 1, 101));
 			
-						netherFortressAboveground = subscriber.subscribe(builder
-				                .comment("\r\n Can Nether Fortresses spawn aboveground in the Netherland biome (between y = 85 and 130)")
-				                .translation("ultraamplified.config.structure.netherfortressaboveground")
-				                .define("netherFortressAboveground", true));
+					builder.pop();
+		
+					builder.push("Stone Fortress");
 			
-						netherFortressUnderground = subscriber.subscribe(builder
-				                .comment("\r\n Can stone-styled Nether Fortresses spawn underground or not (below y = 60)" 
-				                		+ "\n " 
-				                		+ "(Stone Fortresses spawn underground in all biomes except End biome)")
-				                .translation("ultraamplified.config.structure.netherfortressunderground")
-				                .define("netherFortressUnderground", true));
+						stoneFortressSpawnrate = subscriber.subscribe(builder
+				                .comment("\r\n How rare are Stone Fortresses that spawn underground (below y = 65)." 
+				                	+ "\n " 
+				                	+ "1 for spawning in most chunks and 101 for no spawn.")
+				                .translation("ultraamplified.config.structure.stonefortressspawnrate")
+				                .defineInRange("stoneFortressSpawnrate", 14, 1, 101));
 			
 						allowSilverfishSpawnerFortress = subscriber.subscribe(builder
 				                .comment("\r\n Can Silverfish Mob Spawners generate in Stone Fortresses?")
