@@ -19,7 +19,7 @@ public class UAConfig
 		public ConfigValueListener<Boolean> importModdedFeatures;
 		public ConfigValueListener<Boolean> importModdedStructure;
 		public ConfigValueListener<Boolean> importModdedMobs;
-		public ConfigValueListener<Boolean> importModdedBiomes;
+		public ConfigValueListener<Boolean> importOverworldModdedBiomes;
 		public ConfigValueListener<Boolean> importAllModdedBiomes;
 		public ConfigValueListener<String> blacklistedBiomeList;
 		public ConfigValueListener<String> blacklistedStructureList;
@@ -156,7 +156,7 @@ public class UAConfig
 		                .translation("ultraamplified.config.compatibility.importmoddedmobs")
 		                .define("importModdedMobs", false));
 	
-				importModdedBiomes = subscriber.subscribe(builder
+				importOverworldModdedBiomes = subscriber.subscribe(builder
 		                .comment("\r\n Attempt to add modded biomes from Overworld into Ultra Amplified dimension. (or into Overworld in Ultra Amplified worldtype)\r\n " 
 		                		+ "Only works if other mod added the biome to the BiomeDictionary with the BiomeType of DESERT, WARM, COOL, or ICY type.")
 		                .translation("ultraamplified.config.compatibility.importmoddedbiomes")
