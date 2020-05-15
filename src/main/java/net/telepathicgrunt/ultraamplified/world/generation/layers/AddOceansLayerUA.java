@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
-import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -19,21 +19,19 @@ public class AddOceansLayerUA implements IAreaTransformer0
 
 	public AddOceansLayerUA()
 	{
+	    
+	}
+	
+	
+	public static void syncOceanList() {
 		oceanList = new ArrayList<Integer>();
-
-		if (UltraAmplified.UAConfig.warmOcean.get())
-			oceanList.add(BiomeGenHelper.WARM_OCEAN);
-		if (UltraAmplified.UAConfig.lukewarmOcean.get())
-			oceanList.add(BiomeGenHelper.LUKEWARM_OCEAN);
-		if (UltraAmplified.UAConfig.ocean.get())
-			oceanList.add(BiomeGenHelper.OCEAN);
-		if (UltraAmplified.UAConfig.coldOcean.get())
-			oceanList.add(BiomeGenHelper.COLD_OCEAN);
-		if (UltraAmplified.UAConfig.frozenOcean.get())
-			oceanList.add(BiomeGenHelper.FROZEN_OCEAN);
-
+		
+		//grabs all oceans to gen and what their ID is
+		for(BiomeEntry biome : BiomeLayerSetupUA.oceanBiomesList) {
+		    oceanList.add(BiomeGenHelper.BiomeRegistry.getID(biome.biome));
+		}
+		
 		listSize = oceanList.size();
-
 	}
 
 

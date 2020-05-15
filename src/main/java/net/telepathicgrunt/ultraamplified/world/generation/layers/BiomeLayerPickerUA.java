@@ -30,7 +30,7 @@ public class BiomeLayerPickerUA implements IC0Transformer
 
 		int biomeValueModified = (biomeID & 3840) >> 8;
 		biomeID = biomeID & -3841;
-		if (!BiomeGenHelper.isOcean(biomeID) && biomeID != BiomeGenHelper.MUSHROOM_FIELDS)
+		if (!BiomeGenHelper.isOcean(biomeID))
 		{
 			switch (biomeID)
 			{

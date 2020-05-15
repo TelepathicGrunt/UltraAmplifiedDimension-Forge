@@ -40,6 +40,7 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayer
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerPickerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.ReduceOceansLayerUA;
 
 
 public class UABiomeProvider extends BiomeProvider
@@ -105,6 +106,7 @@ public class UABiomeProvider extends BiomeProvider
 		areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(50L), areaFactory1);
 		areaFactory1 = AddIslandLayer.INSTANCE.apply(contextFactory.apply(70L), areaFactory1);
 		areaFactory1 = RemoveTooMuchOceanLayer.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);
+		areaFactory1 = ReduceOceansLayerUA.INSTANCE.apply(contextFactory.apply(3L), areaFactory1);
 		IAreaFactory<T> areaFactory2 = new AddOceansLayerUA().apply(contextFactory.apply(2L));
 		areaFactory2 = LayerUtil.repeat(2001L, ZoomLayer.NORMAL, areaFactory2, (int) (biomeSize * 1.4), contextFactory);
 		areaFactory1 = AddSnowLayer.INSTANCE.apply(contextFactory.apply(2L), areaFactory1);

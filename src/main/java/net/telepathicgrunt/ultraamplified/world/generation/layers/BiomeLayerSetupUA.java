@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -44,6 +43,7 @@ public class BiomeLayerSetupUA
 		//precaution - default
 		setupBiomeEntries();
 		BiomeGenHelper.setBiomeEdgeMap();
+		AddOceansLayerUA.syncOceanList();
 		
 		//Setup what m variants are mapped and not
 		UABiomes.mapMBiomes();
@@ -62,6 +62,7 @@ public class BiomeLayerSetupUA
 		    	// Update what biomes are used when re-entering a world without closing Minecraft.
 			setupBiomeEntries(); 
 			BiomeGenHelper.setBiomeEdgeMap();
+			AddOceansLayerUA.syncOceanList();
 			
 			//Setup what m variants are mapped and not
 			UABiomes.mapMBiomes();
@@ -69,7 +70,6 @@ public class BiomeLayerSetupUA
 	}
 	
 
-	@SuppressWarnings("unchecked")
 	private static void setupBiomeEntries()
 	{
 		//reset lists and variables on world load 
@@ -103,7 +103,6 @@ public class BiomeLayerSetupUA
 
 		//will go through all biomes and add modded biomes that arent UA biomes to biome list
 		//will attempt to place the in right spot based on temperature
-		int index = 0;
 		if (UltraAmplified.UAConfig.importAllModdedBiomes.get())
 		{
 			for (Biome biome : ForgeRegistries.BIOMES.getValues())
@@ -153,7 +152,6 @@ public class BiomeLayerSetupUA
 					.filter(biomeEntry -> !biomeEntry.biome.getRegistryName().getNamespace().equals("minecraft"))
 					.map(biomeEntry -> biomeEntry.itemWeight < 10 ? new BiomeEntry(biomeEntry.biome, 10) : biomeEntry)
 					.collect(Collectors.toList());
-				
 				
 				
 				if (biomesInTempRange != null) {
@@ -260,11 +258,29 @@ public class BiomeLayerSetupUA
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.SPIKY_BADLANDS, 10));
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.DISSECTED_PLATEAU_BADLANDS, 10));
 		}
+		
+		
+		/* 
+		 * Ocean list will not have modded oceans as to get the UA ocean shape,
+		 * we would need to change modded biome surface builder and add a new 
+		 * feature to make it look ok which is overkill. Best to leave oceans
+		 * as UA oceans for now.
+		 **/
+		if (UltraAmplified.UAConfig.warmOcean.get())
+		    	oceanBiomesList.add(new BiomeEntry(UABiomes.WARM_OCEAN, 10));
+		if (UltraAmplified.UAConfig.lukewarmOcean.get())
+		    	oceanBiomesList.add(new BiomeEntry(UABiomes.LUKEWARM_OCEAN, 10));
+		if (UltraAmplified.UAConfig.ocean.get())
+		    	oceanBiomesList.add(new BiomeEntry(UABiomes.OCEAN, 10));
+		if (UltraAmplified.UAConfig.coldOcean.get())
+		    	oceanBiomesList.add(new BiomeEntry(UABiomes.COLD_OCEAN, 10));
+		if (UltraAmplified.UAConfig.frozenOcean.get())
+		    	oceanBiomesList.add(new BiomeEntry(UABiomes.FROZEN_OCEAN, 10));
+
 
 
 		//this is used to help fill any biome list that is empty due to player turning off all of its biome.
 		//otherwise, we will crash if a biome list is empty
-		List<BiomeEntry> temporaryBiomeList = new ArrayList<BiomeEntry>();
 		List<List<BiomeEntry>> listOfBiomeLists = new ArrayList<List<BiomeEntry>>();
 		listOfBiomeLists.add(badlandsBiomesList);
 		listOfBiomeLists.add(jungleBiomesList);

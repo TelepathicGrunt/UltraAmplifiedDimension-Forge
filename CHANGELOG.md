@@ -34,6 +34,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Fixed bug where underground lava pools could be exposed floating in caves and ravines in Netherland biome.
 
+-Cleaned up biome picker code significantly in back end and it should now do better with filling temperature regions that has no biome in it due to blacklisting or config setting.
+
+-Slightly reduced ocean size.
+
 ##### Structure:
 
 -Split Stone Fortress and Nether Fortress into two separate structures and made the Nether Fortress much more common so it can be found easier in Netherland biomes. /locate command now can distinguish between the two structure. (Also removed useless configs entries due to this split)
