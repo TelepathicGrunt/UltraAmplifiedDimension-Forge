@@ -10,7 +10,6 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -74,10 +73,8 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 					currentblock = world.getBlockState(blockpos$Mutable);
 					
 
-					// move down until we hit a water filled block
-					while ((currentblock.getFluidState().isEmpty() || 
-							!currentblock.getFluidState().isTagged(FluidTags.WATER)) && 
-							blockpos$Mutable.getY() > 10)
+					// move down until we hit a liquid filled block
+					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() > 10)
 					{
 						currentblock = world.getBlockState(blockpos$Mutable.move(Direction.DOWN));
 					}
@@ -125,60 +122,6 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 						}
 						blockpos$Mutable.move(face.getOpposite());
 					}
-					
-					
-					//old code that looks for air spot touching water
-//
-//					// move down until we hit an cave air block
-//					while (currentblock.getBlock() != Blocks.CAVE_AIR && blockpos$Mutable.getY() > 10)
-//					{
-//						currentblock = world.getBlockState(blockpos$Mutable.move(Direction.DOWN));
-//					}
-//
-//					//if too low, break and go to next xz coordinate
-//					if (blockpos$Mutable.getY() <= 10)
-//					{
-//						break;
-//					}
-//
-//					// y value is now fully set for rest of code
-//					// checks to see if we are touching a liquid block
-//					notContainedFlag = false;
-//
-//					for (Direction face : Direction.Plane.HORIZONTAL)
-//					{
-//
-//						currentblock = world.getBlockState(blockpos$Mutable.offset(face));
-//						if (!currentblock.getFluidState().isEmpty())
-//						{
-//							notContainedFlag = true;
-//						}
-//					}
-//
-//					currentblock = world.getBlockState(blockpos$Mutable.up());
-//					if (!currentblock.getFluidState().isEmpty())
-//					{
-//						notContainedFlag = true;
-//					}
-//
-//					currentblock = world.getBlockState(blockpos$Mutable.down());
-//					if (blockpos$Mutable.down().getY() > 10 && !currentblock.getFluidState().isEmpty())
-//					{
-//						notContainedFlag = true;
-//					}
-//
-//					// this air block is touching liquid, time to make it solid
-//					if (notContainedFlag)
-//					{
-//						//grabs what block to use based on what biome we are in
-//						replacementBlock = fillerBiomeMap.get(world.getBiome(blockpos$Mutable));
-//						if (replacementBlock == null)
-//						{
-//							replacementBlock = STONE;
-//						}
-//
-//						world.setBlockState(blockpos$Mutable, replacementBlock, 2);
-//					}
 				}
 			}
 		}

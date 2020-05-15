@@ -30,6 +30,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ## (V.8.0.0 Changes) (1.15.2 Minecraft)
 
+##### Biomes:
+
+-Fixed bug where underground lava pools could be exposed floating in caves and ravines in Netherland biome.
+
 ##### Structure:
 
 -Split Stone Fortress and Nether Fortress into two separate structures and made the Nether Fortress much more common so it can be found easier in Netherland biomes. /locate command now can distinguish between the two structure. (Also removed useless configs entries due to this split)
