@@ -37,6 +37,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ##### Structure:
 
 -Split Stone Fortress and Nether Fortress into two separate structures and made the Nether Fortress much more common so it can be found easier in Netherland biomes. /locate command now can distinguish between the two structure. (Also removed useless configs entries due to this split)
+
+-Fix issue with roots decreasing Hanging Ruins' spawnrate. Now Hanging Ruins will ignore roots when looking for the flat parts of the underside of ledges.
  
 ##### Misc: 
 

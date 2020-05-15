@@ -5,6 +5,8 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +47,17 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position);
 		BlockPos.Mutable offset = new BlockPos.Mutable();
 
+		//move through roots to the actual bottom of ledges
+		BlockState currentBlock = world.getBlockState(blockpos$Mutable);
+		while((BlockTags.LOGS.contains(currentBlock.getBlock()) || !currentBlock.isSolid()) && 
+			blockpos$Mutable.getY() < world.getMaxHeight()) 
+		{
+		    blockpos$Mutable.move(Direction.UP);
+		    currentBlock = world.getBlockState(blockpos$Mutable);
+		}
+		
+		if(blockpos$Mutable.getY() == world.getMaxHeight()) return false;
+		
 		//makes sure there is enough solid blocks on ledge to hold this feature.
 		for (int x = -5; x <= 5; x++)
 		{
