@@ -1,12 +1,7 @@
 package net.telepathicgrunt.ultraamplified.world.generation;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.SharedSeedRandom;
@@ -26,6 +21,7 @@ import net.minecraft.world.spawner.PhantomSpawner;
 import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
 import net.telepathicgrunt.ultraamplified.world.feature.UAFeatures;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressPiecesUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStructureUA;
 import net.telepathicgrunt.ultraamplified.world.spawner.UACatSpawner;
 
@@ -48,8 +44,6 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 	private final PhantomSpawner phantomSpawner = new PhantomSpawner();
 	private final PatrolSpawner patrolSpawner = new PatrolSpawner();
 	private final UACatSpawner catSpawner = new UACatSpawner();
-
-	protected static final Set<Block> acceptableStoneFortressBlocks = Stream.of(Blocks.CRACKED_STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.STONE_BRICKS, Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_MOSSY_STONE_BRICKS, Blocks.INFESTED_STONE_BRICKS).collect(Collectors.toCollection(HashSet::new));
 
 
 	public UAChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn)
@@ -189,7 +183,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 			//fortress into another type manually and get the other fortress's spawning entities.
 
 			//Stone Fortress entity spawning
-			if (acceptableStoneFortressBlocks.contains(this.world.getBlockState(pos.down()).getBlock()))
+			if (FortressPiecesUA.STONE_FORTRESS_BLOCKS.contains(this.world.getBlockState(pos.down()).getBlock()))
 			{
 				if (UAFeatures.FORTRESS.isPositionInsideStructure(this.world, pos))
 				{

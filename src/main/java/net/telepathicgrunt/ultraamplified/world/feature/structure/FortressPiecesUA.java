@@ -1,9 +1,13 @@
 package net.telepathicgrunt.ultraamplified.world.feature.structure;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -66,10 +70,38 @@ public class FortressPiecesUA
 		INFESTED_STONE_LOOKUP.put(Blocks.MOSSY_STONE_BRICKS.getDefaultState(), Blocks.MOSSY_STONE_BRICKS.getDefaultState());
 	}
 	
-	private static final FortressPiecesUA.PieceWeight[] PRIMARY_COMPONENTS = new FortressPiecesUA.PieceWeight[] { new FortressPiecesUA.PieceWeight(FortressPiecesUA.Straight.class, 30, 0, true), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing3.class, 10, 4), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing.class, 10, 4), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Stairs.class, 10, 3), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Throne.class, 5, 2),
-			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Entrance.class, 5, 1) };
-	private static final FortressPiecesUA.PieceWeight[] SECONDARY_COMPONENTS = new FortressPiecesUA.PieceWeight[] { new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor5.class, 25, 0, true), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing2.class, 15, 5), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor2.class, 5, 10), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor.class, 5, 10),
-			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor3.class, 10, 3, true), new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor4.class, 7, 2), new FortressPiecesUA.PieceWeight(FortressPiecesUA.NetherStalkRoom.class, 5, 2) };
+
+	public static final Set<Block> STONE_FORTRESS_BLOCKS = Stream.of(
+		Blocks.CRACKED_STONE_BRICKS, 
+		Blocks.CHISELED_STONE_BRICKS, 
+		Blocks.MOSSY_STONE_BRICKS, 
+		Blocks.STONE_BRICKS, 
+		Blocks.INFESTED_CHISELED_STONE_BRICKS, 
+		Blocks.INFESTED_CRACKED_STONE_BRICKS, 
+		Blocks.INFESTED_MOSSY_STONE_BRICKS, 
+		Blocks.INFESTED_STONE_BRICKS
+		).collect(Collectors.toCollection(HashSet::new));
+	
+	private static final FortressPiecesUA.PieceWeight[] PRIMARY_COMPONENTS = 
+		new FortressPiecesUA.PieceWeight[] { 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Straight.class, 30, 0, true), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing3.class, 10, 4), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing.class, 10, 4), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Stairs.class, 10, 3), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Throne.class, 5, 2),
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Entrance.class, 5, 1) 
+		};
+	
+	private static final FortressPiecesUA.PieceWeight[] SECONDARY_COMPONENTS = 
+		new FortressPiecesUA.PieceWeight[] { 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor5.class, 25, 0, true), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Crossing2.class, 15, 5), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor2.class, 5, 10), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor.class, 5, 10),
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor3.class, 10, 3, true), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.Corridor4.class, 7, 2), 
+			new FortressPiecesUA.PieceWeight(FortressPiecesUA.NetherStalkRoom.class, 5, 2) 
+		};
 
 
 	private static FortressPiecesUA.Piece findAndCreateBridgePieceFactory(FortressPiecesUA.PieceWeight p_175887_0_, List<StructurePiece> p_175887_1_, Random p_175887_2_, int p_175887_3_, int p_175887_4_, int p_175887_5_, Direction p_175887_6_, int p_175887_7_, boolean isStone)
