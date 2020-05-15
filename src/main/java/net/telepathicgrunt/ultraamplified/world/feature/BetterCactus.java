@@ -123,7 +123,7 @@ public class BetterCactus extends Feature<NoFeatureConfig>
 		}
 
 		//upward part of branch
-		for (int currentHeight = 1; currentHeight < maxHeightUp && position.up(currentHeight).getY() <= 255; currentHeight++)
+		for (int currentHeight = 1; currentHeight < maxHeightUp && position.up(currentHeight).getY() <= world.getMaxHeight(); currentHeight++)
 		{
 			if (world.isAirBlock(position.up(currentHeight)))
 			{

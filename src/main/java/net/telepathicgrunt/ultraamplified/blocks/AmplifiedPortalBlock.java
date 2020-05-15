@@ -153,7 +153,7 @@ public class AmplifiedPortalBlock extends Block
 				BlockPos worldOriginBlockPos = new BlockPos(10, 0, 8);
 				playerChunkPos = new ChunkPos(worldOriginBlockPos);
 
-				int portalY = 255;
+				int portalY = world.getMaxHeight();
 
 				//finds where portal block is
 				while (portalY > 0)
@@ -197,7 +197,7 @@ public class AmplifiedPortalBlock extends Block
 					if (!validSpaceFound)
 					{
 						//no valid space found around portal. get top solid block instead
-						worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, 255, 8));
+						worldOriginBlockPos = serverworld.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(10, world.getMaxHeight(), 8));
 					}
 
 					playerVec3Pos = new Vec3d(worldOriginBlockPos).add(0.5D, 0.2D, 0.5D); // Set where player spawns
@@ -302,7 +302,7 @@ public class AmplifiedPortalBlock extends Block
 				{
 
 					// finds the highest portal at world origin
-					BlockPos posOfHighestPortal = new BlockPos(pos.getX(), 255, pos.getZ());
+					BlockPos posOfHighestPortal = new BlockPos(pos.getX(), world.getMaxHeight(), pos.getZ());
 					while (posOfHighestPortal.getY() >= 0)
 					{
 						Block blockToCheck = world.getBlockState(posOfHighestPortal).getBlock();

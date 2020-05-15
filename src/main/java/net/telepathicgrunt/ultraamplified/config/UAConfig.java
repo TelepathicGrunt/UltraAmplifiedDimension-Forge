@@ -23,13 +23,38 @@ public class UAConfig
 		public ConfigValueListener<Boolean> importAllModdedBiomes;
 		public ConfigValueListener<String> blacklistedBiomeList;
 		public ConfigValueListener<String> blacklistedStructureList;
+		
 		public ConfigValueListener<Double> xzTerrainModifier;
 		public ConfigValueListener<Double> xzScaleModifier;
 		public ConfigValueListener<Double> yTerrainModifier;
 		public ConfigValueListener<Double> yScaleModifier;
-		public ConfigValueListener<Boolean> bedExplodes;
-		public ConfigValueListener<Boolean> forceExitToOverworld;
 		public ConfigValueListener<Integer> yMaximum;
+		public ConfigValueListener<Boolean> secretSetting;
+		
+		public ConfigValueListener<Boolean> bedExplodes;
+		public ConfigValueListener<Boolean> heavyFog;
+		public ConfigValueListener<Boolean> forceExitToOverworld;
+		public ConfigValueListener<Boolean> allowNetherPortal;
+		public ConfigValueListener<String> portalActivationItem;
+		public ConfigValueListener<String> portalCornerBlocks;
+		public ConfigValueListener<String> portalCeilingBlocks;
+		public ConfigValueListener<String> portalFloorBlocks;
+
+		public ConfigValueListener<Integer> coalOreSpawnrate;
+		public ConfigValueListener<Integer> ironOreSpawnrate;
+		public ConfigValueListener<Integer> redstoneOreSpawnrate;
+		public ConfigValueListener<Integer> lapisOreSpawnrate;
+		public ConfigValueListener<Integer> diamondOreSpawnrate;
+		public ConfigValueListener<Integer> goldOreSpawnrate;
+		public ConfigValueListener<Integer> emeraldOreSpawnrate;
+		public ConfigValueListener<Integer> silverfishSpawnrate;
+		public ConfigValueListener<Integer> quartzOreSpawnrate;
+		public ConfigValueListener<Integer> glowstoneSpawnrate;
+		public ConfigValueListener<Integer> magmaSpawnrate;
+		public ConfigValueListener<Integer> lavaSpawnrate;
+		public ConfigValueListener<Integer> glowstoneVariantsSpawnrate;
+		public ConfigValueListener<Boolean> rootGen;
+		
 		public ConfigValueListener<Integer> dungeonSpawnrate;
 		public ConfigValueListener<Integer> ravineSpawnrate;
 		public ConfigValueListener<Integer> caveCavitySpawnrate;
@@ -39,11 +64,15 @@ public class UAConfig
 		public ConfigValueListener<Boolean> slimeLakeGen;
 		public ConfigValueListener<Boolean> waterLakeGen;
 		public ConfigValueListener<Boolean> lavaLakeGen;
+		public ConfigValueListener<Integer> waterfallSpawnrate;
+		public ConfigValueListener<Integer> lavafallSpawnrate;
+		public ConfigValueListener<Integer> endIslandSpawnrate;
 		public ConfigValueListener<Boolean> chestGeneration;
 		public ConfigValueListener<Integer> sunShrineSpawnrate;
 		public ConfigValueListener<Integer> stonehengeSpawnrate;
 		public ConfigValueListener<Integer> hangingRuinsSpawnrate;
 		public ConfigValueListener<Boolean> miniStructureGeneration;
+		
 		public ConfigValueListener<Integer> villageSpawnrate;
 		public ConfigValueListener<Integer> villageZombieSpawnrate;
 		public ConfigValueListener<Integer> mineshaftSpawnrate;
@@ -69,20 +98,11 @@ public class UAConfig
 		public ConfigValueListener<Boolean> allowNaturalSilverfishFortress;
 		public ConfigValueListener<Integer> endCitySpawnrate;
 		public ConfigValueListener<Integer> pillageOutpostRarity;
-		public ConfigValueListener<Boolean> secretSetting;
-		public ConfigValueListener<Boolean> heavyFog;
-		public ConfigValueListener<String> portalActivationItem;
-		public ConfigValueListener<String> portalCornerBlocks;
-		public ConfigValueListener<String> portalCeilingBlocks;
-		public ConfigValueListener<String> portalFloorBlocks;
-		public ConfigValueListener<Boolean> allowNetherPortal;
+		
 		public ConfigValueListener<Integer> biomeSize;
 		public ConfigValueListener<Integer> mutatedBiomeSpawnrate;
 		public ConfigValueListener<Integer> seaLevel;
 		public ConfigValueListener<Boolean> lavaOcean;
-		public ConfigValueListener<Integer> waterfallSpawnrate;
-		public ConfigValueListener<Integer> lavafallSpawnrate;
-		public ConfigValueListener<Integer> endIslandSpawnrate;
 		public ConfigValueListener<Boolean> plains;
 		public ConfigValueListener<Boolean> desert;
 		public ConfigValueListener<Boolean> forest;
@@ -111,20 +131,6 @@ public class UAConfig
 		public ConfigValueListener<Boolean> ocean;
 		public ConfigValueListener<Boolean> lukewarmOcean;
 		public ConfigValueListener<Boolean> warmOcean;
-		public ConfigValueListener<Integer> coalOreSpawnrate;
-		public ConfigValueListener<Integer> ironOreSpawnrate;
-		public ConfigValueListener<Integer> redstoneOreSpawnrate;
-		public ConfigValueListener<Integer> lapisOreSpawnrate;
-		public ConfigValueListener<Integer> diamondOreSpawnrate;
-		public ConfigValueListener<Integer> goldOreSpawnrate;
-		public ConfigValueListener<Integer> emeraldOreSpawnrate;
-		public ConfigValueListener<Integer> silverfishSpawnrate;
-		public ConfigValueListener<Integer> quartzOreSpawnrate;
-		public ConfigValueListener<Integer> glowstoneSpawnrate;
-		public ConfigValueListener<Integer> magmaSpawnrate;
-		public ConfigValueListener<Integer> lavaSpawnrate;
-		public ConfigValueListener<Integer> glowstoneVariantsSpawnrate;
-		public ConfigValueListener<Boolean> rootGen;
 
 
 		public UAConfigValues(ForgeConfigSpec.Builder builder, ConfigHelper.Subscriber subscriber)
@@ -251,9 +257,10 @@ public class UAConfig
 		                .define("secretSettings", false));
 	
 				yMaximum = subscriber.subscribe(builder
-		                .comment("\r\n Maxium height the terrain can generate up to.")
+		                .comment("\r\n Maxium height the terrain can generate up to."
+		                	+"\r\n Default is 245.")
 		                .translation("ultraamplified.config.terrain.ymaximum")
-		                .defineInRange("yMaximum", 245, 100, 256));
+		                .defineInRange("yMaximum", 245, 100, 2147483646));
 	
 				xzTerrainModifier = subscriber.subscribe(builder
 		                .comment("\r\n Changes the xz terrain modifier.\n " 

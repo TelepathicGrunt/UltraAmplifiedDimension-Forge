@@ -65,13 +65,13 @@ public class Bamboo extends Feature<NoFeatureConfig>
 					}
 				}
 
-				for (int height = 0; height < maxHeight && height <= 255 && world.isAirBlock(blockpos$Mutable); ++height)
+				for (int height = 0; height < maxHeight && height <= world.getMaxHeight() && world.isAirBlock(blockpos$Mutable); ++height)
 				{
 					world.setBlockState(blockpos$Mutable, BAMBOO_DEFAULT, 2);
 					blockpos$Mutable.move(Direction.UP, 1);
 				}
 
-				if (blockpos$Mutable.getY() - pos.getY() >= 3 && blockpos$Mutable.getY() <= 255)
+				if (blockpos$Mutable.getY() - pos.getY() >= 3 && blockpos$Mutable.getY() <= world.getMaxHeight())
 				{
 					world.setBlockState(blockpos$Mutable, BAMBOO_LEAVES_LARGE_TOP, 2);
 					world.setBlockState(blockpos$Mutable.move(Direction.DOWN, 1), BAMBOO_LEAVES_LARGE, 2);

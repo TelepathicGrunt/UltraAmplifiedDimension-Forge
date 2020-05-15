@@ -72,7 +72,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(pos);
 
 		// if height is inside a non-air block, move up until we reached an air block
-		while (blockpos$Mutable.getY() < 255)
+		while (blockpos$Mutable.getY() < world.getMaxHeight())
 		{
 			if (world.isAirBlock(blockpos$Mutable))
 			{
@@ -84,7 +84,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 
 		// if height is an air block, move up until we reached a solid block. We are now
 		// on the bottom of a piece of land
-		while (blockpos$Mutable.getY() < 255)
+		while (blockpos$Mutable.getY() < world.getMaxHeight())
 		{
 			if (!world.isAirBlock(blockpos$Mutable))
 			{
@@ -94,6 +94,6 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 			blockpos$Mutable.move(Direction.UP);
 		}
 
-		return blockpos$Mutable.getY() > 255 ? 255 : blockpos$Mutable.getY();
+		return blockpos$Mutable.getY() > world.getMaxHeight() ? world.getMaxHeight() : blockpos$Mutable.getY();
 	}
 }

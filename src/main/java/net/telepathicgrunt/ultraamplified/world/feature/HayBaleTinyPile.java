@@ -84,7 +84,7 @@ public class HayBaleTinyPile extends Feature<NoFeatureConfig>
 	 */
 	private boolean isBlockNormalCube(IWorld world, BlockPos pos, boolean _default)
 	{
-		if (pos.getY() > 255)
+		if (pos.getY() > world.getMaxHeight())
 		{
 			return false;
 		}

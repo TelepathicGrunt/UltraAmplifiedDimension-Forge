@@ -39,7 +39,7 @@ public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>
 		}
 
 		//gets y value of a layer below top layer
-		int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, 255, 75, pos.add(x, 0, z)); //Finds top layer
+		int yPosOfSurface = PlacingUtils.topOfSurfaceBelowHeight(world, world.getMaxHeight(), 75, pos.add(x, 0, z)); //Finds top layer
 		int height = random.nextInt(yPosOfSurface - 74) + 75;
 		height = PlacingUtils.topOfSurfaceBelowHeight(world, height, 74, pos.add(x, 0, z));
 

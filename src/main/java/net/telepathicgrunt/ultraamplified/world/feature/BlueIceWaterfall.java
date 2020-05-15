@@ -152,7 +152,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig>
 						{
 							if (x * x + z * z <= width * width)
 							{
-								if (y > 1 && y < 255)
+								if (y > 1 && y < world.getMaxHeight())
 								{
 
 									BlockPos blockpos = new BlockPos(x + blockpos$Mutable.getX(), y, z + blockpos$Mutable.getZ());

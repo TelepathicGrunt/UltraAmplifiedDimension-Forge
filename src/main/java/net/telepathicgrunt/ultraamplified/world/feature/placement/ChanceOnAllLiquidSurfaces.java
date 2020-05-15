@@ -38,7 +38,7 @@ public class ChanceOnAllLiquidSurfaces extends Placement<PercentageAndFrequencyC
 		for (int i = 0; i < pfConfig.frequency; i++)
 		{
 
-			blockpos$Mutable.setPos(0, 255, 0);
+			blockpos$Mutable.setPos(0, world.getMaxHeight(), 0);
 
 			while (blockpos$Mutable.getY() > lowestHeight)
 			{

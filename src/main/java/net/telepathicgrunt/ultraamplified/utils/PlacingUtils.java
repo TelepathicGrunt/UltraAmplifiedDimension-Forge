@@ -83,7 +83,7 @@ public class PlacingUtils
 			blockpos$Mutable.move(Direction.UP);
 		}
 
-		return blockpos$Mutable.getY() > 255 ? 255 : blockpos$Mutable.getY();
+		return blockpos$Mutable.getY() > world.getMaxHeight() ? world.getMaxHeight() : blockpos$Mutable.getY();
 	}
 
 

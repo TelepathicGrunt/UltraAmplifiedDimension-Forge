@@ -117,7 +117,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig>
 						world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
 
 						//recursively moves up and breaks floating sugar cane
-						while (blockpos$Mutable.getY() < 255 && world.getBlockState(blockpos$Mutable.move(Direction.UP)) == Blocks.SUGAR_CANE.getDefaultState())
+						while (blockpos$Mutable.getY() < world.getMaxHeight() && world.getBlockState(blockpos$Mutable.move(Direction.UP)) == Blocks.SUGAR_CANE.getDefaultState())
 						{
 							world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
 						}

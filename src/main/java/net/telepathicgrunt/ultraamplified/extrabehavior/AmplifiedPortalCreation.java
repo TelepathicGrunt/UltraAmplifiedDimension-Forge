@@ -79,15 +79,11 @@ public class AmplifiedPortalCreation
 	// ------------------------------------------------------------------------------------//
 	// Portal creation and validation check
 
-	private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
-	private static final BlockState POLISHED_DIORITE = Blocks.POLISHED_DIORITE.getDefaultState();
-	private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
-	private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
-
+	private static final Block POLISHED_DIORITE = Blocks.POLISHED_DIORITE;
 
 	public static boolean checkForGeneratedPortal(IWorld worldUA)
 	{
-		BlockPos pos = new BlockPos(8, 255, 8);
+		BlockPos pos = new BlockPos(8, worldUA.getMaxHeight(), 8);
 		worldUA.getChunk(pos);
 
 		while (pos.getY() >= 0)
@@ -106,7 +102,7 @@ public class AmplifiedPortalCreation
 	public static void generatePortal(IWorld worldUA)
 	{
 		AmplifiedPortalFrame amplifiedportalfeature = new AmplifiedPortalFrame();
-		BlockPos pos = new BlockPos(8, 255, 8);
+		BlockPos pos = new BlockPos(8, worldUA.getMaxHeight(), 8);
 		worldUA.getChunk(pos);
 
 		pos = worldUA.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
@@ -128,86 +124,53 @@ public class AmplifiedPortalCreation
 		ForgeRegistry<Block> registry = ((ForgeRegistry<Block>) ForgeRegistries.BLOCKS);
 
 		// Grabs resourcelocation from config and tries to find that block to use for corners
-		// Doesn't need to be Blockstate as Polished Granite has only 1 state anyway
 		Block blockCorner;
-		//TODO:remove outter if statement in 1.16
-		if (!UltraAmplified.UAConfig.portalCornerBlocks.get().equals(""))
-		{
-			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get())))
-			{
-				blockCorner = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get()));
-			}
-			else
-			{
-				if (entity instanceof ServerPlayerEntity)
-				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame corner config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCornerBlocks.get());
-					entity.sendMessage(message);
-				}
-
-				return false;
-			}
+		if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get()))) {
+		    blockCorner = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCornerBlocks.get()));
 		}
-		else
-		{
-			blockCorner = POLISHED_GRANITE.getBlock();
+		else {
+		    if (entity instanceof ServerPlayerEntity) {
+			ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame corner config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCornerBlocks.get());
+			entity.sendMessage(message);
+		    }
+
+		    return false;
 		}
 
 		//grabs resourcelocation from config and tries to find that block to use for ceiling
 		BlockState blockCeiling;
-		//TODO:remove outter if statement in 1.16
-		if (!UltraAmplified.UAConfig.portalCeilingBlocks.get().equals(""))
-		{
-			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())))
-			{
-				blockCeiling = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())).getDefaultState();
-				if(blockCeiling.getBlock() instanceof SlabBlock){
-					blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
-				}
-			}
-			else
-			{
-				if (entity instanceof ServerPlayerEntity)
-				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame ceiling config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCeilingBlocks.get());
-					entity.sendMessage(message);
-				}
-
-				return false;
-			}
+		if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get()))) {
+		    blockCeiling = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalCeilingBlocks.get())).getDefaultState();
+		    if (blockCeiling.getBlock() instanceof SlabBlock) {
+			blockCeiling = blockCeiling.with(SlabBlock.TYPE, SlabType.TOP);
+		    }
 		}
-		else
-		{
-			blockCeiling = POLISHED_ANDESITE_SLAB_TOP;
+		else {
+		    if (entity instanceof ServerPlayerEntity) {
+			ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was put in the portal frame ceiling config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalCeilingBlocks.get());
+			entity.sendMessage(message);
+		    }
+
+		    return false;
 		}
 
 		//grabs resourcelocation from config and tries to find that block to use for floor
 		BlockState blockFloor;
-		//TODO:remove outter if statement in 1.16
-		if (!UltraAmplified.UAConfig.portalFloorBlocks.get().equals(""))
-		{
-			if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())))
-			{
-				blockFloor = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())).getDefaultState();
-				if(blockFloor.getBlock() instanceof SlabBlock) {
-					blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
-				}
-			}
-			else
-			{
-				if (entity instanceof ServerPlayerEntity)
-				{
-					ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame floor config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalFloorBlocks.get());
-					entity.sendMessage(message);
-				}
+		if (registry.containsKey(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get()))) {
+		    blockFloor = registry.getValue(new ResourceLocation(UltraAmplified.UAConfig.portalFloorBlocks.get())).getDefaultState();
+		    if (blockFloor.getBlock() instanceof SlabBlock) {
+			blockFloor = blockFloor.with(SlabBlock.TYPE, SlabType.BOTTOM);
+		    }
+		}
+		else {
+		    if (entity instanceof ServerPlayerEntity) {
+			ITextComponent message = new StringTextComponent("§eUltra Amplified Dimension: §fI could not find the block with the resourcelocation that was" + " put in the portal frame floor config! Here is what was in the config: §c" + UltraAmplified.UAConfig.portalFloorBlocks.get());
+			entity.sendMessage(message);
+		    }
 
-				return false;
-			}
+		    return false;
 		}
-		else
-		{
-			blockFloor = POLISHED_ANDESITE_SLAB_BOTTOM;
-		}
+		
 
 		// bottom of portal frame
 		for (int x = -1; x <= 1; x++)
@@ -245,7 +208,7 @@ public class AmplifiedPortalCreation
 		}
 
 		// the center itself
-		if (world.getBlockState(pos.add(0, 0, 0)) != POLISHED_DIORITE)
+		if (world.getBlockState(pos.add(0, 0, 0)).getBlock() != POLISHED_DIORITE)
 		{
 			return false;
 		}

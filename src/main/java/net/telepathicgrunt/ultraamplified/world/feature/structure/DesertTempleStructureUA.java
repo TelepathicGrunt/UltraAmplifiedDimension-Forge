@@ -115,29 +115,29 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn)
 		{
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			int i = 5;
-			int j = 5;
+			int xOffset = 5;
+			int zOffset = 5;
 			if (rotation == Rotation.CLOCKWISE_90)
 			{
-				i = -5;
+				xOffset = -5;
 			}
 			else if (rotation == Rotation.CLOCKWISE_180)
 			{
-				i = -5;
-				j = -5;
+				xOffset = -5;
+				zOffset = -5;
 			}
 			else if (rotation == Rotation.COUNTERCLOCKWISE_90)
 			{
-				j = -5;
+				zOffset = -5;
 			}
 
-			int k = (chunkX << 4) + 7;
-			int l = (chunkZ << 4) + 7;
-			int i1 = generator.func_222531_c(k, l, Heightmap.Type.WORLD_SURFACE_WG);
-			int j1 = generator.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-			int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
-			int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-			int y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
+			int xPos = (chunkX << 4) + 7;
+			int zPos = (chunkZ << 4) + 7;
+			int y1 = generator.func_222531_c(xPos, zPos, Heightmap.Type.WORLD_SURFACE_WG);
+			int y2 = generator.func_222531_c(xPos, zPos + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+			int y3 = generator.func_222531_c(xPos + xOffset, zPos, Heightmap.Type.WORLD_SURFACE_WG);
+			int y4 = generator.func_222531_c(xPos + xOffset, zPos + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+			int y = Math.min(Math.min(y1, y2), Math.min(y3, y4));
 			y = Math.min(y, 244);
 
 			if (y >= 70)
@@ -145,8 +145,7 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 				DesertTemplePiecesUA desertpyramidpiece = new DesertTemplePiecesUA(this.rand, chunkX * 16, y, chunkZ * 16);
 				this.components.add(desertpyramidpiece);
 				this.recalculateStructureSize();
-				// UltraAmplified.LOGGER.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+"
-				// "+(chunkZ*16));
+				// UltraAmplified.LOGGER.log(Level.DEBUG, "Desert Temple | "+(chunkX*16)+" "+(chunkZ*16));
 			}
 		}
 	}

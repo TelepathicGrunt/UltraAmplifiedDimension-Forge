@@ -265,11 +265,11 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 	}
 
 
-	protected void makeBedrock(IChunk p_222555_1_, Random p_222555_2_)
+	protected void makeBedrock(IChunk chunk, Random random)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
-		int i = p_222555_1_.getPos().getXStart();
-		int j = p_222555_1_.getPos().getZStart();
+		int i = chunk.getPos().getXStart();
+		int j = chunk.getPos().getZStart();
 		T t = this.getSettings();
 		int k = t.getBedrockFloorHeight();
 		int l = t.getBedrockRoofHeight();
@@ -280,9 +280,9 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 			{
 				for (int i1 = l; i1 >= l - 4; --i1)
 				{
-					if (i1 >= l - p_222555_2_.nextInt(5))
+					if (i1 >= l - random.nextInt(5))
 					{
-						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						chunk.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -291,9 +291,9 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 			{
 				for (int j1 = k + 4; j1 >= k; --j1)
 				{
-					if (j1 <= k + p_222555_2_.nextInt(5))
+					if (j1 <= k + random.nextInt(5))
 					{
-						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						chunk.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -303,11 +303,11 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 
 
 	@Override
-	public void makeBase(IWorld p_222537_1_, IChunk p_222537_2_)
+	public void makeBase(IWorld world, IChunk chunk)
 	{
 		ObjectList<AbstractVillagePiece> objectlist = new ObjectArrayList<>(10);
 		ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
-		ChunkPos chunkpos = p_222537_2_.getPos();
+		ChunkPos chunkpos = chunk.getPos();
 		int chunkX = chunkpos.x;
 		int chunkZ = chunkpos.z;
 		int coordinateX = chunkX << 4;
@@ -316,13 +316,13 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 		for (Structure<?> structure : UAFeatures.ILLAGER_STRUCTURES)
 		{
 			String s = structure.getStructureName();
-			LongIterator longiterator = p_222537_2_.getStructureReferences(s).iterator();
+			LongIterator longiterator = chunk.getStructureReferences(s).iterator();
 
 			while (longiterator.hasNext())
 			{
 				long j1 = longiterator.nextLong();
 				ChunkPos chunkpos1 = new ChunkPos(j1);
-				IChunk ichunk = p_222537_1_.getChunk(chunkpos1.x, chunkpos1.z);
+				IChunk ichunk = world.getChunk(chunkpos1.x, chunkpos1.z);
 				StructureStart structurestart = ichunk.getStructureStart(s);
 				if (structurestart != null && structurestart.isValid())
 				{
@@ -361,7 +361,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 			adouble[1][j5] = new double[this.noiseSizeY + 1];
 		}
 
-		ChunkPrimer chunkprimer = (ChunkPrimer) p_222537_2_;
+		ChunkPrimer chunkprimer = (ChunkPrimer) chunk;
 		Heightmap heightmap = chunkprimer.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG);
 		Heightmap heightmap1 = chunkprimer.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG);
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();

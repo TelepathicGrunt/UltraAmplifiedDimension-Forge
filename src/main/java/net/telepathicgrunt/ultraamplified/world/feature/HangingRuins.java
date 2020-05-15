@@ -80,7 +80,12 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 			return false;
 		}
 
-		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rot).setIgnoreEntities(false).setChunk((ChunkPos) null);
+		PlacementSettings placementsettings = 
+			(new PlacementSettings())
+				.setMirror(Mirror.NONE)
+				.setRotation(rot)
+				.setIgnoreEntities(false)
+				.setChunk((ChunkPos) null);
 
 		template.addBlocksToWorld(world, blockpos$Mutable.move(4, -8, 4), placementsettings, 2);
 

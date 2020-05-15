@@ -141,9 +141,9 @@ public class SwampSpookyBiomeUA extends UABiome
 	 */
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int getGrassColor(double p_225528_1_, double p_225528_3_)
+	public int getGrassColor(double double1, double double2)
 	{
-		double d0 = INFO_NOISE.noiseAt(p_225528_1_ * 0.0225D, p_225528_3_ * 0.0225D, false);
+		double d0 = INFO_NOISE.noiseAt(double1 * 0.0225D, double2 * 0.0225D, false);
 		return d0 < -0.1D ? 5011004 : 6975545;
 	}
 

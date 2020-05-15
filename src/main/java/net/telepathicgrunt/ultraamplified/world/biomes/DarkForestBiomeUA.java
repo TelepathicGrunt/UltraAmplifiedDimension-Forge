@@ -138,9 +138,9 @@ public class DarkForestBiomeUA extends UABiome
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int getGrassColor(double p_225528_1_, double p_225528_3_)
+	public int getGrassColor(double double1, double double2)
 	{
-		int i = super.getGrassColor(p_225528_1_, p_225528_3_);
+		int i = super.getGrassColor(double1, double2);
 		return (i & 16711422) + 2634762 >> 1;
 	}
 }

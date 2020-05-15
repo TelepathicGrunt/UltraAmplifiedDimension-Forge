@@ -142,7 +142,7 @@ public class BadlandsBiomeUA extends UABiome
 	 */
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public int getGrassColor(double p_225528_1_, double p_225528_3_)
+	public int getGrassColor(double double1, double double2)
 	{
 		return 9470285;
 	}
