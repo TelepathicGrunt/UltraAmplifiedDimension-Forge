@@ -38,6 +38,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Slightly reduced ocean size.
 
+-Slightly increased rarity of landlocked Frozen Desert biome.
+
 ##### Structure:
 
 -Split Stone Fortress and Nether Fortress into two separate structures and made the Nether Fortress much more common so it can be found easier in Netherland biomes. /locate command now can distinguish between the two structure. (Also removed useless configs entries due to this split)

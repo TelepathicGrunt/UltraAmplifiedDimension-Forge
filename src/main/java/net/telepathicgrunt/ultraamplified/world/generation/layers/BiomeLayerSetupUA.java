@@ -42,9 +42,13 @@ public class BiomeLayerSetupUA
 
 	public BiomeLayerSetupUA()
 	{
-		//precaution - default
+	    	// Update what biomes are used when re-entering a world without closing Minecraft.
 		setupBiomeEntries();
+		
+		//setup biome edge map again form scratch as some edges are config based
 		BiomeGenHelper.setBiomeEdgeMap();
+		
+		//make ocean layer grab all used oceans and their IDs for biome layout gen
 		AddOceansLayerUA.syncOceanList();
 		
 		//Setup what m variants are mapped and not
@@ -63,7 +67,11 @@ public class BiomeLayerSetupUA
 		{
 		    	// Update what biomes are used when re-entering a world without closing Minecraft.
 			setupBiomeEntries(); 
+			
+			//setup biome edge map again form scratch as some edges are config based
 			BiomeGenHelper.setBiomeEdgeMap();
+			
+			//make ocean layer grab all used oceans and their IDs for biome layout gen
 			AddOceansLayerUA.syncOceanList();
 			
 			//Setup what m variants are mapped and not
@@ -71,10 +79,31 @@ public class BiomeLayerSetupUA
 		}
 	}
 	
-
+	/**
+	 * Takes user's config to determine what modded biome to import,
+	 * what UA biome to use, fill in biome lists that doesn't have
+	 * many biomes, and lets BiomeLayerPickerUA know if there's oceans
+	 * or not.
+	 * 
+	 * Call this method before the world has a chance to even load or 
+	 * generate a single biome. Best time for this is in the
+	 * ModConfig.Reloading event.
+	 */
 	private static void setupBiomeEntries()
 	{
-		//reset lists and variables on world load 
+	    resetBiomeLists();
+	    importModdedBiomes();
+	    addUABiomeEntriesToLists();
+	    fillSparceBiomeLists();
+	    isUAOceanPresent();
+	}
+
+	
+	/**
+	 * Empties and initializes all the temperature based biome entry lists
+	 */
+	private static void resetBiomeLists() 
+	{
 		icyBiomesList = new ArrayList<BiomeEntry>();
 		coolBiomesList = new ArrayList<BiomeEntry>();
 		warmBiomesList = new ArrayList<BiomeEntry>();
@@ -84,7 +113,16 @@ public class BiomeLayerSetupUA
 		badlandsBiomesList = new ArrayList<BiomeEntry>();
 		oceanBiomesList = new ArrayList<BiomeEntry>();
 		noOcean = false;
+	}
 
+	
+	/**
+	 * Will fill up all the land-based temperature range biome entry lists with modded biomes.
+	 * The modded biomes will be from either the registry or BiomeManager (overworld biomes)
+	 * based on what the user's config specifies.
+	 */
+	private static void importModdedBiomes() 
+	{
 		//grabs what the user entered.
 		//is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
 		List<String> blacklistedMods = new ArrayList<String>();
@@ -174,9 +212,18 @@ public class BiomeLayerSetupUA
 				}
 			}
 		}
+	}
 
-		
-		//adds our ultra amplified version of the vanilla biomes while checking to see if they are allowed by the user through the config
+	
+	/**
+	 * Will add all of the basic UA biomes to their respective biome entry list. 
+	 * Variants such as hills or some M forms will be done to the base UA biome 
+	 * in other biome layers in the biome provider.
+	 */
+	private static void addUABiomeEntriesToLists() 
+	{
+		//adds our ultra amplified version of the vanilla biomes while 
+	    	//checking to see if they are allowed by the user through the config
 
 		//deserts
 		if (UltraAmplified.UAConfig.desert.get())
@@ -239,7 +286,7 @@ public class BiomeLayerSetupUA
 		if (UltraAmplified.UAConfig.snowyTaiga.get())
 			icyBiomesList.add(new BiomeEntry(UABiomes.SNOWY_TAIGA, 26));
 		if (UltraAmplified.UAConfig.frozenDesert.get())
-			icyBiomesList.add(new BiomeEntry(UABiomes.FROZEN_DESERT, 10));
+			icyBiomesList.add(new BiomeEntry(UABiomes.FROZEN_DESERT, 6));
 
 		//special biomes lists used to replace vanilla ones such as mesa, jungles, etc
 
@@ -278,61 +325,81 @@ public class BiomeLayerSetupUA
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.COLD_OCEAN, 10));
 		if (UltraAmplified.UAConfig.frozenOcean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.FROZEN_OCEAN, 10));
+	}
 
+	/**
+	 * Goes through all land-based biome lists and if it holds 3 or less biomes,
+	 * it will add other nearby temperature biome list's biome entries to the
+	 * sparce biome until it has at least 5 biomes again.
+	 * 
+	 * If all land biome lists has no biomes, then UA ocean will be used for all land biomes.
+	 * 
+	 * If all lists has no biomes, then vanilla ocean will be used for all lists.
+	 */
+	private static void fillSparceBiomeLists() {
+	    // this is used to help fill any biome list that is empty due to player turning off all of its biome.
+	    // otherwise, we will crash if a biome list is empty
+	    List<List<BiomeEntry>> listOfBiomeLists = new ArrayList<List<BiomeEntry>>();
+	    listOfBiomeLists.add(badlandsBiomesList);
+	    listOfBiomeLists.add(jungleBiomesList);
+	    listOfBiomeLists.add(hotBiomesList);
+	    listOfBiomeLists.add(warmBiomesList);
+	    listOfBiomeLists.add(coolBiomesList);
+	    listOfBiomeLists.add(giantTreeTaigaBiomesList);
+	    listOfBiomeLists.add(icyBiomesList);
 
+	    for (int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) {
+		if (listOfBiomeLists.get(listIndex).isEmpty()) {
 
-		//this is used to help fill any biome list that is empty due to player turning off all of its biome.
-		//otherwise, we will crash if a biome list is empty
-		List<List<BiomeEntry>> listOfBiomeLists = new ArrayList<List<BiomeEntry>>();
-		listOfBiomeLists.add(badlandsBiomesList);
-		listOfBiomeLists.add(jungleBiomesList);
-		listOfBiomeLists.add(hotBiomesList);
-		listOfBiomeLists.add(warmBiomesList);
-		listOfBiomeLists.add(coolBiomesList);
-		listOfBiomeLists.add(giantTreeTaigaBiomesList);
-		listOfBiomeLists.add(icyBiomesList);
-		
-		for(int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) {
-		    if(listOfBiomeLists.get(listIndex).size() == 0) {
-			
-			//switches direction of the list it checks outward from the current list
-			int direction = -1;
-			for(int offsetIndex = 0; offsetIndex < listOfBiomeLists.size(); offsetIndex++) {
-			    //clamp range to not do index out of bounds error
-			    int newIndex = Ints.constrainToRange(listIndex + (offsetIndex * direction), 0, listOfBiomeLists.size()-1);
-			    
-			    //add the non-empty biome list into the empty list
-			    if(listOfBiomeLists.get(newIndex).size() != 0) {
-				listOfBiomeLists.get(listIndex).addAll(listOfBiomeLists.get(newIndex));
-				break;
-			    }
-			    
-			    direction *= -1;
+		    // switches direction of the list it checks outward from the current list
+		    int direction = -1;
+		    for (int offsetIndex = 0; offsetIndex < listOfBiomeLists.size(); offsetIndex++) {
+			// clamp range to not do index out of bounds error
+			int newIndex = Ints.constrainToRange(listIndex + (offsetIndex * direction), 0, listOfBiomeLists.size() - 1);
+
+			// adds up to 4 biomes from the other biome list into the sparce biome list
+			if (!listOfBiomeLists.get(newIndex).isEmpty()) 
+			{
+			    listOfBiomeLists.get(listIndex).addAll(
+				    listOfBiomeLists.get(newIndex)
+				    	.subList(0, Ints.constrainToRange(listOfBiomeLists.get(newIndex).size(), 1, 4)));
+			 
+			    break;
 			}
-			
-			//if this is reached, then all lists are empty.
-			//check for oceans and if that too is empty, then just fill with vanilla ocean
-			if(listOfBiomeLists.get(listIndex).size() == 0) {
-			    
-			    if(oceanBiomesList.size() == 0) {
-				oceanBiomesList.add(new BiomeEntry(Biomes.OCEAN, 10));
-			    }
 
-			    for(List<BiomeEntry> list : listOfBiomeLists) {
-				list.addAll(oceanBiomesList);
-			    }
+			direction *= -1;
+		    }
+
+		    // if this is reached and our current biome list is still empty, then all lists are empty.
+		    // check for oceans and if that too is empty, then just fill with vanilla ocean
+		    if (listOfBiomeLists.get(listIndex).size() == 0) {
+
+			if (oceanBiomesList.size() == 0) {
+			    oceanBiomesList.add(new BiomeEntry(Biomes.OCEAN, 10));
+			}
+
+			for (List<BiomeEntry> list : listOfBiomeLists) {
+			    list.addAll(oceanBiomesList);
 			}
 		    }
 		}
-		
-		if (!UltraAmplified.UAConfig.ocean.get() && 
-			!UltraAmplified.UAConfig.coldOcean.get() && 
-			!UltraAmplified.UAConfig.frozenOcean.get() && 
-			!UltraAmplified.UAConfig.lukewarmOcean.get() && 
-			!UltraAmplified.UAConfig.warmOcean.get())
-		{
-			noOcean = true;
-		}
+	    }
 	}
-
+	
+	/**
+	 * Checks to see if player turned off all UA oceans by config.
+	 * If so, set noOcean to true so the BiomeLayerPickerUA class
+	 * knows to replace oceans with land instead.
+	 */
+	private static void isUAOceanPresent() 
+	{
+	    if (!UltraAmplified.UAConfig.ocean.get() && 
+		    !UltraAmplified.UAConfig.coldOcean.get() && 
+		    !UltraAmplified.UAConfig.frozenOcean.get() && 
+		    !UltraAmplified.UAConfig.lukewarmOcean.get() && 
+		    !UltraAmplified.UAConfig.warmOcean.get()) 
+	    {
+		noOcean = true;
+	    }
+	}
 }
