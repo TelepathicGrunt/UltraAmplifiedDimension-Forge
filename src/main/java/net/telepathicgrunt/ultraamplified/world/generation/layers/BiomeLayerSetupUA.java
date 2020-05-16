@@ -6,6 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.core.util.Integers;
+
+import com.google.common.primitives.Ints;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -294,15 +298,18 @@ public class BiomeLayerSetupUA
 		    if(listOfBiomeLists.get(listIndex).size() == 0) {
 			
 			//switches direction of the list it checks outward from the current list
-			int direction = 1;
+			int direction = -1;
 			for(int offsetIndex = 0; offsetIndex < listOfBiomeLists.size(); offsetIndex++) {
-			    int newIndex = listIndex + offsetIndex * direction;
+			    //clamp range to not do index out of bounds error
+			    int newIndex = Ints.constrainToRange(listIndex + (offsetIndex * direction), 0, listOfBiomeLists.size()-1);
 			    
 			    //add the non-empty biome list into the empty list
 			    if(listOfBiomeLists.get(newIndex).size() != 0) {
 				listOfBiomeLists.get(listIndex).addAll(listOfBiomeLists.get(newIndex));
 				break;
 			    }
+			    
+			    direction *= -1;
 			}
 			
 			//if this is reached, then all lists are empty.
@@ -320,7 +327,11 @@ public class BiomeLayerSetupUA
 		    }
 		}
 		
-		if (!UltraAmplified.UAConfig.ocean.get() && !UltraAmplified.UAConfig.coldOcean.get() && !UltraAmplified.UAConfig.frozenOcean.get() && !UltraAmplified.UAConfig.lukewarmOcean.get() && !UltraAmplified.UAConfig.warmOcean.get())
+		if (!UltraAmplified.UAConfig.ocean.get() && 
+			!UltraAmplified.UAConfig.coldOcean.get() && 
+			!UltraAmplified.UAConfig.frozenOcean.get() && 
+			!UltraAmplified.UAConfig.lukewarmOcean.get() && 
+			!UltraAmplified.UAConfig.warmOcean.get())
 		{
 			noOcean = true;
 		}
