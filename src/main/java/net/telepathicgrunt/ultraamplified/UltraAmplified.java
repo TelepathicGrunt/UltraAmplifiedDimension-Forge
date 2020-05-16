@@ -59,7 +59,6 @@ public class UltraAmplified
 	//worldTypes
 	public static WorldType UltraAmplifiedWorldType;
 
-	//TODO:: redo biome picking lists
 	public UltraAmplified()
 	{
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

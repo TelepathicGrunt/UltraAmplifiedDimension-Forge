@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.core.util.Integers;
-
 import com.google.common.primitives.Ints;
 
 import net.minecraft.util.ResourceLocation;
