@@ -194,8 +194,10 @@ public class BiomeLayerSetupUA
 					.collect(Collectors.toList());
 				
 				
-				if (biomesInTempRange != null) {
-				    switch(tempRange) {
+				if (biomesInTempRange != null) 
+				{
+				    switch(tempRange) 
+				    {
 					case ICY :
 					    icyBiomesList.addAll(biomesInTempRange);
 					    break;
@@ -336,24 +338,36 @@ public class BiomeLayerSetupUA
 	 * 
 	 * If all lists has no biomes, then vanilla ocean will be used for all lists.
 	 */
-	private static void fillSparceBiomeLists() {
+	private static void fillSparceBiomeLists() 
+	{
 	    // this is used to help fill any biome list that is empty due to player turning off all of its biome.
 	    // otherwise, we will crash if a biome list is empty
 	    List<List<BiomeEntry>> listOfBiomeLists = new ArrayList<List<BiomeEntry>>();
 	    listOfBiomeLists.add(badlandsBiomesList);
 	    listOfBiomeLists.add(jungleBiomesList);
 	    listOfBiomeLists.add(hotBiomesList);
+	    
+	    // If no oceans are present, add ocean to middle of this
+	    // list of biome lists so it can pick up land biomes
+	    if (oceanBiomesList.size() == 0) 
+		    listOfBiomeLists.add(oceanBiomesList);
+	    
 	    listOfBiomeLists.add(warmBiomesList);
 	    listOfBiomeLists.add(coolBiomesList);
 	    listOfBiomeLists.add(giantTreeTaigaBiomesList);
 	    listOfBiomeLists.add(icyBiomesList);
+	    
 
-	    for (int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) {
-		if (listOfBiomeLists.get(listIndex).isEmpty()) {
-
+	    
+		
+	    for (int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) 
+	    {
+		if (listOfBiomeLists.get(listIndex).isEmpty()) 
+		{
 		    // switches direction of the list it checks outward from the current list
 		    int direction = -1;
-		    for (int offsetIndex = 0; offsetIndex < listOfBiomeLists.size(); offsetIndex++) {
+		    for (int offsetIndex = 1; offsetIndex < listOfBiomeLists.size();) 
+		    {
 			// clamp range to not do index out of bounds error
 			int newIndex = Ints.constrainToRange(listIndex + (offsetIndex * direction), 0, listOfBiomeLists.size() - 1);
 
@@ -367,18 +381,22 @@ public class BiomeLayerSetupUA
 			    break;
 			}
 
+			//flip slide it is checking and only increment when positive
 			direction *= -1;
+			if(newIndex > 0) offsetIndex++;
 		    }
 
-		    // if this is reached and our current biome list is still empty, then all lists are empty.
-		    // check for oceans and if that too is empty, then just fill with vanilla ocean
-		    if (listOfBiomeLists.get(listIndex).size() == 0) {
-
-			if (oceanBiomesList.size() == 0) {
+		    // If this is reached and our current biome list is still empty, then all lists are empty.
+		    // Then attempt to replace land biomes with UA oceans but if that ocean list is empty too, 
+		    // then just fill all lists with vanilla ocean.
+		    if (listOfBiomeLists.get(listIndex).size() == 0) 
+		    {
+			// replaces ocean list with vanilla ocean if ocean list is also empty
+			if (oceanBiomesList.size() == 0) 
 			    oceanBiomesList.add(new BiomeEntry(Biomes.OCEAN, 10));
-			}
-
-			for (List<BiomeEntry> list : listOfBiomeLists) {
+			
+			for (List<BiomeEntry> list : listOfBiomeLists) 
+			{
 			    list.addAll(oceanBiomesList);
 			}
 		    }
