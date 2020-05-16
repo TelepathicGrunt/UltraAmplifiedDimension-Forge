@@ -19,6 +19,13 @@ public class ClientEvents
 
 	public static void onClientSetup(FMLClientSetupEvent event)
 	{
-		RenderTypeLookup.setRenderLayer(UABlocks.GLOWGRASS_BLOCK.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWSTONE_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWGRASS_BLOCK.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWMYCELIUM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWPODZOL.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWDIRT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(UABlocks.COARSE_GLOWDIRT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(UABlocks.GLOWSAND.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.REDGLOWSAND.get(), RenderType.getTranslucent());
 	}
 }

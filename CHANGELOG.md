@@ -48,7 +48,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
   
 ##### Blocks: 
 
--Fixed rotation variations for several Glow-variant blocks and fixed one Glowdirt texture not actually being used. 
+-Overhauled the glow-variant block textures so they have the Glowstone part be an overlay instead and the base texture can easily be changed with resource packs. You can quickly make and use your own resource packs to replace the Glowstone parts textures used for the overlay too if you wish to make the overlay match a higher resolution resource pack.
 
 ##### Misc: 
 

@@ -16,8 +16,17 @@
         ],
         "snowy=true": [ 
         	{ "model": "ultra_amplified_dimension:block/glowgrass_block_snow" } ,
-	        { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2" } ,
-	        { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3" } 
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow", "y": 270 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2" },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow2", "y": 270 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3" },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3", "y": 90 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3", "y": 180 },
+            { "model": "ultra_amplified_dimension:block/glowgrass_block_snow3", "y": 270 }
         ]
     }
 }

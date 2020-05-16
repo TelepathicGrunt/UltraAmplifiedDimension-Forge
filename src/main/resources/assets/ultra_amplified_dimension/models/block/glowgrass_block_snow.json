@@ -1,9 +1,36 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "particle": "ultra_amplified_dimension:block/glowdirt",
-        "bottom": "ultra_amplified_dimension:block/glowdirt",
+        "particle": "block/dirt",
+        "bottom": "block/dirt",
         "top": "block/grass_block_top",
-        "side": "ultra_amplified_dimension:block/glowgrass_block_snow"
-    }
+        "side": "block/grass_block_snow",
+        "topoverlay": "ultra_amplified_dimension:block/glowgrass_block_top_overlay_1",
+        "bottomoverlay": "ultra_amplified_dimension:block/glowdirt_overlay_1",
+        "sideoverlay": "ultra_amplified_dimension:block/glowgrass_side_snow_overlay_1"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top",    "cullface": "up", "tintindex": 0 },
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "north" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "south" },
+                "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "west" },
+                "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "east" }
+            }
+        },
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottomoverlay", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#topoverlay", "cullface": "up" },
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#sideoverlay", "cullface": "north" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#sideoverlay", "cullface": "south" },
+                "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#sideoverlay", "cullface": "west" },
+                "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#sideoverlay", "cullface": "east" }
+            }
+        }
+    ]
 }
