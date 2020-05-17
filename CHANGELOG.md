@@ -30,6 +30,10 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ## (V.8.0.0 Changes) (1.15.2 Minecraft)
 
+##### Config:
+
+-The blocks used to make the portal now must specify a block's resource location. They cannot be blank anymore.
+ 
 ##### Biomes:
 
 -Fixed bug where underground lava pools could be exposed floating in caves and ravines in Netherland biome.
@@ -43,6 +47,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ##### Structure:
 
 -Split Stone Fortress and Nether Fortress into two separate structures and made the Nether Fortress much more common so it can be found easier in Netherland biomes. /locate command now can distinguish between the two structure. (Also removed useless configs entries due to this split)
+
+-Fixed bug where swapping Stronebrick/Nether Brick for Stone Fortresses and Nether Fortresses would cause the fortress to start spawning the other fortress's types of mobs.
 
 -Fix issue with roots decreasing Hanging Ruins' spawnrate. Now Hanging Ruins will ignore roots when looking for the flat parts of the underside of ledges.
   

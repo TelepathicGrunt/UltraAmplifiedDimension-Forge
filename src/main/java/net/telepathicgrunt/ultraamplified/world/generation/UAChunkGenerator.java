@@ -201,11 +201,11 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 			//Nether Fortress entity spawning
 			else if (belowBlock == Blocks.NETHER_BRICKS)
 			{
-				if (UAFeatures.STONE_FORTRESS.isPositionInsideStructure(this.world, pos))
+				if (UAFeatures.NETHER_FORTRESS.isPositionInsideStructure(this.world, pos))
 				{
 					return ((FortressNetherStructureUA) UAFeatures.NETHER_FORTRESS).getNetherFortressSpawnList();
 				}
-				if (UAFeatures.STONE_FORTRESS.isPositionInStructure(this.world, pos))
+				if (UAFeatures.NETHER_FORTRESS.isPositionInStructure(this.world, pos))
 				{
 					return ((FortressNetherStructureUA) UAFeatures.NETHER_FORTRESS).getNetherFortressSpawnList();
 				}

@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.15.2-7.4.2'
+version = '1.15.2-8.0.0'
 group = 'net.telepathicgrunt.ultraamplified' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ultra_amplified_dimension'
 
