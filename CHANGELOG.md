@@ -50,6 +50,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Overhauled the glow-variant block textures so they have the Glowstone part be an overlay instead and the base texture can easily be changed with resource packs. You can quickly make and use your own resource packs to replace the Glowstone parts textures used for the overlay too if you wish to make the overlay match a higher resolution resource pack.
 
+-Improved the Amplified Portal block textures to look much more polished and cool! It is also more compatible with resource packs too.
+
 ##### Misc: 
 
 -Changed some hardcoded 255 height values to use the world's max height instead. Might help with Cubic Chunk-like mod compatibility but otherwise, users will see no change. 

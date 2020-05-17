@@ -27,5 +27,6 @@ public class ClientEvents
 		RenderTypeLookup.setRenderLayer(UABlocks.COARSE_GLOWDIRT.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(UABlocks.GLOWSAND.get(), RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(UABlocks.REDGLOWSAND.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(UABlocks.AMPLIFIEDPORTAL.get(), RenderType.getTranslucent());
 	}
 }
