@@ -13,7 +13,13 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.15.2-8.0.0'
+repositories {
+	flatDir {
+		dirs 'deps'
+	}
+}
+
+version = '1.15.2-8.0.1'
 group = 'net.telepathicgrunt.ultraamplified' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ultra_amplified_dimension'
 
@@ -21,9 +27,6 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft {
     mappings channel: 'snapshot', version: '20200428-1.15.1'
-    
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
@@ -76,7 +79,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.63'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
 }
 
 // Process resources on build

@@ -149,36 +149,34 @@ public class BiomeLayerSetupUA
 			{
 
 				ResourceLocation rl = BiomeRegistry.getKey(biome);
-				if (rl == null) continue; //pre-caution. Shouldn't ever happen tho.
+				if (rl == null) continue;
 
 				String namespace = rl.getNamespace();
-				if (blacklistedMods.contains(namespace) || UltraAmplified.UAConfig.blacklistedBiomeList.get().contains(rl.toString()))
-					continue; //this modded biome is blacklisted 
+				if(namespace.equals("minecraft") || namespace.equals(UltraAmplified.MODID)) 
+				    continue; //Skip minecraft and UA biomes
 				
+				if (blacklistedMods.contains(namespace) || UltraAmplified.UAConfig.blacklistedBiomeList.get().contains(rl.toString()))
+				    continue; //this modded biome is blacklisted 
+				
+				
+				// default weight of 20 which seems good enough
+				BiomeEntry addedBiome = new BiomeEntry(biome, 20);
+				float biomeTemperature = biome.getDefaultTemperature();
 
-				if (!namespace.equals("minecraft") && !namespace.equals(UltraAmplified.MODID))
-				{
+				// finds what area the biome should go based on temperature
+				// which means even modded biomes without any category
+				// will get placed in the correct temp range.
+				if (biomeTemperature < 0.1f)
+				    icyBiomesList.add(addedBiome);
 
-					//default weight of 20 which seems good enough 
-					BiomeEntry addedBiome = new BiomeEntry(biome, 20);
-					float biomeTemperature = biome.getDefaultTemperature();
+				else if (biomeTemperature >= 0.1f && biomeTemperature < 0.5f)
+				    coolBiomesList.add(addedBiome);
 
-					//finds what area the biome should go based on temperature
-					//which means even modded biomes without any category
-					//will get placed in the correct temp range.
-					if (biomeTemperature < 0.1f)
-					    icyBiomesList.add(addedBiome);
-					
-					else if (biomeTemperature >= 0.1f && biomeTemperature < 0.5f)
-					    coolBiomesList.add(addedBiome);
-					
-					else if (biomeTemperature >= 0.5f && biomeTemperature < 1.0f)
-					    warmBiomesList.add(addedBiome);
-					
-					else
-					    hotBiomesList.add(addedBiome); //greater than 1.0f 
+				else if (biomeTemperature >= 0.5f && biomeTemperature < 1.0f)
+				    warmBiomesList.add(addedBiome);
 
-				}
+				else
+				    hotBiomesList.add(addedBiome); // greater than 1.0f
 			}
 		}
 		//only imports the modded biomes already registered in the biome dictionary (Other mods wanted their biome to generate in Overworld)
