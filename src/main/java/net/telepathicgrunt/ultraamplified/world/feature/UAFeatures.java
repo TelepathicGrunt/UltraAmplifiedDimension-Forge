@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.EntityType;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -17,6 +18,7 @@ import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
 import net.minecraft.world.gen.feature.HugeTreesFeature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
@@ -27,13 +29,17 @@ import net.minecraft.world.gen.feature.structure.ShipwreckConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.placement.CountConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.ultraamplified.utils.RegUtil;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.feature.config.BlockConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.config.ColumnBlocksConfig;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.DesertTempleStructureUA;
+import net.telepathicgrunt.ultraamplified.world.feature.structure.DummyFortressStructure;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.EndCityStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressNetherStructureUA;
 import net.telepathicgrunt.ultraamplified.world.feature.structure.FortressStoneStructureUA;
@@ -239,6 +245,7 @@ public class UAFeatures {
     public static Structure<NoFeatureConfig> PILLAGER_OUTPOST 	= new PillagerOutpostStructureUA(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE 	= new MushroomTempleStructure(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE 	= new IceSpikeTempleStructure(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> DUMMY_FORTRESS_STRUCTURE = new DummyFortressStructure(NoFeatureConfig::deserialize);
 
     // for making the terrain bases for these structure
     public static final List<Structure<?>> ILLAGER_STRUCTURES = ImmutableList.of(PILLAGER_OUTPOST, VILLAGE);
@@ -322,7 +329,11 @@ public class UAFeatures {
 	RegUtil.register(registry, PILLAGER_OUTPOST, "pillager_outpost");
 	RegUtil.register(registry, MUSHROOM_TEMPLE, "mushroom_temple");
 	RegUtil.register(registry, ICE_SPIKE_TEMPLE, "ice_spike_temple");
-
+	
+	RegUtil.register(registry, DUMMY_FORTRESS_STRUCTURE, "fortress");
+	UABiomes.getBiomeArray().forEach(biome -> biome.addStructure(DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)));
+	UABiomes.getBiomeArray().forEach(biome -> biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG))));
+	
 	// registers the structure pieces.
 	StructureInitUA.registerStructurePieces();
     }

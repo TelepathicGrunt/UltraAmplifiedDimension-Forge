@@ -30,16 +30,21 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ## (V.8.0.1 Changes) (1.15.2 Minecraft)
 
+##### Structures:
+
+-Added a dummy fortress structure so updating worlds from pre-8.0.0 UA to 8.0.1+ UA will not crash the world. The dummy fortress will be visible in locate command as ultra_amplified_dimension:fortress but will never return a location.
+
 ##### Mod Compatibility:
 
 -Added JEI integeration. All UA blocks now has a description page with JEI.
+
 
 ## (V.8.0.0 Changes) (1.15.2 Minecraft)
 
 ##### Config:
 
 -The blocks used to make the portal now must specify a block's resource location. They cannot be blank anymore.
- 
+
 ##### Biomes:
 
 -Fixed bug where underground lava pools could be exposed floating in caves and ravines in Netherland biome.

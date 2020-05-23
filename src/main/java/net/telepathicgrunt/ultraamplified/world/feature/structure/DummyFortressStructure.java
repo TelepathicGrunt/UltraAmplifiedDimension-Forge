@@ -20,6 +20,7 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
  * Used for taking the place of old structure registry names so using
  * old worlds on new version won't corrupt the world.
  */
+//TODO: Remove dummy structure in 1.16
 public class DummyFortressStructure extends Structure<NoFeatureConfig>
 {
     /**
@@ -68,7 +69,7 @@ public class DummyFortressStructure extends Structure<NoFeatureConfig>
 	@Override
 	public String getStructureName()
 	{
-		return UltraAmplified.MODID + ":mineshaft";
+		return UltraAmplified.MODID + ":fortress";
 	}
 
 
