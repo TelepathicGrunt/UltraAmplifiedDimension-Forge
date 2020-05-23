@@ -27,14 +27,14 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 	private static final BlockState DARK_OAK_LEAVES = Blocks.DARK_OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
 
 
-	public TreeGiantDarkOak(Function<Dynamic<?>, ? extends HugeTreeFeatureConfig> p_i225808_1_)
+	public TreeGiantDarkOak(Function<Dynamic<?>, ? extends HugeTreeFeatureConfig> config)
 	{
-		super(p_i225808_1_);
+		super(config);
 	}
 
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
 	{
 		int height = 11 + rand.nextInt(3);
 		IWorld world = (IWorld) worldReader;
@@ -71,8 +71,8 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 			//creates the dome like crown of leaves first, 
 			//then puts the ring of wood in the leaves that also makes a smooth transition between leaves and trunk,
 			//then lastly, generates the trunk
-			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, p_225557_5_, boundingBox, p_225557_7_);
-			this.createWoodCrown(world, position.getX(), position.getZ(), position.getY() + height, rand, p_225557_5_, boundingBox, p_225557_7_);
+			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, trunkSet, boundingBox, p_225557_7_);
+			this.createWoodCrown(world, position.getX(), position.getZ(), position.getY() + height, rand, trunkSet, boundingBox, p_225557_7_);
 
 			// we want to generate the trunk as a thick plus sign like this:
 			//    [_][_]
@@ -87,18 +87,18 @@ public class TreeGiantDarkOak extends AbstractTreeFeature<HugeTreeFeatureConfig>
 				position = position.down(2);
 			}
 
-			this.placeColumnOfWood(world, ymax, rand, position, p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 0), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 1), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, 1), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(-1, 0, 0), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, -1), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(-1, 0, 1), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, -1), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, 2), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 2), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(2, 0, 0), p_225557_5_, boundingBox, p_225557_7_);
-			this.placeColumnOfWood(world, ymax, rand, position.add(2, 0, 1), p_225557_5_, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position, trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 0), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 1), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, 1), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(-1, 0, 0), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, -1), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(-1, 0, 1), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, -1), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(0, 0, 2), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(1, 0, 2), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(2, 0, 0), trunkSet, boundingBox, p_225557_7_);
+			this.placeColumnOfWood(world, ymax, rand, position.add(2, 0, 1), trunkSet, boundingBox, p_225557_7_);
 
 		}
 

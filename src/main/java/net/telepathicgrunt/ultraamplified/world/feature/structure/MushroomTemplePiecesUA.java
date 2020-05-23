@@ -172,7 +172,7 @@ public class MushroomTemplePiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 		{
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MushroomTemplePiecesUA.OFFSET1.get(this.resourceLocation));
 			BlockPos blockpos = MushroomTemplePiecesUA.OFFSET2.get(this.resourceLocation);
@@ -187,7 +187,7 @@ public class MushroomTemplePiecesUA
 
 			BlockPos blockpos2 = this.templatePosition;
 			this.templatePosition = this.templatePosition.add(0, i - 90 - 2, 0);
-			boolean flag = super.func_225577_a_(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
+			boolean flag = super.create(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
 
 			this.templatePosition = blockpos2;
 			return flag;

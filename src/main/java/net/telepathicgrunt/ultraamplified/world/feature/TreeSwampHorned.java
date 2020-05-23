@@ -29,15 +29,15 @@ public class TreeSwampHorned extends AbstractTreeFeature<TreeFeatureConfig>
 	private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1));
 
 
-	public TreeSwampHorned(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_)
+	public TreeSwampHorned(Function<Dynamic<?>, ? extends TreeFeatureConfig> config)
 	{
-		super(p_i225808_1_);
+		super(config);
 	}
 
 
 	//generate the spooky horned swamp m trees
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
 	{
 		int height = rand.nextInt(4) + 6;
 		IWorld world = (IWorld) worldReader;

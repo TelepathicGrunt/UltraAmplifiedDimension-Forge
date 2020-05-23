@@ -176,12 +176,12 @@ public class IceSpikeTemplePiecesUA
 
 
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos)
 		{
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE);
 			BlockPos blockpos = IceSpikeTemplePiecesUA.OFFSET.get(this.resourceLocation);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(3 - blockpos.getX(), 0, 0 - blockpos.getZ())));
-			return super.func_225577_a_(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
+			return super.create(world, p_225577_2_, random, structureBoundingBoxIn, chunkPos);
 		}
 	}
 

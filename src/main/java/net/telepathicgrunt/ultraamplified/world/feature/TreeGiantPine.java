@@ -32,7 +32,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
 	{
 		int height = this.func_227256_a_(rand, p_225557_7_);
 		IWorld world = (IWorld) worldReader;

@@ -78,7 +78,7 @@ public class FortressNetherStructureUA extends Structure<NoFeatureConfig>
 
 
     @Override
-    public boolean func_225558_a_(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome) {
+    public boolean canBeGenerated(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome) {
 
 	if (UltraAmplified.UAConfig.netherFortressSpawnrate.get() != 101) {
 	    int i = chunkPosX >> 4;

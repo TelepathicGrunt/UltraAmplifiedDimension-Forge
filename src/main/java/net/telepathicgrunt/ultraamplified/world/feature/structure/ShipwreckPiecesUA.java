@@ -180,7 +180,7 @@ public class ShipwreckPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
+		public boolean create(IWorld world, ChunkGenerator<?> chunkGen, Random random, MutableBoundingBox structureBoundingBox, ChunkPos chunkPos)
 		{
 			BlockPos blockpos;
 			BlockPos blockposSize = this.template.getSize();
@@ -214,7 +214,7 @@ public class ShipwreckPiecesUA
 			//UltraAmplified.LOGGER.info("heightpos: " + blockpos.getX() + ", " + blockpos.getY() + ", " + blockpos.getZ());
 			templatePosition = new BlockPos(templatePosition.getX(), blockpos.getY() - 2, templatePosition.getZ());
 
-			return super.func_225577_a_(world, chunkGen, random, structureBoundingBox, chunkPos);
+			return super.create(world, chunkGen, random, structureBoundingBox, chunkPos);
 		}
 	}
 }

@@ -321,7 +321,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -541,7 +541,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -674,7 +674,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -753,7 +753,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -902,7 +902,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -1056,7 +1056,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -1197,7 +1197,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -1422,7 +1422,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -1654,7 +1654,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			BlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.GRASS_PATH.getDefaultState());
 			BlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OAK_PLANKS.getDefaultState());
@@ -1804,7 +1804,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -2722,7 +2722,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{
@@ -2816,7 +2816,7 @@ public class VillagePastStyledPiecesUA
 		 * end, it adds Fences...
 		 */
 		@Override
-		public boolean func_225577_a_(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
+		public boolean create(IWorld world, ChunkGenerator<?> p_225577_2_, Random random, MutableBoundingBox structureBoundingBoxIn, ChunkPos p_74875_4_)
 		{
 			if (this.averageGroundLvl < 0)
 			{

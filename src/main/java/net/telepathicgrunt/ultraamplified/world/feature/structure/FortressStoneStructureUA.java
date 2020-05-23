@@ -87,7 +87,7 @@ public class FortressStoneStructureUA extends Structure<NoFeatureConfig>
 
 
 	@Override
-	public boolean func_225558_a_(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	public boolean canBeGenerated(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		if (UltraAmplified.UAConfig.stoneFortressSpawnrate.get() != 101) 
 		{

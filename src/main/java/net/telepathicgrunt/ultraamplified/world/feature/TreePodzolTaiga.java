@@ -27,15 +27,15 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
 	private static final BlockState PODZOL = Blocks.PODZOL.getDefaultState();
 
 
-	public TreePodzolTaiga(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_)
+	public TreePodzolTaiga(Function<Dynamic<?>, ? extends TreeFeatureConfig> config)
 	{
-		super(p_i225808_1_);
+		super(config);
 	}
 
 
 	//taller taiga trees with slightly thicker leaves and podzol soil below it.
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
 	{
 		IWorld world = (IWorld) worldReader;
 		int height = rand.nextInt(6) + 8;
@@ -113,7 +113,7 @@ public class TreePodzolTaiga extends AbstractTreeFeature<TreeFeatureConfig>
 					}
 				}
 
-				placeTrunkVines(world, p_225557_4_, rand, position, bottomOfLeaves, boundingBox);
+				placeTrunkVines(world, leafSet, rand, position, bottomOfLeaves, boundingBox);
 
 				int bounds = rand.nextInt(2);
 				int j3 = 1;

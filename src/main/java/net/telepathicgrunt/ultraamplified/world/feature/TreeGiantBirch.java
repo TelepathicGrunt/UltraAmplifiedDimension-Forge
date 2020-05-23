@@ -20,14 +20,14 @@ import net.minecraft.world.gen.feature.HugeTreesFeature;
 public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 {
 
-	public TreeGiantBirch(Function<Dynamic<?>, ? extends HugeTreeFeatureConfig> p_i225808_1_)
+	public TreeGiantBirch(Function<Dynamic<?>, ? extends HugeTreeFeatureConfig> config)
 	{
-		super(p_i225808_1_);
+		super(config);
 	}
 
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig treeConfig)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, HugeTreeFeatureConfig treeConfig)
 	{
 		int height = this.func_227256_a_(rand, treeConfig);
 		IWorld world = (IWorld) worldReader;
@@ -40,7 +40,7 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 		else
 		{
 			//adds the leaves on crown
-			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height - 4, rand, boundingBox, p_225557_4_, treeConfig);
+			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height - 4, rand, boundingBox, leafSet, treeConfig);
 
 			//adds the 2 by 2 wood trunk
 			for (int currentHeight = 0; currentHeight < height; ++currentHeight)
@@ -49,7 +49,7 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 				if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 				{
-					this.func_227216_a_(world, rand, position.up(currentHeight), p_225557_4_, boundingBox, treeConfig);
+					this.func_227216_a_(world, rand, position.up(currentHeight), leafSet, boundingBox, treeConfig);
 				}
 
 				if (currentHeight < height - 1)
@@ -58,21 +58,21 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), leafSet, boundingBox, treeConfig);
 					}
 
 					iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), leafSet, boundingBox, treeConfig);
 					}
 
 					iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, treeConfig);
+						this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), leafSet, boundingBox, treeConfig);
 					}
 				}
 			}

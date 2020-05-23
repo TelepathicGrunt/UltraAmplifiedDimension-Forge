@@ -86,7 +86,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 
 
 	@Override
-	public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
+	public boolean canBeGenerated(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
@@ -154,7 +154,7 @@ public class VillageStructureUA extends Structure<VillageConfigUA>
 				// generates a vanilla village so if villages change in future updates, we pull
 				// the new villages automatically
 				BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-				VillagePieces.func_214838_a(generator, templateManagerIn, blockpos, this.components, this.rand, vanillaVillageConfig);
+				VillagePieces.addPieces(generator, templateManagerIn, blockpos, this.components, this.rand, vanillaVillageConfig);
 				this.recalculateStructureSize();
 			}
 			else

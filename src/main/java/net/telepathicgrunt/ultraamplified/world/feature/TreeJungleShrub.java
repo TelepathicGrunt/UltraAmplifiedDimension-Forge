@@ -20,16 +20,16 @@ public class TreeJungleShrub extends AbstractTreeFeature<BaseTreeFeatureConfig>
 	private final BlockState trunk;
 
 
-	public TreeJungleShrub(Function<Dynamic<?>, ? extends BaseTreeFeatureConfig> p_i225808_1_, BlockState trunk, BlockState leaf)
+	public TreeJungleShrub(Function<Dynamic<?>, ? extends BaseTreeFeatureConfig> config, BlockState trunk, BlockState leaf)
 	{
-		super(p_i225808_1_);
+		super(config);
 		this.trunk = trunk;
 		this.leaf = leaf;
 	}
 
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox p_208519_5_, BaseTreeFeatureConfig p_225557_7_)
 	{
 
 		if (isSoil(world, position.down(), p_225557_7_.getSapling()))

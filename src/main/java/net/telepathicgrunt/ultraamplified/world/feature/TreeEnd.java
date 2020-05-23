@@ -26,14 +26,14 @@ public class TreeEnd extends AbstractTreeFeature<TreeFeatureConfig>
 	private static final BlockState PURPLE_TERRACOTTA = Blocks.BLUE_TERRACOTTA.getDefaultState();
 
 
-	public TreeEnd(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225808_1_)
+	public TreeEnd(Function<Dynamic<?>, ? extends TreeFeatureConfig> config)
 	{
-		super(p_i225808_1_);
+		super(config);
 	}
 
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> leafSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, TreeFeatureConfig p_225557_7_)
 	{
 		int i = rand.nextInt(3) + 5;
 
