@@ -30,7 +30,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ## (V.8.0.1 Changes) (1.15.2 Minecraft)
 
-##### Config:
+##### Mod Compatibility:
+
+-Added JEI integeration. All UA blocks now has a description page with JEI.
 
 ## (V.8.0.0 Changes) (1.15.2 Minecraft)
 

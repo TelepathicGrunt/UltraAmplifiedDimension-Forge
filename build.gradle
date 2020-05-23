@@ -17,6 +17,16 @@ repositories {
 	flatDir {
 		dirs 'deps'
 	}
+	maven {
+		// location of the maven that hosts JEI files
+		name = "Progwml6 maven"
+		url = "https://dvs1.progwml6.com/files/maven/"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "https://modmaven.k-4u.nl"
+	}
 }
 
 version = '1.15.2-8.0.1'
@@ -80,6 +90,9 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
+	
+	compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4:api")
+	runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4")
 }
 
 // Process resources on build
