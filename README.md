@@ -1,15 +1,16 @@
 <p><span style="font-size: 24px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/iOOp7IS.png" alt="Ultra Amplified Logo" width="1000" height="215" /></span></p>
 <h2 style="text-align: center;"><strong><span style="font-size: 36px; color: #b00000;">CURRENTLY FOR 1.15.2 MC</span></strong></h2>
 <p style="text-align: center;"><span style="font-size: 12px;"><strong>(I recommend playing on the latest full release version of this mod for the most polished and best experience!)</strong></span></p>
-<p style="text-align: center;"><span style="font-size: 12px;"><strong>(Please use Forge 1.15.2-31.2.0 or later for 1.15.2. Lots of bugs were fixed)</strong></span></p>
+<p style="text-align: center;"><span style="font-size: 12px;"><strong>(Please use Forge 1.15.2-31.2.0 or later. Lots of bugs were fixed)</strong></span></p>
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;">&nbsp;&nbsp;</p>
-<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;More bugfixes!</strong></b></span></em></p>
-<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>Better textures for glow-variant blocks so</strong></b></span></em></p>
-<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>they mesh with other texture packs better!</strong></b></span></em></p>
-<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>Also split Stone Fortress and Nether Fortress</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px; color: #b00000; text-decoration: underline;"><strong>Recent 1.15.2 News:</strong></span><span style="font-size: 14px;"><b><strong>&nbsp;</strong></b></span></em><em><span style="font-size: 14px;"><b><strong>With v8.0.1, there are more bugfixes,</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>better textures for glow-variant blocks so</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>they mesh with other texture packs better, and</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>Stone Fortress and Nether Fortress are now split</strong></b></span></em></p>
 <p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>into two separate structures so you can find</strong></b></span></em></p>
-<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>either one easier with the /locate command.</strong></b></span></em></p>
+<p style="text-align: center;"><em><span style="font-size: 14px;"><b><strong>either one easier with the /locate command!</strong></b></span></em></p>
+<p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;"><em><span style="font-size: 16px; color: #b00000;"><strong>Server owners,</strong></span><span style="font-size: 16px;"><b><strong> if you are using Ultra Amplified for your worldtype,&nbsp;</strong></b></span></em></p>
 <p style="text-align: center;"><span style="font-size: 16px;"><em><b><strong>remove the "</strong></b></em><b><strong>use-modded-worldtype=ultra-amplified</strong></b><em><b><strong>" entry from </strong></b></em></span></p>
