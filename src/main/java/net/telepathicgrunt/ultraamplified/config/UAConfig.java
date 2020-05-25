@@ -67,6 +67,7 @@ public class UAConfig
 		public ConfigValueListener<Integer> waterfallSpawnrate;
 		public ConfigValueListener<Integer> lavafallSpawnrate;
 		public ConfigValueListener<Integer> endIslandSpawnrate;
+		public ConfigValueListener<Integer> endIslandMaxHeight;
 		public ConfigValueListener<Boolean> chestGeneration;
 		public ConfigValueListener<Integer> sunShrineSpawnrate;
 		public ConfigValueListener<Integer> stonehengeSpawnrate;
@@ -307,6 +308,11 @@ public class UAConfig
 		                .translation("ultraamplified.config.terrain.endislandspawnrate")
 		                .defineInRange("endIslandSpawnrate", 6, 0, 100));
 
+				endIslandMaxHeight = subscriber.subscribe(builder
+		                .comment("\r\n The maximum height that End Islands can spawn at in the End Field Biome.")
+		                .translation("ultraamplified.config.terrain.endislandmaxheight")
+		                .defineInRange("endIslandMaxHeight", 254, 0, 256));
+				
 			builder.pop();
 
 			builder.push("Structure/Feature Options");

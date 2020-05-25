@@ -18,21 +18,23 @@ import net.telepathicgrunt.ultraamplified.UltraAmplified;
 
 public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig>
 {
-	public HeightBiasedEndIslandRange(Function<Dynamic<?>, ? extends CountRangeConfig> configFactory)
-	{
-		super(configFactory);
-	}
+    public HeightBiasedEndIslandRange(Function<Dynamic<?>, ? extends CountRangeConfig> configFactory) {
+	super(configFactory);
+    }
 
 
-	@Override
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos)
-	{
-		return IntStream.range(0, UltraAmplified.UAConfig.endIslandSpawnrate.get() / placementConfig.count).mapToObj((p_215051_3_) ->
-		{
-			int j = random.nextInt(16);
-			int k = random.nextInt(placementConfig.maximum - placementConfig.bottomOffset - placementConfig.topOffset) + placementConfig.bottomOffset;
-			int l = random.nextInt(16);
-			return pos.add(j, k, l);
-		});
-	}
+    @Override
+    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, CountRangeConfig placementConfig, BlockPos pos) 
+    {
+	if(UltraAmplified.UAConfig.endIslandMaxHeight.get() <= placementConfig.bottomOffset)
+	    return Stream.empty();
+
+	return IntStream.range(0, UltraAmplified.UAConfig.endIslandSpawnrate.get() / placementConfig.count).mapToObj((p_215051_3_) -> {
+	    int x = random.nextInt(16);
+	    int range = Math.min(placementConfig.maximum, UltraAmplified.UAConfig.endIslandMaxHeight.get());
+	    int y = random.nextInt(range) + placementConfig.bottomOffset;
+	    int z = random.nextInt(16);
+	    return pos.add(x, y, z);
+	});
+    }
 }

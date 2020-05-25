@@ -28,6 +28,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.8.0.2 Changes) (1.15.2 Minecraft)
+
+##### Config:
+
+-Added a config option to change the maximum height that the tiny End Islands can spawn to in the End Field Biome. 
+
 ## (V.8.0.1 Changes) (1.15.2 Minecraft)
 
 ##### Structures:
