@@ -200,7 +200,7 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 					BlockState block = world.getBlockState(blockpos$Mutable);
 					if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds)
 					{
-					    if(blockpos$Mutable.getY() < world.getDimension().getSeaLevel()) 
+					    if(blockpos$Mutable.getY() < UltraAmplified.UAConfig.seaLevel.get()) 
 						world.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER, 2);
 					    else 
 						world.setBlockState(blockpos$Mutable, AIR, 2);
