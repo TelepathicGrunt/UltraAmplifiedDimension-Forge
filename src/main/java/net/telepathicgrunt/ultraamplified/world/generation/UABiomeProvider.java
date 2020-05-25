@@ -38,6 +38,7 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.AddOceansLayer
 import net.telepathicgrunt.ultraamplified.world.generation.layers.AddSunflowerPlainsLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeEdgeLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerPickerUA;
+import net.telepathicgrunt.ultraamplified.world.generation.layers.BiomeLayerSetupUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.HillsAndAmplifiedLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.MixOceanLayerUA;
 import net.telepathicgrunt.ultraamplified.world.generation.layers.ReduceOceansLayerUA;
@@ -45,15 +46,11 @@ import net.telepathicgrunt.ultraamplified.world.generation.layers.ReduceOceansLa
 
 public class UABiomeProvider extends BiomeProvider
 {
-
 	private final Layer genBiomes;
-	private final Set<Biome> biomes;
-
 
 	public UABiomeProvider(long seed, WorldType worldType)
 	{
-		super(UABiomes.getBiomeArray());
-		biomes = UABiomes.getBiomeArray();
+		super(UABiomes.getRegisteredBiomeArray());
 
 		//generates the world and biome layouts
 		Layer[] agenlayer = buildOverworldProcedure(seed, worldType);
@@ -213,7 +210,7 @@ public class UABiomeProvider extends BiomeProvider
 	{
 		return this.hasStructureCache.computeIfAbsent(structureIn, (p_205006_1_) ->
 		{
-			for (Biome biome : this.biomes)
+			for (Biome biome : BiomeLayerSetupUA.getSpawnableBiomes())
 			{
 				if (biome.hasStructure(p_205006_1_))
 				{
@@ -231,7 +228,7 @@ public class UABiomeProvider extends BiomeProvider
 	{
 		if (this.topBlocksCache.isEmpty())
 		{
-			for (Biome biome : this.biomes)
+			for (Biome biome : BiomeLayerSetupUA.getSpawnableBiomes())
 			{
 				this.topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
 			}

@@ -7,6 +7,7 @@ import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -78,30 +79,8 @@ public class AddOceansLayerUA implements IAreaTransformer0
 
 			if (Math.abs(d1 % 0.1D) < 0.03D)
 			{
-				if (biomeID == BiomeGenHelper.WARM_OCEAN)
-				{
-					biomeID = BiomeGenHelper.DEEP_WARM_OCEAN;
-				}
-
-				if (biomeID == BiomeGenHelper.LUKEWARM_OCEAN)
-				{
-					biomeID = BiomeGenHelper.DEEP_LUKEWARM_OCEAN;
-				}
-
-				if (biomeID == BiomeGenHelper.OCEAN)
-				{
-					biomeID = BiomeGenHelper.DEEP_OCEAN;
-				}
-
-				if (biomeID == BiomeGenHelper.COLD_OCEAN)
-				{
-					biomeID = BiomeGenHelper.DEEP_COLD_OCEAN;
-				}
-
-				if (biomeID == BiomeGenHelper.FROZEN_OCEAN)
-				{
-					biomeID = BiomeGenHelper.DEEP_FROZEN_OCEAN;
-				}
+			    //Turns the shallow ocean to their deep variant
+			    return UABiomes.BASE_TO_HILLS_MAP.get(biomeID);
 			}
 
 			return biomeID;

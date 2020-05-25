@@ -40,11 +40,15 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Fixed spawnrate config for Sunshrines and Stonehenges to not be capped at a rarity of 100 but now can be made rarer up to a rarity of a 1000.
 
+-Adjusted how temperature regions gets filled with biomes slightly if you disable all biomes in a temperature region.
+
 ##### Biomes:
 
 -Fixed rare bug where water will sometimes not be properly contained when ocean biomes meets land biomes.
 
 ##### Structures:
+
+-Fixed bug where if you use /locate for a UA biome that you disabled through config, the world would hang forever. Now, this hanging will not happen and the locate command will say the structure couldn't be found.
 
 -Fixed Sunshrine's beacon not showing a beam anymore. Now they will shoot beams into the sky again!
 

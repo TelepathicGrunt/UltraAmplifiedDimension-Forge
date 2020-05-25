@@ -331,8 +331,8 @@ public class UAFeatures {
 	RegUtil.register(registry, ICE_SPIKE_TEMPLE, "ice_spike_temple");
 	
 	RegUtil.register(registry, DUMMY_FORTRESS_STRUCTURE, "fortress");
-	UABiomes.getBiomeArray().forEach(biome -> biome.addStructure(DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)));
-	UABiomes.getBiomeArray().forEach(biome -> biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG))));
+	UABiomes.getRegisteredBiomeArray().forEach(biome -> biome.addStructure(DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)));
+	UABiomes.getRegisteredBiomeArray().forEach(biome -> biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG))));
 	
 	// registers the structure pieces.
 	StructureInitUA.registerStructurePieces();

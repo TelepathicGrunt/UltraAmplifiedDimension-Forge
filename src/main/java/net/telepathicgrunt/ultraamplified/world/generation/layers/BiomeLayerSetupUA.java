@@ -2,8 +2,10 @@ package net.telepathicgrunt.ultraamplified.world.generation.layers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.primitives.Ints;
@@ -38,10 +40,18 @@ public class BiomeLayerSetupUA
 	public static List<BiomeEntry> oceanBiomesList;
 	public static boolean noOcean = false;
 	private static ForgeRegistry<Biome> BiomeRegistry = ((ForgeRegistry<Biome>) ForgeRegistries.BIOMES);
-
+	
+	private static Set<Biome> allSpawnableBiomes;
+	public static Set<Biome> getSpawnableBiomes(){ 
+	    return allSpawnableBiomes; 
+	}
+	
 
 	public BiomeLayerSetupUA()
 	{
+		//Setup what m variants are mapped and not
+		UABiomes.mapMBiomes();
+		
 	    	// Update what biomes are used when re-entering a world without closing Minecraft.
 		setupBiomeEntries();
 		
@@ -51,8 +61,7 @@ public class BiomeLayerSetupUA
 		//make ocean layer grab all used oceans and their IDs for biome layout gen
 		AddOceansLayerUA.syncOceanList();
 		
-		//Setup what m variants are mapped and not
-		UABiomes.mapMBiomes();
+		setSpawnableBiomeSet();
 	}
 
 	
@@ -65,6 +74,9 @@ public class BiomeLayerSetupUA
 		@SubscribeEvent
 		public static void updateBiomeLayouts(final ModConfig.Reloading event)
 		{
+			//Setup what m variants are mapped and not
+			UABiomes.mapMBiomes();
+			
 		    	// Update what biomes are used when re-entering a world without closing Minecraft.
 			setupBiomeEntries(); 
 			
@@ -73,9 +85,8 @@ public class BiomeLayerSetupUA
 			
 			//make ocean layer grab all used oceans and their IDs for biome layout gen
 			AddOceansLayerUA.syncOceanList();
-			
-			//Setup what m variants are mapped and not
-			UABiomes.mapMBiomes();
+
+			setSpawnableBiomeSet();
 		}
 	}
 	
@@ -224,14 +235,17 @@ public class BiomeLayerSetupUA
 	{
 		//adds our ultra amplified version of the vanilla biomes while 
 	    	//checking to see if they are allowed by the user through the config
-
+	    	
 		//deserts
-		if (UltraAmplified.UAConfig.desert.get())
+		if (UltraAmplified.UAConfig.desert.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.DESERT, 40));
-		if (UltraAmplified.UAConfig.savanna.get())
+		}
+		if (UltraAmplified.UAConfig.savanna.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.SAVANNA, 40));
-		if (UltraAmplified.UAConfig.plains.get())
+		}
+		if (UltraAmplified.UAConfig.plains.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.PLAINS, 20));
+		}
 		if (UltraAmplified.UAConfig.netherland.get())
 			hotBiomesList.add(new BiomeEntry(UABiomes.NETHERLAND, 30));
 
@@ -357,15 +371,20 @@ public class BiomeLayerSetupUA
 	    
 
 	    
-		
+
+	    // switches direction of the list it checks outward from the current list
+	    int direction = 1;
+	    
 	    for (int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) 
 	    {
 		if (listOfBiomeLists.get(listIndex).isEmpty()) 
 		{
-		    // switches direction of the list it checks outward from the current list
-		    int direction = -1;
-		    for (int offsetIndex = 1; offsetIndex < listOfBiomeLists.size();) 
+		    boolean checkedBothSides = false;
+		    for (int offsetIndex = 1; offsetIndex <= listOfBiomeLists.size();) 
 		    {
+			//flip slide it is checking
+			direction *= -1;
+			
 			// clamp range to not do index out of bounds error
 			int newIndex = Ints.constrainToRange(listIndex + (offsetIndex * direction), 0, listOfBiomeLists.size() - 1);
 
@@ -379,9 +398,14 @@ public class BiomeLayerSetupUA
 			    break;
 			}
 
-			//flip slide it is checking and only increment when positive
-			direction *= -1;
-			if(newIndex > 0) offsetIndex++;
+			//only increment when both list on each side are checked
+			if(checkedBothSides) {
+			    offsetIndex++;
+			    checkedBothSides = false;
+			}
+			else {
+			    checkedBothSides = true;
+			}
 		    }
 
 		    // If this is reached and our current biome list is still empty, then all lists are empty.
@@ -401,6 +425,42 @@ public class BiomeLayerSetupUA
 		}
 	    }
 	}
+	
+	/**
+	 * Will create a set of all biomes that can spawn and pass it to the biome provider. 
+	 * That way, doing /locate for a structure in a non spawning biome won't make the game hang forever.
+	 */
+	private static void setSpawnableBiomeSet() {
+	    allSpawnableBiomes = new HashSet<Biome>();
+	    	
+	    List<List<BiomeEntry>> listOfBiomeLists = new ArrayList<List<BiomeEntry>>();
+	    listOfBiomeLists.add(badlandsBiomesList);
+	    listOfBiomeLists.add(jungleBiomesList);
+	    listOfBiomeLists.add(hotBiomesList);
+	    listOfBiomeLists.add(oceanBiomesList);
+	    listOfBiomeLists.add(warmBiomesList);
+	    listOfBiomeLists.add(coolBiomesList);
+	    listOfBiomeLists.add(giantTreeTaigaBiomesList);
+	    listOfBiomeLists.add(icyBiomesList);
+
+	    for (int listIndex = 0; listIndex < listOfBiomeLists.size(); listIndex++) 
+	    {
+		for (int biomeIndex = 0; biomeIndex < listOfBiomeLists.get(listIndex).size(); biomeIndex++) {
+		    allSpawnableBiomes.add(listOfBiomeLists.get(listIndex).get(biomeIndex).biome);
+		    
+		    Biome mutatedBiome = UABiomes.BASE_TO_MUTATION_MAP.get(listOfBiomeLists.get(listIndex).get(biomeIndex).biome);
+		    if(mutatedBiome != null)
+			allSpawnableBiomes.add(mutatedBiome);
+		    
+		    if(UABiomes.BASE_TO_HILLS_MAP.containsKey(BiomeRegistry.getID(listOfBiomeLists.get(listIndex).get(biomeIndex).biome))){
+			    Biome hillsBiome = BiomeRegistry.getValue(UABiomes.BASE_TO_HILLS_MAP.get(BiomeRegistry.getID(listOfBiomeLists.get(listIndex).get(biomeIndex).biome)));
+			    if(hillsBiome != null)
+				allSpawnableBiomes.add(hillsBiome);
+		    }
+		}
+	    }
+	}
+	
 	
 	/**
 	 * Checks to see if player turned off all UA oceans by config.

@@ -5,6 +5,7 @@ import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
 import net.telepathicgrunt.ultraamplified.UltraAmplified;
+import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.generation.BiomeGenHelper;
 
 
@@ -15,28 +16,28 @@ public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer
 	@Override
 	public int apply(INoiseRandom context, IArea area1, IArea area2, int x, int z)
 	{
-		int i = area1.getValue(x, z);
-		int j = area2.getValue(x, z);
-		if (!BiomeGenHelper.isOcean(i))
+		int biome1 = area1.getValue(x, z);
+		int biome2 = area2.getValue(x, z);
+		if (!BiomeGenHelper.isOcean(biome1))
 		{
-			return i;
+			return biome1;
 		}
 		else
 		{
-			for (int i1 = -8; i1 <= 8; i1 += 4)
+			for (int xOffset = -8; xOffset <= 8; xOffset += 4)
 			{
-				for (int j1 = -8; j1 <= 8; j1 += 4)
+				for (int zOffset = -8; zOffset <= 8; zOffset += 4)
 				{
-					int k1 = area1.getValue(x + i1, z + j1);
-					if (!BiomeGenHelper.isOcean(k1))
+					int nearbyBiome = area1.getValue(x + xOffset, z + zOffset);
+					if (!BiomeGenHelper.isOcean(nearbyBiome))
 					{
-						if (j == BiomeGenHelper.WARM_OCEAN)
+						if (biome2 == BiomeGenHelper.WARM_OCEAN)
 						{
 							if (UltraAmplified.UAConfig.lukewarmOcean.get())
 								return BiomeGenHelper.LUKEWARM_OCEAN;
 						}
 
-						if (j == BiomeGenHelper.FROZEN_OCEAN)
+						if (biome2 == BiomeGenHelper.FROZEN_OCEAN)
 						{
 							if (UltraAmplified.UAConfig.coldOcean.get())
 								return BiomeGenHelper.COLD_OCEAN;
@@ -45,30 +46,16 @@ public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer
 				}
 			}
 
-			if (i == BiomeGenHelper.DEEP_OCEAN)
+			if (biome1 == BiomeGenHelper.DEEP_OCEAN)
 			{
-				if (j == BiomeGenHelper.LUKEWARM_OCEAN)
+				if (biome2 != BiomeGenHelper.WARM_OCEAN)
 				{
-					return BiomeGenHelper.DEEP_LUKEWARM_OCEAN;
-				}
-
-				if (j == BiomeGenHelper.OCEAN)
-				{
-					return BiomeGenHelper.DEEP_OCEAN;
-				}
-
-				if (j == BiomeGenHelper.COLD_OCEAN)
-				{
-					return BiomeGenHelper.DEEP_COLD_OCEAN;
-				}
-
-				if (j == BiomeGenHelper.FROZEN_OCEAN)
-				{
-					return BiomeGenHelper.DEEP_FROZEN_OCEAN;
+				    //Turns the shallow ocean to their deep variant
+				    return UABiomes.BASE_TO_HILLS_MAP.get(biome2);
 				}
 			}
 
-			return j;
+			return biome2;
 		}
 	}
 }

@@ -186,7 +186,7 @@ public class BiomeAddModdedFeatures
 			// we have a list of vanilla biomes in the order to match the UA biome list in BiomeInit.
 			// Thus we only need to iterate through the vanilla list to add modded features and mobs to UA biomes
 			int biomeIndex = 0;
-			for (Biome biome : UABiomes.getBiomeArray())
+			for (Biome biome : UABiomes.getRegisteredBiomeArray())
 			{
 				if (biomeIndex == vanillaBiomesToCheck.length)
 				{
@@ -425,7 +425,7 @@ public class BiomeAddModdedFeatures
 		// loop through all features and mobs in UA Biomes and checks to see if they
 		// have a minecraft or UA namespace.
 		// If not, it is a modded feature and we should remove it from the UA biome
-		for (Biome uaBiome : UABiomes.getBiomeArray())
+		for (Biome uaBiome : UABiomes.getRegisteredBiomeArray())
 		{
 
 			// FEATURES

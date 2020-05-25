@@ -32,18 +32,18 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 
 	@Override
-	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, HugeTreeFeatureConfig p_225557_7_)
+	public boolean place(IWorldGenerationReader worldReader, Random rand, BlockPos position, Set<BlockPos> leavesSet, Set<BlockPos> trunkSet, MutableBoundingBox boundingBox, HugeTreeFeatureConfig config)
 	{
-		int height = this.func_227256_a_(rand, p_225557_7_);
+		int height = this.func_227256_a_(rand, config);
 		IWorld world = (IWorld) worldReader;
 
-		if (!this.hasRoom(world, position, height + 8, p_225557_7_))
+		if (!this.hasRoom(world, position, height + 8, config))
 		{
 			return false;
 		}
 		else
 		{
-			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, boundingBox, p_225557_5_, p_225557_7_);
+			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, boundingBox, trunkSet, config);
 
 			for (int currentHeight = 0; currentHeight < height; ++currentHeight)
 			{
@@ -51,7 +51,7 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 				if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 				{
-					this.func_227216_a_(world, rand, position.up(currentHeight), p_225557_4_, boundingBox, p_225557_7_);
+					this.func_227216_a_(world, rand, position.up(currentHeight), leavesSet, boundingBox, config);
 				}
 
 				if (currentHeight < height - 1)
@@ -60,21 +60,21 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), p_225557_4_, boundingBox, p_225557_7_);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 0), leavesSet, boundingBox, config);
 					}
 
 					iblockstate = world.getBlockState(position.add(1, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
+						this.func_227216_a_(world, rand, position.add(1, currentHeight, 1), leavesSet, boundingBox, config);
 					}
 
 					iblockstate = world.getBlockState(position.add(0, currentHeight, 1));
 
 					if (iblockstate.getMaterial() == Material.AIR || iblockstate.getMaterial() == Material.LEAVES)
 					{
-						this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), p_225557_4_, boundingBox, p_225557_7_);
+						this.func_227216_a_(world, rand, position.add(0, currentHeight, 1), leavesSet, boundingBox, config);
 					}
 				}
 			}
