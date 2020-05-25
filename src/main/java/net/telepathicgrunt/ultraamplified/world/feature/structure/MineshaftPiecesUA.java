@@ -881,10 +881,10 @@ public class MineshaftPiecesUA
 		private final boolean normalRoom;
 
 
-		public Room(int p_i47137_1_, Random p_i47137_2_, int p_i47137_3_, int p_i47137_4_, MineshaftStructureUA.Type p_i47137_5_)
+		public Room(int pieceNum, Random random, int x, int z, MineshaftStructureUA.Type type)
 		{
-			super(StructureInitUA.MSROOMUA, p_i47137_1_, p_i47137_5_);
-			this.mineShaftType = p_i47137_5_;
+			super(StructureInitUA.MSROOMUA, pieceNum, type);
+			this.mineShaftType = type;
 			// if the pit rooms are not allowed, makes this boolean always true.
 			// if pits are allowed and normal rooms are not allowed, set to always false.
 			// else if both are allowed, runs RNG to determine which room to generate.
@@ -892,7 +892,7 @@ public class MineshaftPiecesUA
 			{
 				if (UltraAmplified.UAConfig.mineshaftAbovegroundAllowed.get())
 				{
-					normalRoom = p_i47137_2_.nextInt(5) < 3;
+					normalRoom = random.nextInt(5) < 3;
 				}
 				else
 				{
@@ -907,29 +907,30 @@ public class MineshaftPiecesUA
 			if (normalRoom)
 			{
 				// normal dirt room mineshaft
-				this.boundingBox = new MutableBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 30, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
+				this.boundingBox = new MutableBoundingBox(x, 20, z, x + 7 + random.nextInt(6), 30, z + 7 + random.nextInt(6));
 			}
 			else
 			{
 				// giant pit-like dirt room mineshafts
-				int height = p_i47137_2_.nextInt(90);
-				this.boundingBox = new MutableBoundingBox(p_i47137_3_, 20, p_i47137_4_, p_i47137_3_ + 7 + p_i47137_2_.nextInt(6), 150 + height, p_i47137_4_ + 7 + p_i47137_2_.nextInt(6));
+				int extraHeight = random.nextInt(90 / (245 / UltraAmplified.UAConfig.yMaximum.get()));
+				int baseHeight = Math.min(UltraAmplified.UAConfig.yMaximum.get()-40, 150);
+				this.boundingBox = new MutableBoundingBox(x, 20, z, x + 7 + random.nextInt(6), baseHeight + extraHeight, z + 7 + random.nextInt(6));
 			}
 
 		}
 
 
-		public Room(TemplateManager p_i50451_1_, CompoundNBT p_i50451_2_)
+		public Room(TemplateManager templateManager, CompoundNBT random)
 		{
-			super(StructureInitUA.MSROOMUA, p_i50451_2_);
-			ListNBT listnbt = p_i50451_2_.getList("Entrances", 11);
+			super(StructureInitUA.MSROOMUA, random);
+			ListNBT listnbt = random.getList("Entrances", 11);
 
 			for (int i = 0; i < listnbt.size(); ++i)
 			{
 				this.roomsLinkedToTheRoom.add(new MutableBoundingBox(listnbt.getIntArray(i)));
 			}
 
-			normalRoom = p_i50451_2_.getBoolean("NormalRoom");
+			normalRoom = random.getBoolean("NormalRoom");
 
 		}
 

@@ -34,6 +34,20 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Added a config option to change the maximum height that the tiny End Islands can spawn to in the End Field Biome. 
 
+-Made the yMaximum config scale the terrain better so it won't get cut off so sharply at the specified height.
+
+-yMaximum config entry will now impact the spawn height of Mineshafts and Strongholds so they don't float too high in the air if yMaximum is set very low.
+
+-Fixed spawnrate config for Sunshrines and Stonehenges to not be capped at a rarity of 100 but now can be made rarer up to a rarity of a 1000.
+
+##### Biomes:
+
+-Fixed rare bug where water will sometimes not be properly contained when ocean biomes meets land biomes.
+
+##### Structures:
+
+-Fixed Sunshrine's beacon not showing a beam anymore. Now they will shoot beams into the sky again!
+
 ## (V.8.0.1 Changes) (1.15.2 Minecraft)
 
 ##### Structures:

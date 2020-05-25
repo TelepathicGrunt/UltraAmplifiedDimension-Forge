@@ -31,7 +31,7 @@ public class HeightBiasedEndIslandRange extends Placement<CountRangeConfig>
 
 	return IntStream.range(0, UltraAmplified.UAConfig.endIslandSpawnrate.get() / placementConfig.count).mapToObj((p_215051_3_) -> {
 	    int x = random.nextInt(16);
-	    int range = Math.min(placementConfig.maximum, UltraAmplified.UAConfig.endIslandMaxHeight.get());
+	    int range = Math.min(placementConfig.maximum, UltraAmplified.UAConfig.endIslandMaxHeight.get()-placementConfig.bottomOffset);
 	    int y = random.nextInt(range) + placementConfig.bottomOffset;
 	    int z = random.nextInt(16);
 	    return pos.add(x, y, z);

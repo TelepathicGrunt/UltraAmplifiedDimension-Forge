@@ -149,7 +149,8 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 			}
 			
 			this.recalculateStructureSize();
-			this.func_214626_a(this.rand, 100, 120);
+			int maxHeight = Math.min(UltraAmplified.UAConfig.yMaximum.get()-40, 100);
+			this.func_214626_a(this.rand, maxHeight, maxHeight + 20);
 			//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
 		}
 	}

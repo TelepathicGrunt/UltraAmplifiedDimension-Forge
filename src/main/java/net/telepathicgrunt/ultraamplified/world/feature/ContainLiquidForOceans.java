@@ -189,7 +189,7 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 			for (int z = 0; z < 16; ++z)
 			{
 				//only check along chunk edges for better performance
-				if ((x != 0 && x != 16) && (z != 0 && z != 16))
+				if ((x != 0 && x != 15) && (z != 0 && z != 15))
 				{
 					continue;
 				}

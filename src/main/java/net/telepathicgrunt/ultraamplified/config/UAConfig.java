@@ -407,14 +407,14 @@ public class UAConfig
 			                		+ "1 for Sun Shrines spawning in most chunks and 1000 for very rare spawn.\r\n " 
 			                		+ "Spawns mainly in relic variant of biomes.")
 			                .translation("ultraamplified.config.structure.sunshrinespawnrate")
-			                .defineInRange("sunShrineSpawnrate", 130, 1, 100));
+			                .defineInRange("sunShrineSpawnrate", 130, 1, 1000));
 		
 					stonehengeSpawnrate = subscriber.subscribe(builder
 			                .comment("\r\n How rare are Stonehenges.\r\n " 
 			                		+ "1 for Stonehenges spawning in most chunks and 1000 for very rare spawn.\r\n " 
 			                		+ "Spawns mainly in relic variant of biomes.")
 			                .translation("ultraamplified.config.structure.stonehengespawnrate")
-			                .defineInRange("stonehengeSpawnrate", 15, 1, 100));
+			                .defineInRange("stonehengeSpawnrate", 15, 1, 1000));
 		
 					hangingRuinsSpawnrate = subscriber.subscribe(builder
 			                .comment("\r\n How rare are Hanging Ruins.\r\n " 
