@@ -29,7 +29,7 @@ repositories {
 	}
 }
 
-version = '1.15.2-8.0.1'
+version = '1.15.2-8.0.2'
 group = 'net.telepathicgrunt.ultraamplified' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ultra_amplified_dimension'
 

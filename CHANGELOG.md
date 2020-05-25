@@ -42,6 +42,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Adjusted how temperature regions gets filled with biomes slightly if you disable all biomes in a temperature region.
 
+-Added new configs to turn on and off columns and ramps as well as control their spawnrates.
+
 ##### Biomes:
 
 -Fixed rare bug where water will sometimes not be properly contained when ocean biomes meets land biomes.
@@ -51,6 +53,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 -Fixed bug where if you use /locate for a UA biome that you disabled through config, the world would hang forever. Now, this hanging will not happen and the locate command will say the structure couldn't be found.
 
 -Fixed Sunshrine's beacon not showing a beam anymore. Now they will shoot beams into the sky again!
+
+-Fixed Ramps placing air blocks instead of water when going below sealevel.
 
 ## (V.8.0.1 Changes) (1.15.2 Minecraft)
 

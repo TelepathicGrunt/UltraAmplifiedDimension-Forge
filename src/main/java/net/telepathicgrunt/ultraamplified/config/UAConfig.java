@@ -59,7 +59,10 @@ public class UAConfig
 		public ConfigValueListener<Integer> ravineSpawnrate;
 		public ConfigValueListener<Integer> caveCavitySpawnrate;
 		public ConfigValueListener<Integer> oceanCaveSpawnrate;
-		public ConfigValueListener<Boolean> pillarGen;
+		public ConfigValueListener<Boolean> columnGen;
+		public ConfigValueListener<Integer> columnSpawnrate;
+		public ConfigValueListener<Integer> rampSpawnrate;
+		public ConfigValueListener<Boolean> rampGen;
 		public ConfigValueListener<Boolean> honeyLakeGen;
 		public ConfigValueListener<Boolean> slimeLakeGen;
 		public ConfigValueListener<Boolean> waterLakeGen;
@@ -343,11 +346,32 @@ public class UAConfig
 			                .translation("ultraamplified.config.feature.oceancavespawnrate")
 			                .defineInRange("oceanCaveSpawnrate", 20, 0, 100));
 		
-					pillarGen = subscriber.subscribe(builder
-			                .comment("\r\n Controls whether pillars features (both ramp and straight kind) spawn or not.")
-			                .translation("ultraamplified.config.feature.pillargen")
-			                .define("pillarGen", true));
-		
+					columnGen = subscriber.subscribe(builder
+			                .comment("\r\n Controls whether columns/pillars features spawn or not."+
+			                	 "\r\n Note: You need to close and reopen world for changes to take effect.")
+			                .translation("ultraamplified.config.feature.columngen")
+			                .define("columnGen", true));
+
+					columnSpawnrate = subscriber.subscribe(builder
+			                .comment("\r\n How often will column/pillars spawn."+
+			                	 "\r\n Default is 2 with 40 being an insane amount of columns."+
+			                	 "\r\n Note: You need to close and reopen world for changes to take effect.")
+			                .translation("ultraamplified.config.feature.columnspawnrate")
+			                .defineInRange("columnSpawnrate", 2, 1, 40));
+					
+					rampGen = subscriber.subscribe(builder
+			                .comment("\r\n Controls whether ramp features spawn or not."+
+			                	 "\r\n Note: You need to close and reopen world for changes to take effect.")
+			                .translation("ultraamplified.config.feature.rampgen")
+			                .define("rampGen", true));
+
+					rampSpawnrate = subscriber.subscribe(builder
+			                .comment("\r\n How often will ramps spawn."+
+			                	 "\r\n Default is 2 with 40 being an insane amount of ramps."+
+			                	 "\r\n Note: You need to close and reopen world for changes to take effect.")
+			                .translation("ultraamplified.config.feature.rampspawnrate")
+			                .defineInRange("rampSpawnrate", 2, 1, 40));
+					
 					honeyLakeGen = subscriber.subscribe(builder
 			                .comment("\r\n Controls whether Honey Lakes spawn or not.")
 			                .translation("ultraamplified.config.feature.honeylakegen")

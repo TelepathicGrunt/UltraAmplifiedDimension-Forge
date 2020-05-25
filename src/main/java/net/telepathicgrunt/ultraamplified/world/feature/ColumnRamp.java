@@ -27,6 +27,8 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 {
 	protected long seed;
 	private final BlockState AIR = Blocks.AIR.getDefaultState();
+	private final BlockState WATER = Blocks.WATER.getDefaultState();
+	private final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	public final Set<Block> irreplacableBlocks;
 
 
@@ -42,7 +44,7 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig)
 	{
 		//check if user turned pillars off.
-		if (!UltraAmplified.UAConfig.pillarGen.get())
+		if (!UltraAmplified.UAConfig.rampGen.get())
 		{
 			return false;
 		}
@@ -198,6 +200,9 @@ public class ColumnRamp extends Feature<ColumnBlocksConfig>
 					BlockState block = world.getBlockState(blockpos$Mutable);
 					if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds)
 					{
+					    if(blockpos$Mutable.getY() < world.getDimension().getSeaLevel()) 
+						world.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER, 2);
+					    else 
 						world.setBlockState(blockpos$Mutable, AIR, 2);
 
 						//adds top block to exposed middle block after air was set
