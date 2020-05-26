@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -39,6 +40,11 @@ public class TreeGiantBirch extends HugeTreesFeature<HugeTreeFeatureConfig>
 		}
 		else
 		{
+		    	world.setBlockState(position.add(0, -1, 0), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(0, -1, 1), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(1, -1, 0), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(1, -1, 1), Blocks.DIRT.getDefaultState(), 2);
+		    	
 			//adds the leaves on crown
 			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height - 4, rand, boundingBox, leafSet, treeConfig);
 

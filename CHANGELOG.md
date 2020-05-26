@@ -28,6 +28,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.8.0.3 Changes) (1.15.2 Minecraft)
+
+##### Biomes:
+
+-Giant Tree Taigas and Tall Birch Forests's 2x2 trees now gets dirt placed below the trunk so the trunk cannot be floating in midair.
+
 ## (V.8.0.2 Changes) (1.15.2 Minecraft)
 
 ##### Config:

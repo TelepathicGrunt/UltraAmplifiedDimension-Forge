@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -43,6 +44,10 @@ public class TreeGiantPine extends HugeTreesFeature<HugeTreeFeatureConfig>
 		}
 		else
 		{
+		    	world.setBlockState(position.add(0, -1, 0), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(0, -1, 1), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(1, -1, 0), Blocks.DIRT.getDefaultState(), 2);
+		    	world.setBlockState(position.add(1, -1, 1), Blocks.DIRT.getDefaultState(), 2);
 			this.createCrown(world, position.getX(), position.getZ(), position.getY() + height, 0, rand, boundingBox, trunkSet, config);
 
 			for (int currentHeight = 0; currentHeight < height; ++currentHeight)
