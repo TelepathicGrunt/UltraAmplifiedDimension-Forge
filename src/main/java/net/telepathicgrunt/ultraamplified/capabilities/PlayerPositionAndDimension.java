@@ -76,10 +76,6 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		return nonUAYaw;
 	}
 
-
-	////////////////////////////////////////////////////////////
-	//UA stuff
-
 	@Override
 	public void setNonUAPos(Vec3d incomingPos)
 	{
@@ -93,6 +89,9 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		return nonUABlockPos;
 	}
 
+	
+	////////////////////////////////////////////////////////////
+	//UA stuff
 
 	@Override
 	public void setUAPos(Vec3d incomingPos)
@@ -183,10 +182,10 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		data = fixData(data);
 
 		//temp variables to hold what is read from nbt
-		Vec3d storedBlockPosNonUA = null;
+		Vec3d storedPositionNonUA = null;
 		float storedNonUAPitch = 3.75F;
 		float storedNonUAYaw = 0F;
-		Vec3d storedBlockPosUA = null;
+		Vec3d storePositionUA = null;
 		float storedUAPitch = 3.75F;
 		float storedUAYaw = 0F;
 		DimensionType storedDimension = null;
@@ -196,7 +195,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		//Need check for null so we can let rest for code know the player has not exit the dimension yet for the first time.
 		if (data.contains("NonUA_X") && data.contains("NonUA_Y") && data.contains("NonUA_Z"))
 		{
-			storedBlockPosNonUA = new Vec3d(data.getFloat("NonUA_X"), data.getFloat("NonUA_Y"), data.getFloat("NonUA_Z"));
+			storedPositionNonUA = new Vec3d(data.getFloat("NonUA_X"), data.getFloat("NonUA_Y"), data.getFloat("NonUA_Z"));
 		}
 		storedNonUAPitch = data.getFloat("NonUAPitch");
 		storedNonUAYaw = data.getFloat("NonUAYaw");
@@ -205,7 +204,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		//Need check for null so we can let rest for code know the player has not exit the dimension yet for the first time.
 		if (data.contains("UA_X") && data.contains("UA_Y") && data.contains("UA_Z"))
 		{
-			storedBlockPosUA = new Vec3d(data.getFloat("UA_X"), data.getFloat("UA_Y"), data.getFloat("UA_Z"));
+			storePositionUA = new Vec3d(data.getFloat("UA_X"), data.getFloat("UA_Y"), data.getFloat("UA_Z"));
 		}
 		storedUAPitch = data.getFloat("UAPitch");
 		storedUAYaw = data.getFloat("UAYaw");
@@ -213,11 +212,11 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim
 		this.setNonUADim(storedDimension);
 		this.setNonUAPitch(storedNonUAPitch);
 		this.setNonUAYaw(storedNonUAYaw);
-		this.setNonUAPos(storedBlockPosNonUA);
+		this.setNonUAPos(storedPositionNonUA);
 
 		this.setUAPitch(storedUAPitch);
 		this.setUAYaw(storedUAYaw);
-		this.setUAPos(storedBlockPosUA);
+		this.setUAPos(storePositionUA);
 	}
 
 
