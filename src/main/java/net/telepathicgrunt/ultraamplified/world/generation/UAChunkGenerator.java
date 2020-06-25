@@ -46,7 +46,7 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 
 
     public UAChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn) {
-	super(world, provider, 4, 8, UltraAmplified.UAConfig.yMaximum.get(), settingsIn);
+	super(world, provider, 4, 8, UltraAmplified.UATerrainConfig.yMaximum.get(), settingsIn);
 	this.randomSeed.skip(2620);
 	this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
     }
@@ -65,7 +65,18 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 
     @Override
     protected void fillNoiseColumn(double[] areaArrayIn, int x, int z) {
-	this.setupPerlinNoiseGenerators(areaArrayIn, x, z, UltraAmplified.UAConfig.secretSetting.get() ? 117104.946D : UltraAmplified.UAConfig.xzTerrainModifier.get(), UltraAmplified.UAConfig.secretSetting.get() ? 468419.786D : UltraAmplified.UAConfig.yTerrainModifier.get(), UltraAmplified.UAConfig.xzScaleModifier.get(), UltraAmplified.UAConfig.secretSetting.get() ? 73.1905915D : UltraAmplified.UAConfig.yScaleModifier.get(), 8.555149841308594D, 4.277574920654297D, 3, -10);
+	this.setupPerlinNoiseGenerators(
+		areaArrayIn, 
+		x, 
+		z, 
+		UltraAmplified.UATerrainConfig.secretSetting.get() ? 117104.946D : UltraAmplified.UATerrainConfig.xzTerrainModifier.get(), 
+		UltraAmplified.UATerrainConfig.secretSetting.get() ? 468419.786D : UltraAmplified.UATerrainConfig.yTerrainModifier.get(), 
+		UltraAmplified.UATerrainConfig.xzScaleModifier.get(), 
+		UltraAmplified.UATerrainConfig.secretSetting.get() ? 73.1905915D : UltraAmplified.UATerrainConfig.yScaleModifier.get(), 
+		8.555149841308594D, 
+		4.277574920654297D,
+		3, 
+		-10);
     }
 
 
@@ -229,13 +240,13 @@ public class UAChunkGenerator extends UANoiseChunkGenerator<OverworldGenSettings
 
     @Override
     public int getGroundHeight() {
-	return UltraAmplified.UAConfig.seaLevel.get() + 1;
+	return UltraAmplified.UATerrainConfig.seaLevel.get() + 1;
     }
 
 
     @Override
     public int getSeaLevel() {
-	return UltraAmplified.UAConfig.seaLevel.get();
+	return UltraAmplified.UATerrainConfig.seaLevel.get();
     }
 
 }

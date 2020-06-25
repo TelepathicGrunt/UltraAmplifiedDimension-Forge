@@ -71,7 +71,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 	this.verticalNoiseGranularity = verticalNoiseGranularityIn;
 	this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;
 	this.defaultBlock = STONE;
-	this.defaultFluid = UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER;
+	this.defaultFluid = UltraAmplified.UATerrainConfig.lavaOcean.get() ? LAVA : WATER;
 	this.noiseSizeX = 16 / this.horizontalNoiseGranularity;
 	this.noiseSizeY = maximumHeight / this.verticalNoiseGranularity;
 	this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
@@ -158,7 +158,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 	double d0 = (double) k / (double) this.horizontalNoiseGranularity;
 	double d1 = (double) l / (double) this.horizontalNoiseGranularity;
 	double[][] adouble = new double[][] { this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1) };
-	int seaLevel = UltraAmplified.UAConfig.seaLevel.get();
+	int seaLevel = UltraAmplified.UATerrainConfig.seaLevel.get();
 
 	for (int j1 = this.noiseSizeY - 1; j1 >= 0; --j1) {
 	    double d2 = adouble[0][j1];
@@ -218,7 +218,7 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 		int l1 = l + j1;
 		int i2 = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
 		double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
-		region.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, chunk, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, UltraAmplified.UAConfig.seaLevel.get(), this.world.getSeed());
+		region.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, chunk, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, UltraAmplified.UATerrainConfig.seaLevel.get(), this.world.getSeed());
 	    }
 	}
 
@@ -355,11 +355,11 @@ public abstract class UANoiseChunkGenerator<T extends GenerationSettings> extend
 				objectlistiterator1.back(objectlist1.size());
 				BlockState blockstate;
 
-				if (d15 > 0.0D && currentY <= UltraAmplified.UAConfig.yMaximum.get()) {
+				if (d15 > 0.0D && currentY <= UltraAmplified.UATerrainConfig.yMaximum.get()) {
 				    // place the biome's solid block
 				    blockstate = this.defaultBlock;
 				}
-				else if (currentY < UltraAmplified.UAConfig.seaLevel.get()) {
+				else if (currentY < UltraAmplified.UATerrainConfig.seaLevel.get()) {
 				    blockstate = this.defaultFluid;
 				}
 				else {

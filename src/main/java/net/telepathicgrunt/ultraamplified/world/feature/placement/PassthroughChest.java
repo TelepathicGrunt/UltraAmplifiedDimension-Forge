@@ -28,7 +28,7 @@ public class PassthroughChest extends Placement<NoPlacementConfig>
 	{
 
 		//needed so we can prevent vanilla treasure chest from spawning if config is off
-		if (!UltraAmplified.UAConfig.chestGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.chestGeneration.get())
 		{
 			return Stream.empty();
 		}

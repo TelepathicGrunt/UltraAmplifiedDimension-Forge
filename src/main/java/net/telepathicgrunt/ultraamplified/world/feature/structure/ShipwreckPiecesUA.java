@@ -143,7 +143,7 @@ public class ShipwreckPiecesUA
 		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random random, MutableBoundingBox structureBoundingBox)
 		{
-			if (UltraAmplified.UAConfig.chestGeneration.get())
+			if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 			{
 				if ("map_chest".equals(function))
 				{

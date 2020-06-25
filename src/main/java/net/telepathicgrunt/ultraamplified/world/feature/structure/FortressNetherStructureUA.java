@@ -55,7 +55,7 @@ public class FortressNetherStructureUA extends Structure<NoFeatureConfig>
 
     @Override
     protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-	int maxDistance = UltraAmplified.UAConfig.netherFortressSpawnrate.get();
+	int maxDistance = UltraAmplified.UAStructuresConfig.netherFortressSpawnrate.get();
 	int minDistance = 8;
 	
 	if (maxDistance < 9) {
@@ -80,7 +80,7 @@ public class FortressNetherStructureUA extends Structure<NoFeatureConfig>
     @Override
     public boolean canBeGenerated(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome) {
 
-	if (UltraAmplified.UAConfig.netherFortressSpawnrate.get() != 101) {
+	if (UltraAmplified.UAStructuresConfig.netherFortressSpawnrate.get() != 101) {
 	    int i = chunkPosX >> 4;
 	    int j = chunkPosZ >> 4;
 	    rand.setSeed(i ^ j << 4 ^ chunkGen.getSeed());

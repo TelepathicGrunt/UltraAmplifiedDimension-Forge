@@ -73,12 +73,12 @@ public enum BiomeGenHelper
 	{
 		biomesComboToEdge.clear();
 
-		if (UltraAmplified.UAConfig.rockyField.get())
+		if (UltraAmplified.UABiomesConfig.rockyField.get())
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(DESERT, SNOWY_TUNDRA), WOODED_ROCKY_FIELD);
 		}
 
-		if (UltraAmplified.UAConfig.plains.get())
+		if (UltraAmplified.UABiomesConfig.plains.get())
 		{
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, DESERT), PLAINS);
 			biomesComboToEdge.put(new Pair<Integer, Integer>(SWAMP, SNOWY_TUNDRA), PLAINS);
@@ -90,7 +90,7 @@ public enum BiomeGenHelper
 		{
 			int biomeID = BiomeRegistry.getID(biome);
 
-			if (UltraAmplified.UAConfig.savanna.get())
+			if (UltraAmplified.UABiomesConfig.savanna.get())
 			{
 				if (biomeID != NETHERLAND && biomeID != SAVANNA)
 				{
@@ -108,7 +108,7 @@ public enum BiomeGenHelper
 				biomesComboToEdge.put(new Pair<Integer, Integer>(JUNGLE, biomeID), JUNGLE_EDGE);
 			}
 
-			if (UltraAmplified.UAConfig.frozenDesert.get())
+			if (UltraAmplified.UABiomesConfig.frozenDesert.get())
 			{
 				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.ICY && !BiomeGenHelper.isOcean(biomeID))
 				{
@@ -127,7 +127,7 @@ public enum BiomeGenHelper
 				}
 			}
 
-			if (UltraAmplified.UAConfig.stonePlains.get())
+			if (UltraAmplified.UABiomesConfig.stonePlains.get())
 			{
 				if (BiomeRegistry.getValue(biomeID).getCategory() == Biome.Category.EXTREME_HILLS)
 				{

@@ -61,20 +61,20 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig>
 				boolean useCoralBottom = oceanBiome.getSurfaceBuilderConfig().getTop() == DEAD_CORAL_ARRAY[0];
 				blockpos$Mutable.setPos(position.getX() + x, 256, position.getZ() + z);
 
-				for (; blockpos$Mutable.getY() >= UltraAmplified.UAConfig.seaLevel.get(); blockpos$Mutable.move(Direction.DOWN))
+				for (; blockpos$Mutable.getY() >= UltraAmplified.UATerrainConfig.seaLevel.get(); blockpos$Mutable.move(Direction.DOWN))
 				{
 
 					currentblock = world.getBlockState(blockpos$Mutable);
 
 					//move down until we hit a liquid block
-					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= UltraAmplified.UAConfig.seaLevel.get())
+					while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= UltraAmplified.UATerrainConfig.seaLevel.get())
 					{
 						blockpos$Mutable.move(Direction.DOWN);
 						currentblock = world.getBlockState(blockpos$Mutable);
 					}
 
 					//too low now, break out of the loop and move to next xz coordinate
-					if (blockpos$Mutable.getY() < UltraAmplified.UAConfig.seaLevel.get())
+					if (blockpos$Mutable.getY() < UltraAmplified.UATerrainConfig.seaLevel.get())
 					{
 						break;
 					}

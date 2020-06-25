@@ -24,8 +24,18 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.telepathicgrunt.ultraamplified.blocks.BlockColorManager;
 import net.telepathicgrunt.ultraamplified.blocks.UABlocks;
 import net.telepathicgrunt.ultraamplified.capabilities.CapabilityPlayerPosAndDim;
-import net.telepathicgrunt.ultraamplified.config.UAConfig;
-import net.telepathicgrunt.ultraamplified.config.UAConfig.UAConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UABiomesConfig;
+import net.telepathicgrunt.ultraamplified.config.UABiomesConfig.UABiomesConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UADimensionConfig;
+import net.telepathicgrunt.ultraamplified.config.UADimensionConfig.UADimensionConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UAFeaturesConfig;
+import net.telepathicgrunt.ultraamplified.config.UAFeaturesConfig.UAFeaturesConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UAModCompatConfig;
+import net.telepathicgrunt.ultraamplified.config.UAModCompatConfig.UAModCompatConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UAStructuresConfig;
+import net.telepathicgrunt.ultraamplified.config.UAStructuresConfig.UAStructuresConfigValues;
+import net.telepathicgrunt.ultraamplified.config.UATerrainConfig;
+import net.telepathicgrunt.ultraamplified.config.UATerrainConfig.UATerrainConfigValues;
 import net.telepathicgrunt.ultraamplified.utils.ConfigHelper;
 import net.telepathicgrunt.ultraamplified.world.biome.UABiomes;
 import net.telepathicgrunt.ultraamplified.world.biome.surfacebuilder.UASurfaceBuilders;
@@ -51,10 +61,15 @@ import net.telepathicgrunt.ultraamplified.world.worldtypes.UAWorldType;
 @Mod(UltraAmplified.MODID)
 public class UltraAmplified
 {
-
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-	public static UAConfigValues UAConfig = null;
+	
+	public static UABiomesConfigValues UABiomesConfig = null;
+	public static UADimensionConfigValues UADimensionConfig = null;
+	public static UAFeaturesConfigValues UAFeaturesConfig = null;
+	public static UAModCompatConfigValues UAModCompatConfig = null;
+	public static UAStructuresConfigValues UAStructuresConfig = null;
+	public static UATerrainConfigValues UATerrainConfig = null;
 
 	//worldTypes
 	public static WorldType UltraAmplifiedWorldType;
@@ -71,7 +86,12 @@ public class UltraAmplified
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ClientEvents.subscribeClientEvents(modEventBus, forgeBus)); 
 		
 		//generates config
-		UAConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAConfig.UAConfigValues(builder, subscriber));
+		UABiomesConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UABiomesConfig.UABiomesConfigValues(builder, subscriber), "ultra_amplified_dimension-biomes.toml");
+		UADimensionConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UADimensionConfig.UADimensionConfigValues(builder, subscriber), "ultra_amplified_dimension-dimension.toml");
+		UAFeaturesConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAFeaturesConfig.UAFeaturesConfigValues(builder, subscriber), "ultra_amplified_dimension-features.toml");
+		UAModCompatConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAModCompatConfig.UAModCompatConfigValues(builder, subscriber), "ultra_amplified_dimension-mod_compat.toml");
+		UAStructuresConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UAStructuresConfig.UAStructuresConfigValues(builder, subscriber), "ultra_amplified_dimension-structures.toml");
+		UATerrainConfig = ConfigHelper.register(ModConfig.Type.SERVER, (builder, subscriber) -> new UATerrainConfig.UATerrainConfigValues(builder, subscriber), "ultra_amplified_dimension-terrain.toml");
 	}
 
 

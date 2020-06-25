@@ -25,7 +25,7 @@ public class HeightBasedLavafallsRange2 extends SimplePlacement<CountRangeConfig
 	public Stream<BlockPos> getPositions(Random rand, CountRangeConfig config, BlockPos pos)
 	{
 		//we do * instead of / as no biome reduces number of lavafalls. only 2 increases the number of lavafalls
-		return IntStream.range(0, UltraAmplified.UAConfig.lavafallSpawnrate.get() * config.count).mapToObj((p_215057_3_) ->
+		return IntStream.range(0, UltraAmplified.UAFeaturesConfig.lavafallSpawnrate.get() * config.count).mapToObj((p_215057_3_) ->
 		{
 			int i = rand.nextInt(16);
 			int j = rand.nextInt(rand.nextInt(rand.nextInt(config.maximum - config.topOffset) + config.bottomOffset) + config.bottomOffset);

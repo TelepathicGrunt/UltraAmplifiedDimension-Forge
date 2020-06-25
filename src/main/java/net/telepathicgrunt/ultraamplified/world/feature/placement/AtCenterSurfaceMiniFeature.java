@@ -35,11 +35,11 @@ public class AtCenterSurfaceMiniFeature extends Placement<ChanceAndTypeConfig>
 		switch (placementConfig.type)
 		{
 			case SUNSHRINE:
-				chance = (int) (UltraAmplified.UAConfig.sunShrineSpawnrate.get() * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAStructuresConfig.sunShrineSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			case STONEHENGE:
-				chance = (int) (UltraAmplified.UAConfig.stonehengeSpawnrate.get() * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAStructuresConfig.stonehengeSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			default:

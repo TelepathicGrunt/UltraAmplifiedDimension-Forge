@@ -136,12 +136,12 @@ public class IceSpikeTemplePiecesUA
 			if ("chest".equals(function))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (UltraAmplified.UAConfig.chestGeneration.get())
+				if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity)
 					{
-						if (UltraAmplified.UAConfig.chestGeneration.get())
+						if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_1_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						}
@@ -155,12 +155,12 @@ public class IceSpikeTemplePiecesUA
 			else if ("chest2".equals(function))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-				if (UltraAmplified.UAConfig.chestGeneration.get())
+				if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 				{
 					TileEntity tileentity = world.getTileEntity(pos.down());
 					if (tileentity instanceof ChestTileEntity)
 					{
-						if (UltraAmplified.UAConfig.chestGeneration.get())
+						if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 						{
 							((ChestTileEntity) tileentity).setLootTable(CHESTS_2_ICE_SPIKE_TEMPLE_UA, rand.nextLong());
 						}

@@ -99,7 +99,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return p_212246_2_.nextFloat() <= (UltraAmplified.UAConfig.ravineSpawnrate.get()) / 850f;
+		return p_212246_2_.nextFloat() <= (UltraAmplified.UAFeaturesConfig.ravineSpawnrate.get()) / 850f;
 	}
 
 

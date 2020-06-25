@@ -48,7 +48,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = UltraAmplified.UAConfig.strongholdSpawnrate.get();
+		int maxDistance = UltraAmplified.UAStructuresConfig.strongholdSpawnrate.get();
 		int minDistance = maxDistance - 10;
 		if (maxDistance < 12)
 		{
@@ -76,7 +76,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if ((UltraAmplified.UAConfig.strongholdSpawnrate.get() != 501) && chunkGen.hasStructure(biome, this))
+			if ((UltraAmplified.UAStructuresConfig.strongholdSpawnrate.get() != 501) && chunkGen.hasStructure(biome, this))
 			{
 				return true;
 			}
@@ -149,7 +149,7 @@ public class StrongholdStructureUA extends Structure<NoFeatureConfig>
 			}
 			
 			this.recalculateStructureSize();
-			int maxHeight = Math.min(UltraAmplified.UAConfig.yMaximum.get()-40, 100);
+			int maxHeight = Math.min(UltraAmplified.UATerrainConfig.yMaximum.get()-40, 100);
 			this.func_214626_a(this.rand, maxHeight, maxHeight + 20);
 			//			UltraAmplified.LOGGER.log(Level.DEBUG, "Stronghold | "+(chunkX*16)+" "+(chunkZ*16));
 		}

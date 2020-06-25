@@ -42,7 +42,7 @@ public class HayBaleTinyPile extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

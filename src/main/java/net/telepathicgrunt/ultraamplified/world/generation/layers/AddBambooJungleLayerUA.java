@@ -13,6 +13,6 @@ public enum AddBambooJungleLayerUA implements IC1Transformer
 	@Override
 	public int apply(INoiseRandom context, int value)
 	{
-		return (context.random(8) == 0 && UltraAmplified.UAConfig.bambooJungle.get()) && value == BiomeGenHelper.BAMBOO_JUNGLE ? BiomeGenHelper.JUNGLE : value;
+		return (context.random(8) == 0 && UltraAmplified.UABiomesConfig.bambooJungle.get()) && value == BiomeGenHelper.BAMBOO_JUNGLE ? BiomeGenHelper.JUNGLE : value;
 	}
 }

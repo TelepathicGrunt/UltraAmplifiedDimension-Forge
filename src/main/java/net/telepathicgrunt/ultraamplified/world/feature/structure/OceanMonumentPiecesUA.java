@@ -1317,7 +1317,7 @@ public class OceanMonumentPiecesUA
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, -1, 7, 7, -1, 8, DARK_PRISMARINE, DARK_PRISMARINE, false);
 			this.fillWithBlocks(world, mutableBoundingBoxIn, 6, -1, 3, 7, -1, 4, WATER, WATER, false);
 			this.spawnElder(world, mutableBoundingBoxIn, 6, 1, 6);
-			if (UltraAmplified.UAConfig.chestGeneration.get())
+			if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 			{
 				this.generateChest(world, mutableBoundingBoxIn, random, 6, 0, 8, LootTables.CHESTS_END_CITY_TREASURE);
 				this.generateChest(world, mutableBoundingBoxIn, random, 7, 0, 8, LootTables.CHESTS_END_CITY_TREASURE);
@@ -2000,7 +2000,7 @@ public class OceanMonumentPiecesUA
 				this.fillWithBlocks(world, mutableBoundingBoxIn, 6, 0, 21, 7, 4, 21, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 				this.fillWithBlocks(world, mutableBoundingBoxIn, 15, 0, 21, 16, 4, 21, BRICKS_PRISMARINE, BRICKS_PRISMARINE, false);
 
-				if (UltraAmplified.UAConfig.chestGeneration.get())
+				if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 				{
 					this.generateChest(world, mutableBoundingBoxIn, random, 11, 1, 17, LootTables.CHESTS_END_CITY_TREASURE);
 					this.generateChest(world, mutableBoundingBoxIn, random, 12, 1, 17, LootTables.CHESTS_END_CITY_TREASURE);
@@ -2052,7 +2052,7 @@ public class OceanMonumentPiecesUA
 				this.fillWithBlocks(world, mutableBoundingBoxIn, 8, 3, 8, 8, 3, 13, DARK_PRISMARINE, DARK_PRISMARINE, false);
 				this.fillWithBlocks(world, mutableBoundingBoxIn, 14, 3, 8, 14, 3, 13, DARK_PRISMARINE, DARK_PRISMARINE, false);
 
-				if (UltraAmplified.UAConfig.chestGeneration.get())
+				if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 				{
 					this.generateChest(world, mutableBoundingBoxIn, random, 11, 4, 9, LootTables.CHESTS_END_CITY_TREASURE);
 					this.generateChest(world, mutableBoundingBoxIn, random, 10, 4, 9, LootTables.CHESTS_END_CITY_TREASURE);

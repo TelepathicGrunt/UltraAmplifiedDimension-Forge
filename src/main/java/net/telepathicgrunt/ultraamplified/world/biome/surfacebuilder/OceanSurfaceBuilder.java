@@ -38,7 +38,7 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 
 	protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel)
 	{
-		BlockState liquid = UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER;
+		BlockState liquid = UltraAmplified.UATerrainConfig.lavaOcean.get() ? LAVA : WATER;
 		int x = xStart & 15;
 		int z = zStart & 15;
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();

@@ -23,7 +23,7 @@ public class NetherPortalSpawning
 		 */
 		public static void spawnNetherPortal(BlockEvent.EntityPlaceEvent event)
 		{
-			if(UltraAmplified.UAConfig.allowNetherPortal.get()) 
+			if(UltraAmplified.UADimensionConfig.allowNetherPortal.get()) 
 			{
 				if (!event.getWorld().isRemote() && event.getWorld().getDimension().getType() == UADimensionRegistration.ultraamplified() && event.getPlacedBlock().getBlock() == Blocks.FIRE)
 				{

@@ -20,7 +20,7 @@ public class CountRangeColumn extends SimplePlacement<CountRangeConfig>
     }
 
     public Stream<BlockPos> getPositions(Random random, CountRangeConfig config, BlockPos pos) {
-	return IntStream.range(0, ((int)((UltraAmplified.UAConfig.columnSpawnrate.get()/2f)*config.count))).mapToObj((obj) -> {
+	return IntStream.range(0, ((int)((UltraAmplified.UAFeaturesConfig.columnSpawnrate.get()/2f)*config.count))).mapToObj((obj) -> {
 	    int x = random.nextInt(16) + pos.getX();
 	    int z = random.nextInt(16) + pos.getZ();
 	    int y = random.nextInt(config.maximum) + config.bottomOffset;

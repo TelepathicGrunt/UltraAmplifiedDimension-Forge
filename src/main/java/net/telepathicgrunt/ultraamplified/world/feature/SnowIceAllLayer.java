@@ -33,7 +33,7 @@ public class SnowIceAllLayer extends Feature<NoFeatureConfig>
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
 
-		for (int y = 256; y > UltraAmplified.UAConfig.seaLevel.get() - 1; --y)
+		for (int y = 256; y > UltraAmplified.UATerrainConfig.seaLevel.get() - 1; --y)
 		{
 
 			blockpos$Mutable.setPos(pos.getX(), y, pos.getZ());

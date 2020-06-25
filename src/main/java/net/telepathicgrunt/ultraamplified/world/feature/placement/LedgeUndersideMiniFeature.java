@@ -35,7 +35,7 @@ public class LedgeUndersideMiniFeature extends Placement<ChanceAndTypeConfig>
 		switch (placementConfig.type)
 		{
 			case HANGING_RUINS:
-				chance = (int) (UltraAmplified.UAConfig.hangingRuinsSpawnrate.get() * placementConfig.chanceModifier);
+				chance = (int) (UltraAmplified.UAStructuresConfig.hangingRuinsSpawnrate.get() * placementConfig.chanceModifier);
 				break;
 
 			default:

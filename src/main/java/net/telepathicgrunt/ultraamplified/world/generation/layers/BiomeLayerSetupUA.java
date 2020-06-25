@@ -137,7 +137,7 @@ public class BiomeLayerSetupUA
 		//grabs what the user entered.
 		//is done as linked list so we can remove entries later if needed since Arrays.asList creates a fixed size list.
 		List<String> blacklistedMods = new ArrayList<String>();
-		List<String> blacklistedTempList = new LinkedList<String>(Arrays.asList(UltraAmplified.UAConfig.blacklistedBiomeList.get().split(",")));
+		List<String> blacklistedTempList = new LinkedList<String>(Arrays.asList(UltraAmplified.UAModCompatConfig.blacklistedBiomeList.get().split(",")));
 		for (int i = 0; i < blacklistedTempList.size(); i++)
 		{
 			blacklistedTempList.set(i, blacklistedTempList.get(i).trim());
@@ -154,7 +154,7 @@ public class BiomeLayerSetupUA
 
 		//will go through all biomes and add modded biomes that arent UA biomes to biome list
 		//will attempt to place the in right spot based on temperature
-		if (UltraAmplified.UAConfig.importAllModdedBiomes.get())
+		if (UltraAmplified.UAModCompatConfig.importAllModdedBiomes.get())
 		{
 			for (Biome biome : ForgeRegistries.BIOMES.getValues())
 			{
@@ -166,7 +166,7 @@ public class BiomeLayerSetupUA
 				if(namespace.equals("minecraft") || namespace.equals(UltraAmplified.MODID)) 
 				    continue; //Skip minecraft and UA biomes
 				
-				if (blacklistedMods.contains(namespace) || UltraAmplified.UAConfig.blacklistedBiomeList.get().contains(rl.toString()))
+				if (blacklistedMods.contains(namespace) || UltraAmplified.UAModCompatConfig.blacklistedBiomeList.get().contains(rl.toString()))
 				    continue; //this modded biome is blacklisted 
 				
 				
@@ -191,7 +191,7 @@ public class BiomeLayerSetupUA
 			}
 		}
 		//only imports the modded biomes already registered in the biome dictionary (Other mods wanted their biome to generate in Overworld)
-		else if (UltraAmplified.UAConfig.importOverworldModdedBiomes.get())
+		else if (UltraAmplified.UAModCompatConfig.importOverworldModdedBiomes.get())
 		{
 			for (BiomeType tempRange : BiomeType.values())
 			{
@@ -237,86 +237,86 @@ public class BiomeLayerSetupUA
 	    	//checking to see if they are allowed by the user through the config
 	    	
 		//deserts
-		if (UltraAmplified.UAConfig.desert.get()) {
+		if (UltraAmplified.UABiomesConfig.desert.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.DESERT, 40));
 		}
-		if (UltraAmplified.UAConfig.savanna.get()) {
+		if (UltraAmplified.UABiomesConfig.savanna.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.SAVANNA, 40));
 		}
-		if (UltraAmplified.UAConfig.plains.get()) {
+		if (UltraAmplified.UABiomesConfig.plains.get()) {
 			hotBiomesList.add(new BiomeEntry(UABiomes.PLAINS, 20));
 		}
-		if (UltraAmplified.UAConfig.netherland.get())
+		if (UltraAmplified.UABiomesConfig.netherland.get())
 			hotBiomesList.add(new BiomeEntry(UABiomes.NETHERLAND, 30));
 
 		//warm
-		if (UltraAmplified.UAConfig.forest.get())
+		if (UltraAmplified.UABiomesConfig.forest.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.FOREST, 28));
-		if (UltraAmplified.UAConfig.darkForest.get())
+		if (UltraAmplified.UABiomesConfig.darkForest.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.DARK_FOREST, 28));
-		if (UltraAmplified.UAConfig.rockyField.get())
+		if (UltraAmplified.UABiomesConfig.rockyField.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.ROCKY_FIELD, 28));
-		if (UltraAmplified.UAConfig.plains.get())
+		if (UltraAmplified.UABiomesConfig.plains.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.PLAINS, 28));
-		if (UltraAmplified.UAConfig.birchForest.get())
+		if (UltraAmplified.UABiomesConfig.birchForest.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.BIRCH_FOREST, 28));
-		if (UltraAmplified.UAConfig.swamplands.get())
+		if (UltraAmplified.UABiomesConfig.swamplands.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.SWAMP, 28));
-		if (UltraAmplified.UAConfig.mushroom.get())
+		if (UltraAmplified.UABiomesConfig.mushroom.get())
 			warmBiomesList.add(new BiomeEntry(UABiomes.MUSHROOM_FIELDS, 8));
 
 		//cool
-		if (UltraAmplified.UAConfig.forest.get())
+		if (UltraAmplified.UABiomesConfig.forest.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.FOREST, 32));
-		if (UltraAmplified.UAConfig.rockyField.get())
+		if (UltraAmplified.UABiomesConfig.rockyField.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.ROCKY_FIELD, 32));
-		if (UltraAmplified.UAConfig.taiga.get())
+		if (UltraAmplified.UABiomesConfig.taiga.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.TAIGA, 32));
-		if (UltraAmplified.UAConfig.plains.get())
+		if (UltraAmplified.UABiomesConfig.plains.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.PLAINS, 12));
-		if (UltraAmplified.UAConfig.stonePlains.get())
+		if (UltraAmplified.UABiomesConfig.stonePlains.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.STONE_PLAINS, 17));
-		if (UltraAmplified.UAConfig.endField.get())
+		if (UltraAmplified.UABiomesConfig.endField.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.END_FIELD, 32));
-		if (UltraAmplified.UAConfig.mushroom.get())
+		if (UltraAmplified.UABiomesConfig.mushroom.get())
 			coolBiomesList.add(new BiomeEntry(UABiomes.MUSHROOM_FIELDS, 8));
 
 		//icy
-		if (UltraAmplified.UAConfig.snowyTundra.get())
+		if (UltraAmplified.UABiomesConfig.snowyTundra.get())
 			icyBiomesList.add(new BiomeEntry(UABiomes.SNOWY_TUNDRA, 45));
 		else
 		{
 			//turns snowy tundra into ice spike only if config has snowy tundra off and ice spike on
-			if (UltraAmplified.UAConfig.iceSpike.get())
+			if (UltraAmplified.UABiomesConfig.iceSpike.get())
 				icyBiomesList.add(new BiomeEntry(UABiomes.ICE_SPIKES, 26));
 
 			//turns snowy tundra into ice mountain only if config has snowy tundra off and ice mountain on
-			if (UltraAmplified.UAConfig.icedTerrain.get())
+			if (UltraAmplified.UABiomesConfig.icedTerrain.get())
 				icyBiomesList.add(new BiomeEntry(UABiomes.ICED_TERRAIN, 26));
 		}
 
-		if (UltraAmplified.UAConfig.icedTerrain.get())
+		if (UltraAmplified.UABiomesConfig.icedTerrain.get())
 			icyBiomesList.add(new BiomeEntry(UABiomes.ICED_TERRAIN, 17));
-		if (UltraAmplified.UAConfig.snowyTaiga.get())
+		if (UltraAmplified.UABiomesConfig.snowyTaiga.get())
 			icyBiomesList.add(new BiomeEntry(UABiomes.SNOWY_TAIGA, 26));
-		if (UltraAmplified.UAConfig.frozenDesert.get())
+		if (UltraAmplified.UABiomesConfig.frozenDesert.get())
 			icyBiomesList.add(new BiomeEntry(UABiomes.FROZEN_DESERT, 6));
 
 		//special biomes lists used to replace vanilla ones such as mesa, jungles, etc
 
-		if (UltraAmplified.UAConfig.jungle.get())
+		if (UltraAmplified.UABiomesConfig.jungle.get())
 			jungleBiomesList.add(new BiomeEntry(UABiomes.JUNGLE, 70));
-		if (UltraAmplified.UAConfig.bambooJungle.get())
+		if (UltraAmplified.UABiomesConfig.bambooJungle.get())
 			jungleBiomesList.add(new BiomeEntry(UABiomes.BAMBOO_JUNGLE, 30));
-		if (UltraAmplified.UAConfig.giantTreeTaiga.get())
+		if (UltraAmplified.UABiomesConfig.giantTreeTaiga.get())
 			giantTreeTaigaBiomesList.add(new BiomeEntry(UABiomes.GIANT_TREE_TAIGA, 10));
-		if (UltraAmplified.UAConfig.badlands.get())
+		if (UltraAmplified.UABiomesConfig.badlands.get())
 		{
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.SANDLESS_BADLANDS, 20));
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.WOODED_BADLANDS, 10));
 		}
 		//turns mesa completely into spiky/dissected plateau badlands only if config has mesa off and spiky badlands on
-		else if (UltraAmplified.UAConfig.spikyBadlands.get())
+		else if (UltraAmplified.UABiomesConfig.spikyBadlands.get())
 		{
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.SPIKY_BADLANDS, 10));
 			badlandsBiomesList.add(new BiomeEntry(UABiomes.DISSECTED_PLATEAU_BADLANDS, 10));
@@ -329,15 +329,15 @@ public class BiomeLayerSetupUA
 		 * feature to make it look ok which is overkill. Best to leave oceans
 		 * as UA oceans for now.
 		 **/
-		if (UltraAmplified.UAConfig.warmOcean.get())
+		if (UltraAmplified.UABiomesConfig.warmOcean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.WARM_OCEAN, 10));
-		if (UltraAmplified.UAConfig.lukewarmOcean.get())
+		if (UltraAmplified.UABiomesConfig.lukewarmOcean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.LUKEWARM_OCEAN, 10));
-		if (UltraAmplified.UAConfig.ocean.get())
+		if (UltraAmplified.UABiomesConfig.ocean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.OCEAN, 10));
-		if (UltraAmplified.UAConfig.coldOcean.get())
+		if (UltraAmplified.UABiomesConfig.coldOcean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.COLD_OCEAN, 10));
-		if (UltraAmplified.UAConfig.frozenOcean.get())
+		if (UltraAmplified.UABiomesConfig.frozenOcean.get())
 		    	oceanBiomesList.add(new BiomeEntry(UABiomes.FROZEN_OCEAN, 10));
 	}
 
@@ -469,11 +469,11 @@ public class BiomeLayerSetupUA
 	 */
 	private static void isUAOceanPresent() 
 	{
-	    if (!UltraAmplified.UAConfig.ocean.get() && 
-		    !UltraAmplified.UAConfig.coldOcean.get() && 
-		    !UltraAmplified.UAConfig.frozenOcean.get() && 
-		    !UltraAmplified.UAConfig.lukewarmOcean.get() && 
-		    !UltraAmplified.UAConfig.warmOcean.get()) 
+	    if (!UltraAmplified.UABiomesConfig.ocean.get() && 
+		    !UltraAmplified.UABiomesConfig.coldOcean.get() && 
+		    !UltraAmplified.UABiomesConfig.frozenOcean.get() && 
+		    !UltraAmplified.UABiomesConfig.lukewarmOcean.get() && 
+		    !UltraAmplified.UABiomesConfig.warmOcean.get()) 
 	    {
 		noOcean = true;
 	    }

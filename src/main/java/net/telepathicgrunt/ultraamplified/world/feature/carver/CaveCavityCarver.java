@@ -125,7 +125,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return random.nextFloat() <= (UltraAmplified.UAConfig.caveCavitySpawnrate.get()) / 1000f;
+		return random.nextFloat() <= (UltraAmplified.UAFeaturesConfig.caveCavitySpawnrate.get()) / 1000f;
 	}
 
 

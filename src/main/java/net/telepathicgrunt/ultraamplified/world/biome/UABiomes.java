@@ -287,12 +287,12 @@ public class UABiomes
 		BASE_TO_MUTATION_MAP.put(SWAMP, SPOOKY_SWAMP);
 		BASE_TO_MUTATION_MAP.put(TAIGA, ROCKY_TAIGA);
 
-		if (UltraAmplified.UAConfig.iceSpike.get())
+		if (UltraAmplified.UABiomesConfig.iceSpike.get())
 		{
 			BASE_TO_MUTATION_MAP.put(SNOWY_TUNDRA, ICE_SPIKES);
 		}
 
-		if (UltraAmplified.UAConfig.spikyBadlands.get())
+		if (UltraAmplified.UABiomesConfig.spikyBadlands.get())
 		{
 			BASE_TO_MUTATION_MAP.put(SANDLESS_BADLANDS, DISSECTED_PLATEAU_BADLANDS);
 			BASE_TO_MUTATION_MAP.put(BADLANDS, SPIKY_BADLANDS);

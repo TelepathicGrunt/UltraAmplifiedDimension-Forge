@@ -28,7 +28,7 @@ public class AtSurfaceWithChanceDesertWell extends Placement<ChanceConfig>
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, ChanceConfig placementConfig, BlockPos pos)
 	{
 
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get())
 		{
 			return Stream.empty();
 		}

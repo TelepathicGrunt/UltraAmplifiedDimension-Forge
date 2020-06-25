@@ -56,7 +56,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
 
-		int maxSpacing = UltraAmplified.UAConfig.mansionSpawnrate.get();
+		int maxSpacing = UltraAmplified.UAStructuresConfig.mansionSpawnrate.get();
 		int minSpacing = (int) (maxSpacing * 0.75);
 
 		if (maxSpacing < 10)
@@ -83,7 +83,7 @@ public class WoodlandMansionStructureUA extends Structure<NoFeatureConfig>
 	public boolean canBeGenerated(BiomeManager p_225558_1_, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (UltraAmplified.UAConfig.mansionSpawnrate.get() != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
+		if (UltraAmplified.UAStructuresConfig.mansionSpawnrate.get() != 101 && chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomes(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{

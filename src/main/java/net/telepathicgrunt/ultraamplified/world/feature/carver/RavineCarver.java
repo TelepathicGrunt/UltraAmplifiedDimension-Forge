@@ -74,7 +74,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
 
-		return random.nextFloat() <= (UltraAmplified.UAConfig.ravineSpawnrate.get()) / 100f;
+		return random.nextFloat() <= (UltraAmplified.UAFeaturesConfig.ravineSpawnrate.get()) / 100f;
 	}
 
 

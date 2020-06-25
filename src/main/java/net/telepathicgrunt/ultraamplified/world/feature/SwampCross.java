@@ -32,7 +32,7 @@ public class SwampCross extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

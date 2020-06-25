@@ -379,7 +379,7 @@ public class MineshaftPiecesUA
 					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 0, 2, k1 + 2);
 					this.placeCobWeb(world, MutableBoundingBoxIn, random, 0.05F, 2, 2, k1 + 2);
 
-					if (UltraAmplified.UAConfig.chestGeneration.get())
+					if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 					{
 						if (random.nextInt(50) == 0)
 						{
@@ -888,9 +888,9 @@ public class MineshaftPiecesUA
 			// if the pit rooms are not allowed, makes this boolean always true.
 			// if pits are allowed and normal rooms are not allowed, set to always false.
 			// else if both are allowed, runs RNG to determine which room to generate.
-			if (UltraAmplified.UAConfig.mineshaftUndergroundAllowed.get())
+			if (UltraAmplified.UAStructuresConfig.mineshaftUndergroundAllowed.get())
 			{
-				if (UltraAmplified.UAConfig.mineshaftAbovegroundAllowed.get())
+				if (UltraAmplified.UAStructuresConfig.mineshaftAbovegroundAllowed.get())
 				{
 					normalRoom = random.nextInt(5) < 3;
 				}
@@ -912,8 +912,8 @@ public class MineshaftPiecesUA
 			else
 			{
 				// giant pit-like dirt room mineshafts
-				int extraHeight = random.nextInt(90 / (245 / UltraAmplified.UAConfig.yMaximum.get()));
-				int baseHeight = Math.min(UltraAmplified.UAConfig.yMaximum.get()-40, 150);
+				int extraHeight = random.nextInt(90 / (245 / UltraAmplified.UATerrainConfig.yMaximum.get()));
+				int baseHeight = Math.min(UltraAmplified.UATerrainConfig.yMaximum.get()-40, 150);
 				this.boundingBox = new MutableBoundingBox(x, 20, z, x + 7 + random.nextInt(6), baseHeight + extraHeight, z + 7 + random.nextInt(6));
 			}
 

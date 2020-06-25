@@ -33,13 +33,13 @@ public enum MixOceanLayerUA implements IAreaTransformer2, IDimOffset0Transformer
 					{
 						if (biome2 == BiomeGenHelper.WARM_OCEAN)
 						{
-							if (UltraAmplified.UAConfig.lukewarmOcean.get())
+							if (UltraAmplified.UABiomesConfig.lukewarmOcean.get())
 								return BiomeGenHelper.LUKEWARM_OCEAN;
 						}
 
 						if (biome2 == BiomeGenHelper.FROZEN_OCEAN)
 						{
-							if (UltraAmplified.UAConfig.coldOcean.get())
+							if (UltraAmplified.UABiomesConfig.coldOcean.get())
 								return BiomeGenHelper.COLD_OCEAN;
 						}
 					}

@@ -55,7 +55,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = UltraAmplified.UAConfig.oceanMonumentSpawnrate.get();
+		int maxDistance = UltraAmplified.UAStructuresConfig.oceanMonumentSpawnrate.get();
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -84,7 +84,7 @@ public class OceanMonumentStructureUA extends Structure<NoFeatureConfig>
 		{
 			for (Biome biome2 : chunkGen.getBiomeProvider().getBiomes(chunkPosX * 16 + 9, chunkGen.getSeaLevel(), chunkPosZ * 16 + 9, 32))
 			{
-				if (UltraAmplified.UAConfig.oceanMonumentSpawnrate.get() != 101 && 
+				if (UltraAmplified.UAStructuresConfig.oceanMonumentSpawnrate.get() != 101 && 
 					chunkGen.hasStructure(biome2, UAFeatures.OCEAN_MONUMENT))
 				{
 					return true;

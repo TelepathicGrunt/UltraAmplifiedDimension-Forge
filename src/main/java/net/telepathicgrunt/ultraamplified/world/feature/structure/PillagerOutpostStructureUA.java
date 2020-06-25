@@ -77,10 +77,10 @@ public class PillagerOutpostStructureUA extends Structure<NoFeatureConfig>
 	{
 		((SharedSeedRandom) rand).setLargeFeatureSeed(chunkGen.getSeed(), chunkPosX, chunkPosZ);
 
-		if (UltraAmplified.UAConfig.pillageOutpostRarity.get() != 101 && chunkGen.hasStructure(biome, UAFeatures.PILLAGER_OUTPOST))
+		if (UltraAmplified.UAStructuresConfig.pillageOutpostRarity.get() != 101 && chunkGen.hasStructure(biome, UAFeatures.PILLAGER_OUTPOST))
 		{
 
-			if (rand.nextFloat() < 1 / ((UltraAmplified.UAConfig.pillageOutpostRarity.get() - 1) * 4.5D + 1))
+			if (rand.nextFloat() < 1 / ((UltraAmplified.UAStructuresConfig.pillageOutpostRarity.get() - 1) * 4.5D + 1))
 			{
 				for (int k = chunkPosX - 3; k <= chunkPosX + 3; ++k)
 				{

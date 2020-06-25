@@ -122,7 +122,7 @@ public class IglooPiecesUA
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					if (UltraAmplified.UAConfig.chestGeneration.get())
+					if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 					{
 						((ChestTileEntity) tileentity).setLootTable(LootTables.CHESTS_IGLOO_CHEST, rand.nextLong());
 					}

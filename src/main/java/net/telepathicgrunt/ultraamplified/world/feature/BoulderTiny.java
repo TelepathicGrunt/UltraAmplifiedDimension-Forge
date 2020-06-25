@@ -62,13 +62,13 @@ public class BoulderTiny extends Feature<BlockBlobConfig>
 					int randomChance = rand.nextInt(1400);
 
 					// 40/1400th chance for iron ore
-					if (UltraAmplified.UAConfig.ironOreSpawnrate.get() != 0 && randomChance <= 40)
+					if (UltraAmplified.UAFeaturesConfig.ironOreSpawnrate.get() != 0 && randomChance <= 40)
 					{
 						world.setBlockState(blockpos.up(), ironOre, 4);
 					}
 
 					// 60/1400th chance for coal ore
-					else if (UltraAmplified.UAConfig.coalOreSpawnrate.get() != 0 && randomChance <= 100)
+					else if (UltraAmplified.UAFeaturesConfig.coalOreSpawnrate.get() != 0 && randomChance <= 100)
 					{
 						world.setBlockState(blockpos.up(), coalOre, 4);
 					}

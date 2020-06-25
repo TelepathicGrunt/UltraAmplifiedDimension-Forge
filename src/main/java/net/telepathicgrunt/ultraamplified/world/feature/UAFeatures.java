@@ -159,92 +159,89 @@ public class UAFeatures {
 	return clusterConfig;
     }
 
-    public static Feature<NoFeatureConfig> BETTER_CACTUS 	= new BetterCactus(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> GENERIC_DUNGEONS 	= new DungeonDefault(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> MESA_DUNGEONS 	= new DungeonBadlands(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> DARK_FOREST_DUNGEONS	= new DungeonDarkForest(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> DESERT_DUNGEONS 	= new DungeonDesert(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> END_DUNGEONS 	= new DungeonEnd(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> NETHER_DUNGEONS 	= new DungeonNether(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SNOW_DUNGEONS 	= new DungeonSnow(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SWAMP_DUNGEONS 	= new DungeonSwamp(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> MUSHROOM_DUNGEONS 	= new DungeonMushroom(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> JUNGLE_DUNGEONS 	= new DungeonJungle(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> BETTER_CACTUS = new BetterCactus(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> GENERIC_DUNGEONS = new DungeonDefault(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> MESA_DUNGEONS = new DungeonBadlands(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> DARK_FOREST_DUNGEONS = new DungeonDarkForest(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> DESERT_DUNGEONS = new DungeonDesert(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> END_DUNGEONS = new DungeonEnd(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> NETHER_DUNGEONS = new DungeonNether(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_DUNGEONS = new DungeonSnow(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SWAMP_DUNGEONS = new DungeonSwamp(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> MUSHROOM_DUNGEONS = new DungeonMushroom(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> JUNGLE_DUNGEONS = new DungeonJungle(NoFeatureConfig::deserialize);
 
-    public static Feature<NoFeatureConfig> CROSS 		= new SwampCross(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> HAY_BALE 		= new HayBalePile(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> TINY_HAY_BALE 	= new HayBaleTinyPile(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> STONEHENGE 		= new Stonehenge(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SUN_SHRINE 		= new SunShrine(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> HANGING_RUINS 	= new HangingRuins(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> FOSSILS 		= new Fossil(NoFeatureConfig::deserialize);
-    public static Feature<BlockConfig> SINGLE_BLOCK 		= new SingleBlock(BlockConfig::deserialize);
-    public static Feature<BlockStateFeatureConfig> ICEBERG 	= new Iceberg(BlockStateFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CROSS = new SwampCross(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> HAY_BALE = new HayBalePile(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> TINY_HAY_BALE = new HayBaleTinyPile(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> STONEHENGE = new Stonehenge(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SUN_SHRINE = new SunShrine(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> HANGING_RUINS = new HangingRuins(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> FOSSILS = new Fossil(NoFeatureConfig::deserialize);
+    public static Feature<BlockConfig> SINGLE_BLOCK = new SingleBlock(BlockConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> ICEBERG = new Iceberg(BlockStateFeatureConfig::deserialize);
     public static Feature<NoFeatureConfig> MARKED_TREASURE_CHEST = new MarkedTreasureChest(NoFeatureConfig::deserialize);
 
-    public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER 	= new BoulderGiantStackable(BlockBlobConfig::deserialize);
-    public static Feature<BlockBlobConfig> LARGE_BOULDER 		= new BoulderGiant(BlockBlobConfig::deserialize);
-    public static Feature<BlockBlobConfig> MEDIUM_BOULDER 		= new BoulderNormal(BlockBlobConfig::deserialize);
-    public static Feature<BlockBlobConfig> SMALL_BOULDER 		= new BoulderTiny(BlockBlobConfig::deserialize);
+    public static Feature<BlockBlobConfig> LARGE_STACKABLE_BOULDER = new BoulderGiantStackable(BlockBlobConfig::deserialize);
+    public static Feature<BlockBlobConfig> LARGE_BOULDER = new BoulderGiant(BlockBlobConfig::deserialize);
+    public static Feature<BlockBlobConfig> MEDIUM_BOULDER = new BoulderNormal(BlockBlobConfig::deserialize);
+    public static Feature<BlockBlobConfig> SMALL_BOULDER = new BoulderTiny(BlockBlobConfig::deserialize);
 
-    public static Feature<BlockStateFeatureConfig> STONED_LAKE 		= new LakeStoned(BlockStateFeatureConfig::deserialize);
-    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE 	= new LakeStoneless(BlockStateFeatureConfig::deserialize);
-    public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE 	= new LakeWideShallow(BlockStateFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CONTAIN_OCEAN_LIQUID 	= new ContainLiquidForOceans(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID 	= new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> ICE_PATCH_SANDY 		= new IcePatch(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE 		= new IceSpike(NoFeatureConfig::deserialize);
-    public static Feature<SphereReplaceConfig> DISK_DRY 		= new SphereReplaceDry(SphereReplaceConfig::deserialize);
-    public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL 		= new BlueIceWaterfall(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SNOW_AND_ICE_LAYERER 	= new SnowIceLayerHandlerFeature(NoFeatureConfig::deserialize);
-    public static Feature<ColumnBlocksConfig> COLUMN 			= new ColumnVertical(ColumnBlocksConfig::deserialize);
-    public static Feature<ColumnBlocksConfig> RAMP 			= new ColumnRamp(ColumnBlocksConfig::deserialize);
-    public static Feature<CountConfig> GLOWPATCH 			= new GlowPatch(CountConfig::deserialize);
-    public static Feature<OreFeatureConfig> UNDERGROUND_POCKET 		= new UndergroundPocket(OreFeatureConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> STONED_LAKE = new LakeStoned(BlockStateFeatureConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> STONELESS_LAKE = new LakeStoneless(BlockStateFeatureConfig::deserialize);
+    public static Feature<BlockStateFeatureConfig> SHALLOW_LAKE = new LakeWideShallow(BlockStateFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CONTAIN_OCEAN_LIQUID = new ContainLiquidForOceans(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CONTAIN_UNDERGROUND_LIQUID = new ContainUndergroundLiquids(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> ICE_PATCH_SANDY = new IcePatch(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> GIANT_ICE_SPIKE = new IceSpike(NoFeatureConfig::deserialize);
+    public static Feature<SphereReplaceConfig> DISK_DRY = new SphereReplaceDry(SphereReplaceConfig::deserialize);
+    public static Feature<NoFeatureConfig> BLUE_ICE_WATERFALL = new BlueIceWaterfall(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SNOW_AND_ICE_LAYERER = new SnowIceLayerHandlerFeature(NoFeatureConfig::deserialize);
+    public static Feature<ColumnBlocksConfig> COLUMN = new ColumnVertical(ColumnBlocksConfig::deserialize);
+    public static Feature<ColumnBlocksConfig> RAMP = new ColumnRamp(ColumnBlocksConfig::deserialize);
+    public static Feature<CountConfig> GLOWPATCH = new GlowPatch(CountConfig::deserialize);
+    public static Feature<OreFeatureConfig> UNDERGROUND_POCKET = new UndergroundPocket(OreFeatureConfig::deserialize);
 
-    public static Feature<NoFeatureConfig> LONG_VINES 		= new VinesLong(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> SHORT_VINES 		= new VinesShort(NoFeatureConfig::deserialize);
-    public static Feature<SeaGrassConfig> SEA_GRASS 		= new SeaGrass(SeaGrassConfig::deserialize);
-    public static Feature<NoFeatureConfig> KELP 		= new Kelp(NoFeatureConfig::deserialize);
-    public static Feature<CountConfig> SEA_PICKLE 		= new SeaPickle(CountConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_CLAW 		= new CoralClaw(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_TREE 		= new CoralMushroom(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> CORAL_MUSHROOM 	= new CoralTree(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> BAMBOO 		= new Bamboo(NoFeatureConfig::deserialize);
-    public static Feature<BlockConfig> ROOTS 			= new Roots(BlockConfig::deserialize);
+    public static Feature<NoFeatureConfig> LONG_VINES = new VinesLong(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> SHORT_VINES = new VinesShort(NoFeatureConfig::deserialize);
+    public static Feature<SeaGrassConfig> SEA_GRASS = new SeaGrass(SeaGrassConfig::deserialize);
+    public static Feature<NoFeatureConfig> KELP = new Kelp(NoFeatureConfig::deserialize);
+    public static Feature<CountConfig> SEA_PICKLE = new SeaPickle(CountConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_CLAW = new CoralClaw(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_TREE = new CoralMushroom(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> CORAL_MUSHROOM = new CoralTree(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> BAMBOO = new Bamboo(NoFeatureConfig::deserialize);
+    public static Feature<BlockConfig> ROOTS = new Roots(BlockConfig::deserialize);
 
-    public static Feature<NoFeatureConfig> NETHER_UNDERWATER_MAGMA 	= new NetherUnderwaterMagma(NoFeatureConfig::deserialize);
-    public static Feature<NoFeatureConfig> RARE_LAVA 			= new NetherSurfaceLavaRare(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> NETHER_UNDERWATER_MAGMA = new NetherUnderwaterMagma(NoFeatureConfig::deserialize);
+    public static Feature<NoFeatureConfig> RARE_LAVA = new NetherSurfaceLavaRare(NoFeatureConfig::deserialize);
 
-    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE 		= new TreeSwampHorned(TreeFeatureConfig::func_227338_a_);
-    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_BIRCH_TREE 		= new TreeGiantBirch(HugeTreeFeatureConfig::deserializeDarkOak); // may need to fix deserialize
-    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_1 		= new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, false);
-    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_2 		= new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, true);
-    public static AbstractTreeFeature<HugeTreeFeatureConfig> GIANT_DARK_FOREST_TREE 	= new TreeGiantDarkOak(HugeTreeFeatureConfig::deserializeDarkOak);
-    public static AbstractTreeFeature<TreeFeatureConfig> PODZOL_TAIGA_TREE 		= new TreePodzolTaiga(TreeFeatureConfig::func_227338_a_);
-    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE 			= new TreeEnd(TreeFeatureConfig::func_227338_a_);
-    public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH 				= new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, 
-	    											Blocks.JUNGLE_LOG.getDefaultState(), 
-	    											Blocks.OAK_LEAVES.getDefaultState()
-	    												.with(LeavesBlock.DISTANCE, Integer.valueOf(1)));
+    public static AbstractTreeFeature<TreeFeatureConfig> HORNED_SWAMP_TREE = new TreeSwampHorned(TreeFeatureConfig::func_227338_a_);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_BIRCH_TREE = new TreeGiantBirch(HugeTreeFeatureConfig::deserializeDarkOak); // may need to fix deserialize
+    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_1 = new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, false);
+    public static HugeTreesFeature<HugeTreeFeatureConfig> GIANT_PINE_TREE_2 = new TreeGiantPine(HugeTreeFeatureConfig::deserializeSpruce, true);
+    public static AbstractTreeFeature<HugeTreeFeatureConfig> GIANT_DARK_FOREST_TREE = new TreeGiantDarkOak(HugeTreeFeatureConfig::deserializeDarkOak);
+    public static AbstractTreeFeature<TreeFeatureConfig> PODZOL_TAIGA_TREE = new TreePodzolTaiga(TreeFeatureConfig::func_227338_a_);
+    public static AbstractTreeFeature<TreeFeatureConfig> END_TREE = new TreeEnd(TreeFeatureConfig::func_227338_a_);
+    public static Feature<BaseTreeFeatureConfig> JUNGLE_BUSH = new TreeJungleShrub(BaseTreeFeatureConfig::deserializeJungle, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, Integer.valueOf(1)));
 
-    public static Structure<MineshaftConfigUA> MINESHAFT 	= new MineshaftStructureUA(MineshaftConfigUA::deserialize);
-    public static Structure<NoFeatureConfig> WOODLAND_MANSION 	= new WoodlandMansionStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> JUNGLE_TEMPLE 	= new JungleTempleStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> DESERT_TEMPLE 	= new DesertTempleStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> IGLOO 		= new IglooStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<ShipwreckConfig> SHIPWRECK 		= new ShipwreckStructureUA(ShipwreckConfig::deserialize);
-    public static WitchHutStructureUA WITCH_HUT 		= new WitchHutStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> STRONGHOLD 	= new StrongholdStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> OCEAN_MONUMENT 	= new OceanMonumentStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<OceanRuinConfig> OCEAN_RUIN 	= new OceanRuinsStructureUA(OceanRuinConfig::deserialize);
-    public static Structure<NoFeatureConfig> STONE_FORTRESS 	= new FortressStoneStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> NETHER_FORTRESS 	= new FortressNetherStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> END_CITY 		= new EndCityStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<VillageConfigUA> VILLAGE 		= new VillageStructureUA(VillageConfigUA::deserialize);
-    public static Structure<NoFeatureConfig> PILLAGER_OUTPOST 	= new PillagerOutpostStructureUA(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE 	= new MushroomTempleStructure(NoFeatureConfig::deserialize);
-    public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE 	= new IceSpikeTempleStructure(NoFeatureConfig::deserialize);
+    public static Structure<MineshaftConfigUA> MINESHAFT = new MineshaftStructureUA(MineshaftConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> WOODLAND_MANSION = new WoodlandMansionStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> JUNGLE_TEMPLE = new JungleTempleStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> DESERT_TEMPLE = new DesertTempleStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> IGLOO = new IglooStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<ShipwreckConfig> SHIPWRECK = new ShipwreckStructureUA(ShipwreckConfig::deserialize);
+    public static WitchHutStructureUA WITCH_HUT = new WitchHutStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> STRONGHOLD = new StrongholdStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> OCEAN_MONUMENT = new OceanMonumentStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<OceanRuinConfig> OCEAN_RUIN = new OceanRuinsStructureUA(OceanRuinConfig::deserialize);
+    public static Structure<NoFeatureConfig> STONE_FORTRESS = new FortressStoneStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> NETHER_FORTRESS = new FortressNetherStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> END_CITY = new EndCityStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<VillageConfigUA> VILLAGE = new VillageStructureUA(VillageConfigUA::deserialize);
+    public static Structure<NoFeatureConfig> PILLAGER_OUTPOST = new PillagerOutpostStructureUA(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> MUSHROOM_TEMPLE = new MushroomTempleStructure(NoFeatureConfig::deserialize);
+    public static Structure<NoFeatureConfig> ICE_SPIKE_TEMPLE = new IceSpikeTempleStructure(NoFeatureConfig::deserialize);
     public static Structure<NoFeatureConfig> DUMMY_FORTRESS_STRUCTURE = new DummyFortressStructure(NoFeatureConfig::deserialize);
 
     // for making the terrain bases for these structure
@@ -329,11 +326,11 @@ public class UAFeatures {
 	RegUtil.register(registry, PILLAGER_OUTPOST, "pillager_outpost");
 	RegUtil.register(registry, MUSHROOM_TEMPLE, "mushroom_temple");
 	RegUtil.register(registry, ICE_SPIKE_TEMPLE, "ice_spike_temple");
-	
+
 	RegUtil.register(registry, DUMMY_FORTRESS_STRUCTURE, "fortress");
 	UABiomes.getRegisteredBiomeArray().forEach(biome -> biome.addStructure(DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)));
 	UABiomes.getRegisteredBiomeArray().forEach(biome -> biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, DUMMY_FORTRESS_STRUCTURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG))));
-	
+
 	// registers the structure pieces.
 	StructureInitUA.registerStructurePieces();
     }

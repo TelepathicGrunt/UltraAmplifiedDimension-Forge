@@ -72,7 +72,7 @@ public class ModifiedBadlandsSurfaceBuilderUA extends BadlandsSurfaceBuilder
 			{
 				chunkIn.setBlockState(blockpos$Mutable, defaultBlock, false);
 			}
-			else if (k < UltraAmplified.UAConfig.seaLevel.get() + 1)
+			else if (k < UltraAmplified.UATerrainConfig.seaLevel.get() + 1)
 			{
 				hitSolidUnderwaterBlock = true;
 			}

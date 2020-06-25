@@ -55,7 +55,7 @@ public class Fossil extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random rand, BlockPos position, NoFeatureConfig config)
 	{
 
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get())
 		{
 			return false;
 		}

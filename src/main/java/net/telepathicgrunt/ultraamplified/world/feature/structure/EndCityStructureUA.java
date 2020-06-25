@@ -79,7 +79,7 @@ public class EndCityStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if (UltraAmplified.UAConfig.endCitySpawnrate.get() != 101 && chunkGen.hasStructure(biome, this))
+			if (UltraAmplified.UAStructuresConfig.endCitySpawnrate.get() != 101 && chunkGen.hasStructure(biome, this))
 			{
 				int i = getYPosForStructure(chunkPosX, chunkPosZ, chunkGen);
 				return i >= 60;

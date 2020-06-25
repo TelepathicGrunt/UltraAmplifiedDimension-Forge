@@ -13,6 +13,6 @@ public enum AddSunflowerPlainsLayerUA implements IC1Transformer
 	@Override
 	public int apply(INoiseRandom context, int value)
 	{
-		return (context.random(200) == 0 && UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() != 0) && value == BiomeGenHelper.PLAINS ? BiomeGenHelper.SUNFLOWER_PLAINS : value;
+		return (context.random(200) == 0 && UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() != 0) && value == BiomeGenHelper.PLAINS ? BiomeGenHelper.SUNFLOWER_PLAINS : value;
 	}
 }

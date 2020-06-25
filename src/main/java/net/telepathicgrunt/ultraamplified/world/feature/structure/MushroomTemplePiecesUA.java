@@ -112,7 +112,7 @@ public class MushroomTemplePiecesUA
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					if (UltraAmplified.UAConfig.chestGeneration.get())
+					if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 					{
 						((ChestTileEntity) tileentity).setLootTable(CHESTS_MUSHROOM_TEMPLE_UA, rand.nextLong());
 					}

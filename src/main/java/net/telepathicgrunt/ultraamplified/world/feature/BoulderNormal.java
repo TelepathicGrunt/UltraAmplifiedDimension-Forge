@@ -80,19 +80,19 @@ public class BoulderNormal extends Feature<BlockBlobConfig>
 					int randomChance = rand.nextInt(1400);
 
 					// 1/1400th chance for diamond ore
-					if (UltraAmplified.UAConfig.diamondOreSpawnrate.get() != 0 && randomChance == 0)
+					if (UltraAmplified.UAFeaturesConfig.diamondOreSpawnrate.get() != 0 && randomChance == 0)
 					{
 						world.setBlockState(blockpos, diamondOre, 4);
 					}
 
 					// 39/1400th chance for iron ore
-					else if (UltraAmplified.UAConfig.ironOreSpawnrate.get() != 0 && randomChance <= 40)
+					else if (UltraAmplified.UAFeaturesConfig.ironOreSpawnrate.get() != 0 && randomChance <= 40)
 					{
 						world.setBlockState(blockpos, ironOre, 4);
 					}
 
 					// 60/1400th chance for coal ore
-					else if (UltraAmplified.UAConfig.coalOreSpawnrate.get() != 0 && randomChance <= 100)
+					else if (UltraAmplified.UAFeaturesConfig.coalOreSpawnrate.get() != 0 && randomChance <= 100)
 					{
 						world.setBlockState(blockpos, coalOre, 4);
 					}

@@ -50,7 +50,7 @@ public class Roots extends Feature<BlockConfig>
 		//wont generate root if config is turned off
 		//won't generate root on leaves, water, etc.
 		//Only solid blocks can have roots
-		if (!UltraAmplified.UAConfig.rootGen.get() || !world.getBlockState(position).isSolid())
+		if (!UltraAmplified.UAFeaturesConfig.rootGen.get() || !world.getBlockState(position).isSolid())
 		{
 			return false;
 		}

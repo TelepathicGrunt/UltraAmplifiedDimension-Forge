@@ -73,13 +73,13 @@ public class NetherSurfaceBuilderUA extends SurfaceBuilder<SurfaceBuilderConfig>
 			else if (currentBlockToReplace.getMaterial() == Material.WATER)
 			{
 
-				if (ypos < UltraAmplified.UAConfig.seaLevel.get() - 7)
+				if (ypos < UltraAmplified.UATerrainConfig.seaLevel.get() - 7)
 				{
 					chunkIn.setBlockState(blockpos$Mutable, LAVA, false);
 				}
 				else
 				{
-					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : WATER, false);
+					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UATerrainConfig.lavaOcean.get() ? LAVA : WATER, false);
 				}
 
 				depth = -1;

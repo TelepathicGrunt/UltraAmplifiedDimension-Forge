@@ -73,17 +73,17 @@ public class BoulderGiant extends Feature<BlockBlobConfig>
 		    int randomChance = rand.nextInt(1400);
 
 		    // 2/1400th chance for diamond ore
-		    if (UltraAmplified.UAConfig.diamondOreSpawnrate.get() != 0 && randomChance <= 1) {
+		    if (UltraAmplified.UAFeaturesConfig.diamondOreSpawnrate.get() != 0 && randomChance <= 1) {
 			world.setBlockState(blockpos, diamondOre.getDefaultState(), 4);
 		    }
 
 		    // 48/1400th chance for iron ore
-		    else if (UltraAmplified.UAConfig.ironOreSpawnrate.get() != 0 && randomChance <= 50) {
+		    else if (UltraAmplified.UAFeaturesConfig.ironOreSpawnrate.get() != 0 && randomChance <= 50) {
 			world.setBlockState(blockpos, ironOre.getDefaultState(), 4);
 		    }
 
 		    // 82/1400th chance for coal ore
-		    else if (UltraAmplified.UAConfig.coalOreSpawnrate.get() != 0 && randomChance <= 130) {
+		    else if (UltraAmplified.UAFeaturesConfig.coalOreSpawnrate.get() != 0 && randomChance <= 130) {
 			world.setBlockState(blockpos, coalOre.getDefaultState(), 4);
 		    }
 

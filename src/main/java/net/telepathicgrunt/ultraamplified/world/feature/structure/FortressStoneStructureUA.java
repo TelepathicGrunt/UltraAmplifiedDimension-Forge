@@ -64,7 +64,7 @@ public class FortressStoneStructureUA extends Structure<NoFeatureConfig>
 
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-	    int maxDistance = UltraAmplified.UAConfig.stoneFortressSpawnrate.get();
+	    int maxDistance = UltraAmplified.UAStructuresConfig.stoneFortressSpawnrate.get();
 	    int minDistance = 8;
 
 	    if (maxDistance < 9) {
@@ -89,7 +89,7 @@ public class FortressStoneStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	public boolean canBeGenerated(BiomeManager biomeManager, ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ, Biome biome)
 	{
-		if (UltraAmplified.UAConfig.stoneFortressSpawnrate.get() != 101) 
+		if (UltraAmplified.UAStructuresConfig.stoneFortressSpawnrate.get() != 101) 
 		{
 			int i = chunkPosX >> 4;
 			int j = chunkPosZ >> 4;
@@ -127,7 +127,7 @@ public class FortressStoneStructureUA extends Structure<NoFeatureConfig>
 
 	public List<Biome.SpawnListEntry> getStoneFortressSpawnList()
 	{
-		if (UltraAmplified.UAConfig.allowNaturalSilverfishFortress.get())
+		if (UltraAmplified.UAStructuresConfig.allowNaturalSilverfishFortress.get())
 		{
 			return STONE_FORTRESS_ENEMIES;
 		}

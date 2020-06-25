@@ -67,7 +67,7 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 	@Override
 	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config)
 	{
-		return random.nextFloat() <= (UltraAmplified.UAConfig.oceanCaveSpawnrate.get()) / 100f;
+		return random.nextFloat() <= (UltraAmplified.UAFeaturesConfig.oceanCaveSpawnrate.get()) / 100f;
 	}
 
 

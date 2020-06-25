@@ -43,7 +43,7 @@ public class ColumnVertical extends Feature<ColumnBlocksConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, ColumnBlocksConfig blocksConfig)
 	{
 		//check if user turned pillars off.
-		if (!UltraAmplified.UAConfig.columnGen.get())
+		if (!UltraAmplified.UAFeaturesConfig.columnGen.get())
 		{
 			return false;
 		}

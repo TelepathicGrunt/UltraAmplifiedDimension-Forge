@@ -278,7 +278,7 @@ public class OceanRuinsPiecesUA
 		{
 			if ("chest".equals(function))
 			{
-				if (UltraAmplified.UAConfig.chestGeneration.get())
+				if (UltraAmplified.UAStructuresConfig.chestGeneration.get())
 				{
 					world.setBlockState(pos, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, Boolean.valueOf(world.getFluidState(pos).isTagged(FluidTags.WATER))), 2);
 					TileEntity tileentity = world.getTileEntity(pos);

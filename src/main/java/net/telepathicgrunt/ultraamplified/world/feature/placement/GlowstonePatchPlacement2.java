@@ -23,7 +23,7 @@ public class GlowstonePatchPlacement2 extends SimplePlacement<ChanceRangeConfig>
 	@Override
 	public Stream<BlockPos> getPositions(Random rand, ChanceRangeConfig config, BlockPos pos)
 	{
-		if (rand.nextFloat() < (UltraAmplified.UAConfig.glowstoneVariantsSpawnrate.get() / 100f) * config.chance)
+		if (rand.nextFloat() < (UltraAmplified.UAFeaturesConfig.glowstoneVariantsSpawnrate.get() / 100f) * config.chance)
 		{
 			int x = rand.nextInt(16);
 			int y = rand.nextInt(config.top - config.topOffset) + config.bottomOffset;

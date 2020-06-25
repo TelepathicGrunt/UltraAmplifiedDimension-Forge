@@ -30,7 +30,7 @@ public class GlowstonePatchPlacement1 extends Placement<ChanceConfig>
 
 		int x = random.nextInt(16);
 		int z = random.nextInt(16);
-		float chance = (UltraAmplified.UAConfig.glowstoneVariantsSpawnrate.get() / 909f) * chancesConfig.chance;
+		float chance = (UltraAmplified.UAFeaturesConfig.glowstoneVariantsSpawnrate.get() / 909f) * chancesConfig.chance;
 
 		//Chance needs to be less than random number to generate patch
 		if (random.nextFloat() >= chance || chance == 0)

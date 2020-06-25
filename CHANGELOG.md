@@ -28,9 +28,27 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.8.0.4 Changes) (1.15.2 Minecraft)
+
+##### Configs:
+
+-Split the config file into several separate config files to make it easier to find configs.
+
+-Changed the configs for lakes from an on/off switch to a spawnrate modifier.
+
+##### Misc:
+
+-Removed space from in front of Sunflower Plains UA's name in en_us file.
+
+##### Features
+
+-Messed with Slime, honey, Lava, and Water Lakes when implementing spawnrate config. Hopefully I didn't break them....
+
 ## (V.8.0.3 Changes) (1.15.2 Minecraft)
 
 ##### Biomes:
+
+-Fixed rare crash when generating ocean biome layout.
 
 -Giant Tree Taigas and Tall Birch Forests's 2x2 trees now gets dirt placed below the trunk so the trunk cannot be floating in midair.
 

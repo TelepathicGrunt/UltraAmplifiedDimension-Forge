@@ -47,7 +47,7 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 	@Override
 	protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ)
 	{
-		int maxDistance = UltraAmplified.UAConfig.desertTempleSpawnrate.get();
+		int maxDistance = UltraAmplified.UAStructuresConfig.desertTempleSpawnrate.get();
 		int minDistance = 8;
 		if (maxDistance < 9)
 		{
@@ -95,7 +95,7 @@ public class DesertTempleStructureUA extends Structure<NoFeatureConfig>
 		ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
 		if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z)
 		{
-			if ((UltraAmplified.UAConfig.desertTempleSpawnrate.get() != 101) && chunkGen.hasStructure(biome, this))
+			if ((UltraAmplified.UAStructuresConfig.desertTempleSpawnrate.get() != 101) && chunkGen.hasStructure(biome, this))
 			{
 				return true;
 			}

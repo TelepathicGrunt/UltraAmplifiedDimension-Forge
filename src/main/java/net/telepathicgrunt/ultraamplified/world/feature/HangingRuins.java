@@ -38,7 +38,7 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
 		//makes sure this ruins does not spawn too close to world height border.
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get() || position.getY() < UltraAmplified.UAConfig.seaLevel.get() + 5)
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get() || position.getY() < UltraAmplified.UATerrainConfig.seaLevel.get() + 5)
 		{
 			return false;
 		}

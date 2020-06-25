@@ -52,9 +52,9 @@ public class IcedTerrainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
 			else if (iblockstate2.getMaterial() == Material.WATER)
 			{
 
-				if (ypos < UltraAmplified.UAConfig.seaLevel.get())
+				if (ypos < UltraAmplified.UATerrainConfig.seaLevel.get())
 				{
-					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UAConfig.lavaOcean.get() ? LAVA : SNOW_BLOCK, false);
+					chunkIn.setBlockState(blockpos$Mutable, UltraAmplified.UATerrainConfig.lavaOcean.get() ? LAVA : SNOW_BLOCK, false);
 				}
 
 				i = -1;

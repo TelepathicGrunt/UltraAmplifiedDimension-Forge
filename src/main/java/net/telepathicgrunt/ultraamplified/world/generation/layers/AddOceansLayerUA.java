@@ -75,9 +75,9 @@ public class AddOceansLayerUA implements IAreaTransformer0
 			int biomeID = oceanList.get(index);
 
 			//makes deep oceans
-			double d1 = noisegeneratorimproved.func_215456_a((x + 54443) / 5.0D, (z + 34445) / 5.0D, 0.0D, 0.0D, 0.0D);
+			double deepOceanNoise = noisegeneratorimproved.func_215456_a((x + 54443) / 5.0D, (z + 34445) / 5.0D, 0.0D, 0.0D, 0.0D);
 
-			if (Math.abs(d1 % 0.1D) < 0.03D)
+			if (Math.abs(deepOceanNoise % 0.1D) < 0.03D && UABiomes.BASE_TO_HILLS_MAP.containsKey(biomeID))
 			{
 			    //Turns the shallow ocean to their deep variant
 			    return UABiomes.BASE_TO_HILLS_MAP.get(biomeID);

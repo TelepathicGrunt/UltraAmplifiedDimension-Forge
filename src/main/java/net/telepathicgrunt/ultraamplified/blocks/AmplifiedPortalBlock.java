@@ -91,7 +91,7 @@ public class AmplifiedPortalBlock extends Block
 			// Player is leaving Ultra Amplified dimension
 			if (playerEntity.dimension == UADimensionRegistration.ultraamplified())
 			{
-				if (UltraAmplified.UAConfig.forceExitToOverworld.get())
+				if (UltraAmplified.UADimensionConfig.forceExitToOverworld.get())
 				{
 					// Go to Overworld directly because of config option.
 					destination = DimensionType.OVERWORLD;
@@ -215,7 +215,7 @@ public class AmplifiedPortalBlock extends Block
 				else
 				{
 					// Check for null which would be impressive if it occurs
-					if (cap.getNonUAPos() == null || UltraAmplified.UAConfig.forceExitToOverworld.get())
+					if (cap.getNonUAPos() == null || UltraAmplified.UADimensionConfig.forceExitToOverworld.get())
 					{
 						// Set player at world spawn then with Amplified Portal at feet
 						// The portal will try to not replace any block and be at the next air block above non-air blocks.

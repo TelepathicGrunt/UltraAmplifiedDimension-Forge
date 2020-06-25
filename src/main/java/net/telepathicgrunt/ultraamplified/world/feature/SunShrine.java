@@ -43,7 +43,7 @@ public class SunShrine extends Feature<NoFeatureConfig>
 	@Override
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> changedBlock, Random rand, BlockPos position, NoFeatureConfig p_212245_5_)
 	{
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get() || position.getY() > 248)
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get() || position.getY() > 248)
 		{
 			return false;
 		}

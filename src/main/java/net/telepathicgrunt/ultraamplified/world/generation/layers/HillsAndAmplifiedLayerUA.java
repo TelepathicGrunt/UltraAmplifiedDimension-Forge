@@ -30,7 +30,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 
 		//creates the noise (gennerally in the range of -0.5 to 0.5 but not always)
 		double noise = context.getNoiseGenerator().func_215456_a((x) / 8.0D, (z) / 8.0D, 0.0D, 0.0D, 0.0D);
-		boolean allowMForm = UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() != 0 && (noise < (UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() / 10D) - 0.5D || UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() == 10);
+		boolean allowMForm = UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() != 0 && (noise < (UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() / 10D) - 0.5D || UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() == 10);
 		boolean allowHills = (biomeId2 - 2) % 29 == 0 || context.random(3) == 0;
 
 		//debugging
@@ -58,12 +58,12 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			{
 				biomeIdToReturn = UABiomes.BASE_TO_HILLS_MAP.get(biomeId1);
 			}
-			else if (biomeId1 == BiomeGenHelper.PLAINS && UltraAmplified.UAConfig.forest.get())
+			else if (biomeId1 == BiomeGenHelper.PLAINS && UltraAmplified.UABiomesConfig.forest.get())
 			{
 				//makes sure forest is selected in the config setting before allowing it to spawn through here
 				biomeIdToReturn = context.random(3) == 0 ? BiomeGenHelper.RELIC_FOREST : BiomeGenHelper.FOREST;
 			}
-			else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && UltraAmplified.UAConfig.icedTerrain.get())
+			else if (biomeId1 == BiomeGenHelper.SNOWY_TUNDRA && UltraAmplified.UABiomesConfig.icedTerrain.get())
 			{
 				biomeIdToReturn = BiomeGenHelper.ICED_TERRAIN;
 			}
@@ -83,7 +83,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 				}
 				else
 				{
-					if (UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
+					if (UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() == 10) //if we must generate m form, do so of the base biome instead of hills. Otherwise, return base form itself.
 					{
 						biomeTemp = UABiomes.BASE_TO_MUTATION_MAP.get(BiomeRegistry.getValue(biomeId1));
 
@@ -134,7 +134,7 @@ public enum HillsAndAmplifiedLayerUA implements IAreaTransformer2, IDimOffset1Tr
 			}
 		}
 
-		if (UltraAmplified.UAConfig.mutatedBiomeSpawnrate.get() == 10)
+		if (UltraAmplified.UABiomesConfig.mutatedBiomeSpawnrate.get() == 10)
 		{
 			Biome biome = BiomeRegistry.getValue(biomeId1);
 			if (biome == null || !biome.isMutation())

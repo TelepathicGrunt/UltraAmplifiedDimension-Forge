@@ -27,7 +27,7 @@ public class DungeonPlacementBands extends Placement<NoPlacementConfig>
 	@Override
 	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, NoPlacementConfig placementConfig, BlockPos pos)
 	{
-		int count = UltraAmplified.UAConfig.dungeonSpawnrate.get();
+		int count = UltraAmplified.UAFeaturesConfig.dungeonSpawnrate.get();
 
 		return IntStream.range(0, count).mapToObj((function) ->
 		{

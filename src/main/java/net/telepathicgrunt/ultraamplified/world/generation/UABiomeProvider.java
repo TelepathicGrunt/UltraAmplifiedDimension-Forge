@@ -93,7 +93,7 @@ public class UABiomeProvider extends BiomeProvider
 	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, LongFunction<C> contextFactory)
 	{
 
-		int biomeSize = UltraAmplified.UAConfig.biomeSize.get();
+		int biomeSize = UltraAmplified.UABiomesConfig.biomeSize.get();
 
 		IAreaFactory<T> areaFactory1 = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
 		areaFactory1 = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), areaFactory1);

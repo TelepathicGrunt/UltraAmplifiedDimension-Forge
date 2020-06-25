@@ -55,7 +55,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 	{
 
 		//makes sure this stonehenge does not spawn too close to world height border or it will get cut off.
-		if (!UltraAmplified.UAConfig.miniStructureGeneration.get() || position.getY() > 248)
+		if (!UltraAmplified.UAStructuresConfig.miniStructureGeneration.get() || position.getY() > 248)
 		{
 			return false;
 		}
@@ -64,7 +64,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 		if (!validatePosition(world, blockpos$Mutable))
 		{
 			//height is inside a non-air block, move down until we reached an air block
-			while (blockpos$Mutable.getY() > UltraAmplified.UAConfig.seaLevel.get())
+			while (blockpos$Mutable.getY() > UltraAmplified.UATerrainConfig.seaLevel.get())
 			{
 				blockpos$Mutable.move(Direction.DOWN);
 				if (world.isAirBlock(blockpos$Mutable))
@@ -74,7 +74,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 			}
 
 			//height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-			while (blockpos$Mutable.getY() > UltraAmplified.UAConfig.seaLevel.get())
+			while (blockpos$Mutable.getY() > UltraAmplified.UATerrainConfig.seaLevel.get())
 			{
 				blockpos$Mutable.move(Direction.DOWN);
 				if (world.getBlockState(blockpos$Mutable).isSolid())
@@ -83,7 +83,7 @@ public class Stonehenge extends Feature<NoFeatureConfig>
 				}
 			}
 
-			while (blockpos$Mutable.getY() <= UltraAmplified.UAConfig.seaLevel.get())
+			while (blockpos$Mutable.getY() <= UltraAmplified.UATerrainConfig.seaLevel.get())
 			{
 				return false; // Too low to generate. 
 			}

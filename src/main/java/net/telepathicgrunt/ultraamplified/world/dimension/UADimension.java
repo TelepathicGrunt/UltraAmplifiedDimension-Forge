@@ -171,7 +171,7 @@ public class UADimension extends Dimension
 	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
-		return UltraAmplified.UAConfig.yMaximum.get() + 2;
+		return UltraAmplified.UATerrainConfig.yMaximum.get() + 2;
 	}
 
 
@@ -209,7 +209,7 @@ public class UADimension extends Dimension
 
 		//returns a multiplier between 0 and 1 and will decrease the lower down the player gets from 256
 		@SuppressWarnings("resource")
-		float multiplierOfBrightness = ((float) (Minecraft.getInstance().player.getEyePosition(partialTicks).y) - 85) / (UltraAmplified.UAConfig.yMaximum.get() - 85);
+		float multiplierOfBrightness = ((float) (Minecraft.getInstance().player.getEyePosition(partialTicks).y) - 85) / (UltraAmplified.UATerrainConfig.yMaximum.get() - 85);
 		Math.min(Math.max(multiplierOfBrightness, 0), 1);
 
 		f1 = f1 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
@@ -236,7 +236,7 @@ public class UADimension extends Dimension
 	@Override
 	public boolean doesXZShowFog(int x, int z)
 	{
-		return UltraAmplified.UAConfig.heavyFog.get();
+		return UltraAmplified.UADimensionConfig.heavyFog.get();
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class UADimension extends Dimension
 	@Override
 	public boolean canRespawnHere()
 	{
-		return !UltraAmplified.UAConfig.bedExplodes.get();
+		return !UltraAmplified.UADimensionConfig.bedExplodes.get();
 	}
 	
 	/**

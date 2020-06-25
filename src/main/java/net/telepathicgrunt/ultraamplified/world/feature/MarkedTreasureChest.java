@@ -35,7 +35,7 @@ public class MarkedTreasureChest extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkSettings, Random random, BlockPos position, NoFeatureConfig config)
 	{
 
-		if (!UltraAmplified.UAConfig.chestGeneration.get())
+		if (!UltraAmplified.UAStructuresConfig.chestGeneration.get())
 		{
 			return false;
 		}
