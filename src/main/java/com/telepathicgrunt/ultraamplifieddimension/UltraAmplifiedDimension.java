@@ -1,12 +1,14 @@
 package com.telepathicgrunt.ultraamplifieddimension;
 
-import com.telepathicgrunt.ultraamplifieddimension.generation.UADChunkGenerator;
+import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayerPosAndDim;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +16,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,15 +30,10 @@ public class UltraAmplifiedDimension {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 		modEventBus.addListener(this::setup);
-//		WBBiomes.BIOMES.register(modEventBus);
-//		WBFeatures.FEATURES.register(modEventBus);
-//		WBBlocks.BLOCKS.register(modEventBus);
-//		WBBlocks.TILE_ENTITY_TYPES.register(modEventBus);
-//		WBSurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
-//
-//		forgeBus.addListener(EventPriority.NORMAL, this::setupChestList);
-//		forgeBus.addListener(EventPriority.LOWEST, TheBlender::addDimensionalSpacing);
-//		forgeBus.addListener(EventPriority.NORMAL, WBPortalSpawning::BlockRightClickEvent);
+		UADBlocks.BLOCKS.register(modEventBus);
+		UADBlocks.ITEMS.register(modEventBus);
+
+		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
 	}
 
@@ -45,19 +41,8 @@ public class UltraAmplifiedDimension {
 	{
 		event.enqueueWork(() ->
 		{
-			Registry.register(Registry.CHUNK_GENERATOR_CODEC, new ResourceLocation(MODID, "terrain"), UADChunkGenerator.UAD_CHUNK_GENERATOR_CODEC);
-			//WBConfiguredFeatures.registerConfiguredFeatures();
-			//WBBiomeProvider.registerBiomeProvider();
+			UADDimension.setupDimension();
+			CapabilityPlayerPosAndDim.register();
 		});
-	}
-
-	/*
-	 * Helper method to quickly register features, blocks, items, structures, biomes, anything that can be registered.
-	 */
-	public static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T entry, String registryKey)
-	{
-		entry.setRegistryName(new ResourceLocation(MODID, registryKey));
-		registry.register(entry);
-		return entry;
 	}
 }

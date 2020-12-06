@@ -60,7 +60,17 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
     });
 
-    private static final Codec<Double> RANGE_CODEC = Codec.doubleRange(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    private static final float[] NOISE_KERNAL = Util.make(new float[13824], (p_236094_0_) -> {
+        for(int i = 0; i < 24; ++i) {
+            for(int j = 0; j < 24; ++j) {
+                for(int k = 0; k < 24; ++k) {
+                    p_236094_0_[i * 24 * 24 + j * 24 + k] = (float)func_222554_b(j - 12, k - 12, i - 12);
+                }
+            }
+        }
+    });
+
+    private static final Codec<Double> RANGE_CODEC = Codec.doubleRange(Double.MIN_VALUE, Double.MAX_VALUE);
 
     public static final Codec<ScalingSettings> UAD_SCALING_CODEC = RecordCodecBuilder.create((scalingSettingsInstance) ->
             scalingSettingsInstance.group(
@@ -416,14 +426,14 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                                 double d17 = MathHelper.lerp(d16, d14, d15);
                                 double d18 = MathHelper.clamp(d17 / 200.0D, -1.0D, 1.0D);
 
-                                int j4;
-                                int k4;
+                                int jigsawY;
+                                int jigsawZ;
                                 int l4;
-                                for(d18 = d18 / 2.0D - d18 * d18 * d18 / 24.0D; objectlistiterator.hasNext(); d18 += func_222556_a(j4, k4, l4) * 0.8D) {
+                                for(d18 = d18 / 2.0D - d18 * d18 * d18 / 24.0D; objectlistiterator.hasNext(); d18 += func_222556_a(jigsawY, jigsawZ, l4) * 0.8D) {
                                     StructurePiece structurepiece = objectlistiterator.next();
                                     MutableBoundingBox mutableboundingbox = structurepiece.getBoundingBox();
-                                    j4 = Math.max(0, Math.max(mutableboundingbox.minX - i3, i3 - mutableboundingbox.maxX));
-                                    k4 = i2 - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
+                                    jigsawY = Math.max(0, Math.max(mutableboundingbox.minX - i3, i3 - mutableboundingbox.maxX));
+                                    jigsawZ = i2 - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
                                     l4 = Math.max(0, Math.max(mutableboundingbox.minZ - l3, l3 - mutableboundingbox.maxZ));
                                 }
 
@@ -431,10 +441,10 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
                                 while(objectlistiterator1.hasNext()) {
                                     JigsawJunction jigsawjunction = objectlistiterator1.next();
-                                    int k5 = i3 - jigsawjunction.getSourceX();
-                                    j4 = i2 - jigsawjunction.getSourceGroundY();
-                                    k4 = l3 - jigsawjunction.getSourceZ();
-                                    d18 += func_222556_a(k5, j4, k4) * 0.4D;
+                                    int jigsawX = i3 - jigsawjunction.getSourceX();
+                                    jigsawY = i2 - jigsawjunction.getSourceGroundY();
+                                    jigsawZ = l3 - jigsawjunction.getSourceZ();
+                                    d18 += func_222556_a(jigsawX, jigsawY, jigsawZ) * 0.4D;
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());
@@ -464,18 +474,27 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     }
 
-    private static double func_222556_a(int p_222556_0_, int p_222556_1_, int p_222556_2_) {
-        int i = p_222556_0_ + 12;
-        int j = p_222556_1_ + 12;
-        int k = p_222556_2_ + 12;
-        if (i >= 0 && i < 24) {
-            if (j >= 0 && j < 24) {
-                return k >= 0 && k < 24 ? (double)BIOME_WEIGHTING_KERNEL[k * 24 * 24 + i * 24 + j] : 0.0D;
+    private static double func_222556_a(int x, int y, int z) {
+        int xPos = x + 12;
+        int yPos = y + 12;
+        int zPos = z + 12;
+        if (xPos >= 0 && xPos < 24) {
+            if (yPos >= 0 && yPos < 24) {
+                return zPos >= 0 && zPos < 24 ? (double)NOISE_KERNAL[zPos * 24 * 24 + xPos * 24 + yPos] : 0.0D;
             } else {
                 return 0.0D;
             }
         } else {
             return 0.0D;
         }
+    }
+
+    private static double func_222554_b(int x, int y, int z) {
+        double d0 = (x * x) + (z * z);
+        double d1 = (double)y + 0.5D;
+        double d2 = d1 * d1;
+        double d3 = Math.pow(Math.E, -(d2 / 16.0D + d0 / 16.0D));
+        double d4 = -d1 * MathHelper.fastInvSqrt(d2 / 2.0D + d0 / 2.0D) / 2.0D;
+        return d4 * d3;
     }
 }

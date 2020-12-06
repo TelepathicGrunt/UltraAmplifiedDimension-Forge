@@ -5,9 +5,11 @@
   "refmap": "ultraamplifieddimension.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractFireBlockMixin",
     "ChunkGeneratorAccessor",
     "DimensionSettingsInvoker",
-    "NoiseChunkGeneratorAccessor"
+    "NoiseChunkGeneratorAccessor",
+    "SpreadableSnowyDirtBlockAccessor"
   ],
   "client": [
     "SkyPropertiesAccessor"

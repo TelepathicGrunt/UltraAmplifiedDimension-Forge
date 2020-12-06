@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        " g ",
+        "gbg",
+        " g "
+    ],
+    "key":
+    {
+        "b":
+        {
+            "item": "minecraft:red_sand"
+        },
+        "g":
+        {
+            "item": "minecraft:glowstone_dust"
+        }
+    },
+    "result":
+    {
+        "item": "ultra_amplified_dimension:red_glowsand",
+        "count": 1
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ultra_amplified_dimension:glowdirt",
+    "ultra_amplified_dimension:coarse_glowdirt",
+    "ultra_amplified_dimension:glowgrass_block",
+    "ultra_amplified_dimension:glowpodzol",
+    "ultra_amplified_dimension:glowmycelium"
+  ]
+}
