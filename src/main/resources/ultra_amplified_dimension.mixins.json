@@ -9,7 +9,8 @@
     "ChunkGeneratorAccessor",
     "DimensionSettingsInvoker",
     "NoiseChunkGeneratorAccessor",
-    "SpreadableSnowyDirtBlockAccessor"
+    "SpreadableSnowyDirtBlockAccessor",
+    "TreeFeatureMixin"
   ],
   "client": [
     "SkyPropertiesAccessor"

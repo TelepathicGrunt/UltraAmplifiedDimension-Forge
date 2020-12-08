@@ -4,6 +4,7 @@ import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayer
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADPlacements;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,8 +31,9 @@ public class UltraAmplifiedDimension {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 		modEventBus.addListener(this::setup);
-		UADBlocks.BLOCKS.register(modEventBus);
 		UADBlocks.ITEMS.register(modEventBus);
+		UADBlocks.BLOCKS.register(modEventBus);
+		UADPlacements.DECORATORS.register(modEventBus);
 
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);

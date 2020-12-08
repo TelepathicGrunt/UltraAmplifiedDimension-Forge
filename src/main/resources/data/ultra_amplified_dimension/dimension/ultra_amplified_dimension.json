@@ -4,7 +4,7 @@
     "biome_source": {
       "seed": 0,
       "type": "minecraft:fixed",
-      "biome": "minecraft:plains"
+      "biome": "ultra_amplified_dimension:test"
     },
     "seed": 0,
     "type": "ultra_amplified_dimension:terrain",

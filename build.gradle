@@ -126,7 +126,7 @@ processResources {
                 file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
                 jsonBytesSaved += oldLength - file.length()
             }
-            catch(Exception e){
+            catch(Exception ignored){
                 println("Error in file: " + file.name)
                 throw new Exception()
             }
