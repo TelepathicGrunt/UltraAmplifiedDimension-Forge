@@ -49,7 +49,7 @@ public class GlowdirtBlock extends Block {
     // glow mycelium and will transform into glowgrass block or mycelium block
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(@Nonnull BlockState state, ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!world.isAreaLoaded(pos, 3))
             return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 

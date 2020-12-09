@@ -25,7 +25,7 @@ public class PastPosAndDimProvider implements ICapabilityProvider, ICapabilitySe
 	//returns the capability attached to player
 	@Nonnull
 	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side)
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
 	{
 		if (cap == PAST_POS_AND_DIM)
 		{

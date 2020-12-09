@@ -25,7 +25,7 @@ public class GlowgrassBlock extends GrassBlock {
      * every tick, it'll attempt to spread normal mycelium instead of itself. If covered, will turn into glowdirt.
      */
     @Override
-    public void randomTick(@Nonnull BlockState state, ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!world.isRemote) {
             if (!world.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading

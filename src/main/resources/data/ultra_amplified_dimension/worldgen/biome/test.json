@@ -14,11 +14,17 @@
   },
   "surface_builder": "minecraft:grass",
   "carvers": {
-    "air": []
+    "air": [
+      "ultra_amplified_dimension:cave_cavity",
+      "ultra_amplified_dimension:ravine",
+      "ultra_amplified_dimension:long_ravine"
+    ],
+    "liquid": [
+    ]
   },
   "features": [
     [
-       "ultra_amplified_dimension:test"
+       "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [],
     [],

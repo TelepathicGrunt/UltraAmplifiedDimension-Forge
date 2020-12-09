@@ -4,31 +4,16 @@
       "config": {
         "feature": {
           "config": {
-            "features": [
-              {
-                "feature": "minecraft:huge_brown_mushroom",
-                "chance": 0.025
-              },
-              {
-                "feature": "minecraft:huge_red_mushroom",
-                "chance": 0.05
-              },
-              {
-                "feature": "minecraft:dark_oak",
-                "chance": 0.6666667
-              },
-              {
-                "feature": "minecraft:birch",
-                "chance": 0.2
-              },
-              {
-                "feature": "minecraft:fancy_oak",
-                "chance": 0.1
-              }
-            ],
-            "default": "minecraft:oak"
+            "target": {
+              "tag": "minecraft:base_stone_overworld",
+              "predicate_type": "minecraft:tag_match"
+            },
+            "state": {
+              "Name": "minecraft:gold_ore"
+            },
+            "size": 9
           },
-          "type": "minecraft:random_selector"
+          "type": "minecraft:ore"
         },
         "decorator": {
           "config": {
@@ -42,7 +27,8 @@
     "decorator": {
       "config": {
         "column_passes": 20,
-        "skip_top_ledge": true
+        "skip_top_ledge": false,
+        "underside_only": true
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

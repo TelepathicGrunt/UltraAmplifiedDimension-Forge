@@ -23,7 +23,7 @@ public class OffsetPlacer extends Placement<YOffsetPlacerConfig> {
 
     @Nonnull
     @Override
-    public Stream<BlockPos> getPositions(@Nonnull WorldDecoratingHelper context, @Nonnull Random rand, YOffsetPlacerConfig config, @Nonnull BlockPos pos) {
+    public Stream<BlockPos> getPositions(WorldDecoratingHelper context, Random rand, YOffsetPlacerConfig config, BlockPos pos) {
         return Stream.of(pos.up(config.yoffset));
     }
 }

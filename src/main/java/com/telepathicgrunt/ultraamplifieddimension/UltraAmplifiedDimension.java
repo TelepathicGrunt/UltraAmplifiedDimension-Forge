@@ -4,26 +4,37 @@ import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayer
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADCarvers;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADFeatures;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADPlacements;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.telepathicgrunt.ultraamplifieddimension.config.UABiomesConfig.UABiomesConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAFeaturesConfig.UAFeaturesConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAModCompatConfig.UAModCompatConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAStructuresConfig.UAStructuresConfigValues;
 
 @Mod(UltraAmplifiedDimension.MODID)
 public class UltraAmplifiedDimension {
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
+
+	public static UABiomesConfigValues UABiomesConfig = null;
+	public static UADimensionConfigValues UADimensionConfig = null;
+	public static UAFeaturesConfigValues UAFeaturesConfig = null;
+	public static UAModCompatConfigValues UAModCompatConfig = null;
+	public static UAStructuresConfigValues UAStructuresConfig = null;
 
 	public UltraAmplifiedDimension() {
 
@@ -33,10 +44,19 @@ public class UltraAmplifiedDimension {
 		modEventBus.addListener(this::setup);
 		UADBlocks.ITEMS.register(modEventBus);
 		UADBlocks.BLOCKS.register(modEventBus);
+		UADFeatures.FEATURES.register(modEventBus);
 		UADPlacements.DECORATORS.register(modEventBus);
+		UADCarvers.WORLD_CARVERS.register(modEventBus);
 
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
+
+		//generates config
+		UABiomesConfig = ConfigHelper.register(ModConfig.Type.SERVER, UABiomesConfigValues::new, "ultra_amplified_dimension-biomes.toml");
+		UADimensionConfig = ConfigHelper.register(ModConfig.Type.SERVER, UADimensionConfigValues::new, "ultra_amplified_dimension-dimension.toml");
+		UAFeaturesConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAFeaturesConfigValues::new, "ultra_amplified_dimension-features.toml");
+		UAModCompatConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAModCompatConfigValues::new, "ultra_amplified_dimension-mod_compat.toml");
+		UAStructuresConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAStructuresConfigValues::new, "ultra_amplified_dimension-structures.toml");
 	}
 
 	public void setup(final FMLCommonSetupEvent event)

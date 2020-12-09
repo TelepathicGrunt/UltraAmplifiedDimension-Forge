@@ -1,5 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.IPlayerPosAndDim;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.PlayerPositionAndDimension;
@@ -35,6 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 
@@ -51,12 +53,14 @@ public class AmplifiedPortalBlock extends Block
 		super(Properties.create(Material.GLASS, MaterialColor.BLACK).setLightLevel((blockState) -> 15).hardnessAndResistance(5.0F, 3600000.0F));
 	}
 
+	@Nonnull
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
 	{
 		return SHAPE;
 	}
 
+	@Nonnull
 	@Override
 	@SuppressWarnings("deprecation")
 	public ActionResultType onBlockActivated(BlockState thisBlockState, World world, BlockPos position, PlayerEntity playerEntity, Hand playerHand, BlockRayTraceResult raytraceResult)
@@ -77,13 +81,13 @@ public class AmplifiedPortalBlock extends Block
 
 			// Gets previous dimension
 			RegistryKey<World> destinationKey;
-			float pitch = 3.75F; // Looking straight ahead
-			float yaw = 0; // Facing north 
+			float pitch;
+			float yaw;
 			boolean enteringUA = false;
 
 			// Player is leaving Ultra Amplified dimension
 			if (playerEntity.world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY)) {
-				if (false) //UltraAmplified.UADimensionConfig.forceExitToOverworld.get())
+				if (UltraAmplifiedDimension.UADimensionConfig.forceExitToOverworld.get())
 				{
 					// Go to Overworld directly because of config option.
 					destinationKey = World.OVERWORLD;
@@ -195,7 +199,7 @@ public class AmplifiedPortalBlock extends Block
 				}
 				else {
 					// Check for null which would be impressive if it occurs
-					if (cap.getNonUAPos() == null)//|| UltraAmplified.UADimensionConfig.forceExitToOverworld.get())
+					if (cap.getNonUAPos() == null || UltraAmplifiedDimension.UADimensionConfig.forceExitToOverworld.get())
 					{
 						// Set player at world spawn then with Amplified Portal at feet
 						// The portal will try to not replace any block and be at the next air block above non-air blocks.
@@ -312,10 +316,10 @@ public class AmplifiedPortalBlock extends Block
 	@Deprecated
 	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving) {
-		createLotsOfParticles(state, (ServerWorld)world, pos, world.rand);
+		createLotsOfParticles((ServerWorld)world, pos, world.rand);
 	}
 
-	public void createLotsOfParticles(BlockState blockState, ServerWorld world, BlockPos position, Random random) {
+	public void createLotsOfParticles(ServerWorld world, BlockPos position, Random random) {
 		double xPos = (double) position.getX() + 0.5D;
 		double yPos = (double) position.getY() + 0.5D;
 		double zPos = (double) position.getZ() + 0.5D;

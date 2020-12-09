@@ -6,8 +6,10 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AbstractFireBlockMixin",
+    "BiomeContainerAccessor",
     "ChunkGeneratorAccessor",
     "DimensionSettingsInvoker",
+    "MinecraftServerMixin",
     "NoiseChunkGeneratorAccessor",
     "SpreadableSnowyDirtBlockAccessor",
     "TreeFeatureMixin"

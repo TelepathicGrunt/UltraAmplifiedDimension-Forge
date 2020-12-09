@@ -5,12 +5,15 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class UADSkyProperty extends DimensionRenderInfo {
     public UADSkyProperty() {
         super(155, true, FogType.NORMAL, false, false);
     }
 
+    @Nonnull
     @Override
     // sky/fog color
     public Vector3d func_230494_a_(Vector3d color, float sunHeight) {

@@ -43,7 +43,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(@Nonnull BlockState state, ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!world.isAreaLoaded(pos, 1))
             return; // Forge: prevent growing cactus from loading unloaded chunks with block update
         if (!state.isValidPosition(world, pos)) {
@@ -88,7 +88,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
     @Nonnull
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
         return HITBOX_DIMENSIONS;
     }
 
@@ -96,7 +96,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
     @Nonnull
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
         return OUTLINE_DIMENSION;
     }
 
@@ -109,7 +109,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
     @Nonnull
     @Override
     @SuppressWarnings("deprecation")
-    public BlockState updatePostPlacement(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld world, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         if (!stateIn.isValidPosition(world, currentPos)) {
             world.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
         }
@@ -120,7 +120,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isValidPosition(@Nonnull BlockState state, @Nonnull IWorldReader world, @Nonnull BlockPos pos) {
+    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockState blockstate = world.getBlockState(pos.offset(direction));
             Material material = blockstate.getMaterial();
@@ -143,14 +143,14 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, Entity entityIn) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
     }
 
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean allowsMovement(@Nonnull BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull PathType type) {
+    public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
         return false;
     }
 

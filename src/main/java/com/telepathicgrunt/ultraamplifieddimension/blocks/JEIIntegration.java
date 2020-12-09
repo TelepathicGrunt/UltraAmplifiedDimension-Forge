@@ -22,7 +22,7 @@ public class JEIIntegration implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(@Nonnull IRecipeRegistration registration) {
+    public void registerRecipes(IRecipeRegistration registration) {
         addInfo(registration, UADBlocks.AMPLIFIEDPORTAL.get());
         addInfo(registration, UADBlocks.CACTUSBODYBLOCKUA.get());
         addInfo(registration, UADBlocks.CACTUSCORNERBLOCKUA.get());

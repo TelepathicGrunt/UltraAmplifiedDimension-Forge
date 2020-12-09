@@ -19,7 +19,7 @@
         "simplex_surface_noise": true,
         "size_horizontal": 1,
         "size_vertical": 2,
-        "density_factor": 1.0,
+        "density_factor": 0.95,
         "density_offset": -0.46875,
         "top_slide": {
           "target": -10,
@@ -27,9 +27,9 @@
           "offset": 0
         },
         "bottom_slide": {
-          "target": -30,
-          "size": 0,
-          "offset": 0
+          "target": 10,
+          "size": 1,
+          "offset": 4
         },
         "sampling": {
           "xz_scale": 2,

@@ -23,7 +23,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
 
     @Nonnull
     @Override
-    public Stream<BlockPos> getPositions(@Nonnull WorldDecoratingHelper context, @Nonnull Random rand, LedgeSurfacePlacerConfig config, @Nonnull BlockPos pos) {
+    public Stream<BlockPos> getPositions(WorldDecoratingHelper context, Random rand, LedgeSurfacePlacerConfig config, BlockPos pos) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         List<BlockPos> list = new ArrayList<>();
 
@@ -46,15 +46,18 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
 
                 // This is true if above is spacious while current block is solid.
                 // We are at ledge if this is the case.
-                if (!notSolidSpace(currentBlockPos) &&
-                    notSolidSpace(prevBlockState) &&
+                // Also allows underside placements as well
+                if (((!config.undersideOnly && !notSolidSpace(currentBlockPos) && notSolidSpace(prevBlockState)) ||
+                    (config.undersideOnly && notSolidSpace(currentBlockPos) && !notSolidSpace(prevBlockState))) &&
                     !currentBlockPos.isIn(Blocks.BEDROCK))
                 {
                     // If we are skipping top ledge, then current y must not be terrain heightmap.
                     // The -1 is because we check top down and find surfaces if our block is a solid
                     // block with space above but the heightmap method always returns that above space.
                     // thus we need to subtract one to be able to tell if our pos is topmost terrain.
-                    if(!config.skipTopLedge || mutable.getY() != context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1){
+                    //
+                    // Underside placing skips the top ledge checks
+                    if(config.undersideOnly || !config.skipTopLedge || mutable.getY() != context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1){
                         list.add(mutable.toImmutable());
                     }
                 }

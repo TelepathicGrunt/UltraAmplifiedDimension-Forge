@@ -76,7 +76,7 @@ public class AmplifiedPortalCreation {
             pos = new BlockPos(pos.getX(), 6, pos.getZ());
         }
 
-        amplifiedPortalFrame.generate(worldUA, new Random(), pos, IFeatureConfig.NO_FEATURE_CONFIG);
+        amplifiedPortalFrame.generate(worldUA, pos);
     }
 
 
@@ -132,26 +132,11 @@ public class AmplifiedPortalCreation {
         return true;
     }
 
-    public static boolean trySpawnPortal(IWorld world, BlockPos pos) {
-        boolean canMakePortal = isPortal(world, pos);
+    public static void trySpawnPortal(IWorld world, BlockPos pos) {
+        boolean canMakePortal = isValid(world, pos);
         if (canMakePortal) {
             //place portal at pos in the portal frame.
             world.setBlockState(pos, UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
-            return true;
-        }
-        else {
-            return false;
         }
     }
-
-
-    @Nullable
-    public static boolean isPortal(IWorld world, BlockPos pos) {
-        if (isValid(world, pos)) {
-            return true;
-        }
-
-        return false;
-    }
-
 }
