@@ -8,8 +8,8 @@ import net.minecraft.world.biome.Biome;
 
 public class GeneralUtils {
 
-    public static RegistryKey<Biome> biomeRegistryKey(String biomeName){
-        return RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(UltraAmplifiedDimension.MODID, biomeName));
+    public static String biomeIDString(String biomeName){
+        return UltraAmplifiedDimension.MODID + ":" + biomeName;
     }
 
 }

@@ -205,39 +205,109 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
 
 
-    private double func_222552_a(int p_222552_1_, int p_222552_2_, int p_222552_3_, double p_222552_4_, double p_222552_6_, double p_222552_8_, double p_222552_10_) {
-        double d0 = 0.0D;
-        double d1 = 0.0D;
-        double d2 = 0.0D;
-        double d3 = 1.0D;
+    /**
+     * SuperCoder's optimization she PRed into Lithium.
+     * https://github.com/jellysquid3/lithium-fabric/blob/96c4347f2feeeb7310906760566ea2f1ed02e2cd/src/main/java/me/jellysquid/mods/lithium/mixin/gen/fast_noise_interpolation/NoiseChunkGeneratorMixin.java
+     *
+     * I asked if I could recreate it here and was given the green light.
+     * Special thanks to SuperCoder!
+     *
+     * Note from Lithium:
+     *  To generate it's terrain, Minecraft uses two different perlin noises.
+     *  It interpolates these two noises to create the final sample at a position.
+     *  However, the interpolation noise is not all that good and spends most of it's time at > 1 or < 0, rendering
+     *  one of the noises completely unnecessary in the process.
+     *  By taking advantage of that, we can reduce the sampling needed per block through the interpolation noise.
+     */
+    private double func_222552_a(int x, int y, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch) {
+        // This controls both the frequency and amplitude of the noise.
+        double frequency = 1.0;
+        double interpolationValue = 0.0;
 
-        for(int i = 0; i < 16; ++i) {
-            double d4 = OctavesNoiseGenerator.maintainPrecision((double)p_222552_1_ * p_222552_4_ * d3);
-            double d5 = OctavesNoiseGenerator.maintainPrecision((double)p_222552_2_ * p_222552_6_ * d3);
-            double d6 = OctavesNoiseGenerator.maintainPrecision((double)p_222552_3_ * p_222552_4_ * d3);
-            double d7 = p_222552_6_ * d3;
-            ImprovedNoiseGenerator improvednoisegenerator = ((NoiseChunkGeneratorAccessor)this).getField_222568_o().getOctave(i);
-            if (improvednoisegenerator != null) {
-                d0 += improvednoisegenerator.func_215456_a(d4, d5, d6, d7, (double)p_222552_2_ * d7) / d3;
-            }
+        // Calculate interpolation data to decide what noise to sample.
+        for (int octave = 0; octave < 8; octave++) {
+            double scaledVerticalScale = verticalStretch * frequency;
+            double scaledY = y * scaledVerticalScale;
 
-            ImprovedNoiseGenerator improvednoisegenerator1 = ((NoiseChunkGeneratorAccessor)this).getField_222569_p().getOctave(i);
-            if (improvednoisegenerator1 != null) {
-                d1 += improvednoisegenerator1.func_215456_a(d4, d5, d6, d7, (double)p_222552_2_ * d7) / d3;
-            }
+            interpolationValue += sampleOctave(((NoiseChunkGeneratorAccessor)this).getField_222570_q().getOctave(octave),
+                    OctavesNoiseGenerator.maintainPrecision(x * horizontalStretch * frequency),
+                    OctavesNoiseGenerator.maintainPrecision(scaledY),
+                    OctavesNoiseGenerator.maintainPrecision(z * horizontalStretch * frequency), scaledVerticalScale, scaledY, frequency);
 
-            if (i < 8) {
-                ImprovedNoiseGenerator improvednoisegenerator2 = ((NoiseChunkGeneratorAccessor)this).getField_222570_q().getOctave(i);
-                if (improvednoisegenerator2 != null) {
-                    d2 += improvednoisegenerator2.func_215456_a(OctavesNoiseGenerator.maintainPrecision((double)p_222552_1_ * p_222552_8_ * d3), OctavesNoiseGenerator.maintainPrecision((double)p_222552_2_ * p_222552_10_ * d3), OctavesNoiseGenerator.maintainPrecision((double)p_222552_3_ * p_222552_8_ * d3), p_222552_10_ * d3, (double)p_222552_2_ * p_222552_10_ * d3) / d3;
-                }
-            }
-
-            d3 /= 2.0D;
+            frequency /= 2.0;
         }
 
-        return MathHelper.clampedLerp(d0 / 512.0D, d1 / 512.0D, (d2 / 10.0D + 1.0D) / 2.0D);
+        double clampedInterpolation = (interpolationValue / 10.0 + 1.0) / 2.0;
+
+        if (clampedInterpolation >= 1) {
+            // Sample only upper noise, as the lower noise will be interpolated out.
+            frequency = 1.0;
+            double noise = 0.0;
+            for (int octave = 0; octave < 16; octave++) {
+                double scaledVerticalScale = verticalScale * frequency;
+                double scaledY = y * scaledVerticalScale;
+
+                noise += sampleOctave(((NoiseChunkGeneratorAccessor)this).getField_222569_p().getOctave(octave),
+                        OctavesNoiseGenerator.maintainPrecision(x * horizontalScale * frequency),
+                        OctavesNoiseGenerator.maintainPrecision(scaledY),
+                        OctavesNoiseGenerator.maintainPrecision(z * horizontalScale * frequency), scaledVerticalScale, scaledY, frequency);
+
+                frequency /= 2.0;
+            }
+
+            return noise / 512.0;
+        }
+        else if (clampedInterpolation <= 0) {
+            // Sample only lower noise, as the upper noise will be interpolated out.
+            frequency = 1.0;
+            double noise = 0.0;
+            for (int octave = 0; octave < 16; octave++) {
+                double scaledVerticalScale = verticalScale * frequency;
+                double scaledY = y * scaledVerticalScale;
+                noise += sampleOctave(((NoiseChunkGeneratorAccessor)this).getField_222568_o().getOctave(octave),
+                        OctavesNoiseGenerator.maintainPrecision(x * horizontalScale * frequency),
+                        OctavesNoiseGenerator.maintainPrecision(scaledY),
+                        OctavesNoiseGenerator.maintainPrecision(z * horizontalScale * frequency), scaledVerticalScale, scaledY, frequency);
+
+                frequency /= 2.0;
+            }
+
+            return noise / 512.0;
+        }
+        else {
+            // [VanillaCopy] SurfaceChunkGenerator#sampleNoise
+            // Sample both and interpolate, as in vanilla.
+
+            frequency = 1.0;
+            double lowerNoise = 0.0;
+            double upperNoise = 0.0;
+
+            for (int octave = 0; octave < 16; octave++) {
+                // Pre calculate these values to share them
+                double scaledVerticalScale = verticalScale * frequency;
+                double scaledY = y * scaledVerticalScale;
+                double xVal = OctavesNoiseGenerator.maintainPrecision(x * horizontalScale * frequency);
+                double yVal = OctavesNoiseGenerator.maintainPrecision(scaledY);
+                double zVal = OctavesNoiseGenerator.maintainPrecision(z * horizontalScale * frequency);
+
+                upperNoise += sampleOctave(((NoiseChunkGeneratorAccessor)this).getField_222569_p().getOctave(octave), xVal, yVal, zVal, scaledVerticalScale, scaledY, frequency);
+                lowerNoise += sampleOctave(((NoiseChunkGeneratorAccessor)this).getField_222568_o().getOctave(octave), xVal, yVal, zVal, scaledVerticalScale, scaledY, frequency);
+
+                frequency /= 2.0;
+            }
+
+            // Vanilla behavior, return interpolated noise
+            return MathHelper.lerp(clampedInterpolation, lowerNoise / 512.0, upperNoise / 512.0);
+        }
     }
+
+    /**
+     * Also from SuperCoder and Lithium
+     */
+    private static double sampleOctave(ImprovedNoiseGenerator sampler, double x, double y, double z, double scaledVerticalScale, double scaledY, double frequency) {
+        return sampler.func_215456_a(x, y, z, scaledVerticalScale, scaledY) / frequency;
+    }
+
 
     private double[] func_222547_b(int p_222547_1_, int p_222547_2_) {
         double[] adouble = new double[((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() + 1];

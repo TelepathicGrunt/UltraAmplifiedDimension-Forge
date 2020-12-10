@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.carver;
 
 import com.mojang.serialization.Codec;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
@@ -9,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IObjectIntIterable;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.SimpleRegistry;
@@ -16,7 +16,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
-import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import java.util.BitSet;
 import java.util.HashMap;
@@ -24,7 +23,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
-import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeRegistryKey;
+import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
 
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
@@ -53,37 +52,37 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		canReplaceMap = result;
 	}
 
-	private static Map<RegistryKey<Biome>, BlockState> fillerBiomeMap;
+	private static Map<String, BlockState> fillerBiomeMap;
 	static {
 		if (fillerBiomeMap == null)
 		{
 			fillerBiomeMap = new HashMap<>();
 
-			fillerBiomeMap.put(biomeRegistryKey("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("iced_terrain"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("ice_spikes"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("frozen_ocean"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("barren_end_fields"), Blocks.END_STONE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("end_fields"), Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("iced_terrain"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("ice_spikes"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("frozen_ocean"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("barren_end_fields"), Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("end_fields"), Blocks.END_STONE.getDefaultState());
 		}
 	}
 
-	private static Map<RegistryKey<Biome>, BlockState> lavaFloorBiomeMap;
+	private static Map<String, BlockState> lavaFloorBiomeMap;
 	static {
 		if (lavaFloorBiomeMap == null)
 		{
 			lavaFloorBiomeMap = new HashMap<>();
 
-			lavaFloorBiomeMap.put(biomeRegistryKey("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
 		}
 	}
 
@@ -118,9 +117,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
 			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
 		}
-		else{
-			biomeRegistry = null;
-		}
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
@@ -138,7 +134,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		float ledgeWidth = 1.0F;
 
 		// CONTROLS THE LEDGES' WIDTH! FINALLY FOUND WHAT THIS JUNK DOES
-		for (int currentHeight = 0; currentHeight <= 70; ++currentHeight) {
+		for (int currentHeight = 0; currentHeight <= this.maxHeight; ++currentHeight) {
 
 			//attempt at creating dome ceilings
 			if (currentHeight > 44 && currentHeight < 60) {
@@ -180,14 +176,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 			int zMin = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
 			int zMax = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
 			if (xMin <= xMax && yMin <= yMax && zMin <= zMax) {
-				boolean flag = false;
 				BlockState secondaryFloorBlockstate;
 				BlockState currentBlockstate;
 				BlockState aboveBlockstate;
 				BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 				BlockPos.Mutable blockpos$Mutableup = new BlockPos.Mutable();
 				BlockPos.Mutable blockpos$Mutabledown = new BlockPos.Mutable();
-				RegistryKey<Biome> biome;
 				double stalagmiteDouble = 0;
 
 				for (int smallX = xMin; smallX < xMax; ++smallX) {
@@ -205,12 +199,14 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 //							}
 
 							blockpos$Mutable.setPos(x, 60, z);
-							biome = biomeRegistry != null ? biomeRegistry.getOptionalKey(biomeBlockPos.apply(blockpos$Mutable)).orElse(null) : null;
-							BlockState replacementBlock = fillerBiomeMap.get(biome);
+							ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biomeBlockPos.apply(blockpos$Mutable)) : null;
+							String biomeIDString = biomeID == null ? "" : biomeID.toString();
+
+							BlockState replacementBlock = fillerBiomeMap.get(biomeIDString);
 							if (replacementBlock == null) {
 								replacementBlock = STONE;
 							}
-							secondaryFloorBlockstate = lavaFloorBiomeMap.get(biome);
+							secondaryFloorBlockstate = lavaFloorBiomeMap.get(biomeIDString);
 
 							for (int y = yMax; y > yMin; y--) {
 								// sets a trial and error value that widens base of pillar and makes paths
@@ -263,19 +259,19 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 									}
 
 									//limits calling stalagmite perlin generators to reduce gen time
-									if (y > 32) {
+									if (y > 30) {
 										// Creates large stalagmites that cannot reach floor of cavern.
 										//
 										// simplex field creates the main stalagmite shape and placement by stepping
 										// though x and z pretty fast and through y very slowly.
-										// Then adds 400/y so that as the y value gets lower, the more area gets carved
+										// Then adds 500/y so that as the y value gets lower, the more area gets carved
 										// which sets the limit on how far down the stalagmites can go.
 										// Next, add a random value to add some noise to the pillar.
 										// And lastly, sets the greater than value to be high so more stalagmites can be made
-										// while the 400/y has already carved out the rest of the cave.
+										// while the 500/y has already carved out the rest of the cave.
 										//
 										//Increase step in X and Z to decrease number of stalagmites and make them slightly thicker
-										stalagmiteDouble = noiseGen.eval(x * 0.25D, z * 0.25D, y * 0.005D) * 15.0D + (480D / (y));
+										stalagmiteDouble = noiseGen.eval(x * 0.25D, z * 0.25D, 0) * 15.0D + (500D / (y));
 
 										//adds more tiny stalagmites to ceiling
 										if (y > 48) {
@@ -283,7 +279,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										}
 
 										//decrease constant to make stalagmites smaller and thinner
-										boolean flagStalagmites = stalagmiteDouble > 4.9D;
+										boolean flagStalagmites = stalagmiteDouble > 5.3D;
 
 										if (!flagStalagmites) {
 											//skip position if we are in stalagmite space
@@ -337,6 +333,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 													}
 												}
 											}
+
 											world.setBlockState(blockpos$Mutable, currentBlockstate, false);
 										}
 										else {

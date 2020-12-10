@@ -8,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IObjectIntIterable;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.SimpleRegistry;
@@ -22,7 +23,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
 
-import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeRegistryKey;
+import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
 
 
 public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
@@ -52,37 +53,37 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 		canReplaceMap = result;
 	}
 
-	private static Map<RegistryKey<Biome>, BlockState> fillerBiomeMap;
+	private static Map<String, BlockState> fillerBiomeMap;
 	static {
 		if (fillerBiomeMap == null)
 		{
 			fillerBiomeMap = new HashMap<>();
 
-			fillerBiomeMap.put(biomeRegistryKey("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("iced_terrain"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("ice_spikes"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("frozen_ocean"), Blocks.ICE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("barren_end_fields"), Blocks.END_STONE.getDefaultState());
-			fillerBiomeMap.put(biomeRegistryKey("end_fields"), Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("iced_terrain"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("ice_spikes"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("frozen_ocean"), Blocks.ICE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("barren_end_fields"), Blocks.END_STONE.getDefaultState());
+			fillerBiomeMap.put(biomeIDString("end_fields"), Blocks.END_STONE.getDefaultState());
 		}
 	}
 
-	private static Map<RegistryKey<Biome>, BlockState> lavaFloorBiomeMap;
+	private static Map<String, BlockState> lavaFloorBiomeMap;
 	static {
 		if (lavaFloorBiomeMap == null)
 		{
 			lavaFloorBiomeMap = new HashMap<>();
 
-			lavaFloorBiomeMap.put(biomeRegistryKey("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-			lavaFloorBiomeMap.put(biomeRegistryKey("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
+			lavaFloorBiomeMap.put(biomeIDString("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
 		}
 	}
 
@@ -101,9 +102,6 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
 			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
 		}
-		else{
-			biomeRegistry = null;
-		}
 
 		int i = (this.func_222704_c() * 3 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
@@ -121,7 +119,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 	private void func_202535_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, Random random, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
 		float f = 1.0F;
 
-		for (int i = 0; i < 256; ++i) {
+		for (int i = 0; i < this.maxHeight; ++i) {
 			if (i == 0 || random.nextInt(3) == 0) {
 				f = 1.0F + random.nextFloat() * random.nextFloat();
 			}
@@ -174,7 +172,6 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 				BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 				BlockPos.Mutable blockpos$Mutableup = new BlockPos.Mutable();
 				BlockPos.Mutable blockpos$Mutabledown = new BlockPos.Mutable();
-				RegistryKey<Biome> biome;
 
 				for (int k1 = i; k1 < j; ++k1) {
 					int x = k1 + mainChunkX * 16;
@@ -188,12 +185,14 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 						if (xzSquaredModified < 1.0D) {
 
 							blockpos$Mutable.setPos(x, 60, z);
-							biome = biomeRegistry != null ? biomeRegistry.getOptionalKey(biomeBlockPos.apply(blockpos$Mutable)).orElse(null) : null;
-							fillerBlock = fillerBiomeMap.get(biome);
+							ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biomeBlockPos.apply(blockpos$Mutable)) : null;
+							String biomeIDString = biomeID == null ? "" : biomeID.toString();
+
+							fillerBlock = fillerBiomeMap.get(biomeIDString);
 							if (fillerBlock == null) {
 								fillerBlock = STONE;
 							}
-							secondaryFloorBlockstate = lavaFloorBiomeMap.get(biome);
+							secondaryFloorBlockstate = lavaFloorBiomeMap.get(biomeIDString);
 
 							for (int y = l; y > k; --y) {
 
