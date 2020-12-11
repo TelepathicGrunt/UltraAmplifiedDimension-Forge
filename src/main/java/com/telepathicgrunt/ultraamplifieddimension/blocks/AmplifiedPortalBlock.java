@@ -153,7 +153,7 @@ public class AmplifiedPortalBlock extends Block
 
 				//finds where portal block is
 				while (portalY > 0) {
-					if (destinationWorld.getBlockState(worldOriginBlockPos.up(portalY)) == UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState()) {
+					if (destinationWorld.getBlockState(worldOriginBlockPos.up(portalY)) == UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState()) {
 						break;
 					}
 					portalY--;
@@ -210,7 +210,7 @@ public class AmplifiedPortalBlock extends Block
 							blockState = destinationWorld.getBlockState(playerBlockPos);
 						}
 
-						destinationWorld.setBlockState(playerBlockPos, UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState());
+						destinationWorld.setBlockState(playerBlockPos, UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState());
 
 						playerVec3Pos = Vector3d.copyCentered(playerBlockPos).add(0, 0.5D, 0);
 					}
@@ -282,7 +282,7 @@ public class AmplifiedPortalBlock extends Block
 					BlockPos posOfHighestPortal = new BlockPos(pos.getX(), world.func_234938_ad_(), pos.getZ());
 					while (posOfHighestPortal.getY() >= 0) {
 						Block blockToCheck = world.getBlockState(posOfHighestPortal).getBlock();
-						if (blockToCheck == UADBlocks.AMPLIFIEDPORTAL.get()) {
+						if (blockToCheck == UADBlocks.AMPLIFIED_PORTAL.get()) {
 							break;
 						}
 

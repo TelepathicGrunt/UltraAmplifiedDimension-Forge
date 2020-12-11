@@ -58,7 +58,9 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                     //
                     // Underside placing skips the top ledge checks
                     if(config.undersideOnly || !config.skipTopLedge || mutable.getY() != context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1){
-                        list.add(mutable.toImmutable());
+                        if(rand.nextFloat() < config.validSpotChance){
+                            list.add(mutable.toImmutable());
+                        }
                     }
                 }
 

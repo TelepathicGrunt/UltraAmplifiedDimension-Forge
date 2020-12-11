@@ -23,10 +23,10 @@ public class JEIIntegration implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        addInfo(registration, UADBlocks.AMPLIFIEDPORTAL.get());
-        addInfo(registration, UADBlocks.CACTUSBODYBLOCKUA.get());
-        addInfo(registration, UADBlocks.CACTUSCORNERBLOCKUA.get());
-        addInfo(registration, UADBlocks.CACTUSMAINBLOCKUA.get());
+        addInfo(registration, UADBlocks.AMPLIFIED_PORTAL.get());
+        addInfo(registration, UADBlocks.BIG_CACTUS_BODY_BLOCK.get());
+        addInfo(registration, UADBlocks.BIG_CACTUS_CORNER_BLOCK.get());
+        addInfo(registration, UADBlocks.BIG_CACTUS_MAIN_BLOCK.get());
         addInfo(registration, UADBlocks.COARSE_GLOWDIRT.get());
         addInfo(registration, UADBlocks.GLOWDIRT.get());
         addInfo(registration, UADBlocks.GLOWGRASS_BLOCK.get());
@@ -34,7 +34,7 @@ public class JEIIntegration implements IModPlugin {
         addInfo(registration, UADBlocks.GLOWPODZOL.get());
         addInfo(registration, UADBlocks.GLOWSAND.get());
         addInfo(registration, UADBlocks.GLOWSTONE_ORE.get());
-        addInfo(registration, UADBlocks.REDGLOWSAND.get());
+        addInfo(registration, UADBlocks.RED_GLOWSAND.get());
     }
 
 

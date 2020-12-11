@@ -396,10 +396,10 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
     
     @Override
-    public void func_230352_b_(IWorld p_230352_1_, StructureManager p_230352_2_, IChunk p_230352_3_) {
+    public void func_230352_b_(IWorld p_230352_1_, StructureManager p_230352_2_, IChunk chunk) {
         ObjectList<StructurePiece> objectlist = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
-        ChunkPos chunkpos = p_230352_3_.getPos();
+        ChunkPos chunkpos = chunk.getPos();
         int i = chunkpos.x;
         int j = chunkpos.z;
         int k = i << 4;
@@ -440,7 +440,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
             adouble[1][i5] = new double[((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() + 1];
         }
 
-        ChunkPrimer chunkprimer = (ChunkPrimer)p_230352_3_;
+        ChunkPrimer chunkprimer = (ChunkPrimer)chunk;
         Heightmap heightmap = chunkprimer.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG);
         Heightmap heightmap1 = chunkprimer.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG);
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();

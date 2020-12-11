@@ -44,4 +44,6 @@ public interface NoiseChunkGeneratorAccessor {
     @Accessor("field_236080_h_")
     Supplier<DimensionSettings> getfield_236080_h_();
 
+    @Accessor
+    BlockState getDefaultFluid();
 }

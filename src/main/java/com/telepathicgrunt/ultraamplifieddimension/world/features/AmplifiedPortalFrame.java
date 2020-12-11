@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.material.Material;
@@ -66,7 +65,7 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 		//the portal itself
 		world.setBlockState(
 				pos.add(0, 1, 0),
-				UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState(),
+				UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState(),
 				3);
 
 		//top of portal frame

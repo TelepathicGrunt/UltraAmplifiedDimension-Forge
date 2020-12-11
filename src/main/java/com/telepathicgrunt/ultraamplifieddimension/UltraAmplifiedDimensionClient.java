@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -32,8 +31,8 @@ public class UltraAmplifiedDimensionClient {
 			RenderTypeLookup.setRenderLayer(UADBlocks.GLOWDIRT.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(UADBlocks.COARSE_GLOWDIRT.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(UADBlocks.GLOWSAND.get(), RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(UADBlocks.REDGLOWSAND.get(), RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(UADBlocks.AMPLIFIEDPORTAL.get(), RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(UADBlocks.RED_GLOWSAND.get(), RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(UADBlocks.AMPLIFIED_PORTAL.get(), RenderType.getTranslucent());
 		});
 	}
 }

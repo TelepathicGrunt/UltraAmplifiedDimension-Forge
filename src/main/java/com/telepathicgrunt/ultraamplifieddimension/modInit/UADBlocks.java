@@ -8,7 +8,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +20,7 @@ public class UADBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, UltraAmplifiedDimension.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, UltraAmplifiedDimension.MODID);
 
-    public static final RegistryObject<Block> AMPLIFIEDPORTAL = createBlock("amplified_portal", AmplifiedPortalBlock::new);
+    public static final RegistryObject<Block> AMPLIFIED_PORTAL = createBlock("amplified_portal", AmplifiedPortalBlock::new);
     public static final RegistryObject<Block> GLOWSTONE_ORE = createBlock("glowstone_ore", GlowstoneOreBlock::new);
     public static final RegistryObject<Block> COARSE_GLOWDIRT = createBlock("coarse_glowdirt", CoarseGlowdirtBlock::new);
     public static final RegistryObject<Block> GLOWDIRT = createBlock("glowdirt", GlowdirtBlock::new);
@@ -29,17 +28,17 @@ public class UADBlocks {
     public static final RegistryObject<Block> GLOWMYCELIUM = createBlock("glowmycelium", GlowmyceliumBlock::new);
     public static final RegistryObject<Block> GLOWPODZOL = createBlock("glowpodzol", GlowpodzolBlock::new);
     public static final RegistryObject<Block> GLOWSAND = createBlock("glowsand", GlowsandBlock::new);
-    public static final RegistryObject<Block> REDGLOWSAND = createBlock("red_glowsand", RedGlowsandBlock::new);
-    public static final RegistryObject<Block> CACTUSBODYBLOCKUA = createBlock("cactus_body_block_ua", CactusBodyBlockUA::new);
-    public static final RegistryObject<Block> CACTUSCORNERBLOCKUA = createBlock("cactus_corner_block_ua", CactusCornerBlockUA::new);
-    public static final RegistryObject<Block> CACTUSMAINBLOCKUA = createBlock("cactus_main_block_ua", CactusMainBlockUA::new);
+    public static final RegistryObject<Block> RED_GLOWSAND = createBlock("red_glowsand", RedGlowsandBlock::new);
+    public static final RegistryObject<Block> BIG_CACTUS_BODY_BLOCK = createBlock("big_cactus_body_block", BigCactusBodyBlock::new);
+    public static final RegistryObject<Block> BIG_CACTUS_CORNER_BLOCK = createBlock("big_cactus_corner_block", BigCactusCornerBlock::new);
+    public static final RegistryObject<Block> BIG_CACTUS_MAIN_BLOCK = createBlock("big_cactus_main_block", BigCactusMainBlock::new);
 
     //creative tab to hold our block items
     public static final ItemGroup ULTRAMAPLIFIED = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplifiedDimension.MODID) {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ItemStack createIcon() {
-            return new ItemStack(AMPLIFIEDPORTAL.get());
+            return new ItemStack(AMPLIFIED_PORTAL.get());
         }
     };
     

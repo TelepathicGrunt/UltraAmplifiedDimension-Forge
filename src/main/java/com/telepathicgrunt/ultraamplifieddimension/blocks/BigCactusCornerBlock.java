@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 
-public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraftforge.common.IPlantable
+public class BigCactusCornerBlock extends HorizontalBlock implements net.minecraftforge.common.IPlantable
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_15;
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
@@ -36,7 +36,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 	protected static final VoxelShape OUTLINE_DIMENSION = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 
-	public CactusCornerBlockUA() {
+	public BigCactusCornerBlock() {
 		super(Properties.create(Material.CACTUS).tickRandomly().hardnessAndResistance(0.4F).sound(SoundType.CLOTH));
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0).with(FACING, Direction.NORTH));
 	}
@@ -57,7 +57,7 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				int j = state.get(AGE);
 				if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(world, blockpos, state, true)) {
 					if (j == 15) {
-						world.setBlockState(blockpos, UADBlocks.CACTUSBODYBLOCKUA.get().getDefaultState());
+						world.setBlockState(blockpos, UADBlocks.BIG_CACTUS_BODY_BLOCK.get().getDefaultState());
 						BlockState blockstate = state.with(AGE, 0);
 						world.setBlockState(pos, blockstate, 4);
 						blockstate.neighborChanged(world, blockpos, this, pos, false);
@@ -142,8 +142,8 @@ public class CactusCornerBlockUA extends HorizontalBlock implements net.minecraf
 				//handling two edge cases
 				//Case 1: attached to horizontal main cactus block that has corner blocks on both sides but neither corner block has a valid block below
 				//Case 2: two corner blocks are facing each otehr with no valid space below
-				if (offsetBlock.getBlock() == UADBlocks.CACTUSMAINBLOCKUA.get()) {
-					return ((CactusMainBlockUA) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) world, pos.offset(facing.getOpposite()));
+				if (offsetBlock.getBlock() == UADBlocks.BIG_CACTUS_MAIN_BLOCK.get()) {
+					return ((BigCactusMainBlock) offsetBlock.getBlock()).isValidPosition(offsetBlock, (IWorldReader) world, pos.offset(facing.getOpposite()));
 				}
 				else if (offsetBlock.getBlock() == this) {
 					belowBlock = world.getBlockState(pos.offset(facing.getOpposite()).down());

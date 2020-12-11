@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 
-public class CactusMainBlockUA extends DirectionalBlock implements net.minecraftforge.common.IPlantable {
+public class BigCactusMainBlock extends DirectionalBlock implements net.minecraftforge.common.IPlantable {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_0_15;
     public static final DirectionProperty VALIDFACING = DirectionProperty.create("facing", Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.UP);
     public static final DirectionProperty FACING = VALIDFACING;
@@ -37,7 +37,7 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
     protected static final VoxelShape OUTLINE_DIMENSION = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 
-    public CactusMainBlockUA() {
+    public BigCactusMainBlock() {
         super(Properties.create(Material.CACTUS).tickRandomly().hardnessAndResistance(0.4F).sound(SoundType.CLOTH));
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0).with(FACING, Direction.UP));
     }
@@ -57,8 +57,8 @@ public class CactusMainBlockUA extends DirectionalBlock implements net.minecraft
                 int i = 1;
 
                 while (world.getBlockState(pos.down(i)).getBlock() == this ||
-						world.getBlockState(pos.down(i)).getBlock() == UADBlocks.CACTUSBODYBLOCKUA.get() ||
-						world.getBlockState(pos.down(i)).getBlock() == UADBlocks.CACTUSCORNERBLOCKUA.get())
+						world.getBlockState(pos.down(i)).getBlock() == UADBlocks.BIG_CACTUS_BODY_BLOCK.get() ||
+						world.getBlockState(pos.down(i)).getBlock() == UADBlocks.BIG_CACTUS_CORNER_BLOCK.get())
                 {
                     i++;
                 }

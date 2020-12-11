@@ -14,13 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-
-import javax.annotation.Nullable;
-import java.util.Random;
-import java.util.Set;
 
 /**
  * Handles creating the Amplified Portal block and holds the code to make the portal frame too.
@@ -53,7 +48,7 @@ public class AmplifiedPortalCreation {
         worldUA.getChunk(pos);
 
         while (pos.getY() >= 0) {
-            if (worldUA.getBlockState(pos) == UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState()) {
+            if (worldUA.getBlockState(pos) == UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState()) {
                 return true;
             }
             pos = pos.down();
@@ -136,7 +131,7 @@ public class AmplifiedPortalCreation {
         boolean canMakePortal = isValid(world, pos);
         if (canMakePortal) {
             //place portal at pos in the portal frame.
-            world.setBlockState(pos, UADBlocks.AMPLIFIEDPORTAL.get().getDefaultState(), 18);
+            world.setBlockState(pos, UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState(), 18);
         }
     }
 }

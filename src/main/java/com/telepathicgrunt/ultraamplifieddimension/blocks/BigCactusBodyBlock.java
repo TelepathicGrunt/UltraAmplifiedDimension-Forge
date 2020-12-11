@@ -28,14 +28,14 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 
-public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftforge.common.IPlantable {
+public class BigCactusBodyBlock extends HorizontalBlock implements net.minecraftforge.common.IPlantable {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_0_15;
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     protected static final VoxelShape HITBOX_DIMENSIONS = Block.makeCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 15.0D, 16.0D);
     protected static final VoxelShape OUTLINE_DIMENSION = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 
-    public CactusBodyBlockUA() {
+    public BigCactusBodyBlock() {
         super(Properties.create(Material.CACTUS).tickRandomly().hardnessAndResistance(0.4F).sound(SoundType.CLOTH));
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0).with(FACING, Direction.NORTH));
     }
@@ -56,7 +56,7 @@ public class CactusBodyBlockUA extends HorizontalBlock implements net.minecraftf
                 int j = state.get(AGE);
                 if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(world, blockpos, state, true)) {
                     if (j == 15) {
-                        world.setBlockState(blockpos, UADBlocks.CACTUSBODYBLOCKUA.get().getDefaultState());
+                        world.setBlockState(blockpos, UADBlocks.BIG_CACTUS_BODY_BLOCK.get().getDefaultState());
                         BlockState blockstate = state.with(AGE, 0);
                         world.setBlockState(pos, blockstate, 4);
                         blockstate.neighborChanged(world, blockpos, this, pos, false);
