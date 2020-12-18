@@ -13,6 +13,7 @@ public class UADimensionConfig
 	{
 		public ConfigValueListener<Boolean> bedExplodes;
 		public ConfigValueListener<Boolean> heavyFog;
+		public ConfigValueListener<Integer> cloudHeight;
 		public ConfigValueListener<Boolean> forceExitToOverworld;
 		public ConfigValueListener<Boolean> allowNetherPortal;
 		public ConfigValueListener<String> portalActivationItem;
@@ -30,7 +31,13 @@ public class UADimensionConfig
 		                		+" This is not the same as distance fog which does not make chunks near you foggy.")
 		                .translation("ultraamplified.config.dimension.heavyfog")
 		                .define("heavyFog", false));
-	
+
+				cloudHeight = subscriber.subscribe(builder
+						.comment("\r\n Maxium height for clouds to be at."
+								+"\r\n Default is 245.")
+						.translation("ultraamplified.config.dimension.cloudheight")
+						.defineInRange("cloudHeight", 245, 0, 2147483646));
+
 				bedExplodes = subscriber.subscribe(builder
 		                .comment("\r\n Should beds explode in the Ultra Amplified Dimension?")
 		                .translation("ultraamplified.config.dimension.bedexplodes")

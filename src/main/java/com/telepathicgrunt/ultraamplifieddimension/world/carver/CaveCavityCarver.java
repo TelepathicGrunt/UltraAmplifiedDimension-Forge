@@ -305,7 +305,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 											world.setBlockState(blockpos$Mutabledown, replacementBlock, false);
 										}
 									}
-									else if (!mask.get(xInChunk | zInChunk << 4 | y) &&
+									else if (!mask.get(xInChunk | zInChunk << 4 | y << 8) &&
 											 (this.canCarveBlock(currentBlockstate, aboveBlockstate) || CAN_REPLACE_MAP.containsKey(currentBlockstate)))
 									{
 
@@ -333,7 +333,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 											world.setBlockState(blockpos$Mutable, CAVE_AIR, false);
 										}
 
-										mask.set(xInChunk | zInChunk << 4 | y);
+										mask.set(xInChunk | zInChunk << 4 | y << 8);
 									}
 								}
 							}

@@ -225,7 +225,7 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 											world.setBlockState(blockpos$Mutable, CAVE_AIR, false);
 										}
 
-										mask.set(xInChunk | zInChunk << 4 | y);
+										mask.set(xInChunk | zInChunk << 4 | y << 8);
 									}
 								}
 							}

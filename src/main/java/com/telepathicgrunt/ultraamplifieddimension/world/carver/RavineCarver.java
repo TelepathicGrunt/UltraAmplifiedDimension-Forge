@@ -169,7 +169,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 					for (int zInChunk = i1; zInChunk < j1; ++zInChunk) {
 						int z = zInChunk + mainChunkZ * 16;
 						double zSquaringModified = (z + 0.5D - zRange) / placementXZBound;
-						double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
+						double xzSquaredModified = (xSquaringModified * xSquaringModified) + (zSquaringModified * zSquaringModified);
 
 						if (xzSquaredModified < 1.0D) {
 
@@ -185,6 +185,7 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 
 							for (int y = maxY; y > minY; --y) {
 								double d4 = (y - 1 + 0.5D - yRange) / placementYBound;
+
 								if (xzSquaredModified * this.WALL_LEDGES[y - 1] + d4 * d4 / 6.0D < 1.0D) {
 									blockpos$Mutable.setPos(x, y, z);
 
