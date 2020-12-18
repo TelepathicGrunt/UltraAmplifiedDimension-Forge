@@ -1,6 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.SkyPropertiesAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.world.DimensionRenderInfo;
@@ -10,6 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
 public class UADSkyProperty extends DimensionRenderInfo {
@@ -17,17 +19,17 @@ public class UADSkyProperty extends DimensionRenderInfo {
         super(UltraAmplifiedDimension.UADimensionConfig.cloudHeight.get(), true, FogType.NORMAL, false, false);
     }
 
+    @Override
+    // thick fog or no
+    public boolean func_230493_a_(int camX, int camY) {
+        return UltraAmplifiedDimension.UADimensionConfig.heavyFog.get();
+    }
+
     @Nonnull
     @Override
     // sky/fog color
     public Vector3d func_230494_a_(Vector3d color, float sunHeight) {
         return adjustFogColorByHeight(color, sunHeight);
-    }
-
-    @Override
-    // thick fog or no
-    public boolean func_230493_a_(int camX, int camY) {
-        return UltraAmplifiedDimension.UADimensionConfig.heavyFog.get();
     }
 
     public Vector3d adjustFogColorByHeight(Vector3d color, float celestialAngle) {
@@ -39,17 +41,24 @@ public class UADSkyProperty extends DimensionRenderInfo {
         double f3 = color.z;
 
         //returns a multiplier between 0 and 1 and will decrease the lower down the player gets from 256
-        @SuppressWarnings("resource")
-        ClientPlayerEntity player = Minecraft.getInstance().player;
-        float multiplierOfBrightness = 1;
-        if(player != null){
-            multiplierOfBrightness = ((float) (player.getEyePosition(1).y) - 85) / (player.worldClient.getDimensionType().getLogicalHeight() - 85);
-        }
+        float multiplierOfBrightness = getHeightBasedModifier();
 
-        multiplierOfBrightness = Math.min(Math.max(multiplierOfBrightness, 0), 1);
         f1 = f1 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
         f2 = f2 * (f * 0.94F + 0.06F) * multiplierOfBrightness;
         f3 = f3 * (f * 0.91F + 0.09F) * multiplierOfBrightness;
         return new Vector3d(f1, f2, f3);
     }
+
+    private float getHeightBasedModifier() {
+        @SuppressWarnings("resource")
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        float multiplierOfBrightness = 1;
+        if(player != null){
+            int fullBrightnessFromTop = 56; // brightness of 1 starts at y = 200
+            int noBrightnessFromBottom = 90; // brightness of 0 starts at y = 90
+            multiplierOfBrightness = (float) ((player.getEyePosition(1).y - noBrightnessFromBottom) / Math.max(player.worldClient.getDimensionType().getLogicalHeight() - fullBrightnessFromTop - noBrightnessFromBottom, 1));
+        }
+        return Math.min(Math.max(multiplierOfBrightness, 0), 1);
+    }
+
 }
