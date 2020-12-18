@@ -31,6 +31,8 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.58:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.58")
+
+    runtimeOnly fg.deobf("tg:blame:1.7.4")
 }
 
 version = "${mc_version}-${mod_version}"
@@ -48,6 +50,7 @@ minecraft {
             workingDirectory project.file('run')
             arg "-mixin.config="+archivesBaseName+".mixins.json"
             mods { world_blender { source sourceSets.main } }
+            properties 'mixin.env.disableRefMap': 'true'
         }
 
         server {

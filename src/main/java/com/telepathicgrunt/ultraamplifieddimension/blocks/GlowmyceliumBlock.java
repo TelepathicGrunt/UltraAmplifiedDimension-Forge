@@ -1,7 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.SpreadableSnowyDirtBlockAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MyceliumBlock;

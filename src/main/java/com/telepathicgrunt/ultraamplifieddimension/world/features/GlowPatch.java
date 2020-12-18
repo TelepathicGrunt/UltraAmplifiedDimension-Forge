@@ -9,8 +9,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.LightType;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 
 import java.util.HashMap;
@@ -55,27 +55,26 @@ public class GlowPatch extends Feature<CountConfig> {
         // tries as times specified to convert a randomly chosen nearby block
         for (int attempts = 0; attempts < countConfig.count; ++attempts) {
             // clustered around the center the most
-            int gausX = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
+            int gausX = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 15), -15)); // range of -15 to 15
             int gausY = rand.nextInt(4) - rand.nextInt(4); // range of -4 to 4
-            int gausZ = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 16), -16)); // range of -16 to 16
+            int gausZ = (int) (Math.max(Math.min(rand.nextGaussian() * 3, 15), -15)); // range of -15 to 15
             blockpos$Mutable.setPos(position).move(gausX, gausY + 1, gausZ);
 
             // Glowstuff cannot be placed in sunlight
+            // Need cache for heightmap checking
             //if(world.getLightFor(LightType.SKY, blockpos$Mutable) > 10) continue;
+            //if (chunkGenerator.getHeight(blockpos$Mutable.getX(), blockpos$Mutable.getX(), Heightmap.Type.OCEAN_FLOOR) - 1 != blockpos$Mutable.getY()) {
 
             BlockState chosenAboveBlock = world.getBlockState(blockpos$Mutable);
             BlockState chosenBlock = world.getBlockState(blockpos$Mutable.move(Direction.DOWN));
 
-
-            if (chosenBlock.getMaterial() != Material.AIR) {
-                // turns stone into glowstone ore even if no air above
-                if (chosenBlock.getBlock() == Blocks.STONE) {
-                    world.setBlockState(blockpos$Mutable.move(Direction.DOWN), GLOWBLOCK_MAP.get(chosenBlock), 2);
-                }
-                // turns valid surface blocks with air above into glowstone variants
-                else if (GLOWBLOCK_MAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR) {
-                    world.setBlockState(blockpos$Mutable.move(Direction.DOWN), GLOWBLOCK_MAP.get(chosenBlock), 2);
-                }
+            // turns stone into glowstone ore even if no air above
+            if (chosenBlock.getBlock() == Blocks.STONE) {
+                world.setBlockState(blockpos$Mutable, GLOWBLOCK_MAP.get(chosenBlock), 2);
+            }
+            // turns valid surface blocks with air above into glowstone variants
+            else if (GLOWBLOCK_MAP.containsKey(chosenBlock) && chosenAboveBlock.getMaterial() == Material.AIR) {
+                world.setBlockState(blockpos$Mutable, GLOWBLOCK_MAP.get(chosenBlock), 2);
             }
         }
 

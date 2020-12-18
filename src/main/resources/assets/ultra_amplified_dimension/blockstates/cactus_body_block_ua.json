@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "ultra_amplified_dimension:block/cactus_body_block_ua" },
-        "facing=south": { "model": "ultra_amplified_dimension:block/cactus_body_block_ua", "y": 180 },
-        "facing=west":  { "model": "ultra_amplified_dimension:block/cactus_body_block_ua", "y": 270 },
-        "facing=east":  { "model": "ultra_amplified_dimension:block/cactus_body_block_ua", "y": 90 }
-    }
-}

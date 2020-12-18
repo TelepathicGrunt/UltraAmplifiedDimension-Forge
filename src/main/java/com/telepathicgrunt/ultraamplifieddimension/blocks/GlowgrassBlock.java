@@ -1,7 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.SpreadableSnowyDirtBlockAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.GrassBlock;
@@ -10,7 +10,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 

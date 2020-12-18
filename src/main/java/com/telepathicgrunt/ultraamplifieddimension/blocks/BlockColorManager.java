@@ -1,5 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -14,7 +15,6 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 
 
 @Mod.EventBusSubscriber(modid = UltraAmplifiedDimension.MODID, bus = Bus.MOD, value = { Dist.CLIENT })

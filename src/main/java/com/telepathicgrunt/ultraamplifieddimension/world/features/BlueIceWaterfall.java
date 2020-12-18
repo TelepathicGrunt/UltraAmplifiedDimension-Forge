@@ -1,8 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -14,7 +12,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
-import java.util.Set;
 
 
 public class BlueIceWaterfall extends Feature<NoFeatureConfig> {

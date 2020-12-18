@@ -11,19 +11,21 @@
                   "predicate_type": "minecraft:tag_match"
                 },
                 "state": {
-                  "Name": "minecraft:gold_ore"
+                  "Properties": {
+                    "lit": "false"
+                  },
+                  "Name": "minecraft:redstone_ore"
                 },
-                "size": 9
+                "size": 7
               },
               "type": "minecraft:ore"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 32,
-                "top_offset": 32,
-                "maximum": 80
+                "baseline": 65,
+                "spread": 5
               },
-              "type": "minecraft:range"
+              "type": "minecraft:depth_average"
             }
           },
           "type": "minecraft:decorated"
@@ -37,7 +39,7 @@
     },
     "decorator": {
       "config": {
-        "count": 20
+        "count": 6
       },
       "type": "minecraft:count"
     }

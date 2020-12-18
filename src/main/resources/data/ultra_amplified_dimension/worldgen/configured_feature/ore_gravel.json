@@ -19,7 +19,7 @@
             },
             "decorator": {
               "config": {
-                "bottom_offset": 0,
+                "bottom_offset": 1,
                 "top_offset": 0,
                 "maximum": 256
               },

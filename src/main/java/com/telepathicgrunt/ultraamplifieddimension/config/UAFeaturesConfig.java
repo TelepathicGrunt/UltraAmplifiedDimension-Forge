@@ -1,9 +1,9 @@
 package com.telepathicgrunt.ultraamplifieddimension.config;
 
+import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
+import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper.ConfigValueListener;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
-import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper.ConfigValueListener;
-import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
 
 
 @Mod.EventBusSubscriber

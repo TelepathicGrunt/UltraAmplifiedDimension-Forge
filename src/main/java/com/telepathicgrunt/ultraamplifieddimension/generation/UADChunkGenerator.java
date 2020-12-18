@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.generation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.ChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoker;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
@@ -12,19 +11,13 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKeyCodec;
 import net.minecraft.world.Blockreader;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.EndBiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.IChunk;
@@ -43,10 +36,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 
 public class UADChunkGenerator extends NoiseChunkGenerator {
@@ -338,17 +328,17 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
 
     @Override
-    public IBlockReader func_230348_a_(int p_230348_1_, int p_230348_2_) {
+    public IBlockReader func_230348_a_(int x, int z) {
         BlockState[] ablockstate = new BlockState[((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity()];
-        this.func_236087_a_(p_230348_1_, p_230348_2_, ablockstate, null);
+        this.func_236087_a_(x, z, ablockstate, null);
         return new Blockreader(ablockstate);
     }
 
-    private int func_236087_a_(int p_236087_1_, int p_236087_2_, @Nullable BlockState[] p_236087_3_, @Nullable Predicate<BlockState> p_236087_4_) {
-        int i = Math.floorDiv(p_236087_1_, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
-        int j = Math.floorDiv(p_236087_2_, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
-        int k = Math.floorMod(p_236087_1_, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
-        int l = Math.floorMod(p_236087_2_, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
+    private int func_236087_a_(int x, int z, @Nullable BlockState[] p_236087_3_, @Nullable Predicate<BlockState> p_236087_4_) {
+        int i = Math.floorDiv(x, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
+        int j = Math.floorDiv(z, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
+        int k = Math.floorMod(x, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
+        int l = Math.floorMod(z, ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity());
         double d0 = (double)k / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
         double d1 = (double)l / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
         double[][] adouble = new double[][]{this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1)};
@@ -365,15 +355,15 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
             for(int j1 = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; j1 >= 0; --j1) {
                 double d10 = (double)j1 / (double)((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity();
-                double d11 = MathHelper.lerp3(d10, d0, d1, d2, d6, d4, d8, d3, d7, d5, d9);
-                int k1 = i1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + j1;
-                BlockState blockstate = this.func_236086_a_(d11, k1);
+                double noiseValue = MathHelper.lerp3(d10, d0, d1, d2, d6, d4, d8, d3, d7, d5, d9);
+                int y = i1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + j1;
+                BlockState blockstate = this.func_236086_a_(noiseValue, x, y, z);
                 if (p_236087_3_ != null) {
-                    p_236087_3_[k1] = blockstate;
+                    p_236087_3_[y] = blockstate;
                 }
 
                 if (p_236087_4_ != null && p_236087_4_.test(blockstate)) {
-                    return k1 + 1;
+                    return y + 1;
                 }
             }
         }
@@ -381,13 +371,30 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         return 0;
     }
 
-    @Override
-    protected BlockState func_236086_a_(double p_236086_1_, int p_236086_3_) {
+    protected BlockState func_236086_a_(double noiseValue, int x, int y, int z) {
         BlockState blockstate;
-        if (p_236086_1_ > 0.0D) {
+        if (noiseValue > 0.0D) {
             blockstate = this.defaultBlock;
-        } else if (p_236086_3_ < this.getSeaLevel()) {
-            blockstate = this.defaultFluid;
+        } else if (y < this.getSeaLevel()) {
+            if(this.biomeProvider.getNoiseBiome(x, y, z).getCategory() == Biome.Category.NETHER){
+                // If nether biome is surrounded by nether biomes, place lava.
+                // This way, all imported nether biomes gets the lava they want.
+                if(this.biomeProvider.getNoiseBiome(x + 1, y, z).getCategory() == Biome.Category.NETHER &&
+                    this.biomeProvider.getNoiseBiome(x, y, z + 1).getCategory() == Biome.Category.NETHER &&
+                    this.biomeProvider.getNoiseBiome(x - 1, y, z).getCategory() == Biome.Category.NETHER &&
+                    this.biomeProvider.getNoiseBiome(x , y, z - 1).getCategory() == Biome.Category.NETHER)
+                {
+                    blockstate = Blocks.LAVA.getDefaultState();
+                }
+                // Make an obsidian border to separate lava from default fluid.
+                else{
+                    blockstate = Blocks.OBSIDIAN.getDefaultState();
+                }
+            }
+            else{
+                // default world fluid
+                blockstate = this.defaultFluid;
+            }
         } else {
             blockstate = Blocks.AIR.getDefaultState();
         }
@@ -467,9 +474,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     double d7 = adouble[1][j5 + 1][k1 + 1];
 
                     for(int l1 = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; l1 >= 0; --l1) {
-                        int i2 = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + l1;
-                        int j2 = i2 & 15;
-                        int k2 = i2 >> 4;
+                        int y = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + l1;
+                        int yInChunk = y & 15;
+                        int k2 = y >> 4;
                         if (chunksection.getYLocation() >> 4 != k2) {
                             chunksection.unlock();
                             chunksection = chunkprimer.getSection(k2);
@@ -483,51 +490,51 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                         double d12 = MathHelper.lerp(d8, d3, d7);
 
                         for(int l2 = 0; l2 < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++l2) {
-                            int i3 = k + i1 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + l2;
-                            int j3 = i3 & 15;
+                            int x = k + i1 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + l2;
+                            int xInChunk = x & 15;
                             double d13 = (double)l2 / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
                             double d14 = MathHelper.lerp(d13, d9, d10);
                             double d15 = MathHelper.lerp(d13, d11, d12);
 
                             for(int k3 = 0; k3 < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++k3) {
-                                int l3 = l + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + k3;
-                                int i4 = l3 & 15;
+                                int z = l + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + k3;
+                                int zInChunk = z & 15;
                                 double d16 = (double)k3 / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
                                 double d17 = MathHelper.lerp(d16, d14, d15);
-                                double d18 = MathHelper.clamp(d17 / 200.0D, -1.0D, 1.0D);
+                                double noiseValue = MathHelper.clamp(d17 / 200.0D, -1.0D, 1.0D);
 
                                 int jigsawY;
                                 int jigsawZ;
                                 int l4;
-                                for(d18 = d18 / 2.0D - d18 * d18 * d18 / 24.0D; objectlistiterator.hasNext(); d18 += func_222556_a(jigsawY, jigsawZ, l4) * 0.8D) {
+                                for(noiseValue = noiseValue / 2.0D - noiseValue * noiseValue * noiseValue / 24.0D; objectlistiterator.hasNext(); noiseValue += func_222556_a(jigsawY, jigsawZ, l4) * 0.8D) {
                                     StructurePiece structurepiece = objectlistiterator.next();
                                     MutableBoundingBox mutableboundingbox = structurepiece.getBoundingBox();
-                                    jigsawY = Math.max(0, Math.max(mutableboundingbox.minX - i3, i3 - mutableboundingbox.maxX));
-                                    jigsawZ = i2 - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
-                                    l4 = Math.max(0, Math.max(mutableboundingbox.minZ - l3, l3 - mutableboundingbox.maxZ));
+                                    jigsawY = Math.max(0, Math.max(mutableboundingbox.minX - x, x - mutableboundingbox.maxX));
+                                    jigsawZ = y - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
+                                    l4 = Math.max(0, Math.max(mutableboundingbox.minZ - z, z - mutableboundingbox.maxZ));
                                 }
 
                                 objectlistiterator.back(objectlist.size());
 
                                 while(objectlistiterator1.hasNext()) {
                                     JigsawJunction jigsawjunction = objectlistiterator1.next();
-                                    int jigsawX = i3 - jigsawjunction.getSourceX();
-                                    jigsawY = i2 - jigsawjunction.getSourceGroundY();
-                                    jigsawZ = l3 - jigsawjunction.getSourceZ();
-                                    d18 += func_222556_a(jigsawX, jigsawY, jigsawZ) * 0.4D;
+                                    int jigsawX = x - jigsawjunction.getSourceX();
+                                    jigsawY = y - jigsawjunction.getSourceGroundY();
+                                    jigsawZ = z - jigsawjunction.getSourceZ();
+                                    noiseValue += func_222556_a(jigsawX, jigsawY, jigsawZ) * 0.4D;
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());
-                                BlockState blockstate = this.func_236086_a_(d18, i2);
+                                BlockState blockstate = this.func_236086_a_(noiseValue, x, y, z);
                                 if (blockstate != Blocks.AIR.getDefaultState()) {
-                                    blockpos$mutable.setPos(i3, i2, l3);
+                                    blockpos$mutable.setPos(x, y, z);
                                     if (blockstate.getLightValue(chunkprimer, blockpos$mutable) != 0) {
                                         chunkprimer.addLightPosition(blockpos$mutable);
                                     }
 
-                                    chunksection.setBlockState(j3, j2, i4, blockstate, false);
-                                    heightmap.update(j3, i2, i4, blockstate);
-                                    heightmap1.update(j3, i2, i4, blockstate);
+                                    chunksection.setBlockState(xInChunk, yInChunk, zInChunk, blockstate, false);
+                                    heightmap.update(xInChunk, y, zInChunk, blockstate);
+                                    heightmap1.update(xInChunk, y, zInChunk, blockstate);
                                 }
                             }
                         }

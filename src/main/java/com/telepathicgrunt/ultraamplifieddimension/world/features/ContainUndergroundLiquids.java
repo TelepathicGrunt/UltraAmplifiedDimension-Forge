@@ -10,7 +10,6 @@ import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -49,7 +48,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 	private MutableRegistry<Biome> BIOME_REGISTRY = null;
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator chunkSettings, Random random, BlockPos position, NoFeatureConfig configBlock) {
+	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, NoFeatureConfig configBlock) {
 		if(BIOME_REGISTRY == null){
 			BIOME_REGISTRY = world.getWorld().func_241828_r().getRegistry(Registry.BIOME_KEY);
 		}

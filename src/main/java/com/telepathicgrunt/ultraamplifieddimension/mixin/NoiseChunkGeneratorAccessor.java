@@ -1,8 +1,9 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.DimensionSettings;
+import net.minecraft.world.gen.NoiseChunkGenerator;
+import net.minecraft.world.gen.OctavesNoiseGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 

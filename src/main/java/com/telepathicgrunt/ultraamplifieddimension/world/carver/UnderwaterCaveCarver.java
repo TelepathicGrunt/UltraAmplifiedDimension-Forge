@@ -6,7 +6,6 @@ import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IObjectIntIterable;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.SimpleRegistry;

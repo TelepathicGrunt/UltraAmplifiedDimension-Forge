@@ -1,11 +1,11 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.IPlayerPosAndDim;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.PlayerPositionAndDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

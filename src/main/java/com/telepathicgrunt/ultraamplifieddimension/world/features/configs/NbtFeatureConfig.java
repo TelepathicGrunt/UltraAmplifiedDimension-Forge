@@ -2,7 +2,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features.configs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 

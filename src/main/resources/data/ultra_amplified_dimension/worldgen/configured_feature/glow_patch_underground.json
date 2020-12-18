@@ -1,0 +1,39 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "count": 100
+              },
+              "type": "ultra_amplified_dimension:glow_patch"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 45,
+                "top_offset": 0,
+                "maximum": 25
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 2
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

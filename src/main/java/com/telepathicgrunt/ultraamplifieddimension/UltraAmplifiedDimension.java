@@ -1,12 +1,14 @@
 package com.telepathicgrunt.ultraamplifieddimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayerPosAndDim;
+import com.telepathicgrunt.ultraamplifieddimension.config.UABiomesConfig.UABiomesConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAFeaturesConfig.UAFeaturesConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAModCompatConfig.UAModCompatConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UAStructuresConfig.UAStructuresConfigValues;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADCarvers;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADFeatures;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADPlacements;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.*;
 import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,11 +21,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.telepathicgrunt.ultraamplifieddimension.config.UABiomesConfig.UABiomesConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAFeaturesConfig.UAFeaturesConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAModCompatConfig.UAModCompatConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAStructuresConfig.UAStructuresConfigValues;
 
 @Mod(UltraAmplifiedDimension.MODID)
 public class UltraAmplifiedDimension {
@@ -47,6 +44,8 @@ public class UltraAmplifiedDimension {
 		UADFeatures.FEATURES.register(modEventBus);
 		UADPlacements.DECORATORS.register(modEventBus);
 		UADCarvers.WORLD_CARVERS.register(modEventBus);
+		UADSurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
+		UADTags.tagInit();
 
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);

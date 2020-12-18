@@ -1,5 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -8,7 +9,6 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 
 import javax.annotation.Nonnull;
 

@@ -6,7 +6,6 @@ import com.telepathicgrunt.ultraamplifieddimension.world.decorators.LedgeSurface
 import com.telepathicgrunt.ultraamplifieddimension.world.decorators.LedgeSurfacePlacerConfig;
 import com.telepathicgrunt.ultraamplifieddimension.world.decorators.OffsetPlacer;
 import com.telepathicgrunt.ultraamplifieddimension.world.decorators.YOffsetPlacerConfig;
-import net.minecraft.world.gen.feature.FeatureSpreadConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:dirt",
+    "#forge:stone",
+    "#forge:netherrack",
+    "#forge:gravel",
+    "#forge:obsidian",
+    "#forge:sand",
+    "#forge:sandstone",
+    "#forge:ores",
+    "#minecraft:ice",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "#minecraft:nylium",
+    "#minecraft:sand",
+    "#ultra_amplified_dimension:terracotta",
+    "minecraft:end_stone",
+    "minecraft:clay"
+  ]
+}

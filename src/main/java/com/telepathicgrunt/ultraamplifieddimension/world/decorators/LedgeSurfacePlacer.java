@@ -34,6 +34,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
             int x = rand.nextInt(16) + pos.getX();
             int z = rand.nextInt(16) + pos.getZ();
             int heightMapY = context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, x, z);
+            boolean skippedTopLedge = false;
             mutable.setPos(x, heightMapY, z);
 
             // Set the block above for heightmap pos
@@ -55,20 +56,25 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                     // The -1 is because we check top down and find surfaces if our block is a solid
                     // block with space above but the heightmap method always returns that above space.
                     // thus we need to subtract one to be able to tell if our pos is topmost terrain.
-                    //
                     // Underside placing skips the top ledge checks
-                    if(config.undersideOnly || !config.skipTopLedge || mutable.getY() != context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1){
+                    skippedTopLedge = config.skipTopLedge && mutable.getY() == context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1;
+
+                    if(config.undersideOnly || !skippedTopLedge){
                         if(rand.nextFloat() < config.validSpotChance){
                             list.add(mutable.toImmutable());
                         }
+
+                        // pick a new x/z pos
+                        mutable.setPos(
+                                rand.nextInt(16) + pos.getX(),
+                                mutable.getY(),
+                                rand.nextInt(16) + pos.getZ());
                     }
                 }
 
-                // Set prevblock to this block and randomize the pos while move down one.
+                // Set prevblock to this block and move down one.
                 prevBlockState = currentBlockPos;
-                mutable.setPos(rand.nextInt(16) + pos.getX(),
-                            mutable.getY() - 1,
-                            rand.nextInt(16) + pos.getZ());
+                mutable.move(Direction.DOWN);
             }
         }
 

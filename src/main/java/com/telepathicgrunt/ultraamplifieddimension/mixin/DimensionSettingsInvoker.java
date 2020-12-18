@@ -1,14 +1,10 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.world.DimensionRenderInfo;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.NoiseSettings;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(DimensionSettings.class)

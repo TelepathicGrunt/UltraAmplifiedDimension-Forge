@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north": { "model": "ultra_amplified_dimension:block/big_cactus_main_block", "x": 270  },
+        "facing=south": { "model": "ultra_amplified_dimension:block/big_cactus_main_block", "x": 90 },
+        "facing=west" : { "model": "ultra_amplified_dimension:block/big_cactus_main_block", "x": 90, "y": 90 },
+        "facing=east" : { "model": "ultra_amplified_dimension:block/big_cactus_main_block", "x": 270, "y": 90 },
+        "facing=up"   : { "model": "ultra_amplified_dimension:block/big_cactus_main_block" }
+    }
+}
