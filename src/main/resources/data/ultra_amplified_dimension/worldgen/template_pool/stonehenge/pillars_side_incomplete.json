@@ -1,6 +1,6 @@
 {
   "name": "ultra_amplified_dimension:stonehenge/pillars_side_incomplete",
-  "fallback": "ultra_amplified_dimension:stonehenge/pillars_side_incomplete",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,

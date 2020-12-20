@@ -1,14 +1,11 @@
 package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.structures.GenericJigsawStructure;
+import com.telepathicgrunt.ultraamplifieddimension.world.structures.GenericJigsawStructure;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,7 +24,7 @@ public class UADStructures {
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "sun_shrine_start"),
                     10,
-                    -1,
+                    0,
                     0,
                     0
             )
@@ -38,7 +35,7 @@ public class UADStructures {
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "stonehenge/center_start"),
                     10,
-                    -1,
+                    -2,
                     0,
                     0
             )

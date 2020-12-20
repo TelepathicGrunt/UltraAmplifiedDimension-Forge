@@ -1,6 +1,6 @@
 {
   "name": "ultra_amplified_dimension:stonehenge/pillars_corner_complete",
-  "fallback": "ultra_amplified_dimension:stonehenge/pillars_corner_complete",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,

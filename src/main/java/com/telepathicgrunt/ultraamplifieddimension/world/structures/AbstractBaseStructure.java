@@ -1,4 +1,4 @@
-package com.telepathicgrunt.ultraamplifieddimension.structures;
+package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.SharedSeedRandom;

@@ -1,13 +1,13 @@
 {
   "name": "ultra_amplified_dimension:stonehenge/stonehenge_start",
-  "fallback": "ultra_amplified_dimension:stonehenge/stonehenge_start",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 14,
       "element": {
         "location": "ultra_amplified_dimension:stonehenge/body_incomplete",
         "processors": "minecraft:empty",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "element_type": "minecraft:single_pool_element"
       }
     },

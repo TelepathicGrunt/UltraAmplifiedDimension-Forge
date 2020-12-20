@@ -36,6 +36,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<OreFeatureConfig>> ELLIPSOID_POCKET = createFeature("ellipsoid_pocket", () -> new EllipsoidPocket(OreFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> VINES_LONG = createFeature("vines_long", () -> new VinesLong(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<HeightConfig>> VINES_SHORT = createFeature("vines_short", () -> new VinesShort(HeightConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> HANGING_RUINS = createFeature("hanging_ruins", () -> new HangingRuins(NoFeatureConfig.field_236558_a_));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

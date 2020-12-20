@@ -1,13 +1,13 @@
 {
   "name": "ultra_amplified_dimension:stonehenge/incomplete_base",
-  "fallback": "ultra_amplified_dimension:stonehenge/incomplete_base",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
         "location": "ultra_amplified_dimension:stonehenge/incomplete_base",
         "processors": "minecraft:empty",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "element_type": "minecraft:single_pool_element"
       }
     }

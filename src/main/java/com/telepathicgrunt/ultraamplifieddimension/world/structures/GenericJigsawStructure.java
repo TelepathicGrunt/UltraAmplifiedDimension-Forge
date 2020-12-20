@@ -1,7 +1,9 @@
-package com.telepathicgrunt.ultraamplifieddimension.structures;
+package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADConfiguredStructures;
+import javafx.util.Pair;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -20,33 +22,87 @@ import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import org.apache.logging.log4j.Level;
 
-public class GenericJigsawStructure extends AbstractBaseStructure {
-    private final ResourceLocation START_POOL;
-    private final int STRUCTURE_SIZE;
-    private final int PIECE_Y_OFFSET;
-    private final int BOUNDS_Y_OFFSET;
-    private final int BIOME_RANGE;
+import java.util.*;
+import java.util.stream.Collectors;
 
-    public GenericJigsawStructure(Codec<NoFeatureConfig> config, ResourceLocation poolRL, int structureSize, int pieceYOffset, int boundsYOffset, int biomeRange) {
+public class GenericJigsawStructure extends AbstractBaseStructure {
+    protected final ResourceLocation START_POOL;
+    protected final int STRUCTURE_SIZE;
+    protected final int PIECE_Y_OFFSET;
+    protected final int BOUNDS_Y_OFFSET;
+    protected final int FIXED_HEIGHT;
+    protected final boolean SPAWN_AT_TOP_LAND;
+    protected final int BIOME_RANGE;
+    protected Pair<ChunkGenerator, List<Map.Entry<Structure<?>, StructureSeparationSettings>>> STRUCTURE_SPACING_CACHE = null;
+
+    public GenericJigsawStructure(Codec<NoFeatureConfig> config, ResourceLocation poolRL, int structureSize,
+                                  int pieceYOffset, int boundsYOffset, int fixedHeight, int biomeRange) {
         super(config);
         START_POOL = poolRL;
         STRUCTURE_SIZE = structureSize;
         PIECE_Y_OFFSET = pieceYOffset;
         BOUNDS_Y_OFFSET = boundsYOffset;
+        FIXED_HEIGHT = fixedHeight;
+        SPAWN_AT_TOP_LAND = false;
+        BIOME_RANGE = biomeRange;
+    }
+
+    public GenericJigsawStructure(Codec<NoFeatureConfig> config, ResourceLocation poolRL, int structureSize,
+                                  int pieceYOffset, int boundsYOffset, int biomeRange) {
+        super(config);
+        START_POOL = poolRL;
+        STRUCTURE_SIZE = structureSize;
+        PIECE_Y_OFFSET = pieceYOffset;
+        BOUNDS_Y_OFFSET = boundsYOffset;
+        FIXED_HEIGHT = -1;
+        SPAWN_AT_TOP_LAND = true;
         BIOME_RANGE = biomeRange;
     }
 
     @Override
     protected boolean func_230363_a_(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig NoFeatureConfig) {
-         for (int curChunkX = chunkX - BIOME_RANGE; curChunkX <= chunkX + BIOME_RANGE; curChunkX++) {
+        for (int curChunkX = chunkX - BIOME_RANGE; curChunkX <= chunkX + BIOME_RANGE; curChunkX++) {
             for (int curChunkZ = chunkZ - BIOME_RANGE; curChunkZ <= chunkZ + BIOME_RANGE; curChunkZ++) {
                 if (curChunkX != chunkX &&
-                    curChunkZ != chunkZ &&
-                    !biomeSource.getNoiseBiome(curChunkX << 2, 60, curChunkZ << 2).getGenerationSettings().hasStructure(this))
-                {
+                        curChunkZ != chunkZ &&
+                        !biomeSource.getNoiseBiome(curChunkX << 2, 60, curChunkZ << 2).getGenerationSettings().hasStructure(this)) {
                     return false;
+                }
+            }
+        }
+
+        // Cache the filtered spacing as streaming and shit every structure spawn can get ridiculous.
+        // We store the current chunkGenerator as if we go into different dimension, our cache is useless.
+        // Gets all UAD structures to space away from (exclude self or else you can't do low spacing anymore)
+        // Exclude very low spacing structures or else we can't spawn at all
+        if(STRUCTURE_SPACING_CACHE == null || STRUCTURE_SPACING_CACHE.getKey() != chunkGenerator){
+            STRUCTURE_SPACING_CACHE = new Pair<>(
+                    chunkGenerator,
+                    chunkGenerator.func_235957_b_().func_236195_a_().entrySet().stream()
+                            .filter(entry -> entry.getKey() != this &&
+                                            entry.getValue().func_236668_a_() > 4 &&
+                                            UADConfiguredStructures.REGISTERED_UAD_STRUCTURES.containsKey(entry.getKey()))
+                            .collect(Collectors.toList()));
+        }
+
+        int structureRange = 1;
+        for (int curChunkX = chunkX - structureRange; curChunkX <= chunkX + structureRange; curChunkX++) {
+            for (int curChunkZ = chunkZ - structureRange; curChunkZ <= chunkZ + structureRange; curChunkZ++) {
+                for (Map.Entry<Structure<?>, StructureSeparationSettings> spacingSettings : STRUCTURE_SPACING_CACHE.getValue()) {
+                    ChunkPos structurePos = spacingSettings.getKey().getChunkPosForStructure(
+                            spacingSettings.getValue(),
+                            seed,
+                            chunkRandom,
+                            chunkX,
+                            chunkZ);
+
+                    // The other structure is here! ABORT!
+                    if (structurePos.x == curChunkX && structurePos.z == curChunkZ) {
+                        return false;
+                    }
                 }
             }
         }
@@ -71,7 +127,7 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
 
         public void func_230364_a_(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager structureManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig NoFeatureConfig) {
 
-            BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+            BlockPos blockpos = new BlockPos(chunkX * 16, FIXED_HEIGHT, chunkZ * 16);
             JigsawManager.func_242837_a(
                     dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
@@ -83,8 +139,8 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
                     blockpos,
                     this.components,
                     this.rand,
-                    true,
-                    true);
+                    false,
+                    SPAWN_AT_TOP_LAND);
 
             // **THE FOLLOWING TWO LINES ARE OPTIONAL**
             //

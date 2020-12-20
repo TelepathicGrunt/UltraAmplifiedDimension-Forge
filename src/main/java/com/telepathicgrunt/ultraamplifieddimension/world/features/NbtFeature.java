@@ -32,10 +32,14 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, NbtFeatureConfig config) {
 
+        // Person wants an empty feature for some reason.
+        if (config.nbtResourcelocation.size() == 0) {
+            return false;
+        }
+
         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
 
-        //makes sure this shrine does not spawn too close to world height border or it will get cut off.
-        //Also makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
+        // Makes sure it generates with land around it instead of cutting into cliffs or hanging over an edge by checking if block at north, east, west, and south are acceptable terrain blocks that appear only at top of land.
         int radius = config.solidLandRadius;
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -50,7 +54,7 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
         }
 
         TemplateManager templatemanager = world.getWorld().getServer().getTemplateManager();
-        Template template = templatemanager.getTemplate(config.nbtResourcelocation);
+        Template template = templatemanager.getTemplate(config.nbtResourcelocation.get(rand.nextInt(config.nbtResourcelocation.size())));
 
         if (template == null) {
             UltraAmplifiedDimension.LOGGER.warn(config.nbtResourcelocation.toString() + " NTB does not exist!");
@@ -59,7 +63,7 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
 
         BlockPos offset = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
         placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(offset);
-        template.func_237152_b_(world, blockpos$Mutable.move(offset.getX(), 0, offset.getZ()), placementsettings, rand);
+        template.func_237152_b_(world, blockpos$Mutable.setPos(position).move(-offset.getX(), 0, -offset.getZ()), placementsettings, rand);
 
         return true;
     }
