@@ -1,0 +1,15 @@
+{
+  "name": "ultra_amplified_dimension:stonehenge/pillars_side_complete",
+  "fallback": "ultra_amplified_dimension:stonehenge/pillars_side_complete",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:stonehenge/stonehenge1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

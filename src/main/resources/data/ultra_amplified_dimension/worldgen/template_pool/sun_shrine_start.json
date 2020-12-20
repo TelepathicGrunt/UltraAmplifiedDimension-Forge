@@ -1,0 +1,15 @@
+{
+  "name": "ultra_amplified_dimension:sun_shrine_start",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:sun_shrine",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

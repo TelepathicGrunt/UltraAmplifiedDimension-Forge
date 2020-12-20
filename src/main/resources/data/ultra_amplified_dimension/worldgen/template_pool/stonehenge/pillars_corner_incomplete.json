@@ -1,0 +1,42 @@
+{
+  "name": "ultra_amplified_dimension:stonehenge/pillars_corner_incomplete",
+  "fallback": "ultra_amplified_dimension:stonehenge/pillars_corner_incomplete",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:stonehenge/stonehenge5",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:stonehenge/stonehenge6",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:stonehenge/stonehenge7",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "ultra_amplified_dimension:stonehenge/stonehenge8",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

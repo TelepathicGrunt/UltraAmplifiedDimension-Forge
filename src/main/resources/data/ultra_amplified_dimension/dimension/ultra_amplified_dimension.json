@@ -145,6 +145,27 @@
             "spacing": 32,
             "separation": 8,
             "salt": 14357619
+          },
+          "ultra_amplified_dimension:sun_shrine": {
+            "spacing": 11,
+            "separation": 1,
+            "salt": 1831585669
+          },
+          "ultra_amplified_dimension:stonehenge": {
+            "spacing": 10,
+            "separation": 1,
+            "salt": 1633388381
+
+          },
+          "ultra_amplified_dimension:ice_spike_temple": {
+            "spacing": 13,
+            "separation": 1,
+            "salt": 1435761947
+          },
+          "ultra_amplified_dimension:mushroom_temple": {
+            "spacing": 12,
+            "separation": 1,
+            "salt": 1340434666
           }
         }
       }

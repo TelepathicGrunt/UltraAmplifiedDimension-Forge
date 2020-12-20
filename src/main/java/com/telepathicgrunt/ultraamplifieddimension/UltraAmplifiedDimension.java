@@ -10,8 +10,15 @@ import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCrea
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.*;
 import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.FlatChunkGenerator;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -21,6 +28,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod(UltraAmplifiedDimension.MODID)
 public class UltraAmplifiedDimension {
@@ -42,6 +52,7 @@ public class UltraAmplifiedDimension {
 		UADBlocks.ITEMS.register(modEventBus);
 		UADBlocks.BLOCKS.register(modEventBus);
 		UADFeatures.FEATURES.register(modEventBus);
+		UADStructures.STRUCTURES.register(modEventBus);
 		UADPlacements.DECORATORS.register(modEventBus);
 		UADCarvers.WORLD_CARVERS.register(modEventBus);
 		UADSurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
@@ -64,6 +75,8 @@ public class UltraAmplifiedDimension {
 		{
 			UADDimension.setupDimension();
 			CapabilityPlayerPosAndDim.register();
+			UADStructures.setupStructures();
+			UADConfiguredStructures.registerConfiguredStructures();
 		});
 	}
 }

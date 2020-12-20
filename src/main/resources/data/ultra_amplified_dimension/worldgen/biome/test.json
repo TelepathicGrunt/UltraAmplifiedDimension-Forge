@@ -85,7 +85,12 @@
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"
     ]
   ],
-  "starts": [],
+  "starts": [
+    "ultra_amplified_dimension:configured_ice_spike_temple",
+    "ultra_amplified_dimension:configured_mushroom_temple",
+    "ultra_amplified_dimension:configured_stonehenge",
+    "ultra_amplified_dimension:configured_sun_shrine"
+  ],
   "spawners": {
     "monster": [
       {
