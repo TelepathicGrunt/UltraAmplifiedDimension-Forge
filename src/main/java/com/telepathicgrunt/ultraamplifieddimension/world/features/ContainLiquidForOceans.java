@@ -49,32 +49,32 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
         boolean containedFlag;
         BlockState currentblock;
         BlockState blockAbove;
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), 0, position.getZ());  //set y to 0
-        BlockPos.Mutable blockpos$MutableAbove = new BlockPos.Mutable().setPos(blockpos$Mutable);
+        BlockPos.Mutable blockposMutable = new BlockPos.Mutable(position.getX(), 0, position.getZ());  //set y to 0
+        BlockPos.Mutable blockposMutableAbove = new BlockPos.Mutable().setPos(blockposMutable);
         IChunk chunk = world.getChunk(position.getX() >> 4, position.getZ() >> 4);
+
+        BlockState oceanTopBlock = oceanBiome.getGenerationSettings().getSurfaceBuilderConfig().getTop();
+        BlockState oceanUnderBlock = oceanBiome.getGenerationSettings().getSurfaceBuilderConfig().getUnder();
+
+        boolean useCoralTop = oceanTopBlock == DEAD_CORAL_ARRAY[0];
+        boolean useCoralBottom = oceanTopBlock == DEAD_CORAL_ARRAY[0];
 
         //ocean biome was found and thus, is not null. Can safely contain all water in this chunk
         for (int x = 0; x < 16; ++x) {
             for (int z = 0; z < 16; ++z) {
-                BlockState oceanTopBlock = oceanBiome.getGenerationSettings().getSurfaceBuilderConfig().getTop();
-                BlockState oceanUnderBlock = oceanBiome.getGenerationSettings().getSurfaceBuilderConfig().getUnder();
+                blockposMutable.setPos(position.getX() + x, 256, position.getZ() + z);
+                for (; blockposMutable.getY() >= sealevel; blockposMutable.move(Direction.DOWN)) {
 
-                boolean useCoralTop = oceanTopBlock == DEAD_CORAL_ARRAY[0];
-                boolean useCoralBottom = oceanTopBlock == DEAD_CORAL_ARRAY[0];
-                blockpos$Mutable.setPos(position.getX() + x, 256, position.getZ() + z);
-
-                for (; blockpos$Mutable.getY() >= sealevel; blockpos$Mutable.move(Direction.DOWN)) {
-
-                    currentblock = chunk.getBlockState(blockpos$Mutable);
+                    currentblock = chunk.getBlockState(blockposMutable);
 
                     //move down until we hit a liquid block
-                    while (currentblock.getFluidState().isEmpty() && blockpos$Mutable.getY() >= sealevel) {
-                        blockpos$Mutable.move(Direction.DOWN);
-                        currentblock = chunk.getBlockState(blockpos$Mutable);
+                    while (currentblock.getFluidState().isEmpty() && blockposMutable.getY() >= sealevel) {
+                        blockposMutable.move(Direction.DOWN);
+                        currentblock = chunk.getBlockState(blockposMutable);
                     }
 
                     //too low now, break out of the loop and move to next xz coordinate
-                    if (blockpos$Mutable.getY() < sealevel) {
+                    if (blockposMutable.getY() < sealevel) {
                         break;
                     }
                     //y value is now fully set for rest of code
@@ -92,7 +92,11 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
                     containedFlag = true;
                     for (Direction face : Direction.Plane.HORIZONTAL) {
                         //Do world instead of chunk as this could check into the next chunk over.
-                        currentblock = world.getBlockState(blockpos$Mutable.offset(face));
+                        blockposMutable.move(face);
+                        if(blockposMutable.getX() >> 4 != chunk.getPos().x || blockposMutable.getZ() >> 4 != chunk.getPos().z)
+                            chunk = world.getChunk(blockposMutable);
+
+                        currentblock = chunk.getBlockState(blockposMutable);
 
                         // If the block is snow or not solid without liquid, set contains to false.
                         // Yes, snow layers are considered solid and need a second check.
@@ -100,46 +104,49 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
                             currentblock == SNOW)
                         {
                             containedFlag = false;
+                            blockposMutable.move(face.getOpposite());
                             break;
                         }
+
+                        blockposMutable.move(face.getOpposite());
                     }
 
-                    blockpos$MutableAbove.setPos(blockpos$Mutable).move(Direction.UP);
+                    blockposMutableAbove.setPos(blockposMutable).move(Direction.UP);
 
                     if (containedFlag) {
                         //water block is contained
 
-                        blockAbove = chunk.getBlockState(blockpos$MutableAbove);
+                        blockAbove = chunk.getBlockState(blockposMutableAbove);
 
                         //if above is middle block, replace above block with third config block so middle block (sand/gravel) cannot fall.
                         if (blockAbove == oceanUnderBlock) {
                             if (useCoralBottom || !(oceanBiome.getGenerationSettings().getSurfaceBuilderConfig() instanceof SurfaceBuilderConfig)) {
-                                chunk.setBlockState(blockpos$MutableAbove, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
+                                chunk.setBlockState(blockposMutableAbove, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
                             }
                             else {
-                                chunk.setBlockState(blockpos$MutableAbove, ((SurfaceBuilderConfig) oceanBiome.getGenerationSettings().getSurfaceBuilderConfig()).getUnderWaterMaterial(), false);
+                                chunk.setBlockState(blockposMutableAbove, ((SurfaceBuilderConfig) oceanBiome.getGenerationSettings().getSurfaceBuilderConfig()).getUnderWaterMaterial(), false);
                             }
                         }
                     }
                     else {
                         //water is not contained
-                        if (blockpos$Mutable.getY() < 256) {
-                            blockAbove = chunk.getBlockState(blockpos$MutableAbove);
+                        if (blockposMutable.getY() < 256) {
+                            blockAbove = chunk.getBlockState(blockposMutableAbove);
 
                             if (blockAbove.isSolid() || !blockAbove.getFluidState().isEmpty()) {
 
                                 //if above is solid or water, place second config block
-                                chunk.setBlockState(blockpos$Mutable, oceanUnderBlock, false);
+                                chunk.setBlockState(blockposMutable, oceanUnderBlock, false);
                             }
 
                             //place first config block if no solid block above and below
                             else {
                                 //if config top block is dead coral, randomly chooses any dead coral block to place
                                 if (useCoralTop) {
-                                    chunk.setBlockState(blockpos$Mutable, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
+                                    chunk.setBlockState(blockposMutable, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
                                 }
                                 else {
-                                    chunk.setBlockState(blockpos$Mutable, oceanTopBlock, false);
+                                    chunk.setBlockState(blockposMutable, oceanTopBlock, false);
                                 }
                             }
                         }
@@ -147,10 +154,10 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
                         //place first config block if too high
                         //if config top block is dead coral, randomly chooses any dead coral block to place
                         else if (useCoralTop) {
-                            chunk.setBlockState(blockpos$Mutable, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
+                            chunk.setBlockState(blockposMutable, DEAD_CORAL_ARRAY[random.nextInt(DEAD_CORAL_ARRAY.length)], false);
                         }
                         else {
-                            chunk.setBlockState(blockpos$Mutable, oceanTopBlock, false);
+                            chunk.setBlockState(blockposMutable, oceanTopBlock, false);
                         }
                     }
 

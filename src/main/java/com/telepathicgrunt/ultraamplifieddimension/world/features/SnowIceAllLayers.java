@@ -9,6 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -26,26 +27,32 @@ public class SnowIceAllLayers extends Feature<NoFeatureConfig>
 	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, NoFeatureConfig config) {
 
 		Biome biome = world.getBiome(pos);
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
-		BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
+		BlockPos.Mutable blockposMutable1 = new BlockPos.Mutable();
+		BlockPos.Mutable blockposMutable2 = new BlockPos.Mutable();
+
+		IChunk cachedChunk = world.getChunk(pos);
+		if(blockposMutable1.getX() >> 4 != cachedChunk.getPos().x || blockposMutable1.getZ() >> 4 != cachedChunk.getPos().z)
+			cachedChunk = world.getChunk(blockposMutable1);
+
 
 		for (int y = chunkGenerator.getMaxBuildHeight(); y > chunkGenerator.getSeaLevel(); --y) {
 
-			blockpos$Mutable.setPos(pos.getX(), y, pos.getZ());
-			blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN);
+			blockposMutable1.setPos(pos.getX(), y, pos.getZ());
+			blockposMutable2.setPos(blockposMutable1).move(Direction.DOWN);
 
-			if (world.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR && world.getBlockState(blockpos$Mutable1).getMaterial() != Material.AIR) {
+			BlockState blockStateTop = cachedChunk.getBlockState(blockposMutable1);
+			BlockState blockStateBottom = cachedChunk.getBlockState(blockposMutable2);
+			if (blockStateTop.getMaterial() == Material.AIR && blockStateBottom.getMaterial() != Material.AIR) {
 
-				if (!world.getBlockState(blockpos$Mutable1).getFluidState().isEmpty() && biome.doesWaterFreeze(world, blockpos$Mutable1, false)) {
-					world.setBlockState(blockpos$Mutable1, Blocks.ICE.getDefaultState(), 2);
+				if (!blockStateBottom.getFluidState().isEmpty() && biome.doesWaterFreeze(world, blockposMutable2, false)) {
+					cachedChunk.setBlockState(blockposMutable2, Blocks.ICE.getDefaultState(), false);
 				}
 
-				if (biome.doesSnowGenerate(world, blockpos$Mutable)) {
-					world.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
-					BlockState iblockstate = world.getBlockState(blockpos$Mutable1);
+				if (biome.doesSnowGenerate(world, blockposMutable1)) {
+					cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
 
-					if (iblockstate.hasProperty(SnowyDirtBlock.SNOWY)) {
-						world.setBlockState(blockpos$Mutable1, iblockstate.with(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+					if (blockStateBottom.hasProperty(SnowyDirtBlock.SNOWY)) {
+						cachedChunk.setBlockState(blockposMutable2, blockStateBottom.with(SnowyDirtBlock.SNOWY, true), false);
 					}
 				}
 			}

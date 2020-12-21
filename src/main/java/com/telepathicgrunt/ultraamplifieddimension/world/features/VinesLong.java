@@ -26,27 +26,30 @@ public class VinesLong extends Feature<NoFeatureConfig>
 	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerators, Random rand, BlockPos position, NoFeatureConfig config) {
 
 		//generates vines from given position all the way down to sealevel + 1 if path is clear and the given position is valid
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
-		BlockPos.Mutable blockpos$Mutable2 = new BlockPos.Mutable().setPos(position);
+		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
 		IChunk chunk = world.getChunk(position);
 
-		while (blockpos$Mutable.getY() > chunkGenerators.getSeaLevel() + 1) {
-			if (chunk.getBlockState(blockpos$Mutable).isAir()) {
+		while (blockposMutable.getY() > chunkGenerators.getSeaLevel() + 1) {
+			if (chunk.getBlockState(blockposMutable).isAir()) {
 				for (Direction direction : Direction.Plane.HORIZONTAL) {
-					BlockState iblockstate = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), true);
-					blockpos$Mutable2.setPos(blockpos$Mutable).move(Direction.UP);
-					if (iblockstate.isValidPosition(world, blockpos$Mutable)) {
-						chunk.setBlockState(blockpos$Mutable, iblockstate, false);
+					BlockState blockState = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), true);
+					if (blockState.isValidPosition(world, blockposMutable)) {
+						chunk.setBlockState(blockposMutable, blockState, false);
 						break;
 					}
-					else if (chunk.getBlockState(blockpos$Mutable2).isIn(Blocks.VINE)) {
-						chunk.setBlockState(blockpos$Mutable, chunk.getBlockState(blockpos$Mutable2), false);
-						break;
+					else {
+						BlockState aboveBlockstate = chunk.getBlockState(blockposMutable.move(Direction.UP));
+						blockposMutable.move(Direction.DOWN); // Move back to original pos.
+
+						if (aboveBlockstate.isIn(Blocks.VINE)) {
+							chunk.setBlockState(blockposMutable, aboveBlockstate, false);
+							break;
+						}
 					}
 				}
 			}
 
-			blockpos$Mutable.move(Direction.DOWN);
+			blockposMutable.move(Direction.DOWN);
 		}
 
 		return true;

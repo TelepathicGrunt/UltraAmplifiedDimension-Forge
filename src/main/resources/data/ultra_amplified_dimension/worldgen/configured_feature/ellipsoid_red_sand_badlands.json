@@ -13,15 +13,15 @@
                 "state": {
                   "Name": "minecraft:red_sand"
                 },
-                "size": 4
+                "size": 20
               },
               "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 16,
+                "bottom_offset": 1,
                 "top_offset": 0,
-                "maximum": 26
+                "maximum": 60
               },
               "type": "minecraft:range"
             }

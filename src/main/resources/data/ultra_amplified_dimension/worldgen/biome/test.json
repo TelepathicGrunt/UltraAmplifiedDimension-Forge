@@ -37,8 +37,8 @@
     [],
     [
         "ultra_amplified_dimension:contain_underground_liquids",
-        "ultra_amplified_dimension:column_vertical",
-        "ultra_amplified_dimension:column_ramp",
+        "ultra_amplified_dimension:column_vertical_badlands",
+        "ultra_amplified_dimension:column_ramp_badlands",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
@@ -59,6 +59,7 @@
         "ultra_amplified_dimension:ore_andesite",
         "ultra_amplified_dimension:ore_coal",
         "ultra_amplified_dimension:ore_iron",
+        "ultra_amplified_dimension:ore_iron_deep",
         "ultra_amplified_dimension:ore_gold_badlands",
         "ultra_amplified_dimension:ore_redstone",
         "ultra_amplified_dimension:ore_diamond",

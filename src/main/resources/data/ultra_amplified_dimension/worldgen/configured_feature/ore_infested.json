@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:infested_stone"
                 },
-                "size": 9
+                "size": 7
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

@@ -7,6 +7,7 @@ import net.minecraft.block.SnowyDirtBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
@@ -22,21 +23,22 @@ public class SnowLayerWithoutIceFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, NoFeatureConfig config) {
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
-        BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
+        BlockPos.Mutable blockposMutable1 = new BlockPos.Mutable();
+        BlockPos.Mutable blockposMutable2 = new BlockPos.Mutable();
+        IChunk cachedChunk = world.getChunk(position);
 
-        int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING, position.getX(), position.getZ());
-        blockpos$Mutable.setPos(position.getX(), y, position.getZ());
-        blockpos$Mutable1.setPos(blockpos$Mutable).move(Direction.DOWN);
-        BlockState iblockstate = world.getBlockState(blockpos$Mutable);
+        int y = cachedChunk.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, position.getX(), position.getZ()) + 1;
+        blockposMutable1.setPos(position.getX(), y, position.getZ());
+        blockposMutable2.setPos(blockposMutable1).move(Direction.DOWN);
+        BlockState blockState1 = cachedChunk.getBlockState(blockposMutable1);
 
-        if (iblockstate.isAir(world, blockpos$Mutable) && Blocks.SNOW.getDefaultState().isValidPosition(world, blockpos$Mutable)) {
+        if (blockState1.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(world, blockposMutable1)) {
 
-            world.setBlockState(blockpos$Mutable, Blocks.SNOW.getDefaultState(), 2);
-            BlockState iblockstate2 = world.getBlockState(blockpos$Mutable1);
+            cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
+            BlockState blockState2 = cachedChunk.getBlockState(blockposMutable2);
 
-            if (iblockstate2.hasProperty(SnowyDirtBlock.SNOWY)) {
-                world.setBlockState(blockpos$Mutable1, iblockstate2.with(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+            if (blockState2.hasProperty(SnowyDirtBlock.SNOWY)) {
+                cachedChunk.setBlockState(blockposMutable2, blockState2.with(SnowyDirtBlock.SNOWY, true), false);
             }
         }
 

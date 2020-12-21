@@ -10,8 +10,8 @@ public class ColumnConfig implements IFeatureConfig {
             Codec.intRange(1, 256).fieldOf("max_height").forGetter(columnConfig -> columnConfig.maxHeight),
             Codec.intRange(1, 256).fieldOf("min_height").forGetter(columnConfig -> columnConfig.minHeight),
             BlockState.CODEC.fieldOf("top_block").forGetter(columnConfig -> columnConfig.topBlock),
-            BlockState.CODEC.fieldOf("top_block").forGetter(columnConfig -> columnConfig.middleBlock),
-            BlockState.CODEC.fieldOf("top_block").forGetter(columnConfig -> columnConfig.insideBlock)
+            BlockState.CODEC.fieldOf("middle_block").forGetter(columnConfig -> columnConfig.middleBlock),
+            BlockState.CODEC.fieldOf("bottom_block").forGetter(columnConfig -> columnConfig.insideBlock)
             ).apply(columnConfigInstance, ColumnConfig::new));
 
     public final int maxHeight;

@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -24,9 +25,14 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
 
         //creates a waterfall of blue ice that has a puddle at bottom
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
+        BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
 
-        if (!world.getBlockState(blockpos$Mutable.move(Direction.UP)).isSolid()) {
+        IChunk cachedChunk = world.getChunk(blockposMutable);
+        if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+            cachedChunk = world.getChunk(blockposMutable);
+
+
+        if (!cachedChunk.getBlockState(blockposMutable.move(Direction.UP)).isSolid()) {
             return false;
         }
         else {
@@ -35,7 +41,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
             int numberOfSolidSides = 0;
             int neededNumberOfSides;
 
-            if (!world.getBlockState(blockpos$Mutable.move(Direction.DOWN, 2)).isSolid()) {
+            if (!cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN, 2)).isSolid()) {
                 neededNumberOfSides = 4;
             }
             else {
@@ -46,7 +52,11 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
 
             for (Direction face : Direction.Plane.HORIZONTAL) {
 
-                if (world.getBlockState(blockpos$Mutable.setPos(position).move(face)).isSolid()) {
+                blockposMutable.setPos(position).move(face);
+                if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                    cachedChunk = world.getChunk(blockposMutable);
+
+                if (cachedChunk.getBlockState(blockposMutable).isSolid()) {
                     ++numberOfSolidSides;
                 }
                 else {
@@ -58,49 +68,66 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
             if (numberOfSolidSides == neededNumberOfSides) {
 
                 //initial starting point of icefall
-                world.setBlockState(blockpos$Mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
+                cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
 
                 //in wall, offset to out of wall
                 if (numberOfSolidSides == 3) {
                     //set what direction the open side of the wall is
-                    blockpos$Mutable.move(emptySpot);
-                    world.setBlockState(blockpos$Mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
+                    blockposMutable.move(emptySpot);
+
+                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                        cachedChunk = world.getChunk(blockposMutable);
+
+                    cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
                 }
 
                 //places blue ice downward until it hit solid block
                 while (true) {
-                    if (blockpos$Mutable.getY() <= 1) {
+                    if (blockposMutable.getY() <= 1) {
                         return false;
                     }
 
-                    blockpos$Mutable.move(Direction.DOWN); //move down to check below
-                    if (world.getBlockState(blockpos$Mutable).getMaterial() == Material.AIR ||
-                            world.getBlockState(blockpos$Mutable) == Blocks.BLUE_ICE.getDefaultState() ||
-                            world.getBlockState(blockpos$Mutable) == Blocks.SNOW_BLOCK.getDefaultState())
+                    blockposMutable.move(Direction.DOWN); //move down to check below
+
+                    BlockState blockState1 = cachedChunk.getBlockState(blockposMutable);
+                    if (blockState1.getMaterial() == Material.AIR ||
+                        blockState1.getBlock() == Blocks.BLUE_ICE ||
+                        blockState1.getBlock() == Blocks.SNOW_BLOCK)
                     {
-                        world.setBlockState(blockpos$Mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
+                        cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
                         continue; //restart loop to keep moving downward
                     }
 
-                    blockpos$Mutable.move(Direction.UP); //move back up as downward is blocked off
+                    blockposMutable.move(Direction.UP); //move back up as downward is blocked off
                     boolean spotFound = false;
 
                     //goes around ledge
                     for (Direction face : Direction.Plane.HORIZONTAL) {
 
-                        if ((world.getBlockState(blockpos$Mutable.move(face)).getMaterial() == Material.AIR || world.getBlockState(blockpos$Mutable) == Blocks.BLUE_ICE.getDefaultState()))
-                        {
-                            if((world.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial() == Material.AIR || world.getBlockState(blockpos$Mutable) == Blocks.BLUE_ICE.getDefaultState())){
-                                // undo the move down and face offset in the if statement above
-                                blockpos$Mutable.move(face.getOpposite()).move(Direction.UP);
-                                blockpos$Mutable.move(emptySpot);
+                        blockposMutable.move(face);
+                        if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                            cachedChunk = world.getChunk(blockposMutable);
 
-                                world.setBlockState(blockpos$Mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
-                                blockpos$Mutable.move(Direction.DOWN);
-                                world.setBlockState(blockpos$Mutable, Blocks.BLUE_ICE.getDefaultState(), 2);
+                        BlockState blockState2 = cachedChunk.getBlockState(blockposMutable);
+                        if (blockState2.getMaterial() == Material.AIR || blockState2.getBlock() == Blocks.BLUE_ICE) {
+
+                            blockposMutable.move(Direction.DOWN);
+                            BlockState blockState3 = cachedChunk.getBlockState(blockposMutable);
+
+                            if(blockState3.getMaterial() == Material.AIR || blockState3.getBlock() == Blocks.BLUE_ICE){
+                                // undo the move down and face offset in the if statement above
+                                blockposMutable.move(face.getOpposite()).move(Direction.UP);
+                                blockposMutable.move(emptySpot);
+
+                                if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                                    cachedChunk = world.getChunk(blockposMutable);
+
+                                cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
+                                blockposMutable.move(Direction.DOWN);
+                                cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
                                 spotFound = true;
 
-                                if (blockpos$Mutable.getY() <= 1) {
+                                if (blockposMutable.getY() <= 1) {
                                     return false;
                                 }
                                 else {
@@ -109,12 +136,12 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                             }
                             else{
                                 // undo the move down and face offset in the if statement above
-                                blockpos$Mutable.move(face.getOpposite()).move(Direction.UP);
+                                blockposMutable.move(face.getOpposite()).move(Direction.UP);
                             }
                         }
                         else{
                             // undo the face offset in the if statement above
-                            blockpos$Mutable.move(face.getOpposite());
+                            blockposMutable.move(face.getOpposite());
                         }
                     }
 
@@ -125,19 +152,23 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                 }
 
                 //creates blue ice puddle at bottom
+                position = blockposMutable.toImmutable();
                 int width = rand.nextInt(2) + 2;
-                for (int y = blockpos$Mutable.getY() - 1; y < blockpos$Mutable.getY() + 1; ++y) {
+                for (int y = blockposMutable.getY() - 1; y < blockposMutable.getY() + 1; ++y) {
                     for (int x = -width; x <= width; ++x) {
                         for (int z = -width; z <= width; ++z) {
                             if (x * x + z * z <= width * width) {
-                                if (y > 1 && y < world.getWorld().func_234938_ad_()) {
+                                if (y > 1 && y < chunkGenerator.getMaxBuildHeight()) {
 
-                                    BlockPos blockpos = new BlockPos(x + blockpos$Mutable.getX(), y, z + blockpos$Mutable.getZ());
-                                    BlockState block = world.getBlockState(blockpos);
+                                    blockposMutable.setPos(position).move(x, y, z);
+                                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                                        cachedChunk = world.getChunk(blockposMutable);
+
+                                    BlockState blockState4 = cachedChunk.getBlockState(blockposMutable);
 
                                     //replace solid and liquid blocks
-                                    if (block.isSolid() || !block.getFluidState().isEmpty() || block == Blocks.ICE.getDefaultState()) {
-                                        world.setBlockState(blockpos, Blocks.BLUE_ICE.getDefaultState(), 2);
+                                    if (blockState4.isSolid() || !blockState4.getFluidState().isEmpty() || blockState4.getBlock() == Blocks.ICE) {
+                                        cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
                                     }
                                 }
                                 else {
@@ -152,14 +183,19 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                 }
 
                 //remove thin snow above the highest blue ice puddle
+                position = blockposMutable.move(Direction.UP).toImmutable();
                 for (int x = -width; x <= width; ++x) {
                     for (int z = -width; z <= width; ++z) {
                         if (x * x + z * z <= width * width) {
-                            BlockPos blockpos = new BlockPos(x + blockpos$Mutable.getX(), blockpos$Mutable.getY() + 1, z + blockpos$Mutable.getZ());
-                            BlockState block = world.getBlockState(blockpos);
 
-                            if (block == Blocks.SNOW.getDefaultState()) {
-                                world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 2);
+                            blockposMutable.setPos(position).move(x, 0, z);
+                            if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                                cachedChunk = world.getChunk(blockposMutable);
+
+                            BlockState block = cachedChunk.getBlockState(blockposMutable);
+
+                            if (block.getBlock() == Blocks.SNOW) {
+                                cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
                             }
                         }
                     }

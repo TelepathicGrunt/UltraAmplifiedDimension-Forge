@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:lapis_ore"
                 },
-                "size": 7
+                "size": 6
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

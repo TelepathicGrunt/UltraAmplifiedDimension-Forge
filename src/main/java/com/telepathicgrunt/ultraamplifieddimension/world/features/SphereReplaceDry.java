@@ -2,8 +2,10 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
@@ -25,7 +27,8 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 			radius = random.nextInt(config.radius.func_242259_a(random) - 2) + 2;
 		}
 
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
+		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
+		IChunk cachedChunk = world.getChunk(blockposMutable);
 
 		for (int x = position.getX() - radius; x <= position.getX() + radius; ++x) {
 			for (int z = position.getZ() - radius; z <= position.getZ() + radius; ++z) {
@@ -33,13 +36,17 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 				int trueX = x - position.getX();
 				int trueZ = z - position.getZ();
 				if (trueX * trueX + trueZ * trueZ <= radius * radius) {
+					blockposMutable.setPos(x, 0, z);
+					if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+						cachedChunk = world.getChunk(blockposMutable);
+
 					for (int y = position.getY() - config.field_242809_d; y <= position.getY() + config.field_242809_d; ++y) {
-						blockpos$Mutable.setPos(x, y, z);
-						BlockState blockstate = world.getBlockState(blockpos$Mutable);
+						blockposMutable.move(Direction.UP, y);
+						BlockState blockstate = cachedChunk.getBlockState(blockposMutable);
 
 						for (BlockState blockstate1 : config.targets) {
 							if (blockstate1.getBlock() == blockstate.getBlock()) {
-								world.setBlockState(blockpos$Mutable, config.state, 2);
+								cachedChunk.setBlockState(blockposMutable, config.state, false);
 								++placedBlocks;
 								break;
 							}

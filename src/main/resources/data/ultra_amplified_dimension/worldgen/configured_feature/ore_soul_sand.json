@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:soul_sand"
                 },
-                "size": 12
+                "size": 10
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

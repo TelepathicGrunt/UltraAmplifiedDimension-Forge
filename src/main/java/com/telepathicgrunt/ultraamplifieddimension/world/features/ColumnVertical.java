@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 
@@ -33,35 +34,36 @@ public class ColumnVertical extends Feature<ColumnConfig> {
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig blocksConfig) {
 
         setSeed(world.getSeed());
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
+        BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
         int minWidth = 3;
         int maxWidth = 10;
         int currentHeight = 0;
         int ceilingHeight;
         int floorHeight;
         int heightDiff;
+        IChunk cachedChunk = world.getChunk(blockposMutable);
 
         //checks to see if position is acceptable for pillar gen
         //finds ceiling
-        while (!world.getBlockState(blockpos$Mutable).isSolid()) {
+        while (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
             //too high for column to generate
-            if (blockpos$Mutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
+            if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
             }
-            blockpos$Mutable.move(Direction.UP, 2);
+            blockposMutable.move(Direction.UP, 2);
         }
-        ceilingHeight = blockpos$Mutable.getY();
+        ceilingHeight = blockposMutable.getY();
 
         //find floor
-        blockpos$Mutable.setPos(position); // reset back to normal height
-        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid()) {
+        blockposMutable.setPos(position); // reset back to normal height
+        while (!cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
             //too low for column to generate
-            if (blockpos$Mutable.getY() < 50) {
+            if (blockposMutable.getY() < 50) {
                 return false;
             }
-            blockpos$Mutable.move(Direction.DOWN, 2);
+            blockposMutable.move(Direction.DOWN, 2);
         }
-        floorHeight = blockpos$Mutable.getY();
+        floorHeight = blockposMutable.getY();
 
         heightDiff = ceilingHeight - floorHeight;
         if (heightDiff > 100 || heightDiff < 10) {
@@ -85,8 +87,12 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                 int xDiff = x - position.getX();
                 int zDiff = z - position.getZ();
                 if (xDiff * xDiff + zDiff * zDiff <= (widthAtHeight) * (widthAtHeight)) {
-                    BlockState block1 = world.getBlockState(blockpos$Mutable.setPos(x, ceilingHeight + 3, z));
-                    BlockState block2 = world.getBlockState(blockpos$Mutable.setPos(x, floorHeight - 2, z));
+
+                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                        cachedChunk = world.getChunk(blockposMutable);
+
+                    BlockState block1 = cachedChunk.getBlockState(blockposMutable.setPos(x, ceilingHeight + 3, z));
+                    BlockState block2 = cachedChunk.getBlockState(blockposMutable.setPos(x, floorHeight - 2, z));
 
                     //there is not enough land to contain bases of pillar
                     if (!block1.isSolid() || !block2.isSolid()) {
@@ -129,7 +135,7 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                 for (int z = position.getZ() - widthAtHeight - zMod - 1; z <= position.getZ() + widthAtHeight + zMod + 1; ++z) {
                     int xDiff = x - position.getX();
                     int zDiff = z - position.getZ();
-                    blockpos$Mutable.setPos(x, y + floorHeight, z);
+                    blockposMutable.setPos(x, y + floorHeight, z);
 
                     //scratches the surface for more imperfection
                     //cut the number of scratches on smallest part of pillar by 4
@@ -145,10 +151,12 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                     int xzDiffSquaredStretched = (xMod + 1) * (xDiff * xDiff) + (zMod + 1) * (zDiff * zDiff);
                     int xzDiffSquared = (xDiff * xDiff) + (zDiff * zDiff);
                     if (xzDiffSquaredStretched <= (currentWidth - 1) * (currentWidth - 1)) {
-                        BlockState block = world.getBlockState(blockpos$Mutable);
 
-                        if (!block.isSolid()) {
-                            world.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
+                        if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                            cachedChunk = world.getChunk(blockposMutable);
+
+                        if (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
+                            cachedChunk.setBlockState(blockposMutable, blocksConfig.insideBlock, false);
                         }
                     }
                     //We are at non-pillar space
@@ -156,12 +164,15 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                     else if (y < heightDiff / 2 && xzDiffSquared <= (widthAtHeight + 2) * (widthAtHeight + 2)) {
                         //top block followed by 4 middle blocks below that
                         for (int downward = 0; downward < 6 && y - downward >= -3; downward++) {
-                            BlockState block = world.getBlockState(blockpos$Mutable);
-                            if (block == blocksConfig.insideBlock) {
-                                world.setBlockState(blockpos$Mutable, downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, 2);
+
+                            if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                                cachedChunk = world.getChunk(blockposMutable);
+
+                            if (cachedChunk.getBlockState(blockposMutable) == blocksConfig.insideBlock) {
+                                cachedChunk.setBlockState(blockposMutable, downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, false);
                             }
 
-                            blockpos$Mutable.move(Direction.DOWN); //moves down 1 every loop
+                            blockposMutable.move(Direction.DOWN); //moves down 1 every loop
                         }
                     }
                 }

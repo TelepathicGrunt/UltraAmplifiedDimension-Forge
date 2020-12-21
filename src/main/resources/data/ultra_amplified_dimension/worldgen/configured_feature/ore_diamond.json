@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:diamond_ore"
                 },
-                "size": 8
+                "size": 6
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

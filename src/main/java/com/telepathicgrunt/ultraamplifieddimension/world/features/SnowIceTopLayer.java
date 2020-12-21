@@ -8,6 +8,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
@@ -25,22 +26,23 @@ public class SnowIceTopLayer extends Feature<NoFeatureConfig>
 	@Override
 	public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Biome biome = world.getBiome(pos);
-		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
-		BlockPos.Mutable blockpos$mutable1 = new BlockPos.Mutable();
+		BlockPos.Mutable blockposMutable1 = new BlockPos.Mutable();
+		BlockPos.Mutable blockposMutable2 = new BlockPos.Mutable();
+		IChunk cachedChunk = world.getChunk(pos);
 
-		int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ());
-		blockpos$mutable.setPos(pos.getX(), y, pos.getZ());
-		blockpos$mutable1.setPos(blockpos$mutable).move(Direction.DOWN);
+		int y = cachedChunk.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ()) + 1;
+		blockposMutable1.setPos(pos.getX(), y, pos.getZ());
+		blockposMutable2.setPos(blockposMutable1).move(Direction.DOWN);
 
-		if (biome.doesWaterFreeze(world, blockpos$mutable1, false)) {
-			world.setBlockState(blockpos$mutable1, Blocks.ICE.getDefaultState(), 2);
+		if (biome.doesWaterFreeze(world, blockposMutable2, false)) {
+			cachedChunk.setBlockState(blockposMutable2, Blocks.ICE.getDefaultState(), false);
 		}
 
-		if (biome.doesSnowGenerate(world, blockpos$mutable)) {
-			world.setBlockState(blockpos$mutable, Blocks.SNOW.getDefaultState(), 2);
-			BlockState blockstate = world.getBlockState(blockpos$mutable1);
+		if (biome.doesSnowGenerate(world, blockposMutable1)) {
+			cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
+			BlockState blockstate = cachedChunk.getBlockState(blockposMutable2);
 			if (blockstate.hasProperty(SnowyDirtBlock.SNOWY)) {
-				world.setBlockState(blockpos$mutable1, blockstate.with(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+				cachedChunk.setBlockState(blockposMutable2, blockstate.with(SnowyDirtBlock.SNOWY, Boolean.TRUE), false);
 			}
 		}
 		return true;

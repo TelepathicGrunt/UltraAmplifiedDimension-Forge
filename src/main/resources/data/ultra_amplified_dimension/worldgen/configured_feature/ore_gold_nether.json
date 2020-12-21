@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:nether_gold_ore"
                 },
-                "size": 10
+                "size": 8
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

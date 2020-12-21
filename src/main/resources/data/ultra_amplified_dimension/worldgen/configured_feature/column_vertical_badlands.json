@@ -6,22 +6,25 @@
           "config": {
             "feature": {
               "config": {
-                "target": {
-                  "tag": "minecraft:base_stone_overworld",
-                  "predicate_type": "minecraft:tag_match"
+                "top_block": {
+                  "Name": "minecraft:red_sand"
                 },
-                "state": {
-                  "Name": "minecraft:iron_ore"
+                "middle_block": {
+                  "Name": "minecraft:red_sandstone"
                 },
-                "size": 6
+                "bottom_block": {
+                  "Name": "minecraft:stone"
+                },
+                "max_height": 100,
+                "min_height": 10
               },
-              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+              "type": "ultra_amplified_dimension:column_vertical"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 1,
+                "bottom_offset": 70,
                 "top_offset": 0,
-                "maximum": 200
+                "maximum": 180
               },
               "type": "minecraft:range"
             }
@@ -37,7 +40,7 @@
     },
     "decorator": {
       "config": {
-        "count": 44
+        "count": 2
       },
       "type": "minecraft:count"
     }

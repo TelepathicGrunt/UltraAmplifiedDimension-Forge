@@ -16,9 +16,9 @@
                   },
                   "Name": "minecraft:redstone_ore"
                 },
-                "size": 8
+                "size": 7
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {

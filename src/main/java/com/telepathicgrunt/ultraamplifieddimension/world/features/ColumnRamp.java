@@ -13,6 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -34,33 +35,34 @@ public class ColumnRamp extends Feature<ColumnConfig> {
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig blocksConfig) {
 
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
+        BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
         int minWidth = 4;
         int currentHeight = 0;
         int ceilingHeight;
         int bottomFloorHeight;
         int topFloorHeight;
         int heightDiff;
+        IChunk cachedChunk = world.getChunk(blockposMutable);
 
         //finds ceiling
-        while (!world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid()) {
+        while (!cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
             //too high for ramp to generate
-            if (blockpos$Mutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
+            if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
             }
-            blockpos$Mutable.move(Direction.UP, 2);
+            blockposMutable.move(Direction.UP, 2);
         }
-        ceilingHeight = blockpos$Mutable.getY();
+        ceilingHeight = blockposMutable.getY();
 
         //finds floor above ceiling
-        while (world.getBlockState(blockpos$Mutable.up(currentHeight)).isSolid()) {
+        while (cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
             //too high for ramp to generate
-            if (blockpos$Mutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
+            if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
             }
-            blockpos$Mutable.move(Direction.UP);
+            blockposMutable.move(Direction.UP);
         }
-        topFloorHeight = blockpos$Mutable.up(currentHeight).getY();
+        topFloorHeight = blockposMutable.up(currentHeight).getY();
 
         //too thick or thin for ramp to generate
         if (topFloorHeight - ceilingHeight > 7 || topFloorHeight - ceilingHeight < 2) {
@@ -68,15 +70,15 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         }
 
         //find floor
-        blockpos$Mutable.setPos(position); // reset back to normal height
-        while (!world.getBlockState(blockpos$Mutable).isSolid()) {
+        blockposMutable.setPos(position); // reset back to normal height
+        while (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
             //too low/tall for column to generate
-            if (blockpos$Mutable.getY() < 70) {
+            if (blockposMutable.getY() < 70) {
                 return false;
             }
-            blockpos$Mutable.move(Direction.DOWN, 2);
+            blockposMutable.move(Direction.DOWN, 2);
         }
-        bottomFloorHeight = blockpos$Mutable.getY();
+        bottomFloorHeight = blockposMutable.getY();
 
         heightDiff = ceilingHeight - bottomFloorHeight;
         if (heightDiff > 27 || heightDiff < 8) {
@@ -102,8 +104,12 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         for (int x = -widthAtHeight; x <= widthAtHeight; x++) {
             for (int z = -widthAtHeight; z <= widthAtHeight; z++) {
                 if (x * x + z * z > widthAtHeight * widthAtHeight * 0.85 && x * x + z * z < widthAtHeight * widthAtHeight) {
-                    BlockState block1 = world.getBlockState(blockpos$Mutable.setPos(xPosCeiling + x, ceilingHeight + 2, zPosCeiling + z));
-                    BlockState block2 = world.getBlockState(blockpos$Mutable.setPos(xPosFloor + x, bottomFloorHeight - 2, zPosFloor + z));
+
+                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                        cachedChunk = world.getChunk(blockposMutable);
+
+                    BlockState block1 = cachedChunk.getBlockState(blockposMutable.setPos(xPosCeiling + x, ceilingHeight + 2, zPosCeiling + z));
+                    BlockState block2 = cachedChunk.getBlockState(blockposMutable.setPos(xPosFloor + x, bottomFloorHeight - 2, zPosFloor + z));
 
                     //debugging
                     //world.setBlockState(blockpos$Mutable.setPos(position.getX() + x + getOffsetAtHeight(heightDiff + 1, heightDiff, xTurningValue), ceilingHeight + 2, position.getZ() + z + getOffsetAtHeight(0, heightDiff, zTurningValue)), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
@@ -117,7 +123,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
             }
         }
 
-        //If this is reached, position is valid for pillar gen.
+        //If this is reached, position is valid for ramp gen.
 
         //debugging
         //        if(heightDiff > 18) {
@@ -152,7 +158,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                 for (int z = position.getZ() - widthAtHeight - 1; z <= position.getZ() + widthAtHeight + 1; ++z) {
                     xDiff = x - position.getX();
                     zDiff = z - position.getZ();
-                    blockpos$Mutable.setPos(x + xOffset, y + bottomFloorHeight + 3, z + zOffset);
+                    blockposMutable.setPos(x + xOffset, y + bottomFloorHeight + 3, z + zOffset);
 
                     //creates pillar with inside block
                     int xzDiffSquaredStretched = (xDiff * xDiff) + (zDiff * zDiff);
@@ -162,25 +168,31 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                         circleBounds *= (0.6f / (y - heightDiff));
                     }
 
-                    BlockState block = world.getBlockState(blockpos$Mutable);
+                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                        cachedChunk = world.getChunk(blockposMutable);
+
+                    BlockState block = cachedChunk.getBlockState(blockposMutable);
                     if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds) {
-                        if (blockpos$Mutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator)
-                            world.setBlockState(blockpos$Mutable, ((NoiseChunkGeneratorAccessor)chunkGenerator).getDefaultFluid(), 2);
+                        if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator)
+                            cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor)chunkGenerator).getDefaultFluid(), false);
                         else
-                            world.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), 2);
+                            cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
 
                         //adds top block to exposed middle block after air was set
-                        BlockState blockBelowAir = world.getBlockState(blockpos$Mutable.down());
-                        BlockState blockBelowBelowAir = world.getBlockState(blockpos$Mutable.down(2));
+                        BlockState blockBelowAir = cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN));
+                        BlockState blockBelowBelowAir = cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN));
+                        blockposMutable.move(Direction.UP); // Move back to blockBelowAir
+
                         if (blockBelowAir.isSolid()) {
                             if (blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
-                                world.setBlockState(blockpos$Mutable.down(), blocksConfig.middleBlock, 2);
+                                cachedChunk.setBlockState(blockposMutable, blocksConfig.middleBlock, false);
                             }
                             else {
-                                world.setBlockState(blockpos$Mutable.down(), blocksConfig.topBlock, 2);
+                                cachedChunk.setBlockState(blockposMutable, blocksConfig.topBlock, false);
                             }
-
                         }
+
+                        blockposMutable.move(Direction.UP); // Move back to air spot
                     }
                 }
             }
@@ -198,7 +210,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                 for (int z = position.getZ() - widthAtHeight - 1; z <= position.getZ() + widthAtHeight + 1; ++z) {
                     xDiff = x - position.getX();
                     zDiff = z - position.getZ();
-                    blockpos$Mutable.setPos(x + xOffset, y + bottomFloorHeight, z + zOffset);
+                    blockposMutable.setPos(x + xOffset, y + bottomFloorHeight, z + zOffset);
 
                     //creates pillar with inside block
                     int xzDiffSquaredStretched = (xDiff * xDiff) + (zDiff * zDiff);
@@ -209,8 +221,8 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                     }
 
                     if (y <= heightDiff && xzDiffSquaredStretched <= circleBounds) {
-                        if (!world.getBlockState(blockpos$Mutable).isSolid()) {
-                            world.setBlockState(blockpos$Mutable, blocksConfig.insideBlock, 2);
+                        if (!world.getBlockState(blockposMutable).isSolid()) {
+                            world.setBlockState(blockposMutable, blocksConfig.insideBlock, 2);
                         }
                     }
                     //We are at non-pillar space
@@ -218,14 +230,14 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                     else if (y > heightDiff || xzDiffSquaredStretched <= (widthAtHeight + 3) * (widthAtHeight + 3)) {
                         //top block followed by 4 middle blocks below that
                         for (int downward = 0; downward < 6 && y - downward >= -3; downward++) {
-                            BlockState block = world.getBlockState(blockpos$Mutable.down(downward));
-                            BlockState blockBelow = world.getBlockState(blockpos$Mutable.down(downward + 1));
+                            BlockState block = world.getBlockState(blockposMutable.down(downward));
+                            BlockState blockBelow = world.getBlockState(blockposMutable.down(downward + 1));
                             if (block == blocksConfig.insideBlock) {
                                 if (downward == 1 && !(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelow.getMaterial() == Material.AIR)) {
-                                    world.setBlockState(blockpos$Mutable.down(downward), blocksConfig.topBlock, 2);
+                                    world.setBlockState(blockposMutable.down(downward), blocksConfig.topBlock, 2);
                                 }
                                 else {
-                                    world.setBlockState(blockpos$Mutable.down(downward), blocksConfig.middleBlock, 2);
+                                    world.setBlockState(blockposMutable.down(downward), blocksConfig.middleBlock, 2);
                                 }
 
                             }

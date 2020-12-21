@@ -13,7 +13,7 @@
                 "state": {
                   "Name": "minecraft:iron_ore"
                 },
-                "size": 6
+                "size": 7
               },
               "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
@@ -21,7 +21,7 @@
               "config": {
                 "bottom_offset": 1,
                 "top_offset": 0,
-                "maximum": 200
+                "maximum": 100
               },
               "type": "minecraft:range"
             }
@@ -37,7 +37,7 @@
     },
     "decorator": {
       "config": {
-        "count": 44
+        "count": 4
       },
       "type": "minecraft:count"
     }

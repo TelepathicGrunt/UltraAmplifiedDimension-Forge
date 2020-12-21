@@ -33,8 +33,8 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, BlockStateFeatureConfig configBlock) {
 
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
-        IChunk chunk = world.getChunk(blockpos$Mutable);
+        BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
+        IChunk chunk = world.getChunk(blockposMutable);
         boolean[] lakeMask = new boolean[2048];
         int maxInterations = random.nextInt(4) + 4;
 
@@ -66,39 +66,39 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
             for (int z = 0; z < 16; ++z) {
                 int y = 5;
 
-                blockpos$Mutable.setPos(position).move(x, y, z);
-                blockState = chunk.getBlockState(blockpos$Mutable);
+                blockposMutable.setPos(position).move(x, y, z);
+                blockState = chunk.getBlockState(blockposMutable);
                 material = blockState.getMaterial();
 
                 //Finds first solid block of land starting from 5 blocks higher than initial input position
                 //We use unacceptable solid set to help skip solid blocks like leaves.
                 while ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) && y > 0) {
                     y--;
-                    material = chunk.getBlockState(blockpos$Mutable.move(Direction.DOWN)).getMaterial();
+                    material = chunk.getBlockState(blockposMutable.move(Direction.DOWN)).getMaterial();
                 }
 
                 //checks if the spot is solid all around (diagonally too) and has nothing solid above it
-                containedFlag = checkIfValidSpot(world, blockpos$Mutable);
+                containedFlag = checkIfValidSpot(chunk, blockposMutable);
 
                 //Is spot within the mask (sorta a roundish area) and is contained
                 if (lakeMask[(x * 16 + z) * 8 + y] && containedFlag) {
                     //check below without moving down
-                    blockState = chunk.getBlockState(blockpos$Mutable.down());
+                    blockState = chunk.getBlockState(blockposMutable.down());
 
                     //sets the water
                     if (isDirt(blockState.getBlock()) && random.nextInt(5) == 0) {
-                        chunk.setBlockState(blockpos$Mutable, Blocks.SEAGRASS.getDefaultState(), false);
+                        chunk.setBlockState(blockposMutable, Blocks.SEAGRASS.getDefaultState(), false);
                     }
                     else {
-                        chunk.setBlockState(blockpos$Mutable, configBlock.state, false);
+                        chunk.setBlockState(blockposMutable, configBlock.state, false);
                     }
 
                     //remove floating plants so they aren't hovering.
                     //check above while moving up one.
-                    blockState = chunk.getBlockState(blockpos$Mutable.move(Direction.UP));
-                    while(blockpos$Mutable.getY() < chunkGenerator.getMaxBuildHeight() && !blockState.isValidPosition(world, blockpos$Mutable)){
-                        chunk.setBlockState(blockpos$Mutable, Blocks.AIR.getDefaultState(), false);
-                        blockpos$Mutable.move(Direction.UP);
+                    blockState = chunk.getBlockState(blockposMutable.move(Direction.UP));
+                    while(blockposMutable.getY() < chunkGenerator.getMaxBuildHeight() && !blockState.isValidPosition(world, blockposMutable)){
+                        chunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                        blockposMutable.move(Direction.UP);
                     }
                 }
             }
@@ -111,11 +111,11 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
      * checks if the spot is surrounded by solid blocks below and all around horizontally plus nothing solid above.
      * Must take world as this will check into neighboring chunks
      *
-     * @param world            - world to check for materials in
+     * @param chunk            - world to check for materials in
      * @param blockpos$Mutable - location to check if valid
      * @return - if the spot is valid
      */
-    private boolean checkIfValidSpot(IWorld world, BlockPos.Mutable blockpos$Mutable) {
+    private boolean checkIfValidSpot(IChunk chunk, BlockPos.Mutable blockpos$Mutable) {
         Material material;
         BlockState blockState;
 
@@ -123,7 +123,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
         //Will also return false if an unacceptable solid material is found.
         for (int x2 = -1; x2 < 2; x2++) {
             for (int z2 = -1; z2 < 2; z2++) {
-                blockState = world.getBlockState(blockpos$Mutable.add(x2, 0, z2));
+                blockState = chunk.getBlockState(blockpos$Mutable.add(x2, 0, z2));
                 material = blockState.getMaterial();
 
                 if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) &&
@@ -136,7 +136,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 
         //must be solid below
         //Will also return false if an unacceptable solid material is found.
-        blockState = world.getBlockState(blockpos$Mutable.down());
+        blockState = chunk.getBlockState(blockpos$Mutable.down());
         material = blockState.getMaterial();
         if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) &&
                 blockState.getFluidState().isEmpty() && !blockState.getFluidState().isTagged(FluidTags.WATER))
@@ -146,7 +146,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
 
         //cannot have solid, rails, or water above as that makes the lake no longer shallow or on the surface.
         //Will not check unacceptable solid set to allow leaves to be over water.
-        blockState = world.getBlockState(blockpos$Mutable.up());
+        blockState = chunk.getBlockState(blockpos$Mutable.up());
         material = blockState.getMaterial();
         return !material.isSolid() && blockState.getFluidState().isEmpty() && blockState.getBlock() != Blocks.RAIL;
     }

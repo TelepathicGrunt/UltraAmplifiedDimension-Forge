@@ -13,9 +13,9 @@
                 "state": {
                   "Name": "minecraft:granite"
                 },
-                "size": 33
+                "size": 17
               },
-              "type": "minecraft:ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {
