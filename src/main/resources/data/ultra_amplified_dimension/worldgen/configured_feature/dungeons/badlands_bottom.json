@@ -1,0 +1,72 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "replace_air": false,
+                "min_air_space": 1,
+                "max_air_space": 14,
+                "max_num_of_chests": 2,
+                "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
+                "dungeon_nbt_entries": [
+                    {
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands",
+                        "weight": 1
+                    }
+                ],
+                "spawner_mob_entries": [
+                    {
+                        "resourcelocation": "minecraft:husk",
+                        "weight": 48
+                    },
+                    {
+                        "resourcelocation": "minecraft:cave_spider",
+                        "weight": 25
+                    },
+                    {
+                        "resourcelocation": "minecraft:zombie",
+                        "weight": 25
+                    },
+                    {
+                        "resourcelocation": "minecraft:creeper",
+                        "weight": 1
+                    },
+                    {
+                        "resourcelocation": "minecraft:illusioner",
+                        "weight": 1
+                    }
+                ],
+                "processors": "ultra_amplified_dimension:dungeons/badlands"
+              },
+              "type": "ultra_amplified_dimension:nbt_dungeon"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 1,
+                "top_offset": 0,
+                "maximum": 160
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 11
+      },
+      "type": "ultra_amplified_dimension:count_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

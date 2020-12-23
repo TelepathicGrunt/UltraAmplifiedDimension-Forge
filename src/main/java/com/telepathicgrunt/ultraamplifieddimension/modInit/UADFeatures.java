@@ -24,6 +24,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<CountConfig>> GLOW_PATCH = createFeature("glow_patch", () -> new GlowPatch(CountConfig.CODEC));
     public static final RegistryObject<Feature<BlockStateFeatureConfig>> LAKE_WIDE_SHALLOW = createFeature("lake_wide_shallow", () -> new LakeWideShallow(BlockStateFeatureConfig.field_236455_a_));
     public static final RegistryObject<Feature<NbtFeatureConfig>> NBT_FEATURE = createFeature("nbt_feature", () -> new NbtFeature(NbtFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NbtDungeonConfig>> NBT_DUNGEON = createFeature("nbt_dungeon", () -> new NbtDungeon(NbtDungeonConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> NETHER_UNDERWATER_MAGMA = createFeature("nether_underwater_magma", () -> new NetherUnderwaterMagma(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<BlockWithRuleReplaceConfig>> ROOTS = createFeature("roots", () -> new Roots(BlockWithRuleReplaceConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_LAYER_HANDLER_FEATURE = createFeature("snow_ice_layer_handler_feature", () -> new SnowIceLayerHandlerFeature(NoFeatureConfig.field_236558_a_));

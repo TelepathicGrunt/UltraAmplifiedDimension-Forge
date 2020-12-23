@@ -28,9 +28,6 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
 
         IChunk cachedChunk = world.getChunk(blockposMutable);
-        if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
-            cachedChunk = world.getChunk(blockposMutable);
-
 
         if (!cachedChunk.getBlockState(blockposMutable.move(Direction.UP)).isSolid()) {
             return false;

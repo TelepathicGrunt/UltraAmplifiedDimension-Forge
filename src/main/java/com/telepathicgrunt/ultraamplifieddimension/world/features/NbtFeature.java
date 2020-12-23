@@ -1,11 +1,14 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.NbtFeatureConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -33,7 +36,7 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, NbtFeatureConfig config) {
 
         // Person wants an empty feature for some reason.
-        if (config.nbtResourcelocation.size() == 0) {
+        if (config.nbtResourcelocationsAndWeights.size() == 0) {
             return false;
         }
 
@@ -54,15 +57,16 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
         }
 
         TemplateManager templatemanager = world.getWorld().getServer().getTemplateManager();
-        Template template = templatemanager.getTemplate(config.nbtResourcelocation.get(rand.nextInt(config.nbtResourcelocation.size())));
+        ResourceLocation nbtRL = GeneralUtils.getRandomResourceLocation(config.nbtResourcelocationsAndWeights);
+        Template template = templatemanager.getTemplate(nbtRL);
 
         if (template == null) {
-            UltraAmplifiedDimension.LOGGER.warn(config.nbtResourcelocation.toString() + " NTB does not exist!");
+            UltraAmplifiedDimension.LOGGER.warn(config.nbtResourcelocationsAndWeights.toString() + " NTB does not exist!");
             return false;
         }
 
         BlockPos offset = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
-        placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(offset);
+        placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(offset).setIgnoreEntities(false);
         template.func_237152_b_(world, blockpos$Mutable.setPos(position).move(-offset.getX(), 0, -offset.getZ()), placementsettings, rand);
 
         return true;
