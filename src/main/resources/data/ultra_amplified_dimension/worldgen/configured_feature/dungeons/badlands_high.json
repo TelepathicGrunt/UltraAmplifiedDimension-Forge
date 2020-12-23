@@ -13,7 +13,15 @@
                 "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
                 "dungeon_nbt_entries": [
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_1",
+                        "weight": 1
+                    },
+                    {
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_2",
+                        "weight": 1
+                    },
+                    {
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_3",
                         "weight": 1
                     }
                 ],
@@ -63,7 +71,7 @@
     },
     "decorator": {
       "config": {
-        "count": 11
+        "count": 12
       },
       "type": "ultra_amplified_dimension:count_placer"
     }

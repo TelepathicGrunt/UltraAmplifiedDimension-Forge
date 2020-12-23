@@ -10,19 +10,19 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 
-public class OffsetPlacer extends Placement<YOffsetPlacerConfig> {
-    public OffsetPlacer(Codec<YOffsetPlacerConfig> codec) {
+public class RangeValidationPlacer extends Placement<RangeValidationPlacerConfig> {
+    public RangeValidationPlacer(Codec<RangeValidationPlacerConfig> codec) {
         super(codec);
     }
 
     @Nonnull
     @Override
-    public Stream<BlockPos> getPositions(WorldDecoratingHelper context, Random rand, YOffsetPlacerConfig config, BlockPos pos) {
-        if(config.ySpread > 0){
-            return Stream.of(pos.up(config.yOffset + rand.nextInt(config.ySpread * 2) - config.ySpread));
+    public Stream<BlockPos> getPositions(WorldDecoratingHelper context, Random rand, RangeValidationPlacerConfig config, BlockPos pos) {
+        if(pos.getY() <= config.maxY && pos.getY() > config.minY){
+            return Stream.of(pos);
         }
         else{
-            return Stream.of(pos.up(config.yOffset));
+            return Stream.empty();
         }
     }
 }

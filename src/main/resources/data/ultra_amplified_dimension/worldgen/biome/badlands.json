@@ -32,19 +32,19 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:ellipsoid_pocket"
+        "ultra_amplified_dimension:ores/ellipsoid_pocket",
+        "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [],
     [
-        "ultra_amplified_dimension:contain_underground_liquids",
-        "ultra_amplified_dimension:column_vertical_badlands",
-        "ultra_amplified_dimension:column_ramp_badlands",
+        "ultra_amplified_dimension:columns/vertical_badlands",
+        "ultra_amplified_dimension:columns/ramp_badlands",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:hanging_ruins"
+        "ultra_amplified_dimension:ministructures/hanging_ruins"
     ],
     [],
     [],
@@ -78,9 +78,9 @@
       "ultra_amplified_dimension:spring_lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:patch_dead_bush",
-      "ultra_amplified_dimension:patch_grass_badlands",
-      "ultra_amplified_dimension:big_cactus",
+      "ultra_amplified_dimension:vegetation/patch_dead_bush",
+      "ultra_amplified_dimension:vegetation/patch_grass_badlands",
+      "ultra_amplified_dimension:vegetation/big_cactus",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal"
     ],

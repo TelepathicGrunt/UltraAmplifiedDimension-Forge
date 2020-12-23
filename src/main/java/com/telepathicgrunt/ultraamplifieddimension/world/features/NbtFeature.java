@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
@@ -57,7 +56,7 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
         }
 
         TemplateManager templatemanager = world.getWorld().getServer().getTemplateManager();
-        ResourceLocation nbtRL = GeneralUtils.getRandomResourceLocation(config.nbtResourcelocationsAndWeights);
+        ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights);
         Template template = templatemanager.getTemplate(nbtRL);
 
         if (template == null) {
@@ -65,9 +64,9 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
             return false;
         }
 
-        BlockPos offset = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
-        placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(offset).setIgnoreEntities(false);
-        template.func_237152_b_(world, blockpos$Mutable.setPos(position).move(-offset.getX(), 0, -offset.getZ()), placementsettings, rand);
+        BlockPos halfLengths = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
+        placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(halfLengths).setIgnoreEntities(false);
+        template.func_237152_b_(world, blockpos$Mutable.setPos(position).move(-halfLengths.getX(), 0, -halfLengths.getZ()), placementsettings, rand);
 
         return true;
     }

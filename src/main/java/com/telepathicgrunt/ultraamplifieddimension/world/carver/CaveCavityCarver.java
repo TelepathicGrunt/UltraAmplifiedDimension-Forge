@@ -107,14 +107,14 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
 		}
 
-		int i = (this.func_222704_c() * 2 - 1) * 16;
+		int maxIterations = (this.func_222704_c() * 2 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
 		double height = random.nextInt(random.nextInt(2) + 1) + 34;
 		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 1F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
 		float widthHeightBase = (random.nextFloat() + random.nextFloat()) / 16; // width And Height Modifier
-		this.carveCavity(region, biomeBlockPos, random, seaLevel, originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, i, random.nextDouble() + 20D, mask);
+		this.carveCavity(region, biomeBlockPos, random, seaLevel, originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, maxIterations, random.nextDouble() + 20D, mask);
 		return true;
 	}
 
@@ -152,6 +152,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 
 
 	protected void carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+
 		double xPos = mainChunkX * 16 + 8;
 		double zPos = mainChunkZ * 16 + 8;
 		double multipliedXZBound = placementXZBound * 2.0D;
@@ -183,9 +184,9 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 						double xzSquaredModified = xSquaringModified * xSquaringModified + zSquaringModified * zSquaringModified;
 
 						if (xzSquaredModified < 1.0D) {
-//							if (yMax < yMin) {
-//								continue;
-//							}
+							if (yMax < yMin) {
+								continue;
+							}
 
 							blockpos$Mutable.setPos(x, 60, z);
 							ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biomeBlockPos.apply(blockpos$Mutable)) : null;
@@ -198,6 +199,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 							secondaryFloorBlockstate = LAVA_FLOOR_BIOME_MAP.get(biomeIDString);
 
 							for (int y = yMax; y > yMin; y--) {
+
+								// Skip already carved spaces
+								if( y < 60 && mask.get(xInChunk | zInChunk << 4 | y << 8)){
+									continue;
+								}
+
 								// sets a trial and error value that widens base of pillar and makes paths
 								// through lava that look good
 								double yPillarModifier = y;
@@ -305,8 +312,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 											world.setBlockState(blockpos$Mutabledown, replacementBlock, false);
 										}
 									}
-									else if (!mask.get(xInChunk | zInChunk << 4 | y << 8) &&
-											 (this.canCarveBlock(currentBlockstate, aboveBlockstate) || CAN_REPLACE_MAP.containsKey(currentBlockstate)))
+									else if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || CAN_REPLACE_MAP.containsKey(currentBlockstate))
 									{
 
 										if (y < 11) {

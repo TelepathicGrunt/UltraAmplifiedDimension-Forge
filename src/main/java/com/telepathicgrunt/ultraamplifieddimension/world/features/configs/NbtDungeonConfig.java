@@ -5,7 +5,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.NbtFeature;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.template.IStructureProcessorType;
 import net.minecraft.world.gen.feature.template.RuleStructureProcessor;
@@ -25,7 +27,7 @@ public class NbtDungeonConfig implements IFeatureConfig {
             Codec.intRange(0, 100).fieldOf("max_num_of_chests").orElse(2).forGetter(nbtFeatureConfig -> nbtFeatureConfig.maxNumOfChests),
             ResourceLocation.CODEC.fieldOf("chest_loottable_resourcelocation").forGetter(nbtDungeonConfig -> nbtDungeonConfig.chestResourceLocation),
             Codec.mapPair(ResourceLocation.CODEC.fieldOf("resourcelocation"), Codec.INT.fieldOf("weight").orElse(1)).codec().listOf().fieldOf("dungeon_nbt_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.nbtResourcelocationsAndWeights),
-            Codec.mapPair(ResourceLocation.CODEC.fieldOf("resourcelocation"), Codec.INT.fieldOf("weight").orElse(1)).codec().listOf().fieldOf("spawner_mob_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.spawnerResourcelocationsAndWeights),
+            Codec.mapPair(Registry.ENTITY_TYPE.fieldOf("resourcelocation"), Codec.INT.fieldOf("weight").orElse(1)).codec().listOf().fieldOf("spawner_mob_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.spawnerResourcelocationsAndWeights),
             IStructureProcessorType.field_242922_m.fieldOf("processors").forGetter(nbtDungeonConfig -> nbtDungeonConfig.processor)
     ).apply(configInstance, NbtDungeonConfig::new))
             .comapFlatMap((nbtDungeonConfig) -> nbtDungeonConfig.maxAirSpace <= nbtDungeonConfig.minAirSpace ?
@@ -37,13 +39,13 @@ public class NbtDungeonConfig implements IFeatureConfig {
     public final int maxNumOfChests;
     public final ResourceLocation chestResourceLocation;
     public final List<Pair<ResourceLocation, Integer>> nbtResourcelocationsAndWeights;
-    public final List<Pair<ResourceLocation, Integer>> spawnerResourcelocationsAndWeights;
+    public final List<Pair<EntityType<?>, Integer>> spawnerResourcelocationsAndWeights;
     public final Supplier<StructureProcessorList> processor;
 
     public NbtDungeonConfig(boolean replaceAir, int minAirSpace, int maxAirSpace,
                             int maxNumOfChests, ResourceLocation chestResourceLocation,
                             List<Pair<ResourceLocation, Integer>> nbtResourcelocationsAndWeights,
-                            List<Pair<ResourceLocation, Integer>> spawnerResourcelocationsAndWeights,
+                            List<Pair<EntityType<?>, Integer>> spawnerResourcelocationsAndWeights,
                             Supplier<StructureProcessorList> processor)
     {
         this.replaceAir = replaceAir;

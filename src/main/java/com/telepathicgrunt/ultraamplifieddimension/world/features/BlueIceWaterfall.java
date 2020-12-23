@@ -26,7 +26,6 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
 
         //creates a waterfall of blue ice that has a puddle at bottom
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
-
         IChunk cachedChunk = world.getChunk(blockposMutable);
 
         if (!cachedChunk.getBlockState(blockposMutable.move(Direction.UP)).isSolid()) {

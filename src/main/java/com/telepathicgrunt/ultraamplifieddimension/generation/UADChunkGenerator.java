@@ -71,30 +71,31 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                         .apply(scalingSettingsInstance, ScalingSettings::new));
 
     public static final Codec<NoiseSettings> UAD_NOISE_SETTINGS_CODEC = RecordCodecBuilder.create((noiseSettingsInstance) ->
-            noiseSettingsInstance.group(Codec.intRange(0, 256).fieldOf("height")
-                    .forGetter(NoiseSettings::func_236169_a_), UAD_SCALING_CODEC.fieldOf("sampling")
-                    .forGetter(NoiseSettings::func_236171_b_), SlideSettings.field_236182_a_.fieldOf("top_slide")
-                    .forGetter(NoiseSettings::func_236172_c_), SlideSettings.field_236182_a_.fieldOf("bottom_slide")
-                    .forGetter(NoiseSettings::func_236173_d_), Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_horizontal")
-                    .forGetter(NoiseSettings::func_236174_e_), Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_vertical")
-                    .forGetter(NoiseSettings::func_236175_f_), Codec.DOUBLE.fieldOf("density_factor")
-                    .forGetter(NoiseSettings::func_236176_g_), Codec.DOUBLE.fieldOf("density_offset")
-                    .forGetter(NoiseSettings::func_236177_h_), Codec.BOOL.fieldOf("simplex_surface_noise")
-                    .forGetter(NoiseSettings::func_236178_i_), Codec.BOOL.optionalFieldOf("random_density_offset", Boolean.FALSE, Lifecycle.experimental())
-                    .forGetter(NoiseSettings::func_236179_j_), Codec.BOOL.optionalFieldOf("island_noise_override", Boolean.FALSE, Lifecycle.experimental())
-                    .forGetter(NoiseSettings::func_236180_k_), Codec.BOOL.optionalFieldOf("amplified", Boolean.FALSE, Lifecycle.experimental()).forGetter(NoiseSettings::func_236181_l_))
+            noiseSettingsInstance.group(
+                    Codec.intRange(0, 256).fieldOf("height").forGetter(NoiseSettings::func_236169_a_),
+                    UAD_SCALING_CODEC.fieldOf("sampling").forGetter(NoiseSettings::func_236171_b_),
+                    SlideSettings.field_236182_a_.fieldOf("top_slide").forGetter(NoiseSettings::func_236172_c_),
+                    SlideSettings.field_236182_a_.fieldOf("bottom_slide").forGetter(NoiseSettings::func_236173_d_),
+                    Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_horizontal").forGetter(NoiseSettings::func_236174_e_),
+                    Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_vertical").forGetter(NoiseSettings::func_236175_f_),
+                    Codec.DOUBLE.fieldOf("density_factor").forGetter(NoiseSettings::func_236176_g_),
+                    Codec.DOUBLE.fieldOf("density_offset").forGetter(NoiseSettings::func_236177_h_),
+                    Codec.BOOL.fieldOf("simplex_surface_noise").forGetter(NoiseSettings::func_236178_i_),
+                    Codec.BOOL.optionalFieldOf("random_density_offset", Boolean.FALSE, Lifecycle.experimental()).forGetter(NoiseSettings::func_236179_j_),
+                    Codec.BOOL.optionalFieldOf("island_noise_override", Boolean.FALSE, Lifecycle.experimental()).forGetter(NoiseSettings::func_236180_k_),
+                    Codec.BOOL.optionalFieldOf("amplified", Boolean.FALSE, Lifecycle.experimental()).forGetter(NoiseSettings::func_236181_l_))
                         .apply(noiseSettingsInstance, NoiseSettings::new));
 
     public static final Codec<DimensionSettings> UAD_DIMENSION_SETTINGS_CODEC = RecordCodecBuilder.create((dimensionSettingsInstance) ->
-            dimensionSettingsInstance.group(DimensionStructuresSettings.field_236190_a_.fieldOf("structures")
-                    .forGetter(DimensionSettings::getStructures), UAD_NOISE_SETTINGS_CODEC.fieldOf("noise")
-                    .forGetter(DimensionSettings::getNoise), BlockState.CODEC.fieldOf("default_block")
-                    .forGetter(DimensionSettings::getDefaultBlock), BlockState.CODEC.fieldOf("default_fluid")
-                    .forGetter(DimensionSettings::getDefaultFluid), Codec.intRange(-20, 276).fieldOf("bedrock_roof_position")
-                    .forGetter(DimensionSettings::func_236117_e_), Codec.intRange(-20, 276).fieldOf("bedrock_floor_position")
-                    .forGetter(DimensionSettings::func_236118_f_), Codec.intRange(0, 255).fieldOf("sea_level")
-                    .forGetter(DimensionSettings::func_236119_g_), Codec.BOOL.fieldOf("disable_mob_generation")
-                    .forGetter(dimensionSettings -> ((DimensionSettingsInvoker)(Object)dimensionSettings).invokefunc_236120_h_()))
+            dimensionSettingsInstance.group(
+                    DimensionStructuresSettings.field_236190_a_.fieldOf("structures").forGetter(DimensionSettings::getStructures),
+                    UAD_NOISE_SETTINGS_CODEC.fieldOf("noise").forGetter(DimensionSettings::getNoise),
+                    BlockState.CODEC.fieldOf("default_block").forGetter(DimensionSettings::getDefaultBlock),
+                    BlockState.CODEC.fieldOf("default_fluid").forGetter(DimensionSettings::getDefaultFluid),
+                    Codec.intRange(-1000, 1000).fieldOf("bedrock_roof_position").forGetter(DimensionSettings::func_236117_e_),
+                    Codec.intRange(-1000, 1000).fieldOf("bedrock_floor_position").forGetter(DimensionSettings::func_236118_f_),
+                    Codec.intRange(-1000, 1000).fieldOf("sea_level").forGetter(DimensionSettings::func_236119_g_),
+                    Codec.BOOL.fieldOf("disable_mob_generation").forGetter(dimensionSettings -> ((DimensionSettingsInvoker)(Object)dimensionSettings).invokefunc_236120_h_()))
                         .apply(dimensionSettingsInstance, DimensionSettingsInvoker::invokeinit));
 
 

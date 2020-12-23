@@ -10,6 +10,16 @@
     "type": "ultra_amplified_dimension:terrain",
     "settings": 
     {
+      "default_block": {
+        "Name": "minecraft:stone"
+      },
+      "default_fluid": {
+        "Properties": {
+          "level": "0"
+        },
+        "Name": "minecraft:water"
+      },
+      
       "bedrock_roof_position": -10,
       "bedrock_floor_position": 0,
       "sea_level": 75,
@@ -37,15 +47,6 @@
           "xz_factor": 684,
           "y_factor": 68400
         }
-      },
-      "default_block": {
-        "Name": "minecraft:stone"
-      },
-      "default_fluid": {
-        "Properties": {
-          "level": "0"
-        },
-        "Name": "minecraft:water"
       },
 
       "disable_mob_generation": false,

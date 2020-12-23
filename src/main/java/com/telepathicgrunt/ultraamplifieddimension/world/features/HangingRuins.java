@@ -36,30 +36,24 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 			return false;
 		}
 
-		Rotation rot = Rotation.values()[rand.nextInt(Rotation.values().length)];
-		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable().setPos(position);
-		BlockPos.Mutable offset = new BlockPos.Mutable();
+		BlockPos.Mutable mutableMain = new BlockPos.Mutable().setPos(position);
+		BlockPos.Mutable mutableTemp = new BlockPos.Mutable();
 
 		//move through roots to the actual bottom of ledges
-		BlockState currentBlock = world.getBlockState(blockpos$Mutable);
+		BlockState currentBlock = world.getBlockState(mutableMain);
 		while((BlockTags.LOGS.contains(currentBlock.getBlock()) || !currentBlock.isSolid()) && 
-			blockpos$Mutable.getY() < chunkGenerator.getMaxBuildHeight())
+			mutableMain.getY() < chunkGenerator.getMaxBuildHeight())
 		{
-		    blockpos$Mutable.move(Direction.UP);
-		    currentBlock = world.getBlockState(blockpos$Mutable);
+		    mutableMain.move(Direction.UP);
+		    currentBlock = world.getBlockState(mutableMain);
 		}
-		
-		if(blockpos$Mutable.getY() == chunkGenerator.getMaxBuildHeight()) return false;
 		
 		//makes sure there is enough solid blocks on ledge to hold this feature.
 		for (int x = -5; x <= 5; x++) {
 			for (int z = -5; z <= 5; z++) {
 				if (Math.abs(x * z) > 9 && Math.abs(x * z) < 20) {
-					//match rotation of structure as it rotates around 0, 0 I think.
-					//The -4 is to make the check rotate the same way as structure and 
-					//then we do +4 to get the actual position again.
-					offset.setPos(x - 4, 0, z - 4).setPos(offset.rotate(rot));
-					if (!world.getBlockState(blockpos$Mutable.add(-offset.getX() + 4, 1, -offset.getZ() + 4)).isSolid()) {
+					mutableTemp.setPos(mutableMain).move(x, 1, z);
+					if (!world.getBlockState(mutableTemp).isSolid()) {
 						return false;
 					}
 				}
@@ -67,8 +61,8 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 		}
 
 		//makes sure top won't be exposed to air
-		if (shouldMoveDownOne(world, blockpos$Mutable, offset, rot)) {
-			blockpos$Mutable.move(Direction.DOWN);
+		if (shouldMoveDownOne(world, mutableMain)) {
+			mutableMain.move(Direction.DOWN);
 		}
 
 		//UltraAmplified.LOGGER.debug("Hanging Ruins | " + position.getX() + " " + position.getY() + " "+position.getZ());
@@ -80,25 +74,29 @@ public class HangingRuins extends Feature<NoFeatureConfig>
 			return false;
 		}
 
-		PlacementSettings placementsettings = 
-			(new PlacementSettings())
-				.setMirror(Mirror.NONE)
-				.setRotation(rot)
-				.setIgnoreEntities(false)
-				.setChunk(null);
+		// enough space for ruins.
+		if(mutableMain.getY() == chunkGenerator.getMaxBuildHeight() ||
+				!world.getBlockState(mutableMain.down(template.getSize().getY())).isAir() ||
+				!world.getBlockState(mutableMain.down(template.getSize().getY() + 5)).isAir())
+		{
+			return false;
+		}
 
-		template.func_237152_b_(world, blockpos$Mutable.move(4, -8, 4), placementsettings, rand);
+		BlockPos halfLengths = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
+		PlacementSettings placementsettings = new PlacementSettings().setCenterOffset(halfLengths).setRotation(Rotation.randomRotation(rand)).setIgnoreEntities(false);
+		template.func_237152_b_(world, mutableMain.move(-halfLengths.getX(), -8, -halfLengths.getZ()), placementsettings, rand);
 		return true;
 	}
 
 
-	private boolean shouldMoveDownOne(IWorld world, BlockPos.Mutable blockpos$Mutable, BlockPos.Mutable offset, Rotation rot) {
+	private boolean shouldMoveDownOne(IWorld world, BlockPos.Mutable mutableMain) {
+		BlockPos.Mutable mutableTemp = new BlockPos.Mutable();
 		//if we are on a 1 block thick ledge at any point, move down one so ruins ceiling isn't exposed 
 		for (int x = -5; x <= 5; x++) {
 			for (int z = -5; z <= 5; z++) {
-				offset.setPos(x - 4, 0, z - 4).setPos(offset.rotate(rot));
-				if (Math.abs(x * z) < 20 && !world.getBlockState(blockpos$Mutable.add(-offset.getX() + 4, 2, -offset.getZ() + 4)).isSolid()) {
-					//world.setBlockState(blockpos$Mutable.add(-offset.getX() + 4, 2, -offset.getZ() + 4), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
+				mutableTemp.setPos(mutableMain).move(x, 2, z);
+				if (Math.abs(x * z) < 20 && !world.getBlockState(mutableTemp).isSolid()) {
+					//world.setBlockState(mutableTemp, Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
 					return true;
 				}
 			}

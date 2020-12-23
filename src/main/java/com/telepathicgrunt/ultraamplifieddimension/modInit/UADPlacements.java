@@ -17,6 +17,7 @@ public class UADPlacements {
     public static final RegistryObject<Placement<LedgeSurfacePlacerConfig>> LEDGE_SURFACE_PLACER = createDecorator("ledge_surface_placer", () -> new LedgeSurfacePlacer(LedgeSurfacePlacerConfig.CODEC));
     public static final RegistryObject<Placement<YOffsetPlacerConfig>> Y_OFFSET_PLACER = createDecorator("y_offset_placer", () -> new OffsetPlacer(YOffsetPlacerConfig.CODEC));
     public static final RegistryObject<Placement<CountPlacerConfig>> COUNT_PLACER = createDecorator("count_placer", () -> new CountPlacer(CountPlacerConfig.CODEC));
+    public static final RegistryObject<Placement<RangeValidationPlacerConfig>> RANGE_VALIDATION_PLACER = createDecorator("range_validation_placer", () -> new RangeValidationPlacer(RangeValidationPlacerConfig.CODEC));
 
     public static <D extends Placement<?>> RegistryObject<D> createDecorator(String name, Supplier<? extends D> decorator) {
         return DECORATORS.register(name, decorator);

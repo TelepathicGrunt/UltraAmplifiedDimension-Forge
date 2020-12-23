@@ -1,0 +1,67 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "outside_state": {
+                    "Name": "minecraft:slime_block"
+                },
+                "inside_state": {
+                    "Name": "minecraft:slime_block"
+                },
+                "place_outside_state_often": true
+              },
+              "type": "ultra_amplified_dimension:pond"
+            },
+            "decorator": {
+              "config": {
+                "max_Y": 170,
+                "min_Y": 75
+              },
+              "type": "ultra_amplified_dimension:range_validation_placer"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {
+            "outer": {
+              "config": {},
+              "type": "minecraft:heightmap"
+            },
+            "inner": {
+              "config": {
+                "yoffset": -1,
+                "yspread": 1
+              },
+              "type": "ultra_amplified_dimension:y_offset_placer"
+            }
+          },
+          "type": "minecraft:decorated"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "outer": {
+          "config": {
+            "count": 1,
+            "extra_chance": 0,
+            "extra_count": 0
+          },
+          "type": "minecraft:count_extra"
+        },
+        "inner": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    }
+  },
+  "type": "minecraft:decorated"
+}

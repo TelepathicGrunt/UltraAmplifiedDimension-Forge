@@ -10,6 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 
@@ -22,14 +23,13 @@ public class BigCactus extends Feature<HeightConfig> {
         super(configFactory);
     }
 
-    //private final int height = 9;
-
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, HeightConfig betterCactusConfig) {
-        //randomly set this cactus to a random spot. (thus passed in position must be the corner of the 4 loaded chunks)
-        BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+        BlockPos.Mutable blockpos = new BlockPos.Mutable().setPos(position);
+        IChunk cachedChunk = world.getChunk(blockpos);
 
-        if (world.isAirBlock(blockpos) && world.getBlockState(blockpos.down()).isIn(BlockTags.SAND)) {
+        if (cachedChunk.getBlockState(blockpos).isAir() && cachedChunk.getBlockState(blockpos.move(Direction.DOWN)).isIn(BlockTags.SAND)) {
+            blockpos.move(Direction.UP); // Move back to start pos
 
             //gets height with some variations
             //then gets left and right side between 2 and maximum height - 3
@@ -40,31 +40,33 @@ public class BigCactus extends Feature<HeightConfig> {
             Direction cactusFacing = Direction.byHorizontalIndex(rand.nextInt(4));
 
             //create cactus from ground up
-            for (int currentHeight = 0; currentHeight < maxHeight && world.isAirBlock(blockpos.up(currentHeight)); currentHeight++) {
-                if (blockpos.up(currentHeight).getY() <= 254 && (currentHeight == frontSideHeight || currentHeight == backSideHeight)) {
+            for (int currentHeight = 0; currentHeight < maxHeight && cachedChunk.getBlockState(blockpos).isAir(); currentHeight++) {
+                if (blockpos.getY() <= 254 && (currentHeight == frontSideHeight || currentHeight == backSideHeight)) {
                     //will make at least one branch
 
                     //finds what the center should be
                     if (frontSideHeight == backSideHeight) {
-                        world.setBlockState(blockpos.up(currentHeight), UADBlocks.BIG_CACTUS_BODY_BLOCK.get().getDefaultState().with(BigCactusBodyBlock.FACING, cactusFacing), 18);
+                        cachedChunk.setBlockState(blockpos, UADBlocks.BIG_CACTUS_BODY_BLOCK.get().getDefaultState().with(BigCactusBodyBlock.FACING, cactusFacing), false);
                     }
                     else {
-                        world.setBlockState(blockpos.up(currentHeight), UADBlocks.BIG_CACTUS_CORNER_BLOCK.get().getDefaultState().with(BigCactusCornerBlock.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), 18);
+                        cachedChunk.setBlockState(blockpos, UADBlocks.BIG_CACTUS_CORNER_BLOCK.get().getDefaultState().with(BigCactusCornerBlock.FACING, currentHeight == frontSideHeight ? cactusFacing.getOpposite() : cactusFacing), false);
                     }
 
                     //create the branches off of cactus
                     if (currentHeight == frontSideHeight) {
-                        createBranch(world, blockpos.up(currentHeight), cactusFacing, rand.nextInt(maxHeight - frontSideHeight - 2) + 2);
+                        createBranch(world, chunkGenerator, blockpos, cactusFacing, rand.nextInt(maxHeight - frontSideHeight - 2) + 2);
                     }
                     if (currentHeight == backSideHeight) {
-                        createBranch(world, blockpos.up(currentHeight), cactusFacing.getOpposite(), rand.nextInt(maxHeight - backSideHeight - 2) + 2);
+                        createBranch(world, chunkGenerator, blockpos, cactusFacing.getOpposite(), rand.nextInt(maxHeight - backSideHeight - 2) + 2);
                     }
 
                 }
                 else {
                     //places normal vertical cactus
-                    world.setBlockState(blockpos.up(currentHeight), UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, Direction.UP), 18);
+                    cachedChunk.setBlockState(blockpos, UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, Direction.UP), false);
                 }
+
+                blockpos.move(Direction.UP);
             }
 
         }
@@ -81,35 +83,37 @@ public class BigCactus extends Feature<HeightConfig> {
      * @param position        - position of center of cactus that branch is coming off of
      * @param branchDirection - direction that the branch will go
      */
-    private void createBranch(ISeedReader world, BlockPos position, Direction branchDirection, int maxHeightUp) {
-
+    private void createBranch(ISeedReader world, ChunkGenerator chunkGenerator, BlockPos position, Direction branchDirection, int maxHeightUp) {
         //horizontal part of branch first
-        position = position.offset(branchDirection);
-        if (world.isAirBlock(position)) {
-            world.setBlockState(position, UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, branchDirection), 18);
+        BlockPos.Mutable blockpos = new BlockPos.Mutable().setPos(position).move(branchDirection);
+        if (world.isAirBlock(blockpos)) {
+            world.setBlockState(blockpos, UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, branchDirection), 3);
         }
         else {
             return;
         }
 
         //corner
-        position = position.offset(branchDirection);
-        if (world.isAirBlock(position)) {
-            world.setBlockState(position, UADBlocks.BIG_CACTUS_CORNER_BLOCK.get().getDefaultState().with(BigCactusCornerBlock.FACING, branchDirection), 18);
+        blockpos.move(branchDirection);
+        if (world.isAirBlock(blockpos)) {
+            world.setBlockState(blockpos, UADBlocks.BIG_CACTUS_CORNER_BLOCK.get().getDefaultState().with(BigCactusCornerBlock.FACING, branchDirection), 3);
         }
         else {
             return;
         }
 
         //upward part of branch
-        for (int currentHeight = 1; currentHeight < maxHeightUp && position.up(currentHeight).getY() <= world.getWorld().func_234938_ad_(); currentHeight++) {
-            if (world.isAirBlock(position.up(currentHeight))) {
-                world.setBlockState(position.up(currentHeight), UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, Direction.UP), 18);
+        blockpos.move(Direction.UP);
+        IChunk cachedChunk = world.getChunk(blockpos);
+        for (int currentHeight = 1; currentHeight < maxHeightUp && blockpos.getY() <= chunkGenerator.getMaxBuildHeight(); currentHeight++) {
+            if (cachedChunk.getBlockState(blockpos).isAir()) {
+                cachedChunk.setBlockState(blockpos, UADBlocks.BIG_CACTUS_MAIN_BLOCK.get().getDefaultState().with(BigCactusMainBlock.FACING, Direction.UP), false);
 
             }
             else {
                 return;
             }
+            blockpos.move(Direction.UP);
         }
 
     }

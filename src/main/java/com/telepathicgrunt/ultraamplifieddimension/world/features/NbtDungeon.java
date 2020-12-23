@@ -11,10 +11,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.IClearable;
-import net.minecraft.loot.LootTables;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -34,7 +31,6 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 
 import java.util.Iterator;
@@ -50,19 +46,30 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos position, NbtDungeonConfig config) {
 
-        ResourceLocation nbtRL = GeneralUtils.getRandomResourceLocation(config.nbtResourcelocationsAndWeights);
+        ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights);
 
         TemplateManager structureManager = world.getWorld().getStructureTemplateManager();
         Template template = structureManager.getTemplateDefaulted(nbtRL);
+        Rotation rotation = Rotation.randomRotation(random);
 
-        BlockPos offset = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
+        // Rotated blockpos for the nbt's sizes to be used later. Ignore Y
+        BlockPos fullLengths = new BlockPos(
+                Math.abs(template.getSize().rotate(rotation).getX()),
+                0,
+                Math.abs(template.getSize().rotate(rotation).getZ()));
+
+        BlockPos halfLengths = new BlockPos(
+                fullLengths.getX() / 2,
+                0,
+                fullLengths.getZ() / 2);
+
         BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(position);
         IChunk cachedChunk = world.getChunk(mutable);
 
-        int xMin = -offset.getX() + 1;
-        int xMax = offset.getX() - 1;
-        int zMin = -offset.getZ() + 1;
-        int zMax = offset.getZ() - 1;
+        int xMin = -halfLengths.getX() + 1;
+        int xMax = halfLengths.getX() - 1;
+        int zMin = -halfLengths.getZ() + 1;
+        int zMax = halfLengths.getZ() - 1;
         int validOpenings = 0;
         int ceilingOpenings = 0;
         int ceiling = template.getSize().getY();
@@ -104,29 +111,29 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
 
         // Check if we meet minimum for open space.
         if (validOpenings >= config.minAirSpace) {
-            UltraAmplifiedDimension.LOGGER.log(Level.INFO, nbtRL + " at X: "+position.getX() +", "+position.getY()+", "+position.getZ());
-            PlacementSettings placementsettings = (new PlacementSettings()).setRotation(Rotation.randomRotation(random)).setCenterOffset(offset).setIgnoreEntities(false);
+            //UltraAmplifiedDimension.LOGGER.log(Level.INFO, nbtRL + " at X: "+position.getX() +", "+position.getY()+", "+position.getZ());
+            PlacementSettings placementsettings = (new PlacementSettings()).setRotation(rotation).setCenterOffset(halfLengths).setIgnoreEntities(false);
             config.processor.get().func_242919_a().forEach(placementsettings::addProcessor); // add all processors
-            addBlocksToWorld(template, world, mutable.setPos(position).move(-offset.getX(), -1, -offset.getZ()), placementsettings, 2, random, config);
+            addBlocksToWorld(template, world, mutable.setPos(position).move(-halfLengths.getX(), -1, -halfLengths.getZ()), placementsettings, 2, random, config);
 
             // Add chests that are wall based
             for(int currentChestCount = 0; currentChestCount < config.maxNumOfChests; ++currentChestCount) {
-                for (int currentChestAttempt = 0; currentChestAttempt < template.getSize().getX() + template.getSize().getZ(); ++currentChestAttempt) {
+                for (int currentChestAttempt = 0; currentChestAttempt < fullLengths.getX() + fullLengths.getZ(); ++currentChestAttempt) {
                     if (currentChestCount == config.maxNumOfChests) {
                         return true; // Early exit
                     }
 
                     mutable.setPos(position).move(
-                            random.nextInt(Math.max(template.getSize().getX() - 2, 1)) - offset.getX() + 1,
-                            random.nextInt(Math.max(template.getSize().getY() - 1, 1)),
-                            random.nextInt(Math.max(template.getSize().getZ() - 2, 1)) - offset.getZ() + 1);
+                            random.nextInt(Math.max(fullLengths.getX() - 2, 1)) - halfLengths.getX() + 1,
+                            random.nextInt(Math.max(fullLengths.getY() - 1, 1)),
+                            random.nextInt(Math.max(fullLengths.getZ() - 2, 1)) - halfLengths.getZ() + 1);
 
                     if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
                         cachedChunk = world.getChunk(mutable);
 
-                    if (cachedChunk.getBlockState(mutable).isAir()){
-                        if(cachedChunk.getBlockState(mutable.move(Direction.DOWN)).isSolid()){
-                            mutable.move(Direction.UP);
+                    // Use world here due to Block Entity caching weirdness
+                    if (world.getBlockState(mutable).isAir()){
+                        if(cachedChunk.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable.move(Direction.UP), Direction.DOWN)){
 
                             boolean validSpot = false;
                             for(Direction direction : Direction.Plane.HORIZONTAL){
@@ -231,16 +238,13 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                         blockentity1.rotate(placementIn.getRotation());
 
                                         if (blockentity1 instanceof MobSpawnerTileEntity) {
-                                            ResourceLocation entityRL = GeneralUtils.getRandomResourceLocation(config.spawnerResourcelocationsAndWeights);
+                                            EntityType<?> entity = GeneralUtils.getRandomEntry(config.spawnerResourcelocationsAndWeights);
 
-                                            if(entityRL != null){
-                                                EntityType<?> entity = ForgeRegistries.ENTITIES.getValue(entityRL);
-                                                if(entity != null){
-                                                    ((MobSpawnerTileEntity)blockentity1).getSpawnerBaseLogic().setEntityType(entity);
-                                                }
-                                                else{
-                                                    UltraAmplifiedDimension.LOGGER.log(Level.WARN, "EntityType does not exist in registry! : " + entityRL);
-                                                }
+                                            if(entity != null){
+                                                ((MobSpawnerTileEntity)blockentity1).getSpawnerBaseLogic().setEntityType(entity);
+                                            }
+                                            else{
+                                                UltraAmplifiedDimension.LOGGER.log(Level.WARN, "EntityType in a dungeon does not exist in registry!");
                                             }
                                         }
                                         else if(blockentity1 instanceof LockableLootTileEntity){
@@ -264,8 +268,6 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                 }
 
                 boolean flag = false;
-                Direction[] adirection = new Direction[]{Direction.UP, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
-
                 while (flag && !list1.isEmpty()) {
                     flag = false;
                     Iterator<BlockPos> iterator = list1.iterator();
@@ -275,8 +277,10 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         BlockPos blockpos3 = blockpos2;
                         FluidState ifluidstate2 = world.getFluidState(blockpos2);
 
-                        for (int k1 = 0; k1 < adirection.length && !ifluidstate2.isSource(); ++k1) {
-                            BlockPos blockpos1 = blockpos3.offset(adirection[k1]);
+                        for (int k1 = 1; k1 < 6 && !ifluidstate2.isSource(); ++k1) {
+                            // Skip down direction
+                            Direction direction = Direction.byIndex(k1);
+                            BlockPos blockpos1 = blockpos3.offset(direction);
                             FluidState ifluidstate1 = world.getFluidState(blockpos1);
                             if (ifluidstate1.getActualHeight(world, blockpos1) > ifluidstate2.getActualHeight(world, blockpos3) || ifluidstate1.isSource() && !ifluidstate2.isSource()) {
                                 ifluidstate2 = ifluidstate1;
