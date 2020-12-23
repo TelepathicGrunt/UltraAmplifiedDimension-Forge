@@ -27,6 +27,19 @@
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           }
+        },
+        {
+          "output_state": {
+            "Name": "minecraft:orange_terracotta"
+          },
+          "input_predicate": {
+            "block": "minecraft:smooth_red_sandstone",
+            "probability": 0.8,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
         }
       ],
       "processor_type": "minecraft:rule"

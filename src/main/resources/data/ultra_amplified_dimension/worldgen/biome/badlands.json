@@ -35,7 +35,11 @@
         "ultra_amplified_dimension:ores/ellipsoid_pocket",
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
-    [],
+    [
+        "ultra_amplified_dimension:ponds/surface_slime",
+        "ultra_amplified_dimension:ponds/underground_water_badlands",
+        "ultra_amplified_dimension:ponds/underground_lava"
+    ],
     [
         "ultra_amplified_dimension:columns/vertical_badlands",
         "ultra_amplified_dimension:columns/ramp_badlands",
@@ -44,9 +48,13 @@
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
+        "ultra_amplified_dimension:dungeons/badlands_high",
+        "ultra_amplified_dimension:dungeons/badlands_middle",
+        "ultra_amplified_dimension:dungeons/badlands_bottom"
+    ],
+    [
         "ultra_amplified_dimension:ministructures/hanging_ruins"
     ],
-    [],
     [],
     [
         "ultra_amplified_dimension:ores/ellipsoid_red_sand_badlands",
@@ -78,9 +86,10 @@
       "ultra_amplified_dimension:spring_lava_narrow_range"
     ],
     [
+      "ultra_amplified_dimension:vegetation/big_cactus",
+      "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
       "ultra_amplified_dimension:vegetation/patch_grass_badlands",
-      "ultra_amplified_dimension:vegetation/big_cactus",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal"
     ],
@@ -88,7 +97,11 @@
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"
     ]
   ],
-  "starts": [],
+  "starts": [
+    "minecraft:mineshaft_mesa",
+    "minecraft:stronghold",
+    "minecraft:ruined_portal"
+  ],
   "spawners": {
     "monster": [
       {

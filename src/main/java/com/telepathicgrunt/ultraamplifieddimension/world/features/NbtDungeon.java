@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -81,10 +82,10 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                     if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
                         cachedChunk = world.getChunk(mutable);
 
-                    boolean solid = cachedChunk.getBlockState(mutable).getMaterial().isSolid();
+                    BlockState state = cachedChunk.getBlockState(mutable);
 
                     // Floor must be complete
-                    if(!solid){
+                    if(!state.getMaterial().isSolid()){
                         if (y == -1) {
                             return false;
                         }
@@ -92,9 +93,13 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                             ceilingOpenings++;
                         }
                     }
+                    // Dungeons cannot touch fluids
+                    else if(!state.getFluidState().isEmpty()){
+                        return false;
+                    }
 
                     // Check only along wall bottoms for openings
-                    if ((x == xMin || x == xMax || z == zMin || z == zMax) && y == 0 && cachedChunk.getBlockState(mutable).isAir()) {
+                    if ((x == xMin || x == xMax || z == zMin || z == zMax) && y == 0 && state.isAir()) {
                         if(cachedChunk.getBlockState(mutable.move(Direction.UP)).isAir()){
                             validOpenings++;
                         }
@@ -115,61 +120,69 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
             PlacementSettings placementsettings = (new PlacementSettings()).setRotation(rotation).setCenterOffset(halfLengths).setIgnoreEntities(false);
             config.processor.get().func_242919_a().forEach(placementsettings::addProcessor); // add all processors
             addBlocksToWorld(template, world, mutable.setPos(position).move(-halfLengths.getX(), -1, -halfLengths.getZ()), placementsettings, 2, random, config);
-
-            // Add chests that are wall based
-            for(int currentChestCount = 0; currentChestCount < config.maxNumOfChests; ++currentChestCount) {
-                for (int currentChestAttempt = 0; currentChestAttempt < fullLengths.getX() + fullLengths.getZ(); ++currentChestAttempt) {
-                    if (currentChestCount == config.maxNumOfChests) {
-                        return true; // Early exit
-                    }
-
-                    mutable.setPos(position).move(
-                            random.nextInt(Math.max(fullLengths.getX() - 2, 1)) - halfLengths.getX() + 1,
-                            random.nextInt(Math.max(fullLengths.getY() - 1, 1)),
-                            random.nextInt(Math.max(fullLengths.getZ() - 2, 1)) - halfLengths.getZ() + 1);
-
-                    if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
-                        cachedChunk = world.getChunk(mutable);
-
-                    // Use world here due to Block Entity caching weirdness
-                    if (world.getBlockState(mutable).isAir()){
-                        if(cachedChunk.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable.move(Direction.UP), Direction.DOWN)){
-
-                            boolean validSpot = false;
-                            for(Direction direction : Direction.Plane.HORIZONTAL){
-
-                                mutable.move(direction);
-                                if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
-                                    cachedChunk = world.getChunk(mutable);
-
-                                BlockState neightboringState = cachedChunk.getBlockState(mutable);
-
-                                mutable.move(direction.getOpposite());
-                                if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
-                                    cachedChunk = world.getChunk(mutable);
-
-                                if(neightboringState.isSolid() || neightboringState.getBlock() instanceof AbstractChestBlock){
-                                    validSpot = true;
-                                }
-                            }
-
-                            if(validSpot){
-                                world.setBlockState(mutable, StructurePiece.correctFacing(world, mutable, Blocks.CHEST.getDefaultState()), 2);
-                                LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
-                                currentChestCount++;
-                            }
-                        }
-                        else {
-                            mutable.move(Direction.UP);
-                        }
-                    }
-                }
-            }
-
+            spawnChests(world, random, position, config, fullLengths, halfLengths, mutable);
             return true;
         }
 
         return false;
+    }
+
+    private void spawnChests(ISeedReader world, Random random, BlockPos position, NbtDungeonConfig config, BlockPos fullLengths, BlockPos halfLengths, BlockPos.Mutable mutable) {
+        // Add chests that are wall based
+        for(int currentChestCount = 0; currentChestCount < config.maxNumOfChests; ++currentChestCount) {
+            for (int currentChestAttempt = 0; currentChestAttempt < fullLengths.getX() + fullLengths.getZ(); ++currentChestAttempt) {
+                if (currentChestCount == config.maxNumOfChests) {
+                    return; // early exit
+                }
+
+                mutable.setPos(position).move(
+                        random.nextInt(Math.max(fullLengths.getX() - 2, 1)) - halfLengths.getX() + 1,
+                        random.nextInt(Math.max(fullLengths.getY() - 1, 1)),
+                        random.nextInt(Math.max(fullLengths.getZ() - 2, 1)) - halfLengths.getZ() + 1);
+
+                if (world.getBlockState(mutable).isAir()){
+                    if(world.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable.move(Direction.UP), Direction.DOWN)){
+
+                        for(Direction direction : Direction.Plane.HORIZONTAL){
+
+                            mutable.move(direction);
+                            BlockState neightboringState = world.getBlockState(mutable);
+                            mutable.move(direction.getOpposite());
+                            if(neightboringState.getBlock() instanceof AbstractChestBlock){
+                                // Set current chest direction to the side for the double chest connection.
+                                Direction doubleChestDirection = direction.rotateY();
+                                boolean flippedDirections = false;
+                                BlockState blockState = world.getBlockState(mutable.offset(direction));
+
+                                // Face opposite direction if facing wall.
+                                if(blockState.isSolid()){
+                                    doubleChestDirection = doubleChestDirection.getOpposite();
+                                    flippedDirections = true;
+                                }
+
+                                world.setBlockState(mutable, Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.LEFT : ChestType.RIGHT), 2);
+                                LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
+
+                                // Set neighboring chest to face same way too
+                                world.setBlockState(mutable.move(direction), Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.RIGHT : ChestType.LEFT), 2);
+                                currentChestCount++;
+                                break;
+                            }
+                            else if(neightboringState.isSolid()){
+                                // Set chest to face away from wall.
+                                world.setBlockState(mutable, StructurePiece.correctFacing(world, mutable, Blocks.CHEST.getDefaultState()), 2);
+                                LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
+                                currentChestCount++;
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        mutable.move(Direction.UP);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -177,7 +190,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
      */
     public void addBlocksToWorld(Template structure, IServerWorld world, BlockPos pos, PlacementSettings placementIn, int flags, Random random, NbtDungeonConfig config) {
         TemplateInvoker structureAccessor = ((TemplateInvoker) structure);
-        IChunk cachedChunk = world.getChunk(pos);
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
 
         if (!structureAccessor.getBlocks().isEmpty()) {
             List<Template.BlockInfo> list = placementIn.func_237132_a_(structureAccessor.getBlocks(), pos).func_237157_a_();
@@ -185,75 +198,44 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                 MutableBoundingBox mutableboundingbox = placementIn.getBoundingBox();
                 List<BlockPos> list1 = Lists.newArrayListWithCapacity(placementIn.func_204763_l() ? list.size() : 0);
                 List<Pair<BlockPos, CompoundNBT>> list2 = Lists.newArrayListWithCapacity(list.size());
-                int x = Integer.MAX_VALUE;
-                int y = Integer.MAX_VALUE;
-                int z = Integer.MAX_VALUE;
-                int l = Integer.MIN_VALUE;
-                int i1 = Integer.MIN_VALUE;
-                int j1 = Integer.MIN_VALUE;
+                int minX = Integer.MAX_VALUE;
+                int minY = Integer.MAX_VALUE;
+                int minZ = Integer.MAX_VALUE;
+                int maxX = Integer.MIN_VALUE;
+                int maxY = Integer.MIN_VALUE;
+                int maxZ = Integer.MIN_VALUE;
 
                 for (Template.BlockInfo template$blockinfo : Template.func_237145_a_(world, pos, pos, placementIn, list)) {
                     BlockPos blockpos = template$blockinfo.pos;
-                    if(blockpos.getX() >> 4 != cachedChunk.getPos().x || blockpos.getZ() >> 4 != cachedChunk.getPos().z)
-                        cachedChunk = world.getChunk(blockpos);
 
                     if (mutableboundingbox == null || mutableboundingbox.isVecInside(blockpos)) {
-                        FluidState ifluidstate = placementIn.func_204763_l() ? cachedChunk.getFluidState(blockpos) : null;
+                        FluidState ifluidstate = placementIn.func_204763_l() ? world.getFluidState(blockpos) : null;
                         BlockState blockstate = template$blockinfo.state.mirror(placementIn.getMirror()).rotate(placementIn.getRotation());
                         if (template$blockinfo.nbt != null) {
                             TileEntity blockentity = world.getTileEntity(blockpos);
                             IClearable.clearObj(blockentity);
-                            cachedChunk.setBlockState(blockpos, Blocks.BARRIER.getDefaultState(), false);
+                            world.setBlockState(blockpos, Blocks.BARRIER.getDefaultState(), 3);
                         }
 
-                        BlockState originalBlockState = cachedChunk.getBlockState(blockpos);
-                        if (!originalBlockState.isIn(Blocks.SPAWNER) && !(originalBlockState.getBlock() instanceof AbstractChestBlock))
+                        BlockState originalBlockState = world.getBlockState(blockpos);
+                        if (!originalBlockState.hasTileEntity())
                         {
-                            boolean setblock = false;
-                            if((config.replaceAir || originalBlockState.isSolid())) {
-                                cachedChunk.setBlockState(blockpos, blockstate, false);
-                                setblock = true;
-                            }
-                            else if(blockstate.hasTileEntity()){
-                                world.setBlockState(blockpos, blockstate, 2);
-                                setblock = true;
-                            }
+                            // No floating chests or spawners
+                            BlockState aboveState = world.getBlockState(mutable.setPos(blockpos).move(Direction.UP));
+                            if(isNotSpawnerOrChest(aboveState) && (config.replaceAir || originalBlockState.isSolid() || blockstate.hasTileEntity()))
+                            {
+                                world.setBlockState(blockpos, blockstate, 3);
 
-                            if(setblock){
-                                x = Math.min(x, blockpos.getX());
-                                y = Math.min(y, blockpos.getY());
-                                z = Math.min(z, blockpos.getZ());
-                                l = Math.max(l, blockpos.getX());
-                                i1 = Math.max(i1, blockpos.getY());
-                                j1 = Math.max(j1, blockpos.getZ());
+                                minX = Math.min(minX, blockpos.getX());
+                                minY = Math.min(minY, blockpos.getY());
+                                minZ = Math.min(minZ, blockpos.getZ());
+                                maxX = Math.max(maxX, blockpos.getX());
+                                maxY = Math.max(maxY, blockpos.getY());
+                                maxZ = Math.max(maxZ, blockpos.getZ());
                                 list2.add(Pair.of(blockpos, template$blockinfo.nbt));
-                                if (template$blockinfo.nbt != null) {
-                                    TileEntity blockentity1 = world.getTileEntity(blockpos);
-                                    if (blockentity1 != null) {
-                                        template$blockinfo.nbt.putInt("x", blockpos.getX());
-                                        template$blockinfo.nbt.putInt("y", blockpos.getY());
-                                        template$blockinfo.nbt.putInt("z", blockpos.getZ());
-                                        blockentity1.read(template$blockinfo.state, template$blockinfo.nbt);
-                                        blockentity1.mirror(placementIn.getMirror());
-                                        blockentity1.rotate(placementIn.getRotation());
 
-                                        if (blockentity1 instanceof MobSpawnerTileEntity) {
-                                            EntityType<?> entity = GeneralUtils.getRandomEntry(config.spawnerResourcelocationsAndWeights);
-
-                                            if(entity != null){
-                                                ((MobSpawnerTileEntity)blockentity1).getSpawnerBaseLogic().setEntityType(entity);
-                                            }
-                                            else{
-                                                UltraAmplifiedDimension.LOGGER.log(Level.WARN, "EntityType in a dungeon does not exist in registry!");
-                                            }
-                                        }
-                                        else if(blockentity1 instanceof LockableLootTileEntity){
-                                            if(blockstate.isIn(Blocks.CHEST)){
-                                                world.setBlockState(blockpos, StructurePiece.correctFacing(world, blockpos, Blocks.CHEST.getDefaultState()), 2);
-                                            }
-                                            LockableLootTileEntity.setLootTable(world, random, blockpos, config.chestResourceLocation);
-                                        }
-                                    }
+                                if (template$blockinfo.nbt != null){
+                                    setBlockEntity(world, placementIn, random, config, template$blockinfo, blockpos, blockstate);
                                 }
 
                                 if (ifluidstate != null && blockstate.getBlock() instanceof ILiquidContainer) {
@@ -267,76 +249,103 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                     }
                 }
 
-                boolean flag = false;
-                while (flag && !list1.isEmpty()) {
-                    flag = false;
-                    Iterator<BlockPos> iterator = list1.iterator();
+                // fillFluidStates(world, list1);
 
-                    while (iterator.hasNext()) {
-                        BlockPos blockpos2 = iterator.next();
-                        BlockPos blockpos3 = blockpos2;
-                        FluidState ifluidstate2 = world.getFluidState(blockpos2);
-
-                        for (int k1 = 1; k1 < 6 && !ifluidstate2.isSource(); ++k1) {
-                            // Skip down direction
-                            Direction direction = Direction.byIndex(k1);
-                            BlockPos blockpos1 = blockpos3.offset(direction);
-                            FluidState ifluidstate1 = world.getFluidState(blockpos1);
-                            if (ifluidstate1.getActualHeight(world, blockpos1) > ifluidstate2.getActualHeight(world, blockpos3) || ifluidstate1.isSource() && !ifluidstate2.isSource()) {
-                                ifluidstate2 = ifluidstate1;
-                                blockpos3 = blockpos1;
-                            }
-                        }
-
-                        if (ifluidstate2.isSource()) {
-                            BlockState blockstate2 = world.getBlockState(blockpos2);
-                            Block block = blockstate2.getBlock();
-                            if (block instanceof ILiquidContainer) {
-                                ((ILiquidContainer) block).receiveFluid(world, blockpos2, blockstate2, ifluidstate2);
-                                flag = true;
-                                iterator.remove();
-                            }
-                        }
-                    }
-                }
-
-                if (x <= l) {
+                if (minX <= maxX) {
                     if (!placementIn.func_215218_i()) {
-                        VoxelShapePart voxelshapepart = new BitSetVoxelShapePart(l - x + 1, i1 - y + 1, j1 - z + 1);
-
-                        setVoxelShapeParts(world, flags, list2, x, y, z, voxelshapepart);
+                        VoxelShapePart voxelshapepart = new BitSetVoxelShapePart(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
+                        setVoxelShapeParts(world, flags, list2, minX, minY, minZ, voxelshapepart);
                     }
 
                     placeBlocks(world, placementIn, flags, list2);
                 }
 
-
                 if (!placementIn.getIgnoreEntities()) {
-                    structureAccessor.invokeSpawnEntities(world,
-                            pos,
-                            placementIn);
+                    structureAccessor.invokeSpawnEntities(world, pos, placementIn);
                 }
             }
         }
     }
 
+    private void setBlockEntity(IServerWorld world, PlacementSettings placementIn, Random random, NbtDungeonConfig config, Template.BlockInfo template$blockinfo, BlockPos blockpos, BlockState blockstate) {
+        TileEntity blockentity1 = world.getTileEntity(blockpos);
+        if (blockentity1 != null) {
+            template$blockinfo.nbt.putInt("x", blockpos.getX());
+            template$blockinfo.nbt.putInt("y", blockpos.getY());
+            template$blockinfo.nbt.putInt("z", blockpos.getZ());
+            blockentity1.read(template$blockinfo.state, template$blockinfo.nbt);
+            blockentity1.mirror(placementIn.getMirror());
+            blockentity1.rotate(placementIn.getRotation());
+
+            if (blockentity1 instanceof MobSpawnerTileEntity) {
+                EntityType<?> entity = GeneralUtils.getRandomEntry(config.spawnerResourcelocationsAndWeights);
+
+                if(entity != null){
+                    ((MobSpawnerTileEntity)blockentity1).getSpawnerBaseLogic().setEntityType(entity);
+                }
+                else{
+                    UltraAmplifiedDimension.LOGGER.log(Level.WARN, "EntityType in a dungeon does not exist in registry!");
+                }
+            }
+            else if(blockentity1 instanceof LockableLootTileEntity){
+                if(blockstate.isIn(Blocks.CHEST)){
+                    world.setBlockState(blockpos, StructurePiece.correctFacing(world, blockpos, Blocks.CHEST.getDefaultState()), 2);
+                }
+                LockableLootTileEntity.setLootTable(world, random, blockpos, config.chestResourceLocation);
+            }
+        }
+    }
+
+    private void fillFluidStates(IServerWorld world, List<BlockPos> blockPosList) {
+        boolean flag = true;
+        while (flag && !blockPosList.isEmpty()) {
+            flag = false;
+            Iterator<BlockPos> iterator = blockPosList.iterator();
+
+            while (iterator.hasNext()) {
+                BlockPos blockpos2 = iterator.next();
+                BlockPos blockpos3 = blockpos2;
+                FluidState ifluidstate2 = world.getFluidState(blockpos2);
+
+                for (int directionIndex = 1; directionIndex < 6 && !ifluidstate2.isSource(); ++directionIndex) {
+                    // Skip down direction
+                    Direction direction = Direction.byIndex(directionIndex);
+                    BlockPos blockpos1 = blockpos3.offset(direction);
+                    FluidState ifluidstate1 = world.getFluidState(blockpos1);
+                    if (ifluidstate1.getActualHeight(world, blockpos1) > ifluidstate2.getActualHeight(world, blockpos3) ||
+                            ifluidstate1.isSource() && !ifluidstate2.isSource())
+                    {
+                        ifluidstate2 = ifluidstate1;
+                        blockpos3 = blockpos1;
+                    }
+                }
+
+                if (ifluidstate2.isSource()) {
+                    BlockState blockstate2 = world.getBlockState(blockpos2);
+                    Block block = blockstate2.getBlock();
+                    if (block instanceof ILiquidContainer) {
+                        ((ILiquidContainer) block).receiveFluid(world, blockpos2, blockstate2, ifluidstate2);
+                        flag = true;
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isNotSpawnerOrChest(BlockState state){
+        return !state.isIn(Blocks.SPAWNER) && !(state.getBlock() instanceof AbstractChestBlock);
+    }
+
     protected static void placeBlocks(IServerWorld world, PlacementSettings placementIn, int flags, List<Pair<BlockPos, CompoundNBT>> list2) {
-        IChunk cachedChunk = null;
         for (Pair<BlockPos, CompoundNBT> pair : list2) {
             BlockPos blockpos4 = pair.getFirst();
-            if(cachedChunk == null || blockpos4.getX() >> 4 != cachedChunk.getPos().x || blockpos4.getZ() >> 4 != cachedChunk.getPos().z)
-                cachedChunk = world.getChunk(blockpos4);
 
             if (!placementIn.func_215218_i()) {
-                BlockState blockstate1 = cachedChunk.getBlockState(blockpos4);
+                BlockState blockstate1 = world.getBlockState(blockpos4);
                 BlockState blockstate3 = Block.getValidBlockForPosition(blockstate1, world, blockpos4);
                 if (blockstate1 != blockstate3) {
-                    if(blockstate3.hasTileEntity()){
-                        world.setBlockState(blockpos4, blockstate3, 2);
-                    }
-                    else {
-                        cachedChunk.setBlockState(blockpos4, blockstate3, false);
-                    }
+                    world.setBlockState(blockpos4, blockstate3, 3);
                 }
 
                 world.func_230547_a_(blockpos4, blockstate3.getBlock());

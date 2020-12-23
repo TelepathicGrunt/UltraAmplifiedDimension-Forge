@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.decorators;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.Heightmap;
@@ -33,8 +34,8 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
             // Randomizes first pos and set it to heightmap
             int x = rand.nextInt(16) + pos.getX();
             int z = rand.nextInt(16) + pos.getZ();
-            int heightMapY = context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, x, z);
-            boolean skippedTopLedge = false;
+            int heightMapY = context.func_242893_a(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            boolean skippedTopLedge;
             mutable.setPos(x, heightMapY, z);
 
             // Set the block above for heightmap pos
@@ -43,21 +44,22 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
             // Move downward towards sealevel and get every surface along the way
             while (mutable.getY() >= context.func_242895_b()) {
 
-                BlockState currentBlockPos = context.func_242894_a(mutable);
+                BlockState currentBlockState = context.func_242894_a(mutable);
 
                 // This is true if above is spacious while current block is solid.
                 // We are at ledge if this is the case.
                 // Also allows underside placements as well
-                if (((!config.undersideOnly && !notSolidSpace(currentBlockPos) && notSolidSpace(prevBlockState)) ||
-                    (config.undersideOnly && notSolidSpace(currentBlockPos) && !notSolidSpace(prevBlockState))) &&
-                    !currentBlockPos.isIn(Blocks.BEDROCK))
+                if (!currentBlockState.isIn(BlockTags.LEAVES) &&
+                    !currentBlockState.isIn(Blocks.BEDROCK) &&
+                    ((!config.undersideOnly && !notSolidSpace(currentBlockState) && notSolidSpace(prevBlockState)) ||
+                    (config.undersideOnly && notSolidSpace(currentBlockState) && !notSolidSpace(prevBlockState))))
                 {
                     // If we are skipping top ledge, then current y must not be terrain heightmap.
                     // The -1 is because we check top down and find surfaces if our block is a solid
                     // block with space above but the heightmap method always returns that above space.
                     // thus we need to subtract one to be able to tell if our pos is topmost terrain.
                     // Underside placing skips the top ledge checks
-                    skippedTopLedge = config.skipTopLedge && mutable.getY() == context.func_242893_a(Heightmap.Type.MOTION_BLOCKING, mutable.getX(), mutable.getZ()) - 1;
+                    skippedTopLedge = config.skipTopLedge && mutable.getY() == context.func_242893_a(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1;
 
                     if(config.undersideOnly || !skippedTopLedge){
                         if(rand.nextFloat() < config.validSpotChance){
@@ -73,7 +75,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                 }
 
                 // Set prevblock to this block and move down one.
-                prevBlockState = currentBlockPos;
+                prevBlockState = currentBlockState;
                 mutable.move(Direction.DOWN);
             }
         }
