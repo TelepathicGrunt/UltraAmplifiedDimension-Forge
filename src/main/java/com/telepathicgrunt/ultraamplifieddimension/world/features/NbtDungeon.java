@@ -45,7 +45,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos position, NbtDungeonConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, NbtDungeonConfig config) {
 
         ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights);
 
@@ -119,7 +119,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
             //UltraAmplifiedDimension.LOGGER.log(Level.INFO, nbtRL + " at X: "+position.getX() +", "+position.getY()+", "+position.getZ());
             PlacementSettings placementsettings = (new PlacementSettings()).setRotation(rotation).setCenterOffset(halfLengths).setIgnoreEntities(false);
             config.processor.get().func_242919_a().forEach(placementsettings::addProcessor); // add all processors
-            addBlocksToWorld(template, world, mutable.setPos(position).move(-halfLengths.getX(), -1, -halfLengths.getZ()), placementsettings, 2, random, config);
+            addBlocksToWorld(template, world, chunkGenerator, mutable.setPos(position).move(-halfLengths.getX(), -1, -halfLengths.getZ()), placementsettings, 2, random, config);
             spawnChests(world, random, position, config, fullLengths, halfLengths, mutable);
             return true;
         }
@@ -200,7 +200,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
     /**
      * Adds blocks and entities from this structure to the given world.
      */
-    public void addBlocksToWorld(Template structure, IServerWorld world, BlockPos pos, PlacementSettings placementIn, int flags, Random random, NbtDungeonConfig config) {
+    public void addBlocksToWorld(Template structure, IServerWorld world, ChunkGenerator chunkGenerator, BlockPos pos, PlacementSettings placementIn, int flags, Random random, NbtDungeonConfig config) {
         TemplateInvoker structureAccessor = ((TemplateInvoker) structure);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
@@ -257,6 +257,19 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                     }
                                 }
                             }
+
+                            // Prevent plants remaining at edge of dungeons like bamboo which then breaks as dungeon floor isn't valid for bamboo.
+                            else if(!originalBlockState.isAir() && !originalBlockState.isSolid() && originalBlockState.getFluidState().isEmpty()){
+                                world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 3);
+
+                                BlockPos.Mutable mutable1 = new BlockPos.Mutable().setPos(blockpos);
+                                BlockState blockState = world.getBlockState(mutable1.move(Direction.UP));
+
+                                while(mutable1.getY() < chunkGenerator.getMaxBuildHeight() && !blockState.isValidPosition(world, mutable1)){
+                                    world.setBlockState(mutable1, Blocks.AIR.getDefaultState(), 3);
+                                    blockState = world.getBlockState(mutable1.move(Direction.UP));
+                                }
+                            }
                         }
                     }
                 }
@@ -269,7 +282,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         setVoxelShapeParts(world, flags, list2, minX, minY, minZ, voxelshapepart);
                     }
 
-                    placeBlocks(world, placementIn, flags, list2);
+                    placeBlocks(world, placementIn, list2);
                 }
 
                 if (!placementIn.getIgnoreEntities()) {
@@ -349,7 +362,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
         return !state.isIn(Blocks.SPAWNER) && !(state.getBlock() instanceof AbstractChestBlock);
     }
 
-    protected static void placeBlocks(IServerWorld world, PlacementSettings placementIn, int flags, List<Pair<BlockPos, CompoundNBT>> list2) {
+    protected static void placeBlocks(IServerWorld world, PlacementSettings placementIn, List<Pair<BlockPos, CompoundNBT>> list2) {
         for (Pair<BlockPos, CompoundNBT> pair : list2) {
             BlockPos blockpos4 = pair.getFirst();
 

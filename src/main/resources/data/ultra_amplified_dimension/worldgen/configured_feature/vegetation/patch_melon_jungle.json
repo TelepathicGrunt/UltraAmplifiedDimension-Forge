@@ -20,7 +20,7 @@
         "tries": 64,
         "state_provider": {
           "state": {
-            "Name": "minecraft:pumpkin"
+            "Name": "minecraft:melon"
           },
           "type": "minecraft:simple_state_provider"
         },
@@ -33,7 +33,7 @@
     "decorator": {
       "config": {
         "column_passes": 1,
-        "valid_spot_chance": 0.03125,
+        "valid_spot_chance": 0.07,
         "skip_top_ledge": false,
         "underside_only": false
       },

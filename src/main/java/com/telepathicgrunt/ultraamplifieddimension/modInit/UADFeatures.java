@@ -39,6 +39,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<HeightConfig>> VINES_SHORT = createFeature("vines_short", () -> new VinesShort(HeightConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> HANGING_RUINS = createFeature("hanging_ruins", () -> new HangingRuins(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<PondConfig>> POND = createFeature("pond", () -> new Pond(PondConfig.CODEC));
+    public static final RegistryObject<Feature<BambooConfig>> SAFE_BAMBOO = createFeature("safe_bamboo", () -> new SafeBamboo(BambooConfig.CODEC));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

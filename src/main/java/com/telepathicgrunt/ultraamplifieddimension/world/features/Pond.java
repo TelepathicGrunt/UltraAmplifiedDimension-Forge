@@ -53,7 +53,7 @@ public class Pond extends Feature<PondConfig> {
                     double normY = y / 4d;
                     double normZ = z / 7d;
                     // Check only in a squished sphere space
-                    if((normX * normX) + (normY * normY) + (normZ * normZ) <= 0.65d){
+                    if((normX * normX) + (normY * normY) + (normZ * normZ) <= 0.60d){
                         blockpos.setPos(centerPos).move(x, y, z);
                         BlockState blockState = cachedChunk.getBlockState(blockpos);
 
@@ -87,12 +87,21 @@ public class Pond extends Feature<PondConfig> {
                         BlockState block = cachedChunk.getBlockState(blockpos);
 
                         if(y == 4){
-                            // Store y == 4 as that block in world must be stored as aboveState
-                            aboveState = cachedChunk.getBlockState(blockpos);
 
                             if(pondConfig.placeOutsideStateOften && block.isSolid() && rand.nextFloat() < 0.70f){
-                                cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                aboveState = cachedChunk.getBlockState(blockpos.move(Direction.UP));
+                                blockpos.move(Direction.DOWN);
+
+                                if(aboveState.isAir()){
+                                    cachedChunk.setBlockState(blockpos, pondConfig.topState, false);
+                                }
+                                else{
+                                    cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                }
                             }
+
+                            // Store y == 4 as that block in world must be stored as aboveState
+                            aboveState = cachedChunk.getBlockState(blockpos);
                         }
 
                         if(block.isSolid()){
@@ -100,7 +109,12 @@ public class Pond extends Feature<PondConfig> {
                             // Threshold used for the encasing in outside blockstate.
                             if(x == -8 || z== -8 || x == 7 || z == 7 || lakeVal > -0.48d || y == -4){
                                 if(pondConfig.placeOutsideStateOften){
-                                    cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                    if(aboveState.isAir()){
+                                        cachedChunk.setBlockState(blockpos, pondConfig.topState, false);
+                                    }
+                                    else{
+                                        cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                    }
                                 }
                             }
                             else if (y <= 0){
@@ -126,8 +140,13 @@ public class Pond extends Feature<PondConfig> {
                                     }
                                 }
                             }
-                            else{
-                                cachedChunk.setBlockState(blockpos, Blocks.CAVE_AIR.getDefaultState(), false);
+                            else {
+                                if(!aboveState.getFluidState().isEmpty()){
+                                    cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                }
+                                else{
+                                    cachedChunk.setBlockState(blockpos, Blocks.CAVE_AIR.getDefaultState(), false);
+                                }
                             }
 
                             // Remove floating plants.

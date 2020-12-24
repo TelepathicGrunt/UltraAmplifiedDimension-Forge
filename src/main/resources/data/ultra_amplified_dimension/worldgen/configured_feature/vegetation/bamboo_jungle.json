@@ -1,0 +1,34 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "max_height": 16,
+            "min_height": 5,
+            "podzol_max_radius": 2,
+            "podzol_min_radius": 1
+          },
+          "type": "ultra_amplified_dimension:safe_bamboo"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 90,
+        "valid_spot_chance": 0.80,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

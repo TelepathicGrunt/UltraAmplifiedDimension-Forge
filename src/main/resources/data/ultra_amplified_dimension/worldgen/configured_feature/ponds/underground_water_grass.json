@@ -7,10 +7,13 @@
             "feature": {
               "config": {
                 "top_state": {
-                    "Name": "minecraft:red_sand"
+                    "Properties": {
+                      "snowy": "false"
+                    },
+                    "Name": "minecraft:grass_block"
                 },
                 "outside_state": {
-                    "Name": "minecraft:terracotta"
+                    "Name": "minecraft:dirt"
                 },
                 "inside_state": {
                     "Properties": {

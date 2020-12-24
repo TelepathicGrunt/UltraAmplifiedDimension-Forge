@@ -6,6 +6,9 @@
           "config": {
             "feature": {
               "config": {
+                "top_state": {
+                    "Name": "minecraft:slime_block"
+                },
                 "outside_state": {
                     "Name": "minecraft:slime_block"
                 },

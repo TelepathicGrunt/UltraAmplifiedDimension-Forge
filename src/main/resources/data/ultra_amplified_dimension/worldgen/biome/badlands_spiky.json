@@ -83,14 +83,15 @@
         "ultra_amplified_dimension:disk/gravel"
     ],
     [
-      "ultra_amplified_dimension:spring_water",
-      "ultra_amplified_dimension:spring_water_narrow_range",
-      "ultra_amplified_dimension:spring_lava",
-      "ultra_amplified_dimension:spring_lava_narrow_range"
+      "ultra_amplified_dimension:springs/water",
+      "ultra_amplified_dimension:springs/water_narrow_range",
+      "ultra_amplified_dimension:springs/lava",
+      "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
       "ultra_amplified_dimension:vegetation/big_cactus",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
+      "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
       "ultra_amplified_dimension:vegetation/patch_grass_badlands",
       "minecraft:brown_mushroom_normal",

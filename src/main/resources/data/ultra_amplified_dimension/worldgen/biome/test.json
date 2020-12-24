@@ -80,10 +80,10 @@
         "ultra_amplified_dimension:disk/gravel"
     ],
     [
-      "ultra_amplified_dimension:spring_water",
-      "ultra_amplified_dimension:spring_water_narrow_range",
-      "ultra_amplified_dimension:spring_lava",
-      "ultra_amplified_dimension:spring_lava_narrow_range"
+      "ultra_amplified_dimension:springs/water",
+      "ultra_amplified_dimension:springs/water_narrow_range",
+      "ultra_amplified_dimension:springs/lava",
+      "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
       "ultra_amplified_dimension:vegetation/badlands_dense_woods",

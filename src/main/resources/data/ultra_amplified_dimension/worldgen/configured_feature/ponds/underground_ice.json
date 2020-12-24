@@ -6,6 +6,9 @@
           "config": {
             "feature": {
               "config": {
+                "top_state": {
+                    "Name": "minecraft:snow_block"
+                },
                 "outside_state": {
                     "Name": "minecraft:packed_ice"
                 },

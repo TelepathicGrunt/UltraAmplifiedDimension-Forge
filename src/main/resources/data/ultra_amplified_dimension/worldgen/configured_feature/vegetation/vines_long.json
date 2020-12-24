@@ -1,0 +1,30 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {},
+          "type": "ultra_amplified_dimension:vines_long"
+        },
+        "decorator": {
+          "config": {
+            "bottom_offset": 10,
+            "top_offset": 0,
+            "maximum": 245
+          },
+          "type": "minecraft:range"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 6,
+        "extra_chance": 0.5,
+        "extra_count": 3
+      },
+      "type": "minecraft:count_extra"
+    }
+  },
+  "type": "minecraft:decorated"
+}
