@@ -40,7 +40,7 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, BlockWithRuleReplaceConfig blockConfig) {
 		setSeed(world.getSeed());
 
-		BlockPos.Mutable blockposMutable = new BlockPos.Mutable();
+		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
 		IChunk cachedChunk = world.getChunk(blockposMutable);
 		BlockState currentBlockState;
 		int xOffset;
@@ -69,14 +69,29 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 						 currentBlockState == blockConfig.state ||
 						 currentBlockState == Blocks.VINE.getDefaultState()))
 				{
-					//set root block
-					cachedChunk.setBlockState(blockposMutable, blockConfig.state, false);
-
-					//rare chance to also generate a vine
-					if (rand.nextFloat() < 0.13F) {
-						generateTinyVine(world, cachedChunk, rand, blockposMutable);
+					// Make sure it is under ledge and not going off to the side which looks weird.
+					boolean isUnderLedge = false;
+					int upwardOffset = 1;
+					blockposMutable.move(Direction.UP);
+					for(; upwardOffset < 8; upwardOffset++){
+						if(cachedChunk.getBlockState(blockposMutable).isSolid()){
+							isUnderLedge = true;
+							break;
+						}
+						blockposMutable.move(Direction.UP);
 					}
 
+					if(isUnderLedge){
+						blockposMutable.move(Direction.DOWN, upwardOffset); // Move back to current pos.
+
+						//set root block
+						cachedChunk.setBlockState(blockposMutable, blockConfig.state, false);
+
+						//rare chance to also generate a vine
+						if (rand.nextFloat() < 0.13F) {
+							generateTinyVine(world, cachedChunk, rand, blockposMutable);
+						}
+					}
 				}
 				//The position was either too high or was a solid block ( not a root) and so ends this branch
 				else {

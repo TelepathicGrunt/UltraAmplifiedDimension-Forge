@@ -48,7 +48,7 @@ public class Pond extends Feature<PondConfig> {
         // Validation checks to make sure lake is in a safe spot to generate
         for(int x = -7; x < 7; x++){
             for(int z = -7; z < 7; z++){
-                for(int y = -4; y < 4; y++){
+                for(int y = -3; y < 4; y++){
                     double normX = x / 7d;
                     double normY = y / 4d;
                     double normZ = z / 7d;
@@ -107,11 +107,19 @@ public class Pond extends Feature<PondConfig> {
                                 cachedChunk.setBlockState(blockpos, pondConfig.insideState, false);
 
                                 for(Direction direction : Direction.values()){
+                                    // Will never go into other chunk due to the edge of chunk check above.
+                                    // This will contain the liquid as best as possible.
                                     if(direction != Direction.UP){
-                                        // Will never go into other chunk due to the edge of chunk check above.
-                                        // This will contain the liquid as best as possible.
                                         BlockState blockState = cachedChunk.getBlockState(blockpos.move(direction));
                                         if(!blockState.isSolid() && blockState != pondConfig.insideState){
+                                            cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
+                                        }
+                                        blockpos.move(direction.getOpposite());
+                                    }
+                                    // Prevent stuff like lava ponds getting water placed above it.
+                                    else if(!pondConfig.insideState.getFluidState().isEmpty()){
+                                        BlockState blockState = cachedChunk.getBlockState(blockpos.move(direction));
+                                        if(!blockState.getFluidState().isEmpty() && blockState != pondConfig.insideState){
                                             cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
                                         }
                                         blockpos.move(direction.getOpposite());

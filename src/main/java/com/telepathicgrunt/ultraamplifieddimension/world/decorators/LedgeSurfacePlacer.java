@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.Heightmap;
@@ -36,13 +37,15 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
             int z = rand.nextInt(16) + pos.getZ();
             int heightMapY = context.func_242893_a(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
             boolean skippedTopLedge;
+            boolean isValidWaterPos;
             mutable.setPos(x, heightMapY, z);
 
             // Set the block above for heightmap pos
             BlockState prevBlockState = context.func_242894_a(mutable.up());
+            int bottomYLimit = config.waterPosOnly ? 11 : context.func_242895_b();
 
             // Move downward towards sealevel and get every surface along the way
-            while (mutable.getY() >= context.func_242895_b()) {
+            while (mutable.getY() >= bottomYLimit) {
 
                 BlockState currentBlockState = context.func_242894_a(mutable);
 
@@ -59,9 +62,13 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                     // block with space above but the heightmap method always returns that above space.
                     // thus we need to subtract one to be able to tell if our pos is topmost terrain.
                     // Underside placing skips the top ledge checks
-                    skippedTopLedge = config.skipTopLedge && mutable.getY() == context.func_242893_a(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1;
+                    skippedTopLedge = !config.undersideOnly && (config.skipTopLedge && mutable.getY() == context.func_242893_a(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1);
+                    isValidWaterPos = (config.undersideOnly ? currentBlockState.getFluidState().isTagged(FluidTags.WATER) : prevBlockState.getFluidState().isTagged(FluidTags.WATER));
 
-                    if(config.undersideOnly || !skippedTopLedge){
+                    if(((config.waterPosOnly && isValidWaterPos) ||
+                        (!config.waterPosOnly && !isValidWaterPos)) &&
+                        !skippedTopLedge)
+                    {
                         if(rand.nextFloat() < config.validSpotChance){
                             list.add(mutable.toImmutable());
                         }

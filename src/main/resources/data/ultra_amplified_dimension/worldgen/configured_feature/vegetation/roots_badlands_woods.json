@@ -1,0 +1,40 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "target": {
+              "tag": "ultra_amplified_dimension:air_target",
+              "predicate_type": "minecraft:tag_match"
+            },
+            "state": {
+                "Properties": {
+                  "axis": "y"
+                },
+                "Name": "minecraft:oak_wood"
+            }
+          },
+          "type": "ultra_amplified_dimension:roots"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 5,
+        "valid_spot_chance": 1,
+        "skip_top_ledge": false,
+        "underside_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -1,0 +1,47 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "state": {
+              "Name": "minecraft:gravel"
+            },
+            "radius": {
+              "base": 4,
+              "spread": 3
+            },
+            "half_height": 2,
+            "targets": [
+              {
+                "Name": "minecraft:dirt"
+              },
+              {
+                "Name": "minecraft:stone"
+              }
+            ]
+          },
+          "type": "minecraft:disk"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 2,
+        "valid_spot_chance": 1,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

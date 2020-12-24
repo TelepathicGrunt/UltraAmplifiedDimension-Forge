@@ -36,6 +36,7 @@
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [
+        "ultra_amplified_dimension:vegetation/roots_badlands_woods",
         "ultra_amplified_dimension:ponds/surface_slime",
         "ultra_amplified_dimension:ponds/underground_water_badlands",
         "ultra_amplified_dimension:ponds/underground_lava"
@@ -75,9 +76,9 @@
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
         "ultra_amplified_dimension:ores/ore_gold_extra_badlands",
-        "ultra_amplified_dimension:disk_coarse_dirt",
-        "ultra_amplified_dimension:disk_clay",
-        "ultra_amplified_dimension:disk_gravel"
+        "ultra_amplified_dimension:disk/coarse_dirt",
+        "ultra_amplified_dimension:disk/clay",
+        "ultra_amplified_dimension:disk/gravel"
     ],
     [
       "ultra_amplified_dimension:spring_water",

@@ -75,9 +75,9 @@
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
         "ultra_amplified_dimension:ores/ore_gold_extra_badlands",
-        "ultra_amplified_dimension:disk_coarse_dirt",
-        "ultra_amplified_dimension:disk_clay",
-        "ultra_amplified_dimension:disk_gravel"
+        "ultra_amplified_dimension:disk/coarse_dirt",
+        "ultra_amplified_dimension:disk/clay",
+        "ultra_amplified_dimension:disk/gravel"
     ],
     [
       "ultra_amplified_dimension:spring_water",
