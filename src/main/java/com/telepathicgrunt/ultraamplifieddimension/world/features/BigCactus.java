@@ -14,6 +14,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 
+import java.util.Collections;
 import java.util.Random;
 
 
@@ -27,17 +28,31 @@ public class BigCactus extends Feature<HeightConfig> {
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, HeightConfig betterCactusConfig) {
         BlockPos.Mutable blockpos = new BlockPos.Mutable().setPos(position);
         IChunk cachedChunk = world.getChunk(blockpos);
+        Direction cactusFacing = Direction.byHorizontalIndex(rand.nextInt(4));
 
-        if (cachedChunk.getBlockState(blockpos).isAir() && cachedChunk.getBlockState(blockpos.move(Direction.DOWN)).isIn(BlockTags.SAND)) {
+        //gets height with some variations
+        //then gets left and right side between 2 and maximum height - 3
+        //then finds the direction that the cactus will be facing
+        int maxHeight = betterCactusConfig.height + rand.nextInt(2);
+        int frontSideHeight = 2 + rand.nextInt(maxHeight - 4);
+        int backSideHeight = 2 + rand.nextInt(maxHeight - 4);
+
+        // make sure there is space for the cactus and its arms
+        while(blockpos.getY() <= position.getY() + betterCactusConfig.height + 1){
+            if(!cachedChunk.getBlockState(blockpos).isAir() ||
+                (blockpos.getY() >= position.getY() + frontSideHeight && (!cachedChunk.getBlockState(blockpos.move(cactusFacing)).isAir() || !cachedChunk.getBlockState(blockpos.move(cactusFacing)).isAir())) ||
+                (blockpos.getY() >= position.getY() + backSideHeight && (!cachedChunk.getBlockState(blockpos.move(cactusFacing.getOpposite(), 3)).isAir() || !cachedChunk.getBlockState(blockpos.move(cactusFacing.getOpposite())).isAir())))
+            {
+                return false;
+            }
+
+            blockpos.move(Direction.UP).move(cactusFacing, 2); // move up and back to center stalk
+        }
+        // Go back to start pos
+        blockpos.setPos(position);
+
+        if (cachedChunk.getBlockState(blockpos.move(Direction.DOWN)).isIn(BlockTags.SAND)) {
             blockpos.move(Direction.UP); // Move back to start pos
-
-            //gets height with some variations
-            //then gets left and right side between 2 and maximum height - 3
-            //then finds the direction that the cactus will be facing
-            int maxHeight = betterCactusConfig.height + rand.nextInt(2);
-            int frontSideHeight = 2 + rand.nextInt(maxHeight - 4);
-            int backSideHeight = 2 + rand.nextInt(maxHeight - 4);
-            Direction cactusFacing = Direction.byHorizontalIndex(rand.nextInt(4));
 
             //create cactus from ground up
             for (int currentHeight = 0; currentHeight < maxHeight && cachedChunk.getBlockState(blockpos).isAir(); currentHeight++) {

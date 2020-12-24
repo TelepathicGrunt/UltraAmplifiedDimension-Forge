@@ -4,8 +4,8 @@
   "precipitation": "none",
   "temperature": 2.0,
   "downfall": 0.0,
-  "depth": 0.1,
-  "scale": 0.2,
+  "depth": 1.5,
+  "scale": 0.025,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -20,7 +20,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "ultra_amplified_dimension:badlands_surface_builder",
+  "surface_builder": "minecraft:wooded_badlands",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -41,8 +41,8 @@
         "ultra_amplified_dimension:ponds/underground_lava"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_badlands",
-        "ultra_amplified_dimension:columns/ramp_badlands",
+        "ultra_amplified_dimension:columns/vertical_badlands_wooded",
+        "ultra_amplified_dimension:columns/ramp_badlands_wooded",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
@@ -86,10 +86,11 @@
       "ultra_amplified_dimension:spring_lava_narrow_range"
     ],
     [
+      "ultra_amplified_dimension:vegetation/badlands_woods",
       "ultra_amplified_dimension:vegetation/big_cactus",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
-      "ultra_amplified_dimension:vegetation/patch_grass_badlands",
+      "ultra_amplified_dimension:vegetation/patch_grass_wooded_badlands",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal"
     ],
@@ -100,7 +101,9 @@
   "starts": [
     "minecraft:mineshaft_mesa",
     "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:ruined_portal",
+    "ultra_amplified_dimension:configured_sun_shrine",
+    "ultra_amplified_dimension:configured_stonehenge"
   ],
   "spawners": {
     "monster": [

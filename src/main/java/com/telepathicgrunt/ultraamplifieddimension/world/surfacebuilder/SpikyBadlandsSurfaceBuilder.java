@@ -15,8 +15,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import java.util.Random;
 
 
-public class ErodedBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
-    public ErodedBadlandsSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
+public class SpikyBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
+    public SpikyBadlandsSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
         super(codec);
     }
 
@@ -37,7 +37,7 @@ public class ErodedBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
 
         //messy spiky spikes
         if (spikeHeight > 160D) {
-            spikeHeight *= 1.2D;
+            spikeHeight *= 1.1D;
         }
         else if (spikeHeight > 135D) {
             spikeHeight *= 1.5D;

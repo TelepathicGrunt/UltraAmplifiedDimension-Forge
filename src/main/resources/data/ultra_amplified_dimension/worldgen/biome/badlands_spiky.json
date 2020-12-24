@@ -20,7 +20,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "ultra_amplified_dimension:badlands_surface_builder",
+  "surface_builder": "ultra_amplified_dimension:badlands_spiky_surface_builder",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -41,8 +41,8 @@
         "ultra_amplified_dimension:ponds/underground_lava"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_badlands",
-        "ultra_amplified_dimension:columns/ramp_badlands",
+        "ultra_amplified_dimension:columns/vertical_badlands_terracotta",
+        "ultra_amplified_dimension:columns/ramp_badlands_terracotta",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
@@ -72,6 +72,9 @@
         "ultra_amplified_dimension:ores/ore_diamond",
         "ultra_amplified_dimension:ores/ore_lapis",
         "ultra_amplified_dimension:ores/ore_gold_sealevel_badlands",
+        "ultra_amplified_dimension:ores/ore_gold_sealevel_badlands",
+        "ultra_amplified_dimension:ores/ore_gold_sealevel_badlands",
+        "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
         "ultra_amplified_dimension:ores/ore_gold_extra_badlands",
@@ -91,6 +94,8 @@
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
       "ultra_amplified_dimension:vegetation/patch_grass_badlands",
       "minecraft:brown_mushroom_normal",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
       "minecraft:red_mushroom_normal"
     ],
     [

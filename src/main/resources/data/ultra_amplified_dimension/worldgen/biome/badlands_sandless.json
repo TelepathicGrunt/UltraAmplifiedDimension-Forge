@@ -20,7 +20,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "ultra_amplified_dimension:badlands_surface_builder",
+  "surface_builder": "ultra_amplified_dimension:badlands_sandless_surface_builder",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",

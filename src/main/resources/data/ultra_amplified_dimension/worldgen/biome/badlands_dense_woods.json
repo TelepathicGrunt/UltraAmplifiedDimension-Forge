@@ -4,8 +4,8 @@
   "precipitation": "none",
   "temperature": 2.0,
   "downfall": 0.0,
-  "depth": 0.1,
-  "scale": 0.2,
+  "depth": 4.5,
+  "scale": 0.3,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -14,9 +14,9 @@
       "offset": 2.0
     },
     "sky_color": 7907327,
-    "fog_color": 12638463,
     "foliage_color": 10387789,
     "grass_color": 9470285,
+    "fog_color": 12638463,
     "water_color": 4159204,
     "water_fog_color": 329011
   },
@@ -41,8 +41,8 @@
         "ultra_amplified_dimension:ponds/underground_lava"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_badlands",
-        "ultra_amplified_dimension:columns/ramp_badlands",
+        "ultra_amplified_dimension:columns/vertical_badlands_wooded",
+        "ultra_amplified_dimension:columns/ramp_badlands_wooded",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
@@ -90,7 +90,7 @@
       "ultra_amplified_dimension:vegetation/big_cactus",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
-      "ultra_amplified_dimension:vegetation/patch_grass_badlands",
+      "ultra_amplified_dimension:vegetation/patch_grass_wooded_badlands",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal"
     ],
@@ -101,7 +101,9 @@
   "starts": [
     "minecraft:mineshaft_mesa",
     "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:ruined_portal",
+    "ultra_amplified_dimension:configured_sun_shrine",
+    "ultra_amplified_dimension:configured_stonehenge"
   ],
   "spawners": {
     "monster": [

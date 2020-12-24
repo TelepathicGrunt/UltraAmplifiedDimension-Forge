@@ -4,7 +4,7 @@
     "biome_source": {
       "seed": 0,
       "type": "minecraft:fixed",
-      "biome": "ultra_amplified_dimension:test"
+      "biome": "ultra_amplified_dimension:badlands_spiky"
     },
     "seed": 0,
     "type": "ultra_amplified_dimension:terrain",

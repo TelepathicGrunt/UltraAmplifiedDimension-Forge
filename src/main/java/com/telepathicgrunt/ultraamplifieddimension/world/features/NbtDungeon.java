@@ -143,38 +143,50 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                 if (world.getBlockState(mutable).isAir()){
                     if(world.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable.move(Direction.UP), Direction.DOWN)){
 
+                        boolean isOnWall = false;
                         for(Direction direction : Direction.Plane.HORIZONTAL){
 
                             mutable.move(direction);
                             BlockState neightboringState = world.getBlockState(mutable);
                             mutable.move(direction.getOpposite());
+
                             if(neightboringState.getBlock() instanceof AbstractChestBlock){
-                                // Set current chest direction to the side for the double chest connection.
-                                Direction doubleChestDirection = direction.rotateY();
-                                boolean flippedDirections = false;
-                                BlockState blockState = world.getBlockState(mutable.offset(direction));
+                                // Only connect to single chests
+                                if(neightboringState.get(ChestBlock.TYPE) == ChestType.SINGLE){
 
-                                // Face opposite direction if facing wall.
-                                if(blockState.isSolid()){
-                                    doubleChestDirection = doubleChestDirection.getOpposite();
-                                    flippedDirections = true;
+                                    // Set current chest direction to the side for the double chest connection.
+                                    Direction doubleChestDirection = direction.rotateY();
+                                    boolean flippedDirections = false;
+                                    BlockState blockState = world.getBlockState(mutable.offset(direction));
+
+                                    // Face opposite direction if facing wall.
+                                    if(blockState.isSolid()){
+                                        doubleChestDirection = doubleChestDirection.getOpposite();
+                                        flippedDirections = true;
+                                    }
+
+                                    world.setBlockState(mutable, Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.LEFT : ChestType.RIGHT), 2);
+                                    LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
+
+                                    // Set neighboring chest to face same way too
+                                    world.setBlockState(mutable.move(direction), Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.RIGHT : ChestType.LEFT), 2);
+                                    currentChestCount++;
+                                    isOnWall = false; // Skip wall code as we already placed chest
+                                    break;
                                 }
-
-                                world.setBlockState(mutable, Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.LEFT : ChestType.RIGHT), 2);
-                                LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
-
-                                // Set neighboring chest to face same way too
-                                world.setBlockState(mutable.move(direction), Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.RIGHT : ChestType.LEFT), 2);
-                                currentChestCount++;
-                                break;
                             }
                             else if(neightboringState.isSolid()){
-                                // Set chest to face away from wall.
-                                world.setBlockState(mutable, StructurePiece.correctFacing(world, mutable, Blocks.CHEST.getDefaultState()), 2);
-                                LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
-                                currentChestCount++;
-                                break;
+                                isOnWall = true;
                             }
+                        }
+
+                        // Is not next to another chest.
+                        if(isOnWall){
+                            // Set chest to face away from wall.
+                            world.setBlockState(mutable, StructurePiece.correctFacing(world, mutable, Blocks.CHEST.getDefaultState()), 2);
+                            LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
+                            currentChestCount++;
+                            break;
                         }
                     }
                     else {

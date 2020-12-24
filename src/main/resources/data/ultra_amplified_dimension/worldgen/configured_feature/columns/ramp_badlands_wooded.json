@@ -1,0 +1,52 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "top_block": {
+                    "Properties": {
+                      "snowy": "false"
+                    },
+                    "Name": "minecraft:grass_block"
+                },
+                "middle_block": {
+                  "Name": "minecraft:terracotta"
+                },
+                "bottom_block": {
+                  "Name": "minecraft:stone"
+                },
+                "max_height": 7,
+                "min_height": 2
+              },
+              "type": "ultra_amplified_dimension:column_ramp"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 70,
+                "top_offset": 0,
+                "maximum": 180
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 2
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

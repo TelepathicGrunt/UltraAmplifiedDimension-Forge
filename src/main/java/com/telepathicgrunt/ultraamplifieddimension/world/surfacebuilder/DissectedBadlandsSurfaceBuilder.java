@@ -15,8 +15,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import java.util.Random;
 
 
-public class ModifiedBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
-    public ModifiedBadlandsSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
+public class DissectedBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
+    public DissectedBadlandsSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
         super(codec);
     }
 
