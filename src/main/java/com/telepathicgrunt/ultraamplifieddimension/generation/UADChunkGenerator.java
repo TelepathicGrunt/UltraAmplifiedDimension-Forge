@@ -34,9 +34,11 @@ import net.minecraft.world.gen.settings.ScalingSettings;
 import net.minecraft.world.gen.settings.SlideSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 
 public class UADChunkGenerator extends NoiseChunkGenerator {
@@ -105,6 +107,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     UAD_DIMENSION_SETTINGS_CODEC.fieldOf("settings").forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236080_h_().get()))
                         .apply(noiseChunkGeneratorInstance, noiseChunkGeneratorInstance.stable(UADChunkGenerator::new)));
 
+    // Cache the sealevel
+    private final int sealevel;
+
     @Override
     protected Codec<? extends ChunkGenerator> func_230347_a_() {
         return UAD_CHUNK_GENERATOR_CODEC;
@@ -118,6 +123,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     public UADChunkGenerator(BiomeProvider biomeProvider, long seed, DimensionSettings dimensionSettings) {
         super(biomeProvider, seed, () -> dimensionSettings);
+        sealevel = this.field_236080_h_.get().func_236119_g_();
     }
 
 
@@ -574,5 +580,11 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         double d3 = Math.pow(Math.E, -(d2 / 16.0D + d0 / 16.0D));
         double d4 = -d1 * MathHelper.fastInvSqrt(d2 / 2.0D + d0 / 2.0D) / 2.0D;
         return d4 * d3;
+    }
+
+    // Use a field to hold sealevel int to make this not as performance heavy as
+    // what the parent class does which is runs a supplier every time it is called.
+    public int getSeaLevel() {
+        return sealevel;
     }
 }
