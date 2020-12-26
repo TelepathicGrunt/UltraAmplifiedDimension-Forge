@@ -1,0 +1,122 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "features": [
+          {
+            "config": {
+              "can_replace": false,
+              "project": false,
+              "need_water": false,
+              "xspread": 7,
+              "yspread": 3,
+              "zspread": 7,
+              "whitelist": [],
+              "blacklist": [],
+              "tries": 64,
+              "state_provider": {
+                "state": {
+                  "Properties": {
+                    "half": "lower"
+                  },
+                  "Name": "minecraft:lilac"
+                },
+                "type": "minecraft:simple_state_provider"
+              },
+              "block_placer": {
+                "type": "minecraft:double_plant_placer"
+              }
+            },
+            "type": "minecraft:random_patch"
+          },
+          {
+            "config": {
+              "can_replace": false,
+              "project": false,
+              "need_water": false,
+              "xspread": 7,
+              "yspread": 3,
+              "zspread": 7,
+              "whitelist": [],
+              "blacklist": [],
+              "tries": 64,
+              "state_provider": {
+                "state": {
+                  "Properties": {
+                    "half": "lower"
+                  },
+                  "Name": "minecraft:rose_bush"
+                },
+                "type": "minecraft:simple_state_provider"
+              },
+              "block_placer": {
+                "type": "minecraft:double_plant_placer"
+              }
+            },
+            "type": "minecraft:random_patch"
+          },
+          {
+            "config": {
+              "can_replace": false,
+              "project": false,
+              "need_water": false,
+              "xspread": 7,
+              "yspread": 3,
+              "zspread": 7,
+              "whitelist": [],
+              "blacklist": [],
+              "tries": 64,
+              "state_provider": {
+                "state": {
+                  "Properties": {
+                    "half": "lower"
+                  },
+                  "Name": "minecraft:peony"
+                },
+                "type": "minecraft:simple_state_provider"
+              },
+              "block_placer": {
+                "type": "minecraft:double_plant_placer"
+              }
+            },
+            "type": "minecraft:random_patch"
+          },
+          {
+            "config": {
+              "can_replace": false,
+              "project": false,
+              "need_water": false,
+              "xspread": 7,
+              "yspread": 3,
+              "zspread": 7,
+              "whitelist": [],
+              "blacklist": [],
+              "tries": 64,
+              "state_provider": {
+                "state": {
+                  "Name": "minecraft:lily_of_the_valley"
+                },
+                "type": "minecraft:simple_state_provider"
+              },
+              "block_placer": {
+                "type": "minecraft:simple_block_placer"
+              }
+            },
+            "type": "minecraft:no_bonemeal_flower"
+          }
+        ]
+      },
+      "type": "minecraft:simple_random_selector"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 1,
+        "valid_spot_chance": 0.25,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -13,6 +13,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.ChestType;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -84,18 +85,21 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
 
                     BlockState state = cachedChunk.getBlockState(mutable);
 
+                    // Dungeons cannot touch fluids
+                    if(!state.getFluidState().isEmpty()){
+                        return false;
+                    }
                     // Floor must be complete
-                    if(!state.getMaterial().isSolid()){
+                    else if(!state.getMaterial().isSolid()){
                         if (y == -1) {
                             return false;
+                        }
+                        else if(state.isIn(BlockTags.LEAVES)){
+                            continue; // ignore leaves
                         }
                         else if (y == ceiling) {
                             ceilingOpenings++;
                         }
-                    }
-                    // Dungeons cannot touch fluids
-                    else if(!state.getFluidState().isEmpty()){
-                        return false;
                     }
 
                     // Check only along wall bottoms for openings
@@ -236,30 +240,33 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                             BlockState aboveState = world.getBlockState(mutable.setPos(blockpos).move(Direction.UP));
                             if(isNotSpawnerOrChest(aboveState) && (config.replaceAir || originalBlockState.isSolid() || blockstate.hasTileEntity()))
                             {
-                                world.setBlockState(blockpos, blockstate, 3);
+                                // Attempt to let leaves stay in the dungeon space and not be cut off
+                                if(!(blockstate.isAir() && originalBlockState.isIn(BlockTags.LEAVES))){
+                                    world.setBlockState(blockpos, blockstate, 3);
 
-                                minX = Math.min(minX, blockpos.getX());
-                                minY = Math.min(minY, blockpos.getY());
-                                minZ = Math.min(minZ, blockpos.getZ());
-                                maxX = Math.max(maxX, blockpos.getX());
-                                maxY = Math.max(maxY, blockpos.getY());
-                                maxZ = Math.max(maxZ, blockpos.getZ());
-                                list2.add(Pair.of(blockpos, template$blockinfo.nbt));
+                                    minX = Math.min(minX, blockpos.getX());
+                                    minY = Math.min(minY, blockpos.getY());
+                                    minZ = Math.min(minZ, blockpos.getZ());
+                                    maxX = Math.max(maxX, blockpos.getX());
+                                    maxY = Math.max(maxY, blockpos.getY());
+                                    maxZ = Math.max(maxZ, blockpos.getZ());
+                                    list2.add(Pair.of(blockpos, template$blockinfo.nbt));
 
-                                if (template$blockinfo.nbt != null){
-                                    setBlockEntity(world, placementIn, random, config, template$blockinfo, blockpos, blockstate);
-                                }
+                                    if (template$blockinfo.nbt != null){
+                                        setBlockEntity(world, placementIn, random, config, template$blockinfo, blockpos, blockstate);
+                                    }
 
-                                if (ifluidstate != null && blockstate.getBlock() instanceof ILiquidContainer) {
-                                    ((ILiquidContainer) blockstate.getBlock()).receiveFluid(world, blockpos, blockstate, ifluidstate);
-                                    if (!ifluidstate.isSource()) {
-                                        list1.add(blockpos);
+                                    if (ifluidstate != null && blockstate.getBlock() instanceof ILiquidContainer) {
+                                        ((ILiquidContainer) blockstate.getBlock()).receiveFluid(world, blockpos, blockstate, ifluidstate);
+                                        if (!ifluidstate.isSource()) {
+                                            list1.add(blockpos);
+                                        }
                                     }
                                 }
                             }
 
                             // Prevent plants remaining at edge of dungeons like bamboo which then breaks as dungeon floor isn't valid for bamboo.
-                            else if(!originalBlockState.isAir() && !originalBlockState.isSolid() && originalBlockState.getFluidState().isEmpty()){
+                            else if(!originalBlockState.isAir() && !originalBlockState.isIn(BlockTags.LEAVES) && !originalBlockState.isSolid() && originalBlockState.getFluidState().isEmpty()){
                                 world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 3);
 
                                 BlockPos.Mutable mutable1 = new BlockPos.Mutable().setPos(blockpos);

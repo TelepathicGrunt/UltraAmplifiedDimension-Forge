@@ -61,6 +61,7 @@ public class EllipsoidPocket extends Feature<OreFeatureConfig>
 					if(result * 100f < 1f && !(x == 0 && z == 0 && y * y >= (size * size))) {
 						blockposMutable.setPos(position.getX() + x, position.getY() + y, position.getZ() + z);
 
+						// TODO: profile this more. getChunk may be firing more than it should be.
 						if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
 							cachedChunk = world.getChunk(blockposMutable);
 
@@ -71,7 +72,7 @@ public class EllipsoidPocket extends Feature<OreFeatureConfig>
 							}
 
 							// if our replacement state is not solid, do not expose any liquids then.
-							else{
+							else {
 								boolean touchingLiquid = false;
 								for(Direction direction : Direction.values()){
 									if(direction != Direction.DOWN){

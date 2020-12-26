@@ -5,7 +5,7 @@
         "feature": {
           "config": {
             "target": {
-              "tag": "ultra_amplified_dimension:air_target",
+              "tag": "ultra_amplified_dimension:non_cave_air_target",
               "predicate_type": "minecraft:tag_match"
             },
             "state": {

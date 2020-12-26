@@ -26,7 +26,7 @@
               "config": {
                 "bottom_offset": 6,
                 "top_offset": 0,
-                "maximum": 69
+                "maximum": 79
               },
               "type": "minecraft:range"
             }
@@ -42,9 +42,9 @@
     },
     "decorator": {
       "config": {
-        "count": 1,
-        "extra_chance": 0,
-        "extra_count": 0
+        "count": 0,
+        "extra_chance": 0.85,
+        "extra_count": 1
       },
       "type": "minecraft:count_extra"
     }

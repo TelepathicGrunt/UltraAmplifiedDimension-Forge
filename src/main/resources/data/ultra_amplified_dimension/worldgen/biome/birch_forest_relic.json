@@ -1,9 +1,9 @@
 {
-  "player_spawn_friendly": false,
-  "category": "jungle",
+  "player_spawn_friendly": true,
+  "category": "forest",
   "precipitation": "rain",
-  "temperature": 0.95,
-  "downfall": 0.9,
+  "temperature": 0.6,
+  "downfall": 0.6,
   "depth": 0.1,
   "scale": 0.2,
   "effects": {
@@ -14,8 +14,6 @@
       "offset": 2.0
     },
     "sky_color": 7907327,
-    "foliage_color": 47653,
-    "grass_color": 55595,
     "fog_color": 12638463,
     "water_color": 4159204,
     "water_fog_color": 329011
@@ -35,6 +33,7 @@
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [
+        "ultra_amplified_dimension:ponds/surface_honey",
         "ultra_amplified_dimension:ponds/surface_slime",
         "ultra_amplified_dimension:ponds/underground_water_grass",
         "ultra_amplified_dimension:ponds/underground_lava"
@@ -44,13 +43,13 @@
         "ultra_amplified_dimension:columns/ramp_grass",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:vegetation/roots_jungle",
+        "ultra_amplified_dimension:vegetation/roots_birch",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/jungle_high",
-        "ultra_amplified_dimension:dungeons/jungle_middle",
-        "ultra_amplified_dimension:dungeons/jungle_bottom"
+        "ultra_amplified_dimension:dungeons/generic_high",
+        "ultra_amplified_dimension:dungeons/generic_middle",
+        "ultra_amplified_dimension:dungeons/generic_bottom"
     ],
     [
         "ultra_amplified_dimension:ministructures/hanging_ruins"
@@ -83,26 +82,29 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/bamboo_jungle_trees_sparse",
-      "ultra_amplified_dimension:vegetation/bamboo_jungle",
+      "ultra_amplified_dimension:vegetation/forest_flowers",
+      "ultra_amplified_dimension:vegetation/trees_birch_forest_taller",
       "ultra_amplified_dimension:vegetation/patch_default_flowers",
-      "ultra_amplified_dimension:vegetation/patch_melon_jungle",
+      "ultra_amplified_dimension:vegetation/patch_grass_forest_dense",
+      "ultra_amplified_dimension:vegetation/patch_grass_forest_dense",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane",
       "minecraft:brown_mushroom_normal",
+      "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
-      "ultra_amplified_dimension:vegetation/vines_short_jungle",
-      "ultra_amplified_dimension:vegetation/vines_long"
+      "minecraft:red_mushroom_normal",
+      "ultra_amplified_dimension:vegetation/vines_short_birch_relic"
     ],
     [
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [
-    "minecraft:jungle_pyramid",
     "minecraft:mineshaft",
     "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:ruined_portal",
+    "ultra_amplified_dimension:configured_sun_shrine",
+    "ultra_amplified_dimension:configured_stonehenge"
   ],
   "spawners": {
     "monster": [
@@ -153,12 +155,6 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 1
-      },
-      {
-        "type": "minecraft:ocelot",
-        "weight": 2,
-        "minCount": 1,
-        "maxCount": 1
       }
     ],
     "creature": [
@@ -185,24 +181,6 @@
         "weight": 8,
         "minCount": 4,
         "maxCount": 4
-      },
-      {
-        "type": "minecraft:chicken",
-        "weight": 10,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:parrot",
-        "weight": 40,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
-        "type": "minecraft:panda",
-        "weight": 80,
-        "minCount": 1,
-        "maxCount": 2
       }
     ],
     "ambient": [
@@ -229,16 +207,10 @@
     ],
     "water_ambient": [
       {
-        "type": "minecraft:pufferfish",
-        "weight": 15,
-        "minCount": 1,
-        "maxCount": 3
-      },
-      {
-        "type": "minecraft:tropical_fish",
-        "weight": 25,
-        "minCount": 8,
-        "maxCount": 8
+        "type": "minecraft:cod",
+        "weight": 10,
+        "minCount": 3,
+        "maxCount": 6
       }
     ],
     "misc": []

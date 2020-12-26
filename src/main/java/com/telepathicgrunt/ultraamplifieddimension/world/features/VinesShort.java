@@ -28,6 +28,7 @@ public class VinesShort extends Feature<HeightConfig>
 		//generates vines from given position down 6 blocks if path is clear and the given position is valid
 		//Also won't generate vines below Y = 15.
 		int length = 0;
+		boolean extendingVine = false;
 
 		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
 		IChunk chunk = world.getChunk(position);
@@ -38,9 +39,11 @@ public class VinesShort extends Feature<HeightConfig>
 					BlockState blockState = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), true);
 					if (blockState.isValidPosition(world, blockposMutable)) {
 						chunk.setBlockState(blockposMutable, blockState, false);
+						length++;
+						extendingVine = true;
 						break;
 					}
-					else{
+					else if(extendingVine){
 						BlockState aboveBlockstate = chunk.getBlockState(blockposMutable.move(Direction.UP));
 						blockposMutable.move(Direction.DOWN); // Move back to original pos.
 						if (aboveBlockstate.isIn(Blocks.VINE)) {
