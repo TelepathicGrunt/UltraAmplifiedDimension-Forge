@@ -1,0 +1,15 @@
+{
+  "config": {
+    "feature": "minecraft:pile_pumpkin",
+    "decorator": {
+      "config": {
+        "column_passes": 1,
+        "valid_spot_chance": 0.05,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

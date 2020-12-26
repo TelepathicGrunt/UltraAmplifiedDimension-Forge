@@ -7,11 +7,11 @@
             "features": [
               {
                 "feature": "minecraft:huge_brown_mushroom",
-                "chance": 0.025
+                "chance": 0.05
               },
               {
                 "feature": "minecraft:huge_red_mushroom",
-                "chance": 0.05
+                "chance": 0.025
               },
               {
                 "feature": "minecraft:dark_oak",
@@ -44,7 +44,7 @@
         "column_passes": 20,
         "valid_spot_chance": 1,
         "skip_top_ledge": false,
-        "underside_only": true
+        "underside_only": false
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

@@ -6,6 +6,7 @@ import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.BlockW
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.VineBlock;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -74,7 +75,8 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 					int upwardOffset = 1;
 					blockposMutable.move(Direction.UP);
 					for(; upwardOffset < 8; upwardOffset++){
-						if(cachedChunk.getBlockState(blockposMutable).isSolid()){
+						BlockState blockState = cachedChunk.getBlockState(blockposMutable);
+						if(blockState.isSolid() && !blockState.isIn(BlockTags.LEAVES) && !blockState.isIn(BlockTags.LOGS)){
 							isUnderLedge = true;
 							break;
 						}
@@ -103,8 +105,8 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 20000 * rootNum, blockposMutable.getZ() * 1D + 20000 * rootNum, blockposMutable.getY() * 0.5D + 20000 * rootNum) * 15.0D, -1, 1);
-				zOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 10000 * rootNum, blockposMutable.getZ() * 1D + 10000 * rootNum, blockposMutable.getY() * 0.5D + 10000 * rootNum) * 15.0D, -1, 1);
+				xOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 20000 * rootNum, blockposMutable.getZ() * 1D + 20000 * rootNum, blockposMutable.getY() * 0.25D + 20000 * rootNum) * 15.0D, -1, 1);
+				zOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 10000 * rootNum, blockposMutable.getZ() * 1D + 10000 * rootNum, blockposMutable.getY() * 0.25D + 10000 * rootNum) * 15.0D, -1, 1);
 				yOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 0.85D - 10000 * rootNum, blockposMutable.getZ() * 0.85D - 10000 * rootNum, blockposMutable.getY() * 0.5D - 10000) * 15.0D * rootNum - 5.0D, -1, 1);
 
 				//debugging
@@ -137,19 +139,21 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 			if (cachedChunk.getBlockState(blockposMutable).isAir()) {
 				for (Direction direction : Direction.Plane.HORIZONTAL) {
 					BlockState currentBlockState = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), Boolean.TRUE);
-					if (currentBlockState.isValidPosition(world, blockposMutable)) {
-						cachedChunk.setBlockState(blockposMutable, currentBlockState, false);
-						length++;
-						break;
-					}
-					else {
-						BlockState aboveState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
-						blockposMutable.move(Direction.DOWN); // Move back to original pos.
-
-						if (aboveState.isIn(Blocks.VINE)) {
-							cachedChunk.setBlockState(blockposMutable, aboveState, false);
+					if(currentBlockState.isAir()){
+						if (currentBlockState.isValidPosition(world, blockposMutable)) {
+							cachedChunk.setBlockState(blockposMutable, currentBlockState, false);
 							length++;
 							break;
+						}
+						else {
+							BlockState aboveState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
+							blockposMutable.move(Direction.DOWN); // Move back to original pos.
+
+							if (aboveState.isIn(Blocks.VINE)) {
+								cachedChunk.setBlockState(blockposMutable, aboveState, false);
+								length++;
+								break;
+							}
 						}
 					}
 				}

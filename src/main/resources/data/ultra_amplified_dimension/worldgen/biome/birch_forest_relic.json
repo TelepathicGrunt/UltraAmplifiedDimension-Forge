@@ -41,9 +41,9 @@
     [
         "ultra_amplified_dimension:columns/vertical_grass",
         "ultra_amplified_dimension:columns/ramp_grass",
-        "ultra_amplified_dimension:glow_patch_surface",
+        "ultra_amplified_dimension:glow_patch_surface_dense",
         "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:vegetation/roots_birch",
+        "ultra_amplified_dimension:vegetation/roots_birch_dense",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
@@ -89,11 +89,9 @@
       "ultra_amplified_dimension:vegetation/patch_grass_forest_dense",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "ultra_amplified_dimension:vegetation/vines_short_birch_relic"
+      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
+      "ultra_amplified_dimension:vegetation/vines_short_2"
     ],
     [
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"

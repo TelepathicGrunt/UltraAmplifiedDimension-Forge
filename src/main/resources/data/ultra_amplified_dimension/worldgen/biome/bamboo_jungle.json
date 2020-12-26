@@ -89,9 +89,9 @@
       "ultra_amplified_dimension:vegetation/patch_melon_jungle",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "ultra_amplified_dimension:vegetation/vines_short_jungle",
+      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
+      "ultra_amplified_dimension:vegetation/vines_short_6",
       "ultra_amplified_dimension:vegetation/vines_long"
     ],
     [

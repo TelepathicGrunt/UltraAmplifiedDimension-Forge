@@ -1,0 +1,39 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "height": 6
+              },
+              "type": "ultra_amplified_dimension:vines_short"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 10,
+                "top_offset": 0,
+                "maximum": 245
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 50
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

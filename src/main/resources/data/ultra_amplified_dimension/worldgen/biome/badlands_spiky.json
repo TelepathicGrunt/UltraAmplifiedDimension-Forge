@@ -94,10 +94,8 @@
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
       "ultra_amplified_dimension:vegetation/patch_grass_badlands",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "minecraft:red_mushroom_normal"
+      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
     ],
     [
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"

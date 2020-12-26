@@ -4,7 +4,7 @@
     "biome_source": {
       "seed": 0,
       "type": "minecraft:fixed",
-      "biome": "ultra_amplified_dimension:birch_forest_relic"
+      "biome": "ultra_amplified_dimension:dark_forest_relic"
     },
     "seed": 0,
     "type": "ultra_amplified_dimension:terrain",
