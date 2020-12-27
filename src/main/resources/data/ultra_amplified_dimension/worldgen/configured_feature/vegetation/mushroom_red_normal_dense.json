@@ -4,7 +4,7 @@
       "config": {
         "feature": {
           "config": {
-            "feature": "minecraft:patch_brown_mushroom",
+            "feature": "minecraft:patch_red_mushroom",
             "decorator": {
               "config": {
                 "bottom_offset": 1,
@@ -25,7 +25,7 @@
     },
     "decorator": {
       "config": {
-        "count": 4
+        "count": 14
       },
       "type": "minecraft:count"
     }

@@ -105,8 +105,8 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 
 				//move to next place to grow root to
 				//range is clamped to -1 to 1 due to int rounding
-				xOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 20000 * rootNum, blockposMutable.getZ() * 1D + 20000 * rootNum, blockposMutable.getY() * 0.25D + 20000 * rootNum) * 15.0D, -1, 1);
-				zOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 10000 * rootNum, blockposMutable.getZ() * 1D + 10000 * rootNum, blockposMutable.getY() * 0.25D + 10000 * rootNum) * 15.0D, -1, 1);
+				xOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 20000 * rootNum, blockposMutable.getZ() * 1D + 20000 * rootNum, blockposMutable.getY() * 0.20D + 20000 * rootNum) * 15.0D, -1, 1);
+				zOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 1D + 10000 * rootNum, blockposMutable.getZ() * 1D + 10000 * rootNum, blockposMutable.getY() * 0.20D + 10000 * rootNum) * 15.0D, -1, 1);
 				yOffset = (int) MathHelper.clamp(this.noiseGen.eval(blockposMutable.getX() * 0.85D - 10000 * rootNum, blockposMutable.getZ() * 0.85D - 10000 * rootNum, blockposMutable.getY() * 0.5D - 10000) * 15.0D * rootNum - 5.0D, -1, 1);
 
 				//debugging

@@ -66,6 +66,9 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
 
         BlockPos halfLengths = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
         placementsettings.setRotation(Rotation.randomRotation(rand)).setCenterOffset(halfLengths).setIgnoreEntities(false);
+        if(config.processor != null){
+            config.processor.get().func_242919_a().forEach(placementsettings::addProcessor);
+        }
         template.func_237152_b_(world, blockpos$Mutable.setPos(position).move(-halfLengths.getX(), 0, -halfLengths.getZ()), placementsettings, rand);
 
         return true;

@@ -66,12 +66,12 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
                     double normZ = (z - 8) / 8d;
                     double lakeVal = (normX * normX) + (normZ * normZ);
 
-                    if(lakeVal < 0.75d){
+                    if(lakeVal < 0.8d){
                         //check below without moving down
                         blockState = world.getBlockState(blockposMutable.down());
 
                         //sets the water
-                        if (isDirt(blockState.getBlock()) && random.nextInt(5) == 0) {
+                        if ((isDirt(blockState.getBlock()) && random.nextInt(5) == 0)) {
                             world.setBlockState(blockposMutable, Blocks.SEAGRASS.getDefaultState(), 3);
                         }
                         else {

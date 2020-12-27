@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.decorators;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -54,6 +55,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                 // Also allows underside placements as well
                 if (!currentBlockState.isIn(BlockTags.LEAVES) &&
                     !currentBlockState.isIn(Blocks.BEDROCK) &&
+                    currentBlockState.getMaterial() != Material.CACTUS &&
                     ((!config.undersideOnly && !notSolidSpace(currentBlockState) && notSolidSpace(prevBlockState)) ||
                     (config.undersideOnly && notSolidSpace(currentBlockState) && !notSolidSpace(prevBlockState))))
                 {

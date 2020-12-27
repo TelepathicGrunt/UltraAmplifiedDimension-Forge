@@ -1,0 +1,14 @@
+{
+  "config": {
+    "top_material": {
+      "Name": "minecraft:sand"
+    },
+    "under_material": {
+      "Name": "minecraft:sandstone"
+    },
+    "underwater_material": {
+      "Name": "minecraft:sandstone"
+    }
+  },
+  "type": "ultra_amplified_dimension:sand_surface_builder"
+}

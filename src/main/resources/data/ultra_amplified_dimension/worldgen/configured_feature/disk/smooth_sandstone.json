@@ -1,0 +1,53 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "state": {
+              "Name": "minecraft:smooth_sandstone"
+            },
+            "radius": {
+              "base": 3,
+              "spread": 2
+            },
+            "half_height": 2,
+            "targets": [
+              {
+                "Name": "minecraft:dirt"
+              },
+              {
+                "Name": "minecraft:sand"
+              },
+              {
+                "Name": "minecraft:sandstone"
+              },
+              {
+                "Name": "minecraft:stone"
+              }
+            ]
+          },
+          "type": "minecraft:disk"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 4,
+        "valid_spot_chance": 0.60,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

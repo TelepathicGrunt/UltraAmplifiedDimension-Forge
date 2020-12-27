@@ -1,0 +1,36 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "state": {
+                "Properties": {
+                  "level": "0"
+                },
+                "Name": "minecraft:water"
+            }
+          },
+          "type": "ultra_amplified_dimension:lake_wide_shallow"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 6,
+        "valid_spot_chance": 0.50,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -58,8 +58,8 @@
     ],
     [],
     [
-        "ultra_amplified_dimension:ores/ellipsoid_red_sand_badlands",
-        "ultra_amplified_dimension:ores/ellipsoid_red_sandstone_badlands",
+        "ultra_amplified_dimension:ores/ellipsoid_red_sand",
+        "ultra_amplified_dimension:ores/ellipsoid_red_sandstone",
         "ultra_amplified_dimension:ores/ore_dirt",
         "ultra_amplified_dimension:ores/ore_gravel",
         "ultra_amplified_dimension:ores/ore_granite",
@@ -88,7 +88,7 @@
     ],
     [
       "ultra_amplified_dimension:vegetation/badlands_dense_woods",
-      "ultra_amplified_dimension:vegetation/big_cactus",
+      "ultra_amplified_dimension:vegetation/safer_cactus",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
@@ -199,9 +199,7 @@
         "weight": 2,
         "minCount": 1,
         "maxCount": 2
-      }
-    ],
-    "water_ambient": [
+      },
       {
         "type": "minecraft:pufferfish",
         "weight": 15,
@@ -215,6 +213,7 @@
         "maxCount": 8
       }
     ],
+    "water_ambient": [],
     "misc": []
   },
   "spawn_costs": {}

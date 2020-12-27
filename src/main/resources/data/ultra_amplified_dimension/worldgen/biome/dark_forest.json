@@ -198,9 +198,7 @@
         "weight": 2,
         "minCount": 1,
         "maxCount": 2
-      }
-    ],
-    "water_ambient": [
+      },
       {
         "type": "minecraft:cod",
         "weight": 10,
@@ -208,6 +206,7 @@
         "maxCount": 6
       }
     ],
+    "water_ambient": [],
     "misc": []
   },
   "spawn_costs": {}
