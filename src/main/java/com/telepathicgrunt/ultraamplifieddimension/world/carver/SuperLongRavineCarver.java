@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.carver;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
@@ -16,10 +17,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Function;
 
 import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
@@ -27,57 +25,20 @@ import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.bio
 
 public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 {
+	private final float[] WALL_LEDGES = new float[1024];
+	private SimpleRegistry<Biome> biomeRegistry;
+
+
 	public SuperLongRavineCarver(Codec<ProbabilityConfig> codec, int height)
 	{
 		super(codec, height);
+		this.carvableBlocks = new HashSet<>(this.carvableBlocks);
+		this.carvableBlocks.add(Blocks.NETHERRACK);
+		this.carvableBlocks.add(Blocks.ICE);
+		this.carvableBlocks.add(Blocks.SNOW_BLOCK);
+		this.carvableBlocks.add(Blocks.END_STONE);
+		this.carvableBlocks.add(Blocks.LAVA);
 	}
-
-	private final float[] WALL_LEDGES = new float[1024];
-	protected BlockState fillerBlock = Blocks.STONE.getDefaultState();
-
-	private static final Map<BlockState, BlockState> CAN_REPLACE_MAP;
-	static
-	{
-		Map<BlockState, BlockState> result = new HashMap<>();
-
-		result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState());
-		result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState());
-		result.put(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState());
-		result.put(Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState());
-
-		CAN_REPLACE_MAP = result;
-	}
-
-	private static final Map<String, BlockState> FILLER_BIOME_MAP;
-	static {
-		FILLER_BIOME_MAP = new HashMap<>();
-
-		FILLER_BIOME_MAP.put(biomeIDString("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("iced_terrain"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("ice_spikes"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("frozen_ocean"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("barren_end_fields"), Blocks.END_STONE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("end_fields"), Blocks.END_STONE.getDefaultState());
-	}
-
-	private static final Map<String, BlockState> LAVA_FLOOR_BIOME_MAP;
-	static {
-		LAVA_FLOOR_BIOME_MAP = new HashMap<>();
-
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-	}
-
-	private SimpleRegistry<Biome> biomeRegistry;
-
 
 	@Override
 	public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, ProbabilityConfig config) {
@@ -152,11 +113,12 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 		if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
 			int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
 			int j = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
-			int k = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 6);
-			int l = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
+			int minY = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 6);
+			int maxY = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
 			int i1 = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
 			int j1 = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
-			if (i <= j && k <= l && i1 <= j1) {
+			if (i <= j && minY <= maxY && i1 <= j1) {
+				BlockState fillerBlock;
 				BlockState secondaryFloorBlockstate;
 				BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 				BlockPos.Mutable blockpos$Mutableup = new BlockPos.Mutable();
@@ -174,16 +136,22 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 						if (xzSquaredModified < 1.0D) {
 
 							blockpos$Mutable.setPos(x, 60, z);
-							ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biomeBlockPos.apply(blockpos$Mutable)) : null;
-							String biomeIDString = biomeID == null ? "" : biomeID.toString();
 
-							fillerBlock = FILLER_BIOME_MAP.get(biomeIDString);
-							if (fillerBlock == null) {
-								fillerBlock = Blocks.STONE.getDefaultState();
+							if(maxY >= 60 || minY < 11){
+								Biome biome = biomeBlockPos.apply(blockpos$Mutable);
+								ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biome) : null;
+								String biomeIDString = biomeID == null ? "" : biomeID.toString();
+
+								fillerBlock = GeneralUtils.carverFillerBlock(biomeIDString, biome);
+								secondaryFloorBlockstate = GeneralUtils.carverLavaReplacement(biomeIDString, biome);
 							}
-							secondaryFloorBlockstate = LAVA_FLOOR_BIOME_MAP.get(biomeIDString);
+							else{
+								// Set defaults as this will not be used as ravine is not high or low enough
+								fillerBlock = Blocks.STONE.getDefaultState();
+								secondaryFloorBlockstate = Blocks.LAVA.getDefaultState();
+							}
 
-							for (int y = l; y > k; --y) {
+							for (int y = maxY; y > minY; --y) {
 
 								double d4 = (y - 1 + 0.5D - yRange) / placementYBound;
 
@@ -197,10 +165,20 @@ public class SuperLongRavineCarver extends WorldCarver<ProbabilityConfig>
 									BlockState aboveBlockstate = world.getBlockState(blockpos$Mutableup);
 
 									if (!mask.get(xInChunk | zInChunk << 4 | y << 8) &&
-										(this.canCarveBlock(currentBlockstate, aboveBlockstate) || CAN_REPLACE_MAP.containsKey(currentBlockstate)))
+										(this.canCarveBlock(currentBlockstate, aboveBlockstate)))
 									{
 
-										if (y < 11) {
+										if (y >= 60 && !aboveBlockstate.getFluidState().isEmpty()) {
+											//Creates the messy but cool plateau of stone on the ocean floor
+											//above this ravine to help players locate ravines when exploring
+											//ocean biomes. Also helps to break up the blandness of ocean
+											//floors.
+
+											world.setBlockState(blockpos$Mutable, fillerBlock, false);
+											world.setBlockState(blockpos$Mutableup, fillerBlock, false);
+											world.setBlockState(blockpos$Mutabledown, fillerBlock, false);
+										}
+										else if (y < 11) {
 											currentBlockstate = Blocks.LAVA.getDefaultState();
 											if (secondaryFloorBlockstate != null) {
 												if (secondaryFloorBlockstate.isIn(Blocks.OBSIDIAN)) {

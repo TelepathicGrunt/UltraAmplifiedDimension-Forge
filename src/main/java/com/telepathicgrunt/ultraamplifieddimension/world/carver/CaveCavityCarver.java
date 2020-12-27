@@ -2,6 +2,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.carver;
 
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,10 +17,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Function;
 
 import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
@@ -31,50 +29,6 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	private final float[] ledgeWidthArrayYIndex = new float[1024];
 	protected static long NOISE_SEED;
 	protected static OpenSimplexNoise NOISE_GEN;
-
-	// Blocks that we can carve out.
-	private static final Map<BlockState, BlockState> CAN_REPLACE_MAP;
-	static
-	{
-		Map<BlockState, BlockState> result = new HashMap<>();
-
-		result.put(Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState());
-		result.put(Blocks.ICE.getDefaultState(), Blocks.ICE.getDefaultState());
-		result.put(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.ICE.getDefaultState());
-		result.put(Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState());
-		result.put(Blocks.LAVA.getDefaultState(), Blocks.LAVA.getDefaultState());
-
-		CAN_REPLACE_MAP = result;
-	}
-
-	private static final Map<String, BlockState> FILLER_BIOME_MAP;
-	static {
-		FILLER_BIOME_MAP = new HashMap<>();
-
-		FILLER_BIOME_MAP.put(biomeIDString("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("iced_terrain"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("ice_spikes"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("frozen_ocean"), Blocks.ICE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("barren_end_fields"), Blocks.END_STONE.getDefaultState());
-		FILLER_BIOME_MAP.put(biomeIDString("end_fields"), Blocks.END_STONE.getDefaultState());
-	}
-
-	private static final Map<String, BlockState> LAVA_FLOOR_BIOME_MAP;
-	static {
-		LAVA_FLOOR_BIOME_MAP = new HashMap<>();
-
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("iced_terrain"), Blocks.OBSIDIAN.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("ice_spikes"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("relic_snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_rocky_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_taiga"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("snowy_tundra"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("frozen_desert"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("deep_frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-		LAVA_FLOOR_BIOME_MAP.put(biomeIDString("frozen_ocean"), Blocks.MAGMA_BLOCK.getDefaultState());
-	}
-
 	private SimpleRegistry<Biome> biomeRegistry;
 
 	/**
@@ -90,6 +44,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 
 	public CaveCavityCarver(Codec<ProbabilityConfig> codec, int maximumHeight) {
 		super(codec, maximumHeight);
+		this.carvableBlocks = new HashSet<>(this.carvableBlocks);
+		this.carvableBlocks.add(Blocks.NETHERRACK);
+		this.carvableBlocks.add(Blocks.ICE);
+		this.carvableBlocks.add(Blocks.SNOW_BLOCK);
+		this.carvableBlocks.add(Blocks.END_STONE);
+		this.carvableBlocks.add(Blocks.LAVA);
 	}
 
 	/**
@@ -166,6 +126,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 			int zMin = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
 			int zMax = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
 			if (xMin <= xMax && yMin <= yMax && zMin <= zMax) {
+				BlockState fillerBlock;
 				BlockState secondaryFloorBlockstate;
 				BlockState currentBlockstate;
 				BlockState aboveBlockstate;
@@ -187,21 +148,26 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 							if (yMax < yMin) {
 								continue;
 							}
-
 							blockpos$Mutable.setPos(x, 60, z);
-							ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biomeBlockPos.apply(blockpos$Mutable)) : null;
-							String biomeIDString = biomeID == null ? "" : biomeID.toString();
 
-							BlockState replacementBlock = FILLER_BIOME_MAP.get(biomeIDString);
-							if (replacementBlock == null) {
-								replacementBlock = Blocks.STONE.getDefaultState();
+							if(yMax >= 60 || yMin < 11){
+								Biome biome = biomeBlockPos.apply(blockpos$Mutable);
+								ResourceLocation biomeID = biomeRegistry != null ? biomeRegistry.getKey(biome) : null;
+								String biomeIDString = biomeID == null ? "" : biomeID.toString();
+
+								fillerBlock = GeneralUtils.carverFillerBlock(biomeIDString, biome);
+								secondaryFloorBlockstate = GeneralUtils.carverLavaReplacement(biomeIDString, biome);
 							}
-							secondaryFloorBlockstate = LAVA_FLOOR_BIOME_MAP.get(biomeIDString);
+							else{
+								// Set defaults as this will not be used as cave is not high or low enough
+								fillerBlock = Blocks.STONE.getDefaultState();
+								secondaryFloorBlockstate = Blocks.LAVA.getDefaultState();
+							}
 
 							for (int y = yMax; y > yMin; y--) {
 
 								// Skip already carved spaces
-								if( y < 60 && mask.get(xInChunk | zInChunk << 4 | y << 8)){
+								if(mask.get(xInChunk | zInChunk << 4 | y << 8)){
 									continue;
 								}
 
@@ -304,15 +270,15 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 										//floors.
 
 										if (!currentBlockstate.getFluidState().isEmpty()) {
-											world.setBlockState(blockpos$Mutable, replacementBlock, false);
+											world.setBlockState(blockpos$Mutable, fillerBlock, false);
 										}
 										else if (!aboveBlockstate.getFluidState().isEmpty()) {
-											world.setBlockState(blockpos$Mutable, replacementBlock, false);
-											world.setBlockState(blockpos$Mutableup, replacementBlock, false);
-											world.setBlockState(blockpos$Mutabledown, replacementBlock, false);
+											world.setBlockState(blockpos$Mutable, fillerBlock, false);
+											world.setBlockState(blockpos$Mutableup, fillerBlock, false);
+											world.setBlockState(blockpos$Mutabledown, fillerBlock, false);
 										}
 									}
-									else if (this.canCarveBlock(currentBlockstate, aboveBlockstate) || CAN_REPLACE_MAP.containsKey(currentBlockstate))
+									else if (this.canCarveBlock(currentBlockstate, aboveBlockstate))
 									{
 
 										if (y < 11) {

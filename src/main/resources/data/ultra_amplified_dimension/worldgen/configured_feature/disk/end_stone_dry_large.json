@@ -1,0 +1,54 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "state": {
+                  "Name": "minecraft:end_stone"
+                },
+                "radius": {
+                  "base": 7,
+                  "spread": 2
+                },
+                "half_height": 3,
+                "targets": [
+                  {
+                    "Name": "minecraft:dirt"
+                  },
+                  {
+                    "Name": "minecraft:stone"
+                  }
+                ]
+              },
+              "type": "ultra_amplified_dimension:disk_dry"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 70,
+                "top_offset": 0,
+                "maximum": 180
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 15
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

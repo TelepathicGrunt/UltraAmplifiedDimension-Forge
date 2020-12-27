@@ -1,6 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
@@ -27,24 +28,6 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 	public ContainUndergroundLiquids(Codec<NoFeatureConfig> configFactory) {
 		super(configFactory);
 	}
-
-	// Used to keep track of what block to use to fill in certain air/liquids
-	protected BlockState replacementBlock = Blocks.STONE.getDefaultState();
-	protected static final BlockState STONE = Blocks.STONE.getDefaultState();
-
-	private static Map<String, BlockState> fillerBiomeMap;
-	static {
-		fillerBiomeMap = new HashMap<>();
-
-		fillerBiomeMap.put(biomeIDString("nether_wasteland"), Blocks.NETHERRACK.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("iced_terrain"), Blocks.ICE.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("ice_spikes"), Blocks.ICE.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("deep_frozen_ocean"), Blocks.ICE.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("frozen_ocean"), Blocks.ICE.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("barren_end_fields"), Blocks.END_STONE.getDefaultState());
-		fillerBiomeMap.put(biomeIDString("end_fields"), Blocks.END_STONE.getDefaultState());
-	}
-
 	private MutableRegistry<Biome> BIOME_REGISTRY = null;
 
 	@Override
@@ -53,6 +36,7 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 			BIOME_REGISTRY = world.getWorld().func_241828_r().getRegistry(Registry.BIOME_KEY);
 		}
 
+		BlockState replacementBlock;
 		BlockState currentblock;
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		IChunk chunk = world.getChunk(position.getX() >> 4, position.getZ() >> 4);
@@ -81,12 +65,10 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 						currentblock = world.getBlockState(blockpos$Mutable);
 						if (currentblock.isAir()) {
 							//grabs what block to use based on what biome we are in
-							ResourceLocation rl = BIOME_REGISTRY.getKey(world.getBiome(blockpos$Mutable));
-							replacementBlock = fillerBiomeMap.get(rl == null ? "" : rl.toString());
-							if (replacementBlock == null) {
-								replacementBlock = STONE;
-							}
+							Biome biome = world.getBiome(blockpos$Mutable);
+							ResourceLocation rl = BIOME_REGISTRY.getKey(biome);
 
+							replacementBlock = GeneralUtils.carverFillerBlock(rl == null ? "" : rl.toString(), biome);
 							world.setBlockState(blockpos$Mutable, replacementBlock, 2);
 						}
 						blockpos$Mutable.move(face.getOpposite());

@@ -1,11 +1,13 @@
-package com.telepathicgrunt.ultraamplifieddimension.generation;
+package com.telepathicgrunt.ultraamplifieddimension.dimension;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.ChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoker;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
@@ -34,11 +36,11 @@ import net.minecraft.world.gen.settings.ScalingSettings;
 import net.minecraft.world.gen.settings.SlideSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 
 public class UADChunkGenerator extends NoiseChunkGenerator {
@@ -109,6 +111,12 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     // Cache the sealevel
     private final int sealevel;
+    protected OpenSimplexNoise noiseGen;
+    protected long seed;
+
+    // Grab our UA End Biomes as they have different behavior for the chunk generator.
+    // Set in MinecraftServerMixin
+    public static Set<Biome> UA_END_BIOMES = new HashSet<>();
 
     @Override
     protected Codec<? extends ChunkGenerator> func_230347_a_() {
@@ -124,6 +132,10 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     public UADChunkGenerator(BiomeProvider biomeProvider, long seed, DimensionSettings dimensionSettings) {
         super(biomeProvider, seed, () -> dimensionSettings);
         sealevel = this.field_236080_h_.get().func_236119_g_();
+        if (this.seed != seed || this.noiseGen == null) {
+            this.noiseGen = new OpenSimplexNoise(seed);
+            this.seed = seed;
+        }
     }
 
 
@@ -380,10 +392,27 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     protected BlockState func_236086_a_(double noiseValue, int x, int y, int z) {
         BlockState blockstate;
+        Biome biome = this.biomeProvider.getNoiseBiome(x, y, z);
         if (noiseValue > 0.0D) {
             blockstate = this.defaultBlock;
-        } else if (y < this.getSeaLevel()) {
-            if(this.biomeProvider.getNoiseBiome(x, y, z).getCategory() == Biome.Category.NETHER){
+
+            // Change blockstate for end and nether biomes so that their features and carvers behave correctly
+            if(biome.getCategory() == Biome.Category.NETHER){
+                blockstate = Blocks.NETHERRACK.getDefaultState();
+            }
+            else if(biome.getCategory() == Biome.Category.THEEND){
+                if(UA_END_BIOMES.contains(biome)){
+                    if(y < (this.getSeaLevel() - 2) - ((noiseGen.eval(x * 0.1D, z * 0.1D) + 1) * 2)){
+                        blockstate = Blocks.END_STONE.getDefaultState();
+                    }
+                }
+                else {
+                    blockstate = Blocks.END_STONE.getDefaultState();
+                }
+            }
+        }
+        else if (y < this.getSeaLevel()) {
+            if(biome.getCategory() == Biome.Category.NETHER){
                 // If nether biome is surrounded by nether biomes, place lava.
                 // This way, all imported nether biomes gets the lava they want.
                 if(this.biomeProvider.getNoiseBiome(x + 1, y, z).getCategory() == Biome.Category.NETHER &&

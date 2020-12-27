@@ -1,0 +1,54 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "state": {
+                  "Name": "minecraft:obsidian"
+                },
+                "radius": {
+                  "base": 10,
+                  "spread": 2
+                },
+                "half_height": 3,
+                "targets": [
+                  {
+                    "Properties": {
+                      "snowy": "false"
+                    },
+                    "Name": "minecraft:grass_block"
+                  }
+                ]
+              },
+              "type": "ultra_amplified_dimension:disk_dry"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 10,
+                "top_offset": 0,
+                "maximum": 240
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 6
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -31,7 +31,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_ALL_LAYERS = createFeature("snow_ice_all_layers", () -> new SnowIceAllLayers(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_TOP_LAYER = createFeature("snow_ice_top_layer", () -> new SnowIceTopLayer(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_LAYER_WITHOUT_ICE = createFeature("snow_layer_without_ice", () -> new SnowLayerWithoutIceFeature(NoFeatureConfig.field_236558_a_));
-    public static final RegistryObject<Feature<SphereReplaceConfig>> SPHERE_REPLACE_DRY = createFeature("sphere_replace_dry", () -> new SphereReplaceDry(SphereReplaceConfig.field_236516_a_));
+    public static final RegistryObject<Feature<DiskDryConfig>> DISK_DRY = createFeature("disk_dry", () -> new DiskDry(DiskDryConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> SWAMP_CROSS = createFeature("swamp_cross", () -> new SwampCross(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> TREE_SWAMP_HORNED = createFeature("tree_swamp_horned", () -> new TreeSwampHorned(BaseTreeFeatureConfig.CODEC));
     public static final RegistryObject<Feature<OreFeatureConfig>> ELLIPSOID_POCKET = createFeature("ellipsoid_pocket", () -> new EllipsoidPocket(OreFeatureConfig.CODEC));
@@ -41,6 +41,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<PondConfig>> POND = createFeature("pond", () -> new Pond(PondConfig.CODEC));
     public static final RegistryObject<Feature<BambooConfig>> SAFE_BAMBOO = createFeature("safe_bamboo", () -> new SafeBamboo(BambooConfig.CODEC));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> TREE_GIANT_DARK_OAK = createFeature("tree_giant_dark_oak", () -> new TreeGiantDarkOak(BaseTreeFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<BlockWithRuleReplaceConfig>> ON_SOLID_BLOCK_PLACER = createFeature("on_solid_block_placer", () -> new OnSolidBlockPlacer(BlockWithRuleReplaceConfig.CODEC));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

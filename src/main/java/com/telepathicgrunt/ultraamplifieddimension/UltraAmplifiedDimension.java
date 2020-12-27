@@ -56,6 +56,7 @@ public class UltraAmplifiedDimension {
 		UADPlacements.DECORATORS.register(modEventBus);
 		UADCarvers.WORLD_CARVERS.register(modEventBus);
 		UADSurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
+		UADTreeDecoratorTypes.TREE_DECORATOR_TYPES.register(modEventBus);
 		UADTags.tagInit();
 
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);

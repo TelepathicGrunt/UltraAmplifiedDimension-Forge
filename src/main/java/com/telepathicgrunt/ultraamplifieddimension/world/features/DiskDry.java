@@ -1,6 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
+import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.DiskDryConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -13,14 +14,14 @@ import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import java.util.Random;
 
 
-public class SphereReplaceDry extends Feature<SphereReplaceConfig>
+public class DiskDry extends Feature<DiskDryConfig>
 {
-	public SphereReplaceDry(Codec<SphereReplaceConfig> codec) {
+	public DiskDry(Codec<DiskDryConfig> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos position, SphereReplaceConfig config) {
+	public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos position, DiskDryConfig config) {
 		int placedBlocks = 0;
 		int radius = config.radius.func_242259_a(random);
 		if (radius > 2) {
@@ -40,7 +41,7 @@ public class SphereReplaceDry extends Feature<SphereReplaceConfig>
 					if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
 						cachedChunk = world.getChunk(blockposMutable);
 
-					for (int y = position.getY() - config.field_242809_d; y <= position.getY() + config.field_242809_d; ++y) {
+					for (int y = position.getY() - config.half_height; y <= position.getY() + config.half_height; ++y) {
 						blockposMutable.move(Direction.UP, y);
 						BlockState blockstate = cachedChunk.getBlockState(blockposMutable);
 
