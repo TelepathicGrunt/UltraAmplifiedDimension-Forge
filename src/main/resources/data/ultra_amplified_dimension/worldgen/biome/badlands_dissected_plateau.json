@@ -91,7 +91,7 @@
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_dead_bush",
-      "ultra_amplified_dimension:vegetation/patch_grass_badlands",
+      "ultra_amplified_dimension:vegetation/patch_grass_sparse",
       "ultra_amplified_dimension:vegetation/mushroom_red_normal",
       "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
     ],
@@ -168,7 +168,7 @@
       },
       {
         "type": "minecraft:drowned",
-        "weight": 5,
+        "weight": 50,
         "minCount": 1,
         "maxCount": 5
       }

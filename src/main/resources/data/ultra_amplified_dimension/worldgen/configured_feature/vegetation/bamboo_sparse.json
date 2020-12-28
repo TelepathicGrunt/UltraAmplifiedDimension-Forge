@@ -4,24 +4,12 @@
       "config": {
         "feature": {
           "config": {
-            "state": {
-              "Name": "minecraft:coarse_dirt"
-            },
-            "radius": {
-              "base": 3,
-              "spread": 3
-            },
-            "half_height": 2,
-            "targets": [
-              {
-                "Name": "minecraft:dirt"
-              },
-              {
-                "Name": "minecraft:stone"
-              }
-            ]
+            "max_height": 13,
+            "min_height": 5,
+            "podzol_max_radius": 2,
+            "podzol_min_radius": 1
           },
-          "type": "minecraft:disk"
+          "type": "ultra_amplified_dimension:safe_bamboo"
         },
         "decorator": {
           "config": {
@@ -35,10 +23,9 @@
     "decorator": {
       "config": {
         "column_passes": 3,
-        "valid_spot_chance": 0.9,
+        "valid_spot_chance": 0.02,
         "skip_top_ledge": false,
-        "underside_only": false,
-        "water_pos_only": true
+        "underside_only": false
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

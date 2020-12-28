@@ -1,11 +1,11 @@
 {
-  "player_spawn_friendly": false,
-  "category": "mesa",
-  "precipitation": "none",
-  "temperature": 2.0,
-  "downfall": 0.0,
+  "player_spawn_friendly": true,
+  "category": "forest",
+  "precipitation": "rain",
+  "temperature": 1,
+  "downfall": 0.8,
   "depth": 0.1,
-  "scale": 0.2,
+  "scale": 0.4,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -14,13 +14,13 @@
       "offset": 2.0
     },
     "sky_color": 7907327,
-    "foliage_color": 10387789,
-    "grass_color": 9470285,
+    "foliage_color": 47653,
+    "grass_color": 55595,
     "fog_color": 12638463,
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "ultra_amplified_dimension:badlands_surface_builder",
+  "surface_builder": "minecraft:grass",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -32,33 +32,31 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:ores/ellipsoid_pocket",
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [
         "ultra_amplified_dimension:ponds/surface_slime",
-        "ultra_amplified_dimension:ponds/underground_water_badlands",
+        "ultra_amplified_dimension:ponds/underground_water_grass",
         "ultra_amplified_dimension:ponds/underground_lava"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_badlands",
-        "ultra_amplified_dimension:columns/ramp_badlands",
+        "ultra_amplified_dimension:columns/vertical_grass",
+        "ultra_amplified_dimension:columns/ramp_grass",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
+        "ultra_amplified_dimension:vegetation/roots_oak_sparse",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/badlands_high",
-        "ultra_amplified_dimension:dungeons/badlands_middle",
-        "ultra_amplified_dimension:dungeons/badlands_bottom"
+        "ultra_amplified_dimension:dungeons/generic_high",
+        "ultra_amplified_dimension:dungeons/generic_middle",
+        "ultra_amplified_dimension:dungeons/generic_bottom"
     ],
     [
         "ultra_amplified_dimension:ministructures/hanging_ruins"
     ],
     [],
     [
-        "ultra_amplified_dimension:ores/ellipsoid_red_sand",
-        "ultra_amplified_dimension:ores/ellipsoid_red_sandstone",
         "ultra_amplified_dimension:ores/ore_dirt",
         "ultra_amplified_dimension:ores/ore_gravel",
         "ultra_amplified_dimension:ores/ore_granite",
@@ -67,14 +65,13 @@
         "ultra_amplified_dimension:ores/ore_coal",
         "ultra_amplified_dimension:ores/ore_iron",
         "ultra_amplified_dimension:ores/ore_iron_deep",
-        "ultra_amplified_dimension:ores/ore_gold_badlands",
+        "ultra_amplified_dimension:ores/ore_gold",
         "ultra_amplified_dimension:ores/ore_redstone",
         "ultra_amplified_dimension:ores/ore_diamond",
         "ultra_amplified_dimension:ores/ore_lapis",
-        "ultra_amplified_dimension:ores/ore_gold_sealevel_badlands",
+        "ultra_amplified_dimension:ores/ore_gold_sealevel",
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
-        "ultra_amplified_dimension:ores/ore_gold_extra_badlands",
         "ultra_amplified_dimension:disk/coarse_dirt",
         "ultra_amplified_dimension:disk/clay",
         "ultra_amplified_dimension:disk/gravel"
@@ -86,11 +83,12 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/safer_cactus",
-      "ultra_amplified_dimension:vegetation/patch_sugar_cane_badlands",
-      "ultra_amplified_dimension:vegetation/patch_pumpkin",
-      "ultra_amplified_dimension:vegetation/patch_dead_bush",
+      "ultra_amplified_dimension:vegetation/flowers_forest_less_dense",
+      "ultra_amplified_dimension:vegetation/trees_flower_forest",
+      "ultra_amplified_dimension:vegetation/flowers_flower_forest",
       "ultra_amplified_dimension:vegetation/patch_grass_sparse",
+      "ultra_amplified_dimension:vegetation/patch_pumpkin",
+      "ultra_amplified_dimension:vegetation/patch_sugar_cane",
       "ultra_amplified_dimension:vegetation/mushroom_red_normal",
       "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
     ],
@@ -99,33 +97,22 @@
     ]
   ],
   "starts": [
-    "minecraft:mineshaft_mesa",
+    "minecraft:jungle_pyramid",
+    "minecraft:mineshaft",
     "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:ruined_portal_jungle"
   ],
   "spawners": {
     "monster": [
       {
         "type": "minecraft:spider",
-        "weight": 80,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:cave_spider",
-        "weight": 20,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:husk",
-        "weight": 80,
+        "weight": 100,
         "minCount": 4,
         "maxCount": 4
       },
       {
         "type": "minecraft:zombie",
-        "weight": 15,
+        "weight": 95,
         "minCount": 4,
         "maxCount": 4
       },
@@ -167,12 +154,43 @@
       },
       {
         "type": "minecraft:drowned",
-        "weight": 5,
+        "weight": 50,
         "minCount": 1,
         "maxCount": 5
       }
     ],
-    "creature": [],
+    "creature": [
+      {
+        "type": "minecraft:sheep",
+        "weight": 12,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:pig",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:chicken",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:cow",
+        "weight": 8,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:chicken",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      }
+    ],
     "ambient": [
       {
         "type": "minecraft:bat",
@@ -195,16 +213,10 @@
         "maxCount": 2
       },
       {
-        "type": "minecraft:pufferfish",
+        "type": "minecraft:cod",
         "weight": 15,
         "minCount": 1,
         "maxCount": 3
-      },
-      {
-        "type": "minecraft:tropical_fish",
-        "weight": 25,
-        "minCount": 8,
-        "maxCount": 8
       }
     ],
     "water_ambient": [],

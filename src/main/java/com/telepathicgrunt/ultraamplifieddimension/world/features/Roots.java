@@ -137,24 +137,22 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 		//begin vine generation
 		for (; blockposMutable.getY() > 1 && length < 5; blockposMutable.move(Direction.DOWN)) {
 			if (cachedChunk.getBlockState(blockposMutable).isAir()) {
-				for (Direction direction : Direction.Plane.HORIZONTAL) {
-					BlockState currentBlockState = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), Boolean.TRUE);
-					if(currentBlockState.isAir()){
-						if (currentBlockState.isValidPosition(world, blockposMutable)) {
-							cachedChunk.setBlockState(blockposMutable, currentBlockState, false);
-							length++;
-							break;
-						}
-						else {
-							BlockState aboveState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
-							blockposMutable.move(Direction.DOWN); // Move back to original pos.
 
-							if (aboveState.isIn(Blocks.VINE)) {
-								cachedChunk.setBlockState(blockposMutable, aboveState, false);
-								length++;
-								break;
-							}
-						}
+				BlockState aboveState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
+				blockposMutable.move(Direction.DOWN); // Move back to original pos.
+
+				if (aboveState.isIn(Blocks.VINE)) {
+					cachedChunk.setBlockState(blockposMutable, aboveState, false);
+					length++;
+					continue;
+				}
+
+				for (Direction direction : Direction.Plane.HORIZONTAL) {
+					BlockState currentVineBlockState = Blocks.VINE.getDefaultState().with(VineBlock.getPropertyFor(direction), Boolean.TRUE);
+					if (currentVineBlockState.isValidPosition(world, blockposMutable)) {
+						cachedChunk.setBlockState(blockposMutable, currentVineBlockState, false);
+						length++;
+						break;
 					}
 				}
 			}

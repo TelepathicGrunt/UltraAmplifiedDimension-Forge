@@ -4,24 +4,19 @@
       "config": {
         "feature": {
           "config": {
-            "state": {
-              "Name": "minecraft:gravel"
-            },
-            "radius": {
-              "base": 3,
-              "spread": 2
-            },
-            "half_height": 2,
-            "targets": [
+            "features": [
               {
-                "Name": "minecraft:dirt"
+                "feature": "minecraft:birch_bees_005",
+                "chance": 0.2
               },
               {
-                "Name": "minecraft:stone"
+                "feature": "minecraft:fancy_oak_bees_005",
+                "chance": 0.1
               }
-            ]
+            ],
+            "default": "minecraft:oak_bees_005"
           },
-          "type": "minecraft:disk"
+          "type": "minecraft:random_selector"
         },
         "decorator": {
           "config": {
@@ -34,11 +29,10 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 2,
-        "valid_spot_chance": 1,
+        "column_passes": 4,
+        "valid_spot_chance": 0.8,
         "skip_top_ledge": false,
-        "underside_only": false,
-        "water_pos_only": true
+        "underside_only": false
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

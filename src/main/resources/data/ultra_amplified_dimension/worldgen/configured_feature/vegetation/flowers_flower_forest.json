@@ -4,24 +4,23 @@
       "config": {
         "feature": {
           "config": {
-            "state": {
-              "Name": "minecraft:clay"
+            "can_replace": false,
+            "project": false,
+            "need_water": false,
+            "xspread": 7,
+            "yspread": 3,
+            "zspread": 7,
+            "whitelist": [],
+            "blacklist": [],
+            "tries": 64,
+            "state_provider": {
+              "type": "minecraft:forest_flower_provider"
             },
-            "radius": {
-              "base": 3,
-              "spread": 1
-            },
-            "half_height": 1,
-            "targets": [
-              {
-                "Name": "minecraft:dirt"
-              },
-              {
-                "Name": "minecraft:stone"
-              }
-            ]
+            "block_placer": {
+              "type": "minecraft:simple_block_placer"
+            }
           },
-          "type": "minecraft:disk"
+          "type": "minecraft:flower"
         },
         "decorator": {
           "config": {
@@ -35,10 +34,9 @@
     "decorator": {
       "config": {
         "column_passes": 4,
-        "valid_spot_chance": 1,
+        "valid_spot_chance": 0.8,
         "skip_top_ledge": false,
-        "underside_only": false,
-        "water_pos_only": true
+        "underside_only": false
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

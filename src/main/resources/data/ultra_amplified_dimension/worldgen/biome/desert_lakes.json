@@ -166,6 +166,12 @@
         "weight": 80,
         "minCount": 4,
         "maxCount": 4
+      },
+      {
+        "type": "minecraft:drowned",
+        "weight": 50,
+        "minCount": 1,
+        "maxCount": 5
       }
     ],
     "creature": [

@@ -82,7 +82,7 @@
     ],
     [
       "ultra_amplified_dimension:vegetation/trees_dark_forest_brown",
-      "ultra_amplified_dimension:vegetation/forest_flowers",
+      "ultra_amplified_dimension:vegetation/flowers_forest",
       "ultra_amplified_dimension:vegetation/patch_default_flowers",
       "ultra_amplified_dimension:vegetation/patch_grass_forest",
       "ultra_amplified_dimension:vegetation/patch_tall_grass",
@@ -150,6 +150,12 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "minecraft:drowned",
+        "weight": 50,
+        "minCount": 1,
+        "maxCount": 5
       }
     ],
     "creature": [
