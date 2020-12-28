@@ -7,10 +7,10 @@
             "feature": {
               "config": {
                 "top_state": {
-                    "Name": "minecraft:honey_block"
+                    "Name": "minecraft:honeycomb_block"
                 },
                 "outside_state": {
-                    "Name": "minecraft:honey_block"
+                    "Name": "minecraft:honeycomb_block"
                 },
                 "inside_state": {
                     "Name": "minecraft:honey_block"

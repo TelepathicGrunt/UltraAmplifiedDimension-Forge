@@ -4,10 +4,19 @@
       "config": {
         "feature": {
           "config": {
-            "probability": 0.3,
-            "count": 5
+            "features": [
+              {
+                "feature": "minecraft:birch_bees_0002",
+                "chance": 0.2
+              },
+              {
+                "feature": "minecraft:fancy_oak_bees_0002",
+                "chance": 0.1
+              }
+            ],
+            "default": "minecraft:oak_bees_0002"
           },
-          "type": "ultra_amplified_dimension:proper_seagrass"
+          "type": "minecraft:random_selector"
         },
         "decorator": {
           "config": {
@@ -20,11 +29,10 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 5,
-        "valid_spot_chance": 0.4,
+        "column_passes": 12,
+        "valid_spot_chance": 1,
         "skip_top_ledge": false,
-        "underside_only": false,
-        "water_pos_only": true
+        "underside_only": false
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

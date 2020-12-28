@@ -29,13 +29,9 @@ public class SnowIceAllLayers extends Feature<NoFeatureConfig>
 		Biome biome = world.getBiome(pos);
 		BlockPos.Mutable blockposMutable1 = new BlockPos.Mutable();
 		BlockPos.Mutable blockposMutable2 = new BlockPos.Mutable();
-
 		IChunk cachedChunk = world.getChunk(pos);
-		if(blockposMutable1.getX() >> 4 != cachedChunk.getPos().x || blockposMutable1.getZ() >> 4 != cachedChunk.getPos().z)
-			cachedChunk = world.getChunk(blockposMutable1);
 
-
-		for (int y = chunkGenerator.getMaxBuildHeight(); y > chunkGenerator.getSeaLevel(); --y) {
+		for (int y = chunkGenerator.getMaxBuildHeight(); y >= chunkGenerator.getSeaLevel(); --y) {
 
 			blockposMutable1.setPos(pos.getX(), y, pos.getZ());
 			blockposMutable2.setPos(blockposMutable1).move(Direction.DOWN);

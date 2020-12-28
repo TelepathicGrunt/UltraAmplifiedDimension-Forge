@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.DiskDryConfig;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -25,7 +26,7 @@ public class DiskDry extends Feature<DiskDryConfig>
 		int placedBlocks = 0;
 		int radius = config.radius.func_242259_a(random);
 		if (radius > 2) {
-			radius = random.nextInt(config.radius.func_242259_a(random) - 2) + 2;
+			radius = random.nextInt(radius - 2) + 2;
 		}
 
 		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
@@ -37,21 +38,29 @@ public class DiskDry extends Feature<DiskDryConfig>
 				int trueX = x - position.getX();
 				int trueZ = z - position.getZ();
 				if (trueX * trueX + trueZ * trueZ <= radius * radius) {
-					blockposMutable.setPos(x, 0, z);
+					blockposMutable.setPos(x, position.getY(), z);
 					if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
 						cachedChunk = world.getChunk(blockposMutable);
 
-					for (int y = position.getY() - config.half_height; y <= position.getY() + config.half_height; ++y) {
-						blockposMutable.move(Direction.UP, y);
-						BlockState blockstate = cachedChunk.getBlockState(blockposMutable);
+					blockposMutable.move(Direction.DOWN, config.half_height); // start at bottom of half height
+					for (int y = -config.half_height; y <= config.half_height; ++y) {
+						BlockState blockState = cachedChunk.getBlockState(blockposMutable);
 
-						for (BlockState blockstate1 : config.targets) {
-							if (blockstate1.getBlock() == blockstate.getBlock()) {
+						for (BlockState targetBlockState : config.targets) {
+							if (targetBlockState.getBlock() == blockState.getBlock()) {
 								cachedChunk.setBlockState(blockposMutable, config.state, false);
 								++placedBlocks;
+
+								blockState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
+								if(blockState.isIn(Blocks.SNOW) && !blockState.isValidPosition(world, blockposMutable)){
+									cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+								}
+								blockposMutable.move(Direction.DOWN);
 								break;
 							}
 						}
+
+						blockposMutable.move(Direction.UP);
 					}
 				}
 			}

@@ -13,7 +13,7 @@ public class DiskDryConfig implements IFeatureConfig {
 
     public static final Codec<DiskDryConfig> CODEC = RecordCodecBuilder.create((diskDryConfig) -> diskDryConfig.group(
             BlockState.CODEC.fieldOf("state").forGetter((config) -> config.state),
-            FeatureSpread.func_242254_a(0, 36, 36).fieldOf("radius").forGetter((config) -> config.radius),
+            FeatureSpread.func_242254_a(1, 36, 36).fieldOf("radius").forGetter((config) -> config.radius),
             Codec.intRange(0, 36).fieldOf("half_height").forGetter((config) -> config.half_height),
             BlockState.CODEC.listOf().fieldOf("targets").forGetter((config) -> config.targets)
     ).apply(diskDryConfig, DiskDryConfig::new));

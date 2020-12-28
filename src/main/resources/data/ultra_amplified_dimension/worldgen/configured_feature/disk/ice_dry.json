@@ -3,53 +3,53 @@
     "feature": {
       "config": {
         "feature": {
-          "config": {
-            "feature": {
               "config": {
                 "state": {
-                  "Name": "minecraft:obsidian"
+                  "Name": "minecraft:ice"
                 },
                 "radius": {
-                  "base": 5,
+                  "base": 2,
                   "spread": 2
                 },
-                "half_height": 2,
+                "half_height": 1,
                 "targets": [
                   {
                     "Properties": {
                       "snowy": "false"
                     },
                     "Name": "minecraft:grass_block"
+                  },
+                  {
+                    "Name": "minecraft:dirt"
+                  },
+                  {
+                    "Name": "minecraft:sand"
+                  },
+                  {
+                    "Name": "minecraft:sandstone"
                   }
                 ]
               },
               "type": "ultra_amplified_dimension:disk_dry"
             },
-            "decorator": {
-              "config": {
-                "bottom_offset": 10,
-                "top_offset": 0,
-                "maximum": 240
-              },
-              "type": "minecraft:range"
-            }
-          },
-          "type": "minecraft:decorated"
-        },
         "decorator": {
-          "config": {},
-          "type": "minecraft:square"
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
         }
       },
       "type": "minecraft:decorated"
     },
     "decorator": {
       "config": {
-        "count": 3,
-        "extra_chance": 0,
-        "extra_count": 0
+        "column_passes": 4,
+        "valid_spot_chance": 0.4,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": false
       },
-      "type": "minecraft:count_extra"
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
     }
   },
   "type": "minecraft:decorated"

@@ -150,11 +150,13 @@ public class Pond extends Feature<PondConfig> {
                             }
 
                             // Remove floating plants.
+                            BlockState plantCheckState = aboveState;
                             while(blockpos.getY() <= chunkGenerator.getMaxBuildHeight() &&
-                                    !aboveState.isValidPosition(world, blockpos))
+                                    !plantCheckState.isValidPosition(world, blockpos))
                             {
                                 cachedChunk.setBlockState(blockpos, Blocks.AIR.getDefaultState(), false);
                                 blockpos.move(Direction.UP);
+                                plantCheckState = cachedChunk.getBlockState(blockpos);
                             }
                         }
                     }

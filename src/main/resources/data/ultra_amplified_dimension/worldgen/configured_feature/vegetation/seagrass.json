@@ -4,8 +4,8 @@
       "config": {
         "feature": {
           "config": {
-            "probability": 0.3,
-            "count": 5
+            "probability": 0.5,
+            "count": 32
           },
           "type": "ultra_amplified_dimension:proper_seagrass"
         },
@@ -20,8 +20,8 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 5,
-        "valid_spot_chance": 0.4,
+        "column_passes": 14,
+        "valid_spot_chance": 0.75,
         "skip_top_ledge": false,
         "underside_only": false,
         "water_pos_only": true

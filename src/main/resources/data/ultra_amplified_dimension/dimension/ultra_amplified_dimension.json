@@ -4,7 +4,7 @@
     "biome_source": {
       "seed": 0,
       "type": "minecraft:fixed",
-      "biome": "ultra_amplified_dimension:flower_jungle"
+      "biome": "ultra_amplified_dimension:frozen_desert"
     },
     "seed": 0,
     "type": "ultra_amplified_dimension:terrain",

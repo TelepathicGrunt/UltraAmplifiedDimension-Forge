@@ -169,7 +169,12 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                                 cachedChunk = world.getChunk(blockposMutable);
 
                             if (cachedChunk.getBlockState(blockposMutable) == blocksConfig.insideBlock) {
-                                cachedChunk.setBlockState(blockposMutable, downward == 1 ? blocksConfig.topBlock : blocksConfig.middleBlock, false);
+                                if(downward == 1 && blockposMutable.getY() >= chunkGenerator.getSeaLevel() - 1){
+                                    cachedChunk.setBlockState(blockposMutable, blocksConfig.topBlock, false);
+                                }
+                                else{
+                                    cachedChunk.setBlockState(blockposMutable, blocksConfig.middleBlock, false);
+                                }
                             }
 
                             blockposMutable.move(Direction.DOWN); //moves down 1 every loop

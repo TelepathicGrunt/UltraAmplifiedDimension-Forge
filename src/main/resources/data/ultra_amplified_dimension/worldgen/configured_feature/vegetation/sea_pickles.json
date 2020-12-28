@@ -4,10 +4,11 @@
       "config": {
         "feature": {
           "config": {
-            "probability": 0.3,
-            "count": 5
+            "max_pickles": 2,
+            "min_pickles": 1,
+            "count": 6
           },
-          "type": "ultra_amplified_dimension:proper_seagrass"
+          "type": "ultra_amplified_dimension:proper_sea_pickles"
         },
         "decorator": {
           "config": {
@@ -20,8 +21,8 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 5,
-        "valid_spot_chance": 0.4,
+        "column_passes": 2,
+        "valid_spot_chance": 0.5,
         "skip_top_ledge": false,
         "underside_only": false,
         "water_pos_only": true

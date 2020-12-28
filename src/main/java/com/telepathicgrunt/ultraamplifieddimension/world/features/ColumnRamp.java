@@ -134,6 +134,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         int zOffset;
         int xDiff;
         int zDiff;
+        BlockPos.Mutable tempMutable = new BlockPos.Mutable();
 
         //clears hole for ramp
         for (int y = -2; y <= heightDiff + 3; y++) {
@@ -173,10 +174,21 @@ public class ColumnRamp extends Feature<ColumnConfig> {
 
                     BlockState block = cachedChunk.getBlockState(blockposMutable);
                     if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds) {
-                        if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator)
+                        if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator){
                             cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor)chunkGenerator).getDefaultFluid(), false);
-                        else
+                        }
+                         else{
                             cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                        }
+
+                        //remove floating plants so they aren't hovering.
+                        //check above while moving up one.
+                        tempMutable.setPos(blockposMutable).move(Direction.UP);
+                        block = cachedChunk.getBlockState(tempMutable);
+                        while(tempMutable.getY() < chunkGenerator.getMaxBuildHeight() && !block.isValidPosition(world, tempMutable)){
+                            cachedChunk.setBlockState(tempMutable, Blocks.AIR.getDefaultState(), false);
+                            block = cachedChunk.getBlockState(tempMutable.move(Direction.UP));
+                        }
 
                         //adds top block to exposed middle block after air was set
                         BlockState blockBelowAir = cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN));
@@ -184,7 +196,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                         blockposMutable.move(Direction.UP); // Move back to blockBelowAir
 
                         if (blockBelowAir.isSolid()) {
-                            if (blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) {
+                            if ((blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) || blockposMutable.getY() < chunkGenerator.getSeaLevel()) {
                                 cachedChunk.setBlockState(blockposMutable, blocksConfig.middleBlock, false);
                             }
                             else {
@@ -230,14 +242,17 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                     else if (y > heightDiff || xzDiffSquaredStretched <= (widthAtHeight + 3) * (widthAtHeight + 3)) {
                         //top block followed by 4 middle blocks below that
                         for (int downward = 0; downward < 6 && y - downward >= -3; downward++) {
-                            BlockState block = world.getBlockState(blockposMutable.down(downward));
-                            BlockState blockBelow = world.getBlockState(blockposMutable.down(downward + 1));
+                            tempMutable.setPos(blockposMutable).move(Direction.DOWN, downward);
+                            BlockState block = world.getBlockState(tempMutable);
+                            BlockState blockBelow = world.getBlockState(tempMutable.move(Direction.DOWN));
+                            tempMutable.move(Direction.UP);
+
                             if (block == blocksConfig.insideBlock) {
-                                if (downward == 1 && !(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelow.getMaterial() == Material.AIR)) {
-                                    world.setBlockState(blockposMutable.down(downward), blocksConfig.topBlock, 2);
+                                if (tempMutable.getY() >= chunkGenerator.getSeaLevel() - 1 && downward == 1 && !(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelow.getMaterial() == Material.AIR)) {
+                                    world.setBlockState(tempMutable, blocksConfig.topBlock, 2);
                                 }
                                 else {
-                                    world.setBlockState(blockposMutable.down(downward), blocksConfig.middleBlock, 2);
+                                    world.setBlockState(tempMutable, blocksConfig.middleBlock, 2);
                                 }
 
                             }

@@ -42,6 +42,8 @@ public class UADFeatures {
     public static final RegistryObject<Feature<BambooConfig>> SAFE_BAMBOO = createFeature("safe_bamboo", () -> new SafeBamboo(BambooConfig.CODEC));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> TREE_GIANT_DARK_OAK = createFeature("tree_giant_dark_oak", () -> new TreeGiantDarkOak(BaseTreeFeatureConfig.CODEC));
     public static final RegistryObject<Feature<BlockWithRuleReplaceConfig>> ON_SOLID_BLOCK_PLACER = createFeature("on_solid_block_placer", () -> new OnSolidBlockPlacer(BlockWithRuleReplaceConfig.CODEC));
+    public static final RegistryObject<Feature<ProbabilityAndCountConfig>> PROPER_SEAGRASS = createFeature("proper_seagrass", () -> new ProperSeagrass(ProbabilityAndCountConfig.CODEC));
+    public static final RegistryObject<Feature<SeaPickleConfig>> PROPER_SEAPICKLES = createFeature("proper_sea_pickles", () -> new ProperSeapickle(SeaPickleConfig.CODEC));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

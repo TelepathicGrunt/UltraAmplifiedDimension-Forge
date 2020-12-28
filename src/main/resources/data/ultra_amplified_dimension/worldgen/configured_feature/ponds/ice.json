@@ -6,30 +6,24 @@
           "config": {
             "feature": {
               "config": {
-                "state": {
-                  "Name": "minecraft:end_stone"
+                "top_state": {
+                    "Name": "minecraft:snow_block"
                 },
-                "radius": {
-                  "base": 5,
-                  "spread": 2
+                "outside_state": {
+                    "Name": "minecraft:packed_ice"
                 },
-                "half_height": 2,
-                "targets": [
-                  {
-                    "Name": "minecraft:dirt"
-                  },
-                  {
-                    "Name": "minecraft:stone"
-                  }
-                ]
+                "inside_state": {
+                    "Name": "minecraft:ice"
+                },
+                "place_outside_state_often": false
               },
-              "type": "ultra_amplified_dimension:disk_dry"
+              "type": "ultra_amplified_dimension:pond"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 70,
+                "bottom_offset": 6,
                 "top_offset": 0,
-                "maximum": 180
+                "maximum": 250
               },
               "type": "minecraft:range"
             }
@@ -45,9 +39,11 @@
     },
     "decorator": {
       "config": {
-        "count": 4
+        "count": 0,
+        "extra_chance": 0.5,
+        "extra_count": 1
       },
-      "type": "minecraft:count"
+      "type": "minecraft:count_extra"
     }
   },
   "type": "minecraft:decorated"
