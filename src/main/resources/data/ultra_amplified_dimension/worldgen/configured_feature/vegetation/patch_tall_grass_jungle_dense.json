@@ -9,14 +9,7 @@
             "yspread": 3,
             "zspread": 7,
             "whitelist": [],
-            "blacklist": [
-              {
-                "Properties": {
-                  "snowy": "false"
-                },
-                "Name": "minecraft:podzol"
-              }
-            ],
+            "blacklist": [],
             "tries": 64,
             "state_provider": {
               "entries": [
