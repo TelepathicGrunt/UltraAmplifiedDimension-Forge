@@ -6,15 +6,15 @@
           "config": {
             "features": [
               {
-                "feature": "ultra_amplified_dimension:vegetation/tree_mega_spruce",
-                "chance": 0.53333334
+                "feature": "minecraft:spruce",
+                "chance": 0.666
               },
               {
-                "feature": "minecraft:pine",
-                "chance": 0.23333334
+                "feature": "minecraft:fancy_oak",
+                "chance": 0.1
               }
             ],
-            "default": "minecraft:spruce"
+            "default": "minecraft:oak"
           },
           "type": "minecraft:random_selector"
         },
@@ -29,8 +29,8 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 14,
-        "valid_spot_chance": 0.90,
+        "column_passes": 1,
+        "valid_spot_chance": 0.1,
         "skip_top_ledge": false,
         "underside_only": false
       },

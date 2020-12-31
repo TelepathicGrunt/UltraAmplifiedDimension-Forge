@@ -6,32 +6,28 @@
           "config": {
             "feature": {
               "config": {
-                "max_radius": 3,
-                "min_radius": 2,
-                "boulder_blocks" : [
+                "max_radius": 2,
+                "min_radius": 0,
+                "boulder_blocks" :  [
                     {
-                        "state": { "Name": "minecraft:diamond_ore" },
-                        "weight": 1
+                        "state": { "Name": "minecraft:infested_stone" },
+                        "weight": 10
                     },
                     {
                         "state": { "Name": "minecraft:iron_ore" },
-                        "weight": 48
+                        "weight": 20
                     },
                     {
                         "state": { "Name": "minecraft:coal_ore" },
-                        "weight": 82
-                    },
-                    {
-                        "state": { "Name": "minecraft:andesite" },
-                        "weight": 138
+                        "weight": 20
                     },
                     {
                         "state": { "Name": "minecraft:cobblestone" },
-                        "weight": 72
+                        "weight": 250
                     },
                     {
-                        "state": { "Name": "minecraft:mossy_cobblestone" },
-                        "weight": 990
+                        "state": { "Name": "minecraft:stone" },
+                        "weight": 500
                     }
                 ]
               },
@@ -65,7 +61,7 @@
     "decorator": {
       "config": {
         "count": 0,
-        "extra_chance": 0.33333,
+        "extra_chance": 0.2,
         "extra_count": 1      
       },
       "type": "minecraft:count_extra"

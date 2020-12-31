@@ -5,23 +5,16 @@
         "feature": {
           "config": {
             "feature": {
-              "config": {
-                "target": {
-                  "Name": "minecraft:stone"
-                },
-                "state": {
-                  "Name": "minecraft:emerald_ore"
-                }
-              },
-              "type": "minecraft:emerald_ore"
+              "config": {},
+              "type": "ultra_amplified_dimension:blue_ice_waterfall"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 2,
+                "bottom_offset": 75,
                 "top_offset": 0,
-                "maximum": 254
+                "maximum": 150
               },
-              "type": "minecraft:range"
+              "type": "minecraft:range_biased"
             }
           },
           "type": "minecraft:decorated"
@@ -35,11 +28,9 @@
     },
     "decorator": {
       "config": {
-        "count": 30,
-        "extra_chance": 0.4,
-        "extra_count": 20      
+        "count": 36
       },
-      "type": "minecraft:count_extra"
+      "type": "minecraft:count"
     }
   },
   "type": "minecraft:decorated"

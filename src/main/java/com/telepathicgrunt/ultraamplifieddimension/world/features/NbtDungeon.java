@@ -90,7 +90,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         return false;
                     }
                     // Floor must be complete
-                    else if(!state.getMaterial().isSolid()){
+                    else if(!GeneralUtils.isFullCube(world, mutable, state)){
                         if (y == -1) {
                             return false;
                         }
@@ -164,7 +164,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                     BlockState blockState = world.getBlockState(mutable.offset(direction));
 
                                     // Face opposite direction if facing wall.
-                                    if(blockState.isSolid()){
+                                    if(GeneralUtils.isFullCube(world, mutable, blockState)){
                                         doubleChestDirection = doubleChestDirection.getOpposite();
                                         flippedDirections = true;
                                     }
@@ -179,7 +179,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                     break;
                                 }
                             }
-                            else if(neightboringState.isSolid()){
+                            else if(GeneralUtils.isFullCube(world, mutable, neightboringState)){
                                 isOnWall = true;
                             }
                         }
@@ -204,7 +204,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
     /**
      * Adds blocks and entities from this structure to the given world.
      */
-    public void addBlocksToWorld(Template structure, IServerWorld world, ChunkGenerator chunkGenerator, BlockPos pos, PlacementSettings placementIn, int flags, Random random, NbtDungeonConfig config) {
+    public void addBlocksToWorld(Template structure, ISeedReader world, ChunkGenerator chunkGenerator, BlockPos pos, PlacementSettings placementIn, int flags, Random random, NbtDungeonConfig config) {
         TemplateInvoker structureAccessor = ((TemplateInvoker) structure);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
@@ -238,7 +238,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         {
                             // No floating chests or spawners
                             BlockState aboveState = world.getBlockState(mutable.setPos(blockpos).move(Direction.UP));
-                            if(isNotSpawnerOrChest(aboveState) && (config.replaceAir || originalBlockState.isSolid() || blockstate.hasTileEntity()))
+                            if(isNotSpawnerOrChest(aboveState) && (config.replaceAir || GeneralUtils.isFullCube(world, mutable, originalBlockState) || blockstate.hasTileEntity()))
                             {
                                 // Attempt to let leaves stay in the dungeon space and not be cut off
                                 if(!(blockstate.isAir() && originalBlockState.isIn(BlockTags.LEAVES))){

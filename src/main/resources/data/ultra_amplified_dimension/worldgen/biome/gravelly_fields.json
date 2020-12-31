@@ -1,11 +1,11 @@
 {
   "player_spawn_friendly": false,
-  "category": "taiga",
+  "category": "extreme_hills",
   "precipitation": "rain",
-  "temperature": 0.8,
-  "downfall": 0.5,
-  "depth": 0.2,
-  "scale": 0.2,
+  "temperature": 0.5,
+  "downfall": 0.3,
+  "depth": 1,
+  "scale": 0.5,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -18,7 +18,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "minecraft:grass",
+  "surface_builder": "ultra_amplified_dimension:mountains_mutated_surface_builder",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -33,19 +33,15 @@
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [
-        "ultra_amplified_dimension:ministructures/boulder_small",
-        "ultra_amplified_dimension:ministructures/boulder_medium",
-        "ultra_amplified_dimension:ministructures/boulder_large_stack_medium",
         "ultra_amplified_dimension:ponds/surface_slime",
-        "ultra_amplified_dimension:ponds/underground_water_podzol",
+        "ultra_amplified_dimension:ponds/underground_water_gravel",
         "ultra_amplified_dimension:ponds/underground_lava"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_podzol",
-        "ultra_amplified_dimension:columns/ramp_podzol",
+        "ultra_amplified_dimension:columns/vertical_gravel_dense",
+        "ultra_amplified_dimension:columns/ramp_gravel",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:vegetation/roots_spruce",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
@@ -72,7 +68,9 @@
         "ultra_amplified_dimension:ores/ore_lapis",
         "ultra_amplified_dimension:ores/ore_gold_sealevel",
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
+        "ultra_amplified_dimension:ores/ore_iron_big_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
+        "ultra_amplified_dimension:ores/ore_emerald",
         "ultra_amplified_dimension:disk/coarse_dirt",
         "ultra_amplified_dimension:disk/clay",
         "ultra_amplified_dimension:disk/gravel"
@@ -81,23 +79,17 @@
       "ultra_amplified_dimension:springs/water",
       "ultra_amplified_dimension:springs/water_narrow_range",
       "ultra_amplified_dimension:springs/lava",
-      "ultra_amplified_dimension:springs/lava_narrow_range"
+      "ultra_amplified_dimension:springs/lava_narrow_range",
+      "ultra_amplified_dimension:ores/ore_infested"
     ],
     [
-      "ultra_amplified_dimension:vegetation/trees_giant_spruce",
+      "ultra_amplified_dimension:vegetation/trees_mountains",
       "ultra_amplified_dimension:vegetation/patch_default_flowers",
-      "ultra_amplified_dimension:vegetation/patch_grass_taiga_dense",
-      "ultra_amplified_dimension:vegetation/patch_tall_grass",
-      "ultra_amplified_dimension:vegetation/patch_large_fern",
-      "ultra_amplified_dimension:vegetation/patch_dead_bush_sparse",
+      "ultra_amplified_dimension:vegetation/patch_grass_sparse",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane",
-      "ultra_amplified_dimension:vegetation/seagrass_short_sparse",
       "ultra_amplified_dimension:vegetation/mushroom_red_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/patch_berry_bush_ultra_sparse"
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
     ],
     [
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"
@@ -106,7 +98,7 @@
   "starts": [
     "minecraft:mineshaft",
     "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:ruined_portal_mountain"
   ],
   "spawners": {
     "monster": [
@@ -191,22 +183,10 @@
         "maxCount": 4
       },
       {
-        "type": "minecraft:wolf",
-        "weight": 8,
+        "type": "minecraft:llama",
+        "weight": 5,
         "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:rabbit",
-        "weight": 4,
-        "minCount": 2,
-        "maxCount": 3
-      },
-      {
-        "type": "minecraft:fox",
-        "weight": 8,
-        "minCount": 2,
-        "maxCount": 4
+        "maxCount": 6
       }
     ],
     "ambient": [
@@ -225,16 +205,16 @@
         "maxCount": 4
       },
       {
-        "type": "minecraft:cod",
-        "weight": 15,
-        "minCount": 3,
-        "maxCount": 6
-      },
-      {
         "type": "minecraft:salmon",
         "weight": 5,
         "minCount": 1,
         "maxCount": 5
+      },
+      {
+        "type": "minecraft:cod",
+        "weight": 10,
+        "minCount": 3,
+        "maxCount": 6
       }
     ],
     "water_ambient": [],

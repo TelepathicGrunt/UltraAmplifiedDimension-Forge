@@ -4,7 +4,7 @@
     "biome_source": {
       "seed": 0,
       "type": "minecraft:fixed",
-      "biome": "ultra_amplified_dimension:giant_spruce_taiga_pillars"
+      "biome": "ultra_amplified_dimension:ice_spikes"
     },
     "seed": 0,
     "type": "ultra_amplified_dimension:terrain",

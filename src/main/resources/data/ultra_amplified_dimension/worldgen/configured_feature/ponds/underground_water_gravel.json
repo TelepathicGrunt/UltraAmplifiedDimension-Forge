@@ -6,20 +6,27 @@
           "config": {
             "feature": {
               "config": {
-                "target": {
-                  "Name": "minecraft:stone"
+                "top_state": {
+                    "Name": "minecraft:gravel"
                 },
-                "state": {
-                  "Name": "minecraft:emerald_ore"
-                }
+                "outside_state": {
+                    "Name": "minecraft:stone"
+                },
+                "inside_state": {
+                    "Properties": {
+                      "level": "0"
+                    },
+                    "Name": "minecraft:water"
+                },
+                "place_outside_state_often": false
               },
-              "type": "minecraft:emerald_ore"
+              "type": "ultra_amplified_dimension:pond"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 2,
+                "bottom_offset": 6,
                 "top_offset": 0,
-                "maximum": 254
+                "maximum": 250
               },
               "type": "minecraft:range"
             }
@@ -35,9 +42,9 @@
     },
     "decorator": {
       "config": {
-        "count": 30,
-        "extra_chance": 0.4,
-        "extra_count": 20      
+        "count": 0,
+        "extra_chance": 0.3,
+        "extra_count": 1
       },
       "type": "minecraft:count_extra"
     }

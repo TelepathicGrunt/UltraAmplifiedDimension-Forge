@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 
 
 public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
+
     public LedgeSurfacePlacer(Codec<LedgeSurfacePlacerConfig> codec) {
         super(codec);
     }
@@ -54,6 +55,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                 // We are at ledge if this is the case.
                 // Also allows underside placements as well
                 if (!currentBlockState.isIn(BlockTags.LEAVES) &&
+                    !currentBlockState.isIn(BlockTags.LOGS) &&
                     !currentBlockState.isIn(Blocks.BEDROCK) &&
                     currentBlockState.getMaterial() != Material.CACTUS &&
                     ((!config.undersideOnly && !notSolidSpace(currentBlockState) && notSolidSpace(prevBlockState)) ||

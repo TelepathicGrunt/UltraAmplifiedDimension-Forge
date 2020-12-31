@@ -6,20 +6,26 @@
           "config": {
             "feature": {
               "config": {
-                "target": {
-                  "Name": "minecraft:stone"
-                },
                 "state": {
-                  "Name": "minecraft:emerald_ore"
-                }
+                  "Name": "minecraft:lapis_block"
+                },
+                "radius": {
+                  "base": 1,
+                  "spread": 0
+                },
+                "half_height": 0,
+                "targets": [
+                  { "Name": "minecraft:ice" },
+                  { "Name": "minecraft:packed_ice" }
+                ]
               },
-              "type": "minecraft:emerald_ore"
+              "type": "ultra_amplified_dimension:disk_dry"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 2,
+                "bottom_offset": 1,
                 "top_offset": 0,
-                "maximum": 254
+                "maximum": 74
               },
               "type": "minecraft:range"
             }
@@ -35,9 +41,9 @@
     },
     "decorator": {
       "config": {
-        "count": 30,
-        "extra_chance": 0.4,
-        "extra_count": 20      
+        "count": 2,
+        "extra_chance": 0.5,
+        "extra_count": 1
       },
       "type": "minecraft:count_extra"
     }

@@ -1,0 +1,43 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "target": {
+              "tag": "ultra_amplified_dimension:ice_spike_target",
+              "predicate_type": "minecraft:tag_match"
+            },
+            "above_sea_state": {
+                "Name": "minecraft:packed_ice"
+            },
+            "below_sea_state": {
+                "Name": "minecraft:ice"
+            },
+            "giant_spike_max_height": 130,
+            "giant_spike_min_height": 30,
+            "giant_spike_chance": 0.025
+          },
+          "type": "ultra_amplified_dimension:giant_spike"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 4,
+        "valid_spot_chance": 0.8,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

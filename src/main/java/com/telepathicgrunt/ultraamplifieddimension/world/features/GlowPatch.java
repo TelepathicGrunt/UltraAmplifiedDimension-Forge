@@ -54,6 +54,16 @@ public class GlowPatch extends Feature<CountConfig> {
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable();
         IChunk cachedChunk = world.getChunk(position);
 
+        // Cancel glowpatch spawning if too close to visible sky.
+        for(Direction direction : Direction.Plane.HORIZONTAL){
+            blockposMutable.setPos(position).move(direction, 6);
+            int nearbyLandY = world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockposMutable.getX(), blockposMutable.getZ());
+
+            if(nearbyLandY < position.getY()){
+                return false;
+            }
+        }
+
         // tries as times specified to convert a randomly chosen nearby block
         for (int attempts = 0; attempts < countConfig.count; ++attempts) {
             // clustered around the center the most

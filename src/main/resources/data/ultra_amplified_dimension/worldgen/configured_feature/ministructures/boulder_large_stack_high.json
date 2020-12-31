@@ -6,8 +6,9 @@
           "config": {
             "feature": {
               "config": {
-                "max_radius": 3,
-                "min_radius": 2,
+                "max_radius": 6,
+                "min_radius": 5,
+                "boulder_stack_count": 14,
                 "boulder_blocks" : [
                     {
                         "state": { "Name": "minecraft:diamond_ore" },
@@ -23,15 +24,15 @@
                     },
                     {
                         "state": { "Name": "minecraft:andesite" },
-                        "weight": 138
+                        "weight": 178
                     },
                     {
                         "state": { "Name": "minecraft:cobblestone" },
-                        "weight": 72
+                        "weight": 102
                     },
                     {
                         "state": { "Name": "minecraft:mossy_cobblestone" },
-                        "weight": 990
+                        "weight": 930
                     }
                 ]
               },
@@ -65,7 +66,7 @@
     "decorator": {
       "config": {
         "count": 0,
-        "extra_chance": 0.33333,
+        "extra_chance": 0.1,
         "extra_count": 1      
       },
       "type": "minecraft:count_extra"

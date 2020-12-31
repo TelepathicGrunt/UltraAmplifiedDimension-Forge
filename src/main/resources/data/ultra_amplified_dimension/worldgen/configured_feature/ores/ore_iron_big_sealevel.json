@@ -7,21 +7,22 @@
             "feature": {
               "config": {
                 "target": {
-                  "Name": "minecraft:stone"
+                  "tag": "minecraft:base_stone_overworld",
+                  "predicate_type": "minecraft:tag_match"
                 },
                 "state": {
-                  "Name": "minecraft:emerald_ore"
-                }
+                  "Name": "minecraft:iron_ore"
+                },
+                "size": 10
               },
-              "type": "minecraft:emerald_ore"
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 2,
-                "top_offset": 0,
-                "maximum": 254
+                "baseline": 64,
+                "spread": 8
               },
-              "type": "minecraft:range"
+              "type": "minecraft:depth_average"
             }
           },
           "type": "minecraft:decorated"
@@ -35,9 +36,9 @@
     },
     "decorator": {
       "config": {
-        "count": 30,
-        "extra_chance": 0.4,
-        "extra_count": 20      
+        "count": 0,
+        "extra_chance": 0.2,
+        "extra_count": 1      
       },
       "type": "minecraft:count_extra"
     }

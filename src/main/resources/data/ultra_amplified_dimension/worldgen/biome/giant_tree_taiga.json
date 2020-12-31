@@ -35,7 +35,6 @@
     [
         "ultra_amplified_dimension:ministructures/boulder_small",
         "ultra_amplified_dimension:ministructures/boulder_medium",
-        "ultra_amplified_dimension:ministructures/boulder_large_stack_medium",
         "ultra_amplified_dimension:ponds/surface_slime",
         "ultra_amplified_dimension:ponds/underground_water_podzol",
         "ultra_amplified_dimension:ponds/underground_lava"
@@ -84,7 +83,7 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/trees_giant_spruce",
+      "ultra_amplified_dimension:vegetation/trees_giant_pine",
       "ultra_amplified_dimension:vegetation/patch_default_flowers",
       "ultra_amplified_dimension:vegetation/patch_grass_taiga_dense",
       "ultra_amplified_dimension:vegetation/patch_tall_grass",

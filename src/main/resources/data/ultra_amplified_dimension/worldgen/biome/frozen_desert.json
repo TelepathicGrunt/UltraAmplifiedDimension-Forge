@@ -120,13 +120,13 @@
       },
       {
         "type": "minecraft:skeleton",
-        "weight": 100,
+        "weight": 20,
         "minCount": 4,
         "maxCount": 4
       },
       {
         "type": "minecraft:stray",
-        "weight": 50,
+        "weight": 80,
         "minCount": 4,
         "maxCount": 4
       },

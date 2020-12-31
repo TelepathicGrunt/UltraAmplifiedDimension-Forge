@@ -2,17 +2,16 @@ package com.telepathicgrunt.ultraamplifieddimension.utils;
 
 import com.mojang.datafixers.util.Pair;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.SimpleRegistry;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 public class GeneralUtils {
 
@@ -113,5 +112,16 @@ public class GeneralUtils {
         }
 
         return replacementBlock;
+    }
+
+    //////////////////////////////
+    private static final Map<BlockState, Boolean> IS_FULLCUBE_MAP = new HashMap<>();
+
+    public static boolean isFullCube(ISeedReader world, BlockPos pos, BlockState state){
+        if(!IS_FULLCUBE_MAP.containsKey(state)){
+            boolean isFullCube = Block.isOpaque(state.getRenderShapeTrue(world, pos));
+            IS_FULLCUBE_MAP.put(state, isFullCube);
+        }
+        return IS_FULLCUBE_MAP.get(state);
     }
 }

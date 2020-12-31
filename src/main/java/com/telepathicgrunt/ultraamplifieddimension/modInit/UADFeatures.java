@@ -45,6 +45,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<ProbabilityAndCountConfig>> PROPER_SEAGRASS = createFeature("proper_seagrass", () -> new ProperSeagrass(ProbabilityAndCountConfig.CODEC));
     public static final RegistryObject<Feature<SeaPickleConfig>> PROPER_SEAPICKLES = createFeature("proper_sea_pickles", () -> new ProperSeapickle(SeaPickleConfig.CODEC));
     public static final RegistryObject<Feature<BoulderFeatureConfig>> BOULDERS = createFeature("boulders", () -> new Boulders(BoulderFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<GiantSpikeConfig>> GIANT_SPIKE = createFeature("giant_spike", () -> new GiantSpike(GiantSpikeConfig.CODEC));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

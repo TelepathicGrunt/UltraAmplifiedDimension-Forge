@@ -8,11 +8,11 @@
               "config": {
                 "max_radius": 6,
                 "min_radius": 5,
-                "boulder_stack_count": 14,
+                "boulder_stack_count": 9,
                 "boulder_blocks" : [
                     {
                         "state": { "Name": "minecraft:diamond_ore" },
-                        "weight": 2
+                        "weight": 1
                     },
                     {
                         "state": { "Name": "minecraft:iron_ore" },
@@ -24,15 +24,15 @@
                     },
                     {
                         "state": { "Name": "minecraft:andesite" },
-                        "weight": 398
+                        "weight": 178
                     },
                     {
                         "state": { "Name": "minecraft:cobblestone" },
-                        "weight": 352
+                        "weight": 102
                     },
                     {
                         "state": { "Name": "minecraft:mossy_cobblestone" },
-                        "weight": 650
+                        "weight": 930
                     }
                 ]
               },

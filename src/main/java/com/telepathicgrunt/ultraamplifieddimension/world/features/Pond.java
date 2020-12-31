@@ -5,6 +5,7 @@ import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusBodyBlock;
 import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusCornerBlock;
 import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusMainBlock;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.HeightConfig;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.PondConfig;
@@ -62,7 +63,7 @@ public class Pond extends Feature<PondConfig> {
                             return false;
                         }
                         // No air/liquid space in lake space below (allow it's own inside state tho)
-                        else if(!blockState.isSolid() && blockState != pondConfig.insideState){
+                        else if(!GeneralUtils.isFullCube(world, blockpos, blockState) && blockState != pondConfig.insideState){
                             return false;
                         }
                     }
@@ -84,11 +85,11 @@ public class Pond extends Feature<PondConfig> {
                     double lakeVal = (normX * normX) + (normY * normY) + (normZ * normZ) - ((noiseVal + 1) * 0.9d);
 
                     if(lakeVal < -0.065d){
-                        BlockState block = cachedChunk.getBlockState(blockpos);
+                        BlockState blockState1 = cachedChunk.getBlockState(blockpos);
 
                         if(y == 4){
 
-                            if(pondConfig.placeOutsideStateOften && block.isSolid() && rand.nextFloat() < 0.70f){
+                            if(pondConfig.placeOutsideStateOften && GeneralUtils.isFullCube(world, blockpos, blockState1) && rand.nextFloat() < 0.70f){
                                 aboveState = cachedChunk.getBlockState(blockpos.move(Direction.UP));
                                 blockpos.move(Direction.DOWN);
 
@@ -104,12 +105,12 @@ public class Pond extends Feature<PondConfig> {
                             aboveState = cachedChunk.getBlockState(blockpos);
                         }
 
-                        if(block.isSolid()){
+                        if(GeneralUtils.isFullCube(world, blockpos, blockState1) || blockState1.isIn(BlockTags.ICE)){
                             // Edge of chunk and bottom of lake is always solid blocks.
                             // Threshold used for the encasing in outside blockstate.
                             if(x == -8 || z== -8 || x == 7 || z == 7 || lakeVal > -0.48d || y == -4){
                                 if(pondConfig.placeOutsideStateOften){
-                                    if(aboveState.isAir()){
+                                    if(aboveState.isAir() || aboveState.isIn(Blocks.SNOW)){
                                         cachedChunk.setBlockState(blockpos, pondConfig.topState, false);
                                     }
                                     else{
@@ -125,7 +126,7 @@ public class Pond extends Feature<PondConfig> {
                                     // This will contain the liquid as best as possible.
                                     if(direction != Direction.UP){
                                         BlockState blockState = cachedChunk.getBlockState(blockpos.move(direction));
-                                        if(!blockState.isSolid() && blockState != pondConfig.insideState){
+                                        if(!GeneralUtils.isFullCube(world, blockpos, blockState) && blockState != pondConfig.insideState){
                                             cachedChunk.setBlockState(blockpos, pondConfig.outsideState, false);
                                         }
                                         blockpos.move(direction.getOpposite());

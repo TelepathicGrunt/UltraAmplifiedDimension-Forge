@@ -1,0 +1,14 @@
+{
+  "config": {
+    "top_material": {
+      "Name": "minecraft:snow_block"
+    },
+    "under_material": {
+      "Name": "minecraft:ice"
+    },
+    "underwater_material": {
+      "Name": "minecraft:ice"
+    }
+  },
+  "type": "ultra_amplified_dimension:iced_terrain_surface_builder"
+}

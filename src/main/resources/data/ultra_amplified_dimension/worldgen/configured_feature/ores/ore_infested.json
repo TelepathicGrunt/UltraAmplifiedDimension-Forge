@@ -13,15 +13,15 @@
                 "state": {
                   "Name": "minecraft:infested_stone"
                 },
-                "size": 7
+                "size": 9
               },
               "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 1,
+                "bottom_offset": 4,
                 "top_offset": 0,
-                "maximum": 64
+                "maximum": 250
               },
               "type": "minecraft:range"
             }
@@ -37,7 +37,7 @@
     },
     "decorator": {
       "config": {
-        "count": 7
+        "count": 10
       },
       "type": "minecraft:count"
     }

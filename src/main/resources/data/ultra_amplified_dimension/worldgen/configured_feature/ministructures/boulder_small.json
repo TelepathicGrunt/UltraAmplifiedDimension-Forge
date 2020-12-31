@@ -11,7 +11,7 @@
                 "boulder_blocks" :  [
                     {
                         "state": { "Name": "minecraft:diamond_ore" },
-                        "weight": 2
+                        "weight": 1
                     },
                     {
                         "state": { "Name": "minecraft:iron_ore" },
@@ -23,15 +23,15 @@
                     },
                     {
                         "state": { "Name": "minecraft:andesite" },
-                        "weight": 398
+                        "weight": 108
                     },
                     {
                         "state": { "Name": "minecraft:cobblestone" },
-                        "weight": 352
+                        "weight": 82
                     },
                     {
                         "state": { "Name": "minecraft:mossy_cobblestone" },
-                        "weight": 650
+                        "weight": 1030
                     }
                 ]
               },

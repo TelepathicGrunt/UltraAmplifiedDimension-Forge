@@ -54,10 +54,12 @@ public class Boulders extends Feature<BoulderFeatureConfig> {
         for(int stackCount = 0; stackCount < config.boulderStackCount; stackCount++){
             maxRadius = config.maxRadius;
             minRadius = config.minRadius;
-            int radiusModifier = (stackCount / (int)Math.ceil(config.boulderStackCount / config.maxRadius));
+            int radiusModifier = (stackCount / (int)Math.max(Math.ceil(config.boulderStackCount / config.maxRadius) + 1, 1));
             maxRadius = Math.max(maxRadius - radiusModifier, 1);
             minRadius = Math.max(minRadius - radiusModifier, 1);
             startRadius = Math.max(random.nextInt(maxRadius - minRadius + 1) + minRadius, 1);
+            int randMax = (int) Math.max(startRadius * 0.7f, 3);
+            int randMin = (int) Math.max(startRadius * 0.35f, 1);
 
             //we are at a valid spot to generate a boulder now. Begin generation.
             for (int currentCount = 0; currentCount < 3; ++currentCount) {
@@ -94,9 +96,9 @@ public class Boulders extends Feature<BoulderFeatureConfig> {
                 // Randomizes pos of next blob to help keep boulders from looking samey
                 if(config.boulderStackCount > 1){
                     blockposMutable.move(
-                            random.nextInt((int) (startRadius * 1.1f)) - (int) (startRadius * 0.55f),
-                            random.nextInt((int) (startRadius * 1.1f)) - (int) (startRadius * 0.55f),
-                            random.nextInt((int) (startRadius * 1.1f)) - (int) (startRadius * 0.55f));
+                            random.nextInt(randMax) - randMin,
+                            random.nextInt(randMax) - randMin,
+                            random.nextInt(randMax) - randMin);
                 }
                 else{
                     blockposMutable.move(
@@ -115,15 +117,15 @@ public class Boulders extends Feature<BoulderFeatureConfig> {
 
             // set next boulders on top of previous to do stacking
             blockposMutable.setPos(position).move(
-                    random.nextInt((int) (startRadius * 1.1f)) - (int) (startRadius * 0.55f),
+                    random.nextInt(randMax) - randMin,
                     prevHeight,
-                    random.nextInt((int) (startRadius * 1.1f)) - (int) (startRadius * 0.55f));
+                    random.nextInt(randMax) - randMin);
 
             if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
                 cachedChunk = world.getChunk(blockposMutable);
 
             BlockState currentState = cachedChunk.getBlockState(blockposMutable);
-            while(!currentState.isAir()){
+            while(!currentState.isAir() && !currentState.isIn(BlockTags.LEAVES) && !currentState.isIn(BlockTags.LOGS)){
                 blockposMutable.move(Direction.UP);
                 currentState = cachedChunk.getBlockState(blockposMutable);
             }
