@@ -70,7 +70,7 @@ public class GiantSpike extends Feature<GiantSpikeConfig> {
 						BlockPos topPos = mutableBlockPos.add(x, y, z);
 						BlockPos bottomPos = mutableBlockPos.add(x, -y, z);
 						BlockState currentBlockState = world.getBlockState(topPos);
-						if (config.target.test(currentBlockState, rand) && topPos.getY() > generator.getSeaLevel() - 2) {
+						if (config.target.test(currentBlockState, rand) && topPos.getY() >= generator.getSeaLevel() - 1) {
 							this.setBlockState(world, topPos, config.aboveSeaState);
 						}
 						else if (!currentBlockState.getFluidState().isEmpty()) {
@@ -80,7 +80,7 @@ public class GiantSpike extends Feature<GiantSpikeConfig> {
 						if (y != 0 && range > 1) {
 							currentBlockState = world.getBlockState(bottomPos);
 
-							if (config.target.test(currentBlockState, rand) && bottomPos.getY() > generator.getSeaLevel() - 2) {
+							if (config.target.test(currentBlockState, rand) && bottomPos.getY() >= generator.getSeaLevel() - 1) {
 								this.setBlockState(world, bottomPos, config.aboveSeaState);
 							}
 							else if (!currentBlockState.getFluidState().isEmpty()) {
@@ -112,12 +112,15 @@ public class GiantSpike extends Feature<GiantSpikeConfig> {
 					}
 
 					if(placingMode){
-						if (mutableBlockPos.getY() < generator.getSeaLevel()) {
+						if (mutableBlockPos.getY() < generator.getSeaLevel() - 1) {
 							this.setBlockState(world, mutableBlockPos, config.belowSeaState);
 						}
 						else {
 							this.setBlockState(world, mutableBlockPos, config.aboveSeaState);
 						}
+					}
+					else if(mutableBlockPos.getY() == generator.getSeaLevel() - 1){
+						this.setBlockState(world, mutableBlockPos, config.aboveSeaState);
 					}
 
 					mutableBlockPos.move(Direction.DOWN);

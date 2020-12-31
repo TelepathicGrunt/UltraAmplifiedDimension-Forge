@@ -142,6 +142,9 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
                     false,
                     SPAWN_AT_TOP_LAND);
 
+            // Calculate the size of the structure based on all all children.
+            this.recalculateStructureSize();
+
             // **THE FOLLOWING TWO LINES ARE OPTIONAL**
             //
             // Right here, you can do interesting stuff with the pieces in this.components such as offset the
@@ -162,12 +165,9 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
             this.components.forEach(piece -> piece.offset(0, PIECE_Y_OFFSET, 0));
             this.components.forEach(piece -> piece.getBoundingBox().minY += BOUNDS_Y_OFFSET);
 
-            // Sets the bounds of the structure once you are finished.
-            this.recalculateStructureSize();
-
             // I use to debug and quickly find out if the structure is spawning or not and where it is.
             // This is returning the coordinates of the center starting piece.
-            UltraAmplifiedDimension.LOGGER.log(Level.DEBUG, "Rundown House at " +
+            UltraAmplifiedDimension.LOGGER.log(Level.WARN, this.getStructure().getStructureName() + " at " +
                     this.components.get(0).getBoundingBox().minX + " " +
                     this.components.get(0).getBoundingBox().minY + " " +
                     this.components.get(0).getBoundingBox().minZ);

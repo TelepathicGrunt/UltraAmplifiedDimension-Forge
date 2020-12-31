@@ -54,6 +54,7 @@
     [],
     [
         "ultra_amplified_dimension:disk/ice_dry",
+        "ultra_amplified_dimension:ores/ellipsoid_ice",
         "ultra_amplified_dimension:ores/ore_dirt",
         "ultra_amplified_dimension:ores/ore_gravel",
         "ultra_amplified_dimension:ores/ore_granite",
