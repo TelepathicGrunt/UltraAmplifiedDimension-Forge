@@ -5,8 +5,6 @@ import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.Probab
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.KelpTopBlock;
-import net.minecraft.block.TallSeaGrassBlock;
-import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;

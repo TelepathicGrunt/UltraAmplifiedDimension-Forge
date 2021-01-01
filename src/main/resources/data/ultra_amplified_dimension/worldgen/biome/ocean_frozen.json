@@ -1,8 +1,9 @@
 {
   "player_spawn_friendly": false,
   "category": "ocean",
-  "precipitation": "rain",
-  "temperature": 0.95,
+  "precipitation": "snow",
+  "temperature": 0.0,
+  "temperature_modifier": "frozen",
   "downfall": 0.5,
   "depth": -1,
   "scale": 0.1,
@@ -14,13 +15,13 @@
       "offset": 2.0
     },
     "sky_color": 7907327,
-    "foliage_color": 46646,
-    "grass_color": 48683,
+    "foliage_color": 36456,
+    "grass_color": 37488,
     "fog_color": 12638463,
-    "water_color": 4445678,
-    "water_fog_color": 270131
+    "water_color": 3750089,
+    "water_fog_color": 329011
   },
-  "surface_builder": "ultra_amplified_dimension:warm_ocean_surface_builder",
+  "surface_builder": "ultra_amplified_dimension:frozen_ocean_surface_builder",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -36,22 +37,25 @@
         "ultra_amplified_dimension:contain_underground_liquids"
     ],
     [
-        "ultra_amplified_dimension:ponds/surface_slime",
-        "ultra_amplified_dimension:ponds/underground_water_grass",
-        "ultra_amplified_dimension:ponds/underground_lava"
+        "ultra_amplified_dimension:ponds/ice_sparse",
+        "ultra_amplified_dimension:ponds/blue_ice_sparse"
     ],
     [
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/generic_high",
-        "ultra_amplified_dimension:dungeons/generic_middle",
-        "ultra_amplified_dimension:dungeons/generic_bottom"
+        "ultra_amplified_dimension:dungeons/icy_high",
+        "ultra_amplified_dimension:dungeons/icy_middle",
+        "ultra_amplified_dimension:dungeons/icy_bottom"
+    ],
+    [
+        "ultra_amplified_dimension:misc/icebergs"
     ],
     [],
-    [],
     [
+        "ultra_amplified_dimension:ores/ellipsoid_ice",
+        "ultra_amplified_dimension:ores/ellipsoid_packed_ice",
         "ultra_amplified_dimension:ores/ore_dirt",
         "ultra_amplified_dimension:ores/ore_gravel",
         "ultra_amplified_dimension:ores/ore_granite",
@@ -68,25 +72,19 @@
         "ultra_amplified_dimension:ores/ore_redstone_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel_dense"
     ],
+    [],
     [
-      "ultra_amplified_dimension:springs/water_dense"
-    ],
-    [
-      "ultra_amplified_dimension:vegetation/trees_warm_ocean",
-      "ultra_amplified_dimension:vegetation/patch_default_flowers",
+      "ultra_amplified_dimension:vegetation/patch_default_flowers_sparse",
       "ultra_amplified_dimension:vegetation/patch_grass_less_sparse",
       "ultra_amplified_dimension:vegetation/patch_pumpkin",
       "ultra_amplified_dimension:vegetation/patch_sugar_cane_sparse",
-      "ultra_amplified_dimension:vegetation/coral",
-      "ultra_amplified_dimension:vegetation/seagrass_clustered_ultra_dense",
-      "ultra_amplified_dimension:vegetation/sea_pickles_clustered",
+      "ultra_amplified_dimension:vegetation/kelp_sparse",
       "ultra_amplified_dimension:vegetation/mushroom_red_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_under_ledge"
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:snow_ice_layer_handler_feature",
+      "ultra_amplified_dimension:springs/ice_waterfall"
     ]
   ],
   "starts": [
@@ -94,7 +92,7 @@
     "minecraft:mineshaft",
     "minecraft:stronghold",
     "minecraft:shipwreck",
-    "minecraft:ocean_ruin_warm",
+    "minecraft:ocean_ruin_cold",
     "minecraft:ruined_portal_ocean",
     "minecraft:buried_treasure"
   ],
@@ -102,7 +100,13 @@
     "monster": [
       {
         "type": "minecraft:spider",
-        "weight": 100,
+        "weight": 5,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:cave_spider",
+        "weight": 95,
         "minCount": 4,
         "maxCount": 4
       },
@@ -120,7 +124,13 @@
       },
       {
         "type": "minecraft:skeleton",
-        "weight": 100,
+        "weight": 5,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:stray",
+        "weight": 95,
         "minCount": 4,
         "maxCount": 4
       },
@@ -161,6 +171,12 @@
         "weight": 5,
         "minCount": 2,
         "maxCount": 5
+      },
+      {
+        "type": "minecraft:polar_bear",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 2
       }
     ],
     "ambient": [
@@ -173,22 +189,16 @@
     ],
     "water_creature": [
       {
-        "type": "minecraft:dolphin",
-        "weight": 4,
+        "type": "minecraft:squid",
+        "weight": 5,
         "minCount": 1,
         "maxCount": 4
       },
       {
-        "type": "minecraft:pufferfish",
-        "weight": 30,
+        "type": "minecraft:salmon",
+        "weight": 40,
         "minCount": 1,
-        "maxCount": 3
-      },
-      {
-        "type": "minecraft:tropical_fish",
-        "weight": 50,
-        "minCount": 8,
-        "maxCount": 8
+        "maxCount": 5
       }
     ],
     "water_ambient": [],

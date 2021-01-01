@@ -5,8 +5,11 @@
         "feature": {
           "config": {
             "feature": {
-              "config": {},
-              "type": "ultra_amplified_dimension:blue_ice_waterfall"
+              "config": {
+                "state_1": { "Name": "minecraft:blue_ice" },
+                "state_2": { "Name": "minecraft:ice" }
+              },
+              "type": "ultra_amplified_dimension:non_liquid_waterfall"
             },
             "decorator": {
               "config": {

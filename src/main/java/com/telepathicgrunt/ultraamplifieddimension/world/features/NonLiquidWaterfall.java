@@ -1,35 +1,31 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
-import net.minecraft.block.Block;
+import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.TwoBlockStateConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 
-public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
+public class NonLiquidWaterfall extends Feature<TwoBlockStateConfig> {
 
 
-    public BlueIceWaterfall(Codec<NoFeatureConfig> configFactory) {
+    public NonLiquidWaterfall(Codec<TwoBlockStateConfig> configFactory) {
         super(configFactory);
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, NoFeatureConfig fluidConfig) {
+    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, TwoBlockStateConfig config) {
 
         //creates a waterfall of blue ice that has a puddle at bottom
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
@@ -37,7 +33,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
 
         // valid ceiling
         BlockState blockState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
-        if (!GeneralUtils.isFullCube(world, blockposMutable, blockState)) {
+        if (!GeneralUtils.isFullCube(world, blockposMutable, blockState) || !blockState.getFluidState().isEmpty()) {
             return false;
         }
 
@@ -46,7 +42,9 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
         int neededNumberOfSides;
 
         blockState = cachedChunk.getBlockState(blockposMutable.setPos(position).move(Direction.DOWN));
-        if (!GeneralUtils.isFullCube(world, blockposMutable, blockState) && !blockState.isIn(Blocks.ICE)) {
+        if(!blockState.getFluidState().isEmpty()) return false;
+
+        if (!GeneralUtils.isFullCube(world, blockposMutable, blockState)) {
             neededNumberOfSides = 4; // Ceiling with all sides blocked off
         }
         else {
@@ -60,7 +58,9 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                 cachedChunk = world.getChunk(blockposMutable);
 
             blockState = cachedChunk.getBlockState(blockposMutable);
-            if (blockState.isSolid() || blockState.isIn(Blocks.ICE)) {
+            if(!blockState.getFluidState().isEmpty()) return false;
+
+            if (GeneralUtils.isFullCube(world, blockposMutable, blockState)) {
                 ++numberOfSolidSides;
             }
             else {
@@ -78,7 +78,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
         if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
             cachedChunk = world.getChunk(blockposMutable);
 
-        cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
+        cachedChunk.setBlockState(blockposMutable, config.state1, false);
 
 
         // If in wall, move out of wall
@@ -88,7 +88,7 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
             if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
                 cachedChunk = world.getChunk(blockposMutable);
 
-            cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
+            cachedChunk.setBlockState(blockposMutable, config.state1, false);
         }
 
         int ledgeOffsets = 0;
@@ -105,14 +105,14 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
             blockposMutable.move(Direction.DOWN); //move down to check below
             BlockState belowBlockState = cachedChunk.getBlockState(blockposMutable);
 
-            // Move down until it hits a solid block
-            if (!GeneralUtils.isFullCube(world, blockposMutable, belowBlockState))
+            // Move down until it hits a solid block or liquid
+            if (!GeneralUtils.isFullCube(world, blockposMutable, belowBlockState) && belowBlockState.getFluidState().isEmpty())
             {
-                cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
+                cachedChunk.setBlockState(blockposMutable, config.state1, false);
                 continue; //restart loop to keep moving downward
             }
 
-            //move back up above the solid block
+            //move back up above the solid/liquid block
             blockposMutable.move(Direction.UP);
 
             //goes around ledge
@@ -125,17 +125,17 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                 BlockState sideBlockState = cachedChunk.getBlockState(blockposMutable);
 
                 // side is open to move to
-                if (!GeneralUtils.isFullCube(world, blockposMutable, sideBlockState)) {
+                if (!GeneralUtils.isFullCube(world, blockposMutable, sideBlockState) && sideBlockState.getFluidState().isEmpty()) {
 
                     // check under side to see if it is good
                     blockposMutable.move(Direction.DOWN);
                     BlockState belowSideBlockState = cachedChunk.getBlockState(blockposMutable);
 
                     // side below is valid. Time to flow to ledge
-                    if(!GeneralUtils.isFullCube(world, blockposMutable, belowSideBlockState)){
+                    if(!GeneralUtils.isFullCube(world, blockposMutable, belowSideBlockState) && belowSideBlockState.getFluidState().isEmpty()){
                         blockposMutable.move(Direction.UP);
-                        cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
-                        cachedChunk.setBlockState(blockposMutable.move(Direction.DOWN), Blocks.BLUE_ICE.getDefaultState(), false);
+                        cachedChunk.setBlockState(blockposMutable, config.state1, false);
+                        cachedChunk.setBlockState(blockposMutable.move(Direction.DOWN), config.state1, false);
 
                         ledgeOffsets++;
                         deadEnd = false;
@@ -175,18 +175,19 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                                 cachedChunk = world.getChunk(blockposMutable);
                             }
 
-                            BlockState puddleBlockState = cachedChunk.getBlockState(blockposMutable);
+                            BlockState blockStateAtPuddlePos = cachedChunk.getBlockState(blockposMutable);
 
                             //replace solid and liquid blocks
-                            if (GeneralUtils.isFullCube(world, blockposMutable, puddleBlockState)) {
+                            if (GeneralUtils.isFullCube(world, blockposMutable, blockStateAtPuddlePos) || !blockStateAtPuddlePos.getFluidState().isEmpty()) {
 
+                                BlockState biomeTopBlock = world.getBiome(blockposMutable).getGenerationSettings().getSurfaceBuilderConfig().getTop();
                                 BlockState aboveBlockState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
                                 boolean isAboveFullCube = GeneralUtils.isFullCube(world, blockposMutable, aboveBlockState);
                                 blockposMutable.move(Direction.DOWN);
 
-                                // If replacing Snow Block, place ice instead of Blue Ice at top to prevent snow layers
-                                if (puddleBlockState.isIn(Blocks.SNOW_BLOCK) && !isAboveFullCube) {
-                                    cachedChunk.setBlockState(blockposMutable, Blocks.ICE.getDefaultState(), false);
+                                // If replacing biome top block, place state 2 instead of state 1
+                                if (blockStateAtPuddlePos == biomeTopBlock && !isAboveFullCube) {
+                                    cachedChunk.setBlockState(blockposMutable, config.state2, false);
 
                                     // Remove snow layer above
                                     if(aboveBlockState.isIn(Blocks.SNOW)){
@@ -194,7 +195,13 @@ public class BlueIceWaterfall extends Feature<NoFeatureConfig> {
                                     }
                                 }
                                 else{
-                                    cachedChunk.setBlockState(blockposMutable, Blocks.BLUE_ICE.getDefaultState(), false);
+                                    // Make ice turn lava into obsidian to help separate the two better.
+                                    if(config.state1.isIn(BlockTags.ICE) && blockStateAtPuddlePos.getFluidState().isTagged(FluidTags.LAVA)){
+                                        cachedChunk.setBlockState(blockposMutable, Blocks.OBSIDIAN.getDefaultState(), false);
+                                    }
+                                    else{
+                                        cachedChunk.setBlockState(blockposMutable, config.state1, false);
+                                    }
                                 }
                             }
                         }

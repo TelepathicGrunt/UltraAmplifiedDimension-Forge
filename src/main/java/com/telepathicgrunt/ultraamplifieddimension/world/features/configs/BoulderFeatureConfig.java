@@ -4,17 +4,11 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.template.IStructureProcessorType;
-import net.minecraft.world.gen.feature.template.StructureProcessorList;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class BoulderFeatureConfig implements IFeatureConfig {
     public static final Codec<BoulderFeatureConfig> CODEC = RecordCodecBuilder.<BoulderFeatureConfig>create((configInstance) -> configInstance.group(

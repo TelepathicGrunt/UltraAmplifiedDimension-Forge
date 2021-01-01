@@ -17,10 +17,10 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
-import java.util.*;
+import java.util.BitSet;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.function.Function;
-
-import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
 
 
 public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>

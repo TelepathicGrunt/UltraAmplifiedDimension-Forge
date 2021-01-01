@@ -94,9 +94,7 @@
     "minecraft:mineshaft",
     "minecraft:stronghold",
     "minecraft:shipwreck",
-    "minecraft:ocean_ruin_cold",
-    "minecraft:ruined_portal_ocean",
-    "minecraft:shipwreck_beached"
+    "minecraft:ruined_portal_ocean"
   ],
   "spawners": {
     "monster": [

@@ -3,8 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features.treedecorator
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADTreeDecoratorTypes;
-import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.DiskDryConfig;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -12,7 +10,6 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 

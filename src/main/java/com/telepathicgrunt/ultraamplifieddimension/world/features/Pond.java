@@ -1,13 +1,8 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
-import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusBodyBlock;
-import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusCornerBlock;
-import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusMainBlock;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
-import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.HeightConfig;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.PondConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

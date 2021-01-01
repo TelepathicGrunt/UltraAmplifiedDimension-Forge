@@ -1,0 +1,47 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": {
+                    "config": {
+                        "state": { "Name": "minecraft:blue_ice" }
+                    },
+                    "type": "ultra_amplified_dimension:iceberg_without_air"
+                },
+                "chance": 0.27
+              }
+            ],
+            "default": {
+                "config": {
+                    "state": { "Name": "minecraft:packed_ice" }
+                },
+                "type": "ultra_amplified_dimension:iceberg_without_air"
+            }
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 8,
+        "valid_spot_chance": 0.62,
+        "skip_top_ledge": false,
+        "include_ice_placement": false
+      },
+      "type": "ultra_amplified_dimension:water_ice_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

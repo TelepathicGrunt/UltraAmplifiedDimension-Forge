@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features.configs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class PondConfig implements IFeatureConfig {

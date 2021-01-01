@@ -73,7 +73,7 @@ public class GeneralUtils {
         // Cache the biome
         if(replacementBlock == null){
             if(biome.getCategory() == Biome.Category.ICY){
-                if(biome.getTemperature() < 0){
+                if(biome.getTemperature() < -0.5){
                     LAVA_FLOOR_BIOME_MAP.put(biomeIDString, Blocks.OBSIDIAN.getDefaultState());
                 }
                 else{
@@ -101,7 +101,7 @@ public class GeneralUtils {
             else if(biome.getCategory() == Biome.Category.NETHER){
                 FILLER_BIOME_MAP.put(biomeIDString, Blocks.NETHERRACK.getDefaultState());
             }
-            else if(biome.getCategory() == Biome.Category.ICY && biome.getTemperature() < 0){
+            else if(biome.getCategory() == Biome.Category.ICY && biome.getTemperature() < -0.5){
                 FILLER_BIOME_MAP.put(biomeIDString, Blocks.ICE.getDefaultState());
             }
             else{

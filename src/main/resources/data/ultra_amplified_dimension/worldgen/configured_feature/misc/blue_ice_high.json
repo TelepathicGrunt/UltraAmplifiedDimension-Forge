@@ -4,20 +4,14 @@
       "config": {
         "feature": {
           "config": {
-            "feature": {
-              "config": {
-                "state_1": { "Name": "minecraft:blue_ice" },
-                "state_2": { "Name": "minecraft:ice" }
-              },
-              "type": "ultra_amplified_dimension:non_liquid_waterfall"
-            },
+            "feature": "minecraft:blue_ice",
             "decorator": {
               "config": {
-                "bottom_offset": 11,
+                "bottom_offset": 40,
                 "top_offset": 0,
-                "maximum": 67
+                "maximum": 160
               },
-              "type": "minecraft:range_biased"
+              "type": "minecraft:range"
             }
           },
           "type": "minecraft:decorated"
@@ -31,7 +25,7 @@
     },
     "decorator": {
       "config": {
-        "count": 16
+        "count": 20
       },
       "type": "minecraft:count"
     }

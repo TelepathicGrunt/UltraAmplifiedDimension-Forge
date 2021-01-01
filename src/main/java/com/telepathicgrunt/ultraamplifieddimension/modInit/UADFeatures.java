@@ -18,7 +18,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> CONTAIN_LIQUID_FOR_OCEANS = createFeature("contain_liquid_for_oceans", () -> new ContainLiquidForOceans(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> CONTAIN_UNDERGROUND_LIQUIDS = createFeature("contain_underground_liquids", () -> new ContainUndergroundLiquids(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<HeightConfig>> BIG_CACTUS = createFeature("big_cactus", () -> new BigCactus(HeightConfig.CODEC));
-    public static final RegistryObject<Feature<NoFeatureConfig>> BLUE_ICE_WATERFALL = createFeature("blue_ice_waterfall", () -> new BlueIceWaterfall(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<TwoBlockStateConfig>> NON_LIQUID_WATERFALL = createFeature("non_liquid_waterfall", () -> new NonLiquidWaterfall(TwoBlockStateConfig.CODEC));
     public static final RegistryObject<Feature<ColumnConfig>> COLUMN_RAMP = createFeature("column_ramp", () -> new ColumnRamp(ColumnConfig.CODEC));
     public static final RegistryObject<Feature<ColumnConfig>> COLUMN_VERTICAL = createFeature("column_vertical", () -> new ColumnVertical(ColumnConfig.CODEC));
     public static final RegistryObject<Feature<CountConfig>> GLOW_PATCH = createFeature("glow_patch", () -> new GlowPatch(CountConfig.CODEC));
@@ -47,6 +47,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<ProbabilityAndCountConfig>> PROPER_KELP = createFeature("proper_kelp", () -> new ProperKelp(ProbabilityAndCountConfig.CODEC));
     public static final RegistryObject<Feature<BoulderFeatureConfig>> BOULDERS = createFeature("boulders", () -> new Boulders(BoulderFeatureConfig.CODEC));
     public static final RegistryObject<Feature<GiantSpikeConfig>> GIANT_SPIKE = createFeature("giant_spike", () -> new GiantSpike(GiantSpikeConfig.CODEC));
+    public static final RegistryObject<Feature<BlockStateFeatureConfig>> ICEBERG_WITHOUT_AIR = createFeature("iceberg_without_air", () -> new IcebergWithoutAir(BlockStateFeatureConfig.field_236455_a_));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

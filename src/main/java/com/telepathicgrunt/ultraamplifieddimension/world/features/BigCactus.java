@@ -14,7 +14,6 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 
-import java.util.Collections;
 import java.util.Random;
 
 

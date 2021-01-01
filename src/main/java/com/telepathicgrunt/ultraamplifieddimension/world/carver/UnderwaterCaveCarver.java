@@ -1,6 +1,5 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.carver;
 
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
@@ -17,10 +16,11 @@ import net.minecraft.world.gen.carver.CaveWorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.*;
+import java.util.BitSet;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
-
-import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
 
 
 public class UnderwaterCaveCarver extends CaveWorldCarver

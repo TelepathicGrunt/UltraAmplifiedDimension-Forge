@@ -164,7 +164,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                     BlockState blockState = world.getBlockState(mutable.offset(direction));
 
                                     // Face opposite direction if facing wall.
-                                    if(GeneralUtils.isFullCube(world, mutable, blockState)){
+                                    if(GeneralUtils.isFullCube(world, mutable, blockState) && !(blockState.getBlock() instanceof SpawnerBlock)){
                                         doubleChestDirection = doubleChestDirection.getOpposite();
                                         flippedDirections = true;
                                     }
@@ -179,7 +179,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                     break;
                                 }
                             }
-                            else if(GeneralUtils.isFullCube(world, mutable, neightboringState)){
+                            else if(GeneralUtils.isFullCube(world, mutable, neightboringState) && !(neightboringState.getBlock() instanceof SpawnerBlock)){
                                 isOnWall = true;
                             }
                         }

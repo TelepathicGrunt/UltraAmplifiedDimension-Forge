@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.dimension;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.ChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoker;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;

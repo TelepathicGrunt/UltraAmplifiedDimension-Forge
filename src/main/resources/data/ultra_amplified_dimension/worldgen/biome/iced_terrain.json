@@ -2,7 +2,7 @@
   "player_spawn_friendly": false,
   "category": "beach",
   "precipitation": "snow",
-  "temperature": -0.1,
+  "temperature": -1,
   "downfall": 0.5,
   "depth": 0.45,
   "scale": 0.3,

@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -16,11 +15,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-
-import static com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils.biomeIDString;
 
 
 public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>

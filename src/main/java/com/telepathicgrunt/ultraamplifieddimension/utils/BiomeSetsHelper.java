@@ -20,7 +20,7 @@ public class BiomeSetsHelper {
         for(Map.Entry<RegistryKey<Biome>, Biome> biomeEntry : biomeRegistry.getEntries()){
             String path = biomeEntry.getKey().getLocation().getPath();
             Biome biome = biomeEntry.getValue();
-            if(biome.getTemperature() < 0.05f || path.contains("frozen")){
+            if(biome.getTemperature() <= 0.05f || path.contains("frozen")){
                 FROZEN_BIOMES.add(biome);
             }
 

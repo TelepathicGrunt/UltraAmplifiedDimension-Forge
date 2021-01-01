@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.decorators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.NbtDungeonConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 
 import java.util.function.Function;

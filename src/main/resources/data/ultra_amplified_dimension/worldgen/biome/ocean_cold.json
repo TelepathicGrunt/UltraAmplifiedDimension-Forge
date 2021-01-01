@@ -93,7 +93,7 @@
     "minecraft:shipwreck",
     "minecraft:ocean_ruin_cold",
     "minecraft:ruined_portal_ocean",
-    "minecraft:shipwreck_beached"
+    "minecraft:buried_treasure"
   ],
   "spawners": {
     "monster": [
