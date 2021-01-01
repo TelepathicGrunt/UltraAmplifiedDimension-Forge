@@ -1,0 +1,17 @@
+{
+  "config": {
+    "top_material": {
+      "Properties": {
+        "snowy": "false"
+      },
+      "Name": "minecraft:grass_block"
+    },
+    "under_material": {
+      "Name": "minecraft:sand"
+    },
+    "underwater_material": {
+      "Name": "minecraft:dead_horn_coral_block"
+    }
+  },
+  "type": "ultra_amplified_dimension:deep_ocean_surface_builder"
+}

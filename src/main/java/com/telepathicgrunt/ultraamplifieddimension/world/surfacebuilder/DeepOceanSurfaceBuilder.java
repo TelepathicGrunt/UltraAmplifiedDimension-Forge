@@ -54,7 +54,7 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
                 chunkIn.setBlockState(blockpos$Mutable, bottom, false);
                 currentBlock = bottom;
             }
-            else if (!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR && y < startHeight) {
+            else if (!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR) {
 
                 if (above2Block.getMaterial() == Material.AIR) {
                     //sets very bottom of terrain to bottom block
@@ -90,8 +90,9 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
                     chunkIn.setBlockState(blockpos$MutableUp, bottom, false);
                     currentBlock = bottom;
 
-                    if (!above2Block.getFluidState().isEmpty())
+                    if (!above2Block.getFluidState().isEmpty()){
                         chunkIn.setBlockState(blockpos$MutableUp.move(Direction.UP), middle, false);
+                    }
                 }
             }
 
@@ -103,22 +104,20 @@ public class DeepOceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
         //detects if we are a Lukewarm Ocean, Warm Ocean, or ocean plus their deep variants.
         //Adds sand/gravel bottom towards bottom of terrain gen between 40 - 70
         if (BlockTags.SAND.contains(middleBlock.getBlock()) || bottomBlock == Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState()) {
-            blockpos$Mutable.setPos(x, 70, z);
-            blockpos$MutableUp.setPos(blockpos$Mutable).move(Direction.UP);
-            aboveBlock = chunkIn.getBlockState(blockpos$Mutable);
-            above2Block = chunkIn.getBlockState(blockpos$MutableUp);
+            blockpos$Mutable.setPos(x, 72, z);
+            aboveBlock = chunkIn.getBlockState(blockpos$Mutable.move(Direction.DOWN));
+            above2Block = chunkIn.getBlockState(blockpos$Mutable.move(Direction.DOWN));
 
             for (int y = 69; y >= 40; --y) {
-                blockpos$MutableUp.setPos(blockpos$Mutable); // store old pos (above 1 block)
-                blockpos$Mutable.setPos(x, y, z);
+                blockpos$Mutable.move(Direction.DOWN);
                 currentBlock = chunkIn.getBlockState(blockpos$Mutable);
 
                 //detects if above block is solid and has solid block below and liquid block above.
                 //if true, set above block to either sand or gravel
-                currentBlock.getBlock();
-                if (currentBlock.isSolid() && !above2Block.getFluidState().isEmpty() && aboveBlock.isSolid()) {
+                if (currentBlock.isSolid() && aboveBlock.isSolid() && !above2Block.getFluidState().isEmpty()) {
                     if (BlockTags.SAND.contains(middleBlock.getBlock()) || random.nextFloat() < 0.8F) {
-                        chunkIn.setBlockState(blockpos$MutableUp, middleBlock, false);
+                        chunkIn.setBlockState(blockpos$Mutable.move(Direction.UP), middleBlock, false);
+                        blockpos$Mutable.move(Direction.DOWN);
                         aboveBlock = middleBlock;
                     }
                 }

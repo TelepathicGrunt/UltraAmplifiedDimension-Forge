@@ -1,0 +1,34 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "max_pickles": 4,
+            "min_pickles": 1,
+            "count": 20
+          },
+          "type": "ultra_amplified_dimension:proper_sea_pickles"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 2,
+        "valid_spot_chance": 0.15,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

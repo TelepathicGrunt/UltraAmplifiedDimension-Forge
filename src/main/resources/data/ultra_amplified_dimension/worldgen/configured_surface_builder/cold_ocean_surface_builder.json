@@ -1,0 +1,17 @@
+{
+  "config": {
+    "top_material": {
+      "Properties": {
+        "snowy": "false"
+      },
+      "Name": "minecraft:grass_block"
+    },
+    "under_material": {
+      "Name": "minecraft:gravel"
+    },
+    "underwater_material": {
+      "Name": "minecraft:stone"
+    }
+  },
+  "type": "ultra_amplified_dimension:ocean_surface_builder"
+}

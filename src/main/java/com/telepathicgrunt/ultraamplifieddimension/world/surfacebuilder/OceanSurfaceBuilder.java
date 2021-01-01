@@ -28,7 +28,6 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
     }
 
     protected void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int xStart, int zStart, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState bottomBlock, int seaLevel) {
-        BlockState liquid = defaultFluid;
         int x = xStart & 15;
         int z = zStart & 15;
         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
@@ -48,20 +47,20 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
             blockpos$Mutable2.setPos(blockpos$Mutable);
 
             currentBlock = chunkIn.getBlockState(blockpos$Mutable);
-            currentBlock.getBlock();
 
             if (currentBlock == defaultBlock) {
                 //turns terrain into water to manipulate later
-                bottom = liquid;
+                bottom = defaultFluid;
                 chunkIn.setBlockState(blockpos$Mutable, bottom, false);
                 currentBlock = bottom;
             }
-            else if (!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR && y < startHeight) {
+            else if (!aboveBlock.getFluidState().isEmpty() && currentBlock.getMaterial() == Material.AIR) {
 
                 if (above2Block.getMaterial() == Material.AIR) {
                     //sets very bottom of terrain to bottom block
                     bottom = topBlock;
                     chunkIn.setBlockState(blockpos$Mutable.move(Direction.UP), bottom, false);
+                    blockpos$Mutable.move(Direction.DOWN);
                 }
                 else {
                     //removes two block high land
@@ -107,23 +106,21 @@ public class OceanSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
         //detects if we are a Lukewarm Ocean, Warm Ocean, or ocean plus their deep variants.
         //Adds sand/gravel bottom towards bottom of terrain gen between 40 - 70
         if (BlockTags.SAND.contains(middleBlock.getBlock()) || bottomBlock == Blocks.DEAD_HORN_CORAL_BLOCK.getDefaultState()) {
-            blockpos$Mutable.setPos(x, 70, z);
-            aboveBlock = chunkIn.getBlockState(blockpos$Mutable);
-            above2Block = chunkIn.getBlockState(blockpos$Mutable2.setPos(blockpos$Mutable).move(Direction.UP));
+            blockpos$Mutable.setPos(x, 71, z);
+            above2Block = chunkIn.getBlockState(blockpos$Mutable);
+            aboveBlock = chunkIn.getBlockState(blockpos$Mutable.move(Direction.DOWN));
 
             for (int y = 69; y >= 40; --y) {
-                blockpos$Mutable.setPos(x, y, z);
+                blockpos$Mutable.move(Direction.DOWN);
                 currentBlock = chunkIn.getBlockState(blockpos$Mutable);
 
                 //detects if above block is solid and has solid block below and liquid block above.
                 //if true, set above block to either sand or gravel
-                currentBlock.getBlock();
-                if (currentBlock.isSolid()) {
-                    if (!above2Block.getFluidState().isEmpty() && aboveBlock.isSolid()) {
-                        if (BlockTags.SAND.contains(middleBlock.getBlock()) || random.nextFloat() < 0.8F) {
-                            chunkIn.setBlockState(blockpos$Mutable2, middleBlock, false);
-                            aboveBlock = middleBlock;
-                        }
+                if (currentBlock.isSolid() && aboveBlock.isSolid() && !above2Block.getFluidState().isEmpty()) {
+                    if (BlockTags.SAND.contains(middleBlock.getBlock()) || random.nextFloat() < 0.8F) {
+                        chunkIn.setBlockState(blockpos$Mutable.move(Direction.UP), middleBlock, false);
+                        blockpos$Mutable.move(Direction.DOWN);
+                        aboveBlock = middleBlock;
                     }
                 }
 

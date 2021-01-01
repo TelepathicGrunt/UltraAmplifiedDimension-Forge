@@ -112,6 +112,8 @@ public class ContainLiquidForOceans extends Feature<NoFeatureConfig> {
                     }
 
                     blockposMutableAbove.setPos(blockposMutable).move(Direction.UP);
+                    if(blockposMutable.getX() >> 4 != chunk.getPos().x || blockposMutable.getZ() >> 4 != chunk.getPos().z)
+                        chunk = world.getChunk(blockposMutable);
 
                     if (containedFlag) {
                         //water block is contained

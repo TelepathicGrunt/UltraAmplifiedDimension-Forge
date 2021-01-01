@@ -1,0 +1,33 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "probability": 0.95,
+            "count": 32
+          },
+          "type": "ultra_amplified_dimension:proper_seagrass"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 14,
+        "valid_spot_chance": 0.75,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

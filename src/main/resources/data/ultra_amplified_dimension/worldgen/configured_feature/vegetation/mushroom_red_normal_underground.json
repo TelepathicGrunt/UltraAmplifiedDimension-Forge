@@ -4,24 +4,12 @@
       "config": {
         "feature": {
           "config": {
-            "feature": {
-              "config": {
-                "target": {
-                  "tag": "minecraft:base_stone_overworld",
-                  "predicate_type": "minecraft:tag_match"
-                },
-                "state": {
-                  "Name": "minecraft:ice"
-                },
-                "size": 25
-              },
-              "type": "ultra_amplified_dimension:ellipsoid_pocket"
-            },
+            "feature": "minecraft:patch_red_mushroom",
             "decorator": {
               "config": {
-                "bottom_offset": 2,
+                "bottom_offset": 1,
                 "top_offset": 0,
-                "maximum": 220
+                "maximum": 78
               },
               "type": "minecraft:range"
             }
@@ -37,7 +25,7 @@
     },
     "decorator": {
       "config": {
-        "count": 12
+        "count": 14
       },
       "type": "minecraft:count"
     }

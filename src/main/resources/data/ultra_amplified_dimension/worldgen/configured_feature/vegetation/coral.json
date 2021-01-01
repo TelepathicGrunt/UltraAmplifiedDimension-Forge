@@ -1,0 +1,45 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "config": {},
+                "type": "minecraft:coral_tree"
+              },
+              {
+                "config": {},
+                "type": "minecraft:coral_claw"
+              },
+              {
+                "config": {},
+                "type": "minecraft:coral_mushroom"
+              }
+            ]
+          },
+          "type": "minecraft:simple_random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 2,
+        "valid_spot_chance": 0.4,
+        "skip_top_ledge": false,
+        "underside_only": false,
+        "water_pos_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -1,0 +1,14 @@
+{
+  "config": {
+    "top_material": {
+      "Name": "minecraft:ice"
+    },
+    "under_material": {
+      "Name": "minecraft:gravel"
+    },
+    "underwater_material": {
+      "Name": "minecraft:stone"
+    }
+  },
+  "type": "ultra_amplified_dimension:deep_ocean_surface_builder"
+}

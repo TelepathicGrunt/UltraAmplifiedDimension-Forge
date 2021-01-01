@@ -1,0 +1,42 @@
+{
+  "config": {
+    "feature": {
+        "config": {
+            "can_replace": false,
+            "project": false,
+            "need_water": true,
+            "xspread": 4,
+            "yspread": 0,
+            "zspread": 4,
+            "whitelist": [],
+            "blacklist": [],
+            "tries": 20,
+            "state_provider": {
+              "state": {
+                "Properties": {
+                  "age": "0"
+                },
+                "Name": "minecraft:sugar_cane"
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "block_placer": {
+              "min_size": 2,
+              "extra_size": 2,
+              "type": "minecraft:column_placer"
+            }
+        },
+        "type": "minecraft:random_patch"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 4,
+        "valid_spot_chance": 0.2,
+        "skip_top_ledge": true,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

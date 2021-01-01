@@ -44,6 +44,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<BlockWithRuleReplaceConfig>> ON_SOLID_BLOCK_PLACER = createFeature("on_solid_block_placer", () -> new OnSolidBlockPlacer(BlockWithRuleReplaceConfig.CODEC));
     public static final RegistryObject<Feature<ProbabilityAndCountConfig>> PROPER_SEAGRASS = createFeature("proper_seagrass", () -> new ProperSeagrass(ProbabilityAndCountConfig.CODEC));
     public static final RegistryObject<Feature<SeaPickleConfig>> PROPER_SEAPICKLES = createFeature("proper_sea_pickles", () -> new ProperSeapickle(SeaPickleConfig.CODEC));
+    public static final RegistryObject<Feature<ProbabilityAndCountConfig>> PROPER_KELP = createFeature("proper_kelp", () -> new ProperKelp(ProbabilityAndCountConfig.CODEC));
     public static final RegistryObject<Feature<BoulderFeatureConfig>> BOULDERS = createFeature("boulders", () -> new Boulders(BoulderFeatureConfig.CODEC));
     public static final RegistryObject<Feature<GiantSpikeConfig>> GIANT_SPIKE = createFeature("giant_spike", () -> new GiantSpike(GiantSpikeConfig.CODEC));
 

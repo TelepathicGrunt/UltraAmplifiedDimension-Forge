@@ -229,6 +229,7 @@ public class AmplifiedPortalBlock extends Block
 				playerEntity.wakeUp();
 			}
 
+			//TODO: Delay teleportation to prevent ghost blocks as per: https://hatebin.com/eubbjgasvk by Commoble
 			playerEntity.fallDistance = 0;
 			((ServerPlayerEntity) playerEntity).teleport(destinationWorld, playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
 			return ActionResultType.SUCCESS;
