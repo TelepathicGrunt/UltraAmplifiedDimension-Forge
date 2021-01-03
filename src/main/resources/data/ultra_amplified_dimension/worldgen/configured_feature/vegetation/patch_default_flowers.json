@@ -47,8 +47,8 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 3,
-        "valid_spot_chance": 0.35,
+        "column_passes": 2,
+        "valid_spot_chance": 0.45,
         "skip_top_ledge": false,
         "underside_only": false
       },

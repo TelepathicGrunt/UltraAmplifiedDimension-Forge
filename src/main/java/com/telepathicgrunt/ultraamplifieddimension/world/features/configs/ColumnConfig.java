@@ -20,6 +20,7 @@ public class ColumnConfig implements IFeatureConfig {
                     DataResult.error("min_height has to be smaller than max_height") : DataResult.success(rangeValidationPlacerConfig), Function.identity());
 
 
+    //TODO: add snowy boolean and add snow manually to the pillar.
     public final int maxHeight;
     public final int minHeight;
     public final BlockState topBlock;

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:dirt",
+    "#forge:stone",
+    "#forge:netherrack",
+    "#forge:gravel",
+    "#forge:sand",
+    "#forge:sandstone",
+    "#minecraft:nylium",
+    "#minecraft:sand",
+    "#ultra_amplified_dimension:terracotta",
+    "#ultra_amplified_dimension:dirt_like",
+    "minecraft:end_stone"
+  ]
+}

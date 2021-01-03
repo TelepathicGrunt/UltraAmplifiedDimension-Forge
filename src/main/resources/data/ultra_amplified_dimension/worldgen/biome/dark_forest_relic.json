@@ -1,5 +1,5 @@
 {
-  "player_spawn_friendly": true,
+  "player_spawn_friendly": false,
   "category": "forest",
   "precipitation": "rain",
   "temperature": 0.7,

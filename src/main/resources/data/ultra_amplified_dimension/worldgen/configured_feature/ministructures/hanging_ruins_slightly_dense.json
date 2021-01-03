@@ -1,0 +1,18 @@
+{
+  "config": {
+    "feature": {
+       "config": {},
+       "type": "ultra_amplified_dimension:hanging_ruins"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 1,
+        "valid_spot_chance": 0.055,
+        "skip_top_ledge": false,
+        "underside_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

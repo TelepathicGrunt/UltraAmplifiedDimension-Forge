@@ -1,0 +1,49 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "top_block": {
+                  "Name": "minecraft:andesite"
+                },
+                "middle_block": {
+                  "Name": "minecraft:stone"
+                },
+                "bottom_block": {
+                  "Name": "minecraft:stone"
+                },
+                "max_height": 100,
+                "min_height": 10
+              },
+              "type": "ultra_amplified_dimension:column_vertical"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 70,
+                "top_offset": 0,
+                "maximum": 180
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 5
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

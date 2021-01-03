@@ -1,0 +1,20 @@
+{
+  "config": {
+    "top_material": {
+      "Properties": {
+        "snowy": "false"
+      },
+      "Name": "minecraft:grass_block"
+    },
+    "under_material": {
+      "Name": "minecraft:dirt"
+    },
+    "underwater_material": {
+      "Name": "minecraft:gravel"
+    },
+    "extra_material": {
+      "Name": "minecraft:coarse_dirt"
+    }
+  },
+  "type": "ultra_amplified_dimension:shattered_savanna_surface_builder"
+}

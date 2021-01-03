@@ -17,6 +17,7 @@ public class UADPlacements {
     public static final RegistryObject<Placement<YOffsetPlacerConfig>> Y_OFFSET_PLACER = createDecorator("y_offset_placer", () -> new OffsetPlacer(YOffsetPlacerConfig.CODEC));
     public static final RegistryObject<Placement<RangeValidationPlacerConfig>> RANGE_VALIDATION_PLACER = createDecorator("range_validation_placer", () -> new RangeValidationPlacer(RangeValidationPlacerConfig.CODEC));
     public static final RegistryObject<Placement<WaterIceSurfaceConfig>> WATER_ICE_SURFACE_PLACER = createDecorator("water_ice_surface_placer", () -> new WaterIceSurfacePlacer(WaterIceSurfaceConfig.CODEC));
+    public static final RegistryObject<Placement<NonAirSurfaceLedgePlacerConfig>> NON_AIR_SURFACE_LEDGE_PLACER = createDecorator("non_air_surface_ledge_placer", () -> new NonAirSurfaceLedgePlacer(NonAirSurfaceLedgePlacerConfig.CODEC));
 
     public static <D extends Placement<?>> RegistryObject<D> createDecorator(String name, Supplier<? extends D> decorator) {
         return DECORATORS.register(name, decorator);

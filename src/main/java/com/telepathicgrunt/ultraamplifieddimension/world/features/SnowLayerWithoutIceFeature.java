@@ -4,9 +4,11 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowyDirtBlock;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
@@ -23,6 +25,7 @@ public class SnowLayerWithoutIceFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, NoFeatureConfig config) {
+        Biome biome = world.getBiome(position);
         BlockPos.Mutable blockposMutable1 = new BlockPos.Mutable();
         BlockPos.Mutable blockposMutable2 = new BlockPos.Mutable();
         IChunk cachedChunk = world.getChunk(position);
@@ -32,16 +35,27 @@ public class SnowLayerWithoutIceFeature extends Feature<NoFeatureConfig> {
         blockposMutable2.setPos(blockposMutable1).move(Direction.DOWN);
         BlockState blockState1 = cachedChunk.getBlockState(blockposMutable1);
 
-        if (blockState1.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(world, blockposMutable1)) {
+        if (blockState1.isAir()) {
+            if (biome.doesSnowGenerate(world, blockposMutable1)) {
 
-            cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
-            BlockState blockState2 = cachedChunk.getBlockState(blockposMutable2);
+                cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
+                BlockState blockStateBottom = cachedChunk.getBlockState(blockposMutable2);
 
-            if (blockState2.hasProperty(SnowyDirtBlock.SNOWY)) {
-                cachedChunk.setBlockState(blockposMutable2, blockState2.with(SnowyDirtBlock.SNOWY, true), false);
+                // Extra check to follow leaves into nearby chunks and give them the snow they would've avoided
+                // Run this only when on leaves and pos is on chunk edge to minimize wasted time
+                int xMod = blockposMutable1.getX() & 0x000F;
+                int zMod = blockposMutable1.getZ() & 0x000F;
+                if (blockStateBottom.isIn(BlockTags.LEAVES) && (xMod == 0 || xMod == 15 || zMod == 0 || zMod == 15)) {
+                    SnowIceLayerHandlerFeature.placeSnowOnNearbyLeaves(world, biome, blockposMutable1, cachedChunk);
+                }
+
+                if (blockStateBottom.hasProperty(SnowyDirtBlock.SNOWY)) {
+                    cachedChunk.setBlockState(blockposMutable2, blockStateBottom.with(SnowyDirtBlock.SNOWY, true), false);
+                }
             }
         }
 
         return true;
     }
+
 }

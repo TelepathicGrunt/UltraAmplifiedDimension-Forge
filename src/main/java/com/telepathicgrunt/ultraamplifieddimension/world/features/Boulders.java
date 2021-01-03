@@ -107,9 +107,11 @@ public class Boulders extends Feature<BoulderFeatureConfig> {
                             random.nextInt(startRadius * 2) - startRadius);
 
                     blockposMutable.move(Direction.UP,
-                            world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockposMutable.getX(), blockposMutable.getZ())
-                                    - random.nextInt(2)
-                                    - blockposMutable.getY());
+                            config.heightmapSpread ?
+                                    world.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, blockposMutable.getX(), blockposMutable.getZ())
+                                        - random.nextInt(2) - blockposMutable.getY()
+                                    : -random.nextInt( 2)
+                            );
                 }
             }
 

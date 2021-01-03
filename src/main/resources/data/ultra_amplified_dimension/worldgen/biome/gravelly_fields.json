@@ -50,7 +50,7 @@
         "ultra_amplified_dimension:dungeons/generic_bottom"
     ],
     [
-        "ultra_amplified_dimension:ministructures/hanging_ruins"
+        "ultra_amplified_dimension:ministructures/hanging_ruins_slightly_dense"
     ],
     [],
     [
@@ -71,6 +71,7 @@
         "ultra_amplified_dimension:ores/ore_iron_big_sealevel",
         "ultra_amplified_dimension:ores/ore_lapis_sealevel",
         "ultra_amplified_dimension:ores/ore_emerald",
+        "ultra_amplified_dimension:ores/ore_infested",
         "ultra_amplified_dimension:disk/coarse_dirt",
         "ultra_amplified_dimension:disk/clay",
         "ultra_amplified_dimension:disk/gravel"
@@ -79,8 +80,7 @@
       "ultra_amplified_dimension:springs/water",
       "ultra_amplified_dimension:springs/water_narrow_range",
       "ultra_amplified_dimension:springs/lava",
-      "ultra_amplified_dimension:springs/lava_narrow_range",
-      "ultra_amplified_dimension:ores/ore_infested"
+      "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
       "ultra_amplified_dimension:vegetation/trees_mountains",

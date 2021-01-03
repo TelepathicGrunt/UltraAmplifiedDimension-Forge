@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -30,28 +31,25 @@ import java.util.*;
 
 
 public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
-	private static final BlockState TRUNK = Blocks.OAK_LOG.getDefaultState();
-	private static final BlockState LEAF = Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 1);
-
 
 	public TreeSwampHorned(Codec<BaseTreeFeatureConfig> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean generate(ISeedReader serverWorldAccess, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, BaseTreeFeatureConfig BaseTreeFeatureConfig) {
+	public boolean generate(ISeedReader serverWorldAccess, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, BaseTreeFeatureConfig config) {
 		Set<BlockPos> set = Sets.newHashSet();
 		Set<BlockPos> set2 = Sets.newHashSet();
 		Set<BlockPos> set3 = Sets.newHashSet();
 		MutableBoundingBox blockBox = MutableBoundingBox.getNewBoundingBox();
-		boolean bl = this.generate(serverWorldAccess, chunkGenerator, random, blockPos, set, set2);
+		boolean bl = this.generate(serverWorldAccess, chunkGenerator, random, blockPos, set, set2, config);
 		if (blockBox.minX <= blockBox.maxX && bl && !set.isEmpty()) {
-			if (!BaseTreeFeatureConfig.decorators.isEmpty()) {
+			if (!config.decorators.isEmpty()) {
 				List<BlockPos> list = Lists.newArrayList(set);
 				List<BlockPos> list2 = Lists.newArrayList(set2);
 				list.sort(Comparator.comparingInt(Vector3i::getY));
 				list2.sort(Comparator.comparingInt(Vector3i::getY));
-				BaseTreeFeatureConfig.decorators.forEach((decorator) -> decorator.func_225576_a_(serverWorldAccess, random, list, list2, set3, blockBox));
+				config.decorators.forEach((decorator) -> decorator.func_225576_a_(serverWorldAccess, random, list, list2, set3, blockBox));
 			}
 
 			VoxelShapePart voxelSet = this.placeLogsAndLeaves(serverWorldAccess, blockBox, set, set3);
@@ -64,8 +62,10 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 
 
 	// generate the spooky horned swamp m trees
-	private boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions) {
-		int height = random.nextInt(4) + 6;
+	private boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BaseTreeFeatureConfig config) {
+		int height = config.trunkPlacer.func_236917_a_(random);
+		BlockState currentPos = world.getBlockState(position);
+		BlockState belowPos = world.getBlockState(position.down());
 
 		// checks to see if there is room to generate tree
 		if (!this.isSpaceAt(world, chunkGenerator, position, height)) {
@@ -73,7 +73,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 		}
 
 		// sets tree in water if there is water below
-		if (world.getBlockState(position.down()).getMaterial() == Material.WATER) {
+		if (world.getBlockState(position.down()).getFluidState().isTagged(FluidTags.WATER)) {
 			position = position.down();
 		}
 
@@ -98,9 +98,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 						if (y >= 0 && y < chunkGenerator.getMaxBuildHeight()) {
 							blockpos$Mutable.setPos(x, y, z);
 							if (!isAirOrLeaves(world, blockpos$Mutable)) {
-								if (isWater(world, blockpos$Mutable)) {
-									flag = false;
-								} else if (y > position.getY()) {
+								if (y > position.getY() && !isWater(world, blockpos$Mutable)) {
 									flag = false;
 								}
 							}
@@ -118,25 +116,25 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 
 				for (int currentHeight = position.getY() - 4 + height; currentHeight <= position.getY() + height; ++currentHeight) {
 					int heightDiff = currentHeight - (position.getY() + height);
-					int l2 = 2 - heightDiff / 2;
+					int leavesWidth = 2 - heightDiff / 2;
 
-					for (int x = position.getX() - l2 - 1; x <= position.getX() + l2; ++x) {
+					for (int x = position.getX() - leavesWidth - 1; x <= position.getX() + leavesWidth; ++x) {
 						int xPos = x - position.getX();
 
-						for (int z = position.getZ() - l2 - 1; z <= position.getZ() + l2; ++z) {
+						for (int z = position.getZ() - leavesWidth - 1; z <= position.getZ() + leavesWidth; ++z) {
 							int zPos = z - position.getZ();
 							int isCornerIfThisIsTwo = 0;
 
-							if (xPos == l2) {
+							if (xPos == leavesWidth) {
 								isCornerIfThisIsTwo++;
 							}
-							if (zPos == l2) {
+							if (zPos == leavesWidth) {
 								isCornerIfThisIsTwo++;
 							}
-							if (xPos == -l2 - 1) {
+							if (xPos == -leavesWidth - 1) {
 								isCornerIfThisIsTwo++;
 							}
-							if (zPos == -l2 - 1) {
+							if (zPos == -leavesWidth - 1) {
 								isCornerIfThisIsTwo++;
 							}
 
@@ -145,7 +143,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 								BlockPos blockpos = new BlockPos(x, currentHeight, z);
 
 								if (isAirOrLeaves(world, blockpos) || isReplaceablePlant(world, blockpos)) {
-									this.setBlockState(world, blockpos, LEAF);
+									this.setBlockState(world, blockpos, config.leavesProvider.getBlockState(random, blockpos)); // .with(LeavesBlock.DISTANCE, 1)
 									leavesPositions.add(blockpos);
 								}
 							}
@@ -154,47 +152,10 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 				}
 
 				// the following four for statements generates the trunk of the tree
-				genTrunk(world, position, height);
-				genTrunk(world, position.west(), height);
-				genTrunk(world, position.north(), height);
-				genTrunk(world, position.west().north(), height);
-				logPositions.add(position);
-
-				// vine generation
-				for (int currentHeight = position.getY() - 3 + height; currentHeight <= position.getY() + height; ++currentHeight) {
-					int heightDiff = currentHeight - (position.getY() + height);
-					int i3 = 2 - heightDiff / 2;
-					BlockPos.Mutable blockpos$Mutable1 = new BlockPos.Mutable();
-
-					for (int x = position.getX() - i3 - 1; x <= position.getX() + i3; ++x) {
-						for (int z = position.getZ() - i3 - 1; z <= position.getZ() + i3; ++z) {
-							blockpos$Mutable1.setPos(x, currentHeight, z);
-
-							if (world.getBlockState(blockpos$Mutable1).getMaterial() == Material.LEAVES) {
-								BlockPos blockpos3 = blockpos$Mutable1.west();
-								BlockPos blockpos4 = blockpos$Mutable1.east();
-								BlockPos blockpos1 = blockpos$Mutable1.north();
-								BlockPos blockpos2 = blockpos$Mutable1.south();
-
-								if (random.nextInt(4) == 0 && world.isAirBlock(blockpos3)) {
-									this.addVine(world, blockpos3, VineBlock.EAST);
-								}
-
-								if (random.nextInt(4) == 0 && world.isAirBlock(blockpos4)) {
-									this.addVine(world, blockpos4, VineBlock.WEST);
-								}
-
-								if (random.nextInt(4) == 0 && world.isAirBlock(blockpos1)) {
-									this.addVine(world, blockpos1, VineBlock.SOUTH);
-								}
-
-								if (random.nextInt(4) == 0 && world.isAirBlock(blockpos2)) {
-									this.addVine(world, blockpos2, VineBlock.NORTH);
-								}
-							}
-						}
-					}
-				}
+				genTrunk(world, position, height, random, logPositions, leavesPositions, config);
+				genTrunk(world, position.west(), height, random, logPositions, leavesPositions, config);
+				genTrunk(world, position.north(), height, random, logPositions, leavesPositions, config);
+				genTrunk(world, position.west().north(), height, random, logPositions, leavesPositions, config);
 
 				return true;
 			} else {
@@ -207,36 +168,20 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 	}
 
 
-	private void addVine(ISeedReader world, BlockPos pos, BooleanProperty prop) {
-		BlockState iblockstate = Blocks.VINE.getDefaultState().with(prop, Boolean.TRUE);
-		this.setBlockState(world, pos, iblockstate);
-		int i = 4;
-
-		for (BlockPos blockpos = pos.down(); world.isAirBlock(blockpos) && i > 0; --i) {
-			this.setBlockState(world, blockpos, iblockstate);
-			blockpos = blockpos.down();
-		}
-	}
-
-
-	private void genTrunk(ISeedReader world, BlockPos position, int height) {
+	private void genTrunk(ISeedReader world, BlockPos position, int height, Random rand, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BaseTreeFeatureConfig config) {
 		this.setBlockState(world, position.down(), Blocks.DIRT.getDefaultState());
 		BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(position);
 
 		for (int currentHeight = 0; currentHeight < height; currentHeight++) {
 			BlockState iblockstate1 = world.getBlockState(mutable);
 
-			if(world.isAirBlock(mutable) ||
-					iblockstate1.isIn(BlockTags.LEAVES) ||
-					iblockstate1.getMaterial() == Material.PLANTS ||
-					iblockstate1.getMaterial() == Material.TALL_PLANTS ||
-					iblockstate1.getMaterial() == Material.OCEAN_PLANT ||
-					iblockstate1.getMaterial() == Material.WATER){
-
+			if(!iblockstate1.isSolid()){
 				if (currentHeight != height - 1) {
-					this.setBlockState(world, mutable, TRUNK);
+					this.setBlockState(world, mutable, config.trunkProvider.getBlockState(rand, mutable));
+					logPositions.add(mutable);
 				} else if(currentHeight == height - 1) {
-					this.setBlockState(world, mutable, LEAF);
+					this.setBlockState(world, mutable, config.leavesProvider.getBlockState(rand, mutable)); //.with(LeavesBlock.DISTANCE, 1)
+					leavesPositions.add(mutable);
 				}
 			}
 

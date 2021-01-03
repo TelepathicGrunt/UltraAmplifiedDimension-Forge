@@ -419,7 +419,15 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     this.biomeProvider.getNoiseBiome(x - 1, y, z).getCategory() == Biome.Category.NETHER &&
                     this.biomeProvider.getNoiseBiome(x , y, z - 1).getCategory() == Biome.Category.NETHER)
                 {
-                    blockstate = Blocks.LAVA.getDefaultState();
+                    if(y > this.getSeaLevel() - 7){
+                        blockstate = this.defaultFluid;
+                    }
+                    else if(y == this.getSeaLevel() - 7){
+                        blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
+                    }
+                    else{
+                        blockstate = Blocks.LAVA.getDefaultState();
+                    }
                 }
                 // Make an obsidian border to separate lava from default fluid.
                 else{

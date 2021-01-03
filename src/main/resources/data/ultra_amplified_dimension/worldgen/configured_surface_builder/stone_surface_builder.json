@@ -1,10 +1,10 @@
 {
   "config": {
     "top_material": {
-      "Name": "minecraft:snow_block"
+      "Name": "minecraft:stone"
     },
     "under_material": {
-      "Name": "minecraft:dirt"
+      "Name": "minecraft:stone"
     },
     "underwater_material": {
       "Name": "minecraft:gravel"

@@ -2,7 +2,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
-import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.BlockWithRuleReplaceConfig;
+import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.RootConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.VineBlock;
@@ -19,9 +19,9 @@ import net.minecraft.world.gen.feature.Feature;
 import java.util.Random;
 
 
-public class Roots extends Feature<BlockWithRuleReplaceConfig>
+public class Roots extends Feature<RootConfig>
 {
-	public Roots(Codec<BlockWithRuleReplaceConfig> configFactory) {
+	public Roots(Codec<RootConfig> configFactory) {
 		super(configFactory);
 	}
 
@@ -38,7 +38,7 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, BlockWithRuleReplaceConfig blockConfig) {
+	public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, RootConfig blockConfig) {
 		setSeed(world.getSeed());
 
 		BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
@@ -66,8 +66,8 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 				//checks to see if air block is not higher than starting place
 				currentBlockState = cachedChunk.getBlockState(blockposMutable);
 				if (blockposMutable.getY() <= position.getY() &&
-						(blockConfig.target.test(currentBlockState, rand) ||
-						 currentBlockState == blockConfig.state ||
+						(blockConfig.rootReplaceTarget.test(currentBlockState, rand) ||
+						 currentBlockState == blockConfig.rootBlock ||
 						 currentBlockState == Blocks.VINE.getDefaultState()))
 				{
 					// Make sure it is under ledge and not going off to the side which looks weird.
@@ -76,7 +76,7 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 					blockposMutable.move(Direction.UP);
 					for(; upwardOffset < 8; upwardOffset++){
 						BlockState blockState = cachedChunk.getBlockState(blockposMutable);
-						if(blockState.isSolid() && !blockState.isIn(BlockTags.LEAVES) && !blockState.isIn(BlockTags.LOGS)){
+						if(blockConfig.validAboveState.test(blockState, rand)){
 							isUnderLedge = true;
 							break;
 						}
@@ -87,10 +87,10 @@ public class Roots extends Feature<BlockWithRuleReplaceConfig>
 						blockposMutable.move(Direction.DOWN, upwardOffset); // Move back to current pos.
 
 						//set root block
-						cachedChunk.setBlockState(blockposMutable, blockConfig.state, false);
+						cachedChunk.setBlockState(blockposMutable, blockConfig.rootBlock, false);
 
 						//rare chance to also generate a vine
-						if (rand.nextFloat() < 0.13F) {
+						if (rand.nextFloat() < 0.05F) {
 							generateTinyVine(world, cachedChunk, rand, blockposMutable);
 						}
 					}

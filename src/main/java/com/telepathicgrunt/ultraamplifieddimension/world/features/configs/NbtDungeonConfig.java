@@ -22,8 +22,8 @@ public class NbtDungeonConfig implements IFeatureConfig {
             Codec.intRange(0, 36).fieldOf("max_air_space").orElse(14).forGetter(nbtFeatureConfig -> nbtFeatureConfig.maxAirSpace),
             Codec.intRange(0, 100).fieldOf("max_num_of_chests").orElse(2).forGetter(nbtFeatureConfig -> nbtFeatureConfig.maxNumOfChests),
             ResourceLocation.CODEC.fieldOf("chest_loottable_resourcelocation").forGetter(nbtDungeonConfig -> nbtDungeonConfig.chestResourceLocation),
-            Codec.mapPair(ResourceLocation.CODEC.fieldOf("resourcelocation"), Codec.INT.fieldOf("weight").orElse(1)).codec().listOf().fieldOf("dungeon_nbt_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.nbtResourcelocationsAndWeights),
-            Codec.mapPair(Registry.ENTITY_TYPE.fieldOf("resourcelocation"), Codec.INT.fieldOf("weight").orElse(1)).codec().listOf().fieldOf("spawner_mob_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.spawnerResourcelocationsAndWeights),
+            Codec.mapPair(ResourceLocation.CODEC.fieldOf("resourcelocation"), Codec.intRange(1, Integer.MAX_VALUE).fieldOf("weight")).codec().listOf().fieldOf("dungeon_nbt_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.nbtResourcelocationsAndWeights),
+            Codec.mapPair(Registry.ENTITY_TYPE.fieldOf("resourcelocation"), Codec.intRange(1, Integer.MAX_VALUE).fieldOf("weight")).codec().listOf().fieldOf("spawner_mob_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.spawnerResourcelocationsAndWeights),
             IStructureProcessorType.field_242922_m.fieldOf("processors").forGetter(nbtDungeonConfig -> nbtDungeonConfig.processor)
     ).apply(configInstance, NbtDungeonConfig::new))
             .comapFlatMap((nbtDungeonConfig) -> nbtDungeonConfig.maxAirSpace <= nbtDungeonConfig.minAirSpace ?

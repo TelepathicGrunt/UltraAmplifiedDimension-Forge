@@ -1,0 +1,66 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "solid_land_radius": 0,
+            "processors": "ultra_amplified_dimension:fossils/decay",
+            "nbt_entries": [
+                {
+                    "resourcelocation": "minecraft:fossil/spine_1",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/spine_2",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/spine_3",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/spine_4",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/skull_1",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/skull_2",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/skull_3",
+                    "weight": 1
+                },
+                {
+                    "resourcelocation": "minecraft:fossil/skull_4",
+                    "weight": 1
+                }
+            ]
+          },
+          "type": "ultra_amplified_dimension:nbt_feature"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": -1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 1,
+        "valid_spot_chance": 0.004,
+        "skip_top_ledge": false,
+        "underside_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

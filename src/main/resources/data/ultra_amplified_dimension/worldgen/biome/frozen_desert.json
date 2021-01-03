@@ -44,9 +44,9 @@
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/snow_high",
-        "ultra_amplified_dimension:dungeons/snow_middle",
-        "ultra_amplified_dimension:dungeons/snow_bottom"
+        "ultra_amplified_dimension:dungeons/snowy_high",
+        "ultra_amplified_dimension:dungeons/snowy_middle",
+        "ultra_amplified_dimension:dungeons/snowy_bottom"
     ],
     [
         "ultra_amplified_dimension:ministructures/hanging_ruins",

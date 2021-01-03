@@ -1,0 +1,88 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "feature": {
+                  "config": {
+                    "max_radius": 3,
+                    "min_radius": 2,
+                    "boulder_blocks" :  [
+                        {
+                            "state": { "Name": "minecraft:infested_stone" },
+                            "weight": 5
+                        },
+                        {
+                            "state": { "Name": "minecraft:iron_ore" },
+                            "weight": 10
+                        },
+                        {
+                            "state": { "Name": "minecraft:coal_ore" },
+                            "weight": 25
+                        },
+                        {
+                            "state": { "Name": "minecraft:mossy_cobblestone" },
+                            "weight": 50
+                        },
+                        {
+                            "state": { "Name": "minecraft:cobblestone" },
+                            "weight": 350
+                        },
+                        {
+                            "state": { "Name": "minecraft:stone" },
+                            "weight": 700
+                        }
+                    ]
+                  },
+                  "type": "ultra_amplified_dimension:boulders"
+                },
+                "decorator": {
+                  "config": {
+                    "outer": {
+                      "config": {},
+                      "type": "minecraft:heightmap_world_surface"
+                    },
+                    "inner": {
+                      "config": {
+                        "yoffset": -2
+                      },
+                      "type": "ultra_amplified_dimension:y_offset_placer"
+                    }
+                  },
+                  "type": "minecraft:decorated"
+                }
+              },
+              "type": "minecraft:decorated"
+            },
+            "decorator": {
+              "config": {},
+              "type": "minecraft:square"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {
+            "count": 0,
+            "extra_chance": 0.45,
+            "extra_count": 1      
+          },
+          "type": "minecraft:count_extra"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "noise_level": 0.1,
+        "below_noise": 0,
+        "above_noise": 1
+      },
+      "type": "minecraft:count_noise"
+    }
+  },
+  "type": "minecraft:decorated"
+}

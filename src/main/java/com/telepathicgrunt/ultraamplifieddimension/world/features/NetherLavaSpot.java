@@ -14,9 +14,9 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import java.util.Random;
 
 
-public class NetherSurfaceLavaRare extends Feature<NoFeatureConfig> {
+public class NetherLavaSpot extends Feature<NoFeatureConfig> {
 
-    public NetherSurfaceLavaRare(Codec<NoFeatureConfig> configCodec) {
+    public NetherLavaSpot(Codec<NoFeatureConfig> configCodec) {
         super(configCodec);
     }
 

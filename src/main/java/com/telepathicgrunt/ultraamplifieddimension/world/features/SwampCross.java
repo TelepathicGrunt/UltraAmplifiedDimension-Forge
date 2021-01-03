@@ -40,9 +40,9 @@ public class SwampCross extends Feature<NoFeatureConfig>
 			world.setBlockState(blockpos$Mutable.east(i), Blocks.SPRUCE_LOG.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.X), 16 | 2);
 		}
 
-		//adds skull underground if block is not a fluid or air
+		//adds skull underground if block and above block is not a fluid or air
 		blockpos$Mutable.setPos(position).move(Direction.DOWN, 2).move(Direction.NORTH, 1);
-		if (world.getBlockState(blockpos$Mutable).isSolid()) {
+		if (world.getBlockState(blockpos$Mutable).isSolid() && world.getBlockState(blockpos$Mutable.up()).isSolid()) {
 			if (rand.nextFloat() < 0.1F) {
 				world.setBlockState(blockpos$Mutable, Blocks.WITHER_SKELETON_WALL_SKULL.getDefaultState(), 2);
 			}

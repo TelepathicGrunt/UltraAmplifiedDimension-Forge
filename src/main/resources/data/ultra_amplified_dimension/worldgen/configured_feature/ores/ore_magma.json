@@ -13,13 +13,17 @@
                 "state": {
                   "Name": "minecraft:magma_block"
                 },
-                "size": 17
+                "size": 21
               },
               "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
-              "config": {},
-              "type": "minecraft:magma"
+              "config": {
+                "bottom_offset": 40,
+                "top_offset": 0,
+                "maximum": 60
+              },
+              "type": "minecraft:range"
             }
           },
           "type": "minecraft:decorated"
@@ -33,9 +37,11 @@
     },
     "decorator": {
       "config": {
-        "count": 4
+        "count": 4,
+        "extra_chance": 0,
+        "extra_count": 0      
       },
-      "type": "minecraft:count"
+      "type": "minecraft:count_extra"
     }
   },
   "type": "minecraft:decorated"

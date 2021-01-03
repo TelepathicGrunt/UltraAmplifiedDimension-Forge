@@ -1,0 +1,14 @@
+{
+  "config": {
+    "top_material": {
+      "Name": "minecraft:netherrack"
+    },
+    "under_material": {
+      "Name": "minecraft:soul_sand"
+    },
+    "underwater_material": {
+      "Name": "minecraft:gravel"
+    }
+  },
+  "type": "ultra_amplified_dimension:nether_surface_builder"
+}

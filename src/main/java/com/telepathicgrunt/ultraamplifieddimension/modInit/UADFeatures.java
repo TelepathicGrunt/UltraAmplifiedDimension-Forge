@@ -25,8 +25,9 @@ public class UADFeatures {
     public static final RegistryObject<Feature<BlockStateFeatureConfig>> LAKE_WIDE_SHALLOW = createFeature("lake_wide_shallow", () -> new LakeWideShallow(BlockStateFeatureConfig.field_236455_a_));
     public static final RegistryObject<Feature<NbtFeatureConfig>> NBT_FEATURE = createFeature("nbt_feature", () -> new NbtFeature(NbtFeatureConfig.CODEC));
     public static final RegistryObject<Feature<NbtDungeonConfig>> NBT_DUNGEON = createFeature("nbt_dungeon", () -> new NbtDungeon(NbtDungeonConfig.CODEC));
-    public static final RegistryObject<Feature<NoFeatureConfig>> NETHER_UNDERWATER_MAGMA = createFeature("nether_underwater_magma", () -> new NetherUnderwaterMagma(NoFeatureConfig.field_236558_a_));
-    public static final RegistryObject<Feature<BlockWithRuleReplaceConfig>> ROOTS = createFeature("roots", () -> new Roots(BlockWithRuleReplaceConfig.CODEC));
+    public static final RegistryObject<Feature<NoFeatureConfig>> TRIGGER_BUBBLE_COLUMNS = createFeature("trigger_bubble_columns", () -> new TriggerBubbleColumns(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> NETHER_LAVA_SPOT = createFeature("nether_lava_spot", () -> new NetherLavaSpot(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<RootConfig>> ROOTS = createFeature("roots", () -> new Roots(RootConfig.CODEC));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_LAYER_HANDLER_FEATURE = createFeature("snow_ice_layer_handler_feature", () -> new SnowIceLayerHandlerFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_ALL_LAYERS = createFeature("snow_ice_all_layers", () -> new SnowIceAllLayers(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> SNOW_ICE_TOP_LAYER = createFeature("snow_ice_top_layer", () -> new SnowIceTopLayer(NoFeatureConfig.field_236558_a_));

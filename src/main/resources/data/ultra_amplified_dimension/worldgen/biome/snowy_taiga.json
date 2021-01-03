@@ -1,0 +1,241 @@
+{
+  "player_spawn_friendly": false,
+  "category": "taiga",
+  "precipitation": "snow",
+  "temperature": -0.5,
+  "downfall": 0.4,
+  "depth": 0.2,
+  "scale": 0.2,
+  "effects": {
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "sky_color": 7907327,
+    "fog_color": 12638463,
+    "water_color": 11854335,
+    "water_fog_color": 11847915
+  },
+  "surface_builder": "minecraft:grass",
+  "carvers": {
+    "air": [
+      "ultra_amplified_dimension:cave_cavity",
+      "ultra_amplified_dimension:ravine",
+      "ultra_amplified_dimension:long_ravine"
+    ],
+    "liquid": [
+    ]
+  },
+  "features": [
+    [
+        "ultra_amplified_dimension:contain_underground_liquids"
+    ],
+    [
+        "ultra_amplified_dimension:ponds/surface_slime",
+        "ultra_amplified_dimension:ponds/ice"
+    ],
+    [
+        "ultra_amplified_dimension:columns/vertical_grass",
+        "ultra_amplified_dimension:columns/ramp_grass",
+        "ultra_amplified_dimension:glow_patch_surface",
+        "ultra_amplified_dimension:glow_patch_underground",
+        "ultra_amplified_dimension:ores/ellipsoid_ice",
+        "ultra_amplified_dimension:vegetation/roots_stripped_spruce",
+        "ultra_amplified_dimension:contain_liquid_for_oceans"
+    ],
+    [
+        "ultra_amplified_dimension:dungeons/snowy_high",
+        "ultra_amplified_dimension:dungeons/snowy_middle",
+        "ultra_amplified_dimension:dungeons/snowy_bottom"
+    ],
+    [
+        "ultra_amplified_dimension:ministructures/hanging_ruins"
+    ],
+    [],
+    [
+        "ultra_amplified_dimension:ores/ore_dirt",
+        "ultra_amplified_dimension:ores/ore_gravel",
+        "ultra_amplified_dimension:ores/ore_granite",
+        "ultra_amplified_dimension:ores/ore_diorite",
+        "ultra_amplified_dimension:ores/ore_andesite",
+        "ultra_amplified_dimension:ores/ore_coal",
+        "ultra_amplified_dimension:ores/ore_iron",
+        "ultra_amplified_dimension:ores/ore_iron_deep",
+        "ultra_amplified_dimension:ores/ore_gold",
+        "ultra_amplified_dimension:ores/ore_redstone",
+        "ultra_amplified_dimension:ores/ore_diamond",
+        "ultra_amplified_dimension:ores/ore_lapis",
+        "ultra_amplified_dimension:ores/ore_gold_sealevel",
+        "ultra_amplified_dimension:ores/ore_redstone_sealevel",
+        "ultra_amplified_dimension:ores/ore_lapis_sealevel",
+        "ultra_amplified_dimension:disk/coarse_dirt",
+        "ultra_amplified_dimension:disk/clay",
+        "ultra_amplified_dimension:disk/gravel"
+    ],
+    [
+      "ultra_amplified_dimension:springs/water",
+      "ultra_amplified_dimension:springs/water_narrow_range",
+      "ultra_amplified_dimension:springs/lava",
+      "ultra_amplified_dimension:springs/lava_narrow_range"
+    ],
+    [
+      "ultra_amplified_dimension:vegetation/trees_taiga_sparse",
+      "ultra_amplified_dimension:vegetation/patch_default_flowers_sparse",
+      "ultra_amplified_dimension:vegetation/patch_grass_taiga",
+      "ultra_amplified_dimension:vegetation/patch_tall_grass_sparse",
+      "ultra_amplified_dimension:vegetation/patch_berry_bush_rare",
+      "ultra_amplified_dimension:vegetation/patch_pumpkin",
+      "ultra_amplified_dimension:vegetation/patch_sugar_cane",
+      "ultra_amplified_dimension:vegetation/seagrass_short_sparse",
+      "ultra_amplified_dimension:vegetation/mushroom_red_normal_dense",
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_dense"
+    ],
+    [
+      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+    ]
+  ],
+  "starts": [
+    "minecraft:village_snowy",
+    "minecraft:pillager_outpost",
+    "minecraft:igloo",
+    "minecraft:mineshaft",
+    "minecraft:stronghold",
+    "minecraft:ruined_portal"
+  ],
+  "creature_spawn_probability": 0.07,
+  "spawners": {
+    "monster": [
+      {
+        "type": "minecraft:spider",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:zombie",
+        "weight": 95,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:zombie_villager",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "minecraft:skeleton",
+        "weight": 80,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:stray",
+        "weight": 20,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:creeper",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:slime",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:enderman",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:witch",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "minecraft:drowned",
+        "weight": 50,
+        "minCount": 1,
+        "maxCount": 5
+      }
+    ],
+    "creature": [
+      {
+        "type": "minecraft:sheep",
+        "weight": 12,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:pig",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:chicken",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:cow",
+        "weight": 8,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:wolf",
+        "weight": 8,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:rabbit",
+        "weight": 4,
+        "minCount": 2,
+        "maxCount": 3
+      },
+      {
+        "type": "minecraft:fox",
+        "weight": 8,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ],
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "weight": 10,
+        "minCount": 8,
+        "maxCount": 8
+      }
+    ],
+    "water_creature": [
+      {
+        "type": "minecraft:squid",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:salmon",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 5
+      }
+    ],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

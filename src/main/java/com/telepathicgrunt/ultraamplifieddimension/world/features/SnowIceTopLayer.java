@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowyDirtBlock;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -39,6 +40,16 @@ public class SnowIceTopLayer extends Feature<NoFeatureConfig>
 		}
 
 		if (biome.doesSnowGenerate(world, blockposMutable1)) {
+			BlockState blockStateBottom = cachedChunk.getBlockState(blockposMutable2);
+
+			// Extra check to follow leaves into nearby chunks and give them the snow they would've avoided
+			// Run this only when on leaves and pos is on chunk edge to minimize wasted time
+			int xMod = blockposMutable1.getX() & 0x000F;
+			int zMod = blockposMutable1.getZ() & 0x000F;
+			if (blockStateBottom.isIn(BlockTags.LEAVES) && (xMod == 0 || xMod == 15 || zMod == 0 || zMod == 15)) {
+				SnowIceLayerHandlerFeature.placeSnowOnNearbyLeaves(world, biome, blockposMutable1, cachedChunk);
+			}
+
 			cachedChunk.setBlockState(blockposMutable1, Blocks.SNOW.getDefaultState(), false);
 			BlockState blockstate = cachedChunk.getBlockState(blockposMutable2);
 			if (blockstate.hasProperty(SnowyDirtBlock.SNOWY)) {

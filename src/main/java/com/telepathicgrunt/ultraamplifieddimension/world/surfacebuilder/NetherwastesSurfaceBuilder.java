@@ -37,8 +37,8 @@ public class NetherwastesSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderCon
     @Override
     public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
         int sealevel = seaLevel + 1;
-        int xpos = x & 15;
-        int zpos = z & 15;
+        int xInChunk = x & 15;
+        int zInChunk = z & 15;
         int noiseDepth = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
         BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
         BlockPos.Mutable blockpos$MutableUnder = new BlockPos.Mutable();
@@ -47,73 +47,60 @@ public class NetherwastesSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderCon
         BlockState bottomBlockstates = config.getTop();
 
         for (int ypos = startHeight; ypos >= 0; --ypos) {
-            blockpos$Mutable.setPos(xpos, ypos, zpos);
+            blockpos$Mutable.setPos(xInChunk, ypos, zInChunk);
             blockpos$MutableUnder.setPos(blockpos$Mutable).move(Direction.DOWN);
             BlockState currentBlockToReplace = chunkIn.getBlockState(blockpos$Mutable);
 
-            currentBlockToReplace.getBlock();
-            if (currentBlockToReplace.getMaterial() == Material.AIR) {
+            if (currentBlockToReplace.isAir() || !currentBlockToReplace.getFluidState().isEmpty()) {
                 depth = -1;
             }
-            else if (currentBlockToReplace.getMaterial() == Material.WATER) {
+            else if (currentBlockToReplace != Blocks.MAGMA_BLOCK.getDefaultState()){
+                if (depth == -1) {
+                    boolean bottomBlockFlag = this.noiseGen.eval(x * 0.02D + 100.0D, (ypos / 8f), z * 0.02D - 100.0D) > 0.45D;
 
-                if (ypos < seaLevel - 7) {
-                    chunkIn.setBlockState(blockpos$Mutable, Blocks.LAVA.getDefaultState(), false);
-                }
-                else {
-                    chunkIn.setBlockState(blockpos$Mutable, defaultFluid, false);
-                }
+                    if (noiseDepth <= 0) {
+                        topBlockstate = Blocks.CAVE_AIR.getDefaultState();
+                        bottomBlockstates = config.getTop();
+                    }
+                    else if (ypos >= sealevel - 4) {
+                        boolean middleBlockFlag = this.noiseGen.eval(x * 0.015D, ypos / 7f, z * 0.015D) > 0.5D;
 
-                depth = -1;
-            }
-            else {
-                if (currentBlockToReplace == defaultBlock) {
-                    boolean soulSandFlag = this.noiseGen.eval(x * 0.015D, ypos / 7f, z * 0.015D) > 0.45D;
-                    boolean gravelFlag = this.noiseGen.eval(x * 0.02D + 100.0D, (ypos / 8f), z * 0.02D - 100.0D) > 0.48D;
+                        topBlockstate = config.getTop();
+                        bottomBlockstates = config.getTop();
 
-                    if (depth == -1) {
-                        if (noiseDepth <= 0) {
-                            topBlockstate = Blocks.CAVE_AIR.getDefaultState();
-                            bottomBlockstates = config.getTop();
+                        if (middleBlockFlag) {
+                            topBlockstate = config.getUnder();
+                            bottomBlockstates = config.getUnder();
                         }
-                        else if (ypos >= sealevel - 4) {
-                            topBlockstate = config.getTop();
-                            bottomBlockstates = config.getTop();
-
-                            if (soulSandFlag) {
-                                topBlockstate = config.getUnder();
-                                bottomBlockstates = config.getUnder();
-                            }
-                            else if (gravelFlag) {
-                                topBlockstate = config.getUnderWaterMaterial();
-                            }
-                            else if ((noise > -3.85 && noise < -3.7) ||
-                                    (noise > -0.1 && noise < 0.05) ||
-                                    (noise > 3.7 && noise < 3.85))
-                            {
-                                topBlockstate = Blocks.MAGMA_BLOCK.getDefaultState();
-                            }
+                        else if (bottomBlockFlag) {
+                            topBlockstate = config.getUnderWaterMaterial();
                         }
-
-                        depth = noiseDepth;
-                        if (ypos >= sealevel - 1) {
-                            chunkIn.setBlockState(blockpos$Mutable, topBlockstate, false);
-
-                            if (gravelFlag && chunkIn.getBlockState(blockpos$MutableUnder).isAir()) {
-                                chunkIn.setBlockState(blockpos$MutableUnder, config.getTop(), false);
-                            }
-                        }
-                        else {
-                            chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
+                        else if ((noise > -3.85 && noise < -3.7) ||
+                                (noise > -0.1 && noise < 0.05) ||
+                                (noise > 3.7 && noise < 3.85))
+                        {
+                            topBlockstate = Blocks.MAGMA_BLOCK.getDefaultState();
                         }
                     }
-                    else if (depth > 0) {
-                        --depth;
-                        chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
+
+                    depth = noiseDepth;
+                    if (ypos >= sealevel - 1) {
+                        chunkIn.setBlockState(blockpos$Mutable, topBlockstate, false);
+
+                        if (bottomBlockFlag && chunkIn.getBlockState(blockpos$MutableUnder).isAir()) {
+                            chunkIn.setBlockState(blockpos$MutableUnder, config.getTop(), false);
+                        }
                     }
                     else {
-                        chunkIn.setBlockState(blockpos$Mutable, config.getTop(), false);
+                        chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
                     }
+                }
+                else if (depth > 0) {
+                    --depth;
+                    chunkIn.setBlockState(blockpos$Mutable, bottomBlockstates, false);
+                }
+                else {
+                    chunkIn.setBlockState(blockpos$Mutable, config.getTop(), false);
                 }
             }
         }

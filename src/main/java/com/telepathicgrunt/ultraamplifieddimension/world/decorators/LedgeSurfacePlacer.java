@@ -1,6 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.decorators;
 
 import com.mojang.serialization.Codec;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -44,6 +45,8 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
 
             // Set the block above for heightmap pos
             BlockState prevBlockState = context.func_242894_a(mutable.up());
+
+            // If doing water pos, continue down until lava level instead of stopping at sealevel
             int bottomYLimit = config.waterPosOnly ? 11 : context.func_242895_b();
 
             // Move downward towards sealevel and get every surface along the way
@@ -95,6 +98,6 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
     }
 
     private static boolean notSolidSpace(BlockState state) {
-        return state.isAir() || state.isIn(Blocks.WATER) || state.isIn(Blocks.LAVA);
+        return state.isAir() || !(state.getFluidState().isEmpty() || state.isSolid());
     }
 }

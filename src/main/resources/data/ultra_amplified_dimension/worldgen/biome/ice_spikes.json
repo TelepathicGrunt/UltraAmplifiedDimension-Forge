@@ -18,7 +18,7 @@
     "water_color": 13172735,
     "water_fog_color": 13172735
   },
-  "surface_builder": "ultra_amplified_dimension:snow_block_surface_builder",
+  "surface_builder": "minecraft:ice_spikes",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",
@@ -43,9 +43,9 @@
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/snow_high",
-        "ultra_amplified_dimension:dungeons/snow_middle",
-        "ultra_amplified_dimension:dungeons/snow_bottom"
+        "ultra_amplified_dimension:dungeons/snowy_high",
+        "ultra_amplified_dimension:dungeons/snowy_middle",
+        "ultra_amplified_dimension:dungeons/snowy_bottom"
     ],
     [
         "ultra_amplified_dimension:misc/giant_ice_spikes",

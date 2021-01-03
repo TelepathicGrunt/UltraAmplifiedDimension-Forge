@@ -1,0 +1,44 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "root_replace_target": {
+              "tag": "ultra_amplified_dimension:non_cave_air_target",
+              "predicate_type": "minecraft:tag_match"
+            },
+            "root_block": {
+                "Properties": {
+                  "axis": "y"
+                },
+                "Name": "minecraft:acacia_wood"
+            },
+            "valid_above_state": {
+              "tag": "ultra_amplified_dimension:root_valid_general",
+              "predicate_type": "minecraft:tag_match"
+            }
+          },
+          "type": "ultra_amplified_dimension:roots"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 0
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 4,
+        "valid_spot_chance": 0.7,
+        "skip_top_ledge": false,
+        "underside_only": true
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

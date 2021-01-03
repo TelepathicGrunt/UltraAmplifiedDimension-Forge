@@ -11,17 +11,17 @@
                   "predicate_type": "minecraft:block_match"
                 },
                 "state": {
-                  "Name": "minecraft:nether_quartz_ore"
+                  "Name": "minecraft:magma_block"
                 },
-                "size": 11
+                "size": 22
               },
               "type": "ultra_amplified_dimension:ellipsoid_pocket"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 10,
-                "top_offset": 20,
-                "maximum": 128
+                "bottom_offset": 1,
+                "top_offset": 0,
+                "maximum": 40
               },
               "type": "minecraft:range"
             }
@@ -37,9 +37,11 @@
     },
     "decorator": {
       "config": {
-        "count": 16
+        "count": 0,
+        "extra_chance": 0.75,
+        "extra_count": 1    
       },
-      "type": "minecraft:count"
+      "type": "minecraft:count_extra"
     }
   },
   "type": "minecraft:decorated"

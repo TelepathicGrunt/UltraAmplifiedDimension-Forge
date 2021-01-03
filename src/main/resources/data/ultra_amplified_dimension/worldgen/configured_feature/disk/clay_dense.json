@@ -4,16 +4,24 @@
       "config": {
         "feature": {
           "config": {
-            "target": {
-              "tag": "minecraft:base_stone_overworld",
-              "predicate_type": "minecraft:tag_match"
-            },
             "state": {
-              "Name": "minecraft:gold_ore"
+              "Name": "minecraft:clay"
             },
-            "size": 9
+            "radius": {
+              "base": 3,
+              "spread": 1
+            },
+            "half_height": 1,
+            "targets": [
+              {
+                "Name": "minecraft:dirt"
+              },
+              {
+                "Name": "minecraft:stone"
+              }
+            ]
           },
-          "type": "minecraft:ore"
+          "type": "minecraft:disk"
         },
         "decorator": {
           "config": {
@@ -26,10 +34,11 @@
     },
     "decorator": {
       "config": {
-        "column_passes": 20,
-        "validSpotChance": 1,
+        "column_passes": 5,
+        "valid_spot_chance": 1,
         "skip_top_ledge": false,
-        "underside_only": true
+        "underside_only": false,
+        "water_pos_only": true
       },
       "type": "ultra_amplified_dimension:ledge_surface_placer"
     }

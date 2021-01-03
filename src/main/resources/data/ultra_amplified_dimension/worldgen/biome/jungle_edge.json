@@ -1,5 +1,5 @@
 {
-  "player_spawn_friendly": false,
+  "player_spawn_friendly": true,
   "category": "jungle",
   "precipitation": "rain",
   "temperature": 0.95,
