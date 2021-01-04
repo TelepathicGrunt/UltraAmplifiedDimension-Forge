@@ -43,19 +43,21 @@ public class DiskDry extends Feature<DiskDryConfig>
 
 					blockposMutable.move(Direction.DOWN, config.half_height); // start at bottom of half height
 					for (int y = -config.half_height; y <= config.half_height; ++y) {
-						BlockState blockState = cachedChunk.getBlockState(blockposMutable);
+						BlockState aboveBlockState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
+						BlockState blockState = cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN));
 
-						for (BlockState targetBlockState : config.targets) {
-							if (targetBlockState.getBlock() == blockState.getBlock()) {
-								cachedChunk.setBlockState(blockposMutable, config.state, false);
-								++placedBlocks;
+						if(!config.exposedOnly || !aboveBlockState.isSolid()){
+							for (BlockState targetBlockState : config.targets) {
+								if (targetBlockState.getBlock() == blockState.getBlock()) {
+									cachedChunk.setBlockState(blockposMutable, config.state, false);
+									++placedBlocks;
 
-								blockState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
-								if(blockState.isIn(Blocks.SNOW) && !blockState.isValidPosition(world, blockposMutable)){
-									cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+									if(aboveBlockState.isIn(Blocks.SNOW) && !aboveBlockState.isValidPosition(world, blockposMutable)){
+										cachedChunk.setBlockState(blockposMutable.move(Direction.UP), Blocks.AIR.getDefaultState(), false);
+										blockposMutable.move(Direction.DOWN);
+									}
+									break;
 								}
-								blockposMutable.move(Direction.DOWN);
-								break;
 							}
 						}
 

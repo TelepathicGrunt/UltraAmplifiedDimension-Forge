@@ -20,30 +20,37 @@ public class SpikyBadlandsSurfaceBuilder extends BadlandsSurfaceBuilder {
         super(codec);
     }
 
+    double max = 0;
     @Override
     public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
         double spikeHeight = 0.0D;
-        double d1 = Math.min(Math.abs(noise), this.field_215435_c.noiseAt(x * 0.25D, z * 0.25D, false) * 15.0D);
-        if (d1 > -1.5D) {
-            double d3 = Math.abs(this.field_215437_d.noiseAt(x * 1500.001953125D, z * 1500.001953125D, false) * 15.0D);
-            spikeHeight = d1 * d1 * 8.5D;
-            double d4 = Math.ceil(d3 * 1200.0D) + 1000.0D;
-            if (spikeHeight > d4) {
-                spikeHeight = d4;
+        double spikeNoise = Math.min(Math.abs(noise), this.field_215435_c.noiseAt(x * 0.20D, z * 0.20D, false) * 15.0D);
+        if (spikeNoise > -2D) {
+            spikeHeight = spikeNoise * spikeNoise * 8.5D;
+
+            // Result spikeHeight is between 0 and 330 it seems
+            // This makes the massive spikes
+            if (spikeHeight > 30D - (random.nextFloat() * 5D)) {
+                spikeHeight = (spikeNoise + 3D); // 1 - 18
+
+                // Scale it higher with spiky tops
+                spikeHeight *=
+                        (19D + spikeHeight) +
+                        (random.nextFloat() * random.nextFloat() * 3) -
+                        (random.nextFloat() * random.nextFloat() * 3);
+
             }
 
-            spikeHeight = spikeHeight + 95.0D;
-        }
+            double overallHeightRaised = 65D;
+            spikeHeight += overallHeightRaised;
 
-        //messy spiky spikes
-        if (spikeHeight > 160D) {
-            spikeHeight *= 1.1D;
-        }
-        else if (spikeHeight > 135D) {
-            spikeHeight *= 1.5D;
-        }
-        else if (spikeHeight > 115D) {
-            spikeHeight *= 1.9D;
+            // Rough up spikes that are too high
+            if(spikeHeight > 250){
+                spikeHeight -= (spikeHeight - (249D + (random.nextFloat() * 5D))) * 2D;
+            }
+            else if (spikeHeight < 150) {
+                spikeHeight *= 1.25D;
+            }
         }
 
         int xInChunk = x & 15;

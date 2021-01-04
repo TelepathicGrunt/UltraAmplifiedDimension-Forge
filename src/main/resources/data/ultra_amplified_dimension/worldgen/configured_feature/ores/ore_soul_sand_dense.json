@@ -1,0 +1,48 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "target": {
+                  "block": "minecraft:netherrack",
+                  "predicate_type": "minecraft:block_match"
+                },
+                "state": {
+                  "Name": "minecraft:soul_sand"
+                },
+                "size": 22
+              },
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 1,
+                "top_offset": 0,
+                "maximum": 60
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 9,
+        "extra_chance": 0,
+        "extra_count": 0      
+      },
+      "type": "minecraft:count_extra"
+    }
+  },
+  "type": "minecraft:decorated"
+}

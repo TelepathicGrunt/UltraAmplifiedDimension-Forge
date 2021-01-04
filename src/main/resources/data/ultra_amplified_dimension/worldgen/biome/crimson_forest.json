@@ -1,0 +1,140 @@
+{
+  "spawn_costs": {},
+  "player_spawn_friendly": false,
+  "category": "nether",
+  "precipitation": "none",
+  "temperature": 2.0,
+  "downfall": 0.0,
+  "depth": 0.1,
+  "scale": 0.2,
+  "effects": {
+    "mood_sound": {
+      "sound": "minecraft:ambient.crimson_forest.mood",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.crimson_forest.additions",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "minecraft:music.nether.crimson_forest",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.025
+    },
+    "ambient_sound": "minecraft:ambient.crimson_forest.loop",
+    "sky_color": 16740464,
+    "foliage_color": 8075008,
+    "grass_color": 9259264,
+    "fog_color": 3343107,
+    "water_color": 12411469,
+    "water_fog_color": 12076846
+  },
+  "surface_builder": "minecraft:crimson_forest",
+  "carvers": {
+    "air": [
+      "ultra_amplified_dimension:cave_cavity",
+      "ultra_amplified_dimension:ravine",
+      "ultra_amplified_dimension:long_ravine"
+    ],
+    "liquid": [
+    ]
+  },
+  "features": [
+    [
+        "ultra_amplified_dimension:contain_underground_liquids"
+    ],
+    [],
+    [
+        "ultra_amplified_dimension:contain_liquid_for_oceans"
+    ],
+    [],
+    [],
+    [
+        "ultra_amplified_dimension:dungeons/nether_high",
+        "ultra_amplified_dimension:dungeons/nether_middle",
+        "ultra_amplified_dimension:dungeons/nether_bottom"
+    ],
+    [
+      "ultra_amplified_dimension:springs/lava_ceiling_sparse",
+      "ultra_amplified_dimension:nether/ceiling_glowstone",
+      "ultra_amplified_dimension:nether/glowstone",
+      "ultra_amplified_dimension:ores/ore_magma",
+      "ultra_amplified_dimension:ores/ore_magma_sparse",
+      "ultra_amplified_dimension:springs/lava_concealed_nether",
+      "minecraft:ore_gravel_nether",
+      "minecraft:ore_blackstone",
+      "minecraft:ore_gold_nether",
+      "ultra_amplified_dimension:ores/ore_quartz_nether_rare",
+      "ultra_amplified_dimension:ores/ore_quartz_nether_lower",
+      "ultra_amplified_dimension:ores/ore_quartz_nether_sealevel",
+      "minecraft:ore_debris_large",
+      "minecraft:ore_debris_small",
+      "ultra_amplified_dimension:disk/crimson_nylium_dry"
+    ],
+    [
+      "minecraft:patch_fire",
+      "ultra_amplified_dimension:nether/patch_fire",
+      "ultra_amplified_dimension:springs/lava_dense_nether",
+      "ultra_amplified_dimension:springs/lava_floor",
+      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_dense",
+      "ultra_amplified_dimension:vegetation/mushroom_red_normal_dense",
+      "ultra_amplified_dimension:nether/weeping_vines",
+      "ultra_amplified_dimension:nether/weeping_vines_deep",
+      "ultra_amplified_dimension:nether/crimson_fungi",
+      "ultra_amplified_dimension:nether/crimson_forest_vegetation"
+    ],
+    [
+      "ultra_amplified_dimension:nether/nether_sea_adjuster",
+      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+    ]
+  ],
+  "starts": [
+    "minecraft:ruined_portal_nether",
+    "minecraft:fortress",
+    "minecraft:mineshaft",
+    "minecraft:bastion_remnant"
+  ],
+  "spawners": {
+    "monster": [
+      {
+        "type": "minecraft:zombified_piglin",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:hoglin",
+        "weight": 9,
+        "minCount": 3,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:piglin",
+        "weight": 5,
+        "minCount": 3,
+        "maxCount": 4
+      }
+    ],
+    "creature": [
+      {
+        "type": "minecraft:strider",
+        "weight": 60,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  }
+}

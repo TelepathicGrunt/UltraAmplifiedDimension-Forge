@@ -2,13 +2,11 @@ package com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder;
 
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADSurfaceBuilders;
-import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.configs.QuadrarySurfaceBuilderConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.util.Random;
 

@@ -6,22 +6,29 @@
           "config": {
             "feature": {
               "config": {
-                "target": {
-                  "block": "minecraft:netherrack",
-                  "predicate_type": "minecraft:block_match"
+                "top_block": {
+                    "Properties": {
+                      "snowy": "true"
+                    },
+                    "Name": "minecraft:grass_block"
                 },
-                "state": {
-                  "Name": "minecraft:nether_gold_ore"
+                "middle_block": {
+                  "Name": "minecraft:dirt"
                 },
-                "size": 8
+                "bottom_block": {
+                  "Name": "minecraft:stone"
+                },
+                "max_height": 7,
+                "min_height": 2,
+                "is_snowy": true
               },
-              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+              "type": "ultra_amplified_dimension:column_ramp"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 10,
-                "top_offset": 20,
-                "maximum": 128
+                "bottom_offset": 70,
+                "top_offset": 0,
+                "maximum": 180
               },
               "type": "minecraft:range"
             }
@@ -37,7 +44,7 @@
     },
     "decorator": {
       "config": {
-        "count": 10
+        "count": 2
       },
       "type": "minecraft:count"
     }

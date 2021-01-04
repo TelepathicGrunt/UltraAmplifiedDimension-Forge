@@ -12,6 +12,7 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Blockreader;
@@ -389,62 +390,6 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         return 0;
     }
 
-    protected BlockState func_236086_a_(double noiseValue, int x, int y, int z) {
-        BlockState blockstate;
-        Biome biome = this.biomeProvider.getNoiseBiome(x, y, z);
-        if (noiseValue > 0.0D) {
-            blockstate = this.defaultBlock;
-
-            // Change blockstate for end and nether biomes so that their features and carvers behave correctly
-            if(biome.getCategory() == Biome.Category.NETHER){
-                blockstate = Blocks.NETHERRACK.getDefaultState();
-            }
-            else if(biome.getCategory() == Biome.Category.THEEND){
-                if(UA_END_BIOMES.contains(biome)){
-                    if(y < (this.getSeaLevel() - 2) - ((noiseGen.eval(x * 0.1D, z * 0.1D) + 1) * 2)){
-                        blockstate = Blocks.END_STONE.getDefaultState();
-                    }
-                }
-                else {
-                    blockstate = Blocks.END_STONE.getDefaultState();
-                }
-            }
-        }
-        else if (y < this.getSeaLevel()) {
-            if(biome.getCategory() == Biome.Category.NETHER){
-                // If nether biome is surrounded by nether biomes, place lava.
-                // This way, all imported nether biomes gets the lava they want.
-                if(this.biomeProvider.getNoiseBiome(x + 1, y, z).getCategory() == Biome.Category.NETHER &&
-                    this.biomeProvider.getNoiseBiome(x, y, z + 1).getCategory() == Biome.Category.NETHER &&
-                    this.biomeProvider.getNoiseBiome(x - 1, y, z).getCategory() == Biome.Category.NETHER &&
-                    this.biomeProvider.getNoiseBiome(x , y, z - 1).getCategory() == Biome.Category.NETHER)
-                {
-                    if(y > this.getSeaLevel() - 7){
-                        blockstate = this.defaultFluid;
-                    }
-                    else if(y == this.getSeaLevel() - 7){
-                        blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
-                    }
-                    else{
-                        blockstate = Blocks.LAVA.getDefaultState();
-                    }
-                }
-                // Make an obsidian border to separate lava from default fluid.
-                else{
-                    blockstate = Blocks.OBSIDIAN.getDefaultState();
-                }
-            }
-            else{
-                // default world fluid
-                blockstate = this.defaultFluid;
-            }
-        } else {
-            blockstate = Blocks.AIR.getDefaultState();
-        }
-
-        return blockstate;
-    }
-    
     @Override
     public void func_230352_b_(IWorld p_230352_1_, StructureManager p_230352_2_, IChunk chunk) {
         ObjectList<StructurePiece> objectlist = new ObjectArrayList<>(10);
@@ -592,6 +537,105 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
             adouble[1] = adouble1;
         }
 
+    }
+
+    /**
+     * This is used to select the main block for land and sea.
+     * We added biome category checks to help make nether and end biomes
+     * as close to their actual dimensions as possible for best compat.
+     */
+    protected BlockState func_236086_a_(double noiseValue, int x, int y, int z) {
+        BlockState blockstate;
+        Biome biome = this.biomeProvider.getNoiseBiome(x, y, z);
+        if (noiseValue > 0.0D) {
+            blockstate = this.defaultBlock;
+
+            // Change blockstate for end and nether biomes so that their features and carvers behave correctly
+            if(biome.getCategory() == Biome.Category.NETHER){
+                blockstate = Blocks.NETHERRACK.getDefaultState();
+            }
+            else if(biome.getCategory() == Biome.Category.THEEND){
+                if(UA_END_BIOMES.contains(biome)){
+                    if(y < (this.getSeaLevel() - 2) - ((noiseGen.eval(x * 0.1D, z * 0.1D) + 1) * 2)){
+                        blockstate = Blocks.END_STONE.getDefaultState();
+                    }
+                }
+                else {
+                    blockstate = Blocks.END_STONE.getDefaultState();
+                }
+            }
+        }
+        else if (y < this.getSeaLevel()) {
+            if(biome.getCategory() == Biome.Category.NETHER){
+                // If nether biome is surrounded by nether biomes, place lava.
+                // This way, all imported nether biomes gets the lava they want.
+                if(this.biomeProvider.getNoiseBiome(x + 1, y, z).getCategory() == Biome.Category.NETHER &&
+                        this.biomeProvider.getNoiseBiome(x, y, z + 1).getCategory() == Biome.Category.NETHER &&
+                        this.biomeProvider.getNoiseBiome(x - 1, y, z).getCategory() == Biome.Category.NETHER &&
+                        this.biomeProvider.getNoiseBiome(x , y, z - 1).getCategory() == Biome.Category.NETHER)
+                {
+                    if(y > this.getSeaLevel() - 7){
+                        blockstate = this.defaultFluid;
+                    }
+                    else if(y == this.getSeaLevel() - 7){
+                        blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
+                    }
+                    else{
+                        blockstate = Blocks.LAVA.getDefaultState();
+                    }
+                }
+                // Make an obsidian border to separate lava from default fluid.
+                else{
+                    blockstate = Blocks.OBSIDIAN.getDefaultState();
+                }
+            }
+            else{
+                // default world fluid
+                blockstate = this.defaultFluid;
+            }
+        } else {
+            blockstate = Blocks.AIR.getDefaultState();
+        }
+
+        return blockstate;
+    }
+
+    /**
+     * Calls up the biome's surfacebuilders.
+     * We added biome category checks to pass in netherrack and end stone for default blocks
+     * to mimic the nether and end dimensions as much as possible for best compat.
+     */
+    public void generateSurface(WorldGenRegion worldGenRegion, IChunk chunk) {
+        ChunkPos chunkpos = chunk.getPos();
+        int x = chunkpos.x;
+        int z = chunkpos.z;
+        SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
+        sharedseedrandom.setBaseChunkSeed(x, z);
+        ChunkPos chunkpos1 = chunk.getPos();
+        int xStart = chunkpos1.getXStart();
+        int zStart = chunkpos1.getZStart();
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+
+        for(int xInChunk = 0; xInChunk < 16; ++xInChunk) {
+            for(int zInChunk = 0; zInChunk < 16; ++zInChunk) {
+                int xPos = xStart + xInChunk;
+                int zPos = zStart + zInChunk;
+                int maxY = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, xInChunk, zInChunk) + 1;
+                double noise = ((NoiseChunkGeneratorAccessor)this).getSurfaceDepthNoise().noiseAt((double)xPos * 0.0625D, (double)zPos * 0.0625D, 0.0625D, (double)xInChunk * 0.0625D) * 15.0D;
+                Biome biome = worldGenRegion.getBiome(blockpos$mutable.setPos(xStart + xInChunk, maxY, zStart + zInChunk));
+                BlockState defaultBlockForSurface = Blocks.STONE.getDefaultState();
+                if(biome.getCategory() == Biome.Category.NETHER){
+                    defaultBlockForSurface = Blocks.NETHERRACK.getDefaultState();
+                }
+                else if(biome.getCategory() == Biome.Category.THEEND){
+                    defaultBlockForSurface = Blocks.END_STONE.getDefaultState();
+                }
+
+                biome.buildSurface(sharedseedrandom, chunk, xPos, zPos, maxY, noise, defaultBlockForSurface, this.defaultFluid, this.getSeaLevel(), worldGenRegion.getSeed());
+            }
+        }
+
+        ((NoiseChunkGeneratorAccessor)this).callMakeBedrock(chunk, sharedseedrandom);
     }
 
     private static double func_222556_a(int x, int y, int z) {

@@ -8,7 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 public class BoulderFeatureConfig implements IFeatureConfig {

@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.decorators;
 
 import com.mojang.serialization.Codec;
-import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;

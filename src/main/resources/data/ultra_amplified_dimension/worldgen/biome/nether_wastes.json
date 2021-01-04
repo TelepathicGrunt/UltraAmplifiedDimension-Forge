@@ -59,10 +59,6 @@
     ],
     [
       "ultra_amplified_dimension:springs/lava_ceiling",
-      "minecraft:patch_fire",
-      "ultra_amplified_dimension:nether/patch_fire",
-      "minecraft:patch_soul_fire",
-      "ultra_amplified_dimension:nether/patch_soul_fire",
       "ultra_amplified_dimension:nether/ceiling_glowstone",
       "ultra_amplified_dimension:nether/glowstone",
       "ultra_amplified_dimension:ores/ore_magma",
@@ -78,6 +74,10 @@
       "minecraft:ore_debris_small"
     ],
     [
+      "minecraft:patch_fire",
+      "ultra_amplified_dimension:nether/patch_fire",
+      "minecraft:patch_soul_fire",
+      "ultra_amplified_dimension:nether/patch_soul_fire",
       "ultra_amplified_dimension:springs/lava_dense_nether",
       "ultra_amplified_dimension:springs/lava_floor",
       "ultra_amplified_dimension:vegetation/mushroom_brown_normal_dense",
@@ -85,7 +85,7 @@
       "ultra_amplified_dimension:nether/patch_netherwart"
     ],
     [
-      "ultra_amplified_dimension:nether/trigger_bubble_columns",
+      "ultra_amplified_dimension:nether/nether_sea_adjuster",
       "ultra_amplified_dimension:snow_ice_layer_handler_feature"
     ]
   ],

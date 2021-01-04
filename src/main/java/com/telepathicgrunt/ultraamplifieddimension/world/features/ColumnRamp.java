@@ -4,10 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.ColumnConfig;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
@@ -33,11 +32,10 @@ public class ColumnRamp extends Feature<ColumnConfig> {
 
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig blocksConfig) {
+    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig columnConfig) {
 
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
         int minWidth = 4;
-        int currentHeight = 0;
         int ceilingHeight;
         int bottomFloorHeight;
         int topFloorHeight;
@@ -45,7 +43,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         IChunk cachedChunk = world.getChunk(blockposMutable);
 
         //finds ceiling
-        while (!cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
+        while (!GeneralUtils.isFullCube(world, blockposMutable, cachedChunk.getBlockState(blockposMutable))) {
             //too high for ramp to generate
             if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
@@ -55,23 +53,24 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         ceilingHeight = blockposMutable.getY();
 
         //finds floor above ceiling
-        while (cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
+        while (GeneralUtils.isFullCube(world, blockposMutable, cachedChunk.getBlockState(blockposMutable))) {
             //too high for ramp to generate
             if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
             }
             blockposMutable.move(Direction.UP);
         }
-        topFloorHeight = blockposMutable.up(currentHeight).getY();
+        topFloorHeight = blockposMutable.getY();
 
         //too thick or thin for ramp to generate
-        if (topFloorHeight - ceilingHeight > 7 || topFloorHeight - ceilingHeight < 2) {
+        int ledgeThickness = topFloorHeight - ceilingHeight;
+        if (ledgeThickness > 7 || ledgeThickness < 2) {
             return false;
         }
 
         //find floor
         blockposMutable.setPos(position); // reset back to normal height
-        while (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
+        while (!GeneralUtils.isFullCube(world, blockposMutable, cachedChunk.getBlockState(blockposMutable))) {
             //too low/tall for column to generate
             if (blockposMutable.getY() < 70) {
                 return false;
@@ -105,7 +104,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
             for (int z = -widthAtHeight; z <= widthAtHeight; z++) {
                 if (x * x + z * z > widthAtHeight * widthAtHeight * 0.85 && x * x + z * z < widthAtHeight * widthAtHeight) {
 
-                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                    if (blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
                         cachedChunk = world.getChunk(blockposMutable);
 
                     BlockState block1 = cachedChunk.getBlockState(blockposMutable.setPos(xPosCeiling + x, ceilingHeight + 2, zPosCeiling + z));
@@ -135,6 +134,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
         int xDiff;
         int zDiff;
         BlockPos.Mutable tempMutable = new BlockPos.Mutable();
+        BlockPos.Mutable tempPos2 = new BlockPos.Mutable();
 
         //clears hole for ramp
         for (int y = -2; y <= heightDiff + 3; y++) {
@@ -169,23 +169,35 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                         circleBounds *= (0.6f / (y - heightDiff));
                     }
 
-                    if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
+                    if (blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
                         cachedChunk = world.getChunk(blockposMutable);
 
                     BlockState block = cachedChunk.getBlockState(blockposMutable);
                     if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds) {
-                        if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator){
-                            cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor)chunkGenerator).getDefaultFluid(), false);
+                        if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator) {
+                            cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor) chunkGenerator).getDefaultFluid(), false);
                         }
-                         else{
-                            cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                        else {
+
+                            tempMutable.setPos(blockposMutable).move(Direction.DOWN);
+                            if (columnConfig.snowy && Blocks.SNOW.getDefaultState().isValidPosition(world, blockposMutable)) {
+                                cachedChunk.setBlockState(blockposMutable, Blocks.SNOW.getDefaultState(), false);
+
+                                BlockState belowBlock = cachedChunk.getBlockState(tempMutable);
+                                if (belowBlock.hasProperty(SnowyDirtBlock.SNOWY)) {
+                                    cachedChunk.setBlockState(tempMutable, belowBlock.with(SnowyDirtBlock.SNOWY, true), false);
+                                }
+                            }
+                            else {
+                                cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                            }
                         }
 
                         //remove floating plants so they aren't hovering.
                         //check above while moving up one.
                         tempMutable.setPos(blockposMutable).move(Direction.UP);
                         block = cachedChunk.getBlockState(tempMutable);
-                        while(tempMutable.getY() < chunkGenerator.getMaxBuildHeight() && !block.isValidPosition(world, tempMutable)){
+                        while (tempMutable.getY() < chunkGenerator.getMaxBuildHeight() && !block.isValidPosition(world, tempMutable)) {
                             cachedChunk.setBlockState(tempMutable, Blocks.AIR.getDefaultState(), false);
                             block = cachedChunk.getBlockState(tempMutable.move(Direction.UP));
                         }
@@ -195,12 +207,22 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                         BlockState blockBelowBelowAir = cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN));
                         blockposMutable.move(Direction.UP); // Move back to blockBelowAir
 
-                        if (blockBelowAir.isSolid()) {
-                            if ((blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelowBelowAir.getMaterial() == Material.AIR) || blockposMutable.getY() < chunkGenerator.getSeaLevel()) {
-                                cachedChunk.setBlockState(blockposMutable, blocksConfig.middleBlock, false);
+                        if (GeneralUtils.isFullCube(world, blockposMutable, blockBelowAir)) {
+                            if ((columnConfig.topBlock.getBlock() instanceof FallingBlock && blockBelowBelowAir.isAir()) || blockposMutable.getY() < chunkGenerator.getSeaLevel()) {
+                                cachedChunk.setBlockState(blockposMutable, columnConfig.middleBlock, false);
                             }
                             else {
-                                cachedChunk.setBlockState(blockposMutable, blocksConfig.topBlock, false);
+                                cachedChunk.setBlockState(blockposMutable, columnConfig.topBlock, false);
+                                tempMutable.setPos(blockposMutable).move(Direction.UP);
+                                BlockState aboveBlock = cachedChunk.getBlockState(tempMutable);
+
+                                if (columnConfig.snowy && aboveBlock.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(world, tempMutable)) {
+                                    cachedChunk.setBlockState(tempMutable, Blocks.SNOW.getDefaultState(), false);
+
+                                    if (columnConfig.topBlock.hasProperty(SnowyDirtBlock.SNOWY)) {
+                                        cachedChunk.setBlockState(blockposMutable, columnConfig.topBlock.with(SnowyDirtBlock.SNOWY, true), false);
+                                    }
+                                }
                             }
                         }
 
@@ -233,8 +255,8 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                     }
 
                     if (y <= heightDiff && xzDiffSquaredStretched <= circleBounds) {
-                        if (!world.getBlockState(blockposMutable).isSolid()) {
-                            world.setBlockState(blockposMutable, blocksConfig.insideBlock, 2);
+                        if (!GeneralUtils.isFullCube(world, blockposMutable, world.getBlockState(blockposMutable))) {
+                            world.setBlockState(blockposMutable, columnConfig.insideBlock, 2);
                         }
                     }
                     //We are at non-pillar space
@@ -247,14 +269,24 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                             BlockState blockBelow = world.getBlockState(tempMutable.move(Direction.DOWN));
                             tempMutable.move(Direction.UP);
 
-                            if (block == blocksConfig.insideBlock) {
-                                if (tempMutable.getY() >= chunkGenerator.getSeaLevel() - 1 && downward == 1 && !(blocksConfig.topBlock.getMaterial() == Material.SAND && blockBelow.getMaterial() == Material.AIR)) {
-                                    world.setBlockState(tempMutable, blocksConfig.topBlock, 2);
+                            if (block == columnConfig.insideBlock) {
+                                if (tempMutable.getY() >= chunkGenerator.getSeaLevel() - 1 && downward == 1 && !(columnConfig.topBlock.getBlock() instanceof FallingBlock && blockBelow.isAir())) {
+                                    world.setBlockState(tempMutable, columnConfig.topBlock, 2);
+
+                                    tempPos2.setPos(tempMutable).move(Direction.UP);
+                                    BlockState aboveBlock = world.getBlockState(tempPos2);
+
+                                    if (columnConfig.snowy && aboveBlock.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(world, tempPos2)) {
+                                        world.setBlockState(tempPos2, Blocks.SNOW.getDefaultState(), 2);
+
+                                        if (columnConfig.topBlock.hasProperty(SnowyDirtBlock.SNOWY)) {
+                                            world.setBlockState(tempMutable, columnConfig.topBlock.with(SnowyDirtBlock.SNOWY, true), 2);
+                                        }
+                                    }
                                 }
                                 else {
-                                    world.setBlockState(tempMutable, blocksConfig.middleBlock, 2);
+                                    world.setBlockState(tempMutable, columnConfig.middleBlock, 2);
                                 }
-
                             }
                         }
                     }

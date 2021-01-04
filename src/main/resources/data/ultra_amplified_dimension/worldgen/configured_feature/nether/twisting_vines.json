@@ -5,23 +5,14 @@
         "feature": {
           "config": {
             "feature": {
-              "config": {
-                "target": {
-                  "block": "minecraft:netherrack",
-                  "predicate_type": "minecraft:block_match"
-                },
-                "state": {
-                  "Name": "minecraft:soul_sand"
-                },
-                "size": 10
-              },
-              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+              "config": {},
+              "type": "minecraft:twisting_vines"
             },
             "decorator": {
               "config": {
-                "bottom_offset": 1,
+                "bottom_offset": 0,
                 "top_offset": 0,
-                "maximum": 32
+                "maximum": 254
               },
               "type": "minecraft:range"
             }
@@ -37,7 +28,7 @@
     },
     "decorator": {
       "config": {
-        "count": 12
+        "count": 20
       },
       "type": "minecraft:count"
     }

@@ -9,7 +9,10 @@
                 "rock_count": 5,
                 "hole_count": 0,
                 "valid_blocks": [
-                  "minecraft:netherrack"
+                  "minecraft:netherrack",
+                  "minecraft:basalt",
+                  "minecraft:blackstone",
+                  "minecraft:soul_soil"
                 ],
                 "state": {
                   "Properties": {

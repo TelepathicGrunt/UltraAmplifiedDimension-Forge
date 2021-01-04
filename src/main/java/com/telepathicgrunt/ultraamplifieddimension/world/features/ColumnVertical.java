@@ -1,9 +1,12 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.ColumnConfig;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowyDirtBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -31,13 +34,12 @@ public class ColumnVertical extends Feature<ColumnConfig> {
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig blocksConfig) {
+    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, ColumnConfig columnConfig) {
 
         setSeed(world.getSeed());
         BlockPos.Mutable blockposMutable = new BlockPos.Mutable().setPos(position);
         int minWidth = 3;
         int maxWidth = 10;
-        int currentHeight = 0;
         int ceilingHeight;
         int floorHeight;
         int heightDiff;
@@ -45,7 +47,7 @@ public class ColumnVertical extends Feature<ColumnConfig> {
 
         //checks to see if position is acceptable for pillar gen
         //finds ceiling
-        while (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
+        while (!GeneralUtils.isFullCube(world, blockposMutable, cachedChunk.getBlockState(blockposMutable))) {
             //too high for column to generate
             if (blockposMutable.getY() > chunkGenerator.getMaxBuildHeight() - 1) {
                 return false;
@@ -56,9 +58,9 @@ public class ColumnVertical extends Feature<ColumnConfig> {
 
         //find floor
         blockposMutable.setPos(position); // reset back to normal height
-        while (!cachedChunk.getBlockState(blockposMutable.up(currentHeight)).isSolid()) {
+        while (!GeneralUtils.isFullCube(world, blockposMutable, cachedChunk.getBlockState(blockposMutable))) {
             //too low for column to generate
-            if (blockposMutable.getY() < 50) {
+            if (blockposMutable.getY() < 3) {
                 return false;
             }
             blockposMutable.move(Direction.DOWN, 2);
@@ -95,7 +97,8 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                     BlockState block2 = cachedChunk.getBlockState(blockposMutable.setPos(x, floorHeight - 2, z));
 
                     //there is not enough land to contain bases of pillar
-                    if (!block1.isSolid() || !block2.isSolid()) {
+                    if (!GeneralUtils.isFullCube(world, blockposMutable, block1) ||
+                        !GeneralUtils.isFullCube(world, blockposMutable, block2)) {
                         return false;
                     }
                 }
@@ -156,7 +159,7 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                             cachedChunk = world.getChunk(blockposMutable);
 
                         if (!cachedChunk.getBlockState(blockposMutable).isSolid()) {
-                            cachedChunk.setBlockState(blockposMutable, blocksConfig.insideBlock, false);
+                            cachedChunk.setBlockState(blockposMutable, columnConfig.insideBlock, false);
                         }
                     }
                     //We are at non-pillar space
@@ -168,12 +171,25 @@ public class ColumnVertical extends Feature<ColumnConfig> {
                             if(blockposMutable.getX() >> 4 != cachedChunk.getPos().x || blockposMutable.getZ() >> 4 != cachedChunk.getPos().z)
                                 cachedChunk = world.getChunk(blockposMutable);
 
-                            if (cachedChunk.getBlockState(blockposMutable) == blocksConfig.insideBlock) {
+                            if (cachedChunk.getBlockState(blockposMutable) == columnConfig.insideBlock) {
                                 if(downward == 1 && blockposMutable.getY() >= chunkGenerator.getSeaLevel() - 1){
-                                    cachedChunk.setBlockState(blockposMutable, blocksConfig.topBlock, false);
+                                    if(!columnConfig.snowy){
+                                        cachedChunk.setBlockState(blockposMutable, columnConfig.topBlock, false);
+                                    }
+                                    else{
+                                        cachedChunk.setBlockState(blockposMutable.move(Direction.UP), Blocks.SNOW.getDefaultState(), false);
+                                        blockposMutable.move(Direction.DOWN);
+
+                                        if (columnConfig.topBlock.hasProperty(SnowyDirtBlock.SNOWY)) {
+                                            cachedChunk.setBlockState(blockposMutable, columnConfig.topBlock.with(SnowyDirtBlock.SNOWY, true), false);
+                                        }
+                                        else{
+                                            cachedChunk.setBlockState(blockposMutable, columnConfig.topBlock, false);
+                                        }
+                                    }
                                 }
                                 else{
-                                    cachedChunk.setBlockState(blockposMutable, blocksConfig.middleBlock, false);
+                                    cachedChunk.setBlockState(blockposMutable, columnConfig.middleBlock, false);
                                 }
                             }
 

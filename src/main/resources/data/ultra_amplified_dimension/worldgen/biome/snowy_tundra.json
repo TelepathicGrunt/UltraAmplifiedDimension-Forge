@@ -37,8 +37,8 @@
         "ultra_amplified_dimension:ponds/ice"
     ],
     [
-        "ultra_amplified_dimension:columns/vertical_grass",
-        "ultra_amplified_dimension:columns/ramp_grass",
+        "ultra_amplified_dimension:columns/vertical_snowy_grass",
+        "ultra_amplified_dimension:columns/ramp_snowy_grass",
         "ultra_amplified_dimension:glow_patch_surface",
         "ultra_amplified_dimension:glow_patch_underground",
         "ultra_amplified_dimension:contain_liquid_for_oceans"

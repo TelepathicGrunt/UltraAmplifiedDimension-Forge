@@ -1,0 +1,69 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "state": {
+                  "Name": "minecraft:crimson_nylium"
+                },
+                "radius": {
+                  "base": 5,
+                  "spread": 2
+                },
+                "half_height": 1,
+                "exposed_only": true,
+                "targets": [
+                  {
+                    "Name": "minecraft:netherrack"
+                  },
+                  {
+                    "Name": "minecraft:soul_sand"
+                  },
+                  {
+                    "Name": "minecraft:soul_soil"
+                  },
+                  {
+                    "Properties": {
+                      "axis": "y"
+                    },
+                    "Name": "minecraft:basalt"
+                  },
+                  {
+                    "Name": "minecraft:blackstone"
+                  }
+                ]
+              },
+              "type": "ultra_amplified_dimension:disk_dry"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 1,
+                "top_offset": 0,
+                "maximum": 74
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 20,
+        "extra_chance": 0.5,
+        "extra_count": 10
+      },
+      "type": "minecraft:count_extra"
+    }
+  },
+  "type": "minecraft:decorated"
+}

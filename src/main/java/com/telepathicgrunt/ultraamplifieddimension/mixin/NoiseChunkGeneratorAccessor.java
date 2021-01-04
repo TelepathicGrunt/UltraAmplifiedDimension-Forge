@@ -1,12 +1,16 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.DimensionSettings;
+import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 @Mixin(NoiseChunkGenerator.class)
@@ -47,4 +51,10 @@ public interface NoiseChunkGeneratorAccessor {
 
     @Accessor
     BlockState getDefaultFluid();
+
+    @Accessor
+    INoiseGenerator getSurfaceDepthNoise();
+
+    @Invoker
+    void callMakeBedrock(IChunk chunkIn, Random rand);
 }

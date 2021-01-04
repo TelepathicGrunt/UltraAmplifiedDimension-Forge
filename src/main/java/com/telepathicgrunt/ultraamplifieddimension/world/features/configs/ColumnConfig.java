@@ -14,7 +14,8 @@ public class ColumnConfig implements IFeatureConfig {
             Codec.intRange(1, 256).fieldOf("min_height").forGetter(columnConfig -> columnConfig.minHeight),
             BlockState.CODEC.fieldOf("top_block").forGetter(columnConfig -> columnConfig.topBlock),
             BlockState.CODEC.fieldOf("middle_block").forGetter(columnConfig -> columnConfig.middleBlock),
-            BlockState.CODEC.fieldOf("bottom_block").forGetter(columnConfig -> columnConfig.insideBlock)
+            BlockState.CODEC.fieldOf("bottom_block").forGetter(columnConfig -> columnConfig.insideBlock),
+            Codec.BOOL.fieldOf("is_snowy").orElse(false).forGetter(columnConfig -> columnConfig.snowy)
         ).apply(columnConfigInstance, ColumnConfig::new))
             .comapFlatMap((rangeValidationPlacerConfig) -> rangeValidationPlacerConfig.maxHeight < rangeValidationPlacerConfig.minHeight ?
                     DataResult.error("min_height has to be smaller than max_height") : DataResult.success(rangeValidationPlacerConfig), Function.identity());
@@ -26,12 +27,14 @@ public class ColumnConfig implements IFeatureConfig {
     public final BlockState topBlock;
     public final BlockState middleBlock;
     public final BlockState insideBlock;
+    public final boolean snowy;
 
-    public ColumnConfig(int maxHeight, int minHeight, BlockState topBlock, BlockState middleBlock, BlockState insideBlock) {
+    public ColumnConfig(int maxHeight, int minHeight, BlockState topBlock, BlockState middleBlock, BlockState insideBlock, boolean snowy) {
         this.maxHeight = maxHeight;
         this.minHeight = minHeight;
         this.topBlock = topBlock;
         this.middleBlock = middleBlock;
         this.insideBlock = insideBlock;
+        this.snowy = snowy;
     }
 }

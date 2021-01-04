@@ -14,18 +14,21 @@ public class DiskDryConfig implements IFeatureConfig {
             BlockState.CODEC.fieldOf("state").forGetter((config) -> config.state),
             FeatureSpread.func_242254_a(1, 36, 36).fieldOf("radius").forGetter((config) -> config.radius),
             Codec.intRange(0, 36).fieldOf("half_height").forGetter((config) -> config.half_height),
-            BlockState.CODEC.listOf().fieldOf("targets").forGetter((config) -> config.targets)
+            BlockState.CODEC.listOf().fieldOf("targets").forGetter((config) -> config.targets),
+            Codec.BOOL.fieldOf("exposed_only").orElse(false).forGetter((config) -> config.exposedOnly)
     ).apply(diskDryConfig, DiskDryConfig::new));
 
     public final BlockState state;
     public final FeatureSpread radius;
     public final int half_height;
     public final List<BlockState> targets;
+    public final boolean exposedOnly;
 
-    public DiskDryConfig(BlockState blockState, FeatureSpread radius, int half_height, List<BlockState> targets) {
+    public DiskDryConfig(BlockState blockState, FeatureSpread radius, int half_height, List<BlockState> targets, boolean exposedOnly) {
         this.state = blockState;
         this.radius = radius;
         this.half_height = half_height;
         this.targets = targets;
+        this.exposedOnly = exposedOnly;
     }
 }
