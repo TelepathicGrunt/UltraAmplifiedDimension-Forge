@@ -45,9 +45,10 @@
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/icy_high",
-        "ultra_amplified_dimension:dungeons/icy_middle",
-        "ultra_amplified_dimension:dungeons/icy_bottom"
+        "ultra_amplified_dimension:dungeons/icy_bottom",
+        "ultra_amplified_dimension:dungeons/ocean_high",
+        "ultra_amplified_dimension:dungeons/ocean_middle",
+        "ultra_amplified_dimension:dungeons/ocean_bottom"
     ],
     [
         "ultra_amplified_dimension:misc/icebergs"

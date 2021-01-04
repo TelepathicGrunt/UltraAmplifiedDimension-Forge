@@ -13,22 +13,22 @@
                 "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
                 "dungeon_nbt_entries": [
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_1",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/snowy_1",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_2",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/snowy_2",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_3",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/snowy_3",
                         "weight": 1
                     }
                 ],
                 "spawner_mob_entries": [
                     {
-                        "resourcelocation": "minecraft:husk",
-                        "weight": 48
+                        "resourcelocation": "minecraft:stray",
+                        "weight": 37
                     },
                     {
                         "resourcelocation": "minecraft:cave_spider",
@@ -39,15 +39,15 @@
                         "weight": 25
                     },
                     {
-                        "resourcelocation": "minecraft:creeper",
-                        "weight": 1
+                        "resourcelocation": "minecraft:spider",
+                        "weight": 12
                     },
                     {
-                        "resourcelocation": "minecraft:illusioner",
+                        "resourcelocation": "minecraft:snow_golem",
                         "weight": 1
                     }
                 ],
-                "processors": "ultra_amplified_dimension:dungeons/badlands"
+                "processors": "ultra_amplified_dimension:dungeons/snowy"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"
             },

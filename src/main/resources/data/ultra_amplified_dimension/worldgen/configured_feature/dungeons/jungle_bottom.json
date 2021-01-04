@@ -13,41 +13,45 @@
                 "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
                 "dungeon_nbt_entries": [
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_1",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/jungle_1",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_2",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/jungle_2",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_3",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/jungle_3",
                         "weight": 1
                     }
                 ],
                 "spawner_mob_entries": [
                     {
-                        "resourcelocation": "minecraft:husk",
-                        "weight": 48
-                    },
-                    {
-                        "resourcelocation": "minecraft:cave_spider",
-                        "weight": 25
-                    },
-                    {
                         "resourcelocation": "minecraft:zombie",
+                        "weight": 37
+                    },
+                    {
+                        "resourcelocation": "minecraft:parrot",
                         "weight": 25
+                    },
+                    {
+                        "resourcelocation": "minecraft:spider",
+                        "weight": 18
+                    },
+                    {
+                        "resourcelocation": "minecraft:skeleton",
+                        "weight": 18
+                    },
+                    {
+                        "resourcelocation": "minecraft:chicken",
+                        "weight": 1
                     },
                     {
                         "resourcelocation": "minecraft:creeper",
                         "weight": 1
-                    },
-                    {
-                        "resourcelocation": "minecraft:illusioner",
-                        "weight": 1
                     }
                 ],
-                "processors": "ultra_amplified_dimension:dungeons/badlands"
+                "processors": "ultra_amplified_dimension:dungeons/jungle"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"
             },

@@ -45,9 +45,10 @@
         "ultra_amplified_dimension:contain_liquid_for_oceans"
     ],
     [
-        "ultra_amplified_dimension:dungeons/generic_high",
-        "ultra_amplified_dimension:dungeons/generic_middle",
-        "ultra_amplified_dimension:dungeons/generic_bottom"
+        "ultra_amplified_dimension:dungeons/generic_bottom",
+        "ultra_amplified_dimension:dungeons/ocean_high",
+        "ultra_amplified_dimension:dungeons/ocean_middle",
+        "ultra_amplified_dimension:dungeons/ocean_bottom"
     ],
     [],
     [],

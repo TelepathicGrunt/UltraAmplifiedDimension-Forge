@@ -13,41 +13,33 @@
                 "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
                 "dungeon_nbt_entries": [
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_1",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/generic_1",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_2",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/generic_2",
                         "weight": 1
                     },
                     {
-                        "resourcelocation": "ultra_amplified_dimension:dungeons/badlands_3",
+                        "resourcelocation": "ultra_amplified_dimension:dungeons/generic_3",
                         "weight": 1
                     }
                 ],
                 "spawner_mob_entries": [
                     {
-                        "resourcelocation": "minecraft:husk",
+                        "resourcelocation": "minecraft:zombie",
                         "weight": 48
                     },
                     {
-                        "resourcelocation": "minecraft:cave_spider",
+                        "resourcelocation": "minecraft:spider",
                         "weight": 25
                     },
                     {
-                        "resourcelocation": "minecraft:zombie",
+                        "resourcelocation": "minecraft:skeleton",
                         "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:creeper",
-                        "weight": 1
-                    },
-                    {
-                        "resourcelocation": "minecraft:illusioner",
-                        "weight": 1
                     }
                 ],
-                "processors": "ultra_amplified_dimension:dungeons/badlands"
+                "processors": "ultra_amplified_dimension:dungeons/generic"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"
             },

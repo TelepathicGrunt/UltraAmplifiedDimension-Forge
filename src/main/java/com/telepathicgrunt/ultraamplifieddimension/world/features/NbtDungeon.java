@@ -14,6 +14,7 @@ import net.minecraft.inventory.IClearable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -76,17 +77,17 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
         int ceilingOpenings = 0;
         int ceiling = template.getSize().getY();
 
-        for (int x = xMin; x <= xMax; ++x) {
-            for (int z = zMin; z <= zMax; ++z) {
-                for (int y = -1; y <= ceiling; ++y) {
+        for (int x = xMin - 1; x <= xMax + 1; ++x) {
+            for (int z = zMin - 1; z <= zMax + 1; ++z) {
+                for (int y = -2; y <= ceiling + 1; ++y) {
                     mutable.setPos(position).move(x, y, z);
                     if(mutable.getX() >> 4 != cachedChunk.getPos().x || mutable.getZ() >> 4 != cachedChunk.getPos().z)
                         cachedChunk = world.getChunk(mutable);
 
                     BlockState state = cachedChunk.getBlockState(mutable);
 
-                    // Dungeons cannot touch fluids
-                    if(!state.getFluidState().isEmpty()){
+                    // Dungeons cannot touch fluids if set to air mode and reverse if opposite
+                    if(config.airRequirementIsNowWater ? state.isAir() : !state.getFluidState().isEmpty()){
                         return false;
                     }
                     // Floor must be complete
@@ -103,8 +104,13 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                     }
 
                     // Check only along wall bottoms for openings
-                    if ((x == xMin || x == xMax || z == zMin || z == zMax) && y == 0 && state.isAir()) {
-                        if(cachedChunk.getBlockState(mutable.move(Direction.UP)).isAir()){
+                    if ((x == xMin || x == xMax || z == zMin || z == zMax) && y == 0 && isValidNonSolidBlock(config, state))
+                    {
+                        BlockState aboveState = cachedChunk.getBlockState(mutable.move(Direction.UP));
+                        if(config.airRequirementIsNowWater ?
+                            !aboveState.getFluidState().isEmpty() :
+                            aboveState.isAir())
+                        {
                             validOpenings++;
                         }
                         mutable.move(Direction.DOWN);
@@ -144,7 +150,10 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         random.nextInt(Math.max(fullLengths.getY() - 1, 1)),
                         random.nextInt(Math.max(fullLengths.getZ() - 2, 1)) - halfLengths.getZ() + 1);
 
-                if (world.getBlockState(mutable).isAir()){
+                BlockState currentBlock = world.getBlockState(mutable);
+
+                if (isValidNonSolidBlock(config, currentBlock))
+                {
                     if(world.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable.move(Direction.UP), Direction.DOWN)){
 
                         boolean isOnWall = false;
@@ -169,7 +178,12 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                                         flippedDirections = true;
                                     }
 
-                                    world.setBlockState(mutable, Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, doubleChestDirection).with(ChestBlock.TYPE, flippedDirections ? ChestType.LEFT : ChestType.RIGHT), 2);
+                                    world.setBlockState(mutable,
+                                            Blocks.CHEST.getDefaultState()
+                                                .with(ChestBlock.WATERLOGGED, currentBlock.getFluidState().isTagged(FluidTags.WATER))
+                                                .with(ChestBlock.FACING, doubleChestDirection)
+                                                .with(ChestBlock.TYPE, flippedDirections ? ChestType.LEFT : ChestType.RIGHT), 2);
+
                                     LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
 
                                     // Set neighboring chest to face same way too
@@ -187,7 +201,11 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         // Is not next to another chest.
                         if(isOnWall){
                             // Set chest to face away from wall.
-                            world.setBlockState(mutable, StructurePiece.correctFacing(world, mutable, Blocks.CHEST.getDefaultState()), 2);
+                            world.setBlockState(mutable,
+                                    StructurePiece.correctFacing(world, mutable,
+                                            Blocks.CHEST.getDefaultState()
+                                                    .with(ChestBlock.WATERLOGGED, currentBlock.getFluidState().isTagged(FluidTags.WATER))), 2);
+
                             LockableLootTileEntity.setLootTable(world, random, mutable, config.chestResourceLocation);
                             currentChestCount++;
                             break;
@@ -238,10 +256,20 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                         {
                             // No floating chests or spawners
                             BlockState aboveState = world.getBlockState(mutable.setPos(blockpos).move(Direction.UP));
-                            if(isNotSpawnerOrChest(aboveState) && (config.replaceAir || GeneralUtils.isFullCube(world, mutable, originalBlockState) || blockstate.hasTileEntity()))
+
+                            boolean forcePlaceBlock = false;
+                            if(config.blocksToAlwaysPlace.isPresent()){
+                                forcePlaceBlock = config.blocksToAlwaysPlace.get().contains(blockstate);
+                            }
+
+                            if(isNotSpawnerOrChest(aboveState) &&
+                                    (config.replaceAir ||
+                                    forcePlaceBlock ||
+                                    GeneralUtils.isFullCube(world, mutable, originalBlockState) ||
+                                    blockstate.hasTileEntity()))
                             {
                                 // Attempt to let leaves stay in the dungeon space and not be cut off
-                                if(!(blockstate.isAir() && originalBlockState.isIn(BlockTags.LEAVES))){
+                                if(!(isValidNonSolidBlock(config, blockstate) && originalBlockState.isIn(BlockTags.LEAVES))){
                                     world.setBlockState(blockpos, blockstate, 3);
 
                                     minX = Math.min(minX, blockpos.getX());
@@ -266,8 +294,8 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                             }
 
                             // Prevent plants remaining at edge of dungeons like bamboo which then breaks as dungeon floor isn't valid for bamboo.
-                            else if(!originalBlockState.isAir() && !originalBlockState.isIn(BlockTags.LEAVES) && !originalBlockState.isSolid() && originalBlockState.getFluidState().isEmpty()){
-                                world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 3);
+                            else if(!isValidNonSolidBlock(config, blockstate) && !originalBlockState.isIn(BlockTags.LEAVES) && !originalBlockState.isSolid() && originalBlockState.getFluidState().isEmpty()){
+                                world.setBlockState(blockpos, config.airRequirementIsNowWater ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 3);
 
                                 BlockPos.Mutable mutable1 = new BlockPos.Mutable().setPos(blockpos);
                                 BlockState blockState = world.getBlockState(mutable1.move(Direction.UP));
@@ -399,5 +427,12 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
         }
 
         Template.func_222857_a(world, flags, voxelshapepart, x, y, z);
+    }
+
+    private boolean isValidNonSolidBlock(NbtDungeonConfig config, BlockState state){
+        if(config.airRequirementIsNowWater){
+            return !state.getFluidState().isEmpty();
+        }
+        return state.isAir();
     }
 }
