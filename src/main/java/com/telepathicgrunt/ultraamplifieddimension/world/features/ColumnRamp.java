@@ -189,7 +189,12 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                                 }
                             }
                             else {
-                                cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                                BlockState aboveBlock = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
+                                blockposMutable.move(Direction.DOWN);
+                                // Reduce amount of floating trees by leaving the dirt under their trunk.
+                                if(!aboveBlock.isIn(BlockTags.LOGS)){
+                                    cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
+                                }
                             }
                         }
 

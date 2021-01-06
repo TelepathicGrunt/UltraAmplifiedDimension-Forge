@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.world.carver;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.configs.RavineConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
@@ -14,7 +15,6 @@ import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 import java.util.BitSet;
 import java.util.HashSet;
@@ -22,13 +22,13 @@ import java.util.Random;
 import java.util.function.Function;
 
 
-public class RavineCarver extends WorldCarver<ProbabilityConfig>
+public class RavineCarver extends WorldCarver<RavineConfig>
 {
 	private final float[] WALL_LEDGES = new float[1024];
 	private SimpleRegistry<Biome> biomeRegistry;
 
-	public RavineCarver(Codec<ProbabilityConfig> codec, int height) {
-		super(codec, height);
+	public RavineCarver(Codec<RavineConfig> codec) {
+		super(codec, 255);
 		this.carvableBlocks = new HashSet<>(this.carvableBlocks);
 		this.carvableBlocks.add(Blocks.NETHERRACK);
 		this.carvableBlocks.add(Blocks.ICE);
@@ -38,12 +38,12 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 	}
 
 	@Override
-	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config) {
+	public boolean shouldCarve(Random random, int chunkX, int chunkZ, RavineConfig config) {
 		return random.nextFloat() <= config.probability;
 	}
 
 	@Override
-	public boolean carveRegion(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
+	public boolean carveRegion(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, RavineConfig config) {
 		IObjectIntIterable<Biome> reg = region.getBiomes() != null ? ((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry() : null;
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
 			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
@@ -51,26 +51,23 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
-		//TODO:  make codec that specifies height and range of height here
-		double height = random.nextInt(random.nextInt(2) + 1) + 42; // 25 : (double) (random.nextInt(random.nextInt(2) + 1) + 42);
+		double height = config.heightPlacement.func_242259_a(random);
 		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 2F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 8.0F;
 		float widthHeightBase = (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
 		int maxIteration = i - random.nextInt(i / 4);
-		// make a codec that handles the height multiplier
-		//biome == UABiomes.NETHERLAND ? random.nextDouble() + 2.5D : random.nextDouble() / 3 + 1.9D
-		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, maxIteration, random.nextDouble() / 3 + 1.9D, mask);
+		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, maxIteration, config.tallness.func_242259_a(random) / 10D, mask, config);
 		return true;
 	}
 
 
-	private void func_202535_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int maxIteration, double heightMultiplier, BitSet mask) {
+	private void func_202535_a(IChunk world, Function<BlockPos, Biome> biomeBlockPos, long randomSeed, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int maxIteration, double heightMultiplier, BitSet mask, RavineConfig config) {
 		Random random = new Random(randomSeed);
 
 		float f = 1.0F;
 
-		for (int i = 0; i < this.maxHeight; ++i) {
+		for (int i = 0; i < config.cutoffHeight; ++i) {
 			if (i == 0 || random.nextInt(3) == 0) {
 				f = 1.0F + random.nextFloat() * random.nextFloat();
 			}
@@ -101,20 +98,20 @@ public class RavineCarver extends WorldCarver<ProbabilityConfig>
 					return;
 				}
 
-				this.carveAtTarget(world, biomeBlockPos, random, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
+				this.carveAtTarget(world, biomeBlockPos, random, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask, config);
 			}
 		}
 
 	}
 
-	protected void carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+	protected void carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask, RavineConfig config) {
 		double d0 = mainChunkX * 16 + 8;
 		double d1 = mainChunkZ * 16 + 8;
 		if (!(xRange < d0 - 16.0D - placementXZBound * 2.0D) && !(zRange < d1 - 16.0D - placementXZBound * 2.0D) && !(xRange > d0 + 16.0D + placementXZBound * 2.0D) && !(zRange > d1 + 16.0D + placementXZBound * 2.0D)) {
 			int i = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
 			int j = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
 			int minY = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 9);
-			int maxY = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
+			int maxY = Math.min(MathHelper.floor(yRange + placementYBound) + 1, config.cutoffHeight);
 			int i1 = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
 			int j1 = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
 			if (i <= j && minY <= maxY && i1 <= j1) {

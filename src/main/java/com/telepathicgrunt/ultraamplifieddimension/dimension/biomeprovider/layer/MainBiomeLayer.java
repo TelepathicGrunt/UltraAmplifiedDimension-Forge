@@ -1,19 +1,14 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer;
 
-import com.mojang.datafixers.util.Pair;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.BiomeGroup;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.RegionManager;
-import net.minecraft.util.ResourceLocation;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.transformers.CastleWithPositionTransformer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
-import net.minecraft.world.gen.layer.traits.IC1Transformer;
-
-import java.util.List;
+import net.minecraft.world.gen.ImprovedNoiseGenerator;
 
 
-public class MainBiomeLayer implements IC1Transformer {
+public class MainBiomeLayer implements CastleWithPositionTransformer {
     private final Registry<Biome> dynamicRegistry;
     private final RegionManager regionManager;
 
@@ -32,42 +27,39 @@ public class MainBiomeLayer implements IC1Transformer {
      * 5 = cool region
      * 6 = icy region
      */
-    public int apply(INoiseRandom context, int regionID) {
-        Pair<List<BiomeGroup>, Integer> listToUse;
+    public int apply(INoiseRandom context, int north, int west, int south, int east, int regionID, int x, int z) {
+        Biome biomeToUse;
 
-        if(regionID == 0){
-            listToUse = regionManager.getOceanList();
-        }
-        else if(regionID == 1){
-            listToUse = regionManager.getEndList();
+        if(regionID == 1){
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getEndList(), context).get();
         }
         else if(regionID == 2){
-            listToUse = regionManager.getNetherList();
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getNetherList(), context).get();
         }
         else if(regionID == 3){
-            listToUse =regionManager.getHotList();
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getHotList(), context).get();
         }
         else if(regionID == 4){
-            listToUse = regionManager.getWarmRegion();
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getWarmRegion(), context).get();
         }
         else if(regionID == 5){
-            listToUse = regionManager.getCoolList();
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getCoolList(), context).get();
         }
         else if(regionID == 6){
-            listToUse = regionManager.getIcyList();
+            biomeToUse = regionManager.getRandomMainBiome(regionManager.getIcyList(), context).get();
         }
         else{
             return regionID;
         }
 
-        // return dynamicRegistry.getId(dynamicRegistry.getOrDefault(regionManager.getRandomMainBiome(listToUse, context)));
+        return dynamicRegistry.getId(biomeToUse);
 
-        // For debugging purposes
-        ResourceLocation biomeRL = regionManager.getRandomMainBiome(listToUse, context);
-        int id = dynamicRegistry.getId(dynamicRegistry.getOrDefault(biomeRL));
-        if (id == -1){
-            UltraAmplifiedDimension.LOGGER.warn("Invalid Biome: " + biomeRL + "  Region ID: " + regionID);
-        }
-        return id;
+//        // For debugging purposes
+//        ResourceLocation biomeRL = regionManager.getRandomMainBiome(listToUse, context);
+//        int id = dynamicRegistry.getId(dynamicRegistry.getOrDefault(biomeRL));
+//        if (id == -1){
+//            UltraAmplifiedDimension.LOGGER.warn("Invalid Biome: " + biomeRL + "  Region ID: " + regionID);
+//        }
+//        return id;
     }
 }

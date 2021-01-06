@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.BiomeContainerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.configs.CaveConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
@@ -15,7 +16,6 @@ import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 import java.util.BitSet;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 
-public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
+public class CaveCavityCarver extends WorldCarver<CaveConfig>
 {
 
 	private final float[] ledgeWidthArrayYIndex = new float[1024];
@@ -42,8 +42,8 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	}
 
 
-	public CaveCavityCarver(Codec<ProbabilityConfig> codec, int maximumHeight) {
-		super(codec, maximumHeight);
+	public CaveCavityCarver(Codec<CaveConfig> codec) {
+		super(codec, 250);
 		this.carvableBlocks = new HashSet<>(this.carvableBlocks);
 		this.carvableBlocks.add(Blocks.NETHERRACK);
 		this.carvableBlocks.add(Blocks.ICE);
@@ -56,12 +56,12 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 	 * Checks whether the entire cave can spawn or not. (Not the individual parts)
 	 */
 	@Override
-	public boolean shouldCarve(Random random, int chunkX, int chunkZ, ProbabilityConfig config) {
+	public boolean shouldCarve(Random random, int chunkX, int chunkZ, CaveConfig config) {
 		return random.nextFloat() <= config.probability;
 	}
 
 	@Override
-	public boolean carveRegion(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, ProbabilityConfig config) {
+	public boolean carveRegion(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, CaveConfig config) {
 		IObjectIntIterable<Biome> reg = region.getBiomes() != null ? ((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry() : null;
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
 			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
@@ -74,16 +74,16 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 1F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 16.0F;
 		float widthHeightBase = (random.nextFloat() + random.nextFloat()) / 16; // width And Height Modifier
-		this.carveCavity(region, biomeBlockPos, random, seaLevel, originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, maxIterations, random.nextDouble() + 20D, mask);
+		this.carveCavity(region, biomeBlockPos, random, seaLevel, originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, 0, maxIterations, random.nextDouble() + 20D, mask, config);
 		return true;
 	}
 
 
-	private void carveCavity(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask) {
+	private void carveCavity(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int mainChunkX, int mainChunkZ, double randomBlockX, double randomBlockY, double randomBlockZ, float widthHeightBase, float xzNoise2, float xzCosNoise, int startIteration, int maxIteration, double heightMultiplier, BitSet mask, CaveConfig config) {
 		float ledgeWidth = 1.0F;
 
 		// CONTROLS THE LEDGES' WIDTH! FINALLY FOUND WHAT THIS JUNK DOES
-		for (int currentHeight = 0; currentHeight <= this.maxHeight; ++currentHeight) {
+		for (int currentHeight = 0; currentHeight <= config.cutoffHeight; ++currentHeight) {
 
 			//attempt at creating dome ceilings
 			if (currentHeight > 44 && currentHeight < 60) {
@@ -107,11 +107,11 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 		placementXZBound = placementXZBound * 32D; // thickness of the "room" itself
 		placementYBound = placementYBound * 2.2D;
 
-		this.carveAtTarget(world, biomeBlockPos, random, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask);
+		this.carveAtTarget(world, biomeBlockPos, random, mainChunkX, mainChunkZ, randomBlockX, randomBlockY, randomBlockZ, placementXZBound, placementYBound, mask, config);
 	}
 
 
-	protected void carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask) {
+	protected void carveAtTarget(IChunk world, Function<BlockPos, Biome> biomeBlockPos, Random random, int mainChunkX, int mainChunkZ, double xRange, double yRange, double zRange, double placementXZBound, double placementYBound, BitSet mask, CaveConfig config) {
 
 		double xPos = mainChunkX * 16 + 8;
 		double zPos = mainChunkZ * 16 + 8;
@@ -122,7 +122,7 @@ public class CaveCavityCarver extends WorldCarver<ProbabilityConfig>
 			int xMin = Math.max(MathHelper.floor(xRange - placementXZBound) - mainChunkX * 16 - 1, 0);
 			int xMax = Math.min(MathHelper.floor(xRange + placementXZBound) - mainChunkX * 16 + 1, 16);
 			int yMin = Math.max(MathHelper.floor(yRange - placementYBound) - 1, 5);
-			int yMax = Math.min(MathHelper.floor(yRange + placementYBound) + 1, this.maxHeight);
+			int yMax = Math.min(MathHelper.floor(yRange + placementYBound) + 1, config.cutoffHeight);
 			int zMin = Math.max(MathHelper.floor(zRange - placementXZBound) - mainChunkZ * 16 - 1, 0);
 			int zMax = Math.min(MathHelper.floor(zRange + placementXZBound) - mainChunkZ * 16 + 1, 16);
 			if (xMin <= xMax && yMin <= yMax && zMin <= zMax) {

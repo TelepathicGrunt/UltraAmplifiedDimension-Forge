@@ -4,30 +4,13 @@ import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.Regio
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
+import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
+
+import java.util.Random;
 
 
 public class BaseRegionLayer implements IAreaTransformer0 {
-
-    int oceanThreshold = 20;
-    int endThreshold = 7;
-    int netherThreshold = 7;
-    int hotThreshold = 14;
-    int warmThreshold = 14;
-    int coolThreshold = 14;
-    int icyThreshold = 14;
-    int totalThreshold;
-
-    public BaseRegionLayer() {
-        totalThreshold = 0;
-        totalThreshold += oceanThreshold;
-        totalThreshold += endThreshold;
-        totalThreshold += netherThreshold;
-        totalThreshold += hotThreshold;
-        totalThreshold += warmThreshold;
-        totalThreshold += coolThreshold;
-        totalThreshold += icyThreshold;
-    }
 
     /*
      * LAYER KEY FOR MYSELF:
@@ -40,35 +23,31 @@ public class BaseRegionLayer implements IAreaTransformer0 {
      * 6 = icy region
      */
     public int apply(INoiseRandom noise, int x, int z) {
-        int randInt = noise.random(totalThreshold);
+        double regionNoise = (noise.getNoiseGenerator().func_215456_a(
+                        (double)x / 4.0D,
+                        (double)z / 4.0D,
+                        0.0D,
+                        0.0D,
+                        0.0D)
+                      * 0.5D) + 0.5D;
 
-        if(randInt < oceanThreshold)
-            return 0;
-        randInt -= oceanThreshold;
-
-        if(randInt < endThreshold)
-            return 1;
-        randInt -= endThreshold;
-
-        if(randInt < netherThreshold)
-            return 2;
-        randInt -= netherThreshold;
-
-        if(randInt < hotThreshold)
+        if(regionNoise < 0.3D){
+            if(noise.random(7) == 0){
+                return 2;
+            }
             return 3;
-        randInt -= hotThreshold;
-
-        if(randInt < warmThreshold)
+        }
+        else if(regionNoise < 0.5D){
             return 4;
-        randInt -= warmThreshold;
-
-        if(randInt < coolThreshold)
+        }
+        else if(regionNoise < 0.7D){
+            if(noise.random(9) == 0){
+                return 1;
+            }
             return 5;
-        randInt -= coolThreshold;
-
-        if(randInt < icyThreshold)
+        }
+        else{
             return 6;
-
-        return -1;
+        }
     }
 }

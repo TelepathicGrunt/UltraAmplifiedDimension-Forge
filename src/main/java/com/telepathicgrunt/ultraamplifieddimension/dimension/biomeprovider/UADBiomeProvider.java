@@ -3,9 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.BaseRegionLayer;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.MainBiomeLayer;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.TestBiomeLayer;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.*;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.LayerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import net.minecraft.util.registry.Registry;
@@ -63,32 +61,32 @@ public class UADBiomeProvider extends BiomeProvider {
         // Construct the biome layers last so all fields are ready
         this.biomeSampler = new Layer(build((salt) -> new LazyAreaLayerContext(25, this.seed, salt)));
 
-        // Now parse and make sure all biome ids are good.
-        this.regionManager.validateAllBiomeIDs(this.dynamicRegistry);
-
         // Reset this as exiting and joining a different world could have completely different biomes in the dimension json
         this.printedMissingBiomes.clear();
     }
 
+    /*
+     * LAYER KEY FOR MYSELF:
+     * 0 = ocean region
+     * 1 = end region
+     * 2 = nether region
+     * 3 = hot region
+     * 4 = warm region
+     * 5 = cool region
+     * 6 = icy region
+     */
     public <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> build(LongFunction<C> contextFactory) {
-        /*
-         * LAYER KEY FOR MYSELF:
-         * 0 = ocean region
-         * 1 = end region
-         * 2 = nether region
-         * 3 = hot region
-         * 4 = warm region
-         * 5 = cool region
-         * 6 = icy region
-         */
-
         IAreaFactory<T> layer = (new BaseRegionLayer()).apply(contextFactory.apply(1L));
+        layer = new OceanBaseRegionLayer().apply(contextFactory.apply(3459L), layer);
+        layer = new ReduceOceanNoiseAndMagnifyEndNetherLayer().apply(contextFactory.apply(2324L), layer);
+        layer = new OceanBiomeLayer(this.dynamicRegistry, this.regionManager).apply(contextFactory.apply(1567L), layer);
         layer = ZoomLayer.NORMAL.apply(contextFactory.apply(2402L), layer);
         layer = new MainBiomeLayer(this.dynamicRegistry, this.regionManager).apply(contextFactory.apply(1567L), layer);
-        layer = ZoomLayer.FUZZY.apply(contextFactory.apply(6203L), layer);
+        layer = ZoomLayer.NORMAL.apply(contextFactory.apply(6203L), layer);
+
 
         for(int currentExtraZoom = 0; currentExtraZoom < this.biomeSize; currentExtraZoom++){
-            if((currentExtraZoom + 1) % 3 != 0){
+            if(currentExtraZoom % 3 != 0){
                 layer = ZoomLayer.NORMAL.apply(contextFactory.apply(1503L + currentExtraZoom), layer);
             }
             else{

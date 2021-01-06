@@ -1,0 +1,45 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "target": {
+                  "tag": "minecraft:base_stone_overworld",
+                  "predicate_type": "minecraft:tag_match"
+                },
+                "state": {
+                  "Name": "minecraft:gold_ore"
+                },
+                "size": 6
+              },
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+            },
+            "decorator": {
+              "config": {
+                "baseline": 64,
+                "spread": 8
+              },
+              "type": "minecraft:depth_average"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 2
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

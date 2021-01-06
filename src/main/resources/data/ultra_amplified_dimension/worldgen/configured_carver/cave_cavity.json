@@ -1,6 +1,7 @@
 {
   "config": {
-    "probability": 0.005
+    "probability": 0.005,
+    "cutoff_height": 70
   },
   "type": "ultra_amplified_dimension:cave_cavity"
 }

@@ -8,19 +8,22 @@ import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoke
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
+import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Blockreader;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.ColumnFuzzedBiomeMagnifier;
+import net.minecraft.world.biome.FuzzedBiomeMagnifier;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.ChunkSection;
@@ -357,7 +360,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         double d1 = (double)l / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
         double[][] adouble = new double[][]{this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1)};
 
-        Biome biome = ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, 0, z, this.biomeProvider);
+        Biome biome = getCachedBiome(null, new BlockPos(x, 0, z));
         for(int ySection = ((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() - 1; ySection >= 0; --ySection) {
             double d2 = adouble[0][ySection];
             double d3 = adouble[1][ySection];
@@ -372,7 +375,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                 double d10 = (double)j1 / (double)((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity();
                 double noiseValue = MathHelper.lerp3(d10, d0, d1, d2, d6, d4, d8, d3, d7, d5, d9);
                 int y = ySection * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + j1;
-                BlockState blockstate = this.getTerrainBlock(noiseValue, biome, x, y, z);
+                BlockState blockstate = this.getTerrainBlock(null, noiseValue, biome, x, y, z);
                 if (p_236087_3_ != null) {
                     p_236087_3_[y] = blockstate;
                 }
@@ -387,7 +390,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
 
     @Override
-    public void func_230352_b_(IWorld p_230352_1_, StructureManager p_230352_2_, IChunk chunk) {
+    public void func_230352_b_(IWorld world, StructureManager structureManager, IChunk chunk) {
         ObjectList<StructurePiece> objectlist = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
         ChunkPos chunkpos = chunk.getPos();
@@ -397,7 +400,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         int l = j << 4;
 
         for(Structure<?> structure : Structure.field_236384_t_) {
-            p_230352_2_.func_235011_a_(SectionPos.from(chunkpos, 0), structure).forEach((p_236089_5_) -> {
+            structureManager.func_235011_a_(SectionPos.from(chunkpos, 0), structure).forEach((p_236089_5_) -> {
                 for(StructurePiece structurepiece1 : p_236089_5_.getComponents()) {
                     if (structurepiece1.func_214810_a(chunkpos, 12)) {
                         if (structurepiece1 instanceof AbstractVillagePiece) {
@@ -468,7 +471,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                             double d16 = (double)zSection / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
 
                             // Do it here instead of in getTerrainBlock as the biome is the same for the entire y height.
-                            Biome biome = ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, 0, z, this.biomeProvider);
+                            Biome biome = getCachedBiome(world, new BlockPos(x, 0, z));
 
                             for(int ySection = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; ySection >= 0; --ySection) {
                                 int y = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + ySection;
@@ -512,7 +515,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());
-                                BlockState blockstate = this.getTerrainBlock(noiseValue, biome, x, y, z);
+                                BlockState blockstate = this.getTerrainBlock(world, noiseValue, biome, x, y, z);
                                 if (blockstate != Blocks.AIR.getDefaultState()) {
                                     blockpos$mutable.setPos(x, y, z);
                                     if (blockstate.getLightValue(chunkprimer, blockpos$mutable) != 0) {
@@ -543,7 +546,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
      * We added biome category checks to help make nether and end biomes
      * as close to their actual dimensions as possible for best compat.
      */
-    protected BlockState getTerrainBlock(double noiseValue, Biome biome, int x, int y, int z) {
+    protected BlockState getTerrainBlock(IWorld world, double noiseValue, Biome biome, int x, int y, int z) {
         BlockState blockstate;
         if (noiseValue > 0.0D) {
             blockstate = this.defaultBlock;
@@ -558,12 +561,30 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
         else if (y < this.getSeaLevel()) {
             if(biome.getCategory() == Biome.Category.NETHER){
+                BlockPos.Mutable mutable = new BlockPos.Mutable();
                 // If nether biome is surrounded by nether biomes, place lava.
                 // This way, all imported nether biomes gets the lava they want.
-                if(ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x + 1, y, z, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
-                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, y, z + 1, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
-                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x - 1, y, z, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
-                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, y, z - 1, this.biomeProvider).getCategory() == Biome.Category.NETHER)
+                if(world != null &&
+                    getCachedBiome(world, mutable.setPos(x + 1, 0, z)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(world, mutable.setPos(x, 0, z + 1)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(world, mutable.setPos(x - 1, 0, z).move(Direction.WEST)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(world, mutable.setPos(x, 0, z - 1)).getCategory() == Biome.Category.NETHER)
+                {
+                    if(y > this.getSeaLevel() - 7){
+                        blockstate = this.defaultFluid;
+                    }
+                    else if(y == this.getSeaLevel() - 7){
+                        blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
+                    }
+                    else{
+                        blockstate = Blocks.LAVA.getDefaultState();
+                    }
+                }
+                else if(world == null &&
+                    getCachedBiome(null, mutable.setPos(x + 1, 0, z)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(null, mutable.setPos(x, 0, z + 1)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(null, mutable.setPos(x - 1, 0, z)).getCategory() == Biome.Category.NETHER &&
+                    getCachedBiome(null, mutable.setPos(x, 0, z - 1)).getCategory() == Biome.Category.NETHER)
                 {
                     if(y > this.getSeaLevel() - 7){
                         blockstate = this.defaultFluid;
@@ -613,7 +634,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                 int zPos = zStart + zInChunk;
                 int maxY = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, xInChunk, zInChunk) + 1;
                 double noise = ((NoiseChunkGeneratorAccessor)this).getSurfaceDepthNoise().noiseAt((double)xPos * 0.0625D, (double)zPos * 0.0625D, 0.0625D, (double)xInChunk * 0.0625D) * 15.0D;
-                Biome biome = worldGenRegion.getBiome(blockpos$mutable.setPos(xStart + xInChunk, maxY, zStart + zInChunk));
+                Biome biome = getCachedBiome(worldGenRegion, blockpos$mutable.setPos(xPos, 0, zPos));
                 BlockState defaultBlockForSurface = Blocks.STONE.getDefaultState();
                 if(biome.getCategory() == Biome.Category.NETHER){
                     defaultBlockForSurface = Blocks.NETHERRACK.getDefaultState();
@@ -657,5 +678,30 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     // what the parent class does which is runs a supplier every time it is called.
     public int getSeaLevel() {
         return sealevel;
+    }
+
+
+    private static final Long2ReferenceOpenHashMap<Biome> CACHED_BIOMES = new Long2ReferenceOpenHashMap<>();
+    public Biome getCachedBiome(IWorld world, BlockPos blockpos) {
+
+        // shrink cache if it is too large to clear out old biome refs no longer needed.
+        if(CACHED_BIOMES.size() > 200){
+            CACHED_BIOMES.clear();
+        }
+
+        // gets the biome saved or does the expensive getting of biome if it isn't cached yet.
+        long posLong = blockpos.toLong();
+        Biome biome = CACHED_BIOMES.get(posLong);
+        if(biome == null){
+            if(world != null){
+                biome = world.getBiome(blockpos);
+            }
+            else{
+                biome = FuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, blockpos.getX(), blockpos.getY(), blockpos.getZ(), this.biomeProvider);
+            }
+            CACHED_BIOMES.put(posLong, biome);
+        }
+
+        return biome;
     }
 }

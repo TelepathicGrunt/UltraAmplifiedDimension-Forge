@@ -1,0 +1,15 @@
+{
+  "config": {
+    "probability": 0.25,
+    "cutoff_height": 70,
+    "height_placement": {
+        "base": 25,
+        "spread": 3
+    },
+    "tallness": {
+        "base": 25,
+        "spread": 20
+    }
+  },
+  "type": "ultra_amplified_dimension:ravine"
+}

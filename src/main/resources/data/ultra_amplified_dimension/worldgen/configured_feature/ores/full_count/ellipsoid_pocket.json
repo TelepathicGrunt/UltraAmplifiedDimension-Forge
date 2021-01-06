@@ -1,0 +1,46 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "target": {
+                  "tag": "ultra_amplified_dimension:ellipsoid_pocket_target",
+                  "predicate_type": "minecraft:tag_match"
+                },
+                "state": {
+                  "Name": "minecraft:cave_air"
+                },
+                "size": 20
+              },
+              "type": "ultra_amplified_dimension:ellipsoid_pocket"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 16,
+                "top_offset": 0,
+                "maximum": 24
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 2
+      },
+      "type": "minecraft:count"
+    }
+  },
+  "type": "minecraft:decorated"
+}

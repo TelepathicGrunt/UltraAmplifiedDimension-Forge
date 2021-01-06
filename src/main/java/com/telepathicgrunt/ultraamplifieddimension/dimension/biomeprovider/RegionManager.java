@@ -1,15 +1,15 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider;
 
+import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class RegionManager {
     public static final Codec<RegionManager> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
@@ -46,40 +46,29 @@ public class RegionManager {
             Pair<List<BiomeGroup>, Integer> coolList,
             Pair<List<BiomeGroup>, Integer> icyList
     ){
-        this.oceanList = oceanList;
-        this.endList = endList;
-        this.netherList = netherList;
-        this.hotList = hotList;
-        this.warmList = warmList;
-        this.coolList = coolList;
-        this.icyList = icyList;
+        this.oceanList = sortBiomesAndIsNotEmpty(oceanList);
+        this.endList = sortBiomesAndIsNotEmpty(endList);
+        this.netherList = sortBiomesAndIsNotEmpty(netherList);
+        this.hotList = sortBiomesAndIsNotEmpty(hotList);
+        this.warmList = sortBiomesAndIsNotEmpty(warmList);
+        this.coolList = sortBiomesAndIsNotEmpty(coolList);
+        this.icyList = sortBiomesAndIsNotEmpty(icyList);
     }
 
     /**
-     * Will validate and make sure all biome identifiers do exist with the given dynamic registry.
+     * Turn immutable list of BiomeGroups into a mutable list and sort it from hottest biome to coldest.
+     * WIll throw an exception if the biome list is empty as we cannot work with empty regions.
      */
-    public void validateAllBiomeIDs(Registry<Biome> dynamicRegistry){
-        validateBiomeIDs(this.oceanList, "ocean list", dynamicRegistry);
-        validateBiomeIDs(this.endList, "end list", dynamicRegistry);
-        validateBiomeIDs(this.netherList, "nether list", dynamicRegistry);
-        validateBiomeIDs(this.hotList, "hot list", dynamicRegistry);
-        validateBiomeIDs(this.warmList, "warm list", dynamicRegistry);
-        validateBiomeIDs(this.coolList, "cool list", dynamicRegistry);
-        validateBiomeIDs(this.icyList, "icy list", dynamicRegistry);
-    }
-
-    /**
-     * WIll print out any invalid biome within the regionGroup.
-     */
-    private void validateBiomeIDs(Pair<List<BiomeGroup>, Integer> regionGroup, String jsonEntry, Registry<Biome> dynamicRegistry){
-        for(BiomeGroup biomeGroup : regionGroup.getFirst()){
-            if(!dynamicRegistry.getOptional(biomeGroup.getMainBiome()).isPresent()){
-                UltraAmplifiedDimension.LOGGER.warn("Unknown Main Biome in Ultra Amplified Dimension's dimenion json file at " + jsonEntry + " : " + biomeGroup.getMainBiome());
-            }
+    private Pair<List<BiomeGroup>, Integer> sortBiomesAndIsNotEmpty(Pair<List<BiomeGroup>, Integer> regionGroup){
+        Pair<List<BiomeGroup>, Integer> nonImmutableListPair = new Pair<>(new ArrayList<>(regionGroup.getFirst()), regionGroup.getSecond());
+        if (regionGroup.getFirst().size() == 0){
+            throw new JsonSyntaxException("Empty RegionGroup found in Ultra Amplified Dimension's dimension json. Please make sure every temperature category as at least 1 biome.");
         }
+        nonImmutableListPair.getFirst().sort(BiomeGroup::compareTo);
+        return nonImmutableListPair;
     }
 
-    public ResourceLocation getRandomMainBiome(Pair<List<BiomeGroup>, Integer> regionGroup, INoiseRandom context){
+    public Supplier<Biome> getRandomMainBiome(Pair<List<BiomeGroup>, Integer> regionGroup, INoiseRandom context){
         // Now choose a random item.
         int index = 0;
         for (double randomWeightPicked = context.random(regionGroup.getSecond()); index < regionGroup.getFirst().size() - 1; ++index) {
@@ -88,6 +77,28 @@ public class RegionManager {
         }
 
         return regionGroup.getFirst().get(index).getMainBiome();
+    }
+
+    public Supplier<Biome> getHottestBiomeOfList(List<BiomeGroup> regionGroup){
+        return regionGroup.get(0).getMainBiome();
+    }
+
+    public Supplier<Biome> getColdestBiomeOfList(List<BiomeGroup> regionGroup){
+        return regionGroup.get(regionGroup.size() - 1).getMainBiome();
+    }
+
+    /**
+     * takes a float and clamps it between 0 inclusive and 1 exclusive
+     */
+    public Supplier<Biome> getBiomeByTemperature(List<BiomeGroup> regionGroup, double threshold){
+        return regionGroup.get((int) (regionGroup.size() * Math.min(Math.max(threshold, 0), 0.999999999D))).getMainBiome();
+    }
+
+    public Supplier<Biome> getNonHottestOrColdestBiomeOfList(List<BiomeGroup> regionGroup, INoiseRandom context){
+        if(regionGroup.size() > 2){
+            return regionGroup.get(context.random(regionGroup.size() - 2) + 1).getMainBiome();
+        }
+        return regionGroup.get(context.random(regionGroup.size())).getMainBiome();
     }
 
     public Pair<List<BiomeGroup>, Integer> getOceanList() { return oceanList; }

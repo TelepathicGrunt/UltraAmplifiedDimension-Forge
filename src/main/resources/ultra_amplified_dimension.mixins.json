@@ -9,6 +9,7 @@
     "BiomeContainerAccessor",
     "ChunkGeneratorAccessor",
     "DimensionSettingsInvoker",
+    "EndermanSpawnerMixin",
     "LayerAccessor",
     "MinecraftServerMixin",
     "NetherForestSurfaceBuilderMixin",
@@ -16,7 +17,8 @@
     "SpreadableSnowyDirtBlockAccessor",
     "TemplateInvoker",
     "TreeFeatureMixin",
-    "ValleySurfaceBuilderMixin"
+    "ValleySurfaceBuilderMixin",
+    "ZombifiedPiglinSpawnerMixin"
   ],
   "client": [
     "SkyPropertiesAccessor"
