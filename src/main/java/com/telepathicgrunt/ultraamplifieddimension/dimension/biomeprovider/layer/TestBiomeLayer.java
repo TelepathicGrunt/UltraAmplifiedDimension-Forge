@@ -4,14 +4,7 @@ import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.Regio
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.transformers.CastleWithPositionTransformer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IExtendedNoiseRandom;
 import net.minecraft.world.gen.INoiseRandom;
-import net.minecraft.world.gen.area.IArea;
-import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
-import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
-import net.minecraft.world.gen.layer.traits.IC1Transformer;
-
-import javax.annotation.Nonnull;
 
 
 public class TestBiomeLayer implements CastleWithPositionTransformer {

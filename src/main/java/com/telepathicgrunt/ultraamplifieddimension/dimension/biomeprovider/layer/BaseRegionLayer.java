@@ -1,13 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer;
 
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.RegionManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
-import net.minecraft.world.gen.ImprovedNoiseGenerator;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
-
-import java.util.Random;
 
 
 public class BaseRegionLayer implements IAreaTransformer0 {

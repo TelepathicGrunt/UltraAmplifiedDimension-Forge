@@ -3,7 +3,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.carver.configs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.gen.carver.ICarverConfig;
-import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class CaveConfig implements ICarverConfig, IFeatureConfig {

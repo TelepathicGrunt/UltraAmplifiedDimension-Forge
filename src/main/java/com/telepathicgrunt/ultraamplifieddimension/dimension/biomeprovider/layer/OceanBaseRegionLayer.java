@@ -1,12 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer;
 
-import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.RegionManager;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.transformers.CenterWithPositionTransformer;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
-import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
-import net.minecraft.world.gen.layer.traits.IC1Transformer;
 
 
 public class OceanBaseRegionLayer implements CenterWithPositionTransformer {

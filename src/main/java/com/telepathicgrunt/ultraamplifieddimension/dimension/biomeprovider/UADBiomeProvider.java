@@ -18,8 +18,6 @@ import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.layer.Layer;
-import net.minecraft.world.gen.layer.LayerUtil;
-import net.minecraft.world.gen.layer.ShoreLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

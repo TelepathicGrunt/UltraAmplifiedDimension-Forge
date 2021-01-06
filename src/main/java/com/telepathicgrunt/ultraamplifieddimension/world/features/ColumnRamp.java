@@ -7,7 +7,6 @@ import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.ColumnConfig;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

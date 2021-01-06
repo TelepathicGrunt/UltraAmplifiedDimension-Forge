@@ -1,7 +1,10 @@
 package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.world.carver.*;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.CaveCavityCarver;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.RavineCarver;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.SuperLongRavineCarver;
+import com.telepathicgrunt.ultraamplifieddimension.world.carver.UnderwaterCaveCarver;
 import com.telepathicgrunt.ultraamplifieddimension.world.carver.configs.CaveConfig;
 import com.telepathicgrunt.ultraamplifieddimension.world.carver.configs.RavineConfig;
 import net.minecraft.world.gen.carver.WorldCarver;

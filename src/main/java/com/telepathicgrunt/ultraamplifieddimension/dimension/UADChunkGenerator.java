@@ -20,7 +20,6 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Blockreader;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.FuzzedBiomeMagnifier;

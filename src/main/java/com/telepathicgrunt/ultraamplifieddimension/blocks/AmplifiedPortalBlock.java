@@ -1,10 +1,12 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
+import com.mojang.datafixers.util.Pair;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.IPlayerPosAndDim;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.PlayerPositionAndDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.UADWorldSavedData;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,7 +14,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
@@ -30,7 +31,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.server.TicketType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -129,7 +129,8 @@ public class AmplifiedPortalBlock extends Block
 			//Get the world itself. If the world doesn't exist, get Overworld instead.
 			ServerWorld destinationWorld = minecraftserver.getWorld(destinationKey);
 			if(destinationWorld == null){
-				destinationWorld = minecraftserver.getWorld(World.OVERWORLD);
+				destinationKey = World.OVERWORLD;
+				destinationWorld = minecraftserver.getWorld(destinationKey);
 			}
 
 
@@ -142,13 +143,10 @@ public class AmplifiedPortalBlock extends Block
 
 			// Gets top block in other world or original location
 			Vector3d playerVec3Pos;
-			ChunkPos playerChunkPos;
 			if (enteringUA && cap.getUAPos() == null) {
 				// If it is player's first time teleporting to UA dimension, 
 				// find top block at world origin closest to portal
 				BlockPos worldOriginBlockPos = new BlockPos(10, 0, 8);
-				playerChunkPos = new ChunkPos(worldOriginBlockPos);
-
 				int portalY = world.func_234938_ad_();
 
 				//finds where portal block is
@@ -219,19 +217,14 @@ public class AmplifiedPortalBlock extends Block
 						playerVec3Pos = cap.getNonUAPos();
 					}
 				}
-				playerChunkPos = new ChunkPos(new BlockPos(playerVec3Pos));
 			}
-
-			destinationWorld.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, playerChunkPos, 1, playerEntity.getEntityId());
 
 			//dunno how a sleeping player clicked on the portal but if they do, they wake up
 			if (playerEntity.isSleeping()) {
 				playerEntity.wakeUp();
 			}
 
-			//TODO: Delay teleportation to prevent ghost blocks as per: https://hatebin.com/eubbjgasvk by Commoble
-			playerEntity.fallDistance = 0;
-			((ServerPlayerEntity) playerEntity).teleport(destinationWorld, playerVec3Pos.getX(), playerVec3Pos.getY() + 0.2D, playerVec3Pos.getZ(), yaw, pitch);
+			UADWorldSavedData.get((ServerWorld) world).addPlayer(playerEntity, destinationKey, playerVec3Pos, new Pair<>(yaw, pitch));
 			return ActionResultType.SUCCESS;
 		}
 		

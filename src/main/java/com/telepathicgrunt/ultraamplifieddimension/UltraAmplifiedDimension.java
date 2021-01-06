@@ -49,6 +49,7 @@ public class UltraAmplifiedDimension {
 		UADTreeDecoratorTypes.TREE_DECORATOR_TYPES.register(modEventBus);
 		UADTags.tagInit();
 
+		forgeBus.addListener(EventPriority.NORMAL, UADDimension::worldTick);
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
 

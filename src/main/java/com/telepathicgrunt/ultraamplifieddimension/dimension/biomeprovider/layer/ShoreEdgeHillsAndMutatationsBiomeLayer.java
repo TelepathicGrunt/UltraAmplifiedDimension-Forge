@@ -1,6 +1,5 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer;
 
-import com.google.gson.JsonSyntaxException;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.RegionManager;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.transformers.CastleWithPositionTransformer;

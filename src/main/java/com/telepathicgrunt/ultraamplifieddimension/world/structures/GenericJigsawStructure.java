@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 
 import com.mojang.serialization.Codec;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADConfiguredStructures;
 import javafx.util.Pair;
 import net.minecraft.util.ResourceLocation;
@@ -23,7 +22,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import org.apache.logging.log4j.Level;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin;
 
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
 import com.telepathicgrunt.ultraamplifieddimension.utils.BiomeSetsHelper;
 import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import com.telepathicgrunt.ultraamplifieddimension.world.carver.CaveCavityCarver;
