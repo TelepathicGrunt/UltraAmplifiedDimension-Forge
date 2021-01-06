@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -28,7 +29,9 @@ public class NbtDungeonConfig implements IFeatureConfig {
             Codec.mapPair(Registry.ENTITY_TYPE.fieldOf("resourcelocation"), Codec.intRange(1, Integer.MAX_VALUE).fieldOf("weight")).codec().listOf().fieldOf("spawner_mob_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.spawnerResourcelocationsAndWeights),
             IStructureProcessorType.field_242922_m.fieldOf("processors").forGetter(nbtDungeonConfig -> nbtDungeonConfig.processor),
             Codec.BOOL.fieldOf("air_requirement_is_now_water").orElse(false).forGetter(nbtDungeonConfig -> nbtDungeonConfig.airRequirementIsNowWater),
-            BlockState.CODEC.listOf().optionalFieldOf("blocks_to_always_place").forGetter((config) -> config.blocksToAlwaysPlace)
+            BlockState.CODEC.listOf().optionalFieldOf("blocks_to_always_place").forGetter((config) -> config.blocksToAlwaysPlace),
+            Codec.INT.fieldOf("structure_y_offset").orElse(0).forGetter(nbtFeatureConfig -> nbtFeatureConfig.structureYOffset),
+            BlockState.CODEC.fieldOf("loot_block").orElse(Blocks.CHEST.getDefaultState()).forGetter(nbtDungeonConfig -> nbtDungeonConfig.lootBlock)
     ).apply(configInstance, NbtDungeonConfig::new))
             .comapFlatMap((nbtDungeonConfig) -> nbtDungeonConfig.maxAirSpace <= nbtDungeonConfig.minAirSpace ?
                     DataResult.error("min_air_space has to be smaller than max_air_space") : DataResult.success(nbtDungeonConfig), Function.identity());
@@ -43,13 +46,15 @@ public class NbtDungeonConfig implements IFeatureConfig {
     public final Supplier<StructureProcessorList> processor;
     public final boolean airRequirementIsNowWater;
     public final Optional<List<BlockState>> blocksToAlwaysPlace;
+    public final int structureYOffset;
+    public final BlockState lootBlock;
 
     public NbtDungeonConfig(boolean replaceAir, int minAirSpace, int maxAirSpace,
                             int maxNumOfChests, ResourceLocation chestResourceLocation,
                             List<Pair<ResourceLocation, Integer>> nbtResourcelocationsAndWeights,
                             List<Pair<EntityType<?>, Integer>> spawnerResourcelocationsAndWeights,
                             Supplier<StructureProcessorList> processor, boolean airRequirementIsNowWater,
-                            Optional<List<BlockState>> blocksToAlwaysPlace)
+                            Optional<List<BlockState>> blocksToAlwaysPlace, int structureYOffset, BlockState lootBlock)
     {
         this.replaceAir = replaceAir;
         this.minAirSpace = minAirSpace;
@@ -61,5 +66,7 @@ public class NbtDungeonConfig implements IFeatureConfig {
         this.processor = processor;
         this.airRequirementIsNowWater = airRequirementIsNowWater;
         this.blocksToAlwaysPlace = blocksToAlwaysPlace;
+        this.structureYOffset = structureYOffset;
+        this.lootBlock = lootBlock;
     }
 }

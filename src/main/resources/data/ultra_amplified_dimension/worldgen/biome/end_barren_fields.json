@@ -20,7 +20,7 @@
     "water_color": 7299198,
     "water_fog_color": 8542866
   },
-  "surface_builder": "minecraft:grass",
+  "surface_builder": "ultra_amplified_dimension:grassy_end_surface_builder",
   "carvers": {
     "air": [
       "ultra_amplified_dimension:cave_cavity",

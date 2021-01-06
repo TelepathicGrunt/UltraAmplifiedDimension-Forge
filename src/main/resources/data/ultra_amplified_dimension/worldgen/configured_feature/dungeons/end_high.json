@@ -10,7 +10,13 @@
                 "min_air_space": 1,
                 "max_air_space": 14,
                 "max_num_of_chests": 2,
-                "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
+                "chest_loottable_resourcelocation": "ultra_amplified_dimension:chests/dungeon/end",
+                "loot_block": {
+                    "Properties": {
+                      "facing": "up"
+                    },
+                    "Name": "minecraft:shulker_box"
+                },
                 "dungeon_nbt_entries": [
                     {
                         "resourcelocation": "ultra_amplified_dimension:dungeons/end_1",

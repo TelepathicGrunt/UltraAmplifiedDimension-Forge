@@ -56,7 +56,7 @@ public class NbtFeature extends Feature<NbtFeatureConfig> {
         }
 
         TemplateManager templatemanager = world.getWorld().getServer().getTemplateManager();
-        ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights);
+        ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights, rand);
         Template template = templatemanager.getTemplate(nbtRL);
 
         if (template == null) {

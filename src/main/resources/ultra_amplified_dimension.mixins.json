@@ -9,6 +9,7 @@
     "BiomeContainerAccessor",
     "ChunkGeneratorAccessor",
     "DimensionSettingsInvoker",
+    "LayerAccessor",
     "MinecraftServerMixin",
     "NetherForestSurfaceBuilderMixin",
     "NoiseChunkGeneratorAccessor",

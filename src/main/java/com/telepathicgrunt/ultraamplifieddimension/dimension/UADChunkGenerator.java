@@ -7,6 +7,7 @@ import com.telepathicgrunt.ultraamplifieddimension.mixin.ChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoker;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
+import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
@@ -19,6 +20,7 @@ import net.minecraft.world.Blockreader;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.ColumnFuzzedBiomeMagnifier;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.ChunkSection;
@@ -38,8 +40,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Predicate;
 
 
@@ -64,24 +64,23 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
     });
 
-    private static final Codec<Double> RANGE_CODEC = Codec.doubleRange(Double.MIN_VALUE, Double.MAX_VALUE);
-
     public static final Codec<ScalingSettings> UAD_SCALING_CODEC = RecordCodecBuilder.create((scalingSettingsInstance) ->
             scalingSettingsInstance.group(
-                    RANGE_CODEC.fieldOf("xz_scale").forGetter(ScalingSettings::func_236151_a_),
-                    RANGE_CODEC.fieldOf("y_scale").forGetter(ScalingSettings::func_236153_b_),
-                    RANGE_CODEC.fieldOf("xz_factor").forGetter(ScalingSettings::func_236154_c_),
-                    RANGE_CODEC.fieldOf("y_factor").forGetter(ScalingSettings::func_236155_d_))
+                    Codec.DOUBLE.fieldOf("xz_scale").forGetter(ScalingSettings::func_236151_a_),
+                    Codec.DOUBLE.fieldOf("y_scale").forGetter(ScalingSettings::func_236153_b_),
+                    Codec.DOUBLE.fieldOf("xz_factor").forGetter(ScalingSettings::func_236154_c_),
+                    Codec.DOUBLE.fieldOf("y_factor").forGetter(ScalingSettings::func_236155_d_))
                         .apply(scalingSettingsInstance, ScalingSettings::new));
 
     public static final Codec<NoiseSettings> UAD_NOISE_SETTINGS_CODEC = RecordCodecBuilder.create((noiseSettingsInstance) ->
             noiseSettingsInstance.group(
+                    // #TODO: Change this to unlimited in 1.17 and change min height for all features to be based on sealevel and min height.
                     Codec.intRange(0, 256).fieldOf("height").forGetter(NoiseSettings::func_236169_a_),
                     UAD_SCALING_CODEC.fieldOf("sampling").forGetter(NoiseSettings::func_236171_b_),
                     SlideSettings.field_236182_a_.fieldOf("top_slide").forGetter(NoiseSettings::func_236172_c_),
                     SlideSettings.field_236182_a_.fieldOf("bottom_slide").forGetter(NoiseSettings::func_236173_d_),
-                    Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_horizontal").forGetter(NoiseSettings::func_236174_e_),
-                    Codec.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE).fieldOf("size_vertical").forGetter(NoiseSettings::func_236175_f_),
+                    Codec.INT.fieldOf("size_horizontal").forGetter(NoiseSettings::func_236174_e_),
+                    Codec.INT.fieldOf("size_vertical").forGetter(NoiseSettings::func_236175_f_),
                     Codec.DOUBLE.fieldOf("density_factor").forGetter(NoiseSettings::func_236176_g_),
                     Codec.DOUBLE.fieldOf("density_offset").forGetter(NoiseSettings::func_236177_h_),
                     Codec.BOOL.fieldOf("simplex_surface_noise").forGetter(NoiseSettings::func_236178_i_),
@@ -96,16 +95,16 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     UAD_NOISE_SETTINGS_CODEC.fieldOf("noise").forGetter(DimensionSettings::getNoise),
                     BlockState.CODEC.fieldOf("default_block").forGetter(DimensionSettings::getDefaultBlock),
                     BlockState.CODEC.fieldOf("default_fluid").forGetter(DimensionSettings::getDefaultFluid),
-                    Codec.intRange(-1000, 1000).fieldOf("bedrock_roof_position").forGetter(DimensionSettings::func_236117_e_),
-                    Codec.intRange(-1000, 1000).fieldOf("bedrock_floor_position").forGetter(DimensionSettings::func_236118_f_),
-                    Codec.intRange(-1000, 1000).fieldOf("sea_level").forGetter(DimensionSettings::func_236119_g_),
+                    Codec.INT.fieldOf("bedrock_roof_position").forGetter(DimensionSettings::func_236117_e_),
+                    Codec.INT.fieldOf("bedrock_floor_position").forGetter(DimensionSettings::func_236118_f_),
+                    Codec.INT.fieldOf("sea_level").forGetter(DimensionSettings::func_236119_g_),
                     Codec.BOOL.fieldOf("disable_mob_generation").forGetter(dimensionSettings -> ((DimensionSettingsInvoker)(Object)dimensionSettings).invokefunc_236120_h_()))
                         .apply(dimensionSettingsInstance, DimensionSettingsInvoker::invokeinit));
 
 
     public static final Codec<NoiseChunkGenerator> UAD_CHUNK_GENERATOR_CODEC = RecordCodecBuilder.create((noiseChunkGeneratorInstance) -> noiseChunkGeneratorInstance.group(
                     BiomeProvider.CODEC.fieldOf("biome_source").forGetter((noiseChunkGenerator) -> ((ChunkGeneratorAccessor)noiseChunkGenerator).getbiomeProvider()),
-                    Codec.LONG.fieldOf("seed").stable().forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
+                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).stable().forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
                     UAD_DIMENSION_SETTINGS_CODEC.fieldOf("settings").forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236080_h_().get()))
                         .apply(noiseChunkGeneratorInstance, noiseChunkGeneratorInstance.stable(UADChunkGenerator::new)));
 
@@ -113,10 +112,6 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     private final int sealevel;
     protected OpenSimplexNoise noiseGen;
     protected long seed;
-
-    // Grab our UA End Biomes as they have different behavior for the chunk generator.
-    // Set in MinecraftServerMixin
-    public static Set<Biome> UA_END_BIOMES = new HashSet<>();
 
     @Override
     protected Codec<? extends ChunkGenerator> func_230347_a_() {
@@ -362,21 +357,22 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         double d1 = (double)l / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
         double[][] adouble = new double[][]{this.func_222547_b(i, j), this.func_222547_b(i, j + 1), this.func_222547_b(i + 1, j), this.func_222547_b(i + 1, j + 1)};
 
-        for(int i1 = ((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() - 1; i1 >= 0; --i1) {
-            double d2 = adouble[0][i1];
-            double d3 = adouble[1][i1];
-            double d4 = adouble[2][i1];
-            double d5 = adouble[3][i1];
-            double d6 = adouble[0][i1 + 1];
-            double d7 = adouble[1][i1 + 1];
-            double d8 = adouble[2][i1 + 1];
-            double d9 = adouble[3][i1 + 1];
+        Biome biome = ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, 0, z, this.biomeProvider);
+        for(int ySection = ((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() - 1; ySection >= 0; --ySection) {
+            double d2 = adouble[0][ySection];
+            double d3 = adouble[1][ySection];
+            double d4 = adouble[2][ySection];
+            double d5 = adouble[3][ySection];
+            double d6 = adouble[0][ySection + 1];
+            double d7 = adouble[1][ySection + 1];
+            double d8 = adouble[2][ySection + 1];
+            double d9 = adouble[3][ySection + 1];
 
             for(int j1 = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; j1 >= 0; --j1) {
                 double d10 = (double)j1 / (double)((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity();
                 double noiseValue = MathHelper.lerp3(d10, d0, d1, d2, d6, d4, d8, d3, d7, d5, d9);
-                int y = i1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + j1;
-                BlockState blockstate = this.func_236086_a_(noiseValue, x, y, z);
+                int y = ySection * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + j1;
+                BlockState blockstate = this.getTerrainBlock(noiseValue, biome, x, y, z);
                 if (p_236087_3_ != null) {
                     p_236087_3_[y] = blockstate;
                 }
@@ -442,9 +438,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         ObjectListIterator<StructurePiece> objectlistiterator = objectlist.iterator();
         ObjectListIterator<JigsawJunction> objectlistiterator1 = objectlist1.iterator();
 
-        for(int i1 = 0; i1 < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX(); ++i1) {
-            for(int j1 = 0; j1 < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + 1; ++j1) {
-                this.fillNoiseColumn(adouble[1][j1], i * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX() + i1 + 1, j * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + j1);
+        for(int xNoiseSize = 0; xNoiseSize < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX(); ++xNoiseSize) {
+            for(int zNoiseSize = 0; zNoiseSize < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + 1; ++zNoiseSize) {
+                this.fillNoiseColumn(adouble[1][zNoiseSize], i * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX() + xNoiseSize + 1, j * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + zNoiseSize);
             }
 
             for(int j5 = 0; j5 < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ(); ++j5) {
@@ -461,33 +457,36 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     double d6 = adouble[1][j5][k1 + 1];
                     double d7 = adouble[1][j5 + 1][k1 + 1];
 
-                    for(int l1 = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; l1 >= 0; --l1) {
-                        int y = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + l1;
-                        int yInChunk = y & 15;
-                        int k2 = y >> 4;
-                        if (chunksection.getYLocation() >> 4 != k2) {
-                            chunksection.unlock();
-                            chunksection = chunkprimer.getSection(k2);
-                            chunksection.lock();
-                        }
+                    for(int xSection = 0; xSection < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++xSection) {
+                        int x = k + xNoiseSize * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + xSection;
+                        int xInChunk = x & 15;
+                        double d13 = (double)xSection / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
 
-                        double d8 = (double)l1 / (double)((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity();
-                        double d9 = MathHelper.lerp(d8, d0, d4);
-                        double d10 = MathHelper.lerp(d8, d2, d6);
-                        double d11 = MathHelper.lerp(d8, d1, d5);
-                        double d12 = MathHelper.lerp(d8, d3, d7);
+                        for(int zSection = 0; zSection < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++zSection) {
+                            int z = l + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + zSection;
+                            int zInChunk = z & 15;
+                            double d16 = (double)zSection / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
 
-                        for(int l2 = 0; l2 < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++l2) {
-                            int x = k + i1 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + l2;
-                            int xInChunk = x & 15;
-                            double d13 = (double)l2 / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
-                            double d14 = MathHelper.lerp(d13, d9, d10);
-                            double d15 = MathHelper.lerp(d13, d11, d12);
+                            // Do it here instead of in getTerrainBlock as the biome is the same for the entire y height.
+                            Biome biome = ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, 0, z, this.biomeProvider);
 
-                            for(int k3 = 0; k3 < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++k3) {
-                                int z = l + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + k3;
-                                int zInChunk = z & 15;
-                                double d16 = (double)k3 / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
+                            for(int ySection = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; ySection >= 0; --ySection) {
+                                int y = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + ySection;
+                                int yInChunk = y & 15;
+                                int k2 = y >> 4;
+                                if (chunksection.getYLocation() >> 4 != k2) {
+                                    chunksection.unlock();
+                                    chunksection = chunkprimer.getSection(k2);
+                                    chunksection.lock();
+                                }
+
+                                double d8 = (double)ySection / (double)((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity();
+                                double d9 = MathHelper.lerp(d8, d0, d4);
+                                double d10 = MathHelper.lerp(d8, d2, d6);
+                                double d11 = MathHelper.lerp(d8, d1, d5);
+                                double d12 = MathHelper.lerp(d8, d3, d7);
+                                double d14 = MathHelper.lerp(d13, d9, d10);
+                                double d15 = MathHelper.lerp(d13, d11, d12);
                                 double d17 = MathHelper.lerp(d16, d14, d15);
                                 double noiseValue = MathHelper.clamp(d17 / 200.0D, -1.0D, 1.0D);
 
@@ -513,7 +512,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());
-                                BlockState blockstate = this.func_236086_a_(noiseValue, x, y, z);
+                                BlockState blockstate = this.getTerrainBlock(noiseValue, biome, x, y, z);
                                 if (blockstate != Blocks.AIR.getDefaultState()) {
                                     blockpos$mutable.setPos(x, y, z);
                                     if (blockstate.getLightValue(chunkprimer, blockpos$mutable) != 0) {
@@ -544,9 +543,8 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
      * We added biome category checks to help make nether and end biomes
      * as close to their actual dimensions as possible for best compat.
      */
-    protected BlockState func_236086_a_(double noiseValue, int x, int y, int z) {
+    protected BlockState getTerrainBlock(double noiseValue, Biome biome, int x, int y, int z) {
         BlockState blockstate;
-        Biome biome = this.biomeProvider.getNoiseBiome(x, y, z);
         if (noiseValue > 0.0D) {
             blockstate = this.defaultBlock;
 
@@ -555,24 +553,17 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                 blockstate = Blocks.NETHERRACK.getDefaultState();
             }
             else if(biome.getCategory() == Biome.Category.THEEND){
-                if(UA_END_BIOMES.contains(biome)){
-                    if(y < (this.getSeaLevel() - 2) - ((noiseGen.eval(x * 0.1D, z * 0.1D) + 1) * 2)){
-                        blockstate = Blocks.END_STONE.getDefaultState();
-                    }
-                }
-                else {
-                    blockstate = Blocks.END_STONE.getDefaultState();
-                }
+                blockstate = Blocks.END_STONE.getDefaultState();
             }
         }
         else if (y < this.getSeaLevel()) {
             if(biome.getCategory() == Biome.Category.NETHER){
                 // If nether biome is surrounded by nether biomes, place lava.
                 // This way, all imported nether biomes gets the lava they want.
-                if(this.biomeProvider.getNoiseBiome(x + 1, y, z).getCategory() == Biome.Category.NETHER &&
-                        this.biomeProvider.getNoiseBiome(x, y, z + 1).getCategory() == Biome.Category.NETHER &&
-                        this.biomeProvider.getNoiseBiome(x - 1, y, z).getCategory() == Biome.Category.NETHER &&
-                        this.biomeProvider.getNoiseBiome(x , y, z - 1).getCategory() == Biome.Category.NETHER)
+                if(ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x + 1, y, z, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
+                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, y, z + 1, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
+                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x - 1, y, z, this.biomeProvider).getCategory() == Biome.Category.NETHER &&
+                    ColumnFuzzedBiomeMagnifier.INSTANCE.getBiome(this.seed, x, y, z - 1, this.biomeProvider).getCategory() == Biome.Category.NETHER)
                 {
                     if(y > this.getSeaLevel() - 7){
                         blockstate = this.defaultFluid;

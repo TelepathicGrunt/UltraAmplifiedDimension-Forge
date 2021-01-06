@@ -19,8 +19,9 @@ public class OnSolidBlockPlacer extends Feature<BlockWithRuleReplaceConfig> {
 
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos position, BlockWithRuleReplaceConfig replaceBlockConfig) {
-        if (replaceBlockConfig.target.test(world.getBlockState(position), rand) && world.getBlockState(position.down()).isSolidSide(world, position, Direction.DOWN)) {
-            world.setBlockState(position, replaceBlockConfig.state, 2);
+        BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(position);
+        if (replaceBlockConfig.target.test(world.getBlockState(mutable), rand) && world.getBlockState(mutable.move(Direction.DOWN)).isSolidSide(world, mutable, Direction.UP)) {
+            world.setBlockState(mutable.move(Direction.UP), replaceBlockConfig.state, 2);
             return true;
         }
 

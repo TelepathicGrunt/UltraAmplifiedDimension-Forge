@@ -24,7 +24,7 @@ public class UADSurfaceBuilders
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> SPIKY_BADLANDS = createDecorator("spiky_badlands_surface_builder", () -> new SpikyBadlandsSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> ICED_TERRAIN_SURFACE_BUILDER = createDecorator("iced_terrain_surface_builder", () -> new IcedTerrainSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> NETHER_WASTES_SURFACE_BUILDER = createDecorator("nether_surface_builder", () -> new NetherwastesSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
-	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> END_SURFACE_BUILDER = createDecorator("end_surface_builder", () -> new EndSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
+	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> GRASSY_END_SURFACE_BUILDER = createDecorator("grassy_end_surface_builder", () -> new GrassyEndSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> OCEAN_SURFACE_BUILDER = createDecorator("ocean_surface_builder", () -> new OceanSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> SAND_SURFACE_BUILDER = createDecorator("sand_surface_builder", () -> new SandSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> GRAVEL_SURFACE_BUILDER = createDecorator("gravel_surface_builder", () -> new GravelSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_));

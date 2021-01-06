@@ -10,8 +10,8 @@ public class PondConfig implements IFeatureConfig {
             BlockState.CODEC.fieldOf("top_state").forGetter((pondConfig) -> pondConfig.insideState),
             BlockState.CODEC.fieldOf("inside_state").forGetter((pondConfig) -> pondConfig.insideState),
             BlockState.CODEC.fieldOf("outside_state").forGetter((pondConfig) -> pondConfig.outsideState),
-            Codec.BOOL.fieldOf("place_outside_state_often").forGetter((pondConfig) -> pondConfig.placeOutsideStateOften))
-            .apply(cactusConfigInstance, PondConfig::new));
+            Codec.BOOL.fieldOf("place_outside_state_often").forGetter((pondConfig) -> pondConfig.placeOutsideStateOften)
+    ).apply(cactusConfigInstance, PondConfig::new));
 
     public final BlockState topState;
     public final BlockState insideState;

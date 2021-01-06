@@ -3,6 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.mixin;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
 import com.telepathicgrunt.ultraamplifieddimension.utils.BiomeSetsHelper;
+import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import com.telepathicgrunt.ultraamplifieddimension.world.carver.CaveCavityCarver;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.registry.DynamicRegistries;
@@ -28,7 +29,8 @@ public class MinecraftServerMixin {
 	protected DynamicRegistries.Impl field_240767_f_;
 
 	/**
-	 *
+	 * Used for setting up everything that needs to be initialized for UA worldgen.
+	 * Also, to get the seed that the world is using.
 	 * @author TelepathicGrunt
 	 */
 	@Inject(method = "func_240787_a_(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V",
@@ -37,19 +39,9 @@ public class MinecraftServerMixin {
 	private void seedCarvers(IChunkStatusListener chunkStatusListener, CallbackInfo ci, IServerWorldInfo iserverworldinfo,
 									DimensionGeneratorSettings dimensiongeneratorsettings, boolean isDebugWorld, long seed, long hashedSeed)
 	{
+		WorldSeedHolder.setWorldSeed(hashedSeed);
 		MutableRegistry<Biome> biomeRegistry = field_240767_f_.getRegistry(Registry.BIOME_KEY);
 		CaveCavityCarver.setSeed(hashedSeed);
 		BiomeSetsHelper.generateBiomeSets(biomeRegistry);
-
-		// Grab our UA End Biomes as they have different behavior for the chunk generator.
-		UADChunkGenerator.UA_END_BIOMES.clear();
-		biomeRegistry.getEntries().forEach(entry -> {
-			if(entry.getKey().getLocation().getNamespace().equals(UltraAmplifiedDimension.MODID)){
-				if(entry.getValue().getCategory() == Biome.Category.THEEND){
-					UADChunkGenerator.UA_END_BIOMES.add(entry.getValue());
-				}
-			}
-		});
-
 	}
 }

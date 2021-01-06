@@ -88,7 +88,7 @@ public class Boulders extends Feature<BoulderFeatureConfig> {
                             cachedChunk = world.getChunk(blockpos);
 
                         //adds the blocks for generation in this boulder
-                        BlockState boulderBlock = GeneralUtils.getRandomEntry(config.blockAndWeights);
+                        BlockState boulderBlock = GeneralUtils.getRandomEntry(config.blockAndWeights, random);
                         cachedChunk.setBlockState(blockpos, boulderBlock, false);
                     }
                 }

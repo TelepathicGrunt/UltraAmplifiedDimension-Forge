@@ -10,8 +10,9 @@
                 "min_air_space": 1,
                 "max_air_space": 55,
                 "max_num_of_chests": 2,
+                "structure_y_offset": -2,
                 "air_requirement_is_now_water": true,
-                "chest_loottable_resourcelocation": "minecraft:chests/simple_dungeon",
+                "chest_loottable_resourcelocation": "ultra_amplified_dimension:chests/dungeon/ocean",
                 "dungeon_nbt_entries": [
                     {
                         "resourcelocation": "ultra_amplified_dimension:dungeons/ocean_1",
