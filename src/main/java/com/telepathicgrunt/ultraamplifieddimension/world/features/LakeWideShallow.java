@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -110,7 +111,7 @@ public class LakeWideShallow extends Feature<BlockStateFeatureConfig> {
                 blockState = world.getBlockState(mutable);
                 material = blockState.getMaterial();
 
-                if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) &&
+                if ((!material.isSolid() || blockState.getBlock() instanceof HugeMushroomBlock || unacceptableSolidMaterials.contains(material) || BlockTags.PLANKS.contains(blockState.getBlock())) &&
                         blockState.getFluidState().isEmpty() && !blockState.getFluidState().isTagged(FluidTags.WATER))
                 {
                     return false;

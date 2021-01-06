@@ -168,10 +168,10 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
 
             // I use to debug and quickly find out if the structure is spawning or not and where it is.
             // This is returning the coordinates of the center starting piece.
-            UltraAmplifiedDimension.LOGGER.log(Level.WARN, this.getStructure().getStructureName() + " at " +
-                    this.components.get(0).getBoundingBox().minX + " " +
-                    this.components.get(0).getBoundingBox().minY + " " +
-                    this.components.get(0).getBoundingBox().minZ);
+//            UltraAmplifiedDimension.LOGGER.log(Level.WARN, this.getStructure().getStructureName() + " at " +
+//                    this.components.get(0).getBoundingBox().minX + " " +
+//                    this.components.get(0).getBoundingBox().minY + " " +
+//                    this.components.get(0).getBoundingBox().minZ);
         }
     }
 }

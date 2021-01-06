@@ -18,6 +18,8 @@ import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.layer.Layer;
+import net.minecraft.world.gen.layer.LayerUtil;
+import net.minecraft.world.gen.layer.ShoreLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,7 +38,9 @@ public class UADBiomeProvider extends BiomeProvider {
             RecordCodecBuilder.create((instance) -> instance.group(
                     Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).stable().forGetter((biomeSource) -> biomeSource.seed),
                     RegistryLookupCodec.getLookUpCodec(Registry.BIOME_KEY).forGetter((biomeSource) -> biomeSource.dynamicRegistry),
-                    Codec.intRange(0, 20).fieldOf("biome_size").stable().forGetter((biomeSource) -> biomeSource.biomeSize),
+                    Codec.intRange(1, 20).fieldOf("biome_size").stable().forGetter((biomeSource) -> biomeSource.biomeSize),
+                    Codec.floatRange(0, 1).fieldOf("sub_biome_rate").stable().forGetter((biomeSource) -> biomeSource.subBiomeRate),
+                    Codec.floatRange(0, 1).fieldOf("mutated_biome_rate").stable().forGetter((biomeSource) -> biomeSource.mutatedBiomeRate),
                     RegionManager.CODEC.fieldOf("regions").stable().forGetter((biomeSource) -> biomeSource.regionManager))
             .apply(instance, instance.stable(UADBiomeProvider::new)));
 
@@ -44,10 +48,12 @@ public class UADBiomeProvider extends BiomeProvider {
     private final RegionManager regionManager;
     private final Layer biomeSampler;
     private final int biomeSize;
+    private final float subBiomeRate;
+    private final float mutatedBiomeRate;
     private final long seed;
     private final Set<Integer> printedMissingBiomes = new HashSet<>();
 
-    public UADBiomeProvider(long seed, Registry<Biome> biomeRegistry, int biomeSize, RegionManager regionManager) {
+    public UADBiomeProvider(long seed, Registry<Biome> biomeRegistry, int biomeSize, float subBiomeRate, float mutatedBiomeRate, RegionManager regionManager) {
         super(biomeRegistry.getEntries().stream()
                 .filter(entry -> entry.getKey().getLocation().getNamespace().equals(UltraAmplifiedDimension.MODID))
                 .map(Map.Entry::getValue)
@@ -55,6 +61,8 @@ public class UADBiomeProvider extends BiomeProvider {
 
         this.seed = seed;
         this.biomeSize = biomeSize;
+        this.subBiomeRate = subBiomeRate;
+        this.mutatedBiomeRate = mutatedBiomeRate;
         this.regionManager = regionManager;
         this.dynamicRegistry = biomeRegistry;
 
@@ -79,11 +87,9 @@ public class UADBiomeProvider extends BiomeProvider {
         IAreaFactory<T> layer = (new BaseRegionLayer()).apply(contextFactory.apply(1L));
         layer = new OceanBaseRegionLayer().apply(contextFactory.apply(3459L), layer);
         layer = new ReduceOceanNoiseAndMagnifyEndNetherLayer().apply(contextFactory.apply(2324L), layer);
-        layer = new OceanBiomeLayer(this.dynamicRegistry, this.regionManager).apply(contextFactory.apply(1567L), layer);
         layer = ZoomLayer.NORMAL.apply(contextFactory.apply(2402L), layer);
-        layer = new MainBiomeLayer(this.dynamicRegistry, this.regionManager).apply(contextFactory.apply(1567L), layer);
         layer = ZoomLayer.NORMAL.apply(contextFactory.apply(6203L), layer);
-
+        layer = new MainBiomeLayer(this.dynamicRegistry, this.regionManager).apply(contextFactory.apply(1567L), layer);
 
         for(int currentExtraZoom = 0; currentExtraZoom < this.biomeSize; currentExtraZoom++){
             if(currentExtraZoom % 3 != 0){
@@ -91,6 +97,10 @@ public class UADBiomeProvider extends BiomeProvider {
             }
             else{
                 layer = ZoomLayer.FUZZY.apply(contextFactory.apply(1111L + (currentExtraZoom * 31)), layer);
+            }
+
+            if (currentExtraZoom == 1 || this.biomeSize == 1) {
+                layer = new ShoreEdgeHillsAndMutatationsBiomeLayer(this.dynamicRegistry, this.regionManager, this.subBiomeRate, this.mutatedBiomeRate, this.biomeSize).apply(contextFactory.apply(3235L), layer);
             }
         }
 
@@ -135,7 +145,7 @@ public class UADBiomeProvider extends BiomeProvider {
     @Override
     @OnlyIn(Dist.CLIENT)
     public BiomeProvider getBiomeProvider(long seed) {
-        return new UADBiomeProvider(seed, this.dynamicRegistry, this.biomeSize, this.regionManager);
+        return new UADBiomeProvider(seed, this.dynamicRegistry, this.biomeSize, this.subBiomeRate, this.mutatedBiomeRate, this.regionManager);
     }
 
     public enum REGIONS {

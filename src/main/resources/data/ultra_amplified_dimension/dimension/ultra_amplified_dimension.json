@@ -6,105 +6,156 @@
     
     "biome_source": {
       "type": "ultra_amplified_dimension:biome_source",
-      
-      "biome_size": 3,
+      "biome_size": 4,
+      "sub_biome_rate": 0.5,
+      "mutated_biome_rate": 0.475,
+
       "regions": {
         "ocean_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:ocean",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:ocean",
+                "sub_biome": "ultra_amplified_dimension:ocean_deep",
+                "mutated_biome": "ultra_amplified_dimension:ocean_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_cold",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:ocean_cold",
+                "sub_biome": "ultra_amplified_dimension:ocean_cold_deep",
+                "mutated_biome": "ultra_amplified_dimension:ocean_cold_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_frozen",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:ocean_frozen",
+                "sub_biome": "ultra_amplified_dimension:ocean_frozen_deep",
+                "mutated_biome": "ultra_amplified_dimension:ocean_frozen_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_lukewarm",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:ocean_lukewarm",
+                "sub_biome": "ultra_amplified_dimension:ocean_lukewarm_deep",
+                "mutated_biome": "ultra_amplified_dimension:ocean_lukewarm_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_warm",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:ocean_warm",
+                "sub_biome": "ultra_amplified_dimension:ocean_warm_deep",
+                "mutated_biome": "ultra_amplified_dimension:ocean_warm_deep"
             }
         ],
         "end_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:end_fields",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:end_barren_fields"
             }
         ],
         "nether_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:nether_wastes",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:savanna"
             },
             {
                 "main_biome": "ultra_amplified_dimension:crimson_forest",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:savanna"
             },
             {
                 "main_biome": "ultra_amplified_dimension:basalt_deltas",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:savanna"
             },
             {
                 "main_biome": "ultra_amplified_dimension:soul_sand_valley",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:savanna"
             },
             {
                 "main_biome": "ultra_amplified_dimension:warped_forest",
-                "weight": 10
+                "weight": 10,
+                "border_biome": "ultra_amplified_dimension:savanna"
             }
         ],
         "hot_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:badlands",
-                "weight": 10
+                "weight": 15,
+                "shore_biome": "ultra_amplified_dimension:badlands_sandless",
+                "border_biome": "ultra_amplified_dimension:desert",
+                "sub_biome": "ultra_amplified_dimension:badlands_woods",
+                "mutated_biome": "ultra_amplified_dimension:badlands_spiky",
+                "mutated_sub_biome": "ultra_amplified_dimension:badlands_dense_woods",
+                "mutated_border_biome": "ultra_amplified_dimension:badlands_dissected_plateau"
             },
             {
                 "main_biome": "ultra_amplified_dimension:desert",
-                "weight": 10
+                "weight": 15,
+                "sub_biome": "ultra_amplified_dimension:desert_relics",
+                "mutated_biome": "ultra_amplified_dimension:desert_lakes"
             },
             {
                 "main_biome": "ultra_amplified_dimension:savanna",
-                "weight": 10
+                "weight": 15,
+                "sub_biome": "ultra_amplified_dimension:savanna_terrace",
+                "mutated_biome": "ultra_amplified_dimension:shattered_savanna",
+                "mutated_sub_biome": "ultra_amplified_dimension:shattered_savanna_terrace"
             },
             {
                 "main_biome": "ultra_amplified_dimension:jungle",
-                "weight": 10
+                "weight": 15,
+                "border_biome": "ultra_amplified_dimension:jungle_edge",
+                "sub_biome": "ultra_amplified_dimension:jungle_relic",
+                "mutated_biome": "ultra_amplified_dimension:flower_jungle",
+                "mutated_sub_biome": "ultra_amplified_dimension:bamboo_jungle_relic",
+                "mutated_border_biome": "ultra_amplified_dimension:flower_jungle_edge"
             },
             {
                 "main_biome": "ultra_amplified_dimension:mushroom_fields",
-                "weight": 1
+                "weight": 2
             }
         ],
         "warm_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:plains",
-                "weight": 10
+                "weight": 16,
+                "mutated_biome": "ultra_amplified_dimension:sunflower_plains"
             },
             {
                 "main_biome": "ultra_amplified_dimension:dark_forest",
-                "weight": 10
+                "weight": 16,
+                "sub_biome": "ultra_amplified_dimension:dark_forest_relic"
             },
             {
                 "main_biome": "ultra_amplified_dimension:oak_forest",
-                "weight": 10
+                "weight": 16,
+                "sub_biome": "ultra_amplified_dimension:oak_forest_relic",
+                "mutated_biome": "ultra_amplified_dimension:flower_forest"
             },
             {
                 "main_biome": "ultra_amplified_dimension:birch_forest",
-                "weight": 10
+                "weight": 16,
+                "sub_biome": "ultra_amplified_dimension:birch_forest_relic",
+                "mutated_biome": "ultra_amplified_dimension:tall_birch_forest",
+                "mutated_sub_biome": "ultra_amplified_dimension:tall_birch_forest_relic"
             },
             {
                 "main_biome": "ultra_amplified_dimension:swamp",
-                "weight": 8
+                "weight": 12,
+                "mutated_biome": "ultra_amplified_dimension:swamp_spooky"
             },
             {
                 "main_biome": "ultra_amplified_dimension:rocky_fields",
-                "weight": 4
+                "weight": 7,
+                "shore_biome": "ultra_amplified_dimension:stone_plains",
+                "sub_biome": "ultra_amplified_dimension:rocky_field_wooded",
+                "mutated_biome": "ultra_amplified_dimension:gravelly_fields",
+                "mutated_sub_biome": "ultra_amplified_dimension:gravelly_columns_relic"
             },
             {
                 "main_biome": "ultra_amplified_dimension:mushroom_fields",
@@ -114,37 +165,50 @@
         "cool_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:plains",
-                "weight": 4
+                "weight": 10,
+                "mutated_biome": "ultra_amplified_dimension:sunflower_plains"
             },
             {
                 "main_biome": "ultra_amplified_dimension:taiga",
-                "weight": 10
+                "weight": 20
             },
             {
                 "main_biome": "ultra_amplified_dimension:rocky_fields",
-                "weight": 10
+                "weight": 20,
+                "shore_biome": "ultra_amplified_dimension:stone_plains",
+                "sub_biome": "ultra_amplified_dimension:rocky_field_wooded",
+                "mutated_biome": "ultra_amplified_dimension:gravelly_fields",
+                "mutated_sub_biome": "ultra_amplified_dimension:gravelly_columns_relic"
             },
             {
                 "main_biome": "ultra_amplified_dimension:stone_plains",
-                "weight": 4
-            },
-            {
-                "main_biome": "ultra_amplified_dimension:giant_tree_taiga",
                 "weight": 10
             },
             {
-                "main_biome": "ultra_amplified_dimension:mushroom_fields",
-                "weight": 1
+                "main_biome": "ultra_amplified_dimension:giant_tree_taiga",
+                "weight": 20,
+                "border_biome": "ultra_amplified_dimension:taiga",
+                "sub_biome": "ultra_amplified_dimension:giant_tree_taiga_relic",
+                "mutated_biome": "ultra_amplified_dimension:giant_spruce_taiga_pillars",
+                "mutated_sub_biome": "ultra_amplified_dimension:giant_spruce_taiga_pillars_relic",
+                "mutated_border_biome": "ultra_amplified_dimension:taiga_rocky"
             }
         ],
         "icy_biomes": [
             {
                 "main_biome": "ultra_amplified_dimension:snowy_tundra",
-                "weight": 10
+                "weight": 20,
+                "shore_biome": "ultra_amplified_dimension:frozen_desert",
+                "sub_biome": "ultra_amplified_dimension:ice_spikes",
+                "mutated_biome": "ultra_amplified_dimension:iced_terrain",
+                "mutated_sub_biome": "ultra_amplified_dimension:iced_terrain"
             },
             {
                 "main_biome": "ultra_amplified_dimension:snowy_taiga",
-                "weight": 10
+                "weight": 20,
+                "sub_biome": "ultra_amplified_dimension:snowy_taiga_relic",
+                "mutated_biome": "ultra_amplified_dimension:snowy_taiga_rocky",
+                "mutated_sub_biome": "ultra_amplified_dimension:ice_spikes"
             }
         ]
       }
@@ -303,7 +367,7 @@
           
           
           "ultra_amplified_dimension:sun_shrine": {
-            "spacing": 100,
+            "spacing": 80,
             "separation": 1,
             "salt": 1831585669
           },

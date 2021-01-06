@@ -79,8 +79,7 @@
   ],
   "starts": [
     "minecraft:mineshaft",
-    "minecraft:stronghold",
-    "minecraft:ruined_portal"
+    "minecraft:stronghold"
   ],
   "spawners": {
     "monster": [

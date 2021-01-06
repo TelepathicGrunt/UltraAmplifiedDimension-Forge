@@ -31,7 +31,7 @@ public class ReduceOceanNoiseAndMagnifyEndNetherLayer implements ICastleTransfor
 
         // removes end or nether touching ocean
         else if(north == 0 || west == 0 || east == 0 || south == 0){
-            if(center == 1 || center == 2){
+            if((center == 1 && context.random(4) == 0) || center == 2){
                 // get non-nether, non-end, non-ocean biome to use
                 int nonOcean = -1;
                 if(north > 2){
