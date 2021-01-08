@@ -148,6 +148,7 @@ public class Pond extends Feature<PondConfig> {
                             // Remove floating plants.
                             BlockState plantCheckState = aboveState;
                             while(blockpos.getY() <= chunkGenerator.getMaxBuildHeight() &&
+                                    !plantCheckState.isSolid() &&
                                     !plantCheckState.isValidPosition(world, blockpos))
                             {
                                 cachedChunk.setBlockState(blockpos, Blocks.AIR.getDefaultState(), false);

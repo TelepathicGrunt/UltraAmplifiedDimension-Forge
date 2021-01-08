@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.TemplateInvoker;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.features.TemplateInvoker;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.NbtDungeonConfig;
 import net.minecraft.block.*;

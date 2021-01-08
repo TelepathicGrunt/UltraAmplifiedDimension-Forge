@@ -1,0 +1,35 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": "ultra_amplified_dimension:vegetation/tree/swamp_horned",
+                "chance": 0.95
+              }
+            ],
+            "default": "ultra_amplified_dimension:vegetation/tree/swamp"
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 2,
+        "valid_spot_chance": 0.9
+      },
+      "type": "ultra_amplified_dimension:non_air_surface_ledge_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

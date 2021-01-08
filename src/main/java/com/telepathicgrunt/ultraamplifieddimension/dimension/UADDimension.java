@@ -18,7 +18,7 @@ public class UADDimension {
     }
 
     public static void worldTick(TickEvent.WorldTickEvent event){
-        if(!event.world.isRemote()){
+        if(event.phase == TickEvent.Phase.END && !event.world.isRemote()){
             UADWorldSavedData.tick((ServerWorld) event.world);
         }
     }

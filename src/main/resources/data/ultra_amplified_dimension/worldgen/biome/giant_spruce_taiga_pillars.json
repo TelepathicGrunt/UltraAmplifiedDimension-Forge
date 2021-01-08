@@ -30,12 +30,12 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [
-        "ultra_amplified_dimension:ministructures/boulder_small",
-        "ultra_amplified_dimension:ministructures/boulder_medium",
-        "ultra_amplified_dimension:ministructures/boulder_large_stack_medium",
+        "ultra_amplified_dimension:boulder/small",
+        "ultra_amplified_dimension:boulder/medium",
+        "ultra_amplified_dimension:boulder/large_stack_medium",
         "ultra_amplified_dimension:ponds/surface_slime",
         "ultra_amplified_dimension:ponds/underground_water_podzol",
         "ultra_amplified_dimension:ponds/underground_lava"
@@ -43,10 +43,10 @@
     [
         "ultra_amplified_dimension:columns/vertical_podzol",
         "ultra_amplified_dimension:columns/ramp_podzol",
-        "ultra_amplified_dimension:glow_patch_surface",
-        "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:vegetation/roots_spruce",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/glow_patch_surface",
+        "ultra_amplified_dimension:misc/glow_patch_underground",
+        "ultra_amplified_dimension:vegetation/roots/spruce",
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/generic_high",
@@ -84,23 +84,23 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/trees_giant_spruce",
-      "ultra_amplified_dimension:vegetation/patch_default_flowers",
-      "ultra_amplified_dimension:vegetation/patch_grass_taiga_dense",
-      "ultra_amplified_dimension:vegetation/patch_tall_grass",
-      "ultra_amplified_dimension:vegetation/patch_large_fern",
-      "ultra_amplified_dimension:vegetation/patch_dead_bush_sparse",
-      "ultra_amplified_dimension:vegetation/patch_pumpkin",
-      "ultra_amplified_dimension:vegetation/patch_sugar_cane",
-      "ultra_amplified_dimension:vegetation/seagrass_short_sparse",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/patch_berry_bush_ultra_sparse"
+      "ultra_amplified_dimension:vegetation/trees/giant_spruce",
+      "ultra_amplified_dimension:vegetation/patch/default_flowers",
+      "ultra_amplified_dimension:vegetation/patch/grass_fern_3-07",
+      "ultra_amplified_dimension:vegetation/patch/tall_grass",
+      "ultra_amplified_dimension:vegetation/patch/large_fern",
+      "ultra_amplified_dimension:vegetation/patch/dead_bush_sparse",
+      "ultra_amplified_dimension:vegetation/patch/pumpkin",
+      "ultra_amplified_dimension:vegetation/patch/sugar_cane",
+      "ultra_amplified_dimension:vegetation/underwater/seagrass_short_sparse",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal_under_ledge",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal_under_ledge",
+      "ultra_amplified_dimension:vegetation/patch/berry_bush_ultra_sparse"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [

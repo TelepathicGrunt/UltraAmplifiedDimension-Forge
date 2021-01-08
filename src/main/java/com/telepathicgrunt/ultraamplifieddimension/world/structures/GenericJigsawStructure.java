@@ -1,7 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 
 import com.mojang.serialization.Codec;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.UADConfiguredStructures;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADStructures;
 import javafx.util.Pair;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
@@ -82,8 +82,8 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
                     chunkGenerator,
                     chunkGenerator.func_235957_b_().func_236195_a_().entrySet().stream()
                             .filter(entry -> entry.getKey() != this &&
-                                            entry.getValue().func_236668_a_() > 4 &&
-                                            UADConfiguredStructures.REGISTERED_UAD_STRUCTURES.containsKey(entry.getKey()))
+                                            entry.getValue().func_236668_a_() > 6 &&
+                                            UADStructures.REGISTERED_UAD_STRUCTURES.contains(entry.getKey()))
                             .collect(Collectors.toList()));
         }
 

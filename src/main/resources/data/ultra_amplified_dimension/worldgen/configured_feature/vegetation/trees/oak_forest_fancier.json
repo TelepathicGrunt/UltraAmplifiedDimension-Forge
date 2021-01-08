@@ -1,0 +1,45 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": "minecraft:birch_bees_0002",
+                "chance": 0.15
+              },
+              {
+                "feature": "minecraft:fancy_oak_bees_0002",
+                "chance": 0.35
+              },
+              {
+                "feature": "ultra_amplified_dimension:vegetation/tree/bigger_fancy_oak_bees_0002",
+                "chance": 0.15
+              }
+            ],
+            "default": "minecraft:oak_bees_0002"
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 16,
+        "valid_spot_chance": 1,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

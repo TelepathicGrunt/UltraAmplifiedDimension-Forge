@@ -1,0 +1,41 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": "ultra_amplified_dimension:vegetation/tree/mega_spruce",
+                "chance": 0.53333334
+              },
+              {
+                "feature": "minecraft:pine",
+                "chance": 0.23333334
+              }
+            ],
+            "default": "minecraft:spruce"
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 14,
+        "valid_spot_chance": 0.90,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

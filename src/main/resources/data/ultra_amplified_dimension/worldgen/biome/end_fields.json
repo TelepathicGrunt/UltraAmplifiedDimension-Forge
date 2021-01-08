@@ -36,14 +36,14 @@
         "ultra_amplified_dimension:disk/end_island_middle",
         "ultra_amplified_dimension:disk/end_island_low",
         "ultra_amplified_dimension:disk/end_island_underground",
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [],
     [
         "ultra_amplified_dimension:columns/vertical_grass",
         "ultra_amplified_dimension:columns/ramp_grass",
-        "ultra_amplified_dimension:glow_patch_surface",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/glow_patch_surface",
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/end_high",
@@ -66,20 +66,19 @@
     [
       "ultra_amplified_dimension:vegetation/chorus_plant_high",
       "ultra_amplified_dimension:vegetation/chorus_plant_low",
-      "ultra_amplified_dimension:vegetation/trees_end_fields",
-      "ultra_amplified_dimension:vegetation/patch_grass_taiga",
-      "ultra_amplified_dimension:vegetation/patch_berry_bush_ultra_sparse",
-      "ultra_amplified_dimension:dragon_egg_extremely_rare",
-      "ultra_amplified_dimension:shulker_box_extremely_rare",
-      "ultra_amplified_dimension:dragon_head_extremely_rare"
+      "ultra_amplified_dimension:vegetation/trees/end_fields",
+      "ultra_amplified_dimension:vegetation/patch/grass_fern_1-075",
+      "ultra_amplified_dimension:vegetation/patch/berry_bush_ultra_sparse",
+      "ultra_amplified_dimension:misc/dragon_egg_extremely_rare",
+      "ultra_amplified_dimension:misc/shulker_box_extremely_rare",
+      "ultra_amplified_dimension:misc/dragon_head_extremely_rare"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [
-    "minecraft:mineshaft",
-    "minecraft:stronghold"
+    "minecraft:end_city"
   ],
   "spawners": {
     "monster": [

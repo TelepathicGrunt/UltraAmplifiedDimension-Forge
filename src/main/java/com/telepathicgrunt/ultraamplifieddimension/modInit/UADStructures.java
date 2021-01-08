@@ -10,6 +10,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class UADStructures {
@@ -17,6 +19,7 @@ public class UADStructures {
     // https://www.google.com/search?q=random+number
     // 2147483647
 
+    public static Set<Structure<?>> REGISTERED_UAD_STRUCTURES = new HashSet<>();
     public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, UltraAmplifiedDimension.MODID);
 
     public static final RegistryObject<Structure<NoFeatureConfig>> SUN_SHRINE = registerStructure("sun_shrine", () -> (
@@ -88,7 +91,7 @@ public class UADStructures {
             boolean transformSurroundingLand)
     {
         Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
-
+        REGISTERED_UAD_STRUCTURES.add(structure);
         if(transformSurroundingLand){
             Structure.field_236384_t_ =
                     ImmutableList.<Structure<?>>builder()

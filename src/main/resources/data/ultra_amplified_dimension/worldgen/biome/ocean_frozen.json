@@ -34,15 +34,15 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [
         "ultra_amplified_dimension:ponds/ice_sparse",
         "ultra_amplified_dimension:ponds/blue_ice_sparse"
     ],
     [
-        "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/glow_patch_underground",
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/icy_bottom",
@@ -75,16 +75,16 @@
     ],
     [],
     [
-      "ultra_amplified_dimension:vegetation/patch_default_flowers_sparse",
-      "ultra_amplified_dimension:vegetation/patch_grass_less_sparse",
-      "ultra_amplified_dimension:vegetation/patch_pumpkin",
-      "ultra_amplified_dimension:vegetation/patch_sugar_cane_sparse",
-      "ultra_amplified_dimension:vegetation/kelp_sparse",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal"
+      "ultra_amplified_dimension:vegetation/patch/default_flowers_sparse",
+      "ultra_amplified_dimension:vegetation/patch/grass_6-06",
+      "ultra_amplified_dimension:vegetation/patch/pumpkin",
+      "ultra_amplified_dimension:vegetation/patch/sugar_cane_sparse",
+      "ultra_amplified_dimension:vegetation/underwater/kelp_sparse",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature",
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature",
       "ultra_amplified_dimension:springs/ice_waterfall"
     ]
   ],
@@ -93,7 +93,7 @@
     "minecraft:mineshaft",
     "minecraft:stronghold",
     "minecraft:shipwreck",
-    "minecraft:ocean_ruin_cold",
+    "ultra_amplified_dimension:ocean_ruin_cold",
     "minecraft:ruined_portal_ocean",
     "minecraft:buried_treasure"
   ],

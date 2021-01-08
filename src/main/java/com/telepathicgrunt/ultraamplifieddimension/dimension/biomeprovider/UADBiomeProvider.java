@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.*;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.LayerAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.LayerAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -34,12 +34,12 @@ public class UADBiomeProvider extends BiomeProvider {
 
     public static final Codec<UADBiomeProvider> CODEC =
             RecordCodecBuilder.create((instance) -> instance.group(
-                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).stable().forGetter((biomeSource) -> biomeSource.seed),
+                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).forGetter((biomeSource) -> biomeSource.seed),
                     RegistryLookupCodec.getLookUpCodec(Registry.BIOME_KEY).forGetter((biomeSource) -> biomeSource.dynamicRegistry),
-                    Codec.intRange(1, 20).fieldOf("biome_size").stable().forGetter((biomeSource) -> biomeSource.biomeSize),
-                    Codec.floatRange(0, 1).fieldOf("sub_biome_rate").stable().forGetter((biomeSource) -> biomeSource.subBiomeRate),
-                    Codec.floatRange(0, 1).fieldOf("mutated_biome_rate").stable().forGetter((biomeSource) -> biomeSource.mutatedBiomeRate),
-                    RegionManager.CODEC.fieldOf("regions").stable().forGetter((biomeSource) -> biomeSource.regionManager))
+                    Codec.intRange(1, 20).fieldOf("biome_size").forGetter((biomeSource) -> biomeSource.biomeSize),
+                    Codec.floatRange(0, 1).fieldOf("sub_biome_rate").forGetter((biomeSource) -> biomeSource.subBiomeRate),
+                    Codec.floatRange(0, 1).fieldOf("mutated_biome_rate").forGetter((biomeSource) -> biomeSource.mutatedBiomeRate),
+                    RegionManager.CODEC.fieldOf("regions").forGetter((biomeSource) -> biomeSource.regionManager))
             .apply(instance, instance.stable(UADBiomeProvider::new)));
 
     private final Registry<Biome> dynamicRegistry;

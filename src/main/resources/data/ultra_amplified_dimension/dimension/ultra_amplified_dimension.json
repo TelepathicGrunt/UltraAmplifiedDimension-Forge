@@ -6,9 +6,9 @@
     
     "biome_source": {
       "type": "ultra_amplified_dimension:biome_source",
-      "biome_size": 4,
-      "sub_biome_rate": 0.5,
-      "mutated_biome_rate": 0.475,
+      "biome_size": 5,
+      "sub_biome_rate": 0.44,
+      "mutated_biome_rate": 0.42,
 
       "regions": {
         "ocean_biomes": [
@@ -16,36 +16,31 @@
                 "main_biome": "ultra_amplified_dimension:ocean",
                 "weight": 10,
                 "border_biome": "ultra_amplified_dimension:ocean",
-                "sub_biome": "ultra_amplified_dimension:ocean_deep",
-                "mutated_biome": "ultra_amplified_dimension:ocean_deep"
+                "sub_biome": "ultra_amplified_dimension:ocean_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_cold",
                 "weight": 10,
                 "border_biome": "ultra_amplified_dimension:ocean_cold",
-                "sub_biome": "ultra_amplified_dimension:ocean_cold_deep",
-                "mutated_biome": "ultra_amplified_dimension:ocean_cold_deep"
+                "sub_biome": "ultra_amplified_dimension:ocean_cold_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_frozen",
                 "weight": 10,
                 "border_biome": "ultra_amplified_dimension:ocean_frozen",
-                "sub_biome": "ultra_amplified_dimension:ocean_frozen_deep",
-                "mutated_biome": "ultra_amplified_dimension:ocean_frozen_deep"
+                "sub_biome": "ultra_amplified_dimension:ocean_frozen_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_lukewarm",
                 "weight": 10,
                 "border_biome": "ultra_amplified_dimension:ocean_lukewarm",
-                "sub_biome": "ultra_amplified_dimension:ocean_lukewarm_deep",
-                "mutated_biome": "ultra_amplified_dimension:ocean_lukewarm_deep"
+                "sub_biome": "ultra_amplified_dimension:ocean_lukewarm_deep"
             },
             {
                 "main_biome": "ultra_amplified_dimension:ocean_warm",
                 "weight": 10,
                 "border_biome": "ultra_amplified_dimension:ocean_warm",
-                "sub_biome": "ultra_amplified_dimension:ocean_warm_deep",
-                "mutated_biome": "ultra_amplified_dimension:ocean_warm_deep"
+                "sub_biome": "ultra_amplified_dimension:ocean_warm_deep"
             }
         ],
         "end_biomes": [
@@ -265,56 +260,56 @@
         "structures": {
         
           "minecraft:village": {
-            "spacing": 32,
+            "spacing": 30,
             "separation": 8,
             "salt": 10767543
           },
           "minecraft:pillager_outpost": {
-            "spacing": 32,
+            "spacing": 30,
             "separation": 8,
             "salt": 165545296
           },
           
           
           "minecraft:mansion": {
-            "spacing": 60,
-            "separation": 20,
+            "spacing": 35,
+            "separation": 15,
             "salt": 10181213
           },
           "minecraft:desert_pyramid": {
-            "spacing": 25,
-            "separation": 8,
+            "spacing": 20,
+            "separation": 4,
             "salt": 22256784
           },
           "minecraft:jungle_pyramid": {
-            "spacing": 25,
-            "separation": 8,
+            "spacing": 20,
+            "separation": 4,
             "salt": 16767617
           },
           "minecraft:igloo": {
-            "spacing": 25,
-            "separation": 8,
+            "spacing": 8,
+            "separation": 3,
             "salt": 24337518
           },
           "minecraft:swamp_hut": {
-            "spacing": 25,
-            "separation": 8,
+            "spacing": 8,
+            "separation": 3,
             "salt": 28351110
           },
           
           
           "minecraft:ocean_ruin": {
-            "spacing": 20,
-            "separation": 8,
+            "spacing": 8,
+            "separation": 2,
             "salt": 12556621
           },
           "minecraft:shipwreck": {
-            "spacing": 24,
+            "spacing": 15,
             "separation": 4,
             "salt": 165745295
           },
           "minecraft:monument": {
-            "spacing": 32,
+            "spacing": 30,
             "separation": 5,
             "salt": 10387313
           },
@@ -328,18 +323,18 @@
           
           
           "minecraft:bastion_remnant": {
-            "spacing": 27,
+            "spacing": 25,
             "separation": 4,
             "salt": 25764232
           },
           "minecraft:fortress": {
-            "spacing": 27,
+            "spacing": 25,
             "separation": 4,
             "salt": 30084232
           },
           "minecraft:ruined_portal": {
-            "spacing": 40,
-            "separation": 15,
+            "spacing": 35,
+            "separation": 10,
             "salt": 34222645
           },
           "minecraft:nether_fossil": {
@@ -367,7 +362,7 @@
           
           
           "ultra_amplified_dimension:sun_shrine": {
-            "spacing": 80,
+            "spacing": 60,
             "separation": 1,
             "salt": 1831585669
           },
@@ -377,13 +372,13 @@
             "salt": 1633388381
           },
           "ultra_amplified_dimension:ice_spike_temple": {
-            "spacing": 20,
-            "separation": 1,
+            "spacing": 9,
+            "separation": 2,
             "salt": 1435761947
           },
           "ultra_amplified_dimension:mushroom_temple": {
-            "spacing": 12,
-            "separation": 1,
+            "spacing": 9,
+            "separation": 2,
             "salt": 1340434666
           }
         }

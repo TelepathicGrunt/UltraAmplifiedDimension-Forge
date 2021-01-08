@@ -1,0 +1,49 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": "minecraft:fancy_oak_bees_005",
+                "chance": 0.1
+              },
+              {
+                "feature": "minecraft:jungle_bush",
+                "chance": 0.45
+              },
+              {
+                "feature": "minecraft:mega_jungle_tree",
+                "chance": 0.08333334
+              },
+              {
+                "feature": "ultra_amplified_dimension:vegetation/tree/taller_mega_jungle",
+                "chance": 0.3
+              }
+            ],
+            "default": "minecraft:jungle_tree"
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 11,
+        "valid_spot_chance": 0.95,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

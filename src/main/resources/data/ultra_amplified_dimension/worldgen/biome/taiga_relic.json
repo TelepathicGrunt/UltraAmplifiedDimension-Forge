@@ -30,7 +30,7 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [
         "ultra_amplified_dimension:ponds/surface_honey",
@@ -41,10 +41,10 @@
     [
         "ultra_amplified_dimension:columns/vertical_grass",
         "ultra_amplified_dimension:columns/ramp_grass",
-        "ultra_amplified_dimension:glow_patch_surface",
-        "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:vegetation/roots_stripped_spruce",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/glow_patch_surface",
+        "ultra_amplified_dimension:misc/glow_patch_underground",
+        "ultra_amplified_dimension:vegetation/roots/stripped_spruce",
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/generic_high",
@@ -82,20 +82,20 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/trees_taiga_sparse",
-      "ultra_amplified_dimension:vegetation/patch_default_flowers_sparse",
-      "ultra_amplified_dimension:vegetation/patch_grass_taiga",
-      "ultra_amplified_dimension:vegetation/patch_tall_grass_sparse",
-      "ultra_amplified_dimension:vegetation/patch_berry_bush_rare",
-      "ultra_amplified_dimension:vegetation/patch_pumpkin",
-      "ultra_amplified_dimension:vegetation/patch_sugar_cane",
-      "ultra_amplified_dimension:vegetation/seagrass_short_sparse",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_dense",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_dense",
-      "ultra_amplified_dimension:vegetation/vines_short_2"
+      "ultra_amplified_dimension:vegetation/trees/taiga_sparse",
+      "ultra_amplified_dimension:vegetation/patch/default_flowers_sparse",
+      "ultra_amplified_dimension:vegetation/patch/grass_fern_1-075",
+      "ultra_amplified_dimension:vegetation/patch/tall_grass_sparse",
+      "ultra_amplified_dimension:vegetation/patch/berry_bush_rare",
+      "ultra_amplified_dimension:vegetation/patch/pumpkin",
+      "ultra_amplified_dimension:vegetation/patch/sugar_cane",
+      "ultra_amplified_dimension:vegetation/underwater/seagrass_short_sparse",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal_dense",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal_dense",
+      "ultra_amplified_dimension:vegetation/vines/short_2"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [
@@ -104,8 +104,8 @@
     "minecraft:mineshaft",
     "minecraft:stronghold",
     "minecraft:ruined_portal",
-    "ultra_amplified_dimension:configured_sun_shrine",
-    "ultra_amplified_dimension:configured_stonehenge"
+    "ultra_amplified_dimension:sun_shrine",
+    "ultra_amplified_dimension:stonehenge"
   ],
   "spawners": {
     "monster": [

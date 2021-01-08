@@ -1,0 +1,26 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": "ultra_amplified_dimension:vegetation/tree/birch_end",
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 1,
+        "valid_spot_chance": 0.1,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

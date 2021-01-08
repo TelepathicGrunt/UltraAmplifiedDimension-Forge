@@ -3,9 +3,9 @@ package com.telepathicgrunt.ultraamplifieddimension.dimension;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.ChunkGeneratorAccessor;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.DimensionSettingsInvoker;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.NoiseChunkGeneratorAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.ChunkGeneratorAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.DimensionSettingsInvoker;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.NoiseChunkGeneratorAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.utils.OpenSimplexNoise;
 import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
@@ -106,7 +106,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     public static final Codec<NoiseChunkGenerator> UAD_CHUNK_GENERATOR_CODEC = RecordCodecBuilder.create((noiseChunkGeneratorInstance) -> noiseChunkGeneratorInstance.group(
                     BiomeProvider.CODEC.fieldOf("biome_source").forGetter((noiseChunkGenerator) -> ((ChunkGeneratorAccessor)noiseChunkGenerator).getbiomeProvider()),
-                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).stable().forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
+                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
                     UAD_DIMENSION_SETTINGS_CODEC.fieldOf("settings").forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236080_h_().get()))
                         .apply(noiseChunkGeneratorInstance, noiseChunkGeneratorInstance.stable(UADChunkGenerator::new)));
 

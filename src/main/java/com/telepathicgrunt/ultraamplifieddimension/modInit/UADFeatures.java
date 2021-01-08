@@ -49,6 +49,7 @@ public class UADFeatures {
     public static final RegistryObject<Feature<BoulderFeatureConfig>> BOULDERS = createFeature("boulders", () -> new Boulders(BoulderFeatureConfig.CODEC));
     public static final RegistryObject<Feature<GiantSpikeConfig>> GIANT_SPIKE = createFeature("giant_spike", () -> new GiantSpike(GiantSpikeConfig.CODEC));
     public static final RegistryObject<Feature<BlockStateFeatureConfig>> ICEBERG_WITHOUT_AIR = createFeature("iceberg_without_air", () -> new IcebergWithoutAir(BlockStateFeatureConfig.field_236455_a_));
+    public static final RegistryObject<Feature<LootTableConfig>> MARKED_TREASURE_CHEST = createFeature("marked_treasure_chest", () -> new MarkedTreasureChest(LootTableConfig.CODEC));
 
     public static <B extends Feature<?>> RegistryObject<B> createFeature(String name, Supplier<B> feature) {
         return FEATURES.register(name, feature);

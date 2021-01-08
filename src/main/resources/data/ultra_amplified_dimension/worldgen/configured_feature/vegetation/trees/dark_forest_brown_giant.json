@@ -1,0 +1,53 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "features": [
+              {
+                "feature": "minecraft:huge_brown_mushroom",
+                "chance": 0.024
+              },
+              {
+                "feature": "minecraft:huge_red_mushroom",
+                "chance": 0.004
+              },
+              {
+                "feature": "ultra_amplified_dimension:vegetation/tree/giant_dark_oak",
+                "chance": 0.32
+              },
+              {
+                "feature": "minecraft:birch",
+                "chance": 0.22
+              },
+              {
+                "feature": "minecraft:fancy_oak",
+                "chance": 0.22
+              }
+            ],
+            "default": "minecraft:oak"
+          },
+          "type": "minecraft:random_selector"
+        },
+        "decorator": {
+          "config": {
+            "yoffset": 1
+          },
+          "type": "ultra_amplified_dimension:y_offset_placer"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "column_passes": 18,
+        "valid_spot_chance": 1,
+        "skip_top_ledge": false,
+        "underside_only": false
+      },
+      "type": "ultra_amplified_dimension:ledge_surface_placer"
+    }
+  },
+  "type": "minecraft:decorated"
+}

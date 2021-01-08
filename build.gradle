@@ -32,7 +32,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.58:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.58")
 
-    runtimeOnly fg.deobf("tg:blame:1.7.4")
+    runtimeOnly fg.deobf("tg:blame:1.8.0c")
 }
 
 version = "${mc_version}-${mod_version}"

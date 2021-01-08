@@ -1,0 +1,41 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "loot_table": "ultra_amplified_dimension:chests/marked_treasure_chest"
+              },
+              "type": "ultra_amplified_dimension:marked_treasure_chest"
+            },
+            "decorator": {
+              "config": {
+                "bottom_offset": 55,
+                "top_offset": 0,
+                "maximum": 17
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 0,
+        "extra_chance": 0.35,
+        "extra_count": 1      
+      },
+      "type": "minecraft:count_extra"
+    }
+  },
+  "type": "minecraft:decorated"
+}

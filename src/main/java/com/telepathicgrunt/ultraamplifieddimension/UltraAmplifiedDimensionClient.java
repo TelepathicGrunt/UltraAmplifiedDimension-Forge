@@ -1,7 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADSkyProperty;
-import com.telepathicgrunt.ultraamplifieddimension.mixin.SkyPropertiesAccessor;
+import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.SkyPropertiesAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;

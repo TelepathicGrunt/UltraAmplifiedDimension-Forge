@@ -30,7 +30,7 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [
         "ultra_amplified_dimension:ponds/surface_slime",
@@ -40,9 +40,9 @@
     [
         "ultra_amplified_dimension:columns/vertical_mycelium",
         "ultra_amplified_dimension:columns/ramp_mycelium",
-        "ultra_amplified_dimension:glow_patch_surface",
-        "ultra_amplified_dimension:glow_patch_underground",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/glow_patch_surface",
+        "ultra_amplified_dimension:misc/glow_patch_underground",
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/mushroom_high",
@@ -80,24 +80,24 @@
       "ultra_amplified_dimension:springs/lava_narrow_range"
     ],
     [
-      "ultra_amplified_dimension:vegetation/mushrooms_giant",
-      "ultra_amplified_dimension:vegetation/seagrass_tall",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/mushroom_red_normal_underground",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_under_ledge",
-      "ultra_amplified_dimension:vegetation/mushroom_brown_normal_underground"
+      "ultra_amplified_dimension:vegetation/mushroom/red_brown_giant",
+      "ultra_amplified_dimension:vegetation/underwater/seagrass_tall",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal_under_ledge",
+      "ultra_amplified_dimension:vegetation/mushroom/red_normal_underground",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal_under_ledge",
+      "ultra_amplified_dimension:vegetation/mushroom/brown_normal_underground"
     ],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [
     "minecraft:mineshaft",
     "minecraft:stronghold",
     "minecraft:ruined_portal",
-    "ultra_amplified_dimension:configured_mushroom_temple"
+    "ultra_amplified_dimension:mushroom_temple"
   ],
   "spawners": {
     "monster": [],

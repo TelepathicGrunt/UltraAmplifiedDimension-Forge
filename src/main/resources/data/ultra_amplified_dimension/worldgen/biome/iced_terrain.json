@@ -30,7 +30,7 @@
   },
   "features": [
     [
-        "ultra_amplified_dimension:contain_underground_liquids"
+        "ultra_amplified_dimension:misc/contain_underground_liquids"
     ],
     [
         "ultra_amplified_dimension:ponds/packed_ice",
@@ -39,7 +39,7 @@
     ],
     [
         "ultra_amplified_dimension:columns/vertical_ice",
-        "ultra_amplified_dimension:contain_liquid_for_oceans"
+        "ultra_amplified_dimension:misc/contain_liquid_for_oceans"
     ],
     [
         "ultra_amplified_dimension:dungeons/icy_high",
@@ -60,7 +60,7 @@
     ],
     [],
     [
-      "ultra_amplified_dimension:snow_ice_layer_handler_feature"
+      "ultra_amplified_dimension:misc/snow_ice_layer_handler_feature"
     ]
   ],
   "starts": [
