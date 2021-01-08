@@ -16,6 +16,7 @@
           "type": "ultra_amplified_dimension:y_offset_placer"
         }
       },
+      "type": "minecraft:decorated"
     },
     "decorator": {
       "config": {
