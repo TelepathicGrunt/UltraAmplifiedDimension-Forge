@@ -173,7 +173,9 @@
         "weight": 10,
         "minCount": 4,
         "maxCount": 4
-      },
+      }
+    ],
+    "water_ambient": [
       {
         "type": "minecraft:salmon",
         "weight": 5,
@@ -187,7 +189,6 @@
         "maxCount": 6
       }
     ],
-    "water_ambient": [],
     "misc": []
   },
   "spawn_costs": {}

@@ -235,7 +235,9 @@
         "weight": 2,
         "minCount": 1,
         "maxCount": 2
-      },
+      }
+	],
+	"water_ambient": [
       {
         "type": "minecraft:pufferfish",
         "weight": 15,
@@ -249,7 +251,6 @@
         "maxCount": 8
       }
     ],
-    "water_ambient": [],
     "misc": []
   },
   "spawn_costs": {}

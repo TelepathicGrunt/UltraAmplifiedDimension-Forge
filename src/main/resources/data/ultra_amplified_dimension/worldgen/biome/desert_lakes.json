@@ -204,6 +204,14 @@
         "maxCount": 4
       },
       {
+        "type": "minecraft:dolphin",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "water_ambient": [
+      {
         "type": "minecraft:pufferfish",
         "weight": 15,
         "minCount": 1,
@@ -214,15 +222,8 @@
         "weight": 25,
         "minCount": 8,
         "maxCount": 8
-      },
-      {
-        "type": "minecraft:dolphin",
-        "weight": 2,
-        "minCount": 1,
-        "maxCount": 2
       }
-    ],
-    "water_ambient": [],
+	],
     "misc": []
   },
   "spawn_costs": {}
