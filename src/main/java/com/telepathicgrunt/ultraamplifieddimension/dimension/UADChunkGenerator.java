@@ -30,10 +30,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.jigsaw.JigsawJunction;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.NoiseSettings;
 import net.minecraft.world.gen.settings.ScalingSettings;
@@ -42,6 +39,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -56,11 +55,21 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
     });
 
-    private static final float[] NOISE_KERNAL = Util.make(new float[13824], (p_236094_0_) -> {
-        for(int i = 0; i < 24; ++i) {
-            for(int j = 0; j < 24; ++j) {
-                for(int k = 0; k < 24; ++k) {
-                    p_236094_0_[i * 24 * 24 + j * 24 + k] = (float)func_222554_b(j - 12, k - 12, i - 12);
+    private static final float[] TERRAFORMING_NOISE_KERNAL = Util.make(new float[13824], (floats) -> {
+        for(int x = 0; x < 24; ++x) {
+            for(int z = 0; z < 24; ++z) {
+                for(int y = 0; y < 24; ++y) {
+                    floats[x * 24 * 24 + z * 24 + y] = (float) getTerrainValue(z - 12, y - 12, x - 12);
+                }
+            }
+        }
+    });
+
+    private static final float[] GIANT_TERRAFORMING_NOISE_KERNAL = Util.make(new float[13824], (floats) -> {
+        for(int x = 0; x < 24; ++x) {
+            for(int z = 0; z < 24; ++z) {
+                for(int y = 0; y < 24; ++y) {
+                    floats[x * 24 * 24 + z * 24 + y] = (float) getGiantTerrainValue(z - 12, y - 12, x - 12);
                 }
             }
         }
@@ -114,6 +123,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     private final int sealevel;
     protected OpenSimplexNoise noiseGen;
     protected long seed;
+    protected List<Structure<?>> landTerraformingStructures;
 
     @Override
     protected Codec<? extends ChunkGenerator> func_230347_a_() {
@@ -133,6 +143,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
             this.noiseGen = new OpenSimplexNoise(seed);
             this.seed = seed;
         }
+
+        landTerraformingStructures = new ArrayList<>(Structure.field_236384_t_);
+        landTerraformingStructures.add(Structure.MONUMENT);
     }
 
 
@@ -393,12 +406,14 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         ObjectList<StructurePiece> objectlist = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
         ChunkPos chunkpos = chunk.getPos();
-        int i = chunkpos.x;
-        int j = chunkpos.z;
-        int k = i << 4;
-        int l = j << 4;
+        int xChunkPos = chunkpos.x;
+        int zChunkPos = chunkpos.z;
+        int xPos = xChunkPos << 4;
+        int zPos = zChunkPos << 4;
 
-        for(Structure<?> structure : Structure.field_236384_t_) {
+
+
+        for(Structure<?> structure : this.landTerraformingStructures) {
             structureManager.func_235011_a_(SectionPos.from(chunkpos, 0), structure).forEach((p_236089_5_) -> {
                 for(StructurePiece structurepiece1 : p_236089_5_.getComponents()) {
                     if (structurepiece1.func_214810_a(chunkpos, 12)) {
@@ -410,9 +425,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                             }
 
                             for(JigsawJunction jigsawjunction1 : abstractvillagepiece.getJunctions()) {
-                                int l5 = jigsawjunction1.getSourceX();
-                                int i6 = jigsawjunction1.getSourceZ();
-                                if (l5 > k - 12 && i6 > l - 12 && l5 < k + 15 + 12 && i6 < l + 15 + 12) {
+                                int xSource = jigsawjunction1.getSourceX();
+                                int zSource = jigsawjunction1.getSourceZ();
+                                if (xSource > xPos - 12 && zSource > zPos - 12 && xSource < xPos + 15 + 12 && zSource < zPos + 15 + 12) {
                                     objectlist1.add(jigsawjunction1);
                                 }
                             }
@@ -429,7 +444,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
         for(int i5 = 0; i5 < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + 1; ++i5) {
             adouble[0][i5] = new double[((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() + 1];
-            this.fillNoiseColumn(adouble[0][i5], i * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX(), j * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + i5);
+            this.fillNoiseColumn(adouble[0][i5], xChunkPos * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX(), zChunkPos * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + i5);
             adouble[1][i5] = new double[((NoiseChunkGeneratorAccessor)this).getNoiseSizeY() + 1];
         }
 
@@ -442,7 +457,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
         for(int xNoiseSize = 0; xNoiseSize < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX(); ++xNoiseSize) {
             for(int zNoiseSize = 0; zNoiseSize < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + 1; ++zNoiseSize) {
-                this.fillNoiseColumn(adouble[1][zNoiseSize], i * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX() + xNoiseSize + 1, j * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + zNoiseSize);
+                this.fillNoiseColumn(adouble[1][zNoiseSize], xChunkPos * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeX() + xNoiseSize + 1, zChunkPos * ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ() + zNoiseSize);
             }
 
             for(int j5 = 0; j5 < ((NoiseChunkGeneratorAccessor)this).getNoiseSizeZ(); ++j5) {
@@ -460,12 +475,12 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     double d7 = adouble[1][j5 + 1][k1 + 1];
 
                     for(int xSection = 0; xSection < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++xSection) {
-                        int x = k + xNoiseSize * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + xSection;
+                        int x = xPos + xNoiseSize * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + xSection;
                         int xInChunk = x & 15;
                         double d13 = (double)xSection / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
 
                         for(int zSection = 0; zSection < ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity(); ++zSection) {
-                            int z = l + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + zSection;
+                            int z = zPos + j5 * ((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity() + zSection;
                             int zInChunk = z & 15;
                             double d16 = (double)zSection / (double)((NoiseChunkGeneratorAccessor)this).getHorizontalNoiseGranularity();
 
@@ -475,10 +490,10 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                             for(int ySection = ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() - 1; ySection >= 0; --ySection) {
                                 int y = k1 * ((NoiseChunkGeneratorAccessor)this).getVerticalNoiseGranularity() + ySection;
                                 int yInChunk = y & 15;
-                                int k2 = y >> 4;
-                                if (chunksection.getYLocation() >> 4 != k2) {
+                                int yChunk = y >> 4;
+                                if (chunksection.getYLocation() >> 4 != yChunk) {
                                     chunksection.unlock();
-                                    chunksection = chunkprimer.getSection(k2);
+                                    chunksection = chunkprimer.getSection(yChunk);
                                     chunksection.lock();
                                 }
 
@@ -492,25 +507,34 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                                 double d17 = MathHelper.lerp(d16, d14, d15);
                                 double noiseValue = MathHelper.clamp(d17 / 200.0D, -1.0D, 1.0D);
 
-                                int jigsawY;
-                                int jigsawZ;
-                                int l4;
-                                for(noiseValue = noiseValue / 2.0D - noiseValue * noiseValue * noiseValue / 24.0D; objectlistiterator.hasNext(); noiseValue += func_222556_a(jigsawY, jigsawZ, l4) * 0.8D) {
+                                int pieceX;
+                                int pieceY;
+                                int pieceZ;
+                                for(noiseValue = noiseValue / 2.0D - noiseValue * noiseValue * noiseValue / 24.0D;
+                                    objectlistiterator.hasNext();)
+                                {
                                     StructurePiece structurepiece = objectlistiterator.next();
                                     MutableBoundingBox mutableboundingbox = structurepiece.getBoundingBox();
-                                    jigsawY = Math.max(0, Math.max(mutableboundingbox.minX - x, x - mutableboundingbox.maxX));
-                                    jigsawZ = y - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
-                                    l4 = Math.max(0, Math.max(mutableboundingbox.minZ - z, z - mutableboundingbox.maxZ));
+                                    pieceX = Math.max(0, Math.max(mutableboundingbox.minX - x, x - mutableboundingbox.maxX));
+                                    pieceY = y - (mutableboundingbox.minY + (structurepiece instanceof AbstractVillagePiece ? ((AbstractVillagePiece)structurepiece).getGroundLevelDelta() : 0));
+                                    pieceZ = Math.max(0, Math.max(mutableboundingbox.minZ - z, z - mutableboundingbox.maxZ));
+
+                                    if(structurepiece instanceof OceanMonumentPieces.Piece){
+                                        pieceY -= 2;
+                                        noiseValue += giantTerraformNoise(pieceX, pieceY, pieceZ) * 0.8D;
+                                    }
+                                    else{
+                                        noiseValue += terraformNoise(pieceX, pieceY, pieceZ) * 0.8D;
+                                    }
                                 }
 
                                 objectlistiterator.back(objectlist.size());
 
                                 while(objectlistiterator1.hasNext()) {
                                     JigsawJunction jigsawjunction = objectlistiterator1.next();
-                                    int jigsawX = x - jigsawjunction.getSourceX();
-                                    jigsawY = y - jigsawjunction.getSourceGroundY();
-                                    jigsawZ = z - jigsawjunction.getSourceZ();
-                                    noiseValue += func_222556_a(jigsawX, jigsawY, jigsawZ) * 0.4D;
+                                    pieceY = y - jigsawjunction.getSourceGroundY();
+                                    pieceZ = z - jigsawjunction.getSourceZ();
+                                    noiseValue += terraformNoise(pieceZ, pieceY, pieceZ) * 0.4D;
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());
@@ -649,13 +673,13 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         ((NoiseChunkGeneratorAccessor)this).callMakeBedrock(chunk, sharedseedrandom);
     }
 
-    private static double func_222556_a(int x, int y, int z) {
+    private static double terraformNoise(int x, int y, int z) {
         int xPos = x + 12;
         int yPos = y + 12;
         int zPos = z + 12;
         if (xPos >= 0 && xPos < 24) {
             if (yPos >= 0 && yPos < 24) {
-                return zPos >= 0 && zPos < 24 ? (double)NOISE_KERNAL[zPos * 24 * 24 + xPos * 24 + yPos] : 0.0D;
+                return zPos >= 0 && zPos < 24 ? (double) TERRAFORMING_NOISE_KERNAL[zPos * 24 * 24 + xPos * 24 + yPos] : 0.0D;
             } else {
                 return 0.0D;
             }
@@ -664,13 +688,34 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
     }
 
-    private static double func_222554_b(int x, int y, int z) {
-        double d0 = (x * x) + (z * z);
-        double d1 = (double)y + 0.5D;
-        double d2 = d1 * d1;
-        double d3 = Math.pow(Math.E, -(d2 / 16.0D + d0 / 16.0D));
-        double d4 = -d1 * MathHelper.fastInvSqrt(d2 / 2.0D + d0 / 2.0D) / 2.0D;
+    private static double giantTerraformNoise(int x, int y, int z) {
+        int xPos = x + 12;
+        int zPos = z + 12;
+        if (xPos >= 0 && xPos < 24) {
+            if (y >= 0 && y < 24) {
+                return zPos >= 0 && zPos < 24 ? (double) GIANT_TERRAFORMING_NOISE_KERNAL[zPos * 24 * 24 + xPos * 24 + y] : 0.0D;
+            } else {
+                return 0.0D;
+            }
+        } else {
+            return 0.0D;
+        }
+    }
+
+    private static double getTerrainValue(int x, int y, int z) {
+        double horizontalDist = (x * x) + (z * z);
+        double offsetY = (double)y + 0.5D;
+        double squaredOffsetY = offsetY * offsetY;
+        double d3 = Math.pow(Math.E, -(squaredOffsetY / 16.0D + horizontalDist / 16.0D));
+        double d4 = -offsetY * MathHelper.fastInvSqrt(squaredOffsetY / 2.0D + horizontalDist / 2.0D) / 2.0D;
         return d4 * d3;
+    }
+
+    private static double getGiantTerrainValue(int x, int y, int z) {
+        double horizontalDist = (x * x) + (z * z);
+        double v = (12 - Math.abs(y));
+        double vert = v * v * 0.1D;
+        return -(MathHelper.fastInvSqrt((horizontalDist) + 0.001D) - 2D + vert);
     }
 
     // Use a field to hold sealevel int to make this not as performance heavy as

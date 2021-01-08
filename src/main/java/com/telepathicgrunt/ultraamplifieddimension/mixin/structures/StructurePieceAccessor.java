@@ -28,4 +28,7 @@ public interface StructurePieceAccessor {
 
     @Invoker
     void callFillWithBlocks(ISeedReader worldIn, MutableBoundingBox boundingboxIn, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, BlockState boundaryBlockState, BlockState insideBlockState, boolean existingOnly);
+
+    @Invoker
+    void callSetBlockState(ISeedReader worldIn, BlockState blockstateIn, int x, int y, int z, MutableBoundingBox boundingboxIn);
 }

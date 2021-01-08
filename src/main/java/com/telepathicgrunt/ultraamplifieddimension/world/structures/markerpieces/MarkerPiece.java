@@ -11,7 +11,7 @@ import java.util.Random;
 public class MarkerPiece extends TemplateStructurePiece {
     public MarkerPiece(IStructurePieceType structurePieceTypeIn, int componentTypeIn) {
         super(structurePieceTypeIn, componentTypeIn);
-        this.boundingBox = new MutableBoundingBox();
+        this.boundingBox = new MutableBoundingBox(0, 0, 0, 0, 0, 0);
         this.templatePosition = new BlockPos(0,0,0);
     }
 

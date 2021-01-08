@@ -13,4 +13,7 @@ public interface TemplateStructurePieceAccessor {
 
     @Accessor
     BlockPos getTemplatePosition();
+
+    @Accessor
+    void setTemplatePosition(BlockPos blockPos);
 }
