@@ -1,8 +1,8 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADStructures;
-import javafx.util.Pair;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -77,7 +77,7 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
         // We store the current chunkGenerator as if we go into different dimension, our cache is useless.
         // Gets all UAD structures to space away from (exclude self or else you can't do low spacing anymore)
         // Exclude very low spacing structures or else we can't spawn at all
-        if(STRUCTURE_SPACING_CACHE == null || STRUCTURE_SPACING_CACHE.getKey() != chunkGenerator){
+        if(STRUCTURE_SPACING_CACHE == null || STRUCTURE_SPACING_CACHE.getFirst() != chunkGenerator){
             STRUCTURE_SPACING_CACHE = new Pair<>(
                     chunkGenerator,
                     chunkGenerator.func_235957_b_().func_236195_a_().entrySet().stream()
@@ -90,7 +90,7 @@ public class GenericJigsawStructure extends AbstractBaseStructure {
         int structureRange = 1;
         for (int curChunkX = chunkX - structureRange; curChunkX <= chunkX + structureRange; curChunkX++) {
             for (int curChunkZ = chunkZ - structureRange; curChunkZ <= chunkZ + structureRange; curChunkZ++) {
-                for (Map.Entry<Structure<?>, StructureSeparationSettings> spacingSettings : STRUCTURE_SPACING_CACHE.getValue()) {
+                for (Map.Entry<Structure<?>, StructureSeparationSettings> spacingSettings : STRUCTURE_SPACING_CACHE.getSecond()) {
                     ChunkPos structurePos = spacingSettings.getKey().getChunkPosForStructure(
                             spacingSettings.getValue(),
                             seed,

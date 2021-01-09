@@ -712,10 +712,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
 
     private static double getGiantTerrainValue(int x, int y, int z) {
-        double horizontalDist = (x * x) + (z * z);
-        double v = (12 - Math.abs(y));
-        double vert = v * v * 0.1D;
-        return -(MathHelper.fastInvSqrt((horizontalDist) + 0.001D) - 2D + vert);
+        double horizontalDist = (x * x) + (z * z) + 0.0001D;
+        double v = (12 - Math.abs(y)) * 0.08D;
+        return -((MathHelper.fastInvSqrt(horizontalDist) * 1.1D) - 1D + v);
     }
 
     // Use a field to hold sealevel int to make this not as performance heavy as
