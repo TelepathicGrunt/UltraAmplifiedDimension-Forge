@@ -2,17 +2,14 @@ package com.telepathicgrunt.ultraamplifieddimension.mixin.structures;
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
 import com.telepathicgrunt.ultraamplifieddimension.world.structures.OceanMonumentPiecesUtils;
-import com.telepathicgrunt.ultraamplifieddimension.world.structures.markerpieces.MarkerPiece;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.structure.*;
+import net.minecraft.world.gen.feature.structure.OceanMonumentPieces;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.Random;
 

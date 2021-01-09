@@ -42,7 +42,7 @@ public class SuperLongRavineCarver extends WorldCarver<RavineConfig>
 
 	@Override
 	public boolean shouldCarve(Random p_212246_2_, int chunkX, int chunkZ, RavineConfig config) {
-		return p_212246_2_.nextFloat() <= (UltraAmplifiedDimension.UAFeaturesConfig.ravineSpawnrate.get()) / 850f;
+		return p_212246_2_.nextFloat() <= config.probability;
 	}
 
 

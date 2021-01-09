@@ -1,24 +1,17 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.structures;
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
-import com.telepathicgrunt.ultraamplifieddimension.world.structures.markerpieces.MarkerPiece;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.*;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.structure.DesertPyramidPiece;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;

@@ -3,20 +3,12 @@ package com.telepathicgrunt.ultraamplifieddimension.world.structures;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.structures.StructurePieceAccessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.OceanMonumentPieces;
-import net.minecraft.world.gen.feature.template.Template;
-
-import java.util.Random;
 
 public class OceanMonumentPiecesUtils {
     // called in structures/OceanMonumentPiecesMonumentBuildingMixin

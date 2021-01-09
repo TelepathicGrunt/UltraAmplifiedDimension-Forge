@@ -1,11 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayerPosAndDim;
-import com.telepathicgrunt.ultraamplifieddimension.config.UABiomesConfig.UABiomesConfigValues;
 import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAFeaturesConfig.UAFeaturesConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAModCompatConfig.UAModCompatConfigValues;
-import com.telepathicgrunt.ultraamplifieddimension.config.UAStructuresConfig.UAStructuresConfigValues;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.*;
@@ -27,11 +23,8 @@ public class UltraAmplifiedDimension {
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-	public static UABiomesConfigValues UABiomesConfig = null;
 	public static UADimensionConfigValues UADimensionConfig = null;
-	public static UAFeaturesConfigValues UAFeaturesConfig = null;
-	public static UAModCompatConfigValues UAModCompatConfig = null;
-	public static UAStructuresConfigValues UAStructuresConfig = null;
+	//public static UAModCompatConfigValues UAModCompatConfig = null;
 
 	public UltraAmplifiedDimension() {
 
@@ -54,11 +47,8 @@ public class UltraAmplifiedDimension {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
 
 		//generates config
-		UABiomesConfig = ConfigHelper.register(ModConfig.Type.SERVER, UABiomesConfigValues::new, "ultra_amplified_dimension-biomes.toml");
 		UADimensionConfig = ConfigHelper.register(ModConfig.Type.SERVER, UADimensionConfigValues::new, "ultra_amplified_dimension-dimension.toml");
-		UAFeaturesConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAFeaturesConfigValues::new, "ultra_amplified_dimension-features.toml");
-		UAModCompatConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAModCompatConfigValues::new, "ultra_amplified_dimension-mod_compat.toml");
-		UAStructuresConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAStructuresConfigValues::new, "ultra_amplified_dimension-structures.toml");
+		//UAModCompatConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAModCompatConfigValues::new, "ultra_amplified_dimension-mod_compat.toml");
 	}
 
 	public void setup(final FMLCommonSetupEvent event)

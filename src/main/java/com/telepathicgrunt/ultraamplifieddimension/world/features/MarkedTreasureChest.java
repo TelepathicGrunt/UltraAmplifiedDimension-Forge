@@ -2,7 +2,6 @@ package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
 import com.mojang.serialization.Codec;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.LootTableConfig;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Direction;

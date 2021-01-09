@@ -7,7 +7,6 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.structure.DesertPyramidPiece;
 import net.minecraft.world.gen.feature.structure.JunglePyramidPiece;
 import net.minecraft.world.gen.feature.structure.StructureManager;
 import org.spongepowered.asm.mixin.Mixin;

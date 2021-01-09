@@ -1,15 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.structures;
 
-import com.telepathicgrunt.ultraamplifieddimension.world.structures.markerpieces.MarkerPiece;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.structure.EndCityPieces;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-
-import java.util.List;
 
 @Mixin(targets = "net/minecraft/world/gen/feature/structure/EndCityPieces$1")
 public abstract class EndCityPiecesInnerClass1Mixin {

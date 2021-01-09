@@ -1,21 +1,12 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.structures;
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
-import com.telepathicgrunt.ultraamplifieddimension.world.structures.markerpieces.MarkerPiece;
 import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.EndCityStructure;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.WoodlandMansionStructure;
-import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WoodlandMansionStructure.Start.class)
 public abstract class WoodlandMansionStructureStartMixin {
