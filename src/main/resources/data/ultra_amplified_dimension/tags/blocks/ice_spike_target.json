@@ -1,14 +1,13 @@
 {
   "replace": false,
   "values": [
+    "#ultra_amplified_dimension:dirt_like",
     "minecraft:air",
     "minecraft:cave_air",
     "minecraft:ice",
     "minecraft:packed_ice",
     "minecraft:snow",
     "minecraft:snow_block",
-    "minecraft:dirt",
-    "minecraft:coarse_dirt",
     "minecraft:water"
   ]
 }

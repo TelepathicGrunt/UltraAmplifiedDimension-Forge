@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    { "id": "#c:terracotta", "required": false },
     "minecraft:terracotta",
     "minecraft:black_terracotta",
     "minecraft:blue_terracotta",

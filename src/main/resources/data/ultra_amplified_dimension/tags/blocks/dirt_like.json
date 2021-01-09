@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    { "id": "#c:dirt", "required": false },
+    { "id": "#forge:dirt", "required": false },
     "minecraft:dirt",
     "minecraft:coarse_dirt",
     "minecraft:farmland",
