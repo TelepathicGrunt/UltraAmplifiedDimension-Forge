@@ -146,6 +146,7 @@ public class UADBiomeProvider extends BiomeProvider {
         return new UADBiomeProvider(seed, this.dynamicRegistry, this.biomeSize, this.subBiomeRate, this.mutatedBiomeRate, this.regionManager);
     }
 
+    // TODO: use this in layers
     public enum REGIONS {
         END,
         NETHER,

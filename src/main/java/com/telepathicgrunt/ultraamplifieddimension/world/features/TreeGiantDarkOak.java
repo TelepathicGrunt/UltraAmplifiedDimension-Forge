@@ -218,7 +218,7 @@ public class TreeGiantDarkOak extends Feature<BaseTreeFeatureConfig>
 					BlockPos blockpos = layerCenter.add(j, 0, k);
 					BlockState state = world.getBlockState(blockpos);
 
-					if (state.getBlock().isAir(state, world, blockpos) || state.getMaterial() == Material.LEAVES)
+					if (state.isAir() || state.getMaterial() == Material.LEAVES)
 					{
 						this.setBlockState(world, blockpos, DARK_OAK_LEAVES);
 					}
@@ -247,7 +247,7 @@ public class TreeGiantDarkOak extends Feature<BaseTreeFeatureConfig>
 					BlockPos blockpos = layerCenter.add(j, 0, k);
 					BlockState state = world.getBlockState(blockpos);
 
-					if (state.getBlock().isAir(state, world, blockpos) || state.getMaterial() == Material.LEAVES)
+					if (state.isAir() || state.getMaterial() == Material.LEAVES)
 					{
 						this.setBlockState(world, blockpos, DARK_OAK_LOG);
 					}
@@ -352,12 +352,12 @@ public class TreeGiantDarkOak extends Feature<BaseTreeFeatureConfig>
 		}
 	}
 
-	protected static boolean cannotBeReplacedByLogs(IWorldGenerationBaseReader p_214587_0_, BlockPos p_214587_1_) {
-		if (p_214587_0_ instanceof IWorldReader) // FORGE: Redirect to state method when possible
-			return !p_214587_0_.hasBlockState(p_214587_1_, state -> state.canBeReplacedByLogs((IWorldReader) p_214587_0_, p_214587_1_));
-		return !p_214587_0_.hasBlockState(p_214587_1_, (p_214573_0_) -> {
-			Block block = p_214573_0_.getBlock();
-			return p_214573_0_.isAir() || p_214573_0_.isIn(BlockTags.LEAVES) || isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE;
+	protected static boolean cannotBeReplacedByLogs(IWorldGenerationBaseReader reader, BlockPos pos) {
+		if (reader instanceof IWorldReader) // FORGE: Redirect to state method when possible
+			return !reader.hasBlockState(pos, state -> state.canBeReplacedByLogs((IWorldReader) reader, pos));
+		return !reader.hasBlockState(pos, (blockState) -> {
+			Block block = blockState.getBlock();
+			return blockState.isAir() || blockState.isIn(BlockTags.LEAVES) || isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE;
 		});
 	}
 }
