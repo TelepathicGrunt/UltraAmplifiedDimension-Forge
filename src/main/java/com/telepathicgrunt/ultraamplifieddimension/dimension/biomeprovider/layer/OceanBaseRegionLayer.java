@@ -26,7 +26,7 @@ public class OceanBaseRegionLayer implements CenterWithPositionTransformer {
                      + 1) * 0.5D;
 
         // Use a separate noise to make ocean spots separate from the temperature noise
-        if(oceanThresholdNoise < 0.28D){
+        if(oceanThresholdNoise < 0.27D){
             return 0;
         }
 

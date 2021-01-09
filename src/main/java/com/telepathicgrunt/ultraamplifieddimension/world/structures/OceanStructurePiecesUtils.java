@@ -37,7 +37,7 @@ public class OceanStructurePiecesUtils {
 
         // Iterate downward until it hits underwater land that can hold the structure
         for(mutable.move(Direction.UP, startHeight);
-            mutable.getY() > 5;
+            mutable.getY() > Math.max(bottomOfSea - 20, 5);
             mutable.move(Direction.DOWN))
         {
             currentState = world.getBlockState(mutable);
@@ -50,7 +50,7 @@ public class OceanStructurePiecesUtils {
         }
 
         // Set structure at bottom of sea if no valid place was found.
-        return mutable.getY();
+        return bottomOfSea;
     }
 
     public static boolean noAirAround(ISeedReader world, BlockPos blockpos, int xRange, int zRange) {
