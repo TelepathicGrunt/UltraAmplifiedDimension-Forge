@@ -1,5 +1,6 @@
-package com.telepathicgrunt.ultraamplifieddimension;
+package com.telepathicgrunt.ultraamplifieddimension.client;
 
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADSkyProperty;
 import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.SkyPropertiesAccessor;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
@@ -15,6 +16,8 @@ public class UltraAmplifiedDimensionClient {
 	{
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(UltraAmplifiedDimensionClient::onClientSetup);
+		modEventBus.addListener(BlockColorManager::onBlockColorsInit);
+		modEventBus.addListener(BlockColorManager::onItemColorsInit);
 	}
 
 

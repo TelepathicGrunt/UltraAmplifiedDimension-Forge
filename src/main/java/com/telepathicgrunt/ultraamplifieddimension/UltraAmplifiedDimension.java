@@ -1,6 +1,7 @@
 package com.telepathicgrunt.ultraamplifieddimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayerPosAndDim;
+import com.telepathicgrunt.ultraamplifieddimension.client.UltraAmplifiedDimensionClient;
 import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
