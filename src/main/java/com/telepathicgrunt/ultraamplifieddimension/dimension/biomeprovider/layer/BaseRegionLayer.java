@@ -26,7 +26,7 @@ public class BaseRegionLayer implements IAreaTransformer0 {
                       * 0.5D) + 0.5D;
 
         if(regionNoise < 0.3D){
-            if(noise.random(20) == 0){
+            if(noise.random(25) == 0){
                 return 2;
             }
             return 3;
@@ -35,7 +35,7 @@ public class BaseRegionLayer implements IAreaTransformer0 {
             return 4;
         }
         else if(regionNoise < 0.7D){
-            if(noise.random(25) == 0){
+            if(noise.random(30) == 0){
                 return 1;
             }
             return 5;
