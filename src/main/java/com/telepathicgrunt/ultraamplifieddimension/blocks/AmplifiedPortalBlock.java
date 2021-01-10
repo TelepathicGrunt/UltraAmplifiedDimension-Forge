@@ -71,7 +71,8 @@ public class AmplifiedPortalBlock extends Block
 			!playerEntity.isPassenger() &&
 			!playerEntity.isBeingRidden() &&
 			playerEntity.isNonBoss() &&
-			!playerEntity.isCrouching())
+			!playerEntity.isCrouching() &&
+			playerEntity.getActiveHand() == playerHand)
 		{
 			MinecraftServer minecraftserver = playerEntity.getServer();
 
