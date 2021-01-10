@@ -1,8 +1,5 @@
 {
-
-  "generator.ultra_amplified": "Ultra Amplified",
-  "generator.ultra_amplified.info": "May take a few minutes to create a fresh new world.",
-  "itemGroup.ultra_amplified_dimension": "Ultra Amplified Dimension",
+  "itemGroup.ultra_amplified_dimension.main_tab": "Ultra Amplified Dimension",
 
   "block.ultra_amplified_dimension.amplified_portal": "Amplified Portal",
   "block.ultra_amplified_dimension.big_cactus_body_block": "Big Cactus Body",

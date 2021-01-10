@@ -34,7 +34,7 @@ public class UADBlocks {
     public static final RegistryObject<Block> BIG_CACTUS_MAIN_BLOCK = createBlock("big_cactus_main_block", BigCactusMainBlock::new);
 
     //creative tab to hold our block items
-    public static final ItemGroup ULTRAMAPLIFIED = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplifiedDimension.MODID) {
+    public static final ItemGroup ULTRA_AMPLIFIED_TAB = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplifiedDimension.MODID + ".main_tab") {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ItemStack createIcon() {
@@ -44,7 +44,7 @@ public class UADBlocks {
     
     public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<B> block) {
         RegistryObject<B> blockHolder = BLOCKS.register(name, block);
-        ITEMS.register(name, () -> new BlockItem(blockHolder.get(), new Item.Properties().group(ULTRAMAPLIFIED)));
+        ITEMS.register(name, () -> new BlockItem(blockHolder.get(), new Item.Properties().group(ULTRA_AMPLIFIED_TAB)));
         return blockHolder;
     }
 }
