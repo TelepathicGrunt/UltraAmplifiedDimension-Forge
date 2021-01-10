@@ -34,7 +34,7 @@ public class UADBiomeProvider extends BiomeProvider {
 
     public static final Codec<UADBiomeProvider> CODEC =
             RecordCodecBuilder.create((instance) -> instance.group(
-                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).forGetter((biomeSource) -> biomeSource.seed),
+                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getSeed).forGetter((biomeSource) -> biomeSource.seed),
                     RegistryLookupCodec.getLookUpCodec(Registry.BIOME_KEY).forGetter((biomeSource) -> biomeSource.dynamicRegistry),
                     Codec.intRange(1, 20).fieldOf("biome_size").forGetter((biomeSource) -> biomeSource.biomeSize),
                     Codec.floatRange(0, 1).fieldOf("sub_biome_rate").forGetter((biomeSource) -> biomeSource.subBiomeRate),

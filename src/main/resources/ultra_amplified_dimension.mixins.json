@@ -9,6 +9,7 @@
     "blocks.SpreadableSnowyDirtBlockAccessor",
     "dimension.BiomeContainerAccessor",
     "dimension.ChunkGeneratorAccessor",
+    "dimension.DimensionGeneratorSettingsMixin",
     "dimension.DimensionSettingsInvoker",
     "dimension.LayerAccessor",
     "dimension.MinecraftServerMixin",

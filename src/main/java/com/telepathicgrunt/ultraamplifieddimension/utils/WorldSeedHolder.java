@@ -1,13 +1,18 @@
 package com.telepathicgrunt.ultraamplifieddimension.utils;
 
 public class WorldSeedHolder {
-    private static long WORLD_SEED = 0;
+    /**
+     * World seed for worldgen when not specified by JSON by Haven King
+     * https://github.com/Hephaestus-Dev/seedy-behavior/blob/master/src/main/java/dev/hephaestus/seedy/mixin/world/gen/GeneratorOptionsMixin.java
+     */
+    private static long SEED = 0;
 
-    public static long getWorldSeed() {
-        return WORLD_SEED;
+    public static long getSeed() {
+        return SEED;
     }
 
-    public static void setWorldSeed(long worldSeed) {
-        WORLD_SEED = worldSeed;
+    public static long setSeed(long seed) {
+        SEED = seed;
+        return seed;
     }
 }

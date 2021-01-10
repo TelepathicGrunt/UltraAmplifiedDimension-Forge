@@ -37,9 +37,7 @@ public class MinecraftServerMixin {
 	private void seedCarvers(IChunkStatusListener chunkStatusListener, CallbackInfo ci, IServerWorldInfo iserverworldinfo,
 									DimensionGeneratorSettings dimensiongeneratorsettings, boolean isDebugWorld, long seed, long hashedSeed)
 	{
-		WorldSeedHolder.setWorldSeed(hashedSeed);
-		MutableRegistry<Biome> biomeRegistry = field_240767_f_.getRegistry(Registry.BIOME_KEY);
 		CaveCavityCarver.setSeed(hashedSeed);
-		BiomeSetsHelper.generateBiomeSets(biomeRegistry);
+		BiomeSetsHelper.generateBiomeSets(field_240767_f_.getRegistry(Registry.BIOME_KEY));
 	}
 }

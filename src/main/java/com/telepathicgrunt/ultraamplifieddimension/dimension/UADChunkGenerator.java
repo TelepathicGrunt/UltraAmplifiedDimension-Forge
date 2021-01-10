@@ -115,7 +115,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     public static final Codec<NoiseChunkGenerator> UAD_CHUNK_GENERATOR_CODEC = RecordCodecBuilder.create((noiseChunkGeneratorInstance) -> noiseChunkGeneratorInstance.group(
                     BiomeProvider.CODEC.fieldOf("biome_source").forGetter((noiseChunkGenerator) -> ((ChunkGeneratorAccessor)noiseChunkGenerator).getbiomeProvider()),
-                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getWorldSeed).forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
+                    Codec.LONG.fieldOf("seed").orElseGet(WorldSeedHolder::getSeed).forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236084_w_()),
                     UAD_DIMENSION_SETTINGS_CODEC.fieldOf("settings").forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor)noiseChunkGenerator).getfield_236080_h_().get()))
                         .apply(noiseChunkGeneratorInstance, noiseChunkGeneratorInstance.stable(UADChunkGenerator::new)));
 

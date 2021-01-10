@@ -45,10 +45,10 @@ public class EllipsoidPocket extends Feature<OreFeatureConfig>
 		for(int y = minY; y <= maxY; y++) {
 			float yModified = y;
 			if(y < 0){
-				yModified = y - 0.25f;
+				yModified = y + 0.25f;
 			}
 			else if (y > 0){
-				y = (int) ((y + 0.5f));
+				y = (int)(y + 0.5f);
 			}
 
 			// rand.nextFloat() took up too much time
