@@ -532,9 +532,10 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
                                 while(objectlistiterator1.hasNext()) {
                                     JigsawJunction jigsawjunction = objectlistiterator1.next();
+                                    pieceX = z - jigsawjunction.getSourceX();
                                     pieceY = y - jigsawjunction.getSourceGroundY();
                                     pieceZ = z - jigsawjunction.getSourceZ();
-                                    noiseValue += terraformNoise(pieceZ, pieceY, pieceZ) * 0.4D;
+                                    noiseValue += terraformNoise(pieceX, pieceY, pieceZ) * 0.4D;
                                 }
 
                                 objectlistiterator1.back(objectlist1.size());

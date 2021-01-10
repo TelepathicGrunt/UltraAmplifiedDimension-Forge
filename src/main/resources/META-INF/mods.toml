@@ -1,10 +1,10 @@
 modLoader="javafml" #mandatory
 loaderVersion="[30,)" #mandatory
-license="https://github.com/TelepathicGrunt/WorldBlender/blob/master/LICENSE"
+license="https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Forge/blob/1.16/LICENSE"
 
 [[mods]] #mandatory
 modId="ultra_amplified_dimension" #mandatory
-logoFile="ultraamplifiedlogo.png"
+logoFile="ultraamplifiedbanner.png"
 logoBlur=false
 version="${version}" #mandatory
 displayName="Ultra Amplified Dimension" #mandatory
