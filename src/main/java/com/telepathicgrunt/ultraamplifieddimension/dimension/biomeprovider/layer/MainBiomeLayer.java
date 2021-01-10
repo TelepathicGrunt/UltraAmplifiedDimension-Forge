@@ -2,6 +2,7 @@ package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.laye
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.BiomeGroup;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.RegionManager;
+import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.UADBiomeProvider;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer.transformers.CastleWithPositionTransformer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -17,35 +18,25 @@ public class MainBiomeLayer implements CastleWithPositionTransformer {
         this.regionManager = regionManager;
     }
 
-    /*
-     * LAYER KEY FOR MYSELF:
-     * 0 = ocean region
-     * 1 = end region
-     * 2 = nether region
-     * 3 = hot region
-     * 4 = warm region
-     * 5 = cool region
-     * 6 = icy region
-     */
     public int apply(INoiseRandom context, int north, int west, int south, int east, int regionID, int x, int z) {
         BiomeGroup selectedBiomeGroup;
 
-        if(regionID == 1){
+        if(regionID == UADBiomeProvider.REGIONS.END.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getEndList(), context);
         }
-        else if(regionID == 2){
+        else if(regionID == UADBiomeProvider.REGIONS.NETHER.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getNetherList(), context);
         }
-        else if(regionID == 3){
+        else if(regionID == UADBiomeProvider.REGIONS.HOT.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getHotList(), context);
         }
-        else if(regionID == 4){
+        else if(regionID == UADBiomeProvider.REGIONS.WARM.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getWarmRegion(), context);
         }
-        else if(regionID == 5){
+        else if(regionID == UADBiomeProvider.REGIONS.COOL.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getCoolList(), context);
         }
-        else if(regionID == 6){
+        else if(regionID == UADBiomeProvider.REGIONS.ICY.ordinal()){
             selectedBiomeGroup = regionManager.getRandomBiomeGroup(regionManager.getIcyList(), context);
         }
         else{

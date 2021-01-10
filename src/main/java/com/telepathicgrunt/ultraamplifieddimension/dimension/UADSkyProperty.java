@@ -14,13 +14,13 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class UADSkyProperty extends DimensionRenderInfo {
     public UADSkyProperty() {
-        super(UltraAmplifiedDimension.UADimensionConfig.cloudHeight.get(), true, FogType.NORMAL, false, false);
+        super(UltraAmplifiedDimension.UADConfig.cloudHeight.get(), true, FogType.NORMAL, false, false);
     }
 
     @Override
     // thick fog or no
     public boolean func_230493_a_(int camX, int camY) {
-        return UltraAmplifiedDimension.UADimensionConfig.heavyFog.get();
+        return UltraAmplifiedDimension.UADConfig.heavyFog.get();
     }
 
     @Nonnull

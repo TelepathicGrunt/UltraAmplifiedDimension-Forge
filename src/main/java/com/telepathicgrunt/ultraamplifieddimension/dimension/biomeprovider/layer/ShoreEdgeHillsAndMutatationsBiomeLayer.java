@@ -23,16 +23,6 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
         this.biomeSize = biomeSize;
     }
 
-    /*
-     * LAYER KEY FOR MYSELF:
-     * 0 = ocean region
-     * 1 = end region
-     * 2 = nether region
-     * 3 = hot region
-     * 4 = warm region
-     * 5 = cool region
-     * 6 = icy region
-     */
     public int apply(INoiseRandom context, int north, int west, int south, int east, int originalBiomeID, int x, int z) {
         Biome currentBiome = dynamicRegistry.getByValue(originalBiomeID);
         Biome nbiome = dynamicRegistry.getByValue(north);

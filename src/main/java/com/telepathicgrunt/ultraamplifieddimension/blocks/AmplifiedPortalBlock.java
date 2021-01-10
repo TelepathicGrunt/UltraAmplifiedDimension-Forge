@@ -86,7 +86,7 @@ public class AmplifiedPortalBlock extends Block
 
 			// Player is leaving Ultra Amplified dimension
 			if (playerEntity.world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY)) {
-				if (UltraAmplifiedDimension.UADimensionConfig.forceExitToOverworld.get())
+				if (UltraAmplifiedDimension.UADConfig.forceExitToOverworld.get())
 				{
 					// Go to Overworld directly because of config option.
 					destinationKey = World.OVERWORLD;
@@ -196,7 +196,7 @@ public class AmplifiedPortalBlock extends Block
 				}
 				else {
 					// Check for null which would be impressive if it occurs
-					if (cap.getNonUAPos() == null || UltraAmplifiedDimension.UADimensionConfig.forceExitToOverworld.get())
+					if (cap.getNonUAPos() == null || UltraAmplifiedDimension.UADConfig.forceExitToOverworld.get())
 					{
 						// Set player at world spawn then with Amplified Portal at feet
 						// The portal will try to not replace any block and be at the next air block above non-air blocks.
@@ -224,6 +224,8 @@ public class AmplifiedPortalBlock extends Block
 			}
 
 			UADWorldSavedData.get((ServerWorld) world).addPlayer(playerEntity, destinationKey, playerVec3Pos, new Pair<>(yaw, pitch));
+			//particles for other players to see when a player is leaving
+			createLotsOfParticles((ServerWorld)world, playerEntity.getPositionVec(), world.rand);
 			return ActionResultType.SUCCESS;
 		}
 		
@@ -309,19 +311,21 @@ public class AmplifiedPortalBlock extends Block
 	@Deprecated
 	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving) {
-		createLotsOfParticles((ServerWorld)world, pos, world.rand);
+		createLotsOfParticles((ServerWorld)world, new Vector3d(pos.getX(), pos.getY(), pos.getZ()), world.rand);
 	}
 
-	public void createLotsOfParticles(ServerWorld world, BlockPos position, Random random) {
-		double xPos = (double) position.getX() + 0.5D;
-		double yPos = (double) position.getY() + 0.5D;
-		double zPos = (double) position.getZ() + 0.5D;
+	/**
+	 * Safe to call serverside as it sends particle packets to clients
+	 */
+	public static void createLotsOfParticles(ServerWorld world, Vector3d position, Random random) {
+		double xPos = position.getX() + 0.5D;
+		double yPos = position.getY() + 0.5D;
+		double zPos = position.getZ() + 0.5D;
 		double xOffset = (random.nextFloat() - 0.4D) * 0.8D;
 		double zOffset = (random.nextFloat() - 0.4D) * 0.8D;
 
 		world.spawnParticle(ParticleTypes.FLAME, xPos, yPos, zPos, 50, xOffset, 0, zOffset, random.nextFloat() * 0.1D + 0.05D);
 	}
-
 
 	/**
 	 * more frequent particles than normal EndPortal block

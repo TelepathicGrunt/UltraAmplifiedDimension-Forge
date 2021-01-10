@@ -1,33 +1,35 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.layer;
 
+import com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider.UADBiomeProvider;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;
 
 
 public class ReduceOceanNoiseAndMagnifyEndNetherLayer implements ICastleTransformer {
 
-    /*
-     * LAYER KEY FOR MYSELF:
-     * 0 = ocean region
-     * 1 = end region
-     * 2 = nether region
-     * 3 = hot region
-     * 4 = warm region
-     * 5 = cool region
-     * 6 = icy region
-     */
     public int apply(INoiseRandom context, int north, int west, int south, int east, int center) {
 
         // Reduces amount of oceans stuck inland
-        if(center == 0){
-            if(north != 0 && west != 0 && east != 0 && south != 0 && context.random(2) == 0){
+        if(center == UADBiomeProvider.REGIONS.OCEAN.ordinal()){
+            if(north != UADBiomeProvider.REGIONS.OCEAN.ordinal() &&
+                    west != UADBiomeProvider.REGIONS.OCEAN.ordinal() &&
+                    east != UADBiomeProvider.REGIONS.OCEAN.ordinal() &&
+                    south != UADBiomeProvider.REGIONS.OCEAN.ordinal() &&
+                    context.random(2) == 0)
+            {
                 return north;
             }
         }
 
         // removes end or nether touching ocean
-        else if(north == 0 || west == 0 || east == 0 || south == 0){
-            if((center == 1 && context.random(4) == 0) || (center == 2 && context.random(3) == 0)){
+        else if(north == UADBiomeProvider.REGIONS.OCEAN.ordinal() ||
+                west == UADBiomeProvider.REGIONS.OCEAN.ordinal() ||
+                east == UADBiomeProvider.REGIONS.OCEAN.ordinal() ||
+                south == UADBiomeProvider.REGIONS.OCEAN.ordinal())
+        {
+            if((center == UADBiomeProvider.REGIONS.END.ordinal()) ||
+                    (center == UADBiomeProvider.REGIONS.NETHER.ordinal()))
+            {
                 // get non-nether, non-end, non-ocean biome to use
                 int nonOcean = -1;
                 if(north > 2){
@@ -48,17 +50,27 @@ public class ReduceOceanNoiseAndMagnifyEndNetherLayer implements ICastleTransfor
                 }
                 else {
                     // return ocean instead
-                    return 0;
+                    return UADBiomeProvider.REGIONS.OCEAN.ordinal();
                 }
             }
         }
 
         // Magnify end or nether so they are larger (no neighboring oceans either and center isn't ocean now.)
-        else if (north == 1 || west == 1 || east == 1 || south == 1){
-            return 1;
+        else if ((north == UADBiomeProvider.REGIONS.END.ordinal() ||
+                west == UADBiomeProvider.REGIONS.END.ordinal() ||
+                east == UADBiomeProvider.REGIONS.END.ordinal() ||
+                south == UADBiomeProvider.REGIONS.END.ordinal()) &&
+                context.random(2) != 0)
+        {
+            return UADBiomeProvider.REGIONS.END.ordinal();
         }
-        else if (north == 2 || west == 2 || east == 2 || south == 2){
-            return 2;
+        else if ((north == UADBiomeProvider.REGIONS.NETHER.ordinal() ||
+                west == UADBiomeProvider.REGIONS.NETHER.ordinal() ||
+                east == UADBiomeProvider.REGIONS.NETHER.ordinal() ||
+                south == UADBiomeProvider.REGIONS.NETHER.ordinal()) &&
+                context.random(3) != 0)
+        {
+            return UADBiomeProvider.REGIONS.NETHER.ordinal();
         }
 
         return center;

@@ -146,7 +146,18 @@ public class UADBiomeProvider extends BiomeProvider {
         return new UADBiomeProvider(seed, this.dynamicRegistry, this.biomeSize, this.subBiomeRate, this.mutatedBiomeRate, this.regionManager);
     }
 
-    // TODO: use this in layers
+    /*
+     * LAYER KEY FOR MYSELF:
+     * 0 = ocean region
+     * 1 = end region
+     * 2 = nether region
+     * 3 = hot region
+     * 4 = warm region
+     * 5 = cool region
+     * 6 = icy region
+     *
+     * Do not change enum order
+     */
     public enum REGIONS {
         END,
         NETHER,

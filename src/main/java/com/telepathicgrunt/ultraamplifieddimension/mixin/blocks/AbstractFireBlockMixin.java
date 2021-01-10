@@ -20,7 +20,7 @@ public class AbstractFireBlockMixin {
 			at = @At(value = "RETURN"),
 			cancellable = true)
 	private static void allowUADNetherPortal(World world, CallbackInfoReturnable<Boolean> cir) {
-		if(!cir.getReturnValue() && world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY) && UltraAmplifiedDimension.UADimensionConfig.allowNetherPortal.get()) {
+		if(!cir.getReturnValue() && world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY) && UltraAmplifiedDimension.UADConfig.allowNetherPortal.get()) {
 			cir.setReturnValue(true);
 		}
 	}

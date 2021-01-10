@@ -24,8 +24,7 @@ public class UltraAmplifiedDimension {
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-	public static UADimensionConfigValues UADimensionConfig = null;
-	//public static UAModCompatConfigValues UAModCompatConfig = null;
+	public static UADimensionConfigValues UADConfig = null;
 
 	public UltraAmplifiedDimension() {
 
@@ -33,6 +32,8 @@ public class UltraAmplifiedDimension {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 		modEventBus.addListener(this::setup);
+
+		UADTags.tagInit();
 		UADBlocks.ITEMS.register(modEventBus);
 		UADBlocks.BLOCKS.register(modEventBus);
 		UADFeatures.FEATURES.register(modEventBus);
@@ -41,15 +42,13 @@ public class UltraAmplifiedDimension {
 		UADCarvers.WORLD_CARVERS.register(modEventBus);
 		UADSurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
 		UADTreeDecoratorTypes.TREE_DECORATOR_TYPES.register(modEventBus);
-		UADTags.tagInit();
 
 		forgeBus.addListener(EventPriority.NORMAL, UADDimension::worldTick);
 		forgeBus.addListener(EventPriority.NORMAL, AmplifiedPortalCreation::PortalCreationRightClick);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
 
 		//generates config
-		UADimensionConfig = ConfigHelper.register(ModConfig.Type.SERVER, UADimensionConfigValues::new, "ultra_amplified_dimension-dimension.toml");
-		//UAModCompatConfig = ConfigHelper.register(ModConfig.Type.SERVER, UAModCompatConfigValues::new, "ultra_amplified_dimension-mod_compat.toml");
+		UADConfig = ConfigHelper.register(ModConfig.Type.SERVER, UADimensionConfigValues::new, "ultra_amplified_dimension.toml");
 	}
 
 	public void setup(final FMLCommonSetupEvent event)

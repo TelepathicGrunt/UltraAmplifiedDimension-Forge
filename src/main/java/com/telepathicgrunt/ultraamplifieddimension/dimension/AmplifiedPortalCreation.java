@@ -1,35 +1,39 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension;
 
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADTags;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.AmplifiedPortalFrame;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.properties.SlabType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * Handles creating the Amplified Portal block and holds the code to make the portal frame too.
  */
 public class AmplifiedPortalCreation {
-    private static final ResourceLocation PORTAL_ITEMS_TAG = new ResourceLocation(UltraAmplifiedDimension.MODID, "portal_activation_items");
-
     public static void PortalCreationRightClick(PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();
         Entity entity = event.getEntity();
 
-        if (!world.isRemote() && !entity.isCrouching()) {
-            if (event.getItemStack().getItem().getTags().contains(PORTAL_ITEMS_TAG)) {
-                trySpawnPortal(world, event.getPos());
+        if (!world.isRemote() && entity instanceof PlayerEntity && !entity.isCrouching()) {
+            PlayerEntity player = ((PlayerEntity)entity);
+
+            if (event.getItemStack().getItem().isIn(UADTags.PORTAL_ACTIVATION_ITEMS)) {
+                if(trySpawnPortal(world, event.getPos())){
+                    player.swing(player.getActiveHand(), true);
+                    event.setResult(Event.Result.DENY);
+                }
             }
         }
     }
@@ -39,9 +43,6 @@ public class AmplifiedPortalCreation {
     // Portal creation and validation check
 
     private static final Block POLISHED_DIORITE = Blocks.POLISHED_DIORITE;
-    private static final ResourceLocation PORTAL_CORNER_TAG = new ResourceLocation(UltraAmplifiedDimension.MODID, "portal_corner_blocks");
-    private static final ResourceLocation PORTAL_NON_CORNER_TAG = new ResourceLocation(UltraAmplifiedDimension.MODID, "portal_non_corner_blocks");
-
 
     public static boolean checkForGeneratedPortal(IWorld worldUA) {
         BlockPos pos = new BlockPos(8, worldUA.func_234938_ad_(), 8);
@@ -81,7 +82,7 @@ public class AmplifiedPortalCreation {
             for (int z = -1; z <= 1; z++) {
                 // Floor corners
                 if (Math.abs(x * z) == 1) {
-                    if (!world.getBlockState(pos.add(x, -1, z)).getBlock().getTags().contains(PORTAL_CORNER_TAG)) {
+                    if (!world.getBlockState(pos.add(x, -1, z)).isIn(UADTags.PORTAL_CORNER_BLOCKS)) {
                         return false;
                     }
                 }
@@ -89,7 +90,7 @@ public class AmplifiedPortalCreation {
                 // Plus shape on floor
                 else {
                     BlockState currentFloor = world.getBlockState(pos.add(x, -1, z));
-                    if (!(currentFloor.getBlock().getTags().contains(PORTAL_NON_CORNER_TAG) &&
+                    if (!(currentFloor.isIn(UADTags.PORTAL_NON_CORNER_BLOCKS) &&
                         (!currentFloor.hasProperty(SlabBlock.TYPE) || currentFloor.get(SlabBlock.TYPE) == SlabType.BOTTOM)))
                     {
                         return false;
@@ -108,14 +109,14 @@ public class AmplifiedPortalCreation {
             for (int z = -1; z <= 1; z++) {
                 // Top corners
                 if (Math.abs(x * z) == 1) {
-                    if (!world.getBlockState(pos.add(x, 1, z)).getBlock().getTags().contains(PORTAL_CORNER_TAG)) {
+                    if (!world.getBlockState(pos.add(x, 1, z)).isIn(UADTags.PORTAL_CORNER_BLOCKS)) {
                         return false;
                     }
                 }
                 // Plus shape on ceiling
                 else {
                     BlockState currentCeiling = world.getBlockState(pos.add(x, 1, z));
-                    if (!(currentCeiling.getBlock().getTags().contains(PORTAL_NON_CORNER_TAG) &&
+                    if (!(currentCeiling.isIn(UADTags.PORTAL_NON_CORNER_BLOCKS) &&
                         (!currentCeiling.hasProperty(SlabBlock.TYPE) || currentCeiling.get(SlabBlock.TYPE) == SlabType.TOP)))
                     {
                         return false;
@@ -127,11 +128,12 @@ public class AmplifiedPortalCreation {
         return true;
     }
 
-    public static void trySpawnPortal(IWorld world, BlockPos pos) {
+    public static boolean trySpawnPortal(IWorld world, BlockPos pos) {
         boolean canMakePortal = isValid(world, pos);
         if (canMakePortal) {
             //place portal at pos in the portal frame.
             world.setBlockState(pos, UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState(), 18);
         }
+        return canMakePortal;
     }
 }
