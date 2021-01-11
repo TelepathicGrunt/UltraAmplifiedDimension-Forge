@@ -77,7 +77,7 @@ public class UADStructures {
     public static void setupStructures() {
         setupMapSpacingAndLand(SUN_SHRINE.get(), true);
         setupMapSpacingAndLand(STONEHENGE.get(), true);
-        setupMapSpacingAndLand(ICE_SPIKE_TEMPLE.get(), true);
+        setupMapSpacingAndLand(ICE_SPIKE_TEMPLE.get(), false);
         setupMapSpacingAndLand(MUSHROOM_TEMPLE.get(), false);
     }
 
