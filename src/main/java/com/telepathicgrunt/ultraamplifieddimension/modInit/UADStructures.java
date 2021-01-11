@@ -50,7 +50,7 @@ public class UADStructures {
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "ice_spike_temple/body_start"),
                     10,
                     -7,
-                    7,
+                    0,
                     1
             )
     ));

@@ -56,7 +56,7 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
             }
         }
 
-        // break early for shore biomes
+        // break early for shore biomes so they are always placed
         if(newBiome != null){
             return dynamicRegistry.getId(newBiome);
         }
@@ -80,11 +80,18 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
 
         // adds border biome if on border (shrinks current biome)
         if(nbiome.getCategory() != currentBiome.getCategory() ||
-            wbiome.getCategory() != currentBiome.getCategory() ||
-            ebiome.getCategory() != currentBiome.getCategory() ||
-            sbiome.getCategory() != currentBiome.getCategory())
+                wbiome.getCategory() != currentBiome.getCategory() ||
+                ebiome.getCategory() != currentBiome.getCategory() ||
+                sbiome.getCategory() != currentBiome.getCategory())
         {
             newBiome = regionManager.getBorder(currentBiome);
+
+            if(mutatedNoise < mutatedThreshold) {
+                Biome mutatedBorderBiome = regionManager.getMutatedBorderBiome(currentBiome);
+                if (mutatedBorderBiome != null) {
+                    return dynamicRegistry.getId(mutatedBorderBiome);
+                }
+            }
         }
 
         // There's no sub border so we can do else if here safely
@@ -99,19 +106,12 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
                 }
             }
         }
-
-        // Only main biome and border biome will reach here.
-        if(mutatedNoise < mutatedThreshold){
-            if(newBiome == null){
-                newBiome = regionManager.getMutated(currentBiome);
-            }
-            else{
-                // This is only reached if border biome was set
-                newBiome = regionManager.getMutatedBorderBiome(currentBiome);
-            }
+        // Only if no shore, sub, or border biome was set.
+        else if(mutatedNoise < mutatedThreshold){
+            newBiome = regionManager.getMutated(currentBiome);
         }
 
-        // Return the new biome or old one if no new one was set.
+        // Return the non-mutated border, non-mutated sub or mutated biome or the old main one if no new biome was set.
         if(newBiome != null){
             return dynamicRegistry.getId(newBiome);
         }
