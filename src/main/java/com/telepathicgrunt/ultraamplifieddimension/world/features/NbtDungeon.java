@@ -243,9 +243,9 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
         TemplateInvoker structureAccessor = ((TemplateInvoker) structure);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-        if (!structureAccessor.getBlocks().isEmpty()) {
-            List<Template.BlockInfo> list = placementIn.func_237132_a_(structureAccessor.getBlocks(), pos).func_237157_a_();
-            if ((!list.isEmpty() || !placementIn.getIgnoreEntities() && !structureAccessor.getEntities().isEmpty()) && structureAccessor.getSize().getX() >= 1 && structureAccessor.getSize().getY() >= 1 && structureAccessor.getSize().getZ() >= 1) {
+        if (!structureAccessor.uad_getBlocks().isEmpty()) {
+            List<Template.BlockInfo> list = placementIn.func_237132_a_(structureAccessor.uad_getBlocks(), pos).func_237157_a_();
+            if ((!list.isEmpty() || !placementIn.getIgnoreEntities() && !structureAccessor.uad_getEntities().isEmpty()) && structureAccessor.uad_getSize().getX() >= 1 && structureAccessor.uad_getSize().getY() >= 1 && structureAccessor.uad_getSize().getZ() >= 1) {
                 MutableBoundingBox mutableboundingbox = placementIn.getBoundingBox();
                 List<BlockPos> list1 = Lists.newArrayListWithCapacity(placementIn.func_204763_l() ? list.size() : 0);
                 List<Pair<BlockPos, CompoundNBT>> list2 = Lists.newArrayListWithCapacity(list.size());
@@ -338,7 +338,7 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
                 }
 
                 if (!placementIn.getIgnoreEntities()) {
-                    structureAccessor.invokeSpawnEntities(world, pos, placementIn);
+                    structureAccessor.uad_invokeSpawnEntities(world, pos, placementIn);
                 }
             }
         }

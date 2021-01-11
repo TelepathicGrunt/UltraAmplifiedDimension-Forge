@@ -25,7 +25,7 @@ public class UltraAmplifiedDimensionClient {
 	{
 		event.enqueueWork(() ->
 		{
-			SkyPropertiesAccessor.getfield_239208_a_().put(new ResourceLocation(UltraAmplifiedDimension.MODID, "sky_property"), new UADSkyProperty());
+			SkyPropertiesAccessor.uad_getfield_239208_a_().put(new ResourceLocation(UltraAmplifiedDimension.MODID, "sky_property"), new UADSkyProperty());
 
 			RenderTypeLookup.setRenderLayer(UADBlocks.GLOWSTONE_ORE.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(UADBlocks.GLOWGRASS_BLOCK.get(), RenderType.getTranslucent());

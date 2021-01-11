@@ -27,7 +27,7 @@ public abstract class OceanRuinPiecesPieceMixin {
         if (chunkGenerator instanceof UADChunkGenerator) {
             if(i > 100 && random.nextFloat() > 0.25f){
                 OceanRuinPieces.Piece piece = ((OceanRuinPieces.Piece)(Object)this);
-                return OceanStructurePiecesUtils.getNewLedgeHeight(world, chunkGenerator, random, ((TemplateStructurePieceAccessor)piece).getTemplate(), ((OceanRuinPiecesPieceAccessor)piece).getRotation(), ((TemplateStructurePieceAccessor)piece).getTemplatePosition());
+                return OceanStructurePiecesUtils.getNewLedgeHeight(world, chunkGenerator, random, ((TemplateStructurePieceAccessor)piece).uad_getTemplate(), ((OceanRuinPiecesPieceAccessor)piece).uad_getRotation(), ((TemplateStructurePieceAccessor)piece).uad_getTemplatePosition());
             }
             return i;
         }

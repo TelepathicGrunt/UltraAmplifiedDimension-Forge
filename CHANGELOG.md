@@ -27,6 +27,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ---------------------------------------
 # | Ultra Amplified Dimension changelog |
 
+## (V.9.0.2 Changes) (1.16.4 Minecraft)
+
+##### Mixins:
+
+-Prefixed all my accessor and invoker mixins due to this bug in mixins that causes a crash for same named mixins.
+ https://github.com/SpongePowered/Mixin/issues/430
+
+
 ## (V.9.0.1 Changes) (1.16.4 Minecraft)
 
 ##### MAJOR:

@@ -14,7 +14,7 @@ public class MineshaftPiecesUtils {
     // called in structures/MineshaftPiecesMixin
     public static void generateFloorRoom(ISeedReader world, MineshaftPieces.Room room, MutableBoundingBox mutableBoundingBox){
         MutableBoundingBox box = room.getBoundingBox();
-        ((StructurePieceAccessor)room).callFillWithBlocks(world, mutableBoundingBox, box.minX, box.minY, box.minZ, box.maxX, box.minY, box.maxZ, Blocks.COARSE_DIRT.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
+        ((StructurePieceAccessor)room).uad_callFillWithBlocks(world, mutableBoundingBox, box.minX, box.minY, box.minZ, box.maxX, box.minY, box.maxZ, Blocks.COARSE_DIRT.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
     }
 
     // called in structures/MineshaftPiecesMixin
@@ -29,15 +29,15 @@ public class MineshaftPiecesUtils {
                 mutableBoundingBox.maxZ));
 
         // floor
-        ((StructurePieceAccessor)room).callFillWithBlocks(world, mutableBoundingBox, box.minX, box.minY, box.minZ, box.maxX + 8, box.minY, box.maxZ, Blocks.COARSE_DIRT.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
-        ((StructurePieceAccessor)room).callFillWithBlocks(world, mutableBoundingBox, box.minX + 3, box.minY + 1, box.minZ + 3, box.maxX - 1, box.minY + 4, box.maxZ - 1, Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
+        ((StructurePieceAccessor)room).uad_callFillWithBlocks(world, mutableBoundingBox, box.minX, box.minY, box.minZ, box.maxX + 8, box.minY, box.maxZ, Blocks.COARSE_DIRT.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
+        ((StructurePieceAccessor)room).uad_callFillWithBlocks(world, mutableBoundingBox, box.minX + 3, box.minY + 1, box.minZ + 3, box.maxX - 1, box.minY + 4, box.maxZ - 1, Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
 
-        for (MutableBoundingBox MutableBoundingBox : ((MineshaftRoomAccessor)room).getConnectedRooms()) {
-            ((StructurePieceAccessor)room).callFillWithBlocks(world, mutableBoundingBox, MutableBoundingBox.minX, MutableBoundingBox.maxY - 2, MutableBoundingBox.minZ, MutableBoundingBox.maxX, MutableBoundingBox.maxY, MutableBoundingBox.maxZ, Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
+        for (MutableBoundingBox MutableBoundingBox : ((MineshaftRoomAccessor)room).uad_getConnectedRooms()) {
+            ((StructurePieceAccessor)room).uad_callFillWithBlocks(world, mutableBoundingBox, MutableBoundingBox.minX, MutableBoundingBox.maxY - 2, MutableBoundingBox.minZ, MutableBoundingBox.maxX, MutableBoundingBox.maxY, MutableBoundingBox.maxZ, Blocks.CAVE_AIR.getDefaultState(), Blocks.CAVE_AIR.getDefaultState(), false);
         }
 
         // wall
-        ((StructurePieceAccessor)room).callRandomlyRareFillWithBlocks(world, mutableBoundingBox, box.minX + 3, box.minY + 4, box.minZ + 3, box.maxX - 3, box.maxY, box.maxZ - 3, Blocks.CAVE_AIR.getDefaultState(), false);
+        ((StructurePieceAccessor)room).uad_callRandomlyRareFillWithBlocks(world, mutableBoundingBox, box.minX + 3, box.minY + 4, box.minZ + 3, box.maxX - 3, box.maxY, box.maxZ - 3, Blocks.CAVE_AIR.getDefaultState(), false);
         MineshaftPiecesUtils.updateLiquidBlocks(room, world, box, box.minX - 1, box.minY + 4, box.minZ - 1, box.maxX + 1, box.maxY, box.maxZ + 1);
     }
 
@@ -58,10 +58,10 @@ public class MineshaftPiecesUtils {
 
                 for (int z = minZ; z <= maxZ; ++z) {
                     float zModifier = (z - f4) / (f2 * 0.5F);
-                    if (!((StructurePieceAccessor) room).callGetBlockStateFromPos(world, x, y, z, boundingboxIn).getFluidState().isEmpty()) {
+                    if (!((StructurePieceAccessor) room).uad_callGetBlockStateFromPos(world, x, y, z, boundingboxIn).getFluidState().isEmpty()) {
                         float threshold = (xModifier * xModifier) + (yModifier * yModifier) + (zModifier * zModifier);
                         if (threshold <= 1.05F) {
-                            mutable.setPos(((StructurePieceAccessor) room).callGetXWithOffset(x, z), ((StructurePieceAccessor) room).callGetYWithOffset(y), ((StructurePieceAccessor) room).callGetZWithOffset(x, z));
+                            mutable.setPos(((StructurePieceAccessor) room).uad_callGetXWithOffset(x, z), ((StructurePieceAccessor) room).uad_callGetYWithOffset(y), ((StructurePieceAccessor) room).uad_callGetZWithOffset(x, z));
 
                             FluidState ifluidstate = world.getFluidState(mutable);
                             if (!ifluidstate.isEmpty()) {

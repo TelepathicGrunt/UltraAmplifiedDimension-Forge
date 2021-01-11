@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(BiomeContainer.class)
 public interface BiomeContainerAccessor {
-    @Accessor
-    IObjectIntIterable<Biome> getBiomeRegistry();
+    @Accessor("biomeRegistry")
+    IObjectIntIterable<Biome> uad_getBiomeRegistry();
 }

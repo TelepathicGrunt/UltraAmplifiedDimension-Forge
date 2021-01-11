@@ -25,7 +25,7 @@ public abstract class FortressStructureStartMixin {
     )
     private void adjustHeight(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig config, CallbackInfo ci) {
         if(chunkGenerator instanceof UADChunkGenerator){
-            ((StructureStartAccessor)this).callFunc_214626_a(((StructureStartAccessor)this).getRand(), 88, 135);
+            ((StructureStartAccessor)this).uad_callFunc_214626_a(((StructureStartAccessor)this).uad_getRand(), 88, 135);
         }
     }
 }

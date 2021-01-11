@@ -13,18 +13,9 @@ import java.util.Random;
 
 @Mixin(StructureStart.class)
 public interface StructureStartAccessor {
-    @Invoker
-    void callRecalculateStructureSize();
+    @Invoker("func_214626_a")
+    void uad_callFunc_214626_a(Random p_214626_1_, int p_214626_2_, int p_214626_3_);
 
-    @Invoker
-    void callFunc_214626_a(Random p_214626_1_, int p_214626_2_, int p_214626_3_);
-
-    @Accessor
-    SharedSeedRandom getRand();
-
-    @Accessor
-    MutableBoundingBox getBounds();
-
-    @Accessor
-    List<StructurePiece> getComponents();
+    @Accessor("rand")
+    SharedSeedRandom uad_getRand();
 }

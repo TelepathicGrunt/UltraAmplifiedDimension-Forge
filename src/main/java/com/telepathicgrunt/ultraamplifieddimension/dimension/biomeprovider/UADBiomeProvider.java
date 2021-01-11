@@ -109,7 +109,7 @@ public class UADBiomeProvider extends BiomeProvider {
     @Nonnull
     @Override
     public Biome getNoiseBiome(int x, int y, int z) {
-        int biomeID = ((LayerAccessor)this.biomeSampler).getSampler().getValue(x, z);
+        int biomeID = ((LayerAccessor)this.biomeSampler).uad_getSampler().getValue(x, z);
         Biome biome = this.dynamicRegistry.getByValue(biomeID);
 
         // If unknown biome, try a different attempt to get the biome.

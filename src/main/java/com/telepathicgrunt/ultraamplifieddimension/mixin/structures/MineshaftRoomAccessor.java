@@ -9,6 +9,6 @@ import java.util.List;
 
 @Mixin(MineshaftPieces.Room.class)
 public interface MineshaftRoomAccessor {
-    @Accessor
-    List<MutableBoundingBox> getConnectedRooms();
+    @Accessor("connectedRooms")
+    List<MutableBoundingBox> uad_getConnectedRooms();
 }

@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(TemplateStructurePiece.class)
 public interface TemplateStructurePieceAccessor {
-    @Accessor
-    Template getTemplate();
+    @Accessor("template")
+    Template uad_getTemplate();
 
-    @Accessor
-    BlockPos getTemplatePosition();
+    @Accessor("templatePosition")
+    BlockPos uad_getTemplatePosition();
 
-    @Accessor
-    void setTemplatePosition(BlockPos blockPos);
+    @Accessor("templatePosition")
+    void uad_setTemplatePosition(BlockPos blockPos);
 }

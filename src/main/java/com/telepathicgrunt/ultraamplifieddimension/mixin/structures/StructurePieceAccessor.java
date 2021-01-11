@@ -10,24 +10,24 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(StructurePiece.class)
 public interface StructurePieceAccessor {
-    @Invoker
-    BlockState callGetBlockStateFromPos(IBlockReader worldIn, int x, int y, int z, MutableBoundingBox boundingboxIn);
+    @Invoker("getBlockStateFromPos")
+    BlockState uad_callGetBlockStateFromPos(IBlockReader worldIn, int x, int y, int z, MutableBoundingBox boundingboxIn);
 
-    @Invoker
-    int callGetXWithOffset(int x, int z);
+    @Invoker("getXWithOffset")
+    int uad_callGetXWithOffset(int x, int z);
 
-    @Invoker
-    int callGetYWithOffset(int y);
+    @Invoker("getYWithOffset")
+    int uad_callGetYWithOffset(int y);
 
-    @Invoker
-    int callGetZWithOffset(int x, int z);
+    @Invoker("getZWithOffset")
+    int uad_callGetZWithOffset(int x, int z);
 
-    @Invoker
-    void callRandomlyRareFillWithBlocks(ISeedReader worldIn, MutableBoundingBox boundingboxIn, int minX, int minY, int minZ, int maxX, int maxY, int maxZ, BlockState blockstateIn, boolean excludeAir);
+    @Invoker("randomlyRareFillWithBlocks")
+    void uad_callRandomlyRareFillWithBlocks(ISeedReader worldIn, MutableBoundingBox boundingboxIn, int minX, int minY, int minZ, int maxX, int maxY, int maxZ, BlockState blockstateIn, boolean excludeAir);
 
-    @Invoker
-    void callFillWithBlocks(ISeedReader worldIn, MutableBoundingBox boundingboxIn, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, BlockState boundaryBlockState, BlockState insideBlockState, boolean existingOnly);
+    @Invoker("fillWithBlocks")
+    void uad_callFillWithBlocks(ISeedReader worldIn, MutableBoundingBox boundingboxIn, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, BlockState boundaryBlockState, BlockState insideBlockState, boolean existingOnly);
 
-    @Invoker
-    void callSetBlockState(ISeedReader worldIn, BlockState blockstateIn, int x, int y, int z, MutableBoundingBox boundingboxIn);
+    @Invoker("setBlockState")
+    void uad_callSetBlockState(ISeedReader worldIn, BlockState blockstateIn, int x, int y, int z, MutableBoundingBox boundingboxIn);
 }

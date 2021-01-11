@@ -174,7 +174,7 @@ public class ColumnRamp extends Feature<ColumnConfig> {
                     BlockState block = cachedChunk.getBlockState(blockposMutable);
                     if (!block.isIn(BlockTags.LEAVES) && !block.isIn(BlockTags.LOGS) && !irreplacableBlocks.contains(block.getBlock()) && xzDiffSquaredStretched <= circleBounds) {
                         if (blockposMutable.getY() < chunkGenerator.getSeaLevel() && chunkGenerator instanceof NoiseChunkGenerator) {
-                            cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor) chunkGenerator).getDefaultFluid(), false);
+                            cachedChunk.setBlockState(blockposMutable, ((NoiseChunkGeneratorAccessor) chunkGenerator).uad_getDefaultFluid(), false);
                         }
                         else {
 

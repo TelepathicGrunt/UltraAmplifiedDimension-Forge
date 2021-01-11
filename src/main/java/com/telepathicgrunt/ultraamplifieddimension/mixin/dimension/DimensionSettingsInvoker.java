@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface DimensionSettingsInvoker {
 
     @Invoker("<init>")
-    static DimensionSettings invokeinit(DimensionStructuresSettings structures, NoiseSettings noise, BlockState defaultBlock, BlockState defaultFluid, int p_i231905_5_, int p_i231905_6_, int p_i231905_7_, boolean p_i231905_8_) {
+    static DimensionSettings uad_invokeinit(DimensionStructuresSettings structures, NoiseSettings noise, BlockState defaultBlock, BlockState defaultFluid, int p_i231905_5_, int p_i231905_6_, int p_i231905_7_, boolean p_i231905_8_) {
         throw new UnsupportedOperationException();
     }
 
     @Invoker("func_236120_h_")
-    boolean invokefunc_236120_h_();
+    boolean uad_invokefunc_236120_h_();
 }

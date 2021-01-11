@@ -56,9 +56,9 @@ public class UnderwaterCaveCarver extends CaveWorldCarver
 
 	@Override
 	protected boolean carveBlock(IChunk chunk, Function<BlockPos, Biome> biomePos, BitSet carvingMask, Random rand, BlockPos.Mutable p_230358_5_, BlockPos.Mutable p_230358_6_, BlockPos.Mutable p_230358_7_, int p_230358_8_, int p_230358_9_, int p_230358_10_, int posX, int posZ, int p_230358_13_, int posY, int p_230358_15_, MutableBoolean isSurface) {
-		IObjectIntIterable<Biome> reg = chunk.getBiomes() != null ? ((BiomeContainerAccessor)chunk.getBiomes()).getBiomeRegistry() : null;
+		IObjectIntIterable<Biome> reg = chunk.getBiomes() != null ? ((BiomeContainerAccessor)chunk.getBiomes()).uad_getBiomeRegistry() : null;
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
-			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)chunk.getBiomes()).getBiomeRegistry();
+			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)chunk.getBiomes()).uad_getBiomeRegistry();
 		}
 
 		return func_222728_a(biomeRegistry, biomePos, chunk, carvingMask, rand, p_230358_5_, p_230358_8_, p_230358_9_, p_230358_10_, posX, posZ, p_230358_13_, posY, p_230358_15_, this.carvableBlocks);

@@ -14,14 +14,14 @@ import java.util.List;
 public interface TemplateInvoker {
 
     @Accessor("blocks")
-    List<Template.Palette> getBlocks();
+    List<Template.Palette> uad_getBlocks();
 
     @Accessor("entities")
-    List<Template.EntityInfo> getEntities();
+    List<Template.EntityInfo> uad_getEntities();
 
     @Accessor("size")
-    BlockPos getSize();
+    BlockPos uad_getSize();
 
     @Invoker("addEntitiesToWorld")
-    void invokeSpawnEntities(IServerWorld serverIWorld, BlockPos pos, PlacementSettings placementIn);
+    void uad_invokeSpawnEntities(IServerWorld serverIWorld, BlockPos pos, PlacementSettings placementIn);
 }

@@ -44,9 +44,9 @@ public class RavineCarver extends WorldCarver<RavineConfig>
 
 	@Override
 	public boolean carveRegion(IChunk region, Function<BlockPos, Biome> biomeBlockPos, Random random, int seaLevel, int chunkX, int chunkZ, int originalX, int originalZ, BitSet mask, RavineConfig config) {
-		IObjectIntIterable<Biome> reg = region.getBiomes() != null ? ((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry() : null;
+		IObjectIntIterable<Biome> reg = region.getBiomes() != null ? ((BiomeContainerAccessor)region.getBiomes()).uad_getBiomeRegistry() : null;
 		if(reg instanceof SimpleRegistry && reg != biomeRegistry){
-			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).getBiomeRegistry();
+			biomeRegistry = (SimpleRegistry<Biome>)((BiomeContainerAccessor)region.getBiomes()).uad_getBiomeRegistry();
 		}
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;

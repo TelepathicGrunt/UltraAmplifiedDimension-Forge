@@ -9,13 +9,13 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SpreadableSnowyDirtBlock.class)
 public interface SpreadableSnowyDirtBlockAccessor {
-    @Invoker
-    static boolean callIsSnowyAndNotUnderwater(BlockState state, IWorldReader worldReader, BlockPos pos) {
+    @Invoker("isSnowyAndNotUnderwater")
+    static boolean uad_callIsSnowyAndNotUnderwater(BlockState state, IWorldReader worldReader, BlockPos pos) {
         throw new UnsupportedOperationException();
     }
 
-    @Invoker
-    static boolean callIsSnowyConditions(BlockState state, IWorldReader worldReader, BlockPos pos) {
+    @Invoker("isSnowyConditions")
+    static boolean uad_callIsSnowyConditions(BlockState state, IWorldReader worldReader, BlockPos pos) {
         throw new UnsupportedOperationException();
     }
 }
