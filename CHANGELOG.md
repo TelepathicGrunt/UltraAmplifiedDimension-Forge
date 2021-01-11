@@ -31,7 +31,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ##### MAJOR:
 
--PORTED FROM 1.15.4 to 1.16.4!!!!
+-PORTED FROM 1.15.2 to 1.16.4!!!!
 
 
 ## (V.8.0.4 Changes) (1.15.2 Minecraft)
