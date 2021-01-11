@@ -93,7 +93,7 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
 
             if(mutatedNoise < mutatedThreshold) {
                 // return early as there is no other biome modification we can do after this point
-                Biome mutatedSubBiome = regionManager.getMutatedSubBiome(newBiome);
+                Biome mutatedSubBiome = regionManager.getMutatedSubBiome(currentBiome);
                 if(mutatedSubBiome != null){
                     return dynamicRegistry.getId(mutatedSubBiome);
                 }
@@ -107,7 +107,7 @@ public class ShoreEdgeHillsAndMutatationsBiomeLayer implements CastleWithPositio
             }
             else{
                 // This is only reached if border biome was set
-                newBiome = regionManager.getMutatedBorderBiome(newBiome);
+                newBiome = regionManager.getMutatedBorderBiome(currentBiome);
             }
         }
 

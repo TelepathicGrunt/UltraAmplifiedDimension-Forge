@@ -48,7 +48,7 @@ public class MainBiomeLayer implements CastleWithPositionTransformer {
                     0.0D,
                     0.0D,
                     0.0D)
-                    * 0.6D) + 0.5D; // -0.1 to 1.1
+                    * 0.7D) + 0.55D; // -0.1 to 1.1
 
             selectedBiomeGroup = regionManager.getWeightedBiomeGroupByTemperature(regionManager.getOceanList(), baseRegionNoiseCopy);
         }
