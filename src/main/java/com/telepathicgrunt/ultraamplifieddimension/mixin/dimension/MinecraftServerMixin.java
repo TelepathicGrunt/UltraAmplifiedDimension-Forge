@@ -1,13 +1,10 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.dimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.utils.BiomeSetsHelper;
-import com.telepathicgrunt.ultraamplifieddimension.utils.WorldSeedHolder;
 import com.telepathicgrunt.ultraamplifieddimension.world.carver.CaveCavityCarver;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.listener.IChunkStatusListener;
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
 import net.minecraft.world.storage.IServerWorldInfo;

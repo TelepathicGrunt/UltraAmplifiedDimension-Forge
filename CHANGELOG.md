@@ -27,6 +27,14 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ---------------------------------------
 # | Ultra Amplified Dimension changelog |
 
+
+## (V.9.0.3 Changes) (1.16.4 Minecraft)
+
+##### Dimension:
+
+-Switched to a safer mixin to get the world's seed if no seed is specified in the JSON.
+
+
 ## (V.9.0.2 Changes) (1.16.4 Minecraft)
 
 ##### Mixins:
