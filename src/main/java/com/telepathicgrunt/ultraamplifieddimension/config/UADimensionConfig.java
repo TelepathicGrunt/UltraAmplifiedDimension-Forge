@@ -3,10 +3,7 @@ package com.telepathicgrunt.ultraamplifieddimension.config;
 import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
 import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper.ConfigValueListener;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 
-
-@Mod.EventBusSubscriber
 public class UADimensionConfig
 {
 	public static class UADimensionConfigValues
