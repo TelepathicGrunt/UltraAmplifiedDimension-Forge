@@ -7,8 +7,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -36,7 +34,7 @@ public class UADBlocks {
     //creative tab to hold our block items
     public static final ItemGroup ULTRA_AMPLIFIED_TAB = new ItemGroup(ItemGroup.GROUPS.length, UltraAmplifiedDimension.MODID + ".main_tab") {
         @Override
-        @OnlyIn(Dist.CLIENT)
+        // CLIENT-SIDED
         public ItemStack createIcon() {
             return new ItemStack(AMPLIFIED_PORTAL.get());
         }

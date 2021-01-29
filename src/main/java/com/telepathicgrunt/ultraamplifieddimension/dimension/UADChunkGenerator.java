@@ -34,8 +34,6 @@ import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.NoiseSettings;
 import net.minecraft.world.gen.settings.ScalingSettings;
 import net.minecraft.world.gen.settings.SlideSettings;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -129,7 +127,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    // CLIENT-SIDED
     public ChunkGenerator func_230349_a_(long seed) {
         return new UADChunkGenerator(this.biomeProvider.getBiomeProvider(seed), seed, this.field_236080_h_.get());
     }

@@ -6,12 +6,10 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.world.DimensionRenderInfo;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
+// CLIENT-SIDED
 public class UADSkyProperty extends DimensionRenderInfo {
     public UADSkyProperty() {
         super(UltraAmplifiedDimension.UADConfig.cloudHeight.get(), true, FogType.NORMAL, false, false);

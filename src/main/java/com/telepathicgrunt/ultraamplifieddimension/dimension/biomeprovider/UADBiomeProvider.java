@@ -19,8 +19,6 @@ import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.ZoomLayer;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -141,7 +139,7 @@ public class UADBiomeProvider extends BiomeProvider {
 
     @Nonnull
     @Override
-    @OnlyIn(Dist.CLIENT)
+    // CLIENT-SIDED
     public BiomeProvider getBiomeProvider(long seed) {
         return new UADBiomeProvider(seed, this.dynamicRegistry, this.biomeSize, this.subBiomeRate, this.mutatedBiomeRate, this.regionManager);
     }

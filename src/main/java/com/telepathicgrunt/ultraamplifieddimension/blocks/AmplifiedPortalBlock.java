@@ -30,8 +30,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
@@ -332,7 +330,7 @@ public class AmplifiedPortalBlock extends Block
 	 * more frequent particles than normal EndPortal block
 	 */
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	// CLIENT-SIDED
 	public void animateTick(BlockState stateIn, World world, BlockPos pos, Random rand) {
 		double d0 = pos.getX() + (rand.nextFloat() * 3 - 1);
 		double d1 = pos.getY() + (rand.nextFloat() * 3 - 1);
