@@ -12,9 +12,5 @@ import java.util.function.Supplier;
 public class UADTreeDecoratorTypes {
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR_TYPES = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES, UltraAmplifiedDimension.MODID);
 
-    public static final RegistryObject<TreeDecoratorType<DiskGroundDecorator>> DISK_GROUND_DECORATOR = createTreeDecoratorType("disk_ground_decorator", () -> new TreeDecoratorType<>(DiskGroundDecorator.CODEC));
-
-    public static <B extends TreeDecoratorType<?>> RegistryObject<B> createTreeDecoratorType(String name, Supplier<B> type) {
-        return TREE_DECORATOR_TYPES.register(name, type);
-    }
+    public static final RegistryObject<TreeDecoratorType<DiskGroundDecorator>> DISK_GROUND_DECORATOR = TREE_DECORATOR_TYPES.register("disk_ground_decorator", () -> new TreeDecoratorType<>(DiskGroundDecorator.CODEC));
 }

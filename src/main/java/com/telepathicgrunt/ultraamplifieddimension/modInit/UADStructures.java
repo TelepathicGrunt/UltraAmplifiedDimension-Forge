@@ -22,7 +22,7 @@ public class UADStructures {
     public static Set<Structure<?>> REGISTERED_UAD_STRUCTURES = new HashSet<>();
     public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, UltraAmplifiedDimension.MODID);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> SUN_SHRINE = registerStructure("sun_shrine", () -> (
+    public static final RegistryObject<Structure<NoFeatureConfig>> SUN_SHRINE = STRUCTURES.register("sun_shrine", () -> (
             new GenericJigsawStructure(
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "sun_shrine_start"),
@@ -33,7 +33,7 @@ public class UADStructures {
             )
     ));
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> STONEHENGE = registerStructure("stonehenge", () -> (
+    public static final RegistryObject<Structure<NoFeatureConfig>> STONEHENGE = STRUCTURES.register("stonehenge", () -> (
             new GenericJigsawStructure(
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "stonehenge/center_start"),
@@ -44,7 +44,7 @@ public class UADStructures {
             )
     ));
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> ICE_SPIKE_TEMPLE = registerStructure("ice_spike_temple", () -> (
+    public static final RegistryObject<Structure<NoFeatureConfig>> ICE_SPIKE_TEMPLE = STRUCTURES.register("ice_spike_temple", () -> (
             new GenericJigsawStructure(
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "ice_spike_temple/body_start"),
@@ -55,7 +55,7 @@ public class UADStructures {
             )
     ));
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> MUSHROOM_TEMPLE = registerStructure("mushroom_temple", () -> (
+    public static final RegistryObject<Structure<NoFeatureConfig>> MUSHROOM_TEMPLE = STRUCTURES.register("mushroom_temple", () -> (
             new GenericJigsawStructure(
                     NoFeatureConfig.field_236558_a_,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "mushroom_temple/body_start"),
@@ -65,10 +65,6 @@ public class UADStructures {
                     1
             )
     ));
-
-    private static <T extends Structure<?>> RegistryObject<T> registerStructure(String name, Supplier<T> structure) {
-        return STRUCTURES.register(name, structure);
-    }
 
     /**
      * This is where we set the rarity of your structures and determine if land conforms to it.
