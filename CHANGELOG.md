@@ -31,7 +31,9 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ## (V.9.0.4 Changes) (1.16.4 Minecraft)
 
 ##### Dungeons:
--Reduced chance of Blue Ice in Snowy Dungeons.
+- Reduced chance of Blue Ice in Snowy Dungeons.
+
+- Fixed Nether Dungeons having Nether Bricks placed in mid-air due to broken processor file.
 
 
 ## (V.9.0.3 Changes) (1.16.4 Minecraft)
