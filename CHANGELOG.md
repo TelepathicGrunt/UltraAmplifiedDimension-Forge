@@ -35,6 +35,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 - Fixed Nether Dungeons having Nether Bricks placed in mid-air due to broken processor file.
 
+- Fixed ceiling of Desert Dungeons looking weird when it meets the wall.
+
+##### Misc:
+- Made my modifyConstant mixins to the surfacebuilders no longer crash if someone else also modifyConstant the same spot.
+
 
 ## (V.9.0.3 Changes) (1.16.4 Minecraft)
 
