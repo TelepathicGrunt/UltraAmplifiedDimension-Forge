@@ -40,6 +40,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ##### Misc:
 - Made my modifyConstant mixins to the surfacebuilders no longer crash if someone else also modifyConstant the same spot.
 
+- Made Swamp Cross use correct method for setting its chest loottable.
+
 
 ## (V.9.0.3 Changes) (1.16.4 Minecraft)
 

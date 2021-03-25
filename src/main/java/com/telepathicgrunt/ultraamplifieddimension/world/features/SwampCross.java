@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.loot.LootTables;
 import net.minecraft.tileentity.ChestTileEntity;
+import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -59,7 +60,7 @@ public class SwampCross extends Feature<NoFeatureConfig>
 
 			TileEntity tileentity = world.getTileEntity(blockpos$Mutable);
 			if (tileentity instanceof ChestTileEntity) {
-				((ChestTileEntity) tileentity).setLootTable(LootTables.CHESTS_SPAWN_BONUS_CHEST, rand.nextLong());
+				LockableLootTileEntity.setLootTable(world, rand, blockpos$Mutable, LootTables.CHESTS_SPAWN_BONUS_CHEST);
 			}
 		}
 
