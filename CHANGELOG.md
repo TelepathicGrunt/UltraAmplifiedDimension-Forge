@@ -37,6 +37,8 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 - Fixed ceiling of Desert Dungeons looking weird when it meets the wall.
 
+- Dungeons will now log error if fed an invalid identifier to a non-existent nbt file.
+
 ##### Misc:
 - Made my modifyConstant mixins to the surfacebuilders no longer crash if someone else also modifyConstant the same spot.
 

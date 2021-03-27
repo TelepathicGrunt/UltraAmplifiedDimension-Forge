@@ -54,7 +54,11 @@ public class NbtDungeon extends Feature<NbtDungeonConfig>{
         ResourceLocation nbtRL = GeneralUtils.getRandomEntry(config.nbtResourcelocationsAndWeights, random);
 
         TemplateManager structureManager = world.getWorld().getStructureTemplateManager();
-        Template template = structureManager.getTemplateDefaulted(nbtRL);
+        Template template = structureManager.getTemplate(nbtRL);
+        if(template == null){
+            UltraAmplifiedDimension.LOGGER.error("Identifier to the specified nbt file was not found! : {}", nbtRL);
+            return false;
+        }
         Rotation rotation = Rotation.randomRotation(random);
 
         // Rotated blockpos for the nbt's sizes to be used later. Ignore Y
