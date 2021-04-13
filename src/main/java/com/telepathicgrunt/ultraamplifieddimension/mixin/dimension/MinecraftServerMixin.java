@@ -21,7 +21,7 @@ public class MinecraftServerMixin {
 
 	@Final
 	@Shadow
-	protected DynamicRegistries.Impl field_240767_f_;
+	protected DynamicRegistries.Impl dynamicRegistries;
 
 	/**
 	 * Used for setting up everything that needs to be initialized for UA worldgen.
@@ -35,6 +35,6 @@ public class MinecraftServerMixin {
 									DimensionGeneratorSettings dimensiongeneratorsettings, boolean isDebugWorld, long seed, long hashedSeed)
 	{
 		CaveCavityCarver.setSeed(hashedSeed);
-		BiomeSetsHelper.generateBiomeSets(field_240767_f_.getRegistry(Registry.BIOME_KEY));
+		BiomeSetsHelper.generateBiomeSets(dynamicRegistries.getRegistry(Registry.BIOME_KEY));
 	}
 }

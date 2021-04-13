@@ -24,14 +24,14 @@ public class ProperKelp extends Feature<ProbabilityAndCountConfig> {
 
         BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(pos);
         IChunk chunk = world.getChunk(mutable);
-        if (chunk.getBlockState(mutable).isIn(Blocks.WATER)) {
+        if (chunk.getBlockState(mutable).matchesBlock(Blocks.WATER)) {
             BlockState kelpState = Blocks.KELP.getDefaultState();
             BlockState kelpState2 = Blocks.KELP_PLANT.getDefaultState();
             int height = 1 + rand.nextInt(10);
 
             for(int currentHeight = 0; currentHeight <= height; ++currentHeight) {
-                if (chunk.getBlockState(mutable).isIn(Blocks.WATER) &&
-                    chunk.getBlockState(mutable.up()).isIn(Blocks.WATER) &&
+                if (chunk.getBlockState(mutable).matchesBlock(Blocks.WATER) &&
+                    chunk.getBlockState(mutable.up()).matchesBlock(Blocks.WATER) &&
                     kelpState2.isValidPosition(world, mutable))
                 {
                     if (currentHeight == height) {
@@ -45,7 +45,7 @@ public class ProperKelp extends Feature<ProbabilityAndCountConfig> {
                     BlockPos blockpos1 = mutable.down();
 
                     if (kelpState.isValidPosition(world, blockpos1) &&
-                        !chunk.getBlockState(blockpos1.down()).isIn(Blocks.KELP))
+                        !chunk.getBlockState(blockpos1.down()).matchesBlock(Blocks.KELP))
                     {
                         chunk.setBlockState(blockpos1, kelpState.with(KelpTopBlock.AGE, rand.nextInt(4) + 20), false);
                         ++placedKelp;

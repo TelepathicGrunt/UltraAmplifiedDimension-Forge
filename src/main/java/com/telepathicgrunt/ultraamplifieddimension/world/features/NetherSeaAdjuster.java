@@ -73,7 +73,7 @@ public class NetherSeaAdjuster extends Feature<NoFeatureConfig> {
 
                         // Set bubble columns upward from magma blocks.
                         // If we set obsidian before, this gets skipped.
-                        if(prevBlockState.isIn(Blocks.MAGMA_BLOCK) || prevBlockState.isIn(Blocks.BUBBLE_COLUMN)){
+                        if(prevBlockState.matchesBlock(Blocks.MAGMA_BLOCK) || prevBlockState.matchesBlock(Blocks.BUBBLE_COLUMN)){
                             cachedChunk.setBlockState(blockposMutable, Blocks.BUBBLE_COLUMN.getDefaultState(), false);
                             prevBlockState = Blocks.BUBBLE_COLUMN.getDefaultState();
                             blockposMutable.move(Direction.UP);

@@ -190,7 +190,7 @@ public class NonLiquidWaterfall extends Feature<TwoBlockStateConfig> {
                                     cachedChunk.setBlockState(blockposMutable, config.state2, false);
 
                                     // Remove snow layer above
-                                    if(aboveBlockState.isIn(Blocks.SNOW)){
+                                    if(aboveBlockState.matchesBlock(Blocks.SNOW)){
                                         cachedChunk.setBlockState(blockposMutable, Blocks.AIR.getDefaultState(), false);
                                     }
                                 }

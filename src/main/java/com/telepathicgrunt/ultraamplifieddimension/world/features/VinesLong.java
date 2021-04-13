@@ -41,7 +41,7 @@ public class VinesLong extends Feature<NoFeatureConfig>
 						BlockState aboveBlockstate = chunk.getBlockState(blockposMutable.move(Direction.UP));
 						blockposMutable.move(Direction.DOWN); // Move back to original pos.
 
-						if (aboveBlockstate.isIn(Blocks.VINE)) {
+						if (aboveBlockstate.matchesBlock(Blocks.VINE)) {
 							chunk.setBlockState(blockposMutable, aboveBlockstate, false);
 							break;
 						}

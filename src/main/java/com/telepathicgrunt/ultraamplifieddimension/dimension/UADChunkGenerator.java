@@ -103,9 +103,9 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     UAD_NOISE_SETTINGS_CODEC.fieldOf("noise").forGetter(DimensionSettings::getNoise),
                     BlockState.CODEC.fieldOf("default_block").forGetter(DimensionSettings::getDefaultBlock),
                     BlockState.CODEC.fieldOf("default_fluid").forGetter(DimensionSettings::getDefaultFluid),
-                    Codec.INT.fieldOf("bedrock_roof_position").forGetter(DimensionSettings::func_236117_e_),
-                    Codec.INT.fieldOf("bedrock_floor_position").forGetter(DimensionSettings::func_236118_f_),
-                    Codec.INT.fieldOf("sea_level").forGetter(DimensionSettings::func_236119_g_),
+                    Codec.INT.fieldOf("bedrock_roof_position").forGetter(DimensionSettings::getBedrockRoofPosition),
+                    Codec.INT.fieldOf("bedrock_floor_position").forGetter(DimensionSettings::getBedrockFloorPosition),
+                    Codec.INT.fieldOf("sea_level").forGetter(DimensionSettings::getSeaLevel),
                     Codec.BOOL.fieldOf("disable_mob_generation").forGetter(dimensionSettings -> ((DimensionSettingsInvoker)(Object)dimensionSettings).uad_invokefunc_236120_h_()))
                         .apply(dimensionSettingsInstance, DimensionSettingsInvoker::uad_invokeinit));
 
@@ -134,7 +134,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
 
     public UADChunkGenerator(BiomeProvider biomeProvider, long seed, DimensionSettings dimensionSettings) {
         super(biomeProvider, seed, () -> dimensionSettings);
-        sealevel = this.field_236080_h_.get().func_236119_g_();
+        sealevel = this.field_236080_h_.get().getSeaLevel();
         landTerraformingStructures = new ArrayList<>(Structure.field_236384_t_);
         landTerraformingStructures.add(Structure.MONUMENT);
     }

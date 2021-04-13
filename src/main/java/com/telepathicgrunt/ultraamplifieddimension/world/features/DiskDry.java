@@ -23,7 +23,7 @@ public class DiskDry extends Feature<DiskDryConfig>
 	@Override
 	public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos position, DiskDryConfig config) {
 		int placedBlocks = 0;
-		int radius = config.radius.func_242259_a(random);
+		int radius = config.radius.getSpread(random);
 		if (radius > 2) {
 			radius = random.nextInt(radius - 2) + 2;
 		}
@@ -52,7 +52,7 @@ public class DiskDry extends Feature<DiskDryConfig>
 									cachedChunk.setBlockState(blockposMutable, config.state, false);
 									++placedBlocks;
 
-									if(aboveBlockState.isIn(Blocks.SNOW) && !aboveBlockState.isValidPosition(world, blockposMutable)){
+									if(aboveBlockState.matchesBlock(Blocks.SNOW) && !aboveBlockState.isValidPosition(world, blockposMutable)){
 										cachedChunk.setBlockState(blockposMutable.move(Direction.UP), Blocks.AIR.getDefaultState(), false);
 										blockposMutable.move(Direction.DOWN);
 									}

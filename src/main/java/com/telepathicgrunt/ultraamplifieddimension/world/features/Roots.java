@@ -140,7 +140,7 @@ public class Roots extends Feature<RootConfig>
 				BlockState aboveState = cachedChunk.getBlockState(blockposMutable.move(Direction.UP));
 				blockposMutable.move(Direction.DOWN); // Move back to original pos.
 
-				if (aboveState.isIn(Blocks.VINE)) {
+				if (aboveState.matchesBlock(Blocks.VINE)) {
 					cachedChunk.setBlockState(blockposMutable, aboveState, false);
 					length++;
 					continue;

@@ -51,7 +51,8 @@
                         "weight": 1
                     }
                 ],
-                "processors": "ultra_amplified_dimension:dungeons/jungle"
+                "processors": "ultra_amplified_dimension:dungeons/jungle",
+                "post_processors": "ultra_amplified_dimension:dungeons/jungle_post_process"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"
             },

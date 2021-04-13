@@ -58,7 +58,7 @@ public class LedgeSurfacePlacer extends Placement<LedgeSurfacePlacerConfig> {
                 // Also allows underside placements as well
                 if (!currentBlockState.isIn(BlockTags.LEAVES) &&
                     !currentBlockState.isIn(BlockTags.LOGS) &&
-                    !currentBlockState.isIn(Blocks.BEDROCK) &&
+                    !currentBlockState.matchesBlock(Blocks.BEDROCK) &&
                     currentBlockState.getMaterial() != Material.CACTUS &&
                     ((!config.undersideOnly && !notSolidSpace(currentBlockState) && notSolidSpace(prevBlockState)) ||
                     (config.undersideOnly && notSolidSpace(currentBlockState) && !notSolidSpace(prevBlockState))))

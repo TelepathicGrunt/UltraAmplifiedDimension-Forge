@@ -58,6 +58,7 @@ public class UltraAmplifiedDimension {
 			UADDimension.setupDimension();
 			CapabilityPlayerPosAndDim.register();
 			UADStructures.setupStructures();
+			UADProcessors.registerProcessors();
 		});
 	}
 }

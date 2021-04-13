@@ -30,7 +30,7 @@ public class ProperSeagrass extends Feature<ProbabilityAndCountConfig> {
             int y = rand.nextInt(8) - rand.nextInt(8);
             mutable.setPos(pos).move(x, y, z);
 
-            if (reader.getBlockState(mutable).isIn(Blocks.WATER)) {
+            if (reader.getBlockState(mutable).matchesBlock(Blocks.WATER)) {
 
                 boolean spawnTallGrass = rand.nextFloat() < config.probability;
                 BlockState blockstate = spawnTallGrass ? Blocks.TALL_SEAGRASS.getDefaultState() : Blocks.SEAGRASS.getDefaultState();
@@ -38,7 +38,7 @@ public class ProperSeagrass extends Feature<ProbabilityAndCountConfig> {
                 if (blockstate.isValidPosition(reader, mutable)) {
                     if (spawnTallGrass) {
                         BlockState blockstate1 = blockstate.with(TallSeaGrassBlock.HALF, DoubleBlockHalf.UPPER);
-                        if (reader.getBlockState(mutable.move(Direction.UP)).isIn(Blocks.WATER)) {
+                        if (reader.getBlockState(mutable.move(Direction.UP)).matchesBlock(Blocks.WATER)) {
                             reader.setBlockState(mutable.move(Direction.DOWN), blockstate, 2);
                             reader.setBlockState(mutable.move(Direction.UP), blockstate1, 2);
                         }

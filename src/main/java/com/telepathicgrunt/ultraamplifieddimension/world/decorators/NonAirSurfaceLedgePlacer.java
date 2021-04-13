@@ -53,7 +53,7 @@ public class NonAirSurfaceLedgePlacer extends Placement<NonAirSurfaceLedgePlacer
                 // Also allows underside placements as well
                 if (!currentBlockState.isIn(BlockTags.LEAVES) &&
                     !currentBlockState.isIn(BlockTags.LOGS) &&
-                    !currentBlockState.isIn(Blocks.BEDROCK) &&
+                    !currentBlockState.matchesBlock(Blocks.BEDROCK) &&
                     currentBlockState.getMaterial() != Material.CACTUS &&
                     !currentBlockState.isAir() &&
                     prevBlockState.isAir())

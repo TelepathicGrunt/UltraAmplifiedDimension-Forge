@@ -284,7 +284,7 @@ public class CaveCavityCarver extends WorldCarver<CaveConfig>
 										if (y < 11) {
 											currentBlockstate = Blocks.LAVA.getDefaultState();
 											if (secondaryFloorBlockstate != null) {
-												if (secondaryFloorBlockstate.isIn(Blocks.OBSIDIAN)) {
+												if (secondaryFloorBlockstate.matchesBlock(Blocks.OBSIDIAN)) {
 													currentBlockstate = Blocks.MAGMA_BLOCK.getDefaultState();
 												}
 

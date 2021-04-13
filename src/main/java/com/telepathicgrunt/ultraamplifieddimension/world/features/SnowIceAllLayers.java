@@ -38,7 +38,7 @@ public class SnowIceAllLayers extends Feature<NoFeatureConfig>
 
 			BlockState blockStateTop = cachedChunk.getBlockState(blockposMutable1);
 			BlockState blockStateBottom = cachedChunk.getBlockState(blockposMutable2);
-			if ((blockStateTop.isAir() || blockStateTop.isIn(Blocks.VINE)) && !blockStateBottom.isAir()) {
+			if ((blockStateTop.isAir() || blockStateTop.matchesBlock(Blocks.VINE)) && !blockStateBottom.isAir()) {
 
 				if (!blockStateBottom.getFluidState().isEmpty() && biome.doesWaterFreeze(world, blockposMutable2, false)) {
 					cachedChunk.setBlockState(blockposMutable2, Blocks.ICE.getDefaultState(), false);

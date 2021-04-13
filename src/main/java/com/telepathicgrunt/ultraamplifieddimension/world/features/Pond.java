@@ -105,7 +105,7 @@ public class Pond extends Feature<PondConfig> {
                             // Threshold used for the encasing in outside blockstate.
                             if(x == -8 || z== -8 || x == 7 || z == 7 || lakeVal > -0.48d || y == -4){
                                 if(pondConfig.placeOutsideStateOften){
-                                    if(aboveState.isAir() || aboveState.isIn(Blocks.SNOW)){
+                                    if(aboveState.isAir() || aboveState.matchesBlock(Blocks.SNOW)){
                                         cachedChunk.setBlockState(blockpos, pondConfig.topState, false);
                                     }
                                     else{

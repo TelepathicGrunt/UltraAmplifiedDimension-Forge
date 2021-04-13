@@ -27,7 +27,7 @@ public class ProperSeapickle extends Feature<SeaPickleConfig> {
             int y = rand.nextInt(8) - rand.nextInt(8);
             mutable.setPos(pos).move(x, y, z);
             BlockState blockstate = Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.PICKLES, rand.nextInt(config.maxPickles - (config.minPickles - 1)) + config.minPickles);
-            if (world.getBlockState(mutable).isIn(Blocks.WATER) && blockstate.isValidPosition(world, mutable)) {
+            if (world.getBlockState(mutable).matchesBlock(Blocks.WATER) && blockstate.isValidPosition(world, mutable)) {
                 world.setBlockState(mutable, blockstate, 2);
                 ++picklesPlaced;
             }

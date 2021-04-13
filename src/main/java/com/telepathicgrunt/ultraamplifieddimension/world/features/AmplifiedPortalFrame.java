@@ -18,7 +18,7 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 {
 
 	public AmplifiedPortalFrame() {
-		super(NoFeatureConfig.field_236558_a_);
+		super(NoFeatureConfig.CODEC);
 	}
 
 	//need to be made due to extending feature

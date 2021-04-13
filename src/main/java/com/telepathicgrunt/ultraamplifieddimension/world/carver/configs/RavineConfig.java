@@ -10,9 +10,9 @@ public class RavineConfig implements ICarverConfig, IFeatureConfig {
 
     public static final Codec<RavineConfig> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
             Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter((config) -> config.probability),
-            FeatureSpread.func_242254_a(0, 255, 255).fieldOf("height_placement").forGetter((config) -> config.heightPlacement),
+            FeatureSpread.createCodec(0, 255, 255).fieldOf("height_placement").forGetter((config) -> config.heightPlacement),
             Codec.INT.fieldOf("cutoff_height").forGetter((config) -> config.cutoffHeight),
-            FeatureSpread.func_242254_a(0, 255, 255).fieldOf("tallness").forGetter((config) -> config.tallness)
+            FeatureSpread.createCodec(0, 255, 255).fieldOf("tallness").forGetter((config) -> config.tallness)
     ).apply(builder, RavineConfig::new));
 
     public final float probability;

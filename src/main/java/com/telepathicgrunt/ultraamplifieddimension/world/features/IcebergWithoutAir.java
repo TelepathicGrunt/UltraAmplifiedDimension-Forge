@@ -122,7 +122,7 @@ public class IcebergWithoutAir extends Feature<BlockStateFeatureConfig> {
                 if (d0 < 0.0D) {
                     blockpos$Mutable.setPos(position).move(x, belowCenterY, z);
                     blockState = world.getBlockState(blockpos$Mutable);
-                    if (blockState.isIn(BlockTags.ICE) || blockState.isIn(Blocks.SNOW_BLOCK)) {
+                    if (blockState.isIn(BlockTags.ICE) || blockState.matchesBlock(Blocks.SNOW_BLOCK)) {
 
                         world.setBlockState(blockpos$Mutable, appropriateBlockForNeighbors(world, position), 3);
                         if (!placeWater) {
@@ -138,7 +138,7 @@ public class IcebergWithoutAir extends Feature<BlockStateFeatureConfig> {
 
     private void removeSnowLayer(IWorld world, BlockPos.Mutable mutableBlockPos)
     {
-        if (world.getBlockState(mutableBlockPos.move(Direction.UP)).isIn(Blocks.SNOW)) {
+        if (world.getBlockState(mutableBlockPos.move(Direction.UP)).matchesBlock(Blocks.SNOW)) {
             this.setBlockState(world, mutableBlockPos, appropriateBlockForNeighbors(world, mutableBlockPos.down()));
         }
         mutableBlockPos.move(Direction.DOWN);
@@ -165,7 +165,7 @@ public class IcebergWithoutAir extends Feature<BlockStateFeatureConfig> {
     {
         BlockState currentBlockState = world.getBlockState(position);
 
-        if (currentBlockState.isAir() || currentBlockState.isIn(Blocks.SNOW_BLOCK) || currentBlockState.isIn(BlockTags.ICE) || !currentBlockState.getFluidState().isEmpty()) {
+        if (currentBlockState.isAir() || currentBlockState.matchesBlock(Blocks.SNOW_BLOCK) || currentBlockState.isIn(BlockTags.ICE) || !currentBlockState.getFluidState().isEmpty()) {
             boolean flag = !flag1 || random.nextDouble() > 0.05D;
             int i = flag1 ? 3 : 2;
             if (flag2 && currentBlockState.getFluidState().isEmpty() && minHeight <= random.nextInt(Math.max(1, maxHeight / i)) + maxHeight * 0.6D && flag) {
@@ -228,7 +228,7 @@ public class IcebergWithoutAir extends Feature<BlockStateFeatureConfig> {
                 for (int y = 0; y <= height; ++y) {
                     blockpos$Mutable.setPos(position).move(x, y, z);
                     BlockState blockState = world.getBlockState(blockpos$Mutable);
-                    if (blockState.isIn(BlockTags.ICE) || blockState.isIn(Blocks.SNOW)) {
+                    if (blockState.isIn(BlockTags.ICE) || blockState.matchesBlock(Blocks.SNOW)) {
                         if (isAirBelow(world, blockpos$Mutable)) {
                             this.setBlockState(world, blockpos$Mutable, appropriateBlockForNeighbors(world, blockpos$Mutable));
                             this.setBlockState(world, blockpos$Mutable.move(Direction.UP), appropriateBlockForNeighbors(world, blockpos$Mutable));

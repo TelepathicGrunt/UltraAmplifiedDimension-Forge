@@ -51,13 +51,13 @@ public class RavineCarver extends WorldCarver<RavineConfig>
 
 		int i = (this.func_222704_c() * 2 - 1) * 16;
 		double xpos = chunkX * 16 + random.nextInt(16);
-		double height = config.heightPlacement.func_242259_a(random);
+		double height = config.heightPlacement.getSpread(random);
 		double zpos = chunkZ * 16 + random.nextInt(16);
 		float xzNoise2 = random.nextFloat() * ((float) Math.PI * 2F);
 		float xzCosNoise = (random.nextFloat() - 0.5F) / 8.0F;
 		float widthHeightBase = (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
 		int maxIteration = i - random.nextInt(i / 4);
-		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, maxIteration, config.tallness.func_242259_a(random) / 10D, mask, config);
+		this.func_202535_a(region, biomeBlockPos, random.nextLong(), originalX, originalZ, xpos, height, zpos, widthHeightBase, xzNoise2, xzCosNoise, maxIteration, config.tallness.getSpread(random) / 10D, mask, config);
 		return true;
 	}
 
@@ -174,7 +174,7 @@ public class RavineCarver extends WorldCarver<RavineConfig>
 										if (y < 11) {
 											currentBlockstate = Blocks.LAVA.getDefaultState();
 											if (secondaryFloorBlockstate != null) {
-												if (secondaryFloorBlockstate.isIn(Blocks.OBSIDIAN)) {
+												if (secondaryFloorBlockstate.matchesBlock(Blocks.OBSIDIAN)) {
 													currentBlockstate = Blocks.MAGMA_BLOCK.getDefaultState();
 												}
 

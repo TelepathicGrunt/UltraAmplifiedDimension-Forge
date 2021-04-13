@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 public class GiantSpikeConfig implements IFeatureConfig {
     public static final Codec<GiantSpikeConfig> CODEC = RecordCodecBuilder.<GiantSpikeConfig>create((configInstance) -> configInstance.group(
-            RuleTest.field_237127_c_.fieldOf("target").forGetter((config) -> config.target),
+            RuleTest.CODEC.fieldOf("target").forGetter((config) -> config.target),
             BlockState.CODEC.fieldOf("above_sea_state").forGetter((config) -> config.aboveSeaState),
             BlockState.CODEC.fieldOf("below_sea_state").forGetter((config) -> config.belowSeaState),
             Codec.intRange(1, 256).fieldOf("giant_spike_max_height").forGetter(columnConfig -> columnConfig.giantSpikeMaxHeight),

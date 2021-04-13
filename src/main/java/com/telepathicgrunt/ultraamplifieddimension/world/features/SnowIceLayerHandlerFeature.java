@@ -68,7 +68,7 @@ public class SnowIceLayerHandlerFeature extends Feature<NoFeatureConfig>
 					BlockState nearbyBlockStateTop = chunk.getBlockState(nearbyPos);
 					BlockState nearbyBlockStateBottom = chunk.getBlockState(nearbyPosBelow);
 
-					if ((nearbyBlockStateTop.isAir() || nearbyBlockStateTop.isIn(Blocks.VINE)) &&
+					if ((nearbyBlockStateTop.isAir() || nearbyBlockStateTop.matchesBlock(Blocks.VINE)) &&
 						doesSnowGenerate(world, biome, nearbyPos) &&
 						nearbyBlockStateBottom.isIn(BlockTags.LEAVES))
 					{

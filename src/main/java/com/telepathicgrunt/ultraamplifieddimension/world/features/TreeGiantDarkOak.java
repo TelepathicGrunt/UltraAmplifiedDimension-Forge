@@ -62,7 +62,7 @@ public class TreeGiantDarkOak extends Feature<BaseTreeFeatureConfig>
 			}
 
 			VoxelShapePart voxelshapepart = new BitSetVoxelShapePart( 1, 1, 1);
-			Template.func_222857_a(reader, 3, voxelshapepart, mutableboundingbox.minX, mutableboundingbox.minY, mutableboundingbox.minZ);
+			Template.updatePostProcessing(reader, 3, voxelshapepart, mutableboundingbox.minX, mutableboundingbox.minY, mutableboundingbox.minZ);
 			return true;
 		} else {
 			return false;

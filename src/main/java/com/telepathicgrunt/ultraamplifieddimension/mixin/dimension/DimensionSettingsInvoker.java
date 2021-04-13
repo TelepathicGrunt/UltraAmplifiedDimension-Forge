@@ -15,6 +15,6 @@ public interface DimensionSettingsInvoker {
         throw new UnsupportedOperationException();
     }
 
-    @Invoker("func_236120_h_")
+    @Invoker("isMobGenerationDisabled")
     boolean uad_invokefunc_236120_h_();
 }

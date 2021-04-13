@@ -68,7 +68,7 @@ public class AmplifiedPortalBlock extends Block
 		if (!world.isRemote &&
 			!playerEntity.isPassenger() &&
 			!playerEntity.isBeingRidden() &&
-			playerEntity.isNonBoss() &&
+			playerEntity.canChangeDimension() &&
 			!playerEntity.isCrouching() &&
 			playerEntity.getActiveHand() == playerHand)
 		{

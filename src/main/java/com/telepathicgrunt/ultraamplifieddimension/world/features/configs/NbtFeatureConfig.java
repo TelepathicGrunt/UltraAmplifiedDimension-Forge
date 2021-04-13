@@ -16,7 +16,7 @@ public class NbtFeatureConfig implements IFeatureConfig {
     public static final Codec<NbtFeatureConfig> CODEC = RecordCodecBuilder.create((configInstance) -> configInstance.group(
             Codec.intRange(0, 16).fieldOf("solid_land_radius").orElse(3).forGetter(nbtFeatureConfig -> nbtFeatureConfig.solidLandRadius),
             Codec.mapPair(ResourceLocation.CODEC.fieldOf("resourcelocation"), Codec.intRange(1, Integer.MAX_VALUE).fieldOf("weight")).codec().listOf().fieldOf("nbt_entries").forGetter(nbtFeatureConfig -> nbtFeatureConfig.nbtResourcelocationsAndWeights),
-            IStructureProcessorType.field_242922_m.optionalFieldOf("processors").orElse(null).forGetter(nbtFeatureConfig -> Optional.ofNullable(nbtFeatureConfig.processor))
+            IStructureProcessorType.PROCESSOR_LIST_CODEC.optionalFieldOf("processors").orElse(null).forGetter(nbtFeatureConfig -> Optional.ofNullable(nbtFeatureConfig.processor))
             ).apply(configInstance, NbtFeatureConfig::new));
 
     public final int solidLandRadius;

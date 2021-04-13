@@ -12,7 +12,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class UADStructures {
     // Random seed
@@ -24,7 +23,7 @@ public class UADStructures {
 
     public static final RegistryObject<Structure<NoFeatureConfig>> SUN_SHRINE = STRUCTURES.register("sun_shrine", () -> (
             new GenericJigsawStructure(
-                    NoFeatureConfig.field_236558_a_,
+                    NoFeatureConfig.CODEC,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "sun_shrine_start"),
                     10,
                     0,
@@ -35,7 +34,7 @@ public class UADStructures {
 
     public static final RegistryObject<Structure<NoFeatureConfig>> STONEHENGE = STRUCTURES.register("stonehenge", () -> (
             new GenericJigsawStructure(
-                    NoFeatureConfig.field_236558_a_,
+                    NoFeatureConfig.CODEC,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "stonehenge/center_start"),
                     10,
                     -2,
@@ -46,7 +45,7 @@ public class UADStructures {
 
     public static final RegistryObject<Structure<NoFeatureConfig>> ICE_SPIKE_TEMPLE = STRUCTURES.register("ice_spike_temple", () -> (
             new GenericJigsawStructure(
-                    NoFeatureConfig.field_236558_a_,
+                    NoFeatureConfig.CODEC,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "ice_spike_temple/body_start"),
                     10,
                     -7,
@@ -57,7 +56,7 @@ public class UADStructures {
 
     public static final RegistryObject<Structure<NoFeatureConfig>> MUSHROOM_TEMPLE = STRUCTURES.register("mushroom_temple", () -> (
             new GenericJigsawStructure(
-                    NoFeatureConfig.field_236558_a_,
+                    NoFeatureConfig.CODEC,
                     new ResourceLocation(UltraAmplifiedDimension.MODID, "mushroom_temple/body_start"),
                     10,
                     -2,

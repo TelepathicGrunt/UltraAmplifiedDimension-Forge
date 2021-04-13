@@ -50,7 +50,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 			}
 
 			VoxelShapePart voxelSet = this.placeLogsAndLeaves(serverWorldAccess, blockBox, set, set3);
-			Template.func_222857_a(serverWorldAccess, 3, voxelSet, blockBox.minX, blockBox.minY, blockBox.minZ);
+			Template.updatePostProcessing(serverWorldAccess, 3, voxelSet, blockBox.minX, blockBox.minY, blockBox.minZ);
 			return true;
 		} else {
 			return false;
@@ -60,7 +60,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 
 	// generate the spooky horned swamp m trees
 	private boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random random, BlockPos position, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BaseTreeFeatureConfig config) {
-		int height = config.trunkPlacer.func_236917_a_(random);
+		int height = config.trunkPlacer.getHeight(random);
 		BlockState currentPos = world.getBlockState(position);
 		BlockState belowPos = world.getBlockState(position.down());
 
@@ -217,7 +217,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 	}
 
 	private static boolean isWater(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.hasBlockState(pos, (state) -> state.isIn(Blocks.WATER));
+		return world.hasBlockState(pos, (state) -> state.matchesBlock(Blocks.WATER));
 	}
 
 
@@ -227,7 +227,7 @@ public class TreeSwampHorned extends Feature<BaseTreeFeatureConfig> {
 
 
 	private static boolean isDirtOrGrass(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.hasBlockState(pos, (state) -> isDirt(state.getBlock()) || state.isIn(Blocks.FARMLAND));
+		return world.hasBlockState(pos, (state) -> isDirt(state.getBlock()) || state.matchesBlock(Blocks.FARMLAND));
 	}
 
 

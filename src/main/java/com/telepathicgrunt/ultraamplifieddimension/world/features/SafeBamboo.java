@@ -60,11 +60,11 @@ public class SafeBamboo extends Feature<BambooConfig> {
                 }
 
                 // Set the top of bamboo. We moved down one as the block above broke the previous loop.
-                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).isIn(Blocks.BAMBOO))
+                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).matchesBlock(Blocks.BAMBOO))
                     cachedChunk.setBlockState(blockposMutable, BAMBOO_LEAVES_LARGE_TOP, false);
-                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).isIn(Blocks.BAMBOO))
+                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).matchesBlock(Blocks.BAMBOO))
                     cachedChunk.setBlockState(blockposMutable, BAMBOO_LEAVES_LARGE, false);
-                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).isIn(Blocks.BAMBOO))
+                if(cachedChunk.getBlockState(blockposMutable.move(Direction.DOWN)).matchesBlock(Blocks.BAMBOO))
                     cachedChunk.setBlockState(blockposMutable, BAMBOO_LEAVES_SMALL, false);
             }
             ++i;

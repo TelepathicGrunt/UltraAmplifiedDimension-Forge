@@ -15,7 +15,7 @@
     "dimension.MinecraftServerMixin",
     "dimension.NoiseChunkGeneratorAccessor",
     "features.EndermanSpawnerMixin",
-    "features.TemplateInvoker",
+    "features.TemplateAccessor",
     "features.TreeFeatureMixin",
     "features.ZombifiedPiglinSpawnerMixin",
     "structures.DesertPyramidPieceMixin",
