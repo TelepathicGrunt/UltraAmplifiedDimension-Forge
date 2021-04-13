@@ -40,10 +40,14 @@ public class ReplaceAirOnlyProcessor extends StructureProcessor {
             BlockState worldState = worldView.getBlockState(position);
             BlockState aboveWorldState = worldView.getBlockState(position.up());
 
-            if (worldState.isAir() &&
+            if (worldState.isAir()&&
                 !structureBlockInfoWorld.state.getBlock().isTileEntityProvider() &&
                 !aboveWorldState.getBlock().isTileEntityProvider())
             {
+                structureBlockInfoWorld = new Template.BlockInfo(structureBlockInfoWorld.pos, worldState, null);
+            }
+            // Do not replace other dungeon's chests/spawners
+            else if(worldState.getBlock().isTileEntityProvider()){
                 structureBlockInfoWorld = new Template.BlockInfo(structureBlockInfoWorld.pos, worldState, null);
             }
         }
