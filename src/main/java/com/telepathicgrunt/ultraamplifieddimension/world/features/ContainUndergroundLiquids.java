@@ -35,10 +35,11 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 		BlockState currentblock;
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
 		IChunk chunk = world.getChunk(position.getX() >> 4, position.getZ() >> 4);
+		int maxHeight = Math.min(61, chunkGenerator.getSeaLevel() - 1);
 
 		for (int x = 0; x < 16; ++x) {
 			for (int z = 0; z < 16; ++z) {
-				blockpos$Mutable.setPos(position.getX() + x, 61, position.getZ() + z);
+				blockpos$Mutable.setPos(position.getX() + x, maxHeight, position.getZ() + z);
 				while (blockpos$Mutable.getY() > 10) {
 					currentblock = chunk.getBlockState(blockpos$Mutable);
 
@@ -56,15 +57,17 @@ public class ContainUndergroundLiquids extends Feature<NoFeatureConfig>
 					// checks to see if we are touching an air block
 					for (Direction face : Direction.values()) {
 						blockpos$Mutable.move(face);
-						//Do world instead of chunk as this could check into the next chunk over.
-						currentblock = world.getBlockState(blockpos$Mutable);
-						if (currentblock.isAir()) {
-							//grabs what block to use based on what biome we are in
-							Biome biome = world.getBiome(blockpos$Mutable);
-							ResourceLocation rl = BIOME_REGISTRY.getKey(biome);
+						if(blockpos$Mutable.getY() < maxHeight) {
+							//Do world instead of chunk as this could check into the next chunk over.
+							currentblock = world.getBlockState(blockpos$Mutable);
+							if (currentblock.isAir()) {
+								//grabs what block to use based on what biome we are in
+								Biome biome = world.getBiome(blockpos$Mutable);
+								ResourceLocation rl = BIOME_REGISTRY.getKey(biome);
 
-							replacementBlock = GeneralUtils.carverFillerBlock(rl == null ? "" : rl.toString(), biome);
-							world.setBlockState(blockpos$Mutable, replacementBlock, 2);
+								replacementBlock = GeneralUtils.carverFillerBlock(rl == null ? "" : rl.toString(), biome);
+								world.setBlockState(blockpos$Mutable, replacementBlock, 2);
+							}
 						}
 						blockpos$Mutable.move(face.getOpposite());
 					}
