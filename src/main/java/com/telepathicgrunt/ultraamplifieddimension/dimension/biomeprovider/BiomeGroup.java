@@ -44,6 +44,18 @@ public class BiomeGroup implements Comparable<BiomeGroup> {
         this.mutatedBorderBiome = mutatedBorderBiome;
     }
 
+    BiomeGroup(Supplier<Biome> mainBiome, int weight)
+    {
+        this.mainBiome = mainBiome;
+        this.weight = weight;
+        this.shoreBiome = Optional.empty();
+        this.borderBiome = Optional.empty();
+        this.subBiome = Optional.empty();
+        this.mutatedBiome = Optional.empty();
+        this.mutatedSubBiome = Optional.empty();
+        this.mutatedBorderBiome = Optional.empty();
+    }
+
     public Supplier<Biome> getMainBiome(){
         return mainBiome;
     }

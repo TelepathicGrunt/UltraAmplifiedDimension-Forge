@@ -30,6 +30,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 ## (V.9.0.4 Changes) (1.16.4 Minecraft)
 
+##### Dimension:
+- The UAD dimension json file now lets you put `"import_all_modded_biomes": true` into the biome_source section.
+  This is a quick and dirty way to import all modded biomes into the dimension but those biomes will typically not look good.
+  Along with it, you can put `"imported_biome_blacklist": ["mod1:slick_biome", "mod1:crazy_biome"]` into there as well to
+  blacklist any biome that `import_all_modded_biomes` will grab.
+  
 ##### Dungeons:
 - Reduced chance of Blue Ice in Snowy Dungeons.
 
