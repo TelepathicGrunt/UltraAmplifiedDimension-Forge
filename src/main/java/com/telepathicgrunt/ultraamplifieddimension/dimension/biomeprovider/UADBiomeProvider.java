@@ -26,7 +26,6 @@ import net.minecraft.world.gen.layer.ZoomLayer;
 import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.LongFunction;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

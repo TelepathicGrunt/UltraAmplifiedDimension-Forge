@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension.biomeprovider;
 
 import com.google.gson.JsonSyntaxException;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
@@ -14,7 +13,6 @@ import org.apache.commons.lang3.tuple.MutablePair;
 
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class RegionManager {
     public static final Codec<RegionManager> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
