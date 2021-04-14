@@ -35,6 +35,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
   This is a quick and dirty way to import all modded biomes into the dimension but those biomes will typically not look good.
   Along with it, you can put `"imported_biome_blacklist": ["mod1:slick_biome", "mod1:crazy_biome"]` into there as well to
   blacklist any biome that `import_all_modded_biomes` will grab.
+
+##### Portal:
+- `ultra_amplified_dimension:portal_center_blocks` block tag has been added that lets you change what block is required
+  for the center of the portal. This has Polished Diorite by default. if you change this, you might want to change the
+  Amplified Portal block's texture and loot table to match the new block you are using.
   
 ##### Dungeons:
 - Reduced chance of Blue Ice in Snowy Dungeons.
