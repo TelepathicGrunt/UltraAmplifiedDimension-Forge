@@ -58,22 +58,20 @@ public class GlowdirtBlock extends Block {
             return;
         }
 
-        if (world.getLight(pos.up()) >= 4) {
-            if (world.getLight(pos.up()) >= 9) {
-                BlockState replacementBlock;
+        if (world.getLight(pos.up()) >= 9) {
+            BlockState replacementBlock;
 
-                for (int i = 0; i < 4; ++i) {
-                    BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    Block neighborBlock = world.getBlockState(blockpos).getBlock();
+            for (int i = 0; i < 4; ++i) {
+                BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                Block neighborBlock = world.getBlockState(blockpos).getBlock();
 
-                    if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == UADBlocks.GLOWGRASS_BLOCK.get()) {
-                        replacementBlock = UADBlocks.GLOWGRASS_BLOCK.get().getDefaultState();
-                        world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, world.getBlockState(pos.up()).getBlock() == Blocks.SNOW));
-                    }
-                    else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == UADBlocks.GLOWMYCELIUM.get()) {
-                        replacementBlock = UADBlocks.GLOWMYCELIUM.get().getDefaultState();
-                        world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, world.getBlockState(pos.up()).getBlock() == Blocks.SNOW));
-                    }
+                if (neighborBlock == Blocks.GRASS_BLOCK || neighborBlock == UADBlocks.GLOWGRASS_BLOCK.get()) {
+                    replacementBlock = UADBlocks.GLOWGRASS_BLOCK.get().getDefaultState();
+                    world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, world.getBlockState(pos.up()).getBlock() == Blocks.SNOW));
+                }
+                else if (neighborBlock == Blocks.MYCELIUM || neighborBlock == UADBlocks.GLOWMYCELIUM.get()) {
+                    replacementBlock = UADBlocks.GLOWMYCELIUM.get().getDefaultState();
+                    world.setBlockState(pos, replacementBlock.with(SnowyDirtBlock.SNOWY, world.getBlockState(pos.up()).getBlock() == Blocks.SNOW));
                 }
             }
         }
