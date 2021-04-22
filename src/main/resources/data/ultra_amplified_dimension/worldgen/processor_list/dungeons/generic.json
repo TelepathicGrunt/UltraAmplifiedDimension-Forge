@@ -19,6 +19,23 @@
       "processor_type": "minecraft:rule"
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:zombie",
+          "weight": 48
+        },
+        {
+          "resourcelocation": "minecraft:spider",
+          "weight": 25
+        },
+        {
+          "resourcelocation": "minecraft:skeleton",
+          "weight": 25
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:replace_air_only_processor"
     },
     {

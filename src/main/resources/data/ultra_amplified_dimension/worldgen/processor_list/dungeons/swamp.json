@@ -70,6 +70,35 @@
       "processor_type": "minecraft:rule"
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:zombie",
+          "weight": 24
+        },
+        {
+          "resourcelocation": "minecraft:drowned",
+          "weight": 24
+        },
+        {
+          "resourcelocation": "minecraft:spider",
+          "weight": 19
+        },
+        {
+          "resourcelocation": "minecraft:skeleton",
+          "weight": 19
+        },
+        {
+          "resourcelocation": "minecraft:vex",
+          "weight": 3
+        },
+        {
+          "resourcelocation": "minecraft:slime",
+          "weight": 1
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:replace_air_only_processor"
     },
     {

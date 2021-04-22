@@ -28,6 +28,15 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.9.1.1 Changes) (1.16.5 Minecraft)
+
+##### Dungeons:
+- Fixed dungeons so their mob spawners are randomized properly.
+  Please redownload the new datapack of this mod if you were using that to customize this mod.
+  That is because I had to change how dungeon processors are setup.
+  But if you weren't using the datapack, simply just update this mod and spawners will randomize again.
+  
+
 ## (V.9.1.0 Changes) (1.16.5 Minecraft)
 
 ##### Dimension:

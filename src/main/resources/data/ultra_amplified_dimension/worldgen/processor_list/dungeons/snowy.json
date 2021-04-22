@@ -169,6 +169,31 @@
       "processor_type": "minecraft:rule"
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:stray",
+          "weight": 37
+        },
+        {
+          "resourcelocation": "minecraft:cave_spider",
+          "weight": 25
+        },
+        {
+          "resourcelocation": "minecraft:zombie",
+          "weight": 25
+        },
+        {
+          "resourcelocation": "minecraft:spider",
+          "weight": 12
+        },
+        {
+          "resourcelocation": "minecraft:snow_golem",
+          "weight": 1
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:replace_air_only_processor"
     },
     {

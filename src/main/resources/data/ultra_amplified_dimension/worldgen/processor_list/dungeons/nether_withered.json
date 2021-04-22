@@ -38,7 +38,7 @@
         },
         {
           "resourcelocation": "minecraft:magma_cube",
-          "weight": 26
+          "weight": 25
         },
         {
           "resourcelocation": "minecraft:strider",
@@ -47,6 +47,10 @@
         {
           "resourcelocation": "minecraft:blaze",
           "weight": 10
+        },
+        {
+          "resourcelocation" : "minecraft:wither_skeleton",
+          "weight": 1
         }
       ],
       "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"

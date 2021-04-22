@@ -24,6 +24,8 @@ public class GeneralUtils {
 
     // Weighted Random from: https://stackoverflow.com/a/6737362
     public static <T> T getRandomEntry(List<Pair<T, Integer>> rlList, Random random){
+        if(rlList.isEmpty()) return null;
+
         double totalWeight = 0.0;
 
         // Compute the total weight of all items together.

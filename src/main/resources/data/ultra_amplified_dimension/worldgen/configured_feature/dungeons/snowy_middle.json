@@ -25,28 +25,6 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:stray",
-                        "weight": 37
-                    },
-                    {
-                        "resourcelocation": "minecraft:cave_spider",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:zombie",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:spider",
-                        "weight": 12
-                    },
-                    {
-                        "resourcelocation": "minecraft:snow_golem",
-                        "weight": 1
-                    }
-                ],
                 "processors": "ultra_amplified_dimension:dungeons/snowy"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"

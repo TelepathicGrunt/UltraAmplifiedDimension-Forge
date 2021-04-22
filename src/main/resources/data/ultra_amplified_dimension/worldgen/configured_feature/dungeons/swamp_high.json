@@ -25,32 +25,6 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:zombie",
-                        "weight": 24
-                    },
-                    {
-                        "resourcelocation": "minecraft:drowned",
-                        "weight": 24
-                    },
-                    {
-                        "resourcelocation": "minecraft:spider",
-                        "weight": 19
-                    },
-                    {
-                        "resourcelocation": "minecraft:skeleton",
-                        "weight": 19
-                    },
-                    {
-                        "resourcelocation": "minecraft:vex",
-                        "weight": 3
-                    },
-                    {
-                        "resourcelocation": "minecraft:slime",
-                        "weight": 1
-                    }
-                ],
                 "processors": "ultra_amplified_dimension:dungeons/swamp"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"

@@ -25,32 +25,6 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:zombie",
-                        "weight": 40
-                    },
-                    {
-                        "resourcelocation": "minecraft:spider",
-                        "weight": 30
-                    },
-                    {
-                        "resourcelocation": "minecraft:skeleton",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:vex",
-                        "weight": 3
-                    },
-                    {
-                        "resourcelocation": "minecraft:illusioner",
-                        "weight": 2
-                    },
-                    {
-                        "resourcelocation": "minecraft:creeper",
-                        "weight": 1
-                    }
-                ],
                 "processors": "ultra_amplified_dimension:dungeons/dark_oak",
                 "post_processors": "ultra_amplified_dimension:dungeons/dark_oak_post_process"
               },

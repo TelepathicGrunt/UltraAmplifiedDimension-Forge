@@ -27,12 +27,6 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:drowned",
-                        "weight": 100
-                    }
-                ],
                 "processors": "ultra_amplified_dimension:dungeons/ocean"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"

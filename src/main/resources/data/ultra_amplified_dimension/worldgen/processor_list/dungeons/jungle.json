@@ -101,6 +101,35 @@
       "processor_type": "minecraft:rule"
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:zombie",
+          "weight": 37
+        },
+        {
+          "resourcelocation": "minecraft:parrot",
+          "weight": 25
+        },
+        {
+          "resourcelocation": "minecraft:spider",
+          "weight": 18
+        },
+        {
+          "resourcelocation": "minecraft:skeleton",
+          "weight": 18
+        },
+        {
+          "resourcelocation": "minecraft:chicken",
+          "weight": 1
+        },
+        {
+          "resourcelocation": "minecraft:creeper",
+          "weight": 1
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:replace_air_only_processor"
     },
     {

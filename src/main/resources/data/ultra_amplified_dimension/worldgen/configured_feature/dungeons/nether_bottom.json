@@ -25,29 +25,7 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:zombified_piglin",
-                        "weight": 44
-                    },
-                    {
-                        "resourcelocation": "minecraft:magma_cube",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:strider",
-                        "weight": 20
-                    },
-                    {
-                        "resourcelocation": "minecraft:blaze",
-                        "weight": 10
-                    },
-                    {
-                        "resourcelocation" : "minecraft:wither_skeleton",
-                        "weight": 1
-                    }
-                ],
-                "processors": "ultra_amplified_dimension:dungeons/nether"
+                "processors": "ultra_amplified_dimension:dungeons/nether_withered"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"
             },

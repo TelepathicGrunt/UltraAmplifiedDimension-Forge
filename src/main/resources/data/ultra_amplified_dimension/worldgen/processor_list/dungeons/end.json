@@ -18,6 +18,23 @@
       "processor_type": "minecraft:rule"
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:endermite",
+          "weight": 86
+        },
+        {
+          "resourcelocation": "minecraft:enderman",
+          "weight": 12
+        },
+        {
+          "resourcelocation": "minecraft:phantom",
+          "weight": 2
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:replace_air_only_processor"
     },
     {

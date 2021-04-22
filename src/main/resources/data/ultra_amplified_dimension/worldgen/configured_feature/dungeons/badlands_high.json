@@ -25,28 +25,6 @@
                         "weight": 1
                     }
                 ],
-                "spawner_mob_entries": [
-                    {
-                        "resourcelocation": "minecraft:husk",
-                        "weight": 48
-                    },
-                    {
-                        "resourcelocation": "minecraft:cave_spider",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:zombie",
-                        "weight": 25
-                    },
-                    {
-                        "resourcelocation": "minecraft:creeper",
-                        "weight": 1
-                    },
-                    {
-                        "resourcelocation": "minecraft:illusioner",
-                        "weight": 1
-                    }
-                ],
                 "processors": "ultra_amplified_dimension:dungeons/badlands"
               },
               "type": "ultra_amplified_dimension:nbt_dungeon"

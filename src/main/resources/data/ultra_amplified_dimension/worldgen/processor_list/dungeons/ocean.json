@@ -395,6 +395,15 @@
       ]
     },
     {
+      "spawner_mob_entries": [
+        {
+          "resourcelocation": "minecraft:drowned",
+          "weight": 100
+        }
+      ],
+      "processor_type": "ultra_amplified_dimension:spawner_randomizing_processor"
+    },
+    {
       "processor_type": "ultra_amplified_dimension:remove_floating_blocks_processor"
     }
   ]
