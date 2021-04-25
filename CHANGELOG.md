@@ -28,6 +28,12 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 # | Ultra Amplified Dimension changelog |
 
 
+## (V.9.1.2 Changes) (1.16.5 Minecraft)
+
+##### Biomes:
+- Improved Obsidian border between Nether and non-Nether UAD biomes so it looks less weird.
+
+
 ## (V.9.1.1 Changes) (1.16.5 Minecraft)
 
 ##### Biomes:

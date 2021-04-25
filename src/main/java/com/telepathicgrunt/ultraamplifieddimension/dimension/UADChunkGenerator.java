@@ -579,28 +579,7 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
                 // If nether biome is surrounded by nether biomes, place lava.
                 // This way, all imported nether biomes gets the lava they want.
-                if(world != null &&
-                    getCachedBiome(world, mutable.setPos(x + 1, 0, z)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(world, mutable.setPos(x, 0, z + 1)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(world, mutable.setPos(x - 1, 0, z).move(Direction.WEST)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(world, mutable.setPos(x, 0, z - 1)).getCategory() == Biome.Category.NETHER)
-                {
-                    if(y > this.getSeaLevel() - 7){
-                        blockstate = this.defaultFluid;
-                    }
-                    else if(y == this.getSeaLevel() - 7){
-                        blockstate = Blocks.MAGMA_BLOCK.getDefaultState();
-                    }
-                    else{
-                        blockstate = Blocks.LAVA.getDefaultState();
-                    }
-                }
-                else if(world == null &&
-                    getCachedBiome(null, mutable.setPos(x + 1, 0, z)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(null, mutable.setPos(x, 0, z + 1)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(null, mutable.setPos(x - 1, 0, z)).getCategory() == Biome.Category.NETHER &&
-                    getCachedBiome(null, mutable.setPos(x, 0, z - 1)).getCategory() == Biome.Category.NETHER)
-                {
+                if(isSurroundedByNether(world, mutable, x, z)) {
                     if(y > this.getSeaLevel() - 7){
                         blockstate = this.defaultFluid;
                     }
@@ -612,8 +591,11 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
                     }
                 }
                 // Make an obsidian border to separate lava from default fluid.
-                else{
+                else if(y <= this.getSeaLevel() - 6){
                     blockstate = Blocks.OBSIDIAN.getDefaultState();
+                }
+                else{
+                    blockstate = this.defaultFluid;
                 }
             }
             else{
@@ -625,6 +607,20 @@ public class UADChunkGenerator extends NoiseChunkGenerator {
         }
 
         return blockstate;
+    }
+
+    private boolean isSurroundedByNether(IWorld world, BlockPos.Mutable mutable, int x, int z){
+        for(int xOffset = -2; xOffset <= 2; xOffset++){
+            for(int zOffset = -2; zOffset <= 2; zOffset++){
+                if(Math.abs(xOffset * zOffset) == 2) {
+                    if(getCachedBiome(world, mutable.setPos(x + xOffset, 0, z + zOffset)).getCategory() != Biome.Category.NETHER){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+
     }
 
     /**
