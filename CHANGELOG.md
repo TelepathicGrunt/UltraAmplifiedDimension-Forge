@@ -27,6 +27,11 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 ---------------------------------------
 # | Ultra Amplified Dimension changelog |
 
+## (V.9.1.3 Changes) (1.16.5 Minecraft)
+
+##### Config:
+- Cleaned up config backend a tiny bit.
+
 
 ## (V.9.1.2 Changes) (1.16.5 Minecraft)
 
