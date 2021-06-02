@@ -1,113 +1,90 @@
-# Made for Minecraft v.1.16.5
+### **(V.9.1.4 Changes) (1.16.5 Minecraft)**
 
-## Created by TelepathicGrunt
-
-
-
-Hello! If you are reading this, you must be on Github then! I strongly encourage you to only download and run the master branch as that should be the most stable version of my mod. 
-
-If you try to use the latest Minecraft version branch, you may run into bugs and issues as I am experimenting and working on that latest version. Older version branches should be alright.
+##### Blocks:
+* Added recipes for all glow-variant blocks to the Recipe Book when you obtain Glowstone Dust.
 
 
-
-Highly recommend using a strong computer with this mod!
-
-You can choose biome sizes, ore spawn rates, structure rarity, toggle biomes, and much more with this mod's config options!
-
-
-
-Feel free to use this mod and any part of it for whatever you want as long as you do not profit off of my mod. 
-
-Just be sure to have fun and make awesome mods! That's all. Enjoy! :) 
-
-
-
-
-
----------------------------------------
-# | Ultra Amplified Dimension changelog |
-
-## (V.9.1.3 Changes) (1.16.5 Minecraft)
+### **(V.9.1.3 Changes) (1.16.5 Minecraft)**
 
 ##### Config:
-- Cleaned up config backend a tiny bit.
+* Cleaned up config backend a tiny bit.
 
 
-## (V.9.1.2 Changes) (1.16.5 Minecraft)
-
-##### Biomes:
-- Improved Obsidian border between Nether and non-Nether UAD biomes so it looks less weird.
-
-
-## (V.9.1.1 Changes) (1.16.5 Minecraft)
+### **(V.9.1.2 Changes) (1.16.5 Minecraft)**
 
 ##### Biomes:
-- Upgraded /locatebiome command to now search much, much farther in any world with UAD's biome source.
+* Improved Obsidian border between Nether and non-Nether UAD biomes so it looks less weird.
+
+
+### **(V.9.1.1 Changes) (1.16.5 Minecraft)**
+
+##### Biomes:
+* Upgraded /locatebiome command to now search much, much farther in any world with UAD's biome source.
 
 ##### Dungeons:
-- Fixed dungeons so their mob spawners are randomized properly.
+* Fixed dungeons so their mob spawners are randomized properly.
   Please redownload the new datapack of this mod if you were using that to customize this mod.
   That is because I had to change how dungeon processors are setup.
   But if you weren't using the datapack, simply just update this mod and spawners will randomize again.
 
-- Fixed End Dungeons being able to remove each other's End Portal block
+* Fixed End Dungeons being able to remove each other's End Portal block
 
 
-## (V.9.1.0 Changes) (1.16.5 Minecraft)
+### **(V.9.1.0 Changes) (1.16.5 Minecraft)**
 
 ##### Dimension:
-- The UAD dimension json file now lets you put `"import_all_modded_biomes": true` into the biome_source section.
+* The UAD dimension json file now lets you put `"import_all_modded_biomes": true` into the biome_source section.
   This is a quick and dirty way to import all modded biomes into the dimension but those biomes will typically not look good.
   Along with it, you can put `"imported_biome_blacklist": ["mod1:slick_biome", "mod1:crazy_biome"]` into there as well to
   blacklist any biome that `import_all_modded_biomes` will grab.
 
 ##### Portal:
-- `ultra_amplified_dimension:portal_center_blocks` block tag has been added that lets you change what block is required
+* `ultra_amplified_dimension:portal_center_blocks` block tag has been added that lets you change what block is required
   for the center of the portal. This has Polished Diorite by default. if you change this, you might want to change the
   Amplified Portal block's texture and loot table to match the new block you are using.
 
 ##### Biomes:
-- Fixed sea being covered in terrain blocks if lowered below y = 61. Looks amazing if you put UAD's nether biome into the vanilla nether now!
+* Fixed sea being covered in terrain blocks if lowered below y = 61. Looks amazing if you put UAD's nether biome into the vanilla nether now!
 
 ##### Dungeons:
-- Reduced chance of Blue Ice in Snowy Dungeons.
+* Reduced chance of Blue Ice in Snowy Dungeons.
 
-- Fixed Nether Dungeons having Nether Bricks placed in mid-air due to broken processor file.
+* Fixed Nether Dungeons having Nether Bricks placed in mid-air due to broken processor file.
 
-- Fixed ceiling of Desert Dungeons looking weird when it meets the wall.
+* Fixed ceiling of Desert Dungeons looking weird when it meets the wall.
 
-- Dungeons will now log error if fed an invalid identifier to a non-existent nbt file.
+* Dungeons will now log error if fed an invalid identifier to a non-existent nbt file.
 
-- Fixed Dungeon Chests being placed on walls instead of floor.
+* Fixed Dungeon Chests being placed on walls instead of floor.
 
-- Dungeons now use Post Processor files to place Vines and other stuff.
+* Dungeons now use Post Processor files to place Vines and other stuff.
 
 ##### Misc:
-- Made my modifyConstant mixins to the surfacebuilders no longer crash if someone else also modifyConstant the same spot.
+* Made my modifyConstant mixins to the surfacebuilders no longer crash if someone else also modifyConstant the same spot.
 
-- Made Swamp Cross use correct method for setting its chest loottable.
+* Made Swamp Cross use correct method for setting its chest loottable.
 
 
-## (V.9.0.3 Changes) (1.16.4 Minecraft)
+### **(V.9.0.3 Changes) (1.16.4 Minecraft)**
 
 ##### Dimension:
 -Switched to a safer mixin to get the world's seed if no seed is specified in the JSON.
 
 
-## (V.9.0.2 Changes) (1.16.4 Minecraft)
+### **(V.9.0.2 Changes) (1.16.4 Minecraft)**
 
 ##### Mixins:
 -Prefixed all my accessor and invoker mixins due to this bug in mixins that causes a crash for same named mixins.
  https://github.com/SpongePowered/Mixin/issues/430
 
 
-## (V.9.0.1 Changes) (1.16.4 Minecraft)
+### **(V.9.0.1 Changes) (1.16.4 Minecraft)**
 
 ##### MAJOR:
 -PORTED FROM 1.15.2 to 1.16.4!!!!
 
 
-## (V.8.0.4 Changes) (1.15.2 Minecraft)
+### **(V.8.0.4 Changes) (1.15.2 Minecraft)**
 
 ##### Configs:
 
@@ -123,7 +100,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Messed with Slime, honey, Lava, and Water Lakes when implementing spawnrate config. Hopefully I didn't break them....
 
-## (V.8.0.3 Changes) (1.15.2 Minecraft)
+### **(V.8.0.3 Changes) (1.15.2 Minecraft)**
 
 ##### Biomes:
 
@@ -131,7 +108,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Giant Tree Taigas and Tall Birch Forests's 2x2 trees now gets dirt placed below the trunk so the trunk cannot be floating in midair.
 
-## (V.8.0.2 Changes) (1.15.2 Minecraft)
+### **(V.8.0.2 Changes) (1.15.2 Minecraft)**
 
 ##### Config:
 
@@ -159,7 +136,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Fixed Ramps placing air blocks instead of water when going below sealevel.
 
-## (V.8.0.1 Changes) (1.15.2 Minecraft)
+### **(V.8.0.1 Changes) (1.15.2 Minecraft)**
 
 ##### Structures:
 
@@ -170,7 +147,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 -Added JEI integeration. All UA blocks now has a description page with JEI.
 
 
-## (V.8.0.0 Changes) (1.15.2 Minecraft)
+### **(V.8.0.0 Changes) (1.15.2 Minecraft)**
 
 ##### Config:
 
@@ -204,20 +181,20 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 -Changed some hardcoded 255 height values to use the world's max height instead. Might help with Cubic Chunk-like mod compatibility but otherwise, users will see no change. 
 
-## (V.7.4.2 Changes) (1.15.2 Minecraft)
+### **(V.7.4.2 Changes) (1.15.2 Minecraft)**
 
 ##### Misc:
 
 -Fixed crash in production on servers due to me not using the right method name for a reflection.
 
-## (V.7.4.1 Changes) (1.15.2 Minecraft)
+### **(V.7.4.1 Changes) (1.15.2 Minecraft)**
 
 ##### Worldtype:
 
 -Quick fix to stop a crash when trying to sleep in the UA dimension when using the UA worldtype.
 
 
-## (V.7.4.0 Changes) (1.15.2 Minecraft)
+### **(V.7.4.0 Changes) (1.15.2 Minecraft)**
 
 ##### Dimension:
 
@@ -256,7 +233,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 -Fix en_us.json translation for some biomes.
 
 
-## (V.7.3.1 Changes) (1.15.2 Minecraft)
+### **(V.7.3.1 Changes) (1.15.2 Minecraft)**
 
 
 ##### Misc: 
@@ -273,7 +250,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.3.0 Changes) (1.15.2 Minecraft)
+### **(V.7.3.0 Changes) (1.15.2 Minecraft)**
 
 
 
@@ -305,7 +282,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.2.4 Changes) (1.15.2 Minecraft)
+### **(V.7.2.4 Changes) (1.15.2 Minecraft)**
 
 
 
@@ -339,7 +316,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.2.3 Changes) (1.15.2 Minecraft)
+### **(V.7.2.3 Changes) (1.15.2 Minecraft)**
 
 
 
@@ -371,7 +348,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.2.2 Changes) (1.15.2 Minecraft)
+### **(V.7.2.2 Changes) (1.15.2 Minecraft)**
 
 
 
@@ -429,7 +406,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.2.1 Changes) (1.15.2 Minecraft)
+### **(V.7.2.1 Changes) (1.15.2 Minecraft)**
 
 
 
@@ -455,7 +432,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.2.0 Changes) (1.15.1 Minecraft)
+### **(V.7.2.0 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -481,7 +458,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.1.0 Changes) (1.15.1 Minecraft) 
+### **(V.7.1.0 Changes) (1.15.1 Minecraft)** 
 
 
 
@@ -563,7 +540,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.0.4 Changes) (1.15.1 Minecraft)
+### **(V.7.0.4 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -625,7 +602,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.0.3 Changes) (1.15.1 Minecraft)
+### **(V.7.0.3 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -655,7 +632,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.0.2 Changes) (1.15.1 Minecraft)
+### **(V.7.0.2 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -667,7 +644,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.0.1 Changes) (1.15.1 Minecraft)
+### **(V.7.0.1 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -713,7 +690,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.7.0.0 Changes) (1.15.1 Minecraft)
+### **(V.7.0.0 Changes) (1.15.1 Minecraft)**
 
 
 
@@ -863,7 +840,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.12.2 Changes) (1.14.4 Minecraft)
+### **(V.6.12.2 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -873,7 +850,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.12.2 Changes) (1.14.4 Minecraft)
+### **(V.6.12.2 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -891,7 +868,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.12.1 Changes) (1.14.4 Minecraft)
+### **(V.6.12.1 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -911,7 +888,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.12.0 Changes) (1.14.4 Minecraft)
+### **(V.6.12.0 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -941,7 +918,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.11.2 Changes) (1.14.4 Minecraft)
+### **(V.6.11.2 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -963,7 +940,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.11.1 Changes) (1.14.4 Minecraft)
+### **(V.6.11.1 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -997,7 +974,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.11.0 Changes) (1.14.4 Minecraft)
+### **(V.6.11.0 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1019,7 +996,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.10.0 Changes) (1.14.4 Minecraft)
+### **(V.6.10.0 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1071,7 +1048,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.9.1 Changes) (1.14.4 Minecraft)
+### **(V.6.9.1 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1087,7 +1064,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.9 Changes) (1.14.4 Minecraft)
+### **(V.6.9 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1123,7 +1100,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.8 Changes) (1.14.4 Minecraft)
+### **(V.6.8 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1143,7 +1120,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.7 Changes) (1.14.4 Minecraft)
+### **(V.6.7 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1189,7 +1166,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.6 Changes) (1.14.4 Minecraft)
+### **(V.6.6 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1205,7 +1182,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.5 Changes) (1.14.4 Minecraft)
+### **(V.6.5 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1225,7 +1202,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.4 Changes) (1.14.4 Minecraft)
+### **(V.6.4 Changes) (1.14.4 Minecraft)**
 
 -Quick fix to patch bug that caused putting this mod into a server would make the server to crash.
 
@@ -1233,7 +1210,7 @@ Just be sure to have fun and make awesome mods! That's all. Enjoy! :)
 
 
 
-## (V.6.3 Changes) (1.14.4 Minecraft)
+### **(V.6.3 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1305,7 +1282,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.6.2 Changes) (1.14.4 Minecraft)
+### **(V.6.2 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1351,7 +1328,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.6.1 Changes) (1.14.4 Minecraft)
+### **(V.6.1 Changes) (1.14.4 Minecraft)**
 
 
 
@@ -1361,7 +1338,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.6.0 Changes) (1.14.3 Minecraft)
+### **(V.6.0 Changes) (1.14.3 Minecraft)**
 
 
 
@@ -1465,7 +1442,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.5.0 Changes) (1.13.2 Minecraft)
+### **(V.5.0 Changes) (1.13.2 Minecraft)**
 
 
 
@@ -1583,7 +1560,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.4.4 Changes) (1.12 Minecraft)
+### **(V.4.4 Changes) (1.12 Minecraft)**
 
 
 
@@ -1639,7 +1616,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.4.3 Changes) (1.12 Minecraft)
+### **(V.4.3 Changes) (1.12 Minecraft)**
 
 
 
@@ -1713,7 +1690,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.4.2 Changes) (1.12 Minecraft)
+### **(V.4.2 Changes) (1.12 Minecraft)**
 
 
 
@@ -1735,7 +1712,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.4.1 Changes) (1.12 Minecraft)
+### **(V.4.1 Changes) (1.12 Minecraft)**
 
 
 
@@ -1785,7 +1762,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.4.0 Changes) (1.12 Minecraft)
+### **(V.4.0 Changes) (1.12 Minecraft)**
 
 
 
@@ -1863,7 +1840,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.3.1 Changes) (1.12 Minecraft)
+### **(V.3.1 Changes) (1.12 Minecraft)**
 
 
 
@@ -1915,7 +1892,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.3 Changes) (1.12 Minecraft)
+### **(V.3 Changes) (1.12 Minecraft)**
 
 
 
@@ -2017,7 +1994,7 @@ Note: The Ultra Amplified Dimension will have a portal at 8, y, 8 always and is 
 
 
 
-## (V.1 Changes) (1.12 Minecraft)
+### **(V.1 Changes) (1.12 Minecraft)**
 
 
 
