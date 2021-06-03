@@ -11,7 +11,7 @@ publishing {
 
             pom {
                 name = 'UltraAmplifiedDimension-Forge'
-                description = 'Gotta find the broken mods!'
+                description = 'Adds a dimension with insane world gen to provide a more challenging and epic world!'
                 url = 'https://github.com/TelepathicGrunt/UltraAmplifiedDimension'
 
                 scm {
