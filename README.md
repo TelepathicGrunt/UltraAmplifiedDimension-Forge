@@ -232,5 +232,4 @@ The one feature I would like to point out is in ministructures/hay_bale_piles_co
 
 **[https://discord.gg/SM7WBT6FGu](https://discord.gg/SM7WBT6FGu "https://discord.gg/SM7WBT6FGu")**
 
-**[![discord-logo-png-free-transparent-png-logos-discord-png-logo-300_300 (PNG)  | BeeIMG](https://www.freepnglogos.com/uploads/discord-logo-png/concours-discord-cartes-voeux-fortnite-france-6.png)](https://discord.gg/SM7WBT6FGu "https://discord.gg/SM7WBT6FGu")**
-
+<img src="https://www.freepnglogos.com/uploads/discord-logo-png/concours-discord-cartes-voeux-fortnite-france-6.png" alt="discord-logo-png-free-transparent-png-logos-discord-png-logo-300_300 (PNG)  | BeeIMG" width="112" height="112" /></a>
