@@ -14,6 +14,8 @@ For developers that want to add UAD to their mod's workspace:
 
 &nbsp;
 
+Don't forget to change 9.1.4 with the actual latest version of this mod.
+
 <blockquote>dependencies {
 
 
@@ -27,8 +29,7 @@ For developers that want to add UAD to their mod's workspace:
 
 &nbsp;
 
-Don't forget to change 9.1.4 with the actual latest version of this mod.
-
+**Add these two properties to both of your run configs in the build.gradle file. These will allow Blame's mixins to work. After you add the properties lines, refresh Gradle and run `genEclipseRuns` or `genIntellijRuns` or `genVSCodeRuns` based on what IDE you are using.**
 
 <blockquote>minecraft {
 
@@ -72,8 +73,6 @@ Don't forget to change 9.1.4 with the actual latest version of this mod.
 
 
 }</blockquote>
-
-**Add these two properties to both of your run configs in the build.gradle file. These will allow Blame's mixins to work. After you add the properties lines, refresh Gradle and run `genEclipseRuns` or `genIntellijRuns` or `genVSCodeRuns` based on what IDE you are using.**
 
 **____________________________________________________________________________**
 
