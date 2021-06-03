@@ -20,16 +20,5 @@ build
 # other
 eclipse
 run
-runServer.launch
-runClient.launch
-runData.launch
-changelog.txt
-UltraAmplified_Changelog.txt
-build.bat
-references
-/assets
-/deps
-
-# Files from Forge MDK
-forge*changelog.txt
-CREDITS.txt
+.gitattributes
+deps
