@@ -113,7 +113,7 @@ public class UADBiomeProvider extends BiomeProvider {
                 layer = ZoomLayer.NORMAL.apply(contextFactory.apply(1503L + currentExtraZoom), layer);
             }
             else{
-                layer = ZoomLayer.FUZZY.apply(contextFactory.apply(1111L + (currentExtraZoom * 31)), layer);
+                layer = ZoomLayer.FUZZY.apply(contextFactory.apply(1111L + (currentExtraZoom * 31L)), layer);
             }
 
             if (currentExtraZoom == 1 || this.biomeSize == 1) {

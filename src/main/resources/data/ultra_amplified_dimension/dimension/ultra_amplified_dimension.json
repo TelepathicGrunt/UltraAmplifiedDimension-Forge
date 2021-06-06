@@ -93,7 +93,7 @@
             {
                 "main_biome": "ultra_amplified_dimension:desert",
                 "weight": 15,
-                "sub_biome": "ultra_amplified_dimension:desert_relics",
+                "sub_biome": "ultra_amplified_dimension:desert_relic",
                 "mutated_biome": "ultra_amplified_dimension:desert_lakes"
             },
             {
@@ -150,7 +150,7 @@
                 "main_biome": "ultra_amplified_dimension:rocky_fields",
                 "weight": 7,
                 "shore_biome": "ultra_amplified_dimension:stone_plains",
-                "sub_biome": "ultra_amplified_dimension:rocky_field_wooded",
+                "sub_biome": "ultra_amplified_dimension:rocky_fields_wooded",
                 "mutated_biome": "ultra_amplified_dimension:gravelly_fields",
                 "mutated_sub_biome": "ultra_amplified_dimension:gravelly_columns_relic"
             },
@@ -173,7 +173,7 @@
                 "main_biome": "ultra_amplified_dimension:rocky_fields",
                 "weight": 20,
                 "shore_biome": "ultra_amplified_dimension:stone_plains",
-                "sub_biome": "ultra_amplified_dimension:rocky_field_wooded",
+                "sub_biome": "ultra_amplified_dimension:rocky_fields_wooded",
                 "mutated_biome": "ultra_amplified_dimension:gravelly_fields",
                 "mutated_sub_biome": "ultra_amplified_dimension:gravelly_columns_relic"
             },

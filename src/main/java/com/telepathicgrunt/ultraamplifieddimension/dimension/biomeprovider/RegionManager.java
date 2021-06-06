@@ -32,13 +32,13 @@ public class RegionManager {
                 .forGetter(regionManager -> regionManager.icyList)
     ).apply(instance, RegionManager::new));
 
-    private MutablePair<List<BiomeGroup>, Integer> oceanList;
-    private MutablePair<List<BiomeGroup>, Integer> endList;
-    private MutablePair<List<BiomeGroup>, Integer> netherList;
-    private MutablePair<List<BiomeGroup>, Integer> hotList;
-    private MutablePair<List<BiomeGroup>, Integer> warmList;
-    private MutablePair<List<BiomeGroup>, Integer> coolList;
-    private MutablePair<List<BiomeGroup>, Integer> icyList;
+    private final MutablePair<List<BiomeGroup>, Integer> oceanList;
+    private final MutablePair<List<BiomeGroup>, Integer> endList;
+    private final MutablePair<List<BiomeGroup>, Integer> netherList;
+    private final MutablePair<List<BiomeGroup>, Integer> hotList;
+    private final MutablePair<List<BiomeGroup>, Integer> warmList;
+    private final MutablePair<List<BiomeGroup>, Integer> coolList;
+    private final MutablePair<List<BiomeGroup>, Integer> icyList;
 
     private final Map<Biome, Biome> subBiomeMap = new HashMap<>();
     private final Map<Biome, Biome> shoreMap = new HashMap<>();
