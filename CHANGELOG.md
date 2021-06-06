@@ -1,3 +1,9 @@
+### **(V.9.2.0 Changes) (1.16.5 Minecraft)**
+
+##### Biomes:
+* Fixed typo in dimension json file that prevented several biomes from spawning.
+
+
 ### **(V.9.1.4 Changes) (1.16.5 Minecraft)**
 
 ##### Blocks:
