@@ -9,9 +9,9 @@ curseforge {
         changelog = file('CHANGELOG.md')
         addGameVersion("1.16.5")
         addGameVersion("Forge")
-    }
 
-    mainArtifact(jar) {
-        displayName = "Ultra Amplified Dimension v${project.mod_version} (${project.mc_version} MC)"
+        mainArtifact(jar) {
+            displayName = "Ultra Amplified Dimension v${project.mod_version} (${project.mc_version} MC)"
+        }
     }
 }

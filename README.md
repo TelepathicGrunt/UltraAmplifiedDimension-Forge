@@ -139,9 +139,9 @@ One of the biggest feature of this mod is nearly EVERYTHING worldgen is configur
 
 **------------------**
 
-## **[DATAPACK](https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.0.X)**
+## **DATAPACK**
 
-**[https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.1.X](https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.1.X)**
+**[https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.2.X](https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.2.X)**
 
 **------------------**
 
@@ -169,7 +169,7 @@ If you are daring, go to the config for this mod instead and set "import_all_mod
 
 If you are looking to swap the Overworld with UAD's dimension, use this datapack instead that works for both Forge and Fabric:
 
-**[https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.1.X2](https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.1.X2)**
+**[https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.2.X2](https://github.com/TelepathicGrunt/UltraAmplifiedDimension-Fabric/releases/tag/9.2.X2)**
 
 &nbsp;
 
