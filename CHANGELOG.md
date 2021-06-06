@@ -3,6 +3,10 @@
 ##### Biomes:
 * Fixed typo in dimension json file that prevented several biomes from spawning.
 
+* Re-adjusted the backend values for biome layer picking to try and make biomes less spread out and less biased towards icy biomes.
+
+* Ocean biomes are now much more common and not always several thousands blocks apart.
+
 
 ### **(V.9.1.4 Changes) (1.16.5 Minecraft)**
 

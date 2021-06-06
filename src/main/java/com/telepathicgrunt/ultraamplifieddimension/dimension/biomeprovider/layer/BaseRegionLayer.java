@@ -9,12 +9,12 @@ public class BaseRegionLayer implements IAreaTransformer0 {
 
     public int apply(INoiseRandom noise, int x, int z) {
         double regionNoise = (noise.getNoiseGenerator().func_215456_a(
-                        (double)x / 4.0D,
-                        (double)z / 4.0D,
-                        0.0D,
-                        0.0D,
-                        0.0D)
-                      * 0.5D) + 0.5D;
+                (double)x / 4.2D,
+                (double)z / 4.2D,
+                0.0D,
+                0.0D,
+                0.0D)
+                * 0.75D) + 0.5D; // -0.25 to 1.25
 
         if(regionNoise < 0.3D){
             if(noise.random(25) == 0){

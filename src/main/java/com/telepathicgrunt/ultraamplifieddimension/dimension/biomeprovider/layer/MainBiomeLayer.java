@@ -43,12 +43,12 @@ public class MainBiomeLayer implements CastleWithPositionTransformer {
             // Use a copy of the base region layer noise to make ocean temperatures match land temperatures.
             // It is /16 instead of /4 due to the two zoom layers after the base layer.
             double baseRegionNoiseCopy = (context.getNoiseGenerator().func_215456_a(
-                    (double)x / 16.0D,
-                    (double)z / 16.0D,
+                    (double)x / 16.8D,
+                    (double)z / 16.8D,
                     0.0D,
                     0.0D,
                     0.0D)
-                    * 0.7D) + 0.55D; // -0.1 to 1.1
+                    * 0.85D) + 0.5D; // scaled so ends are a bit more common to match land better (-0.35 to 1.35)
 
             selectedBiomeGroup = regionManager.getWeightedBiomeGroupByTemperature(regionManager.getOceanList(), baseRegionNoiseCopy);
         }
