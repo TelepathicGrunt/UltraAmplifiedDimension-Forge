@@ -29,7 +29,7 @@ Don't forget to change 9.1.4 with the actual latest version of this mod.
 
 &nbsp;
 
-**Add these two properties to both of your run configs in the build.gradle file. These will allow Blame's mixins to work. After you add the properties lines, refresh Gradle and run `genEclipseRuns` or `genIntellijRuns` or `genVSCodeRuns` based on what IDE you are using.**
+**Add these two properties to both of your run configs in the build.gradle file. These will allow UAD's mixins to work. After you add the properties lines, refresh Gradle and run `genEclipseRuns` or `genIntellijRuns` or `genVSCodeRuns` based on what IDE you are using.**
 
 <blockquote>minecraft {
 
@@ -104,7 +104,7 @@ Ultra Amplified Dimension is a dimension mod that flattens the land into floatin
 
 &nbsp;
 
-Furthermore, you can find some new structures like Mushroom Temples or Ice Spike Temples and when you dig down, you will find a massive maze-like network of Ravines that leads to giant Cave Cavities with the floor filled with lava! The world is meant to be very difficult and tough but also fun to explore every corner! Be sure to stay safe and bring torches with you as you explore the lower layers! (Also, turn on Heavy Fog in the configs for an even more amazing experience!)
+Furthermore, you can find some new structures like Mushroom Temples or Ice Spike Temples and when you dig down, you will find a massive maze-like network of Ravines that leads to giant Cave Cavities with the floor filled with lava! The world is meant to be very difficult and tough but also fun to explore every corner! Be sure to stay safe and bring torches with you as you explore the lower layers! (Also, turn on Heavy Fog in the configs for an even more amazing experience!)
 
 &nbsp;
 
