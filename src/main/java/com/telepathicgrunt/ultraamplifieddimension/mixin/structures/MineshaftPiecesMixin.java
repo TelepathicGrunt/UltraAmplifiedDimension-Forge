@@ -27,7 +27,7 @@ public abstract class MineshaftPiecesMixin {
             method = "func_230383_a_(Lnet/minecraft/world/ISeedReader;Lnet/minecraft/world/gen/feature/structure/StructureManager;Lnet/minecraft/world/gen/ChunkGenerator;Ljava/util/Random;Lnet/minecraft/util/math/MutableBoundingBox;Lnet/minecraft/util/math/ChunkPos;Lnet/minecraft/util/math/BlockPos;)Z",
             at = @At(value = "TAIL")
     )
-    private void giantRoom(ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, MutableBoundingBox mutableBoundingBox, ChunkPos chunkPos, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void uad_giantRoom(ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, MutableBoundingBox mutableBoundingBox, ChunkPos chunkPos, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (chunkGenerator instanceof UADChunkGenerator) {
             if(random.nextFloat() < 0.25f){
                 MineshaftPiecesUtils.generateLargeRoom(world, ((MineshaftPieces.Room)(Object)this), mutableBoundingBox);

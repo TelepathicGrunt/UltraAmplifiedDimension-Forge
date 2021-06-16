@@ -31,8 +31,8 @@ public class MinecraftServerMixin {
 	@Inject(method = "func_240787_a_(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V",
 			at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/biome/BiomeManager;getHashedSeed(J)J"),
 		locals = LocalCapture.CAPTURE_FAILHARD)
-	private void seedCarvers(IChunkStatusListener chunkStatusListener, CallbackInfo ci, IServerWorldInfo iserverworldinfo,
-									DimensionGeneratorSettings dimensiongeneratorsettings, boolean isDebugWorld, long seed, long hashedSeed)
+	private void uad_seedCarvers(IChunkStatusListener chunkStatusListener, CallbackInfo ci, IServerWorldInfo iserverworldinfo,
+								 DimensionGeneratorSettings dimensiongeneratorsettings, boolean isDebugWorld, long seed, long hashedSeed)
 	{
 		CaveCavityCarver.setSeed(hashedSeed);
 		BiomeSetsHelper.generateBiomeSets(dynamicRegistries.getRegistry(Registry.BIOME_KEY));

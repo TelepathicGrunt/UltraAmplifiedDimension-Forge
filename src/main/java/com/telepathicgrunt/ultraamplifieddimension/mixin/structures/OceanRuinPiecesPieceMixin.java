@@ -23,7 +23,7 @@ public abstract class OceanRuinPiecesPieceMixin {
             method = "func_230383_a_(Lnet/minecraft/world/ISeedReader;Lnet/minecraft/world/gen/feature/structure/StructureManager;Lnet/minecraft/world/gen/ChunkGenerator;Ljava/util/Random;Lnet/minecraft/util/math/MutableBoundingBox;Lnet/minecraft/util/math/ChunkPos;Lnet/minecraft/util/math/BlockPos;)Z",
             at = @At(value = "STORE", ordinal = 0), ordinal = 0
     )
-    private int fixedYHeightForUAD(int i, ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random) {
+    private int uad_fixedYHeightForUAD(int i, ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random) {
         if (chunkGenerator instanceof UADChunkGenerator) {
             if(i > 100 && random.nextFloat() > 0.25f){
                 OceanRuinPieces.Piece piece = ((OceanRuinPieces.Piece)(Object)this);

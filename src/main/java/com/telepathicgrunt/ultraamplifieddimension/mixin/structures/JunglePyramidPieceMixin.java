@@ -29,7 +29,7 @@ public abstract class JunglePyramidPieceMixin {
                     value = "INVOKE",
                     ordinal = 0)
     )
-    private void fixedYHeightForUAD(ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, MutableBoundingBox mutableBoundingBox, ChunkPos chunkPos, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void uad_fixedYHeightForUAD(ISeedReader world, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, MutableBoundingBox mutableBoundingBox, ChunkPos chunkPos, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if(chunkGenerator instanceof UADChunkGenerator){
             MutableBoundingBox box = ((JunglePyramidPiece)(Object)this).getBoundingBox();
             box.offset(0, chunkGenerator.getHeight(box.minX + (box.getXSize() / 2), box.minZ + (box.getZSize() / 2), Heightmap.Type.WORLD_SURFACE_WG) - box.minY, 0);

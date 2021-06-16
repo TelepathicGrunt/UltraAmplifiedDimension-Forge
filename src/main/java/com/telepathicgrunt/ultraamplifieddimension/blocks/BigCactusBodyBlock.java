@@ -17,6 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -44,6 +45,7 @@ public class BigCactusBodyBlock extends HorizontalBlock implements net.minecraft
     @Override
     @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+
         if (!world.isAreaLoaded(pos, 1))
             return; // Forge: prevent growing cactus from loading unloaded chunks with block update
         if (!state.isValidPosition(world, pos)) {

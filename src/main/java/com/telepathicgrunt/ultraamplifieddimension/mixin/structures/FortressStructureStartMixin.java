@@ -23,7 +23,7 @@ public abstract class FortressStructureStartMixin {
             method = "func_230364_a_(Lnet/minecraft/util/registry/DynamicRegistries;Lnet/minecraft/world/gen/ChunkGenerator;Lnet/minecraft/world/gen/feature/template/TemplateManager;IILnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/feature/NoFeatureConfig;)V",
             at = @At(value = "TAIL")
     )
-    private void adjustHeight(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig config, CallbackInfo ci) {
+    private void uad_adjustHeight(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig config, CallbackInfo ci) {
         if(chunkGenerator instanceof UADChunkGenerator){
             ((StructureStartAccessor)this).uad_callFunc_214626_a(((StructureStartAccessor)this).uad_getRand(), 88, 135);
         }

@@ -27,7 +27,7 @@ public abstract class EndermanSpawnerMixin extends MobEntity implements IAngerab
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/monster/EndermanEntity;setHeldBlockState(Lnet/minecraft/block/BlockState;)V", shift = At.Shift.AFTER),
             cancellable = true
     )
-    private void worldCheckAngerFromTag(CompoundNBT tag, CallbackInfo ci) {
+    private void uad_worldCheckAngerFromTag(CompoundNBT tag, CallbackInfo ci) {
         if (!this.world.isRemote) {
             this.readAngerNBT((ServerWorld) world, tag);
         }

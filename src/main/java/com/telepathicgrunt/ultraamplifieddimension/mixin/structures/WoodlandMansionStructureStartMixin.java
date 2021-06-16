@@ -19,7 +19,7 @@ public abstract class WoodlandMansionStructureStartMixin {
             method = "func_230364_a_(Lnet/minecraft/util/registry/DynamicRegistries;Lnet/minecraft/world/gen/ChunkGenerator;Lnet/minecraft/world/gen/feature/template/TemplateManager;IILnet/minecraft/world/biome/Biome;Lnet/minecraft/world/gen/feature/NoFeatureConfig;)V",
             at = @At(value = "STORE", ordinal = 0), ordinal = 10
     )
-    private int fixedYHeightForUAD(int i2, DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator) {
+    private int uad_fixedYHeightForUAD(int i2, DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator) {
         if(chunkGenerator instanceof UADChunkGenerator){
             return Math.min(i2, 215);
         }
