@@ -14,7 +14,7 @@ For developers that want to add UAD to their mod's workspace:
 
 &nbsp;
 
-Don't forget to change 9.1.4 with the actual latest version of this mod.
+Don't forget to change 9.2.1 with the actual latest version of this mod.
 
 <blockquote>dependencies {
 
@@ -22,7 +22,7 @@ Don't forget to change 9.1.4 with the actual latest version of this mod.
 &nbsp; ...
 
 
-&nbsp; implementation fg.deobf("com.telepathicgrunt:UltraAmplifiedMod:1.16.5-9.1.4-forge")
+&nbsp; implementation fg.deobf("com.telepathicgrunt:UltraAmplifiedMod:1.16.5-9.2.1-forge")
 
 
 }</blockquote>
