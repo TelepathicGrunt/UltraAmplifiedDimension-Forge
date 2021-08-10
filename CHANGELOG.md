@@ -1,3 +1,9 @@
+## **(V.9.2.2 Changes) (1.16.5 Minecraft)**
+
+##### Features:
+* Adjusted the chunk cache for UAD ores to free up a hefty chunk of RAM when in UAD.
+
+
 ### **(V.9.2.1 Changes) (1.16.5 Minecraft)**
 
 ##### Dimension:
