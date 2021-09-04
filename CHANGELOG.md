@@ -1,7 +1,7 @@
 ### **(V.9.2.3 Changes) (1.16.5 Minecraft)**
 
 ##### Misc:
-Fixed a memory leak from the cache that UAD's ores uses. The leak only happens if you keep making new world saves without restarting mc in single player.
+Fixed a memory leak from the cache that UAD's ores uses. The leak only happens if you explore UAD's dimension.
   Special thanks to BlueAmulet for catching this leak.
 
 
