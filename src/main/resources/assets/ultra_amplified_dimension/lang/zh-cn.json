@@ -12,7 +12,7 @@
   "block.ultra_amplified_dimension.glowsand": "荧石沙子",
   "block.ultra_amplified_dimension.glowstone_ore": "荧石矿石",
   "block.ultra_amplified_dimension.red_glowsand": "荧石红沙",
-  "ultra_amplified_dimension.amplified_portal.jei_description": " 一个用来进出超级放大维度的传送门方块！\n\n 站立右击方块以传送。\n\n\n\n\n 要制作传送门，你需要按照以下模式制作传送门框架：\n\n顶层：\nCTC\nTTT\nCTC\n\n中层：\nAAA\nADA\nAAA\n\n底层\nCBC\nBBB\nCBC\n\nD = 磨制闪长岩\nA = 空气\nC = 磨制花岗岩\nT = 上层磨制花岗岩台阶\nB = 底层磨制花岗岩台阶\n\n注意: 如果超级放大维度的设置被更改了，C、T和B可能是不同的方块。",
+  "ultra_amplified_dimension.amplified_portal.jei_description": " 一个用来进出超级放大维度的传送门方块！\n\n 站立右击方块以传送。\n\n\n\n\n 要制作传送门，你需要按照以下模式制作传送门框架：\n\n顶层：\nCTC\nTTT\nCTC\n\n中层：\nAAA\nADA\nAAA\n\n底层\nCBC\nBBB\nCBC\n\nD = 磨制闪长岩\nA = 空气\nC = 磨制花岗岩\nT = 上层磨制安山岩台阶\nB = 底层磨制安山岩台阶\n\n注意: 如果超级放大维度的设置被更改了，C、T和B可能是不同的方块。",
   "ultra_amplified_dimension.big_cactus_body_block.jei_description": "这个植物方块可以在超级放大维度的沙漠和恶地生物群系中找到。当被破坏时，它们会掉落原版仙人掌，因此，这个方块在生存模式无法获得。",
   "ultra_amplified_dimension.big_cactus_corner_block.jei_description": "这个植物方块可以在超级放大维度的沙漠和恶地生物群系中找到。当被破坏时，它们会掉落原版仙人掌，因此，这个方块在生存模式无法获得。",
   "ultra_amplified_dimension.big_cactus_main_block.jei_description": "这个植物方块可以在超级放大维度的沙漠和恶地生物群系中找到。当被破坏时，它们会掉落原版仙人掌，因此，这个方块在生存模式无法获得。",
