@@ -1,5 +1,12 @@
 ### **(V.9.2.4 Changes) (1.16.5 Minecraft)**
 
+##### Config:
+Added netherLighting config to make UAD dimension have nether ambient lighting or not.
+
+Added skyType config to let users change the sky from normal sky to end's sky or to no sky (no sun, stars, or moon).
+
+Cloud height config now will take effect right away and not need a restart.
+
 ##### Misc:
 Added zh_cn.json translations. Special thanks to the guy who donated this translation!
 

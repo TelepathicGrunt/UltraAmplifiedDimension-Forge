@@ -10,6 +10,8 @@ public class UADimensionConfig
 	{
 		public ConfigValueListener<Boolean> heavyFog;
 		public ConfigValueListener<Integer> cloudHeight;
+		public ConfigValueListener<Boolean> netherLighting;
+		public ConfigValueListener<String> skyType;
 		public ConfigValueListener<Boolean> forceExitToOverworld;
 		public ConfigValueListener<Boolean> allowNetherPortal;
 
@@ -29,6 +31,18 @@ public class UADimensionConfig
 								" Default is 245.")
 						.translation("ultraamplified.config.dimension.cloudheight")
 						.defineInRange("cloudHeight", 245, -50, 400));
+
+
+				netherLighting = subscriber.subscribe(builder
+						.comment("\n Darkens the dimension to be Nether's lighting which is darker skylight but has ambient lighting.")
+						.translation("ultraamplified.config.dimension.netherlighting")
+						.define("netherLighting", false));
+
+
+				skyType = subscriber.subscribe(builder
+						.comment("\n What sky type the dimension should use. Only values allowed are NORMAL, END, and NONE.")
+						.translation("ultraamplified.config.dimension.skytype")
+						.define("skyType", "NORMAL"));
 
 				allowNetherPortal = subscriber.subscribe(builder
 		                .comment("\n Lets Nether Portals be able to be created in Ultra Amplified Dimension.",

@@ -8,17 +8,33 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 // CLIENT-SIDED
 public class UADSkyProperty extends DimensionRenderInfo {
     public UADSkyProperty() {
-        super(UltraAmplifiedDimension.UADConfig.cloudHeight.get(), true, FogType.NORMAL, false, false);
+        super(UltraAmplifiedDimension.UADConfig.cloudHeight.get(), true, FogType.valueOf(UltraAmplifiedDimension.UADConfig.skyType.get().toUpperCase(Locale.ROOT)), UltraAmplifiedDimension.UADConfig.netherLighting.get(), false);
     }
 
     @Override
     // thick fog or no
     public boolean func_230493_a_(int camX, int camY) {
         return UltraAmplifiedDimension.UADConfig.heavyFog.get();
+    }
+
+    @Override
+    public float func_239213_a_() {
+        return UltraAmplifiedDimension.UADConfig.cloudHeight.get();
+    }
+
+    @Override
+    public DimensionRenderInfo.FogType getFogType() {
+        return FogType.valueOf(UltraAmplifiedDimension.UADConfig.skyType.get().toUpperCase(Locale.ROOT));
+    }
+
+    @Override
+    public boolean func_241684_d_() {
+        return UltraAmplifiedDimension.UADConfig.netherLighting.get();
     }
 
     @Nonnull
