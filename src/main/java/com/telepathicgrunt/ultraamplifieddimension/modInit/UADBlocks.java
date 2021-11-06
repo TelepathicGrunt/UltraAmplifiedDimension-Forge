@@ -1,7 +1,18 @@
 package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.blocks.*;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.AmplifiedPortalBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusBodyBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusCornerBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.BigCactusMainBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.CoarseGlowdirtBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowdirtBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowgrassBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowmyceliumBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowpodzolBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowsandBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.GlowstoneOreBlock;
+import com.telepathicgrunt.ultraamplifieddimension.blocks.RedGlowsandBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;

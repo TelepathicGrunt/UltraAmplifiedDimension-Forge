@@ -2,7 +2,16 @@ package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.world.decorators.*;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.LedgeSurfacePlacer;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.LedgeSurfacePlacerConfig;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.NonAirSurfaceLedgePlacer;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.NonAirSurfaceLedgePlacerConfig;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.OffsetPlacer;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.RangeValidationPlacer;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.RangeValidationPlacerConfig;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.WaterIceSurfaceConfig;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.WaterIceSurfacePlacer;
+import com.telepathicgrunt.ultraamplifieddimension.world.decorators.YOffsetPlacerConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

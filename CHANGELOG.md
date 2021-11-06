@@ -1,3 +1,9 @@
+### **(V.9.2.5 Changes) (1.16.5 Minecraft)**
+
+##### Configs:
+Significantly cleaned up the config system backend code for my mod. Let me know if any config no longer works but it should be ok!
+
+
 ### **(V.9.2.4 Changes) (1.16.5 Minecraft)**
 
 ##### Config:

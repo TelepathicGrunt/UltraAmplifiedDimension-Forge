@@ -11,7 +11,11 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
 import org.apache.commons.lang3.tuple.MutablePair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class RegionManager {

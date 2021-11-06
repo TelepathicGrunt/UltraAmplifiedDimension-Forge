@@ -1,7 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.features;
 
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADChunkGenerator;
-import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;

@@ -1,7 +1,11 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;

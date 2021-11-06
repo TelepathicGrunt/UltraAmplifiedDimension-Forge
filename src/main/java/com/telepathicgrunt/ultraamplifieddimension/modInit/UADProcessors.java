@@ -1,7 +1,13 @@
 package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.world.processors.*;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.CeilingVinePostProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.RemoveFloatingBlocksProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.ReplaceAirOnlyProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.ReplaceLiquidOnlyProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.SpawnerRandomizingProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.WallVinePostProcessor;
+import com.telepathicgrunt.ultraamplifieddimension.world.processors.WaterloggingFixProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.template.IStructureProcessorType;

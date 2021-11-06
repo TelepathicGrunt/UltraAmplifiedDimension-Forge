@@ -1,6 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.dimension;
 
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.world.DimensionRenderInfo;
@@ -13,28 +13,28 @@ import java.util.Locale;
 // CLIENT-SIDED
 public class UADSkyProperty extends DimensionRenderInfo {
     public UADSkyProperty() {
-        super(UltraAmplifiedDimension.UADConfig.cloudHeight.get(), true, FogType.valueOf(UltraAmplifiedDimension.UADConfig.skyType.get().toUpperCase(Locale.ROOT)), UltraAmplifiedDimension.UADConfig.netherLighting.get(), false);
+        super(UADimensionConfig.cloudHeight.get(), true, FogType.valueOf(UADimensionConfig.skyType.get().toUpperCase(Locale.ROOT)), UADimensionConfig.netherLighting.get(), false);
     }
 
     @Override
     // thick fog or no
     public boolean func_230493_a_(int camX, int camY) {
-        return UltraAmplifiedDimension.UADConfig.heavyFog.get();
+        return UADimensionConfig.heavyFog.get();
     }
 
     @Override
     public float func_239213_a_() {
-        return UltraAmplifiedDimension.UADConfig.cloudHeight.get();
+        return UADimensionConfig.cloudHeight.get();
     }
 
     @Override
     public DimensionRenderInfo.FogType getFogType() {
-        return FogType.valueOf(UltraAmplifiedDimension.UADConfig.skyType.get().toUpperCase(Locale.ROOT));
+        return FogType.valueOf(UADimensionConfig.skyType.get().toUpperCase(Locale.ROOT));
     }
 
     @Override
     public boolean func_241684_d_() {
-        return UltraAmplifiedDimension.UADConfig.netherLighting.get();
+        return UADimensionConfig.netherLighting.get();
     }
 
     @Nonnull

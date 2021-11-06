@@ -1,9 +1,9 @@
 package com.telepathicgrunt.ultraamplifieddimension.blocks;
 
 import com.mojang.datafixers.util.Pair;
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.IPlayerPosAndDim;
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.PlayerPositionAndDimension;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADWorldSavedData;
@@ -85,7 +85,7 @@ public class AmplifiedPortalBlock extends Block
 
 			// Player is leaving Ultra Amplified dimension
 			if (playerEntity.world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY)) {
-				if (UltraAmplifiedDimension.UADConfig.forceExitToOverworld.get())
+				if (UADimensionConfig.forceExitToOverworld.get())
 				{
 					// Go to Overworld directly because of config option.
 					destinationKey = World.OVERWORLD;
@@ -195,7 +195,7 @@ public class AmplifiedPortalBlock extends Block
 				}
 				else {
 					// Check for null which would be impressive if it occurs
-					if (cap.getNonUAPos() == null || UltraAmplifiedDimension.UADConfig.forceExitToOverworld.get())
+					if (cap.getNonUAPos() == null || UADimensionConfig.forceExitToOverworld.get())
 					{
 						// Set player at world spawn then with Amplified Portal at feet
 						// The portal will try to not replace any block and be at the next air block above non-air blocks.

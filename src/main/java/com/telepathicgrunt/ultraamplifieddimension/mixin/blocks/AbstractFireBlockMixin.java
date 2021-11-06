@@ -1,6 +1,6 @@
 package com.telepathicgrunt.ultraamplifieddimension.mixin.blocks;
 
-import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.world.World;
@@ -20,7 +20,7 @@ public class AbstractFireBlockMixin {
 			at = @At(value = "RETURN"),
 			cancellable = true)
 	private static void uad_allowNetherPortal(World world, CallbackInfoReturnable<Boolean> cir) {
-		if(!cir.getReturnValue() && world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY) && UltraAmplifiedDimension.UADConfig.allowNetherPortal.get()) {
+		if(!cir.getReturnValue() && world.getDimensionKey().equals(UADDimension.UAD_WORLD_KEY) && UADimensionConfig.allowNetherPortal.get()) {
 			cir.setReturnValue(true);
 		}
 	}

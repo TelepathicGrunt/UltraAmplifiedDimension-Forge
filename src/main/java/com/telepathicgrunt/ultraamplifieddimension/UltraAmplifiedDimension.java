@@ -2,16 +2,24 @@ package com.telepathicgrunt.ultraamplifieddimension;
 
 import com.telepathicgrunt.ultraamplifieddimension.capabilities.CapabilityPlayerPosAndDim;
 import com.telepathicgrunt.ultraamplifieddimension.client.UltraAmplifiedDimensionClient;
-import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig.UADimensionConfigValues;
+import com.telepathicgrunt.ultraamplifieddimension.config.UADimensionConfig;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.AmplifiedPortalCreation;
 import com.telepathicgrunt.ultraamplifieddimension.dimension.UADDimension;
-import com.telepathicgrunt.ultraamplifieddimension.modInit.*;
-import com.telepathicgrunt.ultraamplifieddimension.utils.ConfigHelper;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADCarvers;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADFeatures;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADPlacements;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADProcessors;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADStructures;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADSurfaceBuilders;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADTags;
+import com.telepathicgrunt.ultraamplifieddimension.modInit.UADTreeDecoratorTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -23,8 +31,6 @@ import org.apache.logging.log4j.Logger;
 public class UltraAmplifiedDimension {
 	public static final String MODID = "ultra_amplified_dimension";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-
-	public static UADimensionConfigValues UADConfig = null;
 
 	public UltraAmplifiedDimension() {
 
@@ -48,7 +54,7 @@ public class UltraAmplifiedDimension {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> UltraAmplifiedDimensionClient::subscribeClientEvents);
 
 		//generates config
-		UADConfig = ConfigHelper.register(ModConfig.Type.SERVER, UADimensionConfigValues::new, "ultra_amplified_dimension.toml");
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UADimensionConfig.GENERAL_SPEC, "ultra_amplified_dimension.toml");
 	}
 
 	public void setup(final FMLCommonSetupEvent event)

@@ -6,7 +6,11 @@ import com.telepathicgrunt.ultraamplifieddimension.mixin.dimension.NoiseChunkGen
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
 import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import com.telepathicgrunt.ultraamplifieddimension.world.features.configs.ColumnConfig;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.block.SnowyDirtBlock;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

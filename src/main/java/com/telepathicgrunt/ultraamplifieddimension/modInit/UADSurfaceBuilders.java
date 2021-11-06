@@ -1,7 +1,20 @@
 package com.telepathicgrunt.ultraamplifieddimension.modInit;
 
 import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
-import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.*;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.BadlandsSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.DeepOceanSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.DesertLakesSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.DissectedBadlandsSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.GrassyEndSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.GravelSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.IcedTerrainSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.MountainsMutatedSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.NetherwastesSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.OceanSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.PlateauSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.SandSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.ShatteredSavannaSurfaceBuilder;
+import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.SpikyBadlandsSurfaceBuilder;
 import com.telepathicgrunt.ultraamplifieddimension.world.surfacebuilder.configs.QuadrarySurfaceBuilderConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
