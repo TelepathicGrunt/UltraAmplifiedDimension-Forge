@@ -1,3 +1,9 @@
+### **(V.9.2.6 Changes) (1.16.5 Minecraft)**
+
+##### Structure:
+Made the UAD portal in the UAD dimension now use an nbt file to spawn it. Can be replaced by datapack now
+
+
 ### **(V.9.2.5 Changes) (1.16.5 Minecraft)**
 
 ##### Configs:

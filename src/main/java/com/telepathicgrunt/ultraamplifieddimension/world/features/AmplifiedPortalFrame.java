@@ -1,21 +1,34 @@
 package com.telepathicgrunt.ultraamplifieddimension.world.features;
 
+import com.google.common.collect.ImmutableList;
+import com.telepathicgrunt.ultraamplifieddimension.UltraAmplifiedDimension;
 import com.telepathicgrunt.ultraamplifieddimension.modInit.UADBlocks;
+import com.telepathicgrunt.ultraamplifieddimension.utils.GeneralUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.properties.SlabType;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import java.util.Random;
 
 
 public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 {
+	private static final ResourceLocation PORTAL_RL = new ResourceLocation(UltraAmplifiedDimension.MODID, "auto_generated_portal");
+	private final BlockIgnoreStructureProcessor IGNORE_STRUCTURE_VOID = new BlockIgnoreStructureProcessor(ImmutableList.of(Blocks.STRUCTURE_VOID));
+	private final PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).addProcessor(IGNORE_STRUCTURE_VOID).setIgnoreEntities(false);
 
 	public AmplifiedPortalFrame() {
 		super(NoFeatureConfig.CODEC);
@@ -29,65 +42,19 @@ public class AmplifiedPortalFrame extends Feature<NoFeatureConfig>
 
 	//is called in AmplifiedPortalBehavior which doesn't have a chunk generator passed in
 	public boolean generate(ISeedReader world, BlockPos pos) {
-		BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(pos);
 
-		//7x7 flooring around bottom of frame
-		for (int x = -3; x <= 3; x++) {
-			for (int z = -3; z <= 3; z++) {
-				world.setBlockState(
-						mutable.setPos(pos).move(x, -1, z),
-						Blocks.POLISHED_GRANITE.getDefaultState(),
-						3);
-			}
+		TemplateManager templatemanager = world.getWorld().getServer().getTemplateManager();
+		Template template = templatemanager.getTemplate(PORTAL_RL);
+
+		if (template == null) {
+			UltraAmplifiedDimension.LOGGER.warn(PORTAL_RL + " NTB does not exist!");
+			return false;
 		}
 
-		//bottom of portal frame
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				if (Math.abs(x * z) == 1) {
-					world.setBlockState(
-							mutable.setPos(pos).move(x, 0, z),
-							Blocks.POLISHED_GRANITE.getDefaultState(),
-							3);
-				}
-				else {
-					//sets slab but also waterlogs it if block it replaces is water based
-					world.setBlockState(
-							mutable.setPos(pos).move(x, 0, z),
-							Blocks.POLISHED_ANDESITE_SLAB.getDefaultState()
-									.with(SlabBlock.TYPE, SlabType.BOTTOM)
-									.with(SlabBlock.WATERLOGGED, world.getBlockState(pos.add(x, 0, z)).getMaterial() == Material.WATER),
-							3);
-				}
-			}
-		}
-
-		//the portal itself
-		world.setBlockState(
-				pos.add(0, 1, 0),
-				UADBlocks.AMPLIFIED_PORTAL.get().getDefaultState(),
-				3);
-
-		//top of portal frame
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				if (Math.abs(x * z) == 1) {
-					world.setBlockState(
-							pos.add(x, 2, z),
-							Blocks.POLISHED_GRANITE.getDefaultState(),
-							3);
-				}
-				else {
-					//sets slab but also waterlogs it if block it replaces is water based
-					world.setBlockState(
-							pos.add(x, 2, z),
-							Blocks.POLISHED_ANDESITE_SLAB.getDefaultState()
-									.with(SlabBlock.TYPE, SlabType.TOP)
-									.with(SlabBlock.WATERLOGGED, world.getBlockState(pos.add(x, 2, z)).getMaterial() == Material.WATER),
-							3);
-				}
-			}
-		}
+		BlockPos halfLengths = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
+		placementsettings.setRotation(Rotation.randomRotation(world.getRandom())).setCenterOffset(halfLengths).setIgnoreEntities(false);
+		BlockPos.Mutable mutable = new BlockPos.Mutable().setPos(pos).move(-halfLengths.getX(), 0, -halfLengths.getZ());
+		template.func_237152_b_(world, mutable, placementsettings, world.getRandom());
 
 		return true;
 	}
